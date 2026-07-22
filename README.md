@@ -8,7 +8,7 @@
 - 每篇 R 分析从 `otutab`、`taxonomy`、`metadata` 三件套开始；需要环境、临床或外部统计数据时，在本篇明确提供。
 - 论文用于方法、数据和研究设计溯源；默认使用公开数据重新计算并重绘，不直接复制受版权保护的论文原图。
 - 下游章节必须真实执行；只有 `qa_report.json.status == "passed"` 才能生成发布包。
-- 当前只允许生成本地微信公众号 bundle，不调用公众号草稿或发布 API。
+- 默认只生成本地微信公众号 bundle；只有获得明确授权后才调用草稿 API，发布与群发仍需另行授权。
 - GitHub Pages 的 deploy job 默认关闭；只有人工设置仓库变量 `ENABLE_PRODUCTION_DEPLOY=true` 后才允许部署。
 
 ## 当前状态
@@ -17,7 +17,8 @@
 - 第 01–25 篇已完成；第 25 篇从真实湿地四表出发，使用同一固定置换矩阵运行 envfit、三个预设 Mantel blocks、带警告的 partial Mantel sensitivity 和 adjusted-R² VPA，并重绘四张出版图。
 - Pilot QA 已通过：固定真实数据及参考资产、55 篇目录、二十五篇 HTML、273 个 PDF/SVG/PNG/TIFF 图形文件和 336 份结果/审计文件均通过，21/21 个 workflow steps 与 640/640 个发布断言全部成功；run key 为 `4343439bcad30e0a`，当前 manifest hash 为 `3397de082f938fe8679e8a5437379980666d9a39931dcc35116d0512f52a4f73`。
 - 根目录 55 篇 Quarto Book 已完整渲染并产生恰好 55 个 HTML 页面；其余 30 篇仍是 `draft: true` 的目录占位，不代表正文已经完成。
-- 微信公众号尚未生成草稿或发布。
+- 经明确授权，第 01–25 篇已从同一份已通过 QA 的 Quarto 输出生成公众号审阅稿：102 张正文图和 25 张封面均已上传，25/25 篇草稿创建成功，草稿总数由 53 增至 78；未调用发布或群发接口。本地可追溯记录见 `rendered/wechat_review_01_25/report.json` 与 `rendered/wechat_review_01_25/live_report.json`（生成目录默认不进 Git）。
+- GitHub 审阅仓库为 `petemeng/microbiome-best-practices`，第 01–25 篇位于 Draft PR [#1](https://github.com/petemeng/microbiome-best-practices/pull/1)；该 PR 尚未合并，GitHub Pages 生产部署仍关闭。
 - QIIME 2 官方 2026.4 环境、固定 ITSxpress overlay 与 gemelli 0.0.13 独立环境均已在本机验证；第 07–17 篇相应环境、Artifact、导入、原始质控、去引物、DADA2、ITS/18S、数据库比较、区域 classifier、SEPP rooted phylogeny 与 R 对象验收均已通过，第 18–25 篇的出版图形、Alpha 多样性、组间检验、Beta 距离、PCoA、PERMANOVA/PERMDISP、CAP 与环境方差解构合同也已独立通过。
 
 ## 已锁定的真实数据
@@ -373,6 +374,9 @@ docker run --rm -v "$PWD/_site:/project/_site" microbiome-best-practices:pilot
 - `R/theme_pub.R`：整仓库共享作图函数
 - `data/small/README.md`：Pilot 数据来源与再生说明
 - `qa_report.json`：本地发布门禁报告
+- `scripts/build_wechat_review_bundle.py`：从通过 QA 的 `_site` 生成 25 篇微信 HTML、优化正文图、确定性封面与草稿 payload
+- `rendered/wechat_review_01_25/report.json`：本地生成的微信审阅包结构、尺寸、图片和内容检查报告（默认不进 Git）
+- `rendered/wechat_review_01_25/live_report.json`：本地生成的 25 篇官方草稿及封面素材 ID 操作记录；明确记录未发布、未群发（默认不进 Git）
 
 ## 许可证
 
