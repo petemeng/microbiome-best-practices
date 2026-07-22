@@ -1,0 +1,11 @@
+---
+title: "第 34 篇 · 绝对定量陷阱：相对丰度 vs QMP/spike-in"
+draft: true
+execute:
+  eval: false
+---
+
+<!--
+Planned chapter. It must not be published until its public data, literature,
+commands, outputs, and assertions are added to tutorial.yaml and pass QA.
+-->

@@ -1,0 +1,12 @@
+check	observed	expected	status	required
+Execution scope	native-linux-host	Recorded, not inferred as WSL	INFO	False
+Kernel	6.8.0-49-generic	Linux	PASS	True
+Architecture	x86_64	x86_64	PASS	True
+Bash	5.1.16	available	PASS	True
+Conda	26.1.1	available	PASS	True
+Mamba	2.5.0	available	PASS	True
+Environment manifest SHA-256	68b0e9b974937525b71cca3dec48b7dc5b6135f588a941d1313c118c2a41f4b5	68b0e9b974937525b71cca3dec48b7dc5b6135f588a941d1313c118c2a41f4b5	PASS	True
+QIIME 2 release	2026.4	2026.4	PASS	True
+QIIME 2 version	2026.4.0	2026.4.0	PASS	True
+q2cli version	2026.4.0	2026.4.0	PASS	True
+Registered plugins	27	27	PASS	True

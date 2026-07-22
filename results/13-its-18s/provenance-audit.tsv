@@ -1,0 +1,4 @@
+member	kind	plugin	action	parameters
+088680d4-2099-48c4-bbda-6b1baf56ca66/provenance/action/action.yaml	method	dada2	denoise_paired	"{""chimera_method"": ""consensus"", ""max_ee_f"": ""2"", ""max_ee_r"": ""2"", ""trunc_len_f"": ""0"", ""trunc_len_r"": ""0""}"
+088680d4-2099-48c4-bbda-6b1baf56ca66/provenance/artifacts/343b7bfb-eb24-4105-947f-38b8660d1956/action/action.yaml	method	itsxpress	trim_pair_output_unmerged	"{""cluster_id"": ""1.0"", ""region"": ""ITS2"", ""taxa"": ""F"", ""threads"": ""1""}"
+088680d4-2099-48c4-bbda-6b1baf56ca66/provenance/artifacts/b37cd276-c27e-4488-ac3c-1447eac004dc/action/action.yaml	import		import	{}

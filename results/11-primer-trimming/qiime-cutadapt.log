@@ -1,0 +1,10 @@
+Article 11 q2-cutadapt primary run
+command: conda run -n microbiome-qiime2-2026.4 qiime cutadapt trim-paired --i-demultiplexed-sequences <WORK_DIR>/nfcore-v4-demux.qza --p-front-f '^GTGYCAGCMGCCGCGGTAA' --p-front-r '^GGACTACNVGGGTWTCTAAT' --p-error-rate 0.1 --p-overlap 15 --p-match-adapter-wildcards --p-no-match-read-wildcards --p-indels --p-discard-untrimmed --p-minimum-length 1 --p-cores 1 --o-trimmed-sequences <WORK_DIR>/nfcore-v4-trimmed.qza
+returncode: 0
+elapsed_seconds: 33.459
+stdout:
+Saved SampleData[PairedEndSequencesWithQuality] to: <WORK_DIR>/nfcore-v4-trimmed.qza
+stderr:
+(empty)
+retained_pairs: 8614
+retention_percent: 86.14

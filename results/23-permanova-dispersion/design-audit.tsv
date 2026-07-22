@@ -1,0 +1,25 @@
+BiologicalSampleID	Block	MainPlot	Warming	Clipping	Treatment	TechnicalLibraries	AggregateReads	InferentialContribution
+1UC	Block 1	Block 1 / Ambient	Ambient	Unclipped	Ambient + Unclipped	2	2270	1
+1CC	Block 1	Block 1 / Ambient	Ambient	Clipped	Ambient + Clipped	3	5343	1
+1UW	Block 1	Block 1 / Warmed	Warmed	Unclipped	Warmed + Unclipped	1	2314	1
+1CW	Block 1	Block 1 / Warmed	Warmed	Clipped	Warmed + Clipped	3	5729	1
+2UC	Block 2	Block 2 / Ambient	Ambient	Unclipped	Ambient + Unclipped	3	9863	1
+2CC	Block 2	Block 2 / Ambient	Ambient	Clipped	Ambient + Clipped	2	2192	1
+2UW	Block 2	Block 2 / Warmed	Warmed	Unclipped	Warmed + Unclipped	3	3801	1
+2CW	Block 2	Block 2 / Warmed	Warmed	Clipped	Warmed + Clipped	1	1564	1
+3UC	Block 3	Block 3 / Ambient	Ambient	Unclipped	Ambient + Unclipped	2	3154	1
+3CC	Block 3	Block 3 / Ambient	Ambient	Clipped	Ambient + Clipped	3	8300	1
+3UW	Block 3	Block 3 / Warmed	Warmed	Unclipped	Warmed + Unclipped	2	3342	1
+3CW	Block 3	Block 3 / Warmed	Warmed	Clipped	Warmed + Clipped	3	5280	1
+4UC	Block 4	Block 4 / Ambient	Ambient	Unclipped	Ambient + Unclipped	2	3061	1
+4CC	Block 4	Block 4 / Ambient	Ambient	Clipped	Ambient + Clipped	2	2578	1
+4UW	Block 4	Block 4 / Warmed	Warmed	Unclipped	Warmed + Unclipped	3	5155	1
+4CW	Block 4	Block 4 / Warmed	Warmed	Clipped	Warmed + Clipped	2	2817	1
+5UC	Block 5	Block 5 / Ambient	Ambient	Unclipped	Ambient + Unclipped	2	2971	1
+5CC	Block 5	Block 5 / Ambient	Ambient	Clipped	Ambient + Clipped	2	2881	1
+5UW	Block 5	Block 5 / Warmed	Warmed	Unclipped	Warmed + Unclipped	2	3877	1
+5CW	Block 5	Block 5 / Warmed	Warmed	Clipped	Warmed + Clipped	3	5746	1
+6UC	Block 6	Block 6 / Ambient	Ambient	Unclipped	Ambient + Unclipped	3	5188	1
+6CC	Block 6	Block 6 / Ambient	Ambient	Clipped	Ambient + Clipped	2	2613	1
+6UW	Block 6	Block 6 / Warmed	Warmed	Unclipped	Warmed + Unclipped	3	6138	1
+6CW	Block 6	Block 6 / Warmed	Warmed	Clipped	Warmed + Clipped	2	1845	1

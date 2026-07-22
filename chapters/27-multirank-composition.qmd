@@ -1,0 +1,11 @@
+---
+title: "第 27 篇 · 多分类级组成（门→纲→目→科→属逐级）"
+draft: true
+execute:
+  eval: false
+---
+
+<!--
+Planned chapter. It must not be published until its public data, literature,
+commands, outputs, and assertions are added to tutorial.yaml and pass QA.
+-->

@@ -1,0 +1,34 @@
+role	filename	module	status
+Barcode	barcodes.fastq.gz	Basic Statistics	PASS
+Barcode	barcodes.fastq.gz	Per base sequence quality	PASS
+Barcode	barcodes.fastq.gz	Per tile sequence quality	PASS
+Barcode	barcodes.fastq.gz	Per sequence quality scores	PASS
+Barcode	barcodes.fastq.gz	Per base sequence content	WARN
+Barcode	barcodes.fastq.gz	Per sequence GC content	FAIL
+Barcode	barcodes.fastq.gz	Per base N content	PASS
+Barcode	barcodes.fastq.gz	Sequence Length Distribution	PASS
+Barcode	barcodes.fastq.gz	Sequence Duplication Levels	FAIL
+Barcode	barcodes.fastq.gz	Overrepresented sequences	FAIL
+Barcode	barcodes.fastq.gz	Adapter Content	WARN
+Forward	forward.fastq.gz	Basic Statistics	PASS
+Forward	forward.fastq.gz	Per base sequence quality	PASS
+Forward	forward.fastq.gz	Per tile sequence quality	WARN
+Forward	forward.fastq.gz	Per sequence quality scores	PASS
+Forward	forward.fastq.gz	Per base sequence content	FAIL
+Forward	forward.fastq.gz	Per sequence GC content	FAIL
+Forward	forward.fastq.gz	Per base N content	PASS
+Forward	forward.fastq.gz	Sequence Length Distribution	PASS
+Forward	forward.fastq.gz	Sequence Duplication Levels	FAIL
+Forward	forward.fastq.gz	Overrepresented sequences	FAIL
+Forward	forward.fastq.gz	Adapter Content	PASS
+Reverse	reverse.fastq.gz	Basic Statistics	PASS
+Reverse	reverse.fastq.gz	Per base sequence quality	PASS
+Reverse	reverse.fastq.gz	Per tile sequence quality	PASS
+Reverse	reverse.fastq.gz	Per sequence quality scores	PASS
+Reverse	reverse.fastq.gz	Per base sequence content	FAIL
+Reverse	reverse.fastq.gz	Per sequence GC content	FAIL
+Reverse	reverse.fastq.gz	Per base N content	PASS
+Reverse	reverse.fastq.gz	Sequence Length Distribution	PASS
+Reverse	reverse.fastq.gz	Sequence Duplication Levels	PASS
+Reverse	reverse.fastq.gz	Overrepresented sequences	FAIL
+Reverse	reverse.fastq.gz	Adapter Content	PASS

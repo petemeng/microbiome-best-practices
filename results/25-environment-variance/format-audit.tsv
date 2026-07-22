@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	chinese_characters	font_status	dimension_status
+25-environment-correlation	pdf	figures/25-environment-correlation.pdf	PDF	24159	183	126	182.73888888888888	125.94166666666666						1			embedded	PASS
+25-environment-correlation	svg	figures/25-environment-correlation.svg	SVG	30104	183	126	182.99994444444442	126.00163888888889							53	0	declared	PASS
+25-environment-correlation	png	figures/25-environment-correlation.png	PNG	337673	183	126	183	126	4322	2976	599.8841530054644	599.9238095238095	Zip					PASS
+25-environment-correlation	tiff	figures/25-environment-correlation.tiff	TIFF	787606	183	126	183	126	4322	2976	599.8841530054644	599.9238095238095	LZW					PASS
+25-envfit-pcoa	pdf	figures/25-envfit-pcoa.pdf	PDF	30425	183	122	182.73888888888888	121.70833333333333						1			embedded	PASS
+25-envfit-pcoa	svg	figures/25-envfit-pcoa.svg	SVG	26029	183	122	182.99994444444442	122.00113888888887							24	0	declared	PASS
+25-envfit-pcoa	png	figures/25-envfit-pcoa.png	PNG	470828	183	122	183	122	4322	2881	599.8841530054644	599.8147540983606	Zip					PASS
+25-envfit-pcoa	tiff	figures/25-envfit-pcoa.tiff	TIFF	541072	183	122	183	122	4322	2881	599.8841530054644	599.8147540983606	LZW					PASS
+25-mantel-distance-blocks	pdf	figures/25-mantel-distance-blocks.pdf	PDF	22181	183	96	182.73888888888888	95.95555555555555						1			embedded	PASS
+25-mantel-distance-blocks	svg	figures/25-mantel-distance-blocks.svg	SVG	7713	183	96	182.99994444444442	96.00141666666667							19	0	declared	PASS
+25-mantel-distance-blocks	png	figures/25-mantel-distance-blocks.png	PNG	210267	183	96	183	96	4322	2267	599.8841530054644	599.8104166666666	Zip					PASS
+25-mantel-distance-blocks	tiff	figures/25-mantel-distance-blocks.tiff	TIFF	303880	183	96	183	96	4322	2267	599.8841530054644	599.8104166666666	LZW					PASS
+25-variation-partition	pdf	figures/25-variation-partition.pdf	PDF	18942	183	100	182.73888888888888	99.83611111111111						1			embedded	PASS
+25-variation-partition	svg	figures/25-variation-partition.svg	SVG	7383	183	100	182.99994444444442	99.99838888888888							18	0	declared	PASS
+25-variation-partition	png	figures/25-variation-partition.png	PNG	207662	183	100	183	100	4322	2362	599.8841530054644	599.948	Zip					PASS
+25-variation-partition	tiff	figures/25-variation-partition.tiff	TIFF	335242	183	100	183	100	4322	2362	599.8841530054644	599.948	LZW					PASS

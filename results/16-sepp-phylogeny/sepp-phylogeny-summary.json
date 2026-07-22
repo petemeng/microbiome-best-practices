@@ -1,0 +1,201 @@
+{
+  "status": "passed",
+  "checks_total": 74,
+  "checks_passed": 74,
+  "query_asvs": 366,
+  "query_reads": 5213,
+  "query_length_min": 252,
+  "query_length_median": 253.0,
+  "query_length_max": 303,
+  "reference": {
+    "source_url": "https://data.qiime2.org/classifiers/sepp-ref-dbs/sepp-refs-gg-13-8.qza",
+    "sha256": "e252b83d7d5fbf2a9e14e594768e3578b33b557c34e22b6abc83b324689b1360",
+    "bytes": 50161069,
+    "uuid": "a14c6180-506b-4ecb-bacb-9cb30bc3044b",
+    "semantic_type": "SeppReferenceDatabase",
+    "format": "SeppReferenceDirFmt",
+    "artifact_framework_version": "2019.10.0",
+    "artifact_plugin_version": "2019.10.0",
+    "artifact_sepp_version": "4.3.10",
+    "artifact_import_started": "2019-11-01T05:15:58.299460-07:00",
+    "alignment_records": 203452,
+    "alignment_length_min": 1285,
+    "alignment_length_max": 1285,
+    "alignment_unique_lengths": 1,
+    "tree_tips": 203452,
+    "tree_nodes": 406903,
+    "root_degree": 2,
+    "alignment_tree_id_match": true,
+    "branch_length_min": 0.0,
+    "branch_length_max": 0.5072788354205712,
+    "negative_branch_lengths": 0
+  },
+  "runtime": {
+    "qiime_environment": "microbiome-qiime2-2026.4",
+    "threads": 8,
+    "alignment_subset_size": 1000,
+    "placement_subset_size": 5000,
+    "sepp_elapsed_seconds": 430.598,
+    "filter_elapsed_seconds": 35.383,
+    "versions": {
+      "qiime2": "2026.4.0",
+      "q2cli": "2026.4.0",
+      "q2-fragment-insertion": "2026.4.0",
+      "sepp": "4.5.6",
+      "hmmer": "3.4",
+      "pplacer": "1.1.alpha19",
+      "biom-format": "2.1.17",
+      "dendropy": "5.0.8"
+    }
+  },
+  "placements": {
+    "placement_entries": 366,
+    "placement_names": 366,
+    "fields": [
+      "distal_length",
+      "edge_num",
+      "like_weight_ratio",
+      "likelihood",
+      "pendant_length"
+    ],
+    "tree_string_present": true,
+    "format_version": 1,
+    "top_likelihood_weight": {
+      "min": 0.14285715,
+      "q25": 0.365351765,
+      "median": 0.694185645,
+      "q75": 1.0,
+      "q95": 1.0,
+      "max": 1.0,
+      "read_weighted_median": 0.5032547
+    },
+    "pendant_length": {
+      "min": 6.113515e-06,
+      "q25": 0.012146189,
+      "median": 0.07206193799999999,
+      "q75": 0.12315709250000001,
+      "q95": 0.21211985500000002,
+      "max": 0.31665975,
+      "read_weighted_median": 0.01307477
+    },
+    "distal_length": {
+      "min": 5.000002e-07,
+      "q25": 0.00144538575,
+      "median": 0.013776265499999999,
+      "q75": 0.041023841,
+      "q95": 0.08663522500000001,
+      "max": 0.18149488,
+      "read_weighted_median": 0.004185858
+    },
+    "support_bins": {
+      "<0.50": {
+        "asvs": 131,
+        "reads": 2576
+      },
+      "0.50-<0.90": {
+        "asvs": 103,
+        "reads": 951
+      },
+      ">=0.90": {
+        "asvs": 132,
+        "reads": 1686
+      }
+    },
+    "candidate_placement_counts": {
+      "1": {
+        "asvs": 98,
+        "reads": 1419
+      },
+      "2": {
+        "asvs": 26,
+        "reads": 192
+      },
+      "3": {
+        "asvs": 50,
+        "reads": 436
+      },
+      "4": {
+        "asvs": 28,
+        "reads": 173
+      },
+      "5": {
+        "asvs": 21,
+        "reads": 256
+      },
+      "6": {
+        "asvs": 19,
+        "reads": 90
+      },
+      "7": {
+        "asvs": 124,
+        "reads": 2647
+      }
+    }
+  },
+  "tree": {
+    "tips": 203818,
+    "nodes": 407635,
+    "root_degree": 2,
+    "edges_with_lengths": 407635,
+    "edges_missing_lengths": 0,
+    "zero_length_edges": 4,
+    "negative_length_edges": 0,
+    "branch_length_min": 0.0,
+    "branch_length_max": 0.507279,
+    "query_tips": 366,
+    "query_tips_missing": 0,
+    "reference_tips_preserved": 203452,
+    "unexpected_tips": 0,
+    "query_only_tips": 366,
+    "query_only_nodes": 731,
+    "query_only_root_degree": 2
+  },
+  "retention": {
+    "input_asvs": 366,
+    "retained_asvs": 366,
+    "removed_asvs": 0,
+    "input_reads": 5213,
+    "retained_reads": 5213,
+    "removed_reads": 0,
+    "asv_retention_fraction": 1.0,
+    "read_retention_fraction": 1.0
+  },
+  "artifact_metadata": {
+    "query_sequences": {
+      "uuid": "2c30e68d-9288-45a5-b95b-0ad1184da40f",
+      "type": "FeatureData[Sequence]",
+      "format": "DNASequencesDirectoryFormat"
+    },
+    "query_table": {
+      "uuid": "bdd6c844-a38b-4109-a7db-c67af7c53506",
+      "type": "FeatureTable[Frequency]",
+      "format": "BIOMV210DirFmt"
+    },
+    "insertion_tree": {
+      "uuid": "76670697-5f72-4337-9ec8-94625e3fbab2",
+      "type": "Phylogeny[Rooted]",
+      "format": "NewickDirectoryFormat"
+    },
+    "placements": {
+      "uuid": "ed146928-a4ae-483d-8f82-b87c3afc0a9c",
+      "type": "Placements",
+      "format": "PlacementsDirFmt"
+    },
+    "filtered_table": {
+      "uuid": "cd940ddf-d7d5-404c-8d30-54d5d770b967",
+      "type": "FeatureTable[Frequency]",
+      "format": "BIOMV210DirFmt"
+    },
+    "removed_table": {
+      "uuid": "904488e4-d908-4efd-9613-14cd6595229a",
+      "type": "FeatureTable[Frequency]",
+      "format": "BIOMV210DirFmt"
+    }
+  },
+  "biological_export_sha256": {
+    "insertion_tree_newick": "b511cf833cbc382404f8e2d6bac2fe77a441a1c290a88cff4cc537a77c021765",
+    "placements_jplace": "8b74ae8dffbfae2ae50c724a28dea48fb5ca70691b16724c60eb80e5b615808e",
+    "query_only_tree_newick": "0599d3d0e5c45d0b8f44f944c97fad29c664c2282f9bd678c9acb13e91656184"
+  },
+  "interpretation_boundary": "All query ASVs were inserted and retained, but insertion is not equivalent to a unique or taxonomically correct placement. Likelihood weights are relative support within the retained candidate set, not calibrated correctness probabilities."
+}

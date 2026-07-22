@@ -1,0 +1,3 @@
+Fraction	Df	Variance	FValue	AdjustedR2	PValue	Permutations	PAdjustedHolm	RejectHolm05
+Pure edaphic | wetland group	5	0.0869197160201048	3.3433727566902376	0.0967321023213904	0.001	999	0.002	TRUE
+Pure wetland group | edaphic	2	0.07975088694647556	7.669058153533766	0.11404958577479929	0.001	999	0.002	TRUE

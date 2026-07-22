@@ -1,0 +1,5 @@
+sample_id	input_pairs	retained_pairs	discarded_pairs	retention_percent
+1	2500	1810	690	72.4
+1a	2500	2219	281	88.76
+2	2500	2347	153	93.88
+2a	2500	2238	262	89.52

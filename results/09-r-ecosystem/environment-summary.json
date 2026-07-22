@@ -1,0 +1,40 @@
+{
+  "status": "passed",
+  "validation_date": "2026-07-21",
+  "r_version": "4.4.1",
+  "architecture": "64-bit",
+  "platform": "x86_64-pc-linux-gnu",
+  "bioconductor_version": "3.19",
+  "renv_lock_sha256": "b8c21ded85872cac456403c79013e1ad6b4c519e40c8f5aaa83b6842543cdd2d",
+  "lock_package_records": 146,
+  "packages_audited": 12,
+  "package_checks_passed": 12,
+  "checks_total": 26,
+  "checks_passed": 26,
+  "checks_failed": 0,
+  "object_parity_checks_total": 6,
+  "object_parity_checks_passed": 6,
+  "input": {
+    "features": 13628,
+    "samples": 90,
+    "taxonomy_ranks": 7,
+    "metadata_variables": 3,
+    "total_reads": 1619670
+  },
+  "phyloseq": {
+    "features": 13628,
+    "samples": 90,
+    "total_reads": 1619670
+  },
+  "microtable": {
+    "features": 13628,
+    "samples": 90,
+    "total_reads": 1619670
+  },
+  "sample_library_parity": {
+    "samples": 90,
+    "maximum_absolute_phyloseq_difference": 0,
+    "maximum_absolute_microtable_difference": 0
+  },
+  "figures": ["09-r-ecosystem-map", "09-package-version-audit", "09-object-parity-audit"]
+}

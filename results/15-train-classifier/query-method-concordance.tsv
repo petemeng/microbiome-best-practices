@@ -1,0 +1,7 @@
+rank	naive_bayes_asvs	naive_bayes_reads	sequence_search_asvs	sequence_search_reads	comparable_asvs	comparable_reads	exact_match_asvs	exact_match_reads	exact_match_asv_fraction	exact_match_read_fraction	naive_bayes_read_coverage	sequence_search_read_coverage
+domain	366	5213	358	5181	358	5181	358	5181	1.0	1.0	1.0	0.993862
+phylum	354	5153	354	5126	343	5068	335	5038	0.976676	0.994081	0.98849	0.983311
+class	353	5144	354	5126	343	5068	335	5038	0.976676	0.994081	0.986764	0.983311
+order	336	5024	351	5113	326	4948	309	4892	0.947853	0.988682	0.963744	0.980817
+family	333	5011	351	5113	323	4935	310	4838	0.959752	0.980344	0.961251	0.980817
+genus	318	4217	341	4151	303	3797	293	3711	0.966997	0.977351	0.808939	0.796279

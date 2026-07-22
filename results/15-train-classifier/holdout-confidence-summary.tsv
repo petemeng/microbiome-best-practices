@@ -1,0 +1,4 @@
+confidence_key	confidence	records	assigned	genus_labeled	median_rank_depth	mean_rank_depth
+c050	0.5	26236	26236	24171	6.0	5.889
+c070	0.7	26236	26236	22284	6.0	5.785
+c090	0.9	26236	26235	19859	6.0	5.641

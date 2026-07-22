@@ -1,0 +1,215 @@
+Article 10 import, provenance, and raw-QC validation
+Validation date: 2026-07-19
+
+[qiime-info]
+command: conda run -n microbiome-qiime2-2026.4 qiime info
+returncode: 0
+elapsed_seconds: 5.816
+stdout:
+System versions
+Python version: 3.12.13
+QIIME 2 release: 2026.4
+QIIME 2 version: 2026.4.0
+q2cli version: 2026.4.0
+
+Installed plugins
+alignment: 2026.4.0
+boots: 2026.4.0
+composition: 2026.4.0
+cutadapt: 2026.4.0
+dada2: 2026.4.0
+deblur: 2026.4.0
+demux: 2026.4.0
+diversity: 2026.4.0
+diversity-lib: 2026.4.0
+emperor: 2026.4.0
+feature-classifier: 2026.4.0
+feature-table: 2026.4.0
+fondue: 2026.4.0
+fragment-insertion: 2026.4.0
+kmerizer: 2026.4.0
+longitudinal: 2026.4.0
+metadata: 2026.4.0
+phylogeny: 2026.4.0
+quality-control: 2026.4.0
+quality-filter: 2026.4.0
+rescript: 2026.4.0
+sample-classifier: 2026.4.0
+stats: 2026.4.0
+taxa: 2026.4.0
+types: 2026.4.0
+vizard: 2026.4.0
+vsearch: 2026.4.0
+
+Application config directory
+<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/var/q2cli
+
+Config
+Config Source: <HOME>/miniconda3/envs/microbiome-qiime2-2026.4/etc/qiime2_config.toml
+
+Getting help
+To find help and learning resources, visit https://qiime2.org.
+To get help with configuring and/or understanding QIIME 2 parallelization, visit https://use.qiime2.org/en/stable/references/parallel-configuration.html
+stderr:
+(empty)
+
+[fastqc-version]
+command: conda run -n microbiome-fastqc-multiqc fastqc --version
+returncode: 0
+elapsed_seconds: 2.146
+stdout:
+FastQC v0.12.1
+stderr:
+(empty)
+
+[multiqc-version]
+command: conda run -n microbiome-fastqc-multiqc python -m multiqc --version
+returncode: 0
+elapsed_seconds: 3.306
+stdout:
+multiqc, version 1.33
+stderr:
+(empty)
+
+[qiime-import]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools import --type EMPPairedEndSequences --input-path <WORK_DIR>/emp-paired-end-sequences --input-format EMPPairedEndDirFmt --output-path <WORK_DIR>/atacama-emp-paired-end.qza
+returncode: 0
+elapsed_seconds: 43.125
+stdout:
+Imported <WORK_DIR>/emp-paired-end-sequences as EMPPairedEndDirFmt to <WORK_DIR>/atacama-emp-paired-end.qza
+stderr:
+(empty)
+
+[raw-maximum-validation]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools validate <WORK_DIR>/atacama-emp-paired-end.qza --level max
+returncode: 0
+elapsed_seconds: 30.676
+stdout:
+Result <WORK_DIR>/atacama-emp-paired-end.qza appears to be valid at level=max.
+stderr:
+(empty)
+
+[raw-peek]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools peek --tsv <WORK_DIR>/atacama-emp-paired-end.qza
+returncode: 0
+elapsed_seconds: 5.929
+stdout:
+Filename	Type	UUID	Data Format
+atacama-emp-paired-end.qza	EMPPairedEndSequences	29f9639c-9e72-4892-a515-491b8aa49fbc	EMPPairedEndDirFmt
+stderr:
+(empty)
+
+[emp-paired-demultiplex]
+command: conda run -n microbiome-qiime2-2026.4 qiime demux emp-paired --i-seqs <WORK_DIR>/atacama-emp-paired-end.qza --m-barcodes-file <PROJECT_ROOT>/data/small/fastq/metadata.tsv --m-barcodes-column barcode-sequence --p-rev-comp-mapping-barcodes --o-per-sample-sequences <WORK_DIR>/atacama-demux-paired.qza --o-error-correction-details <WORK_DIR>/atacama-demux-details.qza
+returncode: 0
+elapsed_seconds: 31.884
+stdout:
+Saved SampleData[PairedEndSequencesWithQuality] to: <WORK_DIR>/atacama-demux-paired.qza
+Saved ErrorCorrectionDetails to: <WORK_DIR>/atacama-demux-details.qza
+stderr:
+(empty)
+
+[demux-maximum-validation]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools validate <WORK_DIR>/atacama-demux-paired.qza --level max
+returncode: 0
+elapsed_seconds: 31.741
+stdout:
+Result <WORK_DIR>/atacama-demux-paired.qza appears to be valid at level=max.
+stderr:
+(empty)
+
+[demux-peek]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools peek --tsv <WORK_DIR>/atacama-demux-paired.qza
+returncode: 0
+elapsed_seconds: 5.715
+stdout:
+Filename	Type	UUID	Data Format
+atacama-demux-paired.qza	SampleData[PairedEndSequencesWithQuality]	93a348e3-3dfc-4737-b588-8c04f8b1a600	SingleLanePerSamplePairedEndFastqDirFmt
+stderr:
+(empty)
+
+[demux-details-peek]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools peek --tsv <WORK_DIR>/atacama-demux-details.qza
+returncode: 0
+elapsed_seconds: 5.791
+stdout:
+Filename	Type	UUID	Data Format
+atacama-demux-details.qza	ErrorCorrectionDetails	b98bd5d7-311a-4b10-8b19-c06dfc6b4e50	ErrorCorrectionDetailsDirFmt
+stderr:
+(empty)
+
+[demux-summarize-all-reads]
+command: conda run -n microbiome-qiime2-2026.4 qiime demux summarize --i-data <WORK_DIR>/atacama-demux-paired.qza --p-n 10000 --o-visualization <WORK_DIR>/atacama-demux-summary.qzv
+returncode: 0
+elapsed_seconds: 32.15
+stdout:
+Saved Visualization to: <WORK_DIR>/atacama-demux-summary.qzv
+stderr:
+(empty)
+
+[summary-maximum-validation]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools validate <WORK_DIR>/atacama-demux-summary.qzv --level max
+returncode: 0
+elapsed_seconds: 5.828
+stdout:
+Result <WORK_DIR>/atacama-demux-summary.qzv appears to be valid at level=max.
+stderr:
+(empty)
+
+[summary-peek]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools peek --tsv <WORK_DIR>/atacama-demux-summary.qzv
+returncode: 0
+elapsed_seconds: 5.77
+stdout:
+Filename	Type	UUID	Data Format
+atacama-demux-summary.qzv	Visualization	d05e5b11-be9b-4f8f-b3c1-7773892dc358	None
+stderr:
+(empty)
+
+[export-demux-details]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools export --input-path <WORK_DIR>/atacama-demux-details.qza --output-path <WORK_DIR>/details-export
+returncode: 0
+elapsed_seconds: 31.163
+stdout:
+Exported <WORK_DIR>/atacama-demux-details.qza as ErrorCorrectionDetailsDirFmt to directory <WORK_DIR>/details-export
+stderr:
+(empty)
+
+[fastqc-three-streams]
+command: conda run -n microbiome-fastqc-multiqc fastqc --threads 3 --noextract --outdir <WORK_DIR>/fastqc <PROJECT_ROOT>/data/small/fastq/forward.fastq.gz <PROJECT_ROOT>/data/small/fastq/reverse.fastq.gz <PROJECT_ROOT>/data/small/fastq/barcodes.fastq.gz
+returncode: 0
+elapsed_seconds: 5.311
+stdout:
+application/gzip
+application/gzip
+application/gzip
+Analysis complete for forward.fastq.gz
+Analysis complete for reverse.fastq.gz
+Analysis complete for barcodes.fastq.gz
+stderr:
+Started analysis of forward.fastq.gz
+Approx 45% complete for forward.fastq.gz
+Approx 100% complete for forward.fastq.gz
+Started analysis of reverse.fastq.gz
+Approx 50% complete for reverse.fastq.gz
+Approx 100% complete for reverse.fastq.gz
+Started analysis of barcodes.fastq.gz
+Approx 50% complete for barcodes.fastq.gz
+Approx 100% complete for barcodes.fastq.gz
+
+[multiqc-fastqc-aggregation]
+command: conda run -n microbiome-fastqc-multiqc python -m multiqc <WORK_DIR>/fastqc --module fastqc --require-logs --force --no-version-check --no-ansi --data-dir --outdir <WORK_DIR>/multiqc --filename multiqc_report.html
+returncode: 0
+elapsed_seconds: 4.262
+stdout:
+(empty)
+stderr:
+/// MultiQC v1.33
+
+       file_search | Search path: <WORK_DIR>/fastqc
+       file_search | Only using modules: fastqc
+            fastqc | Found 3 reports
+       file_search | Only using modules: fastqc
+     write_results | Data        : results/10-import-provenance-qc/article10-lalkpc01/multiqc/multiqc_report_data
+     write_results | Report      : results/10-import-provenance-qc/article10-lalkpc01/multiqc/multiqc_report.html
+           multiqc | MultiQC complete

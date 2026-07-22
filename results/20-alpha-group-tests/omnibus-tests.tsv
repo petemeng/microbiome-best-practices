@@ -1,0 +1,4 @@
+Order	Metric	Test	H	DF	PValue	EpsilonSquared	Interpretation	PAdjustedHolm	RejectHolm05
+0	Hill q=0	Kruskal-Wallis rank-sum	3.061391941392003	2	0.21638501726700665	0.012199907372321874	Rank-distribution difference; location only if shapes are comparable	0.64915505180102	FALSE
+1	Hill q=1	Kruskal-Wallis rank-sum	1.0663736263736041	2	0.5867321812974894	0	Rank-distribution difference; location only if shapes are comparable	1	FALSE
+2	Hill q=2	Kruskal-Wallis rank-sum	0.423247863247866	2	0.8092689808186773	0	Rank-distribution difference; location only if shapes are comparable	1	FALSE

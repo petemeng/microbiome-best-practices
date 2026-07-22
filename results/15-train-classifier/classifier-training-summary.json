@@ -1,0 +1,307 @@
+{
+  "status": "passed",
+  "validation_date": "2026-07-20",
+  "reference_database": "SILVA 138.2 SSURef NR99",
+  "marker_region": "16S V4 515F/806R",
+  "reference_records": 262752,
+  "query_asvs": 366,
+  "query_reads": 5213,
+  "versions": {
+    "qiime2": "2026.4.0",
+    "q2-feature-classifier": "2026.4.0",
+    "rescript": "2026.4.0",
+    "scikit-learn": "1.7.1",
+    "joblib": "1.5.3",
+    "numpy": "2.4.2",
+    "scipy": "1.17.1"
+  },
+  "split": {
+    "seed": "article15-silva1382-v4-known-lineage-v1",
+    "strategy": "Known-genus-lineage stratified deterministic SHA-256 holdout; singleton lineages remain in training.",
+    "training_records": 236516,
+    "holdout_records": 26236,
+    "training_lineages": 5872,
+    "holdout_lineages": 5161,
+    "singleton_lineages": 711,
+    "membership_sha256": "dfbcdb65d99eab99d6f7a29b6175600441e58d33ac4eb06039a6fcc0425736e1",
+    "interpretation_boundary": "Same-release known-lineage interpolation; not an independent mock-community or cross-release accuracy estimate."
+  },
+  "classifier_contract": {
+    "method": "q2-feature-classifier fit-classifier-naive-bayes",
+    "feature_analyzer": "char_wb",
+    "ngram_range": [
+      7,
+      7
+    ],
+    "hashed_features": 8192,
+    "alternate_sign": false,
+    "norm": "l2",
+    "alpha": 0.001,
+    "fit_prior": false,
+    "class_weight": "not supplied",
+    "classification_orientation": "same",
+    "reads_per_batch": 20000,
+    "n_jobs": 4,
+    "confidence_thresholds": [
+      0.5,
+      0.7,
+      0.9
+    ]
+  },
+  "training": {
+    "holdout_classifier_seconds": 390.294,
+    "production_classifier_seconds": 559.125,
+    "holdout_classifier_bytes": 41437675,
+    "production_classifier_bytes": 43703493,
+    "production_classifier_sha256": "a21b75c7b3831698d5c4112d7316fb445d2987fb3c185a0e6ad78906c466ae8f"
+  },
+  "holdout_metrics": {
+    "c050": {
+      "domain": {
+        "expected": 26236,
+        "correct": 26236,
+        "incorrect": 0,
+        "abstained": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "phylum": {
+        "expected": 26224,
+        "correct": 26051,
+        "incorrect": 110,
+        "abstained": 63,
+        "precision": 0.995795,
+        "recall": 0.993403,
+        "f1": 0.994598
+      },
+      "class": {
+        "expected": 26216,
+        "correct": 25952,
+        "incorrect": 168,
+        "abstained": 96,
+        "precision": 0.993568,
+        "recall": 0.98993,
+        "f1": 0.991746
+      },
+      "order": {
+        "expected": 26186,
+        "correct": 25553,
+        "incorrect": 420,
+        "abstained": 213,
+        "precision": 0.983829,
+        "recall": 0.975827,
+        "f1": 0.979812
+      },
+      "family": {
+        "expected": 26142,
+        "correct": 25016,
+        "incorrect": 666,
+        "abstained": 460,
+        "precision": 0.974067,
+        "recall": 0.956928,
+        "f1": 0.965421
+      },
+      "genus": {
+        "expected": 25875,
+        "correct": 21811,
+        "incorrect": 2084,
+        "abstained": 1980,
+        "precision": 0.912785,
+        "recall": 0.842937,
+        "f1": 0.876472
+      }
+    },
+    "c070": {
+      "domain": {
+        "expected": 26236,
+        "correct": 26236,
+        "incorrect": 0,
+        "abstained": 0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "phylum": {
+        "expected": 26224,
+        "correct": 26018,
+        "incorrect": 86,
+        "abstained": 120,
+        "precision": 0.996705,
+        "recall": 0.992145,
+        "f1": 0.99442
+      },
+      "class": {
+        "expected": 26216,
+        "correct": 25907,
+        "incorrect": 134,
+        "abstained": 175,
+        "precision": 0.994854,
+        "recall": 0.988213,
+        "f1": 0.991523
+      },
+      "order": {
+        "expected": 26186,
+        "correct": 25423,
+        "incorrect": 327,
+        "abstained": 436,
+        "precision": 0.987301,
+        "recall": 0.970862,
+        "f1": 0.979013
+      },
+      "family": {
+        "expected": 26142,
+        "correct": 24690,
+        "incorrect": 511,
+        "abstained": 941,
+        "precision": 0.979723,
+        "recall": 0.944457,
+        "f1": 0.961767
+      },
+      "genus": {
+        "expected": 25875,
+        "correct": 20695,
+        "incorrect": 1361,
+        "abstained": 3819,
+        "precision": 0.938293,
+        "recall": 0.799807,
+        "f1": 0.863533
+      }
+    },
+    "c090": {
+      "domain": {
+        "expected": 26236,
+        "correct": 26235,
+        "incorrect": 0,
+        "abstained": 1,
+        "precision": 1.0,
+        "recall": 0.999962,
+        "f1": 0.999981
+      },
+      "phylum": {
+        "expected": 26224,
+        "correct": 25954,
+        "incorrect": 66,
+        "abstained": 204,
+        "precision": 0.997463,
+        "recall": 0.989704,
+        "f1": 0.993569
+      },
+      "class": {
+        "expected": 26216,
+        "correct": 25823,
+        "incorrect": 118,
+        "abstained": 275,
+        "precision": 0.995451,
+        "recall": 0.985009,
+        "f1": 0.990203
+      },
+      "order": {
+        "expected": 26186,
+        "correct": 25178,
+        "incorrect": 268,
+        "abstained": 740,
+        "precision": 0.989468,
+        "recall": 0.961506,
+        "f1": 0.975287
+      },
+      "family": {
+        "expected": 26142,
+        "correct": 23988,
+        "incorrect": 367,
+        "abstained": 1787,
+        "precision": 0.984931,
+        "recall": 0.917604,
+        "f1": 0.950076
+      },
+      "genus": {
+        "expected": 25875,
+        "correct": 18926,
+        "incorrect": 765,
+        "abstained": 6184,
+        "precision": 0.96115,
+        "recall": 0.73144,
+        "f1": 0.830707
+      }
+    }
+  },
+  "query_metrics": {
+    "c050": {
+      "assigned_asvs": 366,
+      "assigned_reads": 5213,
+      "genus_asvs": 352,
+      "genus_reads": 4607
+    },
+    "c070": {
+      "assigned_asvs": 366,
+      "assigned_reads": 5213,
+      "genus_asvs": 318,
+      "genus_reads": 4217
+    },
+    "c090": {
+      "assigned_asvs": 366,
+      "assigned_reads": 5213,
+      "genus_asvs": 294,
+      "genus_reads": 3672
+    }
+  },
+  "method_concordance": {
+    "domain": {
+      "comparable_asvs": 358,
+      "exact_match_asvs": 358,
+      "exact_match_asv_fraction": 1.0,
+      "exact_match_read_fraction": 1.0
+    },
+    "phylum": {
+      "comparable_asvs": 343,
+      "exact_match_asvs": 335,
+      "exact_match_asv_fraction": 0.976676,
+      "exact_match_read_fraction": 0.994081
+    },
+    "class": {
+      "comparable_asvs": 343,
+      "exact_match_asvs": 335,
+      "exact_match_asv_fraction": 0.976676,
+      "exact_match_read_fraction": 0.994081
+    },
+    "order": {
+      "comparable_asvs": 326,
+      "exact_match_asvs": 309,
+      "exact_match_asv_fraction": 0.947853,
+      "exact_match_read_fraction": 0.988682
+    },
+    "family": {
+      "comparable_asvs": 323,
+      "exact_match_asvs": 310,
+      "exact_match_asv_fraction": 0.959752,
+      "exact_match_read_fraction": 0.980344
+    },
+    "genus": {
+      "comparable_asvs": 303,
+      "exact_match_asvs": 293,
+      "exact_match_asv_fraction": 0.966997,
+      "exact_match_read_fraction": 0.977351
+    }
+  },
+  "sequence_search_contract": {
+    "generated_within_step": true,
+    "method": "q2-feature-classifier classify-consensus-vsearch",
+    "maxaccepts": 50,
+    "maxrejects": "all",
+    "identity": 0.8,
+    "query_coverage": 0.8,
+    "strand": "both",
+    "top_hits_only": true,
+    "maxhits": "all",
+    "minimum_consensus": 0.51
+  },
+  "source_release": {
+    "release": "138.2",
+    "license": "CC BY 4.0",
+    "reference_fasta_sha256": "3a251d263bd4e12c96023c84b3f2e255b8bcb0d5865dc6f299f9918e6be3a808",
+    "reference_taxonomy_sha256": "f49320aaa32aa70af5c5a48649786e3bb4177868da5da4d2143d0a54c5fa47b0"
+  },
+  "checks_total": 80,
+  "checks_passed": 80,
+  "checks_failed": 0
+}

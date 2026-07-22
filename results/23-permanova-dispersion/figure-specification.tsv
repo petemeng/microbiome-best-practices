@@ -1,0 +1,5 @@
+stem	width_mm	height_mm	raster_ppi
+23-exchangeability-design	183	104	600
+23-pcoa-centroid-dispersion	183	120	600
+23-pairwise-permanova	183	96	600
+23-dispersion-by-treatment	183	104	600

@@ -1,0 +1,4 @@
+DistanceBlock	CommunityDistance	EnvironmentDistance	Method	Statistic	PValue	Permutations	Alternative	PAdjustedHolm	RejectHolm05
+Edaphic	Bray-Curtis on relative abundance	Euclidean on five Z-scored soil variables	Spearman	0.3318957450036113	0.001	999	Positive matrix association	0.003	TRUE
+Climate	Bray-Curtis on relative abundance	Euclidean on two Z-scored climate variables	Spearman	0.39509141243349966	0.001	999	Positive matrix association	0.003	TRUE
+Geographic	Bray-Curtis on relative abundance	Haversine great-circle distance (km)	Spearman	0.5869834682456738	0.001	999	Positive matrix association	0.003	TRUE

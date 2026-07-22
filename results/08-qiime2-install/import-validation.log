@@ -1,0 +1,145 @@
+# Article 08 QIIME 2 installation and Artifact audit
+validation_date: 2026-07-19
+environment: microbiome-qiime2-2026.4
+status: passed
+
+## qiime-info
+$ conda run -n microbiome-qiime2-2026.4 qiime info
+exit_code: 0
+elapsed_seconds: 7.699
+System versions
+Python version: 3.12.13
+QIIME 2 release: 2026.4
+QIIME 2 version: 2026.4.0
+q2cli version: 2026.4.0
+
+Installed plugins
+alignment: 2026.4.0
+boots: 2026.4.0
+composition: 2026.4.0
+cutadapt: 2026.4.0
+dada2: 2026.4.0
+deblur: 2026.4.0
+demux: 2026.4.0
+diversity: 2026.4.0
+diversity-lib: 2026.4.0
+emperor: 2026.4.0
+feature-classifier: 2026.4.0
+feature-table: 2026.4.0
+fondue: 2026.4.0
+fragment-insertion: 2026.4.0
+kmerizer: 2026.4.0
+longitudinal: 2026.4.0
+metadata: 2026.4.0
+phylogeny: 2026.4.0
+quality-control: 2026.4.0
+quality-filter: 2026.4.0
+rescript: 2026.4.0
+sample-classifier: 2026.4.0
+stats: 2026.4.0
+taxa: 2026.4.0
+types: 2026.4.0
+vizard: 2026.4.0
+vsearch: 2026.4.0
+
+Application config directory
+<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/var/q2cli
+
+Config
+Config Source: <HOME>/miniconda3/envs/microbiome-qiime2-2026.4/etc/qiime2_config.toml
+
+Getting help
+To find help and learning resources, visit https://qiime2.org.
+To get help with configuring and/or understanding QIIME 2 parallelization, visit https://use.qiime2.org/en/stable/references/parallel-configuration.html
+
+## real-import
+$ conda run -n microbiome-qiime2-2026.4 qiime tools import --type EMPPairedEndSequences --input-path <WORK_ROOT_1>/emp-paired-end-sequences --output-path <WORK_ROOT_2>/atacama-emp-paired-end.qza
+exit_code: 0
+elapsed_seconds: 54.819
+Imported <WORK_ROOT_1>/emp-paired-end-sequences as EMPPairedEndDirFmt to <WORK_ROOT_2>/atacama-emp-paired-end.qza
+
+## maximum-validation
+$ conda run -n microbiome-qiime2-2026.4 qiime tools validate <WORK_ROOT_2>/atacama-emp-paired-end.qza --level max
+exit_code: 0
+elapsed_seconds: 38.875
+Result <WORK_ROOT_2>/atacama-emp-paired-end.qza appears to be valid at level=max.
+
+## artifact-peek
+$ conda run -n microbiome-qiime2-2026.4 qiime tools peek --tsv <WORK_ROOT_2>/atacama-emp-paired-end.qza
+exit_code: 0
+elapsed_seconds: 7.359
+Filename	Type	UUID	Data Format
+atacama-emp-paired-end.qza	EMPPairedEndSequences	950c372f-5903-407c-9729-a46abd915c38	EMPPairedEndDirFmt
+
+## artifact-export
+$ conda run -n microbiome-qiime2-2026.4 qiime tools export --input-path <WORK_ROOT_2>/atacama-emp-paired-end.qza --output-path <WORK_ROOT_1>/exported
+exit_code: 0
+elapsed_seconds: 35.362
+Exported <WORK_ROOT_2>/atacama-emp-paired-end.qza as EMPPairedEndDirFmt to directory <WORK_ROOT_1>/exported
+
+## probe-action-typo
+$ conda run -n microbiome-qiime2-2026.4 qiime dada2 denoise-pairedx --help
+exit_code: 2
+elapsed_seconds: 9.057
+Error: QIIME 2 plugin 'dada2' has no action 'denoise-pairedx'.  Did you mean 'denoise-paired'?
+ERROR conda.cli.main_run:execute(142): `conda run qiime dada2 denoise-pairedx --help` failed. (See above for error)
+
+## probe-invalid-semantic-type
+$ conda run -n microbiome-qiime2-2026.4 qiime tools import --type NotARealSemanticType --input-path <WORK_ROOT_1>/emp-paired-end-sequences --output-path <WORK_ROOT_1>/invalid-type.qza
+exit_code: 1
+elapsed_seconds: 35.429
+Traceback (most recent call last):
+  File "<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/q2cli/builtin/tools.py", line 27, in _import
+    artifact = qiime2.sdk.Artifact.import_data(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/sdk/result.py", line 645, in import_data
+    output_dir_fmt = pm.get_directory_format(type_)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/sdk/plugin_manager.py", line 394, in get_directory_format
+    raise TypeError(
+TypeError: Semantic type NotARealSemanticType is invalid, either because it doesn't have a compatible directory format, or because it's not registered.
+
+An unexpected error has occurred:
+
+  Semantic type NotARealSemanticType is invalid, either because it doesn't have a compatible directory format, or because it's not registered.
+
+See above for debug info.
+ERROR conda.cli.main_run:execute(142): `conda run qiime tools import --type NotARealSemanticType --input-path <WORK_ROOT_1>/emp-paired-end-sequences --output-path <WORK_ROOT_1>/invalid-type.qza` failed. (See above for error)
+
+## probe-missing-required-fastq
+$ conda run -n microbiome-qiime2-2026.4 qiime tools import --type EMPPairedEndSequences --input-path <WORK_ROOT_1>/missing-fastq --output-path <WORK_ROOT_1>/missing-fastq.qza
+exit_code: 1
+elapsed_seconds: 37.132
+There was a problem importing <WORK_ROOT_1>/missing-fastq:
+
+  Missing one or more files for EMPPairedEndDirFmt: 'reverse.fastq.gz'
+
+ERROR conda.cli.main_run:execute(142): `conda run qiime tools import --type EMPPairedEndSequences --input-path <WORK_ROOT_1>/missing-fastq --output-path <WORK_ROOT_1>/missing-fastq.qza` failed. (See above for error)
+
+## probe-not-a-qiime-artifact
+$ conda run -n microbiome-qiime2-2026.4 qiime tools validate <PROJECT_ROOT>/data/small/fastq/metadata.tsv --level max
+exit_code: 1
+elapsed_seconds: 6.144
+Traceback (most recent call last):
+  File "<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/q2cli/builtin/tools.py", line 816, in validate
+    result = qiime2.sdk.Result.load(path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/sdk/result.py", line 84, in load
+    peek = cls.peek(filepath)
+           ^^^^^^^^^^^^^^^^^^
+  File "<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/sdk/result.py", line 68, in peek
+    return ResultMetadata(*archive.Archiver.peek(filepath))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/core/archive/archiver.py", line 352, in peek
+    archive = cls.get_archive(filepath)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/core/archive/archiver.py", line 338, in get_archive
+    raise ValueError("%s is not a QIIME archive." % filepath)
+ValueError: <PROJECT_ROOT>/data/small/fastq/metadata.tsv is not a QIIME archive.
+
+There was a problem loading <PROJECT_ROOT>/data/small/fastq/metadata.tsv as a QIIME 2 Result:
+
+  <PROJECT_ROOT>/data/small/fastq/metadata.tsv is not a QIIME archive.
+
+See above for debug info.
+ERROR conda.cli.main_run:execute(142): `conda run qiime tools validate <PROJECT_ROOT>/data/small/fastq/metadata.tsv --level max` failed. (See above for error)

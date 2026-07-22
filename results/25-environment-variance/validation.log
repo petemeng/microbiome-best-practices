@@ -1,0 +1,11 @@
+Article 25 environment-variance validation
+Status: PASS
+Checks: 221/221
+Samples/features: 90/11113
+Permutation matrix: 999 unique free rows
+envfit BH rejections: 10/11
+Mantel rho (edaphic/climate/geographic): 0.3319/0.3951/0.5870
+VPA adjusted fractions (edaphic/group/shared/residual): 0.0967/0.1140/0.0710/0.7183
+Primary exports: 16 files
+R version: 4.4.1
+vegan version: 2.6-6.1

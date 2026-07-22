@@ -1,0 +1,81 @@
+check_id	observed	expected	status
+environment-qiime2	2026.4.0	2026.4.0	PASS
+environment-q2-feature-classifier	2026.4.0	2026.4.0	PASS
+environment-rescript	2026.4.0	2026.4.0	PASS
+environment-scikit-learn	1.7.1	1.7.1	PASS
+environment-joblib	1.5.3	1.5.3	PASS
+environment-numpy	2.4.2	2.4.2	PASS
+environment-scipy	1.17.1	1.17.1	PASS
+input-reference-fasta-sha256	3a251d263bd4e12c96023c84b3f2e255b8bcb0d5865dc6f299f9918e6be3a808	3a251d263bd4e12c96023c84b3f2e255b8bcb0d5865dc6f299f9918e6be3a808	PASS
+input-reference-taxonomy-sha256	f49320aaa32aa70af5c5a48649786e3bb4177868da5da4d2143d0a54c5fa47b0	f49320aaa32aa70af5c5a48649786e3bb4177868da5da4d2143d0a54c5fa47b0	PASS
+input-query-fasta-sha256	fa71915be8007d36ec70f85d28401f5a94d0d33eca323782cc937cfc4bcf1af4	fa71915be8007d36ec70f85d28401f5a94d0d33eca323782cc937cfc4bcf1af4	PASS
+input-query-abundance-sha256	a80e3b94d8632c48fb6c01e788e842c022c3b1ee64b79dc94456618328895e6e	a80e3b94d8632c48fb6c01e788e842c022c3b1ee64b79dc94456618328895e6e	PASS
+input-reference-records	262752	262752	PASS
+input-reference-unique-ids	262752	262752	PASS
+input-reference-taxonomy-records	262752	262752	PASS
+input-reference-id-match	True	True	PASS
+input-query-asvs	366	366	PASS
+input-query-unique-ids	366	366	PASS
+input-query-abundance-records	366	366	PASS
+input-query-id-match	True	True	PASS
+input-query-reads	5213	5213	PASS
+split-training-records	236516	236516	PASS
+split-holdout-records	26236	26236	PASS
+split-record-conservation	262752	262752	PASS
+split-id-overlap	0	0	PASS
+split-sequence-overlap	0	0	PASS
+split-training-subset	True	True	PASS
+split-holdout-subset	True	True	PASS
+split-membership-records	262752	262752	PASS
+split-holdout-lineages-in-training	0	0	PASS
+split-singletons-in-holdout	0	0	PASS
+split-holdout-fraction	0.099851	0.099851	PASS
+split-training-taxonomy-id-match	True	True	PASS
+split-holdout-taxonomy-id-match	True	True	PASS
+split-membership-sha256	True	True	PASS
+command-fit-holdout-classifier	0	0	PASS
+command-fit-production-classifier	0	0	PASS
+command-classify-holdout-c050	0	0	PASS
+command-classify-query-c050	0	0	PASS
+command-classify-holdout-c070	0	0	PASS
+command-classify-query-c070	0	0	PASS
+command-classify-holdout-c090	0	0	PASS
+command-classify-query-c090	0	0	PASS
+command-evaluate-holdout-c070	0	0	PASS
+artifact-silva-v4-holdout-classifier.qza-maximum-validation	TaxonomicClassifier; True	TaxonomicClassifier; True	PASS
+artifact-silva-v4-classifier.qza-maximum-validation	TaxonomicClassifier; True	TaxonomicClassifier; True	PASS
+artifact-silva-v4-holdout-sequences.qza-maximum-validation	FeatureData[Sequence]; True	FeatureData[Sequence]; True	PASS
+artifact-silva-v4-holdout-expected-taxonomy.qza-maximum-validation	FeatureData[Taxonomy]; True	FeatureData[Taxonomy]; True	PASS
+artifact-holdout-taxonomy-c050.qza-maximum-validation	FeatureData[Taxonomy]; True	FeatureData[Taxonomy]; True	PASS
+artifact-holdout-taxonomy-c070.qza-maximum-validation	FeatureData[Taxonomy]; True	FeatureData[Taxonomy]; True	PASS
+artifact-holdout-taxonomy-c090.qza-maximum-validation	FeatureData[Taxonomy]; True	FeatureData[Taxonomy]; True	PASS
+artifact-query-taxonomy-c050.qza-maximum-validation	FeatureData[Taxonomy]; True	FeatureData[Taxonomy]; True	PASS
+artifact-query-taxonomy-c070.qza-maximum-validation	FeatureData[Taxonomy]; True	FeatureData[Taxonomy]; True	PASS
+artifact-query-taxonomy-c090.qza-maximum-validation	FeatureData[Taxonomy]; True	FeatureData[Taxonomy]; True	PASS
+artifact-holdout-evaluation-c070.qzv-maximum-validation	Visualization; True	Visualization; True	PASS
+provenance-holdout-fit-action	True	True	PASS
+provenance-production-fit-action	True	True	PASS
+provenance-all-classification-actions	True	True	PASS
+provenance-evaluation-action	True	True	PASS
+holdout-c050-genus-f1	0.876472	>=0.65	PASS
+holdout-c070-genus-f1	0.863533	>=0.65	PASS
+holdout-c090-genus-f1	0.830707	>=0.50	PASS
+holdout-domain-recall-monotonic	[1.0, 1.0, 0.999962]	non-increasing	PASS
+holdout-genus-recall-monotonic	[0.842937, 0.799807, 0.73144]	non-increasing	PASS
+holdout-metric-row-count	18	18	PASS
+query-all-threshold-id-count	[366, 366, 366]	[366, 366, 366]	PASS
+query-assigned-reads-monotonic	[5213, 5213, 5213]	non-increasing	PASS
+query-c070-assigned-reads	5213	>=3000	PASS
+query-method-concordance-contract	6 ranks; fractions bounded	6 ranks; fractions bounded	PASS
+figure-15-classifier-build-contract.pdf	24730	>0 bytes	PASS
+figure-15-classifier-build-contract.png	244537	>0 bytes	PASS
+figure-15-classifier-build-contract.tiff	562046	>0 bytes	PASS
+figure-15-holdout-rank-performance.pdf	24266	>0 bytes	PASS
+figure-15-holdout-rank-performance.png	287206	>0 bytes	PASS
+figure-15-holdout-rank-performance.tiff	586170	>0 bytes	PASS
+figure-15-query-confidence-sensitivity.pdf	23981	>0 bytes	PASS
+figure-15-query-confidence-sensitivity.png	217495	>0 bytes	PASS
+figure-15-query-confidence-sensitivity.tiff	390702	>0 bytes	PASS
+figure-15-method-concordance.pdf	22004	>0 bytes	PASS
+figure-15-method-concordance.png	163825	>0 bytes	PASS
+figure-15-method-concordance.tiff	627752	>0 bytes	PASS

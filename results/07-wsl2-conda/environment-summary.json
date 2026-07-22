@@ -1,0 +1,101 @@
+{
+  "validation_date": "2026-07-19",
+  "execution_scope": "native-linux-host",
+  "wsl_detected": false,
+  "windows_host_controls_validated": false,
+  "environment_name": "microbiome-qiime2-2026.4",
+  "kernel": "6.8.0-49-generic",
+  "architecture": "x86_64",
+  "bash_version": "5.1.16",
+  "conda_version": "26.1.1",
+  "mamba_version": "2.5.0",
+  "environment_manifest_sha256": "68b0e9b974937525b71cca3dec48b7dc5b6135f588a941d1313c118c2a41f4b5",
+  "qiime": {
+    "python_version": "3.12.13",
+    "qiime_release": "2026.4",
+    "qiime_version": "2026.4.0",
+    "q2cli_version": "2026.4.0",
+    "plugins": [
+      "alignment",
+      "boots",
+      "composition",
+      "cutadapt",
+      "dada2",
+      "deblur",
+      "demux",
+      "diversity",
+      "diversity-lib",
+      "emperor",
+      "feature-classifier",
+      "feature-table",
+      "fondue",
+      "fragment-insertion",
+      "kmerizer",
+      "longitudinal",
+      "metadata",
+      "phylogeny",
+      "quality-control",
+      "quality-filter",
+      "rescript",
+      "sample-classifier",
+      "stats",
+      "taxa",
+      "types",
+      "vizard",
+      "vsearch"
+    ],
+    "plugin_count": 27
+  },
+  "entrypoints": {
+    "DADA2 paired denoising": {
+      "command": "qiime dada2 denoise-paired --help",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "Taxonomy classification": {
+      "command": "qiime feature-classifier classify-sklearn --help",
+      "exit_code": 0,
+      "status": "PASS"
+    },
+    "SEPP fragment insertion": {
+      "command": "qiime fragment-insertion sepp --help",
+      "exit_code": 0,
+      "status": "PASS"
+    }
+  },
+  "fastq": {
+    "records_each": {
+      "forward": 2000,
+      "reverse": 2000,
+      "barcodes": 2000
+    },
+    "read_ids_synchronized": true,
+    "metadata_samples": 75,
+    "files": {
+      "forward.fastq.gz": {
+        "sha256": "e6fabdbd31db519c719447f1caf2d1cd334c6ab932353e534ea2433ead88d254",
+        "status": "PASS"
+      },
+      "reverse.fastq.gz": {
+        "sha256": "d2fa5841d150fead5a73067a267ec531221de11c512a38ec32ada03f1621bf65",
+        "status": "PASS"
+      },
+      "barcodes.fastq.gz": {
+        "sha256": "9cce1bb9a57975d14b54a5cf07c89b2b7c2095da4a8f0d1bd2720f1349e74057",
+        "status": "PASS"
+      },
+      "metadata.tsv": {
+        "sha256": "8d5342f0a80abf4197088bb1ce92f4903c1bd1212f6a9182e0e1c87ebc322bcb",
+        "status": "PASS"
+      },
+      "source_summary.json": {
+        "sha256": "daa3e140b0bf7e91c94392a48085da8e1e154920a0272eef93c15a26956e9983",
+        "status": "PASS"
+      }
+    }
+  },
+  "checks_total": 20,
+  "checks_passed": 20,
+  "checks_failed": 0,
+  "status": "passed"
+}

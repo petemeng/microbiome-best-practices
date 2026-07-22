@@ -1,0 +1,4 @@
+sample	total_sequences	percent_gc	percent_duplicates	average_sequence_length	median_sequence_length	percent_failed_modules
+barcodes	2000	47.0	69.55	12.0	12.0	27.27272727272727
+forward	2000	54.0	51.050000000000004	151.0	151.0	36.36363636363637
+reverse	2000	55.0	25.799999999999997	151.0	151.0	27.27272727272727

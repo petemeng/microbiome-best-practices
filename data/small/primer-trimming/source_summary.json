@@ -1,0 +1,82 @@
+{
+  "dataset": "nf-core/test-datasets ampliseq MiSeq v2 primer-retained raw sequencing data",
+  "repository": "https://github.com/nf-core/test-datasets",
+  "source_branch": "ampliseq",
+  "source_commit": "f282ad2bafb3ca90190ec87290066ee1985df655",
+  "source_commit_date": "2026-07-15T13:09:29+02:00",
+  "license": "MIT",
+  "associated_pipeline": {
+    "repository": "https://github.com/nf-core/ampliseq",
+    "commit": "2723d4c298d48321594920d0324697e14d73ee94",
+    "version": "2.18.0",
+    "test_profile": "conf/test.config"
+  },
+  "assay": {
+    "platform": "Illumina MiSeq v2",
+    "marker": "16S rRNA gene",
+    "region": "V4",
+    "layout": "paired-end",
+    "forward_primer_name": "515F (Parada)",
+    "forward_primer_5to3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_primer_name": "806R (Apprill)",
+    "reverse_primer_5to3": "GGACTACNVGGGTWTCTAAT",
+    "primer_contract_source": "nf-core/ampliseq conf/test.config at the associated pipeline commit"
+  },
+  "selection": {
+    "method": "Files are copied byte-for-byte from the pinned nf-core/test-datasets commit; no read subsampling or rewriting was performed.",
+    "samples": 4,
+    "records_per_direction_per_sample": 2500,
+    "total_read_pairs": 10000
+  },
+  "files": {
+    "1_S103_L001_R1_001.fastq.gz": {
+      "url": "https://raw.githubusercontent.com/nf-core/test-datasets/f282ad2bafb3ca90190ec87290066ee1985df655/testdata/1_S103_L001_R1_001.fastq.gz",
+      "sha256": "6121840c7f58f9992a4ed8fbd83d1e84497305481682ccaaa4e05f77f65c037e",
+      "bytes": 267420,
+      "records": 2500
+    },
+    "1_S103_L001_R2_001.fastq.gz": {
+      "url": "https://raw.githubusercontent.com/nf-core/test-datasets/f282ad2bafb3ca90190ec87290066ee1985df655/testdata/1_S103_L001_R2_001.fastq.gz",
+      "sha256": "96dfe650ec086ece5256b7315e7edbe4665b0ceba251481bd23bd5b0fefd4ab5",
+      "bytes": 298247,
+      "records": 2500
+    },
+    "1a_S103_L001_R1_001.fastq.gz": {
+      "url": "https://raw.githubusercontent.com/nf-core/test-datasets/f282ad2bafb3ca90190ec87290066ee1985df655/testdata/1a_S103_L001_R1_001.fastq.gz",
+      "sha256": "f677b902d2a9c5ff3144651b21e111574fec06b46e8d4e8b9871f28c6ca7e7c0",
+      "bytes": 325168,
+      "records": 2500
+    },
+    "1a_S103_L001_R2_001.fastq.gz": {
+      "url": "https://raw.githubusercontent.com/nf-core/test-datasets/f282ad2bafb3ca90190ec87290066ee1985df655/testdata/1a_S103_L001_R2_001.fastq.gz",
+      "sha256": "b473d9f1fc992f0f7b990d309f94db5c9b5205cd66cd9d8af18906b41c04ad18",
+      "bytes": 330396,
+      "records": 2500
+    },
+    "2_S115_L001_R1_001.fastq.gz": {
+      "url": "https://raw.githubusercontent.com/nf-core/test-datasets/f282ad2bafb3ca90190ec87290066ee1985df655/testdata/2_S115_L001_R1_001.fastq.gz",
+      "sha256": "4ef3dcca02628627ac89051f0df5dd341ce1d87b34c04f7403576b70c17705a0",
+      "bytes": 331037,
+      "records": 2500
+    },
+    "2_S115_L001_R2_001.fastq.gz": {
+      "url": "https://raw.githubusercontent.com/nf-core/test-datasets/f282ad2bafb3ca90190ec87290066ee1985df655/testdata/2_S115_L001_R2_001.fastq.gz",
+      "sha256": "a26d7b7afc45d74f232bc719ea612cf22cb788252bb36b1e0bffe1d86e556ba2",
+      "bytes": 368832,
+      "records": 2500
+    },
+    "2a_S115_L001_R1_001.fastq.gz": {
+      "url": "https://raw.githubusercontent.com/nf-core/test-datasets/f282ad2bafb3ca90190ec87290066ee1985df655/testdata/2a_S115_L001_R1_001.fastq.gz",
+      "sha256": "a8fe1286b639346356cec5fc8f1617778e14e04ac997ad02cbf2b71b15d16ff0",
+      "bytes": 317303,
+      "records": 2500
+    },
+    "2a_S115_L001_R2_001.fastq.gz": {
+      "url": "https://raw.githubusercontent.com/nf-core/test-datasets/f282ad2bafb3ca90190ec87290066ee1985df655/testdata/2a_S115_L001_R2_001.fastq.gz",
+      "sha256": "42fc33921fcb3cb4a1d820b72d0804ad82f51b53e2133999e12a8d7c1b2240bf",
+      "bytes": 321744,
+      "records": 2500
+    }
+  },
+  "citation_note": "Cite the pinned nf-core/test-datasets commit, nf-core/ampliseq, Straub et al. 2020, and the primer-method references. The repository describes these files as raw MiSeq v2 sequencing data but does not attach a separate biological-study accession."
+}

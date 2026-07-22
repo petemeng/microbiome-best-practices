@@ -1,0 +1,11 @@
+dataset	sample_id	mode	direction	input_reads	matched_reads	match_percent	paired_retained
+nf-core/ampliseq MiSeq v2	1	Correct V4 primers · anchored	R1	2500	1839	73.56	1810
+nf-core/ampliseq MiSeq v2	1	Correct V4 primers · anchored	R2	2500	1819	72.76	1810
+nf-core/ampliseq MiSeq v2	1a	Correct V4 primers · anchored	R1	2500	2301	92.04	2219
+nf-core/ampliseq MiSeq v2	1a	Correct V4 primers · anchored	R2	2500	2247	89.88	2219
+nf-core/ampliseq MiSeq v2	2	Correct V4 primers · anchored	R1	2500	2387	95.48	2347
+nf-core/ampliseq MiSeq v2	2	Correct V4 primers · anchored	R2	2500	2366	94.64	2347
+nf-core/ampliseq MiSeq v2	2a	Correct V4 primers · anchored	R1	2500	2314	92.56	2238
+nf-core/ampliseq MiSeq v2	2a	Correct V4 primers · anchored	R2	2500	2276	91.04	2238
+QIIME 2 Atacama EMP excerpt	multiplexed-excerpt	Original V4 primers · anchored	R1	2000	0	0.0	0
+QIIME 2 Atacama EMP excerpt	multiplexed-excerpt	Original V4 primers · anchored	R2	2000	0	0.0	0

@@ -1,0 +1,6 @@
+component	class	primary_dimension	secondary_dimension	orientation_or_role	status
+otu_table	otu_table	366	4	features x samples	PASS
+tax_table	taxonomyTable	366	7	features x ranks	PASS
+sample_data	sample_data	4	5	samples x variables	PASS
+phy_tree	phylo	366	365	ASV-pruned rooted tree	PASS
+refseq	DNAStringSet	366		ASV reference sequences	PASS

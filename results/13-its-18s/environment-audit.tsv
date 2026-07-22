@@ -1,0 +1,7 @@
+component	observed_version	expected_version	status
+QIIME 2	2026.4.0	2026.4.0	PASS
+q2cli	2026.4.0	2026.4.0	PASS
+ITSxpress	2.1.4	2.1.4	PASS
+Biopython	1.87	1.87	PASS
+VSEARCH	2.30.4	2.30.4	PASS
+HMMER	3.4	3.4	PASS

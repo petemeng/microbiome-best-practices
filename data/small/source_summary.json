@@ -1,0 +1,11 @@
+{
+  "features": 13628,
+  "samples": 90,
+  "taxonomy_features": 13628,
+  "metadata_samples": 90,
+  "environment_samples": 200,
+  "environment_variables": 11,
+  "common_environment_samples": 90,
+  "feature_ids_match": true,
+  "sample_ids_match": true
+}

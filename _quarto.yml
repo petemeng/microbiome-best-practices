@@ -1,0 +1,122 @@
+project:
+  type: book
+  output-dir: _site
+  execute-dir: project
+
+book:
+  title: "微生物组分析最佳实践 · 16S"
+  subtitle: "从真实数据到发表级重绘图"
+  author: "Songlab"
+  site-url: https://petemeng.github.io/microbiome-best-practices/
+  repo-url: https://github.com/petemeng/microbiome-best-practices
+  repo-actions: [edit, issue]
+  page-navigation: true
+  search: true
+  chapters:
+    - index.qmd
+    - part: "第 0 部分 · 导论"
+      chapters:
+        - chapters/02-scope-and-limits.qmd
+    - part: "第 1 部分 · 实验设计与数据"
+      chapters:
+        - chapters/03-study-design.qmd
+        - chapters/04-contamination-controls.qmd
+        - chapters/05-batch-effects.qmd
+        - chapters/06-data-and-fastq.qmd
+    - part: "第 2 部分 · 环境搭建"
+      chapters:
+        - chapters/07-wsl2-conda.qmd
+        - chapters/08-qiime2-install.qmd
+        - chapters/09-r-ecosystem.qmd
+    - part: "第 3 部分 · 上游（QIIME2）"
+      chapters:
+        - chapters/10-import-provenance-qc.qmd
+        - chapters/11-primer-trimming.qmd
+        - chapters/12-dada2-asv.qmd
+        - chapters/13-its-18s.qmd
+        - chapters/14-taxonomy-databases.qmd
+        - chapters/15-train-classifier.qmd
+        - chapters/16-sepp-phylogeny.qmd
+    - part: "第 4 部分 · 过渡到 R"
+      chapters:
+        - chapters/17-phyloseq-import.qmd
+        - chapters/18-publication-graphics.qmd
+    - part: "第 5 部分 · 多样性"
+      chapters:
+        - chapters/19-alpha-diversity.qmd
+        - chapters/20-alpha-group-tests.qmd
+        - chapters/21-beta-distances.qmd
+        - chapters/22-ordination-unconstrained.qmd
+        - chapters/23-permanova-dispersion.qmd
+        - chapters/24-ordination-constrained-cap.qmd
+        - chapters/25-environment-variance.qmd
+    - part: "第 6 部分 · 组成与分型"
+      chapters:
+        - chapters/26-community-composition.qmd
+        - chapters/27-multirank-composition.qmd
+        - chapters/28-core-rare-biosphere.qmd
+        - chapters/29-community-typing-dmm.qmd
+    - part: "第 7 部分 · 差异分析"
+      chapters:
+        - chapters/30-compositional-data.qmd
+        - chapters/31-da-methods.qmd
+        - chapters/32-multirank-da.qmd
+        - chapters/33-da-visualization.qmd
+        - chapters/34-absolute-quantification.qmd
+    - part: "第 8 部分 · 网络"
+      chapters:
+        - chapters/35-cooccurrence-networks.qmd
+        - chapters/36-network-robustness.qmd
+        - chapters/37-microbial-wgcna.qmd
+    - part: "第 9 部分 · 群落构建生态学"
+      chapters:
+        - chapters/38-community-assembly-bnti.qmd
+        - chapters/39-neutral-community-model.qmd
+        - chapters/40-niche-distance-decay.qmd
+    - part: "第 10 部分 · 功能预测"
+      chapters:
+        - chapters/41-picrust2.qmd
+        - chapters/42-functional-guilds.qmd
+    - part: "第 11 部分 · 机器学习与临床预测"
+      chapters:
+        - chapters/43-random-forest.qmd
+        - chapters/44-cross-cohort-validation.qmd
+        - chapters/45-survival-analysis.qmd
+    - part: "第 12 部分 · 多组学与多界整合"
+      chapters:
+        - chapters/46-procrustes-mantel-halla.qmd
+        - chapters/47-spls-diablo.qmd
+        - chapters/48-mmvec-mofa.qmd
+        - chapters/49-multi-kingdom.qmd
+    - part: "第 13 部分 · 来源追踪"
+      chapters:
+        - chapters/50-source-tracking.qmd
+    - part: "第 14 部分 · 纵向与因果推断"
+      chapters:
+        - chapters/51-longitudinal-analysis.qmd
+        - chapters/52-structural-equation-model.qmd
+        - chapters/53-mediation-analysis.qmd
+        - chapters/54-mendelian-randomization.qmd
+        - chapters/55-causal-evidence.qmd
+
+lang: zh
+
+execute:
+  freeze: auto
+  warning: false
+  message: false
+
+format:
+  html:
+    theme:
+      light: [cosmo, styles.scss]
+      dark: [darkly, styles.scss]
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-tools: true
+    code-overflow: wrap
+    anchor-sections: true
+    smooth-scroll: true
+
+bibliography: references.bib

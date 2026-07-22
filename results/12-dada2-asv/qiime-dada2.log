@@ -1,0 +1,54 @@
+$ conda run -n microbiome-qiime2-2026.4 qiime dada2 denoise-paired --i-demultiplexed-seqs <PROJECT_ROOT>/results/11-primer-trimming/nfcore-v4-trimmed.qza --p-trunc-len-f 220 --p-trunc-len-r 200 --p-trim-left-f 0 --p-trim-left-r 0 --p-max-ee-f 2.0 --p-max-ee-r 2.0 --p-trunc-q 2 --p-min-overlap 12 --p-max-merge-mismatch 0 --p-pooling-method independent --p-chimera-method consensus --p-n-threads 1 --p-n-reads-learn 1000000 --p-hashed-feature-ids --p-retain-all-samples --o-table <WORK_DIR>/profiles/selected/table.qza --o-representative-sequences <WORK_DIR>/profiles/selected/rep-seqs.qza --o-denoising-stats <WORK_DIR>/profiles/selected/stats.qza --o-base-transition-stats <WORK_DIR>/profiles/selected/base-transitions.qza --verbose
+
+[exit_code] 0
+[elapsed_seconds] 74.138
+
+[stdout]
+R version 4.5.2 (2025-10-31) 
+DADA2: 1.38.0 / Rcpp: 1.1.1.1.1 / RcppParallel: 5.1.11.2 
+2) Filtering ....
+3) Learning Error Rates
+1681020 total bases in 7641 reads from 4 samples will be used for learning the error rates.
+1528200 total bases in 7641 reads from 4 samples will be used for learning the error rates.
+3) Denoise samples ....
+....
+5) Remove chimeras (method = consensus)
+6) Report read numbers through the pipeline
+7) Write output
+Running external command line application(s). This may print messages to stdout and/or stderr.
+The command(s) being run are below. These commands cannot be manually re-run as they will depend on temporary files that no longer exist.
+
+Command: run_dada.R --input_directory /tmp/tmpraz0crq0/forward --input_directory_reverse /tmp/tmpraz0crq0/reverse --output_path /tmp/tmpraz0crq0/output.tsv.biom --output_track /tmp/tmpraz0crq0/track.tsv --output_err_track /tmp/tmpraz0crq0/err_track.tsv --filtered_directory /tmp/tmpraz0crq0/filt_f --filtered_directory_reverse /tmp/tmpraz0crq0/filt_r --truncation_length 220 --truncation_length_reverse 200 --trim_left 0 --trim_left_reverse 0 --max_expected_errors 2.0 --max_expected_errors_reverse 2.0 --truncation_quality_score 2 --min_overlap 12 --max_merge_mismatch 0 --trim_overhang False --pooling_method independent --chimera_method consensus --min_parental_fold 1.0 --allow_one_off False --num_threads 1 --learn_min_reads 1000000
+
+Saved FeatureTable[Frequency] to: <WORK_DIR>/profiles/selected/table.qza
+Saved FeatureData[Sequence] to: <WORK_DIR>/profiles/selected/rep-seqs.qza
+Saved SampleData[DADA2Stats] to: <WORK_DIR>/profiles/selected/stats.qza
+Saved DADA2BaseTransitionStats to: <WORK_DIR>/profiles/selected/base-transitions.qza
+
+[stderr]
+载入需要的程序包：Rcpp
+/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/metadata/metadata.py:610: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '[nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan]' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  series[missing.index] = missing
+/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/metadata/metadata.py:610: FutureWarning: Setting an item of incompatible dtype is deprecated and will raise an error in a future version of pandas. Value '[nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan
+ nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan nan]' has dtype incompatible with float64, please explicitly cast to a compatible dtype first.
+  series[missing.index] = missing

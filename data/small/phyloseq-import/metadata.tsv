@@ -1,0 +1,5 @@
+SampleID	LibraryLabel	FilenameSet	FilenameVariant	AmpliconRegion	ReadLayout
+1	Library_1	S103	base	16S_V4	PairedEnd
+1a	Library_1a	S103	suffix_a	16S_V4	PairedEnd
+2	Library_2	S115	base	16S_V4	PairedEnd
+2a	Library_2a	S115	suffix_a	16S_V4	PairedEnd

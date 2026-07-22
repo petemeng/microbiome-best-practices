@@ -1,0 +1,8 @@
+component	id_domain	expected_ids	matched_ids	missing_ids	unexpected_ids	allowed_reference_only_ids	match_percent	status
+Taxonomy	Feature IDs	366	366	0	0	0	100	PASS
+Representative sequences	Feature IDs	366	366	0	0	0	100	PASS
+Full-tree query tips	Feature IDs	366	366	0	0	203452	100	PASS
+Pruned tree	Feature IDs	366	366	0	0	0	100	PASS
+phyloseq taxa	Feature IDs	366	366	0	0	0	100	PASS
+Metadata	Sample IDs	4	4	0	0	0	100	PASS
+phyloseq samples	Sample IDs	4	4	0	0	0	100	PASS

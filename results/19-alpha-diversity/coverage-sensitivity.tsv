@@ -1,0 +1,4 @@
+TargetCoverage	Samples	RarefactionSamples	ObservedSamples	ExtrapolationSamples	MedianImpliedReads	MaximumEffortRatio
+0.88	90	85	0	5	10517.469923138835	1.1834159182495017
+0.9	90	56	0	34	14007.66121881677	1.4527550102606952
+0.92	90	30	0	60	18938.819825420105	1.784848867675807

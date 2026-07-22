@@ -1,0 +1,5 @@
+Branch	Features	Units	UnitDefinition	PermutationScheme	ValidForPrimaryInference	R2Total	R2Partial	PseudoF	PValue	Permutations
+Primary paper filter + split-plot restriction	1824	24	Biological soil sample	Split-plot restricted	TRUE	0.09808712306941238	0.18469215784012546	1.1326528967932397	0.0065	9999
+No prevalence filter + split-plot restriction	16825	24	Biological soil sample	Split-plot restricted	TRUE	0.10283029573629611	0.16355756292501109	0.9776976614013414	0.7642	9999
+Paper filter + unrestricted biological units	1824	24	Biological soil sample	Free; violates paired nested design	FALSE	0.09808712306941238	0.18469215784012546	1.1326528967932397	0.2441	9999
+Paper filter + unrestricted technical libraries	1824	56	PCR/tag technical library	Free; pseudoreplication	FALSE	0.05872515003544344	0.05872515003544344	1.0814084755931617	0.248	9999

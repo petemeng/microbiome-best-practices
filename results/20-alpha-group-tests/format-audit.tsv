@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	font_status	dimension_status
+20-design-selection-map	pdf	figures/20-design-selection-map.pdf	PDF	21196	183	84	182.73888888888888	83.96111111111111						1		embedded	PASS
+20-design-selection-map	svg	figures/20-design-selection-map.svg	SVG	6330	183	84	182.99994444444442	83.99991666666666							15	declared	PASS
+20-design-selection-map	png	figures/20-design-selection-map.png	PNG	222986	183	84	183	84	4322	1984	599.8841530054644	599.9238095238095	Zip				PASS
+20-design-selection-map	tiff	figures/20-design-selection-map.tiff	TIFF	279596	183	84	183	84	4322	1984	599.8841530054644	599.9238095238095	LZW				PASS
+20-alpha-group-distributions	pdf	figures/20-alpha-group-distributions.pdf	PDF	77193	183	108	182.73888888888888	107.94999999999999						1		embedded	PASS
+20-alpha-group-distributions	svg	figures/20-alpha-group-distributions.svg	SVG	189227	183	108	182.99994444444442	107.99938888888887							29	declared	PASS
+20-alpha-group-distributions	png	figures/20-alpha-group-distributions.png	PNG	680954	183	108	183	108	4322	2551	599.8841530054644	599.9574074074073	Zip				PASS
+20-alpha-group-distributions	tiff	figures/20-alpha-group-distributions.tiff	TIFF	1091466	183	108	183	108	4322	2551	599.8841530054644	599.9574074074073	LZW				PASS
+20-standardization-sensitivity	pdf	figures/20-standardization-sensitivity.pdf	PDF	24055	183	92	182.73888888888888	91.72222222222223						1		embedded	PASS
+20-standardization-sensitivity	svg	figures/20-standardization-sensitivity.svg	SVG	10601	183	92	182.99994444444442	92.00091666666667							29	declared	PASS
+20-standardization-sensitivity	png	figures/20-standardization-sensitivity.png	PNG	304723	183	92	183	92	4322	2173	599.8841530054644	599.9369565217391	Zip				PASS
+20-standardization-sensitivity	tiff	figures/20-standardization-sensitivity.tiff	TIFF	343186	183	92	183	92	4322	2173	599.8841530054644	599.9369565217391	LZW				PASS
+20-pairwise-effect-forest	pdf	figures/20-pairwise-effect-forest.pdf	PDF	25806	183	106	182.73888888888888	105.83333333333333						1		embedded	PASS
+20-pairwise-effect-forest	svg	figures/20-pairwise-effect-forest.svg	SVG	18845	183	106	182.99994444444442	105.9991388888889							35	declared	PASS
+20-pairwise-effect-forest	png	figures/20-pairwise-effect-forest.png	PNG	222867	183	106	183	106	4322	2503	599.8841530054644	599.7754716981132	Zip				PASS
+20-pairwise-effect-forest	tiff	figures/20-pairwise-effect-forest.tiff	TIFF	472432	183	106	183	106	4322	2503	599.8841530054644	599.7754716981132	LZW				PASS

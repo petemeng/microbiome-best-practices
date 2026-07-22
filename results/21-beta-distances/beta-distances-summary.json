@@ -1,0 +1,113 @@
+{
+  "article": 21,
+  "title": "Beta distance metric, tree and zero-handling audit",
+  "dataset": {
+    "source": "phyloseq 1.48.0 GlobalPatterns",
+    "primary_study_doi": "10.1073/pnas.1000080107",
+    "source_features": 19216,
+    "zero_sum_features_removed": 228,
+    "features": 18988,
+    "samples": 26,
+    "reads": 28216678,
+    "min_depth": 58688,
+    "median_depth": 1106849,
+    "max_depth": 2357181,
+    "zero_fraction": 0.7881698562655,
+    "habitat_classes": 5
+  },
+  "tree": {
+    "rooted": true,
+    "tips": 18988,
+    "internal_nodes": 18987,
+    "branch_lengths_present": true,
+    "negative_branch_lengths": 0,
+    "tip_set_matches_counts": true
+  },
+  "standardization": {
+    "seed": 20260722,
+    "rarefaction_depth": 50000,
+    "samples_retained": 26,
+    "rarefied_reads": 1300000,
+    "nonzero_features_after_rarefaction": 12443,
+    "bray_relative_abundance_spearman": 0.9985222721482
+  },
+  "composition": {
+    "min_feature_count_exclusive": 10,
+    "min_feature_prevalence_percent_exclusive": 10,
+    "features_retained": 11063,
+    "reads_retained": 28148221,
+    "classic_aitchison_default_pseudocount": 0.5,
+    "pseudocounts_audited": [0.1, 0.5, 1]
+  },
+  "analysis": {
+    "distance_metrics": 6,
+    "pairwise_distances_per_metric": 325,
+    "pairwise_distance_rows": 1950
+  },
+  "comparisons": {
+    "jaccard_unweighted_spearman": 0.9532045997592,
+    "aitchison_robust_spearman": 0.8000115358398,
+    "pseudocount_minimum_spearman_to_default": 0.9957002779089
+  },
+  "robust_aitchison": {
+    "method_family": "DEICODE rclr/RPCA",
+    "maintained_implementation": "gemelli 0.0.13",
+    "python": "3.12.13",
+    "features_retained": 11063,
+    "samples_retained": 26,
+    "reads_retained": 28148221,
+    "n_components": 3,
+    "max_iterations": 5,
+    "seed": 20260722,
+    "arpack_seed": 20260722,
+    "canonical_round_digits": 12,
+    "deterministic_outputs_matched": 5
+  },
+  "pcoa": {
+    "weighted_unifrac_negative_eigenvalues": 3,
+    "weighted_unifrac_negative_positive_ratio": 0.004550580377685,
+    "weighted_unifrac_correction": "Lingoes",
+    "metrics_without_correction": 5
+  },
+  "graphics": {
+    "font_family": "DejaVu Sans",
+    "primary_figures": 4,
+    "vector_files": 8,
+    "raster_files": 8,
+    "format_files": 16,
+    "raster_ppi": 600,
+    "svg_files_with_text": 4,
+    "pdf_files_with_embedded_font": 4,
+    "lzw_tiff_files": 4,
+    "dimension_checks_passed": 16
+  },
+  "r_versions": {
+    "ape": "5.8",
+    "digest": "0.6.36",
+    "dplyr": "1.1.4",
+    "ggplot2": "3.5.2",
+    "jsonlite": "1.8.8",
+    "phyloseq": "1.48.0",
+    "ragg": "1.3.2",
+    "readr": "2.1.5",
+    "scales": "1.3.0",
+    "svglite": "2.1.3",
+    "systemfonts": "1.1.0",
+    "tibble": "3.2.1",
+    "tidyr": "1.3.1",
+    "vegan": "2.6-6.1"
+  },
+  "python_versions": {
+    "python": "3.12.13",
+    "gemelli": "0.0.13",
+    "numpy": "2.4.2",
+    "pandas": "2.3.3",
+    "scipy": "1.17.1",
+    "scikit_learn": "1.7.1",
+    "scikit_bio": "0.7.2",
+    "biom_format": "2.1.17"
+  },
+  "checks_total": 239,
+  "checks_passed": 239,
+  "checks_failed": 0
+}

@@ -1,0 +1,5 @@
+sample_id	input	filtered	filter_percent	denoised	merged	merged_percent	non-chimeric	non_chimeric_percent	filtered_loss	denoising_loss	merging_loss	chimera_loss
+1	1810	1539	85.03	1286	1170	64.64	1144	63.2	271	253	116	26
+1a	2219	2026	91.3	1417	1251	56.38	1251	56.38	193	609	166	0
+2	2347	2033	86.62	1673	1521	64.81	1503	64.04	314	360	152	18
+2a	2238	2043	91.29	1510	1315	58.76	1315	58.76	195	533	195	0

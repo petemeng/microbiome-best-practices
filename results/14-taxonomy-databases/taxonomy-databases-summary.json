@@ -1,0 +1,445 @@
+{
+  "status": "passed",
+  "validation_date": "2026-07-20",
+  "query_asvs": 366,
+  "query_reads": 5213,
+  "query_length_minimum": 252,
+  "query_length_median": 253.0,
+  "query_length_maximum": 303,
+  "classification_contract": {
+    "method": "q2-feature-classifier classify-consensus-vsearch",
+    "maximum_accepts": 50,
+    "maximum_rejects": "all",
+    "percent_identity": 0.8,
+    "query_coverage": 0.8,
+    "strand": "both",
+    "top_hits_only": true,
+    "maximum_hits": "all",
+    "minimum_consensus": 0.51,
+    "threads": 4,
+    "output_no_hits": true
+  },
+  "reference_contract": {
+    "forward_primer_5_to_3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_primer_5_to_3": "GGACTACNVGGGTWTCTAAT",
+    "combined_primer_identity": 0.8,
+    "minimum_length": 200,
+    "maximum_length": 400,
+    "dereplication": "exact sequence, least common ancestor"
+  },
+  "reference_records": {
+    "SILVA": {
+      "full": 510495,
+      "primer_matched_v4": 450770,
+      "unique_v4_lca": 262752
+    },
+    "GTDB": {
+      "full": 93770,
+      "primer_matched_v4": 79669,
+      "unique_v4_lca": 51985
+    },
+    "Greengenes2": {
+      "full": 337506,
+      "primer_matched_v4": 335976,
+      "unique_v4_lca": 98185
+    }
+  },
+  "assignments": {
+    "SILVA": {
+      "assigned_asvs": 358,
+      "assigned_asv_fraction": 0.978142,
+      "assigned_reads": 5181,
+      "assigned_read_fraction": 0.993862,
+      "unassigned_asvs": 8
+    },
+    "GTDB": {
+      "assigned_asvs": 356,
+      "assigned_asv_fraction": 0.972678,
+      "assigned_reads": 5149,
+      "assigned_read_fraction": 0.987723,
+      "unassigned_asvs": 10
+    },
+    "Greengenes2": {
+      "assigned_asvs": 362,
+      "assigned_asv_fraction": 0.989071,
+      "assigned_reads": 5185,
+      "assigned_read_fraction": 0.994629,
+      "unassigned_asvs": 4
+    }
+  },
+  "rank_coverage": {
+    "SILVA": {
+      "domain": {
+        "asv_count": 358,
+        "asv_fraction": 0.978142,
+        "read_count": 5181,
+        "read_fraction": 0.993862
+      },
+      "phylum": {
+        "asv_count": 354,
+        "asv_fraction": 0.967213,
+        "read_count": 5126,
+        "read_fraction": 0.983311
+      },
+      "class": {
+        "asv_count": 354,
+        "asv_fraction": 0.967213,
+        "read_count": 5126,
+        "read_fraction": 0.983311
+      },
+      "order": {
+        "asv_count": 351,
+        "asv_fraction": 0.959016,
+        "read_count": 5113,
+        "read_fraction": 0.980817
+      },
+      "family": {
+        "asv_count": 351,
+        "asv_fraction": 0.959016,
+        "read_count": 5113,
+        "read_fraction": 0.980817
+      },
+      "genus": {
+        "asv_count": 341,
+        "asv_fraction": 0.931694,
+        "read_count": 4151,
+        "read_fraction": 0.796279
+      },
+      "species": {
+        "asv_count": 0,
+        "asv_fraction": 0.0,
+        "read_count": 0,
+        "read_fraction": 0.0
+      }
+    },
+    "GTDB": {
+      "domain": {
+        "asv_count": 356,
+        "asv_fraction": 0.972678,
+        "read_count": 5149,
+        "read_fraction": 0.987723
+      },
+      "phylum": {
+        "asv_count": 350,
+        "asv_fraction": 0.956284,
+        "read_count": 4927,
+        "read_fraction": 0.945137
+      },
+      "class": {
+        "asv_count": 349,
+        "asv_fraction": 0.953552,
+        "read_count": 4855,
+        "read_fraction": 0.931326
+      },
+      "order": {
+        "asv_count": 343,
+        "asv_fraction": 0.937158,
+        "read_count": 4799,
+        "read_fraction": 0.920583
+      },
+      "family": {
+        "asv_count": 337,
+        "asv_fraction": 0.920765,
+        "read_count": 4691,
+        "read_fraction": 0.899866
+      },
+      "genus": {
+        "asv_count": 311,
+        "asv_fraction": 0.849727,
+        "read_count": 3589,
+        "read_fraction": 0.688471
+      },
+      "species": {
+        "asv_count": 273,
+        "asv_fraction": 0.745902,
+        "read_count": 2808,
+        "read_fraction": 0.538653
+      }
+    },
+    "Greengenes2": {
+      "domain": {
+        "asv_count": 362,
+        "asv_fraction": 0.989071,
+        "read_count": 5185,
+        "read_fraction": 0.994629
+      },
+      "phylum": {
+        "asv_count": 359,
+        "asv_fraction": 0.980874,
+        "read_count": 5176,
+        "read_fraction": 0.992902
+      },
+      "class": {
+        "asv_count": 356,
+        "asv_fraction": 0.972678,
+        "read_count": 5165,
+        "read_fraction": 0.990792
+      },
+      "order": {
+        "asv_count": 349,
+        "asv_fraction": 0.953552,
+        "read_count": 5121,
+        "read_fraction": 0.982352
+      },
+      "family": {
+        "asv_count": 336,
+        "asv_fraction": 0.918033,
+        "read_count": 4999,
+        "read_fraction": 0.958949
+      },
+      "genus": {
+        "asv_count": 272,
+        "asv_fraction": 0.743169,
+        "read_count": 3798,
+        "read_fraction": 0.728563
+      },
+      "species": {
+        "asv_count": 186,
+        "asv_fraction": 0.508197,
+        "read_count": 1817,
+        "read_fraction": 0.348552
+      }
+    }
+  },
+  "offtarget": {
+    "SILVA": {
+      "Bacteria": {
+        "asv_count": 279,
+        "read_count": 3983
+      },
+      "Archaea": {
+        "asv_count": 75,
+        "read_count": 1181
+      },
+      "Eukaryota": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Chloroplast/plastid": {
+        "asv_count": 1,
+        "read_count": 4
+      },
+      "Mitochondria": {
+        "asv_count": 3,
+        "read_count": 13
+      },
+      "Other/off-target": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Unassigned": {
+        "asv_count": 8,
+        "read_count": 32
+      }
+    },
+    "GTDB": {
+      "Bacteria": {
+        "asv_count": 281,
+        "read_count": 3973
+      },
+      "Archaea": {
+        "asv_count": 75,
+        "read_count": 1176
+      },
+      "Eukaryota": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Chloroplast/plastid": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Mitochondria": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Other/off-target": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Unassigned": {
+        "asv_count": 10,
+        "read_count": 64
+      }
+    },
+    "Greengenes2": {
+      "Bacteria": {
+        "asv_count": 301,
+        "read_count": 4072
+      },
+      "Archaea": {
+        "asv_count": 59,
+        "read_count": 1108
+      },
+      "Eukaryota": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Chloroplast/plastid": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Mitochondria": {
+        "asv_count": 2,
+        "read_count": 5
+      },
+      "Other/off-target": {
+        "asv_count": 0,
+        "read_count": 0
+      },
+      "Unassigned": {
+        "asv_count": 4,
+        "read_count": 28
+      }
+    }
+  },
+  "genus_agreement_patterns": {
+    "All three genus labels agree": {
+      "asv_count": 8,
+      "read_count": 84
+    },
+    "Database-specific/renamed genus": {
+      "asv_count": 323,
+      "read_count": 3741
+    },
+    "No genus assignment": {
+      "asv_count": 4,
+      "read_count": 547
+    },
+    "Partial genus assignment": {
+      "asv_count": 31,
+      "read_count": 841
+    }
+  },
+  "pairwise_exact_name_concordance": {
+    "SILVA vs GTDB": {
+      "phylum": 0.37317784256559766,
+      "class": 0.45614035087719296,
+      "order": 0.33633633633633636,
+      "family": 0.10397553516819572,
+      "genus": 0.04745762711864407
+    },
+    "SILVA vs Greengenes2": {
+      "phylum": 0.6637931034482759,
+      "class": 0.5159420289855072,
+      "order": 0.2417910447761194,
+      "family": 0.12422360248447205,
+      "genus": 0.05905511811023622
+    },
+    "GTDB vs Greengenes2": {
+      "phylum": 0.42318840579710143,
+      "class": 0.4064327485380117,
+      "order": 0.5212121212121212,
+      "family": 0.4504792332268371,
+      "genus": 0.26495726495726496
+    }
+  },
+  "pairwise_exact_name_concordance_counts": {
+    "SILVA vs GTDB": {
+      "phylum": {
+        "jointly_assigned_asvs": 343,
+        "exact_name_matches": 128,
+        "jointly_assigned_reads": 4864,
+        "exact_name_match_reads": 2666
+      },
+      "class": {
+        "jointly_assigned_asvs": 342,
+        "exact_name_matches": 156,
+        "jointly_assigned_reads": 4792,
+        "exact_name_match_reads": 2798
+      },
+      "order": {
+        "jointly_assigned_asvs": 333,
+        "exact_name_matches": 112,
+        "jointly_assigned_reads": 4723,
+        "exact_name_match_reads": 2525
+      },
+      "family": {
+        "jointly_assigned_asvs": 327,
+        "exact_name_matches": 34,
+        "jointly_assigned_reads": 4615,
+        "exact_name_match_reads": 1234
+      },
+      "genus": {
+        "jointly_assigned_asvs": 295,
+        "exact_name_matches": 14,
+        "jointly_assigned_reads": 3140,
+        "exact_name_match_reads": 228
+      }
+    },
+    "SILVA vs Greengenes2": {
+      "phylum": {
+        "jointly_assigned_asvs": 348,
+        "exact_name_matches": 231,
+        "jointly_assigned_reads": 5092,
+        "exact_name_match_reads": 3724
+      },
+      "class": {
+        "jointly_assigned_asvs": 345,
+        "exact_name_matches": 178,
+        "jointly_assigned_reads": 5081,
+        "exact_name_match_reads": 3539
+      },
+      "order": {
+        "jointly_assigned_asvs": 335,
+        "exact_name_matches": 81,
+        "jointly_assigned_reads": 5024,
+        "exact_name_match_reads": 1630
+      },
+      "family": {
+        "jointly_assigned_asvs": 322,
+        "exact_name_matches": 40,
+        "jointly_assigned_reads": 4902,
+        "exact_name_match_reads": 1648
+      },
+      "genus": {
+        "jointly_assigned_asvs": 254,
+        "exact_name_matches": 15,
+        "jointly_assigned_reads": 3332,
+        "exact_name_match_reads": 490
+      }
+    },
+    "GTDB vs Greengenes2": {
+      "phylum": {
+        "jointly_assigned_asvs": 345,
+        "exact_name_matches": 146,
+        "jointly_assigned_reads": 4896,
+        "exact_name_match_reads": 2595
+      },
+      "class": {
+        "jointly_assigned_asvs": 342,
+        "exact_name_matches": 139,
+        "jointly_assigned_reads": 4817,
+        "exact_name_match_reads": 2502
+      },
+      "order": {
+        "jointly_assigned_asvs": 330,
+        "exact_name_matches": 172,
+        "jointly_assigned_reads": 4719,
+        "exact_name_match_reads": 2803
+      },
+      "family": {
+        "jointly_assigned_asvs": 313,
+        "exact_name_matches": 141,
+        "jointly_assigned_reads": 4535,
+        "exact_name_match_reads": 2464
+      },
+      "genus": {
+        "jointly_assigned_asvs": 234,
+        "exact_name_matches": 62,
+        "jointly_assigned_reads": 2815,
+        "exact_name_match_reads": 976
+      }
+    }
+  },
+  "checks_passed": 91,
+  "checks_total": 91,
+  "failed_checks": [],
+  "interpretation_boundaries": [
+    "Database labels are hypotheses, not proof of species or strain.",
+    "GTDB SSU labels inherit representative-genome taxonomy.",
+    "Greengenes2 2024.09 uses GTDB R220, not GTDB R232.",
+    "Cross-database name changes do not represent biological change.",
+    "Organelle, off-target, and Unassigned results remain visible."
+  ]
+}

@@ -1,0 +1,3 @@
+dataset	region	primer_version	forward_primer_5to3	reverse_primer_5to3	input_pairs	r1_5prime_matches	r2_5prime_matches	paired_retained	decision	reason
+nf-core/ampliseq MiSeq v2	V4	515F (Parada) / 806R (Apprill)	GTGYCAGCMGCCGCGGTAA	GGACTACNVGGGTWTCTAAT	10000	8841	8708	8614	TRIM	Both read directions show coherent anchored 5-prime primer matches.
+QIIME 2 Atacama EMP excerpt	V4	Original 515F / 806R	GTGCCAGCMGCCGCGGTAA	GGACTACHVGGGTWTCTAAT	2000	0	0	0	SKIP	Custom EMP sequencing primers start reads inside the amplicon.

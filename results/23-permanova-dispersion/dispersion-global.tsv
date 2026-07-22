@@ -1,0 +1,2 @@
+Grouping	Center	BiasAdjustment	Df	SumOfSquares	MeanSquare	FValue	PValue	Permutations	MinimumP
+Treatment (4 levels)	Spatial median	TRUE	3	0.007682430353136666	0.002560810117712222	0.40276079691204264	0.3714	9999	1e-4

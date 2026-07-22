@@ -1,0 +1,46 @@
+{
+  "database": "UNITE QIIME release for Fungi",
+  "database_version": "10.0",
+  "database_release_date": "2025-02-19",
+  "database_doi": "10.15156/BIO/3301241",
+  "database_license": "CC BY-SA 4.0",
+  "raw_qiime_fungi_release": {
+    "reference_sequences": 20295,
+    "representative_sequences": 81842,
+    "taxonomy_labels": [
+      "k__",
+      "p__",
+      "c__",
+      "o__",
+      "f__",
+      "g__",
+      "s__",
+      "sh__"
+    ],
+    "taxonomy_contract": "The raw QIIME release retains the Species Hypothesis label sh__."
+  },
+  "classifier_release": {
+    "repository": "https://github.com/colinbrislawn/unite-train",
+    "tag": "v10.0-2025-02-19-qiime2-2026.4",
+    "commit": "26ca7e07979c230ea9a65565e4781b3538962352",
+    "asset": "unite_ver2025-02-19_dynamic_fungi-Q2-2026.4.qza",
+    "asset_sha256": "5df2370f89b7b64766c0d969ddc5374d3951fdb8bda598ae54ff15cf86b0fca0",
+    "evaluation_asset": "eval_unite_ver2025-02-19-Q2-2026.4.qzv",
+    "evaluation_sha256": "f59c439ced1622c372a647464c69c2069ac1d37402559f888c5e4a242c7d20cd",
+    "qiime2_compatibility": "2026.4",
+    "taxonomy_edit": {
+      "tool": "q2-rescript edit-taxonomy",
+      "search_strings": ";sh__.*",
+      "replacement_strings": "",
+      "use_regex": true,
+      "result": "The pre-trained classifier removes sh__ before dereplication and classifier fitting."
+    }
+  },
+  "pinned_sources": {
+    "workflow": "https://github.com/colinbrislawn/unite-train/blob/26ca7e07979c230ea9a65565e4781b3538962352/main.nf",
+    "release_notes": "https://github.com/colinbrislawn/unite-train/blob/26ca7e07979c230ea9a65565e4781b3538962352/release_notes_newest.md",
+    "release": "https://github.com/colinbrislawn/unite-train/releases/tag/v10.0-2025-02-19-qiime2-2026.4",
+    "unite_repository": "https://unite.ut.ee/repository.php"
+  },
+  "interpretation": "Do not describe the raw UNITE taxonomy table and the trained QIIME 2 classifier as having the same rank contract."
+}

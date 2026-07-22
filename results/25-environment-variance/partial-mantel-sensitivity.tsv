@@ -1,0 +1,2 @@
+Analysis	Method	Statistic	PValue	Permutations	PrimaryInference	Warning
+Edaphic distance | geographic distance	Pearson partial Mantel	0.1884761989694864	0.001	999	FALSE	Sensitivity analysis only; partial Mantel can have invalid error rates under spatial autocorrelation and is not used for causal adjustment

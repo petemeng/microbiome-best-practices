@@ -1,0 +1,10 @@
+view	group	hex	shape	contrast_vs_white	contrast_vs_black
+Standard	Inland wetland	#0072B2	21	5.185446345779855	4.0497960251947696
+Standard	Coastal wetland	#D55E00	22	3.8671837898669135	5.430308240075319
+Standard	Tibetan Plateau	#009E73	24	3.421139939945999	6.1383048833516805
+Deuteranopia simulation	Inland wetland	#3B67B1	21	5.583732056015432	3.760925450814999
+Deuteranopia simulation	Coastal wetland	#9E8C00	22	3.384338243750995	6.205053540016401
+Deuteranopia simulation	Tibetan Plateau	#8A8676	24	3.650716947082367	5.752294769602197
+Protanopia simulation	Inland wetland	#5375B5	21	4.585598327993707	4.5795550543102035
+Protanopia simulation	Coastal wetland	#817100	22	4.888864116015144	4.295476311400705
+Protanopia simulation	Tibetan Plateau	#9A9271	24	3.1231365485779925	6.724009556854501

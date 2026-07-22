@@ -1,0 +1,9 @@
+sample_id	direction	input_records	retained_records	median_length_before	median_length_after	median_bases_removed
+1	R1	2500	1810	249.0	230.0	19.0
+1	R2	2500	1810	249.0	229.0	20.0
+1a	R1	2500	2219	249.0	230.0	19.0
+1a	R2	2500	2219	249.0	229.0	20.0
+2	R1	2500	2347	249.0	230.0	19.0
+2	R2	2500	2347	249.0	229.0	20.0
+2a	R1	2500	2238	249.0	230.0	19.0
+2a	R2	2500	2238	249.0	229.0	20.0

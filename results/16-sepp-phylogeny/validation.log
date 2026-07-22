@@ -1,0 +1,13 @@
+Article 16 SEPP validation
+status: passed
+checks: 74/74
+reference tips: 203452
+query ASVs: 366
+query reads: 5213
+placed ASVs: 366
+retained ASVs: 366
+retained reads: 5213
+removed ASVs: 0
+removed reads: 0
+SEPP elapsed seconds: 430.598
+boundary: placement success is not calibrated placement correctness

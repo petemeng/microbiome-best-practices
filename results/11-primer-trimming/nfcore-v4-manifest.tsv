@@ -1,0 +1,5 @@
+sample-id	forward-absolute-filepath	reverse-absolute-filepath
+1	file://<PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R1_001.fastq.gz	file://<PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R2_001.fastq.gz
+1a	file://<PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R1_001.fastq.gz	file://<PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R2_001.fastq.gz
+2	file://<PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R1_001.fastq.gz	file://<PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R2_001.fastq.gz
+2a	file://<PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R1_001.fastq.gz	file://<PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R2_001.fastq.gz

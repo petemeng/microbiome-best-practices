@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	font_status	dimension_status
+19-depth-completeness-audit	pdf	figures/19-depth-completeness-audit.pdf	PDF	26899	183	92	182.73888888888888	91.72222222222223						1		embedded	PASS
+19-depth-completeness-audit	svg	figures/19-depth-completeness-audit.svg	SVG	43361	183	92	182.99994444444442	92.00091666666667							28	declared	PASS
+19-depth-completeness-audit	png	figures/19-depth-completeness-audit.png	PNG	489701	183	92	183	92	4322	2173	599.8841530054644	599.9369565217391	Zip				PASS
+19-depth-completeness-audit	tiff	figures/19-depth-completeness-audit.tiff	TIFF	634796	183	92	183	92	4322	2173	599.8841530054644	599.9369565217391	LZW				PASS
+19-rarefaction-curves	pdf	figures/19-rarefaction-curves.pdf	PDF	23339	183	100	182.73888888888888	99.83611111111111						1		embedded	PASS
+19-rarefaction-curves	svg	figures/19-rarefaction-curves.svg	SVG	38526	183	100	182.99994444444442	99.99838888888888							23	declared	PASS
+19-rarefaction-curves	png	figures/19-rarefaction-curves.png	PNG	1230455	183	100	183	100	4322	2362	599.8841530054644	599.948	Zip				PASS
+19-rarefaction-curves	tiff	figures/19-rarefaction-curves.tiff	TIFF	1592088	183	100	183	100	4322	2362	599.8841530054644	599.948	LZW				PASS
+19-standardization-comparison	pdf	figures/19-standardization-comparison.pdf	PDF	43613	183	100	182.73888888888888	99.83611111111111						1		embedded	PASS
+19-standardization-comparison	svg	figures/19-standardization-comparison.svg	SVG	101452	183	100	182.99994444444442	99.99838888888888							38	declared	PASS
+19-standardization-comparison	png	figures/19-standardization-comparison.png	PNG	777963	183	100	183	100	4322	2362	599.8841530054644	599.948	Zip				PASS
+19-standardization-comparison	tiff	figures/19-standardization-comparison.tiff	TIFF	1047788	183	100	183	100	4322	2362	599.8841530054644	599.948	LZW				PASS
+19-hill-profile	pdf	figures/19-hill-profile.pdf	PDF	27104	183	92	182.73888888888888	91.72222222222223						1		embedded	PASS
+19-hill-profile	svg	figures/19-hill-profile.svg	SVG	24380	183	92	182.99994444444442	92.00091666666667							20	declared	PASS
+19-hill-profile	png	figures/19-hill-profile.png	PNG	1106637	183	92	183	92	4322	2173	599.8841530054644	599.9369565217391	Zip				PASS
+19-hill-profile	tiff	figures/19-hill-profile.tiff	TIFF	2029718	183	92	183	92	4322	2173	599.8841530054644	599.9369565217391	LZW				PASS

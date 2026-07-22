@@ -1,0 +1,7 @@
+metric	observed	expected	status
+records	366	366	PASS
+minimum_length	252	252	PASS
+median_length	253	253	PASS
+modal_length	253	253	PASS
+maximum_length	303	303	PASS
+invalid_alphabet_records	0	0	PASS

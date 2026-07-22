@@ -1,0 +1,7 @@
+artifact	file	uuid	semantic_type	format	maximum_validation	provenance_actions	required_action	required_action_present
+query_sequences	query-v4-asvs.qza	2c30e68d-9288-45a5-b95b-0ad1184da40f	FeatureData[Sequence]	DNASequencesDirectoryFormat	PASS	import	import	True
+query_table	query-abundance-table.qza	bdd6c844-a38b-4109-a7db-c67af7c53506	FeatureTable[Frequency]	BIOMV210DirFmt	PASS	import	import	True
+insertion_tree	sepp-insertion-tree.qza	76670697-5f72-4337-9ec8-94625e3fbab2	Phylogeny[Rooted]	NewickDirectoryFormat	PASS	fragment-insertion:sepp	fragment-insertion:sepp	True
+placements	sepp-placements.qza	ed146928-a4ae-483d-8f82-b87c3afc0a9c	Placements	PlacementsDirFmt	PASS	fragment-insertion:sepp	fragment-insertion:sepp	True
+filtered_table	sepp-filtered-table.qza	cd940ddf-d7d5-404c-8d30-54d5d770b967	FeatureTable[Frequency]	BIOMV210DirFmt	PASS	fragment-insertion:filter_features;fragment-insertion:sepp	fragment-insertion:filter_features	True
+removed_table	sepp-removed-table.qza	904488e4-d908-4efd-9613-14cd6595229a	FeatureTable[Frequency]	BIOMV210DirFmt	PASS	fragment-insertion:filter_features;fragment-insertion:sepp	fragment-insertion:filter_features	True

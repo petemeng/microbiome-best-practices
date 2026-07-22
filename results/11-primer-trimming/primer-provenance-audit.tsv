@@ -1,0 +1,3 @@
+execution_uuid	action_type	plugin	action	parameter_contract
+b074d0ea-d1ea-436c-88cc-89d8c71770da	import	framework	import	PASS
+d77fc748-fa45-4d48-8600-0474b85fb991	method	!ref 'environment:plugins:cutadapt'	trim_paired	PASS

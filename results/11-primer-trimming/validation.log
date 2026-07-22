@@ -1,0 +1,803 @@
+Article 11 primer trimming and region-branch validation
+Validation date: 2026-07-19
+
+[qiime-info]
+command: conda run -n microbiome-qiime2-2026.4 qiime info
+returncode: 0
+elapsed_seconds: 5.945
+stdout:
+System versions
+Python version: 3.12.13
+QIIME 2 release: 2026.4
+QIIME 2 version: 2026.4.0
+q2cli version: 2026.4.0
+
+Installed plugins
+alignment: 2026.4.0
+boots: 2026.4.0
+composition: 2026.4.0
+cutadapt: 2026.4.0
+dada2: 2026.4.0
+deblur: 2026.4.0
+demux: 2026.4.0
+diversity: 2026.4.0
+diversity-lib: 2026.4.0
+emperor: 2026.4.0
+feature-classifier: 2026.4.0
+feature-table: 2026.4.0
+fondue: 2026.4.0
+fragment-insertion: 2026.4.0
+kmerizer: 2026.4.0
+longitudinal: 2026.4.0
+metadata: 2026.4.0
+phylogeny: 2026.4.0
+quality-control: 2026.4.0
+quality-filter: 2026.4.0
+rescript: 2026.4.0
+sample-classifier: 2026.4.0
+stats: 2026.4.0
+taxa: 2026.4.0
+types: 2026.4.0
+vizard: 2026.4.0
+vsearch: 2026.4.0
+
+Application config directory
+<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/var/q2cli
+
+Config
+Config Source: <HOME>/miniconda3/envs/microbiome-qiime2-2026.4/etc/qiime2_config.toml
+
+Getting help
+To find help and learning resources, visit https://qiime2.org.
+To get help with configuring and/or understanding QIIME 2 parallelization, visit https://use.qiime2.org/en/stable/references/parallel-configuration.html
+stderr:
+(empty)
+
+[cutadapt-version]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --version
+returncode: 0
+elapsed_seconds: 4.806
+stdout:
+5.2
+stderr:
+(empty)
+
+[qiime-import-casava]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]' --input-path <WORK_DIR>/casava --input-format CasavaOneEightSingleLanePerSampleDirFmt --output-path <WORK_DIR>/nfcore-v4-demux.qza
+returncode: 0
+elapsed_seconds: 45.513
+stdout:
+Imported <WORK_DIR>/casava as CasavaOneEightSingleLanePerSampleDirFmt to <WORK_DIR>/nfcore-v4-demux.qza
+stderr:
+(empty)
+
+[input-maximum-validation]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools validate <WORK_DIR>/nfcore-v4-demux.qza --level max
+returncode: 0
+elapsed_seconds: 32.233
+stdout:
+Result <WORK_DIR>/nfcore-v4-demux.qza appears to be valid at level=max.
+stderr:
+(empty)
+
+[input-peek]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools peek --tsv <WORK_DIR>/nfcore-v4-demux.qza
+returncode: 0
+elapsed_seconds: 6.014
+stdout:
+Filename	Type	UUID	Data Format
+nfcore-v4-demux.qza	SampleData[PairedEndSequencesWithQuality]	97bdbdc8-e0ab-45aa-8ad3-4a7c998bf681	SingleLanePerSamplePairedEndFastqDirFmt
+stderr:
+(empty)
+
+[input-demux-summary]
+command: conda run -n microbiome-qiime2-2026.4 qiime demux summarize --i-data <WORK_DIR>/nfcore-v4-demux.qza --p-n 10000 --o-visualization <WORK_DIR>/nfcore-v4-demux-summary.qzv
+returncode: 0
+elapsed_seconds: 35.769
+stdout:
+Saved Visualization to: <WORK_DIR>/nfcore-v4-demux-summary.qzv
+stderr:
+(empty)
+
+[q2-cutadapt-trim-paired]
+command: conda run -n microbiome-qiime2-2026.4 qiime cutadapt trim-paired --i-demultiplexed-sequences <WORK_DIR>/nfcore-v4-demux.qza --p-front-f '^GTGYCAGCMGCCGCGGTAA' --p-front-r '^GGACTACNVGGGTWTCTAAT' --p-error-rate 0.1 --p-overlap 15 --p-match-adapter-wildcards --p-no-match-read-wildcards --p-indels --p-discard-untrimmed --p-minimum-length 1 --p-cores 1 --o-trimmed-sequences <WORK_DIR>/nfcore-v4-trimmed.qza
+returncode: 0
+elapsed_seconds: 33.459
+stdout:
+Saved SampleData[PairedEndSequencesWithQuality] to: <WORK_DIR>/nfcore-v4-trimmed.qza
+stderr:
+(empty)
+
+[trimmed-maximum-validation]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools validate <WORK_DIR>/nfcore-v4-trimmed.qza --level max
+returncode: 0
+elapsed_seconds: 32.191
+stdout:
+Result <WORK_DIR>/nfcore-v4-trimmed.qza appears to be valid at level=max.
+stderr:
+(empty)
+
+[trimmed-peek]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools peek --tsv <WORK_DIR>/nfcore-v4-trimmed.qza
+returncode: 0
+elapsed_seconds: 6.018
+stdout:
+Filename	Type	UUID	Data Format
+nfcore-v4-trimmed.qza	SampleData[PairedEndSequencesWithQuality]	37321f82-1246-4292-b411-7f4044b072f0	SingleLanePerSamplePairedEndFastqDirFmt
+stderr:
+(empty)
+
+[trimmed-demux-summary]
+command: conda run -n microbiome-qiime2-2026.4 qiime demux summarize --i-data <WORK_DIR>/nfcore-v4-trimmed.qza --p-n 10000 --o-visualization <WORK_DIR>/nfcore-v4-trimmed-summary.qzv
+returncode: 0
+elapsed_seconds: 36.291
+stdout:
+Saved Visualization to: <WORK_DIR>/nfcore-v4-trimmed-summary.qzv
+stderr:
+(empty)
+
+[export-trimmed-artifact]
+command: conda run -n microbiome-qiime2-2026.4 qiime tools export --input-path <WORK_DIR>/nfcore-v4-trimmed.qza --output-path <WORK_DIR>/trimmed-export
+returncode: 0
+elapsed_seconds: 31.938
+stdout:
+Exported <WORK_DIR>/nfcore-v4-trimmed.qza as SingleLanePerSamplePairedEndFastqDirFmt to directory <WORK_DIR>/trimmed-export
+stderr:
+(empty)
+
+[cutadapt-correct_anchored-1]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^GTGYCAGCMGCCGCGGTAA' -G '^GGACTACNVGGGTWTCTAAT' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_anchored-1.json -o <WORK_DIR>/cutadapt-probes/correct_anchored-1.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_anchored-1.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.995
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^GTGYCAGCMGCCGCGGTAA -G ^GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_anchored-1.json -o <WORK_DIR>/cutadapt-probes/correct_anchored-1.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_anchored-1.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                   1,839 (73.6%)
+  Read 2 with adapter:                   1,819 (72.8%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:              690 (27.6%)
+Pairs written (passing filters):         1,810 (72.4%)
+
+Total basepairs processed:       976,805 bp
+  Read 1:       487,364 bp
+  Read 2:       489,441 bp
+Total written (filtered):        830,832 bp (85.1%)
+  Read 1:       416,413 bp
+  Read 2:       414,419 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGYCAGCMGCCGCGGTAA; Type: anchored 5'; Length: 19; Trimmed: 1839 times
+
+No. of allowed errors: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+18	4	0.0	1	0 4
+19	1835	0.0	1	1729 106
+
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACNVGGGTWTCTAAT; Type: anchored 5'; Length: 20; Trimmed: 1819 times
+
+No. of allowed errors: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	13	0.0	1	0 13
+20	1793	0.0	1	1715 78
+21	13	0.0	1	0 13
+stderr:
+(empty)
+
+[cutadapt-correct_anchored-1a]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^GTGYCAGCMGCCGCGGTAA' -G '^GGACTACNVGGGTWTCTAAT' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_anchored-1a.json -o <WORK_DIR>/cutadapt-probes/correct_anchored-1a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_anchored-1a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.906
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^GTGYCAGCMGCCGCGGTAA -G ^GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_anchored-1a.json -o <WORK_DIR>/cutadapt-probes/correct_anchored-1a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_anchored-1a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                   2,301 (92.0%)
+  Read 2 with adapter:                   2,247 (89.9%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:              281 (11.2%)
+Pairs written (passing filters):         2,219 (88.8%)
+
+Total basepairs processed:     1,215,218 bp
+  Read 1:       607,570 bp
+  Read 2:       607,648 bp
+Total written (filtered):      1,019,102 bp (83.9%)
+  Read 1:       510,764 bp
+  Read 2:       508,338 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGYCAGCMGCCGCGGTAA; Type: anchored 5'; Length: 19; Trimmed: 2301 times
+
+No. of allowed errors: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+18	16	0.0	1	0 16
+19	2282	0.0	1	2132 150
+20	3	0.0	1	0 3
+
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACNVGGGTWTCTAAT; Type: anchored 5'; Length: 20; Trimmed: 2247 times
+
+No. of allowed errors: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	21	0.0	1	0 21
+20	2211	0.0	1	2189 22
+21	15	0.0	1	0 15
+stderr:
+(empty)
+
+[cutadapt-correct_anchored-2]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^GTGYCAGCMGCCGCGGTAA' -G '^GGACTACNVGGGTWTCTAAT' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_anchored-2.json -o <WORK_DIR>/cutadapt-probes/correct_anchored-2.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_anchored-2.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.939
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^GTGYCAGCMGCCGCGGTAA -G ^GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_anchored-2.json -o <WORK_DIR>/cutadapt-probes/correct_anchored-2.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_anchored-2.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                   2,387 (95.5%)
+  Read 2 with adapter:                   2,366 (94.6%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:              153 (6.1%)
+Pairs written (passing filters):         2,347 (93.9%)
+
+Total basepairs processed:     1,214,380 bp
+  Read 1:       607,164 bp
+  Read 2:       607,216 bp
+Total written (filtered):      1,078,050 bp (88.8%)
+  Read 1:       540,290 bp
+  Read 2:       537,760 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGYCAGCMGCCGCGGTAA; Type: anchored 5'; Length: 19; Trimmed: 2387 times
+
+No. of allowed errors: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+18	9	0.0	1	0 9
+19	2378	0.0	1	2267 111
+
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACNVGGGTWTCTAAT; Type: anchored 5'; Length: 20; Trimmed: 2366 times
+
+No. of allowed errors: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	25	0.0	1	0 25
+20	2322	0.0	1	2262 60
+21	19	0.0	1	0 19
+stderr:
+(empty)
+
+[cutadapt-correct_anchored-2a]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^GTGYCAGCMGCCGCGGTAA' -G '^GGACTACNVGGGTWTCTAAT' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_anchored-2a.json -o <WORK_DIR>/cutadapt-probes/correct_anchored-2a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_anchored-2a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.954
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^GTGYCAGCMGCCGCGGTAA -G ^GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_anchored-2a.json -o <WORK_DIR>/cutadapt-probes/correct_anchored-2a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_anchored-2a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                   2,314 (92.6%)
+  Read 2 with adapter:                   2,276 (91.0%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:              262 (10.5%)
+Pairs written (passing filters):         2,238 (89.5%)
+
+Total basepairs processed:     1,217,285 bp
+  Read 1:       608,507 bp
+  Read 2:       608,778 bp
+Total written (filtered):      1,028,347 bp (84.5%)
+  Read 1:       515,394 bp
+  Read 2:       512,953 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGYCAGCMGCCGCGGTAA; Type: anchored 5'; Length: 19; Trimmed: 2314 times
+
+No. of allowed errors: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+18	10	0.0	1	0 10
+19	2302	0.0	1	2155 147
+20	2	0.0	1	0 2
+
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACNVGGGTWTCTAAT; Type: anchored 5'; Length: 20; Trimmed: 2276 times
+
+No. of allowed errors: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	16	0.0	1	0 16
+20	2249	0.0	1	2216 33
+21	11	0.0	1	0 11
+stderr:
+(empty)
+
+[cutadapt-correct_unanchored-1]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_unanchored-1.json -o <WORK_DIR>/cutadapt-probes/correct_unanchored-1.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_unanchored-1.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.89
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_unanchored-1.json -o <WORK_DIR>/cutadapt-probes/correct_unanchored-1.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_unanchored-1.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                   1,840 (73.6%)
+  Read 2 with adapter:                   1,821 (72.8%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:              688 (27.5%)
+Pairs written (passing filters):         1,812 (72.5%)
+
+Total basepairs processed:       976,805 bp
+  Read 1:       487,364 bp
+  Read 2:       489,441 bp
+Total written (filtered):        831,596 bp (85.1%)
+  Read 1:       416,719 bp
+  Read 2:       414,877 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGYCAGCMGCCGCGGTAA; Type: regular 5'; Length: 19; Trimmed: 1840 times
+
+Minimum overlap: 15
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+18	4	0.0	1	2 2
+19	1835	0.0	1	1729 106
+174	1	0.0	1	1
+
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACNVGGGTWTCTAAT; Type: regular 5'; Length: 20; Trimmed: 1821 times
+
+Minimum overlap: 15
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	14	0.0	1	0 14
+20	1793	0.0	1	1715 78
+21	13	0.0	1	2 11
+22	1	0.0	1	0 1
+stderr:
+(empty)
+
+[cutadapt-correct_unanchored-1a]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_unanchored-1a.json -o <WORK_DIR>/cutadapt-probes/correct_unanchored-1a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_unanchored-1a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.957
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_unanchored-1a.json -o <WORK_DIR>/cutadapt-probes/correct_unanchored-1a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_unanchored-1a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                   2,303 (92.1%)
+  Read 2 with adapter:                   2,248 (89.9%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:              279 (11.2%)
+Pairs written (passing filters):         2,221 (88.8%)
+
+Total basepairs processed:     1,215,218 bp
+  Read 1:       607,570 bp
+  Read 2:       607,648 bp
+Total written (filtered):      1,019,985 bp (83.9%)
+  Read 1:       511,228 bp
+  Read 2:       508,757 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGYCAGCMGCCGCGGTAA; Type: regular 5'; Length: 19; Trimmed: 2303 times
+
+Minimum overlap: 15
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+17	1	0.0	1	1
+18	17	0.0	1	1 16
+19	2282	0.0	1	2132 150
+20	3	0.0	1	0 3
+
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACNVGGGTWTCTAAT; Type: regular 5'; Length: 20; Trimmed: 2248 times
+
+Minimum overlap: 15
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	21	0.0	1	5 16
+20	2211	0.0	1	2189 22
+21	15	0.0	1	0 15
+59	1	0.0	1	0 1
+stderr:
+(empty)
+
+[cutadapt-correct_unanchored-2]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_unanchored-2.json -o <WORK_DIR>/cutadapt-probes/correct_unanchored-2.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_unanchored-2.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 5.007
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_unanchored-2.json -o <WORK_DIR>/cutadapt-probes/correct_unanchored-2.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_unanchored-2.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                   2,389 (95.6%)
+  Read 2 with adapter:                   2,369 (94.8%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:              150 (6.0%)
+Pairs written (passing filters):         2,350 (94.0%)
+
+Total basepairs processed:     1,214,380 bp
+  Read 1:       607,164 bp
+  Read 2:       607,216 bp
+Total written (filtered):      1,079,069 bp (88.9%)
+  Read 1:       540,624 bp
+  Read 2:       538,445 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGYCAGCMGCCGCGGTAA; Type: regular 5'; Length: 19; Trimmed: 2389 times
+
+Minimum overlap: 15
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+18	9	0.0	1	4 5
+19	2378	0.0	1	2267 111
+198	2	0.0	1	2
+
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACNVGGGTWTCTAAT; Type: regular 5'; Length: 20; Trimmed: 2369 times
+
+Minimum overlap: 15
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+16	1	0.0	1	1
+19	25	0.0	1	3 22
+20	2322	0.0	1	2262 60
+21	19	0.0	1	0 19
+24	2	0.0	1	0 2
+stderr:
+(empty)
+
+[cutadapt-correct_unanchored-2a]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_unanchored-2a.json -o <WORK_DIR>/cutadapt-probes/correct_unanchored-2a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_unanchored-2a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.919
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g GTGYCAGCMGCCGCGGTAA -G GGACTACNVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/correct_unanchored-2a.json -o <WORK_DIR>/cutadapt-probes/correct_unanchored-2a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/correct_unanchored-2a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                   2,319 (92.8%)
+  Read 2 with adapter:                   2,277 (91.1%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:              256 (10.2%)
+Pairs written (passing filters):         2,244 (89.8%)
+
+Total basepairs processed:     1,217,285 bp
+  Read 1:       608,507 bp
+  Read 2:       608,778 bp
+Total written (filtered):      1,031,109 bp (84.7%)
+  Read 1:       516,778 bp
+  Read 2:       514,331 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGYCAGCMGCCGCGGTAA; Type: regular 5'; Length: 19; Trimmed: 2319 times
+
+Minimum overlap: 15
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+16	1	0.0	1	1
+18	10	0.0	1	0 10
+19	2302	0.0	1	2155 147
+20	6	0.0	1	0 6
+
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACNVGGGTWTCTAAT; Type: regular 5'; Length: 20; Trimmed: 2277 times
+
+Minimum overlap: 15
+No. of allowed errors:
+1-9 bp: 0; 10-19 bp: 1
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+19	17	0.0	1	3 14
+20	2249	0.0	1	2216 33
+21	11	0.0	1	1 10
+stderr:
+(empty)
+
+[cutadapt-wrong_v3v4_anchored-1]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^CCTACGGGNGGCWGCAG' -G '^GACTACHVGGGTATCTAATCC' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1.json -o <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.84
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^CCTACGGGNGGCWGCAG -G ^GACTACHVGGGTATCTAATCC --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1.json -o <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1_S103_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                       0 (0.0%)
+  Read 2 with adapter:                   1,740 (69.6%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:            2,500 (100.0%)
+Pairs written (passing filters):             0 (0.0%)
+
+Total basepairs processed:       976,805 bp
+  Read 1:       487,364 bp
+  Read 2:       489,441 bp
+Total written (filtered):              0 bp (0.0%)
+  Read 1:             0 bp
+  Read 2:             0 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: anchored 5'; Length: 17; Trimmed: 0 times
+
+=== Second read: Adapter 2 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: anchored 5'; Length: 21; Trimmed: 1740 times
+
+No. of allowed errors: 2
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+21	11	0.0	2	0 1 10
+22	1720	0.0	2	0 1084 636
+23	9	0.0	2	0 0 9
+stderr:
+(empty)
+
+[cutadapt-wrong_v3v4_anchored-1a]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^CCTACGGGNGGCWGCAG' -G '^GACTACHVGGGTATCTAATCC' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1a.json -o <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.913
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^CCTACGGGNGGCWGCAG -G ^GACTACHVGGGTATCTAATCC --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1a.json -o <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-1a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/1a_S103_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                       0 (0.0%)
+  Read 2 with adapter:                   2,027 (81.1%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:            2,500 (100.0%)
+Pairs written (passing filters):             0 (0.0%)
+
+Total basepairs processed:     1,215,218 bp
+  Read 1:       607,570 bp
+  Read 2:       607,648 bp
+Total written (filtered):              0 bp (0.0%)
+  Read 1:             0 bp
+  Read 2:             0 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: anchored 5'; Length: 17; Trimmed: 0 times
+
+=== Second read: Adapter 2 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: anchored 5'; Length: 21; Trimmed: 2027 times
+
+No. of allowed errors: 2
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+21	12	0.0	2	0 4 8
+22	2012	0.0	2	0 744 1268
+23	3	0.0	2	0 0 3
+stderr:
+(empty)
+
+[cutadapt-wrong_v3v4_anchored-2]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^CCTACGGGNGGCWGCAG' -G '^GACTACHVGGGTATCTAATCC' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2.json -o <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.985
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^CCTACGGGNGGCWGCAG -G ^GACTACHVGGGTATCTAATCC --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2.json -o <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2_S115_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                       0 (0.0%)
+  Read 2 with adapter:                   2,143 (85.7%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:            2,500 (100.0%)
+Pairs written (passing filters):             0 (0.0%)
+
+Total basepairs processed:     1,214,380 bp
+  Read 1:       607,164 bp
+  Read 2:       607,216 bp
+Total written (filtered):              0 bp (0.0%)
+  Read 1:             0 bp
+  Read 2:             0 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: anchored 5'; Length: 17; Trimmed: 0 times
+
+=== Second read: Adapter 2 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: anchored 5'; Length: 21; Trimmed: 2143 times
+
+No. of allowed errors: 2
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+21	16	0.0	2	1 3 12
+22	2118	0.0	2	0 889 1229
+23	9	0.0	2	0 0 9
+stderr:
+(empty)
+
+[cutadapt-wrong_v3v4_anchored-2a]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^CCTACGGGNGGCWGCAG' -G '^GACTACHVGGGTATCTAATCC' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2a.json -o <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R2_001.fastq.gz
+returncode: 0
+elapsed_seconds: 4.912
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^CCTACGGGNGGCWGCAG -G ^GACTACHVGGGTATCTAATCC --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2a.json -o <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2a.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/wrong_v3v4_anchored-2a.R2.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R1_001.fastq.gz <PROJECT_ROOT>/data/small/primer-trimming/2a_S115_L001_R2_001.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,500
+  Read 1 with adapter:                       0 (0.0%)
+  Read 2 with adapter:                   2,065 (82.6%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:            2,500 (100.0%)
+Pairs written (passing filters):             0 (0.0%)
+
+Total basepairs processed:     1,217,285 bp
+  Read 1:       608,507 bp
+  Read 2:       608,778 bp
+Total written (filtered):              0 bp (0.0%)
+  Read 1:             0 bp
+  Read 2:             0 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: CCTACGGGNGGCWGCAG; Type: anchored 5'; Length: 17; Trimmed: 0 times
+
+=== Second read: Adapter 2 ===
+
+Sequence: GACTACHVGGGTATCTAATCC; Type: anchored 5'; Length: 21; Trimmed: 2065 times
+
+No. of allowed errors: 2
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+21	8	0.0	2	2 3 3
+22	2053	0.0	2	0 762 1291
+23	4	0.0	2	0 0 4
+stderr:
+(empty)
+
+[cutadapt-atacama-original-v4-anchored]
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^GTGCCAGCMGCCGCGGTAA' -G '^GGACTACHVGGGTWTCTAAT' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.json -o <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.R2.fastq.gz <PROJECT_ROOT>/data/small/fastq/forward.fastq.gz <PROJECT_ROOT>/data/small/fastq/reverse.fastq.gz
+returncode: 0
+elapsed_seconds: 4.773
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^GTGCCAGCMGCCGCGGTAA -G ^GGACTACHVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.json -o <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.R2.fastq.gz <PROJECT_ROOT>/data/small/fastq/forward.fastq.gz <PROJECT_ROOT>/data/small/fastq/reverse.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,000
+  Read 1 with adapter:                       0 (0.0%)
+  Read 2 with adapter:                       0 (0.0%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:            2,000 (100.0%)
+Pairs written (passing filters):             0 (0.0%)
+
+Total basepairs processed:       604,000 bp
+  Read 1:       302,000 bp
+  Read 2:       302,000 bp
+Total written (filtered):              0 bp (0.0%)
+  Read 1:             0 bp
+  Read 2:             0 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGCCAGCMGCCGCGGTAA; Type: anchored 5'; Length: 19; Trimmed: 0 times
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACHVGGGTWTCTAAT; Type: anchored 5'; Length: 20; Trimmed: 0 times
+stderr:
+(empty)
+

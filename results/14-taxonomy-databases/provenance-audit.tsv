@@ -1,0 +1,7 @@
+database	artifact	uuid	semantic_type	data_format	maximum_validation	provenance_actions
+SILVA	silva-taxonomy.qza	00fce69f-9a4b-41a5-b52d-4f3f68fef225	FeatureData[Taxonomy]	TSVTaxonomyDirectoryFormat	PASS	feature-classifier:classify_consensus_vsearch; feature-classifier:find_consensus_annotation; feature-classifier:vsearch_global
+SILVA	silva-search-results.qza	ac9bcee3-3ffa-4ce5-8adf-253aec292d5a	FeatureData[BLAST6]	BLAST6DirectoryFormat	PASS	feature-classifier:classify_consensus_vsearch; feature-classifier:vsearch_global
+GTDB	gtdb-taxonomy.qza	c9f0a73a-0e2a-4cd0-b302-5b8ab4a50571	FeatureData[Taxonomy]	TSVTaxonomyDirectoryFormat	PASS	feature-classifier:classify_consensus_vsearch; feature-classifier:find_consensus_annotation; feature-classifier:vsearch_global
+GTDB	gtdb-search-results.qza	eaca9cee-a6fe-4659-b6bf-46af3f3e15e4	FeatureData[BLAST6]	BLAST6DirectoryFormat	PASS	feature-classifier:classify_consensus_vsearch; feature-classifier:vsearch_global
+Greengenes2	greengenes2-taxonomy.qza	f637497a-dd35-4743-8826-718e8d7ffcef	FeatureData[Taxonomy]	TSVTaxonomyDirectoryFormat	PASS	feature-classifier:classify_consensus_vsearch; feature-classifier:find_consensus_annotation; feature-classifier:vsearch_global
+Greengenes2	greengenes2-search-results.qza	78252367-d5aa-4cb0-9b7f-05f026f1d583	FeatureData[BLAST6]	BLAST6DirectoryFormat	PASS	feature-classifier:classify_consensus_vsearch; feature-classifier:vsearch_global

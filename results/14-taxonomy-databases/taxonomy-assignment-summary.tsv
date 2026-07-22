@@ -1,0 +1,4 @@
+database	release	query_asvs	query_reads	assigned_asvs	assigned_asv_fraction	assigned_reads	assigned_read_fraction	unassigned_asvs	median_confidence	median_top_hits
+SILVA	138.2	366	5213	358	0.978142	5181	0.993862	8	1.0	1.0
+GTDB	R11-RS232	366	5213	356	0.972678	5149	0.987723	10	1.0	1.0
+Greengenes2	2024.09	366	5213	362	0.989071	5185	0.994629	4	1.0	1.0

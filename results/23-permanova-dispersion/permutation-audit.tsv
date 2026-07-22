@@ -1,0 +1,6 @@
+Scheme	Seed	Units	Blocks	MainPlots	PossibleIncludingIdentity	NonIdentityAvailable	PermutationsUsed	UniqueRows	IdentityRows	LegalRows	MinimumP	MatrixSHA256
+Primary split-plot Monte Carlo	20260723	24	6	12	262144	262143	9999	9999	0	9999	1e-4	3b135bcf5075a2dc0c8bb0d331683be1bd5d98d53811f2d42fd65eda1cabf427
+Exact paired: Warming | Unclipped		12	6		64	63	63	63	0	63	0.015625	b882be79b77e1b0bd4dc796bcedf63554ce326ea69eae9f3456a9373441bec8d
+Exact paired: Warming | Clipped		12	6		64	63	63	63	0	63	0.015625	b882be79b77e1b0bd4dc796bcedf63554ce326ea69eae9f3456a9373441bec8d
+Exact paired: Clipping | Ambient		12	6		64	63	63	63	0	63	0.015625	b882be79b77e1b0bd4dc796bcedf63554ce326ea69eae9f3456a9373441bec8d
+Exact paired: Clipping | Warmed		12	6		64	63	63	63	0	63	0.015625	b882be79b77e1b0bd4dc796bcedf63554ce326ea69eae9f3456a9373441bec8d

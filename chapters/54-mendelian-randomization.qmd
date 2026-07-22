@@ -1,0 +1,11 @@
+---
+title: "第 54 篇 · 孟德尔随机化：工具变量、水平多效性与敏感性分析"
+draft: true
+execute:
+  eval: false
+---
+
+<!--
+Planned chapter. It must not be published until its public data, literature,
+commands, outputs, and assertions are added to tutorial.yaml and pass QA.
+-->

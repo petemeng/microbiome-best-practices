@@ -1,0 +1,29 @@
+{
+  "status": "passed",
+  "validation_date": "2026-07-19",
+  "qiime_release": "2026.4",
+  "qiime_version": "2026.4.0",
+  "q2cli_version": "2026.4.0",
+  "demux_plugin_version": "2026.4.0",
+  "fastqc_version": "0.12.1",
+  "multiqc_version": "1.33",
+  "raw_qc_environment_sha256": "191d516070ab0c683c684ee4bc6a1584c705698b309f5be32df4aa67460d2e2d",
+  "input_read_pairs": 2000,
+  "metadata_samples": 75,
+  "assigned_read_pairs": 692,
+  "unmapped_read_pairs": 1308,
+  "assignment_rate": 0.346,
+  "demultiplexed_samples": 56,
+  "fastqc_reports": 3,
+  "fastqc_module_states": 33,
+  "multiqc_reports": 3,
+  "provenance_actions": 3,
+  "checks_total": 45,
+  "checks_passed": 45,
+  "checks_failed": 0,
+  "figures": [
+    "10-import-provenance-map",
+    "10-fastqc-module-audit",
+    "10-demultiplexing-qc"
+  ]
+}

@@ -1,0 +1,3 @@
+marker	target	preprocessing	denoising	reference	tree_policy
+Fungal ITS1/ITS2	Variable internal transcribed spacer	ITSxpress after primer-aware import	DADA2 on unmerged trimmed pairs	UNITE v10.0 2025-02-19	Do not force one global alignment/tree
+Eukaryotic 18S	SSU rRNA amplicon	Documented primer removal; no ITSxpress	Standard DADA2 with quality/overlap evidence	PR2 v5.1.1 2025-10-27	Region-specific alignment after off-target audit

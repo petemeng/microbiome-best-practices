@@ -1,0 +1,353 @@
+Article 07 Linux-side environment validation
+============================================
+
+Validation date: 2026-07-19
+Execution scope: native-linux-host
+Windows host controls validated: no
+Environment: microbiome-qiime2-2026.4
+Manifest SHA-256: 68b0e9b974937525b71cca3dec48b7dc5b6135f588a941d1313c118c2a41f4b5
+
+$ conda --version
+exit_code=0
+conda 26.1.1
+
+$ mamba --version
+exit_code=0
+2.5.0
+
+$ bash --version
+exit_code=0
+GNU bash, version 5.1.16(1)-release (x86_64-pc-linux-gnu)
+Copyright (C) 2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+
+This is free software; you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+$ conda run -n microbiome-qiime2-2026.4 qiime info
+exit_code=0
+System versions
+Python version: 3.12.13
+QIIME 2 release: 2026.4
+QIIME 2 version: 2026.4.0
+q2cli version: 2026.4.0
+
+Installed plugins
+alignment: 2026.4.0
+boots: 2026.4.0
+composition: 2026.4.0
+cutadapt: 2026.4.0
+dada2: 2026.4.0
+deblur: 2026.4.0
+demux: 2026.4.0
+diversity: 2026.4.0
+diversity-lib: 2026.4.0
+emperor: 2026.4.0
+feature-classifier: 2026.4.0
+feature-table: 2026.4.0
+fondue: 2026.4.0
+fragment-insertion: 2026.4.0
+kmerizer: 2026.4.0
+longitudinal: 2026.4.0
+metadata: 2026.4.0
+phylogeny: 2026.4.0
+quality-control: 2026.4.0
+quality-filter: 2026.4.0
+rescript: 2026.4.0
+sample-classifier: 2026.4.0
+stats: 2026.4.0
+taxa: 2026.4.0
+types: 2026.4.0
+vizard: 2026.4.0
+vsearch: 2026.4.0
+
+Application config directory
+<HOME>/miniconda3/envs/microbiome-qiime2-2026.4/var/q2cli
+
+Config
+Config Source: <HOME>/miniconda3/envs/microbiome-qiime2-2026.4/etc/qiime2_config.toml
+
+Getting help
+To find help and learning resources, visit https://qiime2.org.
+To get help with configuring and/or understanding QIIME 2 parallelization, visit https://use.qiime2.org/en/stable/references/parallel-configuration.html
+
+$ conda run -n microbiome-qiime2-2026.4 qiime dada2 denoise-paired --help
+exit_code=0
+Usage: qiime dada2 denoise-paired [OPTIONS]
+
+  This method denoises paired-end sequences, dereplicates them, and filters
+  chimeras.
+
+Inputs:
+  --i-demultiplexed-seqs ARTIFACT SampleData[PairedEndSequencesWithQuality]
+                          The paired-end demultiplexed sequences to be
+                          denoised.                                 [required]
+Parameters:
+  --p-trunc-len-f INTEGER Position at which forward read sequences should be
+                          truncated due to decrease in quality. This truncates
+                          the 3' end of the of the input sequences, which will
+                          be the bases that were sequenced in the last cycles.
+                          Reads that are shorter than this value will be
+                          discarded. After this parameter is applied there
+                          must still be at least a 12 nucleotide overlap
+                          between the forward and reverse reads. If 0 is
+                          provided, no truncation or length filtering will be
+                          performed                                 [required]
+  --p-trunc-len-r INTEGER Position at which reverse read sequences should be
+                          truncated due to decrease in quality. This truncates
+                          the 3' end of the of the input sequences, which will
+                          be the bases that were sequenced in the last cycles.
+                          Reads that are shorter than this value will be
+                          discarded. After this parameter is applied there
+                          must still be at least a 12 nucleotide overlap
+                          between the forward and reverse reads. If 0 is
+                          provided, no truncation or length filtering will be
+                          performed                                 [required]
+  --p-trim-left-f INTEGER Position at which forward read sequences should be
+                          trimmed due to low quality. This trims the 5' end of
+                          the input sequences, which will be the bases that
+                          were sequenced in the first cycles.     [default: 0]
+  --p-trim-left-r INTEGER Position at which reverse read sequences should be
+                          trimmed due to low quality. This trims the 5' end of
+                          the input sequences, which will be the bases that
+                          were sequenced in the first cycles.     [default: 0]
+  --p-max-ee-f NUMBER     Forward reads with number of expected errors higher
+                          than this value will be discarded.    [default: 2.0]
+  --p-max-ee-r NUMBER     Reverse reads with number of expected errors higher
+                          than this value will be discarded.    [default: 2.0]
+  --p-trunc-q INTEGER     Reads are truncated at the first instance of a
+                          quality score less than or equal to this value. If
+                          the resulting read is then shorter than
+                          `trunc-len-f` or `trunc-len-r` (depending on the
+                          direction of the read) it is discarded. [default: 2]
+  --p-min-overlap INTEGER The minimum length of the overlap required for
+    Range(4, None)        merging the forward and reverse reads. [default: 12]
+  --p-max-merge-mismatch INTEGER
+                          The maximum number of mismatches allowed in the
+                          overlap region when merging reads. If 0, only exact
+                          overlaps are allowed.                   [default: 0]
+  --p-trim-overhang / --p-no-trim-overhang
+                          If TRUE, "overhangs" in the alignment after merging
+                          are trimmed off. "Overhangs" are when the reverse
+                          read extends past the start of the forward read, and
+                          vice-versa, as can happen when reads are longer than
+                          the amplicon and read into the other-direction
+                          primer region.                      [default: False]
+  --p-pooling-method TEXT Choices('independent', 'pseudo')
+                          The method used to pool samples for denoising.
+                          "independent": Samples are denoised indpendently.
+                          "pseudo": The pseudo-pooling method is used to
+                          approximate pooling of samples. In short, samples
+                          are denoised independently once, ASVs detected in at
+                          least 2 samples are recorded, and samples are
+                          denoised independently a second time, but this time
+                          with prior knowledge of the recorded ASVs and thus
+                          higher sensitivity to those ASVs.
+                                                      [default: 'independent']
+  --p-chimera-method TEXT Choices('consensus', 'none')
+                          The method used to remove chimeras. "none": No
+                          chimera removal is performed. "consensus": Chimeras
+                          are detected in samples individually, and sequences
+                          found chimeric in a sufficient fraction of samples
+                          are removed.                  [default: 'consensus']
+  --p-min-fold-parent-over-abundance NUMBER
+                          The minimum abundance of potential parents of a
+                          sequence being tested as chimeric, expressed as a
+                          fold-change versus the abundance of the sequence
+                          being tested. Values should be greater than or equal
+                          to 1 (i.e. parents should be more abundant than the
+                          sequence being tested). This parameter has no effect
+                          if chimera-method is "none".          [default: 1.0]
+  --p-allow-one-off / --p-no-allow-one-off
+                          Bimeras that are one-off from exact are also
+                          identified if the `allow-one-off` argument is TrueIf
+                          True, a sequence will be identified as bimera if it
+                          is one mismatch or indel away from an exact bimera.
+                                                              [default: False]
+  --p-n-threads NTHREADS  The number of threads to use for multithreaded
+                          processing. If 0 is provided, all available cores
+                          will be used.                           [default: 1]
+  --p-n-reads-learn INTEGER
+                          The number of reads to use when training the error
+                          model. Smaller numbers will result in a shorter run
+                          time but a less reliable error model.
+                                                            [default: 1000000]
+  --p-hashed-feature-ids / --p-no-hashed-feature-ids
+                          If true, the feature ids in the resulting table
+                          will be presented as hashes of the sequences
+                          defining each feature. The hash will always be the
+                          same for the same sequence so this allows feature
+                          tables to be merged across runs of this method. You
+                          should only merge tables if the exact same
+                          parameters are used for each run.    [default: True]
+  --p-retain-all-samples / --p-no-retain-all-samples
+                          If True all samples input to dada2 will be retained
+                          in the output of dada2, if false samples with zero
+                          total frequency are removed from the table.
+                                                               [default: True]
+Outputs:
+  --o-table ARTIFACT FeatureTable[Frequency]
+                          The resulting feature table.              [required]
+  --o-representative-sequences ARTIFACT FeatureData[Sequence]
+                          The resulting feature sequences. Each feature in
+                          the feature table will be represented by exactly one
+                          sequence, and these sequences will be the joined
+                          paired-end sequences.                     [required]
+  --o-denoising-stats ARTIFACT SampleData[DADA2Stats]
+                          A table listing per-sample read retention counts
+                          and percentages after each stage of the pipeline.
+                                                                    [required]
+  --o-base-transition-stats ARTIFACT DADA2BaseTransitionStats
+                          A table listing the transition rates of each
+                          ordered pair of nucleotides at each quality score.
+                                                                    [required]
+Miscellaneous:
+  --output-dir PATH       Output unspecified results to a directory
+  --verbose / --quiet     Display verbose output to stdout and/or stderr
+                          during execution of this action. Or silence output
+                          if execution is successful (silence is golden).
+  --example-data PATH     Write example data and exit.
+  --citations             Show citations and exit.
+  --use-cache DIRECTORY   Specify the cache to be used for the intermediate
+                          work of this action. If not provided, the default
+                          cache under $TMP/qiime2/<uname> will be used.
+                          IMPORTANT FOR HPC USERS: If you are on an HPC system
+                          and are using parallel execution it is important to
+                          set this to a location that is globally accessible
+                          to all nodes in the cluster.
+  --help                  Show this message and exit.
+
+Examples:
+  # ### example: denoise paired
+  qiime dada2 denoise-paired \
+    --i-demultiplexed-seqs demux-paired.qza \
+    --p-trunc-len-f 150 \
+    --p-trunc-len-r 140 \
+    --o-representative-sequences representative-sequences.qza \
+    --o-table table.qza \
+    --o-denoising-stats denoising-stats.qza \
+    --o-base-transition-stats base-transition-stats.qza
+
+$ conda run -n microbiome-qiime2-2026.4 qiime feature-classifier classify-sklearn --help
+exit_code=0
+Usage: qiime feature-classifier classify-sklearn [OPTIONS]
+
+  Classify reads by taxon using a fitted classifier.
+
+Inputs:
+  --i-reads ARTIFACT FeatureData[Sequence]
+                         The feature data to be classified.         [required]
+  --i-classifier ARTIFACT
+    TaxonomicClassifier  The taxonomic classifier for classifying the reads.
+                                                                    [required]
+Parameters:
+  --p-reads-per-batch VALUE Int % Range(1, None) | Str % Choices('auto')
+                         Number of reads to process in each batch. If "auto",
+                         this parameter is autoscaled to min( number of query
+                         sequences / n-jobs, 20000).         [default: 'auto']
+  --p-n-jobs NTHREADS    The maximum number of concurrent worker processes.
+                         If 0 all CPUs are used. If 1 is given, no parallel
+                         computing code is used at all, which is useful for
+                         debugging.                               [default: 1]
+  --p-pre-dispatch TEXT  "all" or expression, as in "3*n_jobs". The number of
+                         batches (of tasks) to be pre-dispatched.
+                                                         [default: '2*n_jobs']
+  --p-confidence VALUE Float % Range(0, 1, inclusive_end=True) | Str %
+    Choices('disable')   Confidence threshold for limiting taxonomic depth.
+                         Set to "disable" to disable confidence calculation,
+                         or 0 to calculate confidence but not apply it to
+                         limit the taxonomic depth of the assignments.
+                                                                [default: 0.7]
+  --p-read-orientation TEXT Choices('same', 'reverse-complement', 'auto',
+    'both')              Direction of reads with respect to reference
+                         sequences. same will cause reads to be classified
+                         unchanged; reverse-complement will cause reads to be
+                         reversed and complemented prior to classification.
+                         Both will classify sequences unchanged and in
+                         reverse-complement and retain the classification with
+                         higher confidence. auto will autodetect orientation
+                         based on the confidence estimates for the first 100
+                         reads.                              [default: 'auto']
+Outputs:
+  --o-classification ARTIFACT FeatureData[Taxonomy]
+                                                                    [required]
+Miscellaneous:
+  --output-dir PATH      Output unspecified results to a directory
+  --verbose / --quiet    Display verbose output to stdout and/or stderr
+                         during execution of this action. Or silence output if
+                         execution is successful (silence is golden).
+  --example-data PATH    Write example data and exit.
+  --citations            Show citations and exit.
+  --use-cache DIRECTORY  Specify the cache to be used for the intermediate
+                         work of this action. If not provided, the default
+                         cache under $TMP/qiime2/<uname> will be used.
+                         IMPORTANT FOR HPC USERS: If you are on an HPC system
+                         and are using parallel execution it is important to
+                         set this to a location that is globally accessible to
+                         all nodes in the cluster.
+  --help                 Show this message and exit.
+
+$ conda run -n microbiome-qiime2-2026.4 qiime fragment-insertion sepp --help
+exit_code=0
+Usage: qiime fragment-insertion sepp [OPTIONS]
+
+  Perform fragment insertion of sequences using the SEPP algorithm.
+
+Inputs:
+  --i-representative-sequences ARTIFACT FeatureData[Sequence]
+                         The sequences to insert into the reference tree.
+                                                                    [required]
+  --i-reference-database ARTIFACT SeppReferenceDatabase
+                         The reference database to insert the representative
+                         sequences into.                            [required]
+Parameters:
+  --p-alignment-subset-size INTEGER
+                         Each placement subset is further broken into subsets
+                         of at most these many sequences and a separate HMM is
+                         trained on each subset.               [default: 1000]
+  --p-placement-subset-size INTEGER
+                         The tree is divided into subsets such that each
+                         subset includes at most these many subsets. The
+                         placement step places the fragment on only one
+                         subset, determined based on alignment scores. Further
+                         reading:
+                         https://github.com/smirarab/sepp/blob/master/tutorial
+                         /sepp-tutorial.md#sample-datasets-default-parameters.
+                                                               [default: 5000]
+  --p-threads NTHREADS   The number of threads to use. Pass 0 to use one per
+                         available core.                          [default: 1]
+  --p-debug / --p-no-debug
+                         Collect additional run information to STDOUT for
+                         debugging. Temporary directories will not be removed
+                         if run fails.                        [default: False]
+Outputs:
+  --o-tree ARTIFACT      The tree with inserted feature data.
+    Phylogeny[Rooted]                                               [required]
+  --o-placements ARTIFACT
+    Placements           Information about the feature placements within the
+                         reference tree.                            [required]
+Miscellaneous:
+  --output-dir PATH      Output unspecified results to a directory
+  --verbose / --quiet    Display verbose output to stdout and/or stderr
+                         during execution of this action. Or silence output if
+                         execution is successful (silence is golden).
+  --example-data PATH    Write example data and exit.
+  --citations            Show citations and exit.
+  --use-cache DIRECTORY  Specify the cache to be used for the intermediate
+                         work of this action. If not provided, the default
+                         cache under $TMP/qiime2/<uname> will be used.
+                         IMPORTANT FOR HPC USERS: If you are on an HPC system
+                         and are using parallel execution it is important to
+                         set this to a location that is globally accessible to
+                         all nodes in the cluster.
+  --help                 Show this message and exit.
+
+FASTQ smoke check
+-----------------
+Forward records: 2000
+Reverse records: 2000
+Barcode records: 2000
+Read IDs synchronized: True
+Metadata samples: 75
+Required checks passed: 20/20
+Final status: passed

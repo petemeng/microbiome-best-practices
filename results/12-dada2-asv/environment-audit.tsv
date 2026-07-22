@@ -1,0 +1,6 @@
+component	observed	expected	status
+QIIME 2 release	2026.4	2026.4	PASS
+q2-dada2	2026.4.0	2026.4.0	PASS
+DADA2 R package	1.38.0	1.38.0	PASS
+learnErrors randomize default	FALSE	FALSE	PASS
+DADA2 execution threads	1	1	PASS

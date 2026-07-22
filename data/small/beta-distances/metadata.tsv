@@ -1,0 +1,27 @@
+SampleID	SampleType	HabitatClass	Primer	Final_Barcode	Barcode_truncated_plus_T	Barcode_full_length	Description
+CL3	Soil	Soil	ILBC_01	AACGCA	TGCGTT	CTAGCGTGCGT	Calhoun South Carolina Pine soil, pH 4.9
+CC1	Soil	Soil	ILBC_02	AACTCG	CGAGTT	CATCGACGAGT	Cedar Creek Minnesota, grassland, pH 6.1
+SV1	Soil	Soil	ILBC_03	AACTGT	ACAGTT	GTACGCACAGT	Sevilleta new Mexico, desert scrub, pH 8.3
+M31Fcsw	Feces	Human-associated	ILBC_04	AAGAGA	TCTCTT	TCGACATCTCT	M3, Day 1, fecal swab, whole body study
+M11Fcsw	Feces	Human-associated	ILBC_05	AAGCTG	CAGCTT	CGACTGCAGCT	M1, Day 1, fecal swab, whole body study 
+M31Plmr	Skin	Human-associated	ILBC_07	AATCGT	ACGATT	CGAGTCACGAT	M3, Day 1, right palm, whole body study
+M11Plmr	Skin	Human-associated	ILBC_08	ACACAC	GTGTGT	GCCATAGTGTG	M1, Day 1, right palm, whole body study 
+F21Plmr	Skin	Human-associated	ILBC_09	ACACAT	ATGTGT	GTAGACATGTG	F1, Day 1,  right palm, whole body study 
+M31Tong	Tongue	Human-associated	ILBC_10	ACACGA	TCGTGT	TGTGGCTCGTG	M3, Day 1, tongue, whole body study 
+M11Tong	Tongue	Human-associated	ILBC_11	ACACGG	CCGTGT	TAGACACCGTG	M1, Day 1, tongue, whole body study 
+LMEpi24M	Freshwater	Freshwater	ILBC_13	ACACTG	CAGTGT	CATGAACAGTG	Lake Mendota Minnesota, 24 meter epilimnion 
+SLEpi20M	Freshwater	Freshwater	ILBC_15	ACAGAG	CTCTGT	AGCCGACTCTG	Sparkling Lake Wisconsin, 20 meter eplimnion
+AQC1cm	Freshwater (creek)	Freshwater	ILBC_16	ACAGCA	TGCTGT	GACCACTGCTG	Allequash Creek, 0-1cm depth
+AQC4cm	Freshwater (creek)	Freshwater	ILBC_17	ACAGCT	AGCTGT	CAAGCTAGCTG	Allequash Creek, 3-4 cm depth
+AQC7cm	Freshwater (creek)	Freshwater	ILBC_18	ACAGTG	CACTGT	ATGAAGCACTG	Allequash Creek, 6-7 cm depth
+NP2	Ocean	Marine/estuarine	ILBC_19	ACAGTT	AACTGT	TCGCGCAACTG	Newport Pier, CA surface water, Time 1
+NP3	Ocean	Marine/estuarine	ILBC_20	ACATCA	TGATGT	GCTAAGTGATG	Newport Pier, CA surface water, Time 2
+NP5	Ocean	Marine/estuarine	ILBC_21	ACATGA	TCATGT	GAACGATCATG	Newport Pier, CA surface water, Time 3
+TRRsed1	Sediment (estuary)	Marine/estuarine	ILBC_22	ACATGT	ACATGT	CACGTGACATG	Tijuana River Reserve, depth 1
+TRRsed2	Sediment (estuary)	Marine/estuarine	ILBC_23	ACATTC	GAATGT	TGCGCTGAATG	Tijuana River Reserve, depth 2
+TRRsed3	Sediment (estuary)	Marine/estuarine	ILBC_24	ACCACA	TGTGGT	GATGTATGTGG	Tijuana River Reserve, depth 2
+TS28	Feces	Human-associated	ILBC_25	ACCAGA	TCTGGT	GCATCGTCTGG	Twin #1
+TS29	Feces	Human-associated	ILBC_26	ACCAGC	GCTGGT	CTAGTCGCTGG	Twin #2
+Even1	Mock	Mock	ILBC_27	ACCGCA	TGCGGT	TGACTCTGCGG	Even1
+Even2	Mock	Mock	ILBC_28	ACCTCG	CGAGGT	TCTGATCGAGG	Even2
+Even3	Mock	Mock	ILBC_29	ACCTGT	ACAGGT	AGAGAGACAGG	Even3

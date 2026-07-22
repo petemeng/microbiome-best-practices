@@ -1,0 +1,5 @@
+dataset	primer_pair	search_mode	input_pairs	retained_pairs	retention_percent	interpretation
+nf-core/ampliseq MiSeq v2	515F (Parada) / 806R (Apprill)	Anchored at 5-prime	10000	8614	86.14	Primary analysis
+nf-core/ampliseq MiSeq v2	515F (Parada) / 806R (Apprill)	Unanchored front search	10000	8627	86.27	Sensitivity only; 13 extra pairs require protocol review
+nf-core/ampliseq MiSeq v2	341F / 805R (wrong region)	Anchored at 5-prime	10000	0	0.0	Reject primer hypothesis
+QIIME 2 Atacama EMP excerpt	Original 515F / 806R	Anchored at 5-prime	2000	0	0.0	Skip trimming

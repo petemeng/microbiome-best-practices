@@ -1,0 +1,7 @@
+component	observed_version	expected_version	status
+QIIME 2	2026.4.0	2026.4.0	PASS
+q2-feature-classifier	2026.4.0	2026.4.0	PASS
+RESCRIPt	2026.4.0	2026.4.0	PASS
+VSEARCH	2.30.4	2.30.4	PASS
+scikit-learn	1.7.1	1.7.1	PASS
+Legacy public sklearn classifiers	not loaded	not loaded; consensus-VSEARCH used	PASS

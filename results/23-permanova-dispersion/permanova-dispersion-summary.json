@@ -1,0 +1,77 @@
+{
+  "article": 23,
+  "title": "PERMANOVA, restricted permutations, and multivariate dispersion",
+  "dataset": {
+    "source": "phyloseq 1.48.0 soilrep",
+    "features": 16825,
+    "technical_libraries": 56,
+    "biological_samples": 24,
+    "blocks": 6,
+    "main_plots": 12,
+    "treatments": 4,
+    "reads": 98022,
+    "minimum_biological_depth": 1564,
+    "median_biological_depth": 3248,
+    "maximum_biological_depth": 9863
+  },
+  "standardization": {
+    "primary": "Relative abundance Bray-Curtis after retaining features detected in >=4 tagged libraries in any treatment",
+    "features_retained": 1824,
+    "distance": "Bray-Curtis"
+  },
+  "permutations": {
+    "seed": 20260723,
+    "possible": 262144,
+    "primary": 9999,
+    "primary_unique": 9999,
+    "primary_identity_rows": 0,
+    "primary_legal_rows": 9999,
+    "primary_minimum_p": 0.0001,
+    "pairwise_each": 63,
+    "pairwise_minimum_p": 0.015625
+  },
+  "analysis": {
+    "conditioning_block_r2": 0.46891560412,
+    "omnibus_r2_total": 0.098087123069,
+    "omnibus_r2_partial": 0.18469215784,
+    "omnibus_p": 0.0065,
+    "factorial_terms": 3,
+    "factorial_rejections_holm": 0,
+    "pairwise_tests": 4,
+    "pairwise_rejections_holm": 0,
+    "dispersion_p": 0.3714,
+    "anosim_r": -0.09475308642,
+    "anosim_p": 0.0066,
+    "mrpp_a": -0.020048019503,
+    "mrpp_p": 0.0122,
+    "sensitivity_branches": 4
+  },
+  "graphics": {
+    "font_family": "DejaVu Sans",
+    "primary_figures": 4,
+    "vector_files": 8,
+    "raster_files": 8,
+    "format_files": 16,
+    "raster_ppi": 600,
+    "svg_files_with_text": 4,
+    "svg_chinese_characters": 0,
+    "pdf_files_with_embedded_font": 4,
+    "lzw_tiff_files": 4,
+    "dimension_checks_passed": 16
+  },
+  "versions": {
+    "digest": "0.6.36",
+    "ggplot2": "3.5.2",
+    "jsonlite": "1.8.8",
+    "permute": "0.9-7",
+    "ragg": "1.3.2",
+    "readr": "2.1.5",
+    "scales": "1.3.0",
+    "svglite": "2.1.3",
+    "systemfonts": "1.1.0",
+    "vegan": "2.6-6.1"
+  },
+  "checks_total": 214,
+  "checks_passed": 214,
+  "checks_failed": 0
+}

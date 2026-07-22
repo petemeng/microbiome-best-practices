@@ -1,0 +1,4 @@
+Method	Statistic	StatisticValue	PValue	Permutations	EffectSizeInterpretation	Role
+PERMANOVA	Pseudo-F	1.1326528967932397	0.0065	9999	R2 is reported in permanova-omnibus.tsv	Primary
+ANOSIM	R	-0.09475308641975291	0.0066	9999	Rank separation; not comparable with R2	Secondary sensitivity
+MRPP	A	-0.020048019503259074	0.0122	9999	Chance-corrected agreement; not comparable with R2	Secondary sensitivity

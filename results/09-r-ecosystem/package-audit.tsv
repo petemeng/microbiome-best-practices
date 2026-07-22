@@ -1,0 +1,13 @@
+package	role	expected_version	observed_version	library_scope	namespace_loaded	status
+phyloseq	S4 microbiome object	1.48.0	1.48.0	System / site library	TRUE	PASS
+microeco	R6 analysis framework	2.0.0	2.0.0	Project library	TRUE	PASS
+tidyverse	data grammar bundle	2.0.0	2.0.0	System / site library	TRUE	PASS
+ggplot2	publication graphics	3.5.2	3.5.2	System / site library	TRUE	PASS
+dplyr	table transformation	1.1.4	1.1.4	System / site library	TRUE	PASS
+readr	delimited input/output	2.1.5	2.1.5	System / site library	TRUE	PASS
+tidyr	long/wide reshaping	1.3.1	1.3.1	System / site library	TRUE	PASS
+tibble	rectangular data	3.2.1	3.2.1	System / site library	TRUE	PASS
+vegan	ecological statistics	2.6-6.1	2.6-6.1	System / site library	TRUE	PASS
+BiocManager	Bioconductor resolver	1.30.23	1.30.23	System / site library	TRUE	PASS
+renv	project lockfile	1.0.7	1.0.7	System / site library	TRUE	PASS
+sessioninfo	environment provenance	1.2.2	1.2.2	System / site library	TRUE	PASS

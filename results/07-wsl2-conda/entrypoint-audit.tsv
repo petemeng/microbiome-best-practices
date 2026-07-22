@@ -1,0 +1,4 @@
+check	command	exit_code	status	required
+DADA2 paired denoising	qiime dada2 denoise-paired --help	0	PASS	True
+Taxonomy classification	qiime feature-classifier classify-sklearn --help	0	PASS	True
+SEPP fragment insertion	qiime fragment-insertion sepp --help	0	PASS	True

@@ -1,0 +1,8 @@
+Article 17 phyloseq import validation
+Input bundle: nfcore-v4-phyloseq-input-v1
+Input: 366 features x 4 samples; 5213 reads
+Complete tree: 203818 tips; object tree: 366 tips
+Object components: otu_table, tax_table, sam_data, phy_tree, refseq
+Genus coverage: 318/366 features; 4217/5213 reads
+RDS round-trip: PASS
+Checks: 82/82 PASS

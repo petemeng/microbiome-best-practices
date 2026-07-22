@@ -1,0 +1,9 @@
+name: microbiome-fastqc-multiqc
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.14.6
+  - openjdk=25.0.2
+  - fastqc=0.12.1
+  - multiqc=1.33
