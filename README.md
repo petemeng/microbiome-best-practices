@@ -17,8 +17,8 @@
 - 第 01–55 篇均已完成；第 51–55 篇依次覆盖纵向混合模型与 volatility、piecewise SEM、因果中介、孟德尔随机化，以及因果证据与措辞校准。第 51–54 篇从真实数据独立实跑，第 55 篇使用七项一手研究的可追溯证据台账。
 - 第 01–29 篇的上一轮 Pilot QA 已通过：固定真实数据及参考资产、55 篇目录、二十九篇 HTML、337 个 PDF/SVG/PNG/TIFF 图形文件和 473 份结果/审计文件均通过，25/25 个 workflow steps 与 809/809 个发布断言全部成功；run key 为 `09613ff88b76b076`。在当前 418-package 锁下，第 30–35 篇的 359/359 项、第 36–40 篇的 406/406 项、第 41–45 篇的 445/445 项、第 46–50 篇的 435/435 项和第 51–55 篇的 413/413 项发布检查均通过；01–55 合并发布门禁为 73/73，run key 为 `2cf0e712b936e213`。
 - 经明确授权，第 01–25 篇已从同一份已通过 QA 的 Quarto 输出生成公众号审阅稿：102 张正文图和 25 张封面均已上传，25/25 篇草稿创建成功，草稿总数由 53 增至 78；未调用发布或群发接口。本地可追溯记录见 `rendered/wechat_review_01_25/report.json` 与 `rendered/wechat_review_01_25/live_report.json`（生成目录默认不进 Git）。
-- 第 01–55 篇已生成最新本地公众号审阅包，共 55 篇、217 张正文图和 55 张确定性封面；其中第 51–55 篇含 20 张原创图。本次未调用微信上传、草稿、发布或群发接口，记录见 `rendered/wechat_review_01_55/report.json`（默认不进 Git）。
-- GitHub 审阅仓库为 `petemeng/microbiome-best-practices`，第 01–25 篇位于 Draft PR [#1](https://github.com/petemeng/microbiome-best-practices/pull/1)；该 PR 尚未合并，GitHub Pages 生产部署仍关闭。
+- 第 01–55 篇已生成最新本地公众号审阅包，共 55 篇、217 张正文图和 55 张确定性封面；其中第 51–55 篇含 20 张原创图。经明确授权，保留既有第 01–25 篇草稿，并新增第 26–55 篇：115 张正文图和 30 张封面均已上传，30/30 篇草稿创建成功，草稿总数由 78 增至 108；最新列表严格为第 55→26 篇，未调用发布或群发接口。生成记录见 `rendered/wechat_review_01_55/report.json`，在线草稿审计见 `rendered/wechat_review_01_55/live_report.json`（两者默认不进 Git）。
+- GitHub 审阅仓库为 `petemeng/microbiome-best-practices`，第 01–55 篇已更新到 Draft PR [#1](https://github.com/petemeng/microbiome-best-practices/pull/1)；该 PR 尚未合并，GitHub Pages 生产部署仍关闭。
 - QIIME 2 官方 2026.4 环境、固定 ITSxpress overlay、gemelli 0.0.13、PICRUSt2 2.6.3、原生 MMvec 1.0.5/MOFA2 0.7.4 与 SourceTracker 2.0.1 独立环境均已在本机验证；第 07–17 篇相应环境与上游验收均已通过，第 18–55 篇的出版图形、生态统计、组成数据、差异丰度、定量、网络、功能预测、机器学习、时间结局、跨组学、来源追踪、纵向与因果推断合同均设有独立门禁。
 
 ## 已锁定的真实数据
