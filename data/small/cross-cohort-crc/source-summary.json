@@ -1,0 +1,96 @@
+{
+  "analysis_boundary": "Only CRC and healthy-control stool samples are retained; adenoma and mock samples are excluded before analysis.",
+  "archives": {
+    "crc_xiang_results.tar.gz": {
+      "bytes": 152465,
+      "sha256": "c16052495cc717069c670cabc9c1028750a71b7fd04ac3d28dbc1e560521d63e"
+    },
+    "crc_zackular_results.tar.gz": {
+      "bytes": 7474849,
+      "sha256": "294305422293a2e87f9eb61d89612f49fb08b295d779b1cce7996b6d884c4498"
+    },
+    "crc_zhao_results.tar.gz": {
+      "bytes": 96802,
+      "sha256": "2f479dab25d980f2d295244166165f5531b9d28e38896767d1acf6a08e88f91f"
+    }
+  },
+  "database_citation": "Duvallet C, Gibbons SM, Gurry T, et al. Nature Communications. 2017;8:1784.",
+  "dataset": "MicrobiomeHD standardized CRC 16S cohorts",
+  "license": "CC BY-NC 4.0",
+  "record_doi": "10.5281/zenodo.1146764",
+  "record_url": "https://zenodo.org/records/1146764",
+  "studies": {
+    "crc_xiang": {
+      "features": 1617,
+      "files": {
+        "metadata.tsv": {
+          "bytes": 2184,
+          "sha256": "b5b241ea1e47301a0ed0527c93f9831c7e2ba423d45c303261b10483840c5d1d"
+        },
+        "otutab.tsv": {
+          "bytes": 167084,
+          "sha256": "fe7c5a997d1999123c7337a2b695f77a969868de5ac42151dca0c3a46cc6692e"
+        },
+        "taxonomy.tsv": {
+          "bytes": 319953,
+          "sha256": "b2646b55e2ff644569fe6616a637bdd15f047de220f413ecc0b5eff41ab00f94"
+        }
+      },
+      "genus_assigned_features": 1133,
+      "groups": {
+        "CRC": 21,
+        "Control": 22
+      },
+      "reads": 55706,
+      "samples": 43
+    },
+    "crc_zackular": {
+      "features": 60226,
+      "files": {
+        "metadata.tsv": {
+          "bytes": 2418,
+          "sha256": "e3e328026b916847a52a723f1716b4dd0f0d20563ff51d77d714087d8ec1e601"
+        },
+        "otutab.tsv": {
+          "bytes": 8498115,
+          "sha256": "9cc3eb9c5e8fb92d777be780902b6a229af964641ed40bd6ef4fa126cd68c639"
+        },
+        "taxonomy.tsv": {
+          "bytes": 12483045,
+          "sha256": "a6f1cbb196337ae08bf942f5bf3697035ef857643d3cd3cb7965bbb812fd619c"
+        }
+      },
+      "genus_assigned_features": 48654,
+      "groups": {
+        "CRC": 30,
+        "Control": 30
+      },
+      "reads": 3856096,
+      "samples": 60
+    },
+    "crc_zhao": {
+      "features": 837,
+      "files": {
+        "metadata.tsv": {
+          "bytes": 3133,
+          "sha256": "73ee0d6a02a70be552941d298b538f9809df892881e07851afd66735757dc8be"
+        },
+        "otutab.tsv": {
+          "bytes": 184023,
+          "sha256": "f1c0cdf7365d102227fba8689b8d2e09bf89e9ef663d0d85d7a658c1fddf2d87"
+        },
+        "taxonomy.tsv": {
+          "bytes": 166524,
+          "sha256": "37b6226d21930621cca851828578d69ea072b9d5eece819eed1d247d50d0d1b3"
+        }
+      },
+      "genus_assigned_features": 667,
+      "groups": {
+        "CRC": 46,
+        "Control": 56
+      },
+      "reads": 19810,
+      "samples": 102
+    }
+  }
+}

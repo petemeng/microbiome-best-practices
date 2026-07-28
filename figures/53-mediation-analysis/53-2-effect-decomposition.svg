@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='510.24pt' height='311.81pt' viewBox='0 0 510.24 311.81'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MTAuMjR8MC4wMHwzMTEuODE='>
+    <rect x='0.00' y='0.00' width='510.24' height='311.81' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTEuODE=)'>
+<rect x='0.00' y='-0.000000000000057' width='510.24' height='311.81' style='stroke-width: 0.97; stroke: #FFFFFF; fill: #FFFFFF;' />
+</g>
+<defs>
+  <clipPath id='cpNzEuMjl8NTA1LjI1fDM1LjA5fDI4Mi45OQ=='>
+    <rect x='71.29' y='35.09' width='433.96' height='247.90' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpNzEuMjl8NTA1LjI1fDM1LjA5fDI4Mi45OQ==)'>
+<rect x='71.29' y='35.09' width='433.96' height='247.90' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
+<polyline points='71.29,236.51 505.25,236.51 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
+<polyline points='71.29,159.04 505.25,159.04 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
+<polyline points='71.29,81.57 505.25,81.57 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
+<polyline points='149.58,282.99 149.58,35.09 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
+<polyline points='263.38,282.99 263.38,35.09 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
+<polyline points='377.18,282.99 377.18,35.09 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
+<polyline points='490.97,282.99 490.97,35.09 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
+<line x1='263.38' y1='282.99' x2='263.38' y2='35.09' style='stroke-width: 1.07; stroke: #777777; stroke-dasharray: 5.69,5.69; stroke-linecap: butt;' />
+<polyline points='302.36,81.57 302.36,81.57 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<polyline points='302.36,81.57 233.62,81.57 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<polyline points='233.62,81.57 233.62,81.57 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<polyline points='485.53,159.04 485.53,159.04 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<polyline points='485.53,159.04 91.02,159.04 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<polyline points='91.02,159.04 91.02,159.04 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<polyline points='479.36,236.51 479.36,236.51 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<polyline points='479.36,236.51 100.80,236.51 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<polyline points='100.80,236.51 100.80,236.51 ' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
+<circle cx='266.28' cy='81.57' r='3.02' style='stroke-width: 0.71; stroke: #0072B2; fill: #0072B2;' />
+<circle cx='292.53' cy='159.04' r='3.02' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
+<circle cx='295.43' cy='236.51' r='3.02' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
+<rect x='71.29' y='35.09' width='433.96' height='247.90' style='stroke-width: 0.97; stroke: #333333;' />
+</g>
+<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTEuODE=)'>
+<text x='66.81' y='239.42' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='44.25px' lengthAdjust='spacingAndGlyphs'>Total effect</text>
+<text x='66.81' y='161.95' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='48.34px' lengthAdjust='spacingAndGlyphs'>ADE (direct)</text>
+<text x='66.81' y='84.49' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='61.83px' lengthAdjust='spacingAndGlyphs'>ACME (indirect)</text>
+<polyline points='68.80,236.51 71.29,236.51 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='68.80,159.04 71.29,159.04 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='68.80,81.57 71.29,81.57 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='149.58,285.48 149.58,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='263.38,285.48 263.38,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='377.18,285.48 377.18,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='490.97,285.48 490.97,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<text x='149.58' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
+<text x='263.38' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='377.18' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='490.97' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.8</text>
+<text x='288.27' y='304.75' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='229.08px' lengthAdjust='spacingAndGlyphs'>Effect on log calprotectin scale (95% interval)</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='270.38px' lengthAdjust='spacingAndGlyphs'>Quasi-Bayesian intervals from 2,000 simulation draws</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='325.16px' lengthAdjust='spacingAndGlyphs'>None of the decomposed effects excludes the null</text>
+</g>
+</svg>

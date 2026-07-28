@@ -1,0 +1,278 @@
+MetaboliteID	OriginalFeature	HMDB	KEGG	High.Confidence.Annotation	Compound.Name	Retention.Time	m.z	Cluster..if.DA.	Putative.Chemical.Class	Adduct	DisplayName
+MT_M001	C8-pos_Cluster_2197: C54:9 TAG			True	C54:9 TAG	10.673255	895.679848	2.0		[M+Na]+	C54:9 TAG
+MT_M002	C18-neg_Cluster_0927: alpha-muricholate	HMDB0000506	C17647	True	alpha-muricholate	8.117757	407.279768			[M-H]-	alpha-muricholate
+MT_M003	C18-neg_Cluster_0004: 4-hydroxystyrene	HMDB0004072	C05627	True	4-hydroxystyrene	2.554039	119.048864		Styrenes	[M-H]-	4-hydroxystyrene
+MT_M004	HILIC-pos_Cluster_0453: C2 carnitine	HMDB0000201	C02571	True	C2 carnitine	8.585624	204.12232			[M+H]+	C2 carnitine
+MT_M005	HILIC-pos_Cluster_0036: creatinine	HMDB0000562	C00791	True	creatinine	6.423718	114.066154		Amino acids, peptides, and analogues	[M+H]+	creatinine
+MT_M006	HILIC-pos_Cluster_0817: atenolol	HMDB0001924	C13235	True	atenolol	6.74024	267.169068		Phenylacetamides	[M+H]+	atenolol
+MT_M007	C18-neg_Cluster_1574: taurochenodesoxycholic acid	HMDB0000951	C05465	True	taurochenodesoxycholic acid	8.289154	498.289107		Bile acids, alcohols and derivatives	[M-H]-	taurochenodesoxycholic acid
+MT_M008	HILIC-neg_Cluster_0332: saccharin	HMDB0029723	C12283	True	saccharin	3.810657	181.99164		Benzothiazoles	[M-H]-	saccharin
+MT_M009	HILIC-pos_Cluster_1673: C20:4 carnitine			True	C20:4 carnitine	6.219689	448.340197	18.0		[M+Na]+	C20:4 carnitine
+MT_M010	C18-neg_Cluster_0486: carnosol	HMDB0002121	C09069	True	carnosol	10.794002	329.175684	2.0	Diterpene lactones	[M-H]-	carnosol
+MT_M011	HILIC-neg_Cluster_0181: hydrocinnamic acid	HMDB0000764	C05629	True	hydrocinnamic acid	3.875114	149.060668	1.0		[M-H]-	hydrocinnamic acid
+MT_M012	C8-pos_Cluster_1791: C42:0 TAG			True	C42:0 TAG	10.82465	740.678078			[M+NH4]+	C42:0 TAG
+MT_M013	C18-neg_Cluster_1575: taurodeoxycholic acid	HMDB0000896	C05463	True	taurodeoxycholic acid	8.547102	498.289493			[M-H]-	taurodeoxycholic acid
+MT_M014	C8-pos_Cluster_1799: C42:0 TAG			True	C42:0 TAG	10.826807	745.631439			[M+Na]+	C42:0 TAG
+MT_M015	C18-neg_Cluster_0833: deoxycholic acid	HMDB0000626	C04483	True	deoxycholic acid	10.769622	391.285468		Bile acids, alcohols and derivatives	[M-H]-	deoxycholic acid
+MT_M016	C8-pos_Cluster_2134: C52:6 TAG			True	C52:6 TAG	11.066022	873.694315	9.0		[M+Na]+	C52:6 TAG
+MT_M017	C8-pos_Cluster_2319: C56:1 TAG			True	C56:1 TAG	13.10915	939.834558		Triacylglycerols	[M+Na]+	C56:1 TAG
+MT_M018	C18-neg_Cluster_1196: glycodeoxycholic acid	HMDB0000631	C05464	True	glycodeoxycholic acid	9.51775	448.306747			[M-H]-	glycodeoxycholic acid
+MT_M019	C18-neg_Cluster_1197: glycoursodeoxycholic acid	HMDB0000708		True	glycoursodeoxycholic acid	8.102488	448.30686			[M-H]-	glycoursodeoxycholic acid
+MT_M020	HILIC-pos_Cluster_0625: C4 carnitine			True	C4 carnitine	7.889518	232.153366	1.0		[M+H]+	C4 carnitine
+MT_M021	C18-neg_Cluster_1465: taurolithocholic acid	HMDB0000722	C02592	True	taurolithocholic acid	9.710907	482.294214			[M-H]-	taurolithocholic acid
+MT_M022	HILIC-pos_Cluster_0790: C3-DC-CH3 carnitine			True	C3-DC-CH3 carnitine	8.496401	262.127486	1.0	Acyl carnitines	[M+H]+	C3-DC-CH3 carnitine
+MT_M023	HILIC-pos_Cluster_1370: 5alpha-cholestanol	HMDB0000908		True	5alpha-cholestanol	1.699779	371.365793	29.0		[M-H2O+H]+	5alpha-cholestanol
+MT_M024	C8-pos_Cluster_2202: C54:8 TAG			True	C54:8 TAG	10.918401	897.696173	9.0	Triacylglycerols	[M+Na]+	C54:8 TAG
+MT_M025	HILIC-pos_Cluster_0082: N-methylproline	HMDB0094696		True	N-methylproline	8.568446	130.086042			[M+H]+	N-methylproline
+MT_M026	C8-pos_Cluster_2313: C56:2 TAG			True	C56:2 TAG	12.791268	937.820021	33.0		[M+Na]+	C56:2 TAG
+MT_M027	C8-pos_Cluster_1861: C44:0 TAG			True	C44:0 TAG	11.187668	773.661475		Triacylglycerols	[M+Na]+	C44:0 TAG
+MT_M028	HILIC-pos_Cluster_0090: creatine	HMDB0000064	C00300	True	creatine	8.298269	132.07633	2.0	Alpha amino acids and derivatives	[M+H]+	creatine
+MT_M029	HILIC-neg_Cluster_0562: ethyl glucuronide	HMDB0010325		True	ethyl glucuronide	4.030186	221.066307		O-glucuronides	[M-H]-	ethyl glucuronide
+MT_M030	C8-pos_Cluster_2311: C56:3 TAG			True	C56:3 TAG	12.502167	935.805034	33.0		[M+Na]+	C56:3 TAG
+MT_M031	C8-pos_Cluster_2300: C56:6 TAG			True	C56:6 TAG	11.721509	929.758223			[M+Na]+	C56:6 TAG
+MT_M032	C8-pos_Cluster_1854: C44:1 TAG			True	C44:1 TAG	10.928481	771.647572			[M+Na]+	C44:1 TAG
+MT_M033	HILIC-pos_Cluster_0254: 3-methylxanthine	HMDB0001886	C16357	True	3-methylxanthine	3.279602	167.055805		Imidazopyrimidines	[M+H]+	3-methylxanthine
+MT_M034	HILIC-pos_Cluster_0121: imidazole propionate	HMDB0002271	C20522	True	imidazole propionate	7.393472	141.065236		Azoles	[M+H]+	imidazole propionate
+MT_M035	C8-pos_Cluster_1012: C20:5 LPC			True	C20:5 LPC	4.607839	542.321749		1-acyl-sn-glycero-3-phosphocholines	[M+Na]+	C20:5 LPC
+MT_M036	C8-pos_Cluster_1922: C46:1 TAG			True	C46:1 TAG	11.275558	799.678727			[M+Na]+	C46:1 TAG
+MT_M037	C8-pos_Cluster_1800: C34:1 PC plasmalogen-A			True	C34:1 PC plasmalogen-A	8.937513	746.606622	1.0	1-(1Z-alkenyl),2-acyl-glycerophosphocholines	[M+H]+	C34:1 PC plasmalogen-A
+MT_M038	C8-pos_Cluster_2293: C56:7 TAG			True	C56:7 TAG	11.482028	927.743962		Triacylglycerols	[M+Na]+	C56:7 TAG
+MT_M039	C18-neg_Cluster_0019: p-hydroxyphenylacetate	HMDB0000020	C00642	True	p-hydroxyphenylacetate	1.470262	151.038765		Phenols	[M-H]-	p-hydroxyphenylacetate
+MT_M040	C8-pos_Cluster_2304: C56:5 TAG			True	C56:5 TAG	11.970845	931.772886		Triacylglycerols	[M+Na]+	C56:5 TAG
+MT_M041	C8-pos_Cluster_1614: C20:5 CE			True	C20:5 CE	11.316771	693.560861	1.0	Cholesteryl esters	[M+Na]+	C20:5 CE
+MT_M042	C8-pos_Cluster_1758: C18:0 SM			True	C18:0 SM	8.557205	731.606607	1.0	Sphingolipids	[M+H]+	C18:0 SM
+MT_M043	HILIC-pos_Cluster_0728: 2-deoxyadenosine	HMDB0000101	C00559	True	2-deoxyadenosine	5.144115	252.108028	1.0	Purine nucleosides	[M+H]+	2-deoxyadenosine
+MT_M044	C8-pos_Cluster_1915: C46:2 TAG			True	C46:2 TAG	11.024304	797.661789		Triacylglycerols	[M+Na]+	C46:2 TAG
+MT_M045	C18-neg_Cluster_0506: adrenic acid	HMDB0002226	C16527	True	adrenic acid	15.061144	331.264136	11.0	Very long-chain fatty acids	[M-H]-	adrenic acid
+MT_M046	HILIC-pos_Cluster_0110: 1-methylnicotinamide	HMDB0000699	C02918	True	1-methylnicotinamide	8.138234	137.070572		Pyridinecarboxylic acids and derivatives	[M+H]+	1-methylnicotinamide
+MT_M047	HILIC-neg_Cluster_1571: glycocholate	HMDB0000138	C01921	True	glycocholate	4.042977	464.301241			[M-H]-	glycocholate
+MT_M048	C8-pos_Cluster_1833: C36:5 PC plasmalogen-A			True	C36:5 PC plasmalogen-A	8.250746	766.57843	1.0	1-(1Z-alkenyl),2-acyl-glycerophosphocholines	[M+H]+	C36:5 PC plasmalogen-A
+MT_M049	HILIC-pos_Cluster_0422: 5-acetylamino-6-amino-3-methyluracil	HMDB0004400	C16366	True	5-acetylamino-6-amino-3-methyluracil	5.216495	199.081977	2.0	Organonitrogen compounds	[M+H]+	5-acetylamino-6-amino-3-methyluracil
+MT_M050	HILIC-neg_Cluster_0064: caproic acid	HMDB0000535	C01585	True	caproic acid	3.727128	115.076515	2.0	Medium-chain fatty acids	[M-H]-	caproic acid
+MT_M051	HILIC-neg_Cluster_0328: homovanillate	HMDB0000118	C05582	True	homovanillate	4.570257	181.050492		Phenols	[M-H]-	homovanillate
+MT_M052	C18-neg_Cluster_1081: glycolithocholic acid	HMDB0000698	C15557	True	glycolithocholic acid	10.904173	432.311815			[M-H]-	glycolithocholic acid
+MT_M053	C8-pos_Cluster_1970: C24:0 SM			True	C24:0 SM	9.8734	815.697986	9.0	Sphingolipids	[M+H]+	C24:0 SM
+MT_M054	HILIC-pos_Cluster_0245: 1-methylguanine	HMDB0003282	C04152	True	1-methylguanine	5.196976	166.071783		Imidazopyrimidines	[M+H]+	1-methylguanine
+MT_M055	C8-pos_Cluster_2345: C58:6 TAG			True	C58:6 TAG	12.067555	957.790733			[M+Na]+	C58:6 TAG
+MT_M056	HILIC-pos_Cluster_0033: histamine	HMDB0000870	C00388	True	histamine	9.120918	112.086877			[M+H]+	histamine
+MT_M057	HILIC-pos_Cluster_2293: C16:0 SM			True	C16:0 SM	7.126087	703.571469	9.0	Sphingolipids	[M+H]+	C16:0 SM
+MT_M058	HILIC-neg_Cluster_0401: glucurote	HMDB0000127	C00191	True	glucurote	5.450615	193.035127		Glucuronic acid derivatives	[M-H]-	glucurote
+MT_M059	C8-pos_Cluster_2307: C56:4 TAG			True	C56:4 TAG	12.234596	933.789253	33.0		[M+Na]+	C56:4 TAG
+MT_M060	HILIC-pos_Cluster_1486: C16 carnitine	HMDB0000222	C02990	True	C16 carnitine	6.561967	400.34031	3.0	Acyl carnitines	[M+H]+	C16 carnitine
+MT_M061	C8-pos_Cluster_1712: C22:5 CE			True	C22:5 CE	11.672278	716.636644	1.0	Cholesteryl esters	[M+Na]+	C22:5 CE
+MT_M062	HILIC-pos_Cluster_1899: C18:0 LPC			True	C18:0 LPC	7.570429	524.369027		1-acyl-sn-glycero-3-phosphocholines	[M+H]+	C18:0 LPC
+MT_M063	C8-pos_Cluster_1303: C14:0 CE			True	C14:0 CE	11.552452	619.542184	1.0	Cholesteryl esters	[M+Na]+	C14:0 CE
+MT_M064	C8-pos_Cluster_1873: C36:4 PC-A			True	C36:4 PC-A	8.140944	782.570672		Phosphatidylcholines	[M+H]+	C36:4 PC-A
+MT_M065	HILIC-neg_Cluster_0299: ascorbate	HMDB0000044	C00072	True	ascorbate	9.502579	175.024517		Furanones	[M-H]-	ascorbate
+MT_M066	HILIC-pos_Cluster_1374: C14 carnitine	HMDB0005066		True	C14 carnitine	6.681222	372.309038	1.0	Acyl carnitines	[M+H]+	C14 carnitine
+MT_M067	C8-pos_Cluster_1837: C44:1 TAG			True	C44:1 TAG	10.923041	766.692069	1.0		[M+NH4]+	C44:1 TAG
+MT_M068	C8-pos_Cluster_1965: C24:1 SM			True	C24:1 SM	9.494136	813.684583	9.0	Sphingolipids	[M+H]+	C24:1 SM
+MT_M069	C8-pos_Cluster_1727: C34:0 PE			True	C34:0 PE	8.234821	720.552435		Phosphatidylethanolamines	[M+H]+	C34:0 PE
+MT_M070	HILIC-neg_Cluster_0480: 1-3-7-trimethylurate	HMDB0002123	C16361	True	1-3-7-trimethylurate	3.83278	209.067885		Imidazopyrimidines	[M-H]-	1-3-7-trimethylurate
+MT_M071	C18-neg_Cluster_0530: 13-docosenoate	HMDB0002068	C08316	True	13-docosenoate	16.986972	337.310869		Very long-chain fatty acids	[M-H]-	13-docosenoate
+MT_M072	HILIC-neg_Cluster_0283: shikimate	HMDB0003070	C00493	True	shikimate	4.737642	173.044913			[M-H]-	shikimate
+MT_M073	HILIC-pos_Cluster_0048: betaine	HMDB0000043	C00719	True	betaine	8.945123	118.085992		Amino acids, peptides, and analogues	[M+H]+	betaine
+MT_M074	HILIC-pos_Cluster_0590: carnosine	HMDB0000033	C00386	True	carnosine	9.298983	227.11306	1.0	Peptidomimetics	[M+H]+	carnosine
+MT_M075	C8-pos_Cluster_1987: C48:3 TAG			True	C48:3 TAG	11.118497	823.679486		Triacylglycerols	[M+Na]+	C48:3 TAG
+MT_M076	HILIC-pos_Cluster_0152: acetylcholine	HMDB0000895	C01996	True	acetylcholine	7.671379	146.116992		Quaternary ammonium salts	[M+H]+	acetylcholine
+MT_M077	C8-pos_Cluster_2341: C58:7 TAG			True	C58:7 TAG	11.816957	955.767833		Triacylglycerols	[M+Na]+	C58:7 TAG
+MT_M078	C8-pos_Cluster_1647: C16:1 SM			True	C16:1 SM	7.695674	701.556757			[M+Na]+	C16:1 SM
+MT_M079	C8-pos_Cluster_1874: C36:4 PC-B			True	C36:4 PC-B	8.357279	782.568897		Phosphatidylcholines	[M+H]+	C36:4 PC-B
+MT_M080	HILIC-pos_Cluster_0936: diacetylspermine	HMDB0002172	C03413	True	diacetylspermine	10.204002	287.242938		Acetamides	[M+H]+	diacetylspermine
+MT_M081	C8-pos_Cluster_1525: C18:0 CE			True	C18:0 CE	12.387281	675.604039	1.0	Cholesteryl esters	[M+Na]+	C18:0 CE
+MT_M082	C8-pos_Cluster_2210: C54:7 TAG			True	C54:7 TAG	11.166372	899.709334	9.0	Triacylglycerols	[M+Na]+	C54:7 TAG
+MT_M083	C8-pos_Cluster_2056: C50:4 TAG			True	C50:4 TAG	11.215287	849.693242			[M+Na]+	C50:4 TAG
+MT_M084	HILIC-neg_Cluster_0707: pseudouridine	HMDB0000767	C02067	True	pseudouridine	2.338077	243.061931		Nucleoside and nucleotide analogues	[M-H]-	pseudouridine
+MT_M085	C8-pos_Cluster_2019: C24:1 SM 			True	C24:1 SM	9.493713	835.666318	1.0	Sphingolipids	[M+Na]+	C24:1 SM
+MT_M086	C8-pos_Cluster_1888: C22:0 SM			True	C22:0 SM	9.45803	787.669656	9.0	Sphingolipids	[M+H]+	C22:0 SM
+MT_M087	HILIC-neg_Cluster_0182: guanine	HMDB0000132	C00242	True	guanine	2.648227	150.041827	2.0	Imidazopyrimidines	[M-H]-	guanine
+MT_M088	HILIC-pos_Cluster_1580: C18:2 carnitine	HMDB0006469		True	C18:2 carnitine	6.524092	424.340387	3.0	Acyl carnitines	[M+H]+	C18:2 carnitine
+MT_M089	HILIC-pos_Cluster_0032: cytosine	HMDB0000630	C00380	True	cytosine	6.12461	112.050537			[M+H]+	cytosine
+MT_M090	C8-pos_Cluster_0939: C18:2 LPC			True	C18:2 LPC	4.600409	520.340406		1-acyl-sn-glycero-3-phosphocholines	[M+H]+	C18:2 LPC
+MT_M091	HILIC-pos_Cluster_1586: C18:1 carnitine			True	C18:1 carnitine	6.477161	426.355876	3.0	Fatty acid esters	[M+H]+	C18:1 carnitine
+MT_M092	HILIC-neg_Cluster_0159: alpha-ketoglutarate	HMDB0000208	C00026	True	alpha-ketoglutarate	7.756236	145.014087		Gamma-keto acids and derivatives	[M-H]-	alpha-ketoglutarate
+MT_M093	C8-pos_Cluster_1369: C16:1 CE			True	C16:1 CE	11.625544	640.602783	2.0	Cholesteryl esters	[M+NH4]+	C16:1 CE
+MT_M094	C8-pos_Cluster_1722: C22:4 CE			True	C22:4 CE	11.949042	718.649241	1.0	Cholesteryl esters	[M+NH4]+	C22:4 CE
+MT_M095	C8-pos_Cluster_1879: C36:3 PC			True	C36:3 PC	8.497757	784.586819		Phosphatidylcholines	[M+H]+	C36:3 PC
+MT_M096	C8-pos_Cluster_1884: C22:1 SM			True	C22:1 SM	9.157656	785.653145		Sphingolipids	[M+H]+	C22:1 SM
+MT_M097	HILIC-pos_Cluster_0007: putrescine	HMDB0001414	C00134	True	putrescine	9.291155	89.107655		Amines	[M+H]+	putrescine
+MT_M098	C8-pos_Cluster_1856: C36:2 PC plasmalogen			True	C36:2 PC plasmalogen	9.078802	772.622539	2.0	1-(1Z-alkenyl),2-acyl-glycerophosphocholines	[M+H]+	C36:2 PC plasmalogen
+MT_M099	C8-pos_Cluster_2168: C52:0 TAG			True	C52:0 TAG	12.605217	885.787857		Triacylglycerols	[M+Na]+	C52:0 TAG
+MT_M100	C8-pos_Cluster_2138: C52:5 TAG			True	C52:5 TAG	11.307026	875.712613	9.0	Triacylglycerols	[M+Na]+	C52:5 TAG
+MT_M101	C18-neg_Cluster_0183: 1,2,3,4-tetrahydro-b-carboline-1,3-dicarboxylic acid	HMDB0032102		True	1,2,3,4-tetrahydro-b-carboline-1,3-dicarboxylic acid	1.282739	259.072196	2.0		[M-H]-	1,2,3,4-tetrahydro-b-carboline-1,3-dicarboxylic acid
+MT_M102	C8-pos_Cluster_1478: C18:2 CE			True	C18:2 CE	11.716127	666.618408	9.0	Cholesteryl esters	[M+NH4]+	C18:2 CE
+MT_M103	C8-pos_Cluster_1761: C32:1 PC			True	C32:1 PC	8.182908	732.555334		Phosphatidylcholines	[M+H]+	C32:1 PC
+MT_M104	HILIC-neg_Cluster_0156: caprylic acid	HMDB0000482	C06423	True	caprylic acid	3.603307	143.107448	1.0	Medium-chain fatty acids	[M-H]-	caprylic acid
+MT_M105	C8-pos_Cluster_1980: C48:4 TAG			True	C48:4 TAG	10.864176	821.664125			[M+Na]+	C48:4 TAG
+MT_M106	C8-pos_Cluster_2003: C48:0 TAG			True	C48:0 TAG	11.860174	829.724585			[M+Na]+	C48:0 TAG
+MT_M107	C8-pos_Cluster_2128: C52:7 TAG			True	C52:7 TAG	10.821649	871.682557			[M+Na]+	C52:7 TAG
+MT_M108	C8-pos_Cluster_0737: epoxysqualene			True	epoxysqualene	7.858286	449.374078			[M+Na]+	epoxysqualene
+MT_M109	HILIC-neg_Cluster_0677: cystine	HMDB0250712	C01420	True	cystine	6.288915	239.01636	3.0	L-cysteine-S-conjugates	[M-H]-	cystine
+MT_M110	C8-pos_Cluster_1521: C14:0 SM			True	C14:0 SM	7.525761	675.54142		Sphingolipids	[M+H]+	C14:0 SM
+MT_M111	C8-pos_Cluster_1502: C18:0 CE			True	C18:0 CE	12.372106	670.650143		Cholesteryl esters	[M+NH4]+	C18:0 CE
+MT_M112	C8-pos_Cluster_1995: C48:2 TAG			True	C48:2 TAG	11.362544	825.694264		Triacylglycerols	[M+Na]+	C48:2 TAG
+MT_M113	C18-neg_Cluster_0672: nervonic acid	HMDB0002368	C08323	True	nervonic acid	17.959622	365.342106		Very long-chain fatty acids	[M-H]-	nervonic acid
+MT_M114	C8-pos_Cluster_1932: C46:0 TAG			True	C46:0 TAG	11.526179	801.69486		Triacylglycerols	[M+Na]+	C46:0 TAG
+MT_M115	C18-neg_Cluster_0244: alpha-linolenic acid	HMDB0001388	C06427	True	alpha-linolenic acid	13.755078	277.217171	1.0	Lineolic acids and derivatives	[M-H]-	alpha-linolenic acid
+MT_M116	C8-pos_Cluster_0277: stearoyl ethanolamide	HMDB0013078		True	stearoyl ethanolamide	5.494829	328.320676		Organonitrogen compounds	[M+H]+	stearoyl ethanolamide
+MT_M117	C8-pos_Cluster_1490: C18:1 CE			True	C18:1 CE	12.043032	668.634054			[M+NH4]+	C18:1 CE
+MT_M118	C8-pos_Cluster_0416: cholesterol	HMDB0000067	C00187	True	cholesterol	7.217012	369.351917			[M-H2O+Na]+	cholesterol
+MT_M119	HILIC-pos_Cluster_0114: 2-hydroxyphenethylamine	HMDB0001065	C02735	True	2-hydroxyphenethylamine	6.220723	138.090932	3.0	Organonitrogen compounds	[M+H]+	2-hydroxyphenethylamine
+MT_M120	HILIC-pos_Cluster_0405: caffeine	HMDB0001847	C07481	True	caffeine	2.823607	195.08719		Purines and purine derivatives	[M+H]+	caffeine
+MT_M121	HILIC-pos_Cluster_0914: 8-hydroxy-deoxyguanosine	HMDB0003333		True	8-hydroxy-deoxyguanosine	5.249252	284.098026		Purine nucleosides	[M+H]+	8-hydroxy-deoxyguanosine
+MT_M122	C8-pos_Cluster_0341: N-oleoylethanolamine 	HMDB0002088		True	N-oleoylethanolamine	5.107714	348.28717	18.0	Organonitrogen compounds	[M+Na]+	N-oleoylethanolamine
+MT_M123	HILIC-neg_Cluster_0174: tartarate	HMDB0000956	C00898	True	tartarate	7.406051	149.008724			[M-H]-	tartarate
+MT_M124	C8-pos_Cluster_0878: C16:0 LPC			True	C16:0 LPC	4.767281	496.339905	14.0	1-acyl-sn-glycero-3-phosphocholines	[M+H]+	C16:0 LPC
+MT_M125	HILIC-pos_Cluster_0113: trigonelline	HMDB0000875	C01004	True	trigonelline	8.845482	138.054606			[M+H]+	trigonelline
+MT_M126	C8-pos_Cluster_0945: C18:1 LPC			True	C18:1 LPC	4.938243	522.355717		1-acyl-sn-glycero-3-phosphocholines	[M+H]+	C18:1 LPC
+MT_M127	HILIC-neg_Cluster_0062: alpha-ketoisovalerate	HMDB0000019	C00141	True	alpha-ketoisovalerate	3.52175	115.039921		Keto acids and derivatives	[M-H]-	alpha-ketoisovalerate
+MT_M128	HILIC-pos_Cluster_0009: beta-alanine	HMDB0000056	C00099	True	beta-alanine	7.961105	90.055235		Amino acids, peptides, and analogues	[M+H]+	beta-alanine
+MT_M129	HILIC-pos_Cluster_0134: proline betaine	HMDB0004827	C10172	True	proline betaine	9.166394	144.101344		Proline and derivatives	[M+H]+	proline betaine
+MT_M130	C8-pos_Cluster_2048: C50:5 TAG			True	C50:5 TAG	10.955001	847.680515			[M+Na]+	C50:5 TAG
+MT_M131	C8-pos_Cluster_2240: C54:2 TAG			True	C54:2 TAG	12.407129	909.790505	33.0		[M+Na]+	C54:2 TAG
+MT_M132	C8-pos_Cluster_0515: beta-sitosterol	HMDB0000852	C01753	True	beta-sitosterol	7.722481	397.383243			[M-H2O+H]+	beta-sitosterol
+MT_M133	HILIC-neg_Cluster_0909: guanosine	HMDB0000133	C00387	True	guanosine	3.055665	282.084094		Purine nucleosides	[M-H]-	guanosine
+MT_M134	C8-pos_Cluster_1835: C36:5 PC plasmalogen-B			True	C36:5 PC plasmalogen-B	8.644664	766.572988		1-(1Z-alkenyl),2-acyl-glycerophosphocholines	[M+H]+	C36:5 PC plasmalogen-B
+MT_M135	C8-pos_Cluster_0949: C18:0 LPC			True	C18:0 LPC	5.303413	524.371152	9.0	1-acyl-sn-glycero-3-phosphocholines	[M+H]+	C18:0 LPC
+MT_M136	C8-pos_Cluster_0936: C18:3 LPC			True	C18:3 LPC	4.766593	518.321945	14.0	1-acyl-sn-glycero-3-phosphocholines	[M+H]+	C18:3 LPC
+MT_M137	C8-pos_Cluster_2088: C50:0 TAG			True	C50:0 TAG	12.228235	857.756895		Triacylglycerols	[M+Na]+	C50:0 TAG
+MT_M138	HILIC-neg_Cluster_0176: xylose	HMDB0000098	C00181	True	xylose	1.627438	149.045268		Pentoses	[M-H]-	xylose
+MT_M139	C8-pos_Cluster_1726: C22:6 CE			True	C22:6 CE	11.439325	719.574628		Cholesteryl esters	[M+Na]+	C22:6 CE
+MT_M140	HILIC-neg_Cluster_0016: oxalate	HMDB0002329	C00209	True	oxalate	7.766292	88.987993		Dicarboxylic acids and derivatives	[M-H]-	oxalate
+MT_M141	C8-pos_Cluster_2242: C54:1 TAG			True	C54:1 TAG	12.68823	911.805326		Triacylglycerols	[M+Na]+	C54:1 TAG
+MT_M142	HILIC-neg_Cluster_0133: 4-nitrophenol	HMDB0001232	C00870	True	4-nitrophenol	4.081432	138.019547		Nitrophenols	[M-H]-	4-nitrophenol
+MT_M143	HILIC-neg_Cluster_0084: 4-methylcatechol	HMDB0000873	C06730	True	4-methylcatechol	1.366308	123.045022	1.0	Phenols	[M-H]-	4-methylcatechol
+MT_M144	C8-pos_Cluster_1997: C48:1 TAG			True	C48:1 TAG	11.609059	827.710874			[M+Na]+	C48:1 TAG
+MT_M145	C18-neg_Cluster_0256: stearic acid	HMDB0000827	C01530	True	stearic acid	16.09378	283.26395		Fatty acids and conjugates	[M-H]-	stearic acid
+MT_M146	HILIC-pos_Cluster_0116: urocanic acid	HMDB0000301	C00785	True	urocanic acid	4.504729	139.04987		Imidazoles	[M+H]+	urocanic acid
+MT_M147	C8-pos_Cluster_2022: C49:1 TAG			True	C49:1 TAG	11.764544	836.7706			[M+NH4]+	C49:1 TAG
+MT_M148	C18-neg_Cluster_0164: palmitoleic acid	HMDB0003229	C08362	True	palmitoleic acid	14.212543	253.216969		Long-chain fatty acids	[M-H]-	palmitoleic acid
+MT_M149	HILIC-neg_Cluster_0203: orotate	HMDB0000226	C00295	True	orotate	4.709074	155.009615		Pyrimidines and pyrimidine derivatives	[M-H]-	orotate
+MT_M150	HILIC-pos_Cluster_0246: 7-methylguanine	HMDB0000897	C02242	True	7-methylguanine	5.691902	166.071809		Imidazopyrimidines	[M+H]+	7-methylguanine
+MT_M151	C8-pos_Cluster_1889: C36:1 PC			True	C36:1 PC	9.080408	788.615447		Phosphatidylcholines	[M+H]+	C36:1 PC
+MT_M152	C8-pos_Cluster_1657: C16:0 SM			True	C16:0 SM	8.053829	703.574815	9.0	Sphingolipids	[M+H]+	C16:0 SM
+MT_M153	HILIC-pos_Cluster_0667: anserine	HMDB0000194	C01262	True	anserine	10.469162	241.128533		Peptidomimetics	[M+H]+	anserine
+MT_M154	HILIC-neg_Cluster_0020: lactate	HMDB0000190	C00186	True	lactate	4.030335	89.024276	1.0	Hydroxy acids and derivatives	[M-H]-	lactate
+MT_M155	C8-pos_Cluster_2069: C50:3 TAG			True	C50:3 TAG	11.456274	851.709849			[M+Na]+	C50:3 TAG
+MT_M156	HILIC-neg_Cluster_0032: 2-aminobutyric acid	HMDB0000452	C02356	True	2-aminobutyric acid	3.037586	102.056011		L-alpha-amino acids	[M-H]-	2-aminobutyric acid
+MT_M157	HILIC-neg_Cluster_0392: citrate	HMDB0000094	C00158	True	citrate	9.415773	191.019484		Tricarboxylic acids and derivatives	[M-H]-	citrate
+MT_M158	C8-pos_Cluster_1886: C36:2 PC			True	C36:2 PC	8.799074	786.599895			[M+H]+	C36:2 PC
+MT_M159	HILIC-pos_Cluster_0081: pipecolic acid	HMDB0000070	C00408	True	pipecolic acid	7.930976	130.086018	2.0	L-alpha-amino acids	[M+H]+	pipecolic acid
+MT_M160	C8-pos_Cluster_1514: C18:1 CE  			True	C18:1 CE	12.049957	673.58944	9.0		[M+Na]+	C18:1 CE
+MT_M161	HILIC-pos_Cluster_0191: methylpyridonecarboxamide			True	methylpyridonecarboxamide	4.249376	153.065281		Pyridines and derivatives	[M+H]+	methylpyridonecarboxamide
+MT_M162	C18-neg_Cluster_0090: acetytyrosine	HMDB0000866	C01657	True	acetytyrosine	1.126767	222.076542		Amino acids, peptides, and analogues	[M+H]+	acetytyrosine
+MT_M163	HILIC-pos_Cluster_0383: kynurenic acid	HMDB0000715	C01717	True	kynurenic acid	5.218416	190.049178		Quinolines and derivatives	[M+H]+	kynurenic acid
+MT_M164	HILIC-neg_Cluster_0049: uracil	HMDB0000300	C00106	True	uracil	1.546029	111.019898		Pyrimidines and pyrimidine derivatives	[M-H]-	uracil
+MT_M165	HILIC-neg_Cluster_0230: levoglucosan	HMDB0000640		True	levoglucosan	7.130819	161.045377			[M-H]-	levoglucosan
+MT_M166	C8-pos_Cluster_2075: C50:2 TAG			True	C50:2 TAG	11.695456	853.726038			[M+Na]+	C50:2 TAG
+MT_M167	HILIC-neg_Cluster_0161: 2-methylglutaric acid	HMDB0000422	C02930	True	2-methylglutaric acid	7.166747	145.050329		Methyl-branched fatty acids	[M-H]-	2-methylglutaric acid
+MT_M168	HILIC-neg_Cluster_0169: 2-hydroxyglutarate	HMDB0059655	C02630	True	2-hydroxyglutarate	7.205254	147.029673		Hydroxy acids and derivatives	[M-H]-	2-hydroxyglutarate
+MT_M169	HILIC-pos_Cluster_1691: C20 carnitine			True	C20 carnitine	6.358002	456.402781		Acyl carnitines	[M+H]+	C20 carnitine
+MT_M170	HILIC-neg_Cluster_0034: alpha-hydroxybutyrate	HMDB0000008	C05984	True	alpha-hydroxybutyrate	3.866533	103.039899	1.0		[M-H]-	alpha-hydroxybutyrate
+MT_M171	C18-neg_Cluster_0219: 2-hydroxyhexadecanoate	HMDB0031057		True	2-hydroxyhexadecanoate	13.929959	271.228079	11.0		[M-H]-	2-hydroxyhexadecanoate
+MT_M172	HILIC-neg_Cluster_0125: phenylacetate	HMDB0000209	C07086	True	phenylacetate	3.972693	135.045062			[M-H]-	phenylacetate
+MT_M173	HILIC-pos_Cluster_2052: bilirubin	HMDB0000054	C00486	True	bilirubin	1.642753	585.267624			[M+H]+	bilirubin
+MT_M174	HILIC-pos_Cluster_0157: lysine	HMDB0000182	C00047	True	lysine	9.37	147.112492		Amino acids, peptides, and analogues	[M+H]+	lysine
+MT_M175	C8-pos_Cluster_1468: C18:3 CE			True	C18:3 CE	11.45202	664.602057		Cholesteryl esters	[M+NH4]+	C18:3 CE
+MT_M176	HILIC-neg_Cluster_0129: salicylate	HMDB0000840	C07588	True	salicylate	3.955146	137.024184		Benzoic acids and derivatives	[M-H]-	salicylate
+MT_M177	HILIC-neg_Cluster_0622: 1,2,3,4-tetrahydro-1-methyl-beta-carboline-3-carboxylic acid	HMDB0037942		True	1,2,3,4-tetrahydro-1-methyl-beta-carboline-3-carboxylic acid	3.809685	229.097974	5.0	Harmala alkaloids	[M-H]-	1,2,3,4-tetrahydro-1-methyl-beta-carboline-3-carboxylic acid
+MT_M178	HILIC-pos_Cluster_0374: N-acetylspermidine	HMDB0001276	C00612	True	N-acetylspermidine	9.710596	188.175124		Carboximidic acids and derivatives	[M+H]+	N-acetylspermidine
+MT_M179	C18-neg_Cluster_0373: eicosenoate	HMDB0002231	C16526	True	eicosenoate	16.115366	309.279965		Long-chain fatty acids	[M-H]-	eicosenoate
+MT_M180	C18-neg_Cluster_0250: oleic acid	HMDB0000207	C00712	True	oleic acid	15.272049	281.248551			[M-H]-	oleic acid
+MT_M181	C8-pos_Cluster_2156: C52:2 TAG			True	C52:2 TAG	12.046012	881.757443			[M+Na]+	C52:2 TAG
+MT_M182	HILIC-pos_Cluster_0797: thiamine	HMDB0000235	C00378	True	thiamine	9.50362	265.110536	2.0	Pyrimidines and pyrimidine derivatives	[M]+	thiamine
+MT_M183	C8-pos_Cluster_1375: C16:0 CE			True	C16:0 CE	11.968649	642.618861		Cholesteryl esters	[M+NH4]+	C16:0 CE
+MT_M184	C8-pos_Cluster_1623: C20:4 CE			True	C20:4 CE	11.573799	695.573841	9.0	Cholesteryl esters	[M+Na]+	C20:4 CE
+MT_M185	C8-pos_Cluster_2161: C52:1 TAG			True	C52:1 TAG	12.311181	883.772469		Triacylglycerols	[M+Na]+	C52:1 TAG
+MT_M186	C18-neg_Cluster_0079: undecanedionate	HMDB0000888		True	undecanedionate	7.187602	215.128083	3.0	Medium-chain fatty acids	[M-H]-	undecanedionate
+MT_M187	HILIC-neg_Cluster_0187: xanthine	HMDB0000292	C00385	True	xanthine	5.116361	151.025765		Imidazopyrimidines	[M-H]-	xanthine
+MT_M188	HILIC-neg_Cluster_0254: urate	HMDB0000289	C00366	True	urate	5.354563	167.020718		Purines and purine derivatives	[M-H]-	urate
+MT_M189	C18-neg_Cluster_0472: docosahexaenoic acid	HMDB0002183	C06429	True	docosahexaenoic acid	14.089371	327.23262	13.0		[M-H]-	docosahexaenoic acid
+MT_M190	C8-pos_Cluster_1597: C20:4 CE			True	C20:4 CE	11.569904	690.618702	9.0	Cholesteryl esters	[M+NH4]+	C20:4 CE
+MT_M191	HILIC-pos_Cluster_0150: 4-guanidinobutanoic acid	HMDB0003464	C01035	True	4-guanidinobutanoic acid	7.207806	146.091958		Gamma amino acids and derivatives	[M+H]+	4-guanidinobutanoic acid
+MT_M192	C8-pos_Cluster_2215: C54:6 TAG			True	C54:6 TAG	11.397791	901.725337	33.0	Triacylglycerols	[M+Na]+	C54:6 TAG
+MT_M193	C8-pos_Cluster_2141: C52:4 TAG			True	C52:4 TAG	11.540259	877.725965	33.0		[M+Na]+	C52:4 TAG
+MT_M194	HILIC-pos_Cluster_0379: trimethyllysine	HMDB0001325	C03793	True	trimethyllysine	11.169333	189.158863		L-alpha-amino acids	[M+H]+	trimethyllysine
+MT_M195	C8-pos_Cluster_2233: C54:3 TAG			True	C54:3 TAG	12.150266	907.772896	33.0	Triacylglycerols	[M+Na]+	C54:3 TAG
+MT_M196	HILIC-neg_Cluster_0706: uridine	HMDB0000296	C00299	True	uridine	1.796623	243.061889			[M-H]-	uridine
+MT_M197	HILIC-neg_Cluster_0087: thymine	HMDB0000262	C00178	True	thymine	1.350997	125.035549		Diazines	[M-H]-	thymine
+MT_M198	HILIC-neg_Cluster_1170: lactose	HMDB0000186	C00243	True	lactose	2.609105	341.108598		O-glycosyl compounds	[M-H]-	lactose
+MT_M199	C8-pos_Cluster_1282: C34:3 DAG			True	C34:3 DAG	8.566257	613.481674	1.0	Lineolic acids and derivatives	[M+Na]+	C34:3 DAG
+MT_M200	C8-pos_Cluster_2226: C54:4 TAG			True	C54:4 TAG	11.891407	905.756823	33.0		[M+Na]+	C54:4 TAG
+MT_M201	HILIC-neg_Cluster_0120: adenine	HMDB0000034	C00147	True	adenine	2.271317	134.04717	1.0	Purines and purine derivatives	[M-H]-	adenine
+MT_M202	C8-pos_Cluster_1817: C34:2 PC			True	C34:2 PC	8.33618	758.569056		Phosphatidylcholines	[M+H]+	C34:2 PC
+MT_M203	HILIC-pos_Cluster_0100: ornithine	HMDB0000214	C00077	True	ornithine	9.281319	133.096824		Amino acids, peptides, and analogues	[M+H]+	ornithine
+MT_M204	HILIC-pos_Cluster_0230: carnitine	HMDB0000062	C00487	True	carnitine	8.756221	162.111937	1.0	Quaternary ammonium salts	[M+H]+	carnitine
+MT_M205	C8-pos_Cluster_1070: C30:0 DAG			True	C30:0 DAG	8.556091	563.467383		1,2-diacylglycerols	[M+Na]+	C30:0 DAG
+MT_M206	C8-pos_Cluster_2149: C52:3 TAG			True	C52:3 TAG	11.790252	879.741796	33.0	Triacylglycerols	[M+Na]+	C52:3 TAG
+MT_M207	C18-neg_Cluster_0394: 9.10-diHOME	HMDB0004704		True	9.10-diHOME	10.358848	313.238464		Long-chain fatty acids	[M-H]-	9.10-diHOME
+MT_M208	C8-pos_Cluster_0338: C18:0e MAG			True	C18:0e MAG	6.184319	345.336485	10.0	Monoalkylglycerols	[M+H]+	C18:0e MAG
+MT_M209	C18-neg_Cluster_0246: linoleic acid	HMDB0000673	C01595	True	linoleic acid	14.484832	279.232943	9.0		[M-H]-	linoleic acid
+MT_M210	HILIC-pos_Cluster_1593: C18 carnitine			True	C18 carnitine	6.455731	428.37169	1.0	Acyl carnitines	[M+H]+	C18 carnitine
+MT_M211	HILIC-pos_Cluster_0378: NMMA			True	NMMA	9.336896	189.133885		Arginine and derivatives	[M+H]+	NMMA
+MT_M212	C8-pos_Cluster_2220: C54:5 TAG			True	C54:5 TAG	11.640319	903.742499	33.0		[M+Na]+	C54:5 TAG
+MT_M213	HILIC-neg_Cluster_0040: pyrocatechol	HMDB0000957	C00090	True	pyrocatechol	1.455358	109.029385	1.0	Benzenediols	[M-H]-	pyrocatechol
+MT_M214	C8-pos_Cluster_1821: C34:1 PC			True	C34:1 PC	8.644594	760.585077		Phosphatidylcholines	[M+H]+	C34:1 PC
+MT_M215	HILIC-pos_Cluster_0172: triethanolamine	HMDB0032538	C06771	True	triethanolamine	7.640081	150.111879		Alkanolamines	[M+H]+	triethanolamine
+MT_M216	C18-neg_Cluster_0111: dodecanedioic acid	HMDB0000623	C02678	True	dodecanedioic acid	8.008681	229.143876	1.0	Medium-chain fatty acids	[M-H]-	dodecanedioic acid
+MT_M217	C8-pos_Cluster_1367: C36:4 DAG			True	C36:4 DAG	8.686175	639.497236	33.0	Lineolic acids and derivatives	[M+Na]+	C36:4 DAG
+MT_M218	HILIC-pos_Cluster_0419: N-acetylhistidine	HMDB0032055	C02997	True	N-acetylhistidine	8.356582	198.084419		Histidine and derivatives	[M+H]+	N-acetylhistidine
+MT_M219	HILIC-neg_Cluster_0003: propionate	HMDB0000237	C00163	True	propionate	4.047601	73.02932		Carboxylic acids	[M-H]-	propionate
+MT_M220	C18-neg_Cluster_0393: 12.13-diHOME	HMDB0004705	C14829	True	12.13-diHOME	10.162391	313.238314		Long-chain fatty acids	[M-H]-	12.13-diHOME
+MT_M221	C8-pos_Cluster_0410: C18:0e MAG			True	C18:0e MAG	6.190883	367.318449	10.0	Monoalkylglycerols	[M+Na]+	C18:0e MAG
+MT_M222	C8-pos_Cluster_1377: C36:2 DAG			True	C36:2 DAG	9.289662	643.529436			[M+Na]+	C36:2 DAG
+MT_M223	HILIC-pos_Cluster_0447: ADMA	HMDB0001539	C03626	True	ADMA	9.686666	203.149698	2.0	Arginine and derivatives	[M+H]+	ADMA
+MT_M224	HILIC-pos_Cluster_0089: hydroxyproline	HMDB0000725	C01157	True	hydroxyproline	7.892168	132.065131			[M+H]+	hydroxyproline
+MT_M225	HILIC-pos_Cluster_0906: threosphingosine			True	threosphingosine	5.683548	282.27795	6.0		[M-H2O]+	threosphingosine
+MT_M226	HILIC-pos_Cluster_0177: 4-hydroxy-3-methylacetophenone	HMDB0059824		True	4-hydroxy-3-methylacetophenone	1.695767	151.074856		Alkyl-phenylketones	[M+H]+	4-hydroxy-3-methylacetophenone
+MT_M227	HILIC-neg_Cluster_0697: pentadecanoate	HMDB0000826	C16537	True	pentadecanoate	3.341595	241.217098		Long-chain fatty acids	[M-H]-	pentadecanoate
+MT_M228	C8-pos_Cluster_2081: C50:1 TAG			True	C50:1 TAG	11.95418	855.741439		Triacylglycerols	[M+Na]+	C50:1 TAG
+MT_M229	HILIC-pos_Cluster_0272: 3-methylhistidine	HMDB0000479	C01152	True	3-methylhistidine	9.833021	170.091783		Histidine and derivatives	[M+H]+	3-methylhistidine
+MT_M230	HILIC-pos_Cluster_1684: C16:0 LPE			True	C16:0 LPE	6.263367	454.290967		1-acyl-sn-glycero-3-phosphoethanolamines	[M+H]+	C16:0 LPE
+MT_M231	HILIC-pos_Cluster_0079: pyroglutamic acid	HMDB0000267	C01879	True	pyroglutamic acid	8.044523	130.0495		Alpha amino acids and derivatives	[M+H]+	pyroglutamic acid
+MT_M232	C8-pos_Cluster_1373: C36:3 DAG			True	C36:3 DAG	8.991042	641.512618		Lineolic acids and derivatives	[M+Na]+	C36:3 DAG
+MT_M233	C8-pos_Cluster_1004: C16:0 ceramide (d18:1)			True	C16:0 ceramide (d18:1)	8.197254	538.519883	6.0	Sphingolipids	[M+H]+	C16:0 ceramide (d18:1)
+MT_M234	HILIC-neg_Cluster_0201: histidine	HMDB0000177	C00135	True	histidine	4.037108	154.061827		Amino acids, peptides, and analogues	[M-H]-	histidine
+MT_M235	HILIC-neg_Cluster_0204: imidazolelactate	HMDB0002320	C05132	True	imidazolelactate	4.568166	155.045875		Azoles	[M-H]-	imidazolelactate
+MT_M236	HILIC-neg_Cluster_0331: sorbitol	HMDB0000247	C00794	True	sorbitol	2.01362	181.071617		Sugar alcohols	[M-H]-	sorbitol
+MT_M237	HILIC-neg_Cluster_0335: 4-pyridoxate	HMDB0000017	C00847	True	4-pyridoxate	3.840545	182.045892	3.0	Pyridines and derivatives	[M-H]-	4-pyridoxate
+MT_M238	HILIC-pos_Cluster_0151: butyrobetaine	HMDB0001161	C01181	True	butyrobetaine	8.675049	146.116967		Fatty acids and conjugates	[M+H]+	butyrobetaine
+MT_M239	HILIC-neg_Cluster_0122: erythronic acid	HMDB0000613		True	erythronic acid	4.425442	135.029822	1.0		[M-H]-	erythronic acid
+MT_M240	HILIC-neg_Cluster_0841: heptadecanoate	HMDB0002259		True	heptadecanoate	3.279936	269.248492		Long-chain fatty acids	[M-H]-	heptadecanoate
+MT_M241	HILIC-pos_Cluster_0998: threosphingosine			True	threosphingosine	5.676804	300.288345	6.0		[M+H]+	threosphingosine
+MT_M242	HILIC-neg_Cluster_0070: hydroxyisovaleric acid			True	hydroxyisovaleric acid	3.714219	117.055643		Hydroxy fatty acids	[M-H]-	hydroxyisovaleric acid
+MT_M243	HILIC-pos_Cluster_0092: isoleucine	HMDB0000172	C00407	True	isoleucine	7.039731	132.101601		Isoleucine and derivatives	[M+H]+	isoleucine
+MT_M244	HILIC-neg_Cluster_0199: dihydroxybenzoic acid			True	dihydroxybenzoic acid	4.819288	153.018996		Benzoic acids and derivatives	[M-H]-	dihydroxybenzoic acid
+MT_M245	HILIC-pos_Cluster_0913: ethyl 9-hexadecenoate	HMDB0059871		True	ethyl 9-hexadecenoate	1.683218	283.262043	29.0	Fatty acid esters	[M+H]+	ethyl 9-hexadecenoate
+MT_M246	HILIC-neg_Cluster_0033: malonate	HMDB0000691	C00383	True	malonate	7.481365	103.003626		Dicarboxylic acids and derivatives	[M-H]-	malonate
+MT_M247	C8-pos_Cluster_1395: C16:0 CE			True	C16:0 CE	11.973232	647.573818	9.0	Cholesteryl esters	[M+Na]+	C16:0 CE
+MT_M248	C18-neg_Cluster_0144: 2-hydroxymyristic acid	HMDB0002261		True	2-hydroxymyristic acid	12.518107	243.196061	11.0	Long-chain fatty acids	[M-H]-	2-hydroxymyristic acid
+MT_M249	C18-neg_Cluster_0107: myristic acid	HMDB0000806	C06424	True	myristic acid	14.008037	227.200845		Long-chain fatty acids	[M-H]-	myristic acid
+MT_M250	HILIC-pos_Cluster_1017: sphinganine	HMDB0000269	C00836	True	sphinganine	5.706731	302.303848		Organonitrogen compounds	[M+H]+	sphinganine
+MT_M251	C8-pos_Cluster_1291: C34:2 DAG			True	C34:2 DAG	8.857822	615.496328	33.0	Lineolic acids and derivatives	[M+Na]+	C34:2 DAG
+MT_M252	HILIC-neg_Cluster_0288: suberate	HMDB0000893	C08278	True	suberate	7.142564	173.081584	6.0		[M-H]-	suberate
+MT_M253	HILIC-pos_Cluster_1113: phytosphingosine	HMDB0004610	C12144	True	phytosphingosine	5.807391	318.298969	1.0	Organonitrogen compounds	[M+H]+	phytosphingosine
+MT_M254	C8-pos_Cluster_1186: C32:0 DAG			True	C32:0 DAG	9.032395	591.495675		1,2-diacylglycerols	[M+Na]+	C32:0 DAG
+MT_M255	C18-neg_Cluster_0171: palmitic acid	HMDB0000220	C00249	True	palmitic acid	15.15693	255.232602		Fatty acids and conjugates	[M-H]-	palmitic acid
+MT_M256	HILIC-neg_Cluster_0192: ribitol	HMDB0000508	C00474	True	ribitol	1.757746	151.06086		Sugar alcohols	[M-H]-	ribitol
+MT_M257	HILIC-neg_Cluster_0118: malate	HMDB0000156	C00149	True	malate	7.324073	133.014111			[M-H]-	malate
+MT_M258	HILIC-pos_Cluster_0524: N-acetyl-L-arginine	HMDB0004620		True	N-acetyl-L-arginine	8.115299	217.12866	1.0	N-acyl-L-alpha-amino acids	[M+H]+	N-acetyl-L-arginine
+MT_M259	HILIC-neg_Cluster_0117: aspartate	HMDB0000191	C00049	True	aspartate	5.346335	132.030197		Amino acids, peptides, and analogues	[M-H]-	aspartate
+MT_M260	HILIC-pos_Cluster_0022: choline	HMDB0000097	C00114	True	choline	8.170531	104.107031		Quaternary ammonium salts	[M+H]+	choline
+MT_M261	HILIC-neg_Cluster_0079: 4-hydroxybenzaldehyde	HMDB0011718	C00633	True	4-hydroxybenzaldehyde	2.527884	121.029504		Hydroxybenzaldehydes	[M-H]-	4-hydroxybenzaldehyde
+MT_M262	HILIC-neg_Cluster_0036: glycerate	HMDB0000139	C00258	True	glycerate	4.394749	105.019192		Sugar acids and derivatives	[M-H]-	glycerate
+MT_M263	HILIC-pos_Cluster_0244: methionine sulfoxide	HMDB0002005	C02989	True	methionine sulfoxide	8.618429	166.052769	1.0	Alpha amino acids	[M+H]+	methionine sulfoxide
+MT_M264	C8-pos_Cluster_1610: C20:3 CE			True	C20:3 CE	11.82771	692.632743		Cholesteryl esters	[M+NH4]+	C20:3 CE
+MT_M265	HILIC-neg_Cluster_1300: riboflavin	HMDB0000244	C00255	True	riboflavin	1.613945	375.130015		Alloxazines and isoalloxazines	[M-H]-	riboflavin
+MT_M266	C8-pos_Cluster_1393: C36:0 DAG			True	C36:0 DAG	9.841556	647.558665		1,2-diacylglycerols	[M+Na]+	C36:0 DAG
+MT_M267	C18-neg_Cluster_0268: hexadecanedioic acid	HMDB0000672	C19615	True	hexadecanedioic acid	10.78202	285.206703	1.0	Long-chain fatty acids	[M-H]-	hexadecanedioic acid
+MT_M268	HILIC-neg_Cluster_0237: fucose	HMDB0000174	C01019	True	fucose	1.587833	163.061029		Hexoses	[M-H]-	fucose
+MT_M269	C8-pos_Cluster_0354: C16:1 MAG			True	C16:1 MAG	4.959597	351.250395		1-monoacylglycerols	[M+Na]+	C16:1 MAG
+MT_M270	C8-pos_Cluster_0288: palmitoyl glycerol	HMDB0011564		True	palmitoyl glycerol	5.126296	331.283872		2-monoacylglycerols	[M+H]+	palmitoyl glycerol
+MT_M271	C8-pos_Cluster_0467: C18:0 MAG			True	C18:0 MAG	5.72305	381.296567		1-monoacylglycerols	[M+Na]+	C18:0 MAG
+MT_M272	C8-pos_Cluster_0868: C24:0 TAG			True	C24:0 TAG	6.457357	493.359345		Triacylglycerols	[M+Na]+	C24:0 TAG
+MT_M273	C8-pos_Cluster_0678: C22:1 MAG			True	C22:1 MAG	6.778841	435.344659		1-monoacylglycerols	[M+Na]+	C22:1 MAG
+MT_M274	C8-pos_Cluster_0100: 7-hexadecenoic acid methyl ester	HMDB0061858		True	7-hexadecenoic acid methyl ester	4.059965	269.247513		Fatty acid methyl esters	[M+H]+	7-hexadecenoic acid methyl ester
+MT_M275	C8-pos_Cluster_0915: C20:0 LPE			True	C20:0 LPE	5.028875	510.356003		1-acyl-sn-glycero-3-phosphoethanolamines	[M+H]+	C20:0 LPE
+MT_M276	C8-pos_Cluster_0446: C18:0 MAG			True	C18:0 MAG	5.71969	376.340419		1-monoacylglycerols	[M+NH4]+	C18:0 MAG
+MT_M277	C18-neg_Cluster_0177: tetradecanedioate	HMDB0000872	C11002	True	tetradecanedioate	9.442364	257.175625		Long-chain fatty acids	[M-H]-	tetradecanedioate

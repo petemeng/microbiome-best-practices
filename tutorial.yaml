@@ -28,14 +28,14 @@ prerequisites:
 workflow_overview:
   - 先验证 55 篇目录、标题、编号和单篇自足规则
   - 从版本锁定的 microeco、decontam 与 phyloseq 真实 16S 数据导出各篇所需标准三件套
-  - 校正并实跑第 22 篇非约束排序、第 24 篇约束排序和第 25 篇环境方差解构
-  - 以通过 QA 的第 01、02、03、04、05、06、07、08、09、10、11、12、13、14、15、16、17、18、19、20、21、22、23、24、25 篇固定全系列结构、作图主题与数据接口
+  - 校正并实跑第 22 篇非约束排序、第 24 篇约束排序、第 25–54 篇下游统计、组成、差异丰度、定量、网络、功能预测、机器学习、多组学、纵向与因果推断分析
+  - 以通过 QA 的第 01–55 篇固定全系列结构、作图主题与数据接口
   - 按编号逐篇选择公开数据和锚定文献，执行、解释并重绘原创结果图
   - QA 通过后再派生网页版和本地微信公众号完整文章
 results_check:
   - 系列目录应包含 55 篇且编号 01–55 连续、标题与 tutorial.yaml 一致
   - pilot 数据应包含 13,628 个 OTU、90 个 16S 样本和 200 行环境观测
-  - 第 01、02、03、04、05、06、07、08、09、10、11、12、13、14、15、16、17、18、19、20、21、22、23、24、25 篇应从公开数据或一次性环境审计独立渲染为 HTML，并生成规定的 PDF、PNG 与 TIFF 图；第 18–21、23、25 篇还必须生成 SVG
+  - 第 01–55 篇应从公开数据、一次性环境审计或可追溯一手研究台账独立渲染为 HTML，并生成规定的 PDF、PNG 与 TIFF 图；第 18–21、23、25–55 篇还必须生成 SVG
   - 图内轴、图例、分组和统计标注均使用英文
   - 微信公众号派生稿应保留完整依赖、数据准备、分析和导出代码
 troubleshooting:
@@ -63,13 +63,35 @@ reproducibility:
     - 第 21 篇固定 phyloseq 1.48.0 GlobalPatterns 的 18,988 × 26 非空 OTU 表、七级 taxonomy、metadata 与 18,988-tip rooted tree；Bray/Jaccard/两种 UniFrac 在 seed 20260722 的 50,000 reads 同深度表上计算，经典 Aitchison 与 gemelli 0.0.13 Robust Aitchison 在未抽平且相同的 total-count/prevalence 过滤后计算；PCoA 负特征值和伪计数敏感性必须审计
     - 第 23 篇固定 phyloseq 1.48.0 soilrep 的 16,825 × 56 技术库三件套与 seed 20260723；先把技术标签库聚合为 24 个真实生物学样本，再按原研究 6-block warming × clipping split-plot 设计生成 9,999 个唯一受限置换；主分支为论文预声明 prevalence 规则后的相对丰度 Bray-Curtis，PERMANOVA 必须与 PERMDISP、四个计划 simple-effect 比较及 Holm 校正共同报告
     - 第 25 篇固定 microeco 2.0.0 湿地四表、5% prevalence、relative-abundance Bray-Curtis、Hellinger community matrix、seed 20260725 与 999-row free-permutation matrix；envfit 11 项做 BH 校正，三个预设 Mantel blocks 与两个可检验 VPA pure fractions 分别做 Holm 校正，partial Mantel 只作非主敏感性分析
+    - 第 26 篇固定同一 checksum-locked 湿地三件套、seed 20260726 与逐样本 closure；门水平 Top 10 由等样本均值确定，Unknown 与 Other 分离，组均值不得默认 pooled reads；同时审计 Top-N、known-only denominator、样本权重与七级 taxonomy completeness
+    - 第 27 篇固定同一 checksum-locked 湿地三件套、seed 20260727 与 Phylum→Class→Order→Family→Genus 五级合同；每级使用 rank-qualified label 和完整 lineage key，空注释保留为 rank-specific Unknown，不回填缺失父级；全局 Top-N 由逐样本闭合后的等样本均值确定，跨组复用同一名单，并审计层级断裂、同名冲突、完整 genus lineage、Top-N coverage、pooled-read weighting 与 known-only denominator
+    - 第 28 篇固定同一 checksum-locked 湿地三件套、seed 20260728 与 feature-level abundance–occupancy 合同；主 core 使用 all-read relative abundance ≥0.01% 且 prevalence ≥80%，全局与组内 core 分开计算；presence/0.01%/0.05%/0.1% detection、50%/80%/90%/100% prevalence、10,000-read rarefaction 与 0.01%/0.05%/0.1%/0.5% local-rarity thresholds 全部保存为敏感性审计
+    - 第 29 篇固定 DirichletMultinomial 1.46.0 分发的 Holmes/Turnbaugh Twins 真实 genus-count 数据、278 个样本、130 个 source categories、570,851 reads 与 seed 20260729；主 DMM 直接使用未转相对丰度、未加伪计数、未抽平的整数 counts，候选 k=1–7，以 fresh-fit Laplace minimum 预选 k，AIC/BIC 只作并列诊断；k=4 标签按 fitted Bacteroides、Prevotella 比例确定性排序，并审计 package reference fit、八个初始化、5% prevalence、测序深度、单人单样本、后验不确定性和重复样本一致性
+    - 第 36 篇固定同一组 40 个 group-blind 命名属、seed 20260736、SparCC/SPIEC-EASI 双网络、500 次 node-failure、499 次 group-label permutation 与 500 次组内 sample bootstrap；Zi-Pi 与 robustness 只解释为推断图属性
+    - 第 37 篇固定 422 个命名属、CLR pseudocount 0.5、signed WGCNA power 双门禁、seed 20260737、module-trait 全族 BH 与 pseudocount 1.0 refit；candidate hub 需同时通过 kME 与 module-specific connectivity 门禁
+    - 第 38 篇固定 microeco 2.0.0 的 14,096-tip rooted branch-length tree、585-OTU 主过滤、999 次 βNTI/RCbray null randomization 与显式 L'Ecuyer worker streams；先执行三个 short-range phylogenetic-signal tests，再用 220-OTU/199-randomization 分支审计过滤敏感性
+    - 第 39 篇固定 90-sample wetland metacommunity、Sloan beta-distribution NCM、exact-binomial predictive envelope、每个 pool 200 次 sample bootstrap、seed 20260739–20260742，并审计 fixed detection、10,000-read rarefaction 与 17 个 detection limits
+    - 第 40 篇固定 5% prevalence/100 reads 的 Levins breadth universe、90 个逐样本五候选 RAD fits、Haversine geographic distance、within-region log-log slopes 与 999 次 sample-label Mantel permutations；pooled permutation 限制在 region blocks 内
+    - 第 41 篇固定官方 chemerin archive SHA-256、37 条 representative sequences、PICRUSt2 2.6.3、ggpicrust2 2.5.17、maximum NSTI 2.0 与 facility-adjusted 225-pathway BH family；预测只解释为 functional potential
+    - 第 42 篇固定 microeco 2.0.0 湿地三件套、FAPROTAX 1.2.12、93-function BH family、Kruskal–Wallis epsilon-squared 与 full-lineage/genus-only taxonomy sensitivity
+    - 第 43 篇固定 Vandeputte Disease cohort、seed 20260743、3×5 outer nested CV、training-fold feature/CLR/tuning、1,000 次 sample bootstrap、50 次 label permutation，并把 apparent training score 与 out-of-fold score分开
+    - 第 44 篇固定 MicrobiomeHD Xiang/Zhao/Zackular 三个 CRC cohort archive checksum、study-level REML/tau²/I² 与 leave-one-study-out preprocessing/tuning；held-out cohort 不参与任何选择
+    - 第 45 篇固定 MiSurv commit 692a2ac、173 只 NOD mice 的逐样本 sampling week、T1D event/censoring、seed 20260745、adjusted genus Cox/BH/PH audit 与 locked-test ridge-Cox/timeROC
+    - 第 46–48 篇固定 Franzosa IBD 配对 microbiome–metabolome 数据 commit 89a519d8、220 个严格配对样本与 outcome-blind feature universe；依次审计 Procrustes/Mantel/HAllA、sPLS/DIABLO locked test，以及原生 MMvec 1.0.5 与 mofapy2 0.7.4
+    - 第 49 篇固定 Duran Arabidopsis interkingdom 数据 commit 6db5e85、36 个 bacteria/fungi/oomycete 严格配对样本、3 × 3 balanced niche design 与 seed 20260749
+    - 第 50 篇固定 FEAST 官方 demo commit 2f8f3df、1 sink/9 sources/1,839 anonymous taxa、5,000-read depth、FEAST 0.1.0 与 SourceTracker2 2.0.1，并把 leave-one-out 和 missing-source sensitivity 纳入主审计
+    - 第 51 篇固定 O'Keefe DietSwap 真实纵向数据、38 位受试者、222 个观测与 6 个 timepoints；主分析用 subject random intercept，并以 AR(1)、相邻时点 Bray–Curtis volatility 和 cohort-by-time interaction 审计重复测量结构
+    - 第 52 篇固定 microeco 2.0.0 湿地三件套与实测环境表；预设 piecewise SEM、directed-separation Fisher's C、竞争 DAG、残差诊断与 PLS-PM bootstrap 必须共同报告，不把路径图等同因果图
+    - 第 53 篇固定 Franzosa IBD 严格配对样本与预先指定的 steroid→Faecalibacterium CLR→胆汁酸中介链；ACME/ADE 使用 2,000 次模拟并报告未测混杂敏感性，不以横断面时间顺序宣称机制
+    - 第 54 篇固定 MiBioGen Bifidobacterium 暴露和 GWAS Catalog GCST004131 IBD 结局；候选 6 个跨染色体工具经 harmonisation 保留 5 个，联合 IVW、weighted median、MR-Egger、leave-one-out、heterogeneity 与 MR-PRESSO，并显式标记 Steiger 与 colocalisation 不可得
+    - 第 55 篇固定七项一手微生物组研究与 Hill 框架的可追溯证据台账；作为无统计代码的批判性阅读章，只校准研究设计可支持的措辞，不把证据阶梯当自动评分
     - 所有随机分析显式固定 seed，章节输入文件纳入校验
   provenance:
     - QA 报告记录下载、工具版本、命令、日志、输出摘要和断言
     - 每篇记录数据论文、方法论文、公开代码与许可证
     - 发表图只使用本项目基于公开数据重新生成的图，或明确具备转载许可的材料
 data_sources:
-  dataset_version: microeco-2.0.0-decontam-1.24.0-atacama-2024.5-nfcore-ampliseq-f282ad2-itsxpress-tutorial-916145d-pr2-5.1.1-unite-10.0-silva-138.2-gtdb-r232-greengenes2-2024.09-sepp-gg-13-8-phyloseq-input-v1-globalpatterns-beta-distances-v1-soilrep-permanova-v1-publication-graphics-v1-alpha-diversity-v1-alpha-group-tests-v1-environment-variance-v1-pilot-v21
+  dataset_version: microeco-2.0.0-rooted-tree-v1-decontam-1.24.0-atacama-2024.5-nfcore-ampliseq-f282ad2-itsxpress-tutorial-916145d-pr2-5.1.1-unite-10.0-silva-138.2-gtdb-r232-greengenes2-2024.09-sepp-gg-13-8-phyloseq-input-v1-globalpatterns-beta-distances-v1-soilrep-permanova-v1-dmn-twins-1.46.0-reconsi-vandeputte-1.16.0-picrust2-chemerin-microbiomehd-crc-misurv-692a2ac-franzosa-ibd-89a519d8-duran-interkingdom-6db5e85-feast-2f8f3df-dietswap-microbiome-1.26.0-mibiogen-gcst004131-causal-evidence-v1-pilot-v30
   items:
     - id: microeco-source-2.0.0
       url: https://cran.r-project.org/src/contrib/Archive/microeco/microeco_2.0.0.tar.gz
@@ -84,6 +106,14 @@ data_sources:
       license: QIIME2 Public Data
       target_path: downloads/sepp-refs-gg-13-8.qza
   bundled_items:
+    - id: microeco-2.0.0-wetland-rooted-tree
+      source: microeco 2.0.0 data/phylo_tree_16S.RData, deterministically serialized as gzip Newick
+      source_url: https://cran.r-project.org/src/contrib/Archive/microeco/microeco_2.0.0.tar.gz
+      checksum: sha256:05d64719bfe720714fdf03f5158893f54fc6400ab649de807cbecc5599589f61
+      license: GPL-3 package data; cite An et al. 2019 and Liu et al. 2021
+      target_paths:
+        - data/small/rooted-tree.nwk.gz
+        - data/small/source_summary.json
     - id: decontam-muclite-1.24.0
       source: decontam 1.24.0 extdata/MUClite.rds
       source_url: https://bioconductor.org/packages/3.19/bioc/html/decontam.html
@@ -217,12 +247,128 @@ data_sources:
         - data/small/permanova-dispersion/taxonomy.tsv
         - data/small/permanova-dispersion/metadata.tsv
         - data/small/permanova-dispersion/source-summary.json
+    - id: dirichletmultinomial-twins-1.46.0
+      source: DirichletMultinomial 1.46.0 extdata/Twins.csv and extdata/TwinStudy.t, derived from the Turnbaugh twin gut 16S cohort analyzed by Holmes et al.
+      source_url: https://bioconductor.org/packages/3.19/bioc/html/DirichletMultinomial.html
+      checksum: sha256:b6a231acded317b49b7fd800bf8b4ce12a75340c5b88499b51e92d72528f93ba
+      license: DirichletMultinomial package LGPL-3; underlying research data require citation of Turnbaugh et al. 2009 and Holmes et al. 2012
+      target_paths:
+        - data/small/community-typing-dmm/otutab.tsv
+        - data/small/community-typing-dmm/taxonomy.tsv
+        - data/small/community-typing-dmm/metadata.tsv
+        - data/small/community-typing-dmm/source-summary.json
+    - id: reconsi-vandeputte-1.16.0
+      source: reconsi 1.16.0 packaged Vandeputte genus counts and matched flow-cytometry microbial loads
+      source_url: https://bioconductor.org/packages/3.19/bioc/html/reconsi.html
+      checksum: sha256:8ac35a7119d1772d5d1c92f30c051f2fb3bdb2b5d3dca3f83c885528352d9d94
+      license: reconsi package GPL-2; underlying research data require citation of Vandeputte et al. 2017
+      target_paths:
+        - data/small/absolute-quantification/otutab.tsv
+        - data/small/absolute-quantification/taxonomy.tsv
+        - data/small/absolute-quantification/metadata.tsv
+        - data/small/absolute-quantification/cell-load.tsv
+        - data/small/absolute-quantification/source-summary.json
+    - id: picrust2-chemerin-tutorial
+      source: PICRUSt2 official chemerin tutorial BIOM, representative sequences and metadata
+      source_url: http://kronos.pharmacology.dal.ca/public_files/picrust/picrust2_tutorial_files/chemerin_16S.zip
+      checksum: sha256:f57abdc069b6560f0ddb739cf9a341f5679b12f4947f4db2ad5e2cab893669e9
+      license: Official tutorial data; no standalone data license stated in the archive, so verify redistribution terms
+      target_paths:
+        - data/small/picrust2-chemerin/otutab.tsv
+        - data/small/picrust2-chemerin/taxonomy.tsv
+        - data/small/picrust2-chemerin/metadata.tsv
+        - data/small/picrust2-chemerin/representative-sequences.fasta.gz
+        - data/small/picrust2-chemerin/source-summary.json
+    - id: microbiomehd-crc-16s
+      source: MicrobiomeHD standardized Xiang, Zhao and Zackular CRC 16S cohorts
+      source_url: https://zenodo.org/records/1146764
+      checksum: sha256:c16052495cc717069c670cabc9c1028750a71b7fd04ac3d28dbc1e560521d63e+2f479dab25d980f2d295244166165f5531b9d28e38896767d1acf6a08e88f91f+294305422293a2e87f9eb61d89612f49fb08b295d779b1cce7996b6d884c4498
+      license: CC BY-NC 4.0; cite Duvallet et al. 2017 and each primary cohort
+      target_paths:
+        - data/small/cross-cohort-crc/crc_xiang/otutab.tsv
+        - data/small/cross-cohort-crc/crc_zhao/otutab.tsv
+        - data/small/cross-cohort-crc/crc_zackular/otutab.tsv
+        - data/small/cross-cohort-crc/source-summary.json
+    - id: misurv-t1d-692a2ac
+      source: MiSurv processed NOD-mouse gut 16S and time-to-T1D data at fixed Git commit
+      source_url: https://github.com/wg99526/MiSurvGit/tree/692a2ac7079d2dbf581893b9a820c80cde0a7e31
+      checksum: sha256:2044c03631508ac8c1b799618d1e8a24ebc50cd1837eca5c22d8fecbbed9a960+3350c16af78eaaa3eb00e0221469a344e82cec0499f8a2f311133260030532b8+48eda70aaaf0ce13d1ff7508c7455e3dae2a6cb3d22aea87628e6b63070922ec
+      license: Source repository states no data license; cite Zhang et al. 2018 and Gu et al. 2023 and verify redistribution terms
+      target_paths:
+        - data/small/survival-t1d/otutab.tsv
+        - data/small/survival-t1d/taxonomy.tsv
+        - data/small/survival-t1d/metadata.tsv
+        - data/small/survival-t1d/source-summary.json
+    - id: franzosa-ibd-multiomics-89a519d8
+      source: Franzosa IBD paired microbial genera and metabolite profiles curated by Muller et al. at a fixed Git commit
+      source_url: https://github.com/borenstein-lab/microbiome-metabolome-curated-data/tree/89a519d8c832008fbc6e650453e83e2f04858d02
+      checksum: sha256:f89aa7832be4ec75081eaa8f38ce4e80bdaf2b7c2e42f09f73e3e5eb35b58ae4+f7396e3d6838b3b30f78b02bd568753757f84c956cd351966dbe654d50285376+528b5e5953bd3697dd1ecf551d810d536c0679bd922e3fa3a6956c1412c6288c
+      license: Cite Franzosa et al. 2019 and Muller et al. 2022; verify upstream redistribution terms
+      target_paths:
+        - data/small/paired-ibd-multiomics/otutab.tsv
+        - data/small/paired-ibd-multiomics/taxonomy.tsv
+        - data/small/paired-ibd-multiomics/metadata.tsv
+        - data/small/paired-ibd-multiomics/metabolites.tsv
+        - data/small/paired-ibd-multiomics/metabolite-annotation.tsv
+        - data/small/paired-ibd-multiomics/source-summary.json
+    - id: duran-interkingdom-6db5e85
+      source: Duran Arabidopsis bacteria, fungi and oomycete count/taxonomy tables at a fixed Git commit
+      source_url: https://github.com/ththi/Microbial-Interkingdom-Suppl/tree/6db5e85cc5d442fd95fcdcb7250b72fa9e2ff900
+      checksum: sha256:ca90bd08ac7cc02f92bd50f8ac1c669aa7453ab01bd27d2d3045eadf3d57074e+5fbb95263f099adb7d8f051dd0da6bb4ec6950c6c012df5cad1148f1b82fad85+10fcfe028a57198716285e47610188cf66704c1b21ae91859cc511f940af0835
+      license: Cite Duran et al. 2018; verify upstream redistribution terms
+      target_paths:
+        - data/small/multi-kingdom-duran/otutab.tsv
+        - data/small/multi-kingdom-duran/taxonomy.tsv
+        - data/small/multi-kingdom-duran/metadata.tsv
+        - data/small/multi-kingdom-duran/fungi-otutab.tsv
+        - data/small/multi-kingdom-duran/fungi-taxonomy.tsv
+        - data/small/multi-kingdom-duran/oomycete-otutab.tsv
+        - data/small/multi-kingdom-duran/oomycete-taxonomy.tsv
+        - data/small/multi-kingdom-duran/source-summary.json
+    - id: feast-source-tracking-demo-2f8f3df
+      source: FEAST official source-tracking count table and metadata demo at a fixed Git commit
+      source_url: https://github.com/cozygene/FEAST/tree/2f8f3df8051e0e08341f597a9f4693bfb76b3bf6
+      checksum: sha256:08cc3c0c10369e69ebe774b94a06c78597592228a350864df4bb541f1105bbae+1be44c28462fe4b67f30852698168b13dc6ce9feca2d5aaa0e5e2a081bbb30d3
+      license: Cite Shenhav et al. 2019; verify upstream redistribution terms
+      target_paths:
+        - data/small/source-tracking-feast/otutab.tsv
+        - data/small/source-tracking-feast/taxonomy.tsv
+        - data/small/source-tracking-feast/metadata.tsv
+        - data/small/source-tracking-feast/source-summary.json
+    - id: okeefe-dietswap-microbiome-1.26.0
+      source: O'Keefe DietSwap longitudinal microbiome data distributed with Bioconductor microbiome 1.26.0
+      source_url: https://bioconductor.org/packages/3.19/bioc/src/contrib/microbiome_1.26.0.tar.gz
+      checksum: sha256:67cc6d117ce9dfbbc472fba828e1bb0d48c621fb574f4f8d3424f6cc9a77fdab
+      license: BSD-2-Clause package data; cite O'Keefe et al. 2015 and Dryad doi:10.5061/dryad.1mn1n
+      target_paths:
+        - data/small/longitudinal-dietswap/otutab.tsv
+        - data/small/longitudinal-dietswap/taxonomy.tsv
+        - data/small/longitudinal-dietswap/metadata.tsv
+        - data/small/longitudinal-dietswap/source-summary.json
+    - id: mibiogen-bifidobacterium-gcst004131
+      source: MiBioGen Bifidobacterium instruments paired with IBD outcome associations from the NHGRI-EBI GWAS Catalog API
+      source_url: https://molgenis26.gcc.rug.nl/downloads/MiBioGen/MBG.allHits.p1e4.txt
+      checksum: sha256:37001a83d060596fe0b97b63d6a397f01f43a29add2925d406916b7a50b5883e
+      license: Public summary statistics; cite Kurilshikov et al. 2021 and de Lange et al. 2017 and verify source-specific reuse terms
+      target_paths:
+        - data/small/mr-mibiogen/exposure.tsv
+        - data/small/mr-mibiogen/outcome.tsv
+        - data/small/mr-mibiogen/selection-ledger.tsv
+        - data/small/mr-mibiogen/source-summary.json
+    - id: causal-evidence-primary-study-ledger-v1
+      source: Curated seven-case primary-study ledger for causal claim calibration
+      source_url: https://doi.org/10.1177/003591576505800503
+      checksum: sha256:a130da9f84a017a6224cf7b467aa49f898367bd0ce2886e30607f2921a333ab2+b48120b3aeaf14db42ab499f8ca7bb56462ecb5fdb6ed684bccd78e55b6d11b2
+      license: Bibliographic facts and original project synthesis; primary studies retain their own terms
+      target_paths:
+        - data/small/causal-evidence/evidence-cases.tsv
+        - data/small/causal-evidence/source-summary.json
 environment:
   runtime: host
-  pipeline_version: 0.1.0-pilot-v21
+  pipeline_version: 0.1.0-pilot-v30
   setup:
     - pilot 使用 R 4.4.1，R 包固定在 env/renv.lock
-    - Quarto 固定为 1.9.38，并已用于第 01、02、03、04、05、06、07、08、09、10、11、12、13、14、15、16、17、18、19、20、21、22、23、24、25 篇真实渲染
+    - Quarto 固定为 1.9.38，并用于第 01–55 篇真实渲染
     - 第 04–05 篇污染与批次诊断固定使用 Bioconductor 3.19、decontam 1.24.0 与 vegan 2.6-6.1
     - env/qiime2.yml 固定 QIIME 2 2026.4；第 07 篇已完成 Linux 执行层审计，第 08 篇已完成真实 FASTQ import、maximum validation、export 回验和报错探针，第 10 篇已完成独立 import、EMP demultiplex、provenance、FastQC 与 MultiQC 验收，第 11 篇已完成 primer-presence、q2-cutadapt、成对保留和区域分支验收，第 12 篇已完成五组 q2-dada2 参数、overlap、逐阶段损失、ASV 长度和 provenance 验收，第 13 篇已通过 env/qiime2-itsxpress-overlay.yml 固定 ITSxpress 2.1.4/Biopython 1.87，并完成真实 ITS2、UNITE build/evaluation 与 PR2 全库审计；第 14 篇已完成 SILVA 138.2、GTDB R232、Greengenes2 2024.09 的完整 source、区域参考、统一 consensus-VSEARCH、maximum validation 与 provenance 审计；第 15 篇已完成 SILVA 138.2 V4 known-lineage holdout、三档 confidence、全参考生产模型、maximum validation 与 provenance 审计；第 16 篇已完成官方 GG13_8 SEPP reference、真实 V4 placement、rooted tree、jplace、feature filtering、maximum validation 与 provenance 审计
     - 第 09 篇固定 R 4.4.1、Bioconductor 3.19、phyloseq 1.48.0、microeco 2.0.0 与 tidyverse 2.0.0，并用真实三件套完成对象双路径验收
@@ -233,6 +379,16 @@ environment:
     - 第 21 篇固定使用 GlobalPatterns 真实 16S 三件套与精确同 tip rooted tree；R 4.4.1/phyloseq 1.48.0 计算 Bray、Jaccard、unweighted/weighted UniFrac 与经典 Aitchison，独立 Python 3.12.13/gemelli 0.0.13 环境计算 observed-only rclr/RPCA Robust Aitchison；同一 feature filter、seed、PC 方向规范化与 12 位写出规则保证可复跑
     - 第 23 篇固定使用 soilrep 的独立三件套；技术标签库按 BiologicalSampleID 聚合，Block/MainPlot/within-plot 三层设计逐项审计；相对丰度 Bray-Curtis 主分析使用 9,999 个 seed-locked split-plot 受限置换，四个预设 simple-effect 比较完整枚举每对 63 个非恒等置换并在同一族内 Holm 校正
     - 第 25 篇固定使用 microeco 2.0.0 的 13,628 × 90 湿地三件套与 11-variable environment 表；5% prevalence 后 11,113 features，envfit/Mantel 使用 relative-abundance Bray-Curtis，VPA 使用 Hellinger matrix；同一 999-row free-permutation matrix 驱动全部主检验，并显式审计 Group/Saline 混杂、共线性、multiplicity 与不可检验 shared fraction
+    - 第 26 篇固定使用同一 13,628 × 90 湿地三件套；逐样本闭合后用等样本均值选择门水平 Top 10，Unknown 与 Other 分离；属水平气泡图和热图保留全部 reads 分母，并对 pooled-read weighting、known-only renormalization、Top-N 与七级注释完整性做敏感性审计
+    - 第 28 篇固定使用同一 13,628 × 90 湿地三件套；feature-level 主 core 为 relative abundance ≥0.01% 且 prevalence ≥80%，组内 core 均在各自 30 个样本中重算；稀有生物圈主视图使用单样本 0–0.1% local abundance，并把 conditionally rare、persistently rare 与低计数/低 occupancy 的 sampling-limited tail 分开标记
+    - 第 29 篇固定使用 DirichletMultinomial 1.46.0 分发的 278 × 130 Holmes Twins 原始 genus counts；DMM 主分支保持整数计数和全部 source categories，k=1–7、seed 20260729、minimum accepted component size 14，外部 BMIClass 仅作描述；package reference fit、八次初始化、5% prevalence、depth ≥1,000、deterministic 1,000-read rarefaction 和每位参与者一份样本均作为稳定性审计，不把离散 state 标签解释为自然类别或疾病亚型
+    - 第 30–33 篇固定使用 microeco 2.0.0 的 13,628 × 90 湿地三件套；依次审计 closure/reference frame、五种差异方法的同设计横评、Family/Genus/Species 注释门禁，以及同一主结果表驱动的四类差异图
+    - 第 34 篇固定使用 reconsi 1.16.0 分发的 Vandeputte 234 × 135 属级表与 flow-cytometry microbial load；主比较只保留同一 Disease cohort 的 29 个 Crohn's disease 与 66 个 healthy 样本，并用 seed 20260734 的 2,000 次 bootstrap 比较 relative 与 quantitative scale
+    - 第 35 篇固定使用同一湿地三件套、40 个 group-blind 预筛属、seed 20260735、SparCC 200 次 bootstrap/permutation 与 SPIEC-EASI MB/StARS 50 次重采样；方法交集与按组中心化 CLR 敏感性均作为边级审计，不把 association 写成 interaction
+    - 第 36–40 篇固定使用同一 13,628 × 90 湿地三件套；第 36 篇审计 topology robustness 与 rewiring，第 37 篇固定 WGCNA 1.74，第 38 篇固定 iCAMP 1.5.12 与同源 rooted tree，第 39 篇审计 neutral-model pool/detection/depth，第 40 篇分开报告 sample-use breadth、RAD 与 within-region distance-decay
+    - 第 41–45 篇固定 PICRUSt2 2.6.3/ggpicrust2 2.5.17、FAPROTAX 1.2.12、ranger 0.16.0/pROC 1.18.5、metafor 4.6-0 与 timeROC 0.4；PICRUSt2 用 env/picrust2.yml 独立管理
+    - 第 46–50 篇固定 HAllA 0.8.40、mixOmics 6.26.0、原生 MMvec 1.0.5/TensorFlow 1.15.0、原生 mofapy2 0.7.4、FEAST 固定 commit 与 SourceTracker2 2.0.1；MMvec legacy runtime、现代 multi-omics runtime 和 SourceTracker2 分别由 env/mmvec-native.yml、env/multiomics.yml 与 env/sourcetracker2.yml 隔离
+    - 第 51–54 篇固定 nlme、piecewiseSEM 2.3.0.1、plspm 0.6.0、mediation 4.5.1、emmeans 1.10.2、TwoSampleMR 0.6.6 与 MRPRESSO 1.0；第 55 篇为无统计代码的证据阅读框架；R 依赖与传递依赖统一记录在 418-package env/renv.lock
     - env/raw-qc.yml 固定 FastQC 0.12.1 与 MultiQC 1.33，和 QIIME 2 环境分开管理
   tools:
     - name: Rscript
@@ -257,9 +413,9 @@ literature_review:
     第 20 篇组间设计门禁、Kruskal–Wallis、Holm 校正、Cliff's delta 与 bootstrap 区间合同，
     第 21 篇 Bray/Jaccard/UniFrac/Aitchison/Robust Aitchison 的测量对象、
     metric-specific standardization、rooted-tree 门禁、零值处理与距离几何合同，
-    以及 PCoA、CAP 两类排序与第 25 篇 envfit/Mantel/VPA 环境方差解构为验收面，结合真实 16S 数据、官方软件文档、
+    以及 PCoA、CAP 两类排序、第 25 篇 envfit/Mantel/VPA 环境方差解构、第 26 篇群落组成可视化、第 27 篇多分类级组成/lineage 审计与第 28 篇核心菌群/稀有生物圈阈值审计为验收面，结合真实 16S 数据、官方软件文档、
     经典方法论文和微生物组统计边界，
-    校正二十五篇正式文章。
+    校正二十八篇正式文章。
     后续每一篇都在写作前锁定公开数据、方法依据
     和可重绘的目标结果，未通过实跑的数值不得写成定论。
   papers:
@@ -270,6 +426,19 @@ literature_review:
         提供 pilot 使用的真实 16S OTU、taxonomy、sample metadata 和环境因子数据，
         同时覆盖排序与环境关联的常用实现。
       citation: Liu C, Cui Y, Li X, Yao M. FEMS Microbiology Ecology. 2021;97(2):fiaa255.
+    - title: Soil bacterial community structure in Chinese wetlands
+      journal: Geoderma
+      year: 2019
+      relevance: >
+        为第 26 篇提供 90 个 inland、coastal 与 Tibetan wetland 样本及其优势门组成的
+        数据与论文锚点；教程从公开三件套重绘，不复制原图或论文数值。
+      citation: An J, Liu C, Wang Q, et al. Geoderma. 2019;337:290-299.
+    - title: "Microbiome datasets are compositional: and this is not optional"
+      journal: Frontiers in Microbiology
+      year: 2017
+      relevance: >
+        为第 26 篇相对丰度闭合、共同分母与不能从组成图推断绝对数量提供方法边界。
+      citation: Gloor GB, Macklaim JM, Pawlowsky-Glahn V, Egozcue JJ. Frontiers in Microbiology. 2017;8:2224.
     - title: Population-level analysis of gut microbiome variation
       journal: Science
       year: 2016
@@ -564,13 +733,13 @@ literature_review:
           citation: Anderson MJ, Willis TJ. Ecology. 2003;84(2):511-525.
 steps:
   - id: prepare-pilot-data
-    title: 从 microeco 源码包导出标准三件套
+    title: 从 microeco 源码包导出标准三件套、环境表与根树
     goal: >
-      从经过校验的 CRAN 源码包导出 otutab、taxonomy、metadata 和 environment，
+      从经过校验的 CRAN 源码包导出 otutab、taxonomy、metadata、environment 和 rooted phylogeny，
       并生成机器可读的数据摘要。
     rationale: >
       直接从版本锁定包数据生成文本表，既保留真实数据出处，又避免依赖本机已安装包，
-      让五篇使用 microeco 数据的正式文章可以从同一组公开输入独立复现。
+      让使用 microeco 数据的正式文章可以从同一组公开输入独立复现。
     inputs:
       - downloads/microeco_2.0.0.tar.gz
       - scripts/prepare_pilot_data.R
@@ -586,11 +755,13 @@ steps:
       - data/small/taxonomy.tsv
       - data/small/metadata.tsv
       - data/small/environment.tsv
+      - data/small/rooted-tree.nwk.gz
       - results/data_summary.json
     acceptance_checks:
       - otutab 为 13,628 个 OTU × 90 个样本
       - taxonomy 与 otutab 的 OTU ID 完全一致
       - metadata 包含 90 个样本，environment 包含 200 行观测和 11 个变量
+      - rooted tree 有 14,096 tips、14,095 internal nodes，包含全部 13,628 个 count-table OTU
     common_failures:
       - 源码包版本与校验值不一致
       - RData 对象名变化或导出后行名丢失
@@ -598,6 +769,7 @@ steps:
     outputs:
       - results/data_summary.json
       - data/small/otutab.tsv
+      - data/small/rooted-tree.nwk.gz
     method_basis:
       type: external-benchmark
       summary: microeco 发布包提供真实且可引用的 16S 与环境数据，适合排序方法的独立演示。
@@ -3927,9 +4099,851 @@ steps:
         key: graphics.format_files
         comparator: "=="
         value: 16
+  - id: validate-community-composition
+    title: 实跑并验证第 26 篇堆叠、气泡、冲积与热图组成合同
+    cache_revision: article-26-community-composition-v1
+    goal: >
+      从 microeco 2.0.0 分发的真实中国湿地 16S otutab、taxonomy、metadata
+      三件套独立开始，逐样本闭合到 100%，按等样本均值选择门水平 Top 10，
+      将 Unknown 与 Other known 明确分离，并生成全样本堆叠图、属水平丰度/检出率
+      气泡图、组均值冲积图与样本级属热图。同步审计七级 taxonomy completeness、
+      Top-N coverage、equal-sample vs pooled-read weighting、all-read vs known-only
+      denominator，以及四格式出版导出。
+    rationale: >
+      群落组成图看似只是绘图，但分类层级、分母、样本权重、Top-N 和 unknown
+      处理都会改变视觉结论。把这些选择固定成可执行合同，才能让描述性图忠实反映
+      数据，并阻止把相对丰度、冲积 ribbon 或热图聚类误写成绝对变化、迁移或推断证据。
+    inputs:
+      - env/renv.lock
+      - data/small/otutab.tsv
+      - data/small/taxonomy.tsv
+      - data/small/metadata.tsv
+      - data/small/source_summary.json
+      - R/theme_pub.R
+      - scripts/prepare_pilot_data.R
+      - scripts/validate_community_composition.R
+      - chapters/26-community-composition.qmd
+    command: |
+      set -eu
+      mkdir -p \
+        "${RUN_ROOT}/results/26-community-composition" \
+        "${RUN_ROOT}/figures"
+      Rscript --vanilla "${MANIFEST_DIR}/scripts/validate_community_composition.R" \
+        --project-root "${MANIFEST_DIR}" \
+        --input-dir "${MANIFEST_DIR}/data/small" \
+        --output-dir "${RUN_ROOT}/results/26-community-composition" \
+        --figure-dir "${RUN_ROOT}/figures"
+    expected_outputs:
+      - results/26-community-composition/community-composition-summary.json
+      - results/26-community-composition/input-audit.tsv
+      - results/26-community-composition/package-audit.tsv
+      - results/26-community-composition/command-audit.tsv
+      - results/26-community-composition/font-audit.tsv
+      - results/26-community-composition/sample-alignment-audit.tsv
+      - results/26-community-composition/taxonomy-rank-audit.tsv
+      - results/26-community-composition/phylum-relative-abundance.tsv
+      - results/26-community-composition/phylum-display-composition.tsv
+      - results/26-community-composition/phylum-group-summary.tsv
+      - results/26-community-composition/genus-relative-abundance.tsv
+      - results/26-community-composition/genus-bubble-summary.tsv
+      - results/26-community-composition/genus-heatmap-matrix.tsv
+      - results/26-community-composition/genus-heatmap-row-order.tsv
+      - results/26-community-composition/top-n-sensitivity.tsv
+      - results/26-community-composition/ranking-sensitivity.tsv
+      - results/26-community-composition/denominator-sensitivity.tsv
+      - results/26-community-composition/aggregation-sensitivity.tsv
+      - results/26-community-composition/closure-audit.tsv
+      - results/26-community-composition/figure-specification.tsv
+      - results/26-community-composition/format-audit.tsv
+      - results/26-community-composition/validation-checks.tsv
+      - results/26-community-composition/r-session-info.txt
+      - results/26-community-composition/validation.log
+      - figures/26-phylum-stacked.pdf
+      - figures/26-phylum-stacked.svg
+      - figures/26-phylum-stacked.png
+      - figures/26-phylum-stacked.tiff
+      - figures/26-genus-bubble.pdf
+      - figures/26-genus-bubble.svg
+      - figures/26-genus-bubble.png
+      - figures/26-genus-bubble.tiff
+      - figures/26-group-phylum-alluvial.pdf
+      - figures/26-group-phylum-alluvial.svg
+      - figures/26-group-phylum-alluvial.png
+      - figures/26-group-phylum-alluvial.tiff
+      - figures/26-genus-heatmap.pdf
+      - figures/26-genus-heatmap.svg
+      - figures/26-genus-heatmap.png
+      - figures/26-genus-heatmap.tiff
+    acceptance_checks:
+      - 三件套、来源摘要、准备脚本和共享作图函数逐文件 SHA-256 全部锁定；输入为 13,628 features、90 samples、1,619,670 reads，三组各 30 个样本，library depth 为 10,364–37,374
+      - Kingdom 到 Species 七级均去除 rank prefix、把空注释规范为 rank-specific Unknown，并逐样本验证每级相对丰度闭合到 1
+      - 门水平有 56 个标签，属水平有 772 个标签；Unknown phylum、genus、species 的等样本均值分别约为 0.00346、0.63106、0.99635
+      - 门水平 Top 10 仅在 55 个已知门中按 90 个样本的等权均值排序；平均覆盖率为 0.94803，单样本范围为 0.86516–0.98917
+      - Other known phyla 只包含未进入 Top 10 的已知门，Unknown phylum 始终独立，折叠后的每个样本仍精确闭合到 1
+      - 组均值主结果先逐样本闭合再等权平均；pooled-read weighting 只作敏感性分析，三组 total variation 均完整保存
+      - equal-sample 与 pooled-read 选出的门水平 Top 10 Jaccard 为 1；一致的入选名单不被解释为两种权重方案完全等价
+      - Top-N sensitivity 固定 5、8、10、15、20 五个分支，保存平均、最小、最大 coverage 与 Other known fraction
+      - 属水平气泡图固定 Top 15 已知 genera 加 Unknown genus，点大小为 all-read mean abundance，颜色为 count > 0 的 prevalence
+      - known-only denominator 只作敏感性分析；最大组–属均值放大为 7.273 percentage points，正文不得把它与 all-read relative abundance 混用
+      - 热图固定 Top 20 已知 genera、log1p(relative abundance × 10,000) 显示变换、complete-linkage 行聚类；列按 Group/Type/SampleID metadata 顺序而非 outcome 聚类
+      - 四张英文原创图各导出 PDF/SVG/600 ppi PNG/LZW-TIFF，并通过物理尺寸、像素、字体、SVG 文本与 TIFF 压缩审计
+    common_failures:
+      - 先合并组内全部 reads 再计算组比例，使高测序量样本获得更大权重
+      - 把 Unknown 与低丰度已知类群都塞进 Other，隐藏分类注释完整性
+      - 删除 Unknown 后重归一化，却仍把结果写成以全部 reads 为分母的 relative abundance
+      - 分别在每组选择 Top-N，导致相同颜色在不同面板代表不同 taxon
+      - 用展示 Top-N 直接筛差异类群，遗漏只在单组富集的低总体丰度 feature
+      - 把冲积 ribbon 解释为迁移或演替，或把描述性组成图当成组间显著性证据
+      - 热图列按结果聚类后，未经稳定性验证就声称发现了新的样本分型
+      - 从相对丰度变化推断绝对细胞数量或生物量变化
+    outputs:
+      - results/26-community-composition/community-composition-summary.json
+      - results/26-community-composition/taxonomy-rank-audit.tsv
+      - results/26-community-composition/phylum-display-composition.tsv
+      - results/26-community-composition/phylum-group-summary.tsv
+      - results/26-community-composition/genus-bubble-summary.tsv
+      - results/26-community-composition/top-n-sensitivity.tsv
+      - results/26-community-composition/denominator-sensitivity.tsv
+      - results/26-community-composition/aggregation-sensitivity.tsv
+      - results/26-community-composition/validation.log
+      - figures/26-phylum-stacked.png
+      - figures/26-genus-bubble.png
+      - figures/26-group-phylum-alluvial.png
+      - figures/26-genus-heatmap.png
+    method_basis:
+      type: external-benchmark
+      summary: >
+        以 An et al. 的中国湿地优势门与群落组成结果为论文锚点，用 microeco 2.0.0
+        公开三件套重绘四类组成图；依据 compositional-data 边界把逐样本 closure、
+        equal-sample weighting、Unknown/Other 分离和 denominator sensitivity 固定为合同。
+    references:
+      - title: Soil bacterial community structure in Chinese wetlands
+        type: data-paper
+        citation: An J, Liu C, Wang Q, et al. Geoderma. 2019;337:290-299. doi:10.1016/j.geoderma.2018.09.035.
+      - title: microeco - an R package for data mining in microbial community ecology
+        type: software-paper
+        citation: Liu C, Cui Y, Li X, Yao M. FEMS Microbiology Ecology. 2021;97:fiaa255. doi:10.1093/femsec/fiaa255.
+      - title: "Microbiome datasets are compositional: and this is not optional"
+        type: method-paper
+        citation: Gloor GB, Macklaim JM, Pawlowsky-Glahn V, Egozcue JJ. Frontiers in Microbiology. 2017;8:2224. doi:10.3389/fmicb.2017.02224.
+      - title: Consistent and correctable bias in metagenomic sequencing experiments
+        type: method-paper
+        citation: McLaren MR, Willis AD, Callahan BJ. eLife. 2019;8:e46923. doi:10.7554/eLife.46923.
+      - title: ggplot2 reference
+        type: software-documentation
+        url: https://ggplot2.tidyverse.org/
+    assertions:
+      - id: community-composition-summary-exists
+        type: file_exists
+        path: results/26-community-composition/community-composition-summary.json
+      - id: community-composition-checks-failed
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: community-composition-checks-passed
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: checks_passed
+        comparator: "=="
+        value: 195
+      - id: community-composition-samples
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: dataset.samples
+        comparator: "=="
+        value: 90
+      - id: community-composition-source-features
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: dataset.features
+        comparator: "=="
+        value: 13628
+      - id: community-composition-phylum-labels
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: taxonomy.phylum_labels
+        comparator: "=="
+        value: 56
+      - id: community-composition-genus-labels
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: taxonomy.genus_labels
+        comparator: "=="
+        value: 772
+      - id: community-composition-top-n
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: primary.top_n
+        comparator: "=="
+        value: 10
+      - id: community-composition-top10-coverage
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: primary.top10_coverage_mean
+        comparator: ">="
+        value: 0.948
+      - id: community-composition-top-n-branches
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: sensitivity.top_n_branches
+        comparator: "=="
+        value: 5
+      - id: community-composition-ranking-jaccard
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: sensitivity.equal_vs_pooled_top10_jaccard
+        comparator: "=="
+        value: 1
+      - id: community-composition-primary-figures
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: graphics.primary_figures
+        comparator: "=="
+        value: 4
+      - id: community-composition-format-count
+        type: metric_threshold
+        path: results/26-community-composition/community-composition-summary.json
+        key: graphics.format_files
+        comparator: "=="
+        value: 16
+  - id: validate-multirank-composition
+    title: 实跑并验证第 27 篇门到属多分类级组成合同
+    cache_revision: article-27-multirank-composition-v1
+    goal: >
+      从 microeco 2.0.0 分发的真实中国湿地 16S otutab、taxonomy、metadata
+      三件套独立开始，在 Phylum、Class、Order、Family、Genus 五级分别闭合、聚合
+      和汇总。所有联合表使用 rank-qualified taxon label 与显式 lineage key，空注释
+      保留为 rank-specific Unknown，不回填缺失父级；生成注释分辨率阶梯、多层级
+      Top-5 气泡图、完整优势 lineage ladder 与跨层级 Top-N coverage 图，并同步审计
+      层级断裂、同名冲突、完整 lineage、样本权重和 known-only denominator。
+    rationale: >
+      不同分类级并不是同一变量的不同缩放。随层级加深，注释率、标签数和 Top-N
+      覆盖率都会改变；裸 taxon 名还可能在不同 rank 或不同父系中重复。把 rank、
+      lineage、Unknown、分母与选择规则固定成可执行合同，才能避免错误合并、虚构父级、
+      双重计数，或把同一条 read 在多个 rank 的比例相加。
+    inputs:
+      - env/renv.lock
+      - data/small/otutab.tsv
+      - data/small/taxonomy.tsv
+      - data/small/metadata.tsv
+      - data/small/source_summary.json
+      - R/theme_pub.R
+      - scripts/prepare_pilot_data.R
+      - scripts/validate_multirank_composition.R
+      - chapters/27-multirank-composition.qmd
+    command: |
+      set -eu
+      mkdir -p \
+        "${RUN_ROOT}/results/27-multirank-composition" \
+        "${RUN_ROOT}/figures"
+      Rscript --vanilla "${MANIFEST_DIR}/scripts/validate_multirank_composition.R" \
+        --project-root "${MANIFEST_DIR}" \
+        --input-dir "${MANIFEST_DIR}/data/small" \
+        --output-dir "${RUN_ROOT}/results/27-multirank-composition" \
+        --figure-dir "${RUN_ROOT}/figures"
+    expected_outputs:
+      - results/27-multirank-composition/multirank-composition-summary.json
+      - results/27-multirank-composition/input-audit.tsv
+      - results/27-multirank-composition/package-audit.tsv
+      - results/27-multirank-composition/command-audit.tsv
+      - results/27-multirank-composition/font-audit.tsv
+      - results/27-multirank-composition/sample-alignment-audit.tsv
+      - results/27-multirank-composition/taxonomy-lineage-map.tsv
+      - results/27-multirank-composition/multirank-relative-abundance.tsv
+      - results/27-multirank-composition/rank-resolution-audit.tsv
+      - results/27-multirank-composition/group-rank-resolution.tsv
+      - results/27-multirank-composition/lineage-gap-audit.tsv
+      - results/27-multirank-composition/complete-depth-audit.tsv
+      - results/27-multirank-composition/label-collision-audit.tsv
+      - results/27-multirank-composition/cross-rank-name-collisions.tsv
+      - results/27-multirank-composition/rank-top-taxa.tsv
+      - results/27-multirank-composition/rank-taxon-group-summary.tsv
+      - results/27-multirank-composition/rank-topn-sensitivity.tsv
+      - results/27-multirank-composition/complete-lineage-abundance.tsv
+      - results/27-multirank-composition/dominant-complete-lineages.tsv
+      - results/27-multirank-composition/lineage-ladder.tsv
+      - results/27-multirank-composition/aggregation-sensitivity.tsv
+      - results/27-multirank-composition/denominator-sensitivity.tsv
+      - results/27-multirank-composition/closure-audit.tsv
+      - results/27-multirank-composition/figure-specification.tsv
+      - results/27-multirank-composition/format-audit.tsv
+      - results/27-multirank-composition/validation-checks.tsv
+      - results/27-multirank-composition/r-session-info.txt
+      - results/27-multirank-composition/validation.log
+      - figures/27-rank-resolution-cascade.pdf
+      - figures/27-rank-resolution-cascade.svg
+      - figures/27-rank-resolution-cascade.png
+      - figures/27-rank-resolution-cascade.tiff
+      - figures/27-multirank-bubble.pdf
+      - figures/27-multirank-bubble.svg
+      - figures/27-multirank-bubble.png
+      - figures/27-multirank-bubble.tiff
+      - figures/27-lineage-ladder.pdf
+      - figures/27-lineage-ladder.svg
+      - figures/27-lineage-ladder.png
+      - figures/27-lineage-ladder.tiff
+      - figures/27-topn-coverage.pdf
+      - figures/27-topn-coverage.svg
+      - figures/27-topn-coverage.png
+      - figures/27-topn-coverage.tiff
+    acceptance_checks:
+      - 三件套、来源摘要、准备脚本和共享作图函数逐文件 SHA-256 全部锁定；输入为 13,628 features、90 samples、1,619,670 reads，三组各 30 个样本
+      - Phylum、Class、Order、Family、Genus 分别有 56、128、217、394、772 个含 Unknown 的唯一标签；五级聚合后每个样本均精确闭合到 1
+      - 五级已命名 reads 的等样本均值依次约为 0.99654、0.96798、0.85573、0.67963、0.36894；最大分辨率损失发生在 Family→Genus，为 31.068 percentage points
+      - Inland、Coastal、Tibetan wetland 的 genus-level known fractions 分别约为 0.28991、0.38385、0.43307；正文必须保留这种组间注释完整性差异
+      - 空 rank 不向下或向上填充；前三个 parent→child transition 无 child-known/parent-unknown 记录，而 Family→Genus 明确保留 324 个 features、17 个 genera 和 0.02518 的等样本 reads
+      - 完整 Phylum→Genus lineage 覆盖 0.34376 的全部 reads；top 12 完整 genus lineages 覆盖 0.10188，展示名单不能替代完整 754-lineage 导出
+      - 联合表使用 rank-qualified labels；13 个跨 rank 同名标签不被合并，Family 层的两个多父系裸名称也使用完整 parent path 区分
+      - 每级 Top 5 只按 90 个样本的全局等权均值选择并固定用于三组；气泡大小为 all-read mean abundance，颜色为 prevalence
+      - Top-N sensitivity 固定 N=5、10、20、50 与 All known 五个分支；Top 10 对 Phylum、Class、Order、Family、Genus 的平均覆盖率依次约为 0.94803、0.59005、0.34765、0.23671、0.09522
+      - 组均值主结果先逐样本闭合再等权平均；pooled-read weighting 和 known-only denominator 仅为敏感性分支，最大 known-only 放大保留为审计结果
+      - "`Incertae Sedis` 保留为来源数据库给出的 unresolved named placement，不静默改成 Unknown，也不写成已解决的标准分类单元"
+      - 四张英文原创图各导出 PDF/SVG/600 ppi PNG/LZW-TIFF，并通过物理尺寸、像素、字体、SVG 文本与 TIFF 压缩审计
+    common_failures:
+      - 直接按裸 taxon 名跨 rank 合并，使 Phylum `Acidobacteria` 与 Class `Acidobacteria` 变成同一行
+      - 为了画漂亮层级图，把 Unknown family 用已知 genus 反推并虚构一个父级
+      - 把同一批 reads 在门、纲、目、科、属的比例相加，得到超过 100% 的所谓总丰度
+      - 每个组或每个 rank 独立挑 Top-N，却仍用同一颜色或位置暗示可直接比较
+      - 删除 Unknown 后重新闭合，再把 known-only 比例写成全部 reads 的 relative abundance
+      - 把 `Incertae Sedis` 当作完全解析的标准命名，或与真正空注释混为一类
+      - 把 lineage ladder、注释率差异或描述性气泡图当作差异丰度检验
+      - 用 genus-level 低注释率否定所有上层级结果，或反过来用 phylum 注释率替代 genus 可解析度
+    outputs:
+      - results/27-multirank-composition/multirank-composition-summary.json
+      - results/27-multirank-composition/rank-resolution-audit.tsv
+      - results/27-multirank-composition/group-rank-resolution.tsv
+      - results/27-multirank-composition/lineage-gap-audit.tsv
+      - results/27-multirank-composition/complete-depth-audit.tsv
+      - results/27-multirank-composition/label-collision-audit.tsv
+      - results/27-multirank-composition/rank-taxon-group-summary.tsv
+      - results/27-multirank-composition/rank-topn-sensitivity.tsv
+      - results/27-multirank-composition/dominant-complete-lineages.tsv
+      - results/27-multirank-composition/lineage-ladder.tsv
+      - results/27-multirank-composition/validation.log
+      - figures/27-rank-resolution-cascade.png
+      - figures/27-multirank-bubble.png
+      - figures/27-lineage-ladder.png
+      - figures/27-topn-coverage.png
+    method_basis:
+      type: external-benchmark
+      summary: >
+        以 An et al. 的中国湿地 16S 群落为数据锚点，从 microeco 2.0.0 公开三件套
+        重建门到属的层级组成；参考 Metacoder 对 taxonomic hierarchy 的显式表达，
+        但用本项目原创的 resolution cascade、rank-qualified bubble、lineage ladder
+        和 Top-N coverage 图固定 lineage、Unknown 与组成分母边界。
+    references:
+      - title: Soil bacterial community structure in Chinese wetlands
+        type: data-paper
+        citation: An J, Liu C, Wang Q, et al. Geoderma. 2019;337:290-299. doi:10.1016/j.geoderma.2018.09.035.
+      - title: microeco - an R package for data mining in microbial community ecology
+        type: software-paper
+        citation: Liu C, Cui Y, Li X, Yao M. FEMS Microbiology Ecology. 2021;97:fiaa255. doi:10.1093/femsec/fiaa255.
+      - title: "Metacoder: An R package for visualization and manipulation of community taxonomic diversity data"
+        type: method-paper
+        citation: Foster ZSL, Sharpton TJ, Grünwald NJ. PLOS Computational Biology. 2017;13(2):e1005404. doi:10.1371/journal.pcbi.1005404.
+      - title: "Microbiome datasets are compositional: and this is not optional"
+        type: method-paper
+        citation: Gloor GB, Macklaim JM, Pawlowsky-Glahn V, Egozcue JJ. Frontiers in Microbiology. 2017;8:2224. doi:10.3389/fmicb.2017.02224.
+      - title: ggplot2 reference
+        type: software-documentation
+        url: https://ggplot2.tidyverse.org/
+    assertions:
+      - id: multirank-composition-summary-exists
+        type: file_exists
+        path: results/27-multirank-composition/multirank-composition-summary.json
+      - id: multirank-composition-checks-failed
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: multirank-composition-checks-passed
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: checks_passed
+        comparator: "=="
+        value: 209
+      - id: multirank-composition-samples
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: dataset.samples
+        comparator: "=="
+        value: 90
+      - id: multirank-composition-ranks
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: taxonomy.ranks
+        comparator: "=="
+        value: 5
+      - id: multirank-composition-genus-known
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: taxonomy.genus_known_equal_sample_mean
+        comparator: ">="
+        value: 0.3689
+      - id: multirank-composition-complete-genus
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: hierarchy.complete_genus_lineage_mean
+        comparator: ">="
+        value: 0.3437
+      - id: multirank-composition-gap-features
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: hierarchy.family_unknown_genus_known_features
+        comparator: "=="
+        value: 324
+      - id: multirank-composition-cross-rank-collisions
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: hierarchy.cross_rank_name_collisions
+        comparator: "=="
+        value: 13
+      - id: multirank-composition-topn-branches
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: sensitivity.top_n_rows
+        comparator: "=="
+        value: 25
+      - id: multirank-composition-primary-figures
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: graphics.primary_figures
+        comparator: "=="
+        value: 4
+      - id: multirank-composition-format-count
+        type: metric_threshold
+        path: results/27-multirank-composition/multirank-composition-summary.json
+        key: graphics.format_files
+        comparator: "=="
+        value: 16
+  - id: validate-core-rare-biosphere
+    title: 实跑并验证第 28 篇核心菌群与稀有生物圈合同
+    cache_revision: article-28-core-rare-biosphere-v1
+    goal: >
+      从 microeco 2.0.0 分发的真实中国湿地 16S otutab、taxonomy、metadata
+      三件套独立开始，在 feature/OTU 层计算 abundance–occupancy。主 core 明确固定为
+      单样本 all-read relative abundance 至少 0.01%、且在至少 80% 样本检出；全局 core、
+      三个湿地组内 core 与 shared/group-specific membership 分开保存。同步区分 primary core、
+      conditionally rare、persistently rare、sampling-limited tail 与 intermediate features，
+      并生成 occupancy–abundance、组内 core membership、阈值/深度敏感性和 rare-mass 四张图。
+    rationale: >
+      “核心”与“稀有”不是数据自带标签，而是由 feature resolution、检测阈值、prevalence、
+      样本集合和测序深度共同决定的操作性分类。把这些选择、等样本分母、固定深度分支和
+      低证据尾部写成可执行合同，才能避免把一次检出写成稳定定殖、把低 read count 写成
+      生态稀有，或把不同组的 core 交集误当作未经阈值审计的普适核心。
+    inputs:
+      - env/renv.lock
+      - data/small/otutab.tsv
+      - data/small/taxonomy.tsv
+      - data/small/metadata.tsv
+      - data/small/source_summary.json
+      - R/theme_pub.R
+      - scripts/prepare_pilot_data.R
+      - scripts/validate_core_rare_biosphere.R
+      - chapters/28-core-rare-biosphere.qmd
+    command: |
+      set -eu
+      mkdir -p \
+        "${RUN_ROOT}/results/28-core-rare-biosphere" \
+        "${RUN_ROOT}/figures"
+      Rscript --vanilla "${MANIFEST_DIR}/scripts/validate_core_rare_biosphere.R" \
+        --project-root "${MANIFEST_DIR}" \
+        --input-dir "${MANIFEST_DIR}/data/small" \
+        --output-dir "${RUN_ROOT}/results/28-core-rare-biosphere" \
+        --figure-dir "${RUN_ROOT}/figures"
+    expected_outputs:
+      - results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+      - results/28-core-rare-biosphere/input-audit.tsv
+      - results/28-core-rare-biosphere/package-audit.tsv
+      - results/28-core-rare-biosphere/command-audit.tsv
+      - results/28-core-rare-biosphere/font-audit.tsv
+      - results/28-core-rare-biosphere/sample-alignment-audit.tsv
+      - results/28-core-rare-biosphere/feature-occupancy-abundance.tsv
+      - results/28-core-rare-biosphere/core-members.tsv
+      - results/28-core-rare-biosphere/global-core-summary.tsv
+      - results/28-core-rare-biosphere/group-core-summary.tsv
+      - results/28-core-rare-biosphere/core-membership-patterns.tsv
+      - results/28-core-rare-biosphere/core-threshold-sensitivity.tsv
+      - results/28-core-rare-biosphere/detection-count-audit.tsv
+      - results/28-core-rare-biosphere/rarefaction-ledger.tsv
+      - results/28-core-rare-biosphere/depth-sensitivity.tsv
+      - results/28-core-rare-biosphere/feature-state-classification.tsv
+      - results/28-core-rare-biosphere/feature-state-summary.tsv
+      - results/28-core-rare-biosphere/rare-mass-by-sample.tsv
+      - results/28-core-rare-biosphere/rare-threshold-sensitivity.tsv
+      - results/28-core-rare-biosphere/group-state-mass.tsv
+      - results/28-core-rare-biosphere/core-feature-taxonomy.tsv
+      - results/28-core-rare-biosphere/closure-audit.tsv
+      - results/28-core-rare-biosphere/figure-specification.tsv
+      - results/28-core-rare-biosphere/format-audit.tsv
+      - results/28-core-rare-biosphere/validation-checks.tsv
+      - results/28-core-rare-biosphere/r-session-info.txt
+      - results/28-core-rare-biosphere/validation.log
+      - figures/28-occupancy-abundance.pdf
+      - figures/28-occupancy-abundance.svg
+      - figures/28-occupancy-abundance.png
+      - figures/28-occupancy-abundance.tiff
+      - figures/28-group-core-membership.pdf
+      - figures/28-group-core-membership.svg
+      - figures/28-group-core-membership.png
+      - figures/28-group-core-membership.tiff
+      - figures/28-threshold-depth-sensitivity.pdf
+      - figures/28-threshold-depth-sensitivity.svg
+      - figures/28-threshold-depth-sensitivity.png
+      - figures/28-threshold-depth-sensitivity.tiff
+      - figures/28-rare-biosphere-mass.pdf
+      - figures/28-rare-biosphere-mass.svg
+      - figures/28-rare-biosphere-mass.png
+      - figures/28-rare-biosphere-mass.tiff
+    acceptance_checks:
+      - 三件套、来源摘要、准备脚本和共享作图函数逐文件 SHA-256 全部锁定；输入为 13,628 features、90 samples、1,619,670 reads，IW/CW/TW 各 30 个样本
+      - 主分析在原始 feature/OTU 层逐样本闭合，以 all-read relative abundance ≥0.0001 定义 detected，并以 prevalence ≥0.80 定义 global core；不先按 genus 合并未知 feature
+      - 主阈值产生 97 个 global core features，合计等样本平均 abundance 约 0.17036；其中 34 个 feature 的全局均值低于 0.1%，说明 core 与 abundant 不是同义词
+      - IW、CW、TW 组内 core 分别为 166、160、278 个；三个组共有 59 个、并集 425 个；global core 与 shared-three-group core 分开报告
+      - detection sensitivity 固定 Presence、0.01%、0.05%、0.1%，prevalence 固定 50%、80%、90%、100%；在 80% prevalence 下 core 数依次为 334、97、9、0
+      - 0.01% 相对丰度阈值在原始 library depth 上对应每样本至少 2–4 reads；不得把一次 read 检出当作统一检测强度
+      - seed 20260728 将全部 90 个样本稀释到 10,000 reads；raw-presence core 由 334 个变为 167 个，主 0.01%-core 与 rarefied one-read core 的 Jaccard 约为 0.58084，此分支只用于深度敏感性
+      - 单样本 local rare mass 主定义为 0 < relative abundance < 0.1%；90 个样本的等权均值约 0.44150，范围约 0.23330–0.59435，并保留 0.01%、0.05%、0.1%、0.5% 阈值网格
+      - feature states 为互斥穷尽分类：97 primary core、200 conditionally rare、1,155 sampling-limited、8,407 persistently rare 与 3,769 intermediate features；sampling-limited 只表示当前 read/occupancy 证据不足
+      - group、Type 与 Saline 结构保持可见；本篇不对 core/rare mass 运行组间显著性检验，也不把 presence、relative abundance 或 CRT 标签写成活性、功能或绝对细胞量
+      - 四张英文原创图各导出 PDF/SVG/600 ppi PNG/LZW-TIFF，并通过物理尺寸、像素、字体、SVG 文本与 TIFF 压缩审计
+    common_failures:
+      - 只写“出现在多数样本”却不报告 detection threshold、边界是否包含、feature rank 和样本集合
+      - 先把所有未注释 OTU 合并为一个 Unknown genus，再把这个人工聚合项称为 core taxon
+      - 每组使用不同 detection/prevalence 规则，随后用 Venn 或 UpSet 图暗示集合可直接比较
+      - 用 pooled reads 计算 occupancy 或 group core，使高测序量样本获得额外权重
+      - 把低总 reads、低 occupancy 的 feature 直接解释为生态稀有或 dormant seed bank
+      - 把 rarefaction 分支当作差异丰度输入，或把一次固定深度抽样当作原始 core 的唯一真值
+      - 将相对丰度低但可在少数样本升高的 conditionally rare feature 与始终低于阈值的 tail 合并
+      - 对 Group 做显著性检验后忽略 Group/Saline 完全混杂和缺少 site/block/subject 标识的边界
+    outputs:
+      - results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+      - results/28-core-rare-biosphere/feature-occupancy-abundance.tsv
+      - results/28-core-rare-biosphere/core-members.tsv
+      - results/28-core-rare-biosphere/group-core-summary.tsv
+      - results/28-core-rare-biosphere/core-membership-patterns.tsv
+      - results/28-core-rare-biosphere/core-threshold-sensitivity.tsv
+      - results/28-core-rare-biosphere/depth-sensitivity.tsv
+      - results/28-core-rare-biosphere/feature-state-classification.tsv
+      - results/28-core-rare-biosphere/rare-mass-by-sample.tsv
+      - results/28-core-rare-biosphere/rare-threshold-sensitivity.tsv
+      - results/28-core-rare-biosphere/validation.log
+      - figures/28-occupancy-abundance.png
+      - figures/28-group-core-membership.png
+      - figures/28-threshold-depth-sensitivity.png
+      - figures/28-rare-biosphere-mass.png
+    method_basis:
+      type: external-benchmark
+      summary: >
+        以 An et al. 的中国湿地 16S 群落为数据锚点，以 abundance–occupancy 作为可复查的
+        core 主框架，并参考 Custer et al. 对 core assignment 方法的实证/模拟比较、Salonen
+        et al. 对 analysis depth 的警示和 Shade et al. 对 conditionally rare taxa 的动态定义；
+        所有阈值均作为本数据集的操作性合同与敏感性网格，而不是通用生态常数。
+    references:
+      - title: Soil bacterial community structure in Chinese wetlands
+        type: data-paper
+        citation: An J, Liu C, Wang Q, et al. Geoderma. 2019;337:290-299. doi:10.1016/j.geoderma.2018.09.035.
+      - title: microeco - an R package for data mining in microbial community ecology
+        type: software-paper
+        citation: Liu C, Cui Y, Li X, Yao M. FEMS Microbiology Ecology. 2021;97:fiaa255. doi:10.1093/femsec/fiaa255.
+      - title: "Defining and quantifying the core microbiome: Challenges and prospects"
+        type: review-paper
+        citation: Neu AT, Allen EE, Roy K. Proceedings of the National Academy of Sciences. 2021;118(51):e2104429118. doi:10.1073/pnas.2104429118.
+      - title: "Comparative Analysis of Core Microbiome Assignments: Implications for Ecological Synthesis"
+        type: method-paper
+        citation: Custer GF, Gans M, van Diepen LTA, Dini-Andreote F, Buerkle CA. mSystems. 2023;8(1):e01066-22. doi:10.1128/msystems.01066-22.
+      - title: The adult intestinal core microbiota is determined by analysis depth and health status
+        type: method-paper
+        citation: Salonen A, Salojärvi J, Lahti L, de Vos WM. Clinical Microbiology and Infection. 2012;18(S4):16-20. doi:10.1111/j.1469-0691.2012.03855.x.
+      - title: Conditionally rare taxa disproportionately contribute to temporal changes in microbial diversity
+        type: method-paper
+        citation: Shade A, Jones SE, Caporaso JG, et al. mBio. 2014;5(4):e01371-14. doi:10.1128/mBio.01371-14.
+      - title: Microbial diversity in the deep sea and the underexplored rare biosphere
+        type: method-paper
+        citation: Sogin ML, Morrison HG, Huber JA, et al. Proceedings of the National Academy of Sciences. 2006;103(32):12115-12120. doi:10.1073/pnas.0605127103.
+    assertions:
+      - id: core-rare-biosphere-summary-exists
+        type: file_exists
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+      - id: core-rare-biosphere-checks-failed
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: core-rare-biosphere-checks-passed
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: checks_passed
+        comparator: "=="
+        value: 320
+      - id: core-rare-biosphere-samples
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: dataset.samples
+        comparator: "=="
+        value: 90
+      - id: core-rare-biosphere-global-core
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: core.global_features
+        comparator: "=="
+        value: 97
+      - id: core-rare-biosphere-shared-group-core
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: core.shared_three_group_features
+        comparator: "=="
+        value: 59
+      - id: core-rare-biosphere-group-union
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: core.group_union_features
+        comparator: "=="
+        value: 425
+      - id: core-rare-biosphere-local-rare-mass
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: rare.local_rare_mass_mean
+        comparator: ">="
+        value: 0.4415
+      - id: core-rare-biosphere-category-total
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: rare.classified_features
+        comparator: "=="
+        value: 13628
+      - id: core-rare-biosphere-conditionally-rare
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: rare.conditionally_rare_features
+        comparator: "=="
+        value: 200
+      - id: core-rare-biosphere-primary-figures
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: graphics.primary_figures
+        comparator: "=="
+        value: 4
+      - id: core-rare-biosphere-format-count
+        type: metric_threshold
+        path: results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: graphics.format_files
+        comparator: "=="
+        value: 16
+  - id: validate-community-typing-dmm
+    title: 实跑并验证第 29 篇 DMM 群落分型合同
+    cache_revision: article-29-community-typing-dmm-nine-section-v2
+    goal: >
+      从 DirichletMultinomial 1.46.0 分发的 Holmes Twins 真实肠道 16S genus-count
+      otutab、taxonomy、metadata 三件套独立开始，直接对原始整数 counts 拟合
+      Dirichlet-multinomial mixture。主模型固定 seed 20260729、候选 k=1–7、
+      minimum Laplace evidence 选择规则和最小 component size 14；同步保存 AIC/BIC、
+      后验不确定性、确定性 label canonicalization、package reference fit、八次初始化、
+      feature prevalence、library depth、rarefaction、one-sample-per-participant 与重复样本审计。
+    rationale: >
+      DMM state 是对过度离散计数分布的概率性近似，不是数据自带的肠型、CST、疾病亚型
+      或不随时间变化的自然类别。只有把 count scale、候选 k、选择准则、初始化、标签交换、
+      小类门槛、过滤与深度敏感性、后验不确定性和外部 metadata 边界写成可执行合同，
+      才能避免只凭一张排序图或一个最优 k 过度解释群落分型。
+    inputs:
+      - env/renv.lock
+      - data/small/community-typing-dmm/otutab.tsv
+      - data/small/community-typing-dmm/taxonomy.tsv
+      - data/small/community-typing-dmm/metadata.tsv
+      - data/small/community-typing-dmm/source-summary.json
+      - R/theme_pub.R
+      - scripts/prepare_dmm_twins_data.R
+      - scripts/validate_community_typing_dmm.R
+      - chapters/29-community-typing-dmm.qmd
+    command: |
+      set -eu
+      mkdir -p \
+        "${RUN_ROOT}/results/29-community-typing-dmm" \
+        "${RUN_ROOT}/figures"
+      Rscript --vanilla "${MANIFEST_DIR}/scripts/validate_community_typing_dmm.R" \
+        --project-root "${MANIFEST_DIR}" \
+        --input-dir "${MANIFEST_DIR}/data/small/community-typing-dmm" \
+        --output-dir "${RUN_ROOT}/results/29-community-typing-dmm" \
+        --figure-dir "${RUN_ROOT}/figures"
+    expected_outputs:
+      - results/29-community-typing-dmm/community-typing-dmm-summary.json
+      - results/29-community-typing-dmm/fresh-fit-cache.rds
+      - results/29-community-typing-dmm/input-audit.tsv
+      - results/29-community-typing-dmm/package-audit.tsv
+      - results/29-community-typing-dmm/command-audit.tsv
+      - results/29-community-typing-dmm/font-audit.tsv
+      - results/29-community-typing-dmm/sample-alignment-audit.tsv
+      - results/29-community-typing-dmm/model-selection.tsv
+      - results/29-community-typing-dmm/reference-fit-comparison.tsv
+      - results/29-community-typing-dmm/initialization-audit.tsv
+      - results/29-community-typing-dmm/initialization-agreement.tsv
+      - results/29-community-typing-dmm/component-profiles.tsv
+      - results/29-community-typing-dmm/component-top-taxa.tsv
+      - results/29-community-typing-dmm/component-summary.tsv
+      - results/29-community-typing-dmm/sample-posteriors.tsv
+      - results/29-community-typing-dmm/ordination-scores.tsv
+      - results/29-community-typing-dmm/bmi-cross-tab.tsv
+      - results/29-community-typing-dmm/participant-repeat-audit.tsv
+      - results/29-community-typing-dmm/participant-transitions.tsv
+      - results/29-community-typing-dmm/sensitivity-model-selection.tsv
+      - results/29-community-typing-dmm/sensitivity-agreement.tsv
+      - results/29-community-typing-dmm/rarefaction-ledger.tsv
+      - results/29-community-typing-dmm/label-matching-audit.tsv
+      - results/29-community-typing-dmm/figure-specification.tsv
+      - results/29-community-typing-dmm/format-audit.tsv
+      - results/29-community-typing-dmm/validation-checks.tsv
+      - results/29-community-typing-dmm/r-session-info.txt
+      - results/29-community-typing-dmm/validation.log
+      - figures/29-model-selection.pdf
+      - figures/29-model-selection.svg
+      - figures/29-model-selection.png
+      - figures/29-model-selection.tiff
+      - figures/29-posterior-ordination.pdf
+      - figures/29-posterior-ordination.svg
+      - figures/29-posterior-ordination.png
+      - figures/29-posterior-ordination.tiff
+      - figures/29-component-profiles.pdf
+      - figures/29-component-profiles.svg
+      - figures/29-component-profiles.png
+      - figures/29-component-profiles.tiff
+      - figures/29-stability-audit.pdf
+      - figures/29-stability-audit.svg
+      - figures/29-stability-audit.png
+      - figures/29-stability-audit.tiff
+    acceptance_checks:
+      - 三件套、来源摘要、准备脚本和共享作图函数逐文件 SHA-256 锁定；输入为 278 samples、130 source genus categories、570,851 reads，library depth 53–10,585、median 1,597.5
+      - 主 DMM 使用 raw non-negative integer counts，不转 relative abundance、不加 pseudocount、不 rarefy；candidate k 固定 1–7，seed 固定 20260729
+      - fresh-fit Laplace minimum 选择 k=4，四个 canonical states 按 fitted Bacteroides、Prevotella 比例排序为 DMM-A 至 DMM-D，样本量为 85、86、46、61；最小 state 46 大于预声明门槛 14
+      - AIC minimum 为 k=2、BIC minimum 为 k=1，必须与 Laplace k=4 的准则分歧同图并列，不得只展示支持四分型的一个指标
+      - package bundled reference fit 与 fresh fixed-seed fit 的 Laplace 数值存在优化/近似差异但都选 k=4；该差异必须保留，不能把 bundled object 冒充本次 fresh fit
+      - k=4 在 seeds 20260729–20260736 的八个 one-shot、single-thread R-process fresh starts 中全部进入与主模型相同的 assignment basin，pairwise 与 primary ARI 均为 1；最低 Laplace 的 seed 20260735 也得到同一 partition，label switching 先按 component profile 匹配再比较，worker 不跨 fit 复用
+      - sample posterior 表保留每个 state 的 probability、maximum probability 与 normalized entropy；低置信度样本不得被画成确定边界
+      - 5% prevalence 分支仍由 Laplace 选择 k=4；depth ≥1,000、seed-locked 1,000-read rarefaction 和 one-sample-per-participant 分支均选择 k=2；固定 k=4 时相对主模型的 matched ARI 约为 0.904、0.928、0.906 与 0.680，所有分支保存 overlap 与 profile divergence 且不替换主 counts 分析
+      - metadata 显示 154 个 suffix-derived ParticipantKey、124 组双时点样本、26 个 no-suffix-only 与 4 个 suffix-only key；重复样本只报告 state agreement/transition，不把 suffix 当作经过独立验证的临床访视时间
+      - BMIClass 仅作描述性交叉表；缺少 family/household、连续 BMI、饮食、药物及完整 visit metadata 时不运行或解释疾病关联检验
+      - 四张英文原创图各导出 PDF/SVG/600 ppi PNG/LZW-TIFF，并通过物理尺寸、像素、字体、SVG 文本与 TIFF 压缩审计
+      - 正文明确区分 Holmes et al. 原始分析合同与当前升级项，目标图链接、原始做法、多初始化、标签匹配、后验不确定性和稳定性审计均可追溯
+    common_failures:
+      - 把相对丰度、CLR、加伪计数或抽平表传给要求 raw counts 的 DMM 主模型
+      - 只凭最低 Laplace 或二维 PCoA 颜色块宣布存在四个稳定、互斥、天然的肠型
+      - 未预声明 candidate k，看到结果后扩大或缩小搜索范围以获得想要的类别数
+      - 直接比较不同拟合的 component number，忽略 mixture label switching
+      - 只报告 hard assignment，不保留 posterior probability、entropy 与边界样本
+      - 过滤低 prevalence taxa 或去除浅测序样本后不重新拟合、不报告分类稳定性
+      - 把同一参与者的重复样本当作独立证据运行普通卡方检验或疾病关联模型
+      - 用优势菌命名 state 后把相关组成模式写成病因、功能或绝对丰度变化
+    outputs:
+      - results/29-community-typing-dmm/community-typing-dmm-summary.json
+      - results/29-community-typing-dmm/model-selection.tsv
+      - results/29-community-typing-dmm/sample-posteriors.tsv
+      - results/29-community-typing-dmm/component-profiles.tsv
+      - results/29-community-typing-dmm/initialization-agreement.tsv
+      - results/29-community-typing-dmm/sensitivity-agreement.tsv
+      - results/29-community-typing-dmm/participant-transitions.tsv
+      - results/29-community-typing-dmm/validation.log
+      - figures/29-model-selection.png
+      - figures/29-posterior-ordination.png
+      - figures/29-component-profiles.png
+      - figures/29-stability-audit.png
+    method_basis:
+      type: external-benchmark
+      summary: >
+        以 Holmes et al. 随 DirichletMultinomial 分发的 Twins genus-count 数据与 DMM
+        方法为可复跑锚点，以 Turnbaugh et al. 为队列出处；Arumugam、Ravel、Koren 与
+        Costea 用于限定 enterotype/CST 的术语、连续梯度、稳定性和外部验证边界。
+    references:
+      - title: Dirichlet Multinomial Mixtures - Generative Models for Microbial Metagenomics
+        type: method-and-data-paper
+        citation: Holmes I, Harris K, Quince C. PLOS ONE. 2012;7(2):e30126. doi:10.1371/journal.pone.0030126.
+      - title: A core gut microbiome in obese and lean twins
+        type: data-paper
+        citation: Turnbaugh PJ, Hamady M, Yatsunenko T, et al. Nature. 2009;457:480-484. doi:10.1038/nature07540.
+      - title: Enterotypes of the human gut microbiome
+        type: concept-paper
+        citation: Arumugam M, Raes J, Pelletier E, et al. Nature. 2011;473:174-180. doi:10.1038/nature09944.
+      - title: Vaginal microbiome of reproductive-age women
+        type: concept-paper
+        citation: Ravel J, Gajer P, Abdo Z, et al. Proceedings of the National Academy of Sciences. 2011;108(S1):4680-4687. doi:10.1073/pnas.1002611107.
+      - title: A guide to enterotypes across the human body - meta-analysis of microbial community structures in human microbiome datasets
+        type: method-paper
+        citation: Koren O, Knights D, Gonzalez A, et al. PLOS Computational Biology. 2013;9(1):e1002863. doi:10.1371/journal.pcbi.1002863.
+      - title: Enterotypes in the landscape of gut microbial community composition
+        type: perspective
+        citation: Costea PI, Hildebrand F, Arumugam M, et al. Nature Microbiology. 2018;3:8-16. doi:10.1038/s41564-017-0072-8.
+      - title: DirichletMultinomial 1.46.0
+        type: software-documentation
+        citation: Bioconductor package release 3.19. doi:10.18129/B9.bioc.DirichletMultinomial.
+    assertions:
+      - id: community-typing-dmm-summary-exists
+        type: file_exists
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+      - id: community-typing-dmm-checks-failed
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: community-typing-dmm-checks-passed
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: checks_passed
+        comparator: "=="
+        value: 222
+      - id: community-typing-dmm-samples
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: dataset.samples
+        comparator: "=="
+        value: 278
+      - id: community-typing-dmm-features
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: dataset.features
+        comparator: "=="
+        value: 130
+      - id: community-typing-dmm-reads
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: dataset.reads
+        comparator: "=="
+        value: 570851
+      - id: community-typing-dmm-selected-k
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: model.selected_k_laplace
+        comparator: "=="
+        value: 4
+      - id: community-typing-dmm-min-state-size
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: model.minimum_state_size
+        comparator: ">="
+        value: 46
+      - id: community-typing-dmm-start-ari
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: stability.initialization_min_ari
+        comparator: "=="
+        value: 1
+      - id: community-typing-dmm-primary-figures
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: graphics.primary_figures
+        comparator: "=="
+        value: 4
+      - id: community-typing-dmm-format-count
+        type: metric_threshold
+        path: results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: graphics.format_files
+        comparator: "=="
+        value: 16
   - id: validate-series-contract
     title: 核对 55 篇目录与单篇自足规则
-    cache_revision: articles-01-25-environment-variance-v1
+    cache_revision: articles-01-55-causal-inference-nine-section-v8
     goal: >
       检查编号、文件名、标题、必需章节、随机种子提示和图内英文规则，输出结构验证报告。
     rationale: >
@@ -3951,7 +4965,7 @@ steps:
     acceptance_checks:
       - 章节编号从 01 到 55 连续且无重复
       - tutorial.yaml 与 _quarto.yml 的章节标题和文件一致
-      - 第 01、02、03、04、05、06、07、08、09、10、11、12、13、14、15、16、17、18、19、20、21、22、23、24、25 篇包含八段结构、完整准备工作和参考文献
+      - 第 01–54 篇保留正式九段结构并含“审计与升级”、完整准备工作、Methods、自有数据迁移和参考文献；第 55 篇使用无代码阅读框架的对应结构
     common_failures:
       - index.qmd 与第 01 篇重复或漏计
       - 中文标题和英文 slug 对不上
@@ -3976,8 +4990,8 @@ steps:
         comparator: "=="
         value: 55
   - id: render-pilot-chapters
-    title: 实跑并渲染第 01、02、03、04、05、06、07、08、09、10、11、12、13、14、15、16、17、18、19、20、21、22、23、24、25 篇
-    cache_revision: articles-01-25-environment-variance-rlock147-gemelli0013-v1
+    title: 实跑并渲染第 01–55 篇
+    cache_revision: articles-01-55-causal-inference-rlock-v8
     goal: >
       在隔离的 QA staging 目录中渲染开篇、测量边界、实验设计、污染控制、
       批次效应、FASTQ 数据合同、WSL2/conda 环境合同、QIIME 2 Artifact 验收、
@@ -3987,11 +5001,16 @@ steps:
       SEPP reference placement 与 rooted phylogeny、QIIME 2 导出与五组件 phyloseq、
       出版图形与四格式导出合同、Alpha 指数/稀释曲线/Hill numbers、Alpha 组间检验与效应量、
       六类 Beta 距离/根树/零值处理、PCoA、受限置换 PERMANOVA/PERMDISP、CAP
-      与 envfit/Mantel/VPA 方差解构二十五篇文章，
+      envfit/Mantel/VPA 方差解构、堆叠/气泡/冲积/热图组成可视化、五级 taxonomy/lineage 组成审计，
+      feature-level core microbiome、稀有生物圈与阈值/深度敏感性、raw-count DMM，
+      以及 CoDA、五方法 DA 横评、多分类级 DA、差异图形、QMP、共现网络、网络鲁棒性、
+      微生物 WGCNA、βNTI/RCbray、中性模型、宏生态 pattern、功能预测、随机森林、
+      跨队列 meta/external validation、时间结局、跨组学关联整合、sPLS/DIABLO、
+      原生 MMvec/MOFA、多界联合分析、来源追踪、纵向模型、SEM、中介、MR 与因果证据阅读框架五十五篇文章，
       生成 HTML、PDF/SVG/PNG/TIFF 图、统计审计表、Artifact、质控报告和运行日志。
     rationale: >
-      二十五篇正式文章只有经过真实数据执行或一次性环境审计，才能成为其余 30 篇的深度、
-      结构、代码和证据范围标准。
+      五十五篇正式文章只有经过真实数据执行、一次性环境审计或可追溯证据台账审计，
+      才能共同形成一致的深度、结构、代码和证据范围标准。
     inputs:
       - env/gemelli.yml
       - env/gemelli-requirements.txt
@@ -3999,6 +5018,7 @@ steps:
       - data/small/taxonomy.tsv
       - data/small/metadata.tsv
       - data/small/environment.tsv
+      - data/small/rooted-tree.nwk.gz
       - data/small/decontam/otutab.tsv
       - data/small/decontam/taxonomy.tsv
       - data/small/decontam/metadata.tsv
@@ -4576,6 +5596,175 @@ steps:
       - figures/25-variation-partition.svg
       - figures/25-variation-partition.png
       - figures/25-variation-partition.tiff
+      - results/26-community-composition/community-composition-summary.json
+      - results/26-community-composition/input-audit.tsv
+      - results/26-community-composition/taxonomy-rank-audit.tsv
+      - results/26-community-composition/phylum-display-composition.tsv
+      - results/26-community-composition/phylum-group-summary.tsv
+      - results/26-community-composition/genus-bubble-summary.tsv
+      - results/26-community-composition/genus-heatmap-matrix.tsv
+      - results/26-community-composition/top-n-sensitivity.tsv
+      - results/26-community-composition/denominator-sensitivity.tsv
+      - results/26-community-composition/aggregation-sensitivity.tsv
+      - results/26-community-composition/format-audit.tsv
+      - results/26-community-composition/validation-checks.tsv
+      - results/26-community-composition/validation.log
+      - figures/26-phylum-stacked.pdf
+      - figures/26-phylum-stacked.svg
+      - figures/26-phylum-stacked.png
+      - figures/26-phylum-stacked.tiff
+      - figures/26-genus-bubble.pdf
+      - figures/26-genus-bubble.svg
+      - figures/26-genus-bubble.png
+      - figures/26-genus-bubble.tiff
+      - figures/26-group-phylum-alluvial.pdf
+      - figures/26-group-phylum-alluvial.svg
+      - figures/26-group-phylum-alluvial.png
+      - figures/26-group-phylum-alluvial.tiff
+      - figures/26-genus-heatmap.pdf
+      - figures/26-genus-heatmap.svg
+      - figures/26-genus-heatmap.png
+      - figures/26-genus-heatmap.tiff
+      - results/27-multirank-composition/multirank-composition-summary.json
+      - results/27-multirank-composition/input-audit.tsv
+      - results/27-multirank-composition/package-audit.tsv
+      - results/27-multirank-composition/command-audit.tsv
+      - results/27-multirank-composition/font-audit.tsv
+      - results/27-multirank-composition/sample-alignment-audit.tsv
+      - results/27-multirank-composition/taxonomy-lineage-map.tsv
+      - results/27-multirank-composition/multirank-relative-abundance.tsv
+      - results/27-multirank-composition/rank-resolution-audit.tsv
+      - results/27-multirank-composition/group-rank-resolution.tsv
+      - results/27-multirank-composition/lineage-gap-audit.tsv
+      - results/27-multirank-composition/complete-depth-audit.tsv
+      - results/27-multirank-composition/label-collision-audit.tsv
+      - results/27-multirank-composition/cross-rank-name-collisions.tsv
+      - results/27-multirank-composition/rank-top-taxa.tsv
+      - results/27-multirank-composition/rank-taxon-group-summary.tsv
+      - results/27-multirank-composition/rank-topn-sensitivity.tsv
+      - results/27-multirank-composition/complete-lineage-abundance.tsv
+      - results/27-multirank-composition/dominant-complete-lineages.tsv
+      - results/27-multirank-composition/lineage-ladder.tsv
+      - results/27-multirank-composition/denominator-sensitivity.tsv
+      - results/27-multirank-composition/aggregation-sensitivity.tsv
+      - results/27-multirank-composition/closure-audit.tsv
+      - results/27-multirank-composition/figure-specification.tsv
+      - results/27-multirank-composition/format-audit.tsv
+      - results/27-multirank-composition/validation-checks.tsv
+      - results/27-multirank-composition/r-session-info.txt
+      - results/27-multirank-composition/validation.log
+      - figures/27-rank-resolution-cascade.pdf
+      - figures/27-rank-resolution-cascade.svg
+      - figures/27-rank-resolution-cascade.png
+      - figures/27-rank-resolution-cascade.tiff
+      - figures/27-multirank-bubble.pdf
+      - figures/27-multirank-bubble.svg
+      - figures/27-multirank-bubble.png
+      - figures/27-multirank-bubble.tiff
+      - figures/27-lineage-ladder.pdf
+      - figures/27-lineage-ladder.svg
+      - figures/27-lineage-ladder.png
+      - figures/27-lineage-ladder.tiff
+      - figures/27-topn-coverage.pdf
+      - figures/27-topn-coverage.svg
+      - figures/27-topn-coverage.png
+      - figures/27-topn-coverage.tiff
+      - results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+      - results/28-core-rare-biosphere/input-audit.tsv
+      - results/28-core-rare-biosphere/package-audit.tsv
+      - results/28-core-rare-biosphere/command-audit.tsv
+      - results/28-core-rare-biosphere/font-audit.tsv
+      - results/28-core-rare-biosphere/sample-alignment-audit.tsv
+      - results/28-core-rare-biosphere/feature-occupancy-abundance.tsv
+      - results/28-core-rare-biosphere/core-members.tsv
+      - results/28-core-rare-biosphere/global-core-summary.tsv
+      - results/28-core-rare-biosphere/group-core-summary.tsv
+      - results/28-core-rare-biosphere/core-membership-patterns.tsv
+      - results/28-core-rare-biosphere/core-threshold-sensitivity.tsv
+      - results/28-core-rare-biosphere/detection-count-audit.tsv
+      - results/28-core-rare-biosphere/rarefaction-ledger.tsv
+      - results/28-core-rare-biosphere/depth-sensitivity.tsv
+      - results/28-core-rare-biosphere/feature-state-classification.tsv
+      - results/28-core-rare-biosphere/feature-state-summary.tsv
+      - results/28-core-rare-biosphere/rare-mass-by-sample.tsv
+      - results/28-core-rare-biosphere/rare-threshold-sensitivity.tsv
+      - results/28-core-rare-biosphere/group-state-mass.tsv
+      - results/28-core-rare-biosphere/core-feature-taxonomy.tsv
+      - results/28-core-rare-biosphere/closure-audit.tsv
+      - results/28-core-rare-biosphere/figure-specification.tsv
+      - results/28-core-rare-biosphere/format-audit.tsv
+      - results/28-core-rare-biosphere/validation-checks.tsv
+      - results/28-core-rare-biosphere/r-session-info.txt
+      - results/28-core-rare-biosphere/validation.log
+      - figures/28-occupancy-abundance.pdf
+      - figures/28-occupancy-abundance.svg
+      - figures/28-occupancy-abundance.png
+      - figures/28-occupancy-abundance.tiff
+      - figures/28-group-core-membership.pdf
+      - figures/28-group-core-membership.svg
+      - figures/28-group-core-membership.png
+      - figures/28-group-core-membership.tiff
+      - figures/28-threshold-depth-sensitivity.pdf
+      - figures/28-threshold-depth-sensitivity.svg
+      - figures/28-threshold-depth-sensitivity.png
+      - figures/28-threshold-depth-sensitivity.tiff
+      - figures/28-rare-biosphere-mass.pdf
+      - figures/28-rare-biosphere-mass.svg
+      - figures/28-rare-biosphere-mass.png
+      - figures/28-rare-biosphere-mass.tiff
+      - data/small/community-typing-dmm/otutab.tsv
+      - data/small/community-typing-dmm/taxonomy.tsv
+      - data/small/community-typing-dmm/metadata.tsv
+      - data/small/community-typing-dmm/source-summary.json
+      - data/small/absolute-quantification/otutab.tsv
+      - data/small/absolute-quantification/taxonomy.tsv
+      - data/small/absolute-quantification/metadata.tsv
+      - data/small/absolute-quantification/cell-load.tsv
+      - data/small/absolute-quantification/source-summary.json
+      - results/29-community-typing-dmm/community-typing-dmm-summary.json
+      - results/29-community-typing-dmm/fresh-fit-cache.rds
+      - results/29-community-typing-dmm/input-audit.tsv
+      - results/29-community-typing-dmm/package-audit.tsv
+      - results/29-community-typing-dmm/command-audit.tsv
+      - results/29-community-typing-dmm/font-audit.tsv
+      - results/29-community-typing-dmm/sample-alignment-audit.tsv
+      - results/29-community-typing-dmm/model-selection.tsv
+      - results/29-community-typing-dmm/reference-fit-comparison.tsv
+      - results/29-community-typing-dmm/initialization-audit.tsv
+      - results/29-community-typing-dmm/initialization-agreement.tsv
+      - results/29-community-typing-dmm/component-profiles.tsv
+      - results/29-community-typing-dmm/component-top-taxa.tsv
+      - results/29-community-typing-dmm/component-summary.tsv
+      - results/29-community-typing-dmm/sample-posteriors.tsv
+      - results/29-community-typing-dmm/ordination-scores.tsv
+      - results/29-community-typing-dmm/bmi-cross-tab.tsv
+      - results/29-community-typing-dmm/participant-repeat-audit.tsv
+      - results/29-community-typing-dmm/participant-transitions.tsv
+      - results/29-community-typing-dmm/sensitivity-model-selection.tsv
+      - results/29-community-typing-dmm/sensitivity-agreement.tsv
+      - results/29-community-typing-dmm/rarefaction-ledger.tsv
+      - results/29-community-typing-dmm/label-matching-audit.tsv
+      - results/29-community-typing-dmm/figure-specification.tsv
+      - results/29-community-typing-dmm/format-audit.tsv
+      - results/29-community-typing-dmm/validation-checks.tsv
+      - results/29-community-typing-dmm/r-session-info.txt
+      - results/29-community-typing-dmm/validation.log
+      - figures/29-model-selection.pdf
+      - figures/29-model-selection.svg
+      - figures/29-model-selection.png
+      - figures/29-model-selection.tiff
+      - figures/29-posterior-ordination.pdf
+      - figures/29-posterior-ordination.svg
+      - figures/29-posterior-ordination.png
+      - figures/29-posterior-ordination.tiff
+      - figures/29-component-profiles.pdf
+      - figures/29-component-profiles.svg
+      - figures/29-component-profiles.png
+      - figures/29-component-profiles.tiff
+      - figures/29-stability-audit.pdf
+      - figures/29-stability-audit.svg
+      - figures/29-stability-audit.png
+      - figures/29-stability-audit.tiff
       - index.qmd
       - chapters/02-scope-and-limits.qmd
       - chapters/03-study-design.qmd
@@ -4601,6 +5790,46 @@ steps:
       - chapters/23-permanova-dispersion.qmd
       - chapters/24-ordination-constrained-cap.qmd
       - chapters/25-environment-variance.qmd
+      - chapters/26-community-composition.qmd
+      - chapters/27-multirank-composition.qmd
+      - chapters/28-core-rare-biosphere.qmd
+      - chapters/29-community-typing-dmm.qmd
+      - chapters/30-compositional-data.qmd
+      - chapters/31-da-methods.qmd
+      - chapters/32-multirank-da.qmd
+      - chapters/33-da-visualization.qmd
+      - chapters/34-absolute-quantification.qmd
+      - chapters/35-cooccurrence-networks.qmd
+      - chapters/36-network-robustness.qmd
+      - chapters/37-microbial-wgcna.qmd
+      - chapters/38-community-assembly-bnti.qmd
+      - chapters/39-neutral-community-model.qmd
+      - chapters/40-niche-distance-decay.qmd
+      - chapters/41-picrust2.qmd
+      - chapters/42-functional-guilds.qmd
+      - chapters/43-random-forest.qmd
+      - chapters/44-cross-cohort-validation.qmd
+      - chapters/45-survival-analysis.qmd
+      - chapters/46-procrustes-mantel-halla.qmd
+      - chapters/47-spls-diablo.qmd
+      - chapters/48-mmvec-mofa.qmd
+      - chapters/49-multi-kingdom.qmd
+      - chapters/50-source-tracking.qmd
+      - chapters/51-longitudinal-analysis.qmd
+      - chapters/52-structural-equation-model.qmd
+      - chapters/53-mediation-analysis.qmd
+      - chapters/54-mendelian-randomization.qmd
+      - chapters/55-causal-evidence.qmd
+      - data/small/picrust2-chemerin/source-summary.json
+      - data/small/cross-cohort-crc/source-summary.json
+      - data/small/survival-t1d/source-summary.json
+      - data/small/paired-ibd-multiomics/source-summary.json
+      - data/small/multi-kingdom-duran/source-summary.json
+      - data/small/source-tracking-feast/source-summary.json
+      - data/small/longitudinal-dietswap/source-summary.json
+      - data/small/mr-mibiogen/source-summary.json
+      - data/small/causal-evidence/source-summary.json
+      - env/picrust2.yml
     command: |
       set -eu
       bash "${MANIFEST_DIR}/scripts/render_pilot.sh" \
@@ -4621,10 +5850,40 @@ steps:
       - pilot/_site/chapters/12-dada2-asv.html
       - pilot/_site/chapters/13-its-18s.html
       - pilot/_site/chapters/14-taxonomy-databases.html
+      - pilot/_site/chapters/41-picrust2.html
+      - pilot/_site/chapters/42-functional-guilds.html
+      - pilot/_site/chapters/43-random-forest.html
+      - pilot/_site/chapters/44-cross-cohort-validation.html
+      - pilot/_site/chapters/45-survival-analysis.html
+      - pilot/_site/chapters/46-procrustes-mantel-halla.html
+      - pilot/_site/chapters/47-spls-diablo.html
+      - pilot/_site/chapters/48-mmvec-mofa.html
+      - pilot/_site/chapters/49-multi-kingdom.html
+      - pilot/_site/chapters/50-source-tracking.html
+      - pilot/_site/chapters/51-longitudinal-analysis.html
+      - pilot/_site/chapters/52-structural-equation-model.html
+      - pilot/_site/chapters/53-mediation-analysis.html
+      - pilot/_site/chapters/54-mendelian-randomization.html
+      - pilot/_site/chapters/55-causal-evidence.html
       - pilot/_site/chapters/22-ordination-unconstrained.html
       - pilot/_site/chapters/23-permanova-dispersion.html
       - pilot/_site/chapters/24-ordination-constrained-cap.html
       - pilot/_site/chapters/25-environment-variance.html
+      - pilot/_site/chapters/26-community-composition.html
+      - pilot/_site/chapters/27-multirank-composition.html
+      - pilot/_site/chapters/28-core-rare-biosphere.html
+      - pilot/_site/chapters/29-community-typing-dmm.html
+      - pilot/_site/chapters/30-compositional-data.html
+      - pilot/_site/chapters/31-da-methods.html
+      - pilot/_site/chapters/32-multirank-da.html
+      - pilot/_site/chapters/33-da-visualization.html
+      - pilot/_site/chapters/34-absolute-quantification.html
+      - pilot/_site/chapters/35-cooccurrence-networks.html
+      - pilot/_site/chapters/36-network-robustness.html
+      - pilot/_site/chapters/37-microbial-wgcna.html
+      - pilot/_site/chapters/38-community-assembly-bnti.html
+      - pilot/_site/chapters/39-neutral-community-model.html
+      - pilot/_site/chapters/40-niche-distance-decay.html
       - pilot/figures/01-preview-pcoa.pdf
       - pilot/figures/01-preview-pcoa.png
       - pilot/figures/01-preview-pcoa.tiff
@@ -5241,8 +6500,335 @@ steps:
       - pilot/figures/25-variation-partition.svg
       - pilot/figures/25-variation-partition.png
       - pilot/figures/25-variation-partition.tiff
+      - pilot/results/26-community-composition/community-composition-summary.json
+      - pilot/results/26-community-composition/input-audit.tsv
+      - pilot/results/26-community-composition/package-audit.tsv
+      - pilot/results/26-community-composition/command-audit.tsv
+      - pilot/results/26-community-composition/font-audit.tsv
+      - pilot/results/26-community-composition/sample-alignment-audit.tsv
+      - pilot/results/26-community-composition/taxonomy-rank-audit.tsv
+      - pilot/results/26-community-composition/phylum-relative-abundance.tsv
+      - pilot/results/26-community-composition/phylum-display-composition.tsv
+      - pilot/results/26-community-composition/phylum-group-summary.tsv
+      - pilot/results/26-community-composition/genus-relative-abundance.tsv
+      - pilot/results/26-community-composition/genus-bubble-summary.tsv
+      - pilot/results/26-community-composition/genus-heatmap-matrix.tsv
+      - pilot/results/26-community-composition/genus-heatmap-row-order.tsv
+      - pilot/results/26-community-composition/top-n-sensitivity.tsv
+      - pilot/results/26-community-composition/ranking-sensitivity.tsv
+      - pilot/results/26-community-composition/denominator-sensitivity.tsv
+      - pilot/results/26-community-composition/aggregation-sensitivity.tsv
+      - pilot/results/26-community-composition/closure-audit.tsv
+      - pilot/results/26-community-composition/figure-specification.tsv
+      - pilot/results/26-community-composition/format-audit.tsv
+      - pilot/results/26-community-composition/validation-checks.tsv
+      - pilot/results/26-community-composition/r-session-info.txt
+      - pilot/results/26-community-composition/validation.log
+      - pilot/figures/26-phylum-stacked.pdf
+      - pilot/figures/26-phylum-stacked.svg
+      - pilot/figures/26-phylum-stacked.png
+      - pilot/figures/26-phylum-stacked.tiff
+      - pilot/figures/26-genus-bubble.pdf
+      - pilot/figures/26-genus-bubble.svg
+      - pilot/figures/26-genus-bubble.png
+      - pilot/figures/26-genus-bubble.tiff
+      - pilot/figures/26-group-phylum-alluvial.pdf
+      - pilot/figures/26-group-phylum-alluvial.svg
+      - pilot/figures/26-group-phylum-alluvial.png
+      - pilot/figures/26-group-phylum-alluvial.tiff
+      - pilot/figures/26-genus-heatmap.pdf
+      - pilot/figures/26-genus-heatmap.svg
+      - pilot/figures/26-genus-heatmap.png
+      - pilot/figures/26-genus-heatmap.tiff
+      - pilot/results/27-multirank-composition/multirank-composition-summary.json
+      - pilot/results/27-multirank-composition/input-audit.tsv
+      - pilot/results/27-multirank-composition/package-audit.tsv
+      - pilot/results/27-multirank-composition/command-audit.tsv
+      - pilot/results/27-multirank-composition/font-audit.tsv
+      - pilot/results/27-multirank-composition/sample-alignment-audit.tsv
+      - pilot/results/27-multirank-composition/taxonomy-lineage-map.tsv
+      - pilot/results/27-multirank-composition/multirank-relative-abundance.tsv
+      - pilot/results/27-multirank-composition/rank-resolution-audit.tsv
+      - pilot/results/27-multirank-composition/group-rank-resolution.tsv
+      - pilot/results/27-multirank-composition/lineage-gap-audit.tsv
+      - pilot/results/27-multirank-composition/complete-depth-audit.tsv
+      - pilot/results/27-multirank-composition/label-collision-audit.tsv
+      - pilot/results/27-multirank-composition/cross-rank-name-collisions.tsv
+      - pilot/results/27-multirank-composition/rank-top-taxa.tsv
+      - pilot/results/27-multirank-composition/rank-taxon-group-summary.tsv
+      - pilot/results/27-multirank-composition/rank-topn-sensitivity.tsv
+      - pilot/results/27-multirank-composition/complete-lineage-abundance.tsv
+      - pilot/results/27-multirank-composition/dominant-complete-lineages.tsv
+      - pilot/results/27-multirank-composition/lineage-ladder.tsv
+      - pilot/results/27-multirank-composition/denominator-sensitivity.tsv
+      - pilot/results/27-multirank-composition/aggregation-sensitivity.tsv
+      - pilot/results/27-multirank-composition/closure-audit.tsv
+      - pilot/results/27-multirank-composition/figure-specification.tsv
+      - pilot/results/27-multirank-composition/format-audit.tsv
+      - pilot/results/27-multirank-composition/validation-checks.tsv
+      - pilot/results/27-multirank-composition/r-session-info.txt
+      - pilot/results/27-multirank-composition/validation.log
+      - pilot/figures/27-rank-resolution-cascade.pdf
+      - pilot/figures/27-rank-resolution-cascade.svg
+      - pilot/figures/27-rank-resolution-cascade.png
+      - pilot/figures/27-rank-resolution-cascade.tiff
+      - pilot/figures/27-multirank-bubble.pdf
+      - pilot/figures/27-multirank-bubble.svg
+      - pilot/figures/27-multirank-bubble.png
+      - pilot/figures/27-multirank-bubble.tiff
+      - pilot/figures/27-lineage-ladder.pdf
+      - pilot/figures/27-lineage-ladder.svg
+      - pilot/figures/27-lineage-ladder.png
+      - pilot/figures/27-lineage-ladder.tiff
+      - pilot/figures/27-topn-coverage.pdf
+      - pilot/figures/27-topn-coverage.svg
+      - pilot/figures/27-topn-coverage.png
+      - pilot/figures/27-topn-coverage.tiff
+      - pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+      - pilot/results/28-core-rare-biosphere/input-audit.tsv
+      - pilot/results/28-core-rare-biosphere/package-audit.tsv
+      - pilot/results/28-core-rare-biosphere/command-audit.tsv
+      - pilot/results/28-core-rare-biosphere/font-audit.tsv
+      - pilot/results/28-core-rare-biosphere/sample-alignment-audit.tsv
+      - pilot/results/28-core-rare-biosphere/feature-occupancy-abundance.tsv
+      - pilot/results/28-core-rare-biosphere/core-members.tsv
+      - pilot/results/28-core-rare-biosphere/global-core-summary.tsv
+      - pilot/results/28-core-rare-biosphere/group-core-summary.tsv
+      - pilot/results/28-core-rare-biosphere/core-membership-patterns.tsv
+      - pilot/results/28-core-rare-biosphere/core-threshold-sensitivity.tsv
+      - pilot/results/28-core-rare-biosphere/detection-count-audit.tsv
+      - pilot/results/28-core-rare-biosphere/rarefaction-ledger.tsv
+      - pilot/results/28-core-rare-biosphere/depth-sensitivity.tsv
+      - pilot/results/28-core-rare-biosphere/feature-state-classification.tsv
+      - pilot/results/28-core-rare-biosphere/feature-state-summary.tsv
+      - pilot/results/28-core-rare-biosphere/rare-mass-by-sample.tsv
+      - pilot/results/28-core-rare-biosphere/rare-threshold-sensitivity.tsv
+      - pilot/results/28-core-rare-biosphere/group-state-mass.tsv
+      - pilot/results/28-core-rare-biosphere/core-feature-taxonomy.tsv
+      - pilot/results/28-core-rare-biosphere/closure-audit.tsv
+      - pilot/results/28-core-rare-biosphere/figure-specification.tsv
+      - pilot/results/28-core-rare-biosphere/format-audit.tsv
+      - pilot/results/28-core-rare-biosphere/validation-checks.tsv
+      - pilot/results/28-core-rare-biosphere/r-session-info.txt
+      - pilot/results/28-core-rare-biosphere/validation.log
+      - pilot/figures/28-occupancy-abundance.pdf
+      - pilot/figures/28-occupancy-abundance.svg
+      - pilot/figures/28-occupancy-abundance.png
+      - pilot/figures/28-occupancy-abundance.tiff
+      - pilot/figures/28-group-core-membership.pdf
+      - pilot/figures/28-group-core-membership.svg
+      - pilot/figures/28-group-core-membership.png
+      - pilot/figures/28-group-core-membership.tiff
+      - pilot/figures/28-threshold-depth-sensitivity.pdf
+      - pilot/figures/28-threshold-depth-sensitivity.svg
+      - pilot/figures/28-threshold-depth-sensitivity.png
+      - pilot/figures/28-threshold-depth-sensitivity.tiff
+      - pilot/figures/28-rare-biosphere-mass.pdf
+      - pilot/figures/28-rare-biosphere-mass.svg
+      - pilot/figures/28-rare-biosphere-mass.png
+      - pilot/figures/28-rare-biosphere-mass.tiff
+      - pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+      - pilot/results/29-community-typing-dmm/fresh-fit-cache.rds
+      - pilot/results/29-community-typing-dmm/input-audit.tsv
+      - pilot/results/29-community-typing-dmm/package-audit.tsv
+      - pilot/results/29-community-typing-dmm/command-audit.tsv
+      - pilot/results/29-community-typing-dmm/font-audit.tsv
+      - pilot/results/29-community-typing-dmm/sample-alignment-audit.tsv
+      - pilot/results/29-community-typing-dmm/model-selection.tsv
+      - pilot/results/29-community-typing-dmm/reference-fit-comparison.tsv
+      - pilot/results/29-community-typing-dmm/initialization-audit.tsv
+      - pilot/results/29-community-typing-dmm/initialization-agreement.tsv
+      - pilot/results/29-community-typing-dmm/component-profiles.tsv
+      - pilot/results/29-community-typing-dmm/component-top-taxa.tsv
+      - pilot/results/29-community-typing-dmm/component-summary.tsv
+      - pilot/results/29-community-typing-dmm/sample-posteriors.tsv
+      - pilot/results/29-community-typing-dmm/ordination-scores.tsv
+      - pilot/results/29-community-typing-dmm/bmi-cross-tab.tsv
+      - pilot/results/29-community-typing-dmm/participant-repeat-audit.tsv
+      - pilot/results/29-community-typing-dmm/participant-transitions.tsv
+      - pilot/results/29-community-typing-dmm/sensitivity-model-selection.tsv
+      - pilot/results/29-community-typing-dmm/sensitivity-agreement.tsv
+      - pilot/results/29-community-typing-dmm/rarefaction-ledger.tsv
+      - pilot/results/29-community-typing-dmm/label-matching-audit.tsv
+      - pilot/results/29-community-typing-dmm/figure-specification.tsv
+      - pilot/results/29-community-typing-dmm/format-audit.tsv
+      - pilot/results/29-community-typing-dmm/validation-checks.tsv
+      - pilot/results/29-community-typing-dmm/r-session-info.txt
+      - pilot/results/29-community-typing-dmm/validation.log
+      - pilot/figures/29-model-selection.pdf
+      - pilot/figures/29-model-selection.svg
+      - pilot/figures/29-model-selection.png
+      - pilot/figures/29-model-selection.tiff
+      - pilot/figures/29-posterior-ordination.pdf
+      - pilot/figures/29-posterior-ordination.svg
+      - pilot/figures/29-posterior-ordination.png
+      - pilot/figures/29-posterior-ordination.tiff
+      - pilot/figures/29-component-profiles.pdf
+      - pilot/figures/29-component-profiles.svg
+      - pilot/figures/29-component-profiles.png
+      - pilot/figures/29-component-profiles.tiff
+      - pilot/figures/29-stability-audit.pdf
+      - pilot/figures/29-stability-audit.svg
+      - pilot/figures/29-stability-audit.png
+      - pilot/figures/29-stability-audit.tiff
+      - pilot/figures/30-closure-artifact.pdf
+      - pilot/figures/30-closure-artifact.svg
+      - pilot/figures/30-closure-artifact.png
+      - pilot/figures/30-closure-artifact.tiff
+      - pilot/figures/30-measurement-scales.pdf
+      - pilot/figures/30-measurement-scales.svg
+      - pilot/figures/30-measurement-scales.png
+      - pilot/figures/30-measurement-scales.tiff
+      - pilot/figures/30-reference-frame.pdf
+      - pilot/figures/30-reference-frame.svg
+      - pilot/figures/30-reference-frame.png
+      - pilot/figures/30-reference-frame.tiff
+      - pilot/figures/31-da-hit-counts.pdf
+      - pilot/figures/31-da-hit-counts.svg
+      - pilot/figures/31-da-hit-counts.png
+      - pilot/figures/31-da-hit-counts.tiff
+      - pilot/figures/31-da-jaccard.pdf
+      - pilot/figures/31-da-jaccard.svg
+      - pilot/figures/31-da-jaccard.png
+      - pilot/figures/31-da-jaccard.tiff
+      - pilot/figures/31-da-evidence-map.pdf
+      - pilot/figures/31-da-evidence-map.svg
+      - pilot/figures/31-da-evidence-map.png
+      - pilot/figures/31-da-evidence-map.tiff
+      - pilot/figures/32-rank-evidence-cascade.pdf
+      - pilot/figures/32-rank-evidence-cascade.svg
+      - pilot/figures/32-rank-evidence-cascade.png
+      - pilot/figures/32-rank-evidence-cascade.tiff
+      - pilot/figures/32-multirank-effect-map.pdf
+      - pilot/figures/32-multirank-effect-map.svg
+      - pilot/figures/32-multirank-effect-map.png
+      - pilot/figures/32-multirank-effect-map.tiff
+      - pilot/figures/32-family-genus-coherence.pdf
+      - pilot/figures/32-family-genus-coherence.svg
+      - pilot/figures/32-family-genus-coherence.png
+      - pilot/figures/32-family-genus-coherence.tiff
+      - pilot/figures/33-da-volcano.pdf
+      - pilot/figures/33-da-volcano.svg
+      - pilot/figures/33-da-volcano.png
+      - pilot/figures/33-da-volcano.tiff
+      - pilot/figures/33-da-cladogram.pdf
+      - pilot/figures/33-da-cladogram.svg
+      - pilot/figures/33-da-cladogram.png
+      - pilot/figures/33-da-cladogram.tiff
+      - pilot/figures/33-da-manhattan.pdf
+      - pilot/figures/33-da-manhattan.svg
+      - pilot/figures/33-da-manhattan.png
+      - pilot/figures/33-da-manhattan.tiff
+      - pilot/figures/33-da-forest.pdf
+      - pilot/figures/33-da-forest.svg
+      - pilot/figures/33-da-forest.png
+      - pilot/figures/33-da-forest.tiff
+      - pilot/figures/34-microbial-load.pdf
+      - pilot/figures/34-microbial-load.svg
+      - pilot/figures/34-microbial-load.png
+      - pilot/figures/34-microbial-load.tiff
+      - pilot/figures/34-relative-quantitative-effects.pdf
+      - pilot/figures/34-relative-quantitative-effects.svg
+      - pilot/figures/34-relative-quantitative-effects.png
+      - pilot/figures/34-relative-quantitative-effects.tiff
+      - pilot/figures/34-qmp-exemplar.pdf
+      - pilot/figures/34-qmp-exemplar.svg
+      - pilot/figures/34-qmp-exemplar.png
+      - pilot/figures/34-qmp-exemplar.tiff
+      - pilot/figures/35-network-matrix.pdf
+      - pilot/figures/35-network-matrix.svg
+      - pilot/figures/35-network-matrix.png
+      - pilot/figures/35-network-matrix.tiff
+      - pilot/figures/35-spiec-network.pdf
+      - pilot/figures/35-spiec-network.svg
+      - pilot/figures/35-spiec-network.png
+      - pilot/figures/35-spiec-network.tiff
+      - pilot/figures/35-network-edge-audit.pdf
+      - pilot/figures/35-network-edge-audit.svg
+      - pilot/figures/35-network-edge-audit.png
+      - pilot/figures/35-network-edge-audit.tiff
+      - pilot/figures/36-role-cartography.pdf
+      - pilot/figures/36-role-cartography.svg
+      - pilot/figures/36-role-cartography.png
+      - pilot/figures/36-role-cartography.tiff
+      - pilot/figures/36-attack-robustness.pdf
+      - pilot/figures/36-attack-robustness.svg
+      - pilot/figures/36-attack-robustness.png
+      - pilot/figures/36-attack-robustness.tiff
+      - pilot/figures/36-group-rewiring.pdf
+      - pilot/figures/36-group-rewiring.svg
+      - pilot/figures/36-group-rewiring.png
+      - pilot/figures/36-group-rewiring.tiff
+      - pilot/figures/36-topology-sensitivity.pdf
+      - pilot/figures/36-topology-sensitivity.svg
+      - pilot/figures/36-topology-sensitivity.png
+      - pilot/figures/36-topology-sensitivity.tiff
+      - pilot/figures/37-soft-threshold.pdf
+      - pilot/figures/37-soft-threshold.svg
+      - pilot/figures/37-soft-threshold.png
+      - pilot/figures/37-soft-threshold.tiff
+      - pilot/figures/37-module-dendrogram.pdf
+      - pilot/figures/37-module-dendrogram.svg
+      - pilot/figures/37-module-dendrogram.png
+      - pilot/figures/37-module-dendrogram.tiff
+      - pilot/figures/37-module-trait.pdf
+      - pilot/figures/37-module-trait.svg
+      - pilot/figures/37-module-trait.png
+      - pilot/figures/37-module-trait.tiff
+      - pilot/figures/37-hub-sensitivity.pdf
+      - pilot/figures/37-hub-sensitivity.svg
+      - pilot/figures/37-hub-sensitivity.png
+      - pilot/figures/37-hub-sensitivity.tiff
+      - pilot/figures/38-tree-filter.pdf
+      - pilot/figures/38-tree-filter.svg
+      - pilot/figures/38-tree-filter.png
+      - pilot/figures/38-tree-filter.tiff
+      - pilot/figures/38-bnti-rcbray.pdf
+      - pilot/figures/38-bnti-rcbray.svg
+      - pilot/figures/38-bnti-rcbray.png
+      - pilot/figures/38-bnti-rcbray.tiff
+      - pilot/figures/38-process-fractions.pdf
+      - pilot/figures/38-process-fractions.svg
+      - pilot/figures/38-process-fractions.png
+      - pilot/figures/38-process-fractions.tiff
+      - pilot/figures/38-phylogenetic-signal.pdf
+      - pilot/figures/38-phylogenetic-signal.svg
+      - pilot/figures/38-phylogenetic-signal.png
+      - pilot/figures/38-phylogenetic-signal.tiff
+      - pilot/figures/39-neutral-abundance-occupancy.pdf
+      - pilot/figures/39-neutral-abundance-occupancy.svg
+      - pilot/figures/39-neutral-abundance-occupancy.png
+      - pilot/figures/39-neutral-abundance-occupancy.tiff
+      - pilot/figures/39-neutral-pool-migration.pdf
+      - pilot/figures/39-neutral-pool-migration.svg
+      - pilot/figures/39-neutral-pool-migration.png
+      - pilot/figures/39-neutral-pool-migration.tiff
+      - pilot/figures/39-neutral-classification-sensitivity.pdf
+      - pilot/figures/39-neutral-classification-sensitivity.svg
+      - pilot/figures/39-neutral-classification-sensitivity.png
+      - pilot/figures/39-neutral-classification-sensitivity.tiff
+      - pilot/figures/39-neutral-detection-sensitivity.pdf
+      - pilot/figures/39-neutral-detection-sensitivity.svg
+      - pilot/figures/39-neutral-detection-sensitivity.png
+      - pilot/figures/39-neutral-detection-sensitivity.tiff
+      - pilot/figures/40-niche-breadth.pdf
+      - pilot/figures/40-niche-breadth.svg
+      - pilot/figures/40-niche-breadth.png
+      - pilot/figures/40-niche-breadth.tiff
+      - pilot/figures/40-rank-abundance-models.pdf
+      - pilot/figures/40-rank-abundance-models.svg
+      - pilot/figures/40-rank-abundance-models.png
+      - pilot/figures/40-rank-abundance-models.tiff
+      - pilot/figures/40-distance-decay.pdf
+      - pilot/figures/40-distance-decay.svg
+      - pilot/figures/40-distance-decay.png
+      - pilot/figures/40-distance-decay.tiff
+      - pilot/figures/40-distance-decay-audit.pdf
+      - pilot/figures/40-distance-decay-audit.svg
+      - pilot/figures/40-distance-decay-audit.png
+      - pilot/figures/40-distance-decay-audit.tiff
     acceptance_checks:
-      - 二十五篇 HTML 均由真实数据执行或一次性环境审计生成
+      - 五十五篇 HTML 均由真实数据执行、一次性环境审计或可追溯一手研究台账生成
       - 第 01 篇学习路线图和两张预览图均无文字截断，图内文字为英文
       - 第 02 篇报告真实 taxonomy 注释覆盖，并区分直接测量、有限推断与未测量
       - 第 03 篇揭示 Group 与 Salinity 完全混杂，并把 pilot 效应明确限制为样本量敏感性情景
@@ -5268,6 +6854,26 @@ steps:
       - 第 23 篇通过 214/214 输入、技术重复聚合、split-plot 合法置换、PERMANOVA/PERMDISP、四个精确 simple effects、Holm 校正、ANOSIM/MRPP 方向与四格式图形检查
       - CAP 环境模型使用自己的轴标签、逐变量检验、VIF 和校正解释率
       - 第 25 篇通过 221/221 输入、环境变量、共线性、固定置换、envfit/BH、Mantel/Holm、partial Mantel 边界、adjusted VPA、VIF、敏感性与四格式图形检查
+      - 第 26 篇通过 195/195 输入、七级注释完整性、逐样本 closure、Top-N、Unknown/Other、equal-sample/pooled-read、all-read/known-only denominator 与四格式图形检查
+      - 第 27 篇通过 209/209 输入、五级分辨率、缺失父级、rank-qualified label、完整 lineage、同名碰撞、Top-N 与权重/分母敏感性及四格式图形检查
+      - 第 28 篇通过 320/320 输入、feature-level abundance–occupancy、global/group core、阈值/read-depth 敏感性、互斥 rare states、local rare mass 与四格式图形检查
+      - 第 29 篇通过 222/222 输入、raw-count DMM、k=1–7、三准则、八次独立初始化、profile label matching、posterior uncertainty、过滤/深度/抽平/单人单样本、重复样本与四格式图形检查，并含独立“审计与升级”章节
+      - 第 30 篇从真实湿地三件套重放 closure 反事实，明确区分 raw reads、relative abundance、CLR/ALR 与 reference-frame sensitivity，并生成三张四格式原创图
+      - 第 31 篇让 ANCOM-BC2、ALDEx2、MaAsLin2、LEfSe+BH 与 corncob 在同一 60 样本、80 行、CW-vs-IW 合同下运行；分别报告 44、47、52、51、62 个命中，并保存 tested/failed rows、方向与 Jaccard，而不把 union 写成 consensus
+      - 第 32 篇在 Family、Genus 与 Species 分别重聚合、过滤和校正；Family/Genus 通过注释报告门禁，Species 因已知 reads 仅约 0.35% 而明确 FAIL、主报告命中数为 0
+      - 第 33 篇由同一 ANCOM-BC2 master table 驱动 volcano、审计后 LEfSe cladogram、Manhattan 与 forest plot；79 个可报告属保持相同 contrast、方向和 FDR 定义
+      - 第 34 篇从 reconsi/Vandeputte 三件套和独立 cell-load 表开始，只比较同一 Disease cohort 的 29 个 CD 与 66 个 healthy 样本，并用 2,000 次 bootstrap 并列展示 relative 与 quantitative scale
+      - 第 35 篇保留 40 个预声明属和 780 个候选对；200 次 SparCC 得到 264 条边，SPIEC-EASI 得到 30 条边且全部属于 SparCC edge，StARS instability 0.0372；156/264 条 SparCC edge 通过按组中心化敏感性门禁
+      - 第 36 篇以同一 40-node universe 审计 Zi-Pi、node attack、edge uncertainty 与 density-matched group rewiring，不把 topology 写成生态功能
+      - 第 37 篇以 power 双门禁、grey fraction、全族 BH 与 pseudocount refit 审计模块、性状与 candidate hub
+      - 第 38 篇使用同源 rooted tree、short-range phylogenetic-signal gate、999 次 βNTI/RCbray nulls 与固定 worker RNG stream
+      - 第 39 篇同时报告 pooled/group migration estimates、predictive envelope、sample bootstrap、detection 与 rarefaction sensitivity
+      - 第 40 篇分开计算 sample-use breadth、逐样本 RAD 与 within-region distance-decay，并保留 AIC/warning/Mantel ledger
+      - 第 41 篇保留真实 PICRUSt2 2.6.3 命令日志、37/37 ASV NSTI audit、pathway coverage 与完整 225-test BH ledger
+      - 第 42 篇报告 FAPROTAX read coverage、93-function effect/FDR family 与 genus-only taxonomy sensitivity
+      - 第 43 篇所有 feature filtering、CLR 与 tuning 均在 outer training fold 内重拟合，并保存 sample-level out-of-fold predictions、calibration、label null 和 apparent/held-out 对照
+      - 第 44 篇以 study 为 meta-analysis 单位，并让整队列 held-out validation 完全隔离 preprocessing、feature selection 与 tuning
+      - 第 45 篇按每只动物实际 sampling week 建立 time origin，逐属 Cox 同时做 BH/PH audit，ridge-Cox 只在锁定 test set 评估一次
       - 所有随机过程固定 seed，图内文字为英文
     common_failures:
       - Quarto 二进制尚未安装
@@ -5297,6 +6903,9 @@ steps:
       - pilot/_site/chapters/23-permanova-dispersion.html
       - pilot/_site/chapters/24-ordination-constrained-cap.html
       - pilot/_site/chapters/25-environment-variance.html
+      - pilot/_site/chapters/26-community-composition.html
+      - pilot/_site/chapters/27-multirank-composition.html
+      - pilot/_site/chapters/28-core-rare-biosphere.html
       - pilot/figures/01-preview-pcoa.pdf
       - pilot/figures/01-preview-pcoa.png
       - pilot/figures/01-preview-pcoa.tiff
@@ -5711,6 +7320,95 @@ steps:
       - pilot/figures/25-envfit-pcoa.png
       - pilot/figures/25-mantel-distance-blocks.png
       - pilot/figures/25-variation-partition.png
+      - pilot/results/26-community-composition/community-composition-summary.json
+      - pilot/results/26-community-composition/taxonomy-rank-audit.tsv
+      - pilot/results/26-community-composition/phylum-display-composition.tsv
+      - pilot/results/26-community-composition/phylum-group-summary.tsv
+      - pilot/results/26-community-composition/genus-bubble-summary.tsv
+      - pilot/results/26-community-composition/top-n-sensitivity.tsv
+      - pilot/results/26-community-composition/denominator-sensitivity.tsv
+      - pilot/results/26-community-composition/aggregation-sensitivity.tsv
+      - pilot/results/26-community-composition/validation.log
+      - pilot/figures/26-phylum-stacked.png
+      - pilot/figures/26-genus-bubble.png
+      - pilot/figures/26-group-phylum-alluvial.png
+      - pilot/figures/26-genus-heatmap.png
+      - pilot/results/27-multirank-composition/multirank-composition-summary.json
+      - pilot/results/27-multirank-composition/taxonomy-lineage-map.tsv
+      - pilot/results/27-multirank-composition/rank-resolution-audit.tsv
+      - pilot/results/27-multirank-composition/group-rank-resolution.tsv
+      - pilot/results/27-multirank-composition/lineage-gap-audit.tsv
+      - pilot/results/27-multirank-composition/label-collision-audit.tsv
+      - pilot/results/27-multirank-composition/rank-topn-sensitivity.tsv
+      - pilot/results/27-multirank-composition/complete-lineage-abundance.tsv
+      - pilot/results/27-multirank-composition/validation.log
+      - pilot/figures/27-rank-resolution-cascade.png
+      - pilot/figures/27-multirank-bubble.png
+      - pilot/figures/27-lineage-ladder.png
+      - pilot/figures/27-topn-coverage.png
+      - pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+      - pilot/results/28-core-rare-biosphere/feature-occupancy-abundance.tsv
+      - pilot/results/28-core-rare-biosphere/core-members.tsv
+      - pilot/results/28-core-rare-biosphere/group-core-summary.tsv
+      - pilot/results/28-core-rare-biosphere/core-membership-patterns.tsv
+      - pilot/results/28-core-rare-biosphere/core-threshold-sensitivity.tsv
+      - pilot/results/28-core-rare-biosphere/depth-sensitivity.tsv
+      - pilot/results/28-core-rare-biosphere/feature-state-classification.tsv
+      - pilot/results/28-core-rare-biosphere/rare-mass-by-sample.tsv
+      - pilot/results/28-core-rare-biosphere/rare-threshold-sensitivity.tsv
+      - pilot/results/28-core-rare-biosphere/validation.log
+      - pilot/figures/28-occupancy-abundance.png
+      - pilot/figures/28-group-core-membership.png
+      - pilot/figures/28-threshold-depth-sensitivity.png
+      - pilot/figures/28-rare-biosphere-mass.png
+      - pilot/_site/chapters/29-community-typing-dmm.html
+      - pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+      - pilot/results/29-community-typing-dmm/model-selection.tsv
+      - pilot/results/29-community-typing-dmm/sample-posteriors.tsv
+      - pilot/results/29-community-typing-dmm/component-profiles.tsv
+      - pilot/results/29-community-typing-dmm/initialization-agreement.tsv
+      - pilot/results/29-community-typing-dmm/sensitivity-agreement.tsv
+      - pilot/results/29-community-typing-dmm/participant-transitions.tsv
+      - pilot/results/29-community-typing-dmm/validation.log
+      - pilot/figures/29-model-selection.png
+      - pilot/figures/29-posterior-ordination.png
+      - pilot/figures/29-component-profiles.png
+      - pilot/figures/29-stability-audit.png
+      - pilot/_site/chapters/30-compositional-data.html
+      - pilot/figures/30-closure-artifact.png
+      - pilot/figures/30-measurement-scales.png
+      - pilot/figures/30-reference-frame.png
+      - pilot/_site/chapters/31-da-methods.html
+      - pilot/figures/31-da-hit-counts.png
+      - pilot/figures/31-da-jaccard.png
+      - pilot/figures/31-da-evidence-map.png
+      - pilot/_site/chapters/32-multirank-da.html
+      - pilot/figures/32-rank-evidence-cascade.png
+      - pilot/figures/32-multirank-effect-map.png
+      - pilot/figures/32-family-genus-coherence.png
+      - pilot/_site/chapters/33-da-visualization.html
+      - pilot/figures/33-da-volcano.png
+      - pilot/figures/33-da-cladogram.png
+      - pilot/figures/33-da-manhattan.png
+      - pilot/figures/33-da-forest.png
+      - pilot/_site/chapters/34-absolute-quantification.html
+      - pilot/figures/34-microbial-load.png
+      - pilot/figures/34-relative-quantitative-effects.png
+      - pilot/figures/34-qmp-exemplar.png
+      - pilot/_site/chapters/35-cooccurrence-networks.html
+      - pilot/figures/35-network-matrix.png
+      - pilot/figures/35-spiec-network.png
+      - pilot/figures/35-network-edge-audit.png
+      - pilot/_site/chapters/41-picrust2.html
+      - pilot/_site/chapters/42-functional-guilds.html
+      - pilot/_site/chapters/43-random-forest.html
+      - pilot/_site/chapters/44-cross-cohort-validation.html
+      - pilot/_site/chapters/45-survival-analysis.html
+      - pilot/figures/41-pathway-effect.png
+      - pilot/figures/42-function-coverage.png
+      - pilot/figures/43-nested-roc.png
+      - pilot/figures/44-meta-forest.png
+      - pilot/figures/45-time-dependent-roc.png
     method_basis:
       type: project-experience
       summary: 真实渲染是本系列发布前的最低证据门槛，静态审阅不能替代代码执行。
@@ -5962,6 +7660,589 @@ steps:
         key: graphics.format_files
         comparator: "=="
         value: 16
+      - id: pilot-community-composition-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/26-community-composition.html
+      - id: pilot-community-composition-summary-exists
+        type: file_exists
+        path: pilot/results/26-community-composition/community-composition-summary.json
+      - id: pilot-community-composition-checks-passed
+        type: metric_threshold
+        path: pilot/results/26-community-composition/community-composition-summary.json
+        key: checks_passed
+        comparator: "=="
+        value: 195
+      - id: pilot-community-composition-checks-failed
+        type: metric_threshold
+        path: pilot/results/26-community-composition/community-composition-summary.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: pilot-community-composition-format-count
+        type: metric_threshold
+        path: pilot/results/26-community-composition/community-composition-summary.json
+        key: graphics.format_files
+        comparator: "=="
+        value: 16
+      - id: pilot-multirank-composition-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/27-multirank-composition.html
+      - id: pilot-multirank-composition-summary-exists
+        type: file_exists
+        path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+      - id: pilot-multirank-composition-checks-passed
+        type: metric_threshold
+        path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+        key: checks_passed
+        comparator: "=="
+        value: 209
+      - id: pilot-multirank-composition-checks-failed
+        type: metric_threshold
+        path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: pilot-multirank-composition-format-count
+        type: metric_threshold
+        path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+        key: graphics.format_files
+        comparator: "=="
+        value: 16
+      - id: pilot-core-rare-biosphere-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/28-core-rare-biosphere.html
+      - id: pilot-core-rare-biosphere-summary-exists
+        type: file_exists
+        path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+      - id: pilot-core-rare-biosphere-checks-passed
+        type: metric_threshold
+        path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: checks_passed
+        comparator: "=="
+        value: 320
+      - id: pilot-core-rare-biosphere-checks-failed
+        type: metric_threshold
+        path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: pilot-core-rare-biosphere-format-count
+        type: metric_threshold
+        path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+        key: graphics.format_files
+        comparator: "=="
+        value: 16
+      - id: pilot-community-typing-dmm-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/29-community-typing-dmm.html
+      - id: pilot-community-typing-dmm-summary-exists
+        type: file_exists
+        path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+      - id: pilot-community-typing-dmm-checks-passed
+        type: metric_threshold
+        path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: checks_passed
+        comparator: "=="
+        value: 222
+      - id: pilot-community-typing-dmm-checks-failed
+        type: metric_threshold
+        path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: pilot-community-typing-dmm-format-count
+        type: metric_threshold
+        path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+        key: graphics.format_files
+        comparator: "=="
+        value: 16
+      - id: pilot-compositional-data-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/30-compositional-data.html
+      - id: pilot-da-methods-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/31-da-methods.html
+      - id: pilot-multirank-da-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/32-multirank-da.html
+      - id: pilot-da-visualization-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/33-da-visualization.html
+      - id: pilot-absolute-quantification-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/34-absolute-quantification.html
+      - id: pilot-cooccurrence-networks-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/35-cooccurrence-networks.html
+      - id: pilot-compositional-reference-frame-png-exists
+        type: file_exists
+        path: pilot/figures/30-reference-frame.png
+      - id: pilot-da-evidence-map-png-exists
+        type: file_exists
+        path: pilot/figures/31-da-evidence-map.png
+      - id: pilot-multirank-effect-map-png-exists
+        type: file_exists
+        path: pilot/figures/32-multirank-effect-map.png
+      - id: pilot-da-cladogram-png-exists
+        type: file_exists
+        path: pilot/figures/33-da-cladogram.png
+      - id: pilot-qmp-effects-png-exists
+        type: file_exists
+        path: pilot/figures/34-relative-quantitative-effects.png
+      - id: pilot-spiec-network-png-exists
+        type: file_exists
+        path: pilot/figures/35-spiec-network.png
+      - id: pilot-picrust2-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/41-picrust2.html
+      - id: pilot-functional-guilds-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/42-functional-guilds.html
+      - id: pilot-random-forest-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/43-random-forest.html
+      - id: pilot-cross-cohort-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/44-cross-cohort-validation.html
+      - id: pilot-survival-html-exists
+        type: file_exists
+        path: pilot/_site/chapters/45-survival-analysis.html
+  - id: validate-articles-30-35-release
+    title: 验证第 30–35 篇发布资产与结果合同
+    cache_revision: articles-30-35-release-assets-v1
+    goal: >
+      对隔离 pilot 站点中的六篇 HTML、十九张主图、七十六个格式文件、
+      两套真实数据合同、R 包锁与关键统计结果执行独立发布门禁。
+    rationale: >
+      QMD 成功执行只能证明代码完成；发布前仍需逐文件核对格式签名、600 ppi、
+      TIFF LZW、SVG 英文文字、HTML 内容和结果口径，防止渲染或派生阶段静默漂移。
+    inputs:
+      - scripts/validate_articles_30_35.py
+      - env/renv.lock
+      - data/small/otutab.tsv
+      - data/small/absolute-quantification/otutab.tsv
+      - data/small/absolute-quantification/source-summary.json
+      - chapters/30-compositional-data.qmd
+      - chapters/31-da-methods.qmd
+      - chapters/32-multirank-da.qmd
+      - chapters/33-da-visualization.qmd
+      - chapters/34-absolute-quantification.qmd
+      - chapters/35-cooccurrence-networks.qmd
+      - pilot/_site/chapters/30-compositional-data.html
+      - pilot/_site/chapters/31-da-methods.html
+      - pilot/_site/chapters/32-multirank-da.html
+      - pilot/_site/chapters/33-da-visualization.html
+      - pilot/_site/chapters/34-absolute-quantification.html
+      - pilot/_site/chapters/35-cooccurrence-networks.html
+    command: |
+      set -eu
+      mkdir -p "${RUN_ROOT}/results"
+      python3 "${MANIFEST_DIR}/scripts/validate_articles_30_35.py" \
+        --project-root "${MANIFEST_DIR}" \
+        --site-root "${RUN_ROOT}/pilot" \
+        --output "${RUN_ROOT}/results/articles-30-35-validation.json"
+    expected_outputs:
+      - results/articles-30-35-validation.json
+    acceptance_checks:
+      - 六篇下游文章均为 eval:true、freeze:auto，含完整结构与固定 seed
+      - 六篇 HTML 和十九张主图存在，七十六个 PDF/SVG/PNG/TIFF 文件均通过
+      - PNG/TIFF 至少 590 ppi，TIFF 使用 LZW，SVG 无中文图内文字
+      - 湿地与 Vandeputte 输入维度、reads、来源 SHA-256 和 418 条 R 锁记录一致
+      - 五方法命中数、Species 注释门禁、Desulfovibrio QMP 示例和网络边数/稳定性与正文一致
+    common_failures:
+      - 单篇 HTML 未在 pilot 目录生成或图形路径断裂
+      - 位图 ppi、TIFF 压缩、SVG 文字或文件签名不符合发布合同
+      - 重跑后统计结果变化但 Methods、README 或图题未同步
+      - 新增包未进入 env/renv.lock，或 SPIEC-EASI commit 漂移
+    outputs:
+      - results/articles-30-35-validation.json
+    method_basis:
+      type: project-experience
+      summary: 发布资产门禁把可执行分析、图形格式、真实数据与文字声明收束到同一机器可读报告。
+    references:
+      - title: Quarto Books documentation
+        type: software-documentation
+        url: https://quarto.org/docs/books/
+    assertions:
+      - id: articles-30-35-validation-passed
+        type: metric_threshold
+        path: results/articles-30-35-validation.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: articles-30-35-validation-checks
+        type: metric_threshold
+        path: results/articles-30-35-validation.json
+        key: checks_passed
+        comparator: "=="
+        value: 359
+      - id: articles-30-35-primary-figures
+        type: metric_threshold
+        path: results/articles-30-35-validation.json
+        key: primary_figure_count
+        comparator: "=="
+        value: 19
+      - id: articles-30-35-format-files
+        type: metric_threshold
+        path: results/articles-30-35-validation.json
+        key: format_file_count
+        comparator: "=="
+        value: 76
+  - id: validate-articles-36-40-release
+    title: 验证第 36–40 篇发布资产与结果合同
+    cache_revision: articles-36-40-release-assets-v1
+    goal: >
+      对隔离 pilot 站点中的五篇 HTML、二十张主图、八十个格式文件、
+      真实湿地根树、R 包锁与关键网络/群落构建/宏生态结果执行独立发布门禁。
+    rationale: >
+      可执行成功不会自动发现图例裁切、taxonomy 标签丢失、并行 RNG 漂移或
+      结果口径错配；发布门禁必须同时检查正文、图形、输入、环境和结果 ledger。
+    inputs:
+      - scripts/validate_articles_36_40.py
+      - env/renv.lock
+      - data/small/otutab.tsv
+      - data/small/taxonomy.tsv
+      - data/small/metadata.tsv
+      - data/small/environment.tsv
+      - data/small/rooted-tree.nwk.gz
+      - data/small/source_summary.json
+      - chapters/36-network-robustness.qmd
+      - chapters/37-microbial-wgcna.qmd
+      - chapters/38-community-assembly-bnti.qmd
+      - chapters/39-neutral-community-model.qmd
+      - chapters/40-niche-distance-decay.qmd
+      - pilot/_site/chapters/36-network-robustness.html
+      - pilot/_site/chapters/37-microbial-wgcna.html
+      - pilot/_site/chapters/38-community-assembly-bnti.html
+      - pilot/_site/chapters/39-neutral-community-model.html
+      - pilot/_site/chapters/40-niche-distance-decay.html
+    command: |
+      set -eu
+      mkdir -p "${RUN_ROOT}/results"
+      python3 "${MANIFEST_DIR}/scripts/validate_articles_36_40.py" \
+        --project-root "${MANIFEST_DIR}" \
+        --site-root "${RUN_ROOT}/pilot" \
+        --output "${RUN_ROOT}/results/articles-36-40-validation.json"
+    expected_outputs:
+      - results/articles-36-40-validation.json
+    acceptance_checks:
+      - 五篇文章均为 eval:true、freeze:auto，含完整结构、真实三件套和固定 seed
+      - 五篇 HTML 和二十张主图存在，八十个 PDF/SVG/PNG/TIFF 文件均通过
+      - PNG/TIFF 至少 590 ppi，TIFF 使用 LZW，SVG 无中文图内文字
+      - 14,096-tip 根树包含全部 13,628 个 OTU，SHA-256 与来源摘要一致
+      - 418 条 R 锁记录包含 WGCNA 1.74、iCAMP 1.5.12、固定 SpiecEasi commit 与第 41–55 篇新增依赖
+      - 网络角色、WGCNA 模块、βNTI/RCbray、NCM 与 distance-decay ledger 与正文一致
+    common_failures:
+      - iCAMP worker 未显式固定并行 RNG stream 或 localhost worker 无法启动
+      - 图例、标签或 patchwork caption 超出最终画布但渲染未报错
+      - taxonomy 行名在清洗后丢失，导致图中标签静默变为 NA
+      - 根树 tip、计数 feature 或 filter/read coverage 口径漂移
+    outputs:
+      - results/articles-36-40-validation.json
+    method_basis:
+      type: project-experience
+      summary: 发布资产门禁把网络、系统发育 null model 与宏生态图的输入、随机性、结果和视觉输出收束到同一机器可读报告。
+    references:
+      - title: WGCNA
+        type: method-paper
+        citation: Langfelder P, Horvath S. BMC Bioinformatics. 2008;9:559.
+      - title: Quantifying community assembly processes
+        type: method-paper
+        citation: Stegen JC, Lin X, Fredrickson JK, et al. ISME Journal. 2013;7:2069-2079.
+      - title: Sloan neutral community model
+        type: method-paper
+        citation: Sloan WT, Lunn M, Woodcock S, et al. Environmental Microbiology. 2006;8:732-740.
+    assertions:
+      - id: articles-36-40-validation-passed
+        type: metric_threshold
+        path: results/articles-36-40-validation.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: articles-36-40-validation-checks
+        type: metric_threshold
+        path: results/articles-36-40-validation.json
+        key: checks_passed
+        comparator: "=="
+        value: 406
+      - id: articles-36-40-primary-figures
+        type: metric_threshold
+        path: results/articles-36-40-validation.json
+        key: primary_figure_count
+        comparator: "=="
+        value: 20
+      - id: articles-36-40-format-files
+        type: metric_threshold
+        path: results/articles-36-40-validation.json
+        key: format_file_count
+        comparator: "=="
+        value: 80
+  - id: validate-articles-41-45-release
+    title: 验证第 41–45 篇发布资产与结果合同
+    cache_revision: articles-41-45-release-assets-v1
+    goal: >
+      对五篇 HTML、二十张主图、八十个格式文件、三套新增真实数据、
+      PICRUSt2/R 环境锁和功能预测/机器学习/meta/时间结局结果执行独立发布门禁。
+    rationale: >
+      功能预测、跨折建模、跨队列验证与 censored outcome 都可能在代码成功运行时
+      仍发生输入错配、信息泄漏或解释越界，因此需把正文、数据、环境、图形和结果共同锁定。
+    inputs:
+      - scripts/validate_articles_41_45.py
+      - env/renv.lock
+      - env/picrust2.yml
+      - data/small/picrust2-chemerin/source-summary.json
+      - data/small/cross-cohort-crc/source-summary.json
+      - data/small/survival-t1d/source-summary.json
+      - chapters/41-picrust2.qmd
+      - chapters/42-functional-guilds.qmd
+      - chapters/43-random-forest.qmd
+      - chapters/44-cross-cohort-validation.qmd
+      - chapters/45-survival-analysis.qmd
+      - pilot/_site/chapters/41-picrust2.html
+      - pilot/_site/chapters/42-functional-guilds.html
+      - pilot/_site/chapters/43-random-forest.html
+      - pilot/_site/chapters/44-cross-cohort-validation.html
+      - pilot/_site/chapters/45-survival-analysis.html
+    command: |
+      set -eu
+      mkdir -p "${RUN_ROOT}/results"
+      python3 "${MANIFEST_DIR}/scripts/validate_articles_41_45.py" \
+        --project-root "${MANIFEST_DIR}" \
+        --site-root "${RUN_ROOT}/pilot" \
+        --output "${RUN_ROOT}/results/articles-41-45-validation.json"
+    expected_outputs:
+      - results/articles-41-45-validation.json
+    acceptance_checks:
+      - 第 41 篇按上游规则 eval:false 并保留一次性真实运行日志；第 42–45 篇均为 eval:true、freeze:auto
+      - 五篇正文结构、内联准备工作、固定 seed、真实三件套/FASTA 与 HTML 标题一致
+      - 二十张主图的八十个 PDF/SVG/PNG/TIFF 文件存在；位图至少 590 ppi、TIFF LZW、SVG 无中文图内文字
+      - 37-ASV chemerin、三个 MicrobiomeHD CRC cohorts 和 173-mouse MiSurv 数据维度、分组、event/time origin 与来源摘要一致
+      - 418-package R 锁包含 ggpicrust2/ranger/pROC/metafor/timeROC，PICRUSt2 YAML 固定 2.6.3
+      - NSTI/pathway FDR、FAPROTAX coverage、nested-CV/null、REML/external AUC 与 Cox/timeROC ledger 与正文一致
+    common_failures:
+      - 把 predicted function 解释为 measured gene、activity 或 metabolite production
+      - feature filtering、CLR、tuning 或 threshold 在 cross-validation/external test 之前看到了 held-out outcome
+      - 合并 study-level residuals 或把 random sample split 冒充 external validation
+      - survival time origin 未按每个样本实际采样周计算，或把 censored subjects 当 controls
+      - 单栏图标题、caption、图例或 ggrepel 标签超出最终画布
+    outputs:
+      - results/articles-41-45-validation.json
+    method_basis:
+      type: project-experience
+      summary: 发布门禁把预测边界、抗泄漏设计、外部可迁移性、时间结局与图形资产收束到同一机器可读报告。
+    references:
+      - title: PICRUSt2
+        type: method-paper
+        citation: Douglas GM, Maffei VJ, Zaneveld JR, et al. Nature Biotechnology. 2020;38:685-688.
+      - title: Effective microbiome machine learning
+        type: method-paper
+        citation: Topçuoğlu BD, Lesniak NA, Ruffin MT IV, Wiens J, Schloss PD. mBio. 2020;11:e00434-20.
+      - title: MicrobiomeHD meta-analysis
+        type: method-paper
+        citation: Duvallet C, Gibbons SM, Gurry T, et al. Nature Communications. 2017;8:1784.
+    assertions:
+      - id: articles-41-45-validation-passed
+        type: metric_threshold
+        path: results/articles-41-45-validation.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: articles-41-45-validation-checks
+        type: metric_threshold
+        path: results/articles-41-45-validation.json
+        key: checks_passed
+        comparator: "=="
+        value: 445
+      - id: articles-41-45-primary-figures
+        type: metric_threshold
+        path: results/articles-41-45-validation.json
+        key: primary_figure_count
+        comparator: "=="
+        value: 20
+      - id: articles-41-45-format-files
+        type: metric_threshold
+        path: results/articles-41-45-validation.json
+        key: format_file_count
+        comparator: "=="
+        value: 80
+  - id: validate-articles-46-50-release
+    title: 验证第 46–50 篇发布资产与结果合同
+    cache_revision: articles-46-50-native-multiomics-source-release-v2
+    goal: >
+      对五篇 HTML、二十张主图、八十个格式文件、三套新增真实数据、
+      原生 MMvec/MOFA/HAllA/SourceTracker 环境和关键结果执行独立发布门禁。
+    rationale: >
+      多视图整合与来源追踪容易在样本配对、训练/留出边界、混杂校正、
+      legacy runtime 和因果措辞上静默出错，因此需共同锁定正文、数据、环境、图形与结果。
+    inputs:
+      - scripts/validate_articles_46_50.py
+      - env/renv.lock
+      - env/mmvec-native.yml
+      - env/multiomics.yml
+      - env/sourcetracker2.yml
+      - data/small/paired-ibd-multiomics/source-summary.json
+      - data/small/multi-kingdom-duran/source-summary.json
+      - data/small/source-tracking-feast/source-summary.json
+      - chapters/46-procrustes-mantel-halla.qmd
+      - chapters/47-spls-diablo.qmd
+      - chapters/48-mmvec-mofa.qmd
+      - chapters/49-multi-kingdom.qmd
+      - chapters/50-source-tracking.qmd
+      - pilot/_site/chapters/46-procrustes-mantel-halla.html
+      - pilot/_site/chapters/47-spls-diablo.html
+      - pilot/_site/chapters/48-mmvec-mofa.html
+      - pilot/_site/chapters/49-multi-kingdom.html
+      - pilot/_site/chapters/50-source-tracking.html
+    command: |
+      set -eu
+      mkdir -p "${RUN_ROOT}/results"
+      python3 "${MANIFEST_DIR}/scripts/validate_articles_46_50.py" \
+        --project-root "${MANIFEST_DIR}" \
+        --site-root "${RUN_ROOT}/pilot" \
+        --output "${RUN_ROOT}/results/articles-46-50-validation.json"
+    expected_outputs:
+      - results/articles-46-50-validation.json
+    acceptance_checks:
+      - 五篇文章均为 eval:true、freeze:auto，含九段结构、内联作图函数、固定 seed 和本篇输入
+      - 二十张主图的八十个 PDF/SVG/PNG/TIFF 文件存在；位图至少 590 ppi、TIFF LZW、SVG 无中文图内文字
+      - Franzosa 220-sample paired views、Duran 36-sample three-kingdom design 与 FEAST 1-sink/9-source demo 的维度、顺序和固定 commit 一致
+      - 第 48 篇及运行脚本直接调用 MMvec 1.0.5 的 MMvec class 与 mofapy2 0.7.4 entry point
+      - 418-package R 锁包含 mixOmics 6.26.0、FEAST 固定 commit、HAllA 与第 51–54 篇所需 R 依赖
+      - global concordance、locked-test DIABLO、MMvec holdout/MOFA、niche-adjusted cross-kingdom 和 source-tracking ledgers 与正文一致
+    common_failures:
+      - 两个 views 的 sample ID/order 未严格对齐，或在 split 前使用 outcome 做 feature selection
+      - 把 training CCA、MMvec co-occurrence、MOFA factor 或 source allocation 写成机制或因果证据
+      - 用现代 TensorFlow 环境强装 MMvec 1.0.5，或把 legacy runtime 混入日常环境
+      - 只报告 raw cross-kingdom association，不做 niche adjustment、bootstrap 或 missing-source audit
+    outputs:
+      - results/articles-46-50-validation.json
+    method_basis:
+      type: project-experience
+      summary: 发布门禁把配对、多视图 estimand、legacy 环境、混杂与解释边界收束到同一机器可读报告。
+    references:
+      - title: MMvec
+        type: method-paper
+        citation: Morton JT, et al. Nature Methods. 2019;16:1306-1314.
+      - title: MOFA+
+        type: method-paper
+        citation: Argelaguet R, et al. Genome Biology. 2020;21:111.
+      - title: FEAST
+        type: method-paper
+        citation: Shenhav L, et al. Nature Methods. 2019;16:627-632.
+    assertions:
+      - id: articles-46-50-validation-passed
+        type: metric_threshold
+        path: results/articles-46-50-validation.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: articles-46-50-validation-checks
+        type: metric_threshold
+        path: results/articles-46-50-validation.json
+        key: checks_passed
+        comparator: "=="
+        value: 435
+      - id: articles-46-50-primary-figures
+        type: metric_threshold
+        path: results/articles-46-50-validation.json
+        key: primary_figure_count
+        comparator: "=="
+        value: 20
+      - id: articles-46-50-format-files
+        type: metric_threshold
+        path: results/articles-46-50-validation.json
+        key: format_file_count
+        comparator: "=="
+        value: 80
+  - id: validate-articles-51-55-release
+    title: 验证第 51–55 篇发布资产与因果边界合同
+    cache_revision: articles-51-55-longitudinal-causal-release-v1
+    goal: >
+      对五篇 HTML、二十张主图、八十个格式文件、三套新增真实数据、
+      纵向/SEM/中介/MR 原生方法环境与因果证据阅读框架执行独立发布门禁。
+    rationale: >
+      重复测量和因果推断容易在独立性、时间顺序、工具变量假设、未测混杂与措辞强度上
+      静默越界，因此需共同锁定正文、数据、环境、图形、关键数值和不可得诊断。
+    inputs:
+      - scripts/validate_articles_51_55.py
+      - env/renv.lock
+      - data/small/longitudinal-dietswap/source-summary.json
+      - data/small/paired-ibd-multiomics/source-summary.json
+      - data/small/mr-mibiogen/source-summary.json
+      - data/small/causal-evidence/source-summary.json
+      - chapters/51-longitudinal-analysis.qmd
+      - chapters/52-structural-equation-model.qmd
+      - chapters/53-mediation-analysis.qmd
+      - chapters/54-mendelian-randomization.qmd
+      - chapters/55-causal-evidence.qmd
+      - pilot/_site/chapters/51-longitudinal-analysis.html
+      - pilot/_site/chapters/52-structural-equation-model.html
+      - pilot/_site/chapters/53-mediation-analysis.html
+      - pilot/_site/chapters/54-mendelian-randomization.html
+      - pilot/_site/chapters/55-causal-evidence.html
+    command: |
+      set -eu
+      mkdir -p "${RUN_ROOT}/results"
+      python3 "${MANIFEST_DIR}/scripts/validate_articles_51_55.py" \
+        --project-root "${MANIFEST_DIR}" \
+        --site-root "${RUN_ROOT}/pilot" \
+        --output "${RUN_ROOT}/results/articles-51-55-validation.json"
+    expected_outputs:
+      - results/articles-51-55-validation.json
+    acceptance_checks:
+      - 第 51–54 篇为 eval:true、freeze:auto，含九段结构、内联作图函数、固定 seed 和本篇输入；第 55 篇为 eval:false 的可追溯阅读框架
+      - 二十张主图的八十个 PDF/SVG/PNG/TIFF 文件存在；位图至少 590 ppi、TIFF LZW、SVG 无中文图内文字
+      - DietSwap 222 observations/38 subjects、湿地 90 samples、Franzosa 中介子集 108 samples、MiBioGen/GWAS 6 个候选工具和七项证据案例与来源摘要一致
+      - 418-package R 锁包含 piecewiseSEM 2.3.0.1、plspm 0.6.0、mediation 4.5.1、TwoSampleMR 0.6.6 与 MRPRESSO 1.0
+      - AR(1)、SEM 竞争图、ACME 区间、MR harmonisation/敏感性和证据措辞 ledgers 与正文一致
+    common_failures:
+      - 把重复测量当独立样本，或只画 spaghetti plot 而不审计 subject correlation
+      - 依据同一批数据反复改 DAG 后只报告最终图，或把显著路径自动解释为因果
+      - 横断面中介缺少时间顺序却写成机制，或 MR 缺少 harmonisation、弱工具和 pleiotropy 审计
+      - 把第 55 篇证据阶梯当作机械评分，忽略不同设计的残余偏倚结构
+    outputs:
+      - results/articles-51-55-validation.json
+    method_basis:
+      type: project-experience
+      summary: 发布门禁把重复测量结构、因果识别假设、不可得诊断与可辩护措辞收束到同一机器可读报告。
+    references:
+      - title: Diet exchange and colon cancer risk
+        type: data-paper
+        citation: O'Keefe SJD, et al. Nature Communications. 2015;6:6342.
+      - title: piecewiseSEM
+        type: method-paper
+        citation: Lefcheck JS. Methods in Ecology and Evolution. 2016;7:573-579.
+      - title: Causal mediation analysis
+        type: method-paper
+        citation: Imai K, Keele L, Tingley D. Psychological Methods. 2010;15:309-334.
+      - title: Mendelian randomization
+        type: method-paper
+        citation: Hemani G, et al. eLife. 2018;7:e34408.
+    assertions:
+      - id: articles-51-55-validation-passed
+        type: metric_threshold
+        path: results/articles-51-55-validation.json
+        key: checks_failed
+        comparator: "=="
+        value: 0
+      - id: articles-51-55-validation-checks
+        type: metric_threshold
+        path: results/articles-51-55-validation.json
+        key: checks_passed
+        comparator: "=="
+        value: 413
+      - id: articles-51-55-primary-figures
+        type: metric_threshold
+        path: results/articles-51-55-validation.json
+        key: primary_figure_count
+        comparator: "=="
+        value: 20
+      - id: articles-51-55-format-files
+        type: metric_threshold
+        path: results/articles-51-55-validation.json
+        key: format_file_count
+        comparator: "=="
+        value: 80
 assertions:
   - id: pilot-data-sample-count
     type: metric_threshold
@@ -5975,6 +8256,126 @@ assertions:
     key: chapter_count
     comparator: "=="
     value: 55
+  - id: articles-30-35-release-checks-failed
+    type: metric_threshold
+    path: results/articles-30-35-validation.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: articles-30-35-release-checks-passed
+    type: metric_threshold
+    path: results/articles-30-35-validation.json
+    key: checks_passed
+    comparator: "=="
+    value: 359
+  - id: articles-30-35-release-primary-figures
+    type: metric_threshold
+    path: results/articles-30-35-validation.json
+    key: primary_figure_count
+    comparator: "=="
+    value: 19
+  - id: articles-30-35-release-format-files
+    type: metric_threshold
+    path: results/articles-30-35-validation.json
+    key: format_file_count
+    comparator: "=="
+    value: 76
+  - id: articles-36-40-release-checks-failed
+    type: metric_threshold
+    path: results/articles-36-40-validation.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: articles-36-40-release-checks-passed
+    type: metric_threshold
+    path: results/articles-36-40-validation.json
+    key: checks_passed
+    comparator: "=="
+    value: 406
+  - id: articles-36-40-release-primary-figures
+    type: metric_threshold
+    path: results/articles-36-40-validation.json
+    key: primary_figure_count
+    comparator: "=="
+    value: 20
+  - id: articles-36-40-release-format-files
+    type: metric_threshold
+    path: results/articles-36-40-validation.json
+    key: format_file_count
+    comparator: "=="
+    value: 80
+  - id: articles-41-45-release-checks-failed
+    type: metric_threshold
+    path: results/articles-41-45-validation.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: articles-41-45-release-checks-passed
+    type: metric_threshold
+    path: results/articles-41-45-validation.json
+    key: checks_passed
+    comparator: "=="
+    value: 445
+  - id: articles-41-45-release-primary-figures
+    type: metric_threshold
+    path: results/articles-41-45-validation.json
+    key: primary_figure_count
+    comparator: "=="
+    value: 20
+  - id: articles-41-45-release-format-files
+    type: metric_threshold
+    path: results/articles-41-45-validation.json
+    key: format_file_count
+    comparator: "=="
+    value: 80
+  - id: articles-46-50-release-checks-failed
+    type: metric_threshold
+    path: results/articles-46-50-validation.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: articles-46-50-release-checks-passed
+    type: metric_threshold
+    path: results/articles-46-50-validation.json
+    key: checks_passed
+    comparator: "=="
+    value: 435
+  - id: articles-46-50-release-primary-figures
+    type: metric_threshold
+    path: results/articles-46-50-validation.json
+    key: primary_figure_count
+    comparator: "=="
+    value: 20
+  - id: articles-46-50-release-format-files
+    type: metric_threshold
+    path: results/articles-46-50-validation.json
+    key: format_file_count
+    comparator: "=="
+    value: 80
+  - id: articles-51-55-release-checks-failed
+    type: metric_threshold
+    path: results/articles-51-55-validation.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: articles-51-55-release-checks-passed
+    type: metric_threshold
+    path: results/articles-51-55-validation.json
+    key: checks_passed
+    comparator: "=="
+    value: 413
+  - id: articles-51-55-release-primary-figures
+    type: metric_threshold
+    path: results/articles-51-55-validation.json
+    key: primary_figure_count
+    comparator: "=="
+    value: 20
+  - id: articles-51-55-release-format-files
+    type: metric_threshold
+    path: results/articles-51-55-validation.json
+    key: format_file_count
+    comparator: "=="
+    value: 80
   - id: intro-html-exists
     type: file_exists
     path: pilot/_site/index.html
@@ -8423,6 +10824,723 @@ assertions:
     key: graphics.format_files
     comparator: "=="
     value: 16
+  - id: community-composition-html-exists
+    type: file_exists
+    path: pilot/_site/chapters/26-community-composition.html
+  - id: community-composition-summary-exists-pilot
+    type: file_exists
+    path: pilot/results/26-community-composition/community-composition-summary.json
+  - id: community-composition-rank-audit-exists
+    type: file_exists
+    path: pilot/results/26-community-composition/taxonomy-rank-audit.tsv
+  - id: community-composition-display-table-exists
+    type: file_exists
+    path: pilot/results/26-community-composition/phylum-display-composition.tsv
+  - id: community-composition-denominator-audit-exists
+    type: file_exists
+    path: pilot/results/26-community-composition/denominator-sensitivity.tsv
+  - id: community-composition-stacked-pdf-exists
+    type: file_exists
+    path: pilot/figures/26-phylum-stacked.pdf
+  - id: community-composition-stacked-svg-exists
+    type: file_exists
+    path: pilot/figures/26-phylum-stacked.svg
+  - id: community-composition-stacked-png-exists
+    type: file_exists
+    path: pilot/figures/26-phylum-stacked.png
+  - id: community-composition-stacked-tiff-exists
+    type: file_exists
+    path: pilot/figures/26-phylum-stacked.tiff
+  - id: community-composition-bubble-pdf-exists
+    type: file_exists
+    path: pilot/figures/26-genus-bubble.pdf
+  - id: community-composition-bubble-svg-exists
+    type: file_exists
+    path: pilot/figures/26-genus-bubble.svg
+  - id: community-composition-bubble-png-exists
+    type: file_exists
+    path: pilot/figures/26-genus-bubble.png
+  - id: community-composition-bubble-tiff-exists
+    type: file_exists
+    path: pilot/figures/26-genus-bubble.tiff
+  - id: community-composition-alluvial-pdf-exists
+    type: file_exists
+    path: pilot/figures/26-group-phylum-alluvial.pdf
+  - id: community-composition-alluvial-svg-exists
+    type: file_exists
+    path: pilot/figures/26-group-phylum-alluvial.svg
+  - id: community-composition-alluvial-png-exists
+    type: file_exists
+    path: pilot/figures/26-group-phylum-alluvial.png
+  - id: community-composition-alluvial-tiff-exists
+    type: file_exists
+    path: pilot/figures/26-group-phylum-alluvial.tiff
+  - id: community-composition-heatmap-pdf-exists
+    type: file_exists
+    path: pilot/figures/26-genus-heatmap.pdf
+  - id: community-composition-heatmap-svg-exists
+    type: file_exists
+    path: pilot/figures/26-genus-heatmap.svg
+  - id: community-composition-heatmap-png-exists
+    type: file_exists
+    path: pilot/figures/26-genus-heatmap.png
+  - id: community-composition-heatmap-tiff-exists
+    type: file_exists
+    path: pilot/figures/26-genus-heatmap.tiff
+  - id: community-composition-check-count-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: checks_total
+    comparator: "=="
+    value: 195
+  - id: community-composition-checks-passed-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: checks_passed
+    comparator: "=="
+    value: 195
+  - id: community-composition-checks-failed-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: community-composition-phylum-labels-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: taxonomy.phylum_labels
+    comparator: "=="
+    value: 56
+  - id: community-composition-genus-labels-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: taxonomy.genus_labels
+    comparator: "=="
+    value: 772
+  - id: community-composition-top10-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: primary.top_n
+    comparator: "=="
+    value: 10
+  - id: community-composition-coverage-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: primary.top10_coverage_mean
+    comparator: ">="
+    value: 0.948
+  - id: community-composition-top-n-branches-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: sensitivity.top_n_branches
+    comparator: "=="
+    value: 5
+  - id: community-composition-ranking-jaccard-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: sensitivity.equal_vs_pooled_top10_jaccard
+    comparator: "=="
+    value: 1
+  - id: community-composition-primary-figures-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: graphics.primary_figures
+    comparator: "=="
+    value: 4
+  - id: community-composition-format-files-pilot
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: graphics.format_files
+    comparator: "=="
+    value: 16
+  - id: community-composition-raster-ppi
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: graphics.raster_ppi
+    comparator: "=="
+    value: 600
+  - id: community-composition-svg-text-files
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: graphics.svg_files_with_text
+    comparator: "=="
+    value: 4
+  - id: community-composition-pdf-font-files
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: graphics.pdf_files_with_embedded_font
+    comparator: "=="
+    value: 4
+  - id: community-composition-lzw-files
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: graphics.lzw_tiff_files
+    comparator: "=="
+    value: 4
+  - id: community-composition-dimension-checks
+    type: metric_threshold
+    path: pilot/results/26-community-composition/community-composition-summary.json
+    key: graphics.dimension_checks_passed
+    comparator: "=="
+    value: 16
+  - id: multirank-composition-html-exists
+    type: file_exists
+    path: pilot/_site/chapters/27-multirank-composition.html
+  - id: multirank-composition-summary-exists-pilot
+    type: file_exists
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+  - id: multirank-composition-taxonomy-map-exists
+    type: file_exists
+    path: pilot/results/27-multirank-composition/taxonomy-lineage-map.tsv
+  - id: multirank-composition-relative-table-exists
+    type: file_exists
+    path: pilot/results/27-multirank-composition/multirank-relative-abundance.tsv
+  - id: multirank-composition-rank-audit-exists
+    type: file_exists
+    path: pilot/results/27-multirank-composition/rank-resolution-audit.tsv
+  - id: multirank-composition-group-audit-exists
+    type: file_exists
+    path: pilot/results/27-multirank-composition/group-rank-resolution.tsv
+  - id: multirank-composition-gap-audit-exists
+    type: file_exists
+    path: pilot/results/27-multirank-composition/lineage-gap-audit.tsv
+  - id: multirank-composition-collision-audit-exists
+    type: file_exists
+    path: pilot/results/27-multirank-composition/label-collision-audit.tsv
+  - id: multirank-composition-topn-audit-exists
+    type: file_exists
+    path: pilot/results/27-multirank-composition/rank-topn-sensitivity.tsv
+  - id: multirank-composition-complete-lineages-exist
+    type: file_exists
+    path: pilot/results/27-multirank-composition/complete-lineage-abundance.tsv
+  - id: multirank-composition-cascade-pdf-exists
+    type: file_exists
+    path: pilot/figures/27-rank-resolution-cascade.pdf
+  - id: multirank-composition-cascade-svg-exists
+    type: file_exists
+    path: pilot/figures/27-rank-resolution-cascade.svg
+  - id: multirank-composition-cascade-png-exists
+    type: file_exists
+    path: pilot/figures/27-rank-resolution-cascade.png
+  - id: multirank-composition-cascade-tiff-exists
+    type: file_exists
+    path: pilot/figures/27-rank-resolution-cascade.tiff
+  - id: multirank-composition-bubble-pdf-exists
+    type: file_exists
+    path: pilot/figures/27-multirank-bubble.pdf
+  - id: multirank-composition-bubble-svg-exists
+    type: file_exists
+    path: pilot/figures/27-multirank-bubble.svg
+  - id: multirank-composition-bubble-png-exists
+    type: file_exists
+    path: pilot/figures/27-multirank-bubble.png
+  - id: multirank-composition-bubble-tiff-exists
+    type: file_exists
+    path: pilot/figures/27-multirank-bubble.tiff
+  - id: multirank-composition-ladder-pdf-exists
+    type: file_exists
+    path: pilot/figures/27-lineage-ladder.pdf
+  - id: multirank-composition-ladder-svg-exists
+    type: file_exists
+    path: pilot/figures/27-lineage-ladder.svg
+  - id: multirank-composition-ladder-png-exists
+    type: file_exists
+    path: pilot/figures/27-lineage-ladder.png
+  - id: multirank-composition-ladder-tiff-exists
+    type: file_exists
+    path: pilot/figures/27-lineage-ladder.tiff
+  - id: multirank-composition-topn-pdf-exists
+    type: file_exists
+    path: pilot/figures/27-topn-coverage.pdf
+  - id: multirank-composition-topn-svg-exists
+    type: file_exists
+    path: pilot/figures/27-topn-coverage.svg
+  - id: multirank-composition-topn-png-exists
+    type: file_exists
+    path: pilot/figures/27-topn-coverage.png
+  - id: multirank-composition-topn-tiff-exists
+    type: file_exists
+    path: pilot/figures/27-topn-coverage.tiff
+  - id: multirank-composition-check-count-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: checks_total
+    comparator: "=="
+    value: 209
+  - id: multirank-composition-checks-passed-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: checks_passed
+    comparator: "=="
+    value: 209
+  - id: multirank-composition-checks-failed-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: multirank-composition-rank-count-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: taxonomy.ranks
+    comparator: "=="
+    value: 5
+  - id: multirank-composition-complete-genus-coverage-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: hierarchy.complete_genus_lineage_mean
+    comparator: ">="
+    value: 0.3437
+  - id: multirank-composition-parent-gap-features-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: hierarchy.family_unknown_genus_known_features
+    comparator: "=="
+    value: 324
+  - id: multirank-composition-parent-label-collisions-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: hierarchy.parent_specific_label_collisions
+    comparator: "=="
+    value: 2
+  - id: multirank-composition-cross-rank-collisions-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: hierarchy.cross_rank_name_collisions
+    comparator: "=="
+    value: 13
+  - id: multirank-composition-topn-rows-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: sensitivity.top_n_rows
+    comparator: "=="
+    value: 25
+  - id: multirank-composition-genus-top10-coverage-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: sensitivity.top10_coverage_by_rank.Genus
+    comparator: ">="
+    value: 0.0952
+  - id: multirank-composition-primary-figures-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: graphics.primary_figures
+    comparator: "=="
+    value: 4
+  - id: multirank-composition-format-files-pilot
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: graphics.format_files
+    comparator: "=="
+    value: 16
+  - id: multirank-composition-raster-ppi
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: graphics.raster_ppi
+    comparator: "=="
+    value: 600
+  - id: multirank-composition-svg-chinese-characters
+    type: metric_threshold
+    path: pilot/results/27-multirank-composition/multirank-composition-summary.json
+    key: graphics.svg_chinese_characters
+    comparator: "=="
+    value: 0
+  - id: core-rare-biosphere-html-exists
+    type: file_exists
+    path: pilot/_site/chapters/28-core-rare-biosphere.html
+  - id: core-rare-biosphere-summary-exists-pilot
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+  - id: core-rare-biosphere-feature-table-exists
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/feature-occupancy-abundance.tsv
+  - id: core-rare-biosphere-members-exist
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/core-members.tsv
+  - id: core-rare-biosphere-group-summary-exists
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/group-core-summary.tsv
+  - id: core-rare-biosphere-membership-exists
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/core-membership-patterns.tsv
+  - id: core-rare-biosphere-threshold-grid-exists
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/core-threshold-sensitivity.tsv
+  - id: core-rare-biosphere-detection-counts-exist
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/detection-count-audit.tsv
+  - id: core-rare-biosphere-depth-audit-exists
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/depth-sensitivity.tsv
+  - id: core-rare-biosphere-state-table-exists
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/feature-state-classification.tsv
+  - id: core-rare-biosphere-rare-mass-exists
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/rare-mass-by-sample.tsv
+  - id: core-rare-biosphere-rare-sensitivity-exists
+    type: file_exists
+    path: pilot/results/28-core-rare-biosphere/rare-threshold-sensitivity.tsv
+  - id: core-rare-biosphere-occupancy-pdf-exists
+    type: file_exists
+    path: pilot/figures/28-occupancy-abundance.pdf
+  - id: core-rare-biosphere-occupancy-svg-exists
+    type: file_exists
+    path: pilot/figures/28-occupancy-abundance.svg
+  - id: core-rare-biosphere-occupancy-png-exists
+    type: file_exists
+    path: pilot/figures/28-occupancy-abundance.png
+  - id: core-rare-biosphere-occupancy-tiff-exists
+    type: file_exists
+    path: pilot/figures/28-occupancy-abundance.tiff
+  - id: core-rare-biosphere-membership-pdf-exists
+    type: file_exists
+    path: pilot/figures/28-group-core-membership.pdf
+  - id: core-rare-biosphere-membership-svg-exists
+    type: file_exists
+    path: pilot/figures/28-group-core-membership.svg
+  - id: core-rare-biosphere-membership-png-exists
+    type: file_exists
+    path: pilot/figures/28-group-core-membership.png
+  - id: core-rare-biosphere-membership-tiff-exists
+    type: file_exists
+    path: pilot/figures/28-group-core-membership.tiff
+  - id: core-rare-biosphere-sensitivity-pdf-exists
+    type: file_exists
+    path: pilot/figures/28-threshold-depth-sensitivity.pdf
+  - id: core-rare-biosphere-sensitivity-svg-exists
+    type: file_exists
+    path: pilot/figures/28-threshold-depth-sensitivity.svg
+  - id: core-rare-biosphere-sensitivity-png-exists
+    type: file_exists
+    path: pilot/figures/28-threshold-depth-sensitivity.png
+  - id: core-rare-biosphere-sensitivity-tiff-exists
+    type: file_exists
+    path: pilot/figures/28-threshold-depth-sensitivity.tiff
+  - id: core-rare-biosphere-rare-pdf-exists
+    type: file_exists
+    path: pilot/figures/28-rare-biosphere-mass.pdf
+  - id: core-rare-biosphere-rare-svg-exists
+    type: file_exists
+    path: pilot/figures/28-rare-biosphere-mass.svg
+  - id: core-rare-biosphere-rare-png-exists
+    type: file_exists
+    path: pilot/figures/28-rare-biosphere-mass.png
+  - id: core-rare-biosphere-rare-tiff-exists
+    type: file_exists
+    path: pilot/figures/28-rare-biosphere-mass.tiff
+  - id: core-rare-biosphere-check-count-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: checks_total
+    comparator: "=="
+    value: 320
+  - id: core-rare-biosphere-checks-passed-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: checks_passed
+    comparator: "=="
+    value: 320
+  - id: core-rare-biosphere-checks-failed-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: core-rare-biosphere-feature-count-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: dataset.features
+    comparator: "=="
+    value: 13628
+  - id: core-rare-biosphere-global-core-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: core.global_features
+    comparator: "=="
+    value: 97
+  - id: core-rare-biosphere-shared-core-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: core.shared_three_group_features
+    comparator: "=="
+    value: 59
+  - id: core-rare-biosphere-union-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: core.group_union_features
+    comparator: "=="
+    value: 425
+  - id: core-rare-biosphere-rarefied-core-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: sensitivity.rarefied_one_read_core_features
+    comparator: "=="
+    value: 167
+  - id: core-rare-biosphere-jaccard-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: sensitivity.primary_rarefied_one_read_jaccard
+    comparator: ">="
+    value: 0.5808
+  - id: core-rare-biosphere-local-rare-mass-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: rare.local_rare_mass_mean
+    comparator: ">="
+    value: 0.4415
+  - id: core-rare-biosphere-conditionally-rare-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: rare.conditionally_rare_features
+    comparator: "=="
+    value: 200
+  - id: core-rare-biosphere-sampling-limited-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: rare.sampling_limited_features
+    comparator: "=="
+    value: 1155
+  - id: core-rare-biosphere-primary-figures-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: graphics.primary_figures
+    comparator: "=="
+    value: 4
+  - id: core-rare-biosphere-format-files-pilot
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: graphics.format_files
+    comparator: "=="
+    value: 16
+  - id: core-rare-biosphere-raster-ppi
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: graphics.raster_ppi
+    comparator: "=="
+    value: 600
+  - id: core-rare-biosphere-svg-chinese-characters
+    type: metric_threshold
+    path: pilot/results/28-core-rare-biosphere/core-rare-biosphere-summary.json
+    key: graphics.svg_chinese_characters
+    comparator: "=="
+    value: 0
+  - id: community-typing-dmm-html-exists
+    type: file_exists
+    path: pilot/_site/chapters/29-community-typing-dmm.html
+  - id: community-typing-dmm-summary-exists-pilot
+    type: file_exists
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+  - id: community-typing-dmm-model-selection-exists
+    type: file_exists
+    path: pilot/results/29-community-typing-dmm/model-selection.tsv
+  - id: community-typing-dmm-posteriors-exist
+    type: file_exists
+    path: pilot/results/29-community-typing-dmm/sample-posteriors.tsv
+  - id: community-typing-dmm-profiles-exist
+    type: file_exists
+    path: pilot/results/29-community-typing-dmm/component-profiles.tsv
+  - id: community-typing-dmm-initialization-exists
+    type: file_exists
+    path: pilot/results/29-community-typing-dmm/initialization-agreement.tsv
+  - id: community-typing-dmm-sensitivity-exists
+    type: file_exists
+    path: pilot/results/29-community-typing-dmm/sensitivity-agreement.tsv
+  - id: community-typing-dmm-transitions-exist
+    type: file_exists
+    path: pilot/results/29-community-typing-dmm/participant-transitions.tsv
+  - id: community-typing-dmm-model-selection-pdf-exists
+    type: file_exists
+    path: pilot/figures/29-model-selection.pdf
+  - id: community-typing-dmm-model-selection-svg-exists
+    type: file_exists
+    path: pilot/figures/29-model-selection.svg
+  - id: community-typing-dmm-model-selection-png-exists
+    type: file_exists
+    path: pilot/figures/29-model-selection.png
+  - id: community-typing-dmm-model-selection-tiff-exists
+    type: file_exists
+    path: pilot/figures/29-model-selection.tiff
+  - id: community-typing-dmm-ordination-pdf-exists
+    type: file_exists
+    path: pilot/figures/29-posterior-ordination.pdf
+  - id: community-typing-dmm-ordination-svg-exists
+    type: file_exists
+    path: pilot/figures/29-posterior-ordination.svg
+  - id: community-typing-dmm-ordination-png-exists
+    type: file_exists
+    path: pilot/figures/29-posterior-ordination.png
+  - id: community-typing-dmm-ordination-tiff-exists
+    type: file_exists
+    path: pilot/figures/29-posterior-ordination.tiff
+  - id: community-typing-dmm-profiles-pdf-exists
+    type: file_exists
+    path: pilot/figures/29-component-profiles.pdf
+  - id: community-typing-dmm-profiles-svg-exists
+    type: file_exists
+    path: pilot/figures/29-component-profiles.svg
+  - id: community-typing-dmm-profiles-png-exists
+    type: file_exists
+    path: pilot/figures/29-component-profiles.png
+  - id: community-typing-dmm-profiles-tiff-exists
+    type: file_exists
+    path: pilot/figures/29-component-profiles.tiff
+  - id: community-typing-dmm-stability-pdf-exists
+    type: file_exists
+    path: pilot/figures/29-stability-audit.pdf
+  - id: community-typing-dmm-stability-svg-exists
+    type: file_exists
+    path: pilot/figures/29-stability-audit.svg
+  - id: community-typing-dmm-stability-png-exists
+    type: file_exists
+    path: pilot/figures/29-stability-audit.png
+  - id: community-typing-dmm-stability-tiff-exists
+    type: file_exists
+    path: pilot/figures/29-stability-audit.tiff
+  - id: community-typing-dmm-check-count-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: checks_total
+    comparator: "=="
+    value: 222
+  - id: community-typing-dmm-checks-passed-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: checks_passed
+    comparator: "=="
+    value: 222
+  - id: community-typing-dmm-checks-failed-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: checks_failed
+    comparator: "=="
+    value: 0
+  - id: community-typing-dmm-sample-count-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: dataset.samples
+    comparator: "=="
+    value: 278
+  - id: community-typing-dmm-feature-count-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: dataset.features
+    comparator: "=="
+    value: 130
+  - id: community-typing-dmm-read-count-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: dataset.reads
+    comparator: "=="
+    value: 570851
+  - id: community-typing-dmm-laplace-k-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: model.selected_k_laplace
+    comparator: "=="
+    value: 4
+  - id: community-typing-dmm-aic-k-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: model.selected_k_aic
+    comparator: "=="
+    value: 2
+  - id: community-typing-dmm-bic-k-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: model.selected_k_bic
+    comparator: "=="
+    value: 1
+  - id: community-typing-dmm-min-state-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: model.minimum_state_size
+    comparator: "=="
+    value: 46
+  - id: community-typing-dmm-low-posterior-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: model.samples_below_point_eight_posterior
+    comparator: "=="
+    value: 8
+  - id: community-typing-dmm-reference-ari-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: model.bundled_reference_partition_ari
+    comparator: "=="
+    value: 1
+  - id: community-typing-dmm-primary-basin-starts-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: stability.initialization_primary_basin_starts
+    comparator: "=="
+    value: 8
+  - id: community-typing-dmm-initialization-min-ari-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: stability.initialization_min_ari
+    comparator: "=="
+    value: 1
+  - id: community-typing-dmm-prevalence-ari-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: stability.sensitivity_fixed_k4_ari.Prevalence >= 5%
+    comparator: ">="
+    value: 0.9035
+  - id: community-typing-dmm-depth-ari-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: stability.sensitivity_fixed_k4_ari.Depth >= 1,000
+    comparator: ">="
+    value: 0.9284
+  - id: community-typing-dmm-rarefied-ari-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: stability.sensitivity_fixed_k4_ari.Rarefied to 1,000
+    comparator: ">="
+    value: 0.9056
+  - id: community-typing-dmm-one-participant-ari-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: stability.sensitivity_fixed_k4_ari.One per participant
+    comparator: ">="
+    value: 0.6795
+  - id: community-typing-dmm-paired-keys-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: repeated_samples.paired_keys
+    comparator: "=="
+    value: 124
+  - id: community-typing-dmm-same-state-pairs-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: repeated_samples.same_state_pairs
+    comparator: "=="
+    value: 85
+  - id: community-typing-dmm-primary-figures-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: graphics.primary_figures
+    comparator: "=="
+    value: 4
+  - id: community-typing-dmm-format-files-pilot
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: graphics.format_files
+    comparator: "=="
+    value: 16
+  - id: community-typing-dmm-raster-ppi
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: graphics.raster_ppi
+    comparator: "=="
+    value: 600
+  - id: community-typing-dmm-svg-chinese-characters
+    type: metric_threshold
+    path: pilot/results/29-community-typing-dmm/community-typing-dmm-summary.json
+    key: graphics.svg_chinese_characters
+    comparator: "=="
+    value: 0
 references:
   - title: "microeco: an R package for data mining in microbial community ecology"
     type: method-paper
@@ -8619,6 +11737,84 @@ references:
   - title: Dismantling the Mantel tests
     type: method-paper
     citation: Guillot G, Rousset F. Methods in Ecology and Evolution. 2013;4:336-344.
+  - title: "Microbiome datasets are compositional: and this is not optional"
+    type: method-paper
+    citation: Gloor GB, Macklaim JM, Pawlowsky-Glahn V, Egozcue JJ. Frontiers in Microbiology. 2017;8:2224. doi:10.3389/fmicb.2017.02224.
+  - title: Microbiome differential abundance methods produce different results across 38 datasets
+    type: benchmark-paper
+    citation: Nearing JT, Douglas GM, Hayes MG, et al. Nature Communications. 2022;13:342. doi:10.1038/s41467-022-28034-z.
+  - title: Multigroup analysis of compositions of microbiomes with covariate adjustments and repeated measures
+    type: method-paper
+    citation: Lin H, Peddada SD. Nature Methods. 2024;21:83-91. doi:10.1038/s41592-023-02092-7.
+  - title: ANOVA-Like Differential Expression tool for compositional data
+    type: method-paper
+    citation: Fernandes AD, Reid JNS, Macklaim JM, et al. Microbiome. 2014;2:15. doi:10.1186/2049-2618-2-15.
+  - title: Multivariable association discovery in population-scale meta-omics studies
+    type: method-paper
+    citation: Mallick H, Rahnavard A, McIver LJ, et al. PLOS Computational Biology. 2021;17:e1009442. doi:10.1371/journal.pcbi.1009442.
+  - title: Metagenomic biomarker discovery and explanation
+    type: method-paper
+    citation: Segata N, Izard J, Waldron L, et al. Genome Biology. 2011;12:R60. doi:10.1186/gb-2011-12-6-r60.
+  - title: Modeling microbial abundances and dysbiosis with beta-binomial regression
+    type: method-paper
+    citation: Martin BD, Witten D, Willis AD. The Annals of Applied Statistics. 2020;14:94-115. doi:10.1214/19-AOAS1283.
+  - title: Quantitative microbiome profiling links gut community variation to microbial load
+    type: data-and-method-paper
+    citation: Vandeputte D, Kathagen G, D'hoe K, et al. Nature. 2017;551:507-511. doi:10.1038/nature24460.
+  - title: Inferring correlation networks from genomic survey data
+    type: method-paper
+    citation: Friedman J, Alm EJ. PLOS Computational Biology. 2012;8:e1002687. doi:10.1371/journal.pcbi.1002687.
+  - title: Sparse and compositionally robust inference of microbial ecological networks
+    type: method-paper
+    citation: Kurtz ZD, Müller CL, Miraldi ER, et al. PLOS Computational Biology. 2015;11:e1004226. doi:10.1371/journal.pcbi.1004226.
+  - title: "ggClusterNet: an R package for microbiome network analysis and modularity-based multiple network layouts"
+    type: software-paper
+    citation: Wen T, Xie P, Yang S, et al. iMeta. 2022;1:e32. doi:10.1002/imt2.32.
+  - title: Fat, fibre and cancer risk in African Americans and rural Africans
+    type: data-and-intervention-paper
+    citation: O'Keefe SJD, Li JV, Lahti L, et al. Nature Communications. 2015;6:6342. doi:10.1038/ncomms7342.
+  - title: A large-scale survey of soil bacterial communities across Chinese wetlands
+    type: data-paper
+    citation: An J, Liu C, Wang Q, et al. Geoderma. 2019;337:841-850. doi:10.1016/j.geoderma.2018.09.035.
+  - title: piecewiseSEM
+    type: method-paper
+    citation: Lefcheck JS. Methods in Ecology and Evolution. 2016;7:573-579. doi:10.1111/2041-210X.12512.
+  - title: D-separation tests for path analytic model selection
+    type: method-paper
+    citation: Shipley B. Ecology. 2013;94:560-564. doi:10.1890/12-0976.1.
+  - title: A general approach to causal mediation analysis
+    type: method-paper
+    citation: Imai K, Keele L, Tingley D. Psychological Methods. 2010;15:309-334. doi:10.1037/a0020761.
+  - title: mediation R package
+    type: software-paper
+    citation: Tingley D, Yamamoto T, Hirose K, Keele L, Imai K. Journal of Statistical Software. 2014;59:1-38. doi:10.18637/jss.v059.i05.
+  - title: MiBioGen host genetics of the gut microbiome
+    type: data-paper
+    citation: Kurilshikov A, Medina-Gomez C, Bacigalupe R, et al. Nature Genetics. 2021;53:156-165. doi:10.1038/s41588-020-00763-1.
+  - title: Inflammatory bowel disease genome-wide association study
+    type: data-paper
+    citation: de Lange KM, Moutsianas L, Lee JC, et al. Nature Genetics. 2017;49:256-261. doi:10.1038/ng.3760.
+  - title: MR-Base
+    type: method-and-software-paper
+    citation: Hemani G, Zheng J, Elsworth B, et al. eLife. 2018;7:e34408. doi:10.7554/eLife.34408.
+  - title: MR-Egger regression
+    type: method-paper
+    citation: Bowden J, Davey Smith G, Burgess S. International Journal of Epidemiology. 2015;44:512-525. doi:10.1093/ije/dyv080.
+  - title: MR-PRESSO
+    type: method-paper
+    citation: Verbanck M, Chen CY, Neale B, Do R. Nature Genetics. 2018;50:693-698. doi:10.1038/s41588-018-0099-7.
+  - title: The environment and disease—association or causation?
+    type: causal-inference-framework
+    citation: Hill AB. Proceedings of the Royal Society of Medicine. 1965;58:295-300. doi:10.1177/003591576505800503.
+  - title: Obesity-discordant twin microbiota transfer
+    type: experimental-paper
+    citation: Ridaura VK, Faith JJ, Rey FE, et al. Science. 2013;341:1241214. doi:10.1126/science.1241214.
+  - title: Precision microbiome reconstitution and colonization resistance
+    type: experimental-paper
+    citation: Buffie CG, Bucci V, Stein RR, et al. Nature. 2015;517:205-208. doi:10.1038/nature13828.
+  - title: Microbial L-carnitine metabolism and atherosclerosis
+    type: mechanism-paper
+    citation: Koeth RA, Wang Z, Levison BS, et al. Nature Medicine. 2013;19:576-585. doi:10.1038/nm.3145.
 publication:
   repo:
     mode: bundle
@@ -8686,16 +11882,16 @@ series:
     - {number: 33, file: chapters/33-da-visualization.qmd, title: "差异可视化：火山/LEfSe cladogram/Manhattan/森林图"}
     - {number: 34, file: chapters/34-absolute-quantification.qmd, title: "绝对定量陷阱：相对丰度 vs QMP/spike-in"}
     - {number: 35, file: chapters/35-cooccurrence-networks.qmd, title: "共现网络基础：SparCC/SPIEC-EASI/ggClusterNet"}
-    - {number: 36, file: chapters/36-network-robustness.qmd, title: "网络进阶：鲁棒性/keystone/Zi-Pi 拓扑角色/组间比较"}
-    - {number: 37, file: chapters/37-microbial-wgcna.qmd, title: "WGCNA 用于微生物组：模块 + 模块–性状关联"}
-    - {number: 38, file: chapters/38-community-assembly-bnti.qmd, title: "βNTI + RCbray：确定性 vs 随机性"}
-    - {number: 39, file: chapters/39-neutral-community-model.qmd, title: "中性群落模型（Sloan/Burns 2016 ISME）"}
-    - {number: 40, file: chapters/40-niche-distance-decay.qmd, title: "生态位宽度/物种丰度分布/距离衰减"}
-    - {number: 41, file: chapters/41-picrust2.qmd, title: "PICRUSt2 + ggpicrust2（复现通路热图）"}
-    - {number: 42, file: chapters/42-functional-guilds.qmd, title: "FAPROTAX/Tax4Fun2/BugBase（环境功能类群）"}
-    - {number: 43, file: chapters/43-random-forest.qmd, title: "随机森林分类/回归 + ROC + 重要性 + 防过拟合规范"}
-    - {number: 44, file: chapters/44-cross-cohort-validation.qmd, title: "跨队列 meta 分析 + 外部验证"}
-    - {number: 45, file: chapters/45-survival-analysis.qmd, title: "微生物组与生存结局：Cox / Kaplan–Meier / 时间依赖 ROC"}
+    - {number: 36, file: chapters/36-network-robustness.qmd, title: "网络进阶：鲁棒性、拓扑角色与组间比较"}
+    - {number: 37, file: chapters/37-microbial-wgcna.qmd, title: "WGCNA 用于微生物组：模块、性状关联与候选 hub"}
+    - {number: 38, file: chapters/38-community-assembly-bnti.qmd, title: "βNTI + RCbray：确定性与随机过程的条件性证据"}
+    - {number: 39, file: chapters/39-neutral-community-model.qmd, title: "中性群落模型：Sloan 拟合、迁入率与偏离类群"}
+    - {number: 40, file: chapters/40-niche-distance-decay.qmd, title: "生态位宽度、物种丰度分布与距离衰减"}
+    - {number: 41, file: chapters/41-picrust2.qmd, title: "PICRUSt2 + ggpicrust2：从 ASV 到通路热图"}
+    - {number: 42, file: chapters/42-functional-guilds.qmd, title: "FAPROTAX、Tax4Fun2 与 BugBase：环境功能类群"}
+    - {number: 43, file: chapters/43-random-forest.qmd, title: "随机森林分类与回归：ROC、重要性与防过拟合"}
+    - {number: 44, file: chapters/44-cross-cohort-validation.qmd, title: "跨队列 meta 分析与外部验证"}
+    - {number: 45, file: chapters/45-survival-analysis.qmd, title: "微生物组与时间结局：Cox、Kaplan–Meier 与时间依赖 ROC"}
     - {number: 46, file: chapters/46-procrustes-mantel-halla.qmd, title: "相关整合：Procrustes/Mantel/HAllA"}
     - {number: 47, file: chapters/47-spls-diablo.qmd, title: "sPLS/DIABLO（mixOmics）"}
     - {number: 48, file: chapters/48-mmvec-mofa.qmd, title: "MMvec/MOFA（菌×代谢物）"}

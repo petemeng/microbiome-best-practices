@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	chinese_characters	font_status	dimension_status
+28-occupancy-abundance	pdf	figures/28-occupancy-abundance.pdf	PDF	507228	183	132	182.73888888888888	131.9388888888889						1			embedded	PASS
+28-occupancy-abundance	svg	figures/28-occupancy-abundance.svg	SVG	1995632	183	132	182.99994444444442	131.9988611111111							31	0	declared	PASS
+28-occupancy-abundance	png	figures/28-occupancy-abundance.png	PNG	1622413	183	132	183	132	4322	3118	599.8841530054644	599.9787878787878	Zip					PASS
+28-occupancy-abundance	tiff	figures/28-occupancy-abundance.tiff	TIFF	1952880	183	132	183	132	4322	3118	599.8841530054644	599.9787878787878	LZW					PASS
+28-group-core-membership	pdf	figures/28-group-core-membership.pdf	PDF	19845	165	118	164.7472222222222	117.82777777777778						1			embedded	PASS
+28-group-core-membership	svg	figures/28-group-core-membership.svg	SVG	13185	165	118	165.00122222222222	118.00063888888889							26	0	declared	PASS
+28-group-core-membership	png	figures/28-group-core-membership.png	PNG	236879	165	118	165	118	3897	2787	599.9018181818182	599.9135593220338	Zip					PASS
+28-group-core-membership	tiff	figures/28-group-core-membership.tiff	TIFF	297708	165	118	165	118	3897	2787	599.9018181818182	599.9135593220338	LZW					PASS
+28-threshold-depth-sensitivity	pdf	figures/28-threshold-depth-sensitivity.pdf	PDF	25266	170	112	169.6861111111111	111.83055555555555						1			embedded	PASS
+28-threshold-depth-sensitivity	svg	figures/28-threshold-depth-sensitivity.svg	SVG	19298	170	112	170.00008333333332	111.99988888888889							45	0	declared	PASS
+28-threshold-depth-sensitivity	png	figures/28-threshold-depth-sensitivity.png	PNG	293899	170	112	170	112	4015	2645	599.8882352941176	599.8482142857142	Zip					PASS
+28-threshold-depth-sensitivity	tiff	figures/28-threshold-depth-sensitivity.tiff	TIFF	830394	170	112	170	112	4015	2645	599.8882352941176	599.8482142857142	LZW					PASS
+28-rare-biosphere-mass	pdf	figures/28-rare-biosphere-mass.pdf	PDF	33982	170	116	169.6861111111111	115.7111111111111						1			embedded	PASS
+28-rare-biosphere-mass	svg	figures/28-rare-biosphere-mass.svg	SVG	71263	170	116	170.00008333333332	116.00038888888889							18	0	declared	PASS
+28-rare-biosphere-mass	png	figures/28-rare-biosphere-mass.png	PNG	525740	170	116	170	116	4015	2740	599.8882352941176	599.9655172413793	Zip					PASS
+28-rare-biosphere-mass	tiff	figures/28-rare-biosphere-mass.tiff	TIFF	803862	170	116	170	116	4015	2740	599.8882352941176	599.9655172413793	LZW					PASS

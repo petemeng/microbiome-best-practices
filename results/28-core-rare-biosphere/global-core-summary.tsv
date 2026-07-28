@@ -1,0 +1,2 @@
+DetectionThreshold	PrevalenceThreshold	CoreFeatures	EqualSampleAbundanceMass	PooledReadAbundanceMass	CoreFeaturesBelowPointOnePercentMean
+1e-4	0.8	97	0.17036121103173313	0.17590126383769533	34

@@ -122,4 +122,52 @@ The host mamba configuration uses strict channel priority, which cannot solve
 the official file's `deblur 1.1.1` / `sortmerna 2.0` combination. Flexible
 channel priority is therefore explicit in the reproducible creation command.
 Real-data execution or bounded environment validation is complete for chapters
-07–19.
+07–50.
+
+## Native paired multi-omics and source tracking (Articles 46–50)
+
+Articles 46–50 use the method projects' native interfaces. The modern Python
+tools share `multiomics.yml`; MMvec is isolated because its released native
+runtime requires Python 3.7 and TensorFlow 1.x. SourceTracker has a separate
+environment so its dependency set cannot alter the multi-omics runtime.
+
+Create and inspect the three environments with:
+
+```bash
+CONDA_CHANNEL_PRIORITY=flexible mamba env create -f env/mmvec-native.yml
+conda run -n mmvec-native python -c \
+  'import pkg_resources; print(pkg_resources.get_distribution("mmvec").version)'
+
+mamba env create -f env/multiomics.yml
+R_LIBS_USER="$PWD/.r-lib" conda run -n multiomics-native python -c \
+  'from importlib.metadata import version; from halla import HAllA; from mofapy2.run.entry_point import entry_point; print(version("halla"), version("mofapy2"))'
+
+mamba env create -f env/sourcetracker2.yml
+conda run -n sourcetracker2 sourcetracker2 --help
+```
+
+The locked native versions are:
+
+- HAllA 0.8.40 and mofapy2 0.7.4 under Python 3.10.19;
+- MMvec 1.0.5 and TensorFlow 1.15.0 under Python 3.7.16;
+- SourceTracker 2.0.1 under Python 3.10.20;
+- mixOmics 6.26.0 and FEAST 0.1.0 in the 390-package R lock.
+
+The bounded real-data commands are:
+
+```bash
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla scripts/run_article46_global_concordance.R
+R_LIBS_USER="$PWD/.r-lib" conda run -n multiomics-native python scripts/run_article46_halla.py
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla scripts/run_article47_diablo.R
+conda run -n mmvec-native python scripts/run_article48_native_mmvec.py --epochs 100
+conda run -n multiomics-native python scripts/run_article48_mmvec_mofa.py
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla scripts/run_article49_multi_kingdom.R
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla scripts/run_article50_feast.R
+conda run -n sourcetracker2 python scripts/run_article50_sourcetracker.py
+```
+
+Article 48 records the MMvec training objective and holdout mean absolute error
+separately. Its selected epoch is the lowest observed holdout error among the
+fixed 100 epochs; a boundary optimum is reported as such and is not called
+early stopping or convergence. Native result ledgers are stored under
+`../results/46-integration/` through `../results/50-source-tracking/`.

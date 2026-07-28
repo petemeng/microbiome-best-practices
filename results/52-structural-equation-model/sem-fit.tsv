@@ -1,0 +1,3 @@
+Model	FisherC	DF	PValue	AIC	Parameters	Samples
+Full direct-path DAG	4.514	2	0.105	794.226	29	90
+Mediation-only DAG	51.796	10	0	828.137	25	90

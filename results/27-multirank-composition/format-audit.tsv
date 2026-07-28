@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	chinese_characters	font_status	dimension_status
+27-rank-resolution-cascade	pdf	figures/27-rank-resolution-cascade.pdf	PDF	26596	150	96	149.93055555555554	95.95555555555555						1			embedded	PASS
+27-rank-resolution-cascade	svg	figures/27-rank-resolution-cascade.svg	SVG	10944	150	96	150.0011111111111	96.00141666666667							20	0	declared	PASS
+27-rank-resolution-cascade	png	figures/27-rank-resolution-cascade.png	PNG	293346	150	96	150	96	3543	2267	599.948	599.8104166666666	Zip					PASS
+27-rank-resolution-cascade	tiff	figures/27-rank-resolution-cascade.tiff	TIFF	338434	150	96	150	96	3543	2267	599.948	599.8104166666666	LZW					PASS
+27-multirank-bubble	pdf	figures/27-multirank-bubble.pdf	PDF	35829	183	198	182.73888888888888	197.90833333333333						1			embedded	PASS
+27-multirank-bubble	svg	figures/27-multirank-bubble.svg	SVG	41802	183	198	182.99994444444442	198.00005555555555							56	0	declared	PASS
+27-multirank-bubble	png	figures/27-multirank-bubble.png	PNG	734398	183	198	183	198	4322	4677	599.8841530054644	599.9787878787879	Zip					PASS
+27-multirank-bubble	tiff	figures/27-multirank-bubble.tiff	TIFF	1065912	183	198	183	198	4322	4677	599.8841530054644	599.9787878787879	LZW					PASS
+27-lineage-ladder	pdf	figures/27-lineage-ladder.pdf	PDF	26102	183	168	182.73888888888888	167.92222222222222						1			embedded	PASS
+27-lineage-ladder	svg	figures/27-lineage-ladder.svg	SVG	32156	183	168	182.99994444444442	167.99983333333333							91	0	declared	PASS
+27-lineage-ladder	png	figures/27-lineage-ladder.png	PNG	537062	183	168	183	168	4322	3968	599.8841530054644	599.9238095238095	Zip					PASS
+27-lineage-ladder	tiff	figures/27-lineage-ladder.tiff	TIFF	1316260	183	168	183	168	4322	3968	599.8841530054644	599.9238095238095	LZW					PASS
+27-topn-coverage	pdf	figures/27-topn-coverage.pdf	PDF	23577	160	102	159.8083333333333	101.95277777777777						1			embedded	PASS
+27-topn-coverage	svg	figures/27-topn-coverage.svg	SVG	13059	160	102	159.99883333333332	101.99863888888888							28	0	declared	PASS
+27-topn-coverage	png	figures/27-topn-coverage.png	PNG	357847	160	102	160	102	3779	2409	599.91625	599.8882352941176	Zip					PASS
+27-topn-coverage	tiff	figures/27-topn-coverage.tiff	TIFF	394010	160	102	160	102	3779	2409	599.91625	599.8882352941176	LZW					PASS

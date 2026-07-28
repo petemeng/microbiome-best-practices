@@ -1,0 +1,57 @@
+{
+  "dataset": "Vandeputte",
+  "description": "Crohn's disease and healthy-control genus counts with parallel flow-cytometry cell loads",
+  "primary_publication": {
+    "citation": "Vandeputte D, Kathagen G, D'hoe K, et al. Nature. 2017;551:507-511.",
+    "doi": "10.1038/nature24460",
+    "url": "https://www.nature.com/articles/nature24460"
+  },
+  "package": {
+    "name": "reconsi",
+    "version": "1.16.0",
+    "bioconductor_release": "3.19",
+    "source_url": "https://bioconductor.org/packages/3.19/bioc/src/contrib/reconsi_1.16.0.tar.gz",
+    "license": "GPL-2"
+  },
+  "dimensions": {
+    "features": 234,
+    "samples": 135,
+    "reads": 4080996,
+    "crohns_samples": 29,
+    "healthy_samples": 106
+  },
+  "package_data_files": {
+    "data_index": {
+      "file": "Rdata.rds",
+      "bytes": 92,
+      "sha256": "5ad812cf736355bd0ec5e7dbc756ec8c1b0bf285727de29ea5eff5cf099d9663"
+    },
+    "data_database": {
+      "file": "Rdata.rdb",
+      "bytes": 32964,
+      "sha256": "beace84b8dbee4f4caa88cf0fc92fb20f84dffd601c4cbd1daae5d4f392f3bdb"
+    }
+  },
+  "exported_files": {
+    "otutab": {
+      "file": "otutab.tsv",
+      "bytes": 79257,
+      "sha256": "2fb2e5042b448ea8db38559fe223b5dca6be7c1b686059451cc5e6a7127e3af0"
+    },
+    "taxonomy": {
+      "file": "taxonomy.tsv",
+      "bytes": 11078,
+      "sha256": "1518574260016b621f469abf8cfc2982f0a137194ab11a5faa6027cf26676b3d"
+    },
+    "metadata": {
+      "file": "metadata.tsv",
+      "bytes": 3271,
+      "sha256": "7201f8435f51833338cb8c2e660b7c5d061e5036068977b5bb8804aabeb59a81"
+    },
+    "cell_load": {
+      "file": "cell-load.tsv",
+      "bytes": 6017,
+      "sha256": "4a8e793dcdb76a80a85e316ce4a3f810aa6be2719bc060fe431abc66946360ef"
+    }
+  }
+}

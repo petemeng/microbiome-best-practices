@@ -1,0 +1,9 @@
+{
+  "purpose": "Curated primary-study cases for the Article 55 causal-evidence reading framework",
+  "selection_rule": "One representative microbiome study for each evidence tier; cases illustrate design capacity and do not rank journal prestige or claim that every listed study satisfies all lower tiers",
+  "framework_reference": "Hill AB. The environment and disease: association or causation? Proc R Soc Med. 1965; doi:10.1177/003591576505800503",
+  "cases": 7,
+  "plot_language": "English",
+  "analysis_code": false,
+  "note": "The chapter is a critical-reading guide. It does not perform statistical analysis and does not treat the ladder as an automatic score."
+}

@@ -33,6 +33,17 @@ mkdir -p \
   "${stage}/data/small/phyloseq-import" \
   "${stage}/data/small/beta-distances" \
   "${stage}/data/small/permanova-dispersion" \
+  "${stage}/data/small/community-typing-dmm" \
+  "${stage}/data/small/absolute-quantification" \
+  "${stage}/data/small/picrust2-chemerin" \
+  "${stage}/data/small/cross-cohort-crc" \
+  "${stage}/data/small/survival-t1d" \
+  "${stage}/data/small/paired-ibd-multiomics" \
+  "${stage}/data/small/multi-kingdom-duran" \
+  "${stage}/data/small/source-tracking-feast" \
+  "${stage}/data/small/longitudinal-dietswap" \
+  "${stage}/data/small/mr-mibiogen" \
+  "${stage}/data/small/causal-evidence" \
   "${stage}/figures" \
   "${stage}/scripts" \
   "${stage}/results/07-wsl2-conda" \
@@ -51,7 +62,31 @@ mkdir -p \
   "${stage}/results/20-alpha-group-tests" \
   "${stage}/results/21-beta-distances" \
   "${stage}/results/23-permanova-dispersion" \
-  "${stage}/results/25-environment-variance"
+  "${stage}/results/25-environment-variance" \
+  "${stage}/results/26-community-composition" \
+  "${stage}/results/27-multirank-composition" \
+  "${stage}/results/28-core-rare-biosphere" \
+  "${stage}/results/29-community-typing-dmm" \
+  "${stage}/results/36-network-robustness" \
+  "${stage}/results/37-microbial-wgcna" \
+  "${stage}/results/38-community-assembly-bnti" \
+  "${stage}/results/39-neutral-community-model" \
+  "${stage}/results/40-niche-distance-decay" \
+  "${stage}/results/41-picrust2" \
+  "${stage}/results/42-functional-guilds" \
+  "${stage}/results/43-random-forest" \
+  "${stage}/results/44-cross-cohort-validation" \
+  "${stage}/results/45-survival-analysis" \
+  "${stage}/results/46-integration" \
+  "${stage}/results/47-spls-diablo" \
+  "${stage}/results/48-mmvec-mofa" \
+  "${stage}/results/49-multi-kingdom" \
+  "${stage}/results/50-source-tracking" \
+  "${stage}/results/51-longitudinal-analysis" \
+  "${stage}/results/52-structural-equation-model" \
+  "${stage}/results/53-mediation-analysis" \
+  "${stage}/results/54-mendelian-randomization" \
+  "${stage}/results/55-causal-evidence"
 cp "${project_root}/qa/pilot/_quarto.yml" "${stage}/_quarto.yml"
 cp "${project_root}/index.qmd" "${stage}/index.qmd"
 cp "${project_root}/styles.scss" "${stage}/styles.scss"
@@ -79,8 +114,39 @@ cp "${project_root}/chapters/22-ordination-unconstrained.qmd" "${stage}/chapters
 cp "${project_root}/chapters/23-permanova-dispersion.qmd" "${stage}/chapters/"
 cp "${project_root}/chapters/24-ordination-constrained-cap.qmd" "${stage}/chapters/"
 cp "${project_root}/chapters/25-environment-variance.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/26-community-composition.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/27-multirank-composition.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/28-core-rare-biosphere.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/29-community-typing-dmm.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/30-compositional-data.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/31-da-methods.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/32-multirank-da.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/33-da-visualization.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/34-absolute-quantification.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/35-cooccurrence-networks.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/36-network-robustness.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/37-microbial-wgcna.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/38-community-assembly-bnti.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/39-neutral-community-model.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/40-niche-distance-decay.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/41-picrust2.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/42-functional-guilds.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/43-random-forest.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/44-cross-cohort-validation.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/45-survival-analysis.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/46-procrustes-mantel-halla.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/47-spls-diablo.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/48-mmvec-mofa.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/49-multi-kingdom.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/50-source-tracking.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/51-longitudinal-analysis.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/52-structural-equation-model.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/53-mediation-analysis.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/54-mendelian-randomization.qmd" "${stage}/chapters/"
+cp "${project_root}/chapters/55-causal-evidence.qmd" "${stage}/chapters/"
 cp "${run_root}/data/small/"*.tsv "${stage}/data/small/"
 cp "${project_root}/data/small/source_summary.json" "${stage}/data/small/"
+cp "${project_root}/data/small/rooted-tree.nwk.gz" "${stage}/data/small/"
 cp "${run_root}/data/small/decontam/"*.tsv "${stage}/data/small/decontam/"
 cp "${project_root}/data/small/fastq/"* "${stage}/data/small/fastq/"
 cp "${project_root}/data/small/primer-trimming/"* \
@@ -97,7 +163,32 @@ cp "${project_root}/data/small/beta-distances/"* \
   "${stage}/data/small/beta-distances/"
 cp "${project_root}/data/small/permanova-dispersion/"* \
   "${stage}/data/small/permanova-dispersion/"
+cp "${project_root}/data/small/community-typing-dmm/"* \
+  "${stage}/data/small/community-typing-dmm/"
+cp "${project_root}/data/small/absolute-quantification/"* \
+  "${stage}/data/small/absolute-quantification/"
+cp -R "${project_root}/data/small/picrust2-chemerin/." \
+  "${stage}/data/small/picrust2-chemerin/"
+cp -R "${project_root}/data/small/cross-cohort-crc/." \
+  "${stage}/data/small/cross-cohort-crc/"
+cp -R "${project_root}/data/small/survival-t1d/." \
+  "${stage}/data/small/survival-t1d/"
+cp -R "${project_root}/data/small/paired-ibd-multiomics/." \
+  "${stage}/data/small/paired-ibd-multiomics/"
+cp -R "${project_root}/data/small/multi-kingdom-duran/." \
+  "${stage}/data/small/multi-kingdom-duran/"
+cp -R "${project_root}/data/small/source-tracking-feast/." \
+  "${stage}/data/small/source-tracking-feast/"
+cp -R "${project_root}/data/small/longitudinal-dietswap/." \
+  "${stage}/data/small/longitudinal-dietswap/"
+cp -R "${project_root}/data/small/mr-mibiogen/." \
+  "${stage}/data/small/mr-mibiogen/"
+cp -R "${project_root}/data/small/causal-evidence/." \
+  "${stage}/data/small/causal-evidence/"
 cp "${project_root}/scripts/run_gemelli_rpca.py" "${stage}/scripts/"
+cp -R "${project_root}/results/41-picrust2/." \
+  "${stage}/results/41-picrust2/"
+cp "${project_root}/figures/41-"* "${stage}/figures/"
 cp "${run_root}/results/07-wsl2-conda/"* "${stage}/results/07-wsl2-conda/"
 cp "${run_root}/figures/07-"* "${stage}/figures/"
 cp "${run_root}/results/08-qiime2-install/"* "${stage}/results/08-qiime2-install/"
@@ -160,6 +251,44 @@ cp -R \
   "${run_root}/results/25-environment-variance/." \
   "${stage}/results/25-environment-variance/"
 cp "${run_root}/figures/25-"* "${stage}/figures/"
+cp -R \
+  "${run_root}/results/26-community-composition/." \
+  "${stage}/results/26-community-composition/"
+cp "${run_root}/figures/26-"* "${stage}/figures/"
+cp -R \
+  "${run_root}/results/27-multirank-composition/." \
+  "${stage}/results/27-multirank-composition/"
+cp "${run_root}/figures/27-"* "${stage}/figures/"
+cp -R \
+  "${run_root}/results/28-core-rare-biosphere/." \
+  "${stage}/results/28-core-rare-biosphere/"
+cp "${run_root}/figures/28-"* "${stage}/figures/"
+cp -R \
+  "${run_root}/results/29-community-typing-dmm/." \
+  "${stage}/results/29-community-typing-dmm/"
+cp "${run_root}/figures/29-"* "${stage}/figures/"
+cp -R "${project_root}/results/46-integration/." \
+  "${stage}/results/46-integration/"
+cp -R "${project_root}/results/47-spls-diablo/." \
+  "${stage}/results/47-spls-diablo/"
+cp -R "${project_root}/results/48-mmvec-mofa/." \
+  "${stage}/results/48-mmvec-mofa/"
+cp -R "${project_root}/results/49-multi-kingdom/." \
+  "${stage}/results/49-multi-kingdom/"
+cp -R "${project_root}/results/50-source-tracking/." \
+  "${stage}/results/50-source-tracking/"
+cp -R "${project_root}/results/51-longitudinal-analysis/." \
+  "${stage}/results/51-longitudinal-analysis/"
+cp -R "${project_root}/results/52-structural-equation-model/." \
+  "${stage}/results/52-structural-equation-model/"
+cp -R "${project_root}/results/53-mediation-analysis/." \
+  "${stage}/results/53-mediation-analysis/"
+cp -R "${project_root}/results/54-mendelian-randomization/." \
+  "${stage}/results/54-mendelian-randomization/"
+cp -R "${project_root}/results/55-causal-evidence/." \
+  "${stage}/results/55-causal-evidence/"
+cp -R "${project_root}/figures/55-causal-evidence" \
+  "${stage}/figures/"
 
 (
   cd "${stage}"
@@ -197,6 +326,141 @@ test -f "${stage}/_site/chapters/22-ordination-unconstrained.html"
 test -f "${stage}/_site/chapters/23-permanova-dispersion.html"
 test -f "${stage}/_site/chapters/24-ordination-constrained-cap.html"
 test -f "${stage}/_site/chapters/25-environment-variance.html"
+test -f "${stage}/_site/chapters/26-community-composition.html"
+test -f "${stage}/_site/chapters/27-multirank-composition.html"
+test -f "${stage}/_site/chapters/28-core-rare-biosphere.html"
+test -f "${stage}/_site/chapters/29-community-typing-dmm.html"
+test -f "${stage}/_site/chapters/30-compositional-data.html"
+test -f "${stage}/_site/chapters/31-da-methods.html"
+test -f "${stage}/_site/chapters/32-multirank-da.html"
+test -f "${stage}/_site/chapters/33-da-visualization.html"
+test -f "${stage}/_site/chapters/34-absolute-quantification.html"
+test -f "${stage}/_site/chapters/35-cooccurrence-networks.html"
+test -f "${stage}/_site/chapters/36-network-robustness.html"
+test -f "${stage}/_site/chapters/37-microbial-wgcna.html"
+test -f "${stage}/_site/chapters/38-community-assembly-bnti.html"
+test -f "${stage}/_site/chapters/39-neutral-community-model.html"
+test -f "${stage}/_site/chapters/40-niche-distance-decay.html"
+test -f "${stage}/_site/chapters/41-picrust2.html"
+test -f "${stage}/_site/chapters/42-functional-guilds.html"
+test -f "${stage}/_site/chapters/43-random-forest.html"
+test -f "${stage}/_site/chapters/44-cross-cohort-validation.html"
+test -f "${stage}/_site/chapters/45-survival-analysis.html"
+test -f "${stage}/_site/chapters/46-procrustes-mantel-halla.html"
+test -f "${stage}/_site/chapters/47-spls-diablo.html"
+test -f "${stage}/_site/chapters/48-mmvec-mofa.html"
+test -f "${stage}/_site/chapters/49-multi-kingdom.html"
+test -f "${stage}/_site/chapters/50-source-tracking.html"
+test -f "${stage}/_site/chapters/51-longitudinal-analysis.html"
+test -f "${stage}/_site/chapters/52-structural-equation-model.html"
+test -f "${stage}/_site/chapters/53-mediation-analysis.html"
+test -f "${stage}/_site/chapters/54-mendelian-randomization.html"
+test -f "${stage}/_site/chapters/55-causal-evidence.html"
+
+for stem in \
+  30-closure-artifact \
+  30-measurement-scales \
+  30-reference-frame \
+  31-da-hit-counts \
+  31-da-jaccard \
+  31-da-evidence-map \
+  32-rank-evidence-cascade \
+  32-multirank-effect-map \
+  32-family-genus-coherence \
+  33-da-volcano \
+  33-da-cladogram \
+  33-da-manhattan \
+  33-da-forest \
+  34-microbial-load \
+  34-relative-quantitative-effects \
+  34-qmp-exemplar \
+  35-network-matrix \
+  35-spiec-network \
+  35-network-edge-audit \
+  36-role-cartography \
+  36-attack-robustness \
+  36-group-rewiring \
+  36-topology-sensitivity \
+  37-soft-threshold \
+  37-module-dendrogram \
+  37-module-trait \
+  37-hub-sensitivity \
+  38-tree-filter \
+  38-bnti-rcbray \
+  38-process-fractions \
+  38-phylogenetic-signal \
+  39-neutral-abundance-occupancy \
+  39-neutral-pool-migration \
+  39-neutral-classification-sensitivity \
+  39-neutral-detection-sensitivity \
+  40-niche-breadth \
+  40-rank-abundance-models \
+  40-distance-decay \
+  40-distance-decay-audit \
+  41-picrust2-workflow \
+  41-nsti-audit \
+  41-pathway-heatmap \
+  41-pathway-effect \
+  42-function-coverage \
+  42-functional-composition \
+  42-functional-heatmap \
+  42-functional-sensitivity \
+  43-nested-roc \
+  43-calibration \
+  43-permutation-importance \
+  43-regression-performance \
+  44-cohort-pcoa \
+  44-meta-forest \
+  44-heterogeneity \
+  44-external-validation \
+  45-treatment-km \
+  45-taxon-cox \
+  45-ph-diagnostics \
+  45-time-dependent-roc \
+  46-integration/46-1-procrustes \
+  46-integration/46-2-global-tests \
+  46-integration/46-3-confounding-audit \
+  46-integration/46-4-halla-associations \
+  47-spls-diablo/47-1-spls-generalization \
+  47-spls-diablo/47-2-diablo-scores \
+  47-spls-diablo/47-3-test-performance \
+  47-spls-diablo/47-4-feature-stability \
+  48-mmvec-mofa/48-1-cca-overfit-audit \
+  48-mmvec-mofa/48-2-mmvec-loss \
+  48-mmvec-mofa/48-3-mmvec-top-pairs \
+  48-mmvec-mofa/48-4-mofa-summary \
+  49-multi-kingdom/49-1-three-kingdom-pcoa \
+  49-multi-kingdom/49-2-procrustes-audit \
+  49-multi-kingdom/49-3-shared-niche-audit \
+  49-multi-kingdom/49-4-stable-candidates \
+  50-source-tracking/50-1-feast-main \
+  50-source-tracking/50-2-method-comparison \
+  50-source-tracking/50-3-loo-calibration \
+  50-source-tracking/50-4-missing-source \
+  51-longitudinal-analysis/51-1-alpha-trajectories \
+  51-longitudinal-analysis/51-2-pcoa-trajectories \
+  51-longitudinal-analysis/51-3-volatility \
+  51-longitudinal-analysis/51-4-model-audit \
+  52-structural-equation-model/52-1-prespecified-dag \
+  52-structural-equation-model/52-2-path-coefficients \
+  52-structural-equation-model/52-3-model-diagnostics \
+  52-structural-equation-model/52-4-model-audit \
+  53-mediation-analysis/53-1-mediation-dag \
+  53-mediation-analysis/53-2-effect-decomposition \
+  53-mediation-analysis/53-3-unmeasured-confounding \
+  53-mediation-analysis/53-4-observed-data \
+  54-mendelian-randomization/54-1-harmonised-scatter \
+  54-mendelian-randomization/54-2-method-forest \
+  54-mendelian-randomization/54-3-leave-one-out \
+  54-mendelian-randomization/54-4-assumption-audit \
+  55-causal-evidence/55-1-evidence-ladder \
+  55-causal-evidence/55-2-threat-matrix \
+  55-causal-evidence/55-3-claim-calibration \
+  55-causal-evidence/55-4-triangulation; do
+  for extension in pdf svg png tiff; do
+    test -f "${stage}/figures/${stem}.${extension}"
+  done
+done
 test -f "${stage}/figures/01-preview-pcoa.pdf"
 test -f "${stage}/figures/01-preview-pcoa.png"
 test -f "${stage}/figures/01-preview-pcoa.tiff"
@@ -771,3 +1035,110 @@ test -f "${stage}/results/25-environment-variance/prevalence-sensitivity.tsv"
 test -f "${stage}/results/25-environment-variance/conditioning-sensitivity.tsv"
 test -f "${stage}/results/25-environment-variance/validation-checks.tsv"
 test -f "${stage}/results/25-environment-variance/validation.log"
+test -f "${stage}/figures/26-phylum-stacked.pdf"
+test -f "${stage}/figures/26-phylum-stacked.svg"
+test -f "${stage}/figures/26-phylum-stacked.png"
+test -f "${stage}/figures/26-phylum-stacked.tiff"
+test -f "${stage}/figures/26-genus-bubble.pdf"
+test -f "${stage}/figures/26-genus-bubble.svg"
+test -f "${stage}/figures/26-genus-bubble.png"
+test -f "${stage}/figures/26-genus-bubble.tiff"
+test -f "${stage}/figures/26-group-phylum-alluvial.pdf"
+test -f "${stage}/figures/26-group-phylum-alluvial.svg"
+test -f "${stage}/figures/26-group-phylum-alluvial.png"
+test -f "${stage}/figures/26-group-phylum-alluvial.tiff"
+test -f "${stage}/figures/26-genus-heatmap.pdf"
+test -f "${stage}/figures/26-genus-heatmap.svg"
+test -f "${stage}/figures/26-genus-heatmap.png"
+test -f "${stage}/figures/26-genus-heatmap.tiff"
+test -f "${stage}/results/26-community-composition/community-composition-summary.json"
+test -f "${stage}/results/26-community-composition/taxonomy-rank-audit.tsv"
+test -f "${stage}/results/26-community-composition/phylum-display-composition.tsv"
+test -f "${stage}/results/26-community-composition/phylum-group-summary.tsv"
+test -f "${stage}/results/26-community-composition/genus-bubble-summary.tsv"
+test -f "${stage}/results/26-community-composition/top-n-sensitivity.tsv"
+test -f "${stage}/results/26-community-composition/denominator-sensitivity.tsv"
+test -f "${stage}/results/26-community-composition/aggregation-sensitivity.tsv"
+test -f "${stage}/results/26-community-composition/validation-checks.tsv"
+test -f "${stage}/results/26-community-composition/validation.log"
+test -f "${stage}/figures/27-rank-resolution-cascade.pdf"
+test -f "${stage}/figures/27-rank-resolution-cascade.svg"
+test -f "${stage}/figures/27-rank-resolution-cascade.png"
+test -f "${stage}/figures/27-rank-resolution-cascade.tiff"
+test -f "${stage}/figures/27-multirank-bubble.pdf"
+test -f "${stage}/figures/27-multirank-bubble.svg"
+test -f "${stage}/figures/27-multirank-bubble.png"
+test -f "${stage}/figures/27-multirank-bubble.tiff"
+test -f "${stage}/figures/27-lineage-ladder.pdf"
+test -f "${stage}/figures/27-lineage-ladder.svg"
+test -f "${stage}/figures/27-lineage-ladder.png"
+test -f "${stage}/figures/27-lineage-ladder.tiff"
+test -f "${stage}/figures/27-topn-coverage.pdf"
+test -f "${stage}/figures/27-topn-coverage.svg"
+test -f "${stage}/figures/27-topn-coverage.png"
+test -f "${stage}/figures/27-topn-coverage.tiff"
+test -f "${stage}/results/27-multirank-composition/multirank-composition-summary.json"
+test -f "${stage}/results/27-multirank-composition/taxonomy-lineage-map.tsv"
+test -f "${stage}/results/27-multirank-composition/multirank-relative-abundance.tsv"
+test -f "${stage}/results/27-multirank-composition/rank-resolution-audit.tsv"
+test -f "${stage}/results/27-multirank-composition/group-rank-resolution.tsv"
+test -f "${stage}/results/27-multirank-composition/lineage-gap-audit.tsv"
+test -f "${stage}/results/27-multirank-composition/label-collision-audit.tsv"
+test -f "${stage}/results/27-multirank-composition/rank-topn-sensitivity.tsv"
+test -f "${stage}/results/27-multirank-composition/complete-lineage-abundance.tsv"
+test -f "${stage}/results/27-multirank-composition/denominator-sensitivity.tsv"
+test -f "${stage}/results/27-multirank-composition/validation-checks.tsv"
+test -f "${stage}/results/27-multirank-composition/validation.log"
+test -f "${stage}/figures/28-occupancy-abundance.pdf"
+test -f "${stage}/figures/28-occupancy-abundance.svg"
+test -f "${stage}/figures/28-occupancy-abundance.png"
+test -f "${stage}/figures/28-occupancy-abundance.tiff"
+test -f "${stage}/figures/28-group-core-membership.pdf"
+test -f "${stage}/figures/28-group-core-membership.svg"
+test -f "${stage}/figures/28-group-core-membership.png"
+test -f "${stage}/figures/28-group-core-membership.tiff"
+test -f "${stage}/figures/28-threshold-depth-sensitivity.pdf"
+test -f "${stage}/figures/28-threshold-depth-sensitivity.svg"
+test -f "${stage}/figures/28-threshold-depth-sensitivity.png"
+test -f "${stage}/figures/28-threshold-depth-sensitivity.tiff"
+test -f "${stage}/figures/28-rare-biosphere-mass.pdf"
+test -f "${stage}/figures/28-rare-biosphere-mass.svg"
+test -f "${stage}/figures/28-rare-biosphere-mass.png"
+test -f "${stage}/figures/28-rare-biosphere-mass.tiff"
+test -f "${stage}/results/28-core-rare-biosphere/core-rare-biosphere-summary.json"
+test -f "${stage}/results/28-core-rare-biosphere/feature-occupancy-abundance.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/core-members.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/group-core-summary.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/core-membership-patterns.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/core-threshold-sensitivity.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/depth-sensitivity.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/feature-state-classification.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/rare-mass-by-sample.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/rare-threshold-sensitivity.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/validation-checks.tsv"
+test -f "${stage}/results/28-core-rare-biosphere/validation.log"
+test -f "${stage}/figures/29-model-selection.pdf"
+test -f "${stage}/figures/29-model-selection.svg"
+test -f "${stage}/figures/29-model-selection.png"
+test -f "${stage}/figures/29-model-selection.tiff"
+test -f "${stage}/figures/29-posterior-ordination.pdf"
+test -f "${stage}/figures/29-posterior-ordination.svg"
+test -f "${stage}/figures/29-posterior-ordination.png"
+test -f "${stage}/figures/29-posterior-ordination.tiff"
+test -f "${stage}/figures/29-component-profiles.pdf"
+test -f "${stage}/figures/29-component-profiles.svg"
+test -f "${stage}/figures/29-component-profiles.png"
+test -f "${stage}/figures/29-component-profiles.tiff"
+test -f "${stage}/figures/29-stability-audit.pdf"
+test -f "${stage}/figures/29-stability-audit.svg"
+test -f "${stage}/figures/29-stability-audit.png"
+test -f "${stage}/figures/29-stability-audit.tiff"
+test -f "${stage}/results/29-community-typing-dmm/community-typing-dmm-summary.json"
+test -f "${stage}/results/29-community-typing-dmm/model-selection.tsv"
+test -f "${stage}/results/29-community-typing-dmm/sample-posteriors.tsv"
+test -f "${stage}/results/29-community-typing-dmm/component-profiles.tsv"
+test -f "${stage}/results/29-community-typing-dmm/initialization-agreement.tsv"
+test -f "${stage}/results/29-community-typing-dmm/sensitivity-agreement.tsv"
+test -f "${stage}/results/29-community-typing-dmm/participant-transitions.tsv"
+test -f "${stage}/results/29-community-typing-dmm/validation-checks.tsv"
+test -f "${stage}/results/29-community-typing-dmm/validation.log"

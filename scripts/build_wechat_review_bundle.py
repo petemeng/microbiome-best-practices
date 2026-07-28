@@ -87,12 +87,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--manifest", default="tutorial.yaml")
     parser.add_argument("--qa-report", default="qa_report.json")
     parser.add_argument("--site-dir", default="_site")
-    parser.add_argument("--output-dir", default="rendered/wechat_review_01_25")
-    parser.add_argument("--formal-count", type=int, default=25)
+    parser.add_argument("--output-dir", default="rendered/wechat_review_01_55")
+    parser.add_argument("--formal-count", type=int, default=55)
     parser.add_argument("--author", default="Songlab")
     parser.add_argument(
         "--review-url",
-        default="https://github.com/petemeng/microbiome-best-practices/pull/1",
+        default="https://github.com/petemeng/microbiome-best-practices",
     )
     return parser.parse_args()
 
@@ -140,13 +140,46 @@ def _font_path(family: str) -> str:
     return path
 
 
-def _wrap_cjk(text: str, width: int = 16, max_lines: int = 3) -> list[str]:
-    compact = re.sub(r"\s+", "", text)
-    lines = [compact[index : index + width] for index in range(0, len(compact), width)]
+def _wrap_cjk(
+    text: str,
+    draw: ImageDraw.ImageDraw,
+    font: ImageFont.FreeTypeFont,
+    max_width: int = 610,
+    max_lines: int = 3,
+) -> list[str]:
+    """Wrap mixed Chinese/Latin titles without splitting technical terms."""
+
+    def wrap_segment(segment: str) -> list[str]:
+        normalized = re.sub(r"\s+", " ", segment).strip()
+        tokens = re.findall(
+            r"[A-Za-z0-9]+(?:[./+–—-][A-Za-z0-9]+)*|\s+|.",
+            normalized,
+        )
+        output: list[str] = []
+        current = ""
+        for token in tokens:
+            candidate = (current + token).lstrip()
+            if current and draw.textlength(candidate, font=font) > max_width:
+                output.append(current.rstrip())
+                current = token.lstrip()
+            else:
+                current = candidate
+        if current.strip():
+            output.append(current.rstrip())
+        return output
+
+    normalized = re.sub(r"\s+", " ", text).strip()
+    if "：" in normalized:
+        head, tail = normalized.split("：", 1)
+        lines = wrap_segment(head) + wrap_segment(tail)
+    else:
+        lines = wrap_segment(normalized)
     if len(lines) > max_lines:
         lines = lines[:max_lines]
-        lines[-1] = lines[-1][:-1] + "…"
-    return lines or ["16S微生物组最佳实践"]
+        while lines[-1] and draw.textlength(lines[-1] + "…", font=font) > max_width:
+            lines[-1] = lines[-1][:-1].rstrip()
+        lines[-1] = lines[-1] + "…"
+    return lines or ["16S 微生物组最佳实践"]
 
 
 def create_cover(number: int, raw_title: str, output: Path) -> None:
@@ -164,7 +197,7 @@ def create_cover(number: int, raw_title: str, output: Path) -> None:
     serif = ImageFont.truetype(_font_path("Noto Serif CJK SC"), 44)
     sans = ImageFont.truetype(_font_path("Noto Sans CJK SC"), 22)
     small = ImageFont.truetype(_font_path("Noto Sans CJK SC"), 19)
-    lines = _wrap_cjk(raw_title)
+    lines = _wrap_cjk(raw_title, draw, serif)
     draw.multiline_text((54, 76), "\n".join(lines), font=serif, fill="#203124", spacing=10)
     draw.rounded_rectangle((54, 300, 272, 344), radius=14, fill="#f9f4ea")
     draw.text((72, 307), f"第 {number:02d} / 55 篇", font=sans, fill="#6f8561")

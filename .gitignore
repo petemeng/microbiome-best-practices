@@ -1,6 +1,8 @@
 /_site/
 /_freeze/
 /.quarto/
+/.quarto-cache/
+/cache/
 /.tools/
 /.r-lib/
 /.tutorial_runs/
@@ -26,3 +28,5 @@ __pycache__/
 /renv/staging/
 
 **/*.quarto_ipynb
+/chapters/*_cache/
+/chapters/*_files/

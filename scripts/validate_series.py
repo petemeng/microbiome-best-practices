@@ -38,6 +38,36 @@ PILOT_NUMBERS = {
     23,
     24,
     25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
 }
 PILOT_PRIMARY_INPUT_PATHS = {
     1: "data/small/otutab.tsv",
@@ -65,6 +95,36 @@ PILOT_PRIMARY_INPUT_PATHS = {
     23: "data/small/permanova-dispersion/otutab.tsv",
     24: "data/small/otutab.tsv",
     25: "data/small/otutab.tsv",
+    26: "data/small/otutab.tsv",
+    27: "data/small/otutab.tsv",
+    28: "data/small/otutab.tsv",
+    29: "data/small/community-typing-dmm/otutab.tsv",
+    30: "data/small/otutab.tsv",
+    31: "data/small/otutab.tsv",
+    32: "data/small/otutab.tsv",
+    33: "data/small/otutab.tsv",
+    34: "data/small/absolute-quantification",
+    35: "data/small/otutab.tsv",
+    36: "data/small/otutab.tsv",
+    37: "data/small/otutab.tsv",
+    38: "data/small/otutab.tsv",
+    39: "data/small/otutab.tsv",
+    40: "data/small/otutab.tsv",
+    41: "data/small/picrust2-chemerin",
+    42: "data/small/otutab.tsv",
+    43: "data/small/absolute-quantification",
+    44: "data/small/cross-cohort-crc",
+    45: "data/small/survival-t1d",
+    46: "data/small/paired-ibd-multiomics",
+    47: "data/small/paired-ibd-multiomics",
+    48: "data/small/paired-ibd-multiomics",
+    49: "data/small/multi-kingdom-duran",
+    50: "data/small/source-tracking-feast",
+    51: "data/small/longitudinal-dietswap",
+    52: "data/small/environment.tsv",
+    53: "data/small/paired-ibd-multiomics",
+    54: "data/small/mr-mibiogen",
+    55: "data/small/causal-evidence",
 }
 REQUIRED_PILOT_SECTIONS = (
     "这一步对应论文里的哪张图",
@@ -82,6 +142,8 @@ PROHIBITED_PUBLIC_PATTERNS = (
     "作者代码通常长这样",
     "本篇不依赖前面章节",
     "这正是全系列坚持",
+    "Omic" + "Verse",
+    "omic" + "verse",
 )
 
 
@@ -159,13 +221,21 @@ def main() -> int:
         text = chapter_path.read_text(encoding="utf-8")
         if metadata.get("draft") is True:
             errors.append(f"article {number:02d} is still marked draft")
-        for section in REQUIRED_PILOT_SECTIONS:
+        required_sections = REQUIRED_PILOT_SECTIONS
+        if number == 55:
+            required_sections = tuple(
+                "可复制阅读框架" if section == "可复制代码" else
+                "换成你自己的论文或项目怎么做"
+                if section == "换成你自己的数据怎么做" else section
+                for section in REQUIRED_PILOT_SECTIONS
+            )
+        for section in required_sections:
             if section not in text:
                 errors.append(f"article {number:02d} is missing section: {section}")
         for pattern in PROHIBITED_PUBLIC_PATTERNS:
             if pattern in text:
                 errors.append(f"article {number:02d} contains prohibited public text: {pattern}")
-        if "set.seed(" not in text:
+        if number != 55 and "set.seed(" not in text:
             errors.append(f"article {number:02d} does not fix a random seed")
         expected_input = PILOT_PRIMARY_INPUT_PATHS[number]
         if expected_input not in text:
@@ -798,6 +868,540 @@ def main() -> int:
             errors.append("article 25 must retain the downstream eval:true policy")
         if not isinstance(execute, dict) or execute.get("freeze") != "auto":
             errors.append("article 25 must retain freeze:auto")
+
+    community_composition_path = root / "chapters/26-community-composition.qmd"
+    if community_composition_path.exists():
+        community_composition = community_composition_path.read_text(
+            encoding="utf-8"
+        )
+        for token in (
+            "data/small/otutab.tsv",
+            "data/small/taxonomy.tsv",
+            "data/small/metadata.tsv",
+            "clean_taxon",
+            "aggregate_rank(",
+            "phylum_display",
+            "top_n_sensitivity",
+            "denominator_sensitivity",
+            "make_flow_polygons",
+            "log1p(",
+            "26-phylum-stacked",
+            "26-genus-bubble",
+            "26-group-phylum-alluvial",
+            "26-genus-heatmap",
+            "validate_community_composition.R",
+            "audit_summary$checks_total == 195L",
+            "audit_summary$checks_passed == 195L",
+            "audit_summary$checks_failed == 0L",
+        ):
+            if token not in community_composition:
+                errors.append(f"article 26 is missing executable {token}")
+        community_composition_metadata = frontmatter(community_composition_path)
+        execute = community_composition_metadata.get("execute", {})
+        if not isinstance(execute, dict) or execute.get("eval") is not True:
+            errors.append("article 26 must retain the downstream eval:true policy")
+        if not isinstance(execute, dict) or execute.get("freeze") != "auto":
+            errors.append("article 26 must retain freeze:auto")
+
+    multirank_composition_path = root / "chapters/27-multirank-composition.qmd"
+    if multirank_composition_path.exists():
+        multirank_composition = multirank_composition_path.read_text(
+            encoding="utf-8"
+        )
+        for token in (
+            "data/small/otutab.tsv",
+            "data/small/taxonomy.tsv",
+            "data/small/metadata.tsv",
+            "rank_names <- c(\"Phylum\", \"Class\", \"Order\", \"Family\", \"Genus\")",
+            "RankQualifiedTaxon",
+            "lineage_key",
+            "complete_depth",
+            "lineage_gap_audit",
+            "label_collision_audit",
+            "rank_topn_sensitivity",
+            "aggregation_sensitivity",
+            "denominator_sensitivity",
+            "27-rank-resolution-cascade",
+            "27-multirank-bubble",
+            "27-lineage-ladder",
+            "27-topn-coverage",
+            "nrow(validation_checks) == 209L",
+            "all(validation_checks$status == \"PASS\")",
+        ):
+            if token not in multirank_composition:
+                errors.append(f"article 27 is missing executable {token}")
+        multirank_composition_metadata = frontmatter(multirank_composition_path)
+        execute = multirank_composition_metadata.get("execute", {})
+        if not isinstance(execute, dict) or execute.get("eval") is not True:
+            errors.append("article 27 must retain the downstream eval:true policy")
+        if not isinstance(execute, dict) or execute.get("freeze") != "auto":
+            errors.append("article 27 must retain freeze:auto")
+
+    core_rare_path = root / "chapters/28-core-rare-biosphere.qmd"
+    if core_rare_path.exists():
+        core_rare = core_rare_path.read_text(encoding="utf-8")
+        for token in (
+            "data/small/otutab.tsv",
+            "data/small/taxonomy.tsv",
+            "data/small/metadata.tsv",
+            "primary_detection <- 0.0001",
+            "primary_prevalence <- 0.80",
+            "relative_feature >= primary_detection",
+            "global_core",
+            "group_core",
+            "core_membership_patterns",
+            "core_threshold_sensitivity",
+            "detection_count_audit",
+            "vegan::rrarefy(",
+            "rarefied_repeat",
+            "feature_state_summary",
+            "rare_mass_by_sample",
+            "28-occupancy-abundance",
+            "28-group-core-membership",
+            "28-threshold-depth-sensitivity",
+            "28-rare-biosphere-mass",
+            "nrow(validation_checks) == 320L",
+            "all(validation_checks$status == \"PASS\")",
+        ):
+            if token not in core_rare:
+                errors.append(f"article 28 is missing executable {token}")
+        core_rare_metadata = frontmatter(core_rare_path)
+        execute = core_rare_metadata.get("execute", {})
+        if not isinstance(execute, dict) or execute.get("eval") is not True:
+            errors.append("article 28 must retain the downstream eval:true policy")
+        if not isinstance(execute, dict) or execute.get("freeze") != "auto":
+            errors.append("article 28 must retain freeze:auto")
+
+    community_typing_path = root / "chapters/29-community-typing-dmm.qmd"
+    if community_typing_path.exists():
+        community_typing = community_typing_path.read_text(encoding="utf-8")
+        for token in (
+            "data/small/community-typing-dmm/otutab.tsv",
+            "data/small/community-typing-dmm/taxonomy.tsv",
+            "data/small/community-typing-dmm/metadata.tsv",
+            "DirichletMultinomial::dmn(",
+            "candidate_k <- 1:7",
+            "primary_seed <- 20260729L",
+            "match_profiles",
+            "adjusted_rand_index",
+            "MaximumPosterior",
+            "NormalizedEntropy",
+            "vegan::rrarefy(",
+            "participant_repeat_audit",
+            "## 审计与升级",
+            "audit-original-vs-upgraded-dmm",
+            "29-model-selection",
+            "29-posterior-ordination",
+            "29-component-profiles",
+            "29-stability-audit",
+            "nrow(validation_checks) == 222L",
+            "all(validation_checks$status == \"PASS\")",
+        ):
+            if token not in community_typing:
+                errors.append(f"article 29 is missing executable {token}")
+        community_typing_metadata = frontmatter(community_typing_path)
+        execute = community_typing_metadata.get("execute", {})
+        if not isinstance(execute, dict) or execute.get("eval") is not True:
+            errors.append("article 29 must retain the downstream eval:true policy")
+        if not isinstance(execute, dict) or execute.get("freeze") != "auto":
+            errors.append("article 29 must retain freeze:auto")
+
+    downstream_contracts = {
+        30: (
+            "chapters/30-compositional-data.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "closure_audit",
+                "reference_effects",
+                "## 审计与升级",
+                "30-closure-artifact",
+                "30-measurement-scales",
+                "30-reference-frame",
+            ),
+        ),
+        31: (
+            "chapters/31-da-methods.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "ANCOMBC::ancombc2(",
+                "ALDEx2::aldex.clr(",
+                "Maaslin2::Maaslin2(",
+                "lefser::lefser(",
+                "corncob::differentialTest(",
+                "## 审计与升级",
+                "31-da-hit-counts",
+                "31-da-jaccard",
+                "31-da-evidence-map",
+            ),
+        ),
+        32: (
+            "chapters/32-multirank-da.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "aggregate_rank <- function",
+                "PrimaryReportingEligible",
+                "ReportingGate",
+                "## 审计与升级",
+                "32-rank-evidence-cascade",
+                "32-multirank-effect-map",
+                "32-family-genus-coherence",
+            ),
+        ),
+        33: (
+            "chapters/33-da-visualization.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "master_results",
+                "build-audited-cladogram",
+                "## 审计与升级",
+                "33-da-volcano",
+                "33-da-cladogram",
+                "33-da-manhattan",
+                "33-da-forest",
+            ),
+        ),
+        34: (
+            "chapters/34-absolute-quantification.qmd",
+            (
+                'file.path(data_dir, "taxonomy.tsv")',
+                'file.path(data_dir, "metadata.tsv")',
+                "cell-load.tsv",
+                "calculate-qmp",
+                "## 审计与升级",
+                "34-microbial-load",
+                "34-relative-quantitative-effects",
+                "34-qmp-exemplar",
+            ),
+        ),
+        35: (
+            "chapters/35-cooccurrence-networks.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "SpiecEasi::sparccboot(",
+                "SpiecEasi::spiec.easi(",
+                "group_centered_clr",
+                "## 审计与升级",
+                "35-network-matrix",
+                "35-spiec-network",
+                "35-network-edge-audit",
+            ),
+        ),
+        36: (
+            "chapters/36-network-robustness.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "SpiecEasi::sparcc(",
+                "SpiecEasi::spiec.easi(",
+                "calculate_roles",
+                "group_bootstrap_frequency",
+                "## 审计与升级",
+                "36-role-cartography",
+                "36-attack-robustness",
+                "36-group-rewiring",
+                "36-topology-sensitivity",
+            ),
+        ),
+        37: (
+            "chapters/37-microbial-wgcna.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "data/small/environment.tsv",
+                "WGCNA::pickSoftThreshold(",
+                "WGCNA::blockwiseModules(",
+                "WGCNA::signedKME(",
+                "## 审计与升级",
+                "37-soft-threshold",
+                "37-module-dendrogram",
+                "37-module-trait",
+                "37-hub-sensitivity",
+            ),
+        ),
+        38: (
+            "chapters/38-community-assembly-bnti.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "data/small/environment.tsv",
+                "data/small/rooted-tree.nwk.gz",
+                "iCAMP::bNTI.cm",
+                "iCAMP::RC.cm",
+                "clusterSetRNGStream",
+                "## 审计与升级",
+                "38-tree-filter",
+                "38-bnti-rcbray",
+                "38-process-fractions",
+                "38-phylogenetic-signal",
+            ),
+        ),
+        39: (
+            "chapters/39-neutral-community-model.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "fit_ncm <- function",
+                "bootstrap_migration",
+                "vegan::rrarefy(",
+                "## 审计与升级",
+                "39-neutral-abundance-occupancy",
+                "39-neutral-pool-migration",
+                "39-neutral-classification-sensitivity",
+                "39-neutral-detection-sensitivity",
+            ),
+        ),
+        40: (
+            "chapters/40-niche-distance-decay.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "data/small/environment.tsv",
+                "standardized_b",
+                "vegan::radfit(",
+                "haversine_km",
+                "vegan::mantel(",
+                "## 审计与升级",
+                "40-niche-breadth",
+                "40-rank-abundance-models",
+                "40-distance-decay",
+                "40-distance-decay-audit",
+            ),
+        ),
+        42: (
+            "chapters/42-functional-guilds.qmd",
+            (
+                "data/small/taxonomy.tsv",
+                "data/small/metadata.tsv",
+                "microeco::trans_func$new",
+                'prok_database = "FAPROTAX"',
+                "## 审计与升级",
+                "42-function-coverage",
+                "42-functional-composition",
+                "42-functional-heatmap",
+                "42-functional-sensitivity",
+            ),
+        ),
+        43: (
+            "chapters/43-random-forest.qmd",
+            (
+                "cell-load.tsv",
+                "ranger::ranger",
+                "nested-random-forest-classification",
+                "permutation_auc <- numeric(50L)",
+                "## 审计与升级",
+                "43-nested-roc",
+                "43-calibration",
+                "43-permutation-importance",
+                "43-regression-performance",
+            ),
+        ),
+        44: (
+            "chapters/44-cross-cohort-validation.qmd",
+            (
+                "metafor::rma.uni",
+                'method = "REML"',
+                "leave-one-study-out-classification",
+                "HeldOutStudy",
+                "## 审计与升级",
+                "44-cohort-pcoa",
+                "44-meta-forest",
+                "44-heterogeneity",
+                "44-external-validation",
+            ),
+        ),
+        45: (
+            "chapters/45-survival-analysis.qmd",
+            (
+                "metadata$SamplingWeek",
+                "survival::coxph",
+                "survival::cox.zph",
+                "glmnet::cv.glmnet",
+                "timeROC::timeROC",
+                "## 审计与升级",
+                "45-treatment-km",
+                "45-taxon-cox",
+                "45-ph-diagnostics",
+                "45-time-dependent-roc",
+            ),
+        ),
+        46: (
+            "chapters/46-procrustes-mantel-halla.qmd",
+            (
+                "data/small/paired-ibd-multiomics",
+                "protest(",
+                "mantel(",
+                "from halla import HAllA",
+                "pairwise-group-residual.tsv",
+                "## 审计与升级",
+                "46-1-procrustes",
+                "46-4-halla-associations",
+            ),
+        ),
+        47: (
+            "chapters/47-spls-diablo.qmd",
+            (
+                "data/small/paired-ibd-multiomics",
+                "spls(",
+                "tune.block.splsda(",
+                "block.splsda(",
+                "test-predictions.tsv",
+                "## 审计与升级",
+                "47-1-spls-generalization",
+                "47-4-feature-stability",
+            ),
+        ),
+        48: (
+            "chapters/48-mmvec-mofa.qmd",
+            (
+                "data/small/paired-ibd-multiomics",
+                "from mmvec.multimodal import MMvec",
+                "from mofapy2.run.entry_point import entry_point",
+                "mmvec-native",
+                "multiomics-native",
+                "ValidationMAE",
+                "## 审计与升级",
+                "48-1-cca-overfit-audit",
+                "48-4-mofa-summary",
+            ),
+        ),
+        49: (
+            "chapters/49-multi-kingdom.qmd",
+            (
+                "data/small/multi-kingdom-duran",
+                "fungi-otutab.tsv",
+                "oomycete-otutab.tsv",
+                "adonis2(",
+                "protest(",
+                "cross-kingdom-associations.tsv",
+                "## 审计与升级",
+                "49-1-three-kingdom-pcoa",
+                "49-4-stable-candidates",
+            ),
+        ),
+        50: (
+            "chapters/50-source-tracking.qmd",
+            (
+                "data/small/source-tracking-feast",
+                "library(FEAST)",
+                "FEAST(",
+                "from sourcetracker._sourcetracker import _gibbs",
+                "feast-missing-source.tsv",
+                "## 审计与升级",
+                "50-1-feast-main",
+                "50-4-missing-source",
+            ),
+        ),
+        51: (
+            "chapters/51-longitudinal-analysis.qmd",
+            (
+                "data/small/longitudinal-dietswap",
+                "nlme::lme(",
+                "corAR1(",
+                "SubjectID",
+                "vegdist(",
+                "Volatility",
+                "## 审计与升级",
+                "51-1-alpha-trajectories",
+                "51-4-model-audit",
+            ),
+        ),
+        52: (
+            "chapters/52-structural-equation-model.qmd",
+            (
+                "data/small/environment.tsv",
+                "piecewiseSEM::psem(",
+                "piecewiseSEM::fisherC(",
+                "plspm::plspm(",
+                "br = 2000",
+                "## 审计与升级",
+                "52-1-prespecified-dag",
+                "52-4-model-audit",
+            ),
+        ),
+        53: (
+            "chapters/53-mediation-analysis.qmd",
+            (
+                "data/small/paired-ibd-multiomics",
+                "mediation::mediate(",
+                "mediation::medsens(",
+                "FaecalibacteriumCLR",
+                "## 审计与升级",
+                "53-1-mediation-dag",
+                "53-4-observed-data",
+            ),
+        ),
+        54: (
+            "chapters/54-mendelian-randomization.qmd",
+            (
+                "data/small/mr-mibiogen",
+                "TwoSampleMR::harmonise_data(",
+                "TwoSampleMR::mr(",
+                "MRPRESSO::mr_presso(",
+                "NbDistribution = 2000",
+                "colocalisation",
+                "## 审计与升级",
+                "54-1-harmonised-scatter",
+                "54-4-assumption-audit",
+            ),
+        ),
+    }
+    for number, (relative_path, tokens) in downstream_contracts.items():
+        chapter_path = root / relative_path
+        if not chapter_path.exists():
+            continue
+        chapter_text = chapter_path.read_text(encoding="utf-8")
+        for token in tokens:
+            if token not in chapter_text:
+                errors.append(f"article {number:02d} is missing executable {token}")
+        metadata = frontmatter(chapter_path)
+        execute = metadata.get("execute", {})
+        if not isinstance(execute, dict) or execute.get("eval") is not True:
+            errors.append(f"article {number:02d} must retain the downstream eval:true policy")
+        if not isinstance(execute, dict) or execute.get("freeze") != "auto":
+            errors.append(f"article {number:02d} must retain freeze:auto")
+
+    evidence_path = root / "chapters/55-causal-evidence.qmd"
+    if evidence_path.exists():
+        evidence = evidence_path.read_text(encoding="utf-8")
+        for token in (
+            "data/small/causal-evidence",
+            "可复制阅读框架",
+            "横断面关联",
+            "人群干预",
+            "实验转移",
+            "分子机制链",
+            "三角验证",
+            "55-1-evidence-ladder",
+            "55-4-triangulation",
+        ):
+            if token not in evidence:
+                errors.append(f"article 55 is missing evidence framework token {token}")
+        execute = frontmatter(evidence_path).get("execute", {})
+        if not isinstance(execute, dict) or execute.get("eval") is not False:
+            errors.append("article 55 must retain the no-code eval:false policy")
+        if not isinstance(execute, dict) or execute.get("freeze") != "auto":
+            errors.append("article 55 must retain freeze:auto")
+
+    picrust_path = root / "chapters/41-picrust2.qmd"
+    if picrust_path.exists():
+        picrust_text = picrust_path.read_text(encoding="utf-8")
+        for token in (
+            "picrust2_pipeline.py", "--coverage", "--stratified",
+            "41-picrust2-workflow", "41-nsti-audit",
+            "41-pathway-heatmap", "41-pathway-effect",
+        ):
+            if token not in picrust_text:
+                errors.append(f"article 41 is missing executable {token}")
+        execute = frontmatter(picrust_path).get("execute", {})
+        if not isinstance(execute, dict) or execute.get("eval") is not False:
+            errors.append("article 41 must retain the upstream eval:false policy")
+        if not isinstance(execute, dict) or execute.get("freeze") != "auto":
+            errors.append("article 41 must retain freeze:auto")
 
     status = "passed" if not errors else "failed"
     payload = {

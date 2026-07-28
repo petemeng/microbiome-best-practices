@@ -1,0 +1,131 @@
+FeatureID	Kingdom	Phylum	Class	Order	Family	Genus	Species	DisplayName
+HT_001	Bacteria	Actinobacteria			Actinobacteria	Actinomycetaceae		Actinomycetaceae
+HT_002	Bacteria	Firmicutes			Bacilli	Aerococcus		Aerococcus
+HT_003	Bacteria	Proteobacteria			Proteobacteria	Aeromonas		Aeromonas
+HT_004	Bacteria	Verrucomicrobia			Verrucomicrobia	Akkermansia		Akkermansia
+HT_005	Bacteria	Proteobacteria			Proteobacteria	Alcaligenes faecalis et rel.		Alcaligenes faecalis et rel.
+HT_006	Bacteria	Bacteroidetes			Bacteroidetes	Allistipes et rel.		Allistipes et rel.
+HT_007	Bacteria	Proteobacteria			Proteobacteria	Anaerobiospirillum		Anaerobiospirillum
+HT_008	Bacteria	Firmicutes			Clostridium cluster XV	Anaerofustis		Anaerofustis
+HT_009	Bacteria	Firmicutes			Clostridium cluster XIVa	Anaerostipes caccae et rel.		Anaerostipes caccae et rel.
+HT_010	Bacteria	Firmicutes			Clostridium cluster IV	Anaerotruncus colihominis et rel.		Anaerotruncus colihominis et rel.
+HT_011	Bacteria	Firmicutes			Clostridium cluster XI	Anaerovorax odorimutans et rel.		Anaerovorax odorimutans et rel.
+HT_012	Bacteria	Firmicutes			Bacilli	Aneurinibacillus		Aneurinibacillus
+HT_013	Bacteria	Proteobacteria			Proteobacteria	Aquabacterium		Aquabacterium
+HT_014	Bacteria	Firmicutes			Asteroleplasma	Asteroleplasma et rel.		Asteroleplasma et rel.
+HT_015	Bacteria	Actinobacteria			Actinobacteria	Atopobium		Atopobium
+HT_016	Bacteria	Firmicutes			Bacilli	Bacillus		Bacillus
+HT_017	Bacteria	Bacteroidetes			Bacteroidetes	Bacteroides fragilis et rel.		Bacteroides fragilis et rel.
+HT_018	Bacteria	Bacteroidetes			Bacteroidetes	Bacteroides intestinalis et rel.		Bacteroides intestinalis et rel.
+HT_019	Bacteria	Bacteroidetes			Bacteroidetes	Bacteroides ovatus et rel.		Bacteroides ovatus et rel.
+HT_020	Bacteria	Bacteroidetes			Bacteroidetes	Bacteroides plebeius et rel.		Bacteroides plebeius et rel.
+HT_021	Bacteria	Bacteroidetes			Bacteroidetes	Bacteroides splachnicus et rel.		Bacteroides splachnicus et rel.
+HT_022	Bacteria	Bacteroidetes			Bacteroidetes	Bacteroides stercoris et rel.		Bacteroides stercoris et rel.
+HT_023	Bacteria	Bacteroidetes			Bacteroidetes	Bacteroides uniformis et rel.		Bacteroides uniformis et rel.
+HT_024	Bacteria	Bacteroidetes			Bacteroidetes	Bacteroides vulgatus et rel.		Bacteroides vulgatus et rel.
+HT_025	Bacteria	Actinobacteria			Actinobacteria	Bifidobacterium		Bifidobacterium
+HT_026	Bacteria	Proteobacteria			Proteobacteria	Bilophila et rel.		Bilophila et rel.
+HT_027	Bacteria	Spirochaetes			Spirochaetes	Brachyspira		Brachyspira
+HT_028	Bacteria	Firmicutes			Clostridium cluster XIVa	Bryantella formatexigens et rel.		Bryantella formatexigens et rel.
+HT_029	Bacteria	Firmicutes			Clostridium cluster XVI	Bulleidia moorei et rel.		Bulleidia moorei et rel.
+HT_030	Bacteria	Proteobacteria			Proteobacteria	Burkholderia		Burkholderia
+HT_031	Bacteria	Firmicutes			Clostridium cluster XIVa	Butyrivibrio crossotus et rel.		Butyrivibrio crossotus et rel.
+HT_032	Bacteria	Proteobacteria			Proteobacteria	Campylobacter		Campylobacter
+HT_033	Bacteria	Firmicutes			Clostridium cluster XVII	Catenibacterium mitsuokai et rel.		Catenibacterium mitsuokai et rel.
+HT_034	Bacteria	Firmicutes			Clostridium cluster I	Clostridium (sensu stricto)		Clostridium (sensu stricto)
+HT_035	Bacteria	Firmicutes			Clostridium cluster IV	Clostridium cellulosi et rel.		Clostridium cellulosi et rel.
+HT_036	Bacteria	Firmicutes			Clostridium cluster XIVa	Clostridium colinum et rel.		Clostridium colinum et rel.
+HT_037	Bacteria	Firmicutes			Clostridium cluster XI	Clostridium difficile et rel.		Clostridium difficile et rel.
+HT_038	Bacteria	Firmicutes			Clostridium cluster XI	Clostridium felsineum et rel.		Clostridium felsineum et rel.
+HT_039	Bacteria	Firmicutes			Clostridium cluster IV	Clostridium leptum et rel.		Clostridium leptum et rel.
+HT_040	Bacteria	Firmicutes			Clostridium cluster XIVa	Clostridium nexile et rel.		Clostridium nexile et rel.
+HT_041	Bacteria	Firmicutes			Clostridium cluster IV	Clostridium orbiscindens et rel.		Clostridium orbiscindens et rel.
+HT_042	Bacteria	Firmicutes			Clostridium cluster XVIII	Clostridium ramosum et rel.		Clostridium ramosum et rel.
+HT_043	Bacteria	Firmicutes			Clostridium cluster XIVa	Clostridium sphenoides et rel.		Clostridium sphenoides et rel.
+HT_044	Bacteria	Firmicutes			Clostridium cluster III	Clostridium stercorarium et rel.		Clostridium stercorarium et rel.
+HT_045	Bacteria	Firmicutes			Clostridium cluster XIVa	Clostridium symbiosum et rel.		Clostridium symbiosum et rel.
+HT_046	Bacteria	Firmicutes			Clostridium cluster III	Clostridium thermocellum et rel.		Clostridium thermocellum et rel.
+HT_047	Bacteria	Actinobacteria			Actinobacteria	Collinsella		Collinsella
+HT_048	Bacteria	Firmicutes			Clostridium cluster XVIII	Coprobacillus catenaformis et rel.		Coprobacillus catenaformis et rel.
+HT_049	Bacteria	Firmicutes			Clostridium cluster XIVa	Coprococcus eutactus et rel.		Coprococcus eutactus et rel.
+HT_050	Bacteria	Actinobacteria			Actinobacteria	Corynebacterium		Corynebacterium
+HT_051	Bacteria	Proteobacteria			Proteobacteria	Desulfovibrio et rel.		Desulfovibrio et rel.
+HT_052	Bacteria	Firmicutes			Clostridium cluster IX	Dialister		Dialister
+HT_053	Bacteria	Firmicutes			Clostridium cluster XIVa	Dorea formicigenerans et rel.		Dorea formicigenerans et rel.
+HT_054	Bacteria	Actinobacteria			Actinobacteria	Eggerthella lenta et rel.		Eggerthella lenta et rel.
+HT_055	Bacteria	Proteobacteria			Proteobacteria	Enterobacter aerogenes et rel.		Enterobacter aerogenes et rel.
+HT_056	Bacteria	Firmicutes			Bacilli	Enterococcus		Enterococcus
+HT_057	Bacteria	Proteobacteria			Proteobacteria	Escherichia coli et rel.		Escherichia coli et rel.
+HT_058	Bacteria	Firmicutes			Clostridium cluster XVI	Eubacterium biforme et rel.		Eubacterium biforme et rel.
+HT_059	Bacteria	Firmicutes			Clostridium cluster XVI	Eubacterium cylindroides et rel.		Eubacterium cylindroides et rel.
+HT_060	Bacteria	Firmicutes			Clostridium cluster XIVa	Eubacterium hallii et rel.		Eubacterium hallii et rel.
+HT_061	Bacteria	Firmicutes			Clostridium cluster XV	Eubacterium limosum et rel.		Eubacterium limosum et rel.
+HT_062	Bacteria	Firmicutes			Clostridium cluster XIVa	Eubacterium rectale et rel.		Eubacterium rectale et rel.
+HT_063	Bacteria	Firmicutes			Clostridium cluster IV	Eubacterium siraeum et rel.		Eubacterium siraeum et rel.
+HT_064	Bacteria	Firmicutes			Clostridium cluster XIVa	Eubacterium ventriosum et rel.		Eubacterium ventriosum et rel.
+HT_065	Bacteria	Firmicutes			Clostridium cluster IV	Faecalibacterium prausnitzii et rel.		Faecalibacterium prausnitzii et rel.
+HT_066	Bacteria	Fusobacteria			Fusobacteria	Fusobacteria		Fusobacteria
+HT_067	Bacteria	Firmicutes			Bacilli	Gemella		Gemella
+HT_068	Bacteria	Firmicutes			Bacilli	Granulicatella		Granulicatella
+HT_069	Bacteria	Proteobacteria			Proteobacteria	Haemophilus		Haemophilus
+HT_070	Bacteria	Proteobacteria			Proteobacteria	Helicobacter		Helicobacter
+HT_071	Bacteria	Proteobacteria			Proteobacteria	Klebisiella pneumoniae et rel.		Klebisiella pneumoniae et rel.
+HT_072	Bacteria	Firmicutes			Clostridium cluster XIVa	Lachnobacillus bovis et rel.		Lachnobacillus bovis et rel.
+HT_073	Bacteria	Firmicutes			Clostridium cluster XIVa	Lachnospira pectinoschiza et rel.		Lachnospira pectinoschiza et rel.
+HT_074	Bacteria	Firmicutes			Clostridium cluster XVII	Lactobacillus catenaformis et rel.		Lactobacillus catenaformis et rel.
+HT_075	Bacteria	Firmicutes			Bacilli	Lactobacillus gasseri et rel.		Lactobacillus gasseri et rel.
+HT_076	Bacteria	Firmicutes			Bacilli	Lactobacillus plantarum et rel.		Lactobacillus plantarum et rel.
+HT_077	Bacteria	Firmicutes			Bacilli	Lactobacillus salivarius et rel.		Lactobacillus salivarius et rel.
+HT_078	Bacteria	Firmicutes			Bacilli	Lactococcus		Lactococcus
+HT_079	Bacteria	Proteobacteria			Proteobacteria	Leminorella		Leminorella
+HT_080	Bacteria	Firmicutes			Clostridium cluster IX	Megamonas hypermegale et rel.		Megamonas hypermegale et rel.
+HT_081	Bacteria	Firmicutes			Clostridium cluster IX	Megasphaera elsdenii et rel.		Megasphaera elsdenii et rel.
+HT_082	Bacteria	Proteobacteria			Proteobacteria	Methylobacterium		Methylobacterium
+HT_083	Bacteria	Actinobacteria			Actinobacteria	Micrococcaceae		Micrococcaceae
+HT_084	Bacteria	Firmicutes			Clostridium cluster IX	Mitsuokella multiacida et rel.		Mitsuokella multiacida et rel.
+HT_085	Bacteria	Proteobacteria			Proteobacteria	Moraxellaceae		Moraxellaceae
+HT_086	Bacteria	Proteobacteria			Proteobacteria	Novosphingobium		Novosphingobium
+HT_087	Bacteria	Proteobacteria			Proteobacteria	Oceanospirillum		Oceanospirillum
+HT_088	Bacteria	Firmicutes			Clostridium cluster IV	Oscillospira guillermondii et rel.		Oscillospira guillermondii et rel.
+HT_089	Bacteria	Firmicutes			Clostridium cluster XIVa	Outgrouping clostridium cluster XIVa		Outgrouping clostridium cluster XIVa
+HT_090	Bacteria	Proteobacteria			Proteobacteria	Oxalobacter formigenes et rel.		Oxalobacter formigenes et rel.
+HT_091	Bacteria	Firmicutes			Clostridium cluster IV	Papillibacter cinnamivorans et rel.		Papillibacter cinnamivorans et rel.
+HT_092	Bacteria	Bacteroidetes			Bacteroidetes	Parabacteroides distasonis et rel.		Parabacteroides distasonis et rel.
+HT_093	Bacteria	Firmicutes			Clostridium cluster IX	Peptococcus niger et rel.		Peptococcus niger et rel.
+HT_094	Bacteria	Firmicutes			Clostridium cluster XI	Peptostreptococcus anaerobius et rel.		Peptostreptococcus anaerobius et rel.
+HT_095	Bacteria	Firmicutes			Clostridium cluster XIII	Peptostreptococcus micros et rel.		Peptostreptococcus micros et rel.
+HT_096	Bacteria	Firmicutes			Clostridium cluster IX	Phascolarctobacterium faecium et rel.		Phascolarctobacterium faecium et rel.
+HT_097	Bacteria	Bacteroidetes			Bacteroidetes	Prevotella melaninogenica et rel.		Prevotella melaninogenica et rel.
+HT_098	Bacteria	Bacteroidetes			Bacteroidetes	Prevotella oralis et rel.		Prevotella oralis et rel.
+HT_099	Bacteria	Bacteroidetes			Bacteroidetes	Prevotella ruminicola et rel.		Prevotella ruminicola et rel.
+HT_100	Bacteria	Bacteroidetes			Bacteroidetes	Prevotella tannerae et rel.		Prevotella tannerae et rel.
+HT_101	Bacteria	Actinobacteria			Actinobacteria	Propionibacterium		Propionibacterium
+HT_102	Bacteria	Proteobacteria			Proteobacteria	Proteus et rel.		Proteus et rel.
+HT_103	Bacteria	Proteobacteria			Proteobacteria	Pseudomonas		Pseudomonas
+HT_104	Bacteria	Firmicutes			Clostridium cluster XIVa	Roseburia intestinalis et rel.		Roseburia intestinalis et rel.
+HT_105	Bacteria	Firmicutes			Clostridium cluster IV	Ruminococcus bromii et rel.		Ruminococcus bromii et rel.
+HT_106	Bacteria	Firmicutes			Clostridium cluster IV	Ruminococcus callidus et rel.		Ruminococcus callidus et rel.
+HT_107	Bacteria	Firmicutes			Clostridium cluster XIVa	Ruminococcus gnavus et rel.		Ruminococcus gnavus et rel.
+HT_108	Bacteria	Firmicutes			Clostridium cluster XIVa	Ruminococcus lactaris et rel.		Ruminococcus lactaris et rel.
+HT_109	Bacteria	Firmicutes			Clostridium cluster XIVa	Ruminococcus obeum et rel.		Ruminococcus obeum et rel.
+HT_110	Bacteria	Proteobacteria			Proteobacteria	Serratia		Serratia
+HT_111	Bacteria	Firmicutes			Clostridium cluster IV	Sporobacter termitidis et rel.		Sporobacter termitidis et rel.
+HT_112	Bacteria	Firmicutes			Bacilli	Staphylococcus		Staphylococcus
+HT_113	Bacteria	Firmicutes			Bacilli	Streptococcus bovis et rel.		Streptococcus bovis et rel.
+HT_114	Bacteria	Firmicutes			Bacilli	Streptococcus intermedius et rel.		Streptococcus intermedius et rel.
+HT_115	Bacteria	Firmicutes			Bacilli	Streptococcus mitis et rel.		Streptococcus mitis et rel.
+HT_116	Bacteria	Firmicutes			Clostridium cluster IV	Subdoligranulum variable at rel.		Subdoligranulum variable at rel.
+HT_117	Bacteria	Proteobacteria			Proteobacteria	Sutterella wadsworthia et rel.		Sutterella wadsworthia et rel.
+HT_118	Bacteria	Bacteroidetes			Bacteroidetes	Tannerella et rel.		Tannerella et rel.
+HT_119	Bacteria	Bacteroidetes			Bacteroidetes	Uncultured Bacteroidetes		Uncultured Bacteroidetes
+HT_120	Bacteria	Cyanobacteria			Cyanobacteria	Uncultured Chroococcales		Uncultured Chroococcales
+HT_121	Bacteria	Firmicutes			Uncultured Clostridiales	Uncultured Clostridiales I		Uncultured Clostridiales I
+HT_122	Bacteria	Firmicutes			Uncultured Clostridiales	Uncultured Clostridiales II		Uncultured Clostridiales II
+HT_123	Bacteria	Firmicutes			Uncultured Mollicutes	Uncultured Mollicutes		Uncultured Mollicutes
+HT_124	Bacteria	Firmicutes			Clostridium cluster IX	Uncultured Selenomonadaceae		Uncultured Selenomonadaceae
+HT_125	Bacteria	Firmicutes			Clostridium cluster IX	Veillonella		Veillonella
+HT_126	Bacteria	Proteobacteria			Proteobacteria	Vibrio		Vibrio
+HT_127	Bacteria	Firmicutes			Bacilli	Weissella et rel.		Weissella et rel.
+HT_128	Bacteria	Firmicutes			Bacilli	Wissella et rel.		Wissella et rel.
+HT_129	Bacteria	Proteobacteria			Proteobacteria	Xanthomonadaceae		Xanthomonadaceae
+HT_130	Bacteria	Proteobacteria			Proteobacteria	Yersinia et rel.		Yersinia et rel.

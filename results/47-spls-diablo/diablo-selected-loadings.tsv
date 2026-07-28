@@ -1,0 +1,46 @@
+Block	Component	FeatureID	DisplayName	Loading
+Microbiome	Component1	MB_G103	Pediococcus	0.0980482323058806
+Microbiome	Component1	MB_G134	Citrobacter	0.00908432764113206
+Microbiome	Component1	MB_G072	Limosilactobacillus	0.13350580936374
+Microbiome	Component1	MB_G011	Ruminococcus_B	0.154653982281172
+Microbiome	Component1	MB_G233	CAJFUR01	-0.131080826004812
+Microbiome	Component1	MB_G205	UMGS1975	-0.0997886323033303
+Microbiome	Component1	MB_G043	CAG-103	-0.483272176894337
+Microbiome	Component1	MB_G163	Pullichristensenella	-0.505046590527675
+Microbiome	Component1	MB_G094	CAG-1427	-0.334366365196141
+Microbiome	Component1	MB_G079	UBA11524	-0.566566402059225
+Microbiome	Component2	MB_G183	MWCK01	-0.0665465027770929
+Microbiome	Component2	MB_G050	Lactobacillus	0.0034363958165866
+Microbiome	Component2	MB_G015	Akkermansia	0.155357303312549
+Microbiome	Component2	MB_G048	Acidaminococcus	0.0895797620384299
+Microbiome	Component2	MB_G156	RUG705	0.0351461929411604
+Microbiome	Component2	MB_G055	Haemophilus_D	-0.275767335878591
+Microbiome	Component2	MB_G128	Longicatena	-0.128720813185801
+Microbiome	Component2	MB_G067	Parasutterella	0.18553540899051
+Microbiome	Component2	MB_G202	CAG-417	-0.451968291453156
+Microbiome	Component2	MB_G100	Clostridium_P	-0.323546024049253
+Microbiome	Component2	MB_G007	Bifidobacterium	-0.209830524027465
+Microbiome	Component2	MB_G083	Fimivicinus	0.17615353540902
+Microbiome	Component2	MB_G120	Romboutsia	-0.464489236801086
+Microbiome	Component2	MB_G181	Turicibacter	-0.459033543074708
+Microbiome	Component2	MB_G093	Clostridium_A	0.156989447927311
+Metabolome	Component1	MT_M023	5alpha-cholestanol	-0.445303054345109
+Metabolome	Component1	MT_M045	adrenic acid	0.581550022967026
+Metabolome	Component1	MT_M048	C36:5 PC plasmalogen-A	0.0884106546524408
+Metabolome	Component1	MT_M060	C16 carnitine	0.619197506282472
+Metabolome	Component1	MT_M066	C14 carnitine	0.268854542337421
+Metabolome	Component2	MT_M004	C2 carnitine	-0.354734346547436
+Metabolome	Component2	MT_M029	ethyl glucuronide	-0.258309538262323
+Metabolome	Component2	MT_M037	C34:1 PC plasmalogen-A	-0.408644731420916
+Metabolome	Component2	MT_M025	N-methylproline	0.0625102690973296
+Metabolome	Component2	MT_M028	creatine	-0.0614079058666442
+Metabolome	Component2	MT_M053	C24:0 SM	-0.0604635319523979
+Metabolome	Component2	MT_M068	C24:1 SM	-0.419958099599379
+Metabolome	Component2	MT_M052	glycolithocholic acid	0.023697690807114
+Metabolome	Component2	MT_M057	C16:0 SM	-0.343418232808865
+Metabolome	Component2	MT_M062	C18:0 LPC	-0.281229374676634
+Metabolome	Component2	MT_M050	caproic acid	0.0255545796759426
+Metabolome	Component2	MT_M069	C34:0 PE	-0.079626564106869
+Metabolome	Component2	MT_M074	carnosine	-0.222308391935099
+Metabolome	Component2	MT_M061	C22:5 CE	0.0982552563420664
+Metabolome	Component2	MT_M089	cytosine	0.434849322650628

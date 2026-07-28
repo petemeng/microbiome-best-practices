@@ -170,7 +170,7 @@ expected_sha256 <- c(
   otutab = "76fa79c38da889f35978dc86da4641a270961746709ff38049ee5f67e3c6f7a3",
   taxonomy = "725280bb9a0cd9bda7b540022e92af945ceed52527f8b2d220b055b4489f6901",
   metadata = "df24771dccf27607ddf922c6bca2cafa876d946fbe2e09d14b601accce66ba64",
-  source_summary = "e51bb47c6766d41ee6efe34689ce550ab50fa4ec07ca3beef5656268124bf6f6"
+  source_summary = "acc15b18d3f85d6d35770d0db7580d91d0a55a838862876536500a8d7c75711b"
 )
 
 missing_inputs <- input_paths[!file.exists(input_paths)]

@@ -61,14 +61,14 @@
 <text x='33.76' y='122.78' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>50%</text>
 <text x='33.76' y='79.28' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>75%</text>
 <text x='33.76' y='35.78' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='19.44px' lengthAdjust='spacingAndGlyphs'>100%</text>
-<polyline points='35.46,207.30 37.57,207.30 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='35.46,163.80 37.57,163.80 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='35.46,120.30 37.57,120.30 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='35.46,76.80 37.57,76.80 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='35.46,33.30 37.57,33.30 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='77.04,209.42 77.04,207.30 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='142.81,209.42 142.81,207.30 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
-<polyline points='208.58,209.42 208.58,207.30 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='35.46,207.30 37.57,207.30 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
+<polyline points='35.46,163.80 37.57,163.80 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
+<polyline points='35.46,120.30 37.57,120.30 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
+<polyline points='35.46,76.80 37.57,76.80 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
+<polyline points='35.46,33.30 37.57,33.30 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
+<polyline points='77.04,209.42 77.04,207.30 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
+<polyline points='142.81,209.42 142.81,207.30 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
+<polyline points='208.58,209.42 208.58,207.30 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <text transform='translate(79.13,215.60) rotate(-25)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='50.21px' lengthAdjust='spacingAndGlyphs'>Inland wetland</text>
 <text transform='translate(144.90,215.60) rotate(-25)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='54.55px' lengthAdjust='spacingAndGlyphs'>Coastal wetland</text>
 <text transform='translate(210.68,215.60) rotate(-25)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='53.08px' lengthAdjust='spacingAndGlyphs'>Tibetan Plateau</text>

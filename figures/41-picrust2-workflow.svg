@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='504.57pt' height='192.76pt' viewBox='0 0 504.57 192.76'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MDQuNTd8MC4wMHwxOTIuNzY='>
+    <rect x='0.00' y='0.00' width='504.57' height='192.76' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MDQuNTd8MC4wMHwxOTIuNzY=)'>
+<line x1='86.69' y1='96.30' x2='106.90' y2='96.30' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt;' />
+<polygon points='101.50,99.41 106.90,96.30 101.50,93.18 ' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt; fill: #6B7280;' />
+<line x1='164.43' y1='96.30' x2='184.65' y2='96.30' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt;' />
+<polygon points='179.24,99.41 184.65,96.30 179.24,93.18 ' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt; fill: #6B7280;' />
+<line x1='242.18' y1='96.30' x2='262.39' y2='96.30' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt;' />
+<polygon points='256.99,99.41 262.39,96.30 256.99,93.18 ' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt; fill: #6B7280;' />
+<line x1='319.92' y1='96.30' x2='340.14' y2='96.30' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt;' />
+<polygon points='334.73,99.41 340.14,96.30 334.73,93.18 ' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt; fill: #6B7280;' />
+<line x1='397.67' y1='96.30' x2='417.88' y2='96.30' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt;' />
+<polygon points='412.48,99.41 417.88,96.30 412.48,93.18 ' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt; fill: #6B7280;' />
+<polygon points='31.91,102.15 83.93,102.15 83.87,102.15 84.13,102.14 84.38,102.09 84.61,102.00 84.84,101.87 85.03,101.71 85.20,101.52 85.34,101.30 85.44,101.07 85.50,100.82 85.52,100.57 85.52,100.57 85.52,92.03 85.52,92.03 85.50,91.77 85.44,91.52 85.34,91.29 85.20,91.07 85.03,90.88 84.84,90.72 84.61,90.59 84.38,90.50 84.13,90.45 83.93,90.44 31.91,90.44 32.10,90.45 31.84,90.44 31.59,90.47 31.34,90.54 31.11,90.65 30.90,90.80 30.72,90.97 30.56,91.18 30.45,91.40 30.37,91.65 30.32,91.90 30.32,92.03 30.32,100.57 30.32,100.44 30.32,100.69 30.37,100.95 30.45,101.19 30.56,101.41 30.72,101.62 30.90,101.79 31.11,101.94 31.34,102.05 31.59,102.12 31.84,102.15 ' style='stroke-width: 0.64; stroke: #1A1A1A; fill: #EAF4FB;' />
+<text x='57.92' y='99.51' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='49.91px' lengthAdjust='spacingAndGlyphs'>ASV counts</text>
+<polygon points='101.31,107.18 170.02,107.18 169.95,107.18 170.21,107.17 170.46,107.12 170.70,107.03 170.92,106.90 171.12,106.74 171.29,106.55 171.42,106.33 171.52,106.10 171.58,105.85 171.60,105.59 171.60,105.59 171.60,87.00 171.60,87.00 171.58,86.74 171.52,86.50 171.42,86.26 171.29,86.04 171.12,85.85 170.92,85.69 170.70,85.56 170.46,85.47 170.21,85.42 170.02,85.41 101.31,85.41 101.51,85.42 101.25,85.41 101.00,85.44 100.75,85.51 100.52,85.62 100.31,85.77 100.13,85.95 99.97,86.15 99.85,86.38 99.77,86.62 99.73,86.87 99.73,87.00 99.73,105.59 99.73,105.47 99.73,105.72 99.77,105.97 99.85,106.22 99.97,106.44 100.13,106.65 100.31,106.82 100.52,106.97 100.75,107.08 101.00,107.15 101.25,107.18 ' style='stroke-width: 0.64; stroke: #1A1A1A; fill: #EAF4FB;' />
+<text x='135.67' y='94.48' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='66.59px' lengthAdjust='spacingAndGlyphs'>Representative</text>
+<text x='135.67' y='104.53' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='47.07px' lengthAdjust='spacingAndGlyphs'>sequences</text>
+<polygon points='188.97,107.18 237.85,107.18 237.78,107.18 238.04,107.17 238.29,107.12 238.53,107.03 238.75,106.90 238.95,106.74 239.12,106.55 239.25,106.33 239.35,106.10 239.41,105.85 239.44,105.59 239.44,105.59 239.44,87.00 239.44,87.00 239.41,86.74 239.35,86.50 239.25,86.26 239.12,86.04 238.95,85.85 238.75,85.69 238.53,85.56 238.29,85.47 238.04,85.42 237.85,85.41 188.97,85.41 189.17,85.42 188.91,85.41 188.66,85.44 188.41,85.51 188.18,85.62 187.97,85.77 187.79,85.95 187.63,86.15 187.51,86.38 187.43,86.62 187.39,86.87 187.39,87.00 187.39,105.59 187.39,105.47 187.39,105.72 187.43,105.97 187.51,106.22 187.63,106.44 187.79,106.65 187.97,106.82 188.18,106.97 188.41,107.08 188.66,107.15 188.91,107.18 ' style='stroke-width: 0.64; stroke: #1A1A1A; fill: #FFF4DC;' />
+<text x='213.41' y='94.48' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='30.51px' lengthAdjust='spacingAndGlyphs'>EPA-ng</text>
+<text x='213.41' y='104.53' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='46.76px' lengthAdjust='spacingAndGlyphs'>placement</text>
+<polygon points='261.71,107.18 320.60,107.18 320.54,107.18 320.80,107.17 321.05,107.12 321.28,107.03 321.51,106.90 321.70,106.74 321.87,106.55 322.01,106.33 322.11,106.10 322.17,105.85 322.19,105.59 322.19,105.59 322.19,87.00 322.19,87.00 322.17,86.74 322.11,86.50 322.01,86.26 321.87,86.04 321.70,85.85 321.51,85.69 321.28,85.56 321.05,85.47 320.80,85.42 320.60,85.41 261.71,85.41 261.90,85.42 261.64,85.41 261.39,85.44 261.15,85.51 260.91,85.62 260.70,85.77 260.52,85.95 260.37,86.15 260.25,86.38 260.17,86.62 260.13,86.87 260.12,87.00 260.12,105.59 260.13,105.47 260.13,105.72 260.17,105.97 260.25,106.22 260.37,106.44 260.52,106.65 260.70,106.82 260.91,106.97 261.15,107.08 261.39,107.15 261.64,107.18 ' style='stroke-width: 0.64; stroke: #1A1A1A; fill: #FFF4DC;' />
+<text x='291.16' y='94.48' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='56.78px' lengthAdjust='spacingAndGlyphs'>Hidden-state</text>
+<text x='291.16' y='104.53' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='44.22px' lengthAdjust='spacingAndGlyphs'>prediction</text>
+<polygon points='351.58,107.18 386.22,107.18 386.16,107.18 386.41,107.17 386.66,107.12 386.90,107.03 387.12,106.90 387.32,106.74 387.49,106.55 387.63,106.33 387.73,106.10 387.79,105.85 387.81,105.59 387.81,105.59 387.81,87.00 387.81,87.00 387.79,86.74 387.73,86.50 387.63,86.26 387.49,86.04 387.32,85.85 387.12,85.69 386.90,85.56 386.66,85.47 386.41,85.42 386.22,85.41 351.58,85.41 351.77,85.42 351.52,85.41 351.26,85.44 351.02,85.51 350.79,85.62 350.58,85.77 350.39,85.95 350.24,86.15 350.12,86.38 350.04,86.62 350.00,86.87 349.99,87.00 349.99,105.59 350.00,105.47 350.00,105.72 350.04,105.97 350.12,106.22 350.24,106.44 350.39,106.65 350.58,106.82 350.79,106.97 351.02,107.08 351.26,107.15 351.52,107.18 ' style='stroke-width: 0.64; stroke: #1A1A1A; fill: #E9F7F1;' />
+<text x='368.90' y='94.48' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='32.52px' lengthAdjust='spacingAndGlyphs'>EC / KO</text>
+<text x='368.90' y='104.53' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='32.43px' lengthAdjust='spacingAndGlyphs'>profiles</text>
+<polygon points='424.36,107.18 468.93,107.18 468.87,107.18 469.12,107.17 469.37,107.12 469.61,107.03 469.83,106.90 470.03,106.74 470.20,106.55 470.34,106.33 470.44,106.10 470.50,105.85 470.52,105.59 470.52,105.59 470.52,87.00 470.52,87.00 470.50,86.74 470.44,86.50 470.34,86.26 470.20,86.04 470.03,85.85 469.83,85.69 469.61,85.56 469.37,85.47 469.12,85.42 468.93,85.41 424.36,85.41 424.55,85.42 424.30,85.41 424.05,85.44 423.80,85.51 423.57,85.62 423.36,85.77 423.17,85.95 423.02,86.15 422.90,86.38 422.82,86.62 422.78,86.87 422.77,87.00 422.77,105.59 422.78,105.47 422.78,105.72 422.82,105.97 422.90,106.22 423.02,106.44 423.17,106.65 423.36,106.82 423.57,106.97 423.80,107.08 424.05,107.15 424.30,107.18 ' style='stroke-width: 0.64; stroke: #1A1A1A; fill: #E9F7F1;' />
+<text x='446.65' y='94.48' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='38.10px' lengthAdjust='spacingAndGlyphs'>MetaCyc</text>
+<text x='446.65' y='104.53' text-anchor='middle' style='font-size: 8.82px;fill: #1A1A1A; font-family: "Arial";' textLength='42.45px' lengthAdjust='spacingAndGlyphs'>pathways</text>
+<text x='57.92' y='139.01' text-anchor='middle' style='font-size: 7.11px;fill: #4D4D4D; font-family: "Arial";' textLength='28.56px' lengthAdjust='spacingAndGlyphs'>37 × 24</text>
+<text x='135.67' y='139.01' text-anchor='middle' style='font-size: 7.11px;fill: #4D4D4D; font-family: "Arial";' textLength='24.85px' lengthAdjust='spacingAndGlyphs'>400 bp</text>
+<text x='213.41' y='139.01' text-anchor='middle' style='font-size: 7.11px;fill: #4D4D4D; font-family: "Arial";' textLength='69.15px' lengthAdjust='spacingAndGlyphs'>Bacteria + Archaea</text>
+<text x='291.16' y='139.01' text-anchor='middle' style='font-size: 7.11px;fill: #4D4D4D; font-family: "Arial";' textLength='59.54px' lengthAdjust='spacingAndGlyphs'>NSTI + 16S copy</text>
+<text x='368.90' y='139.01' text-anchor='middle' style='font-size: 7.11px;fill: #4D4D4D; font-family: "Arial";' textLength='59.96px' lengthAdjust='spacingAndGlyphs'>Copy-normalized</text>
+<text x='446.65' y='139.01' text-anchor='middle' style='font-size: 7.11px;fill: #4D4D4D; font-family: "Arial";' textLength='83.52px' lengthAdjust='spacingAndGlyphs'>Abundance + coverage</text>
+<text x='252.28' y='31.43' text-anchor='middle' style='font-size: 11.38px; font-weight: bold; font-family: "Arial";' textLength='96.80px' lengthAdjust='spacingAndGlyphs'>PICRUSt2 2.6.3</text>
+<text x='0.00' y='190.93' style='font-size: 8.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='468.18px' lengthAdjust='spacingAndGlyphs'>Predictions are functional potential inferred from phylogenetic placement, not measured genes or activity.</text>
+</g>
+</svg>

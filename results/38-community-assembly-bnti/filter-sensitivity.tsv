@@ -1,0 +1,11 @@
+Filter	OTUs	ReadFraction	Randomizations	Process	Fraction
+Total reads >= 500	585	0.474173751443195	999	Heterogeneous selection	0.168039950062422
+Total reads >= 500	585	0.474173751443195	999	Homogeneous selection	0
+Total reads >= 500	585	0.474173751443195	999	Dispersal limitation	0.820973782771536
+Total reads >= 500	585	0.474173751443195	999	Homogenizing dispersal	0.00649188514357054
+Total reads >= 500	585	0.474173751443195	999	Undominated	0.00449438202247191
+Total reads >= 1000	220	0.319737971315144	199	Heterogeneous selection	0.0566791510611735
+Total reads >= 1000	220	0.319737971315144	199	Homogeneous selection	0
+Total reads >= 1000	220	0.319737971315144	199	Dispersal limitation	0.936828963795256
+Total reads >= 1000	220	0.319737971315144	199	Homogenizing dispersal	0.0017478152309613
+Total reads >= 1000	220	0.319737971315144	199	Undominated	0.00474406991260924

@@ -1,0 +1,5 @@
+stem	width_mm	height_mm	raster_ppi
+27-rank-resolution-cascade	150	96	600
+27-multirank-bubble	183	198	600
+27-lineage-ladder	183	168	600
+27-topn-coverage	160	102	600

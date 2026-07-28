@@ -1,0 +1,3 @@
+Rank	Taxon	ParentLineages	ParentPaths	EqualSampleMean
+Family	FamilyI	3	Cyanobacteria > Cyanobacteria > SubsectionI | Cyanobacteria > Cyanobacteria > SubsectionIII | Cyanobacteria > Cyanobacteria > SubsectionIV	0.001376437511524925
+Family	Family XII	2	Firmicutes > Bacilli > Bacillales | Firmicutes > Clostridia > Clostridiales	0.004929644117998486

@@ -1,0 +1,22 @@
+RemovedClass	SourceClass	Contribution
+None	Infant gut	0.66889087998063
+None	Adult gut	0.032313086714873
+None	Adult skin	0.000867279618707329
+None	Soil	0.112571482947324
+None	Unknown	0.185357270738466
+Infant gut	Adult gut	0.100383496510341
+Infant gut	Adult skin	0.284912912793236
+Infant gut	Soil	0.482301317473817
+Infant gut	Unknown	0.132402273222605
+Adult gut	Infant gut	0.688659318923278
+Adult gut	Adult skin	0.00711706722032709
+Adult gut	Soil	0.0852911565826176
+Adult gut	Unknown	0.218932457273778
+Adult skin	Infant gut	0.71228067907094
+Adult skin	Adult gut	0.0240799818693637
+Adult skin	Soil	0.0801963029173559
+Adult skin	Unknown	0.18344303614234
+Soil	Infant gut	0.788624910414505
+Soil	Adult gut	0.034958799309316
+Soil	Adult skin	0.0153918492450072
+Soil	Unknown	0.161024441031172

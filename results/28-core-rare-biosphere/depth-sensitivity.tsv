@@ -1,0 +1,5 @@
+Definition	CoreFeatures	SharedWithPrimary	UnionWithPrimary	JaccardWithPrimary	EqualSampleAbundanceMass
+Raw presence	334	97	334	0.2904191616766467	0.3177034334440175
+Raw 0.01%	97	97	97	1	0.17036121103173313
+Rarefied one read	167	97	167	0.5808383233532934	0.22171344111047817
+Rarefied two reads	52	52	97	0.5360824742268041	0.122813104199409

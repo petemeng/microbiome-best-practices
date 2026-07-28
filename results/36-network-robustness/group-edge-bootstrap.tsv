@@ -1,0 +1,1356 @@
+Group	EdgeKey	SelectionFrequency
+CW	Genus:Acidovorax || Genus:Altererythrobacter	0.002
+CW	Genus:Acidovorax || Genus:Arenimonas	0.006
+CW	Genus:Acidovorax || Genus:Exiguobacterium	0.02
+CW	Genus:Acidovorax || Genus:Fusibacter	0.048
+CW	Genus:Acidovorax || Genus:Haliangium	0.068
+CW	Genus:Acidovorax || Genus:Lysobacter	0.008
+CW	Genus:Algoriphagus || Genus:Altererythrobacter	0.008
+CW	Genus:Algoriphagus || Genus:Fusibacter	0.008
+CW	Genus:Algoriphagus || Genus:Massilia	0.002
+CW	Genus:Algoriphagus || Genus:Terrimonas	0.002
+CW	Genus:Altererythrobacter || Genus:Fusibacter	0.002
+CW	Genus:Anaerolinea || Genus:Algoriphagus	0.002
+CW	Genus:Anaerolinea || Genus:Altererythrobacter	0.02
+CW	Genus:Anaerolinea || Genus:Bryobacter	0.036
+CW	Genus:Anaerolinea || Genus:Desulfobulbus	0.006
+CW	Genus:Anaerolinea || Genus:Erythrobacter	0.012
+CW	Genus:Anaerolinea || Genus:Gaiella	0.012
+CW	Genus:Anaerolinea || Genus:Gemmatimonas	0.006
+CW	Genus:Anaerolinea || Genus:Illumatobacter	0.002
+CW	Genus:Anaerolinea || Genus:Marinicella	0.038
+CW	Genus:Anaerolinea || Genus:Paenisporosarcina	0.02
+CW	Genus:Anaerolinea || Genus:Planomicrobium	0.02
+CW	Genus:Anaerolinea || Genus:Pseudolabrys	0.002
+CW	Genus:Anaerolinea || Genus:Pseudomonas	0.004
+CW	Genus:Anaerolinea || Genus:Robiginitalea	0.002
+CW	Genus:Anaerolinea || Genus:Sulfurovum	0.006
+CW	Genus:Anaerolinea || Genus:Terrimonas	0.002
+CW	Genus:Anaerolinea || Genus:Variibacter	0.052
+CW	Genus:Arenimonas || Genus:Altererythrobacter	0.074
+CW	Genus:Arenimonas || Genus:Exiguobacterium	0.06
+CW	Genus:Arenimonas || Genus:Terrimonas	0.014
+CW	Genus:Arthrobacter || Genus:Algoriphagus	0.008
+CW	Genus:Arthrobacter || Genus:Altererythrobacter	0.002
+CW	Genus:Arthrobacter || Genus:Anaerolinea	0.002
+CW	Genus:Arthrobacter || Genus:Arenimonas	0.056
+CW	Genus:Arthrobacter || Genus:Ferruginibacter	0.01
+CW	Genus:Arthrobacter || Genus:Flavobacterium	0.012
+CW	Genus:Arthrobacter || Genus:Gemmatimonas	0.004
+CW	Genus:Arthrobacter || Genus:Geobacter	0.002
+CW	Genus:Arthrobacter || Genus:Gillisia	0.746
+CW	Genus:Arthrobacter || Genus:Haliangium	0.006
+CW	Genus:Arthrobacter || Genus:Illumatobacter	0.392
+CW	Genus:Arthrobacter || Genus:Lysobacter	0.002
+CW	Genus:Arthrobacter || Genus:Marinicella	0.452
+CW	Genus:Arthrobacter || Genus:Nitrospira	0.004
+CW	Genus:Arthrobacter || Genus:Paenisporosarcina	0.006
+CW	Genus:Arthrobacter || Genus:Pedobacter	0.056
+CW	Genus:Arthrobacter || Genus:Planomicrobium	0.01
+CW	Genus:Arthrobacter || Genus:Pseudolabrys	0.48
+CW	Genus:Arthrobacter || Genus:Pseudomonas	0.002
+CW	Genus:Arthrobacter || Genus:Robiginitalea	0.004
+CW	Genus:Arthrobacter || Genus:Sulfurovum	0.054
+CW	Genus:Arthrobacter || Genus:Variibacter	0.018
+CW	Genus:Bacillus || Genus:Algoriphagus	0.48
+CW	Genus:Bacillus || Genus:Altererythrobacter	0.012
+CW	Genus:Bacillus || Genus:Anaerolinea	0.028
+CW	Genus:Bacillus || Genus:Arenimonas	0.162
+CW	Genus:Bacillus || Genus:Blastocatella	0.382
+CW	Genus:Bacillus || Genus:Bryobacter	0.01
+CW	Genus:Bacillus || Genus:Desulfobulbus	0.036
+CW	Genus:Bacillus || Genus:Erythrobacter	0.418
+CW	Genus:Bacillus || Genus:Exiguobacterium	0.314
+CW	Genus:Bacillus || Genus:Ferruginibacter	0.002
+CW	Genus:Bacillus || Genus:Gemmatimonas	0.222
+CW	Genus:Bacillus || Genus:Gillisia	0.002
+CW	Genus:Bacillus || Genus:Haliangium	0.004
+CW	Genus:Bacillus || Genus:Illumatobacter	0.33
+CW	Genus:Bacillus || Genus:Marinicella	0.05
+CW	Genus:Bacillus || Genus:Massilia	0.002
+CW	Genus:Bacillus || Genus:Nitrospira	0.004
+CW	Genus:Bacillus || Genus:Pedobacter	0.006
+CW	Genus:Bacillus || Genus:Pirellula	0.004
+CW	Genus:Bacillus || Genus:Planomicrobium	0.002
+CW	Genus:Bacillus || Genus:Pseudolabrys	0.002
+CW	Genus:Bacillus || Genus:Pseudomonas	0.018
+CW	Genus:Bacillus || Genus:Robiginitalea	0.002
+CW	Genus:Bacillus || Genus:Terrimonas	0.142
+CW	Genus:Bacillus || Genus:Variibacter	0.002
+CW	Genus:Blastocatella || Genus:Acidovorax	0.012
+CW	Genus:Blastocatella || Genus:Algoriphagus	0.018
+CW	Genus:Blastocatella || Genus:Altererythrobacter	0.094
+CW	Genus:Blastocatella || Genus:Anaerolinea	0.028
+CW	Genus:Blastocatella || Genus:Desulfobulbus	0.002
+CW	Genus:Blastocatella || Genus:Erythrobacter	0.032
+CW	Genus:Blastocatella || Genus:Exiguobacterium	0.004
+CW	Genus:Blastocatella || Genus:Fusibacter	0.006
+CW	Genus:Blastocatella || Genus:Gaiella	0.014
+CW	Genus:Blastocatella || Genus:Haliangium	0.004
+CW	Genus:Blastocatella || Genus:Illumatobacter	0.096
+CW	Genus:Blastocatella || Genus:Marinicella	0.012
+CW	Genus:Blastocatella || Genus:Pedobacter	0.002
+CW	Genus:Blastocatella || Genus:Pirellula	0.082
+CW	Genus:Blastocatella || Genus:Planctomyces	0.016
+CW	Genus:Blastocatella || Genus:Planomicrobium	0.008
+CW	Genus:Blastocatella || Genus:Pseudolabrys	0.016
+CW	Genus:Blastocatella || Genus:Robiginitalea	0.11
+CW	Genus:Blastocatella || Genus:Sulfurovum	0.04
+CW	Genus:Blastocatella || Genus:Terrimonas	0.014
+CW	Genus:Bryobacter || Genus:Acidovorax	0.002
+CW	Genus:Bryobacter || Genus:Algoriphagus	0.002
+CW	Genus:Bryobacter || Genus:Desulfobulbus	0.004
+CW	Genus:Bryobacter || Genus:Erythrobacter	0.002
+CW	Genus:Bryobacter || Genus:Gaiella	0.002
+CW	Genus:Bryobacter || Genus:Gemmatimonas	0.002
+CW	Genus:Bryobacter || Genus:Marinicella	0.022
+CW	Genus:Bryobacter || Genus:Massilia	0.006
+CW	Genus:Bryobacter || Genus:Nitrospira	0.002
+CW	Genus:Bryobacter || Genus:Planctomyces	0.132
+CW	Genus:Bryobacter || Genus:Pseudomonas	0.012
+CW	Genus:Bryobacter || Genus:Terrimonas	0.002
+CW	Genus:Bryobacter || Genus:Variibacter	0.002
+CW	Genus:Candidatus Solibacter || Genus:Algoriphagus	0.188
+CW	Genus:Candidatus Solibacter || Genus:Arenimonas	0.008
+CW	Genus:Candidatus Solibacter || Genus:Bryobacter	0.002
+CW	Genus:Candidatus Solibacter || Genus:Erythrobacter	0.006
+CW	Genus:Candidatus Solibacter || Genus:Exiguobacterium	0.224
+CW	Genus:Candidatus Solibacter || Genus:Ferruginibacter	0.18
+CW	Genus:Candidatus Solibacter || Genus:Flavobacterium	0.052
+CW	Genus:Candidatus Solibacter || Genus:Fusibacter	0.092
+CW	Genus:Candidatus Solibacter || Genus:Gaiella	0.002
+CW	Genus:Candidatus Solibacter || Genus:Gemmatimonas	0.01
+CW	Genus:Candidatus Solibacter || Genus:Gillisia	0.048
+CW	Genus:Candidatus Solibacter || Genus:Lysobacter	0.002
+CW	Genus:Candidatus Solibacter || Genus:Marinicella	0.014
+CW	Genus:Candidatus Solibacter || Genus:Nitrospira	0.004
+CW	Genus:Candidatus Solibacter || Genus:Paenisporosarcina	0.014
+CW	Genus:Candidatus Solibacter || Genus:Pedobacter	0.004
+CW	Genus:Candidatus Solibacter || Genus:Pirellula	0.044
+CW	Genus:Candidatus Solibacter || Genus:Planomicrobium	0.002
+CW	Genus:Candidatus Solibacter || Genus:Pseudolabrys	0.114
+CW	Genus:Candidatus Solibacter || Genus:Robiginitalea	0.018
+CW	Genus:Candidatus Solibacter || Genus:Terrimonas	0.032
+CW	Genus:Candidatus Solibacter || Genus:Variibacter	0.048
+CW	Genus:Clostridium sensu stricto 13 || Genus:Altererythrobacter	0.006
+CW	Genus:Clostridium sensu stricto 13 || Genus:Anaerolinea	0.034
+CW	Genus:Clostridium sensu stricto 13 || Genus:Bacillus	0.118
+CW	Genus:Clostridium sensu stricto 13 || Genus:Blastocatella	0.004
+CW	Genus:Clostridium sensu stricto 13 || Genus:Bryobacter	0.038
+CW	Genus:Clostridium sensu stricto 13 || Genus:Ferruginibacter	0.008
+CW	Genus:Clostridium sensu stricto 13 || Genus:Gemmatimonas	0.002
+CW	Genus:Clostridium sensu stricto 13 || Genus:Gillisia	0.224
+CW	Genus:Clostridium sensu stricto 13 || Genus:Haliangium	0.02
+CW	Genus:Clostridium sensu stricto 13 || Genus:Lysobacter	0.152
+CW	Genus:Clostridium sensu stricto 13 || Genus:Massilia	0.02
+CW	Genus:Clostridium sensu stricto 13 || Genus:Paenisporosarcina	0.002
+CW	Genus:Clostridium sensu stricto 13 || Genus:Pedobacter	0.176
+CW	Genus:Clostridium sensu stricto 13 || Genus:Pirellula	0.006
+CW	Genus:Clostridium sensu stricto 13 || Genus:Planctomyces	0.012
+CW	Genus:Clostridium sensu stricto 13 || Genus:Pseudolabrys	0.018
+CW	Genus:Clostridium sensu stricto 13 || Genus:Pseudomonas	0.084
+CW	Genus:Clostridium sensu stricto 13 || Genus:Robiginitalea	0.012
+CW	Genus:Clostridium sensu stricto 13 || Genus:Sulfurovum	0.006
+CW	Genus:Clostridium sensu stricto 13 || Genus:Terrimonas	0.002
+CW	Genus:Clostridium sensu stricto 13 || Genus:Thiobacillus	0.012
+CW	Genus:Clostridium sensu stricto 13 || Genus:Variibacter	0.004
+CW	Genus:Desulfobulbus || Genus:Acidovorax	0.002
+CW	Genus:Desulfobulbus || Genus:Algoriphagus	0.006
+CW	Genus:Desulfobulbus || Genus:Altererythrobacter	0.024
+CW	Genus:Desulfobulbus || Genus:Arenimonas	0.288
+CW	Genus:Desulfobulbus || Genus:Erythrobacter	0.002
+CW	Genus:Desulfobulbus || Genus:Exiguobacterium	0.684
+CW	Genus:Desulfobulbus || Genus:Fusibacter	0.008
+CW	Genus:Desulfobulbus || Genus:Geobacter	0.05
+CW	Genus:Desulfobulbus || Genus:Pseudolabrys	0.002
+CW	Genus:Desulfobulbus || Genus:Terrimonas	0.006
+CW	Genus:Erythrobacter || Genus:Altererythrobacter	0.032
+CW	Genus:Erythrobacter || Genus:Arenimonas	0.002
+CW	Genus:Erythrobacter || Genus:Geobacter	0.002
+CW	Genus:Erythrobacter || Genus:Haliangium	0.002
+CW	Genus:Erythrobacter || Genus:Massilia	0.002
+CW	Genus:Erythrobacter || Genus:Paenisporosarcina	0.004
+CW	Genus:Erythrobacter || Genus:Robiginitalea	0.186
+CW	Genus:Ferruginibacter || Genus:Algoriphagus	0.012
+CW	Genus:Ferruginibacter || Genus:Erythrobacter	0.52
+CW	Genus:Ferruginibacter || Genus:Exiguobacterium	0.328
+CW	Genus:Ferruginibacter || Genus:Lysobacter	0.066
+CW	Genus:Ferruginibacter || Genus:Massilia	0.004
+CW	Genus:Ferruginibacter || Genus:Nitrospira	0.004
+CW	Genus:Ferruginibacter || Genus:Paenisporosarcina	0.002
+CW	Genus:Ferruginibacter || Genus:Pseudolabrys	0.01
+CW	Genus:Ferruginibacter || Genus:Terrimonas	0.16
+CW	Genus:Ferruginibacter || Genus:Variibacter	0.094
+CW	Genus:Flavobacterium || Genus:Acidovorax	0.004
+CW	Genus:Flavobacterium || Genus:Arenimonas	0.004
+CW	Genus:Flavobacterium || Genus:Blastocatella	0.192
+CW	Genus:Flavobacterium || Genus:Desulfobulbus	0.002
+CW	Genus:Flavobacterium || Genus:Exiguobacterium	0.842
+CW	Genus:Flavobacterium || Genus:Ferruginibacter	0.42
+CW	Genus:Flavobacterium || Genus:Gemmatimonas	0.164
+CW	Genus:Flavobacterium || Genus:Geobacter	0.078
+CW	Genus:Flavobacterium || Genus:Gillisia	0.312
+CW	Genus:Flavobacterium || Genus:Haliangium	0.002
+CW	Genus:Flavobacterium || Genus:Illumatobacter	0.008
+CW	Genus:Flavobacterium || Genus:Lysobacter	0.002
+CW	Genus:Flavobacterium || Genus:Massilia	0.002
+CW	Genus:Flavobacterium || Genus:Paenisporosarcina	0.01
+CW	Genus:Flavobacterium || Genus:Pedobacter	0.294
+CW	Genus:Flavobacterium || Genus:Pirellula	0.024
+CW	Genus:Flavobacterium || Genus:Planctomyces	0.016
+CW	Genus:Flavobacterium || Genus:Planomicrobium	0.014
+CW	Genus:Flavobacterium || Genus:Pseudomonas	0.062
+CW	Genus:Flavobacterium || Genus:Robiginitalea	0.322
+CW	Genus:Flavobacterium || Genus:Sulfurovum	0.008
+CW	Genus:Flavobacterium || Genus:Terrimonas	0.014
+CW	Genus:Fusibacter || Genus:Exiguobacterium	0.038
+CW	Genus:Fusibacter || Genus:Terrimonas	0.014
+CW	Genus:Gaiella || Genus:Acidovorax	0.002
+CW	Genus:Gaiella || Genus:Algoriphagus	0.064
+CW	Genus:Gaiella || Genus:Arenimonas	0.364
+CW	Genus:Gaiella || Genus:Erythrobacter	0.068
+CW	Genus:Gaiella || Genus:Exiguobacterium	0.006
+CW	Genus:Gaiella || Genus:Ferruginibacter	0.002
+CW	Genus:Gaiella || Genus:Gemmatimonas	0.002
+CW	Genus:Gaiella || Genus:Geobacter	0.042
+CW	Genus:Gaiella || Genus:Massilia	0.118
+CW	Genus:Gaiella || Genus:Nitrospira	0.25
+CW	Genus:Gaiella || Genus:Paenisporosarcina	0.028
+CW	Genus:Gaiella || Genus:Pirellula	0.082
+CW	Genus:Gaiella || Genus:Planctomyces	0.014
+CW	Genus:Gaiella || Genus:Pseudolabrys	0.082
+CW	Genus:Gaiella || Genus:Terrimonas	0.034
+CW	Genus:Gemmatimonas || Genus:Acidovorax	0.006
+CW	Genus:Gemmatimonas || Genus:Algoriphagus	0.114
+CW	Genus:Gemmatimonas || Genus:Altererythrobacter	0.008
+CW	Genus:Gemmatimonas || Genus:Desulfobulbus	0.202
+CW	Genus:Gemmatimonas || Genus:Exiguobacterium	0.016
+CW	Genus:Gemmatimonas || Genus:Ferruginibacter	0.048
+CW	Genus:Gemmatimonas || Genus:Fusibacter	0.004
+CW	Genus:Gemmatimonas || Genus:Haliangium	0.122
+CW	Genus:Gemmatimonas || Genus:Lysobacter	0.016
+CW	Genus:Gemmatimonas || Genus:Massilia	0.004
+CW	Genus:Gemmatimonas || Genus:Paenisporosarcina	0.21
+CW	Genus:Gemmatimonas || Genus:Pedobacter	0.002
+CW	Genus:Gemmatimonas || Genus:Pseudolabrys	0.048
+CW	Genus:Gemmatimonas || Genus:Variibacter	0.002
+CW	Genus:Geobacter || Genus:Altererythrobacter	0.138
+CW	Genus:Geobacter || Genus:Arenimonas	0.054
+CW	Genus:Geobacter || Genus:Exiguobacterium	0.006
+CW	Genus:Geobacter || Genus:Massilia	0.058
+CW	Genus:Geobacter || Genus:Robiginitalea	0.006
+CW	Genus:Geobacter || Genus:Terrimonas	0.014
+CW	Genus:Gillisia || Genus:Arenimonas	0.002
+CW	Genus:Gillisia || Genus:Exiguobacterium	0.054
+CW	Genus:Gillisia || Genus:Ferruginibacter	0.002
+CW	Genus:Gillisia || Genus:Fusibacter	0.026
+CW	Genus:Gillisia || Genus:Gemmatimonas	0.124
+CW	Genus:Gillisia || Genus:Haliangium	0.046
+CW	Genus:Gillisia || Genus:Lysobacter	0.014
+CW	Genus:Gillisia || Genus:Marinicella	0.004
+CW	Genus:Gillisia || Genus:Massilia	0.298
+CW	Genus:Gillisia || Genus:Paenisporosarcina	0.25
+CW	Genus:Gillisia || Genus:Pedobacter	0.018
+CW	Genus:Gillisia || Genus:Planctomyces	0.196
+CW	Genus:Gillisia || Genus:Planomicrobium	0.006
+CW	Genus:Gillisia || Genus:Pseudolabrys	0.006
+CW	Genus:Gillisia || Genus:Terrimonas	0.168
+CW	Genus:Gillisia || Genus:Variibacter	0.004
+CW	Genus:Haliangium || Genus:Algoriphagus	0.002
+CW	Genus:Haliangium || Genus:Altererythrobacter	0.002
+CW	Genus:Haliangium || Genus:Arenimonas	0.002
+CW	Genus:Haliangium || Genus:Exiguobacterium	0.002
+CW	Genus:Haliangium || Genus:Fusibacter	0.004
+CW	Genus:Haliangium || Genus:Geobacter	0.004
+CW	Genus:Haliangium || Genus:Terrimonas	0.002
+CW	Genus:Illumatobacter || Genus:Erythrobacter	0.002
+CW	Genus:Illumatobacter || Genus:Exiguobacterium	0.004
+CW	Genus:Illumatobacter || Genus:Ferruginibacter	0.112
+CW	Genus:Illumatobacter || Genus:Fusibacter	0.002
+CW	Genus:Illumatobacter || Genus:Gaiella	0.018
+CW	Genus:Illumatobacter || Genus:Gemmatimonas	0.01
+CW	Genus:Illumatobacter || Genus:Geobacter	0.004
+CW	Genus:Illumatobacter || Genus:Haliangium	0.066
+CW	Genus:Illumatobacter || Genus:Lysobacter	0.004
+CW	Genus:Illumatobacter || Genus:Nitrospira	0.004
+CW	Genus:Illumatobacter || Genus:Paenisporosarcina	0.014
+CW	Genus:Illumatobacter || Genus:Pedobacter	0.004
+CW	Genus:Illumatobacter || Genus:Pirellula	0.032
+CW	Genus:Illumatobacter || Genus:Planomicrobium	0.02
+CW	Genus:Illumatobacter || Genus:Pseudolabrys	0.09
+CW	Genus:Lysobacter || Genus:Altererythrobacter	0.006
+CW	Genus:Lysobacter || Genus:Arenimonas	0.004
+CW	Genus:Lysobacter || Genus:Fusibacter	0.116
+CW	Genus:Lysobacter || Genus:Geobacter	0.038
+CW	Genus:Lysobacter || Genus:Terrimonas	0.002
+CW	Genus:Marinicella || Genus:Algoriphagus	0.166
+CW	Genus:Marinicella || Genus:Altererythrobacter	0.066
+CW	Genus:Marinicella || Genus:Desulfobulbus	0.068
+CW	Genus:Marinicella || Genus:Erythrobacter	0.018
+CW	Genus:Marinicella || Genus:Exiguobacterium	0.002
+CW	Genus:Marinicella || Genus:Ferruginibacter	0.08
+CW	Genus:Marinicella || Genus:Gemmatimonas	0.03
+CW	Genus:Marinicella || Genus:Geobacter	0.12
+CW	Genus:Marinicella || Genus:Lysobacter	0.836
+CW	Genus:Marinicella || Genus:Massilia	0.018
+CW	Genus:Marinicella || Genus:Nitrospira	0.154
+CW	Genus:Marinicella || Genus:Pedobacter	0.002
+CW	Genus:Marinicella || Genus:Pseudolabrys	0.01
+CW	Genus:Nitrospira || Genus:Altererythrobacter	0.002
+CW	Genus:Nitrospira || Genus:Exiguobacterium	0.014
+CW	Genus:Nitrospira || Genus:Fusibacter	0.004
+CW	Genus:Nitrospira || Genus:Geobacter	0.028
+CW	Genus:Nitrospira || Genus:Lysobacter	0.174
+CW	Genus:Nitrospira || Genus:Paenisporosarcina	0.026
+CW	Genus:Nitrospira || Genus:Robiginitalea	0.002
+CW	Genus:Paenisporosarcina || Genus:Algoriphagus	0.002
+CW	Genus:Paenisporosarcina || Genus:Altererythrobacter	0.002
+CW	Genus:Paenisporosarcina || Genus:Exiguobacterium	0.12
+CW	Genus:Paenisporosarcina || Genus:Fusibacter	0.004
+CW	Genus:Paenisporosarcina || Genus:Geobacter	0.002
+CW	Genus:Paenisporosarcina || Genus:Haliangium	0.002
+CW	Genus:Pedobacter || Genus:Altererythrobacter	0.006
+CW	Genus:Pedobacter || Genus:Arenimonas	0.024
+CW	Genus:Pedobacter || Genus:Desulfobulbus	0.002
+CW	Genus:Pedobacter || Genus:Fusibacter	0.004
+CW	Genus:Pedobacter || Genus:Haliangium	0.136
+CW	Genus:Pedobacter || Genus:Massilia	0.02
+CW	Genus:Pedobacter || Genus:Nitrospira	0.018
+CW	Genus:Pedobacter || Genus:Paenisporosarcina	0.038
+CW	Genus:Pedobacter || Genus:Pseudolabrys	0.006
+CW	Genus:Pedobacter || Genus:Robiginitalea	0.052
+CW	Genus:Pedobacter || Genus:Variibacter	0.012
+CW	Genus:Pirellula || Genus:Acidovorax	0.006
+CW	Genus:Pirellula || Genus:Altererythrobacter	0.008
+CW	Genus:Pirellula || Genus:Desulfobulbus	0.054
+CW	Genus:Pirellula || Genus:Ferruginibacter	0.01
+CW	Genus:Pirellula || Genus:Fusibacter	0.002
+CW	Genus:Pirellula || Genus:Gemmatimonas	0.09
+CW	Genus:Pirellula || Genus:Geobacter	0.018
+CW	Genus:Pirellula || Genus:Haliangium	0.002
+CW	Genus:Pirellula || Genus:Lysobacter	0.388
+CW	Genus:Pirellula || Genus:Massilia	0.08
+CW	Genus:Pirellula || Genus:Nitrospira	0.11
+CW	Genus:Pirellula || Genus:Paenisporosarcina	0.054
+CW	Genus:Pirellula || Genus:Planctomyces	0.148
+CW	Genus:Pirellula || Genus:Pseudolabrys	0.002
+CW	Genus:Pirellula || Genus:Robiginitalea	0.002
+CW	Genus:Pirellula || Genus:Variibacter	0.126
+CW	Genus:Planctomyces || Genus:Altererythrobacter	0.002
+CW	Genus:Planctomyces || Genus:Arenimonas	0.002
+CW	Genus:Planctomyces || Genus:Ferruginibacter	0.256
+CW	Genus:Planctomyces || Genus:Fusibacter	0.006
+CW	Genus:Planctomyces || Genus:Geobacter	0.002
+CW	Genus:Planctomyces || Genus:Haliangium	0.03
+CW	Genus:Planctomyces || Genus:Nitrospira	0.008
+CW	Genus:Planctomyces || Genus:Pedobacter	0.002
+CW	Genus:Planctomyces || Genus:Robiginitalea	0.002
+CW	Genus:Planctomyces || Genus:Variibacter	0.006
+CW	Genus:Planomicrobium || Genus:Acidovorax	0.004
+CW	Genus:Planomicrobium || Genus:Desulfobulbus	0.002
+CW	Genus:Planomicrobium || Genus:Ferruginibacter	0.056
+CW	Genus:Planomicrobium || Genus:Fusibacter	0.028
+CW	Genus:Planomicrobium || Genus:Gemmatimonas	0.29
+CW	Genus:Planomicrobium || Genus:Geobacter	0.014
+CW	Genus:Planomicrobium || Genus:Haliangium	0.016
+CW	Genus:Planomicrobium || Genus:Lysobacter	0.004
+CW	Genus:Planomicrobium || Genus:Marinicella	0.002
+CW	Genus:Planomicrobium || Genus:Massilia	0.002
+CW	Genus:Planomicrobium || Genus:Nitrospira	0.002
+CW	Genus:Planomicrobium || Genus:Pedobacter	0.002
+CW	Genus:Planomicrobium || Genus:Pirellula	0.022
+CW	Genus:Planomicrobium || Genus:Planctomyces	0.026
+CW	Genus:Planomicrobium || Genus:Pseudolabrys	0.008
+CW	Genus:Planomicrobium || Genus:Robiginitalea	0.004
+CW	Genus:Pseudolabrys || Genus:Acidovorax	0.002
+CW	Genus:Pseudolabrys || Genus:Altererythrobacter	0.012
+CW	Genus:Pseudolabrys || Genus:Arenimonas	0.022
+CW	Genus:Pseudolabrys || Genus:Fusibacter	0.022
+CW	Genus:Pseudolabrys || Genus:Geobacter	0.09
+CW	Genus:Pseudolabrys || Genus:Robiginitalea	0.148
+CW	Genus:Pseudolabrys || Genus:Terrimonas	0.036
+CW	Genus:Pseudomonas || Genus:Acidovorax	0.004
+CW	Genus:Pseudomonas || Genus:Algoriphagus	0.002
+CW	Genus:Pseudomonas || Genus:Altererythrobacter	0.062
+CW	Genus:Pseudomonas || Genus:Ferruginibacter	0.004
+CW	Genus:Pseudomonas || Genus:Fusibacter	0.038
+CW	Genus:Pseudomonas || Genus:Geobacter	0.008
+CW	Genus:Pseudomonas || Genus:Haliangium	0.008
+CW	Genus:Pseudomonas || Genus:Massilia	0.076
+CW	Genus:Pseudomonas || Genus:Nitrospira	0.002
+CW	Genus:Pseudomonas || Genus:Paenisporosarcina	0.018
+CW	Genus:Pseudomonas || Genus:Pedobacter	0.11
+CW	Genus:Pseudomonas || Genus:Pirellula	0.014
+CW	Genus:Pseudomonas || Genus:Planctomyces	0.164
+CW	Genus:Pseudomonas || Genus:Robiginitalea	0.21
+CW	Genus:Pseudomonas || Genus:Terrimonas	0.298
+CW	Genus:Pseudomonas || Genus:Variibacter	0.002
+CW	Genus:Robiginitalea || Genus:Altererythrobacter	0.202
+CW	Genus:Robiginitalea || Genus:Exiguobacterium	0.07
+CW	Genus:Robiginitalea || Genus:Massilia	0.002
+CW	Genus:Sphingomonas || Genus:Acidovorax	0.002
+CW	Genus:Sphingomonas || Genus:Algoriphagus	0.146
+CW	Genus:Sphingomonas || Genus:Altererythrobacter	0.006
+CW	Genus:Sphingomonas || Genus:Anaerolinea	0.016
+CW	Genus:Sphingomonas || Genus:Arthrobacter	0.138
+CW	Genus:Sphingomonas || Genus:Bacillus	0.06
+CW	Genus:Sphingomonas || Genus:Bryobacter	0.004
+CW	Genus:Sphingomonas || Genus:Candidatus Solibacter	0.006
+CW	Genus:Sphingomonas || Genus:Clostridium sensu stricto 13	0.008
+CW	Genus:Sphingomonas || Genus:Exiguobacterium	0.002
+CW	Genus:Sphingomonas || Genus:Ferruginibacter	0.08
+CW	Genus:Sphingomonas || Genus:Flavobacterium	0.004
+CW	Genus:Sphingomonas || Genus:Gemmatimonas	0.08
+CW	Genus:Sphingomonas || Genus:Geobacter	0.058
+CW	Genus:Sphingomonas || Genus:Haliangium	0.002
+CW	Genus:Sphingomonas || Genus:Illumatobacter	0.096
+CW	Genus:Sphingomonas || Genus:Lysobacter	0.058
+CW	Genus:Sphingomonas || Genus:Massilia	0.014
+CW	Genus:Sphingomonas || Genus:Nitrospira	0.002
+CW	Genus:Sphingomonas || Genus:Paenisporosarcina	0.002
+CW	Genus:Sphingomonas || Genus:Pedobacter	0.052
+CW	Genus:Sphingomonas || Genus:Pirellula	0.146
+CW	Genus:Sphingomonas || Genus:Planctomyces	0.002
+CW	Genus:Sphingomonas || Genus:Planomicrobium	0.004
+CW	Genus:Sphingomonas || Genus:Sulfurovum	0.002
+CW	Genus:Sphingomonas || Genus:Variibacter	0.038
+CW	Genus:Sulfurovum || Genus:Acidovorax	0.046
+CW	Genus:Sulfurovum || Genus:Algoriphagus	0.02
+CW	Genus:Sulfurovum || Genus:Altererythrobacter	0.032
+CW	Genus:Sulfurovum || Genus:Arenimonas	0.002
+CW	Genus:Sulfurovum || Genus:Ferruginibacter	0.032
+CW	Genus:Sulfurovum || Genus:Fusibacter	0.182
+CW	Genus:Sulfurovum || Genus:Gaiella	0.252
+CW	Genus:Sulfurovum || Genus:Gemmatimonas	0.038
+CW	Genus:Sulfurovum || Genus:Gillisia	0.04
+CW	Genus:Sulfurovum || Genus:Haliangium	0.01
+CW	Genus:Sulfurovum || Genus:Lysobacter	0.876
+CW	Genus:Sulfurovum || Genus:Marinicella	0.012
+CW	Genus:Sulfurovum || Genus:Massilia	0.822
+CW	Genus:Sulfurovum || Genus:Nitrospira	0.02
+CW	Genus:Sulfurovum || Genus:Paenisporosarcina	0.012
+CW	Genus:Sulfurovum || Genus:Pirellula	0.734
+CW	Genus:Sulfurovum || Genus:Planctomyces	0.036
+CW	Genus:Sulfurovum || Genus:Planomicrobium	0.006
+CW	Genus:Sulfurovum || Genus:Pseudomonas	0.004
+CW	Genus:Sulfurovum || Genus:Robiginitalea	0.004
+CW	Genus:Sulfurovum || Genus:Terrimonas	0.274
+CW	Genus:Sulfurovum || Genus:Variibacter	0.028
+CW	Genus:Terrimonas || Genus:Exiguobacterium	0.002
+CW	Genus:Thiobacillus || Genus:Arthrobacter	0.302
+CW	Genus:Thiobacillus || Genus:Bacillus	0.018
+CW	Genus:Thiobacillus || Genus:Blastocatella	0.03
+CW	Genus:Thiobacillus || Genus:Bryobacter	0.108
+CW	Genus:Thiobacillus || Genus:Candidatus Solibacter	0.06
+CW	Genus:Thiobacillus || Genus:Desulfobulbus	0.004
+CW	Genus:Thiobacillus || Genus:Flavobacterium	0.004
+CW	Genus:Thiobacillus || Genus:Gaiella	0.05
+CW	Genus:Thiobacillus || Genus:Geobacter	0.19
+CW	Genus:Thiobacillus || Genus:Lysobacter	0.002
+CW	Genus:Thiobacillus || Genus:Massilia	0.008
+CW	Genus:Thiobacillus || Genus:Nitrospira	0.004
+CW	Genus:Thiobacillus || Genus:Pirellula	0.002
+CW	Genus:Thiobacillus || Genus:Planctomyces	0.002
+CW	Genus:Thiobacillus || Genus:Planomicrobium	0.06
+CW	Genus:Thiobacillus || Genus:Pseudomonas	0.194
+CW	Genus:Thiobacillus || Genus:Sulfurovum	0.004
+CW	Genus:Thiobacillus || Genus:Terrimonas	0.002
+CW	Genus:Variibacter || Genus:Acidovorax	0.118
+CW	Genus:Variibacter || Genus:Exiguobacterium	0.006
+CW	Genus:Variibacter || Genus:Haliangium	0.318
+CW	Genus:Variibacter || Genus:Lysobacter	0.01
+CW	Genus:Variibacter || Genus:Nitrospira	0.21
+CW	Genus:Variibacter || Genus:Paenisporosarcina	0.002
+CW	Genus:Variibacter || Genus:Robiginitalea	0.1
+CW	Genus:Variibacter || Genus:Terrimonas	0.114
+IW	Genus:Acidovorax || Genus:Algoriphagus	0.004
+IW	Genus:Acidovorax || Genus:Altererythrobacter	0.01
+IW	Genus:Acidovorax || Genus:Arenimonas	0.022
+IW	Genus:Acidovorax || Genus:Erythrobacter	0.01
+IW	Genus:Acidovorax || Genus:Exiguobacterium	0.006
+IW	Genus:Acidovorax || Genus:Fusibacter	0.23
+IW	Genus:Acidovorax || Genus:Haliangium	0.256
+IW	Genus:Acidovorax || Genus:Lysobacter	0.042
+IW	Genus:Acidovorax || Genus:Nitrospira	0.026
+IW	Genus:Acidovorax || Genus:Paenisporosarcina	0.002
+IW	Genus:Acidovorax || Genus:Robiginitalea	0.198
+IW	Genus:Acidovorax || Genus:Terrimonas	0.006
+IW	Genus:Algoriphagus || Genus:Fusibacter	0.008
+IW	Genus:Algoriphagus || Genus:Massilia	0.014
+IW	Genus:Algoriphagus || Genus:Terrimonas	0.002
+IW	Genus:Altererythrobacter || Genus:Massilia	0.008
+IW	Genus:Anaerolinea || Genus:Arenimonas	0.002
+IW	Genus:Anaerolinea || Genus:Bryobacter	0.002
+IW	Genus:Anaerolinea || Genus:Exiguobacterium	0.002
+IW	Genus:Anaerolinea || Genus:Fusibacter	0.008
+IW	Genus:Anaerolinea || Genus:Gaiella	0.01
+IW	Genus:Anaerolinea || Genus:Gemmatimonas	0.924
+IW	Genus:Anaerolinea || Genus:Gillisia	0.05
+IW	Genus:Anaerolinea || Genus:Illumatobacter	0.006
+IW	Genus:Anaerolinea || Genus:Marinicella	0.002
+IW	Genus:Anaerolinea || Genus:Massilia	0.002
+IW	Genus:Anaerolinea || Genus:Nitrospira	0.06
+IW	Genus:Anaerolinea || Genus:Paenisporosarcina	0.032
+IW	Genus:Anaerolinea || Genus:Pirellula	0.3
+IW	Genus:Anaerolinea || Genus:Planctomyces	0.022
+IW	Genus:Anaerolinea || Genus:Planomicrobium	0.004
+IW	Genus:Anaerolinea || Genus:Pseudomonas	0.002
+IW	Genus:Anaerolinea || Genus:Robiginitalea	0.004
+IW	Genus:Anaerolinea || Genus:Sulfurovum	0.972
+IW	Genus:Arenimonas || Genus:Exiguobacterium	0.008
+IW	Genus:Arenimonas || Genus:Massilia	0.018
+IW	Genus:Arenimonas || Genus:Terrimonas	0.002
+IW	Genus:Arthrobacter || Genus:Algoriphagus	0.018
+IW	Genus:Arthrobacter || Genus:Blastocatella	0.016
+IW	Genus:Arthrobacter || Genus:Erythrobacter	0.078
+IW	Genus:Arthrobacter || Genus:Exiguobacterium	0.012
+IW	Genus:Arthrobacter || Genus:Ferruginibacter	0.004
+IW	Genus:Arthrobacter || Genus:Gemmatimonas	0.002
+IW	Genus:Arthrobacter || Genus:Geobacter	0.024
+IW	Genus:Arthrobacter || Genus:Gillisia	0.002
+IW	Genus:Arthrobacter || Genus:Haliangium	0.016
+IW	Genus:Arthrobacter || Genus:Illumatobacter	0.002
+IW	Genus:Arthrobacter || Genus:Marinicella	0.004
+IW	Genus:Arthrobacter || Genus:Massilia	0.008
+IW	Genus:Arthrobacter || Genus:Planctomyces	0.012
+IW	Genus:Arthrobacter || Genus:Planomicrobium	0.002
+IW	Genus:Arthrobacter || Genus:Pseudolabrys	0.006
+IW	Genus:Arthrobacter || Genus:Pseudomonas	0.006
+IW	Genus:Arthrobacter || Genus:Robiginitalea	0.002
+IW	Genus:Arthrobacter || Genus:Sulfurovum	0.002
+IW	Genus:Arthrobacter || Genus:Terrimonas	0.006
+IW	Genus:Arthrobacter || Genus:Variibacter	0.112
+IW	Genus:Bacillus || Genus:Algoriphagus	0.086
+IW	Genus:Bacillus || Genus:Altererythrobacter	0.024
+IW	Genus:Bacillus || Genus:Anaerolinea	0.488
+IW	Genus:Bacillus || Genus:Arenimonas	0.008
+IW	Genus:Bacillus || Genus:Arthrobacter	0.002
+IW	Genus:Bacillus || Genus:Blastocatella	0.134
+IW	Genus:Bacillus || Genus:Bryobacter	0.008
+IW	Genus:Bacillus || Genus:Candidatus Solibacter	0.004
+IW	Genus:Bacillus || Genus:Desulfobulbus	0.046
+IW	Genus:Bacillus || Genus:Erythrobacter	0.142
+IW	Genus:Bacillus || Genus:Ferruginibacter	0.002
+IW	Genus:Bacillus || Genus:Fusibacter	0.022
+IW	Genus:Bacillus || Genus:Gaiella	0.048
+IW	Genus:Bacillus || Genus:Geobacter	0.056
+IW	Genus:Bacillus || Genus:Haliangium	0.964
+IW	Genus:Bacillus || Genus:Lysobacter	0.002
+IW	Genus:Bacillus || Genus:Marinicella	0.368
+IW	Genus:Bacillus || Genus:Massilia	0.474
+IW	Genus:Bacillus || Genus:Nitrospira	0.002
+IW	Genus:Bacillus || Genus:Pedobacter	0.496
+IW	Genus:Bacillus || Genus:Pirellula	0.002
+IW	Genus:Bacillus || Genus:Planctomyces	0.002
+IW	Genus:Bacillus || Genus:Pseudolabrys	0.002
+IW	Genus:Bacillus || Genus:Robiginitalea	0.004
+IW	Genus:Bacillus || Genus:Terrimonas	0.014
+IW	Genus:Blastocatella || Genus:Acidovorax	0.002
+IW	Genus:Blastocatella || Genus:Altererythrobacter	0.002
+IW	Genus:Blastocatella || Genus:Desulfobulbus	0.008
+IW	Genus:Blastocatella || Genus:Exiguobacterium	0.174
+IW	Genus:Blastocatella || Genus:Ferruginibacter	0.038
+IW	Genus:Blastocatella || Genus:Fusibacter	0.204
+IW	Genus:Blastocatella || Genus:Gemmatimonas	0.044
+IW	Genus:Blastocatella || Genus:Gillisia	0.004
+IW	Genus:Blastocatella || Genus:Massilia	1
+IW	Genus:Blastocatella || Genus:Nitrospira	0.018
+IW	Genus:Blastocatella || Genus:Paenisporosarcina	0.006
+IW	Genus:Blastocatella || Genus:Pirellula	0.004
+IW	Genus:Blastocatella || Genus:Planctomyces	0.01
+IW	Genus:Blastocatella || Genus:Pseudolabrys	0.05
+IW	Genus:Blastocatella || Genus:Pseudomonas	0.012
+IW	Genus:Blastocatella || Genus:Robiginitalea	0.204
+IW	Genus:Blastocatella || Genus:Sulfurovum	0.044
+IW	Genus:Blastocatella || Genus:Terrimonas	0.014
+IW	Genus:Blastocatella || Genus:Variibacter	0.002
+IW	Genus:Bryobacter || Genus:Altererythrobacter	0.054
+IW	Genus:Bryobacter || Genus:Erythrobacter	0.048
+IW	Genus:Bryobacter || Genus:Exiguobacterium	0.004
+IW	Genus:Bryobacter || Genus:Ferruginibacter	0.002
+IW	Genus:Bryobacter || Genus:Gemmatimonas	0.006
+IW	Genus:Bryobacter || Genus:Geobacter	0.002
+IW	Genus:Bryobacter || Genus:Haliangium	0.154
+IW	Genus:Bryobacter || Genus:Lysobacter	0.004
+IW	Genus:Bryobacter || Genus:Marinicella	0.004
+IW	Genus:Bryobacter || Genus:Massilia	0.006
+IW	Genus:Bryobacter || Genus:Pedobacter	0.008
+IW	Genus:Bryobacter || Genus:Planomicrobium	0.014
+IW	Genus:Bryobacter || Genus:Pseudomonas	0.002
+IW	Genus:Bryobacter || Genus:Robiginitalea	0.15
+IW	Genus:Bryobacter || Genus:Sulfurovum	0.002
+IW	Genus:Bryobacter || Genus:Terrimonas	0.002
+IW	Genus:Bryobacter || Genus:Variibacter	0.002
+IW	Genus:Candidatus Solibacter || Genus:Acidovorax	0.02
+IW	Genus:Candidatus Solibacter || Genus:Algoriphagus	0.002
+IW	Genus:Candidatus Solibacter || Genus:Altererythrobacter	0.004
+IW	Genus:Candidatus Solibacter || Genus:Anaerolinea	0.002
+IW	Genus:Candidatus Solibacter || Genus:Arthrobacter	0.054
+IW	Genus:Candidatus Solibacter || Genus:Blastocatella	0.052
+IW	Genus:Candidatus Solibacter || Genus:Desulfobulbus	0.024
+IW	Genus:Candidatus Solibacter || Genus:Ferruginibacter	0.002
+IW	Genus:Candidatus Solibacter || Genus:Flavobacterium	0.002
+IW	Genus:Candidatus Solibacter || Genus:Fusibacter	0.006
+IW	Genus:Candidatus Solibacter || Genus:Gemmatimonas	0.008
+IW	Genus:Candidatus Solibacter || Genus:Gillisia	0.01
+IW	Genus:Candidatus Solibacter || Genus:Illumatobacter	0.01
+IW	Genus:Candidatus Solibacter || Genus:Pirellula	0.274
+IW	Genus:Candidatus Solibacter || Genus:Planomicrobium	0.034
+IW	Genus:Candidatus Solibacter || Genus:Pseudolabrys	0.012
+IW	Genus:Candidatus Solibacter || Genus:Pseudomonas	0.024
+IW	Genus:Candidatus Solibacter || Genus:Sulfurovum	0.008
+IW	Genus:Candidatus Solibacter || Genus:Variibacter	0.042
+IW	Genus:Clostridium sensu stricto 13 || Genus:Anaerolinea	0.008
+IW	Genus:Clostridium sensu stricto 13 || Genus:Arenimonas	0.002
+IW	Genus:Clostridium sensu stricto 13 || Genus:Bacillus	0.03
+IW	Genus:Clostridium sensu stricto 13 || Genus:Exiguobacterium	0.002
+IW	Genus:Clostridium sensu stricto 13 || Genus:Ferruginibacter	0.052
+IW	Genus:Clostridium sensu stricto 13 || Genus:Flavobacterium	0.004
+IW	Genus:Clostridium sensu stricto 13 || Genus:Gaiella	0.218
+IW	Genus:Clostridium sensu stricto 13 || Genus:Gillisia	0.968
+IW	Genus:Clostridium sensu stricto 13 || Genus:Illumatobacter	0.002
+IW	Genus:Clostridium sensu stricto 13 || Genus:Lysobacter	0.002
+IW	Genus:Clostridium sensu stricto 13 || Genus:Massilia	0.002
+IW	Genus:Clostridium sensu stricto 13 || Genus:Paenisporosarcina	0.01
+IW	Genus:Clostridium sensu stricto 13 || Genus:Pirellula	0.078
+IW	Genus:Clostridium sensu stricto 13 || Genus:Planctomyces	0.002
+IW	Genus:Clostridium sensu stricto 13 || Genus:Planomicrobium	0.064
+IW	Genus:Clostridium sensu stricto 13 || Genus:Pseudolabrys	0.012
+IW	Genus:Clostridium sensu stricto 13 || Genus:Pseudomonas	0.004
+IW	Genus:Clostridium sensu stricto 13 || Genus:Thiobacillus	0.002
+IW	Genus:Desulfobulbus || Genus:Acidovorax	0.484
+IW	Genus:Desulfobulbus || Genus:Altererythrobacter	0.002
+IW	Genus:Desulfobulbus || Genus:Arenimonas	0.024
+IW	Genus:Desulfobulbus || Genus:Erythrobacter	0.01
+IW	Genus:Desulfobulbus || Genus:Exiguobacterium	0.498
+IW	Genus:Desulfobulbus || Genus:Fusibacter	0.024
+IW	Genus:Desulfobulbus || Genus:Geobacter	0.016
+IW	Genus:Desulfobulbus || Genus:Lysobacter	0.006
+IW	Genus:Desulfobulbus || Genus:Massilia	0.01
+IW	Genus:Desulfobulbus || Genus:Pseudolabrys	0.226
+IW	Genus:Desulfobulbus || Genus:Robiginitalea	0.758
+IW	Genus:Desulfobulbus || Genus:Terrimonas	0.2
+IW	Genus:Desulfobulbus || Genus:Variibacter	0.004
+IW	Genus:Erythrobacter || Genus:Altererythrobacter	0.096
+IW	Genus:Erythrobacter || Genus:Arenimonas	0.068
+IW	Genus:Erythrobacter || Genus:Exiguobacterium	0.126
+IW	Genus:Erythrobacter || Genus:Fusibacter	0.01
+IW	Genus:Erythrobacter || Genus:Geobacter	0.012
+IW	Genus:Erythrobacter || Genus:Haliangium	0.324
+IW	Genus:Erythrobacter || Genus:Lysobacter	0.024
+IW	Genus:Erythrobacter || Genus:Nitrospira	0.032
+IW	Genus:Erythrobacter || Genus:Paenisporosarcina	0.096
+IW	Genus:Erythrobacter || Genus:Robiginitalea	0.014
+IW	Genus:Ferruginibacter || Genus:Acidovorax	0.01
+IW	Genus:Ferruginibacter || Genus:Algoriphagus	0.1
+IW	Genus:Ferruginibacter || Genus:Altererythrobacter	0.058
+IW	Genus:Ferruginibacter || Genus:Fusibacter	0.002
+IW	Genus:Ferruginibacter || Genus:Haliangium	0.042
+IW	Genus:Ferruginibacter || Genus:Lysobacter	0.002
+IW	Genus:Ferruginibacter || Genus:Massilia	0.042
+IW	Genus:Ferruginibacter || Genus:Paenisporosarcina	0.002
+IW	Genus:Ferruginibacter || Genus:Robiginitalea	0.02
+IW	Genus:Ferruginibacter || Genus:Terrimonas	0.004
+IW	Genus:Ferruginibacter || Genus:Variibacter	0.004
+IW	Genus:Flavobacterium || Genus:Anaerolinea	0.002
+IW	Genus:Flavobacterium || Genus:Bryobacter	0.018
+IW	Genus:Flavobacterium || Genus:Desulfobulbus	0.002
+IW	Genus:Flavobacterium || Genus:Ferruginibacter	0.012
+IW	Genus:Flavobacterium || Genus:Gemmatimonas	0.014
+IW	Genus:Flavobacterium || Genus:Geobacter	0.1
+IW	Genus:Flavobacterium || Genus:Gillisia	0.002
+IW	Genus:Flavobacterium || Genus:Haliangium	0.006
+IW	Genus:Flavobacterium || Genus:Marinicella	0.006
+IW	Genus:Flavobacterium || Genus:Massilia	0.006
+IW	Genus:Flavobacterium || Genus:Planomicrobium	0.034
+IW	Genus:Flavobacterium || Genus:Robiginitalea	0.148
+IW	Genus:Flavobacterium || Genus:Sulfurovum	0.034
+IW	Genus:Fusibacter || Genus:Exiguobacterium	0.006
+IW	Genus:Gaiella || Genus:Acidovorax	0.128
+IW	Genus:Gaiella || Genus:Erythrobacter	0.002
+IW	Genus:Gaiella || Genus:Ferruginibacter	0.002
+IW	Genus:Gaiella || Genus:Fusibacter	0.002
+IW	Genus:Gaiella || Genus:Gemmatimonas	0.102
+IW	Genus:Gaiella || Genus:Geobacter	0.246
+IW	Genus:Gaiella || Genus:Haliangium	0.004
+IW	Genus:Gaiella || Genus:Lysobacter	0.004
+IW	Genus:Gaiella || Genus:Nitrospira	0.078
+IW	Genus:Gaiella || Genus:Paenisporosarcina	0.016
+IW	Genus:Gaiella || Genus:Pirellula	0.006
+IW	Genus:Gaiella || Genus:Planctomyces	0.01
+IW	Genus:Gaiella || Genus:Pseudolabrys	0.032
+IW	Genus:Gaiella || Genus:Pseudomonas	0.006
+IW	Genus:Gaiella || Genus:Terrimonas	0.002
+IW	Genus:Gemmatimonas || Genus:Algoriphagus	0.192
+IW	Genus:Gemmatimonas || Genus:Altererythrobacter	0.038
+IW	Genus:Gemmatimonas || Genus:Desulfobulbus	0.002
+IW	Genus:Gemmatimonas || Genus:Erythrobacter	0.012
+IW	Genus:Gemmatimonas || Genus:Ferruginibacter	0.002
+IW	Genus:Gemmatimonas || Genus:Geobacter	0.052
+IW	Genus:Gemmatimonas || Genus:Haliangium	0.008
+IW	Genus:Gemmatimonas || Genus:Massilia	0.056
+IW	Genus:Gemmatimonas || Genus:Pedobacter	0.016
+IW	Genus:Gemmatimonas || Genus:Planctomyces	0.052
+IW	Genus:Gemmatimonas || Genus:Pseudolabrys	0.032
+IW	Genus:Gemmatimonas || Genus:Robiginitalea	0.09
+IW	Genus:Gemmatimonas || Genus:Variibacter	0.002
+IW	Genus:Geobacter || Genus:Exiguobacterium	0.002
+IW	Genus:Geobacter || Genus:Robiginitalea	0.022
+IW	Genus:Gillisia || Genus:Acidovorax	0.05
+IW	Genus:Gillisia || Genus:Algoriphagus	0.024
+IW	Genus:Gillisia || Genus:Arenimonas	0.002
+IW	Genus:Gillisia || Genus:Desulfobulbus	0.01
+IW	Genus:Gillisia || Genus:Ferruginibacter	0.018
+IW	Genus:Gillisia || Genus:Gaiella	0.004
+IW	Genus:Gillisia || Genus:Gemmatimonas	0.064
+IW	Genus:Gillisia || Genus:Haliangium	0.016
+IW	Genus:Gillisia || Genus:Nitrospira	0.008
+IW	Genus:Gillisia || Genus:Paenisporosarcina	0.01
+IW	Genus:Gillisia || Genus:Pirellula	0.01
+IW	Genus:Gillisia || Genus:Planctomyces	0.004
+IW	Genus:Gillisia || Genus:Pseudomonas	0.044
+IW	Genus:Gillisia || Genus:Robiginitalea	0.004
+IW	Genus:Gillisia || Genus:Terrimonas	0.022
+IW	Genus:Haliangium || Genus:Algoriphagus	0.004
+IW	Genus:Haliangium || Genus:Altererythrobacter	0.002
+IW	Genus:Haliangium || Genus:Geobacter	0.016
+IW	Genus:Haliangium || Genus:Massilia	0.018
+IW	Genus:Haliangium || Genus:Robiginitalea	0.132
+IW	Genus:Illumatobacter || Genus:Acidovorax	0.002
+IW	Genus:Illumatobacter || Genus:Algoriphagus	0.042
+IW	Genus:Illumatobacter || Genus:Altererythrobacter	0.146
+IW	Genus:Illumatobacter || Genus:Desulfobulbus	0.026
+IW	Genus:Illumatobacter || Genus:Gaiella	0.004
+IW	Genus:Illumatobacter || Genus:Geobacter	0.01
+IW	Genus:Illumatobacter || Genus:Haliangium	0.002
+IW	Genus:Illumatobacter || Genus:Lysobacter	0.19
+IW	Genus:Illumatobacter || Genus:Massilia	0.008
+IW	Genus:Illumatobacter || Genus:Nitrospira	0.006
+IW	Genus:Illumatobacter || Genus:Paenisporosarcina	0.002
+IW	Genus:Illumatobacter || Genus:Pirellula	0.132
+IW	Genus:Illumatobacter || Genus:Planomicrobium	0.016
+IW	Genus:Illumatobacter || Genus:Pseudolabrys	0.024
+IW	Genus:Illumatobacter || Genus:Robiginitalea	0.028
+IW	Genus:Illumatobacter || Genus:Terrimonas	0.056
+IW	Genus:Illumatobacter || Genus:Variibacter	0.016
+IW	Genus:Lysobacter || Genus:Algoriphagus	0.058
+IW	Genus:Lysobacter || Genus:Haliangium	0.382
+IW	Genus:Lysobacter || Genus:Massilia	0.048
+IW	Genus:Marinicella || Genus:Acidovorax	0.002
+IW	Genus:Marinicella || Genus:Altererythrobacter	0.458
+IW	Genus:Marinicella || Genus:Arenimonas	0.074
+IW	Genus:Marinicella || Genus:Desulfobulbus	0.016
+IW	Genus:Marinicella || Genus:Erythrobacter	0.198
+IW	Genus:Marinicella || Genus:Ferruginibacter	0.098
+IW	Genus:Marinicella || Genus:Gaiella	0.002
+IW	Genus:Marinicella || Genus:Gemmatimonas	0.382
+IW	Genus:Marinicella || Genus:Geobacter	0.004
+IW	Genus:Marinicella || Genus:Haliangium	0.072
+IW	Genus:Marinicella || Genus:Lysobacter	0.584
+IW	Genus:Marinicella || Genus:Paenisporosarcina	0.078
+IW	Genus:Marinicella || Genus:Planctomyces	0.054
+IW	Genus:Marinicella || Genus:Pseudomonas	0.004
+IW	Genus:Marinicella || Genus:Robiginitalea	0.696
+IW	Genus:Marinicella || Genus:Terrimonas	0.004
+IW	Genus:Marinicella || Genus:Variibacter	0.002
+IW	Genus:Massilia || Genus:Fusibacter	0.064
+IW	Genus:Massilia || Genus:Terrimonas	0.03
+IW	Genus:Nitrospira || Genus:Paenisporosarcina	0.098
+IW	Genus:Nitrospira || Genus:Robiginitalea	0.062
+IW	Genus:Paenisporosarcina || Genus:Algoriphagus	0.02
+IW	Genus:Paenisporosarcina || Genus:Arenimonas	0.002
+IW	Genus:Paenisporosarcina || Genus:Exiguobacterium	0.034
+IW	Genus:Paenisporosarcina || Genus:Geobacter	0.374
+IW	Genus:Paenisporosarcina || Genus:Haliangium	0.074
+IW	Genus:Paenisporosarcina || Genus:Terrimonas	0.028
+IW	Genus:Pedobacter || Genus:Acidovorax	0.006
+IW	Genus:Pedobacter || Genus:Algoriphagus	0.186
+IW	Genus:Pedobacter || Genus:Altererythrobacter	0.258
+IW	Genus:Pedobacter || Genus:Arenimonas	0.002
+IW	Genus:Pedobacter || Genus:Desulfobulbus	0.032
+IW	Genus:Pedobacter || Genus:Erythrobacter	0.046
+IW	Genus:Pedobacter || Genus:Exiguobacterium	0.002
+IW	Genus:Pedobacter || Genus:Fusibacter	0.002
+IW	Genus:Pedobacter || Genus:Geobacter	0.09
+IW	Genus:Pedobacter || Genus:Haliangium	0.906
+IW	Genus:Pedobacter || Genus:Lysobacter	0.042
+IW	Genus:Pedobacter || Genus:Massilia	0.798
+IW	Genus:Pedobacter || Genus:Nitrospira	0.056
+IW	Genus:Pedobacter || Genus:Pseudolabrys	0.002
+IW	Genus:Pedobacter || Genus:Robiginitalea	0.002
+IW	Genus:Pedobacter || Genus:Variibacter	0.03
+IW	Genus:Pirellula || Genus:Arenimonas	0.02
+IW	Genus:Pirellula || Genus:Desulfobulbus	0.026
+IW	Genus:Pirellula || Genus:Exiguobacterium	0.056
+IW	Genus:Pirellula || Genus:Ferruginibacter	0.006
+IW	Genus:Pirellula || Genus:Geobacter	0.12
+IW	Genus:Pirellula || Genus:Robiginitalea	0.006
+IW	Genus:Planctomyces || Genus:Algoriphagus	0.006
+IW	Genus:Planctomyces || Genus:Altererythrobacter	0.008
+IW	Genus:Planctomyces || Genus:Ferruginibacter	0.002
+IW	Genus:Planctomyces || Genus:Fusibacter	0.002
+IW	Genus:Planctomyces || Genus:Geobacter	0.038
+IW	Genus:Planctomyces || Genus:Massilia	0.004
+IW	Genus:Planctomyces || Genus:Nitrospira	0.012
+IW	Genus:Planctomyces || Genus:Paenisporosarcina	0.012
+IW	Genus:Planctomyces || Genus:Robiginitalea	0.026
+IW	Genus:Planctomyces || Genus:Variibacter	0.066
+IW	Genus:Planomicrobium || Genus:Algoriphagus	0.022
+IW	Genus:Planomicrobium || Genus:Altererythrobacter	0.204
+IW	Genus:Planomicrobium || Genus:Arenimonas	0.004
+IW	Genus:Planomicrobium || Genus:Desulfobulbus	0.004
+IW	Genus:Planomicrobium || Genus:Fusibacter	0.028
+IW	Genus:Planomicrobium || Genus:Gaiella	0.006
+IW	Genus:Planomicrobium || Genus:Haliangium	0.174
+IW	Genus:Planomicrobium || Genus:Lysobacter	0.13
+IW	Genus:Planomicrobium || Genus:Massilia	0.004
+IW	Genus:Planomicrobium || Genus:Nitrospira	0.054
+IW	Genus:Planomicrobium || Genus:Paenisporosarcina	0.002
+IW	Genus:Planomicrobium || Genus:Pirellula	0.006
+IW	Genus:Planomicrobium || Genus:Pseudolabrys	0.136
+IW	Genus:Planomicrobium || Genus:Robiginitalea	0.004
+IW	Genus:Planomicrobium || Genus:Terrimonas	0.022
+IW	Genus:Pseudolabrys || Genus:Algoriphagus	0.014
+IW	Genus:Pseudolabrys || Genus:Altererythrobacter	0.146
+IW	Genus:Pseudolabrys || Genus:Arenimonas	0.158
+IW	Genus:Pseudolabrys || Genus:Erythrobacter	0.022
+IW	Genus:Pseudolabrys || Genus:Exiguobacterium	0.008
+IW	Genus:Pseudolabrys || Genus:Fusibacter	0.012
+IW	Genus:Pseudolabrys || Genus:Haliangium	0.04
+IW	Genus:Pseudolabrys || Genus:Robiginitalea	0.002
+IW	Genus:Pseudolabrys || Genus:Terrimonas	0.044
+IW	Genus:Pseudomonas || Genus:Erythrobacter	0.01
+IW	Genus:Pseudomonas || Genus:Exiguobacterium	0.03
+IW	Genus:Pseudomonas || Genus:Ferruginibacter	0.002
+IW	Genus:Pseudomonas || Genus:Gemmatimonas	0.018
+IW	Genus:Pseudomonas || Genus:Geobacter	0.002
+IW	Genus:Pseudomonas || Genus:Haliangium	0.002
+IW	Genus:Pseudomonas || Genus:Lysobacter	0.004
+IW	Genus:Pseudomonas || Genus:Massilia	0.008
+IW	Genus:Pseudomonas || Genus:Nitrospira	0.012
+IW	Genus:Pseudomonas || Genus:Pirellula	0.002
+IW	Genus:Pseudomonas || Genus:Planctomyces	0.002
+IW	Genus:Pseudomonas || Genus:Robiginitalea	0.004
+IW	Genus:Pseudomonas || Genus:Terrimonas	0.002
+IW	Genus:Pseudomonas || Genus:Variibacter	0.002
+IW	Genus:Robiginitalea || Genus:Algoriphagus	0.012
+IW	Genus:Robiginitalea || Genus:Altererythrobacter	0.04
+IW	Genus:Robiginitalea || Genus:Arenimonas	0.1
+IW	Genus:Robiginitalea || Genus:Exiguobacterium	0.006
+IW	Genus:Robiginitalea || Genus:Fusibacter	0.096
+IW	Genus:Robiginitalea || Genus:Terrimonas	0.008
+IW	Genus:Sphingomonas || Genus:Algoriphagus	0.002
+IW	Genus:Sphingomonas || Genus:Anaerolinea	0.032
+IW	Genus:Sphingomonas || Genus:Arthrobacter	0.016
+IW	Genus:Sphingomonas || Genus:Bacillus	0.002
+IW	Genus:Sphingomonas || Genus:Blastocatella	0.088
+IW	Genus:Sphingomonas || Genus:Bryobacter	0.002
+IW	Genus:Sphingomonas || Genus:Clostridium sensu stricto 13	0.15
+IW	Genus:Sphingomonas || Genus:Erythrobacter	0.166
+IW	Genus:Sphingomonas || Genus:Exiguobacterium	0.002
+IW	Genus:Sphingomonas || Genus:Fusibacter	0.004
+IW	Genus:Sphingomonas || Genus:Gaiella	0.274
+IW	Genus:Sphingomonas || Genus:Gillisia	0.624
+IW	Genus:Sphingomonas || Genus:Marinicella	0.034
+IW	Genus:Sphingomonas || Genus:Nitrospira	0.002
+IW	Genus:Sphingomonas || Genus:Paenisporosarcina	0.016
+IW	Genus:Sphingomonas || Genus:Pseudomonas	0.002
+IW	Genus:Sphingomonas || Genus:Robiginitalea	0.004
+IW	Genus:Sphingomonas || Genus:Sulfurovum	0.758
+IW	Genus:Sphingomonas || Genus:Terrimonas	0.006
+IW	Genus:Sphingomonas || Genus:Thiobacillus	0.008
+IW	Genus:Sphingomonas || Genus:Variibacter	0.008
+IW	Genus:Sulfurovum || Genus:Acidovorax	0.012
+IW	Genus:Sulfurovum || Genus:Altererythrobacter	0.006
+IW	Genus:Sulfurovum || Genus:Arenimonas	0.002
+IW	Genus:Sulfurovum || Genus:Desulfobulbus	0.018
+IW	Genus:Sulfurovum || Genus:Exiguobacterium	0.002
+IW	Genus:Sulfurovum || Genus:Fusibacter	0.002
+IW	Genus:Sulfurovum || Genus:Gaiella	0.052
+IW	Genus:Sulfurovum || Genus:Gemmatimonas	0.008
+IW	Genus:Sulfurovum || Genus:Geobacter	0.026
+IW	Genus:Sulfurovum || Genus:Gillisia	0.688
+IW	Genus:Sulfurovum || Genus:Lysobacter	0.056
+IW	Genus:Sulfurovum || Genus:Marinicella	0.002
+IW	Genus:Sulfurovum || Genus:Massilia	0.002
+IW	Genus:Sulfurovum || Genus:Pedobacter	0.002
+IW	Genus:Sulfurovum || Genus:Planctomyces	0.28
+IW	Genus:Sulfurovum || Genus:Terrimonas	0.02
+IW	Genus:Terrimonas || Genus:Exiguobacterium	0.118
+IW	Genus:Thiobacillus || Genus:Altererythrobacter	0.002
+IW	Genus:Thiobacillus || Genus:Anaerolinea	0.002
+IW	Genus:Thiobacillus || Genus:Arenimonas	0.048
+IW	Genus:Thiobacillus || Genus:Blastocatella	0.094
+IW	Genus:Thiobacillus || Genus:Candidatus Solibacter	0.004
+IW	Genus:Thiobacillus || Genus:Desulfobulbus	0.004
+IW	Genus:Thiobacillus || Genus:Exiguobacterium	0.032
+IW	Genus:Thiobacillus || Genus:Ferruginibacter	0.012
+IW	Genus:Thiobacillus || Genus:Flavobacterium	0.004
+IW	Genus:Thiobacillus || Genus:Gaiella	0.002
+IW	Genus:Thiobacillus || Genus:Gemmatimonas	0.004
+IW	Genus:Thiobacillus || Genus:Geobacter	0.002
+IW	Genus:Thiobacillus || Genus:Gillisia	0.014
+IW	Genus:Thiobacillus || Genus:Haliangium	0.008
+IW	Genus:Thiobacillus || Genus:Illumatobacter	0.004
+IW	Genus:Thiobacillus || Genus:Pedobacter	0.002
+IW	Genus:Thiobacillus || Genus:Pirellula	0.132
+IW	Genus:Thiobacillus || Genus:Planomicrobium	0.004
+IW	Genus:Thiobacillus || Genus:Pseudomonas	0.03
+IW	Genus:Thiobacillus || Genus:Robiginitalea	0.006
+IW	Genus:Variibacter || Genus:Arenimonas	0.02
+IW	Genus:Variibacter || Genus:Erythrobacter	0.002
+IW	Genus:Variibacter || Genus:Exiguobacterium	0.002
+IW	Genus:Variibacter || Genus:Massilia	0.054
+IW	Genus:Variibacter || Genus:Nitrospira	0.03
+IW	Genus:Variibacter || Genus:Paenisporosarcina	0.002
+IW	Genus:Variibacter || Genus:Robiginitalea	0.002
+IW	Genus:Variibacter || Genus:Terrimonas	0.006
+TW	Genus:Acidovorax || Genus:Algoriphagus	0.168
+TW	Genus:Acidovorax || Genus:Arenimonas	0.052
+TW	Genus:Acidovorax || Genus:Erythrobacter	0.002
+TW	Genus:Acidovorax || Genus:Fusibacter	0.014
+TW	Genus:Acidovorax || Genus:Geobacter	0.008
+TW	Genus:Acidovorax || Genus:Haliangium	0.108
+TW	Genus:Acidovorax || Genus:Lysobacter	0.086
+TW	Genus:Acidovorax || Genus:Massilia	0.048
+TW	Genus:Acidovorax || Genus:Nitrospira	0.018
+TW	Genus:Algoriphagus || Genus:Altererythrobacter	0.002
+TW	Genus:Algoriphagus || Genus:Exiguobacterium	0.01
+TW	Genus:Altererythrobacter || Genus:Exiguobacterium	0.002
+TW	Genus:Altererythrobacter || Genus:Massilia	0.03
+TW	Genus:Altererythrobacter || Genus:Terrimonas	0.004
+TW	Genus:Anaerolinea || Genus:Altererythrobacter	0.008
+TW	Genus:Anaerolinea || Genus:Arenimonas	0.002
+TW	Genus:Anaerolinea || Genus:Exiguobacterium	0.002
+TW	Genus:Anaerolinea || Genus:Fusibacter	0.034
+TW	Genus:Anaerolinea || Genus:Geobacter	0.008
+TW	Genus:Anaerolinea || Genus:Lysobacter	0.002
+TW	Genus:Anaerolinea || Genus:Pedobacter	0.002
+TW	Genus:Anaerolinea || Genus:Terrimonas	0.012
+TW	Genus:Anaerolinea || Genus:Variibacter	0.002
+TW	Genus:Arenimonas || Genus:Exiguobacterium	0.006
+TW	Genus:Arthrobacter || Genus:Acidovorax	0.682
+TW	Genus:Arthrobacter || Genus:Algoriphagus	0.004
+TW	Genus:Arthrobacter || Genus:Arenimonas	0.41
+TW	Genus:Arthrobacter || Genus:Bryobacter	0.002
+TW	Genus:Arthrobacter || Genus:Desulfobulbus	0.054
+TW	Genus:Arthrobacter || Genus:Erythrobacter	0.002
+TW	Genus:Arthrobacter || Genus:Exiguobacterium	0.002
+TW	Genus:Arthrobacter || Genus:Ferruginibacter	0.134
+TW	Genus:Arthrobacter || Genus:Geobacter	0.084
+TW	Genus:Arthrobacter || Genus:Gillisia	0.506
+TW	Genus:Arthrobacter || Genus:Haliangium	0.026
+TW	Genus:Arthrobacter || Genus:Illumatobacter	0.388
+TW	Genus:Arthrobacter || Genus:Lysobacter	0.002
+TW	Genus:Arthrobacter || Genus:Marinicella	0.068
+TW	Genus:Arthrobacter || Genus:Massilia	0.024
+TW	Genus:Arthrobacter || Genus:Nitrospira	0.016
+TW	Genus:Arthrobacter || Genus:Paenisporosarcina	0.18
+TW	Genus:Arthrobacter || Genus:Pedobacter	0.012
+TW	Genus:Arthrobacter || Genus:Pirellula	0.052
+TW	Genus:Arthrobacter || Genus:Pseudomonas	0.044
+TW	Genus:Arthrobacter || Genus:Robiginitalea	0.006
+TW	Genus:Arthrobacter || Genus:Sulfurovum	0.07
+TW	Genus:Arthrobacter || Genus:Terrimonas	0.072
+TW	Genus:Bacillus || Genus:Acidovorax	0.042
+TW	Genus:Bacillus || Genus:Algoriphagus	0.002
+TW	Genus:Bacillus || Genus:Anaerolinea	0.004
+TW	Genus:Bacillus || Genus:Arthrobacter	0.068
+TW	Genus:Bacillus || Genus:Blastocatella	0.026
+TW	Genus:Bacillus || Genus:Bryobacter	0.116
+TW	Genus:Bacillus || Genus:Candidatus Solibacter	0.004
+TW	Genus:Bacillus || Genus:Desulfobulbus	0.016
+TW	Genus:Bacillus || Genus:Exiguobacterium	0.008
+TW	Genus:Bacillus || Genus:Ferruginibacter	0.838
+TW	Genus:Bacillus || Genus:Gaiella	0.066
+TW	Genus:Bacillus || Genus:Geobacter	0.042
+TW	Genus:Bacillus || Genus:Marinicella	0.002
+TW	Genus:Bacillus || Genus:Massilia	0.006
+TW	Genus:Bacillus || Genus:Nitrospira	0.006
+TW	Genus:Bacillus || Genus:Pedobacter	0.022
+TW	Genus:Bacillus || Genus:Pirellula	0.002
+TW	Genus:Bacillus || Genus:Planctomyces	0.012
+TW	Genus:Bacillus || Genus:Planomicrobium	0.036
+TW	Genus:Bacillus || Genus:Pseudolabrys	0.076
+TW	Genus:Bacillus || Genus:Robiginitalea	0.002
+TW	Genus:Bacillus || Genus:Sulfurovum	0.002
+TW	Genus:Bacillus || Genus:Terrimonas	0.004
+TW	Genus:Bacillus || Genus:Variibacter	0.004
+TW	Genus:Blastocatella || Genus:Anaerolinea	0.266
+TW	Genus:Blastocatella || Genus:Arenimonas	0.002
+TW	Genus:Blastocatella || Genus:Bryobacter	0.002
+TW	Genus:Blastocatella || Genus:Erythrobacter	0.004
+TW	Genus:Blastocatella || Genus:Fusibacter	0.004
+TW	Genus:Blastocatella || Genus:Gaiella	0.056
+TW	Genus:Blastocatella || Genus:Gemmatimonas	0.112
+TW	Genus:Blastocatella || Genus:Lysobacter	0.02
+TW	Genus:Blastocatella || Genus:Paenisporosarcina	0.002
+TW	Genus:Blastocatella || Genus:Planctomyces	0.01
+TW	Genus:Blastocatella || Genus:Planomicrobium	0.008
+TW	Genus:Blastocatella || Genus:Pseudolabrys	0.01
+TW	Genus:Blastocatella || Genus:Pseudomonas	0.012
+TW	Genus:Blastocatella || Genus:Sulfurovum	0.066
+TW	Genus:Blastocatella || Genus:Terrimonas	0.002
+TW	Genus:Bryobacter || Genus:Acidovorax	0.084
+TW	Genus:Bryobacter || Genus:Algoriphagus	0.006
+TW	Genus:Bryobacter || Genus:Arenimonas	0.084
+TW	Genus:Bryobacter || Genus:Desulfobulbus	0.002
+TW	Genus:Bryobacter || Genus:Ferruginibacter	0.002
+TW	Genus:Bryobacter || Genus:Fusibacter	0.014
+TW	Genus:Bryobacter || Genus:Gillisia	0.012
+TW	Genus:Bryobacter || Genus:Haliangium	0.01
+TW	Genus:Bryobacter || Genus:Massilia	0.014
+TW	Genus:Bryobacter || Genus:Nitrospira	0.01
+TW	Genus:Bryobacter || Genus:Pseudolabrys	0.02
+TW	Genus:Bryobacter || Genus:Pseudomonas	0.008
+TW	Genus:Bryobacter || Genus:Robiginitalea	0.008
+TW	Genus:Bryobacter || Genus:Sulfurovum	0.004
+TW	Genus:Bryobacter || Genus:Variibacter	0.004
+TW	Genus:Candidatus Solibacter || Genus:Algoriphagus	0.05
+TW	Genus:Candidatus Solibacter || Genus:Anaerolinea	0.114
+TW	Genus:Candidatus Solibacter || Genus:Arenimonas	0.098
+TW	Genus:Candidatus Solibacter || Genus:Arthrobacter	0.004
+TW	Genus:Candidatus Solibacter || Genus:Blastocatella	0.042
+TW	Genus:Candidatus Solibacter || Genus:Bryobacter	0.002
+TW	Genus:Candidatus Solibacter || Genus:Desulfobulbus	0.008
+TW	Genus:Candidatus Solibacter || Genus:Ferruginibacter	0.002
+TW	Genus:Candidatus Solibacter || Genus:Gaiella	0.114
+TW	Genus:Candidatus Solibacter || Genus:Geobacter	0.004
+TW	Genus:Candidatus Solibacter || Genus:Haliangium	0.016
+TW	Genus:Candidatus Solibacter || Genus:Illumatobacter	0.006
+TW	Genus:Candidatus Solibacter || Genus:Marinicella	0.002
+TW	Genus:Candidatus Solibacter || Genus:Massilia	0.006
+TW	Genus:Candidatus Solibacter || Genus:Paenisporosarcina	0.046
+TW	Genus:Candidatus Solibacter || Genus:Pedobacter	0.004
+TW	Genus:Candidatus Solibacter || Genus:Pirellula	0.002
+TW	Genus:Candidatus Solibacter || Genus:Planctomyces	0.056
+TW	Genus:Candidatus Solibacter || Genus:Pseudolabrys	0.038
+TW	Genus:Candidatus Solibacter || Genus:Robiginitalea	0.004
+TW	Genus:Candidatus Solibacter || Genus:Sulfurovum	0.09
+TW	Genus:Clostridium sensu stricto 13 || Genus:Acidovorax	0.026
+TW	Genus:Clostridium sensu stricto 13 || Genus:Anaerolinea	0.14
+TW	Genus:Clostridium sensu stricto 13 || Genus:Arenimonas	0.008
+TW	Genus:Clostridium sensu stricto 13 || Genus:Bacillus	0.006
+TW	Genus:Clostridium sensu stricto 13 || Genus:Candidatus Solibacter	0.02
+TW	Genus:Clostridium sensu stricto 13 || Genus:Desulfobulbus	0.852
+TW	Genus:Clostridium sensu stricto 13 || Genus:Exiguobacterium	0.012
+TW	Genus:Clostridium sensu stricto 13 || Genus:Flavobacterium	0.002
+TW	Genus:Clostridium sensu stricto 13 || Genus:Gaiella	0.002
+TW	Genus:Clostridium sensu stricto 13 || Genus:Gemmatimonas	0.302
+TW	Genus:Clostridium sensu stricto 13 || Genus:Gillisia	0.542
+TW	Genus:Clostridium sensu stricto 13 || Genus:Illumatobacter	0.016
+TW	Genus:Clostridium sensu stricto 13 || Genus:Lysobacter	0.006
+TW	Genus:Clostridium sensu stricto 13 || Genus:Nitrospira	0.114
+TW	Genus:Clostridium sensu stricto 13 || Genus:Pedobacter	0.178
+TW	Genus:Clostridium sensu stricto 13 || Genus:Pirellula	0.008
+TW	Genus:Clostridium sensu stricto 13 || Genus:Planctomyces	0.262
+TW	Genus:Clostridium sensu stricto 13 || Genus:Planomicrobium	0.002
+TW	Genus:Clostridium sensu stricto 13 || Genus:Pseudolabrys	0.002
+TW	Genus:Clostridium sensu stricto 13 || Genus:Pseudomonas	0.024
+TW	Genus:Clostridium sensu stricto 13 || Genus:Thiobacillus	0.012
+TW	Genus:Clostridium sensu stricto 13 || Genus:Variibacter	0.116
+TW	Genus:Desulfobulbus || Genus:Altererythrobacter	0.002
+TW	Genus:Desulfobulbus || Genus:Arenimonas	0.008
+TW	Genus:Desulfobulbus || Genus:Erythrobacter	0.004
+TW	Genus:Desulfobulbus || Genus:Ferruginibacter	0.014
+TW	Genus:Desulfobulbus || Genus:Haliangium	0.03
+TW	Genus:Desulfobulbus || Genus:Massilia	0.042
+TW	Genus:Desulfobulbus || Genus:Nitrospira	0.004
+TW	Genus:Desulfobulbus || Genus:Paenisporosarcina	0.002
+TW	Genus:Desulfobulbus || Genus:Terrimonas	0.01
+TW	Genus:Erythrobacter || Genus:Algoriphagus	0.022
+TW	Genus:Erythrobacter || Genus:Exiguobacterium	0.01
+TW	Genus:Erythrobacter || Genus:Geobacter	0.008
+TW	Genus:Erythrobacter || Genus:Haliangium	0.006
+TW	Genus:Erythrobacter || Genus:Massilia	0.026
+TW	Genus:Erythrobacter || Genus:Paenisporosarcina	0.008
+TW	Genus:Erythrobacter || Genus:Robiginitalea	0.264
+TW	Genus:Ferruginibacter || Genus:Altererythrobacter	0.022
+TW	Genus:Ferruginibacter || Genus:Exiguobacterium	0.006
+TW	Genus:Ferruginibacter || Genus:Fusibacter	0.15
+TW	Genus:Ferruginibacter || Genus:Geobacter	0.172
+TW	Genus:Ferruginibacter || Genus:Lysobacter	0.04
+TW	Genus:Ferruginibacter || Genus:Massilia	0.008
+TW	Genus:Ferruginibacter || Genus:Nitrospira	0.002
+TW	Genus:Ferruginibacter || Genus:Robiginitalea	0.074
+TW	Genus:Ferruginibacter || Genus:Terrimonas	0.018
+TW	Genus:Flavobacterium || Genus:Algoriphagus	0.11
+TW	Genus:Flavobacterium || Genus:Altererythrobacter	0.58
+TW	Genus:Flavobacterium || Genus:Anaerolinea	0.01
+TW	Genus:Flavobacterium || Genus:Arenimonas	0.016
+TW	Genus:Flavobacterium || Genus:Blastocatella	0.198
+TW	Genus:Flavobacterium || Genus:Bryobacter	0.002
+TW	Genus:Flavobacterium || Genus:Desulfobulbus	0.024
+TW	Genus:Flavobacterium || Genus:Erythrobacter	0.032
+TW	Genus:Flavobacterium || Genus:Exiguobacterium	0.018
+TW	Genus:Flavobacterium || Genus:Ferruginibacter	0.35
+TW	Genus:Flavobacterium || Genus:Fusibacter	0.604
+TW	Genus:Flavobacterium || Genus:Gemmatimonas	0.028
+TW	Genus:Flavobacterium || Genus:Geobacter	0.18
+TW	Genus:Flavobacterium || Genus:Gillisia	0.28
+TW	Genus:Flavobacterium || Genus:Haliangium	0.26
+TW	Genus:Flavobacterium || Genus:Illumatobacter	0.342
+TW	Genus:Flavobacterium || Genus:Marinicella	0.054
+TW	Genus:Flavobacterium || Genus:Nitrospira	0.002
+TW	Genus:Flavobacterium || Genus:Paenisporosarcina	0.04
+TW	Genus:Flavobacterium || Genus:Pedobacter	0.066
+TW	Genus:Flavobacterium || Genus:Planctomyces	0.684
+TW	Genus:Flavobacterium || Genus:Pseudomonas	0.384
+TW	Genus:Flavobacterium || Genus:Robiginitalea	0.002
+TW	Genus:Gaiella || Genus:Acidovorax	0.02
+TW	Genus:Gaiella || Genus:Algoriphagus	0.018
+TW	Genus:Gaiella || Genus:Altererythrobacter	0.058
+TW	Genus:Gaiella || Genus:Erythrobacter	0.002
+TW	Genus:Gaiella || Genus:Gemmatimonas	0.002
+TW	Genus:Gaiella || Genus:Geobacter	0.062
+TW	Genus:Gaiella || Genus:Haliangium	0.004
+TW	Genus:Gaiella || Genus:Massilia	0.022
+TW	Genus:Gaiella || Genus:Nitrospira	0.034
+TW	Genus:Gaiella || Genus:Paenisporosarcina	0.004
+TW	Genus:Gaiella || Genus:Pedobacter	0.008
+TW	Genus:Gaiella || Genus:Pirellula	0.002
+TW	Genus:Gaiella || Genus:Pseudomonas	0.016
+TW	Genus:Gaiella || Genus:Robiginitalea	0.018
+TW	Genus:Gaiella || Genus:Terrimonas	0.004
+TW	Genus:Gaiella || Genus:Variibacter	0.002
+TW	Genus:Gemmatimonas || Genus:Acidovorax	0.008
+TW	Genus:Gemmatimonas || Genus:Algoriphagus	0.054
+TW	Genus:Gemmatimonas || Genus:Arenimonas	0.108
+TW	Genus:Gemmatimonas || Genus:Desulfobulbus	0.29
+TW	Genus:Gemmatimonas || Genus:Exiguobacterium	0.326
+TW	Genus:Gemmatimonas || Genus:Geobacter	0.006
+TW	Genus:Gemmatimonas || Genus:Lysobacter	0.002
+TW	Genus:Gemmatimonas || Genus:Nitrospira	0.07
+TW	Genus:Gemmatimonas || Genus:Paenisporosarcina	0.002
+TW	Genus:Gemmatimonas || Genus:Pseudolabrys	0.01
+TW	Genus:Gemmatimonas || Genus:Terrimonas	0.008
+TW	Genus:Gemmatimonas || Genus:Variibacter	0.014
+TW	Genus:Geobacter || Genus:Algoriphagus	0.002
+TW	Genus:Geobacter || Genus:Altererythrobacter	0.006
+TW	Genus:Geobacter || Genus:Arenimonas	0.006
+TW	Genus:Geobacter || Genus:Exiguobacterium	0.002
+TW	Genus:Geobacter || Genus:Fusibacter	0.002
+TW	Genus:Geobacter || Genus:Terrimonas	0.002
+TW	Genus:Gillisia || Genus:Algoriphagus	0.026
+TW	Genus:Gillisia || Genus:Arenimonas	0.082
+TW	Genus:Gillisia || Genus:Exiguobacterium	0.022
+TW	Genus:Gillisia || Genus:Ferruginibacter	0.022
+TW	Genus:Gillisia || Genus:Fusibacter	0.88
+TW	Genus:Gillisia || Genus:Gaiella	0.002
+TW	Genus:Gillisia || Genus:Gemmatimonas	0.376
+TW	Genus:Gillisia || Genus:Geobacter	0.094
+TW	Genus:Gillisia || Genus:Lysobacter	0.002
+TW	Genus:Gillisia || Genus:Marinicella	0.002
+TW	Genus:Gillisia || Genus:Nitrospira	0.074
+TW	Genus:Gillisia || Genus:Paenisporosarcina	0.042
+TW	Genus:Gillisia || Genus:Pedobacter	0.022
+TW	Genus:Gillisia || Genus:Pirellula	0.034
+TW	Genus:Gillisia || Genus:Planomicrobium	0.044
+TW	Genus:Gillisia || Genus:Pseudomonas	0.002
+TW	Genus:Gillisia || Genus:Variibacter	0.16
+TW	Genus:Haliangium || Genus:Algoriphagus	0.302
+TW	Genus:Haliangium || Genus:Exiguobacterium	0.002
+TW	Genus:Haliangium || Genus:Robiginitalea	0.01
+TW	Genus:Haliangium || Genus:Terrimonas	0.042
+TW	Genus:Illumatobacter || Genus:Algoriphagus	0.002
+TW	Genus:Illumatobacter || Genus:Altererythrobacter	0.024
+TW	Genus:Illumatobacter || Genus:Bryobacter	0.004
+TW	Genus:Illumatobacter || Genus:Desulfobulbus	0.01
+TW	Genus:Illumatobacter || Genus:Haliangium	0.002
+TW	Genus:Illumatobacter || Genus:Lysobacter	0.002
+TW	Genus:Illumatobacter || Genus:Massilia	0.002
+TW	Genus:Illumatobacter || Genus:Nitrospira	0.026
+TW	Genus:Illumatobacter || Genus:Paenisporosarcina	0.004
+TW	Genus:Illumatobacter || Genus:Pirellula	0.024
+TW	Genus:Illumatobacter || Genus:Planomicrobium	0.048
+TW	Genus:Illumatobacter || Genus:Robiginitalea	0.016
+TW	Genus:Illumatobacter || Genus:Sulfurovum	0.01
+TW	Genus:Lysobacter || Genus:Altererythrobacter	0.006
+TW	Genus:Lysobacter || Genus:Geobacter	0.062
+TW	Genus:Lysobacter || Genus:Haliangium	0.75
+TW	Genus:Marinicella || Genus:Algoriphagus	0.06
+TW	Genus:Marinicella || Genus:Altererythrobacter	0.004
+TW	Genus:Marinicella || Genus:Arenimonas	0.002
+TW	Genus:Marinicella || Genus:Desulfobulbus	0.002
+TW	Genus:Marinicella || Genus:Fusibacter	0.006
+TW	Genus:Marinicella || Genus:Gaiella	0.002
+TW	Genus:Marinicella || Genus:Gemmatimonas	0.004
+TW	Genus:Marinicella || Genus:Lysobacter	0.058
+TW	Genus:Marinicella || Genus:Nitrospira	0.002
+TW	Genus:Marinicella || Genus:Pirellula	0.012
+TW	Genus:Marinicella || Genus:Planctomyces	0.096
+TW	Genus:Marinicella || Genus:Robiginitalea	0.002
+TW	Genus:Marinicella || Genus:Terrimonas	0.002
+TW	Genus:Marinicella || Genus:Variibacter	0.018
+TW	Genus:Massilia || Genus:Exiguobacterium	0.004
+TW	Genus:Massilia || Genus:Fusibacter	0.062
+TW	Genus:Nitrospira || Genus:Algoriphagus	0.004
+TW	Genus:Nitrospira || Genus:Altererythrobacter	0.004
+TW	Genus:Nitrospira || Genus:Exiguobacterium	0.008
+TW	Genus:Nitrospira || Genus:Fusibacter	0.02
+TW	Genus:Nitrospira || Genus:Geobacter	0.068
+TW	Genus:Nitrospira || Genus:Lysobacter	0.344
+TW	Genus:Nitrospira || Genus:Massilia	0.076
+TW	Genus:Nitrospira || Genus:Paenisporosarcina	0.054
+TW	Genus:Nitrospira || Genus:Robiginitalea	0.362
+TW	Genus:Nitrospira || Genus:Terrimonas	0.136
+TW	Genus:Paenisporosarcina || Genus:Algoriphagus	0.016
+TW	Genus:Paenisporosarcina || Genus:Arenimonas	0.084
+TW	Genus:Paenisporosarcina || Genus:Exiguobacterium	0.418
+TW	Genus:Paenisporosarcina || Genus:Fusibacter	0.002
+TW	Genus:Paenisporosarcina || Genus:Haliangium	0.062
+TW	Genus:Paenisporosarcina || Genus:Lysobacter	0.232
+TW	Genus:Paenisporosarcina || Genus:Massilia	0.456
+TW	Genus:Paenisporosarcina || Genus:Robiginitalea	0.014
+TW	Genus:Pedobacter || Genus:Algoriphagus	0.322
+TW	Genus:Pedobacter || Genus:Arenimonas	0.002
+TW	Genus:Pedobacter || Genus:Erythrobacter	0.126
+TW	Genus:Pedobacter || Genus:Exiguobacterium	0.01
+TW	Genus:Pedobacter || Genus:Lysobacter	0.002
+TW	Genus:Pedobacter || Genus:Nitrospira	0.144
+TW	Genus:Pedobacter || Genus:Pseudolabrys	0.004
+TW	Genus:Pedobacter || Genus:Robiginitalea	0.002
+TW	Genus:Pedobacter || Genus:Variibacter	0.002
+TW	Genus:Pirellula || Genus:Acidovorax	0.56
+TW	Genus:Pirellula || Genus:Algoriphagus	0.006
+TW	Genus:Pirellula || Genus:Altererythrobacter	0.008
+TW	Genus:Pirellula || Genus:Arenimonas	0.02
+TW	Genus:Pirellula || Genus:Desulfobulbus	0.018
+TW	Genus:Pirellula || Genus:Exiguobacterium	0.126
+TW	Genus:Pirellula || Genus:Gemmatimonas	0.002
+TW	Genus:Pirellula || Genus:Geobacter	0.004
+TW	Genus:Pirellula || Genus:Massilia	0.002
+TW	Genus:Pirellula || Genus:Paenisporosarcina	0.002
+TW	Genus:Pirellula || Genus:Pedobacter	0.006
+TW	Genus:Pirellula || Genus:Planctomyces	0.002
+TW	Genus:Pirellula || Genus:Robiginitalea	0.008
+TW	Genus:Pirellula || Genus:Terrimonas	0.004
+TW	Genus:Pirellula || Genus:Variibacter	0.002
+TW	Genus:Planctomyces || Genus:Algoriphagus	0.258
+TW	Genus:Planctomyces || Genus:Altererythrobacter	0.002
+TW	Genus:Planctomyces || Genus:Arenimonas	0.002
+TW	Genus:Planctomyces || Genus:Desulfobulbus	0.004
+TW	Genus:Planctomyces || Genus:Erythrobacter	0.004
+TW	Genus:Planctomyces || Genus:Ferruginibacter	0.126
+TW	Genus:Planctomyces || Genus:Lysobacter	0.126
+TW	Genus:Planctomyces || Genus:Massilia	0.074
+TW	Genus:Planctomyces || Genus:Nitrospira	0.022
+TW	Genus:Planctomyces || Genus:Pedobacter	0.004
+TW	Genus:Planctomyces || Genus:Robiginitalea	0.038
+TW	Genus:Planctomyces || Genus:Terrimonas	0.032
+TW	Genus:Planctomyces || Genus:Variibacter	0.03
+TW	Genus:Planomicrobium || Genus:Acidovorax	0.014
+TW	Genus:Planomicrobium || Genus:Algoriphagus	0.006
+TW	Genus:Planomicrobium || Genus:Altererythrobacter	0.058
+TW	Genus:Planomicrobium || Genus:Erythrobacter	0.004
+TW	Genus:Planomicrobium || Genus:Exiguobacterium	0.004
+TW	Genus:Planomicrobium || Genus:Ferruginibacter	0.016
+TW	Genus:Planomicrobium || Genus:Gemmatimonas	0.002
+TW	Genus:Planomicrobium || Genus:Geobacter	0.004
+TW	Genus:Planomicrobium || Genus:Haliangium	0.004
+TW	Genus:Planomicrobium || Genus:Marinicella	0.012
+TW	Genus:Planomicrobium || Genus:Massilia	0.018
+TW	Genus:Planomicrobium || Genus:Pedobacter	0.006
+TW	Genus:Planomicrobium || Genus:Planctomyces	0.004
+TW	Genus:Planomicrobium || Genus:Pseudolabrys	0.006
+TW	Genus:Planomicrobium || Genus:Pseudomonas	0.002
+TW	Genus:Planomicrobium || Genus:Robiginitalea	0.012
+TW	Genus:Pseudolabrys || Genus:Acidovorax	0.028
+TW	Genus:Pseudolabrys || Genus:Altererythrobacter	0.002
+TW	Genus:Pseudolabrys || Genus:Erythrobacter	0.002
+TW	Genus:Pseudolabrys || Genus:Exiguobacterium	0.004
+TW	Genus:Pseudolabrys || Genus:Lysobacter	0.008
+TW	Genus:Pseudolabrys || Genus:Massilia	0.096
+TW	Genus:Pseudolabrys || Genus:Nitrospira	0.09
+TW	Genus:Pseudolabrys || Genus:Paenisporosarcina	0.01
+TW	Genus:Pseudolabrys || Genus:Terrimonas	0.016
+TW	Genus:Pseudomonas || Genus:Acidovorax	0.04
+TW	Genus:Pseudomonas || Genus:Algoriphagus	0.046
+TW	Genus:Pseudomonas || Genus:Altererythrobacter	0.002
+TW	Genus:Pseudomonas || Genus:Desulfobulbus	0.04
+TW	Genus:Pseudomonas || Genus:Exiguobacterium	0.002
+TW	Genus:Pseudomonas || Genus:Ferruginibacter	0.002
+TW	Genus:Pseudomonas || Genus:Geobacter	0.026
+TW	Genus:Pseudomonas || Genus:Lysobacter	0.016
+TW	Genus:Pseudomonas || Genus:Massilia	0.002
+TW	Genus:Pseudomonas || Genus:Nitrospira	0.006
+TW	Genus:Pseudomonas || Genus:Paenisporosarcina	0.006
+TW	Genus:Pseudomonas || Genus:Pedobacter	0.052
+TW	Genus:Pseudomonas || Genus:Pirellula	0.004
+TW	Genus:Pseudomonas || Genus:Planctomyces	0.04
+TW	Genus:Pseudomonas || Genus:Pseudolabrys	0.012
+TW	Genus:Pseudomonas || Genus:Terrimonas	0.016
+TW	Genus:Pseudomonas || Genus:Variibacter	0.034
+TW	Genus:Robiginitalea || Genus:Algoriphagus	0.002
+TW	Genus:Robiginitalea || Genus:Altererythrobacter	0.062
+TW	Genus:Robiginitalea || Genus:Arenimonas	0.008
+TW	Genus:Robiginitalea || Genus:Terrimonas	0.002
+TW	Genus:Sphingomonas || Genus:Acidovorax	0.03
+TW	Genus:Sphingomonas || Genus:Algoriphagus	0.038
+TW	Genus:Sphingomonas || Genus:Arthrobacter	0.212
+TW	Genus:Sphingomonas || Genus:Bacillus	0.004
+TW	Genus:Sphingomonas || Genus:Blastocatella	0.006
+TW	Genus:Sphingomonas || Genus:Candidatus Solibacter	0.496
+TW	Genus:Sphingomonas || Genus:Clostridium sensu stricto 13	0.668
+TW	Genus:Sphingomonas || Genus:Exiguobacterium	0.052
+TW	Genus:Sphingomonas || Genus:Ferruginibacter	0.43
+TW	Genus:Sphingomonas || Genus:Flavobacterium	0.074
+TW	Genus:Sphingomonas || Genus:Fusibacter	0.014
+TW	Genus:Sphingomonas || Genus:Geobacter	0.082
+TW	Genus:Sphingomonas || Genus:Gillisia	0.004
+TW	Genus:Sphingomonas || Genus:Lysobacter	0.002
+TW	Genus:Sphingomonas || Genus:Marinicella	0.038
+TW	Genus:Sphingomonas || Genus:Massilia	0.03
+TW	Genus:Sphingomonas || Genus:Nitrospira	0.002
+TW	Genus:Sphingomonas || Genus:Paenisporosarcina	0.002
+TW	Genus:Sphingomonas || Genus:Pirellula	0.002
+TW	Genus:Sphingomonas || Genus:Planctomyces	0.006
+TW	Genus:Sphingomonas || Genus:Planomicrobium	0.05
+TW	Genus:Sphingomonas || Genus:Pseudolabrys	0.074
+TW	Genus:Sphingomonas || Genus:Sulfurovum	0.014
+TW	Genus:Sphingomonas || Genus:Thiobacillus	0.036
+TW	Genus:Sphingomonas || Genus:Variibacter	0.136
+TW	Genus:Sulfurovum || Genus:Acidovorax	0.016
+TW	Genus:Sulfurovum || Genus:Algoriphagus	0.004
+TW	Genus:Sulfurovum || Genus:Altererythrobacter	0.006
+TW	Genus:Sulfurovum || Genus:Arenimonas	0.01
+TW	Genus:Sulfurovum || Genus:Desulfobulbus	0.18
+TW	Genus:Sulfurovum || Genus:Gillisia	0.076
+TW	Genus:Sulfurovum || Genus:Haliangium	0.016
+TW	Genus:Sulfurovum || Genus:Lysobacter	0.356
+TW	Genus:Sulfurovum || Genus:Massilia	0.006
+TW	Genus:Sulfurovum || Genus:Nitrospira	0.006
+TW	Genus:Sulfurovum || Genus:Paenisporosarcina	0.002
+TW	Genus:Sulfurovum || Genus:Planomicrobium	0.002
+TW	Genus:Sulfurovum || Genus:Pseudolabrys	0.002
+TW	Genus:Sulfurovum || Genus:Pseudomonas	0.002
+TW	Genus:Sulfurovum || Genus:Variibacter	0.038
+TW	Genus:Terrimonas || Genus:Exiguobacterium	0.002
+TW	Genus:Thiobacillus || Genus:Altererythrobacter	0.022
+TW	Genus:Thiobacillus || Genus:Arenimonas	0.002
+TW	Genus:Thiobacillus || Genus:Arthrobacter	0.004
+TW	Genus:Thiobacillus || Genus:Bacillus	0.002
+TW	Genus:Thiobacillus || Genus:Bryobacter	0.006
+TW	Genus:Thiobacillus || Genus:Erythrobacter	0.188
+TW	Genus:Thiobacillus || Genus:Ferruginibacter	0.21
+TW	Genus:Thiobacillus || Genus:Gemmatimonas	0.11
+TW	Genus:Thiobacillus || Genus:Haliangium	0.006
+TW	Genus:Thiobacillus || Genus:Illumatobacter	0.114
+TW	Genus:Thiobacillus || Genus:Lysobacter	0.006
+TW	Genus:Thiobacillus || Genus:Nitrospira	0.024
+TW	Genus:Thiobacillus || Genus:Paenisporosarcina	0.682
+TW	Genus:Thiobacillus || Genus:Pedobacter	0.194
+TW	Genus:Thiobacillus || Genus:Pirellula	0.242
+TW	Genus:Thiobacillus || Genus:Planctomyces	0.014
+TW	Genus:Thiobacillus || Genus:Pseudolabrys	0.016
+TW	Genus:Thiobacillus || Genus:Sulfurovum	0.004
+TW	Genus:Variibacter || Genus:Arenimonas	0.084
+TW	Genus:Variibacter || Genus:Erythrobacter	0.01
+TW	Genus:Variibacter || Genus:Exiguobacterium	0.064
+TW	Genus:Variibacter || Genus:Geobacter	0.038
+TW	Genus:Variibacter || Genus:Haliangium	0.208
+TW	Genus:Variibacter || Genus:Nitrospira	0.026
+TW	Genus:Variibacter || Genus:Paenisporosarcina	0.008
+TW	Genus:Variibacter || Genus:Pseudolabrys	0.07
+TW	Genus:Variibacter || Genus:Robiginitalea	0.002
+TW	Genus:Variibacter || Genus:Terrimonas	0.028

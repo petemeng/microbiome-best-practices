@@ -1,0 +1,61 @@
+LineageRank	LineageKey	LeafGenus	Rank	Taxon	NodePercent	LeafPercent
+1	Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas	Sphingomonas	Phylum	Proteobacteria	30.71339669457529	1.2858134623686595
+1	Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas	Sphingomonas	Class	Alphaproteobacteria	8.71028693992452	1.2858134623686595
+1	Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas	Sphingomonas	Order	Sphingomonadales	2.602311143139074	1.2858134623686595
+1	Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas	Sphingomonas	Family	Sphingomonadaceae	1.6314341383588022	1.2858134623686595
+1	Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas	Sphingomonas	Genus	Sphingomonas	1.2858134623686595	1.2858134623686595
+2	Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13	Clostridium sensu stricto 13	Phylum	Firmicutes	5.934885234273045	1.267335764511777
+2	Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13	Clostridium sensu stricto 13	Class	Clostridia	2.7907159210318966	1.267335764511777
+2	Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13	Clostridium sensu stricto 13	Order	Clostridiales	2.6647093736911143	1.267335764511777
+2	Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13	Clostridium sensu stricto 13	Family	Clostridiaceae 1	1.5897817403194539	1.267335764511777
+2	Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13	Clostridium sensu stricto 13	Genus	Clostridium sensu stricto 13	1.2673357645117769	1.267335764511777
+3	Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus	Thiobacillus	Phylum	Proteobacteria	30.71339669457529	1.0813746999199108
+3	Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus	Thiobacillus	Class	Betaproteobacteria	7.801805379674997	1.0813746999199108
+3	Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus	Thiobacillus	Order	Hydrogenophilales	1.1554199925773379	1.0813746999199108
+3	Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus	Thiobacillus	Family	Hydrogenophilaceae	1.1554199925773379	1.0813746999199108
+3	Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus	Thiobacillus	Genus	Thiobacillus	1.0813746999199108	1.0813746999199108
+4	Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus	Bacillus	Phylum	Firmicutes	5.934885234273045	1.0772492499551531
+4	Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus	Bacillus	Class	Bacilli	3.0027926716586997	1.0772492499551531
+4	Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus	Bacillus	Order	Bacillales	2.727362483443895	1.0772492499551531
+4	Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus	Bacillus	Family	Bacillaceae	1.435984725367846	1.0772492499551531
+4	Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus	Bacillus	Genus	Bacillus	1.0772492499551534	1.0772492499551531
+5	Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter	Arthrobacter	Phylum	Actinobacteria	10.00956318837023	0.8563785926697711
+5	Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter	Arthrobacter	Class	Actinobacteria	2.832374875355657	0.8563785926697711
+5	Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter	Arthrobacter	Order	Micrococcales	1.7247716244926392	0.8563785926697711
+5	Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter	Arthrobacter	Family	Micrococcaceae	0.8867854364332471	0.8563785926697711
+5	Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter	Arthrobacter	Genus	Arthrobacter	0.8563785926697709	0.8563785926697711
+6	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium	Flavobacterium	Phylum	Bacteroidetes	11.649247538266623	0.8166456152901479
+6	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium	Flavobacterium	Class	Flavobacteriia	2.8907156557772433	0.8166456152901479
+6	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium	Flavobacterium	Order	Flavobacteriales	2.8907156557772433	0.8166456152901479
+6	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium	Flavobacterium	Family	Flavobacteriaceae	2.8304263819657165	0.8166456152901479
+6	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium	Flavobacterium	Genus	Flavobacterium	0.8166456152901479	0.8166456152901479
+7	Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea	Anaerolinea	Phylum	Chloroflexi	13.824089760719026	0.7531610481461075
+7	Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea	Anaerolinea	Class	Anaerolineae	6.93983552048356	0.7531610481461075
+7	Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea	Anaerolinea	Order	Anaerolineales	6.93983552048356	0.7531610481461075
+7	Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea	Anaerolinea	Family	Anaerolineaceae	6.93983552048356	0.7531610481461075
+7	Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea	Anaerolinea	Genus	Anaerolinea	0.7531610481461074	0.7531610481461075
+8	Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter	Illumatobacter	Phylum	Actinobacteria	10.00956318837023	0.6843106998303157
+8	Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter	Illumatobacter	Class	Acidimicrobiia	3.660090964134116	0.6843106998303157
+8	Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter	Illumatobacter	Order	Acidimicrobiales	3.660090964134116	0.6843106998303157
+8	Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter	Illumatobacter	Family	Acidimicrobiaceae	1.120162417488809	0.6843106998303157
+8	Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter	Illumatobacter	Genus	Illumatobacter	0.6843106998303156	0.6843106998303157
+9	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Gillisia	Gillisia	Phylum	Bacteroidetes	11.649247538266623	0.655927691278976
+9	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Gillisia	Gillisia	Class	Flavobacteriia	2.8907156557772433	0.655927691278976
+9	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Gillisia	Gillisia	Order	Flavobacteriales	2.8907156557772433	0.655927691278976
+9	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Gillisia	Gillisia	Family	Flavobacteriaceae	2.8304263819657165	0.655927691278976
+9	Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Gillisia	Gillisia	Genus	Gillisia	0.6559276912789759	0.655927691278976
+10	Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum	Sulfurovum	Phylum	Proteobacteria	30.71339669457529	0.605919597163607
+10	Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum	Sulfurovum	Class	Epsilonproteobacteria	0.7319929625093993	0.605919597163607
+10	Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum	Sulfurovum	Order	Campylobacterales	0.7318567278712902	0.605919597163607
+10	Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum	Sulfurovum	Family	Helicobacteraceae	0.7122244484405688	0.605919597163607
+10	Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum	Sulfurovum	Genus	Sulfurovum	0.6059195971636069	0.605919597163607
+11	Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter	Pedobacter	Phylum	Bacteroidetes	11.649247538266623	0.5889720331414485
+11	Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter	Pedobacter	Class	Sphingobacteriia	3.2748272232835967	0.5889720331414485
+11	Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter	Pedobacter	Order	Sphingobacteriales	3.2748272232835967	0.5889720331414485
+11	Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter	Pedobacter	Family	Sphingobacteriaceae	0.5958564099872973	0.5889720331414485
+11	Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter	Pedobacter	Genus	Pedobacter	0.5889720331414485	0.5889720331414485
+12	Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella	Marinicella	Phylum	Proteobacteria	30.71339669457529	0.514540504617099
+12	Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella	Marinicella	Class	Gammaproteobacteria	6.740034331017529	0.514540504617099
+12	Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella	Marinicella	Order	Order Incertae Sedis	0.514540504617099	0.514540504617099
+12	Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella	Marinicella	Family	Family Incertae Sedis	0.514540504617099	0.514540504617099
+12	Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella	Marinicella	Genus	Marinicella	0.514540504617099	0.514540504617099

@@ -1,0 +1,108 @@
+{
+  "article": 28,
+  "title": "Core microbiome and the rare biosphere",
+  "dataset": {
+    "source": "microeco 2.0.0 packaged Chinese wetland 16S tables",
+    "features": 13628,
+    "samples": 90,
+    "reads": 1619670,
+    "groups": 3,
+    "samples_per_group": {
+      "IW": 30,
+      "CW": 30,
+      "TW": 30
+    },
+    "library_depth_min": 10364,
+    "library_depth_max": 37374
+  },
+  "primary_definition": {
+    "feature_level": "OTU/feature",
+    "denominator": "All reads within each sample",
+    "sample_weighting": "Equal sample weight",
+    "detection_threshold": 0.0001,
+    "detection_boundary": "relative abundance >= threshold",
+    "prevalence_threshold": 0.8,
+    "prevalence_boundary": "prevalence >= threshold",
+    "seed": 20260728
+  },
+  "core": {
+    "global_features": 97,
+    "global_equal_sample_abundance_mass": 0.1703612110317,
+    "global_features_below_point_one_percent_mean": 34,
+    "group_features": {
+      "IW": 166,
+      "CW": 160,
+      "TW": 278
+    },
+    "shared_three_group_features": 59,
+    "group_union_features": 425,
+    "global_minus_shared_three": 38
+  },
+  "sensitivity": {
+    "threshold_grid_rows": 16,
+    "detection_thresholds": [0, 0.0001, 0.0005, 0.001],
+    "prevalence_thresholds": [0.5, 0.8, 0.9, 1],
+    "primary_minimum_reads_min": 2,
+    "primary_minimum_reads_max": 4,
+    "rarefaction_depth": 10000,
+    "rarefaction_seed": 20260728,
+    "rarefaction_reproducible": true,
+    "raw_presence_core_features": 334,
+    "rarefied_one_read_core_features": 167,
+    "rarefied_two_read_core_features": 52,
+    "primary_rarefied_one_read_jaccard": 0.5808383233533
+  },
+  "rare": {
+    "local_definition": "0 < per-sample relative abundance < 0.001",
+    "local_rare_mass_mean": 0.4415014769802,
+    "local_rare_mass_minimum": 0.2332953321933,
+    "local_rare_mass_maximum": 0.5943484665863,
+    "classified_features": 13628,
+    "primary_core_features": 97,
+    "conditionally_rare_features": 200,
+    "persistently_rare_features": 8407,
+    "sampling_limited_features": 1155,
+    "intermediate_features": 3769,
+    "rare_threshold_means": {
+      "0.01%": 0.104676641055,
+      "0.05%": 0.3186407888667,
+      "0.1%": 0.4415014769802,
+      "0.5%": 0.7365071580306
+    }
+  },
+  "inference": {
+    "group_hypothesis_test": false,
+    "group_and_salinity_confounded": true,
+    "absolute_abundance_claim": false,
+    "activity_claim": false,
+    "function_claim": false
+  },
+  "graphics": {
+    "font_family": "DejaVu Sans",
+    "primary_figures": 4,
+    "vector_files": 8,
+    "raster_files": 8,
+    "format_files": 16,
+    "raster_ppi": 600,
+    "svg_files_with_text": 4,
+    "svg_chinese_characters": 0,
+    "pdf_files_with_embedded_font": 4,
+    "lzw_tiff_files": 4,
+    "dimension_checks_passed": 16
+  },
+  "versions": {
+    "digest": "0.6.36",
+    "ggplot2": "3.5.2",
+    "ggrepel": "0.9.5",
+    "jsonlite": "1.8.8",
+    "ragg": "1.3.2",
+    "readr": "2.1.5",
+    "scales": "1.3.0",
+    "svglite": "2.1.3",
+    "systemfonts": "1.1.0",
+    "vegan": "2.6-6.1"
+  },
+  "checks_total": 320,
+  "checks_passed": 320,
+  "checks_failed": 0
+}

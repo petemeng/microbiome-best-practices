@@ -1,0 +1,15 @@
+{
+  "samples": 108,
+  "steroid_exposed": 28,
+  "steroid_unexposed": 80,
+  "mediator": "Faecalibacterium CLR, pseudocount 0.5, z-scored",
+  "outcome": "log(1 + fecal calprotectin)",
+  "acme": 0.0102,
+  "acme_lower": -0.1046,
+  "acme_upper": 0.137,
+  "acme_p": 0.846,
+  "ade": 0.1025,
+  "total_effect": 0.1126,
+  "sensitivity_rho_nearest_zero": 1.1102e-16,
+  "interpretation": "The cross-sectional decomposition does not support a non-zero indirect effect and cannot verify exposure-mediator-outcome time order."
+}

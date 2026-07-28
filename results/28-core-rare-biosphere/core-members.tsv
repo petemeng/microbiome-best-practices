@@ -1,0 +1,702 @@
+ScopeCode	Scope	Samples	FeatureID	DetectedSamples	Prevalence	EqualSampleMean	BestRank	BestTaxon	Lineage
+Global	All samples	90	OTU_32	84	0.9333333333333333	0.0011985667539466942	Phylum	Miscellaneous Crenarchaeotic Group	Archaea > Miscellaneous Crenarchaeotic Group > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_50	74	0.8222222222222222	0.001751408063419826	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_408	74	0.8222222222222222	6.308024717115559e-4	Genus	Geoalkalibacter	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Geobacteraceae > Geoalkalibacter > Unknown species
+Global	All samples	90	OTU_6426	78	0.8666666666666667	9.30892619525654e-4	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+Global	All samples	90	OTU_75	77	0.8555555555555555	7.79076814303051e-4	Family	Rhodocyclaceae	Bacteria > Proteobacteria > Betaproteobacteria > Rhodocyclales > Rhodocyclaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_356	76	0.8444444444444444	5.04578066674105e-4	Family	Halieaceae	Bacteria > Proteobacteria > Gammaproteobacteria > Cellvibrionales > Halieaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_1	88	0.9777777777777777	0.010140087637493926	Genus	Clostridium sensu stricto 13	Bacteria > Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13 > Unknown species
+Global	All samples	90	OTU_41	78	0.8666666666666667	0.0012158504703719054	Order	PeM15	Bacteria > Actinobacteria > Actinobacteria > PeM15 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_59	76	0.8444444444444444	0.004065472880655992	Family	Draconibacteriaceae	Bacteria > Bacteroidetes > Bacteroidia > Bacteroidia Incertae Sedis > Draconibacteriaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_52	87	0.9666666666666667	0.0015234330385951657	Genus	Bradyrhizobium	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Bradyrhizobiaceae > Bradyrhizobium > Unknown species
+Global	All samples	90	OTU_23	90	1	0.0030354445089865543	Family	Alcaligenaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Alcaligenaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_2	90	1	0.008213118755311085	Genus	Arthrobacter	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter > Unknown species
+Global	All samples	90	OTU_36	90	1	0.00418673390832859	Family	DA101 soil group	Bacteria > Verrucomicrobia > Spartobacteria > Chthoniobacterales > DA101 soil group > Unknown genus > Unknown species
+Global	All samples	90	OTU_192	89	0.9888888888888889	0.0015682654244150004	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_3	74	0.8222222222222222	0.003382186259426206	Genus	Paenisporosarcina	Bacteria > Firmicutes > Bacilli > Bacillales > Planococcaceae > Paenisporosarcina > Unknown species
+Global	All samples	90	OTU_94	89	0.9888888888888889	0.0013980338462897968	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_123	86	0.9555555555555556	0.0010032899285663756	Order	Subgroup 17	Bacteria > Acidobacteria > Acidobacteria > Subgroup 17 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_37	88	0.9777777777777777	0.001810222986385486	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_592	78	0.8666666666666667	5.397918277793335e-4	Genus	Illumatobacter	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter > Unknown species
+Global	All samples	90	OTU_5	90	1	0.004339284931053062	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+Global	All samples	90	OTU_84	81	0.9	0.00281617384399388	Genus	Illumatobacter	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter > Unknown species
+Global	All samples	90	OTU_31	90	1	0.0028172518861042527	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+Global	All samples	90	OTU_22	79	0.8777777777777778	9.46730595250589e-4	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+Global	All samples	90	OTU_16	90	1	0.003803875934070899	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_255	84	0.9333333333333333	0.0012203439718729992	Family	Gemmatimonadaceae	Bacteria > Gemmatimonadetes > Gemmatimonadetes > Gemmatimonadales > Gemmatimonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_12	90	1	0.006985598764305498	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_800	80	0.8888888888888888	6.08689176725635e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_8	87	0.9666666666666667	0.004147366594134879	Genus	Planomicrobium	Bacteria > Firmicutes > Bacilli > Bacillales > Planococcaceae > Planomicrobium > Unknown species
+Global	All samples	90	OTU_169	87	0.9666666666666667	0.0012822702005442763	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+Global	All samples	90	OTU_15	74	0.8222222222222222	0.0022634395281584006	Order	Subgroup 23	Bacteria > Acidobacteria > Holophagae > Subgroup 23 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_318	90	1	0.0021267758029846467	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_195	82	0.9111111111111111	8.71910807351341e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_832	74	0.8222222222222222	5.772235439225758e-4	Genus	Gaiella	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Gaiellaceae > Gaiella > Unknown species
+Global	All samples	90	OTU_25	90	1	0.0033040886842538907	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_434	75	0.8333333333333334	9.565281645004894e-4	Family	Nitrospinaceae	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Nitrospinaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_102	87	0.9666666666666667	0.002491760698708417	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_5117	74	0.8222222222222222	5.584761697992731e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_78	75	0.8333333333333334	8.085726118258217e-4	Family	Verrucomicrobiaceae	Bacteria > Verrucomicrobia > Verrucomicrobiae > Verrucomicrobiales > Verrucomicrobiaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_218	74	0.8222222222222222	5.727372318668279e-4	Genus	Devosia	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Hyphomicrobiaceae > Devosia > Unknown species
+Global	All samples	90	OTU_79	86	0.9555555555555556	0.0013994836503092762	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_275	86	0.9555555555555556	9.557023523404332e-4	Genus	Xenophilus	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Xenophilus > Unknown species
+Global	All samples	90	OTU_105	84	0.9333333333333333	8.884443097001499e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_17	87	0.9666666666666667	0.0011942010890158496	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_926	76	0.8444444444444444	7.52371291833489e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_6	79	0.8777777777777778	0.0017913318552329857	Class	Soil Crenarchaeotic Group(SCG)	Archaea > Thaumarchaeota > Soil Crenarchaeotic Group(SCG) > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_220	82	0.9111111111111111	0.003070821653559184	Genus	Marinicella	Bacteria > Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella > Unknown species
+Global	All samples	90	OTU_49	75	0.8333333333333334	0.0011567016937109635	Family	DA101 soil group	Bacteria > Verrucomicrobia > Spartobacteria > Chthoniobacterales > DA101 soil group > Unknown genus > Unknown species
+Global	All samples	90	OTU_11	79	0.8777777777777778	0.0032669803238779926	Genus	Sulfurovum	Bacteria > Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum > Unknown species
+Global	All samples	90	OTU_372	82	0.9111111111111111	0.0010255132304243918	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_18	77	0.8555555555555555	8.854819882111064e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+Global	All samples	90	OTU_72	73	0.8111111111111111	0.0010817578579138452	Genus	Blastocatella	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > Unknown family > Blastocatella > Unknown species
+Global	All samples	90	OTU_409	73	0.8111111111111111	5.602499378112011e-4	Family	Rhodobiaceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Rhodobiaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_293	77	0.8555555555555555	5.090231643725696e-4	Order	Acidimicrobiales	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_1759	73	0.8111111111111111	4.2841405277188046e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_656	88	0.9777777777777777	0.0012316162062410158	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_254	88	0.9777777777777777	0.0015835022439275085	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_40	85	0.9444444444444444	0.0012225116810908496	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+Global	All samples	90	OTU_146	84	0.9333333333333333	6.755129176376049e-4	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_459	81	0.9	6.549124171691587e-4	Family	Intrasporangiaceae	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_115	84	0.9333333333333333	0.001043657957653747	Family	Nitrospiraceae	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > Nitrospiraceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_578	75	0.8333333333333334	0.0012687171347194682	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_82	85	0.9444444444444444	0.0033700798688022222	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+Global	All samples	90	OTU_496	84	0.9333333333333333	0.0010672962606485333	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+Global	All samples	90	OTU_781	76	0.8444444444444444	4.918619751645447e-4	Genus	Candidatus Nitrotoga	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Gallionellaceae > Candidatus Nitrotoga > Unknown species
+Global	All samples	90	OTU_88	80	0.8888888888888888	0.0015919802576289032	Genus	Lysobacter	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Lysobacter > Unknown species
+Global	All samples	90	OTU_868	74	0.8222222222222222	4.705322666067157e-4	Genus	Mycobacterium	Bacteria > Actinobacteria > Actinobacteria > Corynebacteriales > Mycobacteriaceae > Mycobacterium > Unknown species
+Global	All samples	90	OTU_114	75	0.8333333333333334	9.752173482901831e-4	Genus	Tropicimonas	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Tropicimonas > Unknown species
+Global	All samples	90	OTU_747	81	0.9	5.295637735080567e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_357	79	0.8777777777777778	0.0022490286229773235	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_1747	72	0.8	3.437470307371118e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+Global	All samples	90	OTU_135	89	0.9888888888888889	0.0015331993563722033	Class	Gitt-GS-136	Bacteria > Chloroflexi > Gitt-GS-136 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_13	81	0.9	0.003295289131722974	Genus	Candidatus Solibacter	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > Unknown family > Candidatus Solibacter > Unknown species
+Global	All samples	90	OTU_73	89	0.9888888888888889	0.002447311356679798	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+Global	All samples	90	OTU_260	81	0.9	5.059470735160249e-4	Family	MNG7	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > MNG7 > Unknown genus > Unknown species
+Global	All samples	90	OTU_197	82	0.9111111111111111	7.789930065166549e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_1112	83	0.9222222222222223	0.0010901306586861587	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+Global	All samples	90	OTU_292	74	0.8222222222222222	0.001330400219557765	Family	JG34-KF-161	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > JG34-KF-161 > Unknown genus > Unknown species
+Global	All samples	90	OTU_164	73	0.8111111111111111	7.303172508975298e-4	Genus	Geobacter	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Geobacteraceae > Geobacter > Unknown species
+Global	All samples	90	OTU_51	86	0.9555555555555556	0.002320979594041432	Family	DUNssu044	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > DUNssu044 > Unknown genus > Unknown species
+Global	All samples	90	OTU_33	75	0.8333333333333334	0.0011734623586232434	Family	BVA18	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > BVA18 > Unknown genus > Unknown species
+Global	All samples	90	OTU_28	87	0.9666666666666667	0.002422515803875429	Order	43F-1404R	Bacteria > Proteobacteria > Deltaproteobacteria > 43F-1404R > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_80	90	1	0.0033184944971392243	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+Global	All samples	90	OTU_140	76	0.8444444444444444	0.0010571093674304022	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_150	86	0.9555555555555556	0.0017742491960657985	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_10	82	0.9111111111111111	0.0012331705718779179	Genus	Thermomonas	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Thermomonas > Unknown species
+Global	All samples	90	OTU_62	87	0.9666666666666667	0.0022477041953909505	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_20	78	0.8666666666666667	0.0018592562673877722	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_312	76	0.8444444444444444	5.353890184748474e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+Global	All samples	90	OTU_61	77	0.8555555555555555	0.0014826128178788032	Genus	Lutibacter	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Lutibacter > Unknown species
+Global	All samples	90	OTU_457	75	0.8333333333333334	5.641177316582554e-4	Family	0319-6A21	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > 0319-6A21 > Unknown genus > Unknown species
+Global	All samples	90	OTU_119	77	0.8555555555555555	0.0010670502169655702	Genus	Pseudolabrys	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Pseudolabrys > Unknown species
+Global	All samples	90	OTU_208	75	0.8333333333333334	6.473689210045251e-4	Species	Ornithinibacter aureus	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Ornithinibacter > Ornithinibacter aureus
+Global	All samples	90	OTU_38	88	0.9777777777777777	0.001994606409876405	Genus	Cryobacterium	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Microbacteriaceae > Cryobacterium > Unknown species
+Global	All samples	90	OTU_207	86	0.9555555555555556	0.001860796201441226	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+Global	All samples	90	OTU_64	83	0.9222222222222223	0.0013806968068532572	Genus	Oryzihumus	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Oryzihumus > Unknown species
+Global	All samples	90	OTU_219	73	0.8111111111111111	0.0017671436118481695	Family	Xanthomonadaceae	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Unknown genus > Unknown species
+Global	All samples	90	OTU_225	82	0.9111111111111111	8.303275724485587e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+IW	Inland wetland	30	OTU_32	28	0.9333333333333333	0.0011985667539466942	Phylum	Miscellaneous Crenarchaeotic Group	Archaea > Miscellaneous Crenarchaeotic Group > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_75	27	0.9	7.79076814303051e-4	Family	Rhodocyclaceae	Bacteria > Proteobacteria > Betaproteobacteria > Rhodocyclales > Rhodocyclaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1	30	1	0.010140087637493926	Genus	Clostridium sensu stricto 13	Bacteria > Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13 > Unknown species
+IW	Inland wetland	30	OTU_2733	25	0.8333333333333334	4.321803463612831e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_52	30	1	0.0015234330385951657	Genus	Bradyrhizobium	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Bradyrhizobiaceae > Bradyrhizobium > Unknown species
+IW	Inland wetland	30	OTU_23	30	1	0.0030354445089865543	Family	Alcaligenaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Alcaligenaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_2	30	1	0.008213118755311085	Genus	Arthrobacter	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter > Unknown species
+IW	Inland wetland	30	OTU_36	30	1	0.00418673390832859	Family	DA101 soil group	Bacteria > Verrucomicrobia > Spartobacteria > Chthoniobacterales > DA101 soil group > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_192	30	1	0.0015682654244150004	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_3	30	1	0.003382186259426206	Genus	Paenisporosarcina	Bacteria > Firmicutes > Bacilli > Bacillales > Planococcaceae > Paenisporosarcina > Unknown species
+IW	Inland wetland	30	OTU_94	30	1	0.0013980338462897968	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_123	29	0.9666666666666667	0.0010032899285663756	Order	Subgroup 17	Bacteria > Acidobacteria > Acidobacteria > Subgroup 17 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_37	28	0.9333333333333333	0.001810222986385486	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_5	30	1	0.004339284931053062	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+IW	Inland wetland	30	OTU_55	30	1	0.0016518685195773283	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_157	30	1	4.477695582537979e-4	Family	Geodermatophilaceae	Bacteria > Actinobacteria > Actinobacteria > Frankiales > Geodermatophilaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_31	30	1	0.0028172518861042527	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_16	30	1	0.003803875934070899	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_255	29	0.9666666666666667	0.0012203439718729992	Family	Gemmatimonadaceae	Bacteria > Gemmatimonadetes > Gemmatimonadetes > Gemmatimonadales > Gemmatimonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_12	30	1	0.006985598764305498	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_443	24	0.8	4.775822174067391e-4	Genus	Azoarcus	Bacteria > Proteobacteria > Betaproteobacteria > Rhodocyclales > Rhodocyclaceae > Azoarcus > Unknown species
+IW	Inland wetland	30	OTU_800	30	1	6.08689176725635e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_124	27	0.9	3.0580948855349186e-4	Family	KD3-10	Bacteria > Proteobacteria > Deltaproteobacteria > Myxococcales > KD3-10 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1336	24	0.8	2.8020340869707e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_8	30	1	0.004147366594134879	Genus	Planomicrobium	Bacteria > Firmicutes > Bacilli > Bacillales > Planococcaceae > Planomicrobium > Unknown species
+IW	Inland wetland	30	OTU_169	29	0.9666666666666667	0.0012822702005442763	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+IW	Inland wetland	30	OTU_297	30	1	5.109652483598118e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_15	26	0.8666666666666667	0.0022634395281584006	Order	Subgroup 23	Bacteria > Acidobacteria > Holophagae > Subgroup 23 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_19	30	1	0.0029465913150672376	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_318	30	1	0.0021267758029846467	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_195	27	0.9	8.71910807351341e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_214	25	0.8333333333333334	9.966245114094274e-4	Family	OM1 clade	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > OM1 clade > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_7	30	1	5.767753419594598e-4	Genus	Clostridium sensu stricto 1	Bacteria > Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 1 > Unknown species
+IW	Inland wetland	30	OTU_97	26	0.8666666666666667	9.804435016751106e-4	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_832	25	0.8333333333333334	5.772235439225758e-4	Genus	Gaiella	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Gaiellaceae > Gaiella > Unknown species
+IW	Inland wetland	30	OTU_25	30	1	0.0033040886842538907	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_5380	29	0.9666666666666667	4.816708676277777e-4	Family	Bradyrhizobiaceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Bradyrhizobiaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_233	28	0.9333333333333333	8.708275434194594e-4	Genus	Blastocatella	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > Unknown family > Blastocatella > Unknown species
+IW	Inland wetland	30	OTU_5851	25	0.8333333333333334	3.84518377964656e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_2229	29	0.9666666666666667	6.453371452388491e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_13824	30	1	0.0020049097438844324	Genus	Clostridium sensu stricto 13	Bacteria > Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13 > Unknown species
+IW	Inland wetland	30	OTU_102	30	1	0.002491760698708417	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_2810	29	0.9666666666666667	3.6295730498355774e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_994	25	0.8333333333333334	6.841970706511114e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_5117	25	0.8333333333333334	5.584761697992731e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1634	24	0.8	9.449465121356698e-4	Genus	Candidatus Solibacter	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > Unknown family > Candidatus Solibacter > Unknown species
+IW	Inland wetland	30	OTU_218	27	0.9	5.727372318668279e-4	Genus	Devosia	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Hyphomicrobiaceae > Devosia > Unknown species
+IW	Inland wetland	30	OTU_875	27	0.9	4.174846005307584e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_181	25	0.8333333333333334	2.2477943246212173e-4	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+IW	Inland wetland	30	OTU_79	30	1	0.0013994836503092762	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1751	28	0.9333333333333333	4.2095554944707566e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_3436	24	0.8	3.051028250397187e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_275	30	1	9.557023523404332e-4	Genus	Xenophilus	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Xenophilus > Unknown species
+IW	Inland wetland	30	OTU_105	30	1	8.884443097001499e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_17	28	0.9333333333333333	0.0011942010890158496	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_326	27	0.9	2.17315497428901e-4	Order	C0119	Bacteria > Chloroflexi > Ktedonobacteria > C0119 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_926	30	1	7.52371291833489e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_131	26	0.8666666666666667	4.2718485489031636e-4	Family	0319-6A21	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > 0319-6A21 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_6	30	1	0.0017913318552329857	Class	Soil Crenarchaeotic Group(SCG)	Archaea > Thaumarchaeota > Soil Crenarchaeotic Group(SCG) > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1313	24	0.8	6.121801832333817e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1034	29	0.9666666666666667	4.4528951751493696e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_96	24	0.8	4.891563949321446e-4	Class	Gitt-GS-136	Bacteria > Chloroflexi > Gitt-GS-136 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1071	26	0.8666666666666667	3.608302460223471e-4	Family	0319-6A21	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > 0319-6A21 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_611	26	0.8666666666666667	2.228857192163925e-4	Family	Myxococcaceae	Bacteria > Proteobacteria > Deltaproteobacteria > Myxococcales > Myxococcaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_49	26	0.8666666666666667	0.0011567016937109635	Family	DA101 soil group	Bacteria > Verrucomicrobia > Spartobacteria > Chthoniobacterales > DA101 soil group > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_11	26	0.8666666666666667	0.0032669803238779926	Genus	Sulfurovum	Bacteria > Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum > Unknown species
+IW	Inland wetland	30	OTU_372	26	0.8666666666666667	0.0010255132304243918	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_101	24	0.8	3.304258526212465e-4	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+IW	Inland wetland	30	OTU_18	28	0.9333333333333333	8.854819882111064e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_72	28	0.9333333333333333	0.0010817578579138452	Genus	Blastocatella	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > Unknown family > Blastocatella > Unknown species
+IW	Inland wetland	30	OTU_1601	26	0.8666666666666667	4.860925269019425e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_409	29	0.9666666666666667	5.602499378112011e-4	Family	Rhodobiaceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Rhodobiaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_293	25	0.8333333333333334	5.090231643725696e-4	Order	Acidimicrobiales	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1759	25	0.8333333333333334	4.2841405277188046e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_983	29	0.9666666666666667	3.3782510572504963e-4	Genus	Ramlibacter	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Ramlibacter > Unknown species
+IW	Inland wetland	30	OTU_139	24	0.8	8.894392245541909e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_656	28	0.9333333333333333	0.0012316162062410158	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_254	30	1	0.0015835022439275085	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_40	30	1	0.0012225116810908496	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+IW	Inland wetland	30	OTU_146	29	0.9666666666666667	6.755129176376049e-4	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_5277	27	0.9	5.915679907292456e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_459	26	0.8666666666666667	6.549124171691587e-4	Family	Intrasporangiaceae	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_415	27	0.9	6.705618090248108e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_83	28	0.9333333333333333	4.2852109031775416e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_127	26	0.8666666666666667	0.0013513656581059462	Family	Gemmatimonadaceae	Bacteria > Gemmatimonadetes > Gemmatimonadetes > Gemmatimonadales > Gemmatimonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_226	26	0.8666666666666667	1.5638680073062303e-4	Genus	Gemmatimonas	Bacteria > Gemmatimonadetes > Gemmatimonadetes > Gemmatimonadales > Gemmatimonadaceae > Gemmatimonas > Unknown species
+IW	Inland wetland	30	OTU_115	27	0.9	0.001043657957653747	Family	Nitrospiraceae	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > Nitrospiraceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1126	24	0.8	2.1304003161467735e-4	Order	Acidimicrobiales	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_11936	25	0.8333333333333334	2.00527326734186e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_578	25	0.8333333333333334	0.0012687171347194682	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_82	26	0.8666666666666667	0.0033700798688022222	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+IW	Inland wetland	30	OTU_496	27	0.9	0.0010672962606485333	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+IW	Inland wetland	30	OTU_781	25	0.8333333333333334	4.918619751645447e-4	Genus	Candidatus Nitrotoga	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Gallionellaceae > Candidatus Nitrotoga > Unknown species
+IW	Inland wetland	30	OTU_148	27	0.9	3.1172616567958666e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_88	28	0.9333333333333333	0.0015919802576289032	Genus	Lysobacter	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Lysobacter > Unknown species
+IW	Inland wetland	30	OTU_868	27	0.9	4.705322666067157e-4	Genus	Mycobacterium	Bacteria > Actinobacteria > Actinobacteria > Corynebacteriales > Mycobacteriaceae > Mycobacterium > Unknown species
+IW	Inland wetland	30	OTU_114	28	0.9333333333333333	9.752173482901831e-4	Genus	Tropicimonas	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Tropicimonas > Unknown species
+IW	Inland wetland	30	OTU_543	25	0.8333333333333334	6.713976990617683e-4	Genus	Pseudolabrys	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Pseudolabrys > Unknown species
+IW	Inland wetland	30	OTU_747	29	0.9666666666666667	5.295637735080567e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1747	25	0.8333333333333334	3.437470307371118e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+IW	Inland wetland	30	OTU_1775	29	0.9666666666666667	7.329496839978359e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_135	30	1	0.0015331993563722033	Class	Gitt-GS-136	Bacteria > Chloroflexi > Gitt-GS-136 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_13	30	1	0.003295289131722974	Genus	Candidatus Solibacter	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > Unknown family > Candidatus Solibacter > Unknown species
+IW	Inland wetland	30	OTU_73	29	0.9666666666666667	0.002447311356679798	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+IW	Inland wetland	30	OTU_2754	25	0.8333333333333334	2.2409473802485308e-4	Genus	Pseudolabrys	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Pseudolabrys > Unknown species
+IW	Inland wetland	30	OTU_189	29	0.9666666666666667	1.36140238577678e-4	Order	SC-I-84	Bacteria > Proteobacteria > Betaproteobacteria > SC-I-84 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_2190	29	0.9666666666666667	7.608255091264212e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_260	24	0.8	5.059470735160249e-4	Family	MNG7	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > MNG7 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_197	30	1	7.789930065166549e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_771	29	0.9666666666666667	8.44916489246409e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_411	26	0.8666666666666667	8.658095209343561e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_245	26	0.8666666666666667	7.341830967882494e-4	Family	Planococcaceae	Bacteria > Firmicutes > Bacilli > Bacillales > Planococcaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1112	28	0.9333333333333333	0.0010901306586861587	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+IW	Inland wetland	30	OTU_249	25	0.8333333333333334	2.98205105888552e-4	Family	0319-6A21	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > 0319-6A21 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_292	28	0.9333333333333333	0.001330400219557765	Family	JG34-KF-161	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > JG34-KF-161 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_164	29	0.9666666666666667	7.303172508975298e-4	Genus	Geobacter	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Geobacteraceae > Geobacter > Unknown species
+IW	Inland wetland	30	OTU_51	27	0.9	0.002320979594041432	Family	DUNssu044	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > DUNssu044 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_448	30	1	4.4132237244114115e-4	Family	480-2	Bacteria > Actinobacteria > Thermoleophilia > Solirubrobacterales > 480-2 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_28	28	0.9333333333333333	0.002422515803875429	Order	43F-1404R	Bacteria > Proteobacteria > Deltaproteobacteria > 43F-1404R > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_229	30	1	4.503964599775085e-4	Family	Xanthobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_80	30	1	0.0033184944971392243	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+IW	Inland wetland	30	OTU_150	30	1	0.0017742491960657985	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_10	26	0.8666666666666667	0.0012331705718779179	Genus	Thermomonas	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Thermomonas > Unknown species
+IW	Inland wetland	30	OTU_185	25	0.8333333333333334	2.06773405469417e-4	Genus	Haliangium	Bacteria > Proteobacteria > Deltaproteobacteria > Myxococcales > Haliangiaceae > Haliangium > Unknown species
+IW	Inland wetland	30	OTU_203	28	0.9333333333333333	0.0012070890340278204	Family	Gemmatimonadaceae	Bacteria > Gemmatimonadetes > Gemmatimonadetes > Gemmatimonadales > Gemmatimonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_62	30	1	0.0022477041953909505	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_2155	24	0.8	2.869508687220363e-4	Family	Xanthobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_20	30	1	0.0018592562673877722	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_149	29	0.9666666666666667	8.877511712597944e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_648	26	0.8666666666666667	5.05433878821111e-4	Genus	Geobacter	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Geobacteraceae > Geobacter > Unknown species
+IW	Inland wetland	30	OTU_112	25	0.8333333333333334	3.0100440641721055e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_312	28	0.9333333333333333	5.353890184748474e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+IW	Inland wetland	30	OTU_12874	25	0.8333333333333334	1.914518565028219e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_26	28	0.9333333333333333	9.129696742921649e-4	Genus	Exiguobacterium	Bacteria > Firmicutes > Bacilli > Bacillales > Family XII > Exiguobacterium > Unknown species
+IW	Inland wetland	30	OTU_196	28	0.9333333333333333	9.420732926120675e-4	Order	TRA3-20	Bacteria > Proteobacteria > Betaproteobacteria > TRA3-20 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_2821	24	0.8	4.551013028933619e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_457	28	0.9333333333333333	5.641177316582554e-4	Family	0319-6A21	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > 0319-6A21 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_564	24	0.8	7.034634924004085e-4	Genus	Blastocatella	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > Unknown family > Blastocatella > Unknown species
+IW	Inland wetland	30	OTU_119	29	0.9666666666666667	0.0010670502169655702	Genus	Pseudolabrys	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Pseudolabrys > Unknown species
+IW	Inland wetland	30	OTU_208	24	0.8	6.473689210045251e-4	Species	Ornithinibacter aureus	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Ornithinibacter > Ornithinibacter aureus
+IW	Inland wetland	30	OTU_38	28	0.9333333333333333	0.001994606409876405	Genus	Cryobacterium	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Microbacteriaceae > Cryobacterium > Unknown species
+IW	Inland wetland	30	OTU_207	29	0.9666666666666667	0.001860796201441226	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_133	28	0.9333333333333333	4.768391739862717e-4	Order	Acidimicrobiales	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1325	27	0.9	7.632025553965295e-4	Genus	Bacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus > Unknown species
+IW	Inland wetland	30	OTU_3756	24	0.8	2.66200033677189e-4	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_64	28	0.9333333333333333	0.0013806968068532572	Genus	Oryzihumus	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Oryzihumus > Unknown species
+IW	Inland wetland	30	OTU_29	30	1	0.0016543750879951522	Class	JG37-AG-4	Bacteria > Chloroflexi > JG37-AG-4 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_2575	25	0.8333333333333334	2.432160944384562e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_616	24	0.8	6.402985527252329e-4	Family	Acidobacteriaceae (Subgroup 1)	Bacteria > Acidobacteria > Acidobacteria > Acidobacteriales > Acidobacteriaceae (Subgroup 1) > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1867	27	0.9	3.935675760886161e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_321	27	0.9	2.631667774749352e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_225	30	1	8.303275724485587e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+IW	Inland wetland	30	OTU_1296	25	0.8333333333333334	9.740097800488837e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_176	25	0.8333333333333334	8.624365484661855e-4	Family	Acidobacteriaceae (Subgroup 1)	Bacteria > Acidobacteria > Acidobacteria > Acidobacteriales > Acidobacteriaceae (Subgroup 1) > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_2413	29	0.9666666666666667	3.4855251900723104e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_258	26	0.8666666666666667	2.7419492937165777e-4	Family	Holophagaceae	Bacteria > Acidobacteria > Holophagae > Holophagales > Holophagaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_237	28	0.9333333333333333	7.384221380859239e-4	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_572	24	0.8	4.807308661630001e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1193	28	0.9333333333333333	3.5034841328700873e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_108	28	0.9333333333333333	5.069642147638155e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_234	27	0.9	7.683129361671214e-4	Family	Methylobacteriaceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Methylobacteriaceae > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_608	25	0.8333333333333334	5.334089874932336e-4	Genus	Candidatus Solibacter	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > Unknown family > Candidatus Solibacter > Unknown species
+IW	Inland wetland	30	OTU_274	24	0.8	6.095170505699215e-4	Family	TM146	Bacteria > Actinobacteria > Thermoleophilia > Solirubrobacterales > TM146 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_705	24	0.8	5.032751311880648e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_1108	27	0.9	2.4201787611062103e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+IW	Inland wetland	30	OTU_5597	26	0.8666666666666667	1.692046074479225e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_32	27	0.9	0.0011985667539466942	Phylum	Miscellaneous Crenarchaeotic Group	Archaea > Miscellaneous Crenarchaeotic Group > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_3692	25	0.8333333333333334	3.2791131494680297e-4	Genus	Rhodobacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Rhodobacter > Unknown species
+CW	Coastal wetland	30	OTU_50	26	0.8666666666666667	0.001751408063419826	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_408	26	0.8666666666666667	6.308024717115559e-4	Genus	Geoalkalibacter	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Geobacteraceae > Geoalkalibacter > Unknown species
+CW	Coastal wetland	30	OTU_6426	30	1	9.30892619525654e-4	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_356	25	0.8333333333333334	5.04578066674105e-4	Family	Halieaceae	Bacteria > Proteobacteria > Gammaproteobacteria > Cellvibrionales > Halieaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1	29	0.9666666666666667	0.010140087637493926	Genus	Clostridium sensu stricto 13	Bacteria > Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13 > Unknown species
+CW	Coastal wetland	30	OTU_41	27	0.9	0.0012158504703719054	Order	PeM15	Bacteria > Actinobacteria > Actinobacteria > PeM15 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_59	27	0.9	0.004065472880655992	Family	Draconibacteriaceae	Bacteria > Bacteroidetes > Bacteroidia > Bacteroidia Incertae Sedis > Draconibacteriaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_52	27	0.9	0.0015234330385951657	Genus	Bradyrhizobium	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Bradyrhizobiaceae > Bradyrhizobium > Unknown species
+CW	Coastal wetland	30	OTU_4147	26	0.8666666666666667	4.3367789077033514e-4	Genus	Halioglobus	Bacteria > Proteobacteria > Gammaproteobacteria > Cellvibrionales > Halieaceae > Halioglobus > Unknown species
+CW	Coastal wetland	30	OTU_23	30	1	0.0030354445089865543	Family	Alcaligenaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Alcaligenaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_2	30	1	0.008213118755311085	Genus	Arthrobacter	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter > Unknown species
+CW	Coastal wetland	30	OTU_36	30	1	0.00418673390832859	Family	DA101 soil group	Bacteria > Verrucomicrobia > Spartobacteria > Chthoniobacterales > DA101 soil group > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_192	30	1	0.0015682654244150004	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_94	29	0.9666666666666667	0.0013980338462897968	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_123	29	0.9666666666666667	0.0010032899285663756	Order	Subgroup 17	Bacteria > Acidobacteria > Acidobacteria > Subgroup 17 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_37	30	1	0.001810222986385486	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_592	29	0.9666666666666667	5.397918277793335e-4	Genus	Illumatobacter	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter > Unknown species
+CW	Coastal wetland	30	OTU_5	30	1	0.004339284931053062	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+CW	Coastal wetland	30	OTU_84	30	1	0.00281617384399388	Genus	Illumatobacter	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter > Unknown species
+CW	Coastal wetland	30	OTU_31	30	1	0.0028172518861042527	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_22	28	0.9333333333333333	9.46730595250589e-4	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_104	24	0.8	0.0010007133146104226	Genus	Truepera	Bacteria > Deinococcus-Thermus > Deinococci > Deinococcales > Trueperaceae > Truepera > Unknown species
+CW	Coastal wetland	30	OTU_16	30	1	0.003803875934070899	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_255	26	0.8666666666666667	0.0012203439718729992	Family	Gemmatimonadaceae	Bacteria > Gemmatimonadetes > Gemmatimonadetes > Gemmatimonadales > Gemmatimonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_12	30	1	0.006985598764305498	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_800	24	0.8	6.08689176725635e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_8	27	0.9	0.004147366594134879	Genus	Planomicrobium	Bacteria > Firmicutes > Bacilli > Bacillales > Planococcaceae > Planomicrobium > Unknown species
+CW	Coastal wetland	30	OTU_117	29	0.9666666666666667	0.0011191347985870519	Family	PHOS-HE36	Bacteria > Chlorobi > Ignavibacteria > Ignavibacteriales > PHOS-HE36 > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_169	29	0.9666666666666667	0.0012822702005442763	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+CW	Coastal wetland	30	OTU_15	29	0.9666666666666667	0.0022634395281584006	Order	Subgroup 23	Bacteria > Acidobacteria > Holophagae > Subgroup 23 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_318	30	1	0.0021267758029846467	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_195	25	0.8333333333333334	8.71910807351341e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_977	26	0.8666666666666667	3.4739169991531403e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_97	28	0.9333333333333333	9.804435016751106e-4	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_832	24	0.8	5.772235439225758e-4	Genus	Gaiella	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Gaiellaceae > Gaiella > Unknown species
+CW	Coastal wetland	30	OTU_25	30	1	0.0033040886842538907	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_434	28	0.9333333333333333	9.565281645004894e-4	Family	Nitrospinaceae	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Nitrospinaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_118	25	0.8333333333333334	8.549061101042683e-4	Order	Subgroup 23	Bacteria > Acidobacteria > Holophagae > Subgroup 23 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_27	25	0.8333333333333334	0.0013984762751255585	Family	Carnobacteriaceae	Bacteria > Firmicutes > Bacilli > Lactobacillales > Carnobacteriaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_620	25	0.8333333333333334	4.046379388698756e-4	Genus	Desulfobacca	Bacteria > Proteobacteria > Deltaproteobacteria > Syntrophobacterales > Syntrophaceae > Desulfobacca > Unknown species
+CW	Coastal wetland	30	OTU_102	27	0.9	0.002491760698708417	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_78	25	0.8333333333333334	8.085726118258217e-4	Family	Verrucomicrobiaceae	Bacteria > Verrucomicrobia > Verrucomicrobiae > Verrucomicrobiales > Verrucomicrobiaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_79	30	1	0.0013994836503092762	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_526	24	0.8	4.535740423135463e-4	Family	Sphingomonadaceae	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_275	26	0.8666666666666667	9.557023523404332e-4	Genus	Xenophilus	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Xenophilus > Unknown species
+CW	Coastal wetland	30	OTU_105	24	0.8	8.884443097001499e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_17	29	0.9666666666666667	0.0011942010890158496	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_109	30	1	0.001312527085926219	Genus	Anderseniella	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Rhodobiaceae > Anderseniella > Unknown species
+CW	Coastal wetland	30	OTU_545	26	0.8666666666666667	4.3919700627267856e-4	Order	SC-I-84	Bacteria > Proteobacteria > Betaproteobacteria > SC-I-84 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_300	24	0.8	6.428111205001553e-4	Family	Alcaligenaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Alcaligenaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_6	24	0.8	0.0017913318552329857	Class	Soil Crenarchaeotic Group(SCG)	Archaea > Thaumarchaeota > Soil Crenarchaeotic Group(SCG) > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_220	30	1	0.003070821653559184	Genus	Marinicella	Bacteria > Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella > Unknown species
+CW	Coastal wetland	30	OTU_632	24	0.8	0.0018529972338423393	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+CW	Coastal wetland	30	OTU_11	29	0.9666666666666667	0.0032669803238779926	Genus	Sulfurovum	Bacteria > Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum > Unknown species
+CW	Coastal wetland	30	OTU_372	28	0.9333333333333333	0.0010255132304243918	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_18	24	0.8	8.854819882111064e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_293	27	0.9	5.090231643725696e-4	Order	Acidimicrobiales	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_656	30	1	0.0012316162062410158	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_254	28	0.9333333333333333	0.0015835022439275085	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_40	26	0.8666666666666667	0.0012225116810908496	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+CW	Coastal wetland	30	OTU_146	26	0.8666666666666667	6.755129176376049e-4	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1349	27	0.9	8.263747574498452e-4	Genus	Marinicella	Bacteria > Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella > Unknown species
+CW	Coastal wetland	30	OTU_459	27	0.9	6.549124171691587e-4	Family	Intrasporangiaceae	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_115	27	0.9	0.001043657957653747	Family	Nitrospiraceae	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > Nitrospiraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1217	25	0.8333333333333334	5.423778931251225e-4	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_7991	24	0.8	1.0743810006867608e-4	Family	ABS-19	Bacteria > Acidobacteria > Holophagae > Subgroup 10 > ABS-19 > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_82	29	0.9666666666666667	0.0033700798688022222	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+CW	Coastal wetland	30	OTU_496	28	0.9333333333333333	0.0010672962606485333	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+CW	Coastal wetland	30	OTU_341	25	0.8333333333333334	4.978705827873343e-4	Genus	Limnobacter	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Burkholderiaceae > Limnobacter > Unknown species
+CW	Coastal wetland	30	OTU_88	24	0.8	0.0015919802576289032	Genus	Lysobacter	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Lysobacter > Unknown species
+CW	Coastal wetland	30	OTU_114	26	0.8666666666666667	9.752173482901831e-4	Genus	Tropicimonas	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Tropicimonas > Unknown species
+CW	Coastal wetland	30	OTU_747	25	0.8333333333333334	5.295637735080567e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_357	26	0.8666666666666667	0.0022490286229773235	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1819	24	0.8	7.4063137102277e-4	Family	OM1 clade	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > OM1 clade > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_198	24	0.8	4.715338474843552e-4	Genus	Gaiella	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Gaiellaceae > Gaiella > Unknown species
+CW	Coastal wetland	30	OTU_135	29	0.9666666666666667	0.0015331993563722033	Class	Gitt-GS-136	Bacteria > Chloroflexi > Gitt-GS-136 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_13	24	0.8	0.003295289131722974	Genus	Candidatus Solibacter	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > Unknown family > Candidatus Solibacter > Unknown species
+CW	Coastal wetland	30	OTU_73	30	1	0.002447311356679798	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+CW	Coastal wetland	30	OTU_260	29	0.9666666666666667	5.059470735160249e-4	Family	MNG7	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > MNG7 > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_197	27	0.9	7.789930065166549e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1112	25	0.8333333333333334	0.0010901306586861587	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+CW	Coastal wetland	30	OTU_853	25	0.8333333333333334	8.684410786833618e-4	Family	Flavobacteriaceae	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_51	29	0.9666666666666667	0.002320979594041432	Family	DUNssu044	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > DUNssu044 > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_33	24	0.8	0.0011734623586232434	Family	BVA18	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > BVA18 > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_28	29	0.9666666666666667	0.002422515803875429	Order	43F-1404R	Bacteria > Proteobacteria > Deltaproteobacteria > 43F-1404R > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_229	27	0.9	4.503964599775085e-4	Family	Xanthobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_80	30	1	0.0033184944971392243	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+CW	Coastal wetland	30	OTU_140	25	0.8333333333333334	0.0010571093674304022	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_381	26	0.8666666666666667	0.0014803230894556017	Family	JTB255 marine benthic group	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > JTB255 marine benthic group > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_150	28	0.9333333333333333	0.0017742491960657985	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_423	25	0.8333333333333334	2.8806520582302426e-4	Order	43F-1404R	Bacteria > Proteobacteria > Deltaproteobacteria > 43F-1404R > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_10	26	0.8666666666666667	0.0012331705718779179	Genus	Thermomonas	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Thermomonas > Unknown species
+CW	Coastal wetland	30	OTU_62	28	0.9333333333333333	0.0022477041953909505	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_20	25	0.8333333333333334	0.0018592562673877722	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_312	25	0.8333333333333334	5.353890184748474e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+CW	Coastal wetland	30	OTU_61	25	0.8333333333333334	0.0014826128178788032	Genus	Lutibacter	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Lutibacter > Unknown species
+CW	Coastal wetland	30	OTU_458	25	0.8333333333333334	4.5910023849704643e-4	Genus	Tabrizicola	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Tabrizicola > Unknown species
+CW	Coastal wetland	30	OTU_1176	26	0.8666666666666667	4.439483420263838e-4	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_457	25	0.8333333333333334	5.641177316582554e-4	Family	0319-6A21	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > 0319-6A21 > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_462	24	0.8	5.045721878581703e-4	Genus	Porphyrobacter	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Erythrobacteraceae > Porphyrobacter > Unknown species
+CW	Coastal wetland	30	OTU_119	27	0.9	0.0010670502169655702	Genus	Pseudolabrys	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Pseudolabrys > Unknown species
+CW	Coastal wetland	30	OTU_208	25	0.8333333333333334	6.473689210045251e-4	Species	Ornithinibacter aureus	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Ornithinibacter > Ornithinibacter aureus
+CW	Coastal wetland	30	OTU_38	30	1	0.001994606409876405	Genus	Cryobacterium	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Microbacteriaceae > Cryobacterium > Unknown species
+CW	Coastal wetland	30	OTU_558	24	0.8	6.042884057621017e-4	Family	Sva1033	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Sva1033 > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_45	30	1	0.001480242566776851	Order	43F-1404R	Bacteria > Proteobacteria > Deltaproteobacteria > 43F-1404R > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_207	30	1	0.001860796201441226	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_844	25	0.8333333333333334	7.969068767078439e-4	Family	OM1 clade	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > OM1 clade > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1437	26	0.8666666666666667	3.46363877112548e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_64	25	0.8333333333333334	0.0013806968068532572	Genus	Oryzihumus	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Oryzihumus > Unknown species
+CW	Coastal wetland	30	OTU_278	26	0.8666666666666667	5.696713231891693e-4	Family	Erythrobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Erythrobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_3130	24	0.8	4.050006209207033e-4	Order	Sh765B-TzT-29	Bacteria > Proteobacteria > Deltaproteobacteria > Sh765B-TzT-29 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_854	25	0.8333333333333334	0.001020260390619248	Phylum	Chloroflexi	Bacteria > Chloroflexi > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_4348	26	0.8666666666666667	2.291049064718958e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_219	28	0.9333333333333333	0.0017671436118481695	Family	Xanthomonadaceae	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1363	28	0.9333333333333333	5.804123001092173e-4	Genus	Paracocccus	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Paracocccus > Unknown species
+CW	Coastal wetland	30	OTU_155	27	0.9	8.786654775918928e-4	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_3087	24	0.8	2.3888368841033894e-4	Genus	Hoeflea	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Phyllobacteriaceae > Hoeflea > Unknown species
+CW	Coastal wetland	30	OTU_225	26	0.8666666666666667	8.303275724485587e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+CW	Coastal wetland	30	OTU_58	24	0.8	0.0012341403871419649	Genus	Pseudomonas	Bacteria > Proteobacteria > Gammaproteobacteria > Pseudomonadales > Pseudomonadaceae > Pseudomonas > Unknown species
+CW	Coastal wetland	30	OTU_1821	27	0.9	3.7725726764713165e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_2896	26	0.8666666666666667	3.427705737231705e-4	Family	Erythrobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Erythrobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_7765	26	0.8666666666666667	9.39368852129649e-5	Genus	Filomicrobium	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Hyphomicrobiaceae > Filomicrobium > Unknown species
+CW	Coastal wetland	30	OTU_1859	26	0.8666666666666667	3.568507595741221e-4	Class	Bacteroidetes BD2-2	Bacteria > Bacteroidetes > Bacteroidetes BD2-2 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_425	26	0.8666666666666667	9.175023267961069e-4	Family	Flammeovirgaceae	Bacteria > Bacteroidetes > Cytophagia > Cytophagales > Flammeovirgaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1194	24	0.8	9.271911298395456e-4	Genus	Sulfurovum	Bacteria > Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum > Unknown species
+CW	Coastal wetland	30	OTU_7557	24	0.8	3.2736023908083484e-4	Class	Bacteroidetes BD2-2	Bacteria > Bacteroidetes > Bacteroidetes BD2-2 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1851	29	0.9666666666666667	7.75100703773787e-4	Family	Acidimicrobiaceae	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_87	28	0.9333333333333333	0.002925011133254211	Genus	Flavobacterium	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium > Unknown species
+CW	Coastal wetland	30	OTU_967	30	1	0.001085720368351311	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_938	27	0.9	4.064748473504082e-4	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_3306	24	0.8	5.887477087949946e-4	Phylum	Proteobacteria	Bacteria > Proteobacteria > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_265	30	1	0.001956597274433308	Family	JTB255 marine benthic group	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > JTB255 marine benthic group > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_532	25	0.8333333333333334	3.848160599975418e-4	Genus	Desulfosarcina	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Desulfobacteraceae > Desulfosarcina > Unknown species
+CW	Coastal wetland	30	OTU_944	24	0.8	3.4590262063799904e-4	Genus	Leisingera	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Leisingera > Unknown species
+CW	Coastal wetland	30	OTU_1823	28	0.9333333333333333	9.039284124829249e-4	Genus	Haliea	Bacteria > Proteobacteria > Gammaproteobacteria > Cellvibrionales > Halieaceae > Haliea > Unknown species
+CW	Coastal wetland	30	OTU_107	28	0.9333333333333333	0.0019406340052890905	Genus	Robiginitalea	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Robiginitalea > Unknown species
+CW	Coastal wetland	30	OTU_842	25	0.8333333333333334	0.0012108310488872518	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_8187	24	0.8	3.6388877489624925e-4	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_947	25	0.8333333333333334	3.626172019712291e-4	Genus	Seohaeicola	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Seohaeicola > Unknown species
+CW	Coastal wetland	30	OTU_7415	27	0.9	5.653196818589566e-4	Family	JTB255 marine benthic group	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > JTB255 marine benthic group > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_7648	25	0.8333333333333334	3.091979683959218e-4	Family	JTB255 marine benthic group	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > JTB255 marine benthic group > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_2211	24	0.8	6.433752980449252e-4	Genus	Desulfobulbus	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Desulfobulbaceae > Desulfobulbus > Unknown species
+CW	Coastal wetland	30	OTU_3139	25	0.8333333333333334	2.936567256394013e-4	Genus	Anaerolinea	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea > Unknown species
+CW	Coastal wetland	30	OTU_1833	25	0.8333333333333334	2.2800432150330994e-4	Class	OM190	Bacteria > Planctomycetes > OM190 > Unknown order > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_2784	26	0.8666666666666667	2.1252717352471885e-4	Genus	Thioclava	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Thioclava > Unknown species
+CW	Coastal wetland	30	OTU_426	28	0.9333333333333333	5.844612390391877e-4	Genus	Blastocatella	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > Unknown family > Blastocatella > Unknown species
+CW	Coastal wetland	30	OTU_1830	25	0.8333333333333334	5.950418834670094e-4	Order	Subgroup 23	Bacteria > Acidobacteria > Holophagae > Subgroup 23 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1883	27	0.9	3.967091060475266e-4	Genus	Methyloceanibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Rhodobiaceae > Methyloceanibacter > Unknown species
+CW	Coastal wetland	30	OTU_1858	25	0.8333333333333334	2.63434075449761e-4	Genus	Rubripirellula	Bacteria > Planctomycetes > Planctomycetacia > Planctomycetales > Planctomycetaceae > Rubripirellula > Unknown species
+CW	Coastal wetland	30	OTU_4	26	0.8666666666666667	4.692083626224316e-4	Genus	Sulfurovum	Bacteria > Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum > Unknown species
+CW	Coastal wetland	30	OTU_2131	25	0.8333333333333334	3.071005183641219e-4	Family	Saprospiraceae	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Saprospiraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1869	26	0.8666666666666667	1.7106114565853847e-4	Family	PAUC26f	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > PAUC26f > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_3321	24	0.8	2.9956663202263396e-4	Order	Subgroup 17	Bacteria > Acidobacteria > Acidobacteria > Subgroup 17 > Unknown family > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_3101	26	0.8666666666666667	2.5903993676498776e-4	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_9026	25	0.8333333333333334	0.00038262500721196523	Genus	Ponticoccus	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Ponticoccus > Unknown species
+CW	Coastal wetland	30	OTU_863	24	0.8	7.338732467498862e-4	Family	Desulfobacteraceae	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Desulfobacteraceae > Unknown genus > Unknown species
+CW	Coastal wetland	30	OTU_1827	25	0.8333333333333334	2.6545437604699577e-4	Genus	Planctomyces	Bacteria > Planctomycetes > Planctomycetacia > Planctomycetales > Planctomycetaceae > Planctomyces > Unknown species
+CW	Coastal wetland	30	OTU_353	24	0.8	6.98433046852452e-4	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_32	29	0.9666666666666667	0.0011985667539466942	Phylum	Miscellaneous Crenarchaeotic Group	Archaea > Miscellaneous Crenarchaeotic Group > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_3692	27	0.9	3.2791131494680297e-4	Genus	Rhodobacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Rhodobacter > Unknown species
+TW	Tibetan wetland	30	OTU_50	30	1	0.001751408063419826	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_305	29	0.9666666666666667	8.826073252818981e-4	Genus	Syntrophus	Bacteria > Proteobacteria > Deltaproteobacteria > Syntrophobacterales > Syntrophaceae > Syntrophus > Unknown species
+TW	Tibetan wetland	30	OTU_408	29	0.9666666666666667	6.308024717115559e-4	Genus	Geoalkalibacter	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Geobacteraceae > Geoalkalibacter > Unknown species
+TW	Tibetan wetland	30	OTU_6426	26	0.8666666666666667	9.30892619525654e-4	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_75	28	0.9333333333333333	7.79076814303051e-4	Family	Rhodocyclaceae	Bacteria > Proteobacteria > Betaproteobacteria > Rhodocyclales > Rhodocyclaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_356	28	0.9333333333333333	5.04578066674105e-4	Family	Halieaceae	Bacteria > Proteobacteria > Gammaproteobacteria > Cellvibrionales > Halieaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1	29	0.9666666666666667	0.010140087637493926	Genus	Clostridium sensu stricto 13	Bacteria > Firmicutes > Clostridia > Clostridiales > Clostridiaceae 1 > Clostridium sensu stricto 13 > Unknown species
+TW	Tibetan wetland	30	OTU_41	30	1	0.0012158504703719054	Order	PeM15	Bacteria > Actinobacteria > Actinobacteria > PeM15 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_59	30	1	0.004065472880655992	Family	Draconibacteriaceae	Bacteria > Bacteroidetes > Bacteroidia > Bacteroidia Incertae Sedis > Draconibacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_52	30	1	0.0015234330385951657	Genus	Bradyrhizobium	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Bradyrhizobiaceae > Bradyrhizobium > Unknown species
+TW	Tibetan wetland	30	OTU_23	30	1	0.0030354445089865543	Family	Alcaligenaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Alcaligenaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_2	30	1	0.008213118755311085	Genus	Arthrobacter	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Micrococcaceae > Arthrobacter > Unknown species
+TW	Tibetan wetland	30	OTU_36	30	1	0.00418673390832859	Family	DA101 soil group	Bacteria > Verrucomicrobia > Spartobacteria > Chthoniobacterales > DA101 soil group > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1761	26	0.8666666666666667	2.1158696784916652e-4	Class	SB-5	Bacteria > Bacteroidetes > SB-5 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_192	29	0.9666666666666667	0.0015682654244150004	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_471	25	0.8333333333333334	4.433840497685133e-4	Order	SC-I-84	Bacteria > Proteobacteria > Betaproteobacteria > SC-I-84 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_12367	24	0.8	1.9817620475061265e-4	Family	Microbacteriaceae	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Microbacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_94	30	1	0.0013980338462897968	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_123	28	0.9333333333333333	0.0010032899285663756	Order	Subgroup 17	Bacteria > Acidobacteria > Acidobacteria > Subgroup 17 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_37	30	1	0.001810222986385486	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_592	28	0.9333333333333333	5.397918277793335e-4	Genus	Illumatobacter	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter > Unknown species
+TW	Tibetan wetland	30	OTU_1127	29	0.9666666666666667	4.071471380304436e-4	Class	SB-5	Bacteria > Bacteroidetes > SB-5 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_5	30	1	0.004339284931053062	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+TW	Tibetan wetland	30	OTU_84	30	1	0.00281617384399388	Genus	Illumatobacter	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter > Unknown species
+TW	Tibetan wetland	30	OTU_3693	25	0.8333333333333334	2.861891921762344e-4	Genus	Desulfobulbus	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Desulfobulbaceae > Desulfobulbus > Unknown species
+TW	Tibetan wetland	30	OTU_31	30	1	0.0028172518861042527	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_3303	30	1	6.68640733541409e-4	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_22	29	0.9666666666666667	9.46730595250589e-4	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1579	25	0.8333333333333334	2.9748296723004666e-4	Family	Coriobacteriaceae	Bacteria > Actinobacteria > Coriobacteriia > Coriobacteriales > Coriobacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_16	30	1	0.003803875934070899	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_231	27	0.9	5.285163066851976e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_515	24	0.8	5.730751052680907e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_255	29	0.9666666666666667	0.0012203439718729992	Family	Gemmatimonadaceae	Bacteria > Gemmatimonadetes > Gemmatimonadetes > Gemmatimonadales > Gemmatimonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_12	30	1	0.006985598764305498	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_800	26	0.8666666666666667	6.08689176725635e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_8	30	1	0.004147366594134879	Genus	Planomicrobium	Bacteria > Firmicutes > Bacilli > Bacillales > Planococcaceae > Planomicrobium > Unknown species
+TW	Tibetan wetland	30	OTU_117	29	0.9666666666666667	0.0011191347985870519	Family	PHOS-HE36	Bacteria > Chlorobi > Ignavibacteria > Ignavibacteriales > PHOS-HE36 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_169	29	0.9666666666666667	0.0012822702005442763	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+TW	Tibetan wetland	30	OTU_1118	26	0.8666666666666667	4.2745551596453106e-4	Phylum	Chloroflexi	Bacteria > Chloroflexi > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_318	30	1	0.0021267758029846467	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_195	30	1	8.71910807351341e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_832	25	0.8333333333333334	5.772235439225758e-4	Genus	Gaiella	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Gaiellaceae > Gaiella > Unknown species
+TW	Tibetan wetland	30	OTU_91	28	0.9333333333333333	5.758989198149949e-4	Genus	Arenimonas	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Arenimonas > Unknown species
+TW	Tibetan wetland	30	OTU_25	30	1	0.0033040886842538907	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_395	26	0.8666666666666667	3.6242275385048214e-4	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_434	26	0.8666666666666667	9.565281645004894e-4	Family	Nitrospinaceae	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Nitrospinaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_233	24	0.8	8.708275434194594e-4	Genus	Blastocatella	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > Unknown family > Blastocatella > Unknown species
+TW	Tibetan wetland	30	OTU_631	26	0.8666666666666667	3.5765243940288715e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_27	27	0.9	0.0013984762751255585	Family	Carnobacteriaceae	Bacteria > Firmicutes > Bacilli > Lactobacillales > Carnobacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_2056	24	0.8	4.984190542106109e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_217	30	1	0.0016352213623027335	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_7758	25	0.8333333333333334	2.854778490842259e-4	Family	Coriobacteriaceae	Bacteria > Actinobacteria > Coriobacteriia > Coriobacteriales > Coriobacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_102	30	1	0.002491760698708417	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_5117	29	0.9666666666666667	5.584761697992731e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_78	30	1	8.085726118258217e-4	Family	Verrucomicrobiaceae	Bacteria > Verrucomicrobia > Verrucomicrobiae > Verrucomicrobiales > Verrucomicrobiaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_912	25	0.8333333333333334	3.884444275000638e-4	Family	WCHB1-69	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > WCHB1-69 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_218	27	0.9	5.727372318668279e-4	Genus	Devosia	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Hyphomicrobiaceae > Devosia > Unknown species
+TW	Tibetan wetland	30	OTU_310	26	0.8666666666666667	6.82618441694712e-4	Class	WCHB1-32	Bacteria > Bacteroidetes > WCHB1-32 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_79	26	0.8666666666666667	0.0013994836503092762	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_151	28	0.9333333333333333	3.450065849414061e-4	Family	Verrucomicrobiaceae	Bacteria > Verrucomicrobia > Verrucomicrobiae > Verrucomicrobiales > Verrucomicrobiaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1187	28	0.9333333333333333	2.128491730565613e-4	Family	Methylophilaceae	Bacteria > Proteobacteria > Betaproteobacteria > Methylophilales > Methylophilaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_441	24	0.8	3.9002678459100146e-4	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_275	30	1	9.557023523404332e-4	Genus	Xenophilus	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Xenophilus > Unknown species
+TW	Tibetan wetland	30	OTU_105	30	1	8.884443097001499e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_17	30	1	0.0011942010890158496	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_109	24	0.8	0.001312527085926219	Genus	Anderseniella	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Rhodobiaceae > Anderseniella > Unknown species
+TW	Tibetan wetland	30	OTU_4731	30	1	4.4731641765035886e-4	Genus	Bacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus > Unknown species
+TW	Tibetan wetland	30	OTU_926	24	0.8	7.52371291833489e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_582	24	0.8	3.3281483254669414e-4	Genus	Leptolinea	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Leptolinea > Unknown species
+TW	Tibetan wetland	30	OTU_35	26	0.8666666666666667	0.0010908280093614303	Genus	Exiguobacterium	Bacteria > Firmicutes > Bacilli > Bacillales > Family XII > Exiguobacterium > Unknown species
+TW	Tibetan wetland	30	OTU_6	25	0.8333333333333334	0.0017913318552329857	Class	Soil Crenarchaeotic Group(SCG)	Archaea > Thaumarchaeota > Soil Crenarchaeotic Group(SCG) > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_220	30	1	0.003070821653559184	Genus	Marinicella	Bacteria > Proteobacteria > Gammaproteobacteria > Order Incertae Sedis > Family Incertae Sedis > Marinicella > Unknown species
+TW	Tibetan wetland	30	OTU_1177	27	0.9	3.3786933468800374e-4	Family	Coriobacteriaceae	Bacteria > Actinobacteria > Coriobacteriia > Coriobacteriales > Coriobacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_632	29	0.9666666666666667	0.0018529972338423393	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+TW	Tibetan wetland	30	OTU_923	26	0.8666666666666667	2.0341162676323443e-4	Genus	Fastidiosipila	Bacteria > Firmicutes > Clostridia > Clostridiales > Ruminococcaceae > Fastidiosipila > Unknown species
+TW	Tibetan wetland	30	OTU_773	27	0.9	3.974736928059079e-4	Family	Coriobacteriaceae	Bacteria > Actinobacteria > Coriobacteriia > Coriobacteriales > Coriobacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_49	29	0.9666666666666667	0.0011567016937109635	Family	DA101 soil group	Bacteria > Verrucomicrobia > Spartobacteria > Chthoniobacterales > DA101 soil group > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_11	24	0.8	0.0032669803238779926	Genus	Sulfurovum	Bacteria > Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum > Unknown species
+TW	Tibetan wetland	30	OTU_372	28	0.9333333333333333	0.0010255132304243918	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_768	24	0.8	4.013003525497546e-4	Family	Xanthomonadales Incertae Sedis	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadales Incertae Sedis > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_18	25	0.8333333333333334	8.854819882111064e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_390	30	1	0.0012403123202249704	Genus	Flavobacterium	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium > Unknown species
+TW	Tibetan wetland	30	OTU_409	26	0.8666666666666667	5.602499378112011e-4	Family	Rhodobiaceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Rhodobiaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_293	25	0.8333333333333334	5.090231643725696e-4	Order	Acidimicrobiales	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1759	26	0.8666666666666667	4.2841405277188046e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_983	25	0.8333333333333334	3.3782510572504963e-4	Genus	Ramlibacter	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Ramlibacter > Unknown species
+TW	Tibetan wetland	30	OTU_2011	26	0.8666666666666667	4.153425485260718e-4	Family	Coriobacteriaceae	Bacteria > Actinobacteria > Coriobacteriia > Coriobacteriales > Coriobacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_139	25	0.8333333333333334	8.894392245541909e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_656	30	1	0.0012316162062410158	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_289	24	0.8	2.4125271565469614e-4	Family	Rhodocyclaceae	Bacteria > Proteobacteria > Betaproteobacteria > Rhodocyclales > Rhodocyclaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_254	30	1	0.0015835022439275085	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_40	29	0.9666666666666667	0.0012225116810908496	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+TW	Tibetan wetland	30	OTU_2907	26	0.8666666666666667	2.309912119066134e-4	Class	OPB35 soil group	Bacteria > Verrucomicrobia > OPB35 soil group > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_673	25	0.8333333333333334	5.482517783961064e-4	Family	Gemmatimonadaceae	Bacteria > Gemmatimonadetes > Gemmatimonadetes > Gemmatimonadales > Gemmatimonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_146	29	0.9666666666666667	6.755129176376049e-4	Order	Gaiellales	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_5277	24	0.8	5.915679907292456e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_67	29	0.9666666666666667	0.001443508317348889	Genus	Algoriphagus	Bacteria > Bacteroidetes > Cytophagia > Cytophagales > Cyclobacteriaceae > Algoriphagus > Unknown species
+TW	Tibetan wetland	30	OTU_459	28	0.9333333333333333	6.549124171691587e-4	Family	Intrasporangiaceae	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_115	30	1	0.001043657957653747	Family	Nitrospiraceae	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > Nitrospiraceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_130	29	0.9666666666666667	0.001199344233495035	Family	M20-Pitesti	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > M20-Pitesti > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_578	30	1	0.0012687171347194682	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_82	30	1	0.0033700798688022222	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+TW	Tibetan wetland	30	OTU_496	29	0.9666666666666667	0.0010672962606485333	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+TW	Tibetan wetland	30	OTU_781	30	1	4.918619751645447e-4	Genus	Candidatus Nitrotoga	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Gallionellaceae > Candidatus Nitrotoga > Unknown species
+TW	Tibetan wetland	30	OTU_3052	28	0.9333333333333333	5.61989752658219e-4	Family	Nitrospinaceae	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Nitrospinaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_88	28	0.9333333333333333	0.0015919802576289032	Genus	Lysobacter	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Lysobacter > Unknown species
+TW	Tibetan wetland	30	OTU_868	24	0.8	4.705322666067157e-4	Genus	Mycobacterium	Bacteria > Actinobacteria > Actinobacteria > Corynebacteriales > Mycobacteriaceae > Mycobacterium > Unknown species
+TW	Tibetan wetland	30	OTU_13463	28	0.9333333333333333	7.655482961577695e-4	Genus	Flavobacterium	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium > Unknown species
+TW	Tibetan wetland	30	OTU_747	27	0.9	5.295637735080567e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_165	28	0.9333333333333333	0.001002828299748721	Genus	Anaerolinea	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea > Unknown species
+TW	Tibetan wetland	30	OTU_357	30	1	0.0022490286229773235	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1804	26	0.8666666666666667	3.565735100015094e-4	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1819	24	0.8	7.4063137102277e-4	Family	OM1 clade	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > OM1 clade > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_198	24	0.8	4.715338474843552e-4	Genus	Gaiella	Bacteria > Actinobacteria > Thermoleophilia > Gaiellales > Gaiellaceae > Gaiella > Unknown species
+TW	Tibetan wetland	30	OTU_1747	27	0.9	3.437470307371118e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+TW	Tibetan wetland	30	OTU_349	30	1	4.989747192269798e-4	Genus	Luteolibacter	Bacteria > Verrucomicrobia > Verrucomicrobiae > Verrucomicrobiales > Verrucomicrobiaceae > Luteolibacter > Unknown species
+TW	Tibetan wetland	30	OTU_135	30	1	0.0015331993563722033	Class	Gitt-GS-136	Bacteria > Chloroflexi > Gitt-GS-136 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_5894	25	0.8333333333333334	3.320870015540243e-4	Family	WCHB1-69	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > WCHB1-69 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_13	27	0.9	0.003295289131722974	Genus	Candidatus Solibacter	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > Unknown family > Candidatus Solibacter > Unknown species
+TW	Tibetan wetland	30	OTU_73	30	1	0.002447311356679798	Genus	Thiobacillus	Bacteria > Proteobacteria > Betaproteobacteria > Hydrogenophilales > Hydrogenophilaceae > Thiobacillus > Unknown species
+TW	Tibetan wetland	30	OTU_240	27	0.9	5.449487971793063e-4	Family	BVA18	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > BVA18 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_767	27	0.9	4.2502806802673153e-4	Genus	Massilia	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Oxalobacteraceae > Massilia > Unknown species
+TW	Tibetan wetland	30	OTU_2190	26	0.8666666666666667	7.608255091264212e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_260	28	0.9333333333333333	5.059470735160249e-4	Family	MNG7	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > MNG7 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_197	25	0.8333333333333334	7.789930065166549e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_870	26	0.8666666666666667	4.123698651751793e-4	Genus	Pirellula	Bacteria > Planctomycetes > Planctomycetacia > Planctomycetales > Planctomycetaceae > Pirellula > Unknown species
+TW	Tibetan wetland	30	OTU_9	29	0.9666666666666667	0.0019008757769199526	Genus	Illumatobacter	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Illumatobacter > Unknown species
+TW	Tibetan wetland	30	OTU_2354	27	0.9	4.575023036512343e-4	Genus	Pseudolabrys	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Pseudolabrys > Unknown species
+TW	Tibetan wetland	30	OTU_589	25	0.8333333333333334	3.997171865539023e-4	Order	TRA3-20	Bacteria > Proteobacteria > Betaproteobacteria > TRA3-20 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_3829	26	0.8666666666666667	3.9322937259781836e-4	Family	RB41	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > RB41 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1316	24	0.8	1.6059873513784713e-4	Genus	Pelolinea	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Pelolinea > Unknown species
+TW	Tibetan wetland	30	OTU_1112	30	1	0.0010901306586861587	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+TW	Tibetan wetland	30	OTU_309	24	0.8	6.900760799834047e-4	Family	Saprospiraceae	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Saprospiraceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_292	24	0.8	0.001330400219557765	Family	JG34-KF-161	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > JG34-KF-161 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_317	29	0.9666666666666667	8.902768957859501e-4	Genus	Massilia	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Oxalobacteraceae > Massilia > Unknown species
+TW	Tibetan wetland	30	OTU_164	24	0.8	7.303172508975298e-4	Genus	Geobacter	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Geobacteraceae > Geobacter > Unknown species
+TW	Tibetan wetland	30	OTU_1328	25	0.8333333333333334	4.1400117836687427e-4	Genus	Nocardioides	Bacteria > Actinobacteria > Actinobacteria > Propionibacteriales > Nocardioidaceae > Nocardioides > Unknown species
+TW	Tibetan wetland	30	OTU_398	24	0.8	7.903211988922451e-4	Family	4-29	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > 4-29 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_51	30	1	0.002320979594041432	Family	DUNssu044	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > DUNssu044 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_111	27	0.9	4.07259599824393e-4	Genus	Acidovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Acidovorax > Unknown species
+TW	Tibetan wetland	30	OTU_33	28	0.9333333333333333	0.0011734623586232434	Family	BVA18	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > BVA18 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_320	29	0.9666666666666667	4.369675267379963e-4	Genus	Chlorochromatium	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Chlorochromatium > Unknown species
+TW	Tibetan wetland	30	OTU_5395	28	0.9333333333333333	3.0400937597207026e-4	Genus	Hydrogenophaga	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Hydrogenophaga > Unknown species
+TW	Tibetan wetland	30	OTU_1873	25	0.8333333333333334	2.4174308282284984e-4	Genus	Nocardioides	Bacteria > Actinobacteria > Actinobacteria > Propionibacteriales > Nocardioidaceae > Nocardioides > Unknown species
+TW	Tibetan wetland	30	OTU_85	26	0.8666666666666667	6.053339708710096e-4	Genus	Desulfuromonas	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > Desulfuromonadaceae > Desulfuromonas > Unknown species
+TW	Tibetan wetland	30	OTU_28	30	1	0.002422515803875429	Order	43F-1404R	Bacteria > Proteobacteria > Deltaproteobacteria > 43F-1404R > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1078	24	0.8	1.4497404464706754e-4	Order	Xanthomonadales	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_80	30	1	0.0033184944971392243	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+TW	Tibetan wetland	30	OTU_3786	30	1	4.56774964727137e-4	Genus	Variovorax	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Variovorax > Unknown species
+TW	Tibetan wetland	30	OTU_2015	25	0.8333333333333334	2.8445659751283493e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_140	28	0.9333333333333333	0.0010571093674304022	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_354	26	0.8666666666666667	0.001453528972822475	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_381	24	0.8	0.0014803230894556017	Family	JTB255 marine benthic group	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > JTB255 marine benthic group > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_2564	26	0.8666666666666667	3.596384483183942e-4	Genus	Syntrophus	Bacteria > Proteobacteria > Deltaproteobacteria > Syntrophobacterales > Syntrophaceae > Syntrophus > Unknown species
+TW	Tibetan wetland	30	OTU_30	29	0.9666666666666667	0.0013480709643490091	Family	WCHB1-69	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > WCHB1-69 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_150	28	0.9333333333333333	0.0017742491960657985	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_10	30	1	0.0012331705718779179	Genus	Thermomonas	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Thermomonas > Unknown species
+TW	Tibetan wetland	30	OTU_816	27	0.9	4.997552217054343e-4	Genus	Nitrospira	Bacteria > Nitrospirae > Nitrospira > Nitrospirales > Nitrospiraceae > Nitrospira > Unknown species
+TW	Tibetan wetland	30	OTU_62	29	0.9666666666666667	0.0022477041953909505	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_691	28	0.9333333333333333	6.101975705133536e-4	Family	YNPFFP1	Bacteria > Actinobacteria > Thermoleophilia > Solirubrobacterales > YNPFFP1 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_149	26	0.8666666666666667	8.877511712597944e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_223	25	0.8333333333333334	8.861219530868231e-4	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_288	27	0.9	3.821702926131379e-4	Family	SJA-149	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > SJA-149 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_61	29	0.9666666666666667	0.0014826128178788032	Genus	Lutibacter	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Lutibacter > Unknown species
+TW	Tibetan wetland	30	OTU_2597	24	0.8	9.334085502483128e-5	Genus	Polynucleobacter	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Burkholderiaceae > Polynucleobacter > Unknown species
+TW	Tibetan wetland	30	OTU_404	29	0.9666666666666667	4.1685140858313226e-4	Genus	Iamia	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Iamiaceae > Iamia > Unknown species
+TW	Tibetan wetland	30	OTU_322	26	0.8666666666666667	4.024155144183756e-4	Genus	Sva0081 sediment group	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfobacterales > Desulfobacteraceae > Sva0081 sediment group > Unknown species
+TW	Tibetan wetland	30	OTU_196	26	0.8666666666666667	9.420732926120675e-4	Order	TRA3-20	Bacteria > Proteobacteria > Betaproteobacteria > TRA3-20 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_401	24	0.8	7.155341191140853e-4	Genus	Terrimonas	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Chitinophagaceae > Terrimonas > Unknown species
+TW	Tibetan wetland	30	OTU_1801	24	0.8	2.882295034801803e-4	Genus	Lysinimonas	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Microbacteriaceae > Lysinimonas > Unknown species
+TW	Tibetan wetland	30	OTU_1231	29	0.9666666666666667	6.879485876484517e-4	Genus	Actinotalea	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Cellulomonadaceae > Actinotalea > Unknown species
+TW	Tibetan wetland	30	OTU_462	25	0.8333333333333334	5.045721878581703e-4	Genus	Porphyrobacter	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Erythrobacteraceae > Porphyrobacter > Unknown species
+TW	Tibetan wetland	30	OTU_208	26	0.8666666666666667	6.473689210045251e-4	Species	Ornithinibacter aureus	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Ornithinibacter > Ornithinibacter aureus
+TW	Tibetan wetland	30	OTU_38	30	1	0.001994606409876405	Genus	Cryobacterium	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Microbacteriaceae > Cryobacterium > Unknown species
+TW	Tibetan wetland	30	OTU_3876	27	0.9	3.733109154617448e-4	Genus	Blastocatella	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > Unknown family > Blastocatella > Unknown species
+TW	Tibetan wetland	30	OTU_417	24	0.8	3.1369198015253905e-4	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_21	28	0.9333333333333333	0.002073104531280994	Genus	Gillisia	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Gillisia > Unknown species
+TW	Tibetan wetland	30	OTU_34	30	1	0.005942346575288133	Genus	Bacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus > Unknown species
+TW	Tibetan wetland	30	OTU_207	27	0.9	0.001860796201441226	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_447	28	0.9333333333333333	0.0012229154947086755	Genus	Ferruginibacter	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Chitinophagaceae > Ferruginibacter > Unknown species
+TW	Tibetan wetland	30	OTU_436	25	0.8333333333333334	7.926706868719642e-4	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1511	24	0.8	8.580648865499575e-4	Family	Verrucomicrobiaceae	Bacteria > Verrucomicrobia > Verrucomicrobiae > Verrucomicrobiales > Verrucomicrobiaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1758	24	0.8	3.944963528423049e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_503	29	0.9666666666666667	4.252226425619349e-4	Order	Sh765B-TzT-29	Bacteria > Proteobacteria > Deltaproteobacteria > Sh765B-TzT-29 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_340	30	1	7.134092171165888e-4	Genus	Brevundimonas	Bacteria > Proteobacteria > Alphaproteobacteria > Caulobacterales > Caulobacteraceae > Brevundimonas > Unknown species
+TW	Tibetan wetland	30	OTU_1882	26	0.8666666666666667	3.2561947891384996e-4	Genus	Marmoricola	Bacteria > Actinobacteria > Actinobacteria > Propionibacteriales > Nocardioidaceae > Marmoricola > Unknown species
+TW	Tibetan wetland	30	OTU_64	30	1	0.0013806968068532572	Genus	Oryzihumus	Bacteria > Actinobacteria > Actinobacteria > Micrococcales > Intrasporangiaceae > Oryzihumus > Unknown species
+TW	Tibetan wetland	30	OTU_92	27	0.9	7.249514430422697e-4	Family	WCHB1-69	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > WCHB1-69 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_821	29	0.9666666666666667	5.691255131606657e-4	Genus	Noviherbaspirillum	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Oxalobacteraceae > Noviherbaspirillum > Unknown species
+TW	Tibetan wetland	30	OTU_219	29	0.9666666666666667	0.0017671436118481695	Family	Xanthomonadaceae	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_6203	26	0.8666666666666667	1.7718899090630327e-4	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_225	26	0.8666666666666667	8.303275724485587e-4	Genus	Variibacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhizobiales > Xanthobacteraceae > Variibacter > Unknown species
+TW	Tibetan wetland	30	OTU_3985	24	0.8	1.6614155722182632e-4	Phylum	Bacteroidetes	Bacteria > Bacteroidetes > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_63	28	0.9333333333333333	0.001824124939573741	Family	Draconibacteriaceae	Bacteria > Bacteroidetes > Bacteroidia > Bacteroidia Incertae Sedis > Draconibacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_2035	24	0.8	3.2228980958458065e-4	Family	M20-Pitesti	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfuromonadales > M20-Pitesti > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_3651	26	0.8666666666666667	2.5882779701675483e-4	Genus	Brevundimonas	Bacteria > Proteobacteria > Alphaproteobacteria > Caulobacterales > Caulobacteraceae > Brevundimonas > Unknown species
+TW	Tibetan wetland	30	OTU_2501	24	0.8	2.7087454131553406e-4	Family	SJA-28	Bacteria > Chlorobi > Chlorobia > Chlorobiales > SJA-28 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_520	26	0.8666666666666667	3.052807073050746e-4	Order	Acidimicrobiales	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_674	29	0.9666666666666667	5.04926054729062e-4	Class	WCHB1-32	Bacteria > Bacteroidetes > WCHB1-32 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_886	25	0.8333333333333334	4.6973225206952893e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_177	27	0.9	8.15339995793771e-4	Genus	Anaerolinea	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea > Unknown species
+TW	Tibetan wetland	30	OTU_801	27	0.9	4.4292221688209995e-4	Order	Subgroup 6	Bacteria > Acidobacteria > Acidobacteria > Subgroup 6 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_3994	26	0.8666666666666667	2.4081799624492357e-4	Genus	Anaerolinea	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea > Unknown species
+TW	Tibetan wetland	30	OTU_525	30	1	0.0010797819580549226	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1851	27	0.9	7.75100703773787e-4	Family	Acidimicrobiaceae	Bacteria > Actinobacteria > Acidimicrobiia > Acidimicrobiales > Acidimicrobiaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_87	30	1	0.002925011133254211	Genus	Flavobacterium	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium > Unknown species
+TW	Tibetan wetland	30	OTU_301	30	1	3.298193396566784e-4	Genus	Smithella	Bacteria > Proteobacteria > Deltaproteobacteria > Syntrophobacterales > Syntrophaceae > Smithella > Unknown species
+TW	Tibetan wetland	30	OTU_967	25	0.8333333333333334	0.001085720368351311	Family	Rhodobacteraceae	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodobacterales > Rhodobacteraceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_57	30	1	0.0041007833474023	Genus	Pedobacter	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter > Unknown species
+TW	Tibetan wetland	30	OTU_265	26	0.8666666666666667	0.001956597274433308	Family	JTB255 marine benthic group	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > JTB255 marine benthic group > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_3103	24	0.8	1.3172655279930054e-4	Genus	Undibacterium	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Oxalobacteraceae > Undibacterium > Unknown species
+TW	Tibetan wetland	30	OTU_661	30	1	4.857890392581114e-4	Genus	Staphylococcus	Bacteria > Firmicutes > Bacilli > Bacillales > Staphylococcaceae > Staphylococcus > Unknown species
+TW	Tibetan wetland	30	OTU_1649	27	0.9	3.48420513967574e-4	Genus	Polaromonas	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Polaromonas > Unknown species
+TW	Tibetan wetland	30	OTU_1755	24	0.8	4.7938187433640983e-4	Genus	Blastocatella	Bacteria > Acidobacteria > Acidobacteria > Subgroup 4 > Unknown family > Blastocatella > Unknown species
+TW	Tibetan wetland	30	OTU_881	28	0.9333333333333333	4.034005336616747e-4	Genus	Candidatus Anammoximicrobium	Bacteria > Planctomycetes > Planctomycetacia > Planctomycetales > Planctomycetaceae > Candidatus Anammoximicrobium > Unknown species
+TW	Tibetan wetland	30	OTU_267	28	0.9333333333333333	5.384069500452563e-4	Genus	Acinetobacter	Bacteria > Proteobacteria > Gammaproteobacteria > Pseudomonadales > Moraxellaceae > Acinetobacter > Unknown species
+TW	Tibetan wetland	30	OTU_10018	24	0.8	3.3389589352633166e-4	Order	GR-WP33-30	Bacteria > Proteobacteria > Deltaproteobacteria > GR-WP33-30 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_345	25	0.8333333333333334	5.880562664532134e-4	Class	KD4-96	Bacteria > Chloroflexi > KD4-96 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_682	25	0.8333333333333334	3.8398213728856197e-4	Family	Nitrosomonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Nitrosomonadales > Nitrosomonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_107	25	0.8333333333333334	0.0019406340052890905	Genus	Robiginitalea	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Robiginitalea > Unknown species
+TW	Tibetan wetland	30	OTU_7885	28	0.9333333333333333	2.3953158608369603e-4	Genus	Sphingorhabdus	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingorhabdus > Unknown species
+TW	Tibetan wetland	30	OTU_3500	25	0.8333333333333334	2.3723709402543328e-4	Family	WCHB1-69	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > WCHB1-69 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_842	24	0.8	0.0012108310488872518	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1287	24	0.8	2.571378392454283e-4	Phylum	Chloroflexi	Bacteria > Chloroflexi > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1504	26	0.8666666666666667	4.089909475509016e-4	Order	Subgroup 7	Bacteria > Acidobacteria > Holophagae > Subgroup 7 > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_2937	25	0.8333333333333334	3.0479383175581096e-4	Genus	Bryobacter	Bacteria > Acidobacteria > Acidobacteria > Subgroup 3 > Unknown family > Bryobacter > Unknown species
+TW	Tibetan wetland	30	OTU_668	30	1	3.252423581911863e-4	Genus	Methanothermobacter	Archaea > Euryarchaeota > Methanobacteria > Methanobacteriales > Methanobacteriaceae > Methanothermobacter > Unknown species
+TW	Tibetan wetland	30	OTU_1169	24	0.8	1.298447862157326e-4	Genus	Desulfomonile	Bacteria > Proteobacteria > Deltaproteobacteria > Syntrophobacterales > Syntrophaceae > Desulfomonile > Unknown species
+TW	Tibetan wetland	30	OTU_1156	25	0.8333333333333334	3.6996156121757163e-4	Genus	Pseudoxanthomonas	Bacteria > Proteobacteria > Gammaproteobacteria > Xanthomonadales > Xanthomonadaceae > Pseudoxanthomonas > Unknown species
+TW	Tibetan wetland	30	OTU_699	26	0.8666666666666667	1.9486502538514948e-4	Family	Coriobacteriaceae	Bacteria > Actinobacteria > Coriobacteriia > Coriobacteriales > Coriobacteriaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1707	24	0.8	2.8500132264810626e-4	Family	Sphingomonadaceae	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_659	29	0.9666666666666667	3.6668363324141983e-4	Genus	Sphingopyxis	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingopyxis > Unknown species
+TW	Tibetan wetland	30	OTU_154	30	1	0.0017715046382508585	Family	Comamonadaceae	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Comamonadaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_172	26	0.8666666666666667	0.0019229502728672968	Family	Anaerolineaceae	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_847	30	1	4.3193446177979466e-4	Genus	Magnetospirillum	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodospirillales > Rhodospirillaceae > Magnetospirillum > Unknown species
+TW	Tibetan wetland	30	OTU_879	27	0.9	7.497114496498184e-4	Genus	Sphingomonas	Bacteria > Proteobacteria > Alphaproteobacteria > Sphingomonadales > Sphingomonadaceae > Sphingomonas > Unknown species
+TW	Tibetan wetland	30	OTU_3659	26	0.8666666666666667	3.396653385187397e-4	Order	Frankiales	Bacteria > Actinobacteria > Actinobacteria > Frankiales > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1183	25	0.8333333333333334	1.510583793104356e-4	Class	W27	Bacteria > Cloacimonetes > W27 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1243	30	1	1.9355724035871589e-4	Genus	Arcicella	Bacteria > Bacteroidetes > Cytophagia > Cytophagales > Cytophagaceae > Arcicella > Unknown species
+TW	Tibetan wetland	30	OTU_702	25	0.8333333333333334	2.529841607737799e-4	Genus	Anaerolinea	Bacteria > Chloroflexi > Anaerolineae > Anaerolineales > Anaerolineaceae > Anaerolinea > Unknown species
+TW	Tibetan wetland	30	OTU_178	30	1	0.0010854194727090186	Genus	Pedobacter	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter > Unknown species
+TW	Tibetan wetland	30	OTU_626	24	0.8	3.8792700128884933e-4	Genus	Flavobacterium	Bacteria > Bacteroidetes > Flavobacteriia > Flavobacteriales > Flavobacteriaceae > Flavobacterium > Unknown species
+TW	Tibetan wetland	30	OTU_1901	29	0.9666666666666667	1.6950646253444126e-4	Genus	GKS98 freshwater group	Bacteria > Proteobacteria > Betaproteobacteria > Burkholderiales > Alcaligenaceae > GKS98 freshwater group > Unknown species
+TW	Tibetan wetland	30	OTU_4	30	1	4.692083626224316e-4	Genus	Sulfurovum	Bacteria > Proteobacteria > Epsilonproteobacteria > Campylobacterales > Helicobacteraceae > Sulfurovum > Unknown species
+TW	Tibetan wetland	30	OTU_943	29	0.9666666666666667	3.172888196512437e-4	Family	WCHB1-69	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > WCHB1-69 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_3441	25	0.8333333333333334	8.381503358109467e-5	Genus	Pedobacter	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter > Unknown species
+TW	Tibetan wetland	30	OTU_874	29	0.9666666666666667	3.264114726312246e-4	Genus	hgcI clade	Bacteria > Actinobacteria > Actinobacteria > Frankiales > Sporichthyaceae > hgcI clade > Unknown species
+TW	Tibetan wetland	30	OTU_1891	30	1	3.094435475085972e-4	Genus	Bacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus > Unknown species
+TW	Tibetan wetland	30	OTU_3727	25	0.8333333333333334	2.653610404829286e-4	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1308	26	0.8666666666666667	3.574291325783538e-4	Class	Bacteroidetes vadinHA17	Bacteria > Bacteroidetes > Bacteroidetes vadinHA17 > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_266	29	0.9666666666666667	3.559143192294332e-4	Family	Spirochaetaceae	Bacteria > Spirochaetae > Spirochaetes > Spirochaetales > Spirochaetaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1897	30	1	3.4373692025329455e-4	Genus	Lactobacillus	Bacteria > Firmicutes > Bacilli > Lactobacillales > Lactobacillaceae > Lactobacillus > Unknown species
+TW	Tibetan wetland	30	OTU_3282	24	0.8	9.07961647357664e-5	Genus	Pseudarcicella	Bacteria > Bacteroidetes > Cytophagia > Cytophagales > Cytophagaceae > Pseudarcicella > Unknown species
+TW	Tibetan wetland	30	OTU_360	28	0.9333333333333333	1.600302956282184e-4	Genus	Thermovirga	Bacteria > Synergistetes > Synergistia > Synergistales > Synergistaceae > Thermovirga > Unknown species
+TW	Tibetan wetland	30	OTU_655	24	0.8	1.4296800396578933e-4	Genus	Desulfovibrio	Bacteria > Proteobacteria > Deltaproteobacteria > Desulfovibrionales > Desulfovibrionaceae > Desulfovibrio > Unknown species
+TW	Tibetan wetland	30	OTU_9506	26	0.8666666666666667	1.4809873051809414e-4	Genus	Bacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus > Unknown species
+TW	Tibetan wetland	30	OTU_3222	28	0.9333333333333333	2.71113097188881e-4	Species	Oceanobacillus indicireducens	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Oceanobacillus > Oceanobacillus indicireducens
+TW	Tibetan wetland	30	OTU_1912	28	0.9333333333333333	1.731824651499238e-4	Family	TTA-B1	Bacteria > Caldiserica > Caldisericia > Caldisericales > TTA-B1 > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1185	30	1	4.4425392527676946e-4	Genus	EM3	Bacteria > Thermotogae > Thermotogae > Thermotogales > Thermotogaceae > EM3 > Unknown species
+TW	Tibetan wetland	30	OTU_1892	30	1	5.091472749176065e-4	Genus	Anaerobaculum	Bacteria > Synergistetes > Synergistia > Synergistales > Synergistaceae > Anaerobaculum > Unknown species
+TW	Tibetan wetland	30	OTU_1914	29	0.9666666666666667	1.679596386453016e-4	Phylum	Acetothermia	Bacteria > Acetothermia > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_1811	25	0.8333333333333334	1.6085651160339208e-4	Genus	Ferruginibacter	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Chitinophagaceae > Ferruginibacter > Unknown species
+TW	Tibetan wetland	30	OTU_126	30	1	0.0018377462891888143	Genus	Lentibacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Lentibacillus > Unknown species
+TW	Tibetan wetland	30	OTU_902	30	1	7.958592696903394e-4	Genus	Oceanobacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Oceanobacillus > Unknown species
+TW	Tibetan wetland	30	OTU_351	30	1	4.4214497666255725e-4	Genus	Acetobacter	Bacteria > Proteobacteria > Alphaproteobacteria > Rhodospirillales > Acetobacteraceae > Acetobacter > Unknown species
+TW	Tibetan wetland	30	OTU_264	30	1	0.0013630962591254074	Genus	Kroppenstedtia	Bacteria > Firmicutes > Bacilli > Bacillales > Thermoactinomycetaceae > Kroppenstedtia > Unknown species
+TW	Tibetan wetland	30	OTU_1173	30	1	2.4380494760325368e-4	Family	Synergistaceae	Bacteria > Synergistetes > Synergistia > Synergistales > Synergistaceae > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_3337	24	0.8	1.3285297407388043e-4	Genus	Pedobacter	Bacteria > Bacteroidetes > Sphingobacteriia > Sphingobacteriales > Sphingobacteriaceae > Pedobacter > Unknown species
+TW	Tibetan wetland	30	OTU_1866	30	1	3.900610295297103e-4	Genus	Coprothermobacter	Bacteria > Firmicutes > Clostridia > Thermoanaerobacterales > Thermodesulfobiaceae > Coprothermobacter > Unknown species
+TW	Tibetan wetland	30	OTU_1848	30	1	3.5533671224620986e-4	Genus	Lactococcus	Bacteria > Firmicutes > Bacilli > Lactobacillales > Streptococcaceae > Lactococcus > Unknown species
+TW	Tibetan wetland	30	OTU_3285	27	0.9	1.6359634324487435e-4	Genus	Kroppenstedtia	Bacteria > Firmicutes > Bacilli > Bacillales > Thermoactinomycetaceae > Kroppenstedtia > Unknown species
+TW	Tibetan wetland	30	OTU_3419	27	0.9	1.4403513913264324e-4	Genus	Bacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus > Unknown species
+TW	Tibetan wetland	30	OTU_1204	26	0.8666666666666667	1.674492011227226e-4	Genus	Bacillus	Bacteria > Firmicutes > Bacilli > Bacillales > Bacillaceae > Bacillus > Unknown species
+TW	Tibetan wetland	30	OTU_1184	30	1	1.722165239332902e-4	Phylum	Acetothermia	Bacteria > Acetothermia > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species
+TW	Tibetan wetland	30	OTU_8206	24	0.8	1.1270339434146936e-4	Genus	Anaerobaculum	Bacteria > Synergistetes > Synergistia > Synergistales > Synergistaceae > Anaerobaculum > Unknown species
+TW	Tibetan wetland	30	OTU_666	25	0.8333333333333334	1.0718944916816869e-4	Phylum	Marinimicrobia (SAR406 clade)	Bacteria > Marinimicrobia (SAR406 clade) > Unknown class > Unknown order > Unknown family > Unknown genus > Unknown species

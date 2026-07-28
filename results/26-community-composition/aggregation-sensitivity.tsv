@@ -1,0 +1,4 @@
+GroupCode	Group	TotalVariation	MaximumAbsoluteDifferencePP	EqualSampleClosure	PooledReadClosure
+IW	Inland wetland	0.013233006729922043	0.8077141295111001	1	1
+CW	Coastal wetland	0.021246319280900414	1.4529591816066083	1	1
+TW	Tibetan wetland	0.005369767416168286	0.20459439918334432	1	1

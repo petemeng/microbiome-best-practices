@@ -1,0 +1,31 @@
+{
+  "status": "passed",
+  "seed": 20260726,
+  "samples": 10,
+  "sink_samples": 1,
+  "source_samples": 9,
+  "source_classes": [
+    "Infant gut",
+    "Adult gut",
+    "Adult skin",
+    "Soil"
+  ],
+  "taxa": 1839,
+  "coverage": 5000,
+  "em_iterations": 1000,
+  "main_largest_source_class": "Infant gut",
+  "main_unknown": 0.1854,
+  "leave_one_out_samples": 8,
+  "leave_one_out_known_class_accuracy": 0.5,
+  "missing_source_unknown": {
+    "None": 0.1854,
+    "Infant gut": 0.1324,
+    "Adult gut": 0.2189,
+    "Adult skin": 0.1834,
+    "Soil": 0.161
+  },
+  "versions": {
+    "R": "4.4.1",
+    "FEAST": "0.1.0"
+  }
+}

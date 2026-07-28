@@ -1,0 +1,91 @@
+Rank	GroupCode	Group	Taxon	RankQualifiedTaxon	MeanRelativeAbundance	MeanPercent	Prevalence
+Phylum	IW	Inland wetland	Proteobacteria	P · Proteobacteria	0.23380807835259423	23.380807835259425	1
+Phylum	IW	Inland wetland	Chloroflexi	P · Chloroflexi	0.17560180417559512	17.56018041755951	1
+Phylum	IW	Inland wetland	Bacteroidetes	P · Bacteroidetes	0.06519396132055894	6.519396132055894	1
+Phylum	IW	Inland wetland	Acidobacteria	P · Acidobacteria	0.19261967335626284	19.261967335626284	1
+Phylum	IW	Inland wetland	Actinobacteria	P · Actinobacteria	0.10352535550749131	10.352535550749131	1
+Phylum	IW	Inland wetland	Unknown phylum	P · Unknown phylum	0.003454172623889436	0.3454172623889436	1
+Phylum	CW	Coastal wetland	Proteobacteria	P · Proteobacteria	0.37269758830053235	37.269758830053235	1
+Phylum	CW	Coastal wetland	Chloroflexi	P · Chloroflexi	0.12366948115320059	12.366948115320058	1
+Phylum	CW	Coastal wetland	Bacteroidetes	P · Bacteroidetes	0.10072289274626053	10.072289274626053	1
+Phylum	CW	Coastal wetland	Acidobacteria	P · Acidobacteria	0.07105327441085589	7.105327441085589	1
+Phylum	CW	Coastal wetland	Actinobacteria	P · Actinobacteria	0.09523486410163824	9.523486410163825	1
+Phylum	CW	Coastal wetland	Unknown phylum	P · Unknown phylum	0.003228991164574667	0.3228991164574667	1
+Phylum	TW	Tibetan wetland	Proteobacteria	P · Proteobacteria	0.31489623418413215	31.489623418413217	1
+Phylum	TW	Tibetan wetland	Chloroflexi	P · Chloroflexi	0.11545140749277512	11.545140749277511	1
+Phylum	TW	Tibetan wetland	Bacteroidetes	P · Bacteroidetes	0.1835605720811792	18.35605720811792	1
+Phylum	TW	Tibetan wetland	Acidobacteria	P · Acidobacteria	0.07645415411086307	7.645415411086306	1
+Phylum	TW	Tibetan wetland	Actinobacteria	P · Actinobacteria	0.10152667604197732	10.152667604197733	1
+Phylum	TW	Tibetan wetland	Unknown phylum	P · Unknown phylum	0.003708183388253242	0.37081833882532417	1
+Class	IW	Inland wetland	Acidobacteria	C · Acidobacteria	0.16492072916568118	16.49207291656812	1
+Class	IW	Inland wetland	Alphaproteobacteria	C · Alphaproteobacteria	0.0861673079867751	8.61673079867751	1
+Class	IW	Inland wetland	Betaproteobacteria	C · Betaproteobacteria	0.07376778998696909	7.376778998696909	1
+Class	IW	Inland wetland	Anaerolineae	C · Anaerolineae	0.05493456054648962	5.493456054648962	1
+Class	IW	Inland wetland	Gammaproteobacteria	C · Gammaproteobacteria	0.031240047471186895	3.1240047471186894	1
+Class	IW	Inland wetland	Unknown class	C · Unknown class	0.029201210880251672	2.920121088025167	1
+Class	CW	Coastal wetland	Acidobacteria	C · Acidobacteria	0.04345192214047041	4.345192214047041	1
+Class	CW	Coastal wetland	Alphaproteobacteria	C · Alphaproteobacteria	0.09553364309950159	9.553364309950158	1
+Class	CW	Coastal wetland	Betaproteobacteria	C · Betaproteobacteria	0.04927093460297455	4.9270934602974545	1
+Class	CW	Coastal wetland	Anaerolineae	C · Anaerolineae	0.08336382643838505	8.336382643838505	1
+Class	CW	Coastal wetland	Gammaproteobacteria	C · Gammaproteobacteria	0.11517984851148627	11.517984851148627	1
+Class	CW	Coastal wetland	Unknown class	C · Unknown class	0.03161534528158835	3.1615345281588354	1
+Class	TW	Tibetan wetland	Acidobacteria	C · Acidobacteria	0.060526940365178666	6.052694036517867	1
+Class	TW	Tibetan wetland	Alphaproteobacteria	C · Alphaproteobacteria	0.07960765711145891	7.960765711145891	1
+Class	TW	Tibetan wetland	Betaproteobacteria	C · Betaproteobacteria	0.1110154368003063	11.10154368003063	1
+Class	TW	Tibetan wetland	Anaerolineae	C · Anaerolineae	0.06989667862963216	6.989667862963215	1
+Class	TW	Tibetan wetland	Gammaproteobacteria	C · Gammaproteobacteria	0.05578113394785272	5.578113394785271	1
+Class	TW	Tibetan wetland	Unknown class	C · Unknown class	0.035247811023562926	3.5247811023562927	1
+Order	IW	Inland wetland	Anaerolineales	O · Anaerolineales	0.05493456054648962	5.493456054648962	1
+Order	IW	Inland wetland	Acidimicrobiales	O · Acidimicrobiales	0.029363364254812892	2.936336425481289	1
+Order	IW	Inland wetland	Xanthomonadales	O · Xanthomonadales	0.018478250899426268	1.8478250899426267	1
+Order	IW	Inland wetland	Sphingobacteriales	O · Sphingobacteriales	0.02240168698504181	2.240168698504181	1
+Order	IW	Inland wetland	Rhizobiales	O · Rhizobiales	0.04704013805839456	4.704013805839456	1
+Order	IW	Inland wetland	Unknown order	O · Unknown order	0.18911798691024514	18.911798691024515	1
+Order	CW	Coastal wetland	Anaerolineales	O · Anaerolineales	0.08336382643838505	8.336382643838505	1
+Order	CW	Coastal wetland	Acidimicrobiales	O · Acidimicrobiales	0.04621788622649122	4.621788622649122	1
+Order	CW	Coastal wetland	Xanthomonadales	O · Xanthomonadales	0.05356673355723885	5.356673355723885	1
+Order	CW	Coastal wetland	Sphingobacteriales	O · Sphingobacteriales	0.015042899476303028	1.5042899476303029	1
+Order	CW	Coastal wetland	Rhizobiales	O · Rhizobiales	0.02488783332564076	2.488783332564076	1
+Order	CW	Coastal wetland	Unknown order	O · Unknown order	0.1056115282252098	10.561152822520981	1
+Order	TW	Tibetan wetland	Anaerolineales	O · Anaerolineales	0.06989667862963216	6.989667862963215	1
+Order	TW	Tibetan wetland	Acidimicrobiales	O · Acidimicrobiales	0.034221478442719375	3.4221478442719375	1
+Order	TW	Tibetan wetland	Xanthomonadales	O · Xanthomonadales	0.03175270484793487	3.175270484793487	1
+Order	TW	Tibetan wetland	Sphingobacteriales	O · Sphingobacteriales	0.06080023023716307	6.080023023716307	1
+Order	TW	Tibetan wetland	Rhizobiales	O · Rhizobiales	0.020338150965839692	2.0338150965839694	1
+Order	TW	Tibetan wetland	Unknown order	O · Unknown order	0.13808864345470756	13.808864345470756	1
+Family	IW	Inland wetland	Anaerolineaceae	F · Anaerolineaceae	0.05493456054648962	5.493456054648962	1
+Family	IW	Inland wetland	Flavobacteriaceae	F · Flavobacteriaceae	0.003423868099708523	0.3423868099708523	1
+Family	IW	Inland wetland	Comamonadaceae	F · Comamonadaceae	0.01339542114265386	1.339542114265386	1
+Family	IW	Inland wetland	Planctomycetaceae	F · Planctomycetaceae	0.022098122037542217	2.209812203754222	1
+Family	IW	Inland wetland	Gemmatimonadaceae	F · Gemmatimonadaceae	0.027491924497098818	2.7491924497098816	1
+Family	IW	Inland wetland	Unknown family	F · Unknown family	0.42764557883295456	42.76455788329546	1
+Family	CW	Coastal wetland	Anaerolineaceae	F · Anaerolineaceae	0.08336382643838505	8.336382643838505	1
+Family	CW	Coastal wetland	Flavobacteriaceae	F · Flavobacteriaceae	0.04888014199800176	4.888014199800176	1
+Family	CW	Coastal wetland	Comamonadaceae	F · Comamonadaceae	0.01201684242047365	1.201684242047365	1
+Family	CW	Coastal wetland	Planctomycetaceae	F · Planctomycetaceae	0.021580719257155576	2.1580719257155576	1
+Family	CW	Coastal wetland	Gemmatimonadaceae	F · Gemmatimonadaceae	0.007649446527610958	0.7649446527610958	1
+Family	CW	Coastal wetland	Unknown family	F · Unknown family	0.2645595285524693	26.455952855246927	1
+Family	TW	Tibetan wetland	Anaerolineaceae	F · Anaerolineaceae	0.06989667862963216	6.989667862963215	1
+Family	TW	Tibetan wetland	Flavobacteriaceae	F · Flavobacteriaceae	0.03260878136126121	3.260878136126121	1
+Family	TW	Tibetan wetland	Comamonadaceae	F · Comamonadaceae	0.03821847712801916	3.8218477128019157	1
+Family	TW	Tibetan wetland	Planctomycetaceae	F · Planctomycetaceae	0.017970071959880957	1.7970071959880958	1
+Family	TW	Tibetan wetland	Gemmatimonadaceae	F · Gemmatimonadaceae	0.01701009770758847	1.701009770758847	1
+Family	TW	Tibetan wetland	Unknown family	F · Unknown family	0.2689122745883499	26.891227458834987	1
+Genus	IW	Inland wetland	Sphingomonas	G · Sphingomonas	0.010904978295373959	1.090497829537396	1
+Genus	IW	Inland wetland	Clostridium sensu stricto 13	G · Clostridium sensu stricto 13	0.004625918070895867	0.4625918070895867	1
+Genus	IW	Inland wetland	Thiobacillus	G · Thiobacillus	0.0027807535415940846	0.2780753541594085	1
+Genus	IW	Inland wetland	Bacillus	G · Bacillus	0.004994115229596027	0.49941152295960267	1
+Genus	IW	Inland wetland	Candidatus Solibacter	G · Candidatus Solibacter	0.023833236156502575	2.3833236156502577	1
+Genus	IW	Inland wetland	Unknown genus	G · Unknown genus	0.7100869431729195	71.00869431729195	1
+Genus	CW	Coastal wetland	Sphingomonas	G · Sphingomonas	0.004613225065928601	0.4613225065928601	1
+Genus	CW	Coastal wetland	Clostridium sensu stricto 13	G · Clostridium sensu stricto 13	0.03209814324392249	3.209814324392249	1
+Genus	CW	Coastal wetland	Thiobacillus	G · Thiobacillus	0.006265195494185234	0.6265195494185234	1
+Genus	CW	Coastal wetland	Bacillus	G · Bacillus	0.013188628179528754	1.3188628179528754	1
+Genus	CW	Coastal wetland	Candidatus Solibacter	G · Candidatus Solibacter	0.001237665333817098	0.12376653338170981	1
+Genus	CW	Coastal wetland	Unknown genus	G · Unknown genus	0.6161532155434476	61.61532155434476	1
+Genus	TW	Tibetan wetland	Sphingomonas	G · Sphingomonas	0.023056200509757225	2.3056200509757225	1
+Genus	TW	Tibetan wetland	Clostridium sensu stricto 13	G · Clostridium sensu stricto 13	0.001296011620534956	0.1296011620534956	0.9666666666666667
+Genus	TW	Tibetan wetland	Thiobacillus	G · Thiobacillus	0.02339529196181801	2.3395291961818008	1
+Genus	TW	Tibetan wetland	Bacillus	G · Bacillus	0.014134734089529817	1.4134734089529817	1
+Genus	TW	Tibetan wetland	Candidatus Solibacter	G · Candidatus Solibacter	0.003063381122361056	0.30633811223610563	1
+Genus	TW	Tibetan wetland	Unknown genus	G · Unknown genus	0.5669281804933896	56.69281804933895	1

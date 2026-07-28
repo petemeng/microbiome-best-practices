@@ -1,0 +1,2466 @@
+{
+  "status": "passed",
+  "articles": [
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "article_count": 5,
+  "primary_figure_count": 20,
+  "format_file_count": 80,
+  "checks_total": 406,
+  "checks_passed": 406,
+  "checks_failed": 0,
+  "failed_checks": [],
+  "checks": [
+    {
+      "id": "article-36-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/36-network-robustness.qmd"
+    },
+    {
+      "id": "article-36-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-36-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-36-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-36-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-36-section-416ae484",
+      "status": "PASS",
+      "detail": "这一步对应论文里的哪张图"
+    },
+    {
+      "id": "article-36-section-4a576e0b",
+      "status": "PASS",
+      "detail": "理论"
+    },
+    {
+      "id": "article-36-section-b822fdab",
+      "status": "PASS",
+      "detail": "准备工作"
+    },
+    {
+      "id": "article-36-section-792296bc",
+      "status": "PASS",
+      "detail": "可复制代码"
+    },
+    {
+      "id": "article-36-section-cd1d7453",
+      "status": "PASS",
+      "detail": "审计与升级"
+    },
+    {
+      "id": "article-36-section-82df7efd",
+      "status": "PASS",
+      "detail": "出版级美化"
+    },
+    {
+      "id": "article-36-section-66ed156e",
+      "status": "PASS",
+      "detail": "常见坑"
+    },
+    {
+      "id": "article-36-section-54dd41b9",
+      "status": "PASS",
+      "detail": "这段 Methods 怎么写"
+    },
+    {
+      "id": "article-36-section-fc57d73a",
+      "status": "PASS",
+      "detail": "换成你自己的数据怎么做"
+    },
+    {
+      "id": "article-36-section-a1880f69",
+      "status": "PASS",
+      "detail": "参考"
+    },
+    {
+      "id": "article-36-token-891a4894",
+      "status": "PASS",
+      "detail": "SpiecEasi::sparcc"
+    },
+    {
+      "id": "article-36-token-a01e0853",
+      "status": "PASS",
+      "detail": "SpiecEasi::spiec.easi"
+    },
+    {
+      "id": "article-36-token-e855a2a6",
+      "status": "PASS",
+      "detail": "calculate_roles"
+    },
+    {
+      "id": "article-36-token-9ce5a434",
+      "status": "PASS",
+      "detail": "group_bootstrap_frequency"
+    },
+    {
+      "id": "article-36-token-a69520ea",
+      "status": "PASS",
+      "detail": "36-role-cartography"
+    },
+    {
+      "id": "article-36-token-24e4a719",
+      "status": "PASS",
+      "detail": "36-attack-robustness"
+    },
+    {
+      "id": "article-36-token-bf4a6fa1",
+      "status": "PASS",
+      "detail": "36-group-rewiring"
+    },
+    {
+      "id": "article-36-token-4b1ebc2e",
+      "status": "PASS",
+      "detail": "36-topology-sensitivity"
+    },
+    {
+      "id": "article-36-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/36-network-robustness.html"
+    },
+    {
+      "id": "article-36-html-title",
+      "status": "PASS",
+      "detail": "第 36 篇 · 网络进阶：鲁棒性、拓扑角色与组间比较"
+    },
+    {
+      "id": "figure-36-role-cartography-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-role-cartography.pdf"
+    },
+    {
+      "id": "signature-36-role-cartography-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-36-role-cartography-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-role-cartography.svg"
+    },
+    {
+      "id": "signature-36-role-cartography-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-36-role-cartography-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-36-role-cartography-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-role-cartography.png"
+    },
+    {
+      "id": "raster-36-role-cartography-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-36-role-cartography-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3425
+      ]
+    },
+    {
+      "id": "figure-36-role-cartography-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-role-cartography.tiff"
+    },
+    {
+      "id": "raster-36-role-cartography-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-36-role-cartography-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3425
+      ]
+    },
+    {
+      "id": "raster-36-role-cartography-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-36-attack-robustness-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-attack-robustness.pdf"
+    },
+    {
+      "id": "signature-36-attack-robustness-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-36-attack-robustness-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-attack-robustness.svg"
+    },
+    {
+      "id": "signature-36-attack-robustness-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-36-attack-robustness-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-36-attack-robustness-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-attack-robustness.png"
+    },
+    {
+      "id": "raster-36-attack-robustness-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-36-attack-robustness-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "figure-36-attack-robustness-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-attack-robustness.tiff"
+    },
+    {
+      "id": "raster-36-attack-robustness-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-36-attack-robustness-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "raster-36-attack-robustness-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-36-group-rewiring-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-group-rewiring.pdf"
+    },
+    {
+      "id": "signature-36-group-rewiring-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-36-group-rewiring-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-group-rewiring.svg"
+    },
+    {
+      "id": "signature-36-group-rewiring-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-36-group-rewiring-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-36-group-rewiring-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-group-rewiring.png"
+    },
+    {
+      "id": "raster-36-group-rewiring-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-36-group-rewiring-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "figure-36-group-rewiring-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-group-rewiring.tiff"
+    },
+    {
+      "id": "raster-36-group-rewiring-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-36-group-rewiring-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "raster-36-group-rewiring-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-36-topology-sensitivity-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-topology-sensitivity.pdf"
+    },
+    {
+      "id": "signature-36-topology-sensitivity-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-36-topology-sensitivity-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-topology-sensitivity.svg"
+    },
+    {
+      "id": "signature-36-topology-sensitivity-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-36-topology-sensitivity-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-36-topology-sensitivity-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-topology-sensitivity.png"
+    },
+    {
+      "id": "raster-36-topology-sensitivity-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-36-topology-sensitivity-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3118
+      ]
+    },
+    {
+      "id": "figure-36-topology-sensitivity-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/36-topology-sensitivity.tiff"
+    },
+    {
+      "id": "raster-36-topology-sensitivity-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-36-topology-sensitivity-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3118
+      ]
+    },
+    {
+      "id": "raster-36-topology-sensitivity-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-37-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/37-microbial-wgcna.qmd"
+    },
+    {
+      "id": "article-37-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-37-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-37-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-37-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-37-section-416ae484",
+      "status": "PASS",
+      "detail": "这一步对应论文里的哪张图"
+    },
+    {
+      "id": "article-37-section-4a576e0b",
+      "status": "PASS",
+      "detail": "理论"
+    },
+    {
+      "id": "article-37-section-b822fdab",
+      "status": "PASS",
+      "detail": "准备工作"
+    },
+    {
+      "id": "article-37-section-792296bc",
+      "status": "PASS",
+      "detail": "可复制代码"
+    },
+    {
+      "id": "article-37-section-cd1d7453",
+      "status": "PASS",
+      "detail": "审计与升级"
+    },
+    {
+      "id": "article-37-section-82df7efd",
+      "status": "PASS",
+      "detail": "出版级美化"
+    },
+    {
+      "id": "article-37-section-66ed156e",
+      "status": "PASS",
+      "detail": "常见坑"
+    },
+    {
+      "id": "article-37-section-54dd41b9",
+      "status": "PASS",
+      "detail": "这段 Methods 怎么写"
+    },
+    {
+      "id": "article-37-section-fc57d73a",
+      "status": "PASS",
+      "detail": "换成你自己的数据怎么做"
+    },
+    {
+      "id": "article-37-section-a1880f69",
+      "status": "PASS",
+      "detail": "参考"
+    },
+    {
+      "id": "article-37-token-a9a8a826",
+      "status": "PASS",
+      "detail": "WGCNA::pickSoftThreshold"
+    },
+    {
+      "id": "article-37-token-dc11c0cb",
+      "status": "PASS",
+      "detail": "WGCNA::blockwiseModules"
+    },
+    {
+      "id": "article-37-token-4b5ad24c",
+      "status": "PASS",
+      "detail": "WGCNA::signedKME"
+    },
+    {
+      "id": "article-37-token-3264dc20",
+      "status": "PASS",
+      "detail": "module_trait_ledger"
+    },
+    {
+      "id": "article-37-token-2ec07834",
+      "status": "PASS",
+      "detail": "37-soft-threshold"
+    },
+    {
+      "id": "article-37-token-1c683da1",
+      "status": "PASS",
+      "detail": "37-module-dendrogram"
+    },
+    {
+      "id": "article-37-token-61c536e6",
+      "status": "PASS",
+      "detail": "37-module-trait"
+    },
+    {
+      "id": "article-37-token-2611eacd",
+      "status": "PASS",
+      "detail": "37-hub-sensitivity"
+    },
+    {
+      "id": "article-37-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/37-microbial-wgcna.html"
+    },
+    {
+      "id": "article-37-html-title",
+      "status": "PASS",
+      "detail": "第 37 篇 · WGCNA 用于微生物组：模块、性状关联与候选 hub"
+    },
+    {
+      "id": "figure-37-soft-threshold-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-soft-threshold.pdf"
+    },
+    {
+      "id": "signature-37-soft-threshold-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-37-soft-threshold-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-soft-threshold.svg"
+    },
+    {
+      "id": "signature-37-soft-threshold-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-37-soft-threshold-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-37-soft-threshold-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-soft-threshold.png"
+    },
+    {
+      "id": "raster-37-soft-threshold-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-37-soft-threshold-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "figure-37-soft-threshold-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-soft-threshold.tiff"
+    },
+    {
+      "id": "raster-37-soft-threshold-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-37-soft-threshold-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "raster-37-soft-threshold-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-37-module-dendrogram-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-module-dendrogram.pdf"
+    },
+    {
+      "id": "signature-37-module-dendrogram-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-37-module-dendrogram-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-module-dendrogram.svg"
+    },
+    {
+      "id": "signature-37-module-dendrogram-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-37-module-dendrogram-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-37-module-dendrogram-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-module-dendrogram.png"
+    },
+    {
+      "id": "raster-37-module-dendrogram-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-37-module-dendrogram-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3118
+      ]
+    },
+    {
+      "id": "figure-37-module-dendrogram-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-module-dendrogram.tiff"
+    },
+    {
+      "id": "raster-37-module-dendrogram-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-37-module-dendrogram-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3118
+      ]
+    },
+    {
+      "id": "raster-37-module-dendrogram-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-37-module-trait-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-module-trait.pdf"
+    },
+    {
+      "id": "signature-37-module-trait-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-37-module-trait-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-module-trait.svg"
+    },
+    {
+      "id": "signature-37-module-trait-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-37-module-trait-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-37-module-trait-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-module-trait.png"
+    },
+    {
+      "id": "raster-37-module-trait-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-37-module-trait-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3259
+      ]
+    },
+    {
+      "id": "figure-37-module-trait-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-module-trait.tiff"
+    },
+    {
+      "id": "raster-37-module-trait-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-37-module-trait-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3259
+      ]
+    },
+    {
+      "id": "raster-37-module-trait-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-37-hub-sensitivity-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-hub-sensitivity.pdf"
+    },
+    {
+      "id": "signature-37-hub-sensitivity-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-37-hub-sensitivity-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-hub-sensitivity.svg"
+    },
+    {
+      "id": "signature-37-hub-sensitivity-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-37-hub-sensitivity-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-37-hub-sensitivity-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-hub-sensitivity.png"
+    },
+    {
+      "id": "raster-37-hub-sensitivity-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-37-hub-sensitivity-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3259
+      ]
+    },
+    {
+      "id": "figure-37-hub-sensitivity-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/37-hub-sensitivity.tiff"
+    },
+    {
+      "id": "raster-37-hub-sensitivity-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-37-hub-sensitivity-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3259
+      ]
+    },
+    {
+      "id": "raster-37-hub-sensitivity-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-38-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/38-community-assembly-bnti.qmd"
+    },
+    {
+      "id": "article-38-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-38-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-38-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-38-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-38-section-416ae484",
+      "status": "PASS",
+      "detail": "这一步对应论文里的哪张图"
+    },
+    {
+      "id": "article-38-section-4a576e0b",
+      "status": "PASS",
+      "detail": "理论"
+    },
+    {
+      "id": "article-38-section-b822fdab",
+      "status": "PASS",
+      "detail": "准备工作"
+    },
+    {
+      "id": "article-38-section-792296bc",
+      "status": "PASS",
+      "detail": "可复制代码"
+    },
+    {
+      "id": "article-38-section-cd1d7453",
+      "status": "PASS",
+      "detail": "审计与升级"
+    },
+    {
+      "id": "article-38-section-82df7efd",
+      "status": "PASS",
+      "detail": "出版级美化"
+    },
+    {
+      "id": "article-38-section-66ed156e",
+      "status": "PASS",
+      "detail": "常见坑"
+    },
+    {
+      "id": "article-38-section-54dd41b9",
+      "status": "PASS",
+      "detail": "这段 Methods 怎么写"
+    },
+    {
+      "id": "article-38-section-fc57d73a",
+      "status": "PASS",
+      "detail": "换成你自己的数据怎么做"
+    },
+    {
+      "id": "article-38-section-a1880f69",
+      "status": "PASS",
+      "detail": "参考"
+    },
+    {
+      "id": "article-38-token-ee8702a0",
+      "status": "PASS",
+      "detail": "data/small/rooted-tree.nwk.gz"
+    },
+    {
+      "id": "article-38-token-068e33b8",
+      "status": "PASS",
+      "detail": "iCAMP::bNTI.cm"
+    },
+    {
+      "id": "article-38-token-031899b1",
+      "status": "PASS",
+      "detail": "iCAMP::RC.cm"
+    },
+    {
+      "id": "article-38-token-f485b7d9",
+      "status": "PASS",
+      "detail": "clusterSetRNGStream"
+    },
+    {
+      "id": "article-38-token-8fc30827",
+      "status": "PASS",
+      "detail": "primary_randomizations <- 999L"
+    },
+    {
+      "id": "article-38-token-c68d4086",
+      "status": "PASS",
+      "detail": "38-tree-filter"
+    },
+    {
+      "id": "article-38-token-3208b635",
+      "status": "PASS",
+      "detail": "38-bnti-rcbray"
+    },
+    {
+      "id": "article-38-token-9b895a61",
+      "status": "PASS",
+      "detail": "38-process-fractions"
+    },
+    {
+      "id": "article-38-token-6fd056d2",
+      "status": "PASS",
+      "detail": "38-phylogenetic-signal"
+    },
+    {
+      "id": "article-38-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/38-community-assembly-bnti.html"
+    },
+    {
+      "id": "article-38-html-title",
+      "status": "PASS",
+      "detail": "第 38 篇 · βNTI + RCbray：确定性与随机过程的条件性证据"
+    },
+    {
+      "id": "figure-38-tree-filter-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-tree-filter.pdf"
+    },
+    {
+      "id": "signature-38-tree-filter-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-38-tree-filter-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-tree-filter.svg"
+    },
+    {
+      "id": "signature-38-tree-filter-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-38-tree-filter-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-38-tree-filter-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-tree-filter.png"
+    },
+    {
+      "id": "raster-38-tree-filter-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-38-tree-filter-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "figure-38-tree-filter-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-tree-filter.tiff"
+    },
+    {
+      "id": "raster-38-tree-filter-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-38-tree-filter-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "raster-38-tree-filter-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-38-bnti-rcbray-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-bnti-rcbray.pdf"
+    },
+    {
+      "id": "signature-38-bnti-rcbray-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-38-bnti-rcbray-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-bnti-rcbray.svg"
+    },
+    {
+      "id": "signature-38-bnti-rcbray-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-38-bnti-rcbray-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-38-bnti-rcbray-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-bnti-rcbray.png"
+    },
+    {
+      "id": "raster-38-bnti-rcbray-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-38-bnti-rcbray-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3496
+      ]
+    },
+    {
+      "id": "figure-38-bnti-rcbray-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-bnti-rcbray.tiff"
+    },
+    {
+      "id": "raster-38-bnti-rcbray-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-38-bnti-rcbray-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3496
+      ]
+    },
+    {
+      "id": "raster-38-bnti-rcbray-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-38-process-fractions-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-process-fractions.pdf"
+    },
+    {
+      "id": "signature-38-process-fractions-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-38-process-fractions-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-process-fractions.svg"
+    },
+    {
+      "id": "signature-38-process-fractions-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-38-process-fractions-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-38-process-fractions-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-process-fractions.png"
+    },
+    {
+      "id": "raster-38-process-fractions-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-38-process-fractions-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3118
+      ]
+    },
+    {
+      "id": "figure-38-process-fractions-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-process-fractions.tiff"
+    },
+    {
+      "id": "raster-38-process-fractions-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-38-process-fractions-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3118
+      ]
+    },
+    {
+      "id": "raster-38-process-fractions-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-38-phylogenetic-signal-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-phylogenetic-signal.pdf"
+    },
+    {
+      "id": "signature-38-phylogenetic-signal-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-38-phylogenetic-signal-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-phylogenetic-signal.svg"
+    },
+    {
+      "id": "signature-38-phylogenetic-signal-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-38-phylogenetic-signal-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-38-phylogenetic-signal-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-phylogenetic-signal.png"
+    },
+    {
+      "id": "raster-38-phylogenetic-signal-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-38-phylogenetic-signal-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3000
+      ]
+    },
+    {
+      "id": "figure-38-phylogenetic-signal-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/38-phylogenetic-signal.tiff"
+    },
+    {
+      "id": "raster-38-phylogenetic-signal-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-38-phylogenetic-signal-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3000
+      ]
+    },
+    {
+      "id": "raster-38-phylogenetic-signal-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-39-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/39-neutral-community-model.qmd"
+    },
+    {
+      "id": "article-39-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-39-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-39-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-39-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-39-section-416ae484",
+      "status": "PASS",
+      "detail": "这一步对应论文里的哪张图"
+    },
+    {
+      "id": "article-39-section-4a576e0b",
+      "status": "PASS",
+      "detail": "理论"
+    },
+    {
+      "id": "article-39-section-b822fdab",
+      "status": "PASS",
+      "detail": "准备工作"
+    },
+    {
+      "id": "article-39-section-792296bc",
+      "status": "PASS",
+      "detail": "可复制代码"
+    },
+    {
+      "id": "article-39-section-cd1d7453",
+      "status": "PASS",
+      "detail": "审计与升级"
+    },
+    {
+      "id": "article-39-section-82df7efd",
+      "status": "PASS",
+      "detail": "出版级美化"
+    },
+    {
+      "id": "article-39-section-66ed156e",
+      "status": "PASS",
+      "detail": "常见坑"
+    },
+    {
+      "id": "article-39-section-54dd41b9",
+      "status": "PASS",
+      "detail": "这段 Methods 怎么写"
+    },
+    {
+      "id": "article-39-section-fc57d73a",
+      "status": "PASS",
+      "detail": "换成你自己的数据怎么做"
+    },
+    {
+      "id": "article-39-section-a1880f69",
+      "status": "PASS",
+      "detail": "参考"
+    },
+    {
+      "id": "article-39-token-14cde840",
+      "status": "PASS",
+      "detail": "fit_ncm <- function"
+    },
+    {
+      "id": "article-39-token-fb42106c",
+      "status": "PASS",
+      "detail": "bootstrap_migration"
+    },
+    {
+      "id": "article-39-token-4c737efc",
+      "status": "PASS",
+      "detail": "vegan::rrarefy"
+    },
+    {
+      "id": "article-39-token-4a1a889b",
+      "status": "PASS",
+      "detail": "39-neutral-abundance-occupancy"
+    },
+    {
+      "id": "article-39-token-2fe86a1c",
+      "status": "PASS",
+      "detail": "39-neutral-pool-migration"
+    },
+    {
+      "id": "article-39-token-c150dd3e",
+      "status": "PASS",
+      "detail": "39-neutral-classification-sensitivity"
+    },
+    {
+      "id": "article-39-token-040a86aa",
+      "status": "PASS",
+      "detail": "39-neutral-detection-sensitivity"
+    },
+    {
+      "id": "article-39-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/39-neutral-community-model.html"
+    },
+    {
+      "id": "article-39-html-title",
+      "status": "PASS",
+      "detail": "第 39 篇 · 中性群落模型：Sloan 拟合、迁入率与偏离类群"
+    },
+    {
+      "id": "figure-39-neutral-abundance-occupancy-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-abundance-occupancy.pdf"
+    },
+    {
+      "id": "signature-39-neutral-abundance-occupancy-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-39-neutral-abundance-occupancy-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-abundance-occupancy.svg"
+    },
+    {
+      "id": "signature-39-neutral-abundance-occupancy-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-39-neutral-abundance-occupancy-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-39-neutral-abundance-occupancy-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-abundance-occupancy.png"
+    },
+    {
+      "id": "raster-39-neutral-abundance-occupancy-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-39-neutral-abundance-occupancy-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3377
+      ]
+    },
+    {
+      "id": "figure-39-neutral-abundance-occupancy-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-abundance-occupancy.tiff"
+    },
+    {
+      "id": "raster-39-neutral-abundance-occupancy-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-39-neutral-abundance-occupancy-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3377
+      ]
+    },
+    {
+      "id": "raster-39-neutral-abundance-occupancy-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-39-neutral-pool-migration-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-pool-migration.pdf"
+    },
+    {
+      "id": "signature-39-neutral-pool-migration-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-39-neutral-pool-migration-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-pool-migration.svg"
+    },
+    {
+      "id": "signature-39-neutral-pool-migration-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-39-neutral-pool-migration-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-39-neutral-pool-migration-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-pool-migration.png"
+    },
+    {
+      "id": "raster-39-neutral-pool-migration-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-39-neutral-pool-migration-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "figure-39-neutral-pool-migration-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-pool-migration.tiff"
+    },
+    {
+      "id": "raster-39-neutral-pool-migration-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-39-neutral-pool-migration-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "raster-39-neutral-pool-migration-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-39-neutral-classification-sensitivity-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-classification-sensitivity.pdf"
+    },
+    {
+      "id": "signature-39-neutral-classification-sensitivity-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-39-neutral-classification-sensitivity-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-classification-sensitivity.svg"
+    },
+    {
+      "id": "signature-39-neutral-classification-sensitivity-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-39-neutral-classification-sensitivity-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-39-neutral-classification-sensitivity-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-classification-sensitivity.png"
+    },
+    {
+      "id": "raster-39-neutral-classification-sensitivity-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-39-neutral-classification-sensitivity-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "figure-39-neutral-classification-sensitivity-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-classification-sensitivity.tiff"
+    },
+    {
+      "id": "raster-39-neutral-classification-sensitivity-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-39-neutral-classification-sensitivity-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "raster-39-neutral-classification-sensitivity-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-39-neutral-detection-sensitivity-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-detection-sensitivity.pdf"
+    },
+    {
+      "id": "signature-39-neutral-detection-sensitivity-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-39-neutral-detection-sensitivity-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-detection-sensitivity.svg"
+    },
+    {
+      "id": "signature-39-neutral-detection-sensitivity-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-39-neutral-detection-sensitivity-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-39-neutral-detection-sensitivity-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-detection-sensitivity.png"
+    },
+    {
+      "id": "raster-39-neutral-detection-sensitivity-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-39-neutral-detection-sensitivity-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "figure-39-neutral-detection-sensitivity-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/39-neutral-detection-sensitivity.tiff"
+    },
+    {
+      "id": "raster-39-neutral-detection-sensitivity-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-39-neutral-detection-sensitivity-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2881
+      ]
+    },
+    {
+      "id": "raster-39-neutral-detection-sensitivity-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-40-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/40-niche-distance-decay.qmd"
+    },
+    {
+      "id": "article-40-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-40-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-40-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-40-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-40-section-416ae484",
+      "status": "PASS",
+      "detail": "这一步对应论文里的哪张图"
+    },
+    {
+      "id": "article-40-section-4a576e0b",
+      "status": "PASS",
+      "detail": "理论"
+    },
+    {
+      "id": "article-40-section-b822fdab",
+      "status": "PASS",
+      "detail": "准备工作"
+    },
+    {
+      "id": "article-40-section-792296bc",
+      "status": "PASS",
+      "detail": "可复制代码"
+    },
+    {
+      "id": "article-40-section-cd1d7453",
+      "status": "PASS",
+      "detail": "审计与升级"
+    },
+    {
+      "id": "article-40-section-82df7efd",
+      "status": "PASS",
+      "detail": "出版级美化"
+    },
+    {
+      "id": "article-40-section-66ed156e",
+      "status": "PASS",
+      "detail": "常见坑"
+    },
+    {
+      "id": "article-40-section-54dd41b9",
+      "status": "PASS",
+      "detail": "这段 Methods 怎么写"
+    },
+    {
+      "id": "article-40-section-fc57d73a",
+      "status": "PASS",
+      "detail": "换成你自己的数据怎么做"
+    },
+    {
+      "id": "article-40-section-a1880f69",
+      "status": "PASS",
+      "detail": "参考"
+    },
+    {
+      "id": "article-40-token-ad4e275a",
+      "status": "PASS",
+      "detail": "standardized_b"
+    },
+    {
+      "id": "article-40-token-38d48d77",
+      "status": "PASS",
+      "detail": "vegan::radfit"
+    },
+    {
+      "id": "article-40-token-0e4f784e",
+      "status": "PASS",
+      "detail": "haversine_km"
+    },
+    {
+      "id": "article-40-token-a20ee615",
+      "status": "PASS",
+      "detail": "vegan::mantel"
+    },
+    {
+      "id": "article-40-token-4a7a23ae",
+      "status": "PASS",
+      "detail": "40-niche-breadth"
+    },
+    {
+      "id": "article-40-token-12fed244",
+      "status": "PASS",
+      "detail": "40-rank-abundance-models"
+    },
+    {
+      "id": "article-40-token-9b9509d5",
+      "status": "PASS",
+      "detail": "40-distance-decay"
+    },
+    {
+      "id": "article-40-token-67070ed6",
+      "status": "PASS",
+      "detail": "40-distance-decay-audit"
+    },
+    {
+      "id": "article-40-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/40-niche-distance-decay.html"
+    },
+    {
+      "id": "article-40-html-title",
+      "status": "PASS",
+      "detail": "第 40 篇 · 生态位宽度、物种丰度分布与距离衰减"
+    },
+    {
+      "id": "figure-40-niche-breadth-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-niche-breadth.pdf"
+    },
+    {
+      "id": "signature-40-niche-breadth-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-40-niche-breadth-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-niche-breadth.svg"
+    },
+    {
+      "id": "signature-40-niche-breadth-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-40-niche-breadth-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-40-niche-breadth-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-niche-breadth.png"
+    },
+    {
+      "id": "raster-40-niche-breadth-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-40-niche-breadth-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3307
+      ]
+    },
+    {
+      "id": "figure-40-niche-breadth-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-niche-breadth.tiff"
+    },
+    {
+      "id": "raster-40-niche-breadth-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-40-niche-breadth-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3307
+      ]
+    },
+    {
+      "id": "raster-40-niche-breadth-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-40-rank-abundance-models-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-rank-abundance-models.pdf"
+    },
+    {
+      "id": "signature-40-rank-abundance-models-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-40-rank-abundance-models-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-rank-abundance-models.svg"
+    },
+    {
+      "id": "signature-40-rank-abundance-models-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-40-rank-abundance-models-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-40-rank-abundance-models-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-rank-abundance-models.png"
+    },
+    {
+      "id": "raster-40-rank-abundance-models-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-40-rank-abundance-models-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3118
+      ]
+    },
+    {
+      "id": "figure-40-rank-abundance-models-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-rank-abundance-models.tiff"
+    },
+    {
+      "id": "raster-40-rank-abundance-models-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-40-rank-abundance-models-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3118
+      ]
+    },
+    {
+      "id": "raster-40-rank-abundance-models-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-40-distance-decay-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-distance-decay.pdf"
+    },
+    {
+      "id": "signature-40-distance-decay-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-40-distance-decay-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-distance-decay.svg"
+    },
+    {
+      "id": "signature-40-distance-decay-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-40-distance-decay-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-40-distance-decay-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-distance-decay.png"
+    },
+    {
+      "id": "raster-40-distance-decay-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-40-distance-decay-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3236
+      ]
+    },
+    {
+      "id": "figure-40-distance-decay-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-distance-decay.tiff"
+    },
+    {
+      "id": "raster-40-distance-decay-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-40-distance-decay-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3236
+      ]
+    },
+    {
+      "id": "raster-40-distance-decay-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-40-distance-decay-audit-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-distance-decay-audit.pdf"
+    },
+    {
+      "id": "signature-40-distance-decay-audit-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-40-distance-decay-audit-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-distance-decay-audit.svg"
+    },
+    {
+      "id": "signature-40-distance-decay-audit-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-40-distance-decay-audit-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-40-distance-decay-audit-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-distance-decay-audit.png"
+    },
+    {
+      "id": "raster-40-distance-decay-audit-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-40-distance-decay-audit-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2952
+      ]
+    },
+    {
+      "id": "figure-40-distance-decay-audit-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/40-distance-decay-audit.tiff"
+    },
+    {
+      "id": "raster-40-distance-decay-audit-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-40-distance-decay-audit-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2952
+      ]
+    },
+    {
+      "id": "raster-40-distance-decay-audit-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-file-count",
+      "status": "PASS",
+      "detail": 80
+    },
+    {
+      "id": "wetland-triad-contract",
+      "status": "PASS",
+      "detail": [
+        13628,
+        90,
+        1619670
+      ]
+    },
+    {
+      "id": "tree-summary-tree_tips",
+      "status": "PASS",
+      "detail": 14096
+    },
+    {
+      "id": "tree-summary-tree_internal_nodes",
+      "status": "PASS",
+      "detail": 14095
+    },
+    {
+      "id": "tree-summary-tree_rooted",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "id": "tree-summary-tree_contains_all_features",
+      "status": "PASS",
+      "detail": true
+    },
+    {
+      "id": "tree-summary-tree_extra_tips",
+      "status": "PASS",
+      "detail": 468
+    },
+    {
+      "id": "rooted-tree-sha256",
+      "status": "PASS",
+      "detail": "05d64719bfe720714fdf03f5158893f54fc6400ab649de807cbecc5599589f61"
+    },
+    {
+      "id": "rooted-tree-newick",
+      "status": "PASS",
+      "detail": 451178
+    },
+    {
+      "id": "renv-package-count",
+      "status": "PASS",
+      "detail": 418
+    },
+    {
+      "id": "renv-WGCNA",
+      "status": "PASS",
+      "detail": "1.74"
+    },
+    {
+      "id": "renv-iCAMP",
+      "status": "PASS",
+      "detail": "1.5.12"
+    },
+    {
+      "id": "renv-SpiecEasi",
+      "status": "PASS",
+      "detail": "1.1.2"
+    },
+    {
+      "id": "renv-microeco",
+      "status": "PASS",
+      "detail": "2.0.0"
+    },
+    {
+      "id": "renv-vegan",
+      "status": "PASS",
+      "detail": "2.6-6.1"
+    },
+    {
+      "id": "renv-SpiecEasi-sha",
+      "status": "PASS",
+      "detail": "c463727a51d0df34db0c670d3b170195bb3d4eba"
+    },
+    {
+      "id": "result-36-sparcc-giant",
+      "status": "PASS",
+      "detail": {
+        "Method": "SparCC",
+        "InitialGiantNodes": "40",
+        "RandomAUC": "0.495",
+        "DegreeAttackAUC": "0.419375",
+        "BetweennessAttackAUC": "0.379375"
+      }
+    },
+    {
+      "id": "result-36-degree-auc",
+      "status": "PASS",
+      "detail": {
+        "Method": "SparCC",
+        "InitialGiantNodes": "40",
+        "RandomAUC": "0.495",
+        "DegreeAttackAUC": "0.419375",
+        "BetweennessAttackAUC": "0.379375"
+      }
+    },
+    {
+      "id": "result-36-role-count",
+      "status": "PASS",
+      "detail": 40
+    },
+    {
+      "id": "result-36-connectors",
+      "status": "PASS",
+      "detail": {
+        "Peripheral": 37,
+        "Connector": 3
+      }
+    },
+    {
+      "id": "result-36-mean-jaccard",
+      "status": "PASS",
+      "detail": 0.052847636332209826
+    },
+    {
+      "id": "result-37-power-r2",
+      "status": "PASS",
+      "detail": {
+        "Power": "7",
+        "SFT.R.sq": "0.876504313811303",
+        "slope": "-1.86542763357792",
+        "truncated.R.sq": "0.919152819276733",
+        "mean.k.": "9.56295806167491",
+        "median.k.": "8.55235405924154",
+        "max.k.": "22.4537340587211"
+      }
+    },
+    {
+      "id": "result-37-module-sizes",
+      "status": "PASS",
+      "detail": {
+        "blue": 72,
+        "brown": 57,
+        "grey": 115,
+        "turquoise": 127,
+        "yellow": 51
+      }
+    },
+    {
+      "id": "result-37-trait-tests",
+      "status": "PASS",
+      "detail": 32
+    },
+    {
+      "id": "result-37-trait-hits",
+      "status": "PASS",
+      "detail": "BH q < 0.05"
+    },
+    {
+      "id": "result-37-hub-candidates",
+      "status": "PASS",
+      "detail": "candidate hubs"
+    },
+    {
+      "id": "result-38-tree-contract",
+      "status": "PASS",
+      "detail": [
+        {
+          "TreeTips": "14096",
+          "CountFeatures": "13628",
+          "CountFeaturesMissingFromTree": "0",
+          "TreeTipsOutsideCountTable": "468",
+          "Rooted": "TRUE",
+          "NonPositiveBranches": "1"
+        }
+      ]
+    },
+    {
+      "id": "result-38-pair-count",
+      "status": "PASS",
+      "detail": 4005
+    },
+    {
+      "id": "result-38-process-total",
+      "status": "PASS",
+      "detail": {
+        "Dispersal limitation": 3288,
+        "Heterogeneous selection": 673,
+        "Homogenizing dispersal": 26,
+        "Undominated": 18
+      }
+    },
+    {
+      "id": "result-38-signal-tests",
+      "status": "PASS",
+      "detail": 3
+    },
+    {
+      "id": "result-38-signal-supported",
+      "status": "PASS",
+      "detail": [
+        {
+          "Trait": "pH",
+          "ObservedRho": "0.0426905438148528",
+          "NullLower": "-0.0444046907120348",
+          "NullMedian": "-0.000738854757944491",
+          "NullUpper": "0.0426202037136221",
+          "PValue": "0.028",
+          "ShortRangePairs": "17083",
+          "QValue": "0.042",
+          "Supported": "TRUE"
+        },
+        {
+          "Trait": "Conductivity",
+          "ObservedRho": "0.172253666774457",
+          "NullLower": "-0.0394704961449438",
+          "NullMedian": "-0.000177069973360797",
+          "NullUpper": "0.0452854905616149",
+          "PValue": "0.002",
+          "ShortRangePairs": "17083",
+          "QValue": "0.006",
+          "Supported": "TRUE"
+        },
+        {
+          "Trait": "TOC",
+          "ObservedRho": "0.0300661614806999",
+          "NullLower": "-0.0441542393669463",
+          "NullMedian": "0.00135720200519048",
+          "NullUpper": "0.0509205506863708",
+          "PValue": "0.102",
+          "ShortRangePairs": "17083",
+          "QValue": "0.102",
+          "Supported": "FALSE"
+        }
+      ]
+    },
+    {
+      "id": "result-38-filter-rows",
+      "status": "PASS",
+      "detail": 10
+    },
+    {
+      "id": "result-39-migration",
+      "status": "PASS",
+      "detail": {
+        "Pool": "All wetlands",
+        "Samples": "90",
+        "Migration": "0.102903264863042",
+        "Lower": "0.0916165044021577",
+        "Upper": "0.121031608724621",
+        "RSquared": "0.711545466386703",
+        "Detection": "5.55668747337421e-05"
+      }
+    },
+    {
+      "id": "result-39-r2",
+      "status": "PASS",
+      "detail": {
+        "Pool": "All wetlands",
+        "Samples": "90",
+        "Migration": "0.102903264863042",
+        "Lower": "0.0916165044021577",
+        "Upper": "0.121031608724621",
+        "RSquared": "0.711545466386703",
+        "Detection": "5.55668747337421e-05"
+      }
+    },
+    {
+      "id": "result-39-class-counts",
+      "status": "PASS",
+      "detail": {
+        "Above neutral": 4531,
+        "Below neutral": 1086,
+        "Neutral envelope": 8011
+      }
+    },
+    {
+      "id": "result-39-detection-grid",
+      "status": "PASS",
+      "detail": 17
+    },
+    {
+      "id": "result-40-breadth-taxa",
+      "status": "PASS",
+      "detail": 3208
+    },
+    {
+      "id": "result-40-rad-winners",
+      "status": "PASS",
+      "detail": {
+        "Mandelbrot": 75,
+        "Zipf": 15
+      }
+    },
+    {
+      "id": "result-40-rad-warnings",
+      "status": "PASS",
+      "detail": [
+        {
+          "SampleID": "S22",
+          "Message": "GLM did not converge"
+        },
+        {
+          "SampleID": "S165",
+          "Message": "GLM did not converge"
+        },
+        {
+          "SampleID": "S167",
+          "Message": "GLM did not converge"
+        }
+      ]
+    },
+    {
+      "id": "result-40-negative-slopes",
+      "status": "PASS",
+      "detail": {
+        "Pooled": -0.179661585450509,
+        "CW": -0.135612485023822,
+        "IW": -0.141921811189952,
+        "TW": -0.0536803766966294
+      }
+    },
+    {
+      "id": "result-40-tw-mantel",
+      "status": "PASS",
+      "detail": {
+        "Region": "TW",
+        "Samples": "30",
+        "MantelRho": "0.0397138512720556",
+        "PermutationP": "0.287"
+      }
+    }
+  ]
+}

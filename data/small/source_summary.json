@@ -6,6 +6,11 @@
   "environment_samples": 200,
   "environment_variables": 11,
   "common_environment_samples": 90,
+  "tree_tips": 14096,
+  "tree_internal_nodes": 14095,
+  "tree_rooted": true,
+  "tree_contains_all_features": true,
+  "tree_extra_tips": 468,
   "feature_ids_match": true,
   "sample_ids_match": true
 }

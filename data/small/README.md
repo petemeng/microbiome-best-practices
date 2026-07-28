@@ -31,7 +31,26 @@ total-read, and per-sample library-size contracts are identical in
 prevalence filter, and audits envfit, three Mantel distance blocks, a
 non-primary partial Mantel sensitivity analysis, and adjusted-R² variation
 partitioning under one fixed 999-row permutation matrix. Its 221/221 audit is
-written under `results/25-environment-variance/`.
+written under `results/25-environment-variance/`. Article 26 independently
+closes each sample to 100%, selects the phylum Top 10 by equal-sample mean,
+keeps rank-specific Unknown separate from Other known taxa, and audits Top-N,
+pooled-read weighting, known-only renormalization, and four composition plots.
+Its 195/195 audit is written under `results/26-community-composition/`.
+Article 27 independently aggregates Phylum through Genus while preserving
+missing-parent gaps, uses rank-qualified display labels and full-lineage keys,
+audits within-parent and cross-rank name collisions, compares rank-specific
+Top-N coverage, and keeps pooled-read and known-only calculations as
+sensitivity branches. Its 209/209 audit is written under
+`results/27-multirank-composition/`.
+Article 28 independently defines feature-level detection from sample-level
+relative abundance, with a primary threshold of 0.01% and prevalence of 80%
+under an all-read denominator and equal sample weights. It separates global
+from IW/CW/TW group-specific core sets, audits a 4 x 4 detection-prevalence
+grid and a seed-20260728 10,000-read depth branch, and assigns mutually
+exclusive primary-core, conditionally-rare, sampling-limited,
+persistently-rare, and intermediate states. Its 320/320 audit, including four
+English-only publication figures, is written under
+`results/28-core-rare-biosphere/`.
 
 ## phyloseq GlobalPatterns beta-distance tables and tree
 
@@ -531,3 +550,223 @@ R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla \
 The validator regenerates four original figures in PDF/SVG/600-ppi PNG/LZW-
 TIFF and writes raw, equal-size, equal-coverage, sensitivity, rank-stability,
 format, and session audits. The current fixed run passes 193/193 checks.
+
+## Article 29 community-typing DMM inputs
+
+Article 29 starts from the independently readable
+`community-typing-dmm/otutab.tsv`, `taxonomy.tsv`, and `metadata.tsv` triad.
+They are deterministically exported from `Twins.csv` and `TwinStudy.t` in
+`DirichletMultinomial 1.46.0`, which distributes the real Holmes/Turnbaugh
+twins gut 16S genus-count data. The fixed table contains 130 source
+categories, 278 samples, and 570,851 raw reads. BMI class is retained only as
+post-fit descriptive metadata; suffix-derived participant keys are audit
+fields and are not asserted to be clinically validated visit labels.
+
+Frozen file SHA-256 values:
+
+- `otutab.tsv`:
+  `28de822c434aedade101e66ac60a61df38124c9b59357095599fbd278f2ecb41`
+- `taxonomy.tsv`:
+  `9eaa0bf788ad1db8c314a59e774c8935bdaa33a51135eaf606c11d5a497dff08`
+- `metadata.tsv`:
+  `0368c9129c7d77f381688465141593a2c61a229368d2fc411c9017e1abe04409`
+
+Regenerate the triad from the locked package and run the independent audit:
+
+```bash
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla \
+  scripts/prepare_dmm_twins_data.R \
+  --output-dir data/small/community-typing-dmm
+
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla \
+  scripts/validate_community_typing_dmm.R \
+  --project-root . \
+  --input-dir data/small/community-typing-dmm \
+  --output-dir results/29-community-typing-dmm \
+  --figure-dir figures
+```
+
+The validator uses unrarefied non-negative integer counts, fits candidate
+`k=1–7` models, launches one fresh R process per model for the initialization
+audit, and regenerates four original figures in PDF/SVG/600-ppi PNG/LZW-TIFF.
+The current fixed run passes 222/222 checks. Data provenance and licensing are
+recorded in `community-typing-dmm/source-summary.json`.
+
+## Articles 30–33 and 35–40 downstream inputs
+
+Articles 30–33 and 35–40 independently reread the root wetland
+`otutab.tsv`/`taxonomy.tsv`/`metadata.tsv` triad documented under Article 18:
+13,628 ASVs, 90 samples, 1,619,670 reads, and 30 samples per CW/IW/TW group.
+They do not read another article's RDS or result table. Article 30 audits
+closure and reference frames; Articles 31–33 aggregate by complete lineage for
+differential-abundance analyses and graphics; Article 35 applies a group-blind
+genus-node filter before SparCC and SPIEC-EASI inference. Articles 36–37 extend
+the same group-blind universe to topology robustness and microbial WGCNA;
+Articles 39–40 fit neutral and macroecological models directly from the triad.
+Articles 37, 38 and 40 additionally read the matched `environment.tsv`.
+
+Article 38 also uses `rooted-tree.nwk.gz`, deterministically extracted from the
+real `phylo_tree_16S` object in `microeco 2.0.0`. The source tree is rooted and
+has branch lengths, 14,096 tips and 14,095 internal nodes. It contains all
+13,628 count-table OTUs plus 468 explicitly pruned extra tips. Frozen SHA-256:
+
+- `rooted-tree.nwk.gz`:
+  `05d64719bfe720714fdf03f5158893f54fc6400ab649de807cbecc5599589f61`
+- updated `source_summary.json`:
+  `acc15b18d3f85d6d35770d0db7580d91d0a55a838862876536500a8d7c75711b`
+
+Regenerate the four tables and tree from the fixed source tarball with:
+
+```bash
+Rscript scripts/prepare_pilot_data.R \
+  /path/to/microeco_2.0.0.tar.gz \
+  data/small \
+  data/small/source_summary.json
+```
+
+## Article 34 absolute-quantification inputs
+
+`absolute-quantification/` contains an independently readable triad plus
+`cell-load.tsv`. The files are deterministically exported by
+`scripts/prepare_vandeputte_absolute_data.R` from the `Vandeputte` object in
+Bioconductor `reconsi 1.16.0`. They contain 234 genera, 135 samples, 4,080,996
+reads, and matched flow-cytometry microbial loads. The main comparison uses
+only the common Disease cohort (29 Crohn's disease and 66 healthy samples);
+40 healthy samples from the separate Study cohort remain available for the
+cohort audit but are not pooled into the contrast.
+
+Frozen file SHA-256 values:
+
+- `absolute-quantification/otutab.tsv`:
+  `2fb2e5042b448ea8db38559fe223b5dca6be7c1b686059451cc5e6a7127e3af0`
+- `absolute-quantification/taxonomy.tsv`:
+  `1518574260016b621f469abf8cfc2982f0a137194ab11a5faa6027cf26676b3d`
+- `absolute-quantification/metadata.tsv`:
+  `7201f8435f51833338cb8c2e660b7c5d061e5036068977b5bb8804aabeb59a81`
+- `absolute-quantification/cell-load.tsv`:
+  `4a8e793dcdb76a80a85e316ce4a3f810aa6be2719bc060fe431abc66946360ef`
+- `absolute-quantification/source-summary.json`:
+  `8ac35a7119d1772d5d1c92f30c051f2fb3bdb2b5d3dca3f83c885528352d9d94`
+
+Regenerate the bundle with:
+
+```bash
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla \
+  scripts/prepare_vandeputte_absolute_data.R \
+  data/small/absolute-quantification
+```
+
+The underlying study is Vandeputte et al., *Nature* 2017,
+doi:10.1038/nature24460; package and file-level provenance are recorded in
+`absolute-quantification/source-summary.json`.
+
+## Articles 41–45 functional prediction, external validation, and survival inputs
+
+Article 41 uses the official PICRUSt2 chemerin tutorial archive, converted to
+an independently readable 37-ASV × 24-sample triad plus the exact
+representative-sequence FASTA and BIOM input. The table contains 108,718
+reads; all 37 sequences entered PICRUSt2 2.6.3, selected the bacterial domain,
+and passed the prespecified maximum NSTI of 2.0. The upstream archive SHA-256
+is `f57abdc069b6560f0ddb739cf9a341f5679b12f4947f4db2ad5e2cab893669e9`.
+The official archive does not include taxonomy, so the seven taxonomy ranks
+are intentionally blank and are not fabricated. File-level checksums and this
+boundary are recorded in `picrust2-chemerin/source-summary.json`.
+
+Article 42 independently rereads the root microeco wetland triad documented
+above. Article 43 independently rereads the Vandeputte triad and matched
+`cell-load.tsv`; its classification branch uses only the 95-sample Disease
+cohort, while its regression branch uses the measured microbial load.
+
+Article 44 uses three standardized CRC 16S cohorts from MicrobiomeHD
+(Zenodo record `10.5281/zenodo.1146764`), retaining only CRC and healthy-control
+stool samples. Xiang contains 43 samples (21 CRC/22 control), Zhao contains
+102 (46/56), and Zackular contains 60 (30/30). Their fixed upstream archive
+SHA-256 values are `c16052495cc717069c670cabc9c1028750a71b7fd04ac3d28dbc1e560521d63e`,
+`2f479dab25d980f2d295244166165f5531b9d28e38896767d1acf6a08e88f91f`,
+and `294305422293a2e87f9eb61d89612f49fb08b295d779b1cce7996b6d884c4498`.
+The derived cohort triads and file-level checksums are under
+`cross-cohort-crc/`; the source record is CC BY-NC 4.0.
+
+Article 45 uses the MiSurv-processed NOD-mouse T1D cohort at fixed Git commit
+`692a2ac7079d2dbf581893b9a820c80cde0a7e31`. The triad contains 348 OTUs,
+173 baseline samples, 3,073,108 reads, 118 T1D-onset events, and 55 censored
+mice. Sampling occurred at week 6 (n=6), 7 (n=164), or 8 (n=3), and each
+mouse's follow-up time is calculated from its own sampling week. The event is
+mouse T1D onset, not human death or overall survival. The source repository
+does not state a data license; cite Zhang et al. 2018 and Gu et al. 2023 and
+verify redistribution terms before republishing the source tables. Checksums
+and boundaries are recorded in `survival-t1d/source-summary.json`.
+
+Regenerate all three fixed data bundles from checksum-verified downloads with:
+
+```bash
+bash scripts/download_articles_41_45_data.sh
+```
+
+Re-run the locked PICRUSt2 analysis and its R audit figures with:
+
+```bash
+bash scripts/run_article41_picrust2.sh
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla \
+  scripts/render_article41_picrust2.R "$PWD"
+```
+
+## Articles 46–50 multi-omics, multi-kingdom, and source-tracking inputs
+
+`paired-ibd-multiomics/` fixes the Franzosa IBD microbiome–metabolome resource
+at curated-data commit `89a519d8c832008fbc6e650453e83e2f04858d02` and contains
+250 microbial genera × 220 strictly paired samples, 277 named metabolites,
+clinical metadata, and metabolite annotations. Articles 46–48 reread these
+files independently for global concordance/HAllA, sPLS/DIABLO, and native
+MMvec/MOFA analyses.
+
+`multi-kingdom-duran/` fixes the Duran Arabidopsis supplement at commit
+`6db5e85cc5d442fd95fcdcb7250b72fa9e2ff900`. Its 36 strictly paired samples
+form a balanced 3-soil × 3-compartment × 4-replicate design with bacterial,
+fungal, and oomycete count/taxonomy tables.
+
+`source-tracking-feast/` fixes the official FEAST demonstration at commit
+`2f8f3df8051e0e08341f597a9f4693bfb76b3bf6`: one sink, nine candidate-source
+samples, four source classes, and 1,839 anonymous features. Anonymous features
+remain anonymous; the tutorial does not invent taxonomy. Each directory's
+`source-summary.json` records upstream URLs, checksums, transformations, and
+reuse boundaries.
+
+## Articles 51–55 longitudinal and causal-inference inputs
+
+`longitudinal-dietswap/` contains the O'Keefe DietSwap object distributed with
+Bioconductor `microbiome 1.26.0`, serialized as an independent triad with 130
+features, 222 observations, 38 subjects, and six timepoints. The packaged
+source SHA-256 is
+`67cc6d117ce9dfbbc472fba828e1bb0d48c621fb574f4f8d3424f6cc9a77fdab`.
+The assay is a HITChip 16S phylogenetic microarray rather than amplicon
+sequencing; the repeated-measures workflow transfers, but assay preprocessing
+does not. Cite O'Keefe et al. 2015 and Dryad `10.5061/dryad.1mn1n`.
+
+Article 52 rereads the root wetland triad and `environment.tsv`; all SEM
+variables are measured environmental or community summaries rather than
+simulated covariates. Article 53 rereads `paired-ibd-multiomics/` and applies a
+prespecified complete-case contract to 108 samples; no intermediate object
+from Articles 46–48 is required.
+
+`mr-mibiogen/` contains TwoSampleMR-format exposure/outcome tables and the API
+selection ledger for MiBioGen `genus.Bifidobacterium.id.436` and IBD study
+GCST004131. The MiBioGen source SHA-256 is
+`37001a83d060596fe0b97b63d6a397f01f43a29add2925d406916b7a50b5883e`.
+Six cross-chromosome candidate instruments are frozen; the lack of ancestry-
+matched LD clumping, allele frequencies, Steiger inputs, and colocalisation
+statistics is explicitly retained as an analysis boundary.
+
+`causal-evidence/evidence-cases.tsv` is a seven-row, DOI-linked ledger of
+primary microbiome studies used by the no-code Article 55 reading framework.
+It records design capacity, bounded claims, and residual threats; it is not a
+numerical evidence score. Its SHA-256 is
+`a130da9f84a017a6224cf7b467aa49f898367bd0ce2886e30607f2921a333ab2`.
+
+Regenerate or audit the fixed bundles with:
+
+```bash
+R_LIBS_USER="$PWD/.r-lib" Rscript --vanilla \
+  scripts/prepare_articles_51_55_data.R
+python3 scripts/prepare_article54_mr_data.py
+```

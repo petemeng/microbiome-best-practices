@@ -1,0 +1,220 @@
+FeatureID	Kingdom	Phylum	Class	Order	Family	Genus	Species	Lineage	DisplayName
+OTU_14			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_19			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_34			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_40			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_12			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_11			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_20			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_20
+OTU_93			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_93
+OTU_6			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_62			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_57			Oomycetes	Pythiales	Pythiaceae			p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__;s__	Pythiaceae
+OTU_50			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_23			Oomycetes	Leptomitales	Apodachlya	Apodachlya	Apodachlya	p__;c__Oomycetes;o__Leptomitales;f__Apodachlya;g__Apodachlya;s__Apodachlya	Apodachlya
+OTU_5			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_13			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_7			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_100			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_15			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_3			Oomycetes	Peronosporales	Sclerosporaceae	Hyaloperonospora	Hyaloperonospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Hyaloperonospora;s__Hyaloperonospora	Hyaloperonospora
+OTU_8			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_67			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_29			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_9			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_9
+OTU_41			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_41
+OTU_2			Oomycetes	Albuginales	Albuginaceae	Albugo	Albugo	p__;c__Oomycetes;o__Albuginales;f__Albuginaceae;g__Albugo;s__Albugo	Albugo
+OTU_4			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_35			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_17			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_157			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_1			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_10			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_18			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_66			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_24			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_27			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_88			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_88
+OTU_69			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_22			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_215			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_123			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_123
+OTU_32			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_214			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_83			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_28			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_343			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_343
+OTU_148			Oomycetes	Peronosporales	Sclerosporaceae	Bremia	Bremia	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Bremia;s__Bremia	Bremia
+OTU_43			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_43
+OTU_243			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_47			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_121			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_33			Oomycetes	Peronosporales	Sclerosporaceae	Hyaloperonospora	Hyaloperonospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Hyaloperonospora;s__Hyaloperonospora	Hyaloperonospora
+OTU_85			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_85
+OTU_97			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_102			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_49			Oomycetes	Peronosporales	Sclerosporaceae	Hyaloperonospora	Hyaloperonospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Hyaloperonospora;s__Hyaloperonospora	Hyaloperonospora
+OTU_140			Oomycetes	Leptomitales	Apodachlya	Apodachlya	Apodachlya	p__;c__Oomycetes;o__Leptomitales;f__Apodachlya;g__Apodachlya;s__Apodachlya	Apodachlya
+OTU_39			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_91			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_91
+OTU_311			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_53			Oomycetes	Peronosporales	Sclerosporaceae	Paraperonospora	Paraperonospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Paraperonospora;s__Paraperonospora	Paraperonospora
+OTU_112			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_79			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_38			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_38
+OTU_30			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_26			Oomycetes	Peronosporales	Sclerosporaceae	Peronospora	Peronospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Peronospora;s__Peronospora	Peronospora
+OTU_250			Oomycetes	Pythiales	Pythiogetonaceae	Pythiogeton	Pythiogeton	p__;c__Oomycetes;o__Pythiales;f__Pythiogetonaceae;g__Pythiogeton;s__Pythiogeton	Pythiogeton
+OTU_128			Oomycetes	Peronosporales				p__;c__Oomycetes;o__Peronosporales;f__;g__;s__	OTU_128
+OTU_16			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_71			Oomycetes	Albuginales	Albuginaceae	Albugo	Albugo	p__;c__Oomycetes;o__Albuginales;f__Albuginaceae;g__Albugo;s__Albugo	Albugo
+OTU_45			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_87			Oomycetes	Peronosporales	Phytophthora	Phytophthora	Phytophthora	p__;c__Oomycetes;o__Peronosporales;f__Phytophthora;g__Phytophthora;s__Phytophthora	Phytophthora
+OTU_58			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_25			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_25
+OTU_173			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_241			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_54			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_54
+OTU_74			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_137			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_36			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_63			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_31			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_44			Oomycetes	Saprolegniales	Saprolegniaceae	Saprolegnia	Saprolegnia	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Saprolegnia;s__Saprolegnia	Saprolegnia
+OTU_75			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_75
+OTU_21			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_52			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_46			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_117			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_117
+OTU_146			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_146
+OTU_61			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_56			Oomycetes	Pythiales	Pythiaceae			p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__;s__	Pythiaceae
+OTU_370			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_72			Oomycetes	Leptomitales	Apodachlya	Apodachlya	Apodachlya	p__;c__Oomycetes;o__Leptomitales;f__Apodachlya;g__Apodachlya;s__Apodachlya	Apodachlya
+OTU_134			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_51			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_133			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_133
+OTU_78			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_78
+OTU_158			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_80			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_37			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_203			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_70			Oomycetes	Peronosporales	Sclerosporaceae	Hyaloperonospora	Hyaloperonospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Hyaloperonospora;s__Hyaloperonospora	Hyaloperonospora
+OTU_163			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_163
+OTU_55			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_77			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_59			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_59
+OTU_73			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_412			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_60			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_42			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_114			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_114
+OTU_96			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_96
+OTU_82			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_82
+OTU_204			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_136			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_89			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_217			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_217
+OTU_349			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_349
+OTU_116			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_64			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_48			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_120			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_115			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_90			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_206			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_409			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_119			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_119
+OTU_189			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_303			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_65			Oomycetes	Peronosporales	Sclerosporaceae	Hyaloperonospora	Hyaloperonospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Hyaloperonospora;s__Hyaloperonospora	Hyaloperonospora
+OTU_318			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_318
+OTU_94			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_101			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_139			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_150			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_390			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_390
+OTU_201			Oomycetes	Peronosporales	Sclerosporaceae	Peronospora	Peronospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Peronospora;s__Peronospora	Peronospora
+OTU_95			Oomycetes	Pythiales	Pythiogetonaceae	Pythiogeton	Pythiogeton	p__;c__Oomycetes;o__Pythiales;f__Pythiogetonaceae;g__Pythiogeton;s__Pythiogeton	Pythiogeton
+OTU_107			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_364			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_109			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_109
+OTU_153			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_141			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_131			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_131
+OTU_76			Oomycetes	Peronosporales	Sclerosporaceae	Peronospora	Peronospora	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Peronospora;s__Peronospora	Peronospora
+OTU_68			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_365			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_81			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_81
+OTU_98			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_98
+OTU_182			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_161			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_111			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_104			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_104
+OTU_142			Oomycetes	Albuginales	Albuginaceae	Albugo	Albugo	p__;c__Oomycetes;o__Albuginales;f__Albuginaceae;g__Albugo;s__Albugo	Albugo
+OTU_105			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_105
+OTU_84			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_84
+OTU_130			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_130
+OTU_196			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_196
+OTU_369			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_190			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_188			Oomycetes	Lagenidiales	Lagenidiaceae	Lagenidium	Lagenidium	p__;c__Oomycetes;o__Lagenidiales;f__Lagenidiaceae;g__Lagenidium;s__Lagenidium	Lagenidium
+OTU_92			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_92
+OTU_106			Oomycetes	Leptomitales	Apodachlya	Apodachlya	Apodachlya	p__;c__Oomycetes;o__Leptomitales;f__Apodachlya;g__Apodachlya;s__Apodachlya	Apodachlya
+OTU_149			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_149
+OTU_147			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_144			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_138			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_138
+OTU_361			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_361
+OTU_156			Oomycetes	Lagenidiales	Lagenidiaceae	Lagenidium	Lagenidium	p__;c__Oomycetes;o__Lagenidiales;f__Lagenidiaceae;g__Lagenidium;s__Lagenidium	Lagenidium
+OTU_99			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_236			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_236
+OTU_113			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_271			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_103			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_129			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_118			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_126			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_126
+OTU_110			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_162			Oomycetes	Peronosporales	Phytophthora	Phytophthora	Phytophthora	p__;c__Oomycetes;o__Peronosporales;f__Phytophthora;g__Phytophthora;s__Phytophthora	Phytophthora
+OTU_172			Oomycetes	Peronosporales	Phytophthora	Phytophthora	Phytophthora	p__;c__Oomycetes;o__Peronosporales;f__Phytophthora;g__Phytophthora;s__Phytophthora	Phytophthora
+OTU_125			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_366			Oomycetes	Lagenidiales	Lagenidiaceae	Lagenidium	Lagenidium	p__;c__Oomycetes;o__Lagenidiales;f__Lagenidiaceae;g__Lagenidium;s__Lagenidium	Lagenidium
+OTU_124			Oomycetes	Peronosporales	Sclerosporaceae	Bremia	Bremia	p__;c__Oomycetes;o__Peronosporales;f__Sclerosporaceae;g__Bremia;s__Bremia	Bremia
+OTU_193			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_132			Oomycetes	Leptomitales	Apodachlya	Apodachlya	Apodachlya	p__;c__Oomycetes;o__Leptomitales;f__Apodachlya;g__Apodachlya;s__Apodachlya	Apodachlya
+OTU_178			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_178
+OTU_312			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_312
+OTU_305			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_305
+OTU_145			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_127			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_269			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_122			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_221			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_191			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_175			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_175
+OTU_86			Oomycetes	Pythiales	Pythiogetonaceae	Pythiogeton	Pythiogeton	p__;c__Oomycetes;o__Pythiales;f__Pythiogetonaceae;g__Pythiogeton;s__Pythiogeton	Pythiogeton
+OTU_155			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_155
+OTU_205			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_205
+OTU_168			Oomycetes	Saprolegniales	Saprolegniaceae	Saprolegnia	Saprolegnia	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Saprolegnia;s__Saprolegnia	Saprolegnia
+OTU_233			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_209			Oomycetes	Saprolegniales	Saprolegniaceae	Aphanomyces	Aphanomyces	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Aphanomyces;s__Aphanomyces	Aphanomyces
+OTU_319			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_319
+OTU_165			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_219			Oomycetes	Pythiales	Pythiaceae			p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__;s__	Pythiaceae
+OTU_208			Oomycetes	Peronosporales				p__;c__Oomycetes;o__Peronosporales;f__;g__;s__	OTU_208
+OTU_167			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_174			Oomycetes	Saprolegniales	Saprolegniaceae	Saprolegnia	Saprolegnia	p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__Saprolegnia;s__Saprolegnia	Saprolegnia
+OTU_207			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_207
+OTU_199			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_199
+OTU_151			Oomycetes	Saprolegniales	Saprolegniaceae			p__;c__Oomycetes;o__Saprolegniales;f__Saprolegniaceae;g__;s__	Saprolegniaceae
+OTU_300			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_300
+OTU_247			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_244			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_244
+OTU_177			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_177
+OTU_388			Oomycetes	Peronosporales				p__;c__Oomycetes;o__Peronosporales;f__;g__;s__	OTU_388
+OTU_342			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_342
+OTU_225			Oomycetes	Pythiales	Pythiaceae	Pythium	Pythium	p__;c__Oomycetes;o__Pythiales;f__Pythiaceae;g__Pythium;s__Pythium	Pythium
+OTU_284			Oomycetes	Peronosporales				p__;c__Oomycetes;o__Peronosporales;f__;g__;s__	OTU_284
+OTU_315			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_315
+OTU_227			Oomycetes					p__;c__Oomycetes;o__;f__;g__;s__	OTU_227

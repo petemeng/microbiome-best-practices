@@ -16,7 +16,8 @@ required <- c(
   "microeco/data/otu_table_16S.RData",
   "microeco/data/taxonomy_table_16S.RData",
   "microeco/data/sample_info_16S.RData",
-  "microeco/data/env_data_16S.RData"
+  "microeco/data/env_data_16S.RData",
+  "microeco/data/phylo_tree_16S.RData"
 )
 
 extract_dir <- tempfile("microeco-data-")
@@ -37,10 +38,13 @@ otu <- get("otu_table_16S", envir = data_env)
 taxonomy <- get("taxonomy_table_16S", envir = data_env)
 metadata <- get("sample_info_16S", envir = data_env)
 environment <- get("env_data_16S", envir = data_env)
+phylo_tree <- get("phylo_tree_16S", envir = data_env)
 
 feature_ids_match <- identical(rownames(otu), rownames(taxonomy))
 sample_ids_match <- identical(colnames(otu), rownames(metadata))
-if (!feature_ids_match || !sample_ids_match) {
+tree_contains_all_features <- all(rownames(otu) %in% phylo_tree$tip.label)
+tree_extra_tips <- sum(!phylo_tree$tip.label %in% rownames(otu))
+if (!feature_ids_match || !sample_ids_match || !tree_contains_all_features) {
   stop("microeco feature or sample identifiers do not align")
 }
 
@@ -68,6 +72,15 @@ write_tsv(taxonomy, "FeatureID", file.path(output_dir, "taxonomy.tsv"))
 write_tsv(metadata, "SampleID", file.path(output_dir, "metadata.tsv"))
 write_tsv(environment, "SampleID", file.path(output_dir, "environment.tsv"))
 
+if (!requireNamespace("ape", quietly = TRUE)) {
+  stop("Package 'ape' is required to export phylo_tree_16S")
+}
+tree_text <- paste0(ape::write.tree(phylo_tree), "\n")
+tree_path <- file.path(output_dir, "rooted-tree.nwk.gz")
+tree_connection <- gzfile(tree_path, open = "wb", compression = 9)
+writeLines(tree_text, tree_connection, useBytes = TRUE)
+close(tree_connection)
+
 common_environment_samples <- sum(rownames(metadata) %in% rownames(environment))
 json_lines <- c(
   "{",
@@ -78,6 +91,11 @@ json_lines <- c(
   sprintf('  "environment_samples": %d,', nrow(environment)),
   sprintf('  "environment_variables": %d,', ncol(environment)),
   sprintf('  "common_environment_samples": %d,', common_environment_samples),
+  sprintf('  "tree_tips": %d,', ape::Ntip(phylo_tree)),
+  sprintf('  "tree_internal_nodes": %d,', ape::Nnode(phylo_tree)),
+  sprintf('  "tree_rooted": %s,', tolower(as.character(ape::is.rooted(phylo_tree)))),
+  sprintf('  "tree_contains_all_features": %s,', tolower(as.character(tree_contains_all_features))),
+  sprintf('  "tree_extra_tips": %d,', tree_extra_tips),
   sprintf('  "feature_ids_match": %s,', tolower(as.character(feature_ids_match))),
   sprintf('  "sample_ids_match": %s', tolower(as.character(sample_ids_match))),
   "}"

@@ -1,0 +1,5 @@
+Region	Samples	MantelRho	PermutationP
+Pooled; permutations within region	90	0.584639282362346	0.001
+CW	30	0.617192355968025	0.001
+IW	30	0.413639445021919	0.001
+TW	30	0.0397138512720556	0.287

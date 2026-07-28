@@ -1,0 +1,49 @@
+{
+  "dataset": "PICRUSt2 chemerin 16S tutorial data",
+  "dimensions": {
+    "facility_counts": {
+      "Dalhousie": 12,
+      "PaloAlto": 12
+    },
+    "features": 37,
+    "genotype_counts": {
+      "KO": 14,
+      "WT": 10
+    },
+    "reads": 108718,
+    "samples": 24
+  },
+  "files": {
+    "metadata.tsv": {
+      "bytes": 547,
+      "sha256": "65d1701a064e2aa107d859113a0fd9d25eda105f65f2e2fa4ab8b74f8b57866b"
+    },
+    "otutab.tsv": {
+      "bytes": 4110,
+      "sha256": "4a55f85c3cd575656a8d46b8aae67396ebbe1d4030666a19749637f869e93f02"
+    },
+    "representative-sequences.fasta": {
+      "bytes": 16243,
+      "sha256": "4951d5779f02dc988fb68e88e19490dfbc5471a373ede8589a78e5b8e321f959"
+    },
+    "representative-sequences.fasta.gz": {
+      "bytes": 2866,
+      "sha256": "bda9901065f72787157e8338b77e24c9428996795de24417322579a53020a5e0"
+    },
+    "table.biom": {
+      "bytes": 35888,
+      "sha256": "2924222ae592a5ab68949a62756c7eee4673374ee6d58bd2e5d3eddf82f2c3a6"
+    },
+    "taxonomy.tsv": {
+      "bytes": 1538,
+      "sha256": "9899a71f840f6fb8a932a922a168c08dffaf7495fcdab097022505dca4c50a33"
+    }
+  },
+  "source_url": "http://kronos.pharmacology.dal.ca/public_files/picrust/picrust2_tutorial_files/chemerin_16S.zip",
+  "taxonomy_boundary": "The official tutorial archive does not distribute taxonomy; taxonomy.tsv intentionally contains blank ranks because PICRUSt2 uses representative sequences.",
+  "tutorial_url": "https://github.com/picrust/picrust2/wiki/PICRUSt2-Tutorial-(v2.5.0)",
+  "upstream_archive": {
+    "bytes": 9732,
+    "sha256": "f57abdc069b6560f0ddb739cf9a341f5679b12f4947f4db2ad5e2cab893669e9"
+  }
+}

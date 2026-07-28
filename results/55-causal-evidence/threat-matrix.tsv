@@ -1,0 +1,43 @@
+LevelName	Threat	Risk
+Cross-sectional association	Confounding	High
+Longitudinal temporality	Confounding	High
+Mediation or MR triangulation	Confounding	Moderate
+Human intervention	Confounding	Lower
+Experimental transfer	Confounding	Lower
+Culture or rescue	Confounding	Lower
+Molecular mechanism	Confounding	Lower
+Cross-sectional association	Reverse causation	High
+Longitudinal temporality	Reverse causation	Moderate
+Mediation or MR triangulation	Reverse causation	Lower
+Human intervention	Reverse causation	Lower
+Experimental transfer	Reverse causation	Lower
+Culture or rescue	Reverse causation	Lower
+Molecular mechanism	Reverse causation	Lower
+Cross-sectional association	Compositional bias	High
+Longitudinal temporality	Compositional bias	High
+Mediation or MR triangulation	Compositional bias	Moderate
+Human intervention	Compositional bias	Moderate
+Experimental transfer	Compositional bias	Moderate
+Culture or rescue	Compositional bias	Moderate
+Molecular mechanism	Compositional bias	Moderate
+Cross-sectional association	Host-context transfer	Not tested
+Longitudinal temporality	Host-context transfer	Not tested
+Mediation or MR triangulation	Host-context transfer	Not tested
+Human intervention	Host-context transfer	Not tested
+Experimental transfer	Host-context transfer	High
+Culture or rescue	Host-context transfer	Moderate
+Molecular mechanism	Host-context transfer	Moderate
+Cross-sectional association	Intervention specificity	Not tested
+Longitudinal temporality	Intervention specificity	Not tested
+Mediation or MR triangulation	Intervention specificity	Not tested
+Human intervention	Intervention specificity	Moderate
+Experimental transfer	Intervention specificity	Moderate
+Culture or rescue	Intervention specificity	Lower
+Molecular mechanism	Intervention specificity	Lower
+Cross-sectional association	Mechanism ambiguity	High
+Longitudinal temporality	Mechanism ambiguity	High
+Mediation or MR triangulation	Mechanism ambiguity	Moderate
+Human intervention	Mechanism ambiguity	Moderate
+Experimental transfer	Mechanism ambiguity	Moderate
+Culture or rescue	Mechanism ambiguity	Lower
+Molecular mechanism	Mechanism ambiguity	Lower

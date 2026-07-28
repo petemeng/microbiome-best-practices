@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "seed": 20260726,
+  "samples": 10,
+  "sink_samples": 1,
+  "source_samples": 9,
+  "source_classes": [
+    "Infant gut",
+    "Adult gut",
+    "Adult skin",
+    "Soil"
+  ],
+  "taxa": 1839,
+  "coverage": 5000,
+  "alpha1": 0.001,
+  "alpha2": 0.001,
+  "beta": 10,
+  "restarts": 10,
+  "draws_per_restart": 2,
+  "burnin": 100,
+  "delay": 10,
+  "main_largest_source_class": "Infant gut",
+  "main_unknown": 0.004399999999999999,
+  "leave_one_out_samples": 8,
+  "leave_one_out_known_class_accuracy": 0.5,
+  "versions": {
+    "python": "3.10.20",
+    "sourcetracker": "2.0.1",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3"
+  }
+}

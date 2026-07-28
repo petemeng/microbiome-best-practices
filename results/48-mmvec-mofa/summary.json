@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "seed": 20260726,
+  "samples": 220,
+  "microbe_features": 100,
+  "metabolite_features": 120,
+  "spearman_tested_pairs": 12000,
+  "spearman_fdr_hits": 4166,
+  "cca_canonical_correlations": [
+    0.9997625482324894,
+    0.9993638236488163,
+    0.9990188798343462
+  ],
+  "mmvec_implementation": "biocore/mmvec native MMvec class",
+  "mmvec_train_samples": 153,
+  "mmvec_holdout_samples": 67,
+  "mmvec_epochs_run": 100,
+  "mmvec_best_epoch_one_based": 100,
+  "mmvec_best_validation_mae": 1844.2938232421875,
+  "mmvec_probability_max_row_sum_error": 6.8833827526759706e-15,
+  "spearman_mmvec_top50_pair_overlap": 0,
+  "mofa_factors_retained": 4,
+  "mofa_total_variance_explained_by_view": {
+    "Metabolome": 0.3259248380408615,
+    "Microbiome": 0.34829472134082795
+  },
+  "mofa_group_associated_factors_fdr": 3,
+  "versions": {
+    "python": "3.10.19",
+    "mmvec": "1.0.5",
+    "tensorflow": "1.15.0",
+    "mofapy2": "0.7.4",
+    "scikit_learn": "1.7.2"
+  }
+}

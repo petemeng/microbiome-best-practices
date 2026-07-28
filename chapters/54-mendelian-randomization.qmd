@@ -1,11 +1,544 @@
 ---
 title: "第 54 篇 · 孟德尔随机化：工具变量、水平多效性与敏感性分析"
-draft: true
+author: "微生物组分析最佳实践 · 16S 系列"
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    number-sections: true
 execute:
-  eval: false
+  eval: true
+  freeze: auto
+  warning: false
+  message: false
+fig-dpi: 300
+fig-format: png
 ---
 
-<!--
-Planned chapter. It must not be published until its public data, literature,
-commands, outputs, and assertions are added to tutorial.yaml and pass QA.
--->
+> **分析目标：**用 two-sample Mendelian randomization（MR）评估遗传预测的 `Bifidobacterium` 菌属丰度与炎症性肠病（IBD）风险，并系统审计工具强度、等位基因对齐、水平多效性、方向性和共定位。  
+> **额外数据：**MR 不能从 `otutab/taxonomy/metadata` 直接计算；必须另有暴露 GWAS 与结局 GWAS 的逐 SNP 汇总统计，至少包括 effect/other allele、beta、SE、P 值，最好还有 effect-allele frequency 与完整位点统计。  
+> **预计资源：**教学子集为 6 个候选 SNP、5 个对齐后工具；2,000 次 MR-PRESSO 模拟约 1–3 分钟，内存低于 1 GB。
+
+## 这一步对应论文里的哪张图 {#sec-target}
+
+微生物组 MR 论文通常包含：SNP 暴露效应–结局效应散点图、多个 MR 估计器的森林图、leave-one-out 图，以及异质性/多效性诊断。它们试图回答：
+
+> 携带使某个微生物性状长期偏高的遗传变异者，结局风险是否也沿一致方向改变？这种关系能否用水平多效性、反向因果或共享关联位点解释？
+
+本例的暴露来自 MiBioGen 联盟 24 个队列的菌群 GWAS，选取 `genus.Bifidobacterium.id.436`；结局来自 de Lange 等人的 IBD GWAS（GCST004131，25,042 病例、34,915 对照）。[MiBioGen 论文](https://doi.org/10.1038/s41588-020-00763-1)、[IBD GWAS 论文](https://doi.org/10.1038/ng.3760)、[MiBioGen 官方汇总文件](https://molgenis26.gcc.rug.nl/downloads/MiBioGen/MBG.allHits.p1e4.txt)和[NHGRI-EBI GWAS Catalog](https://www.ebi.ac.uk/gwas/)提供来源。
+
+为了让单篇可运行，这里冻结 MiBioGen P < 5×10^-6、且在结局 API 中可取到的 6 个跨染色体候选位点。**一条染色体取一个 SNP 只能保证它们不在同一染色体，并不替代与暴露祖源匹配的 LD clumping。** 因此这是用于演示全流程的审计型分析，不是可直接投稿的最终工具集。
+
+::: {.callout-important title="MR 不是“有遗传数据就自动因果”"}
+MR 的因果解释依赖三个不可由一次回归完全验证的假设：工具与暴露相关；工具不受暴露–结局混杂影响；工具只经暴露影响结局。菌群 GWAS 的弱工具、祖源差异、菌定义不一致、水平多效性和宿主位点共享尤其容易破坏这些条件。
+:::
+
+## 理论：三项工具变量假设 {#sec-theory}
+
+对工具 SNP (G_j)、微生物暴露 (X) 和结局 (Y)，Wald ratio 为：
+
+\[
+\hat\beta_{MR,j}=\frac{\hat\beta_{Y G,j}}{\hat\beta_{X G,j}}.
+\]
+
+IVW（inverse-variance weighted）将多个 ratio 按精度合并。它依赖：
+
+1. **Relevance（相关性）**：(G\) 能预测 (X\)。常用近似 (F=(\beta_X/SE_X)^2\)，但 F > 10 只是经验筛查，不是强工具保证。
+2. **Independence（独立性）**：(G\) 与 (X-Y\) 混杂因素独立；人群分层、家系结构和择偶可破坏它。
+3. **Exclusion restriction（排除限制）**：(G\) 不经 (X\) 之外的路径影响 (Y\)。这正是水平多效性的核心风险。
+
+<details>
+<summary><strong>深入：不同敏感性估计器保护什么</strong></summary>
+
+- **IVW**：在所有工具有效，或无方向性多效性时效率高；异质性提示 ratio 不一致。
+- **MR-Egger**：截距检验平均方向性多效性，斜率在 InSIDE 假设下可较稳健，但工具少时功效极低且易受弱工具影响。
+- **Weighted median**：当至少一半权重来自有效工具时可一致。
+- **Mode estimators**：假设最大的一簇相似 ratio 来自有效工具，通常区间较宽。
+- **MR-PRESSO**：寻找异常多效性工具并比较校正前后结果；没有检测到 outlier 不等于没有多效性。
+
+所有方法都可能在共同假设同时失败时一致地给出错误答案。敏感性分析的价值是压力测试，不是“多数投票即真”。
+
+</details>
+
+### 微生物 MR 的专属审计
+
+- 暴露 GWAS 中的“属”可能由不同 16S 区域、分类库、相对丰度变换和 cohort-specific prevalence 定义；
+- 暴露 beta 的一单位到底代表标准化丰度、presence/absence 还是秩正态值，决定效应量如何解释；
+- 两个 GWAS 的祖源、样本重叠和协变量策略影响偏倚；
+- 同一宿主位点同时关联菌和 IBD，不代表由菌介导；需要 locus colocalisation 区分共享因果变异与 LD 中的两个信号。
+
+## 准备工作 {#sec-setup}
+
+<details>
+<summary><strong>展开：安装依赖、下载公开汇总统计和定义作图函数</strong></summary>
+
+首次运行安装：
+
+```{r}
+#| eval: false
+install.packages(c(
+  "remotes", "jsonlite", "digest", "ggplot2", "ggrepel", "patchwork",
+  "scales", "svglite", "ragg"
+))
+remotes::install_github("MRCIEU/TwoSampleMR@v0.6.6")
+remotes::install_github("rondolab/MR-PRESSO")
+```
+
+下面从 MiBioGen 官方文件筛选预先指定的候选 SNP，并从 GWAS Catalog summary-statistics API 取得 GCST004131 的对齐记录。原始 API JSON 应保留，以便将来审计接口内容变化。
+
+```{r}
+#| eval: false
+mibiogen_path <- "data/raw/MBG.allHits.p1e4.txt"
+mibiogen_url <- "https://molgenis26.gcc.rug.nl/downloads/MiBioGen/MBG.allHits.p1e4.txt"
+expected_sha <- "37001a83d060596fe0b97b63d6a397f01f43a29add2925d406916b7a50b5883e"
+raw_api <- "data/raw/mr-mibiogen"
+out_dir <- "data/small/mr-mibiogen"
+dir.create(dirname(mibiogen_path), recursive = TRUE, showWarnings = FALSE)
+dir.create(raw_api, recursive = TRUE, showWarnings = FALSE)
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+if (!file.exists(mibiogen_path)) download.file(mibiogen_url, mibiogen_path, mode = "wb")
+stopifnot(identical(
+  digest::digest(mibiogen_path, algo = "sha256", file = TRUE), expected_sha
+))
+
+exposure_id <- "genus.Bifidobacterium.id.436"
+outcome_id <- "GCST004131"
+rsids <- c("rs182549", "rs73797465", "rs857444", "rs10841473", "rs7322849", "rs75344046")
+mbg <- read.delim(mibiogen_path, check.names = FALSE)
+x <- mbg[mbg$bac == exposure_id & mbg$rsID %in% rsids, ]
+x <- x[match(rsids, x$rsID), ]
+stopifnot(nrow(x) == 6, all(x$P.weightedSumZ < 5e-6), !anyDuplicated(x$chr))
+exposure <- data.frame(
+  SNP = x$rsID, exposure = "Bifidobacterium genus abundance",
+  id.exposure = exposure_id,
+  chr.exposure = x$chr, pos.exposure = x$bp,
+  effect_allele.exposure = toupper(x$eff.allele),
+  other_allele.exposure = toupper(x$ref.allele),
+  beta.exposure = x$beta, se.exposure = x$SE,
+  pval.exposure = x$P.weightedSumZ, eaf.exposure = NA_real_,
+  samplesize.exposure = x$N, ncohorts.exposure = x$Ncohorts,
+  check.names = FALSE
+)
+exposure$FStatistic <- (exposure$beta.exposure / exposure$se.exposure)^2
+
+priority <- c(`10` = 1, `5` = 2, `12` = 3, `11` = 4, `6` = 5, `13` = 6)
+get_outcome <- function(rsid) {
+  url <- paste0(
+    "https://www.ebi.ac.uk/gwas/summary-statistics/api/associations/",
+    rsid, "?study_accession=", outcome_id, "&reveal=all"
+  )
+  cache <- file.path(raw_api, paste0(outcome_id, "-", rsid, ".json"))
+  if (!file.exists(cache)) download.file(url, cache, mode = "wb",
+                                        headers = "User-Agent: microbiome-best-practices/1.0")
+  payload <- jsonlite::read_json(cache, simplifyVector = FALSE)
+  rows <- payload[["_embedded"]][["associations"]]
+  usable <- Filter(function(z) {
+    identical(z$study_accession, outcome_id) &&
+      !is.null(z$hm_effect_allele) && !is.null(z$hm_other_allele) &&
+      !is.null(z$hm_beta) && !is.null(z$standard_error)
+  }, rows)
+  rank <- vapply(usable, function(z) priority[as.character(z$hm_code)], numeric(1))
+  z <- usable[[which.min(rank)]]
+  data.frame(
+    SNP = rsid, outcome = "Inflammatory bowel disease", id.outcome = outcome_id,
+    chr.outcome = z$chromosome, pos.outcome = z$base_pair_location,
+    effect_allele.outcome = toupper(z$hm_effect_allele),
+    other_allele.outcome = toupper(z$hm_other_allele),
+    beta.outcome = z$hm_beta, se.outcome = z$standard_error,
+    pval.outcome = z$p_value, samplesize.outcome = 59957,
+    ncase.outcome = 25042, ncontrol.outcome = 34915,
+    eaf.outcome = NA_real_, check.names = FALSE
+  )
+}
+outcome <- do.call(rbind, lapply(rsids, get_outcome))
+write.table(exposure, file.path(out_dir, "exposure.tsv"), sep = "\t",
+            quote = FALSE, row.names = FALSE, na = "")
+write.table(outcome, file.path(out_dir, "outcome.tsv"), sep = "\t",
+            quote = FALSE, row.names = FALSE, na = "")
+```
+
+出版级作图函数直接内联：
+
+```{r}
+.libPaths(c(".r-lib", .libPaths()))
+library(TwoSampleMR)
+library(MRPRESSO)
+library(ggplot2)
+library(ggrepel)
+library(patchwork)
+
+set.seed(20260754)
+font_pub <- "DejaVu Sans"
+pal_pub <- c(
+  blue = "#0072B2", orange = "#E69F00", green = "#009E73",
+  vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
+  yellow = "#F0E442", grey = "#6B7280"
+)
+scale_color_pub <- function(..., values = unname(pal_pub)) {
+  ggplot2::scale_color_manual(..., values = values)
+}
+scale_fill_pub <- function(..., values = unname(pal_pub)) {
+  ggplot2::scale_fill_manual(..., values = values)
+}
+theme_pub <- function(base_size = 10, base_family = font_pub) {
+  ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_line(colour = "#E6E6E6", linewidth = 0.25),
+      axis.text = ggplot2::element_text(colour = "#1A1A1A"),
+      axis.title = ggplot2::element_text(colour = "#1A1A1A"),
+      plot.title.position = "plot",
+      plot.title = ggplot2::element_text(face = "bold", size = ggplot2::rel(1.15)),
+      plot.subtitle = ggplot2::element_text(colour = "#4D4D4D"),
+      legend.position = "top", legend.key = ggplot2::element_blank()
+    )
+}
+save_pub <- function(plot, file_base, width = 180, height = 115,
+                     units = "mm", dpi = 600) {
+  dir.create(dirname(file_base), recursive = TRUE, showWarnings = FALSE)
+  ggplot2::ggsave(paste0(file_base, ".pdf"), plot, width = width,
+                  height = height, units = units,
+                  device = grDevices::cairo_pdf, family = font_pub, bg = "white")
+  ggplot2::ggsave(paste0(file_base, ".svg"), plot, width = width,
+                  height = height, units = units, device = svglite::svglite,
+                  bg = "white")
+  ggplot2::ggsave(paste0(file_base, ".png"), plot, width = width,
+                  height = height, units = units, dpi = dpi,
+                  device = ragg::agg_png, bg = "white")
+  ggplot2::ggsave(paste0(file_base, ".tiff"), plot, width = width,
+                  height = height, units = units, dpi = dpi,
+                  device = ragg::agg_tiff, compression = "lzw", bg = "white")
+  invisible(plot)
+}
+```
+
+整套项目可使用内容相同的 `R/theme_pub.R`；单篇复制时保留以上函数。
+
+</details>
+
+## 可复制代码 {#sec-code}
+
+### 1. 读取并审计暴露/结局汇总统计
+
+```{r}
+base <- "data/small/mr-mibiogen"
+exposure <- read.delim(
+  file.path(base, "exposure.tsv"), check.names = FALSE, stringsAsFactors = FALSE
+)
+outcome <- read.delim(
+  file.path(base, "outcome.tsv"), check.names = FALSE, stringsAsFactors = FALSE
+)
+stopifnot(
+  nrow(exposure) == 6,
+  identical(exposure$SNP, outcome$SNP),
+  length(unique(exposure$chr.exposure)) == nrow(exposure),
+  all(exposure$FStatistic > 10)
+)
+exposure
+outcome
+```
+
+候选工具的最小近似 F = 20.77，但最弱位点仍只达到暴露 GWAS 的 suggestive threshold，而非传统 genome-wide significance。菌群性状遗传解释度较低时，F 筛查不能替代弱工具稳健分析。
+
+### 2. 等位基因 harmonisation
+
+同一个 SNP 在两份 GWAS 中可能以相反 effect allele 报告。`harmonise_data(action = 2)` 对齐方向，并在缺少 allele frequency 时删除不能可靠判向的 palindromic SNP。
+
+```{r}
+harmonised <- TwoSampleMR::harmonise_data(exposure, outcome, action = 2)
+harmonisation_ledger <- harmonised[, c(
+  "SNP", "effect_allele.exposure", "other_allele.exposure",
+  "effect_allele.outcome", "other_allele.outcome",
+  "beta.exposure", "beta.outcome", "palindromic", "ambiguous",
+  "mr_keep", "remove", "action"
+)]
+harmonisation_ledger
+analysis_data <- harmonised[harmonised$mr_keep, , drop = FALSE]
+stopifnot(nrow(analysis_data) == 5)
+```
+
+`rs10841473` 是 C/G palindromic SNP，且两份紧凑表没有 effect-allele frequency，无法判断 strand，因而删除。不能为了增加工具数而强行保留。
+
+### 3. 主估计与稳健估计器
+
+```{r}
+methods <- c(
+  "mr_ivw", "mr_egger_regression", "mr_weighted_median",
+  "mr_simple_mode", "mr_weighted_mode"
+)
+set.seed(20260754)
+mr_results <- TwoSampleMR::mr(analysis_data, method_list = methods)
+mr_results$Lower <- mr_results$b - qnorm(0.975) * mr_results$se
+mr_results$Upper <- mr_results$b + qnorm(0.975) * mr_results$se
+mr_results$OR <- exp(mr_results$b)
+mr_results$ORLower <- exp(mr_results$Lower)
+mr_results$ORUpper <- exp(mr_results$Upper)
+mr_results[, c("method", "nsnp", "b", "se", "pval", "Lower", "Upper", "OR")]
+```
+
+IVW 估计为 −0.0167（SE = 0.1065，P = 0.876），对应 OR = 0.984（95% CI 0.798–1.212）。MR-Egger、weighted median 和两种 mode 的区间也均包含零。这里的“每单位更高 abundance”沿用 MiBioGen 暴露标度，不能写成“每增加 1% 相对丰度”。
+
+### 4. 散点图：每个 SNP 的方向与方法斜率
+
+```{r}
+ivw <- mr_results[mr_results$method == "Inverse variance weighted", ]
+egger <- mr_results[mr_results$method == "MR Egger", ]
+median <- mr_results[mr_results$method == "Weighted median", ]
+egger_intercept <- TwoSampleMR::mr_pleiotropy_test(analysis_data)
+line_data <- data.frame(
+  Method = c("IVW", "MR Egger", "Weighted median"),
+  Intercept = c(0, egger_intercept$egger_intercept, 0),
+  Slope = c(ivw$b, egger$b, median$b)
+)
+method_colours <- c(
+  IVW = pal_pub[["blue"]],
+  `MR Egger` = pal_pub[["vermillion"]],
+  `Weighted median` = pal_pub[["green"]]
+)
+p_scatter <- ggplot(
+  analysis_data, aes(beta.exposure, beta.outcome, label = SNP)
+) +
+  geom_errorbar(
+    aes(ymin = beta.outcome - 1.96 * se.outcome,
+        ymax = beta.outcome + 1.96 * se.outcome),
+    width = 0, colour = "#888888"
+  ) +
+  geom_errorbarh(
+    aes(xmin = beta.exposure - 1.96 * se.exposure,
+        xmax = beta.exposure + 1.96 * se.exposure),
+    height = 0, colour = "#888888"
+  ) +
+  geom_point(size = 2.3, colour = "#202020") +
+  ggrepel::geom_text_repel(
+    seed = 20260754, size = 2.8, max.overlaps = Inf,
+    min.segment.length = 0, box.padding = 0.35, point.padding = 0.25
+  ) +
+  geom_abline(
+    data = line_data,
+    aes(intercept = Intercept, slope = Slope, colour = Method), linewidth = 0.9
+  ) +
+  scale_colour_manual(values = method_colours) +
+  coord_cartesian(xlim = range(analysis_data$beta.exposure) * 1.15) +
+  labs(
+    title = "Harmonised SNP effects do not share a stable causal slope",
+    subtitle = "Five non-ambiguous instruments; error bars are 95% confidence intervals",
+    x = "SNP effect on Bifidobacterium abundance",
+    y = "SNP effect on log-odds of IBD", colour = "MR method"
+  ) + theme_pub(10)
+p_scatter
+save_pub(p_scatter, "figures/54-mendelian-randomization/54-1-harmonised-scatter",
+         height = 120)
+```
+
+### 5. 森林图：不要只报告 IVW
+
+```{r}
+mr_results$method <- factor(
+  mr_results$method,
+  levels = rev(c(
+    "Inverse variance weighted", "MR Egger", "Weighted median",
+    "Simple mode", "Weighted mode"
+  ))
+)
+p_methods <- ggplot(mr_results, aes(b, method)) +
+  geom_vline(xintercept = 0, linetype = 2, colour = "#777777") +
+  geom_errorbarh(aes(xmin = Lower, xmax = Upper), height = 0,
+                 colour = pal_pub[["grey"]]) +
+  geom_point(aes(colour = method == "Inverse variance weighted"), size = 2.5) +
+  scale_colour_manual(values = c(
+    `FALSE` = pal_pub[["grey"]], `TRUE` = pal_pub[["blue"]]
+  )) +
+  labs(
+    title = "Sensitivity estimators all include the null",
+    subtitle = "Effects are log-odds of IBD per unit higher genetically predicted abundance",
+    x = "MR estimate (95% confidence interval)", y = NULL
+  ) + theme_pub(10) + theme(legend.position = "none")
+p_methods
+save_pub(p_methods, "figures/54-mendelian-randomization/54-2-method-forest",
+         height = 110)
+```
+
+## 审计与升级 {#sec-audit}
+
+### 异质性、Egger 截距与 MR-PRESSO
+
+```{r}
+heterogeneity <- TwoSampleMR::mr_heterogeneity(analysis_data)
+egger_intercept <- TwoSampleMR::mr_pleiotropy_test(analysis_data)
+heterogeneity
+egger_intercept
+
+set.seed(20260754)
+presso <- MRPRESSO::mr_presso(
+  BetaOutcome = "beta.outcome", BetaExposure = "beta.exposure",
+  SdOutcome = "se.outcome", SdExposure = "se.exposure",
+  OUTLIERtest = TRUE, DISTORTIONtest = TRUE,
+  data = analysis_data, NbDistribution = 2000, SignifThreshold = 0.05
+)
+presso[["Main MR results"]]
+presso[["MR-PRESSO results"]][["Global Test"]]
+```
+
+IVW Cochran's Q P = 0.106，Egger intercept = −0.0075（P = 0.825），MR-PRESSO global P = 0.183，未检测到 outlier。只有 5 个工具时这些检验功效很低，因此结果应写作“未发现多效性信号”，而不是“证明不存在多效性”。
+
+### Leave-one-out 只能发现单点主导
+
+```{r}
+leave_one_out <- TwoSampleMR::mr_leaveoneout(analysis_data)
+leave_one_out$Lower <- leave_one_out$b - qnorm(0.975) * leave_one_out$se
+leave_one_out$Upper <- leave_one_out$b + qnorm(0.975) * leave_one_out$se
+leave_one_out$Label <- ifelse(
+  leave_one_out$SNP == "All", "All instruments", paste("Remove", leave_one_out$SNP)
+)
+leave_one_out$Label <- factor(leave_one_out$Label, levels = rev(leave_one_out$Label))
+p_loo <- ggplot(leave_one_out, aes(b, Label)) +
+  geom_vline(xintercept = 0, linetype = 2, colour = "#777777") +
+  geom_errorbarh(aes(xmin = Lower, xmax = Upper), height = 0,
+                 colour = pal_pub[["grey"]]) +
+  geom_point(aes(colour = SNP == "All"), size = 2.3) +
+  scale_colour_manual(values = c(
+    `FALSE` = pal_pub[["orange"]], `TRUE` = pal_pub[["blue"]]
+  )) +
+  labs(
+    title = "Leave-one-out estimates remain imprecise",
+    subtitle = "A stable sign alone would not overcome weak instrument design or pleiotropy",
+    x = "IVW estimate after exclusion (95% confidence interval)", y = NULL
+  ) + theme_pub(10) + theme(legend.position = "none")
+p_loo
+save_pub(p_loo, "figures/54-mendelian-randomization/54-3-leave-one-out",
+         height = 110)
+```
+
+### 把无法完成的诊断也写进结果
+
+```{r}
+presso_global_p <- presso[["MR-PRESSO results"]][["Global Test"]]$Pvalue
+assumption_audit <- data.frame(
+  Assumption = c(
+    "Instrument strength", "LD independence", "Allele harmonisation",
+    "Directional pleiotropy", "Outlier pleiotropy", "Steiger directionality",
+    "Population overlap", "Locus colocalisation"
+  ),
+  Status = c(
+    "Supported", "Partial", "Partial", "Low power",
+    "No signal", "Unavailable", "Unresolved", "Unavailable"
+  ),
+  Evidence = c(
+    sprintf("Minimum F = %.1f", min(exposure$FStatistic)),
+    "One SNP per chromosome;\nno ancestry-matched clumping",
+    sprintf("%d of %d SNPs retained", nrow(analysis_data), nrow(harmonised)),
+    sprintf("Egger intercept P = %.3f", egger_intercept$pval),
+    sprintf("MR-PRESSO global P = %.3f", presso_global_p),
+    "Effect-allele frequencies absent",
+    "Cohort overlap unresolved\nfrom compact files",
+    "Top-hit file lacks full\nlocus statistics"
+  )
+)
+
+strength <- merge(
+  exposure[, c("SNP", "FStatistic")],
+  harmonisation_ledger[, c("SNP", "mr_keep")],
+  by = "SNP", all.x = TRUE, sort = FALSE
+)
+strength$Status <- ifelse(strength$mr_keep, "Retained", "Dropped: palindromic")
+p_strength <- ggplot(strength, aes(FStatistic, reorder(SNP, FStatistic), colour = Status)) +
+  geom_vline(xintercept = 10, linetype = 2, colour = pal_pub[["vermillion"]]) +
+  geom_segment(aes(x = 0, xend = FStatistic, yend = reorder(SNP, FStatistic)),
+               linewidth = 0.7) +
+  geom_point(size = 2.4) +
+  scale_colour_manual(values = c(
+    Retained = pal_pub[["blue"]],
+    `Dropped: palindromic` = pal_pub[["orange"]]
+  )) +
+  labs(
+    title = "A. Candidate instruments", subtitle = "The dashed line marks F = 10",
+    x = "Approximate F statistic", y = NULL, colour = "Harmonisation"
+  ) + theme_pub(9)
+
+assumption_audit$Assumption <- factor(
+  assumption_audit$Assumption, levels = rev(assumption_audit$Assumption)
+)
+status_colours <- c(
+  Supported = pal_pub[["green"]], Partial = pal_pub[["orange"]],
+  `No signal` = pal_pub[["sky"]], `Low power` = pal_pub[["purple"]],
+  Unavailable = pal_pub[["vermillion"]], Unresolved = pal_pub[["grey"]]
+)
+p_assumptions <- ggplot(assumption_audit, aes(1, Assumption, fill = Status)) +
+  geom_tile(width = 0.28, height = 0.7, colour = "white") +
+  geom_text(aes(x = 1.2, label = Evidence), hjust = 0, size = 2.35,
+            lineheight = 0.9, colour = "#252525") +
+  scale_fill_manual(values = status_colours) +
+  coord_cartesian(xlim = c(0.82, 2.55), clip = "off") +
+  labs(title = "B. Assumption audit", x = NULL, y = NULL, fill = "Status") +
+  theme_pub(8) +
+  theme(
+    axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+    panel.grid = element_blank(), plot.margin = margin(5, 85, 5, 5)
+  )
+p_audit <- p_strength + p_assumptions +
+  patchwork::plot_layout(widths = c(0.85, 1.5), guides = "collect") &
+  theme(legend.position = "bottom")
+p_audit
+save_pub(p_audit, "figures/54-mendelian-randomization/54-4-assumption-audit",
+         height = 130)
+```
+
+本教学子集没有 effect-allele frequency，不能可靠计算 exposure/outcome explained variance，因此不伪造 Steiger directionality；暴露仅有 top-hit 记录，也无法做位点共定位。样本重叠不能从紧凑文件排除。把这些标成 unavailable/unresolved 比输出一个看似齐全的绿色勾选表更重要。
+
+### 今天可投稿分析还要升级什么
+
+- 用与暴露 GWAS 祖源匹配的 reference panel 做 LD clumping，并报告阈值、窗口和 panel；
+- 获取完整暴露与结局 summary statistics，做 Steiger、双向 MR 和关键位点 colocalisation；
+- 报告暴露 GWAS 的统一分类/变换、工具解释度、conditional F 和样本重叠；
+- 检查 SNP 与 BMI、饮食、药物、免疫表型等潜在多效性通路；
+- 在独立 GWAS、不同 16S 区域或 shotgun taxonomic definition 中复现；
+- 若暴露是多个相关菌，考虑 multivariable MR，但先证明工具对各暴露有足够条件强度。
+
+::: {.callout-caution title="常见坑：MR 最危险的“全绿结果”"}
+- 用 P < 1×10^-5 的弱工具，却只写所有 F > 10；  
+- 把“一染色体一个 SNP”写成已完成 LD clumping；  
+- palindromic SNP 无 EAF 仍强行对齐；  
+- Egger/PRESSO P > 0.05 就宣称不存在水平多效性；  
+- 两份 GWAS 中同名菌属的测量定义不同，却按同一 exposure 解释；  
+- 没做 colocalisation，就把共享区域写成“菌介导宿主遗传效应”；  
+- 空结果写成“证明该菌对疾病无因果作用”。宽区间通常只表示数据还不能排除有意义的正负效应。
+:::
+
+## 出版级美化 {#sec-publication}
+
+MR 主图建议用“散点 + 方法森林图”，把 leave-one-out 与 assumption audit 放补充材料。森林图必须有零参考线、方法名、SNP 数和 95% CI；二元结局可补充 OR，但不要把暴露标度误写成百分比。
+
+图注应同时说明：候选/保留 SNP 数、harmonisation action、工具选择与 clumping、效应单位、样本量以及哪些诊断不可得。`save_pub()` 已输出 PDF/SVG 和 600 ppi PNG/TIFF，图中文字全部为英文。
+
+## 这段 Methods 怎么写 {#sec-methods}
+
+> We performed two-sample Mendelian randomisation using summary associations for MiBioGen genus-level *Bifidobacterium* abundance and inflammatory bowel disease (GCST004131; 25,042 cases and 34,915 controls). Candidate instruments were selected at P < 5×10^-6. For this compact teaching analysis, one outcome-available variant per chromosome was retained before harmonisation; this cross-chromosome rule was not considered a substitute for ancestry-matched LD clumping. Effect alleles were harmonised using `TwoSampleMR` with action 2, and one palindromic variant without allele-frequency information was excluded. The inverse-variance weighted estimator was primary; MR-Egger, weighted-median, simple-mode and weighted-mode estimators were sensitivity analyses. Heterogeneity, the MR-Egger intercept, leave-one-out estimates and MR-PRESSO with 2,000 fixed-seed simulations were evaluated. Steiger directionality and locus colocalisation were not estimable because effect-allele frequencies and full locus-level exposure statistics, respectively, were unavailable. Results were therefore treated as a limited teaching analysis rather than definitive causal evidence.
+
+正式论文必须把上述“cross-chromosome rule”替换为真正执行的 clumping 参数，并补充 population、exposure scale、software version、sample overlap、Steiger、bidirectional MR、colocalisation 和数据 accession。
+
+## 换成你自己的数据怎么做 {#sec-own-data}
+
+你的 16S 三件套只能定义表型和发现问题，不能充当 MR 暴露 GWAS。还需两张独立汇总统计表：
+
+| 字段 | 暴露表 | 结局表 |
+|---|---|---|
+| 变异 ID | `SNP` | `SNP` |
+| 等位基因 | `effect_allele.exposure`, `other_allele.exposure` | 对应 `.outcome` 字段 |
+| 效应与标准误 | `beta.exposure`, `se.exposure` | `beta.outcome`, `se.outcome` |
+| P 值 | `pval.exposure` | `pval.outcome` |
+| 推荐补充 | EAF、N、祖源、坐标/build | EAF、病例/对照 N、祖源、坐标/build |
+
+先统一 genome build 与 variant ID，再做 ancestry-matched clumping，最后 harmonise。若菌属 GWAS 与你的 16S 研究在分类层级、扩增区域和变换上不一致，只能把 MR 当作外部三角验证，不能声称它直接验证了你队列中的具体 ASV。
+
+## 参考 {#sec-references}
+
+- Kurilshikov A, et al. Large-scale association analyses identify host factors influencing human gut microbiome composition. *Nature Genetics*. 2021;53:156–165. [doi:10.1038/s41588-020-00763-1](https://doi.org/10.1038/s41588-020-00763-1)
+- de Lange KM, et al. Genome-wide association study implicates immune activation of multiple integrin genes in inflammatory bowel disease. *Nature Genetics*. 2017;49:256–261. [doi:10.1038/ng.3760](https://doi.org/10.1038/ng.3760)
+- Hemani G, et al. The MR-Base platform supports systematic causal inference across the human phenome. *eLife*. 2018;7:e34408. [doi:10.7554/eLife.34408](https://doi.org/10.7554/eLife.34408)
+- Bowden J, Davey Smith G, Burgess S. Mendelian randomization with invalid instruments: effect estimation and bias detection through Egger regression. *International Journal of Epidemiology*. 2015;44:512–525. [doi:10.1093/ije/dyv080](https://doi.org/10.1093/ije/dyv080)
+- Verbanck M, et al. Detection of widespread horizontal pleiotropy in causal relationships inferred from Mendelian randomization. *Nature Genetics*. 2018;50:693–698. [doi:10.1038/s41588-018-0099-7](https://doi.org/10.1038/s41588-018-0099-7)
+- Burgess S, Thompson SG. *Mendelian Randomization: Methods for Using Genetic Variants in Causal Estimation*. Chapman & Hall/CRC; 2015.

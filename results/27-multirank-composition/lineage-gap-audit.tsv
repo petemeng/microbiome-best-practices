@@ -1,0 +1,5 @@
+ParentRank	ChildRank	ChildKnownParentUnknownFeatures	ChildKnownParentUnknownTaxa	ChildKnownParentUnknownEqualSampleMean	ChildKnownParentUnknownPooledReadFraction	ParentKnownChildUnknownFeatures	ParentKnownChildUnknownEqualSampleMean
+Phylum	Class	0	0	0	0	941	0.028557673336228537
+Class	Order	0	0	0	0	1500	0.11225126380158652
+Order	Family	0	0	0	0	2593	0.1760997411278704
+Family	Genus	324	17	0.025182773158744894	0.025399618440793494	4433	0.3358664255707392

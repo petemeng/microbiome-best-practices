@@ -1,11 +1,433 @@
 ---
 title: "第 49 篇 · 多界微生物组：16S＋ITS/18S 联合分析"
-draft: true
+author: "微生物组分析最佳实践 · 16S 系列"
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    number-sections: true
 execute:
-  eval: false
+  eval: true
+  freeze: auto
+  warning: false
+  message: false
+fig-dpi: 300
+fig-format: png
 ---
 
-<!--
-Planned chapter. It must not be published until its public data, literature,
-commands, outputs, and assertions are added to tutorial.yaml and pass QA.
--->
+> **分析目标：**把同一样本的 bacterial 16S、fungal ITS 与 oomycete amplicon profiles 放进一个可审计框架：每个 kingdom 独立过滤与排序，再检验跨 kingdom community concordance，最后在控制 soil × compartment 后筛跨界 feature associations，并用分层 bootstrap 评估方向稳定性。  
+> **输入文件：**bacterial 三件套 `data/small/multi-kingdom-duran/{otutab,taxonomy,metadata}.tsv`；另加严格配对的 `fungi-otutab.tsv`/`fungi-taxonomy.tsv` 与 `oomycete-otutab.tsv`/`oomycete-taxonomy.tsv`。  
+> **预计资源：**36 个完整配对样本（3 soils × 3 compartments × 4 replicates）；三套 PCoA、6 次 Procrustes tests、1,200 对 correlation 与 30 对 × 500 次分层 bootstrap，普通笔记本约 1 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
+
+## 这一步对应论文里的哪张图 {#sec-target}
+
+[Durán et al. (2018)](https://doi.org/10.1016/j.cell.2018.10.020)联合细菌、真菌与 oomycete communities 研究 Arabidopsis root microbiota 的 interkingdom structure 与植物存活。本页不转载论文原图，而是从作者公开 count/taxonomy/design files 构建 36 个完全配对的 biological samples，重绘三界 ordination、Procrustes concordance、shared-niche confounding 与稳定候选边。
+
+::: {.callout-important title="先给结论"}
+三个 kingdom 的 observed sample configurations 两两一致（Procrustes $q=0.001$）。去除 soil × compartment 均值后，bacteria–fungi concordance 不再显著（$r=0.382,q=0.236$），而 bacteria–oomycete 与 fungi–oomycete 仍保留较弱一致性（$q=0.015$ 与 0.003）。跨 feature 的 1,200 对检验中，raw FDR hits 有 505 对，niche-adjusted 后只剩 2 对；两对的分层 bootstrap sign stability 分别为 99.6% 与 99.8%。这是候选关联，不是已证实的跨界互作。
+:::
+
+## 理论：多界整合先保证“同一样本、不同数据生成过程” {#sec-theory}
+
+### 1. 三个 kingdom 必须独立做 feature QC
+
+16S、ITS 与 oomycete primers 的 amplification efficiency、copy number、taxonomy resolution 和 sequencing depth 不可比。不能把三张 raw count tables 纵向拼接后算一个相对丰度；本文分别做 prevalence filter、transformation 与 distance，再在 sample level 比较结构。
+
+### 2. sample pairing 是跨界分析的基本单位
+
+本数据每个 `SampleID` 唯一对应同一 soil、compartment 与 replicate 的三个 libraries。library names 可以不同，但必须通过显式 key 映射；取交集后若不是预期的 36 个完整 pairs，立即停止。
+
+### 3. Procrustes 区分 global concordance 与 shared niche
+
+Observed concordance 可能只说明 root、rhizosphere、soil 对所有 kingdom 都有强 selection。本文再对每套 ordination axes 回归 `Soil * Compartment`，并把 permutations 限制在 9 个 niche cells 内，检验 replicate-level residual concordance。
+
+### 4. feature association 要控制环境并统一 FDR family
+
+每界先按 CLR variance outcome-blind 地取 20 个 features；三个跨界组合共 $20\times20\times3=1{,}200$ 对。raw 与 niche-adjusted Spearman 分别计算，但 adjusted p-values 在完整 1,200 对上统一 BH correction。
+
+### 5. statistical edge 不等于 ecological interaction
+
+正相关可来自共同环境偏好、宿主 filtering、间接网络或 compositional coupling；负相关也不自动等于竞争。要把“association”升级为“interaction”，至少需要 perturbation、synthetic community、isolate/co-culture、time ordering 或可验证的 molecular mechanism。
+
+<details>
+<summary><strong>深入：为何还要做分层 bootstrap</strong></summary>
+
+单次 correlation 的小 p-value 可能由 36 个样本中的少数 points 驱动。本文在每个 `Soil × Compartment` cell 内有放回抽 4 个 replicates，重新拟合 niche model 并计算 residual Spearman，重复 500 次。95% interval 与 sign stability 检查 effect direction 是否依赖个别 replicate；它不能替代 external validation。
+
+</details>
+
+## 准备工作 {#sec-setup}
+
+<details>
+<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "jsonlite", "permute", "ragg", "readr", "scales",
+  "svglite", "systemfonts", "vegan"
+))
+```
+
+整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行下面定义：
+
+```{r}
+#| label: setup-multikingdom-theme
+library(ggplot2)
+
+set.seed(20260749)
+font_pub <- "DejaVu Sans"
+pal_pub <- c(
+  blue = "#0072B2", orange = "#E69F00", green = "#009E73",
+  vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
+  yellow = "#F0E442", grey = "#6B7280"
+)
+scale_color_pub <- function(..., values = unname(pal_pub)) {
+  ggplot2::scale_color_manual(..., values = values)
+}
+scale_fill_pub <- function(..., values = unname(pal_pub)) {
+  ggplot2::scale_fill_manual(..., values = values)
+}
+theme_pub <- function(base_size = 10, base_family = font_pub) {
+  ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_line(colour = "#E6E6E6", linewidth = 0.25),
+      axis.text = ggplot2::element_text(colour = "#1A1A1A"),
+      axis.title = ggplot2::element_text(colour = "#1A1A1A"),
+      plot.title.position = "plot",
+      plot.title = ggplot2::element_text(face = "bold", size = ggplot2::rel(1.15)),
+      plot.subtitle = ggplot2::element_text(colour = "#4D4D4D"),
+      plot.caption = ggplot2::element_text(colour = "#666666", hjust = 0),
+      strip.background = ggplot2::element_rect(fill = "#F2F2F2", colour = "#B3B3B3"),
+      strip.text = ggplot2::element_text(face = "bold"),
+      legend.key = ggplot2::element_blank(), legend.position = "top"
+    )
+}
+save_pub <- function(plot, file_base, width = 89, height = 70, units = "mm", dpi = 600) {
+  dir.create(dirname(file_base), recursive = TRUE, showWarnings = FALSE)
+  ggplot2::ggsave(paste0(file_base, ".pdf"), plot, width = width, height = height,
+                  units = units, device = grDevices::cairo_pdf, family = font_pub, bg = "white")
+  ggplot2::ggsave(paste0(file_base, ".svg"), plot, width = width, height = height,
+                  units = units, device = svglite::svglite, bg = "white")
+  ggplot2::ggsave(paste0(file_base, ".png"), plot, width = width, height = height,
+                  units = units, dpi = dpi, device = ragg::agg_png, bg = "white")
+  ggplot2::ggsave(paste0(file_base, ".tiff"), plot, width = width, height = height,
+                  units = units, dpi = dpi, device = ragg::agg_tiff,
+                  compression = "lzw", bg = "white")
+  invisible(plot)
+}
+```
+
+</details>
+
+## 可复制代码 {#sec-code}
+
+### 1. 从 bacterial 三件套开始，并接入两个严格配对 views
+
+```{r}
+#| label: read-multikingdom-data
+read_keyed_tsv <- function(path) {
+  x <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE,
+                       name_repair = "minimal", na = character())
+  ids <- as.character(x[[1L]])
+  stopifnot(!anyDuplicated(ids))
+  out <- as.data.frame(x[-1L], check.names = FALSE)
+  rownames(out) <- ids
+  out
+}
+data_dir <- "data/small/multi-kingdom-duran"
+metadata <- read_keyed_tsv(file.path(data_dir, "metadata.tsv"))
+view_files <- c(
+  Bacteria = "otutab.tsv", Fungi = "fungi-otutab.tsv",
+  Oomycete = "oomycete-otutab.tsv"
+)
+taxonomy_files <- c(
+  Bacteria = "taxonomy.tsv", Fungi = "fungi-taxonomy.tsv",
+  Oomycete = "oomycete-taxonomy.tsv"
+)
+counts <- lapply(view_files, function(filename) {
+  raw <- read_keyed_tsv(file.path(data_dir, filename))
+  value <- as.matrix(data.frame(lapply(raw, as.numeric), check.names = FALSE))
+  rownames(value) <- rownames(raw)
+  value
+})
+taxonomy <- lapply(taxonomy_files, function(filename) {
+  read_keyed_tsv(file.path(data_dir, filename))
+})
+stopifnot(
+  identical(vapply(counts, nrow, integer(1)), c(Bacteria = 772L, Fungi = 1063L, Oomycete = 219L)),
+  all(vapply(counts, ncol, integer(1)) == 36L),
+  all(vapply(counts, function(x) identical(colnames(x), rownames(metadata)), logical(1))),
+  identical(as.integer(table(metadata$Soil, metadata$Compartment)), rep(4L, 9))
+)
+head(counts$Bacteria[, 1:5])
+head(taxonomy$Bacteria)
+head(metadata)
+```
+
+### 2. 每个 kingdom 独立 Hellinger/Bray PCoA
+
+```{r}
+#| eval: false
+library(vegan)
+hellinger <- lapply(counts, function(x) decostand(t(x), method = "hellinger"))
+bray <- lapply(hellinger, function(x) vegdist(x, method = "bray"))
+ordination <- lapply(bray, function(d) cmdscale(d, k = 5, eig = TRUE, add = TRUE))
+
+set.seed(20260726)
+lapply(bray, function(d) {
+  adonis2(d ~ Soil * Compartment, data = metadata, permutations = 999, by = "margin")
+})
+```
+
+### 3. observed 与 niche-adjusted Procrustes
+
+```{r}
+#| eval: false
+library(permute)
+axes <- lapply(ordination, function(x) x$points[, 1:5, drop = FALSE])
+design <- model.matrix(~ Soil * Compartment, data = metadata)
+axes_adjusted <- lapply(axes, function(x) lm.fit(design, x)$residuals)
+strata <- interaction(metadata$Soil, metadata$Compartment, drop = TRUE)
+
+set.seed(20260726)
+protest(
+  axes_adjusted$Bacteria, axes_adjusted$Fungi,
+  symmetric = TRUE, permutations = how(nperm = 999, blocks = strata)
+)
+```
+
+### 4. 统一 1,200 对 FDR，并对领先候选做分层 bootstrap
+
+```{r}
+#| eval: false
+clr <- function(x) {
+  z <- log(t(x) + 0.5)
+  z - rowMeans(z)
+}
+selected <- lapply(counts, function(x) {
+  retained <- rownames(x)[rowMeans(x > 0) >= 0.20]
+  z <- clr(x[retained, , drop = FALSE])
+  z[, names(sort(apply(z, 2, var), decreasing = TRUE))[1:20], drop = FALSE]
+})
+design <- model.matrix(~ Soil * Compartment, data = metadata)
+adjusted <- lapply(selected, function(x) lm.fit(design, x)$residuals)
+
+# 对 Bacteria–Fungi、Bacteria–Oomycete、Fungi–Oomycete 全部 1,200 对
+# 计算 Spearman；所有 adjusted P values 一次 BH correction。
+# 对 adjusted q 最小的 30 对，在 9 个 niche cells 内有放回重采样 500 次。
+set.seed(20260726)
+```
+
+完整固定运行命令为：
+
+```{bash}
+#| eval: false
+R_LIBS_USER="$PWD/.r-lib" Rscript scripts/run_article49_multi_kingdom.R
+```
+
+```{r}
+#| label: load-multikingdom-results
+result_dir <- "results/49-multi-kingdom"
+ordination_scores <- readr::read_tsv(
+  file.path(result_dir, "ordination-scores.tsv"), show_col_types = FALSE
+)
+pcoa_variance <- readr::read_tsv(
+  file.path(result_dir, "pcoa-variance.tsv"), show_col_types = FALSE
+)
+procrustes_summary <- readr::read_tsv(
+  file.path(result_dir, "procrustes-summary.tsv"), show_col_types = FALSE
+)
+associations <- readr::read_tsv(
+  file.path(result_dir, "cross-kingdom-associations.tsv"), show_col_types = FALSE
+)
+multi_summary <- jsonlite::read_json(
+  file.path(result_dir, "summary.json"), simplifyVector = TRUE
+)
+stopifnot(
+  nrow(ordination_scores) == 108L,
+  nrow(procrustes_summary) == 6L,
+  nrow(associations) == 1200L,
+  multi_summary$raw_cross_kingdom_q_lt_0_05 == 505L,
+  multi_summary$adjusted_cross_kingdom_q_lt_0_05 == 2L,
+  multi_summary$stable_candidates_q_lt_0_05 == 2L
+)
+head(associations, 6)
+```
+
+## 审计与升级 {#sec-audit}
+
+1. **键必须包含 kingdom。**三个 tables 都有 `OTU_1` 等重复编号；任何 join 都使用 `Kingdom + FeatureID`，只按 `FeatureID` 会串错 taxonomy。这次 QA 正是用该契约捕获并修复了标签错配。
+2. **不要拼 raw relative abundance。**三个 assays 的 denominator 与 detection process 不同；先在每界内转换，再在 sample-level latent/distance space 连接。
+3. **shared niche 是主混杂。**raw 505 个 FDR hits 在控制 `Soil * Compartment` 后只剩 2 个，491 对甚至改变 effect sign。
+4. **adjusted association 仍不是 interaction。**保留下来的两对都是 fungi–oomycete candidates，bootstrap sign stability >99%，但仍需要独立实验与 mechanism。
+5. **permutation/bootstrapping 遵守设计。**本例在 9 个 niche cells 内交换或重采样；若同一植株、plot 或 time series 有重复，blocking 还需上移到真正 experimental unit。
+6. **unknown taxonomy 不应静默丢弃。**两个稳定候选的 fungal labels 仍是 OTU IDs；应明确 annotation resolution，而不是强行命名。
+
+::: {.callout-warning title="从关联到互作的证据阶梯"}
+同一样本共现 < longitudinal precedence < perturbation response < isolate/co-culture reproducibility < molecular mechanism。扩增子横断面结果位于第一层，即使 FDR 和 bootstrap 都通过也不能跳级。
+:::
+
+## 出版级美化 {#sec-beautify}
+
+### 图 1：三个 kingdom 的独立 PCoA
+
+```{r}
+#| label: fig-multikingdom-pcoa
+#| fig-cap: "Independent Bray–Curtis PCoA for bacterial, fungal and oomycete profiles."
+axis_1 <- setNames(
+  pcoa_variance$Percent[pcoa_variance$Axis == "Axis1"],
+  pcoa_variance$Kingdom[pcoa_variance$Axis == "Axis1"]
+)
+axis_2 <- setNames(
+  pcoa_variance$Percent[pcoa_variance$Axis == "Axis2"],
+  pcoa_variance$Kingdom[pcoa_variance$Axis == "Axis2"]
+)
+facet_labels <- setNames(
+  sprintf("%s\nAxis 1 %.1f%% | Axis 2 %.1f%%", names(axis_1), axis_1, axis_2[names(axis_1)]),
+  names(axis_1)
+)
+compartment_colors <- c(
+  Soil = unname(pal_pub["grey"]),
+  Rhizosphere = unname(pal_pub["orange"]),
+  Root = unname(pal_pub["green"])
+)
+p49_1 <- ggplot(ordination_scores, aes(Axis1, Axis2, colour = Compartment, shape = Soil)) +
+  geom_hline(yintercept = 0, colour = "#E5E5E5", linewidth = 0.3) +
+  geom_vline(xintercept = 0, colour = "#E5E5E5", linewidth = 0.3) +
+  geom_point(size = 2.1, alpha = 0.82) +
+  stat_ellipse(aes(group = Compartment), level = 0.80, linewidth = 0.5,
+               show.legend = FALSE) +
+  facet_wrap(~ Kingdom, scales = "free", labeller = as_labeller(facet_labels)) +
+  scale_color_manual(values = compartment_colors) +
+  labs(x = "PCoA axis 1", y = "PCoA axis 2", colour = "Compartment", shape = "Soil",
+       title = "Each kingdom is ordinated independently") + theme_pub()
+save_pub(p49_1, "figures/49-multi-kingdom/49-1-three-kingdom-pcoa", 180, 82)
+p49_1
+```
+
+### 图 2：shared-niche adjustment 后的 concordance
+
+```{r}
+#| label: fig-multikingdom-procrustes
+#| fig-cap: "Pairwise Procrustes concordance before and after soil-by-compartment adjustment."
+procrustes_summary$Pair <- factor(
+  procrustes_summary$Pair,
+  levels = rev(c("Bacteria vs Fungi", "Bacteria vs Oomycete", "Fungi vs Oomycete"))
+)
+p49_2 <- ggplot(procrustes_summary, aes(Correlation, Pair, colour = Model)) +
+  geom_segment(aes(x = 0, xend = Correlation, yend = Pair), linewidth = 0.6, alpha = 0.45) +
+  geom_point(aes(shape = QValue < 0.05), size = 3) +
+  geom_text(aes(label = sprintf("q=%.3f", QValue)), nudge_x = 0.045,
+            family = font_pub, size = 2.8, show.legend = FALSE) +
+  scale_color_manual(values = c(
+    Observed = unname(pal_pub["grey"]),
+    `Niche-adjusted` = unname(pal_pub["blue"])
+  )) +
+  scale_shape_manual(values = c(`TRUE` = 16, `FALSE` = 1),
+                     labels = c(`TRUE` = "BH q < 0.05", `FALSE` = "Not significant")) +
+  scale_x_continuous(limits = c(0, 0.95), expand = expansion(mult = c(0, 0.02))) +
+  labs(x = "Procrustes correlation", y = NULL, colour = "Model", shape = "Inference",
+       title = "Cross-kingdom community concordance") + theme_pub()
+save_pub(p49_2, "figures/49-multi-kingdom/49-2-procrustes-audit", 180, 80)
+p49_2
+```
+
+### 图 3：raw association 的 shared-niche inflation
+
+```{r}
+#| label: fig-multikingdom-confounding
+#| fig-cap: "Raw and niche-adjusted cross-kingdom correlations across the complete testing family."
+associations$Status <- ifelse(
+  associations$RawQValue < 0.05 & associations$AdjustedQValue < 0.05, "Both",
+  ifelse(associations$RawQValue < 0.05, "Raw only",
+         ifelse(associations$AdjustedQValue < 0.05, "Adjusted only", "Neither"))
+)
+status_colors <- c(
+  Both = unname(pal_pub["blue"]),
+  `Raw only` = unname(pal_pub["orange"]),
+  `Adjusted only` = unname(pal_pub["green"]),
+  Neither = "#CDD1D5"
+)
+p49_3 <- ggplot(associations, aes(RawRho, AdjustedRho, colour = Status)) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2, colour = "#777777", linewidth = 0.4) +
+  geom_hline(yintercept = 0, colour = "#E5E5E5", linewidth = 0.3) +
+  geom_vline(xintercept = 0, colour = "#E5E5E5", linewidth = 0.3) +
+  geom_point(size = 1.2, alpha = 0.62) +
+  scale_color_manual(values = status_colors) +
+  coord_equal(xlim = c(-1, 1), ylim = c(-1, 1)) +
+  labs(x = "Raw Spearman rho", y = "Niche-adjusted Spearman rho", colour = "BH status",
+       title = "Raw 505 to adjusted 2 FDR hits",
+       subtitle = "Effect sign changed for 491 pairs") + theme_pub()
+save_pub(p49_3, "figures/49-multi-kingdom/49-3-shared-niche-audit", 89, 82)
+p49_3
+```
+
+### 图 4：bootstrap-stable adjusted candidates
+
+```{r}
+#| label: fig-multikingdom-stability
+#| fig-cap: "Bootstrap intervals and sign stability for the 15 leading adjusted associations."
+bootstrapped <- associations[is.finite(associations$SignStability), ]
+bootstrapped <- head(bootstrapped, 15)
+bootstrapped$Association <- paste0(bootstrapped$Label1, "  |  ", bootstrapped$Label2)
+bootstrapped$Association <- factor(
+  bootstrapped$Association,
+  levels = rev(bootstrapped$Association)
+)
+bootstrapped$Pass <- bootstrapped$AdjustedQValue < 0.05 & bootstrapped$SignStability >= 0.90
+p49_4 <- ggplot(bootstrapped, aes(AdjustedRho, Association, colour = Pass)) +
+  geom_vline(xintercept = 0, linetype = 2, colour = "#777777") +
+  geom_errorbarh(aes(xmin = BootstrapLower, xmax = BootstrapUpper), height = 0.15,
+                 linewidth = 0.55) +
+  geom_point(aes(size = SignStability), alpha = 0.9) +
+  scale_color_manual(values = c(
+    `TRUE` = unname(pal_pub["blue"]),
+    `FALSE` = unname(pal_pub["grey"])
+  ),
+                     labels = c(`TRUE` = "q < 0.05 and stability >= 90%", `FALSE` = "Exploratory")) +
+  scale_size_continuous(range = c(2, 4), labels = scales::percent) +
+  labs(x = "Niche-adjusted Spearman rho", y = NULL, colour = "Decision",
+       size = "Sign stability", title = "Adjusted association stability") +
+  theme_pub(8.5) + theme(legend.position = "right")
+save_pub(p49_4, "figures/49-multi-kingdom/49-4-stable-candidates", 180, 112)
+p49_4
+```
+
+## 常见坑 {#sec-pitfalls}
+
+::: {.callout-caution title="审稿人最常追问的六件事"}
+
+1. 三个 assays 不是同一 biological samples，或只按相似字符串猜配对。
+2. 不同 kingdom 的 `OTU_1` 被错误 join 成同一 feature。
+3. 把三张 raw count tables 合并后统一 closure，制造跨界 compositional coupling。
+4. 忽略 soil、compartment、batch 或 host genotype 的共同驱动。
+5. 每个 kingdom pair 分别 FDR，却声称控制了完整 network 的错误发现率。
+6. 把横断面 edge 写成 competition、facilitation 或 pathogen suppression。
+
+:::
+
+## 这段 Methods 怎么写 {#sec-methods}
+
+> Bacterial 16S, fungal ITS and oomycete amplicon profiles were matched for 36 biological samples spanning three soils, three compartments and four replicates per soil-by-compartment cell. Each kingdom was filtered and transformed independently. Hellinger-transformed Bray–Curtis distances were ordinated separately, and pairwise community concordance was tested using symmetric Procrustes analysis with 999 permutations. To assess shared-niche confounding, ordination axes and feature-level CLR values were residualized against soil, compartment and their interaction; permutations and 500 bootstrap resamples were restricted within soil-by-compartment cells. Twenty prevalent, high-variance features per kingdom were selected without using association outcomes. Spearman associations were tested across all 1,200 cross-kingdom pairs and adjusted jointly using the Benjamini–Hochberg procedure. Edges were designated stable only when adjusted P<0.05 and bootstrap sign stability was at least 90%; they were interpreted as candidate associations rather than ecological interactions.
+
+## 换成你自己的数据怎么做 {#sec-own-data}
+
+1. 保留 bacterial `otutab/taxonomy/metadata` 三件套，再为每个额外 kingdom 提供独立 count/taxonomy table；metadata 中建立显式 biological sample key。
+2. 若某个 kingdom 缺样，不要以 0 填充“未测”；先定义 complete-case、pairwise 或 missing-data strategy。
+3. 用每个 assay 自己的 contaminant/QC/prevalence threshold，保留 primer、reference database 与 taxonomy version。
+4. 把 `Soil * Compartment` 换成你的 host/site/batch/design covariates，并以真正 experimental unit 设 permutation/bootstrapping block。
+5. taxonomy labels 可重复，所有内部键使用 `Kingdom + FeatureID`；图上再显示人类可读名称。
+
+## 参考 {#sec-references}
+
+- Durán P, et al. Microbial interkingdom interactions in roots promote Arabidopsis survival. *Cell*. 2018. <https://doi.org/10.1016/j.cell.2018.10.020>
+- Durán et al. Official analysis repository, fixed source commit `6db5e85cc5d442fd95fcdcb7250b72fa9e2ff900`. <https://github.com/isaisg/Duran_et_al_2018>
+- Peres-Neto PR, Jackson DA. How well do multivariate data sets match? *Oecologia*. 2001. <https://doi.org/10.1007/s004420100720>
+- Weiss S, et al. Correlation detection strategies in microbial data sets vary widely in sensitivity and precision. *ISME Journal*. 2016. <https://doi.org/10.1038/ismej.2015.235>
+- Oksanen J, et al. *vegan: Community Ecology Package*. <https://CRAN.R-project.org/package=vegan>
