@@ -1,5 +1,5 @@
 ---
-title: "第 08 篇 · 安装 QIIME2 + 验证 + 报错对照"
+title: "安装 QIIME2 + 验证 + 报错对照"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**环境约占 5.1 GB；首次求解与下载通常 20–60 分钟。本篇 2,000-record 真实数据验收约 4 分钟、峰值内存低于 2 GB，生成的 `.qza` 约 0.5 MB。  
 > **执行策略：**安装与命令行验收已经一次性实跑并保存日志；网页渲染使用 `eval: false`，避免每次构建都重新创建环境或生成新的 Artifact UUID。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 怎样确认 QIIME 2 真的安装正确？ {#sec-target}
 
 安装过程通常不进入主文结果图，但它直接决定 Methods 与补充材料能否被第三方复现。最有用的呈现方式有三类：
 

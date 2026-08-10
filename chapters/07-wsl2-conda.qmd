@@ -1,5 +1,5 @@
 ---
-title: "第 07 篇 · WSL2 + conda/mamba（Windows 用户主线）"
+title: "WSL2 + conda/mamba（Windows 用户主线）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**WSL2 与 Miniforge 安装约 10–25 分钟；QIIME 2 2026.4 环境约占 5–8 GB，首次求解和下载通常需要 20–60 分钟；本篇验证约 30 秒、内存低于 500 MB。  
 > **验证边界：**Windows 侧命令必须在读者自己的管理员 PowerShell 中执行；随文证据记录的是 Linux 执行层的真实服务器实测，不把 native Linux 主机冒充成 WSL2 主机。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## Windows 上怎样建立稳定的分析环境？ {#sec-target}
 
 环境安装不是生物学结果，但它决定 Methods 中的命令能否被第三方重跑。对应到论文，最适合放在以下两个位置：
 

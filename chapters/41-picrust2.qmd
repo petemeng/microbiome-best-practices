@@ -1,5 +1,5 @@
 ---
-title: "第 41 篇 · PICRUSt2 + ggpicrust2：从 ASV 到通路热图"
+title: "PICRUSt2 + ggpicrust2：从 ASV 到通路热图"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**通用三件套 `data/small/picrust2-chemerin/{otutab,taxonomy,metadata}.tsv`，另需与 `otutab` 行名一致的 `representative-sequences.fasta`。  
 > **预计资源：**官方 chemerin tutorial 的 37 个 ASV、24 个 mouse samples；PICRUSt2 environment 约 3.4 GB、默认 reference 约 470 MB，本次 8 线程实跑 1,213 秒；下游作图少于 1 分钟，四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## PICRUSt2 预测的是潜在功能，不是实测通路活性 {#sec-target}
 
 [Douglas et al. (2020)](https://doi.org/10.1038/s41587-020-0548-6)系统展示 PICRUSt2 的 phylogenetic placement、hidden-state prediction 与 benchmark；[Yang et al. (2023)](https://doi.org/10.1093/bioinformatics/btad470)给出 ggpicrust2 的 differential-abundance 与 visualization workflow。这里不复制论文原图，而是对 PICRUSt2 官方 chemerin 16S tutorial 数据真实运行最新版 pipeline，重绘 workflow、NSTI、MetaCyc heatmap 与 multiplicity/coverage audit。
 
@@ -276,7 +276,7 @@ head(pathway_tests, 12)
 
 `ggpicrust2::pathway_daa()` 可快速比较多个 DAA backends，`pathway_heatmap()` 可直接生成分组热图；本数据主模型需要显式调整 `Facility`，因此统计层用上面的 covariate-aware model，注释与图形语法沿用 ggpicrust2，再通过 `theme_pub()` 锁定尺寸、字体和输出格式。
 
-## 审计与升级 {#sec-audit}
+## NSTI、参考基因组和组成性限制了什么？ {#sec-audit}
 
 1. **ID contract 在 placement 前检查。**FASTA headers 与 count rownames 必须一一对应；重名、空格截断或 ASV 表已过滤而 FASTA 未同步都会污染结果。
 2. **NSTI 给分布和权重。**此次 ASV max NSTI 远低于 cutoff 2，但不能把低 NSTI 改写成“功能预测准确”；目标 habitat 的 reference representation 仍需讨论。

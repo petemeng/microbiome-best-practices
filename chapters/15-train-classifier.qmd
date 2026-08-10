@@ -1,5 +1,5 @@
 ---
-title: "第 15 篇 · 训练你自己引物区的分类器"
+title: "训练你自己引物区的分类器"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**本次 262,752 条区域参考在 4 个分类线程下，两次训练约 13.2 分钟；导入、三档留出分类、三档真实 ASV 分类、maximum validation 与审计合计约 30–40 分钟。建议预留 16 GB 内存和 2 GB 工作空间。  
 > **执行策略：**参考拆分、两次训练、六次分类、QIIME taxonomy evaluation、Artifact validation 与 provenance 已一次性实跑；网页构建保留 `eval: false`，避免每次渲染重新训练模型。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 为什么分类器必须匹配你的引物区域？ {#sec-target}
 
 训练分类器通常不占正文里最醒目的生态结果图，却决定后面每一张堆叠柱图、差异菌图和网络图上的名称。论文中至少应留下两类证据：
 

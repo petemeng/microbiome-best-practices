@@ -1,5 +1,5 @@
 ---
-title: "第 12 篇 · DADA2 出 ASV（截断参数怎么定）"
+title: "DADA2 出 ASV（截断参数怎么定）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**示例数据约 2.5 MB；单个主参数分支通常 1–2 分钟，5 组敏感性分析与 Artifact 验收约 5–7 分钟，峰值内存低于 2 GB。真实项目的耗时和临时磁盘随 reads 数与样本数增加。  
 > **执行策略：**QIIME 2、5 组 DADA2 参数、预期失败探针、Artifact maximum validation、provenance 和出图均已一次性实跑；网页构建使用 `eval: false`，避免重复执行上游去噪。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 截断参数决定能保留多少有效 ASV {#sec-target}
 
 DADA2 常被压缩成 Methods 里的一句话，但它实际上决定论文中最基础的两个对象：
 

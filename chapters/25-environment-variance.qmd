@@ -1,5 +1,5 @@
 ---
-title: "第 25 篇 · 方差解构：envfit/Mantel/VPA 变异分解"
+title: "方差解构：envfit/Mantel/VPA 变异分解"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`、`environment.tsv`。  
 > **预计资源：**示例含 13,628 个 OTU、90 个样本和 11 个环境变量；999 次固定置换、4 个 prevalence 分支及四张 600 ppi 图通常需要 3–6 分钟，峰值内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 环境变量能解释多少变异，取决于问题分解 {#sec-target}
 
 环境或宿主因素很多时，论文通常会把三类图放在同一条证据链中：
 

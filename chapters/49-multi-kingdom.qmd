@@ -1,5 +1,5 @@
 ---
-title: "第 49 篇 · 多界微生物组：16S＋ITS/18S 联合分析"
+title: "多界微生物组：16S＋ITS/18S 联合分析"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**bacterial 三件套 `data/small/multi-kingdom-duran/{otutab,taxonomy,metadata}.tsv`；另加严格配对的 `fungi-otutab.tsv`/`fungi-taxonomy.tsv` 与 `oomycete-otutab.tsv`/`oomycete-taxonomy.tsv`。  
 > **预计资源：**36 个完整配对样本（3 soils × 3 compartments × 4 replicates）；三套 PCoA、6 次 Procrustes tests、1,200 对 correlation 与 30 对 × 500 次分层 bootstrap，普通笔记本约 1 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 多界分析首先解决测量尺度与样本配对 {#sec-target}
 
 [Durán et al. (2018)](https://doi.org/10.1016/j.cell.2018.10.020)联合细菌、真菌与 oomycete communities 研究 Arabidopsis root microbiota 的 interkingdom structure 与植物存活。本页不转载论文原图，而是从作者公开 count/taxonomy/design files 构建 36 个完全配对的 biological samples，重绘三界 ordination、Procrustes concordance、shared-niche confounding 与稳定候选边。
 
@@ -260,7 +260,7 @@ stopifnot(
 head(associations, 6)
 ```
 
-## 审计与升级 {#sec-audit}
+## 跨界相关如何排除测量和生态混杂？ {#sec-audit}
 
 1. **键必须包含 kingdom。**三个 tables 都有 `OTU_1` 等重复编号；任何 join 都使用 `Kingdom + FeatureID`，只按 `FeatureID` 会串错 taxonomy。这次 QA 正是用该契约捕获并修复了标签错配。
 2. **不要拼 raw relative abundance。**三个 assays 的 denominator 与 detection process 不同；先在每界内转换，再在 sample-level latent/distance space 连接。

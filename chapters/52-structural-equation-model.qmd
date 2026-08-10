@@ -1,5 +1,5 @@
 ---
-title: "第 52 篇 · 结构方程模型：从环境因子到微生物再到表型"
+title: "结构方程模型：从环境因子到微生物再到表型"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`，以及逐样本实测的 `environment.tsv`；后者必须包含环境因子和表型，不能由 OTU 表虚构。  
 > **预计资源：**真实示例为 13,628 个 OTU、90 个样本、4 个实测环境变量和 1 个实测表型；普通笔记本约 3–8 分钟，内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## SEM 先从可证伪的因果图开始 {#sec-target}
 
 环境微生物组论文常见一张由方框和箭头组成的路径图：环境因子指向菌群，菌群再指向生态功能或宿主表型，箭头旁标标准化系数和 P 值。它试图同时回答：
 
@@ -397,7 +397,7 @@ save_pub(p_paths, "figures/52-structural-equation-model/52-2-path-coefficients",
          height = 135)
 ```
 
-## 审计与升级 {#sec-audit}
+## 拟合良好不等于因果图正确 {#sec-audit}
 
 ### 用竞争图检验“完全中介”的强假设
 

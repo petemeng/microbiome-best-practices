@@ -1,5 +1,5 @@
 ---
-title: "第 09 篇 · 安装 R/RStudio + 关键包生态（phyloseq/microeco/tidyverse）"
+title: "安装 R/RStudio + 关键包生态（phyloseq/microeco/tidyverse）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**首次安装通常 10–40 分钟，取决于是否有二进制包和编译缓存；真实三件套验收约 15 秒，峰值内存约 1–2 GB。  
 > **执行策略：**安装、锁文件、namespace 和对象验收已用 `Rscript --vanilla` 一次性实跑并保存审计结果；网页渲染使用 `eval: false`，避免每次构建重复安装包。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## R 端分析需要哪些核心对象与包？ {#sec-target}
 
 R 与 RStudio 的安装通常不进入论文主图，却决定后续每一张图能否在另一台机器上重现。最有用的证据不是 IDE 截图，而是三类可审计结果：
 

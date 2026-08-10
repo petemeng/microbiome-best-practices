@@ -1,5 +1,5 @@
 ---
-title: "第 43 篇 · 随机森林分类与回归：ROC、重要性与防过拟合"
+title: "随机森林分类与回归：ROC、重要性与防过拟合"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**三件套 `data/small/absolute-quantification/{otutab,taxonomy,metadata}.tsv`；回归额外读取独立测得的 `cell-load.tsv`。  
 > **预计资源：**234 个属、95 个同 cohort 样本（29 CD、66 healthy）；3×5 outer folds、3-fold inner tuning、50 次 label permutation，约 2–5 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 随机森林的首要任务是外部可泛化，而非训练集 AUC {#sec-target}
 
 [Vandeputte et al. (2017)](https://doi.org/10.1038/nature24460)展示了 microbial load 如何改变疾病关联；[Topçuoğlu et al. (2020)](https://doi.org/10.1128/mBio.00434-20)系统指出 microbiome machine learning 对 preprocessing、validation 和 leakage 极其敏感。这里不复制论文原图，而是用公开 Vandeputte cohort 重绘完全 out-of-fold 的 ROC、calibration、permutation/importance audit 与 microbial-load regression。
 
@@ -431,7 +431,7 @@ data.frame(CrossValidatedRMSE = regression_rmse, CrossValidatedMAE = regression_
            CrossValidatedR2 = regression_r2, ApparentR2 = apparent_r2)
 ```
 
-## 审计与升级 {#sec-audit}
+## 防止数据泄漏、过拟合与伪泛化 {#sec-audit}
 
 1. **split 必须早于筛选。**taxonomy aggregation 可预先定义；依赖样本分布的 prevalence、variance、scaling、feature selection 和 tuning 都放入 fold。
 2. **受试者/中心是 split unit。**重复测量按 subject group-fold；多中心研究优先 leave-one-center-out，而不是随机拆散同中心样本。

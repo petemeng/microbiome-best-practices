@@ -1,5 +1,5 @@
 ---
-title: "第 13 篇 · ITS/18S 特殊处理（ITSxpress、UNITE、PR2）"
+title: "ITS/18S 特殊处理（ITSxpress、UNITE、PR2）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**示例 ITS FASTQ 约 1.2 MB，单线程 ITSxpress + DADA2 通常 3–6 分钟、峰值内存低于 2 GB；完整 PR2 压缩文件约 54.8 MB，流式审计通常数分钟。下载并运行约 115 MB 的 UNITE sklearn 分类器需要更多内存。  
 > **执行策略：**QIIME 2 导入、ITSxpress、DADA2、Artifact validation、provenance、UNITE evaluation 和 PR2 全库审计均已一次性实跑；网页构建使用 `eval: false`，避免每次渲染重复上游计算。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## ITS 和 18S 为什么不能照搬 16S 流程？ {#sec-target}
 
 同一项研究可以同时测细菌 16S、真菌 ITS 和真核 18S，但三者不是“换一个数据库名字”这么简单。Marker gene 决定了可观察对象、read geometry、参考序列空间和可用的系统发育方法。
 

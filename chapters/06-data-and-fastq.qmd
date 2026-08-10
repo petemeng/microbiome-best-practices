@@ -1,5 +1,5 @@
 ---
-title: "第 06 篇 · 认识你的数据：测序原理 + FASTQ / 文件格式拆解"
+title: "认识你的数据：测序原理 + FASTQ / 文件格式拆解"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`forward.fastq.gz`、`reverse.fastq.gz`、`barcodes.fastq.gz`、`metadata.tsv`。  
 > **预计资源：**本篇随附 2,000 组真实同步 reads，普通笔记本约 20–40 秒、内存低于 300 MB；官方 1% 完整数据为 135,487 组 reads。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 开始分析前，先认清 FASTQ 和样本表 {#sec-target}
 
 论文通常不会把 FASTQ 四行结构当作结果图，但一篇可信的 16S 论文至少需要让读者从 Methods 或流程图中回答五个问题：
 

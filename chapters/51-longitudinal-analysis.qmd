@@ -1,5 +1,5 @@
 ---
-title: "第 51 篇 · 纵向：线性混合模型/轨迹/volatility"
+title: "纵向：线性混合模型/轨迹/volatility"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；metadata 还需包含个体 ID、组别和有序时间点。  
 > **预计资源：**真实示例为 130 个 HITChip 分类单元、222 个样本、38 位参与者和 6 个时间点；普通笔记本约 2–5 分钟，内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 纵向分析的独立单位是受试者，不是时间点 {#sec-target}
 
 纵向微生物组论文常把同一位参与者的多个样本连成线，并叠加组平均轨迹；若研究整体群落变化，还会画 PCoA 箭头或报告相邻时间点距离。它们共同回答：
 
@@ -440,7 +440,7 @@ save_pub(p_volatility, "figures/51-longitudinal-analysis/51-3-volatility")
 
 这里得到 180 对完整相邻观测。若跳过缺失时间点，不能把 T2 到 T4 当作“T2–T3”或“T3–T4”的 volatility；应保留实际时间差，或改用每单位时间距离。
 
-## 审计与升级 {#sec-audit}
+## 时间相关、缺失和个体异质性 {#sec-audit}
 
 ### 相关结构是否改变结论
 

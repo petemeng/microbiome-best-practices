@@ -1,5 +1,5 @@
 ---
-title: "第 44 篇 · 跨队列 meta 分析与外部验证"
+title: "跨队列 meta 分析与外部验证"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**每个研究独立的 `data/small/cross-cohort-crc/<study>/{otutab,taxonomy,metadata}.tsv` 三件套。  
 > **预计资源：**Xiang 43、Zhao 102、Zackular 60 个 CRC/control stool samples；genus aggregation、random-effects models 与三个外部验证模型通常 2–5 分钟、峰值内存低于 3 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 跨队列验证必须把异质性作为结果 {#sec-target}
 
 [Duvallet et al. (2017)](https://doi.org/10.1038/s41467-017-01973-8)用统一处理的公开研究区分 disease-specific 与跨疾病 microbial signatures；[Wirbel et al. (2019)](https://doi.org/10.1038/s41591-019-0406-6)展示 CRC shotgun cohorts 的跨研究 meta-analysis 与 external classification。这里不转载论文原图，而是在 MicrobiomeHD 三个真实 CRC 16S cohorts 上重绘 study separation、random-effects forest、heterogeneity map 与 leave-one-study-out ROC。
 
@@ -332,7 +332,7 @@ stopifnot(nrow(external_predictions) == 205L, nrow(external_performance) == 3L)
 external_performance
 ```
 
-## 审计与升级 {#sec-audit}
+## 异质性、留一队列与外部验证 {#sec-audit}
 
 1. **forest plot 先看每个 study。**pooled estimate 不能遮住方向相反、CI 很宽或单一研究支配权重的情况。
 2. **meta-analysis 的单位是 study。**不能把 205 个 samples 当 205 个独立 studies；三个研究对 heterogeneity 的估计仍很粗。

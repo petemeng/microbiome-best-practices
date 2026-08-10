@@ -1,5 +1,5 @@
 ---
-title: "第 27 篇 · 多分类级组成（门→纲→目→科→属逐级）"
+title: "多分类级组成（门→纲→目→科→属逐级）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**示例含 13,628 个 OTU、90 个样本和 1,619,670 reads；五级聚合、完整 lineage 审计与四张 600 ppi 图通常需 1–3 分钟，峰值内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 分类层级越细，信息损失越大 {#sec-target}
 
 微生物组论文常把门、纲、目、科、属的组成并排展示：上层级交代群落骨架，下层级追踪更具体的分类单元。真正困难的不是把 `Phylum` 换成 `Genus`，而是保证每个面板仍使用同一批样本、同一分母和可追踪的分类路径，同时避免把跨层级同名 taxon 合并。
 

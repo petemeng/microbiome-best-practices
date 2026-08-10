@@ -1,5 +1,5 @@
 ---
-title: "第 21 篇 · Beta 距离度量：Bray/Jaccard/UniFrac/Aitchison/Robust Aitchison（DEICODE）"
+title: "Beta 距离度量：Bray/Jaccard/UniFrac/Aitchison/Robust Aitchison（DEICODE）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；UniFrac 额外需要 `rooted-tree.nwk.gz`。  
 > **预计资源：**示例数据含 26 个样本、18,988 个非空 OTU、28,216,678 reads；R 距离计算与 gemelli RPCA 通常少于 1 分钟，峰值内存约 2 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 不同 Beta 距离回答不同问题 {#sec-target}
 
 微生物组论文中的 PCoA、NMDS、PERMANOVA、CAP 和距离热图，第一步都不是“画坐标”，而是定义样本间距离。常见目标图把每个样本画成一个点，用颜色区分病例、处理或生态环境；然而点的位置首先由距离度量决定。
 

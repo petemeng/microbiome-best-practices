@@ -1,5 +1,5 @@
 ---
-title: "第 11 篇 · 去引物 + 引物区分支决策（V4 / V3–V4 / 全长 / 单双端）"
+title: "去引物 + 引物区分支决策（V4 / V3–V4 / 全长 / 单双端）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**示例输入约 2.5 MB；固定环境中的 50 项完整验收约 6–8 分钟，峰值内存低于 2 GB。完整研究的耗时和临时磁盘近似随 reads 数增加。  
 > **执行策略：**导入、探针搜索、`q2-cutadapt`、Artifact 校验、provenance 审计与出图已一次性实跑；网页渲染使用 `eval: false`，避免每次构建重复执行上游处理。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 去引物前，先确认扩增区域和读长结构 {#sec-target}
 
 去引物通常不会成为论文主图，却会决定 ASV 是否仍携带技术序列、双端 reads 是否还能合并，以及不同批次能否进入同一条分析链。建议把下面四类证据保存在补充材料或内部审计中：
 

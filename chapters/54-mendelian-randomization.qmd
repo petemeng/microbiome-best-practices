@@ -1,5 +1,5 @@
 ---
-title: "第 54 篇 · 孟德尔随机化：工具变量、水平多效性与敏感性分析"
+title: "孟德尔随机化：工具变量、水平多效性与敏感性分析"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **额外数据：**MR 不能从 `otutab/taxonomy/metadata` 直接计算；必须另有暴露 GWAS 与结局 GWAS 的逐 SNP 汇总统计，至少包括 effect/other allele、beta、SE、P 值，最好还有 effect-allele frequency 与完整位点统计。  
 > **预计资源：**教学子集为 6 个候选 SNP、5 个对齐后工具；2,000 次 MR-PRESSO 模拟约 1–3 分钟，内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## MR 的可信度由工具变量假设决定 {#sec-target}
 
 微生物组 MR 论文通常包含：SNP 暴露效应–结局效应散点图、多个 MR 估计器的森林图、leave-one-out 图，以及异质性/多效性诊断。它们试图回答：
 
@@ -362,7 +362,7 @@ save_pub(p_methods, "figures/54-mendelian-randomization/54-2-method-forest",
          height = 110)
 ```
 
-## 审计与升级 {#sec-audit}
+## 工具强度、多效性与共定位 {#sec-audit}
 
 ### 异质性、Egger 截距与 MR-PRESSO
 

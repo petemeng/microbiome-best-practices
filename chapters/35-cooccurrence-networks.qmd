@@ -1,5 +1,5 @@
 ---
-title: "第 35 篇 · 共现网络基础：SparCC/SPIEC-EASI/ggClusterNet"
+title: "共现网络基础：SparCC/SPIEC-EASI/ggClusterNet"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**90 个样本、40 个 group-blind 高信息属；SparCC 200 次 bootstrap/permutation + SPIEC-EASI 50 次 StARS subsampling，单线程通常 4–8 分钟、峰值内存约 2–4 GB；三张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 共现网络不是微生物互作网络 {#sec-target}
 
 [Friedman & Alm (2012)](https://doi.org/10.1371/journal.pcbi.1002687)提出 SparCC，用 composition-aware correlation 重建 microbial association network；[Kurtz et al. (2015)](https://doi.org/10.1371/journal.pcbi.1004226)提出 SPIEC-EASI，以 sparse inverse-covariance/neighborhood selection 估计条件关联。两篇 PLOS 原文为开放许可。这里不复制原图，而是用真实湿地 16S 三件套重绘 correlation matrix、SPIEC-EASI network 和 edge audit ledger。
 
@@ -521,7 +521,7 @@ stopifnot(
 )
 ```
 
-## 审计与升级 {#sec-audit}
+## 怎样判断一条网络边是否稳定？ {#sec-audit}
 
 ```{r}
 #| label: network-audit-table

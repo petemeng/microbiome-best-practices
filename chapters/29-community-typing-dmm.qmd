@@ -1,5 +1,5 @@
 ---
-title: "第 29 篇 · 群落分型 DMM（肠型/CST）"
+title: "群落分型 DMM（肠型/CST）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**示例含 278 个样本、130 个来源属级类别和 570,851 reads；42 个 fresh fits 各用一次性 R 进程、最多 8 个并发，通常需 3–6 分钟，峰值内存约 1–2 GB，四张图以 PDF/SVG/600 ppi PNG/LZW-TIFF 导出。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 群落分型是概率模型，不是天然类别 {#sec-target}
 
 群落分型常见于论文中的三类图：模型证据随 component 数 `k` 的曲线、按“肠型”（enterotype）或阴道群落状态型（community state type, CST）着色的排序图，以及各状态优势类群的组成热图。Holmes 等人的原文可直接查看 [Figure 1：Laplace model evidence](https://doi.org/10.1371/journal.pone.0030126.g001)、[Figure 2：按四个 component 着色的 NMDS](https://doi.org/10.1371/journal.pone.0030126.g002) 和 [Table 4：BMI 与 component 的列联表](https://doi.org/10.1371/journal.pone.0030126.t004)。PLOS ONE 原文采用 CC BY 许可；这里不嵌入原图，而是沿用“模型选择—排序显示—component 解释”的信息结构，从公开计数重绘并增加不确定性与稳定性审计。真正需要回答的不是“软件能分成几类”，而是：**离散状态是否比连续梯度更有支持，样本属于某状态的把握有多大，换一种合理的数据处理后结论是否仍成立。**
 
@@ -1031,7 +1031,7 @@ ordination_scores <- data.frame(
 
 PCoA 使用相对丰度 Bray–Curtis，只承担可视化；DMM assignment 来自 raw-count posterior，不来自点到 PCoA centroid 的距离。
 
-## 审计与升级 {#sec-audit-upgrade}
+## DMM 分型最容易在哪些地方失真？ {#sec-audit-upgrade}
 
 ### 1. 先忠实还原原文分析合同
 

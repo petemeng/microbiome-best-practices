@@ -126,16 +126,16 @@ PILOT_PRIMARY_INPUT_PATHS = {
     54: "data/small/mr-mibiogen",
     55: "data/small/causal-evidence",
 }
-REQUIRED_PILOT_SECTIONS = (
-    "这一步对应论文里的哪张图",
-    "理论",
-    "准备工作",
-    "可复制代码",
-    "出版级美化",
-    "常见坑",
-    "这段 Methods 怎么写",
-    "换成你自己的数据怎么做",
-    "参考",
+REQUIRED_PILOT_SECTION_PATTERNS = (
+    ("opening", r"\{#sec-(?:target|paper-figure)\}"),
+    ("theory", r"\{#sec-theory\}"),
+    ("data-environment", r"\{#sec-(?:setup|preparation)\}"),
+    ("analysis", r"\{#sec-code\}"),
+    ("presentation", r"\{#sec-(?:publication|polish|beautify|visualization|figure)\}"),
+    ("pitfalls", r"常见.*(?:坑|误判)"),
+    ("methods", r"\{#sec-methods\}"),
+    ("transfer", r"\{#sec-own-data\}"),
+    ("references", r"\{#sec-references\}"),
 )
 PROHIBITED_PUBLIC_PATTERNS = (
     "vegan::dune",
@@ -144,6 +144,14 @@ PROHIBITED_PUBLIC_PATTERNS = (
     "这正是全系列坚持",
     "Omic" + "Verse",
     "omic" + "verse",
+    "审阅草稿",
+    "开放审阅",
+    "GitHub Draft PR",
+)
+PROHIBITED_PUBLIC_REGEXES = (
+    r'(?m)^title:\s*"第\s*\d{2}\s*篇\s*·',
+    r"(?m)^##\s+这一步对应论文里的哪张图",
+    r"(?m)^\s*number-sections:\s*true\s*$",
 )
 
 
@@ -221,28 +229,28 @@ def main() -> int:
         text = chapter_path.read_text(encoding="utf-8")
         if metadata.get("draft") is True:
             errors.append(f"article {number:02d} is still marked draft")
-        required_sections = REQUIRED_PILOT_SECTIONS
-        if number == 55:
-            required_sections = tuple(
-                "可复制阅读框架" if section == "可复制代码" else
-                "换成你自己的论文或项目怎么做"
-                if section == "换成你自己的数据怎么做" else section
-                for section in REQUIRED_PILOT_SECTIONS
-            )
-        for section in required_sections:
-            if section not in text:
-                errors.append(f"article {number:02d} is missing section: {section}")
+        for section, pattern in REQUIRED_PILOT_SECTION_PATTERNS:
+            if re.search(pattern, text) is None:
+                errors.append(
+                    f"article {number:02d} is missing section function {section}: {pattern}"
+                )
         for pattern in PROHIBITED_PUBLIC_PATTERNS:
             if pattern in text:
                 errors.append(f"article {number:02d} contains prohibited public text: {pattern}")
+        for pattern in PROHIBITED_PUBLIC_REGEXES:
+            if re.search(pattern, text):
+                errors.append(
+                    f"article {number:02d} contains prohibited public pattern: {pattern}"
+                )
         if number != 55 and "set.seed(" not in text:
             errors.append(f"article {number:02d} does not fix a random seed")
-        expected_input = PILOT_PRIMARY_INPUT_PATHS[number]
-        if expected_input not in text:
-            errors.append(
-                f"article {number:02d} does not read its declared primary input: "
-                f"{expected_input}"
-            )
+        if number != 55:
+            expected_input = PILOT_PRIMARY_INPUT_PATHS[number]
+            if expected_input not in text:
+                errors.append(
+                    f"article {number:02d} does not read its declared primary input: "
+                    f"{expected_input}"
+                )
 
     intro_path = root / "index.qmd"
     if intro_path.exists():
@@ -988,7 +996,6 @@ def main() -> int:
             "NormalizedEntropy",
             "vegan::rrarefy(",
             "participant_repeat_audit",
-            "## 审计与升级",
             "audit-original-vs-upgraded-dmm",
             "29-model-selection",
             "29-posterior-ordination",
@@ -1014,7 +1021,6 @@ def main() -> int:
                 "data/small/metadata.tsv",
                 "closure_audit",
                 "reference_effects",
-                "## 审计与升级",
                 "30-closure-artifact",
                 "30-measurement-scales",
                 "30-reference-frame",
@@ -1030,7 +1036,6 @@ def main() -> int:
                 "Maaslin2::Maaslin2(",
                 "lefser::lefser(",
                 "corncob::differentialTest(",
-                "## 审计与升级",
                 "31-da-hit-counts",
                 "31-da-jaccard",
                 "31-da-evidence-map",
@@ -1044,7 +1049,6 @@ def main() -> int:
                 "aggregate_rank <- function",
                 "PrimaryReportingEligible",
                 "ReportingGate",
-                "## 审计与升级",
                 "32-rank-evidence-cascade",
                 "32-multirank-effect-map",
                 "32-family-genus-coherence",
@@ -1057,7 +1061,6 @@ def main() -> int:
                 "data/small/metadata.tsv",
                 "master_results",
                 "build-audited-cladogram",
-                "## 审计与升级",
                 "33-da-volcano",
                 "33-da-cladogram",
                 "33-da-manhattan",
@@ -1071,7 +1074,6 @@ def main() -> int:
                 'file.path(data_dir, "metadata.tsv")',
                 "cell-load.tsv",
                 "calculate-qmp",
-                "## 审计与升级",
                 "34-microbial-load",
                 "34-relative-quantitative-effects",
                 "34-qmp-exemplar",
@@ -1085,7 +1087,6 @@ def main() -> int:
                 "SpiecEasi::sparccboot(",
                 "SpiecEasi::spiec.easi(",
                 "group_centered_clr",
-                "## 审计与升级",
                 "35-network-matrix",
                 "35-spiec-network",
                 "35-network-edge-audit",
@@ -1100,7 +1101,6 @@ def main() -> int:
                 "SpiecEasi::spiec.easi(",
                 "calculate_roles",
                 "group_bootstrap_frequency",
-                "## 审计与升级",
                 "36-role-cartography",
                 "36-attack-robustness",
                 "36-group-rewiring",
@@ -1116,7 +1116,6 @@ def main() -> int:
                 "WGCNA::pickSoftThreshold(",
                 "WGCNA::blockwiseModules(",
                 "WGCNA::signedKME(",
-                "## 审计与升级",
                 "37-soft-threshold",
                 "37-module-dendrogram",
                 "37-module-trait",
@@ -1133,7 +1132,6 @@ def main() -> int:
                 "iCAMP::bNTI.cm",
                 "iCAMP::RC.cm",
                 "clusterSetRNGStream",
-                "## 审计与升级",
                 "38-tree-filter",
                 "38-bnti-rcbray",
                 "38-process-fractions",
@@ -1148,7 +1146,6 @@ def main() -> int:
                 "fit_ncm <- function",
                 "bootstrap_migration",
                 "vegan::rrarefy(",
-                "## 审计与升级",
                 "39-neutral-abundance-occupancy",
                 "39-neutral-pool-migration",
                 "39-neutral-classification-sensitivity",
@@ -1165,7 +1162,6 @@ def main() -> int:
                 "vegan::radfit(",
                 "haversine_km",
                 "vegan::mantel(",
-                "## 审计与升级",
                 "40-niche-breadth",
                 "40-rank-abundance-models",
                 "40-distance-decay",
@@ -1179,7 +1175,6 @@ def main() -> int:
                 "data/small/metadata.tsv",
                 "microeco::trans_func$new",
                 'prok_database = "FAPROTAX"',
-                "## 审计与升级",
                 "42-function-coverage",
                 "42-functional-composition",
                 "42-functional-heatmap",
@@ -1193,7 +1188,6 @@ def main() -> int:
                 "ranger::ranger",
                 "nested-random-forest-classification",
                 "permutation_auc <- numeric(50L)",
-                "## 审计与升级",
                 "43-nested-roc",
                 "43-calibration",
                 "43-permutation-importance",
@@ -1207,7 +1201,6 @@ def main() -> int:
                 'method = "REML"',
                 "leave-one-study-out-classification",
                 "HeldOutStudy",
-                "## 审计与升级",
                 "44-cohort-pcoa",
                 "44-meta-forest",
                 "44-heterogeneity",
@@ -1222,7 +1215,6 @@ def main() -> int:
                 "survival::cox.zph",
                 "glmnet::cv.glmnet",
                 "timeROC::timeROC",
-                "## 审计与升级",
                 "45-treatment-km",
                 "45-taxon-cox",
                 "45-ph-diagnostics",
@@ -1237,7 +1229,6 @@ def main() -> int:
                 "mantel(",
                 "from halla import HAllA",
                 "pairwise-group-residual.tsv",
-                "## 审计与升级",
                 "46-1-procrustes",
                 "46-4-halla-associations",
             ),
@@ -1250,7 +1241,6 @@ def main() -> int:
                 "tune.block.splsda(",
                 "block.splsda(",
                 "test-predictions.tsv",
-                "## 审计与升级",
                 "47-1-spls-generalization",
                 "47-4-feature-stability",
             ),
@@ -1264,7 +1254,6 @@ def main() -> int:
                 "mmvec-native",
                 "multiomics-native",
                 "ValidationMAE",
-                "## 审计与升级",
                 "48-1-cca-overfit-audit",
                 "48-4-mofa-summary",
             ),
@@ -1278,7 +1267,6 @@ def main() -> int:
                 "adonis2(",
                 "protest(",
                 "cross-kingdom-associations.tsv",
-                "## 审计与升级",
                 "49-1-three-kingdom-pcoa",
                 "49-4-stable-candidates",
             ),
@@ -1291,7 +1279,6 @@ def main() -> int:
                 "FEAST(",
                 "from sourcetracker._sourcetracker import _gibbs",
                 "feast-missing-source.tsv",
-                "## 审计与升级",
                 "50-1-feast-main",
                 "50-4-missing-source",
             ),
@@ -1305,7 +1292,6 @@ def main() -> int:
                 "SubjectID",
                 "vegdist(",
                 "Volatility",
-                "## 审计与升级",
                 "51-1-alpha-trajectories",
                 "51-4-model-audit",
             ),
@@ -1318,7 +1304,6 @@ def main() -> int:
                 "piecewiseSEM::fisherC(",
                 "plspm::plspm(",
                 "br = 2000",
-                "## 审计与升级",
                 "52-1-prespecified-dag",
                 "52-4-model-audit",
             ),
@@ -1330,7 +1315,6 @@ def main() -> int:
                 "mediation::mediate(",
                 "mediation::medsens(",
                 "FaecalibacteriumCLR",
-                "## 审计与升级",
                 "53-1-mediation-dag",
                 "53-4-observed-data",
             ),
@@ -1344,7 +1328,6 @@ def main() -> int:
                 "MRPRESSO::mr_presso(",
                 "NbDistribution = 2000",
                 "colocalisation",
-                "## 审计与升级",
                 "54-1-harmonised-scatter",
                 "54-4-assumption-audit",
             ),
@@ -1369,12 +1352,12 @@ def main() -> int:
     if evidence_path.exists():
         evidence = evidence_path.read_text(encoding="utf-8")
         for token in (
-            "data/small/causal-evidence",
-            "可复制阅读框架",
-            "横断面关联",
-            "人群干预",
-            "实验转移",
-            "分子机制链",
+            "七项真实研究提供了哪些证据",
+            "不同研究设计的结论上限",
+            "为什么需要跨设计三角验证",
+            "病例–对照研究",
+            "人群随机干预",
+            "转移、救援和机制实验",
             "三角验证",
             "55-1-evidence-ladder",
             "55-4-triangulation",

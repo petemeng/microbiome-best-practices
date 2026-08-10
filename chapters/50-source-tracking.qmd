@@ -1,5 +1,5 @@
 ---
-title: "第 50 篇 · 微生物来源追踪：SourceTracker / FEAST 与传播证据"
+title: "微生物来源追踪：SourceTracker / FEAST 与传播证据"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**通用三件套 `data/small/source-tracking-feast/{otutab,taxonomy,metadata}.tsv`；metadata 额外包含 `SourceSink`、`SourceClass` 与 FEAST `id`。  
 > **预计资源：**官方 FEAST demo 的 10 个样本、1,839 个 anonymous taxa；FEAST 主分析＋8 次 leave-one-out＋4 次 missing-source audit 约 2 分钟，SourceTracker2 10 chains/20 draws 的主分析与 8 次 leave-one-out 在旧版 CPU 实现上约 12 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 来源追踪估计贡献比例，不证明传播路径 {#sec-target}
 
 [Knights et al. (2011)](https://doi.org/10.1038/nmeth.1650)提出 Bayesian SourceTracker；[Shenhav et al. (2019)](https://doi.org/10.1038/s41592-019-0431-x)提出快速 expectation-maximization source tracking（FEAST）。本页不复制论文原图，而是使用 FEAST 官方真实 demo，重绘 source contributions、method disagreement、leave-one-out calibration 与 missing-source audit。
 
@@ -292,7 +292,7 @@ rbind(
 )
 ```
 
-## 审计与升级 {#sec-audit}
+## 未知来源、留一校准与方法敏感性 {#sec-audit}
 
 1. **source panel 先于算法。**candidate sources 应来自研究问题与 sampling design，而不是看完 sink 后补最相似的样本。
 2. **negative controls 不能缺。**extraction blanks、reagent lots 与 sequencing runs 应作为 contamination audit；低 biomass sinks 尤其不能把 kit contaminants 当来源。

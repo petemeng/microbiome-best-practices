@@ -1,5 +1,5 @@
 ---
-title: "第 53 篇 · 中介分析：暴露 → 微生物 → 结局"
+title: "中介分析：暴露 → 微生物 → 结局"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；metadata 还需包含暴露、结局以及暴露–中介和中介–结局两条关系的混杂变量。  
 > **预计资源：**真实示例最终纳入 108 个 IBD 样本、250 个候选菌属；2,000 次 quasi-Bayesian simulation 约 1–3 分钟，内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 中介效应依赖时间顺序与不可检验假设 {#sec-target}
 
 中介分析常画成三节点路径图：暴露 (A) 指向微生物中介 (M)，中介再指向结局 (Y)，同时保留 (A\rightarrow Y) 直接路径。常见结果图则并列 ACME、ADE 与 total effect 的估计和区间。
 
@@ -432,7 +432,7 @@ p_effects
 save_pub(p_effects, "figures/53-mediation-analysis/53-2-effect-decomposition")
 ```
 
-## 审计与升级 {#sec-audit}
+## 中介效应对未测混杂有多敏感？ {#sec-audit}
 
 ### 未测中介–结局混杂需要多强才会改变 ACME
 

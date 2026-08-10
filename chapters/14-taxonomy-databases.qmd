@@ -1,5 +1,5 @@
 ---
-title: "第 14 篇 · 物种注释 + 数据库选择（SILVA/GTDB/Greengenes2）"
+title: "物种注释 + 数据库选择（SILVA/GTDB/Greengenes2）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**区域参考资产压缩后约 22 MB；4 线程导入、maximum validation、三次 consensus-VSEARCH 分类和审计通常约 15–25 分钟，建议预留 8 GB 内存。若从三个完整官方发布重新提取区域参考，需要额外磁盘、网络和更长的一次性运行时间。  
 > **执行策略：**完整发布下载、区域提取、LCA 去冗余、三库分类、Artifact validation 与 provenance 审计均已一次性实跑；网页构建使用 `eval: false`，避免重复执行上游重任务。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 分类结果首先取决于参考数据库 {#sec-target}
 
 数据库选择首先对应 Methods 中的 reference contract，也会直接改变正文或补充材料里的分类深度、未注释比例与脱靶审计。不要从“哪个数据库名字更熟”开始，而要从研究问题开始。
 

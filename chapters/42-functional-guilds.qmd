@@ -1,5 +1,5 @@
 ---
-title: "第 42 篇 · FAPROTAX、Tax4Fun2 与 BugBase：环境功能类群"
+title: "FAPROTAX、Tax4Fun2 与 BugBase：环境功能类群"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**通用三件套 `data/small/{otutab,taxonomy,metadata}.tsv`。Tax4Fun2 另需 representative sequences；BugBase 另需 OTU table、Greengenes-compatible taxonomy 和 normalized input。  
 > **预计资源：**13,628 个 OTU、90 个湿地样本；两次 FAPROTAX mapping 与 93 个功能的组间检验，普通笔记本约 1 分钟、峰值内存低于 1 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 功能类群注释依赖数据库规则与分类分辨率 {#sec-target}
 
 [Louca et al. (2016)](https://doi.org/10.1126/science.aaf4507)用 taxonomy–function literature mapping 描述全球海洋微生物功能；[Wemheuer et al. (2020)](https://doi.org/10.1186/s40168-020-00815-y)则以 Tax4Fun2 引入 reference-data-based functional prediction 与 functional redundancy index。这里不转载论文原图，而是在公开湿地 16S 数据上重绘 annotation coverage、功能组成、组别 heatmap 和 taxonomic-resolution sensitivity。
 
@@ -277,7 +277,7 @@ resolution_coverage <- data.frame(
 resolution_coverage
 ```
 
-## 审计与升级 {#sec-audit}
+## 功能数据库覆盖率决定解释上限 {#sec-audit}
 
 1. **先审 coverage。**低 coverage 时，组间差异可能只是“哪些 reads 能被数据库注释”的差异。必须给逐样本分布，而不是只给总体百分比。
 2. **锁数据库和 reference。**FAPROTAX、Tax4Fun2 与 BugBase 更新节奏不同；版本、下载日期、reference files、checksum 与参数都应进入 provenance。

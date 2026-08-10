@@ -2,8 +2,8 @@
   "status": "passed",
   "scope": "Articles 01–55 local release assets",
   "manifest": "/media/desk16/tly9658/wechat/16s/tutorial.yaml",
-  "manifest_hash": "f61000902837c8e743f893b87b49d3522ef1d454392db741a26a3340b52c90ba",
-  "run_key": "2cf0e712b936e213",
+  "manifest_hash": "be85a69a362e657f1d6c40387e467a8f3f4bcdf43b4278c84b96ee2111740c76",
+  "run_key": "ff4dd0588e10a487",
   "formal_count": 55,
   "html_count": 55,
   "components": {
@@ -23,37 +23,37 @@
     },
     "articles_30_35": {
       "path": "/media/desk16/tly9658/wechat/16s/results/articles-30-35-validation.json",
-      "sha256": "4d613732349c5ec24764dc9ba1eb665682f1fcca8f10e79621e5acfc6f3b8c7e",
+      "sha256": "c00e7a385b00b0ce9be8429b28675c46a0b2ab39dc8b844f402f9f0f2fa3fab9",
       "status": "passed",
       "checks_passed": 359,
       "checks_failed": 0
     },
     "articles_36_40": {
       "path": "/media/desk16/tly9658/wechat/16s/results/articles-36-40-validation.json",
-      "sha256": "d9852156ea2e9c208774eac1fd15e08f975ea4f8cae49202f0b0a066ef47cc37",
+      "sha256": "3d4dc1bdbfae151b03eb442f72d9b38f316a2c4e90e10df6301644ae5596464b",
       "status": "passed",
       "checks_passed": 406,
       "checks_failed": 0
     },
     "articles_41_45": {
       "path": "/media/desk16/tly9658/wechat/16s/results/articles-41-45-validation.json",
-      "sha256": "9449ca83183f999cd5fa8b82a293b78b24db60e08ab91a8ec2aa79c1451bfa6d",
+      "sha256": "444e72c59b42e1e42908b7308e6997cfca77ff4e75b403a2c2ab4eaa1ca3b1b2",
       "status": "passed",
       "checks_passed": 445,
       "checks_failed": 0
     },
     "articles_46_50": {
       "path": "/media/desk16/tly9658/wechat/16s/results/articles-46-50-validation.json",
-      "sha256": "806eaec814682f31d7ac20ee9defd6b965320c96ac8a545ca350e02403211f2d",
+      "sha256": "f7a8cf87b51727399bff988cb724767bc255c34c3d4cdaa5513d6e429d7220a3",
       "status": "passed",
       "checks_passed": 435,
       "checks_failed": 0
     },
     "articles_51_55": {
       "path": "/media/desk16/tly9658/wechat/16s/results/articles-51-55-validation.json",
-      "sha256": "d9cc2fe5738f682013cea220c849db3eff7bd5d560fda58466ad7f9ba592a2de",
+      "sha256": "37c8d6d89b69087bccd2e243f4ab0ccc260fc7f799f9bdd1af1197900bbab60c",
       "status": "passed",
-      "checks_passed": 413,
+      "checks_passed": 422,
       "checks_failed": 0
     }
   },

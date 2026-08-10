@@ -37,17 +37,17 @@ CHAPTERS = {
     )),
 }
 
-REQUIRED_SECTIONS = (
-    "这一步对应论文里的哪张图",
-    "理论",
-    "准备工作",
-    "可复制代码",
-    "审计与升级",
-    "出版级美化",
-    "常见坑",
-    "这段 Methods 怎么写",
-    "换成你自己的数据怎么做",
-    "参考",
+REQUIRED_SECTION_PATTERNS = (
+    ("opening", r"\{#sec-(?:target|paper-figure)\}"),
+    ("theory", r"\{#sec-theory\}"),
+    ("data-environment", r"\{#sec-(?:setup|preparation)\}"),
+    ("analysis", r"\{#sec-code\}"),
+    ("limitations", r"\{#sec-audit\}"),
+    ("presentation", r"\{#sec-(?:publication|polish|beautify|visualization|figure)\}"),
+    ("pitfalls", r"常见.*(?:坑|误判)"),
+    ("methods", r"\{#sec-methods\}"),
+    ("transfer", r"\{#sec-own-data\}"),
+    ("references", r"\{#sec-references\}"),
 )
 
 PACKAGE_VERSIONS = {
@@ -127,11 +127,11 @@ def main() -> int:
         check(f"article-{number}-freeze", isinstance(execute, dict) and execute.get("freeze") == "auto", execute)
         check(f"article-{number}-not-draft", metadata.get("draft") is not True, metadata.get("draft"))
         check(f"article-{number}-seed", "set.seed(" in qmd_text, "set.seed present")
-        for section in REQUIRED_SECTIONS:
+        for section, pattern in REQUIRED_SECTION_PATTERNS:
             check(
                 f"article-{number}-section-{hashlib.sha1(section.encode()).hexdigest()[:8]}",
-                section in qmd_text,
-                section,
+                re.search(pattern, qmd_text) is not None,
+                pattern,
             )
 
         html = site_root / "_site" / "chapters" / f"{slug}.html"

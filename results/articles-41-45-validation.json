@@ -55,7 +55,7 @@
       "status": "PASS",
       "detail": {
         "manifest": "PICRUSt2 + ggpicrust2：从 ASV 到通路热图",
-        "qmd": "第 41 篇 · PICRUSt2 + ggpicrust2：从 ASV 到通路热图"
+        "qmd": "PICRUSt2 + ggpicrust2：从 ASV 到通路热图"
       }
     },
     {
@@ -69,54 +69,54 @@
       "detail": "no executable external theme dependency"
     },
     {
-      "id": "article-41-section-416ae484",
+      "id": "article-41-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-41-section-4a576e0b",
+      "id": "article-41-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-41-section-b822fdab",
+      "id": "article-41-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-41-section-792296bc",
+      "id": "article-41-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-41-section-cd1d7453",
+      "id": "article-41-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-41-section-82df7efd",
+      "id": "article-41-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-41-section-66ed156e",
+      "id": "article-41-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-41-section-54dd41b9",
+      "id": "article-41-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-41-section-fc57d73a",
+      "id": "article-41-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-41-section-a1880f69",
+      "id": "article-41-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-41-token-0c39bb75",
@@ -491,7 +491,7 @@
       "status": "PASS",
       "detail": {
         "manifest": "FAPROTAX、Tax4Fun2 与 BugBase：环境功能类群",
-        "qmd": "第 42 篇 · FAPROTAX、Tax4Fun2 与 BugBase：环境功能类群"
+        "qmd": "FAPROTAX、Tax4Fun2 与 BugBase：环境功能类群"
       }
     },
     {
@@ -505,54 +505,54 @@
       "detail": "no executable external theme dependency"
     },
     {
-      "id": "article-42-section-416ae484",
+      "id": "article-42-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-42-section-4a576e0b",
+      "id": "article-42-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-42-section-b822fdab",
+      "id": "article-42-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-42-section-792296bc",
+      "id": "article-42-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-42-section-cd1d7453",
+      "id": "article-42-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-42-section-82df7efd",
+      "id": "article-42-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-42-section-66ed156e",
+      "id": "article-42-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-42-section-54dd41b9",
+      "id": "article-42-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-42-section-fc57d73a",
+      "id": "article-42-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-42-section-a1880f69",
+      "id": "article-42-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-42-token-e926504d",
@@ -922,7 +922,7 @@
       "status": "PASS",
       "detail": {
         "manifest": "随机森林分类与回归：ROC、重要性与防过拟合",
-        "qmd": "第 43 篇 · 随机森林分类与回归：ROC、重要性与防过拟合"
+        "qmd": "随机森林分类与回归：ROC、重要性与防过拟合"
       }
     },
     {
@@ -936,54 +936,54 @@
       "detail": "no executable external theme dependency"
     },
     {
-      "id": "article-43-section-416ae484",
+      "id": "article-43-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-43-section-4a576e0b",
+      "id": "article-43-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-43-section-b822fdab",
+      "id": "article-43-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-43-section-792296bc",
+      "id": "article-43-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-43-section-cd1d7453",
+      "id": "article-43-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-43-section-82df7efd",
+      "id": "article-43-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-43-section-66ed156e",
+      "id": "article-43-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-43-section-54dd41b9",
+      "id": "article-43-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-43-section-fc57d73a",
+      "id": "article-43-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-43-section-a1880f69",
+      "id": "article-43-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-43-token-b930ebda",
@@ -1358,7 +1358,7 @@
       "status": "PASS",
       "detail": {
         "manifest": "跨队列 meta 分析与外部验证",
-        "qmd": "第 44 篇 · 跨队列 meta 分析与外部验证"
+        "qmd": "跨队列 meta 分析与外部验证"
       }
     },
     {
@@ -1372,54 +1372,54 @@
       "detail": "no executable external theme dependency"
     },
     {
-      "id": "article-44-section-416ae484",
+      "id": "article-44-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-44-section-4a576e0b",
+      "id": "article-44-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-44-section-b822fdab",
+      "id": "article-44-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-44-section-792296bc",
+      "id": "article-44-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-44-section-cd1d7453",
+      "id": "article-44-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-44-section-82df7efd",
+      "id": "article-44-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-44-section-66ed156e",
+      "id": "article-44-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-44-section-54dd41b9",
+      "id": "article-44-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-44-section-fc57d73a",
+      "id": "article-44-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-44-section-a1880f69",
+      "id": "article-44-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-44-token-7e14a7b3",
@@ -1794,7 +1794,7 @@
       "status": "PASS",
       "detail": {
         "manifest": "微生物组与时间结局：Cox、Kaplan–Meier 与时间依赖 ROC",
-        "qmd": "第 45 篇 · 微生物组与时间结局：Cox、Kaplan–Meier 与时间依赖 ROC"
+        "qmd": "微生物组与时间结局：Cox、Kaplan–Meier 与时间依赖 ROC"
       }
     },
     {
@@ -1808,54 +1808,54 @@
       "detail": "no executable external theme dependency"
     },
     {
-      "id": "article-45-section-416ae484",
+      "id": "article-45-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-45-section-4a576e0b",
+      "id": "article-45-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-45-section-b822fdab",
+      "id": "article-45-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-45-section-792296bc",
+      "id": "article-45-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-45-section-cd1d7453",
+      "id": "article-45-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-45-section-82df7efd",
+      "id": "article-45-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-45-section-66ed156e",
+      "id": "article-45-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-45-section-54dd41b9",
+      "id": "article-45-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-45-section-fc57d73a",
+      "id": "article-45-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-45-section-a1880f69",
+      "id": "article-45-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-45-token-3c2c5122",

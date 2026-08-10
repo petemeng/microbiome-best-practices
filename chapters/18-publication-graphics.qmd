@@ -1,5 +1,5 @@
 ---
-title: "第 18 篇 · 出版级作图地基：ggplot2 主题、色盲友好配色、字体、PDF/SVG 矢量 + TIFF/PNG 300–600 ppi 导出"
+title: "出版级作图地基：ggplot2 主题、色盲友好配色、字体、PDF/SVG 矢量 + TIFF/PNG 300–600 ppi 导出"
 draft: false
 execute:
   eval: true
@@ -8,7 +8,7 @@ execute:
   message: false
 ---
 
-## 这一步对应论文里的哪张图 {#sec-paper-figure}
+## 发表级图形首先要可读、可辨和可复现 {#sec-paper-figure}
 
 一张图在 RStudio 绘图窗里看起来清楚，不等于投稿文件合格。真正要交付的是一组可复核的文件合同：最终物理尺寸、字体、颜色编码、矢量或位图格式、实际像素数，以及打开导出文件后的回验结果。
 

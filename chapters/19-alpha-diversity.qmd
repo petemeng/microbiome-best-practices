@@ -1,5 +1,5 @@
 ---
-title: "第 19 篇 · Alpha 指数全家 + 稀释曲线 + 抽平之争 + Hill numbers"
+title: "Alpha 指数全家 + 稀释曲线 + 抽平之争 + Hill numbers"
 draft: false
 execute:
   eval: true
@@ -8,7 +8,7 @@ execute:
   message: false
 ---
 
-## 这一步对应论文里的哪张图 {#sec-paper-figure}
+## Alpha 多样性到底在量化什么？ {#sec-paper-figure}
 
 Alpha 多样性（alpha diversity）描述的是**单个样本内部**检测到多少类群，以及丰度在这些类群之间分配得多均匀。论文里常见的 Shannon 箱线图只是最终摘要；在比较分组之前，还应先回答三个测量问题：样本测了多深、测得多完整、结论是否依赖某一种指数或标准化方法。
 

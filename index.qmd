@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；环境约束分析额外使用 `environment.tsv`。  
 > **预计资源：**90 个样本、13,628 个 OTU；普通笔记本约 2–5 分钟，内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 先看终点：一篇完整的 16S 研究需要哪些证据？ {#sec-target}
 
 一项完整的 16S 研究通常不是“做一张菌群柱状图”，而是一条逐层收紧的证据链：
 

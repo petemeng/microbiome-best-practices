@@ -50,9 +50,17 @@ CHAPTERS = {
     )),
 }
 
-REQUIRED_SECTIONS = (
-    "这一步对应论文里的哪张图", "理论", "准备工作", "审计与升级",
-    "出版级美化", "常见坑", "这段 Methods 怎么写", "参考",
+REQUIRED_SECTION_PATTERNS = (
+    ("opening", r"\{#sec-(?:target|paper-figure)\}"),
+    ("theory", r"\{#sec-theory\}"),
+    ("data-environment", r"\{#sec-(?:setup|preparation)\}"),
+    ("analysis", r"\{#sec-code\}"),
+    ("limitations", r"\{#sec-audit\}"),
+    ("presentation", r"\{#sec-(?:publication|polish|beautify|visualization|figure)\}"),
+    ("pitfalls", r"常见.*(?:坑|误判)"),
+    ("methods", r"\{#sec-methods\}"),
+    ("transfer", r"\{#sec-own-data\}"),
+    ("references", r"\{#sec-references\}"),
 )
 
 ARTICLE_TOKENS = {
@@ -76,8 +84,9 @@ ARTICLE_TOKENS = {
         "colocalisation", "54-4-assumption-audit",
     ),
     55: (
-        "七项真实研究", "横断面关联", "人群干预", "实验转移",
-        "分子机制链", "三角验证", "55-4-triangulation",
+        "七项真实研究提供了哪些证据", "病例–对照研究",
+        "人群随机干预", "转移、救援和机制实验",
+        "跨设计三角验证", "55-4-triangulation",
     ),
 }
 
@@ -179,10 +188,10 @@ def main() -> int:
             titles[number] in str(metadata.get("title", "")),
             {"manifest": titles[number], "qmd": metadata.get("title")},
         )
-        for section in REQUIRED_SECTIONS:
+        for section, pattern in REQUIRED_SECTION_PATTERNS:
             check(
                 f"article-{number}-section-{hashlib.sha1(section.encode()).hexdigest()[:8]}",
-                section in text, section,
+                re.search(pattern, text) is not None, pattern,
             )
         if number != 55:
             check(f"article-{number}-copyable-code", "可复制代码" in text,
@@ -198,10 +207,20 @@ def main() -> int:
                 "pal_pub/theme_pub/save_pub inline",
             )
         else:
-            check(f"article-{number}-reading-framework", "可复制阅读框架" in text,
-                  "no-code reading framework")
-            check(f"article-{number}-own-project", "换成你自己的论文或项目怎么做" in text,
-                  "paper/project audit")
+            check(
+                f"article-{number}-evidence-comparison",
+                all(token in text for token in (
+                    "七项真实研究提供了哪些证据",
+                    "不同研究设计的结论上限",
+                    "为什么需要跨设计三角验证",
+                )),
+                "worked evidence comparison",
+            )
+            check(
+                f"article-{number}-own-project",
+                "在自己的研究中怎样选择可辩护措辞" in text,
+                "claim calibration for the reader's project",
+            )
         check(
             f"article-{number}-no-source-theme",
             re.search(r'(?m)^[ \t]*source\("R/theme_pub\.R"\)', text) is None,

@@ -1,5 +1,5 @@
 ---
-title: "第 05 篇 · 批次效应：来源、检测与校正策略"
+title: "批次效应：来源、检测与校正策略"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；metadata 额外包含 `PlateNumber`、`Subject`、`Habitat`、`IsNegative` 和 DNA 定量。  
 > **预计资源：**1,951 个 ASV、569 个样本；普通笔记本约 2–5 分钟，内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 先区分生物差异与技术批次 {#sec-target}
 
 批次效应（batch effect）不是“PCoA 上按批次上色看起来没分开”就可以排除。论文中至少应留下四类证据：
 

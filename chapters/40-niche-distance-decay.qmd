@@ -1,5 +1,5 @@
 ---
-title: "第 40 篇 · 生态位宽度、物种丰度分布与距离衰减"
+title: "生态位宽度、物种丰度分布与距离衰减"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**通用三件套 `data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；距离衰减额外读取同一数据源的 `environment.tsv` 中 `Latitude`/`Longitude`。  
 > **预计资源：**13,628 个 OTU、90 个样本；90 × 5 个 RAD fits、999 次分层 Mantel permutation，通常 2–5 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 生态位、丰度分布与距离衰减回答不同尺度问题 {#sec-target}
 
 [Martiny et al. (2011)](https://doi.org/10.1073/pnas.1016308108)展示了 bacterial beta-diversity 的空间尺度依赖；[Hanson et al. (2012)](https://doi.org/10.1038/nrmicro2795)系统梳理了 selection、dispersal、drift 与 diversification 如何共同塑造微生物生物地理格局。这里不复制论文原图，而是在公开湿地 16S 数据上重绘 breadth–occupancy、rank-abundance fit、within-region distance-decay 和 effect-size audit。
 
@@ -508,7 +508,7 @@ distance_slope_ledger
 mantel_ledger
 ```
 
-## 审计与升级 {#sec-audit}
+## 三类生态模式如何相互验证？ {#sec-audit}
 
 ```{r}
 #| label: niche-distance-audit-table

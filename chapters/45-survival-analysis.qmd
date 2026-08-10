@@ -1,5 +1,5 @@
 ---
-title: "第 45 篇 · 微生物组与时间结局：Cox、Kaplan–Meier 与时间依赖 ROC"
+title: "微生物组与时间结局：Cox、Kaplan–Meier 与时间依赖 ROC"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -27,7 +27,7 @@ fig-format: png
 每个样本还必须有：`FollowUpTime`、`Event`（1=发生目标事件，0=右删失）、明确的 time origin，以及准备调整的临床/实验 covariates。只有 case/control 标签不能做 survival analysis；把随访末是否患病当普通二分类会丢失 censoring 与事件时间。
 :::
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 时间结局分析需要同时定义起点、事件和删失 {#sec-target}
 
 [Zhang et al. (2018)](https://doi.org/10.1038/s41564-018-0251-7)研究 early-life antibiotics、gut microbiome 与 NOD mice type 1 diabetes development；[Gu et al. (2023)](https://doi.org/10.1128/spectrum.05059-22)基于该公开数据提出 MiSurv。本页不复制论文原图，而是从其 6–8-week baseline 16S tables 重绘 treatment KM、adjusted genus HR、PH diagnostic 与 locked-test time-dependent ROC。
 
@@ -336,7 +336,7 @@ data.frame(Lambda1SE = lambda_locked, TestCIndex = test_concordance,
            HorizonWeeks = horizons, TestAUC = test_time_roc$AUC)
 ```
 
-## 审计与升级 {#sec-audit}
+## 比例风险、删失与模型稳定性 {#sec-audit}
 
 1. **锁 time zero。**microbiome sample、treatment exposure、covariates 与 follow-up 起点要有时间顺序；事件后样本不能预测既往事件。
 2. **先画 censoring/risk table。**若某 horizon 后 at-risk 很少，KM tail 与 timeROC 都不稳定；不要只看完整曲线外观。

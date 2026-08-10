@@ -1,5 +1,5 @@
 ---
-title: "第 02 篇 · 16S 能回答什么、回答不了什么（vs 宏基因组 / 其他组学）"
+title: "16S 能回答什么、回答不了什么（vs 宏基因组 / 其他组学）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**13,628 个 OTU、90 个样本；普通笔记本约 1 分钟，内存低于 500 MB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 先确定分辨率：16S 能测到什么？ {#sec-target}
 
 在论文中，测序方法决定了后续结论能走多远。16S rRNA 扩增子测序最适合回答：
 

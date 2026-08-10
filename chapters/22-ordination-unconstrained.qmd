@@ -1,5 +1,5 @@
 ---
-title: "第 22 篇 · 非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）"
+title: "非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**示例数据 90 个样本、13,628 个 OTU；普通笔记本约 2–5 分钟，内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 排序图展示的是距离结构，不是组间检验 {#sec-target}
 
 微生物组论文中常见的“每个点代表一个样本、颜色代表分组、椭圆概括组内分布”的散点图，回答的是：
 

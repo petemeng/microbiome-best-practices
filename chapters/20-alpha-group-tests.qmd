@@ -1,5 +1,5 @@
 ---
-title: "第 20 篇 · Alpha 组间检验 + 复现顶刊箱线图"
+title: "Alpha 组间检验 + 复现顶刊箱线图"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**真实示例含 90 个样本、13,628 个 OTU；完整计算与 5,000 次 bootstrap 通常少于 2 分钟，峰值内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 组间显著不等于生态差异重要 {#sec-target}
 
 微生物组论文最常见的 Alpha 结果图，是按病例组、处理组或地点分组的箱线图。它通常被用来回答：
 

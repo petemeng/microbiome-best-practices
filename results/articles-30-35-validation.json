@@ -52,54 +52,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-30-section-416ae484",
+      "id": "article-30-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-30-section-4a576e0b",
+      "id": "article-30-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-30-section-b822fdab",
+      "id": "article-30-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-30-section-792296bc",
+      "id": "article-30-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-30-section-cd1d7453",
+      "id": "article-30-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-30-section-82df7efd",
+      "id": "article-30-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-30-section-66ed156e",
+      "id": "article-30-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-30-section-54dd41b9",
+      "id": "article-30-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-30-section-fc57d73a",
+      "id": "article-30-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-30-section-a1880f69",
+      "id": "article-30-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-30-html",
@@ -109,7 +109,7 @@
     {
       "id": "article-30-html-title",
       "status": "PASS",
-      "detail": "第 30 篇 · CoDA 成分数据原理：为什么不能比原始丰度"
+      "detail": "CoDA 成分数据原理：为什么不能比原始丰度"
     },
     {
       "id": "figure-30-closure-artifact-pdf",
@@ -363,54 +363,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-31-section-416ae484",
+      "id": "article-31-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-31-section-4a576e0b",
+      "id": "article-31-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-31-section-b822fdab",
+      "id": "article-31-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-31-section-792296bc",
+      "id": "article-31-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-31-section-cd1d7453",
+      "id": "article-31-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-31-section-82df7efd",
+      "id": "article-31-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-31-section-66ed156e",
+      "id": "article-31-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-31-section-54dd41b9",
+      "id": "article-31-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-31-section-fc57d73a",
+      "id": "article-31-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-31-section-a1880f69",
+      "id": "article-31-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-31-html",
@@ -420,7 +420,7 @@
     {
       "id": "article-31-html-title",
       "status": "PASS",
-      "detail": "第 31 篇 · 差异方法横评（ANCOM-BC2/ALDEx2/MaAsLin2/LEfSe/corncob）"
+      "detail": "差异方法横评（ANCOM-BC2/ALDEx2/MaAsLin2/LEfSe/corncob）"
     },
     {
       "id": "figure-31-da-hit-counts-pdf",
@@ -674,54 +674,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-32-section-416ae484",
+      "id": "article-32-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-32-section-4a576e0b",
+      "id": "article-32-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-32-section-b822fdab",
+      "id": "article-32-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-32-section-792296bc",
+      "id": "article-32-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-32-section-cd1d7453",
+      "id": "article-32-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-32-section-82df7efd",
+      "id": "article-32-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-32-section-66ed156e",
+      "id": "article-32-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-32-section-54dd41b9",
+      "id": "article-32-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-32-section-fc57d73a",
+      "id": "article-32-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-32-section-a1880f69",
+      "id": "article-32-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-32-html",
@@ -731,7 +731,7 @@
     {
       "id": "article-32-html-title",
       "status": "PASS",
-      "detail": "第 32 篇 · 多分类级差异（差异科/属/种，collapse 逐级）"
+      "detail": "多分类级差异（差异科/属/种，collapse 逐级）"
     },
     {
       "id": "figure-32-rank-evidence-cascade-pdf",
@@ -985,54 +985,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-33-section-416ae484",
+      "id": "article-33-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-33-section-4a576e0b",
+      "id": "article-33-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-33-section-b822fdab",
+      "id": "article-33-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-33-section-792296bc",
+      "id": "article-33-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-33-section-cd1d7453",
+      "id": "article-33-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-33-section-82df7efd",
+      "id": "article-33-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-33-section-66ed156e",
+      "id": "article-33-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-33-section-54dd41b9",
+      "id": "article-33-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-33-section-fc57d73a",
+      "id": "article-33-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-33-section-a1880f69",
+      "id": "article-33-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-33-html",
@@ -1042,7 +1042,7 @@
     {
       "id": "article-33-html-title",
       "status": "PASS",
-      "detail": "第 33 篇 · 差异可视化：火山/LEfSe cladogram/Manhattan/森林图"
+      "detail": "差异可视化：火山/LEfSe cladogram/Manhattan/森林图"
     },
     {
       "id": "figure-33-da-volcano-pdf",
@@ -1368,54 +1368,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-34-section-416ae484",
+      "id": "article-34-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-34-section-4a576e0b",
+      "id": "article-34-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-34-section-b822fdab",
+      "id": "article-34-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-34-section-792296bc",
+      "id": "article-34-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-34-section-cd1d7453",
+      "id": "article-34-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-34-section-82df7efd",
+      "id": "article-34-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-34-section-66ed156e",
+      "id": "article-34-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-34-section-54dd41b9",
+      "id": "article-34-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-34-section-fc57d73a",
+      "id": "article-34-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-34-section-a1880f69",
+      "id": "article-34-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-34-html",
@@ -1425,7 +1425,7 @@
     {
       "id": "article-34-html-title",
       "status": "PASS",
-      "detail": "第 34 篇 · 绝对定量陷阱：相对丰度 vs QMP/spike-in"
+      "detail": "绝对定量陷阱：相对丰度 vs QMP/spike-in"
     },
     {
       "id": "figure-34-microbial-load-pdf",
@@ -1679,54 +1679,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-35-section-416ae484",
+      "id": "article-35-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-35-section-4a576e0b",
+      "id": "article-35-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-35-section-b822fdab",
+      "id": "article-35-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-35-section-792296bc",
+      "id": "article-35-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-35-section-cd1d7453",
+      "id": "article-35-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-35-section-82df7efd",
+      "id": "article-35-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-35-section-66ed156e",
+      "id": "article-35-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-35-section-54dd41b9",
+      "id": "article-35-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-35-section-fc57d73a",
+      "id": "article-35-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-35-section-a1880f69",
+      "id": "article-35-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-35-html",
@@ -1736,7 +1736,7 @@
     {
       "id": "article-35-html-title",
       "status": "PASS",
-      "detail": "第 35 篇 · 共现网络基础：SparCC/SPIEC-EASI/ggClusterNet"
+      "detail": "共现网络基础：SparCC/SPIEC-EASI/ggClusterNet"
     },
     {
       "id": "figure-35-network-matrix-pdf",

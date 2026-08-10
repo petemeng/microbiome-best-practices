@@ -1,5 +1,5 @@
 ---
-title: "第 48 篇 · MMvec/MOFA（菌×代谢物）"
+title: "MMvec/MOFA（菌×代谢物）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**通用三件套 `data/small/paired-ibd-multiomics/{otutab,taxonomy,metadata}.tsv`，另加 `metabolites.tsv` 与 `metabolite-annotation.tsv`。  
 > **预计资源：**220 个样本；100 个 microbial features、120 个 metabolites。CPU 上 MMvec/MOFA 通常数分钟、峰值内存约 3 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 联合潜变量模型比较的是共享结构 {#sec-target}
 
 [Morton et al. (2019)](https://doi.org/10.1038/s41592-019-0616-3)用 MMvec 展示 microbe–metabolite conditional probabilities 与 embeddings；[Argelaguet et al. (2020)](https://doi.org/10.1186/s13059-020-02015-1)用 MOFA+ 展示多视图 factors、variance explained 和 loadings。本页不转载原图，而是在 [Franzosa et al. (2019)](https://doi.org/10.1038/s41564-018-0306-4) 数据上重绘 CCA audit、MMvec training trace/ranking 与 MOFA factor summary。
 
@@ -317,7 +317,7 @@ integration_summary[c(
 )]
 ```
 
-## 审计与升级 {#sec-audit}
+## MMvec 与 MOFA 的结果怎样交叉验证？ {#sec-audit}
 
 1. **CCA 的 0.999 不是胜利。**100 + 120 个 features 对 220 个 samples，training canonical correlation 几乎为 1 正是高维 flexibility；必须 sparse/regularized CCA 并做 held-out projection。
 2. **MMvec 的 holdout 最优点仍在边界。**原生默认方案跑 100 个 epochs，最低 holdout MAE 1844.29 出现在 epoch 100。它不能被写成“已 early stop”；正式分析应预先设定更长上限与 patience，再检查最佳点是否离开边界。

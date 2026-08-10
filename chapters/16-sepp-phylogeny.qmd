@@ -1,5 +1,5 @@
 ---
-title: "第 16 篇 · 系统发育树（SEPP fragment insertion）"
+title: "系统发育树（SEPP fragment insertion）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**官方 SEPP reference Artifact 约 47.8 MiB；本次在 8 线程下 fragment insertion 用时约 7.4 分钟，feature filtering 约 36 秒。建议预留 8 GB 内存、2 GB 工作空间和 15–30 分钟。  
 > **执行策略：**reference 下载与最大级别验证、SEPP、jplace/树/BIOM 导出、tip reconciliation、feature filtering、Artifact provenance 和重复运行稳定性均已一次性实跑；网页构建使用 `eval: false`，避免每次渲染重新执行上游任务。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## UniFrac 之前，先得到可信的系统发育树 {#sec-target}
 
 系统发育树通常不会直接作为一张“全树图”放进正文。它更常以三种形式进入论文：
 

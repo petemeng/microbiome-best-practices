@@ -182,7 +182,7 @@ def _wrap_cjk(
     return lines or ["16S 微生物组最佳实践"]
 
 
-def create_cover(number: int, raw_title: str, output: Path) -> None:
+def create_cover(raw_title: str, output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     image = Image.new("RGB", (900, 383), "#f7f1e6")
     draw = ImageDraw.Draw(image)
@@ -199,8 +199,8 @@ def create_cover(number: int, raw_title: str, output: Path) -> None:
     small = ImageFont.truetype(_font_path("Noto Sans CJK SC"), 19)
     lines = _wrap_cjk(raw_title, draw, serif)
     draw.multiline_text((54, 76), "\n".join(lines), font=serif, fill="#203124", spacing=10)
-    draw.rounded_rectangle((54, 300, 272, 344), radius=14, fill="#f9f4ea")
-    draw.text((72, 307), f"第 {number:02d} / 55 篇", font=sans, fill="#6f8561")
+    draw.rounded_rectangle((54, 300, 330, 344), radius=14, fill="#f9f4ea")
+    draw.text((72, 307), "MICROBIOME TUTORIAL", font=sans, fill="#6f8561")
     draw.text((690, 326), "16S · BEST PRACTICES", font=small, fill="#6f8561")
     for quality in (82, 74, 68, 62, 56, 50, 44):
         image.save(output, "JPEG", quality=quality, optimize=True, progressive=True, subsampling=2)
@@ -250,6 +250,7 @@ def remove_unwanted(main: etree._Element) -> None:
         './/*[contains(concat(" ", normalize-space(@class), " "), " code-copy-button ")]',
         './/*[contains(concat(" ", normalize-space(@class), " "), " code-annotation-gutter ")]',
         './/*[contains(concat(" ", normalize-space(@class), " "), " anchorjs-link ")]',
+        './/*[contains(concat(" ", normalize-space(@class), " "), " header-section-number ")]',
         './/*[contains(concat(" ", normalize-space(@class), " "), " quarto-title-meta ")]',
     ]
     seen: set[etree._Element] = set()
@@ -336,7 +337,6 @@ def resolve_and_optimize_images(
         relative, destination = cache[source]
         image_element.set("src", relative)
         image_element.set("style", STYLES["img"])
-        image_element.set("data-local-image", str(destination.resolve()))
         record = {
             "source_path": str(source),
             "local_path": str(destination.resolve()),
@@ -352,7 +352,7 @@ def resolve_and_optimize_images(
 
 
 def strip_unsupported_attributes(main: etree._Element) -> None:
-    allowed = {"style", "href", "src", "alt", "title", "colspan", "rowspan", "data-local-image"}
+    allowed = {"style", "href", "src", "alt", "title", "colspan", "rowspan"}
     for element in main.iter():
         for key in list(element.attrib):
             if key not in allowed:
@@ -367,52 +367,9 @@ def strip_unsupported_attributes(main: etree._Element) -> None:
                 element.attrib.pop("href", None)
 
 
-def review_banner(review_url: str, number: int) -> etree._Element:
-    fragment = html.fragment_fromstring(
-        (
-            '<section style="margin:0 0 24px;padding:16px 18px;background:#f6f1e7;'
-            'border:1px solid #eadfca;border-radius:12px;">'
-            f'<p style="margin:0;color:#4b5f4e;font-size:14px;line-height:1.75;">'
-            f'16S 微生物组最佳实践 · 第 {number:02d}/55 篇 · 审阅草稿<br>'
-            f'<a href="{review_url}" style="color:#8a6428;text-decoration:none;'
-            'border-bottom:1px solid #cfb17b;">在 GitHub 查看同源完整版本与审计文件</a>'
-            '</p></section>'
-        ),
-        create_parent=False,
-    )
-    return fragment
-
-
-def navigation_footer(
-    review_url: str,
-    number: int,
-    formal_count: int,
-) -> etree._Element:
-    text = (
-        f"本次开放审阅第 01–{formal_count:02d} 篇；"
-        "可在草稿箱继续查看下一篇。"
-    )
-    if number == formal_count:
-        text = f"本次开放审阅到第 {formal_count:02d} 篇，后续篇目仍在撰写与 QA。"
-    return html.fragment_fromstring(
-        (
-            '<section style="margin:36px 0 0;padding:18px;background:#eef3ea;'
-            'border-radius:12px;text-align:center;">'
-            f'<p style="margin:0 0 8px;color:#314735;font-size:14px;line-height:1.75;">{text}</p>'
-            f'<p style="margin:0;"><a href="{review_url}" style="color:#8a6428;'
-            'text-decoration:none;border-bottom:1px solid #cfb17b;">GitHub Draft PR #1</a></p>'
-            '</section>'
-        ),
-        create_parent=False,
-    )
-
-
 def sanitize_article(
     source_html: Path,
     article_dir: Path,
-    review_url: str,
-    number: int,
-    formal_count: int,
 ) -> tuple[str, list[dict[str, Any]]]:
     document = html.parse(str(source_html)).getroot()
     mains = document.xpath(
@@ -430,8 +387,6 @@ def sanitize_article(
     images = resolve_and_optimize_images(main, source_html, article_dir)
     strip_unsupported_attributes(main)
     main.set("style", ROOT_STYLE)
-    main.insert(0, review_banner(review_url, number))
-    main.append(navigation_footer(review_url, number, formal_count))
     return etree.tostring(main, encoding="unicode", method="html"), images
 
 
@@ -469,19 +424,22 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             raise FileNotFoundError(source_html)
         article_dir = output_dir / f"{number:02d}"
         article_dir.mkdir(parents=True, exist_ok=True)
-        title = truncate(f"16S最佳实践（{number:02d}/55）｜{raw_title}", MAX_TITLE_CHARS)
-        digest = truncate(
-            f"第{number:02d}篇：{raw_title}。真实数据、完整复现代码、结果解释与发表级重绘图。",
-            MAX_DIGEST_CHARS,
+        title = truncate(f"16S最佳实践｜{raw_title}", MAX_TITLE_CHARS)
+        digest_lead = raw_title if raw_title.endswith(("。", "！", "？", "!", "?")) else f"{raw_title}。"
+        digest_text = (
+            f"{digest_lead}真实数据、完整复现代码、结果解释与发表级重绘图。"
         )
+        if number == 55:
+            digest_text = (
+                f"{digest_lead}用七项一手研究比较不同设计的证据边界、"
+                "残余偏倚与可辩护措辞。"
+            )
+        digest = truncate(digest_text, MAX_DIGEST_CHARS)
         cover = article_dir / "cover.jpg"
-        create_cover(number, raw_title, cover)
+        create_cover(raw_title, cover)
         content, images = sanitize_article(
             source_html=source_html,
             article_dir=article_dir,
-            review_url=args.review_url,
-            number=number,
-            formal_count=args.formal_count,
         )
         payload = {
             "title": title,
@@ -531,6 +489,17 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             errors.append(f"{item['chapter_id']}: digest is too long")
         if re.search(r"<(script|style|button|nav)\b", draft["content"], flags=re.I):
             errors.append(f"{item['chapter_id']}: unsupported HTML remains")
+        if re.search(
+            r"审阅草稿|开放审阅|GitHub Draft PR|草稿箱继续查看|"
+            r"header-section-number|data-local-image|"
+            r"16S最佳实践[（(]\d{1,2}/\d{1,2}[）)]|"
+            r"第\s*\d{1,2}\s*/\s*\d{1,2}\s*篇",
+            draft["content"],
+            flags=re.I,
+        ):
+            errors.append(f"{item['chapter_id']}: internal review or numbering metadata remains")
+        if "/pull/" in str(draft.get("content_source_url", "")):
+            errors.append(f"{item['chapter_id']}: content_source_url points to a pull request")
         for image_record in item["embedded_images"]:
             if image_record["size_bytes"] > MAX_ARTICLE_IMAGE_BYTES:
                 errors.append(f"{item['chapter_id']}: article image exceeds upload budget")

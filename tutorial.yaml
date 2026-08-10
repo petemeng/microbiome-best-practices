@@ -11901,4 +11901,4 @@ series:
     - {number: 52, file: chapters/52-structural-equation-model.qmd, title: "结构方程模型：从环境因子到微生物再到表型"}
     - {number: 53, file: chapters/53-mediation-analysis.qmd, title: "中介分析：暴露 → 微生物 → 结局"}
     - {number: 54, file: chapters/54-mendelian-randomization.qmd, title: "孟德尔随机化：工具变量、水平多效性与敏感性分析"}
-    - {number: 55, file: chapters/55-causal-evidence.qmd, title: "因果证据阶梯：如何判断一篇论文的因果级别"}
+    - {number: 55, file: chapters/55-causal-evidence.qmd, title: "因果证据阶梯：微生物组结果什么时候可以谈因果？"}

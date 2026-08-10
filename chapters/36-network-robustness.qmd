@@ -1,5 +1,5 @@
 ---
-title: "第 36 篇 · 网络进阶：鲁棒性、拓扑角色与组间比较"
+title: "网络进阶：鲁棒性、拓扑角色与组间比较"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**90 个样本、40 个预先筛选的命名属；SPIEC-EASI 50 次 StARS subsampling、SparCC 100 次样本 bootstrap、组间 499 次置换与每组 500 次 bootstrap，通常 6–12 分钟、峰值内存约 2–4 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 网络差异必须先证明推断过程可比 {#sec-target}
 
 [Guimerà & Amaral (2005)](https://doi.org/10.1038/nature03288)用 within-module degree 与 participation coefficient 建立网络角色图；[Yuan et al. (2021)](https://doi.org/10.1038/s41558-021-00989-9)把网络复杂度与稳定性用于土壤微生物群落比较。这里不复制论文原图，而是在公开湿地 16S 数据上重绘 role cartography、node-attack curve、group rewiring null distribution 和方法敏感性账本。
 
@@ -645,7 +645,7 @@ data.frame(
 )
 ```
 
-## 审计与升级 {#sec-audit}
+## 组间网络比较必须统一推断条件 {#sec-audit}
 
 ```{r}
 #| label: network-robustness-audit-table

@@ -1,5 +1,5 @@
 ---
-title: "第 24 篇 · 约束排序：CAP/db-RDA/RDA/CCA（复现）"
+title: "约束排序：CAP/db-RDA/RDA/CCA（复现）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`、`environment.tsv`。  
 > **预计资源：**示例数据 90 个样本、13,628 个 OTU、5 个候选环境变量；普通笔记本约 3–8 分钟，内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 约束排序回答环境解释了多少群落差异 {#sec-target}
 
 环境微生物组论文经常出现一张带箭头的二维排序图：
 

@@ -1,5 +1,5 @@
 ---
-title: "第 23 篇 · PERMANOVA + betadisper（必配）+ ANOSIM/MRPP"
+title: "PERMANOVA + betadisper（必配）+ ANOSIM/MRPP"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**示例含 16,825 个 OTU、56 个 PCR/tag 技术文库和 24 个生物学土壤样本；9,999 次受限置换及四张 600 ppi 图通常少于 2 分钟，峰值内存低于 1 GB。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## PERMANOVA 必须与离散度检验一起解释 {#sec-target}
 
 PERMANOVA 常对应论文中的 PCoA/NMDS 分组图和一张含 pseudo-F、(R^2)、P 值的统计表。真正需要回答的不是“彩色点是否看起来分开”，而是：
 

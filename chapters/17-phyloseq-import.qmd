@@ -1,5 +1,5 @@
 ---
-title: "第 17 篇 · 导出到 R：构建 phyloseq 对象、数据结构详解"
+title: "导出到 R：构建 phyloseq 对象、数据结构详解"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**读取 203,818-tip 完整树并裁剪、构建对象和回验通常需要 20–90 秒；建议预留 1–2 GB 内存。  
 > **执行策略：**正文从可校验的输入文件重新构建对象，`execute: eval: true`；发布前另用独立校验脚本完成 82 项检查，并输出 PDF、PNG、350 dpi LZW TIFF、审计表和运行日志。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 把 QIIME 2 结果正确装进 phyloseq {#sec-target}
 
 `phyloseq` 对象通常不直接成为论文结果图，却是群落组成、alpha diversity、beta diversity、差异丰度和系统发育分析共同的数据入口。McMurdie 与 Holmes 在 `phyloseq` 方法论文中用对象与分析组件的关系说明这种设计。本页不复制论文原图，而是根据本次真实输入重新绘制四张审计图：
 

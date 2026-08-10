@@ -51,54 +51,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-36-section-416ae484",
+      "id": "article-36-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-36-section-4a576e0b",
+      "id": "article-36-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-36-section-b822fdab",
+      "id": "article-36-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-36-section-792296bc",
+      "id": "article-36-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-36-section-cd1d7453",
+      "id": "article-36-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-36-section-82df7efd",
+      "id": "article-36-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-36-section-66ed156e",
+      "id": "article-36-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-36-section-54dd41b9",
+      "id": "article-36-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-36-section-fc57d73a",
+      "id": "article-36-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-36-section-a1880f69",
+      "id": "article-36-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-36-token-891a4894",
@@ -148,7 +148,7 @@
     {
       "id": "article-36-html-title",
       "status": "PASS",
-      "detail": "第 36 篇 · 网络进阶：鲁棒性、拓扑角色与组间比较"
+      "detail": "网络进阶：鲁棒性、拓扑角色与组间比较"
     },
     {
       "id": "figure-36-role-cartography-pdf",
@@ -474,54 +474,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-37-section-416ae484",
+      "id": "article-37-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-37-section-4a576e0b",
+      "id": "article-37-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-37-section-b822fdab",
+      "id": "article-37-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-37-section-792296bc",
+      "id": "article-37-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-37-section-cd1d7453",
+      "id": "article-37-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-37-section-82df7efd",
+      "id": "article-37-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-37-section-66ed156e",
+      "id": "article-37-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-37-section-54dd41b9",
+      "id": "article-37-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-37-section-fc57d73a",
+      "id": "article-37-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-37-section-a1880f69",
+      "id": "article-37-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-37-token-a9a8a826",
@@ -571,7 +571,7 @@
     {
       "id": "article-37-html-title",
       "status": "PASS",
-      "detail": "第 37 篇 · WGCNA 用于微生物组：模块、性状关联与候选 hub"
+      "detail": "WGCNA 用于微生物组：模块、性状关联与候选 hub"
     },
     {
       "id": "figure-37-soft-threshold-pdf",
@@ -897,54 +897,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-38-section-416ae484",
+      "id": "article-38-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-38-section-4a576e0b",
+      "id": "article-38-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-38-section-b822fdab",
+      "id": "article-38-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-38-section-792296bc",
+      "id": "article-38-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-38-section-cd1d7453",
+      "id": "article-38-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-38-section-82df7efd",
+      "id": "article-38-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-38-section-66ed156e",
+      "id": "article-38-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-38-section-54dd41b9",
+      "id": "article-38-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-38-section-fc57d73a",
+      "id": "article-38-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-38-section-a1880f69",
+      "id": "article-38-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-38-token-ee8702a0",
@@ -999,7 +999,7 @@
     {
       "id": "article-38-html-title",
       "status": "PASS",
-      "detail": "第 38 篇 · βNTI + RCbray：确定性与随机过程的条件性证据"
+      "detail": "βNTI + RCbray：确定性与随机过程的条件性证据"
     },
     {
       "id": "figure-38-tree-filter-pdf",
@@ -1325,54 +1325,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-39-section-416ae484",
+      "id": "article-39-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-39-section-4a576e0b",
+      "id": "article-39-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-39-section-b822fdab",
+      "id": "article-39-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-39-section-792296bc",
+      "id": "article-39-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-39-section-cd1d7453",
+      "id": "article-39-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-39-section-82df7efd",
+      "id": "article-39-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-39-section-66ed156e",
+      "id": "article-39-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-39-section-54dd41b9",
+      "id": "article-39-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-39-section-fc57d73a",
+      "id": "article-39-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-39-section-a1880f69",
+      "id": "article-39-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-39-token-14cde840",
@@ -1417,7 +1417,7 @@
     {
       "id": "article-39-html-title",
       "status": "PASS",
-      "detail": "第 39 篇 · 中性群落模型：Sloan 拟合、迁入率与偏离类群"
+      "detail": "中性群落模型：Sloan 拟合、迁入率与偏离类群"
     },
     {
       "id": "figure-39-neutral-abundance-occupancy-pdf",
@@ -1743,54 +1743,54 @@
       "detail": "set.seed present"
     },
     {
-      "id": "article-40-section-416ae484",
+      "id": "article-40-section-832f94bf",
       "status": "PASS",
-      "detail": "这一步对应论文里的哪张图"
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
     },
     {
-      "id": "article-40-section-4a576e0b",
+      "id": "article-40-section-6477d7f1",
       "status": "PASS",
-      "detail": "理论"
+      "detail": "\\{#sec-theory\\}"
     },
     {
-      "id": "article-40-section-b822fdab",
+      "id": "article-40-section-b95e4291",
       "status": "PASS",
-      "detail": "准备工作"
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
     },
     {
-      "id": "article-40-section-792296bc",
+      "id": "article-40-section-36847a29",
       "status": "PASS",
-      "detail": "可复制代码"
+      "detail": "\\{#sec-code\\}"
     },
     {
-      "id": "article-40-section-cd1d7453",
+      "id": "article-40-section-c9897832",
       "status": "PASS",
-      "detail": "审计与升级"
+      "detail": "\\{#sec-audit\\}"
     },
     {
-      "id": "article-40-section-82df7efd",
+      "id": "article-40-section-e4c8d951",
       "status": "PASS",
-      "detail": "出版级美化"
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
     },
     {
-      "id": "article-40-section-66ed156e",
+      "id": "article-40-section-f94d5096",
       "status": "PASS",
-      "detail": "常见坑"
+      "detail": "常见.*(?:坑|误判)"
     },
     {
-      "id": "article-40-section-54dd41b9",
+      "id": "article-40-section-b85dac7f",
       "status": "PASS",
-      "detail": "这段 Methods 怎么写"
+      "detail": "\\{#sec-methods\\}"
     },
     {
-      "id": "article-40-section-fc57d73a",
+      "id": "article-40-section-34420cf5",
       "status": "PASS",
-      "detail": "换成你自己的数据怎么做"
+      "detail": "\\{#sec-own-data\\}"
     },
     {
-      "id": "article-40-section-a1880f69",
+      "id": "article-40-section-f4c9a69f",
       "status": "PASS",
-      "detail": "参考"
+      "detail": "\\{#sec-references\\}"
     },
     {
       "id": "article-40-token-ad4e275a",
@@ -1840,7 +1840,7 @@
     {
       "id": "article-40-html-title",
       "status": "PASS",
-      "detail": "第 40 篇 · 生态位宽度、物种丰度分布与距离衰减"
+      "detail": "生态位宽度、物种丰度分布与距离衰减"
     },
     {
       "id": "figure-40-niche-breadth-pdf",

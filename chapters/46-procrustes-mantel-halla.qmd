@@ -1,5 +1,5 @@
 ---
-title: "第 46 篇 · 相关整合：Procrustes/Mantel/HAllA"
+title: "相关整合：Procrustes/Mantel/HAllA"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**通用三件套 `data/small/paired-ibd-multiomics/{otutab,taxonomy,metadata}.tsv`，另加同一样本的 `metabolites.tsv` 与 `metabolite-annotation.tsv`。  
 > **预计资源：**220 个配对样本；全局检验约 1 分钟，25 × 40 个特征的 HAllA（999 permutations）约 2 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 跨组学相关首先要保证样本与统计单位对齐 {#sec-target}
 
 [Franzosa et al. (2019)](https://doi.org/10.1038/s41564-018-0306-4)联合粪便宏基因组与代谢组刻画 IBD；公开整理仓库提供可追溯的配对 genus counts、metabolites 与 diagnosis metadata。本页不转载论文原图，而是用该数据重绘整体 concordance、分组混杂审计和 HAllA association ranking。
 
@@ -273,7 +273,7 @@ stopifnot(
 head(halla_blocks, 5)
 ```
 
-## 审计与升级 {#sec-audit}
+## 全局一致不等于具体特征关联 {#sec-audit}
 
 1. **先审配对。**这里 220 个 sample IDs 在两个视图中顺序完全一致；任何丢样或重复都应在分析前停止，而不是由函数静默取交集。
 2. **先画 raw，再画 adjusted。**437 个 raw hits 中有一部分只是 diagnosis separation；校正后 350 个 hits 才进入 HAllA。若还有 age、medication、batch，应一起进入 design。

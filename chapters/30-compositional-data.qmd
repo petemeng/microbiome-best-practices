@@ -1,5 +1,5 @@
 ---
-title: "第 30 篇 · CoDA 成分数据原理：为什么不能比原始丰度"
+title: "CoDA 成分数据原理：为什么不能比原始丰度"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**13,628 个 ASV、90 个样本、1,619,670 reads；普通笔记本通常少于 1 分钟、峰值内存低于 1 GB；三张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 微生物丰度是成分数据 {#sec-target}
 
 [Gloor et al. (2017)](https://doi.org/10.3389/fmicb.2017.02224)系统解释了为什么高通量测序表是 composition，而不是绝对丰度表；原文为 CC BY。这里不复制原图，而是用公开湿地 16S 计数重绘三个更接近分析现场的证据：一次真实组成上的反事实闭合实验、同一属在三种测量尺度下的组间分布，以及 reference 改变时效应量如何移动。
 
@@ -396,7 +396,7 @@ reference_effects
 
 ALR effect 的方向和大小属于“target 相对 reference”的性质。若三个 reference 给出不同结论，先审计 reference 的稳定性，而不是挑最显著的一条。
 
-## 审计与升级 {#sec-audit}
+## 零值、分母与参考框架怎样改变结论？ {#sec-audit}
 
 ```{r}
 #| label: coda-audit-table

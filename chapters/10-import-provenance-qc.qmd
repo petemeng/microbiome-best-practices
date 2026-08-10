@@ -1,5 +1,5 @@
 ---
-title: "第 10 篇 · 导入数据 + provenance + 质控（FastQC/MultiQC）"
+title: "导入数据 + provenance + 质控（FastQC/MultiQC）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -24,7 +24,7 @@ fig-format: png
 > **预计资源：**本页使用的 2,000-pair 真实摘录约 0.5 MB，完整验收约 3–5 分钟、峰值内存低于 2 GB；完整研究数据的耗时和空间近似随 reads 数增长。  
 > **执行策略：**导入、拆样、FastQC、MultiQC 与 provenance 审计已在固定环境中一次性实跑；网页渲染使用 `eval: false`，避免每次构建生成新的 Artifact UUID 或重复运行上游工具。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 先让每一步输入、输出和来源可追溯 {#sec-target}
 
 “导入成功”通常不会成为论文主图，但它决定后续 ASV 表是否还对应正确样本。建议至少保留三类证据：
 

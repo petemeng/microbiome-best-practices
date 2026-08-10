@@ -1,5 +1,5 @@
 ---
-title: "第 38 篇 · βNTI + RCbray：确定性与随机过程的条件性证据"
+title: "βNTI + RCbray：确定性与随机过程的条件性证据"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；额外读取 `environment.tsv` 与 `rooted-tree.nwk.gz`。  
 > **预计资源：**90 个样本、585 个主分析 OTU、999 次 βNTI 与 999 次 RCbray null randomizations；8 个本地 workers 通常 8–18 分钟、峰值内存约 4–8 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## βNTI 与 RCbray 提供的是条件性组装证据 {#sec-target}
 
 [Stegen et al. (2013)](https://doi.org/10.1038/ismej.2013.93)把 β-nearest taxon index（βNTI）与 abundance-based Raup–Crick（RCbray）串联，用 pairwise phylogenetic 与 taxonomic turnover 条件性区分 selection、dispersal 和 undominated processes。[Ning et al. (2020)](https://doi.org/10.1038/s41467-020-18560-z)进一步发展了可扩展的定量框架。这里不复制原图，而是用公开湿地数据重绘 βNTI–RCbray process map、分组 process fractions、系统发育信号与过滤审计。
 
@@ -535,7 +535,7 @@ data.frame(
 )
 ```
 
-## 审计与升级 {#sec-audit}
+## 阈值、树和 null model 怎样改变组装比例？ {#sec-audit}
 
 ```{r}
 #| label: bnti-audit-table

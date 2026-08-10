@@ -1,5 +1,5 @@
 ---
-title: "第 34 篇 · 绝对定量陷阱：相对丰度 vs QMP/spike-in"
+title: "绝对定量陷阱：相对丰度 vs QMP/spike-in"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**标准三件套 `data/small/absolute-quantification/{otutab,taxonomy,metadata}.tsv`，外加每样本 `cell-load.tsv`。  
 > **预计资源：**234 个属、135 个样本、4,080,996 reads；主比较限定同一 Disease cohort 的 29 个 CD 与 66 个 healthy samples；普通笔记本少于 1 分钟、峰值内存低于 1 GB；三张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 相对丰度不能替代微生物总负荷 {#sec-target}
 
 [Vandeputte et al. (2017)](https://doi.org/10.1038/nature24460)把 flow-cytometry cell counts 与 16S composition 结合，展示 microbial load 如何改变 enterotype、疾病关联和共变网络的解释。Nature 图形许可不默认允许公众号整图转载，因此这里使用论文公开数据的 Bioconductor 分发版本，从数值重绘 load distribution、relative–quantitative effect map 和一个分歧 taxon 的双尺度分布。
 
@@ -451,7 +451,7 @@ exemplar
 
 示例选择规则先找方向相反的可报告属，再找只在一个尺度通过 BH 的属，最后才按 effect shift 大小排序；规则在看名字前固定，避免挑选更好讲故事的菌。
 
-## 审计与升级 {#sec-audit}
+## QMP 与 spike-in 仍需哪些校准？ {#sec-audit}
 
 ```{r}
 #| label: absolute-audit-table

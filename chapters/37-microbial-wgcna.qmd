@@ -1,5 +1,5 @@
 ---
-title: "第 37 篇 · WGCNA 用于微生物组：模块、性状关联与候选 hub"
+title: "WGCNA 用于微生物组：模块、性状关联与候选 hub"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；额外读取同源 `environment.tsv` 作为 module–trait 分析。  
 > **预计资源：**90 个样本、422 个预先过滤的命名属；WGCNA 1.74、4 线程通常 1–3 分钟、峰值内存约 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## WGCNA 模块是共变模式，不是生态功能单元 {#sec-target}
 
 [Langfelder & Horvath (2008)](https://doi.org/10.1186/1471-2105-9-559)系统化了 weighted correlation network analysis：用 soft threshold 把 correlation 转为 adjacency，经 topological overlap 聚类得到模块，再以 module eigengene 关联外部性状。这里不复制原图，而是用公开湿地 16S 数据重绘 soft-threshold audit、module dendrogram、module–trait heatmap 和候选 hub 稳定性图。
 
@@ -461,7 +461,7 @@ data.frame(
 )
 ```
 
-## 审计与升级 {#sec-audit}
+## 模块、性状和 hub 的结论边界 {#sec-audit}
 
 ```{r}
 #| label: wgcna-audit-table

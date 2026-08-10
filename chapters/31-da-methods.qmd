@@ -1,5 +1,5 @@
 ---
-title: "第 31 篇 · 差异方法横评（ANCOM-BC2/ALDEx2/MaAsLin2/LEfSe/corncob）"
+title: "差异方法横评（ANCOM-BC2/ALDEx2/MaAsLin2/LEfSe/corncob）"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**CW 对 IW 共 60 个样本，79 个可报告属加 1 个 denominator residual；单线程通常 2–5 分钟、峰值内存约 2–4 GB；三张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 差异丰度方法为什么会给出不同答案？ {#sec-target}
 
 [Nearing et al. (2022)](https://doi.org/10.1038/s41467-022-28034-z)在 38 个 16S 数据集上比较 14 种差异丰度（differential abundance, DA）方法。其 Figure 1 展示了同一数据集换方法后，显著 feature 的比例可以大幅变化；Figure 3 进一步比较方法间重叠。本文不复制原图，而是用一套真实湿地数据重建“同设计横评”：所有方法只允许改变统计模型，不允许偷偷改变数据或 contrast。
 
@@ -590,7 +590,7 @@ direction_check
 head(feature_support, 15)
 ```
 
-## 审计与升级 {#sec-audit}
+## 不同方法的结果为什么不能按“投票”决定？ {#sec-audit}
 
 ```{r}
 #| label: audit-da-methods

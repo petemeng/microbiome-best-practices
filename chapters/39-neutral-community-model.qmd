@@ -1,5 +1,5 @@
 ---
-title: "第 39 篇 · 中性群落模型：Sloan 拟合、迁入率与偏离类群"
+title: "中性群落模型：Sloan 拟合、迁入率与偏离类群"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: true
   freeze: auto
@@ -23,7 +23,7 @@ fig-format: png
 > **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
 > **预计资源：**13,628 个 OTU、90 个样本；主模型、分组模型、800 次 sample bootstrap、一次 10,000-read rarefaction 与 17 个 detection thresholds，通常 2–5 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 中性模型的偏离不等于确定性机制 {#sec-target}
 
 [Sloan et al. (2006)](https://doi.org/10.1111/j.1462-2920.2005.00956.x)给出了微生物 neutral community model；[Burns et al. (2016)](https://doi.org/10.1038/ismej.2015.142)用 abundance–occupancy 曲线比较斑马鱼不同发育阶段的中性拟合。这里不转载论文原图，而是在公开湿地 16S 数据上重绘 abundance–occupancy envelope、分组 immigration estimate、classification sensitivity 和 detection-limit sensitivity。
 
@@ -421,7 +421,7 @@ stopifnot(
 classification_agreement
 ```
 
-## 审计与升级 {#sec-audit}
+## 迁入率与偏离类群的解释边界 {#sec-audit}
 
 ```{r}
 #| label: neutral-model-audit-table

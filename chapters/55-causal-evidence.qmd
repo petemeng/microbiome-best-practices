@@ -1,5 +1,5 @@
 ---
-title: "第 55 篇 · 因果证据阶梯：如何判断一篇论文的因果级别"
+title: "因果证据阶梯：微生物组结果什么时候可以谈因果？"
 author: "微生物组分析最佳实践 · 16S 系列"
 date: last-modified
 format:
@@ -9,7 +9,7 @@ format:
     code-fold: false
     code-tools: true
     code-copy: true
-    number-sections: true
+    number-sections: false
 execute:
   eval: false
   freeze: auto
@@ -17,261 +17,183 @@ fig-dpi: 300
 fig-format: png
 ---
 
-> **阅读目标：**从研究设计能排除哪些替代解释出发，判断一篇微生物组论文最多能使用多强的因果措辞。  
-> **输入材料：**论文全文、补充方法、研究方案/注册记录、数据与代码链接；摘要和一张显著性图不够。  
-> **预计时间：**快速审读约 20 分钟；完成设计、偏倚和可迁移性审计约 60–90 分钟。
+::: {.callout-important title="本章结论"}
+- **横断面 16S 研究通常只能支持关联。**显著性、预测准确率或多组学一致性都不能自动排除混杂与反向因果。
+- **纵向数据增加了时间顺序，却没有自动创造可交换性。**治疗变化、疾病活动和选择性失访仍可能解释结果。
+- **随机干预、实验转移和定义菌救援回答的是不同问题。**它们分别加强干预效应、模型内可转移性和特定条件下的机制定位，不能互相替代。
+- **最可靠的因果判断来自跨设计三角验证。**只有多个研究针对同一因果命题、且主要偏倚结构不同，证据才真正升级。
+:::
 
-## 这一步对应论文里的哪张图 {#sec-target}
+## 微生物组结果什么时候可以谈因果？ {#sec-target}
 
-一篇论文最重要的“因果图”往往不在某个 panel，而藏在标题、摘要和讨论的动词里：`associated with`、`predicts`、`mediates`、`drives`、`protects against`、`acts through`，每个词需要不同强度的设计支持。
+微生物组论文中最需要审慎处理的，往往不是某个 P 值，而是标题、摘要和讨论里的动词。  
+`associated with`、`preceded`、`changed`、`transferred`、`restored` 和 `acted through` 对研究设计的要求并不相同。
 
-下面的证据阶梯用七项真实研究作锚点，从横断面关联、纵向、MR/中介、人群干预，一直走到实验转移、定义菌救援和分子机制。它不是期刊排名，也不是自动打分表；每升一级只减少部分替代解释，并会引入新的外推问题。
+下面的证据阶梯用七项一手研究说明不同设计的**结论上限**。层级越高，能够排除的替代解释通常越多；但动物、培养和分子实验也会增加模型外推问题。因此，这不是期刊排名、论文质量分或“因果通关表”。
 
 ![Seven evidence tiers illustrated by representative microbiome studies. Higher tiers justify stronger but still bounded causal language.](../figures/55-causal-evidence/55-1-evidence-ladder.png){fig-alt="Seven-tier microbiome causal evidence ladder" width="100%"}
 
-图中案例均来自可追溯的一手研究：
-
-| 层级 | 代表设计 | 案例 | 该设计最多支持什么 |
-|---|---|---|---|
-| L1 | 横断面关联 | Franzosa 2019，IBD 多组学 | 病例与对照存在微生物/代谢差异 |
-| L2 | 纵向时间信息 | Lloyd-Price 2019，IBD 动态多组学 | 菌群状态与疾病活动随时间共同变化，部分变化先于结局 |
-| L3 | 中介或 MR 三角验证 | Sanna 2019，菌群–代谢性状遗传分析 | 遗传代理效应与某个方向的因果假设相容 |
-| L4 | 人群干预 | O'Keefe 2015，双向饮食互换 | 被分配的饮食组合改变了观测结局 |
-| L5 | 实验转移 | Ridaura 2013，人源菌群移植无菌鼠 | 供体菌群可在特定模型中转移表型 |
-| L6 | 培养或救援 | Buffie 2015，`C. scindens` 重建 | 定义菌在受控模型中恢复定植抗性 |
-| L7 | 分子机制链 | Koeth 2013，L-carnitine–TMAO | 在所测系统中，菌代谢参与指定通路和表型 |
-
-::: {.callout-important title="最高层级也不是“放之四海而皆准”"}
-无菌鼠转移能加强“该群落在该模型中具有可转移作用”，却不自动证明同一作用量存在于自由生活的人群。定义菌救援能定位充分性，却可能依赖饮食、宿主基因、剂量和群落背景。结论必须绑定 population、exposure、outcome、time 和 system。
+::: {.callout-note title="不要给整篇论文贴一个因果等级"}
+同一篇论文可能同时包含横断面关联、纵向预测和动物救援。应逐条判断主张，而不是把整篇论文简单归为 L1 或 L7。真正需要分级的是“某项证据能支持哪一句结论”。
 :::
 
-## 理论：因果判断是在排除替代解释 {#sec-theory}
+## 因果证据的核心是排除替代解释 {#sec-theory}
 
-因果问题不是“P < 0.05 吗”，而是：
+因果问题可以写成一个反事实：
 
-> 如果 (X) 没有改变，结局 (Y) 会怎样？当前设计能否比较这些反事实，并排除足以解释结果的其它路径？
+> 在同一目标人群或实验系统中，如果暴露从对照水平变为处理水平，结局会怎样改变？
 
-观察性研究看不到同一对象同时处于两个反事实状态，只能依靠设计、调整和假设近似；随机干预通过分配机制改善可交换性；动物/体外实验增强控制，却改变目标系统。没有一种设计同时完美解决混杂、反向因果、测量误差、成分性、干预特异性和人群外推。
+观察性研究无法同时看到同一个体的两个反事实，只能依靠设计、调整和假设逼近；随机分配改善了可交换性，但仍可能受到依从性、失访和干预组合的限制；动物与体外实验增强了控制，却改变了目标系统。
 
-### Hill 视角：思考框架，不是九项通关证书
+| 设计增加了什么 | 主要减少的威胁 | 仍然没有自动解决 |
+|---|---|---|
+| 重复随访 | 同一时点的反向解释、稳定个体差异 | 时间变化混杂、治疗改变、失访 |
+| 遗传工具变量 | 部分环境混杂和反向因果 | 弱工具、水平多效性、分类错配、共定位 |
+| 随机干预 | 已测与未测基线混杂 | 依从性、失访、盲法、组合干预归因 |
+| 无菌动物转移 | 人群中难以操纵的群落暴露 | 供体选择、笼位、饮食、宿主物种外推 |
+| 定义菌救援或阻断 | 复杂群落中候选因素定位 | 菌株、剂量、生态背景和模型依赖 |
 
-Hill 提出的强度、一致性、特异性、时间性、生物梯度、合理性、连贯性、实验和类比，适合帮助提问，但不能机械计分：
+### Hill 标准适合提问，不适合机械计分
+
+Hill 提出的强度、一致性、特异性、时间性、生物梯度、合理性、连贯性、实验和类比，可以帮助发现证据缺口，但不是九项通关证书：
 
 - 时间性是因果的必要条件，却不是充分条件；
-- 强关联仍可能来自强混杂，弱关联也可能是真实但被测量误差稀释；
-- 现代生物学中的多因一果、一因多果使“特异性”常不成立；
-- 生物学合理性依赖当时知识，不能用来否定未知机制；
-- 多项证据若共享同一偏倚，数量增加也不会自动加强因果性。
+- 强关联仍可能来自强混杂，弱关联也可能被测量误差稀释；
+- 多因一果与一因多果使“特异性”经常不成立；
+- 多项研究若共享同一种偏倚，数量增加也不会自动加强因果性。
 
 <details>
-<summary><strong>深入：充分性、必要性、介导和可迁移性不要混写</strong></summary>
+<summary><strong>充分性、必要性、介导和可迁移性不能混写</strong></summary>
 
-- **充分性（sufficiency）**：加入某菌/代谢物在给定条件下可产生或恢复表型。
+- **充分性（sufficiency）**：加入某菌或代谢物，在给定条件下可产生或恢复表型。
 - **必要性（necessity）**：去除或阻断它会消除表型。
 - **介导（mediation）**：暴露的一部分效应通过该中介传递，需要明确时间顺序与中介假设。
-- **可迁移性（transportability）**：从实验物种、队列或干预剂量得到的效应能否推广到目标人群。
+- **可迁移性（transportability）**：实验物种、队列或剂量下的效应能否推广到目标人群。
 
-“补回后恢复”支持特定系统中的充分性，有时也支持通路定位；只有再做敲除、阻断或替代实验，才更接近必要性。即使机制在鼠中成立，人类临床效应仍需单独验证。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：准备一套可审计的阅读材料</strong></summary>
-
-这项判断不需要安装统计软件。先收齐：
-
-1. 正文与全部补充材料；
-2. protocol、trial registration 或预分析计划；
-3. cohort flow、排除标准和每个分析的实际样本量；
-4. 原始/处理数据、代码、数据库版本和关键参数；
-5. 暴露、微生物、中介和结局的采样时间；
-6. 主要混杂、negative controls、sensitivity analyses 与 external validation；
-7. 对干预研究，收集随机序列、分配隐藏、依从性、失访、不良事件和 intention-to-treat 结果；
-8. 对动物/培养研究，收集宿主背景、笼位、饮食、抗生素、剂量、定植验证与盲法。
-
-建立一张证据台账，每项结论至少记录：原文措辞、对应图表、设计、estimand、调整集、时间顺序、剩余威胁和更克制的改写。不要只摘录作者讨论中的自我评价。
-
-本文七个一手案例的结构化台账保存在 `data/small/causal-evidence/evidence-cases.tsv`；表中的 DOI、设计、有限定结论与残余威胁均可逐行回查。
+“补回后恢复”支持特定系统中的充分性；只有配合敲除、阻断或替代实验，才更接近必要性。即使机制在鼠中成立，人体临床效应仍需单独验证。
 
 </details>
 
-## 可复制阅读框架 {#sec-code}
+## 七项真实研究提供了哪些证据？ {#sec-setup}
 
-### 第一步：把 headline 改写成可检验命题
+下表把案例的设计、实际发现、可辩护结论和残余威胁直接并列。最后一列不是对论文的否定，而是说明下一种研究设计最需要解决什么。
 
-先补齐五个限定：
+| 研究与设计 | 实际证据 | 可辩护结论 | 仍不能排除 |
+|---|---|---|---|
+| [Franzosa 2019](https://doi.org/10.1038/s41564-018-0306-4)：IBD 病例–对照宏基因组与代谢组 | 病例与对照在微生物物种、酶和代谢物谱上存在系统差异 | IBD 与特定微生物及代谢特征相关，这些特征可用于分层或生成机制假设 | 药物、疾病活动、饮食、transit time、总生物量和反向因果 |
+| [Lloyd-Price 2019](https://doi.org/10.1038/s41586-019-1237-9)：IBD 纵向多组学 | 重复采样显示微生物与宿主分子状态随疾病活动动态变化 | 部分群落变化与后续疾病状态相关，并具有受试者内时间信息 | 时间变化的治疗与疾病严重度、非随机失访和不规则采样 |
+| [Sanna 2019](https://doi.org/10.1038/s41588-019-0350-x)：952 名正常血糖个体加 17 项代谢性状的遗传分析 | 微生物、短链脂肪酸和代谢性状的遗传代理效应支持若干方向性假设 | 结果与特定方向的因果关系相容，可作为独立偏倚结构的三角验证 | 弱工具、水平多效性、分类层级不匹配、样本重叠和缺少共定位 |
+| [O'Keefe 2015](https://doi.org/10.1038/ncomms7342)：两周双向饮食互换 | 被分配的饮食组合引起菌群代谢、胆汁酸、短链脂肪酸和结肠黏膜标志物的相反方向变化 | 该短期饮食组合改变了所测微生物相关标志物与黏膜表型 | 组合饮食中单一成分的归因、短随访和临床癌症终点外推 |
+| [Ridaura 2013](https://doi.org/10.1126/science.1241214)：肥胖不一致双胞胎菌群转移至无菌鼠 | 四对双胞胎供体的菌群在受控鼠模型中产生不同脂肪积累表型；共居救援受饮食影响 | 人源群落可在该饮食和鼠模型中转移肥胖相关表型 | 供体选择、共转移成分、笼效应、宿主物种和人体治疗效果 |
+| [Buffie 2015](https://doi.org/10.1038/nature13828)：定义菌重建与感染模型 | `Clostridium scindens` 重建与次级胆汁酸通路恢复了鼠模型中的艰难梭菌定植抗性 | 该菌及相关代谢能力在指定模型中足以恢复部分定植抗性 | 菌株和剂量特异性、群落背景、病原背景以及人体疗效 |
+| [Koeth 2013](https://doi.org/10.1038/nm.3145)：人体摄入、菌代谢与小鼠动脉粥样硬化实验 | L-carnitine 经肠道微生物代谢形成 TMAO；人体关联与小鼠实验共同支持该通路 | 在所测系统中，菌代谢参与 L-carnitine–TMAO–动脉粥样硬化通路 | 饮食剂量、平行通路、人群异质性以及临床干预效应 |
 
-> 在【目标人群/系统】中，把【暴露】从【对照水平】改变到【处理水平】，在【时间范围】内是否改变【结局】？微生物在其中扮演 marker、mediator、effect modifier，还是可干预靶点？
+这七项研究不是同一个生物学问题的连续验证，因此不能把它们合并成一条“已证明”的因果链。它们的用途是展示：**当设计改变时，哪些句子开始变得可辩护，哪些句子仍然过强。**
 
-“菌 X 导致疾病 Y”通常缺少剂量、时间、宿主和干预定义。若论文只测相对丰度，暴露甚至不是“菌的绝对数量”。
+## 不同研究设计的结论上限 {#sec-code}
 
-### 第二步：识别真正的分析单位
+### 病例–对照研究：发现关联，不负责确定方向
 
-逐项回答：
+Franzosa 2019 的多组学一致性使 IBD 相关信号更完整，却没有改变暴露分配方式。即使微生物和代谢物同时显著，也仍可能共同响应药物或疾病活动。
 
-- 独立单位是人、受试者内时间点、窝、笼、供体，还是技术重复？
-- 暴露在哪一级分配？统计模型是否在同一级处理相关性？
-- FMT 实验中有几个独立供体，而不只是几只受体鼠？
-- 多中心数据的中心、批次和处理是否混杂？
-- 结论外推到谁：入组样本、目标人群、另一物种，还是所有人？
+**推荐写法：**“IBD was associated with…”、“features differed between…”  
+**不推荐：**“the altered microbiome drove IBD”。
 
-把 3 个供体各移植 10 只鼠写成 n = 30 的“独立人源证据”，属于典型伪重复。
+### 纵向研究：先后顺序增强，但不等于干预效应
 
-### 第三步：画出最小 DAG 和时间轴
+Lloyd-Price 2019 提供了受试者内动态和时间信息。这比一次横断面采样更接近疾病过程，但“先出现”仍可能由治疗变化或早期未测病程共同造成。
 
-至少标出：
+**推荐写法：**“changes preceded…”、“predicted subsequent…”  
+**不推荐：**在没有可交换性或干预时直接写 “caused”。
 
-- 暴露 (A)、微生物 (M)、结局 (Y)；
-- 已测与未测共同原因 (C)；
-- 药物、疾病严重程度、饮食、transit time、年龄、中心和批次；
-- 每个变量的采样时刻；
-- 是否存在被暴露影响、又混杂 (M\rightarrow Y) 的变量。
+### 中介与 MR：提供另一种偏倚结构，而不是因果证明书
 
-如果图中允许 (Y\rightarrow M)，横断面数据就不能仅凭回归方向排除反向因果。若调整了暴露后的变量，还要警惕 collider 和 overadjustment。
+Sanna 2019 将宿主遗传、菌群、短链脂肪酸和代谢性状连接起来。MR 的价值是与常规观察研究共享更少的环境混杂；其结论仍依赖工具相关性、排除限制和独立性。
 
-### 第四步：按设计能力校准动词
+**推荐写法：**“genetically proxied exposure was consistent with…”  
+**不推荐：**“MR proved that supplementation will improve the clinical outcome”。
+
+### 人群随机干预：识别被分配干预，而不是自动定位微生物中介
+
+O'Keefe 2015 的核心优势是饮食互换，而不是某个单独菌的随机化。饮食包含多种同步改变的成分，因此试验支持“该饮食组合改变了结局”，不能仅凭菌群随之变化就把全部效应归给某个 taxon。
+
+**推荐写法：**“the assigned dietary intervention changed…”  
+**不推荐：**“microbiome change alone caused…”。
+
+### 转移、救援和机制实验：结论必须绑定模型
+
+Ridaura 2013 支持群落在无菌鼠中的可转移性；Buffie 2015 把复杂群落效应缩小到定义菌及胆汁酸能力；Koeth 2013 进一步连接摄入、微生物代谢物和宿主表型。三者的证据逐步接近机制，但都不能省略 `in this model`、饮食、剂量和宿主背景。
 
 ![Defensible wording and wording to avoid for seven study-design families.](../figures/55-causal-evidence/55-3-claim-calibration.png){fig-alt="Claim calibration table for microbiome study designs" width="100%"}
 
-实用规则如下：
+## 为什么需要跨设计三角验证 {#sec-audit}
 
-| 设计 | 推荐动词 | 暂不使用 |
-|---|---|---|
-| 横断面 | `was associated with`, `differed between` | `caused`, `drove` |
-| 纵向 | `preceded`, `predicted subsequent` | `caused`（若无可交换性） |
-| 中介/MR | `was consistent with`, `genetically proxied` | `proved mediation/causality` |
-| 人群随机干预 | `changed under the assigned intervention` | `microbiome alone caused`（若干预是组合） |
-| 实验转移 | `transferred the phenotype in the model` | `must cause the same phenotype in humans` |
-| 定义菌救援 | `restored under controlled conditions` | `is universally protective` |
-| 机制链 | `acted through the tested pathway in this system` | `is the only mechanism` |
-
-### 第五步：列出仍能推翻结论的替代解释
+单一研究设计通常只消除一部分偏倚。下面的矩阵把剩余威胁并列展示：横断面研究最容易受混杂和反向因果影响；动物转移改善操纵性，却增加物种外推问题；定义菌和分子实验缩小机制范围，但可能只在特定菌株、剂量和生态背景下成立。
 
 ![Residual threat profiles across evidence tiers. The matrix is a reading aid rather than a numerical score.](../figures/55-causal-evidence/55-2-threat-matrix.png){fig-alt="Residual threat matrix across causal evidence tiers" width="100%"}
 
-对每个主张写一句 falsifier：什么新结果出现时，你会改变判断？例如：
+真正的证据升级不是把同一种病例–对照研究再做十次，而是让**针对同一命题**的不同设计收敛。例如，一项可干预假设若同时得到以下结果支持，可信度才会实质提高：
 
-- 加入精确的疾病活动度后菌–药物关系消失；
-- absolute load 与 relative abundance 的方向相反；
-- 随机干预改变饮食和体重，但菌群变化不预测结局；
-- FMT 效应只由单一供体或笼位驱动；
-- 候选菌的功能缺失株不能复制野生型效应；
-- MR 关联位点不共定位，或反向 MR 更强。
-
-没有可想象的反证条件，往往说明主张不可检验或过于模糊。
-
-## 审计与升级 {#sec-audit}
-
-### L1：横断面关联
-
-**能做什么：**发现病例相关模式、生成 biomarker 或机制假设。  
-**不能排除：**反向因果、药物、饮食、疾病严重程度、批次、transit time 和总生物量。  
-**升级：**前瞻性采样、absolute quantification、negative controls、多队列验证和明确 DAG。
-
-Franzosa 2019 的价值是在人 IBD 中展示微生物与代谢组的系统差异；即便多组学信号一致，也不能仅靠病例–对照比较确定哪一层先改变。
-
-### L2：纵向时间信息
-
-**能做什么：**建立 within-person change 和先后顺序，减少稳定个体差异。  
-**不能排除：**时间变化的治疗、疾病活动和选择性失访。  
-**升级：**密集采样、lagged analysis、target trial 思维、受试者内对照和预设时间窗。
-
-Lloyd-Price 2019 显示 IBD 生态系统随活动度动态变化；“先于”比“同日相关”更强，但还不等于“若阻断该菌群变化，结局就不会发生”。
-
-### L3：中介与 MR
-
-**能做什么：**用不同假设结构给出方向性三角验证。  
-**不能排除：**中介的 sequential ignorability 失败；MR 的弱工具、水平多效性、样本重叠、分类错配和未共定位。  
-**升级：**分时点/随机中介设计，或强工具、双向 MR、Steiger、colocalisation 和独立 GWAS。
-
-Sanna 2019 把宿主遗传、菌群和代谢性状连接起来，是重要的三角验证；遗传 proxy 仍不等于直接给人补充该菌所产生的临床干预效应。
-
-### L4：人群干预
-
-**能做什么：**随机且执行良好时，识别“被分配干预”的平均效应。  
-**不能排除：**组合干预中哪一成分起效、依从性、失访、盲法失败和中介测量误差。  
-**升级：**factorial design、active comparator、intention-to-treat、per-protocol sensitivity、预设中介和长期随访。
-
-O'Keefe 2015 的双向饮食互换加强饮食改变与多项标志物变化的证据；但高纤维/低脂等多项成分一起变化，不能把全部效应归给单一菌或单一营养素。
-
-### L5：实验转移
-
-**能做什么：**证明完整群落或样品在受控模型中的可转移性。  
-**不能排除：**供体选择、噬菌体/代谢物共转移、宿主物种、饮食、抗生素预处理和笼效应。  
-**升级：**多独立供体、过滤/灭活对照、cross-over diet、定植验证、gnotobiotic replication 和供体为统计单位。
-
-Ridaura 2013 的人源双胞胎菌群转移证明肥胖相关表型可在特定饮食和鼠模型中转移；它并不等于对人进行 FMT 会产生同样的体重效应。
-
-### L6：定义菌、培养与救援
-
-**能做什么：**把复杂群落效应缩小到可操纵的菌、consortium 或代谢能力。  
-**不能排除：**strain specificity、剂量、定植背景、生态互作和模型依赖。  
-**升级：**基因缺失/互补株、剂量–反应、多背景重复、代谢追踪和必要性实验。
-
-Buffie 2015 将胆汁酸代谢与 `Clostridium scindens` 的定植抗性联系起来，并在鼠模型中做定义菌救援；结论应绑定病原、菌株、宿主和处理条件。
-
-### L7：分子机制链
-
-**能做什么：**把暴露、菌酶/代谢物、宿主靶点和表型连接成可干预链条。  
-**不能排除：**平行通路、剂量不现实、临床终点替代和人群异质性。  
-**升级：**isotope tracing、酶/受体阻断、遗传互补、人体 pharmacodynamic evidence 与临床结局试验。
-
-Koeth 2013 结合人体喂养、菌代谢和动物动脉粥样硬化实验支持 L-carnitine–TMAO 通路；这条机制链仍不意味着所有饮食、剂量与人群中效应相同。
-
-### 真正的升级不是“同一种研究再做十次”
+1. 人群纵向数据给出正确的时间顺序；
+2. 遗传或 negative-control 分析对主要混杂不敏感；
+3. 随机干预改变预设结局；
+4. 动物转移或定义菌实验在受控系统中复现表型；
+5. 阻断或互补实验定位必要或充分的通路；
+6. 独立队列验证效应方向和适用人群。
 
 ![Triangulation across human and experimental designs with independent bias structures.](../figures/55-causal-evidence/55-4-triangulation.png){fig-alt="Causal triangulation across human and experimental evidence" width="100%"}
 
-最有说服力的证据来自不同偏倚结构的收敛：人群纵向、遗传 proxy、随机干预、无菌动物转移、定义菌和分子实验都指向同一条**有限定的**结论。十个同样受药物混杂影响的横断面队列，即使 meta-analysis 极显著，也没有解决共同偏倚。
-
-::: {.callout-caution title="常见坑：判断因果级别时最常见的七个捷径"}
-1. 用期刊影响因子代替设计审计；  
-2. 用样本量和 P 值代替 effect、bias 与测量质量；  
-3. 认为纵向必然因果，忽略 time-varying confounding；  
-4. 认为 MR 天生随机化，忽略弱工具、多效性和共定位；  
-5. 把无菌鼠中的 transferability 直接翻译成人体治疗效果；  
-6. 把“机制合理”当作已经测到机制；  
-7. 只列支持证据，不主动寻找能推翻主张的结果。
+::: {.callout-tip title="最佳实践：对主张分级，而不是对论文打分"}
+先写出精确命题中的 population、exposure、comparator、outcome、time 和 system，再列出每项研究实际排除了哪些替代解释。只有当不同偏倚结构指向同一命题时，才使用“triangulated evidence”；不要因为论文同时包含多种实验就默认因果链闭合。
 :::
 
-## 出版级美化 {#sec-publication}
+## 怎样画证据图而不夸大因果性 {#sec-publication}
 
-因果证据图最忌把层级画成“分数越高越真”。更诚实的组合是：
+证据图不应把层级画成“分数越高越真”。更稳妥的组合是：
 
-- 阶梯图说明不同设计可支持的最大措辞；
-- threat matrix 显示每种设计仍留下什么；
-- claim calibration 把统计结果翻译为可辩护句子；
-- triangulation 图强调不同偏倚结构的收敛。
+- 用阶梯图说明不同设计可支持的最大措辞；
+- 用 threat matrix 显示每种设计仍留下什么；
+- 用 claim calibration 把统计结果翻译为可辩护句子；
+- 用 triangulation 图强调不同偏倚结构的收敛。
 
-图注要写清“层级不是数值质量分”“高层级只对特定系统成立”。颜色用于区分证据类型和剩余威胁，不用红绿灯把整篇论文判成好/坏。此处四张图均为基于一手案例重新绘制的原创阅读框架，图内文字为英文，已提供 PDF/SVG 与 600 ppi PNG/TIFF。
+图注必须说明层级不是论文质量分，高层级结论也只对指定系统成立。颜色用于区分证据类型和剩余威胁，不用红绿灯把整篇论文判成好或坏。
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 最常见的因果误判
 
-若论文包含一段因果证据综合或叙述性审查，可采用下面的英文模板：
+::: {.callout-caution title="出现任意一项，都应降低结论强度"}
+1. 用期刊影响因子、样本量或 P 值替代设计判断；
+2. 把预测准确率当成病因证据；
+3. 认为纵向数据天然排除了 time-varying confounding；
+4. 认为 MR 天然随机化，忽略弱工具、多效性和共定位；
+5. 把组合干预的效应全部归给某个菌；
+6. 把无菌鼠中的 transferability 直接翻译成人体治疗效果；
+7. 把 rescue 当作 necessity，或把“机制合理”写成“机制已证实”；
+8. 只罗列支持证据，不写可能推翻主张的结果。
+:::
+
+## Methods 中怎样说明证据判定 {#sec-methods}
+
+若论文包含因果证据综合或叙述性审查，可以使用下面的英文模板：
 
 > We classified each claim according to the strongest design directly supporting it: cross-sectional association, longitudinal temporality, mediation or genetic triangulation, human intervention, experimental transfer, defined-organism rescue, or molecular mechanism. Classification was based on the study unit, exposure assignment, measurement timing, comparator, estimand, handling of clustering, and the alternative explanations addressed by the design; journal venue and statistical significance were not scoring criteria. For each claim, we recorded residual threats from confounding, reverse causation, compositional measurement, intervention specificity, model-system transportability, and mechanistic ambiguity. Evidence was considered triangulated only when findings converged across designs with materially different bias structures. Causal wording was bounded to the population, exposure, outcome, time frame, and experimental system actually studied.
 
-系统综述还需写数据库、检索式、日期、纳排标准、双人筛选、风险偏倚工具、预注册与证据分级规则。不要把上面的七级阅读框架冒充经过验证的量表。
+系统综述还应报告数据库、检索式、检索日期、纳排标准、双人筛选、风险偏倚工具、预注册和证据分级规则。上面的七级框架用于校准措辞，不能冒充经过验证的量表。
 
-## 换成你自己的论文或项目怎么做 {#sec-own-data}
+## 在自己的研究中怎样选择可辩护措辞 {#sec-own-data}
 
-给每个主结论填写这张卡：
+先根据设计选择结论上限，再根据敏感性分析决定是否需要进一步降级：
 
-| 问题 | 你的答案 |
-|---|---|
-| 精确因果命题 | 人群、暴露/对照、时间、结局、系统是什么？ |
-| 独立单位 | 人、供体、笼、样地还是技术重复？ |
-| 暴露如何产生 | 观察、遗传 proxy、随机分配还是实验操纵？ |
-| 时间顺序 | (A\)、(M\)、(Y\) 分别何时测？ |
-| 主要替代解释 | 哪个混杂/反向路径最可能完全解释结果？ |
-| 已做压力测试 | negative control、sensitivity、replication、rescue、knockout？ |
-| 可迁移范围 | 结论适用于哪个人群、物种、饮食和剂量？ |
-| 当前可用动词 | associated、preceded、changed、transferred、restored、acted through？ |
-| 下一项最值钱的实验 | 哪种不同偏倚结构能最大幅度升级证据？ |
+| 你实际拥有的证据 | 首选措辞 | 只有补充什么才能升级 |
+|---|---|---|
+| 单时点组间差异 | associated with、differed between | 纵向时间信息与主要混杂控制 |
+| 重复随访且暴露先于结局 | preceded、predicted subsequent | 更可信的可交换性或干预 |
+| 有效遗传工具与多项 MR 敏感性分析 | genetically proxied、consistent with | 共定位、独立 GWAS 与其它设计验证 |
+| 随机分配的组合干预 | assigned intervention changed | factorial design 或预设中介分析 |
+| 人源菌群转移到动物模型 | transferred the phenotype in this model | 多供体、饮食/笼位控制和人体验证 |
+| 定义菌或代谢物救援 | restored under controlled conditions | 阻断、敲除、互补和剂量–反应 |
+| 完整的暴露–菌酶–代谢物–宿主通路 | acted through the tested pathway in this system | 临床终点试验与目标人群验证 |
 
-最后执行一次“动词审计”：标题、摘要、图注、结果与讨论中的因果动词必须一致。若结果段只能支持 `associated with`，讨论不能突然升级成 `drives`；若动物救援成立，应写 `in this model`，并把人体临床效应留给后续试验。
+最后检查标题、摘要、图注、结果和讨论中的因果动词是否一致。结果段若只能支持 `associated with`，讨论不能突然升级为 `drives`；动物救援成立时，应保留 `in this model`，把人体临床效应留给人体试验。
 
 ## 参考 {#sec-references}
 
