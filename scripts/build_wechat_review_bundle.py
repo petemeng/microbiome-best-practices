@@ -89,7 +89,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--site-dir", default="_site")
     parser.add_argument("--output-dir", default="rendered/wechat_review_01_55")
     parser.add_argument("--formal-count", type=int, default=55)
-    parser.add_argument("--author", default="Songlab")
+    parser.add_argument("--author", default="Peter")
     parser.add_argument(
         "--review-url",
         default="https://github.com/petemeng/microbiome-best-practices",

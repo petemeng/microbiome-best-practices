@@ -6,7 +6,7 @@ project:
 book:
   title: "微生物组分析最佳实践 · 16S"
   subtitle: "从真实数据到发表级重绘图"
-  author: "Songlab"
+  author: "Peter"
   site-url: https://petemeng.github.io/microbiome-best-practices/
   repo-url: https://github.com/petemeng/microbiome-best-practices
   repo-actions: [edit, issue]
