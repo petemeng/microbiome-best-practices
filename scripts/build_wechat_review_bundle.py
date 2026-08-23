@@ -2,7 +2,8 @@
 """Build WeChat-ready review articles from the validated Quarto HTML site.
 
 The script is intentionally offline: it sanitizes and inlines styles, optimizes
-article images, creates deterministic covers, and writes resumable JSON payloads.
+article images, creates deterministic covers from each article's representative
+figure, and writes resumable JSON payloads.
 Uploading images and creating official-account drafts remain separate actions.
 """
 
@@ -149,6 +150,18 @@ def _wrap_cjk(
 ) -> list[str]:
     """Wrap mixed Chinese/Latin titles without splitting technical terms."""
 
+    def repair_punctuation(lines: list[str]) -> list[str]:
+        opening = "（([【《〈"
+        closing = "）)]】》〉，。！？；：、"
+        for index in range(1, len(lines)):
+            while lines[index - 1].endswith(tuple(opening)):
+                lines[index] = lines[index - 1][-1] + lines[index]
+                lines[index - 1] = lines[index - 1][:-1].rstrip()
+            while lines[index] and lines[index][0] in closing:
+                lines[index - 1] += lines[index][0]
+                lines[index] = lines[index][1:].lstrip()
+        return [line for line in lines if line]
+
     def wrap_segment(segment: str) -> list[str]:
         normalized = re.sub(r"\s+", " ", segment).strip()
         tokens = re.findall(
@@ -174,35 +187,57 @@ def _wrap_cjk(
         lines = wrap_segment(head) + wrap_segment(tail)
     else:
         lines = wrap_segment(normalized)
+    lines = repair_punctuation(lines)
     if len(lines) > max_lines:
         lines = lines[:max_lines]
         while lines[-1] and draw.textlength(lines[-1] + "…", font=font) > max_width:
             lines[-1] = lines[-1][:-1].rstrip()
         lines[-1] = lines[-1] + "…"
-    return lines or ["16S 微生物组最佳实践"]
+    return repair_punctuation(lines) or ["16S 微生物组最佳实践"]
 
 
-def create_cover(raw_title: str, output: Path) -> None:
+def create_cover(raw_title: str, representative_image: Path, output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     image = Image.new("RGB", (900, 383), "#f7f1e6")
     draw = ImageDraw.Draw(image)
-    for y in range(image.height):
-        ratio = y / max(1, image.height - 1)
-        start = (247, 241, 230)
-        end = (238, 244, 234)
-        colour = tuple(round(a + (b - a) * ratio) for a, b in zip(start, end))
-        draw.line((0, y, image.width, y), fill=colour)
-    draw.rectangle((0, 0, 900, 14), fill="#7c9970")
-    draw.ellipse((735, 52, 833, 150), fill="#e1b36a")
-    serif = ImageFont.truetype(_font_path("Noto Serif CJK SC"), 44)
-    sans = ImageFont.truetype(_font_path("Noto Sans CJK SC"), 22)
-    small = ImageFont.truetype(_font_path("Noto Sans CJK SC"), 19)
-    lines = _wrap_cjk(raw_title, draw, serif)
-    draw.multiline_text((54, 76), "\n".join(lines), font=serif, fill="#203124", spacing=10)
-    draw.rounded_rectangle((54, 300, 330, 344), radius=14, fill="#f9f4ea")
-    draw.text((72, 307), "MICROBIOME TUTORIAL", font=sans, fill="#6f8561")
-    draw.text((690, 326), "16S · BEST PRACTICES", font=small, fill="#6f8561")
-    for quality in (82, 74, 68, 62, 56, 50, 44):
+    draw.rectangle((0, 0, 340, 383), fill="#244633")
+    draw.rectangle((340, 0, 348, 383), fill="#d9ad67")
+
+    with Image.open(representative_image) as opened:
+        figure = ImageOps.exif_transpose(opened)
+        if figure.mode in {"RGBA", "LA"} or "transparency" in figure.info:
+            rgba = figure.convert("RGBA")
+            background = Image.new("RGBA", rgba.size, "white")
+            background.alpha_composite(rgba)
+            figure = background.convert("RGB")
+        else:
+            figure = figure.convert("RGB")
+        figure = ImageOps.contain(figure, (516, 335), Image.Resampling.LANCZOS)
+        panel = Image.new("RGB", (528, 347), "white")
+        panel.paste(
+            figure,
+            ((panel.width - figure.width) // 2, (panel.height - figure.height) // 2),
+        )
+        image.paste(panel, (360, 18))
+    draw.rounded_rectangle((359, 17, 889, 366), radius=12, outline="#d8ded8", width=2)
+
+    sans = ImageFont.truetype(_font_path("Noto Sans CJK SC"), 17)
+    draw.text((34, 30), "16S · BEST PRACTICES", font=sans, fill="#d9ad67")
+    draw.rectangle((34, 63, 94, 68), fill="#d9ad67")
+    for font_size in (34, 32, 30, 28, 26):
+        serif = ImageFont.truetype(_font_path("Noto Serif CJK SC"), font_size)
+        lines = _wrap_cjk(raw_title, draw, serif, max_width=272, max_lines=6)
+        line_height = font_size + 10
+        if len(lines) * line_height <= 250:
+            break
+    draw.multiline_text(
+        (34, 88),
+        "\n".join(lines),
+        font=serif,
+        fill="white",
+        spacing=10,
+    )
+    for quality in (82, 74, 68, 62, 56, 50, 44, 38, 34):
         image.save(output, "JPEG", quality=quality, optimize=True, progressive=True, subsampling=2)
         if output.stat().st_size <= MAX_THUMB_BYTES:
             return
@@ -435,12 +470,15 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "残余偏倚与可辩护措辞。"
             )
         digest = truncate(digest_text, MAX_DIGEST_CHARS)
-        cover = article_dir / "cover.jpg"
-        create_cover(raw_title, cover)
         content, images = sanitize_article(
             source_html=source_html,
             article_dir=article_dir,
         )
+        if not images:
+            raise RuntimeError(f"Article {number:02d} has no representative figure for its cover")
+        cover = article_dir / "cover.jpg"
+        cover_source = Path(images[0]["local_path"])
+        create_cover(raw_title, cover_source, cover)
         payload = {
             "title": title,
             "author": args.author,
@@ -465,6 +503,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "article_html": str(article_html),
                 "draft_json": str(draft_json),
                 "cover_image": str(cover),
+                "cover_source_image": str(cover_source),
                 "cover_size_bytes": cover.stat().st_size,
                 "cover_sha256": sha256(cover),
                 "html_chars": len(content),
@@ -514,6 +553,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         "qa_run_key": qa_report.get("run_key"),
         "qa_manifest_hash": qa_report.get("manifest_hash"),
         "formal_count": args.formal_count,
+        "author": args.author,
         "review_url": args.review_url,
         "item_count": len(items),
         "embedded_image_count": sum(item["embedded_image_count"] for item in items),
