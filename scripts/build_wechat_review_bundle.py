@@ -366,7 +366,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             raise FileNotFoundError(source_html)
         article_dir = output_dir / f"{number:02d}"
         article_dir.mkdir(parents=True, exist_ok=True)
-        title = truncate(f"16S最佳实践｜{raw_title}", MAX_TITLE_CHARS)
+        title = truncate(f"16S最佳实践｜{number}. {raw_title}", MAX_TITLE_CHARS)
         digest_lead = raw_title if raw_title.endswith(("。", "！", "？", "!", "?")) else f"{raw_title}。"
         digest_text = (
             f"{digest_lead}真实数据、完整复现代码、结果解释与发表级重绘图。"
@@ -405,6 +405,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             {
                 "chapter_id": f"{number:02d}",
                 "title": title,
+                "title_order_prefix": f"{number}.",
                 "source_qmd": str((project / qmd_path).resolve()),
                 "source_html": str(source_html),
                 "article_html": str(article_html),
@@ -430,6 +431,9 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         if item["html_chars"] < 3000:
             errors.append(f"{item['chapter_id']}: article content is unexpectedly short")
         draft = json.loads(Path(item["draft_json"]).read_text(encoding="utf-8"))
+        expected_prefix = f"16S最佳实践｜{int(item['chapter_id'])}. "
+        if not draft["title"].startswith(expected_prefix):
+            errors.append(f"{item['chapter_id']}: title order prefix is missing")
         if len(draft["title"]) > MAX_TITLE_CHARS:
             errors.append(f"{item['chapter_id']}: title is too long")
         if len(draft["digest"]) > MAX_DIGEST_CHARS:
@@ -462,6 +466,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         "qa_manifest_hash": qa_report.get("manifest_hash"),
         "formal_count": args.formal_count,
         "author": args.author,
+        "title_style": "series_then_ordinal_dot",
         "review_url": args.review_url,
         "item_count": len(items),
         "embedded_image_count": sum(item["embedded_image_count"] for item in items),
