@@ -13,7 +13,6 @@ import argparse
 import hashlib
 import json
 import re
-import subprocess
 from copy import deepcopy
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,7 +21,7 @@ from urllib.parse import urljoin
 
 import yaml
 from lxml import etree, html
-from PIL import Image, ImageDraw, ImageFont, ImageOps
+from PIL import Image, ImageOps
 
 
 MAX_TITLE_CHARS = 64
@@ -128,81 +127,9 @@ def site_html_path(site_dir: Path, qmd_path: str) -> Path:
     return site_dir / qmd.with_suffix(".html")
 
 
-def _font_path(family: str) -> str:
-    result = subprocess.run(
-        ["fc-match", "-f", "%{file}\n", family],
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    path = result.stdout.strip().splitlines()[0]
-    if not path:
-        raise RuntimeError(f"No font found for {family}")
-    return path
-
-
-def _wrap_cjk(
-    text: str,
-    draw: ImageDraw.ImageDraw,
-    font: ImageFont.FreeTypeFont,
-    max_width: int = 610,
-    max_lines: int = 3,
-) -> list[str]:
-    """Wrap mixed Chinese/Latin titles without splitting technical terms."""
-
-    def repair_punctuation(lines: list[str]) -> list[str]:
-        opening = "（([【《〈"
-        closing = "）)]】》〉，。！？；：、"
-        for index in range(1, len(lines)):
-            while lines[index - 1].endswith(tuple(opening)):
-                lines[index] = lines[index - 1][-1] + lines[index]
-                lines[index - 1] = lines[index - 1][:-1].rstrip()
-            while lines[index] and lines[index][0] in closing:
-                lines[index - 1] += lines[index][0]
-                lines[index] = lines[index][1:].lstrip()
-        return [line for line in lines if line]
-
-    def wrap_segment(segment: str) -> list[str]:
-        normalized = re.sub(r"\s+", " ", segment).strip()
-        tokens = re.findall(
-            r"[A-Za-z0-9]+(?:[./+–—-][A-Za-z0-9]+)*|\s+|.",
-            normalized,
-        )
-        output: list[str] = []
-        current = ""
-        for token in tokens:
-            candidate = (current + token).lstrip()
-            if current and draw.textlength(candidate, font=font) > max_width:
-                output.append(current.rstrip())
-                current = token.lstrip()
-            else:
-                current = candidate
-        if current.strip():
-            output.append(current.rstrip())
-        return output
-
-    normalized = re.sub(r"\s+", " ", text).strip()
-    if "：" in normalized:
-        head, tail = normalized.split("：", 1)
-        lines = wrap_segment(head) + wrap_segment(tail)
-    else:
-        lines = wrap_segment(normalized)
-    lines = repair_punctuation(lines)
-    if len(lines) > max_lines:
-        lines = lines[:max_lines]
-        while lines[-1] and draw.textlength(lines[-1] + "…", font=font) > max_width:
-            lines[-1] = lines[-1][:-1].rstrip()
-        lines[-1] = lines[-1] + "…"
-    return repair_punctuation(lines) or ["16S 微生物组最佳实践"]
-
-
-def create_cover(raw_title: str, representative_image: Path, output: Path) -> None:
+def create_cover(representative_image: Path, output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
-    image = Image.new("RGB", (900, 383), "#f7f1e6")
-    draw = ImageDraw.Draw(image)
-    draw.rectangle((0, 0, 340, 383), fill="#244633")
-    draw.rectangle((340, 0, 348, 383), fill="#d9ad67")
-
+    image = Image.new("RGB", (900, 383), "white")
     with Image.open(representative_image) as opened:
         figure = ImageOps.exif_transpose(opened)
         if figure.mode in {"RGBA", "LA"} or "transparency" in figure.info:
@@ -212,31 +139,11 @@ def create_cover(raw_title: str, representative_image: Path, output: Path) -> No
             figure = background.convert("RGB")
         else:
             figure = figure.convert("RGB")
-        figure = ImageOps.contain(figure, (516, 335), Image.Resampling.LANCZOS)
-        panel = Image.new("RGB", (528, 347), "white")
-        panel.paste(
+        figure = ImageOps.contain(figure, image.size, Image.Resampling.LANCZOS)
+        image.paste(
             figure,
-            ((panel.width - figure.width) // 2, (panel.height - figure.height) // 2),
+            ((image.width - figure.width) // 2, (image.height - figure.height) // 2),
         )
-        image.paste(panel, (360, 18))
-    draw.rounded_rectangle((359, 17, 889, 366), radius=12, outline="#d8ded8", width=2)
-
-    sans = ImageFont.truetype(_font_path("Noto Sans CJK SC"), 17)
-    draw.text((34, 30), "16S · BEST PRACTICES", font=sans, fill="#d9ad67")
-    draw.rectangle((34, 63, 94, 68), fill="#d9ad67")
-    for font_size in (34, 32, 30, 28, 26):
-        serif = ImageFont.truetype(_font_path("Noto Serif CJK SC"), font_size)
-        lines = _wrap_cjk(raw_title, draw, serif, max_width=272, max_lines=6)
-        line_height = font_size + 10
-        if len(lines) * line_height <= 250:
-            break
-    draw.multiline_text(
-        (34, 88),
-        "\n".join(lines),
-        font=serif,
-        fill="white",
-        spacing=10,
-    )
     for quality in (82, 74, 68, 62, 56, 50, 44, 38, 34):
         image.save(output, "JPEG", quality=quality, optimize=True, progressive=True, subsampling=2)
         if output.stat().st_size <= MAX_THUMB_BYTES:
@@ -478,7 +385,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             raise RuntimeError(f"Article {number:02d} has no representative figure for its cover")
         cover = article_dir / "cover.jpg"
         cover_source = Path(images[0]["local_path"])
-        create_cover(raw_title, cover_source, cover)
+        create_cover(cover_source, cover)
         payload = {
             "title": title,
             "author": args.author,
@@ -503,6 +410,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "article_html": str(article_html),
                 "draft_json": str(draft_json),
                 "cover_image": str(cover),
+                "cover_layout": "representative_figure_only",
                 "cover_source_image": str(cover_source),
                 "cover_size_bytes": cover.stat().st_size,
                 "cover_sha256": sha256(cover),
