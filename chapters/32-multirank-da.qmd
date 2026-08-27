@@ -79,7 +79,6 @@ BiocManager::install(version = "3.19", ask = FALSE)
 BiocManager::install("ALDEx2", ask = FALSE)
 ```
 
-整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行内联函数：
 
 ```{r}
 #| label: setup-multirank-da-theme

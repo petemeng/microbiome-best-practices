@@ -4,7 +4,8 @@ title: 微生物组分析最佳实践 · 16S 系列
 problem_statement: >
   面向懂生物学但缺少系统生信训练的科研读者，建立一套由真实数据、
   可执行代码和发表级重绘图共同支撑的 16S 扩增子分析教程。网页版与
-  微信公众号文章都必须单篇自足，能够从数据准备一直复现到结果解释和图形导出。
+  微信公众号文章都必须单篇自足：网页版保存完整计算路径，公众号保存
+  完整科学论证、实际结果、关键代码和稳定源码入口。
 audience:
   level: 科研初中级
   summary: >
@@ -24,20 +25,20 @@ prerequisites:
   - 能阅读基础 R 与 shell 命令
   - 理解样本、ASV/OTU、taxonomy 和 metadata 的基本含义
   - 下游章节使用 R 4.4 系列；上游章节使用已锁定并验证的独立 QIIME 2 2026.4 环境
-  - 每篇文章均提供本篇所需依赖、真实数据入口和完整代码
+  - 计算章节的网页版提供所需依赖、真实数据入口和完整代码；导读与概念章直接展示证据
 workflow_overview:
   - 先验证 55 篇目录、标题、编号和单篇自足规则
   - 从版本锁定的 microeco、decontam 与 phyloseq 真实 16S 数据导出各篇所需标准三件套
   - 校正并实跑第 22 篇非约束排序、第 24 篇约束排序、第 25–54 篇下游统计、组成、差异丰度、定量、网络、功能预测、机器学习、多组学、纵向与因果推断分析
   - 以通过 QA 的第 01–55 篇固定全系列结构、作图主题与数据接口
   - 按编号逐篇选择公开数据和锚定文献，执行、解释并重绘原创结果图
-  - QA 通过后再派生网页版和本地微信公众号完整文章
+  - QA 通过后再派生网页版和去除通用环境脚手架的微信公众号文章
 results_check:
   - 系列目录应包含 55 篇且编号 01–55 连续、标题与 tutorial.yaml 一致
   - pilot 数据应包含 13,628 个 OTU、90 个 16S 样本和 200 行环境观测
   - 第 01–55 篇应从公开数据、一次性环境审计或可追溯一手研究台账独立渲染为 HTML，并生成规定的 PDF、PNG 与 TIFF 图；第 18–21、23、25–55 篇还必须生成 SVG
   - 图内轴、图例、分组和统计标注均使用英文
-  - 微信公众号派生稿应保留完整依赖、数据准备、分析和导出代码
+  - 微信公众号派生稿应保留数据出处、关键分析、实际结果与解释，但不重复通用安装、归档/checksum 和主题函数
 troubleshooting:
   - 如果 CRAN 归档下载失败，先检查 URL 白名单、网络和 SHA-256，再考虑镜像
   - 如果三件套维度不一致，先核对 OTU 行名、taxonomy 行名和 metadata 样本名
@@ -11838,16 +11839,17 @@ publication:
       - 微生物组
       - 最佳实践
     summary: >
-      55 篇 16S 微生物组分析最佳实践系列；每篇公众号文章保留完整数据入口、
-      依赖、分析代码、结果解释和发表级重绘图。
+      55 篇 16S 微生物组分析最佳实践系列；公众号文章保留数据出处、关键分析、
+      结果解释和发表级重绘图，完整依赖与计算脚手架由网页版承载。
 series:
   total_articles: 55
   source_format: qmd
   website_source_of_truth: true
   wechat_self_contained: true
+  wechat_bootstrap_policy: omit-generic-environment-and-data-plumbing
   paper_figure_policy: redraw-from-public-data
   chapters:
-    - {number: 1, file: index.qmd, title: "开篇：这套教程你将复现哪些顶刊图（图集预览 + 学习地图）"}
+    - {number: 1, kind: overview, file: index.qmd, title: "开篇：这套教程你将复现哪些顶刊图（图集预览 + 学习地图）"}
     - {number: 2, file: chapters/02-scope-and-limits.qmd, title: "16S 能回答什么、回答不了什么（vs 宏基因组 / 其他组学）"}
     - {number: 3, file: chapters/03-study-design.qmd, title: "实验设计：样本量、统计效力、分组与配对"}
     - {number: 4, file: chapters/04-contamination-controls.qmd, title: "污染与对照：blank、kitome、低生物量、decontam"}
@@ -11901,4 +11903,4 @@ series:
     - {number: 52, file: chapters/52-structural-equation-model.qmd, title: "结构方程模型：从环境因子到微生物再到表型"}
     - {number: 53, file: chapters/53-mediation-analysis.qmd, title: "中介分析：暴露 → 微生物 → 结局"}
     - {number: 54, file: chapters/54-mendelian-randomization.qmd, title: "孟德尔随机化：工具变量、水平多效性与敏感性分析"}
-    - {number: 55, file: chapters/55-causal-evidence.qmd, title: "因果证据阶梯：微生物组结果什么时候可以谈因果？"}
+    - {number: 55, kind: evidence-synthesis, file: chapters/55-causal-evidence.qmd, title: "因果证据阶梯：微生物组结果什么时候可以谈因果？"}

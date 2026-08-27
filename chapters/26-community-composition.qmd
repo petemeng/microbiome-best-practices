@@ -250,7 +250,6 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可用 `source("R/theme_pub.R")` 代替上面的作图函数块；单独复制本文时无需该文件。
 
 </details>
 

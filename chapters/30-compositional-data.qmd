@@ -92,7 +92,6 @@ install.packages(c(
 ))
 ```
 
-整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行下面的内联定义：
 
 ```{r}
 #| label: setup-coda-theme

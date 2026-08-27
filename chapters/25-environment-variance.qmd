@@ -269,7 +269,6 @@ save_pub <- function(
 }
 ```
 
-若在完整仓库中运行，也可把上面的函数块替换为 `source("R/theme_pub.R")`；正文复现不依赖该文件。
 
 </details>
 

@@ -221,7 +221,7 @@ FASTQ 来自 QIIME 2 Atacama soils 2024.5 paired-end 教程 1% 数据的确定�
 
 ### R 作图依赖与函数
 
-环境章节的命令不依赖 R，但将审计表转换为论文补充图时使用以下函数。单独复制本文时直接保留这段：
+环境章节的命令不依赖 R；将审计表转换为论文补充图时使用以下函数：
 
 ```{r}
 #| eval: false
@@ -312,7 +312,6 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可以改用 `source("R/theme_pub.R")`；单篇复制时使用上面的内联定义。
 
 </details>
 
@@ -732,7 +731,7 @@ metadata samples: 75
 
 ### 步骤 9：生成一份机器可读审计
 
-整仓库用户可以运行已经固化的审计器：
+运行以下审计命令可生成机器可读的环境检查结果：
 
 ```{bash}
 #| eval: false
@@ -824,7 +823,7 @@ sha256sum \
 
 ### 2. 从审计表画出可投稿的检查图
 
-若只复制本文而没有整仓库脚本，可先把检查结果保存为 `environment-audit.tsv`，再用下面的 R 代码画简洁的 validation matrix：
+将检查结果保存为 `environment-audit.tsv` 后，可用下面的 R 代码绘制简洁的 validation matrix：
 
 ```{r}
 #| eval: false

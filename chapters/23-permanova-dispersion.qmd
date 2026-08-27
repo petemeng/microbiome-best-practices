@@ -375,7 +375,6 @@ format_p <- function(p) {
 }
 ```
 
-整仓库使用者可改为 `source("R/theme_pub.R")`；只复制本页时，上面的代码已经包含全部作图与导出函数。
 
 </details>
 

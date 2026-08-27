@@ -78,7 +78,6 @@ conda activate multiomics-native
 python -c 'from halla import HAllA; print("HAllA import: OK")'
 ```
 
-整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行下面定义：
 
 ```{r}
 #| label: setup-integration-theme

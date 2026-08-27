@@ -115,8 +115,9 @@ Cliff's delta 定义为：
 ```{r}
 #| eval: false
 install.packages(c(
-  "digest", "dplyr", "ggplot2", "iNEXT", "jsonlite",
-  "ragg", "readr", "scales", "svglite", "systemfonts", "vegan"
+  "digest", "dplyr", "emmeans", "ggplot2", "iNEXT", "jsonlite",
+  "lme4", "lmerTest", "ragg", "readr", "scales", "svglite",
+  "systemfonts", "vegan"
 ))
 ```
 
@@ -320,7 +321,6 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可使用内容相同的 `R/theme_pub.R`；只复制本页时，上面的代码块已经包含全部作图与导出函数。
 
 </details>
 
@@ -1408,8 +1408,6 @@ paired_fit
 
 ```{r}
 #| eval: false
-install.packages(c("lme4", "lmerTest", "emmeans"))
-
 longitudinal_data <- alpha_primary |>
   filter(Order == 1L) |>
   mutate(

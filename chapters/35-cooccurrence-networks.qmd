@@ -87,7 +87,7 @@ remotes::install_github(
 )
 ```
 
-本页实跑 `SpiecEasi` 1.1.2（官方仓库 commit `c463727`）。ggClusterNet 未进入主计算依赖；其 GitHub master 会变化，正式项目应把安装当日 SHA 写进 lockfile。整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行下面定义：
+本页实跑 `SpiecEasi` 1.1.2（官方仓库 commit `c463727`）。ggClusterNet 未进入主计算依赖；其 GitHub master 会变化，正式项目应把安装当日 SHA 写进 lockfile。
 
 ```{r}
 #| label: setup-network-theme

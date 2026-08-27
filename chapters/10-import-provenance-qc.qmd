@@ -143,7 +143,7 @@ Atacama 官方教程明确要求：
 | Unmapped | 0 | 870 | 43.50% |
 | Unmapped | 1–4 | 438 | 21.90% |
 
-不要因为软件提供 Golay 纠错，就默认任意长度、任意设计的 index 都适用。若实验不是 EMP 12-nt Golay barcode，应依据建库协议选择对应 demultiplex 方法，不能只复制本页参数。
+不要因为软件提供 Golay 纠错，就默认任意长度、任意设计的 index 都适用。若实验不是 EMP 12-nt Golay barcode，应依据建库协议选择对应 demultiplex 方法，不能机械照搬这里的参数。
 
 ### 5. QZA、QZV 与 provenance 的责任不同
 
@@ -541,7 +541,6 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可以改用 `source("R/theme_pub.R")`；单独复制分析时使用上面的内联定义。
 
 </details>
 

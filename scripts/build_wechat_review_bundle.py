@@ -88,6 +88,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--qa-report", default="qa_report.json")
     parser.add_argument("--site-dir", default="_site")
     parser.add_argument("--output-dir", default="rendered/wechat_review_01_55")
+    parser.add_argument(
+        "--fallback-bundle",
+        help=(
+            "Optional previously verified review bundle used only when a "
+            "rendered site article is missing. The report records every "
+            "fallback chapter."
+        ),
+    )
     parser.add_argument("--formal-count", type=int, default=55)
     parser.add_argument("--author", default="Peter")
     parser.add_argument(
@@ -125,6 +133,20 @@ def site_html_path(site_dir: Path, qmd_path: str) -> Path:
     if qmd.name == "index.qmd":
         return site_dir / "index.html"
     return site_dir / qmd.with_suffix(".html")
+
+
+def missing_local_images(source_html: Path) -> list[str]:
+    if not source_html.exists():
+        return []
+    document = html.parse(str(source_html)).getroot()
+    missing: list[str] = []
+    for image_element in document.xpath("//img"):
+        src = image_element.get("src") or ""
+        if not src or src.startswith(("http://", "https://", "data:")):
+            continue
+        if not (source_html.parent / src).resolve().exists():
+            missing.append(src)
+    return missing
 
 
 def create_cover(representative_image: Path, output: Path) -> None:
@@ -206,13 +228,106 @@ def remove_unwanted(main: etree._Element) -> None:
                 parent.remove(element)
 
 
-def flatten_code(main: etree._Element) -> None:
+def normalized_text(element: etree._Element) -> str:
+    return re.sub(r"\s+", " ", "".join(element.itertext())).strip()
+
+
+def remove_wechat_bootstrap(main: etree._Element) -> int:
+    """Remove website-only environment bootstrap blocks from WeChat prose."""
+    removed = 0
+    for section in list(main.xpath(".//section")):
+        headings = section.xpath("./h2[1]")
+        if not headings or normalized_text(headings[0]) != "准备工作":
+            continue
+        parent = section.getparent()
+        if parent is not None:
+            parent.remove(section)
+            removed += 1
+
+    # Keep the filter robust if a future chapter changes the outer heading but
+    # retains the generic dependency/data/theme bootstrap disclosure.
+    for details in list(main.xpath(".//details")):
+        summaries = details.xpath("./summary[1]")
+        if not summaries:
+            continue
+        summary = normalized_text(summaries[0])
+        if not (
+            summary.startswith("展开：")
+            and (
+                "安装依赖" in summary
+                or "定义作图函数" in summary
+                or "出版级函数" in summary
+            )
+        ):
+            continue
+        parent = details.getparent()
+        if parent is not None:
+            parent.remove(details)
+            removed += 1
+    return removed
+
+
+def remove_explicit_wechat_omissions(main: etree._Element) -> int:
+    removed = 0
+    selector = (
+        './/*[contains(concat(" ", normalize-space(@class), " "), '
+        '" wechat-omit ")]'
+    )
+    elements = list(main.xpath(selector))
+    marked = set(elements)
+    for element in elements:
+        if any(ancestor in marked for ancestor in element.iterancestors()):
+            continue
+        parent = element.getparent()
+        if parent is not None:
+            parent.remove(element)
+            removed += 1
+    return removed
+
+
+INSTALL_CALL = re.compile(
+    r"^\s*(?:install\.packages|BiocManager::install|"
+    r"remotes::install_github|pak::pkg_install)\s*\("
+)
+
+
+def strip_leading_install_calls(code_text: str) -> tuple[str, int]:
+    lines = code_text.splitlines()
+    prefix: list[str] = []
+    index = 0
+    while index < len(lines) and (
+        not lines[index].strip() or lines[index].lstrip().startswith("#|")
+    ):
+        prefix.append(lines[index])
+        index += 1
+
+    removed = 0
+    while index < len(lines) and INSTALL_CALL.match(lines[index]):
+        depth = lines[index].count("(") - lines[index].count(")")
+        index += 1
+        while index < len(lines) and depth > 0:
+            depth += lines[index].count("(") - lines[index].count(")")
+            index += 1
+        removed += 1
+        while index < len(lines) and not lines[index].strip():
+            index += 1
+
+    if not removed:
+        return code_text, 0
+    return "\n".join(prefix + lines[index:]).rstrip(), removed
+
+
+def flatten_code(main: etree._Element) -> int:
+    stripped_install_calls = 0
     for pre in main.xpath(".//pre"):
         code_text = "".join(pre.itertext()).rstrip()
+        code_text, removed = strip_leading_install_calls(code_text)
+        stripped_install_calls += removed
         for child in list(pre):
             pre.remove(child)
         pre.text = code_text
         pre.set("style", STYLES["pre"])
+    return stripped_install_calls
 
 
 def transform_special_blocks(main: etree._Element) -> None:
@@ -312,24 +427,37 @@ def strip_unsupported_attributes(main: etree._Element) -> None:
 def sanitize_article(
     source_html: Path,
     article_dir: Path,
-) -> tuple[str, list[dict[str, Any]]]:
+) -> tuple[str, list[dict[str, Any]], int, int, int]:
     document = html.parse(str(source_html)).getroot()
     mains = document.xpath(
         '//main[contains(concat(" ",normalize-space(@class)," ")," content ")]'
         ' | //main[@id="quarto-document-content"] | //main'
     )
     if not mains:
-        raise RuntimeError(f"No main content found in {source_html}")
+        # A prior local review bundle wraps its sanitized article in the first
+        # section under body. Accept that surface only when explicitly chosen
+        # as a fallback source.
+        mains = document.xpath("//body/section[1]")
+    if not mains:
+        raise RuntimeError(f"No article content found in {source_html}")
     main = deepcopy(mains[0])
     main.tag = "section"
     remove_unwanted(main)
-    flatten_code(main)
+    removed_wechat_omit_blocks = remove_explicit_wechat_omissions(main)
+    removed_bootstrap_blocks = remove_wechat_bootstrap(main)
+    stripped_install_calls = flatten_code(main)
     transform_special_blocks(main)
     apply_inline_styles(main)
     images = resolve_and_optimize_images(main, source_html, article_dir)
     strip_unsupported_attributes(main)
     main.set("style", ROOT_STYLE)
-    return etree.tostring(main, encoding="unicode", method="html"), images
+    return (
+        etree.tostring(main, encoding="unicode", method="html"),
+        images,
+        removed_bootstrap_blocks,
+        removed_wechat_omit_blocks,
+        stripped_install_calls,
+    )
 
 
 def local_preview_html(title: str, content: str) -> str:
@@ -347,6 +475,11 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     qa_path = (project / args.qa_report).resolve()
     site_dir = (project / args.site_dir).resolve()
     output_dir = (project / args.output_dir).resolve()
+    fallback_bundle = (
+        (project / args.fallback_bundle).resolve()
+        if args.fallback_bundle
+        else None
+    )
     manifest = yaml.safe_load(manifest_path.read_text(encoding="utf-8"))
     qa_report = json.loads(qa_path.read_text(encoding="utf-8"))
     if qa_report.get("status") != "passed":
@@ -362,22 +495,59 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         raw_title = str(chapter["title"])
         qmd_path = str(chapter["file"])
         source_html = site_html_path(site_dir, qmd_path)
+        source_surface = "rendered_site"
+        source_surface_reason = "current_render"
+        site_problem: str | None = None
         if not source_html.exists():
-            raise FileNotFoundError(source_html)
+            site_problem = "missing_site_html"
+        else:
+            missing_images = missing_local_images(source_html)
+            if missing_images:
+                site_problem = f"missing_site_images:{len(missing_images)}"
+        if site_problem is not None:
+            if fallback_bundle is None:
+                raise FileNotFoundError(
+                    f"{site_problem} for rendered article {source_html}"
+                )
+            fallback_html = fallback_bundle / f"{number:02d}" / "article.html"
+            if not fallback_html.exists():
+                raise FileNotFoundError(
+                    f"Missing site HTML {source_html} and fallback {fallback_html}"
+                )
+            fallback_missing_images = missing_local_images(fallback_html)
+            if fallback_missing_images:
+                raise FileNotFoundError(
+                    f"Fallback {fallback_html} has missing images: "
+                    f"{fallback_missing_images[:3]}"
+                )
+            source_html = fallback_html
+            source_surface = "verified_fallback_bundle"
+            source_surface_reason = site_problem
         article_dir = output_dir / f"{number:02d}"
         article_dir.mkdir(parents=True, exist_ok=True)
         title = truncate(f"16S最佳实践｜{number}. {raw_title}", MAX_TITLE_CHARS)
         digest_lead = raw_title if raw_title.endswith(("。", "！", "？", "!", "?")) else f"{raw_title}。"
         digest_text = (
-            f"{digest_lead}真实数据、完整复现代码、结果解释与发表级重绘图。"
+            f"{digest_lead}真实数据、关键分析步骤、结果解释与发表级重绘图。"
         )
+        if number == 1:
+            digest_text = (
+                f"{digest_lead}用七张代表性结果图理解多样性、组成、差异、"
+                "预测与因果证据的边界。"
+            )
         if number == 55:
             digest_text = (
                 f"{digest_lead}用七项一手研究比较不同设计的证据边界、"
                 "残余偏倚与可辩护措辞。"
             )
         digest = truncate(digest_text, MAX_DIGEST_CHARS)
-        content, images = sanitize_article(
+        (
+            content,
+            images,
+            removed_bootstrap_blocks,
+            removed_wechat_omit_blocks,
+            stripped_install_calls,
+        ) = sanitize_article(
             source_html=source_html,
             article_dir=article_dir,
         )
@@ -408,6 +578,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "title_order_prefix": f"{number}.",
                 "source_qmd": str((project / qmd_path).resolve()),
                 "source_html": str(source_html),
+                "source_surface": source_surface,
+                "source_surface_reason": source_surface_reason,
                 "article_html": str(article_html),
                 "draft_json": str(draft_json),
                 "cover_image": str(cover),
@@ -416,6 +588,9 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "cover_size_bytes": cover.stat().st_size,
                 "cover_sha256": sha256(cover),
                 "html_chars": len(content),
+                "removed_bootstrap_block_count": removed_bootstrap_blocks,
+                "removed_wechat_omit_block_count": removed_wechat_omit_blocks,
+                "stripped_install_call_count": stripped_install_calls,
                 "embedded_image_count": len(images),
                 "embedded_images": images,
             }
@@ -449,6 +624,29 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             flags=re.I,
         ):
             errors.append(f"{item['chapter_id']}: internal review or numbering metadata remains")
+        if re.search(
+            r"<h2[^>]*>\s*准备工作\s*</h2>|"
+            r"展开：[^<]{0,80}(?:安装依赖|定义作图函数|出版级函数)|"
+            r"整仓库(?:运行时|使用者|用户|的一次性|的验收器)|"
+            r"只复制(?:本页|本文)|单篇复现|独立运行以上",
+            draft["content"],
+            flags=re.I,
+        ):
+            errors.append(f"{item['chapter_id']}: website-only bootstrap or maintainer prose remains")
+        for code_block in re.findall(
+            r"<pre\b[^>]*>.*?</pre>",
+            draft["content"],
+            flags=re.I | re.S,
+        ):
+            if re.search(
+                r"(?:install\.packages|BiocManager::install|"
+                r"remotes::install_github|pak::pkg_install)\s*\(",
+                code_block,
+            ):
+                errors.append(
+                    f"{item['chapter_id']}: package-install command remains in WeChat code"
+                )
+                break
         if "/pull/" in str(draft.get("content_source_url", "")):
             errors.append(f"{item['chapter_id']}: content_source_url points to a pull request")
         for image_record in item["embedded_images"]:
@@ -469,6 +667,15 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         "title_style": "series_then_ordinal_dot",
         "review_url": args.review_url,
         "item_count": len(items),
+        "fallback_item_count": sum(
+            item["source_surface"] == "verified_fallback_bundle"
+            for item in items
+        ),
+        "fallback_chapters": [
+            item["chapter_id"]
+            for item in items
+            if item["source_surface"] == "verified_fallback_bundle"
+        ],
         "embedded_image_count": sum(item["embedded_image_count"] for item in items),
         "errors": errors,
         "items": items,

@@ -70,7 +70,6 @@ PILOT_NUMBERS = {
     55,
 }
 PILOT_PRIMARY_INPUT_PATHS = {
-    1: "data/small/otutab.tsv",
     2: "data/small/otutab.tsv",
     3: "data/small/otutab.tsv",
     4: "data/small/decontam/otutab.tsv",
@@ -147,6 +146,11 @@ PROHIBITED_PUBLIC_PATTERNS = (
     "审阅草稿",
     "开放审阅",
     "GitHub Draft PR",
+    "整仓库",
+    "单篇复现",
+    "只复制本页",
+    "只复制本文",
+    "独立运行以上",
 )
 PROHIBITED_PUBLIC_REGEXES = (
     r'(?m)^title:\s*"第\s*\d{2}\s*篇\s*·',
@@ -222,6 +226,9 @@ def main() -> int:
         title = str(metadata.get("title", ""))
         if item["title"] not in title:
             errors.append(f"title mismatch for article {number:02d}: {item['file']}")
+        kind = str(item.get("kind", "computational"))
+        if kind not in {"computational", "overview", "evidence-synthesis"}:
+            errors.append(f"article {number:02d} has unsupported kind: {kind}")
 
         if number not in PILOT_NUMBERS:
             continue
@@ -229,11 +236,13 @@ def main() -> int:
         text = chapter_path.read_text(encoding="utf-8")
         if metadata.get("draft") is True:
             errors.append(f"article {number:02d} is still marked draft")
-        for section, pattern in REQUIRED_PILOT_SECTION_PATTERNS:
-            if re.search(pattern, text) is None:
-                errors.append(
-                    f"article {number:02d} is missing section function {section}: {pattern}"
-                )
+        if kind == "computational":
+            for section, pattern in REQUIRED_PILOT_SECTION_PATTERNS:
+                if re.search(pattern, text) is None:
+                    errors.append(
+                        f"article {number:02d} is missing section function "
+                        f"{section}: {pattern}"
+                    )
         for pattern in PROHIBITED_PUBLIC_PATTERNS:
             if pattern in text:
                 errors.append(f"article {number:02d} contains prohibited public text: {pattern}")
@@ -242,9 +251,9 @@ def main() -> int:
                 errors.append(
                     f"article {number:02d} contains prohibited public pattern: {pattern}"
                 )
-        if number != 55 and "set.seed(" not in text:
+        if kind == "computational" and "set.seed(" not in text:
             errors.append(f"article {number:02d} does not fix a random seed")
-        if number != 55:
+        if kind == "computational":
             expected_input = PILOT_PRIMARY_INPUT_PATHS[number]
             if expected_input not in text:
                 errors.append(
@@ -256,14 +265,31 @@ def main() -> int:
     if intro_path.exists():
         intro = intro_path.read_text(encoding="utf-8")
         for token in (
-            "adonis2(",
-            "capscale(",
             "01-preview-pcoa",
             "01-preview-cap",
             "01-learning-map",
+            "19-hill-profile",
+            "26-phylum-stacked",
+            "33-da-forest",
+            "43-nested-roc",
+            "55-1-evidence-ladder",
+            "## 参考",
         ):
             if token not in intro:
-                errors.append(f"article 01 is missing executable {token}")
+                errors.append(f"article 01 is missing overview evidence {token}")
+        for token in (
+            "```",
+            "## 准备工作",
+            "install.packages(",
+            "download.file(",
+            "SHA-256",
+            "推荐的最短可信主线",
+            "## 这段 Methods 怎么写",
+        ):
+            if token in intro:
+                errors.append(f"article 01 contains non-overview material: {token}")
+        if len(re.findall(r"!\[[^\]]*\]\([^\)]+\)", intro)) < 7:
+            errors.append("article 01 must display at least seven representative figures")
 
     scope_path = root / "chapters/02-scope-and-limits.qmd"
     if scope_path.exists():

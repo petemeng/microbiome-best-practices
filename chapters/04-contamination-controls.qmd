@@ -305,7 +305,6 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可使用内容相同的 `R/theme_pub.R`；独立运行以上代码块即可获得全部函数。
 
 </details>
 

@@ -76,7 +76,7 @@ BiocManager::install(
 )
 ```
 
-本页实跑版本为 ANCOMBC 2.6.0、ALDEx2 1.36.0、Maaslin2 1.18.0、lefser 1.14.0、corncob 0.4.2 和 phyloseq 1.48.0。整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行下面定义：
+本页实跑版本为 ANCOMBC 2.6.0、ALDEx2 1.36.0、Maaslin2 1.18.0、lefser 1.14.0、corncob 0.4.2 和 phyloseq 1.48.0。
 
 ```{r}
 #| label: setup-da-theme

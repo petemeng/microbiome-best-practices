@@ -409,13 +409,12 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可以改用 `source("R/theme_pub.R")`；单篇复制时使用上面的内联定义。
 
 </details>
 
 ## 可复制代码 {#sec-code}
 
-### 步骤 1：确认 R、库路径和仓库代际
+### 确认 R、Rscript 与 Bioconductor 版本
 
 在终端运行：
 
@@ -446,7 +445,7 @@ Bioconductor: 3.19
 Architecture: 64 bit
 ```
 
-### 步骤 2：下载并校验真实数据来源
+### 固定并校验真实数据来源 {.wechat-omit}
 
 本次使用 `microeco 2.0.0` 源码包中随软件分发的真实 16S 湿地数据。下载固定归档：
 
@@ -510,7 +509,7 @@ load(file.path(
 ))
 ```
 
-### 步骤 3：导出通用三件套
+### 将包内数据导出为通用三件套 {.wechat-omit}
 
 ```r
 #| eval: false
@@ -569,7 +568,7 @@ taxonomy: 13628 × 7
 metadata: 90 × 3
 ```
 
-### 步骤 4：从文本三件套重新读入
+### 从文本三件套重新读入
 
 不要直接沿用内存中的包对象；重新读取 TSV 才能检验交付接口。
 
@@ -599,7 +598,7 @@ storage.mode(tax_matrix) <- "character"
 
 `check.names = FALSE` 很重要：它避免 R 自动把样本名中的连字符等字符改写成点号。
 
-### 步骤 5：在构建对象前执行数据合同
+### 在构建对象前核对数据合同
 
 ```r
 #| eval: false
@@ -622,7 +621,7 @@ raw_library <- colSums(otu_matrix)
 stopifnot(sum(raw_library) == 1619670)
 ```
 
-### 步骤 6：构建 phyloseq 对象
+### 构建 phyloseq 对象
 
 ```r
 #| eval: false
@@ -660,7 +659,7 @@ stopifnot(
 )
 ```
 
-### 步骤 7：构建 microeco 对象
+### 构建 microeco 对象
 
 ```r
 #| eval: false
@@ -698,7 +697,7 @@ stopifnot(
 )
 ```
 
-### 步骤 8：用 tidyverse 连接逐样本审计
+### 用 tidyverse 连接逐样本核对
 
 ```r
 #| eval: false
@@ -740,7 +739,7 @@ stopifnot(
 head(library_audit)
 ```
 
-### 步骤 9：输出环境证据
+### 输出可引用的环境信息
 
 ```r
 #| eval: false
@@ -772,7 +771,7 @@ cat(
 )
 ```
 
-整仓库的一次性审计入口为：
+一次性环境审计入口为：
 
 ```bash
 #| eval: false

@@ -142,7 +142,7 @@ install.packages(c(
 ))
 BiocManager::install(version = "3.19", ask = FALSE)
 BiocManager::install(
-  c("decontam", "phyloseq"),
+  c("decontam", "MMUPHin", "phyloseq"),
   ask = FALSE,
   update = FALSE
 )
@@ -317,7 +317,6 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可使用内容相同的 `R/theme_pub.R`；独立运行以上代码块即可获得全部函数。
 
 </details>
 
@@ -1533,12 +1532,6 @@ vegan::permutest(
 
 ```{r}
 #| eval: false
-BiocManager::install(
-  "MMUPHin",
-  ask = FALSE,
-  update = FALSE
-)
-
 relative_abundance <- sweep(
   otutab,
   2,

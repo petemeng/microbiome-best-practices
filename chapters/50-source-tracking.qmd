@@ -88,7 +88,6 @@ conda activate sourcetracker2
 
 SourceTracker2 2.0.1 仍引用 NumPy 2 已移除的 `np.int`；下文在调用前使用 `np.int = int` 的局部兼容垫片，不修改算法或安装包。
 
-整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行下面定义：
 
 ```{r}
 #| label: setup-source-tracking-theme

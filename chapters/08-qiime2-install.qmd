@@ -335,7 +335,6 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可以改用 `source("R/theme_pub.R")`；单篇复制时使用上面的内联定义。
 
 </details>
 
@@ -385,7 +384,7 @@ sha256sum env/qiime2.yml
 
 如果哈希不同，先确认文件来源和 release，不要继续使用文中的预期版本解释结果。
 
-没有整仓库文件时，可以按 QIIME 2 Library 当前 release 的 Linux/WSL2 命令直接创建官方环境：
+也可以按 QIIME 2 Library 当前 release 的 Linux/WSL2 命令直接创建官方环境：
 
 ```{bash}
 #| eval: false
@@ -609,7 +608,7 @@ unzip -l "$ARTIFACT" |
 
 ### 步骤 12：运行完整的可审计验收
 
-整仓库的验收器会创建临时 EMP 目录、设置可写缓存、完成真实 import/validate/export、扫描 archive，并执行四个预期失败探针：
+以下验收命令会创建临时 EMP 目录、设置可写缓存、完成真实 import/validate/export、扫描 archive，并执行四个预期失败探针：
 
 ```{bash}
 #| eval: false

@@ -524,7 +524,6 @@ save_pub <- function(
 }
 ```
 
-整仓库运行时可改用 `source("R/theme_pub.R")`；单篇运行直接保留上面的函数定义。
 
 </details>
 

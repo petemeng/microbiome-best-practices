@@ -93,7 +93,7 @@ remotes::install_github(
 )
 ```
 
-本页实跑 `SpiecEasi` 1.1.2（官方仓库 commit `c463727`）。整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行下面定义：
+本页实跑 `SpiecEasi` 1.1.2（官方仓库 commit `c463727`）。
 
 ```{r}
 #| label: setup-network-robustness-theme

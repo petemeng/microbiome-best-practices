@@ -216,7 +216,6 @@ save_pub <- function(plot, file_base, width = 180, height = 115,
 }
 ```
 
-整套项目可使用内容相同的 `R/theme_pub.R`；单篇复制时保留以上函数。
 
 </details>
 

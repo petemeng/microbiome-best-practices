@@ -81,7 +81,7 @@ install.packages(c(
 ))
 ```
 
-本页实跑 `WGCNA` 1.74。旧版 1.72-5 与当前 `xfun` 可出现 namespace 冲突，因此应恢复本仓库 lockfile，而不是混用系统旧包。整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行下面定义：
+本页实跑 `WGCNA` 1.74。旧版 1.72-5 与当前 `xfun` 可出现 namespace 冲突，因此应使用本页锁定的依赖版本，不要混用系统旧包。
 
 ```{r}
 #| label: setup-wgcna-theme

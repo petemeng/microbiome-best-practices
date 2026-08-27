@@ -81,7 +81,6 @@ BiocManager::install(
 )
 ```
 
-整仓库使用者可改用 `source("R/theme_pub.R")`；单篇复现直接运行内联函数：
 
 ```{r}
 #| label: setup-da-visualization-theme
