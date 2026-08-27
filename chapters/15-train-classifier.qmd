@@ -92,7 +92,7 @@ Production classifier
 
 这里的 366 条 ASV 来自固定 commit `f282ad2bafb3ca90190ec87290066ee1985df655` 的真实 nf-core V4 MiSeq 数据。原始 10,000 对 reads 经 anchored、IUPAC-aware 515F/806R 去引物和 DADA2 后保留 5,213 对非嵌合 reads。它们用于测试模型在真实 query 上的分类深度和方法敏感性；原数据没有独立生态分组，因此不据此推断处理效应。
 
-## 理论：为什么这么做 {#sec-theory}
+## 分类器必须匹配引物和扩增区域 {#sec-theory}
 
 ### 1. “区域特异”是让训练集与实验可见信息一致
 

@@ -33,7 +33,7 @@ FAPROTAX、Tax4Fun2 和 BugBase 都是**从扩增子数据推断潜在功能**�
 
 本页使用 `microeco` 2.0.0 随包分发的真实中国湿地 16S 数据，CW、IW、TW 各 30 个样本。FAPROTAX 数据库版本由运行日志记录；同一个 OTU 可以匹配多个功能，因此功能条目的相对份额是 **annotation assignments 的组成**，不能解释为互斥细胞比例。
 
-## 理论：三种工具的 estimand 并不相同 {#sec-theory}
+## 三种工具估计的对象并不相同 {#sec-theory}
 
 ### 1. FAPROTAX 是 taxonomy-to-trait literature mapping
 

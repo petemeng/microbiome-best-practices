@@ -25,7 +25,7 @@ fig-format: png
 
 ## 微生物丰度是成分数据 {#sec-target}
 
-[Gloor et al. (2017)](https://doi.org/10.3389/fmicb.2017.02224)系统解释了为什么高通量测序表是 composition，而不是绝对丰度表；原文为 CC BY。这里不复制原图，而是用公开湿地 16S 计数重绘三个更接近分析现场的证据：一次真实组成上的反事实闭合实验、同一属在三种测量尺度下的组间分布，以及 reference 改变时效应量如何移动。
+[Gloor et al. (2017)](https://doi.org/10.3389/fmicb.2017.02224)系统解释了为什么高通量测序表是 composition，而不是绝对丰度表。下面用公开湿地 16S 计数展示三类直接影响分析的证据：真实组成上的反事实闭合实验、同一属在三种测量尺度下的组间分布，以及 reference 改变时效应量如何移动。
 
 ::: {.callout-important title="先给结论"}
 测序 reads 是在每个样本的有限文库中分配的份额。raw reads 同时受微生物组成和 library size 影响；relative abundance 消除了 library size，却引入总和固定为 1 的 closure；CLR/ALR 把问题改写为“某 taxon 相对一个 reference 变化多少”。因此，**“某菌的百分比下降”不等于“每克样本中的细胞数下降”**，而不说明 reference 的 log-ratio 也不是无条件的绝对变化。
@@ -33,7 +33,7 @@ fig-format: png
 
 本页数据来自 `microeco` 2.0.0 随包分发的真实湿地 16S 数据，包含 conventional wetland（CW）、intensive wetland（IW）和 temporal wetland（TW）各 30 个样本。分析始终从三件套读起；属级已知 reads 仅占全部 reads 的一部分，未注释部分保留为 denominator residual，不被解释成一个生物学 taxon。
 
-## 理论：读数只给比例尺，不给绝对刻度 {#sec-theory}
+## 读数只给比例尺，不给绝对刻度 {#sec-theory}
 
 ### 1. Closure 会把一个分子的变化传给所有分子
 

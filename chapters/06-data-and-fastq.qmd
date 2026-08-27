@@ -62,7 +62,7 @@ fig-format: png
 
 完整 URL、完整校验值、2,000-record 摘录的生成规则和摘录文件校验值均保存在 `data/small/fastq/source_summary.json`。本篇的图是根据真实 reads 重新计算的原创图，不复制论文图版。
 
-## 理论：从荧光信号到四行文本 {#sec-theory}
+## 从荧光信号到四行文本 {#sec-theory}
 
 ### 1. paired-end 测序得到的是两个方向的观测
 

@@ -25,13 +25,13 @@ fig-format: png
 
 ## sPLS/DIABLO 找到的是协同变化，不自动等于机制 {#sec-target}
 
-[Singh et al. (2019)](https://doi.org/10.1093/bioinformatics/bty1054)用 DIABLO 展示 supervised multi-omics integration、sample plots、circos/loadings 与 prediction performance。本页不复制论文原图，而是在 [Franzosa et al. (2019)](https://doi.org/10.1038/s41564-018-0306-4) 的公开 IBD 配对数据上重绘 cross-block generalization、DIABLO scores、locked-test confusion/AUC 与 feature stability。
+[Singh et al. (2019)](https://doi.org/10.1093/bioinformatics/bty1054)用 DIABLO 展示 supervised multi-omics integration、sample plots、circos/loadings 与 prediction performance。以下分析使用 [Franzosa et al. (2019)](https://doi.org/10.1038/s41564-018-0306-4) 的公开 IBD 配对数据，同时检查 cross-block generalization、DIABLO scores、locked-test confusion/AUC 与 feature stability。
 
 ::: {.callout-important title="先给结论"}
 sPLS component 1 的跨 block correlation 从 training 的 0.884 保持到 test 的 0.883；component 2 从 0.738 降到 0.502。DIABLO 在 67 个 locked test samples 上 accuracy 0.657、balanced accuracy 0.676、macro one-vs-rest AUC 0.798；UC AUC 只有 0.654。模型能概括部分跨组学结构，但还不够作为临床分类器。
 :::
 
-## 理论：共同变化、监督分离与预测验证 {#sec-theory}
+## 共同变化、监督分离与预测验证是三个任务 {#sec-theory}
 
 ### 1. sPLS 用稀疏 loadings 找跨 block covariance
 

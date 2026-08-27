@@ -43,7 +43,7 @@ fig-format: png
 三个 coverage-standardized Hill 指标的 Kruskal–Wallis 检验均未通过 Holm 校正；九个计划成对比较也没有一个通过 Holm 校正。未经标准化的 raw (q=0) 有一个未校正的名义信号（P = 0.035），但在 10,000 reads 和 90% coverage 下分别变为 P = 0.511 与 P = 0.216。这个例子说明，星号可能首先反映测量口径，而不是稳健的组间生物学差异。
 :::
 
-## 理论：检验之前先锁定设计、指标和检验族 {#sec-theory}
+## 检验之前先锁定设计、指标和检验族 {#sec-theory}
 
 最短的决策顺序是：
 

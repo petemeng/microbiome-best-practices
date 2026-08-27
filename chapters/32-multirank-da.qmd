@@ -33,7 +33,7 @@ Family、Genus、Species 必须各自从 ASV 表重新聚合、过滤、检验�
 
 本页预声明 CW 对 IW、prevalence `>=10%`、total reads `>=20`、每 rank 最多 80 个 group-blind 高信息行、BH `q<0.05`。Family/Genus 使用 ALDEx2 IQLR reference；Species 因可用 feature 太少而预声明使用全表 CLR reference，并同时判定报告门禁失败。每个 rank 的 unclassified residual 保留在 denominator 中，却永远不作为 biomarker。
 
-## 理论：taxonomic rank 改变的是数据和假设族 {#sec-theory}
+## taxonomic rank 改变的是数据和假设族 {#sec-theory}
 
 ### 1. Collapse 不是改一列标签
 

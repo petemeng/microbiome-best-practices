@@ -25,7 +25,7 @@ fig-format: png
 
 ## PICRUSt2 预测的是潜在功能，不是实测通路活性 {#sec-target}
 
-[Douglas et al. (2020)](https://doi.org/10.1038/s41587-020-0548-6)系统展示 PICRUSt2 的 phylogenetic placement、hidden-state prediction 与 benchmark；[Yang et al. (2023)](https://doi.org/10.1093/bioinformatics/btad470)给出 ggpicrust2 的 differential-abundance 与 visualization workflow。这里不复制论文原图，而是对 PICRUSt2 官方 chemerin 16S tutorial 数据真实运行最新版 pipeline，重绘 workflow、NSTI、MetaCyc heatmap 与 multiplicity/coverage audit。
+[Douglas et al. (2020)](https://doi.org/10.1038/s41587-020-0548-6)系统展示 PICRUSt2 的 phylogenetic placement、hidden-state prediction 与 benchmark；[Yang et al. (2023)](https://doi.org/10.1093/bioinformatics/btad470)给出 ggpicrust2 的 differential-abundance 与 visualization workflow。以下结果来自 PICRUSt2 官方 chemerin 16S tutorial 数据的完整运行，包括 workflow、NSTI、MetaCyc heatmap 与 multiplicity/coverage 检查。
 
 ::: {.callout-important title="先给结论"}
 PICRUSt2 输出的是由 16S phylogeny 与 reference genomes **预测的 functional potential**。通路图是否可信，至少要同时检查：ASV 与 count-table ID 契约、NSTI、被阈值剔除的 reads、16S copy normalization、pathway coverage、batch/facility adjustment 和多重检验。热图本身不能证明 pathway 基因存在，更不能证明它被表达或产生代谢通量。
@@ -33,7 +33,7 @@ PICRUSt2 输出的是由 16S phylogeny 与 reference genomes **预测的 functio
 
 官方压缩包含 24 个样本、37 条 400-bp ASV sequences 和 108,718 reads；metadata 中有 `Genotype`（14 KO、10 WT）与 `Facility`（Dalhousie、PaloAlto 各 12）。官方包不分发 taxonomy，因此本章的 `taxonomy.tsv` 七个 rank 有意留空；PICRUSt2 的必需 biological input 是 representative sequences，而不是 taxonomy labels。
 
-## 理论：从 phylogenetic neighbor 推断基因家族 {#sec-theory}
+## PICRUSt2 如何根据系统发育邻近关系推断基因家族 {#sec-theory}
 
 ### 1. placement 先决定 sequence 位于 reference tree 的哪里
 

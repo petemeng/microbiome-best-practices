@@ -25,7 +25,7 @@ fig-format: png
 
 ## 网络差异必须先证明推断过程可比 {#sec-target}
 
-[Guimerà & Amaral (2005)](https://doi.org/10.1038/nature03288)用 within-module degree 与 participation coefficient 建立网络角色图；[Yuan et al. (2021)](https://doi.org/10.1038/s41558-021-00989-9)把网络复杂度与稳定性用于土壤微生物群落比较。这里不复制论文原图，而是在公开湿地 16S 数据上重绘 role cartography、node-attack curve、group rewiring null distribution 和方法敏感性账本。
+[Guimerà & Amaral (2005)](https://doi.org/10.1038/nature03288)用 within-module degree 与 participation coefficient 建立网络角色图；[Yuan et al. (2021)](https://doi.org/10.1038/s41558-021-00989-9)把网络复杂度与稳定性用于土壤微生物群落比较。以下分析在公开湿地 16S 数据上同时检查 role cartography、node-attack curve、group rewiring null distribution 和方法敏感性。
 
 ::: {.callout-important title="先给结论"}
 Zi–Pi、degree 和节点移除曲线描述的是**推断网络的拓扑**，不是一个 taxon 在真实生态系统中的必要性。只有先固定节点集合、edge inference、密度和不确定性，组间拓扑才可比较；即使满足这些条件，“candidate topological keystone”仍需扰动实验、时间序列或机制证据验证。
@@ -33,7 +33,7 @@ Zi–Pi、degree 和节点移除曲线描述的是**推断网络的拓扑**，�
 
 本页使用 `microeco` 2.0.0 的真实湿地三件套，CW、IW、TW 各 30 个样本。所有 feature 筛选在看分组网络前一次完成；SparCC 与 SPIEC-EASI 都读取同一个 90 × 40 count matrix。组间网络使用同样 40 个节点并强制保留相同边数，避免把 node count 或 density 差异误写成生态稳定性差异。
 
-## 理论：拓扑角色、鲁棒性和组间差异是三个问题 {#sec-theory}
+## 拓扑角色、鲁棒性和组间差异是三个问题 {#sec-theory}
 
 ### 1. Zi 与 Pi 先问“节点连到哪里”
 

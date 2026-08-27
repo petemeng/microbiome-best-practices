@@ -25,7 +25,7 @@ fig-format: png
 
 ## WGCNA 模块是共变模式，不是生态功能单元 {#sec-target}
 
-[Langfelder & Horvath (2008)](https://doi.org/10.1186/1471-2105-9-559)系统化了 weighted correlation network analysis：用 soft threshold 把 correlation 转为 adjacency，经 topological overlap 聚类得到模块，再以 module eigengene 关联外部性状。这里不复制原图，而是用公开湿地 16S 数据重绘 soft-threshold audit、module dendrogram、module–trait heatmap 和候选 hub 稳定性图。
+[Langfelder & Horvath (2008)](https://doi.org/10.1186/1471-2105-9-559)系统化了 weighted correlation network analysis：用 soft threshold 把 correlation 转为 adjacency，经 topological overlap 聚类得到模块，再以 module eigengene 关联外部性状。以下结果依次检查 soft threshold、module dendrogram、module–trait association 和候选 hub 的稳定性。
 
 ::: {.callout-important title="先给结论"}
 WGCNA 可以把共同变化的 taxa 压缩成模块，但微生物 abundance 是组成数据，模块也容易重现分组、地理与批次结构。本页先做 prevalence/abundance filter，再用 CLR 与 signed bicor；module–trait p-value 在统一检验族内 BH 校正。Hub 只表示“在当前模块里与 eigengene 高度一致且连接较强”，不能直接写成功能核心菌或 keystone。
@@ -33,7 +33,7 @@ WGCNA 可以把共同变化的 taxa 压缩成模块，但微生物 abundance 是
 
 本页仍使用 CW、IW、TW 各 30 个真实样本。已知 genus reads 只占全部 reads 的一部分，因此 WGCNA 的 estimand 明确限定为“可命名且通过过滤的属级子群”，不会把模块结果外推到整张 ASV 表。
 
-## 理论：WGCNA 是软阈值模块模型，不是另一种差异分析 {#sec-theory}
+## WGCNA 是软阈值模块模型，不是另一种差异分析 {#sec-theory}
 
 ### 1. 从 correlation 到 signed adjacency
 

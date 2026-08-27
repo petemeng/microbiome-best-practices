@@ -33,7 +33,7 @@ NCM 检验的是一个明确的观测模式：在给定 metacommunity pool、局
 
 本页使用 `microeco` 2.0.0 随包分发的真实中国湿地 OTU 表：CW、IW、TW 各 30 个样本，共 1,619,670 reads。主模型把全部 90 个样本定义为一个 regional pool；组内模型改变了 pool 和平均 library size，因此只作为分层描述，不把三个 $m$ 当作无偏处理效应比较。
 
-## 理论：曲线、参数和偏离各自回答什么 {#sec-theory}
+## 曲线、参数和偏离各自回答什么 {#sec-theory}
 
 ### 1. abundance–occupancy 是模型的观测接口
 

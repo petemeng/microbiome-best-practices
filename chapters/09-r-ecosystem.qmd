@@ -56,7 +56,7 @@ Sample-wise maximum absolute difference: 0
 Required checks: 26 / 26 PASS
 ```
 
-## 理论：R 微生物组环境到底由哪些层组成 {#sec-theory}
+## R 微生物组环境到底由哪些层组成 {#sec-theory}
 
 ### 1. R 是运行时，RStudio 是 IDE
 

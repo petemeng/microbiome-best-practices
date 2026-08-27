@@ -33,7 +33,7 @@ Volcano 的远点、cladogram 的彩色分支、Manhattan 的高峰和 forest �
 
 本页使用 `microeco` 2.0.0 的真实湿地三件套，预声明 CW 对 IW。属级 feature selection 只看总体 prevalence 和总体 reads；未注释 residual 进入 denominator，却从四种图的生物学标注中排除。
 
-## 理论：四种图回答四个不同问题 {#sec-theory}
+## 四种图回答四个不同问题 {#sec-theory}
 
 ### 1. Volcano：全表筛查，不是 effect uncertainty 图
 

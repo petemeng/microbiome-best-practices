@@ -58,7 +58,7 @@ fig-format: png
 
 随文实测记录的 Linux 执行面为 `native-linux-host`，内核 `6.8.0-49-generic`、架构 `x86_64`。这与 WSL2 内需要满足的 Linux 软件合同相同，但不声称服务器运行在 Windows 上。
 
-## 理论：WSL2、conda 与 mamba 各自解决什么问题 {#sec-theory}
+## WSL2、conda 与 mamba 各自解决什么问题 {#sec-theory}
 
 ### 1. WSL2 提供真正的 Linux 执行层
 

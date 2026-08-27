@@ -42,7 +42,7 @@ PERMANOVA 常对应论文中的 PCoA/NMDS 分组图和一张含 pseudo-F、(R^2)
 这个信号不能简化成“所有处理比较都显著”。Warming、Clipping 与交互项的 Holm-adjusted P 分别为 0.132、0.120 和 0.120；四个计划 simple effects 的 Holm-adjusted P 均为 0.125。更重要的是，保留全部 16,825 个 feature、仍使用同一合法置换时，omnibus P 变为 0.7642。因而结论应写成：**主预处理分支检测到条件性的整体位置差异，未见全局 dispersion 证据，但结果对 feature filter 敏感，不能宣称稳健而普遍的处理效应。**
 :::
 
-## 理论：PERMANOVA 与 PERMDISP 回答不同问题 {#sec-theory}
+## PERMANOVA 与 PERMDISP 回答不同问题 {#sec-theory}
 
 ### 先分清 location 和 dispersion
 

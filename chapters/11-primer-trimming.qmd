@@ -78,7 +78,7 @@ Required checks:                50 / 50 PASS
 
 负例来自 QIIME 2 Atacama soils 1% paired-end 数据。其原始研究考察干旱度对荒漠土壤微生物组的影响；这里使用确定性抽取的 2,000 对 reads，只验证“已从扩增子内部开始测序”的处理分支，不重新解释研究结论。[Neilson et al., 2017](https://doi.org/10.1128/mSystems.00195-16)
 
-## 理论：为什么这么做 {#sec-theory}
+## 引物和接头为什么必须先去除 {#sec-theory}
 
 ### 1. 引物名称只是标签，序列才是计算输入
 

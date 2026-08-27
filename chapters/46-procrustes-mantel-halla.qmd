@@ -31,7 +31,7 @@ fig-format: png
 Observed 数据中 Procrustes correlation 为 0.588、Mantel Spearman 为 0.597；校正 Control/CD/UC 后仍分别为 0.529 与 0.554（四次 permutation test 均为 $P=0.001$）。不过，1,000 对候选关联的 FDR hits 从 437 降到 350。**整体结构相似不等于每条边可靠，局部相关也不等于代谢转化或因果。**
 :::
 
-## 理论：整体一致与局部关联回答不同问题 {#sec-theory}
+## 整体一致与局部关联回答不同问题 {#sec-theory}
 
 ### 1. Procrustes 比较两个低维构型
 

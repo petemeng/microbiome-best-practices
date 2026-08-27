@@ -27,17 +27,15 @@ fig-format: png
 
 群落组成图常出现在论文结果的第一组主图：先用堆叠条形图交代每个样本由哪些优势类群构成，再用气泡图压缩组均值与检出率，用冲积图展示组与优势类群之间的组成分配，最后用热图保留样本内部异质性。这四张图都属于**描述性证据**；它们能告诉我们“看见了什么”，不能替代差异丰度检验。
 
-本页使用 `microeco` 2.0.0 随包分发的中国湿地土壤 16S 数据。数据研究 [An et al. (2019)](https://doi.org/10.1016/j.geoderma.2018.09.035)比较 inland、coastal 与 Tibetan wetland 的细菌群落结构，报告 Proteobacteria、Chloroflexi、Acidobacteria、Actinobacteria 和 Bacteroidetes 等优势门；可复现数据入口与软件对象由 [Liu et al. (2021)](https://doi.org/10.1093/femsec/fiaa255)说明。这里不复制论文原图，而从公开 count、taxonomy 和 metadata 三件套重新绘制四类图。
-
 ::: {.callout-important title="先给结论"}
-每个样本先闭合到 100%，再按**等样本权重**计算总体或组均值。门水平 Top 10 已知类群平均覆盖 94.80% 的全部 reads，单样本覆盖范围为 86.52%–98.92%；`Unknown phylum` 平均仅占 0.35%，因此门水平适合作为全样本概览。
+在这组 90 个湿地土壤样本中，每个样本先闭合到 100%，再按**等样本权重**计算总体或组均值。门水平 Top 10 已知类群平均覆盖 94.80% 的全部 reads，单样本覆盖范围为 86.52%–98.92%；`Unknown phylum` 平均仅占 0.35%，因此门水平适合作为全样本概览。
 
 分类越细，未注释比例越高：`Unknown genus` 平均占 63.11%，`Unknown species` 达 99.63%。所以属水平图始终保留全部 reads 作为分母，并把 `Unknown genus` 明示；若删除未注释 reads 后重新归一化，本例某些组–属均值最多会被抬高 7.27 个百分点。
 
 三组的优势结构不同：Proteobacteria 在 inland、coastal、Tibetan wetland 的等样本均值分别为 23.38%、37.27% 和 31.49%；Acidobacteria 分别为 19.26%、7.11% 和 7.65%，Bacteroidetes 分别为 6.52%、10.07% 和 18.36%。这些是组成描述，不带显著性或因果含义。
 :::
 
-## 理论：一张组成图至少有四个隐藏决定 {#sec-theory}
+## 画组成图之前，先确定四件事 {#sec-theory}
 
 ### 1. 相对丰度先解决“每个样本的分母”
 

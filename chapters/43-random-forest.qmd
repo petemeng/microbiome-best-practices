@@ -25,7 +25,7 @@ fig-format: png
 
 ## 随机森林的首要任务是外部可泛化，而非训练集 AUC {#sec-target}
 
-[Vandeputte et al. (2017)](https://doi.org/10.1038/nature24460)展示了 microbial load 如何改变疾病关联；[Topçuoğlu et al. (2020)](https://doi.org/10.1128/mBio.00434-20)系统指出 microbiome machine learning 对 preprocessing、validation 和 leakage 极其敏感。这里不复制论文原图，而是用公开 Vandeputte cohort 重绘完全 out-of-fold 的 ROC、calibration、permutation/importance audit 与 microbial-load regression。
+[Vandeputte et al. (2017)](https://doi.org/10.1038/nature24460)展示了 microbial load 如何改变疾病关联；[Topçuoğlu et al. (2020)](https://doi.org/10.1128/mBio.00434-20)系统指出 microbiome machine learning 对 preprocessing、validation 和 leakage 极其敏感。以下分析在公开 Vandeputte cohort 上完全使用 out-of-fold 预测，并同时检查 ROC、calibration、permutation/importance 和 microbial-load regression。
 
 ::: {.callout-important title="先给结论"}
 随机森林能拟合高维非线性，但“树多”不会自动防止研究流程过拟合。feature filtering、CLR basis、hyperparameter tuning、threshold selection 和 importance calculation 都必须在 training fold 内完成；test fold 只能在模型锁定后使用一次。本文所有主性能都来自 sample-level out-of-fold predictions。
@@ -33,7 +33,7 @@ fig-format: png
 
 本页只保留 `Cohort == "Disease"` 的 95 个样本，避免把额外 study controls 与病例队列混合。分类标签是观察性 CD/healthy，不等价于病因；回归结局是独立 flow-cytometry cells/g，而不是 sequencing library size。
 
-## 理论：评估单位必须是未来样本 {#sec-theory}
+## 评估单位必须是未来样本 {#sec-theory}
 
 ### 1. nested CV 把调参和估计泛化误差分开
 

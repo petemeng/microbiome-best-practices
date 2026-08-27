@@ -33,7 +33,7 @@ fig-format: png
 
 本页数据来自 `reconsi` 1.16.0 随包分发的 `Vandeputte` phyloseq object，原始研究同时提供 genus counts 与 flow cytometry。主比较只用 `Cohort == "Disease"`，避免把额外 40 个 study controls 与病例队列直接混合；健康状态仍是观察性标签，不能据此推出疾病因果菌。
 
-## 理论：QMP 给 composition 乘回样本 scale {#sec-theory}
+## QMP 如何把样本总负荷带回组成数据 {#sec-theory}
 
 ### 1. Relative abundance 丢失总负荷
 

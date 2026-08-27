@@ -39,7 +39,7 @@ Core microbiome 常见于论文中的 abundance–occupancy 散点图、prevalen
 按单样本 `0 < relative abundance < 0.1%` 定义 local rare mass，其等权均值为 **44.15%**，范围为 **23.33%–59.43%**。这个比例是阈值下的相对丰度质量，不是“44.15% 的细胞处于休眠”或“44.15% 的功能来自稀有菌”。
 :::
 
-## 理论：core 与 rare 都是带条件的操作性定义 {#sec-theory}
+## core 与 rare 都是带条件的操作性定义 {#sec-theory}
 
 ### 1. Core 至少需要四个同时公开的坐标
 

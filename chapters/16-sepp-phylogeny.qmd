@@ -32,7 +32,7 @@ fig-format: png
 - Supplementary 中的放置质量与序列保留审计；
 - 下游 Faith's PD、weighted UniFrac、unweighted UniFrac、phylogenetic balance 或树注释图。
 
-Janssen 等人的 SEPP 评估中，Figure 5 用已知来源的 V4 片段量化插入误差与歧义，Figure S2 比较 alignment/placement subset 的运行代价，Figure 12 对比 reference insertion 与 de novo tree construction。本页不复制论文原图，而是把同样的验证逻辑落实到真实 ASV。
+Janssen 等人的 SEPP 评估中，Figure 5 用已知来源的 V4 片段量化插入误差与歧义，Figure S2 比较 alignment/placement subset 的运行代价，Figure 12 对比 reference insertion 与 de novo tree construction。下面沿用这套验证逻辑，在真实 ASV 上检查插入、过滤和系统发育树的可用性。
 
 ![SEPP 工作流合同。短 V4 query 先通过 profile HMM 对齐到固定 reference alignment，再由 pplacer 放入 backbone；输出 rooted tree 与 jplace，随后按树尖端过滤 feature table。](../figures/16-sepp-workflow-contract.png){#fig-sepp-contract}
 
@@ -90,7 +90,7 @@ Output tree
 
 这些 ASV 来自 nf-core/test-datasets 固定提交 `f282ad2bafb3ca90190ec87290066ee1985df655` 的真实 MiSeq V4 数据。原始 10,000 对 reads 经 anchored、IUPAC-aware 515F/806R 去引物和 DADA2 后保留 5,213 对非嵌合 reads，得到 366 个 ASV。
 
-## 理论：为什么这么做 {#sec-theory}
+## SEPP 如何把短序列放入参考树 {#sec-theory}
 
 ### 1. reference placement 与 de novo 建树是两条不同路线
 

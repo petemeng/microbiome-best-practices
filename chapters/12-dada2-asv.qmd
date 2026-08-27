@@ -86,7 +86,7 @@ Validation:                    122 / 122 PASS
 
 该仓库没有为这 8 个技术测试文件附上独立生物学研究 accession。因此本页只用它们验证 DADA2 的输入、参数和损失账本，不对样本 `1/1a/2/2a` 做生态学解释。
 
-## 理论：为什么这么做 {#sec-theory}
+## DADA2 如何从 reads 推断 ASV {#sec-theory}
 
 ### 1. DADA2 输出的是 ASV，不是按相似度聚类的 OTU
 

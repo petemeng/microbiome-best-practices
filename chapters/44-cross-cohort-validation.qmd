@@ -33,7 +33,7 @@ fig-format: png
 
 数据来自 MicrobiomeHD Zenodo record 10.5281/zenodo.1146764 的 standardized 16S outputs，许可为 CC BY-NC 4.0。本页仅保留 CRC 与 healthy controls；Zackular cohort 的 adenoma 与 mock samples 在分析前排除。三项研究的 amplicon region、platform、geography 与 preprocessing lineage 不完全相同，这正是需要 study-level validation 的原因。
 
-## 理论：heterogeneity 不是需要隐藏的噪声 {#sec-theory}
+## 队列异质性不是需要隐藏的噪声 {#sec-theory}
 
 ### 1. 每个 study 先产生可比较的 effect 与 uncertainty
 

@@ -37,7 +37,7 @@ fig-format: png
 共有 **754** 条完整 Phylum→Genus lineage，合计覆盖 34.38% reads；丰度最高的 12 条完整 lineage 仅覆盖 10.19%。另外有 324 个 features（2.52% reads）出现“Family 未知、Genus 已知”，这些断裂路径被原样保留，不根据 genus 反推或补写 family。
 :::
 
-## 理论：多分类级不是把五张表直接拼起来 {#sec-theory}
+## 多分类级不是把五张表直接拼起来 {#sec-theory}
 
 ### 1. 每个 rank 都有自己的 100%，跨 rank 不能相加
 

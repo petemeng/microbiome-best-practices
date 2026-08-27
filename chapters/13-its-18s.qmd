@@ -88,7 +88,7 @@ ITS FASTQ 来自 USDA-ARS 的公开 [`itsxpress-tutorial`](https://github.com/US
 
 18S 部分使用 PR2 v5.1.1 完整 DADA2 FASTA 做 reference scope、rank depth 和脱靶标签审计。本页没有把参考库记录数冒充成 18S 样本结果，也没有声称运行了一个未给出的 18S 实验。
 
-## 理论：为什么这么做 {#sec-theory}
+## ITS 与 18S 为什么不能照搬 16S 参数 {#sec-theory}
 
 ### 1. Marker gene 决定你测到什么
 

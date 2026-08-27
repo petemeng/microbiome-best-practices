@@ -29,13 +29,13 @@ fig-format: png
 
 ## 时间结局分析需要同时定义起点、事件和删失 {#sec-target}
 
-[Zhang et al. (2018)](https://doi.org/10.1038/s41564-018-0251-7)研究 early-life antibiotics、gut microbiome 与 NOD mice type 1 diabetes development；[Gu et al. (2023)](https://doi.org/10.1128/spectrum.05059-22)基于该公开数据提出 MiSurv。本页不复制论文原图，而是从其 6–8-week baseline 16S tables 重绘 treatment KM、adjusted genus HR、PH diagnostic 与 locked-test time-dependent ROC。
+[Zhang et al. (2018)](https://doi.org/10.1038/s41564-018-0251-7)研究 early-life antibiotics、gut microbiome 与 NOD mice type 1 diabetes development；[Gu et al. (2023)](https://doi.org/10.1128/spectrum.05059-22)基于该公开数据提出 MiSurv。以下分析使用 6–8-week baseline 16S tables，依次检查 treatment KM、adjusted genus HR、PH diagnostic 与 locked-test time-dependent ROC。
 
 ::: {.callout-warning title="结局边界"}
 这里的 event 是 **NOD 小鼠 T1D 起病**，不是人类死亡、overall survival 或临床无进展生存。示例展示统计接口；把代码迁移到人群研究时，必须重新定义 time origin、competing events、loss to follow-up 与 covariates。
 :::
 
-## 理论：time origin、censoring 与 prediction horizon {#sec-theory}
+## 生存分析必须先定义起点、删失和预测时点 {#sec-theory}
 
 ### 1. 生存对象包含时间和事件状态
 

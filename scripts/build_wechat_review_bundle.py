@@ -232,6 +232,47 @@ def normalized_text(element: etree._Element) -> str:
     return re.sub(r"\s+", " ", "".join(element.itertext())).strip()
 
 
+SOURCE_H2 = re.compile(
+    r"(?m)^##\s+(.+?)\s+\{#(sec-[A-Za-z0-9_-]+)\}\s*$"
+)
+
+
+def source_section_headings(source_qmd: Path) -> dict[str, str]:
+    """Read stable section anchors and their reader-facing titles from QMD."""
+    source = source_qmd.read_text(encoding="utf-8")
+    return {
+        anchor: re.sub(r"[`*_]", "", heading).strip()
+        for heading, anchor in SOURCE_H2.findall(source)
+    }
+
+
+def replace_element_text(element: etree._Element, value: str) -> None:
+    for child in list(element):
+        element.remove(child)
+    element.text = value
+
+
+def sync_topic_heading(main: etree._Element, source_qmd: Path) -> int:
+    """Keep a verified fallback body aligned with the current topic heading."""
+    expected = source_section_headings(source_qmd).get("sec-theory")
+    if not expected:
+        return 0
+    for heading in main.xpath(".//h2"):
+        anchor = heading.get("data-anchor-id") or heading.get("id")
+        current = normalized_text(heading)
+        if (
+            anchor == "sec-theory"
+            or current.startswith("理论：")
+            or current == "为什么这么做"
+            or current == expected
+        ):
+            if current != expected:
+                replace_element_text(heading, expected)
+                return 1
+            return 0
+    raise RuntimeError(f"Could not locate sec-theory heading in {source_qmd}")
+
+
 def remove_wechat_bootstrap(main: etree._Element) -> int:
     """Remove website-only environment bootstrap blocks from WeChat prose."""
     removed = 0
@@ -427,7 +468,8 @@ def strip_unsupported_attributes(main: etree._Element) -> None:
 def sanitize_article(
     source_html: Path,
     article_dir: Path,
-) -> tuple[str, list[dict[str, Any]], int, int, int]:
+    source_qmd: Path,
+) -> tuple[str, list[dict[str, Any]], int, int, int, int]:
     document = html.parse(str(source_html)).getroot()
     mains = document.xpath(
         '//main[contains(concat(" ",normalize-space(@class)," ")," content ")]'
@@ -443,6 +485,7 @@ def sanitize_article(
     main = deepcopy(mains[0])
     main.tag = "section"
     remove_unwanted(main)
+    synced_topic_heading_count = sync_topic_heading(main, source_qmd)
     removed_wechat_omit_blocks = remove_explicit_wechat_omissions(main)
     removed_bootstrap_blocks = remove_wechat_bootstrap(main)
     stripped_install_calls = flatten_code(main)
@@ -457,6 +500,7 @@ def sanitize_article(
         removed_bootstrap_blocks,
         removed_wechat_omit_blocks,
         stripped_install_calls,
+        synced_topic_heading_count,
     )
 
 
@@ -547,9 +591,11 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             removed_bootstrap_blocks,
             removed_wechat_omit_blocks,
             stripped_install_calls,
+            synced_topic_heading_count,
         ) = sanitize_article(
             source_html=source_html,
             article_dir=article_dir,
+            source_qmd=(project / qmd_path).resolve(),
         )
         if not images:
             raise RuntimeError(f"Article {number:02d} has no representative figure for its cover")
@@ -591,6 +637,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "removed_bootstrap_block_count": removed_bootstrap_blocks,
                 "removed_wechat_omit_block_count": removed_wechat_omit_blocks,
                 "stripped_install_call_count": stripped_install_calls,
+                "synced_topic_heading_count": synced_topic_heading_count,
                 "embedded_image_count": len(images),
                 "embedded_images": images,
             }
@@ -633,6 +680,17 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             flags=re.I,
         ):
             errors.append(f"{item['chapter_id']}: website-only bootstrap or maintainer prose remains")
+        if re.search(
+            r"<h2[^>]*>\s*(?:理论：|为什么这么做)|"
+            r"隐藏决定|"
+            r"(?:这里|本页|本文|本篇|我们)[^。<]{0,40}"
+            r"不复制[^。<]{0,24}(?:原图|成图)",
+            draft["content"],
+            flags=re.I,
+        ):
+            errors.append(
+                f"{item['chapter_id']}: template heading or figure-production narration remains"
+            )
         for code_block in re.findall(
             r"<pre\b[^>]*>.*?</pre>",
             draft["content"],

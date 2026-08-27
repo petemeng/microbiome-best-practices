@@ -25,7 +25,7 @@ fig-format: png
 
 ## 差异丰度方法为什么会给出不同答案？ {#sec-target}
 
-[Nearing et al. (2022)](https://doi.org/10.1038/s41467-022-28034-z)在 38 个 16S 数据集上比较 14 种差异丰度（differential abundance, DA）方法。其 Figure 1 展示了同一数据集换方法后，显著 feature 的比例可以大幅变化；Figure 3 进一步比较方法间重叠。本文不复制原图，而是用一套真实湿地数据重建“同设计横评”：所有方法只允许改变统计模型，不允许偷偷改变数据或 contrast。
+[Nearing et al. (2022)](https://doi.org/10.1038/s41467-022-28034-z)在 38 个 16S 数据集上比较 14 种差异丰度（differential abundance, DA）方法。其 Figure 1 展示了同一数据集换方法后，显著 feature 的比例可以大幅变化；Figure 3 进一步比较方法间重叠。下面用一套真实湿地数据做“同设计横评”：所有方法只允许改变统计模型，不允许改变数据或 contrast。
 
 ::: {.callout-important title="先给结论"}
 五种方法的“显著”不是同一种证据：ANCOM-BC2估计 bias-corrected log fold change，ALDEx2使用 Dirichlet Monte Carlo log-ratio，MaAsLin2拟合可扩展协变量模型，LEfSe把秩检验与 LDA score 串联，corncob拟合 beta-binomial mean/dispersion。**交集可作为优先验证层，union 不能叫 consensus；方法数量也不是投票真值。**每个候选菌仍需检查效应方向、零比例、模型收敛、混杂与原始分布。
@@ -33,7 +33,7 @@ fig-format: png
 
 本页使用 `microeco` 2.0.0 随包分发的湿地 16S 三件套，预先限定 CW 对 IW。Feature selection 只看总体 prevalence 与总体 reads，不看 group label；未注释 reads 合成一个 denominator residual，但它不进入 biomarker 报告。
 
-## 理论：横评必须锁死设计，只让模型变化 {#sec-theory}
+## 横评必须锁死设计，只让模型变化 {#sec-theory}
 
 ### 1. 五种方法估计的量不同
 

@@ -53,7 +53,7 @@ Round-trip:  3/3 exported FASTQ SHA-256 values match
 
 预定义的 20 项安装、Artifact 与数据检查全部通过；四个受控失败探针也都返回了预期的非零 exit code 和诊断模式。
 
-## 理论：QIIME 2 的“安装成功”究竟指什么 {#sec-theory}
+## QIIME 2 的“安装成功”究竟指什么 {#sec-theory}
 
 ### 1. 安装的是 distribution，不是一个孤立 Python 包
 

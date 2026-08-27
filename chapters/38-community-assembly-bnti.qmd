@@ -25,7 +25,7 @@ fig-format: png
 
 ## βNTI 与 RCbray 提供的是条件性组装证据 {#sec-target}
 
-[Stegen et al. (2013)](https://doi.org/10.1038/ismej.2013.93)把 β-nearest taxon index（βNTI）与 abundance-based Raup–Crick（RCbray）串联，用 pairwise phylogenetic 与 taxonomic turnover 条件性区分 selection、dispersal 和 undominated processes。[Ning et al. (2020)](https://doi.org/10.1038/s41467-020-18560-z)进一步发展了可扩展的定量框架。这里不复制原图，而是用公开湿地数据重绘 βNTI–RCbray process map、分组 process fractions、系统发育信号与过滤审计。
+[Stegen et al. (2013)](https://doi.org/10.1038/ismej.2013.93)把 β-nearest taxon index（βNTI）与 abundance-based Raup–Crick（RCbray）串联，用 pairwise phylogenetic 与 taxonomic turnover 条件性区分 selection、dispersal 和 undominated processes。[Ning et al. (2020)](https://doi.org/10.1038/s41467-020-18560-z)进一步发展了可扩展的定量框架。下面用公开湿地数据检查 βNTI–RCbray process map、分组 process fractions、系统发育信号和过滤结果。
 
 ::: {.callout-important title="先给结论"}
 βNTI/RCbray 不是从一张 OTU 表直接“测出生态过程”。只有系统树与 feature 精确对齐、局部 phylogenetic signal 得到支持、null model 与 regional pool 合理、随机化充分且过滤敏感性可接受时，process fractions 才能作为条件性证据。它们不是 dispersal rate、selection strength 或因果比例的直接测量。
@@ -33,7 +33,7 @@ fig-format: png
 
 本页使用 `microeco` 2.0.0 随数据分发的真实 14,096-tip rooted 16S tree。树覆盖全部 13,628 个 count-table OTU，另有 468 个未进入 count table 的 tips；代码先按当前 feature universe 裁剪，不让 `ape` 或 iCAMP 静默重排。
 
-## 理论：先用 βNTI 判断 selection，再用 RCbray 分流 {#sec-theory}
+## 先用 βNTI 判断 selection，再用 RCbray 分流 {#sec-theory}
 
 ### 1. βMNTD 与 βNTI
 

@@ -25,7 +25,7 @@ fig-format: png
 
 ## 生态位、丰度分布与距离衰减回答不同尺度问题 {#sec-target}
 
-[Martiny et al. (2011)](https://doi.org/10.1073/pnas.1016308108)展示了 bacterial beta-diversity 的空间尺度依赖；[Hanson et al. (2012)](https://doi.org/10.1038/nrmicro2795)系统梳理了 selection、dispersal、drift 与 diversification 如何共同塑造微生物生物地理格局。这里不复制论文原图，而是在公开湿地 16S 数据上重绘 breadth–occupancy、rank-abundance fit、within-region distance-decay 和 effect-size audit。
+[Martiny et al. (2011)](https://doi.org/10.1073/pnas.1016308108)展示了 bacterial beta-diversity 的空间尺度依赖；[Hanson et al. (2012)](https://doi.org/10.1038/nrmicro2795)系统梳理了 selection、dispersal、drift 与 diversification 如何共同塑造微生物生物地理格局。以下分析在公开湿地 16S 数据上对照 breadth–occupancy、rank-abundance fit、within-region distance-decay 和 effect size。
 
 ::: {.callout-important title="先给结论"}
 Levins breadth、RAD 和 distance-decay 是三个不同层次的 pattern：taxon 在样本间分布得多均匀、单个样本内丰度怎样排序、不同地点的群落相似性怎样随距离变化。它们可以提出 generalist/specialist、dominance 与 dispersal/selection 假设，但任一张图都不能单独识别生态过程。
@@ -33,7 +33,7 @@ Levins breadth、RAD 和 distance-decay 是三个不同层次的 pattern：taxon
 
 本页使用 `microeco` 2.0.0 的真实中国湿地数据。CW、IW、TW 各 30 个样本，但三组覆盖的地理距离和环境范围不同；因此 distance-decay 以 **within-region** slope 为主，pooled 结果只作审计，避免把 region composition difference 当成连续空间衰减。
 
-## 理论：三种宏生态图不能互相代替 {#sec-theory}
+## 三种宏生态图不能互相代替 {#sec-theory}
 
 ### 1. standardized Levins breadth 是 sample-use evenness
 

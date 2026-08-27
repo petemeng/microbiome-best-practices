@@ -26,7 +26,7 @@ fig-format: png
 
 ## 把 QIIME 2 结果正确装进 phyloseq {#sec-target}
 
-`phyloseq` 对象通常不直接成为论文结果图，却是群落组成、alpha diversity、beta diversity、差异丰度和系统发育分析共同的数据入口。McMurdie 与 Holmes 在 `phyloseq` 方法论文中用对象与分析组件的关系说明这种设计。本页不复制论文原图，而是根据本次真实输入重新绘制四张审计图：
+`phyloseq` 对象通常不直接成为论文结果图，却是群落组成、alpha diversity、beta diversity、差异丰度和系统发育分析共同的数据入口。McMurdie 与 Holmes 在 `phyloseq` 方法论文中用对象与分析组件的关系说明这种设计。面对真实输入时，先检查以下四件事：
 
 1. 五类输入如何通过方向与 ID gate 进入一个对象；
 2. feature ID 和 sample ID 是否完整对齐；
@@ -78,7 +78,7 @@ phyloseq object
 
 四个 library labels 来自 nf-core 测试文件名。`S103`、`S115`、`base` 和 `suffix_a` 描述文件集合，不是处理、病例状态或生物学重复，因此这里只验证数据结构，不做组间推断。
 
-## 理论：为什么这么做 {#sec-theory}
+## phyloseq 如何保持特征、分类和样本一致 {#sec-theory}
 
 ### 1. 导出是数据合同转换，不是一次复制粘贴
 

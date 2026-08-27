@@ -25,13 +25,13 @@ fig-format: png
 
 ## 来源追踪估计贡献比例，不证明传播路径 {#sec-target}
 
-[Knights et al. (2011)](https://doi.org/10.1038/nmeth.1650)提出 Bayesian SourceTracker；[Shenhav et al. (2019)](https://doi.org/10.1038/s41592-019-0431-x)提出快速 expectation-maximization source tracking（FEAST）。本页不复制论文原图，而是使用 FEAST 官方真实 demo，重绘 source contributions、method disagreement、leave-one-out calibration 与 missing-source audit。
+[Knights et al. (2011)](https://doi.org/10.1038/nmeth.1650)提出 Bayesian SourceTracker；[Shenhav et al. (2019)](https://doi.org/10.1038/s41592-019-0431-x)提出快速 expectation-maximization source tracking（FEAST）。以下分析使用 FEAST 官方真实 demo，对照 source contributions、method disagreement、leave-one-out calibration 与 missing-source 情形。
 
 ::: {.callout-important title="先给结论"}
 两种方法都把 `infant gut 1` sink 的最大已知来源判为 `infant gut`，但 FEAST 给 66.9%、Unknown 18.5%，SourceTracker2 给 92.9%、Unknown 0.44%。两者对 8 个可留一验证的 sources，其已知类别回判率都只有 50%。**最大来源标签一致，不代表比例可互换；Unknown 更不是“真实未知比例”的直接测量。**
 :::
 
-## 理论：source tracking 的输出取决于 reference panel {#sec-theory}
+## 来源追踪的结果取决于参考来源集 {#sec-theory}
 
 ### 1. sink 被表示为候选 sources 的 mixture
 

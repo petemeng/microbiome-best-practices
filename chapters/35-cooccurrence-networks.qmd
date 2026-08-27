@@ -25,7 +25,7 @@ fig-format: png
 
 ## 共现网络不是微生物互作网络 {#sec-target}
 
-[Friedman & Alm (2012)](https://doi.org/10.1371/journal.pcbi.1002687)提出 SparCC，用 composition-aware correlation 重建 microbial association network；[Kurtz et al. (2015)](https://doi.org/10.1371/journal.pcbi.1004226)提出 SPIEC-EASI，以 sparse inverse-covariance/neighborhood selection 估计条件关联。两篇 PLOS 原文为开放许可。这里不复制原图，而是用真实湿地 16S 三件套重绘 correlation matrix、SPIEC-EASI network 和 edge audit ledger。
+[Friedman & Alm (2012)](https://doi.org/10.1371/journal.pcbi.1002687)提出 SparCC，用 composition-aware correlation 重建 microbial association network；[Kurtz et al. (2015)](https://doi.org/10.1371/journal.pcbi.1004226)提出 SPIEC-EASI，以 sparse inverse-covariance/neighborhood selection 估计条件关联。下面用真实湿地 16S 三件套比较 correlation matrix、SPIEC-EASI network 和 edge audit ledger。
 
 ::: {.callout-important title="先给结论"}
 Network edge 最多表示在当前样本、feature filter、composition reference 与模型下的统计关联；它不是共培养、代谢交换、竞争或因果作用。SparCC 给 marginal association，SPIEC-EASI 尝试在其他节点条件下保留 sparse association，因此两者的边集不应完全一致。优先解释经过稳定性、group adjustment、方法对照和外部数据支持的边；节点 degree 高也不能直接叫 keystone taxon。
@@ -33,7 +33,7 @@ Network edge 最多表示在当前样本、feature filter、composition referenc
 
 本页使用 `microeco` 2.0.0 的真实湿地数据，纳入 CW、IW、TW 各 30 个样本。网络只包含具有可报告 genus label 的 40 个 group-blind 高信息属，不把 unclassified residual 当节点。由于 pooled groups 本身可能制造相关，所有 SparCC edges 额外与 group-centered CLR correlation 对照。
 
-## 理论：相关、条件关联和生态作用是三层证据 {#sec-theory}
+## 相关、条件关联和生态作用是三层证据 {#sec-theory}
 
 ### 1. Ordinary correlation 会被 closure 扭曲
 

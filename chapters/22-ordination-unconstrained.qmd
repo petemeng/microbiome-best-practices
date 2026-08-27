@@ -31,7 +31,7 @@ fig-format: png
 
 本例使用中国湿地土壤 16S 数据。原始研究覆盖中国内陆、沿海和青藏高原湿地，并指出 pH 与电导率是重要环境因子；`microeco` 将其中一组标准 OTU、分类和样本表作为公开示例数据分发。[原始数据论文（An et al., 2019）](https://doi.org/10.1016/j.geoderma.2018.09.035)与[`microeco` 软件论文（Liu et al., 2021）](https://doi.org/10.1093/femsec/fiaa255)提供了可引用的数据与软件出处。
 
-这里不复制论文成图，而是从公开表格重新计算一张可直接复现的目标图：
+从公开表格重新计算的 PCoA 同时满足以下要求：
 
 - X/Y 轴为 `PCoA 1` 和 `PCoA 2`，括号内给出轴解释比例；
 - 点按 `Non-saline soil` 与 `Saline soil` 着色；
@@ -42,7 +42,7 @@ fig-format: png
 PCoA 展示距离矩阵的主要结构；PERMANOVA 检验组中心是否存在差异；`betadisper` 检查组内离散度是否不同。只有散点“看起来分开”不能替代统计检验，PERMANOVA 显著也必须结合离散度结果解释。
 :::
 
-## 理论：为什么先算距离，再做排序 {#sec-theory}
+## 为什么先算距离，再做排序 {#sec-theory}
 
 先记住三条：
 

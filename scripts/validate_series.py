@@ -151,10 +151,14 @@ PROHIBITED_PUBLIC_PATTERNS = (
     "只复制本页",
     "只复制本文",
     "独立运行以上",
+    "隐藏决定",
 )
 PROHIBITED_PUBLIC_REGEXES = (
     r'(?m)^title:\s*"第\s*\d{2}\s*篇\s*·',
     r"(?m)^##\s+这一步对应论文里的哪张图",
+    r"(?m)^##\s+理论：",
+    r"(?m)^##\s+(?:理论：)?为什么这么做",
+    r"不复制[^。\n]{0,24}(?:原图|成图)",
     r"(?m)^\s*number-sections:\s*true\s*$",
 )
 

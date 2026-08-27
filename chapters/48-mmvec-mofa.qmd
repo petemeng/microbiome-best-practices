@@ -31,7 +31,7 @@ fig-format: png
 naive CCA 的前三个 canonical correlations 都超过 0.999，但这里 $p=220$ features、$n=220$ samples，几乎完美的 training correlation 是高维过拟合警报。原生 MMvec 在固定的 153/67 train/holdout split 上运行 100 个 epochs，最低 holdout MAE 为 1844.29，且出现在最后一轮；这提示结果尚未形成内部最优点，不能冒充 early stopping。原生 MOFA2 最终保留 4 个 factors，解释 microbiome 34.8%、metabolome 32.6% 的总 variance，其中 3 个 factors 与 diagnosis group 通过 FDR。Spearman 与 MMvec top-50 pairs 的精确重叠为 0，说明它们不是同一个问题的可互换答案。
 :::
 
-## 理论：四种“整合”方法的 estimand {#sec-theory}
+## 四种“整合”方法分别估计什么 {#sec-theory}
 
 ### 1. Spearman 是逐对单调 association
 

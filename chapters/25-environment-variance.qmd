@@ -33,7 +33,7 @@ fig-format: png
 
 [Falony et al. (2016)](https://doi.org/10.1126/science.aad3503)在 1,106 人的发现队列和 1,135 人的复现队列中系统筛查了临床与问卷协变量；其 Figure 3 一类的累计效应量图强调：微生物组差异通常由许多相关因素共同贡献，单个小 P 值不等于解释了大量群落变异。
 
-这里不复制该人群研究的数值或原图，而是使用 `microeco` 2.0.0 公开分发的中国湿地土壤 16S 数据重新绘图。原始数据研究为 [An et al. (2019)](https://doi.org/10.1016/j.geoderma.2018.09.035)，包含 90 个可与环境表匹配的样本；`microeco` 的数据与软件说明见 [Liu et al. (2021)](https://doi.org/10.1093/femsec/fiaa255)。
+以下分析使用 `microeco` 2.0.0 公开分发的中国湿地土壤 16S 数据。数据来自 [An et al. (2019)](https://doi.org/10.1016/j.geoderma.2018.09.035)，包含 90 个可与环境表匹配的样本；`microeco` 的数据与软件说明见 [Liu et al. (2021)](https://doi.org/10.1093/femsec/fiaa255)。
 
 ::: {.callout-important title="先给结论"}
 在预先固定的 5% prevalence filter 后保留 11,113 个 OTU。11 个连续变量的 `envfit` 检验中，10 个经 BH 校正后达到 0.05；最强的两个二维关联为 Temperature（(r^2=0.801)）和 Latitude（(r^2=0.801)）。这里的 (r^2) 只描述变量与当前两条 PCoA 轴的拟合，不是完整群落表的解释率。
@@ -43,7 +43,7 @@ fig-format: png
 Hellinger VPA 的 combined adjusted (R^2=0.282)：纯土壤变量占 9.7%，纯 wetland group 占 11.4%，共享部分占 7.1%，未解释部分占 71.8%；两个纯组分的 Holm-adjusted (P=0.002)。`Group` 与 `Saline` 在这批数据中完全混杂，因此这些比例是统计关联分解，不能被写成盐度或地域的因果贡献。
 :::
 
-## 理论：三种方法回答三个不同问题 {#sec-theory}
+## 三种方法回答三个不同问题 {#sec-theory}
 
 ### envfit：变量与“当前排序图”是否对齐
 

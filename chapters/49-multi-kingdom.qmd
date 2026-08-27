@@ -31,7 +31,7 @@ fig-format: png
 三个 kingdom 的 observed sample configurations 两两一致（Procrustes $q=0.001$）。去除 soil × compartment 均值后，bacteria–fungi concordance 不再显著（$r=0.382,q=0.236$），而 bacteria–oomycete 与 fungi–oomycete 仍保留较弱一致性（$q=0.015$ 与 0.003）。跨 feature 的 1,200 对检验中，raw FDR hits 有 505 对，niche-adjusted 后只剩 2 对；两对的分层 bootstrap sign stability 分别为 99.6% 与 99.8%。这是候选关联，不是已证实的跨界互作。
 :::
 
-## 理论：多界整合先保证“同一样本、不同数据生成过程” {#sec-theory}
+## 多界整合先保证“同一样本、不同数据生成过程” {#sec-theory}
 
 ### 1. 三个 kingdom 必须独立做 feature QC
 

@@ -90,7 +90,7 @@ Validation:                       91 / 91 PASS
 
 这 366 条 ASV 来自固定 commit `f282ad2bafb3ca90190ec87290066ee1985df655` 的真实 nf-core/test-datasets V4 MiSeq 数据。原始 10,000 对 reads 经 anchored、IUPAC-aware 515F/806R 去引物和 DADA2 后保留 5,213 对非嵌合 reads。这里使用其代表序列和真实频数做数据库合同验证；原数据没有独立的生态研究分组，因此不据此比较环境或处理效应。
 
-## 理论：为什么这么做 {#sec-theory}
+## 分类结果为什么取决于数据库和分类器 {#sec-theory}
 
 ### 1. 三个数据库回答的问题不同
 
