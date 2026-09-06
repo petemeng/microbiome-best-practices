@@ -23,6 +23,8 @@ import yaml
 from lxml import etree, html
 from PIL import Image, ImageOps
 
+from reader_reproducibility import validate_reader_contract
+
 
 MAX_TITLE_CHARS = 64
 MAX_DIGEST_CHARS = 120
@@ -575,8 +577,10 @@ def sanitize_article(
     images = resolve_and_optimize_images(main, source_html, article_dir)
     strip_unsupported_attributes(main)
     main.set("style", ROOT_STYLE)
+    content = etree.tostring(main, encoding="unicode", method="html")
+    validate_reader_contract(source_qmd, content)
     return (
-        etree.tostring(main, encoding="unicode", method="html"),
+        content,
         images,
         removed_bootstrap_blocks,
         removed_wechat_omit_blocks,
@@ -679,6 +683,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             article_dir=article_dir,
             source_qmd=(project / qmd_path).resolve(),
         )
+        reader_reproduction = validate_reader_contract(project / qmd_path, content, project)
         if not images:
             raise RuntimeError(f"Article {number:02d} has no representative figure for its cover")
         cover = article_dir / "cover.jpg"
@@ -717,6 +722,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "cover_sha256": sha256(cover),
                 "html_chars": len(content),
                 "readability": article_readability(content),
+                "reader_reproduction": reader_reproduction,
                 "removed_bootstrap_block_count": removed_bootstrap_blocks,
                 "removed_wechat_omit_block_count": removed_wechat_omit_blocks,
                 "stripped_install_call_count": stripped_install_calls,

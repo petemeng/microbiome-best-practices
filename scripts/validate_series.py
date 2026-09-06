@@ -921,7 +921,7 @@ def main() -> int:
             "phylum_display",
             "top_n_sensitivity",
             "denominator_sensitivity",
-            "make_flow_polygons",
+            "geom_alluvium(",
             "log1p(",
             "26-phylum-stacked",
             "26-genus-bubble",

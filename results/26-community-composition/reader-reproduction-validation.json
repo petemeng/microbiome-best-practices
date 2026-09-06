@@ -1,0 +1,174 @@
+{
+  "chapter": 26,
+  "contract": {
+    "required": true,
+    "status": "passed",
+    "code_blocks": 17,
+    "code_sha256": "56bf2748c82a567ea585f9feb71d2d4979b22629581b30061a2a6ebd0b7926e6",
+    "script": "examples/26-community-composition.R"
+  },
+  "fresh_working_directory": true,
+  "R_vanilla": true,
+  "preinstalled_declared_packages": true,
+  "checks": [
+    {
+      "check": "public_code_executes",
+      "passed": true
+    },
+    {
+      "check": "download_otutab.tsv",
+      "passed": true
+    },
+    {
+      "check": "download_taxonomy.tsv",
+      "passed": true
+    },
+    {
+      "check": "download_metadata.tsv",
+      "passed": true
+    },
+    {
+      "check": "phylum_matches_independent_reference",
+      "passed": true,
+      "values_compared": 5040,
+      "maximum_absolute_difference": 4.996003610813204e-16
+    },
+    {
+      "check": "genus_matches_independent_reference",
+      "passed": true,
+      "values_compared": 69480,
+      "maximum_absolute_difference": 4.440892098500626e-16
+    },
+    {
+      "check": "26-phylum-stacked.pdf_exported",
+      "passed": true
+    },
+    {
+      "check": "26-phylum-stacked.svg_exported",
+      "passed": true
+    },
+    {
+      "check": "26-phylum-stacked.png_exported",
+      "passed": true
+    },
+    {
+      "check": "26-phylum-stacked.tiff_exported",
+      "passed": true
+    },
+    {
+      "check": "26-phylum-stacked.png_physical_dimensions_and_600ppi",
+      "passed": true
+    },
+    {
+      "check": "26-phylum-stacked.tiff_physical_dimensions_and_600ppi",
+      "passed": true
+    },
+    {
+      "check": "26-phylum-stacked_english_labels",
+      "passed": true
+    },
+    {
+      "check": "26-phylum-stacked_matches_rendered_export",
+      "passed": true
+    },
+    {
+      "check": "26-genus-bubble.pdf_exported",
+      "passed": true
+    },
+    {
+      "check": "26-genus-bubble.svg_exported",
+      "passed": true
+    },
+    {
+      "check": "26-genus-bubble.png_exported",
+      "passed": true
+    },
+    {
+      "check": "26-genus-bubble.tiff_exported",
+      "passed": true
+    },
+    {
+      "check": "26-genus-bubble.png_physical_dimensions_and_600ppi",
+      "passed": true
+    },
+    {
+      "check": "26-genus-bubble.tiff_physical_dimensions_and_600ppi",
+      "passed": true
+    },
+    {
+      "check": "26-genus-bubble_english_labels",
+      "passed": true
+    },
+    {
+      "check": "26-genus-bubble_matches_rendered_export",
+      "passed": true
+    },
+    {
+      "check": "26-genus-heatmap.pdf_exported",
+      "passed": true
+    },
+    {
+      "check": "26-genus-heatmap.svg_exported",
+      "passed": true
+    },
+    {
+      "check": "26-genus-heatmap.png_exported",
+      "passed": true
+    },
+    {
+      "check": "26-genus-heatmap.tiff_exported",
+      "passed": true
+    },
+    {
+      "check": "26-genus-heatmap.png_physical_dimensions_and_600ppi",
+      "passed": true
+    },
+    {
+      "check": "26-genus-heatmap.tiff_physical_dimensions_and_600ppi",
+      "passed": true
+    },
+    {
+      "check": "26-genus-heatmap_english_labels",
+      "passed": true
+    },
+    {
+      "check": "26-genus-heatmap_matches_rendered_export",
+      "passed": true
+    },
+    {
+      "check": "26-group-phylum-alluvial.pdf_exported",
+      "passed": true
+    },
+    {
+      "check": "26-group-phylum-alluvial.svg_exported",
+      "passed": true
+    },
+    {
+      "check": "26-group-phylum-alluvial.png_exported",
+      "passed": true
+    },
+    {
+      "check": "26-group-phylum-alluvial.tiff_exported",
+      "passed": true
+    },
+    {
+      "check": "26-group-phylum-alluvial.png_physical_dimensions_and_600ppi",
+      "passed": true
+    },
+    {
+      "check": "26-group-phylum-alluvial.tiff_physical_dimensions_and_600ppi",
+      "passed": true
+    },
+    {
+      "check": "26-group-phylum-alluvial_english_labels",
+      "passed": true
+    },
+    {
+      "check": "26-group-phylum-alluvial_matches_rendered_export",
+      "passed": true
+    }
+  ],
+  "status": "passed",
+  "checks_total": 38,
+  "checks_passed": 38
+}

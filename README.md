@@ -556,6 +556,20 @@ python3 scripts/build_wechat_review_bundle.py \
   --output-dir rendered/wechat_review_01_55
 ```
 
+第 26 篇的可下载脚本位于 `examples/26-community-composition.R`。正文中的 `reader-*` / `fig-*` R 代码、该脚本和微信正文必须保持相同顺序和内容；生成微信包时会自动检查，必要的数据加载代码被移除会直接报错。
+
+发布前还需从实际微信 payload 提取代码，在**不存在的新目录**和 `Rscript --vanilla` 会话中运行。先安装正文声明的 R 包，再执行：
+
+```bash
+python3 scripts/validate_reader_composition.py \
+  --project-root . \
+  --draft-json rendered/wechat_review_01_55/26/draft.json \
+  --work-dir /tmp/ch26-reader-clean-run \
+  --output /tmp/ch26-reader-validation.json
+```
+
+此检查不复制项目数据：代码自行下载三张表，核对门/属相对丰度与独立参考结果，检查四张图的四种导出格式、600 ppi 栅格尺寸、英文标签及其与网站导出 PNG 的一致性。它验证的是空白工作目录中的复现，不是未安装任何软件的操作系统；也不替代独立的统计结果检查。
+
 直接渲染网站：
 
 ```bash

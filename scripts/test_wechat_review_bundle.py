@@ -3,10 +3,15 @@
 
 import tempfile
 import unittest
+from html import escape
 from pathlib import Path
 
 from lxml import html
 from PIL import Image
+
+from reader_reproducibility import (
+    public_blocks, reader_blocks, script_text, validate_reader_contract,
+)
 
 from build_wechat_review_bundle import (
     article_readability, localize_figure_labels, remove_unwanted,
@@ -99,6 +104,69 @@ class EditorialSurfaceTests(unittest.TestCase):
         self.assertEqual(metrics["preformatted_chars"], 3)
         self.assertEqual(metrics["chars_before_first_image"], 8)
         self.assertIsNone(article_readability("<p>text</p>")["chars_before_first_image"])
+
+
+class ReaderReproductionTests(unittest.TestCase):
+    source = '''---
+title: Composition
+reader-reproduction:
+  required: true
+  script: examples/analysis.R
+---
+```{r}
+#| label: reader-download
+x <- read.delim("counts.tsv")
+```
+```{r}
+#| label: fig-result
+#| fig-cap: Result
+plot(x)
+```
+'''
+
+    def surface(self, codes):
+        return "<section>" + "".join("<pre>" + escape(code) + "</pre>" for code in codes) + "</section>"
+
+    def test_source_public_code_and_script_agree(self):
+        blocks = reader_blocks(self.source)
+        content = self.surface([blocks[0][1], "console output", blocks[1][1]])
+        self.assertEqual(public_blocks(self.source, content), blocks)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            qmd = root / "chapter.qmd"
+            qmd.write_text(self.source)
+            (root / "examples").mkdir()
+            script = root / "examples/analysis.R"
+            script.write_text(script_text(self.source, blocks))
+            self.assertEqual(validate_reader_contract(qmd, content, root)["code_blocks"], 2)
+            script.write_text("plot(x)\n")
+            with self.assertRaisesRegex(ValueError, "script differs"):
+                validate_reader_contract(qmd, content, root)
+
+    def test_rejects_missing_changed_and_out_of_order_code(self):
+        codes = [code for _, code in reader_blocks(self.source)]
+        for content in (self.surface(codes[1:]), self.surface(codes[::-1]),
+                        self.surface([codes[0], "plot(y)"])):
+            with self.subTest(content=content), self.assertRaises(ValueError):
+                public_blocks(self.source, content)
+
+    def test_rejects_hidden_or_unlabelled_required_code(self):
+        for source in (self.source.replace("#| label: reader-download", "#| echo: false\n#| label: reader-download"),
+                       self.source.replace("#| label: reader-download\n", "")):
+            with self.assertRaises(ValueError):
+                reader_blocks(source)
+
+    def test_sanitizer_cannot_remove_required_download(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            qmd = root / "chapter.qmd"
+            qmd.write_text(self.source)
+            blocks = reader_blocks(self.source)
+            source_html = root / "chapter.html"
+            source_html.write_text('<main><details class="wechat-omit">' +
+                self.surface([blocks[0][1]]) + '</details>' + self.surface([blocks[1][1]]) + '</main>')
+            with self.assertRaisesRegex(ValueError, "reader-download"):
+                sanitize_article(source_html, root, qmd)
 
 
 if __name__ == "__main__":
