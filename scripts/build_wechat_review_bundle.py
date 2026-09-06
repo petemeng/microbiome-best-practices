@@ -97,6 +97,10 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument("--formal-count", type=int, default=55)
+    parser.add_argument(
+        "--chapters", type=int, nargs="+",
+        help="Build only these chapter numbers, in manifest order (for scoped revisions).",
+    )
     parser.add_argument("--author", default="Peter")
     parser.add_argument(
         "--review-url",
@@ -122,6 +126,51 @@ def truncate(text: str, limit: int) -> str:
     if len(normalized) <= limit:
         return normalized
     return normalized[: max(1, limit - 1)].rstrip() + "…"
+
+
+def select_chapters(
+    chapters: list[dict[str, Any]],
+    formal_count: int,
+    selected: list[int] | None,
+) -> list[dict[str, Any]]:
+    if not 1 <= formal_count <= len(chapters):
+        raise ValueError("formal-count must be within the manifest chapter count")
+    formal = chapters[:formal_count]
+    if selected is None:
+        return formal
+    if not selected or len(set(selected)) != len(selected):
+        raise ValueError("Selected chapter numbers must be nonempty and unique")
+    available = {int(chapter["number"]) for chapter in formal}
+    if set(selected) - available:
+        raise ValueError("Selected chapters must be within the formal manifest scope")
+    return [chapter for chapter in formal if int(chapter["number"]) in selected]
+
+
+def source_description(source_qmd: Path) -> str | None:
+    source = source_qmd.read_text(encoding="utf-8")
+    match = re.match(r"\A---\s*\n(.*?)\n---(?:\s*\n|$)", source, re.S)
+    metadata = yaml.safe_load(match.group(1)) if match else None
+    description = metadata.get("description") if isinstance(metadata, dict) else None
+    return description.strip() if isinstance(description, str) and description.strip() else None
+
+
+def article_readability(content: str) -> dict[str, int | float | None]:
+    """Report reading load without treating a word-count threshold as quality."""
+    document = html.fromstring(content)
+    visible_chars = len(normalized_text(document))
+    code_chars = sum(len(normalized_text(node)) for node in document.xpath(".//pre"))
+    first_image = re.search(r"<img\b", content, re.I)
+    before_image = (
+        len(normalized_text(html.fromstring(content[:first_image.start()])))
+        if first_image else None
+    )
+    return {
+        "visible_chars": visible_chars,
+        "preformatted_block_count": len(document.xpath(".//pre")),
+        "preformatted_chars": code_chars,
+        "preformatted_share": round(code_chars / max(1, visible_chars), 4),
+        "chars_before_first_image": before_image,
+    }
 
 
 def class_tokens(element: etree._Element) -> set[str]:
@@ -205,6 +254,12 @@ def optimize_article_image(source: Path, destination: Path) -> None:
 
 
 def remove_unwanted(main: etree._Element) -> None:
+    # These labels are hidden on the website, but inline-only WeChat HTML
+    # would expose them next to the actual callout title. Preserve the tail.
+    for element in main.xpath(
+        './/*[contains(concat(" ", normalize-space(@class), " "), " screen-reader-only ")]'
+    ):
+        element.drop_tree()
     selectors = [
         ".//script",
         ".//style",
@@ -230,6 +285,29 @@ def remove_unwanted(main: etree._Element) -> None:
 
 def normalized_text(element: etree._Element) -> str:
     return re.sub(r"\s+", " ", "".join(element.itertext())).strip()
+
+
+def localize_figure_labels(main: etree._Element) -> None:
+    """Use article-local figure numbers; keep chapter prefixes on the website."""
+    pattern = re.compile(r"^(\s*)(图|Figure)\s+(\d+(?:\.\d+)+)(?=\s*[:：]|\s*$)")
+    labels: dict[str, str] = {}
+    for caption in main.xpath(".//figcaption"):
+        match = pattern.match(caption.text or "")
+        if match:
+            local = str(len(labels) + 1)
+            labels[match.group(3)] = local
+            caption.text = pattern.sub(
+                lambda m: f"{m.group(1)}{m.group(2)} {local}",
+                caption.text, count=1,
+            )
+    for link in main.xpath('.//a[starts-with(@href, "#fig-")]'):
+        match = pattern.match(link.text or "")
+        if match and match.group(3) in labels:
+            local = labels[match.group(3)]
+            link.text = pattern.sub(
+                lambda m: f"{m.group(1)}{m.group(2)} {local}",
+                link.text, count=1,
+            )
 
 
 SOURCE_H2 = re.compile(
@@ -435,14 +513,16 @@ def resolve_and_optimize_images(
         relative, destination = cache[source]
         image_element.set("src", relative)
         image_element.set("style", STYLES["img"])
+        with Image.open(destination) as optimized:
+            width, height = optimized.size
         record = {
             "source_path": str(source),
             "local_path": str(destination.resolve()),
             "relative_src": relative,
             "sha256": sha256(destination),
             "size_bytes": destination.stat().st_size,
-            "width": Image.open(destination).width,
-            "height": Image.open(destination).height,
+            "width": width,
+            "height": height,
         }
         if not any(item["local_path"] == record["local_path"] for item in records):
             records.append(record)
@@ -488,6 +568,7 @@ def sanitize_article(
     synced_topic_heading_count = sync_topic_heading(main, source_qmd)
     removed_wechat_omit_blocks = remove_explicit_wechat_omissions(main)
     removed_bootstrap_blocks = remove_wechat_bootstrap(main)
+    localize_figure_labels(main)
     stripped_install_calls = flatten_code(main)
     transform_special_blocks(main)
     apply_inline_styles(main)
@@ -531,7 +612,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
     chapters = manifest.get("series", {}).get("chapters", [])
     if len(chapters) != 55:
         raise RuntimeError(f"Expected 55 manifest chapters, found {len(chapters)}")
-    formal = chapters[: args.formal_count]
+    formal = select_chapters(chapters, args.formal_count, getattr(args, "chapters", None))
     output_dir.mkdir(parents=True, exist_ok=True)
     items: list[dict[str, Any]] = []
     for chapter in formal:
@@ -584,6 +665,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 f"{digest_lead}用七项一手研究比较不同设计的证据边界、"
                 "残余偏倚与可辩护措辞。"
             )
+        digest_text = source_description(project / qmd_path) or digest_text
         digest = truncate(digest_text, MAX_DIGEST_CHARS)
         (
             content,
@@ -634,6 +716,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
                 "cover_size_bytes": cover.stat().st_size,
                 "cover_sha256": sha256(cover),
                 "html_chars": len(content),
+                "readability": article_readability(content),
                 "removed_bootstrap_block_count": removed_bootstrap_blocks,
                 "removed_wechat_omit_block_count": removed_wechat_omit_blocks,
                 "stripped_install_call_count": stripped_install_calls,
@@ -643,8 +726,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             }
         )
     errors: list[str] = []
-    if len(items) != args.formal_count:
-        errors.append(f"Expected {args.formal_count} items, found {len(items)}")
+    if len(items) != len(formal):
+        errors.append(f"Expected {len(formal)} selected items, found {len(items)}")
     if len({item["title"] for item in items}) != len(items):
         errors.append("Draft titles are not unique")
     for item in items:
@@ -662,6 +745,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             errors.append(f"{item['chapter_id']}: digest is too long")
         if re.search(r"<(script|style|button|nav)\b", draft["content"], flags=re.I):
             errors.append(f"{item['chapter_id']}: unsupported HTML remains")
+        if re.search(r"\{#sec-[^}]+\}", draft["content"]):
+            errors.append(f"{item['chapter_id']}: unrendered section anchor remains")
         if re.search(
             r"审阅草稿|开放审阅|GitHub Draft PR|草稿箱继续查看|"
             r"header-section-number|data-local-image|"
@@ -721,6 +806,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         "qa_run_key": qa_report.get("run_key"),
         "qa_manifest_hash": qa_report.get("manifest_hash"),
         "formal_count": args.formal_count,
+        "selected_chapters": [int(chapter["number"]) for chapter in formal],
         "author": args.author,
         "title_style": "series_then_ordinal_dot",
         "review_url": args.review_url,

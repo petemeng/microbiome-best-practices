@@ -187,7 +187,9 @@ expected_sha256 <- c(
   taxonomy = "725280bb9a0cd9bda7b540022e92af945ceed52527f8b2d220b055b4489f6901",
   metadata = "df24771dccf27607ddf922c6bca2cafa876d946fbe2e09d14b601accce66ba64",
   source_summary = "acc15b18d3f85d6d35770d0db7580d91d0a55a838862876536500a8d7c75711b",
-  prepare_script = "fb9ce168b70aeb3636ab73c3c3fabf4208934a04f8eb89a547dc93c7d66a1e3f",
+  # dd6310c added phylogeny export; re-exported count/taxonomy/metadata hashes
+  # were checked unchanged before updating this preparation-script pin.
+  prepare_script = "e7dc61c63e7118b719e69605bd1d2e9c199c1d77e6f18bde34c5d9dee5e9794e",
   theme_pub = "8d3821a485aeb529b12184bbe977c1ca952131a22d5eb69b802088ce91909beb"
 )
 

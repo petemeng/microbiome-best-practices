@@ -927,10 +927,6 @@ def main() -> int:
             "26-genus-bubble",
             "26-group-phylum-alluvial",
             "26-genus-heatmap",
-            "validate_community_composition.R",
-            "audit_summary$checks_total == 195L",
-            "audit_summary$checks_passed == 195L",
-            "audit_summary$checks_failed == 0L",
         ):
             if token not in community_composition:
                 errors.append(f"article 26 is missing executable {token}")
@@ -940,6 +936,18 @@ def main() -> int:
             errors.append("article 26 must retain the downstream eval:true policy")
         if not isinstance(execute, dict) or execute.get("freeze") != "auto":
             errors.append("article 26 must retain freeze:auto")
+        # Verification belongs to maintainer tooling, not the public lesson.
+        if not (root / "scripts/validate_community_composition.R").is_file():
+            errors.append("article 26 independent analysis validator is missing")
+        composition_qa = root / "results/26-community-composition/community-composition-summary.json"
+        try:
+            summary = json.loads(composition_qa.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            summary = {}
+        if any(summary.get(key) != expected for key, expected in (
+            ("checks_total", 195), ("checks_passed", 195), ("checks_failed", 0)
+        )):
+            errors.append("article 26 independent analysis checks must pass")
 
     multirank_composition_path = root / "chapters/27-multirank-composition.qmd"
     if multirank_composition_path.exists():
