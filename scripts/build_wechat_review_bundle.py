@@ -23,7 +23,7 @@ import yaml
 from lxml import etree, html
 from PIL import Image, ImageOps
 
-from reader_reproducibility import validate_reader_contract
+from reader_reproducibility import coalesce_rendered_code, validate_reader_contract
 
 
 MAX_TITLE_CHARS = 64
@@ -570,6 +570,7 @@ def sanitize_article(
     synced_topic_heading_count = sync_topic_heading(main, source_qmd)
     removed_wechat_omit_blocks = remove_explicit_wechat_omissions(main)
     removed_bootstrap_blocks = remove_wechat_bootstrap(main)
+    coalesce_rendered_code(source_qmd.read_text(encoding="utf-8"), main)
     localize_figure_labels(main)
     stripped_install_calls = flatten_code(main)
     transform_special_blocks(main)

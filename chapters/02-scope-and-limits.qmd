@@ -1,6 +1,6 @@
 ---
 title: "16S 能回答什么、回答不了什么（vs 宏基因组 / 其他组学）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,14 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/02-scope-and-limits.R
+  packages:
+  - ggplot2
+  - scales
 ---
-
-> **分析目标：**用真实 taxonomy 表量化 16S 的分类解析深度，并根据科学问题选择 16S、shotgun、宏转录组、代谢组或绝对定量。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**13,628 个 OTU、90 个样本；普通笔记本约 1 分钟，内存低于 500 MB。
 
 ## 先确定分辨率：16S 能测到什么？ {#sec-target}
 
@@ -42,11 +45,6 @@ fig-format: png
 
 本篇从真实湿地 taxonomy 表生成两张目标图：
 
-::: {layout-ncol=2}
-![真实 16S 数据在不同分类层级的非空注释比例。](../figures/02-taxonomy-resolution.png){#fig-taxonomy-resolution}
-
-![不同测量技术对六类科学问题的直接、部分或不可测范围。](../figures/02-assay-scope-map.png){#fig-assay-scope}
-:::
 
 图 @fig-taxonomy-resolution 检查当前数据能被注释到多深；图 @fig-assay-scope 用来判断研究问题是否需要增加其他测量技术。
 
@@ -54,148 +52,31 @@ fig-format: png
 如果主要终点是“菌株传播”“耐药基因”“实际代谢活动”或“绝对微生物负荷”，仅做 16S 会让研究从采样开始就缺失关键测量。后期增加更复杂的统计模型，无法补回实验阶段没有测到的信息。
 :::
 
-## 16S 实际测到了什么 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 从生物样本到 reads，中间有多层选择
+需要 R，以及 `ggplot2`、`scales`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-16S 结果不是样本中微生物的无偏普查。观测链条依次包含：
-
-1. 样本采集与保存；
-2. 细胞裂解与 DNA 提取；
-3. 引物与目标可变区；
-4. PCR 扩增；
-5. 建库与测序；
-6. 质量过滤、去嵌合体与 ASV/OTU 推断；
-7. 参考数据库与分类器。
-
-任一环节都可能使不同类群的检出概率不同。16S rRNA 基因在不同基因组中的拷贝数也不同，同一基因组内的多个拷贝还可能存在序列差异。因此，ASV 数不等于物种数，reads 比例也不等于细胞比例。[Větrovský 与 Baldrian](https://doi.org/10.1371/journal.pone.0057923)讨论了 16S 基因拷贝和基因组内变异对群落分析的影响。
-
-### 2. 短扩增区通常不能稳定解析菌株
-
-常规 Illumina 16S 只覆盖一个或数个可变区。不同物种可能在目标区域拥有相同序列，同一物种的不同菌株也可能共享完全相同的 16S 序列。[Johnson 等](https://doi.org/10.1038/s41467-019-13036-1)表明，短读长可变区的物种/菌株分辨率低于全长 16S；全长 16S 能改善部分分类群的物种分辨率，但仍不能把“全长序列不同”普遍等同于“菌株不同”。
-
-因此：
-
-- 属水平标签通常比种水平更稳妥，但仍依赖参考库、目标区域和分类阈值；
-- 一个 ASV 可以对应多个物种；
-- 同一个物种也可能产生多个 ASV；
-- “检出某属”不能自动推出“检出该属中的致病种或致病株”。
-
-### 3. DNA 潜力、转录活动和代谢产物是不同层次
-
-shotgun 宏基因组直接测量样本 DNA 片段，可以分析基因家族、通路潜力，并在覆盖度足够时进行物种或菌株分析，但仍主要反映“基因存在的潜力”。宏转录组测量 RNA，更接近表达活动；代谢组测量小分子，是宿主、微生物、饮食和环境共同作用后的结果。[Quince 等](https://doi.org/10.1038/nbt.3935)综述了 shotgun 从采样到分析的能力与限制。
-
-PICRUSt2 等工具可根据 16S 序列在参考系统发育中的位置预测基因家族与通路。[PICRUSt2 原始论文](https://doi.org/10.1038/s41587-020-0548-6)明确将其定位为 metagenome function prediction。预测结果不是实测基因，更不是表达量或代谢通量；参考基因组稀疏的环境样本尤其需要谨慎。
-
-### 4. 分类变化不等于功能变化，功能相似也不等于机制相同
-
-不同分类群可能携带相似功能，同一分类群内部也可能存在显著功能差异。[Louca 等](https://doi.org/10.1038/s41559-018-0519-1)总结了微生物系统中的功能冗余。因此：
-
-- 分类组成显著变化时，功能潜力未必同步变化；
-- 预测通路显著变化时，不能证明该通路正在表达；
-- 代谢物变化时，不能仅凭相关性把来源归给某个菌；
-- 要建立机制，需要时间顺序、干预、培养或多组学证据。
-
-<details>
-<summary><strong>深入：五类技术怎么选</strong></summary>
-
-| 技术 | 主要测量 | 优势 | 关键限制 |
-|---|---|---|---|
-| 16S/ITS/18S 扩增子 | 标记基因片段 | 成本低、适合大队列、群落比较成熟 | PCR/引物偏倚、相对组成、功能和菌株有限 |
-| Shotgun 宏基因组 | 群落总 DNA | 物种/菌株和基因潜力更强，可覆盖病毒与真菌 | 成本与计算量高，宿主 DNA、低丰度覆盖不足 |
-| 宏转录组 | 群落 RNA | 更接近正在表达的功能 | RNA 易降解、rRNA 占比高、仍受组成和注释影响 |
-| 代谢组 | 小分子 | 接近实际化学表型 | 来源不唯一、注释率有限、宿主与饮食混杂 |
-| qPCR/ddPCR/流式/spike-in | 靶标或总负荷 | 提供绝对数量参照 | 通常只覆盖预先选择的靶标或总量 |
-
-多组学不是“同一样本多测几张表”就自动得到机制。真正的整合需要匹配的样本/时间、明确的主要假设、独立验证和与每种测量误差相符的统计模型。iHMP 展示了纵向、多组学和宿主信息联合设计的范式，而不是简单把多个矩阵拼接。[iHMP 项目论文](https://doi.org/10.1038/s41586-019-1238-8)
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载真实数据和定义作图函数</strong></summary>
-
-首次运行安装以下 CRAN 包：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c("ggplot2", "scales", "digest"))
-```
-
-数据固定使用 `microeco 2.0.0` 源码包中的真实湿地 16S 表：
-
-```{r}
-#| eval: false
-archive <- "data/raw/microeco_2.0.0.tar.gz"
-source_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/",
-  "microeco/microeco_2.0.0.tar.gz"
-)
-expected_sha256 <- paste0(
-  "454a3b71ceeea86bdd54f475a12b5bac",
-  "9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) {
-  download.file(source_url, archive, mode = "wb")
-}
-observed_sha256 <- digest::digest(
-  file = archive,
-  algo = "sha256",
-  serialize = FALSE
-)
-stopifnot(identical(observed_sha256, expected_sha256))
-
-required <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-utils::untar(archive, files = required, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name),
-    x,
-    check.names = FALSE
-  )
-  utils::write.table(
-    out,
-    path,
-    sep = "\t",
-    quote = FALSE,
-    row.names = FALSE,
-    na = ""
-  )
-}
-
-write_tsv(data_env$otu_table_16S, "FeatureID", "data/small/otutab.tsv")
-write_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
   "data/small/taxonomy.tsv"
 )
-write_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-出版级函数直接定义在文章内：
-
 ```{r}
+#| results: hold
+#| label: reader-step-02
 library(ggplot2)
 
 set.seed(20260718)
@@ -267,14 +148,11 @@ save_pub <- function(
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套读取并核对 ID
+### 从三件套读取并核对 ID
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 otutab <- read.delim(
   "data/small/otutab.tsv",
   row.names = 1,
@@ -307,11 +185,84 @@ taxonomy[1:5, , drop = FALSE]
 head(metadata)
 ```
 
-### 2. 统一 taxonomy 空值规则
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/6c3ebab44401839f38b8d9356cb2f338ecfc9a3f/examples/02-scope-and-limits.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c("ggplot2", "scales", "digest"))
+```
+
+</details>
+
+## 16S 实际测到了什么 {#sec-theory}
+
+### 从生物样本到 reads，中间有多层选择
+
+16S 结果不是样本中微生物的无偏普查。观测链条依次包含：
+
+1. 样本采集与保存；
+2. 细胞裂解与 DNA 提取；
+3. 引物与目标可变区；
+4. PCR 扩增；
+5. 建库与测序；
+6. 质量过滤、去嵌合体与 ASV/OTU 推断；
+7. 参考数据库与分类器。
+
+任一环节都可能使不同类群的检出概率不同。16S rRNA 基因在不同基因组中的拷贝数也不同，同一基因组内的多个拷贝还可能存在序列差异。因此，ASV 数不等于物种数，reads 比例也不等于细胞比例。[Větrovský 与 Baldrian](https://doi.org/10.1371/journal.pone.0057923)讨论了 16S 基因拷贝和基因组内变异对群落分析的影响。
+
+### 短扩增区通常不能稳定解析菌株
+
+常规 Illumina 16S 只覆盖一个或数个可变区。不同物种可能在目标区域拥有相同序列，同一物种的不同菌株也可能共享完全相同的 16S 序列。[Johnson 等](https://doi.org/10.1038/s41467-019-13036-1)表明，短读长可变区的物种/菌株分辨率低于全长 16S；全长 16S 能改善部分分类群的物种分辨率，但仍不能把“全长序列不同”普遍等同于“菌株不同”。
+
+因此：
+
+- 属水平标签通常比种水平更稳妥，但仍依赖参考库、目标区域和分类阈值；
+- 一个 ASV 可以对应多个物种；
+- 同一个物种也可能产生多个 ASV；
+- “检出某属”不能自动推出“检出该属中的致病种或致病株”。
+
+### DNA 潜力、转录活动和代谢产物是不同层次
+
+shotgun 宏基因组直接测量样本 DNA 片段，可以分析基因家族、通路潜力，并在覆盖度足够时进行物种或菌株分析，但仍主要反映“基因存在的潜力”。宏转录组测量 RNA，更接近表达活动；代谢组测量小分子，是宿主、微生物、饮食和环境共同作用后的结果。[Quince 等](https://doi.org/10.1038/nbt.3935)综述了 shotgun 从采样到分析的能力与限制。
+
+PICRUSt2 等工具可根据 16S 序列在参考系统发育中的位置预测基因家族与通路。[PICRUSt2 原始论文](https://doi.org/10.1038/s41587-020-0548-6)明确将其定位为 metagenome function prediction。预测结果不是实测基因，更不是表达量或代谢通量；参考基因组稀疏的环境样本尤其需要谨慎。
+
+### 分类变化不等于功能变化，功能相似也不等于机制相同
+
+不同分类群可能携带相似功能，同一分类群内部也可能存在显著功能差异。[Louca 等](https://doi.org/10.1038/s41559-018-0519-1)总结了微生物系统中的功能冗余。因此：
+
+- 分类组成显著变化时，功能潜力未必同步变化；
+- 预测通路显著变化时，不能证明该通路正在表达；
+- 代谢物变化时，不能仅凭相关性把来源归给某个菌；
+- 要建立机制，需要时间顺序、干预、培养或多组学证据。
+
+<details>
+<summary><strong>深入：五类技术怎么选</strong></summary>
+
+| 技术 | 主要测量 | 优势 | 关键限制 |
+|---|---|---|---|
+| 16S/ITS/18S 扩增子 | 标记基因片段 | 成本低、适合大队列、群落比较成熟 | PCR/引物偏倚、相对组成、功能和菌株有限 |
+| Shotgun 宏基因组 | 群落总 DNA | 物种/菌株和基因潜力更强，可覆盖病毒与真菌 | 成本与计算量高，宿主 DNA、低丰度覆盖不足 |
+| 宏转录组 | 群落 RNA | 更接近正在表达的功能 | RNA 易降解、rRNA 占比高、仍受组成和注释影响 |
+| 代谢组 | 小分子 | 接近实际化学表型 | 来源不唯一、注释率有限、宿主与饮食混杂 |
+| qPCR/ddPCR/流式/spike-in | 靶标或总负荷 | 提供绝对数量参照 | 通常只覆盖预先选择的靶标或总量 |
+
+多组学不是“同一样本多测几张表”就自动得到机制。真正的整合需要匹配的样本/时间、明确的主要假设、独立验证和与每种测量误差相符的统计模型。iHMP 展示了纵向、多组学和宿主信息联合设计的范式，而不是简单把多个矩阵拼接。[iHMP 项目论文](https://doi.org/10.1038/s41586-019-1238-8)
+
+</details>
+
+## 检查分类标签，确定16S的解释范围 {#sec-code}
+
+### 统一 taxonomy 空值规则
 
 示例表使用 `k__`、`p__`、`g__` 等前缀，未注释条目可能是空字符串或 `Unassigned`。先去掉层级前缀，再统一判定空值。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 rank_order <- c(
   "Kingdom", "Phylum", "Class", "Order",
   "Family", "Genus", "Species"
@@ -341,9 +292,11 @@ taxonomy_clean[rank_order] <- lapply(
 )
 ```
 
-### 3. 计算每个分类层级的注释覆盖
+### 计算每个分类层级的注释覆盖
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 rank_summary <- do.call(
   rbind,
   lapply(rank_order, function(rank_name) {
@@ -376,11 +329,13 @@ stopifnot(
 
 这些数字表示“分类器返回了非空标签”，不等于标签一定正确。分类准确度还取决于扩增区、序列质量、参考库覆盖、训练方式和置信阈值。
 
-### 4. 建立测量范围矩阵
+### 建立测量范围矩阵
 
 以下矩阵是实验设计决策工具。`Direct` 表示该技术直接测量该层信息，`Partial / inferred` 表示覆盖有限或需要模型推断，`Not measured` 表示该技术本身没有测量该信息。
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 questions <- c(
   "Community\nstructure",
   "Species /\nstrain",
@@ -466,11 +421,14 @@ scope_matrix$Status <- factor(
 scope_matrix
 ```
 
-## 出版级美化 {#sec-polish}
+## 注释覆盖率与测量范围怎样呈现在图中 {#sec-polish}
 
-### 1. 真实 taxonomy 解析深度
+### 真实 taxonomy 解析深度
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
+#| fig-show: hide
 rank_palette <- c(
   Kingdom = "#1B4965",
   Phylum = "#245F73",
@@ -541,9 +499,14 @@ save_pub(
 )
 ```
 
-### 2. 技术选择范围图
+![真实 16S 数据在不同分类层级的非空注释比例。](../figures/02-taxonomy-resolution.png){#fig-taxonomy-resolution}
+
+### 技术选择范围图
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
+#| fig-show: hide
 scope_colors <- c(
   "Direct" = "#009E73",
   "Partial / inferred" = "#E69F00",
@@ -601,6 +564,8 @@ save_pub(
 )
 ```
 
+![不同测量技术对六类科学问题的直接、部分或不可测范围。](../figures/02-assay-scope-map.png){#fig-assay-scope}
+
 两张图均导出为 PDF、PNG 和 300 dpi LZW-TIFF。图内标签全部使用英文；正文保留中文解释。
 
 ## 常见坑 {#sec-pitfalls}
@@ -620,7 +585,7 @@ save_pub(
 当前比例由这套湿地数据、目标扩增区、`microeco 2.0.0` 分发的 taxonomy 和当时采用的参考数据库共同决定。其他数据可能更高或更低。真正可迁移的做法是对自己的 taxonomy 表运行同样的覆盖审计，并把结果写进报告。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告16S测量边界的方法与限制 {#sec-methods}
 
 适用于论文中说明测量边界的英文模板：
 
@@ -628,7 +593,7 @@ save_pub(
 
 真实论文还必须写明扩增区、引物序列、平台、读长、DADA2/OTU 参数、数据库名称与版本、分类器和置信阈值。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将16S测量边界用于自己的研究 {#sec-own-data}
 
 替换三件套路径后，直接运行本篇的 taxonomy 清理与 `rank_summary` 代码：
 

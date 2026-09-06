@@ -1,6 +1,6 @@
 ---
 title: "认识你的数据：测序原理 + FASTQ / 文件格式拆解"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,17 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/06-data-and-fastq.R
+  packages:
+  - dplyr
+  - ggplot2
+  - knitr
+  - scales
+  - tidyr
 ---
-
-> **分析目标：**从一组真实的 multiplexed paired-end FASTQ 出发，读懂 read header、碱基序列、Phred 质量、R1/R2/index 的对应关系，并建立从原始 reads 到 `otutab` / `taxonomy` / `metadata` 三件套的文件地图。  
-> **输入文件：**`forward.fastq.gz`、`reverse.fastq.gz`、`barcodes.fastq.gz`、`metadata.tsv`。  
-> **预计资源：**本篇随附 2,000 组真实同步 reads，普通笔记本约 20–40 秒、内存低于 300 MB；官方 1% 完整数据为 135,487 组 reads。
 
 ## 开始分析前，先认清 FASTQ 和样本表 {#sec-target}
 
@@ -35,17 +41,6 @@ fig-format: png
 
 本篇使用 QIIME 2 官方 Atacama soils paired-end 教程数据。原研究沿智利 Atacama Desert 的 Baquedano 与 Yungay 两条 transect 采集土壤，研究干旱增强对微生物群落的影响。官方 1% 数据包含 135,487 个同步的 forward、reverse 与 barcode record；这里从首尾完整覆盖的 1% 文件中等间距、保序抽取 2,000 组，既保留真实 read header 和质量分布，也让文章可以快速重复执行。
 
-::: {layout-ncol=2}
-![扩增子、双端 reads、index 与 overlap 的关系。](../figures/06-read-architecture.png){#fig-read-architecture}
-
-![一个真实 FASTQ record 的四行结构。](../figures/06-fastq-anatomy.png){#fig-fastq-anatomy}
-:::
-
-::: {layout-ncol=2}
-![2,000 组真实 Atacama reads 的逐 cycle Phred 质量。](../figures/06-quality-profile.png){#fig-quality-profile}
-
-![从 multiplexed FASTQ 到标准三件套的文件流。](../figures/06-file-contract.png){#fig-file-contract}
-:::
 
 ::: {.callout-important title="先确认交付类型，再写导入命令"}
 `R1/R2` 两个文件不一定代表“两个样本”，也不一定已经按样本拆分。本篇数据采用 EMP multiplexed 格式：所有样本共用一份 `forward.fastq.gz`、一份 `reverse.fastq.gz` 和一份 `barcodes.fastq.gz`，三个文件依靠 **record 顺序**保持对应。若测序公司交付的是每个样本一对 FASTQ，则它们已经 demultiplex，导入方式完全不同。
@@ -62,183 +57,33 @@ fig-format: png
 
 完整 URL、完整校验值、2,000-record 摘录的生成规则和摘录文件校验值均保存在 `data/small/fastq/source_summary.json`。本篇的图是根据真实 reads 重新计算的原创图，不复制论文图版。
 
-## 从荧光信号到四行文本 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. paired-end 测序得到的是两个方向的观测
+需要 R，以及 `dplyr`、`ggplot2`、`knitr`、`scales`、`tidyr`。本次使用Atacama 土壤示例的 2,000 组同步 FASTQ records、barcode reads 与样本信息表。
 
-Illumina sequencing by synthesis（边合成边测序）每个 cycle 延伸一个碱基并记录荧光信号。single-end 只从文库分子的一端读取；paired-end 先完成 Read 1，再经过 index read 和模板重建，从另一端得到 Read 2。一个文库分子因此对应：
-
-- 一条 R1；
-- 一条 R2；
-- 一个或两个 index read，取决于建库方案。
-
-“2 × 150 bp”表示每个分子得到 151 bp 左右的两个方向观测，不表示一个样本只有 300 bp 数据，也不表示 R1 与 R2 可以直接首尾拼接。扩增子分析还要先去除 primer，再把 R2 reverse-complement 后寻找足够的 overlap。
-
-设去 primer 与截断后的有效长度为 \(L_F\) 和 \(L_R\)，扩增子长度为 \(L_A\)，理论 overlap 为：
-
-$$
-L_{\mathrm{overlap}} = L_F + L_R - L_A
-$$
-
-若 overlap 太短、两端在重叠区冲突太多，paired reads 就不能可靠合并。不能只看“尾端质量差不差”，还要同时保住扩增子几何关系。
-
-### 2. FASTQ 的一个 record 固定为四行
-
-```text
-@read_identifier optional_description
-ACGT...                         # sequence
-+
-?IIG...                         # ASCII-encoded quality
-```
-
-四行分别是：
-
-1. `@` 开头的 read identifier；
-2. 碱基序列；
-3. `+` 开头的分隔行；
-4. 与序列等长的质量字符串。
-
-最基本的合法性条件是：
-
-$$
-n_{\mathrm{lines}} \bmod 4 = 0
-$$
-
-并且每条 read 都满足：
-
-$$
-\operatorname{length}(\mathrm{sequence})
-=
-\operatorname{length}(\mathrm{quality})
-$$
-
-`.fastq.gz` 只是使用 gzip 压缩的 FASTQ。检查时应流式解压，不能把压缩文件的字节数当作 read 数。
-
-### 3. Phred 质量是错误概率的对数尺度
-
-Phred score \(Q\) 与碱基判错概率 \(P_e\) 的关系为：
-
-$$
-Q = -10\log_{10}(P_e), \qquad
-P_e = 10^{-Q/10}
-$$
-
-| Phred | 估计错误概率 | 直观解释 |
-|---:|---:|---|
-| Q20 | 1% | 约每 100 个 base 错 1 个 |
-| Q30 | 0.1% | 约每 1,000 个 base 错 1 个 |
-| Q40 | 0.01% | 约每 10,000 个 base 错 1 个 |
-
-现代 Illumina FASTQ 通常使用 Phred+33：质量字符的 ASCII 整数减 33 得到 \(Q\)。例如 `?` 的 ASCII 值是 63，因此表示 Q30；`I` 的 ASCII 值是 73，因此表示 Q40。质量字符不是“越像乱码越差”，必须先解码。
-
-<details>
-<summary><strong>深入：为什么不能只报告平均 Q30</strong></summary>
-
-平均 Q30 会把 cycle、方向和 read 之间的异质性压成一个数字。扩增子去噪真正需要的是：
-
-- 每个 cycle 的质量分布；
-- forward 与 reverse 分开观察；
-- 碱基 `N` 的位置；
-- read 长度是否一致；
-- 保留足够 overlap 后的可截断区间。
-
-如果 R2 从 cycle 120 后快速下降，整文件平均 Q30 仍可能很好看；但把 `trunc-len-r` 设在 150 可能造成错误率升高或合并失败。质量图用于提出截断候选值，最终参数还要用 DADA2 retention、merged reads 和 non-chimeric reads 验收。
-
-</details>
-
-### 4. multiplexed 与 demultiplexed 是两种文件合同
-
-**Multiplexed EMP paired-end：**
-
-```text
-forward.fastq.gz
-reverse.fastq.gz
-barcodes.fastq.gz
-sample_metadata.tsv  # sample ID ↔ barcode
-```
-
-三个 FASTQ 的第 \(i\) 个 record 必须属于同一文库分子。任何单独排序、过滤或截取都会破坏对应。
-
-**Demultiplexed paired-end：**
-
-```text
-SampleA_R1.fastq.gz
-SampleA_R2.fastq.gz
-SampleB_R1.fastq.gz
-SampleB_R2.fastq.gz
-manifest.tsv
-```
-
-每个样本各有一对 FASTQ，manifest 明确 `sample-id`、绝对路径和方向。此时通常不再需要 barcode FASTQ，但必须检查 manifest 与文件名、方向、样本数是否一致。
-
-### 5. 常见文件不是彼此替代品
-
-| 文件/对象 | 保存什么 | 是否含质量 | 典型阶段 |
-|---|---|---:|---|
-| FASTQ / FASTQ.GZ | reads + per-base quality | 是 | 原始测序、去噪前 |
-| FASTA | 序列 | 否 | 代表序列、参考序列 |
-| TSV/CSV manifest | sample 与文件路径 | 否 | 导入 demultiplexed FASTQ |
-| QZA | QIIME 2 数据 + provenance | 视类型而定 | QIIME 2 中间/结果对象 |
-| QZV | 可视化结果 + provenance | 不适用 | QIIME 2 报告 |
-| BIOM | feature count table | 否 | ASV/OTU 计数 |
-| `otutab.tsv` | feature × sample 计数 | 否 | R 下游标准输入 |
-| `taxonomy.tsv` | feature × taxonomic ranks | 否 | R 下游标准输入 |
-| `metadata.tsv` | sample × covariates | 否 | 全流程设计信息 |
-
-原始 FASTQ 阶段还没有 `otutab` 和 `taxonomy`。它们必须通过 demultiplex、primer trimming、denoising、chimera removal 与 taxonomic classification 产生；metadata 则应从实验设计开始就存在，并贯穿所有步骤。
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载真实数据和定义作图函数</strong></summary>
-
-本篇使用 R 4.4.1、`ggplot2 3.5.2`、`dplyr 1.1.4`、`tidyr 1.3.1`、`jsonlite 1.8.8` 与 `digest 0.6.36`。首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "dplyr", "tidyr", "scales",
-  "jsonlite", "digest", "knitr"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/fastq/barcodes.fastq.gz",
+  "data/small/fastq/forward.fastq.gz",
+  "data/small/fastq/metadata.tsv",
+  "data/small/fastq/reverse.fastq.gz",
+  "data/small/fastq/source_summary.json"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
-
-仓库已经提供 2,000 组同步的真实摘录。若要改用 QIIME 2 官方 1% 完整文件，可下载到新目录：
-
-```{bash}
-#| eval: false
-mkdir -p data/atacama-1p
-
-curl -fL \
-  -o data/atacama-1p/forward.fastq.gz \
-  https://data.qiime2.org/2024.5/tutorials/atacama-soils/1p/forward.fastq.gz
-
-curl -fL \
-  -o data/atacama-1p/reverse.fastq.gz \
-  https://data.qiime2.org/2024.5/tutorials/atacama-soils/1p/reverse.fastq.gz
-
-curl -fL \
-  -o data/atacama-1p/barcodes.fastq.gz \
-  https://data.qiime2.org/2024.5/tutorials/atacama-soils/1p/barcodes.fastq.gz
-
-curl -fL \
-  -o data/atacama-1p/metadata.tsv \
-  https://data.qiime2.org/2024.5/tutorials/atacama-soils/sample_metadata.tsv
-```
-
-先检查压缩流和官方校验值：
-
-```{bash}
-#| eval: false
-gzip -t data/atacama-1p/forward.fastq.gz
-gzip -t data/atacama-1p/reverse.fastq.gz
-gzip -t data/atacama-1p/barcodes.fastq.gz
-
-sha256sum data/atacama-1p/*
-```
-
-出版级函数直接定义在文章内：
 
 ```{r}
+#| results: hold
+#| label: reader-step-02
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -341,16 +186,13 @@ save_pub <- function(
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 选择输入并核对 SHA-256
+### 选择输入并核对 SHA-256
 
 默认读取随文章提供的真实摘录。若改用官方完整 1% 文件，只需把 `fastq_dir` 改为 `data/atacama-1p`。
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 fastq_dir <- "data/small/fastq"
 
 fastq_paths <- c(
@@ -410,11 +252,155 @@ knitr::kable(
 
 这一关拦住的不是“下载失败”而是更危险的静默替换：同名文件被覆盖、下载不完整、上游版本变更或团队成员传错数据，都可能让后续分析在不报错的情况下变成另一批数据。
 
-### 2. 不依赖专用包读取并验证 FASTQ
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/6c3ebab44401839f38b8d9356cb2f338ecfc9a3f/examples/06-data-and-fastq.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "dplyr", "tidyr", "scales",
+  "jsonlite", "digest", "knitr"
+))
+```
+
+</details>
+
+## 从荧光信号到四行文本 {#sec-theory}
+
+### paired-end 测序得到的是两个方向的观测
+
+Illumina sequencing by synthesis（边合成边测序）每个 cycle 延伸一个碱基并记录荧光信号。single-end 只从文库分子的一端读取；paired-end 先完成 Read 1，再经过 index read 和模板重建，从另一端得到 Read 2。一个文库分子因此对应：
+
+- 一条 R1；
+- 一条 R2；
+- 一个或两个 index read，取决于建库方案。
+
+“2 × 150 bp”表示每个分子得到 151 bp 左右的两个方向观测，不表示一个样本只有 300 bp 数据，也不表示 R1 与 R2 可以直接首尾拼接。扩增子分析还要先去除 primer，再把 R2 reverse-complement 后寻找足够的 overlap。
+
+设去 primer 与截断后的有效长度为 \(L_F\) 和 \(L_R\)，扩增子长度为 \(L_A\)，理论 overlap 为：
+
+$$
+L_{\mathrm{overlap}} = L_F + L_R - L_A
+$$
+
+若 overlap 太短、两端在重叠区冲突太多，paired reads 就不能可靠合并。不能只看“尾端质量差不差”，还要同时保住扩增子几何关系。
+
+### FASTQ 的一个 record 固定为四行
+
+```text
+@read_identifier optional_description
+ACGT...                         # sequence
++
+?IIG...                         # ASCII-encoded quality
+```
+
+四行分别是：
+
+1. `@` 开头的 read identifier；
+2. 碱基序列；
+3. `+` 开头的分隔行；
+4. 与序列等长的质量字符串。
+
+最基本的合法性条件是：
+
+$$
+n_{\mathrm{lines}} \bmod 4 = 0
+$$
+
+并且每条 read 都满足：
+
+$$
+\operatorname{length}(\mathrm{sequence})
+=
+\operatorname{length}(\mathrm{quality})
+$$
+
+`.fastq.gz` 只是使用 gzip 压缩的 FASTQ。检查时应流式解压，不能把压缩文件的字节数当作 read 数。
+
+### Phred 质量是错误概率的对数尺度
+
+Phred score \(Q\) 与碱基判错概率 \(P_e\) 的关系为：
+
+$$
+Q = -10\log_{10}(P_e), \qquad
+P_e = 10^{-Q/10}
+$$
+
+| Phred | 估计错误概率 | 直观解释 |
+|---:|---:|---|
+| Q20 | 1% | 约每 100 个 base 错 1 个 |
+| Q30 | 0.1% | 约每 1,000 个 base 错 1 个 |
+| Q40 | 0.01% | 约每 10,000 个 base 错 1 个 |
+
+现代 Illumina FASTQ 通常使用 Phred+33：质量字符的 ASCII 整数减 33 得到 \(Q\)。例如 `?` 的 ASCII 值是 63，因此表示 Q30；`I` 的 ASCII 值是 73，因此表示 Q40。质量字符不是“越像乱码越差”，必须先解码。
+
+<details>
+<summary><strong>深入：为什么不能只报告平均 Q30</strong></summary>
+
+平均 Q30 会把 cycle、方向和 read 之间的异质性压成一个数字。扩增子去噪真正需要的是：
+
+- 每个 cycle 的质量分布；
+- forward 与 reverse 分开观察；
+- 碱基 `N` 的位置；
+- read 长度是否一致；
+- 保留足够 overlap 后的可截断区间。
+
+如果 R2 从 cycle 120 后快速下降，整文件平均 Q30 仍可能很好看；但把 `trunc-len-r` 设在 150 可能造成错误率升高或合并失败。质量图用于提出截断候选值，最终参数还要用 DADA2 retention、merged reads 和 non-chimeric reads 验收。
+
+</details>
+
+### multiplexed 与 demultiplexed 是两种文件合同
+
+**Multiplexed EMP paired-end：**
+
+```text
+forward.fastq.gz
+reverse.fastq.gz
+barcodes.fastq.gz
+sample_metadata.tsv  # sample ID ↔ barcode
+```
+
+三个 FASTQ 的第 \(i\) 个 record 必须属于同一文库分子。任何单独排序、过滤或截取都会破坏对应。
+
+**Demultiplexed paired-end：**
+
+```text
+SampleA_R1.fastq.gz
+SampleA_R2.fastq.gz
+SampleB_R1.fastq.gz
+SampleB_R2.fastq.gz
+manifest.tsv
+```
+
+每个样本各有一对 FASTQ，manifest 明确 `sample-id`、绝对路径和方向。此时通常不再需要 barcode FASTQ，但必须检查 manifest 与文件名、方向、样本数是否一致。
+
+### 常见文件不是彼此替代品
+
+| 文件/对象 | 保存什么 | 是否含质量 | 典型阶段 |
+|---|---|---:|---|
+| FASTQ / FASTQ.GZ | reads + per-base quality | 是 | 原始测序、去噪前 |
+| FASTA | 序列 | 否 | 代表序列、参考序列 |
+| TSV/CSV manifest | sample 与文件路径 | 否 | 导入 demultiplexed FASTQ |
+| QZA | QIIME 2 数据 + provenance | 视类型而定 | QIIME 2 中间/结果对象 |
+| QZV | 可视化结果 + provenance | 不适用 | QIIME 2 报告 |
+| BIOM | feature count table | 否 | ASV/OTU 计数 |
+| `otutab.tsv` | feature × sample 计数 | 否 | R 下游标准输入 |
+| `taxonomy.tsv` | feature × taxonomic ranks | 否 | R 下游标准输入 |
+| `metadata.tsv` | sample × covariates | 否 | 全流程设计信息 |
+
+原始 FASTQ 阶段还没有 `otutab` 和 `taxonomy`。它们必须通过 demultiplex、primer trimming、denoising、chimera removal 与 taxonomic classification 产生；metadata 则应从实验设计开始就存在，并贯穿所有步骤。
+
+## 读取FASTQ并检查双端与barcode对应关系 {#sec-code}
+
+### 不依赖专用包读取并验证 FASTQ
 
 下面的函数只使用 base R，完整检查四行结构、header、separator 与 sequence/quality 等长条件。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 read_fastq <- function(path) {
   connection <- gzfile(path, open = "rt")
   on.exit(close(connection), add = TRUE)
@@ -491,6 +477,8 @@ stopifnot(
 当前输入包含 `r format(nrow(forward), big.mark = ",")` 组完全同步的 records。下面不是虚构例子，而是文件中的第一条真实 forward read：
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 record_example <- data.frame(
   Line = 1:4,
   Field = c(
@@ -528,11 +516,13 @@ knitr::kable(
 )
 ```
 
-### 3. 读 metadata，确认 barcode 与实验设计
+### 读 metadata，确认 barcode 与实验设计
 
 QIIME 2 metadata 的第二行是类型声明 `#q2:types`，不是一个样本。读取时保留表头、跳过这一行：
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 read_q2_metadata <- function(path) {
   lines <- readLines(path, warn = FALSE)
   stopifnot(
@@ -582,9 +572,11 @@ knitr::kable(
 
 metadata 共 75 个样本：Baquedano 32 个、Yungay 43 个。barcode 是 12 nt，并且在 metadata 内唯一。注意本数据的 barcode reads 与 metadata 中的 barcode 方向相反，因此 QIIME 2 demultiplex 时需要 `--p-rev-comp-mapping-barcodes`；这个选项来自实际建库方向，不能对所有项目机械照抄。
 
-### 4. 解码 Phred，按 cycle 审计 R1 与 R2
+### 解码 Phred，按 cycle 审计 R1 与 R2
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 decode_phred33 <- function(quality_string) {
   utf8ToInt(quality_string) - 33L
 }
@@ -706,9 +698,11 @@ knitr::kable(
 
 在 2,000-record 摘录中，forward 与 reverse 都是 151 nt。forward 的 median read-mean Phred 为 `r sprintf("%.2f", file_summary$MedianReadMeanPhred[file_summary$Read == "Forward"])`，Q30 base 占 `r scales::percent(file_summary$Q30BaseFraction[file_summary$Read == "Forward"], accuracy = 0.1)`；reverse 分别为 `r sprintf("%.2f", file_summary$MedianReadMeanPhred[file_summary$Read == "Reverse"])` 和 `r scales::percent(file_summary$Q30BaseFraction[file_summary$Read == "Reverse"], accuracy = 0.1)`。因此 R2 的整体质量低于 R1，但截断位置仍应根据逐 cycle 分布和后续 merge retention 联合决定。
 
-### 5. 导出可审计结果表
+### 导出可审计结果表
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 dir.create(
   "results/06-fastq",
   recursive = TRUE,
@@ -756,11 +750,14 @@ utils::write.table(
 
 `fastq-file-audit.tsv` 保存文件级 read 数、长度、Phred、Q30、N 比例与 SHA-256；`quality-by-cycle.tsv` 是截断参数决策的机器可读证据；另外两张表分别保留真实四行 record 和 metadata 分组规模。
 
-## 出版级美化 {#sec-polish}
+## 用结构图和质量曲线检查测序交付 {#sec-polish}
 
 ### 图 1：read architecture 只画能由实验流程支持的关系
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
+#| fig-show: hide
 p_architecture <- ggplot() +
   annotate(
     "rect",
@@ -897,11 +894,16 @@ save_pub(
 p_architecture
 ```
 
+![扩增子、双端 reads、index 与 overlap 的关系。](../figures/06-read-architecture.png){#fig-read-architecture}
+
 这张图不声称所有项目都使用 515F/806R，也不把示意长度伪装成测量值。换引物区域时需要重画 primer、insert 和 overlap 的关系，并把实际 primer sequence 写进 Methods。
 
 ### 图 2：FASTQ anatomy 使用真实 record，但避免长字符串挤压
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
+#| fig-show: hide
 anatomy <- record_example |>
   mutate(
     Display = case_when(
@@ -1007,9 +1009,14 @@ save_pub(
 p_anatomy
 ```
 
+![一个真实 FASTQ record 的四行结构。](../figures/06-fastq-anatomy.png){#fig-fastq-anatomy}
+
 ### 图 3：逐 cycle 质量图显示分布，不只画均值
 
 ```{r}
+#| results: hold
+#| label: reader-step-11
+#| fig-show: hide
 p_quality <- ggplot(
   cycle_summary,
   aes(
@@ -1090,9 +1097,14 @@ save_pub(
 p_quality
 ```
 
+![2,000 组真实 Atacama reads 的逐 cycle Phred 质量。](../figures/06-quality-profile.png){#fig-quality-profile}
+
 ### 图 4：把 FASTQ 与三件套放在同一条 provenance 链上
 
 ```{r}
+#| results: hold
+#| label: reader-step-12
+#| fig-show: hide
 flow <- tibble(
   Step = 1:4,
   Stage = factor(
@@ -1208,11 +1220,13 @@ save_pub(
 p_contract
 ```
 
+![从 multiplexed FASTQ 到标准三件套的文件流。](../figures/06-file-contract.png){#fig-file-contract}
+
 ::: {.callout-note title="这四张图各自回答什么"}
 - `read architecture` 回答 primer、R1/R2 与 overlap 的几何关系；
 - `FASTQ anatomy` 回答文件内部每一行是什么；
 - `quality profile` 回答两个方向哪些 cycle 可能限制截断；
-- `file contract` 回答 FASTQ、QIIME 2 artifact 与 R 三件套如何衔接。
+- `文件格式` 回答 FASTQ、QIIME 2 artifact 与 R 三件套如何衔接。
 :::
 
 ## 常见坑 {#sec-pitfalls}
@@ -1236,7 +1250,7 @@ p_contract
 高 Q30、无损 gzip、完全配对只能证明测序文件在技术上可读，不能补救病例/对照混杂、样本量不足、阴性对照缺失或 metadata 错误。文件 QC 与研究设计 QC 是两条都必须通过的证据链。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告测序数据与质量编码的方法与限制 {#sec-methods}
 
 以下模板把可替换字段保留在方括号中：
 
@@ -1248,9 +1262,9 @@ p_contract
 
 Methods 中不要只写“quality control was performed”。至少给出 read 类型、长度、质量编码、primer、截断/去引物规则、最低 overlap、demultiplex 方式和完整数据上的 retention。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将测序数据与质量编码用于自己的研究 {#sec-own-data}
 
-### 1. 先判定是哪种交付
+### 先判定是哪种交付
 
 | 你收到的文件 | 交付类型 | 下一步 |
 |---|---|---|
@@ -1259,7 +1273,7 @@ Methods 中不要只写“quality control was performed”。至少给出 read �
 | 每样本一个 FASTQ | Demultiplexed single-end | 建 single-end manifest |
 | BCL + sample sheet | 未完成 base calling/demultiplex | 先运行厂商转换流程或要求测序方交付 FASTQ |
 
-### 2. 只改路径即可复用本篇审计
+### 只改路径即可复用本篇审计
 
 ```{r}
 #| eval: false
@@ -1292,7 +1306,7 @@ cycle_summary <- bind_rows(
 - metadata sample ID 是否与 manifest 一致；
 - 每个样本内部 R1/R2 record 数和 read ID 是否一一对应。
 
-### 3. 原始 reads 之后仍要回到标准三件套
+### 原始 reads 之后仍要回到标准三件套
 
 完成 demultiplex、primer trimming、DADA2/其他 ASV inference 与 taxonomy classification 后，导出：
 

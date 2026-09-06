@@ -156,6 +156,16 @@ plot(x)
             with self.assertRaises(ValueError):
                 reader_blocks(source)
 
+    def test_existing_labels_and_chapter_specific_packages(self):
+        source = self.source.replace('  required: true',
+            '  required: true\n  label-policy: all-executed\n  packages: [vegan, ggplot2]')
+        source = source.replace('reader-download', 'read-study-inputs')
+        blocks = reader_blocks(source)
+        self.assertEqual(blocks[0][0], 'read-study-inputs')
+        self.assertIn('Required packages: vegan, ggplot2.', script_text(source, blocks))
+        with self.assertRaises(ValueError):
+            reader_blocks(source.replace('#| label: read-study-inputs\n', ''))
+
     def test_sanitizer_cannot_remove_required_download(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

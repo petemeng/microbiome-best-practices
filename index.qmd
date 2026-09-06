@@ -1,6 +1,6 @@
 ---
 title: "开篇：这套教程你将复现哪些顶刊图（图集预览 + 学习地图）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -13,7 +13,21 @@ execute:
 
 16S 研究的价值不取决于方法堆得多不多，而取决于每张图是否回答了明确的问题、统计检验是否匹配实验设计，以及结论有没有越过证据边界。
 
-下面先看七类常见结果。它们分别负责描述多样性、比较整体群落、定位差异类群、评估预测能力或校准因果语言；任何一张图都不能替代其他层级的证据。
+下面先用七张代表性结果图看六类常见问题。它们分别负责描述多样性、比较整体群落、定位差异类群、评估预测能力或校准因果语言；任何一张图都不能替代其他层级的证据。
+
+## 先认清分析需要的三张表
+
+常规 16S 下游分析从计数表、分类表和样本信息表开始。三张表通过样本 ID 和特征 ID 对齐，而不是按文件中的行号拼接。
+
+| 输入 | 每行和每列代表什么 | 分析前先检查什么 |
+|---|---|---|
+| `otutab` | 行是 ASV/OTU，列是样本，单元格是 reads 数 | 保留非负整数计数，不要用百分比代替原始计数 |
+| `taxonomy` | 行是同一批 ASV/OTU，列是分类层级 | 特征 ID 与计数表一致；未注释的分类保留为未知 |
+| `metadata` | 行是样本，列是分组、个体、时间、批次及协变量 | 样本 ID 与计数表一致；技术重复不能当作独立样本 |
+
+可以先查看中国湿地数据的[计数表](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/data/small/otutab.tsv)、[分类表](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/data/small/taxonomy.tsv)和[样本信息表](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/data/small/metadata.tsv)：计数表包含 13,628 个 OTU、90 个样本，分为 inland、coastal 和 Tibetan wetland 三组，每组 30 个样本。
+
+这三张表足以开始组成和多样性分析，但不能替代其他测量。绝对定量还需要微生物负荷，生存分析需要随访时间和事件，多组学整合需要同一样本的另一组学数据，MR 则使用外部 GWAS 汇总统计。下方预测和因果证据示例使用各自对应的研究数据，不是从湿地样本推导疾病结论。
 
 ## 六类结果图分别回答什么问题？
 
@@ -64,7 +78,7 @@ Alpha diversity 不是一个 Shannon 指数就能概括。(q=0) 强调稀有类�
 | 章节 | 核心问题 | 主要交付 |
 |---|---|---|
 | 02 | 16S 能测到什么、不能测到什么？ | 技术边界与组学选择 |
-| 03–06 | 比较是否由正确的实验单位、对照和采样设计支持？ | estimand、对照、批次与数据合同 |
+| 03–06 | 比较是否由正确的实验单位、对照和采样设计支持？ | 目标效应、对照、批次与数据格式 |
 | 07–09 | 计算环境能否被另一台机器重建？ | 固定的软件、包和数据库版本 |
 | 10–16 | FASTQ 怎样变成可信的 ASV、taxonomy 和 tree？ | 可追溯的上游结果与逐阶段损失 |
 | 17–25 | 样本内部和样本之间的群落差异是什么？ | alpha/beta diversity、PCoA、PERMANOVA、CAP |

@@ -1,6 +1,6 @@
 ---
 title: "批次效应：来源、检测与校正策略"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,17 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/05-batch-effects.R
+  packages:
+  - MMUPHin
+  - decontam
+  - ggplot2
+  - scales
+  - vegan
 ---
-
-> **分析目标：**从实验设计、群落距离和 feature 三个层级识别 batch effect，区分“在模型中控制批次”和“直接改写丰度表”，并用可审计的敏感性分析检查生物结论是否稳定。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；metadata 额外包含 `PlateNumber`、`Subject`、`Habitat`、`IsNegative` 和 DNA 定量。  
-> **预计资源：**1,951 个 ASV、569 个样本；普通笔记本约 2–5 分钟，内存低于 1 GB。
 
 ## 先区分生物差异与技术批次 {#sec-target}
 
@@ -34,199 +40,37 @@ fig-format: png
 
 本篇使用 `decontam 1.24.0` 随包分发的真实 `MUClite.rds` 数据。对象包含 539 个口腔生物样本、30 个阴性对照、3 位受试者、7 个口腔部位和 6 块实验板。每位受试者分布在两块板上，每块板又覆盖全部 7 个部位，因此可以估计“同一受试者内部的板间差异”；但 plate 与 subject 仍是嵌套关系，不能把板间差异简单宣布为纯技术效应。
 
-::: {layout-ncol=2}
-![每块板均覆盖 7 个口腔部位，但 plate 嵌套在 subject 内。](../figures/05-batch-design-audit.png){#fig-batch-design}
-
-![Bray-Curtis 与 Aitchison 距离下，habitat、subject 和 plate 的群落解释率。](../figures/05-community-batch-effects.png){#fig-community-batch}
-:::
-
-::: {layout-ncol=2}
-![234 个高检出 ASV 的 habitat 与 plate 解释率；颜色表示 plate 项的 FDR 判定。](../figures/05-feature-batch-effects.png){#fig-feature-batch}
-
-![保留 habitat 与 subject 设计项后，诊断性移除 subject 内 plate 均值前后的残差 PCA。](../figures/05-adjustment-diagnostic.png){#fig-adjustment}
-:::
 
 ::: {.callout-important title="先判断能不能分，再谈怎么校正"}
 如果所有病例都在 Batch 1、所有对照都在 Batch 2，`Group` 与 `Batch` 完全共线。此时不存在能从这批数据中唯一分离“疾病效应”和“批次效应”的统计方法。ComBat、ConQuR、MMUPHin 或任何深度模型都不能凭空创造缺失的交叉设计；强行校正只是在不可识别的信号之间做未经验证的分配。
 :::
 
-## 批次从哪里来，为什么不能见到就删 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 从采样到统计模型，每一层都可能形成批次
+需要 R，以及 `MMUPHin`、`decontam`、`ggplot2`、`scales`、`vegan`。本次使用口腔样本与阴性对照的三张表；实验板、受试者和口腔部位均保留在样本表中。
 
-| 阶段 | 常见批次来源 | 建议保留的 metadata |
-|---|---|---|
-| Sampling | 日期、中心、操作者、季节、运输路线 | `CollectionDate`, `Site`, `Collector` |
-| Storage | 保存液、温度、冻融次数、保存时长 | `Preservative`, `FreezeThaw`, `StorageDays` |
-| Extraction | kit lot、提取板、机器人、实验人员 | `ExtractionBatch`, `KitLot`, `PlateRow/Column` |
-| PCR | primer lot、循环数、PCR plate | `PCRBatch`, `PrimerLot`, `PCRCycles` |
-| Sequencing | run、lane、flow cell、index set | `SequencingRun`, `Lane`, `IndexSet` |
-| Bioinformatics | 引物、截断长度、数据库、软件版本 | `PipelineVersion`, `ClassifierVersion` |
-
-同一天、同一块板或同一个研究中心产生的相似性，可能来自技术流程，也可能包含真实的空间、时间或人群差异。批次变量的定义不是“我不感兴趣的列”，而是需要结合采样流程、随机化记录和研究问题解释的变异来源。
-
-### 2. technical batch、biological block 与 confounder 不是同义词
-
-- **Technical batch：**本希望相同的样本因提取板、试剂批号或测序 run 不同而产生系统差异。
-- **Biological block：**subject、cage、plot、center 等会让样本相关，但这种相关本身可能具有生物意义。
-- **Confounder：**同时与暴露/分组和结局相关，导致目标效应无法直接解释。
-
-例如 cage 既可能是需要控制的笼位效应，也可能通过共食粪便真实改变肠道微生物。把 cage 影响从丰度表中“抹平”不等于获得更真实的数据；更稳妥的做法通常是在设计和模型中承认 cage 这一层级。
-
-### 3. 三种设计决定了可做的分析
-
-| Batch × biology 关系 | 例子 | 能否估计批次 | 首选策略 |
-|---|---|---|---|
-| Crossed / balanced | 每个批次都有病例与对照 | 可以 | 模型中加入 batch；必要时做经过验证的校正 |
-| Partially crossed | 部分批次缺少某一组 | 有限 | 限制比较范围、分层/混合模型、敏感性分析 |
-| Completely confounded | Batch 1 全病例，Batch 2 全对照 | 不可以 | 补测桥接样本、重新设计或弱化问题 |
-
-用设计矩阵表示时，完全混杂会导致矩阵不满秩：
-
-$$
-\operatorname{rank}(\mathbf{X}) < \operatorname{ncol}(\mathbf{X})
-$$
-
-这不是软件报错技巧问题，而是数据没有提供足够信息。
-
-### 4. 批次诊断必须同时看 effect size 与 dispersion
-
-PCoA/PCA 只展示前几个方向，批次也可能影响稀有 feature、零比例、方差或高阶分布。一个基本诊断组合是：
-
-- 设计交叉表与 library/QC 分布；
-- Bray-Curtis、Aitchison 等不同距离下的 PERMANOVA $R^2$；
-- 与 PERMANOVA 配套的 multivariate dispersion；
-- feature-wise 模型，并做 Benjamini-Hochberg FDR；
-- leave-one-batch-out 或 within-batch 敏感性分析。
-
-大样本中很小的批次效应也可能得到极小的 $P$ 值。反过来，批次数很少时，一个肉眼明显的差异也可能没有足够的批次级自由度。结论应首先看设计和效应量，再看显著性。
-
-### 5. “控制 batch”优先于“改写数据”
-
-从稳妥到激进，可按下列顺序决策：
-
-1. **实验阶段预防：**随机分板、平衡分组、桥接样本、阴性/阳性对照；
-2. **统计模型控制：**把 batch 作为固定效应、随机效应或 permutation block；
-3. **分层与 meta-analysis：**先在 batch/study 内估计，再合并效应；
-4. **生成校正后的 profile：**仅在设计可识别、方法与数据类型匹配且生物信号保留得到验证时使用；
-5. **补测或缩小问题：**完全混杂时增加 bridge samples，或只回答批次内可识别的问题。
-
-[Wang 与 Lê Cao](https://doi.org/10.1093/bib/bbz105)系统总结了微生物组 batch 的来源、设计条件和方法假设；[Gibbons 等](https://doi.org/10.1371/journal.pcbi.1006102)证明常规 omics 校正可能在微生物组 case-control 合并中制造或掩盖信号；[ConQuR](https://doi.org/10.1038/s41467-022-33071-9)与 [MMUPHin](https://doi.org/10.1186/s13059-022-02753-4)则针对零膨胀、过度离散和多队列结构提供了更专门的方法。
-
-<details>
-<summary><strong>深入：为什么本篇不把 ComBat 后的丰度表当默认答案</strong></summary>
-
-16S 计数具有稀疏、过度离散和成分性。对相对丰度逐 feature 做高斯位置/尺度校正，可能：
-
-- 产生负值或破坏每个样本总和；
-- 把真实但与 batch 相关的生物差异一并删除；
-- 改变零值、稀有 feature 与相关结构；
-- 在全数据上先校正再交叉验证，造成测试集信息泄漏；
-- 让排序图“混得更好”，但下游分类或差异结果更差。
-
-因此本篇的矩阵调整只作为**设计矩阵是否按预期工作**的诊断：先保留 habitat 与 subject 的模型项，再减去每位 subject 内的 plate 均值对比。它不是 ConQuR、MMUPHin 或 ComBat 的替代品，也不作为后续差异丰度的默认输入。正式推断仍优先在每个方法自己的模型中加入 batch。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、导出真实数据和定义作图函数</strong></summary>
-
-本篇使用 R 4.4.1、Bioconductor 3.19、`decontam 1.24.0` 与 `vegan 2.6-6.1`。首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "BiocManager", "vegan", "ggplot2", "scales", "digest"
-))
-BiocManager::install(version = "3.19", ask = FALSE)
-BiocManager::install(
-  c("decontam", "MMUPHin", "phyloseq"),
-  ask = FALSE,
-  update = FALSE
-)
-```
-
-`MUClite.rds` 随 `decontam` 分发。下面代码核对对象 SHA-256，并导出本篇使用的三件套：
-
-```{r}
-#| eval: false
-library(phyloseq)
-
-muc_path <- system.file(
-  "extdata",
-  "MUClite.rds",
-  package = "decontam"
-)
-expected_sha256 <- paste0(
-  "801456d5780d5f51308d04c23f447710",
-  "2cc5fbe9543ffa62fad2240a99c43d62"
-)
-stopifnot(
-  nzchar(muc_path),
-  identical(
-    digest::digest(
-      file = muc_path,
-      algo = "sha256",
-      serialize = FALSE
-    ),
-    expected_sha256
-  )
-)
-
-ps <- readRDS(muc_path)
-otutab <- as(phyloseq::otu_table(ps), "matrix")
-if (!phyloseq::taxa_are_rows(ps)) {
-  otutab <- t(otutab)
-}
-taxonomy <- as(phyloseq::tax_table(ps), "matrix")
-metadata <- as.data.frame(phyloseq::sample_data(ps))
-metadata$IsNegative <- (
-  metadata$Sample_or_Control == "Control Sample"
-)
-
-write_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name),
-    x,
-    check.names = FALSE
-  )
-  utils::write.table(
-    out,
-    path,
-    sep = "\t",
-    quote = FALSE,
-    row.names = FALSE,
-    na = ""
-  )
-}
-
-dir.create(
-  "data/small/decontam",
-  recursive = TRUE,
-  showWarnings = FALSE
-)
-write_tsv(
-  otutab,
-  "FeatureID",
-  "data/small/decontam/otutab.tsv"
-)
-write_tsv(
-  taxonomy,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/decontam/metadata.tsv",
+  "data/small/decontam/otutab.tsv",
+  "data/small/decontam/source_summary.json",
   "data/small/decontam/taxonomy.tsv"
 )
-write_tsv(
-  metadata,
-  "SampleID",
-  "data/small/decontam/metadata.tsv"
-)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-出版级函数直接定义在文章内：
-
 ```{r}
+#| results: hold
+#| label: reader-step-02
 library(decontam)
 library(vegan)
 library(ggplot2)
@@ -317,14 +161,11 @@ save_pub <- function(
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套读取并核对 batch metadata
+### 从三件套读取并核对 batch metadata
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 otutab <- read.delim(
   "data/small/decontam/otutab.tsv",
   row.names = 1,
@@ -368,9 +209,111 @@ head(metadata)
 
 原始对象包含 `r format(nrow(otutab), big.mark = ",")` 个 ASV 和 `r format(ncol(otutab), big.mark = ",")` 个测序样本，其中 `r sum(metadata$IsNegative)` 个为阴性对照。批次分析前不能忽略污染：若某一提取板的 reagent background 更高，污染本身就会表现为 batch effect。
 
-### 2. 在本篇内完成污染判定，再保留生物样本
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/6c3ebab44401839f38b8d9356cb2f338ecfc9a3f/examples/05-batch-effects.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "BiocManager", "vegan", "ggplot2", "scales", "digest"
+))
+BiocManager::install(version = "3.19", ask = FALSE)
+BiocManager::install(
+  c("decontam", "MMUPHin", "phyloseq"),
+  ask = FALSE,
+  update = FALSE
+)
+```
+
+</details>
+
+## 批次从哪里来，为什么不能见到就删 {#sec-theory}
+
+### 从采样到统计模型，每一层都可能形成批次
+
+| 阶段 | 常见批次来源 | 建议保留的 metadata |
+|---|---|---|
+| Sampling | 日期、中心、操作者、季节、运输路线 | `CollectionDate`, `Site`, `Collector` |
+| Storage | 保存液、温度、冻融次数、保存时长 | `Preservative`, `FreezeThaw`, `StorageDays` |
+| Extraction | kit lot、提取板、机器人、实验人员 | `ExtractionBatch`, `KitLot`, `PlateRow/Column` |
+| PCR | primer lot、循环数、PCR plate | `PCRBatch`, `PrimerLot`, `PCRCycles` |
+| Sequencing | run、lane、flow cell、index set | `SequencingRun`, `Lane`, `IndexSet` |
+| Bioinformatics | 引物、截断长度、数据库、软件版本 | `PipelineVersion`, `ClassifierVersion` |
+
+同一天、同一块板或同一个研究中心产生的相似性，可能来自技术流程，也可能包含真实的空间、时间或人群差异。批次变量的定义不是“我不感兴趣的列”，而是需要结合采样流程、随机化记录和研究问题解释的变异来源。
+
+### technical batch、biological block 与 confounder 不是同义词
+
+- **Technical batch：**本希望相同的样本因提取板、试剂批号或测序 run 不同而产生系统差异。
+- **Biological block：**subject、cage、plot、center 等会让样本相关，但这种相关本身可能具有生物意义。
+- **Confounder：**同时与暴露/分组和结局相关，导致目标效应无法直接解释。
+
+例如 cage 既可能是需要控制的笼位效应，也可能通过共食粪便真实改变肠道微生物。把 cage 影响从丰度表中“抹平”不等于获得更真实的数据；更稳妥的做法通常是在设计和模型中承认 cage 这一层级。
+
+### 三种设计决定了可做的分析
+
+| Batch × biology 关系 | 例子 | 能否估计批次 | 首选策略 |
+|---|---|---|---|
+| Crossed / balanced | 每个批次都有病例与对照 | 可以 | 模型中加入 batch；必要时做经过验证的校正 |
+| Partially crossed | 部分批次缺少某一组 | 有限 | 限制比较范围、分层/混合模型、敏感性分析 |
+| Completely confounded | Batch 1 全病例，Batch 2 全对照 | 不可以 | 补测桥接样本、重新设计或弱化问题 |
+
+用设计矩阵表示时，完全混杂会导致矩阵不满秩：
+
+$$
+\operatorname{rank}(\mathbf{X}) < \operatorname{ncol}(\mathbf{X})
+$$
+
+这不是软件报错技巧问题，而是数据没有提供足够信息。
+
+### 批次诊断必须同时看 effect size 与 dispersion
+
+PCoA/PCA 只展示前几个方向，批次也可能影响稀有 feature、零比例、方差或高阶分布。一个基本诊断组合是：
+
+- 设计交叉表与 library/QC 分布；
+- Bray-Curtis、Aitchison 等不同距离下的 PERMANOVA $R^2$；
+- 与 PERMANOVA 配套的 multivariate dispersion；
+- feature-wise 模型，并做 Benjamini-Hochberg FDR；
+- leave-one-batch-out 或 within-batch 敏感性分析。
+
+大样本中很小的批次效应也可能得到极小的 $P$ 值。反过来，批次数很少时，一个肉眼明显的差异也可能没有足够的批次级自由度。结论应首先看设计和效应量，再看显著性。
+
+### “控制 batch”优先于“改写数据”
+
+从稳妥到激进，可按下列顺序决策：
+
+1. **实验阶段预防：**随机分板、平衡分组、桥接样本、阴性/阳性对照；
+2. **统计模型控制：**把 batch 作为固定效应、随机效应或 permutation block；
+3. **分层与 meta-analysis：**先在 batch/study 内估计，再合并效应；
+4. **生成校正后的 profile：**仅在设计可识别、方法与数据类型匹配且生物信号保留得到验证时使用；
+5. **补测或缩小问题：**完全混杂时增加 bridge samples，或只回答批次内可识别的问题。
+
+[Wang 与 Lê Cao](https://doi.org/10.1093/bib/bbz105)系统总结了微生物组 batch 的来源、设计条件和方法假设；[Gibbons 等](https://doi.org/10.1371/journal.pcbi.1006102)证明常规 omics 校正可能在微生物组 case-control 合并中制造或掩盖信号；[ConQuR](https://doi.org/10.1038/s41467-022-33071-9)与 [MMUPHin](https://doi.org/10.1186/s13059-022-02753-4)则针对零膨胀、过度离散和多队列结构提供了更专门的方法。
+
+<details>
+<summary><strong>深入：为什么本篇不把 ComBat 后的丰度表当默认答案</strong></summary>
+
+16S 计数具有稀疏、过度离散和成分性。对相对丰度逐 feature 做高斯位置/尺度校正，可能：
+
+- 产生负值或破坏每个样本总和；
+- 把真实但与 batch 相关的生物差异一并删除；
+- 改变零值、稀有 feature 与相关结构；
+- 在全数据上先校正再交叉验证，造成测试集信息泄漏；
+- 让排序图“混得更好”，但下游分类或差异结果更差。
+
+因此本篇的矩阵调整只作为**设计矩阵是否按预期工作**的诊断：先保留 habitat 与 subject 的模型项，再减去每位 subject 内的 plate 均值对比。它不是 ConQuR、MMUPHin 或 ComBat 的替代品，也不作为后续差异丰度的默认输入。正式推断仍优先在每个方法自己的模型中加入 batch。
+
+</details>
+
+## 区分部位、受试者与实验板的影响 {#sec-code}
+
+### 在本篇内完成污染判定，再保留生物样本
+
+```{r}
+#| results: hold
+#| label: reader-step-04
 seqtab <- t(otutab)
 contam_combined <- decontam::isContaminant(
   seqtab,
@@ -423,9 +366,11 @@ data.frame(
 
 本例标记并移除 `r length(contaminant_ids)` 个候选污染 ASV，保留 `r nrow(otutab_bio)` 个 ASV 和 `r ncol(otutab_bio)` 个生物样本。阴性对照不进入后续生物群落模型，但原始三件套与 classifier 结果始终保留。
 
-### 3. 先画设计矩阵，不从排序图开始
+### 先画设计矩阵，不从排序图开始
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 habitat_labels <- c(
   "Cheek_Left" = "Cheek left",
   "Cheek_Right" = "Cheek right",
@@ -502,11 +447,13 @@ head(design_counts)
 
 每块板都覆盖全部 7 个 habitat，单格 `r min(design_counts$Samples)`–`r max(design_counts$Samples)` 个样本；每位 subject 分布在两块板上。因而 habitat 与 plate 是交叉的，但 plate 嵌套在 subject 内。后续模型按 `Habitat + Subject + Plate` 的顺序估计：`Plate` 项表示控制 habitat 和 subject 后剩余的 subject 内板间差异。
 
-### 4. 同时检查 Bray-Curtis 与 Aitchison 距离
+### 同时检查 Bray-Curtis 与 Aitchison 距离
 
 Bray-Curtis 使用污染过滤后的相对丰度。Aitchison 距离先保留至少 5% 生物样本中检出的 ASV，再加 0.5 pseudocount 做 centered log-ratio（CLR）：
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 relative_abundance <- sweep(
   otutab_bio,
   2,
@@ -551,9 +498,11 @@ dim(clr_matrix)
 
 这里进入 CLR 诊断的有 `r ncol(clr_matrix)` 个 ASV。pseudocount 是零值处理假设，不是“恢复真实绝对丰度”；因此 Bray-Curtis 与 Aitchison 结果都报告，避免把单一变换当成唯一真相。
 
-### 5. PERMANOVA 报告 $R^2$，并限制置换范围
+### PERMANOVA 报告 $R^2$，并限制置换范围
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 run_permanova <- function(distance_object) {
   set.seed(20260719)
   vegan::adonis2(
@@ -601,9 +550,11 @@ Bray-Curtis 下，habitat、subject 和 plate 分别解释 `r scales::percent(co
 
 plate 项在两种距离下都达到置换显著，但解释率只有约 1%。这正说明“大样本 $P$ 值很小”不等于“batch 主导整个数据”。
 
-### 6. PERMANOVA 必须配 dispersion
+### PERMANOVA 必须配 dispersion
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 run_dispersion <- function(distance_object, metric) {
   dispersion <- vegan::betadisper(
     distance_object,
@@ -646,9 +597,11 @@ community_diagnostics <- rbind(
 
 Bray-Curtis 的 plate dispersion $P=`r sprintf("%.3f", dispersion_results$P[dispersion_results$Metric == "Bray-Curtis"])`$，Aitchison 的 $P=`r sprintf("%.3f", dispersion_results$P[dispersion_results$Metric == "Aitchison"])`$。因此 Aitchison 下的 plate PERMANOVA 既可能包含 centroid shift，也受到组内离散度差异影响，不能只解释为板间均值位移。
 
-### 7. feature-wise 模型：做 FDR，也报告解释率
+### feature-wise 模型：做 FDR，也报告解释率
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 fit_feature_model <- function(y) {
   fit <- stats::lm(
     y ~ Habitat + Subject + Plate,
@@ -734,9 +687,11 @@ feature_summary
 
 本对象没有完整的纵向时间与采样事件字段，因此这里的 feature 模型是 batch diagnostic，不用于宣称总体人群中的口腔部位差异。真实重复测量研究应加入 time/visit，并按 subject 使用 mixed model 或其他相关结构。
 
-### 8. leave-one-plate-out：结论是否被某块板推动
+### leave-one-plate-out：结论是否被某块板推动
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
 leave_one_plate_out <- do.call(
   rbind,
   lapply(
@@ -779,11 +734,13 @@ leave_one_plate_out
 
 删去任一板后，Aitchison habitat $R^2$ 保持在 `r scales::percent(min(leave_one_plate_out$HabitatR2), accuracy = 0.1)`–`r scales::percent(max(leave_one_plate_out$HabitatR2), accuracy = 0.1)`，plate $R^2$ 保持在 `r scales::percent(min(leave_one_plate_out$PlateR2), accuracy = 0.01)`–`r scales::percent(max(leave_one_plate_out$PlateR2), accuracy = 0.01)`。这比只报告全数据的一次 $P$ 值更能说明结果不是由某一块板单独推动。
 
-### 9. 设计感知的 adjustment 只用于诊断
+### 设计感知的 adjustment 只用于诊断
 
 因为每位 subject 恰好分布在两块板上，可以为每位 subject 构造一个板间对比：该 subject 的两块板分别记为 $-0.5$ 和 $+0.5$，其他 subject 记为 0。模型先保留 habitat 与 subject，再估计三个 subject 内 plate contrast：
 
 ```{r}
+#| results: hold
+#| label: reader-step-11
 x_biology <- stats::model.matrix(
   ~ Habitat + Subject,
   data = metadata_bio
@@ -857,6 +814,8 @@ head(adjustment_coefficients)
 用相同公式重新计算 Aitchison PERMANOVA：
 
 ```{r}
+#| results: hold
+#| label: reader-step-12
 adjusted_aitchison <- stats::dist(
   clr_adjusted_diagnostic
 )
@@ -890,6 +849,8 @@ plate $R^2$ 从 `r scales::percent(adjustment_diagnostic$R2[adjustment_diagnosti
 下面只为可视化检查，在保留/调整后的 CLR 中进一步回归掉 habitat 与 subject，并把两组 residual 投影到同一个 PCA 基底：
 
 ```{r}
+#| results: hold
+#| label: reader-step-13
 residualize_biology <- function(x) {
   stats::lm.fit(
     x = x_biology,
@@ -958,9 +919,11 @@ ordination_centroids <- aggregate(
 head(ordination_scores)
 ```
 
-### 10. 导出完整审计轨迹
+### 导出完整审计轨迹
 
 ```{r}
+#| results: hold
+#| label: reader-step-14
 result_dir <- "results/05-batch"
 dir.create(
   result_dir,
@@ -1011,11 +974,14 @@ write_result(
 
 这些文件分别回答“设计是否交叉”“群落层 batch 多大”“哪些 ASV 受影响”“删去哪一板是否改变结论”“诊断性 adjustment 做了什么”。不要只保存一张校正后 PCA；没有原始输入、模型矩阵和系数的校正结果不可审计。
 
-## 出版级美化 {#sec-polish}
+## 判断校正是否保留了生物差异 {#sec-polish}
 
-### 1. Batch × habitat 设计热图
+### Batch × habitat 设计热图
 
 ```{r}
+#| results: hold
+#| label: reader-step-15
+#| fig-show: hide
 p_batch_design <- ggplot(
   design_counts,
   aes(
@@ -1076,9 +1042,14 @@ save_pub(
 )
 ```
 
-### 2. 群落层解释率
+![每块板均覆盖 7 个口腔部位，但 plate 嵌套在 subject 内。](../figures/05-batch-design-audit.png){#fig-batch-design}
+
+### 群落层解释率
 
 ```{r}
+#| results: hold
+#| label: reader-step-16
+#| fig-show: hide
 community_plot_data <- community_terms
 community_plot_data$Term <- factor(
   community_plot_data$Term,
@@ -1152,9 +1123,14 @@ save_pub(
 )
 ```
 
-### 3. Feature 层 effect-size landscape
+![Bray-Curtis 与 Aitchison 距离下，habitat、subject 和 plate 的群落解释率。](../figures/05-community-batch-effects.png){#fig-community-batch}
+
+### Feature 层 effect-size landscape
 
 ```{r}
+#| results: hold
+#| label: reader-step-17
+#| fig-show: hide
 feature_diagnostics$PlateStatus <- factor(
   ifelse(
     feature_diagnostics$PlateQ < 0.05,
@@ -1267,9 +1243,14 @@ save_pub(
 )
 ```
 
-### 4. Adjustment 前后诊断图
+![234 个高检出 ASV 的 habitat 与 plate 解释率；颜色表示 plate 项的 FDR 判定。](../figures/05-feature-batch-effects.png){#fig-feature-batch}
+
+### Adjustment 前后诊断图
 
 ```{r}
+#| results: hold
+#| label: reader-step-18
+#| fig-show: hide
 plate_colors <- setNames(
   pal_pub[1:6],
   levels(metadata_bio$Plate)
@@ -1351,6 +1332,8 @@ save_pub(
 )
 ```
 
+![保留 habitat 与 subject 设计项后，诊断性移除 subject 内 plate 均值前后的残差 PCA。](../figures/05-adjustment-diagnostic.png){#fig-adjustment}
+
 ## 常见坑 {#sec-pitfalls}
 
 ::: {.callout-caution title="1. Group 与 batch 完全混杂，还想靠软件救回来"}
@@ -1393,7 +1376,7 @@ Aitchison 下 plate dispersion 也显著。位置与离散度可能共同贡献 
 某一提取板的 blank burden、kitome 或串样异常会表现为 batch effect。应先完成对照与污染审计，再判断剩余板间结构；低生物量项目尤其不能跳过这一步。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告批次控制与敏感性分析的方法与限制 {#sec-methods}
 
 可直接修改的英文模板：
 
@@ -1413,9 +1396,9 @@ Results 中应同时给出：
 - 校正前后生物效应与批次效应；
 - leave-one-batch-out、within-batch 或外部验证结果。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将批次控制与敏感性分析用于自己的研究 {#sec-own-data}
 
-### 1. metadata 至少要有这些列
+### metadata 至少要有这些列
 
 | 列名 | 类型 | 用途 |
 |---|---|---|
@@ -1430,7 +1413,7 @@ Results 中应同时给出：
 
 不要把多个来源都压成一个含义模糊的 `batch1/batch2`。提取板、PCR plate、测序 run 和研究中心可能需要分别建模。
 
-### 2. 先做可识别性检查
+### 先做可识别性检查
 
 ```{r}
 #| eval: false
@@ -1479,7 +1462,7 @@ if (qr(x)$rank < ncol(x)) {
 
 设计平衡不要求每格完全相等，但主要生物水平必须在足够多的 batch 中重复出现。批次只有 1–2 个水平时，也很难把它当作可推广的随机效应。
 
-### 3. 默认在统计模型中加入 batch
+### 默认在统计模型中加入 batch
 
 ```{r}
 #| eval: false
@@ -1518,7 +1501,7 @@ vegan::permutest(
 
 差异丰度、alpha diversity、纵向模型和预测模型都应在各自方法中处理 batch；不要因为生成过一次“校正表”就从所有下游模型中删除 batch。
 
-### 4. 什么时候考虑生成校正后的 profile
+### 什么时候考虑生成校正后的 profile
 
 | 场景 | 可考虑的方法 | 必须检查 |
 |---|---|---|

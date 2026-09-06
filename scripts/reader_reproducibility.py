@@ -28,7 +28,9 @@ def normalize_code(code: str) -> str:
 
 def reader_blocks(source: str) -> list[tuple[str, str]]:
     blocks = []
-    required = frontmatter(source).get("reader-reproduction", {}).get("required", False)
+    config = frontmatter(source).get("reader-reproduction", {})
+    required = config.get("required", False)
+    all_executed = config.get("label-policy") == "all-executed"
     for match in re.finditer(r"^```\{r(?:[ ,][^}]*)?\}\n(.*?)^```[ \t]*$", source, re.M | re.S):
         raw = match.group(1)
         option_lines = re.findall(r"^#\| ?(.*)$", raw, re.M)
@@ -36,7 +38,7 @@ def reader_blocks(source: str) -> list[tuple[str, str]]:
         if options.get("eval") is False:
             continue
         label = str(options.get("label", ""))
-        if not label.startswith(("reader-", "fig-")):
+        if not label or (not all_executed and not label.startswith(("reader-", "fig-"))):
             if required:
                 raise ValueError("Every executed R chunk needs a reader- or fig- label")
             continue
@@ -55,8 +57,10 @@ def reader_blocks(source: str) -> list[tuple[str, str]]:
 
 
 def script_text(source: str, blocks: list[tuple[str, str]]) -> str:
-    title = frontmatter(source).get("title", "R analysis")
-    header = f"# {title}\n# Run sequentially in a new working directory.\n# Required packages: ggplot2, ggalluvial, ragg, svglite.\n"
+    metadata = frontmatter(source)
+    title = metadata.get("title", "R analysis")
+    packages = metadata.get("reader-reproduction", {}).get("packages", ["ggplot2", "ggalluvial", "ragg", "svglite"])
+    header = f"# {title}\n# Run sequentially in a new working directory.\n# Required packages: {', '.join(packages)}.\n"
     return header + "\n" + "\n\n".join(code for _, code in blocks) + "\n"
 
 
@@ -73,6 +77,45 @@ def public_blocks(source: str, content: str) -> list[tuple[str, str]]:
         selected.append((label, displayed[position]))
         cursor = position + 1
     return selected
+
+
+def coalesce_rendered_code(source: str, main) -> int:
+    """Join code split by knitr plot events, only after verifying every segment.
+
+    Never insert code into a stale cell: each existing source segment must match
+    the QMD exactly, allowing whitespace only at boundaries between segments.
+    Computed outputs remain in place and are not used to reconstruct source.
+    """
+    if not frontmatter(source).get('reader-reproduction', {}).get('required'):
+        return 0
+    cells = main.xpath('.//*[contains(concat(" ", normalize-space(@class), " "), " cell ")]')
+    cursor = 0
+    merged = 0
+    for label, expected in reader_blocks(source):
+        for index in range(cursor, len(cells)):
+            pres = cells[index].xpath('.//pre[contains(concat(" ", normalize-space(@class), " "), " sourceCode ")]')
+            segments = [normalize_code(pre.text_content()) for pre in pres]
+            position = 0
+            matched = bool(segments)
+            for segment in segments:
+                start = expected.find(segment, position)
+                if start < 0 or expected[position:start].strip():
+                    matched = False
+                    break
+                position = start + len(segment)
+            if not matched or expected[position:].strip():
+                continue
+            if len(pres) > 1:
+                first = pres[0]
+                for child in list(first):
+                    first.remove(child)
+                first.text = expected
+                for pre in pres[1:]:
+                    pre.getparent().remove(pre)
+                merged += 1
+            cursor = index + 1
+            break
+    return merged
 
 
 def validate_reader_contract(source_qmd: Path, content: str, project: Path | None = None) -> dict:

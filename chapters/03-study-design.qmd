@@ -1,6 +1,6 @@
 ---
 title: "实验设计：样本量、统计效力、分组与配对"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,17 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/03-study-design.R
+  packages:
+  - ggplot2
+  - lme4
+  - permute
+  - scales
+  - vegan
 ---
-
-> **分析目标：**在测序前定义独立实验单位、主要终点、分组/配对结构和统计效力；用真实 metadata 识别完全混杂，并用 pilot Shannon 差异完成可复算的样本量敏感性分析。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。自己的研究还应在 metadata 中提供 `SubjectID`、`Block/Site/Cage`、`Batch` 和时间点等设计变量。  
-> **预计资源：**13,628 个 OTU、90 个样本；普通笔记本约 1–3 分钟，内存低于 500 MB。
 
 ## 分析能否回答问题，首先由研究设计决定 {#sec-target}
 
@@ -35,11 +41,6 @@ fig-format: png
 
 本篇从真实中国湿地 16S 数据重绘两张设计审计图：
 
-::: {layout-ncol=2}
-![样本分组与盐碱状态的交叉表；空单元格揭示完全混杂。](../figures/03-design-confounding.png){#fig-design-confounding}
-
-![三种标准化效应量下，两独立组主要终点的样本量—效力敏感性曲线。](../figures/03-power-sensitivity.png){#fig-power-sensitivity}
-:::
 
 图 @fig-design-confounding 先回答“设计是否允许区分两个因素”；图 @fig-power-sensitivity 再回答“在给定假设下，大致需要多少独立样本”。顺序不能颠倒：样本再多，也不能从完全混杂的设计中分离两个效应。
 
@@ -47,171 +48,31 @@ fig-format: png
 同一只动物取 10 份粪便、同一位受试者测 10 个时间点，或同一笼内取 10 只共居动物，都不自动等于 $N=10$ 个独立重复。技术重复可以降低测量误差，纵向样本可以提高个体内变化的估计精度，但它们不能凭空增加独立受试者、笼位或样地的数量。
 :::
 
-## 从科学问题倒推设计 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 先写清 estimand，再计算样本量
+需要 R，以及 `ggplot2`、`lme4`、`permute`、`scales`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表；分组与盐碱状态保留在样本表中。
 
-**Estimand（目标估计量）**是研究真正要估计的量。例如：
-
-- 两个处理组在第 8 周 Shannon 指数的平均差；
-- 干预后整体群落 Bray–Curtis 距离中由处理解释的变异比例；
-- 某个预先指定菌属在病例与对照之间的对数丰度比；
-- 同一个体从基线到治疗后的变化量之组间差异。
-
-如果只写“比较两组菌群是否不同”，就无法唯一确定主要终点、统计检验、效应量或样本量。α 多样性、PERMANOVA、差异丰度和分类模型的效力函数不同，不能用一个通用的“每组至少 20 例”覆盖所有问题。
-
-### 2. 实验单位、观测单位和技术重复不是一回事
-
-- **实验单位（experimental unit）**：能够独立接受处理、暴露或被随机分组的最小单位。
-- **观测单位（observational unit）**：实际被测量的样本。
-- **技术重复（technical replicate）**：对同一生物材料重复提取、PCR 或测序。
-
-若处理施加在笼位，笼位通常是实验单位；若处理施加在动物，动物才可能是实验单位。共居动物共享环境和微生物来源，不能默认彼此独立。[Reish 等](https://doi.org/10.1128/aem.01033-24)审阅宿主—微生物组研究后指出，伪重复和实验单位描述不足仍很常见。
-
-### 3. 配对和重复测量要写进模型，而不是只连一条线
-
-配对设计通过比较同一个体内的变化，消除稳定的个体间差异。它通常比同样人数的完全独立设计更有效，但前提是：
-
-- 配对关系在 `SubjectID` 中明确记录；
-- 每个时间点的缺失机制被报告；
-- 模型包含个体随机截距或等价的配对结构；
-- 置换检验被限制在设计允许的交换范围内。
-
-一位受试者有两个时间点时，独立样本量仍是“受试者数/完整配对数”，不是样本管数。把 30 人 × 2 时间点写成 $N=60$ 个独立样本会造成伪重复。
-
-### 4. 平衡、随机化和阻断决定能否解释结果
-
-理想设计让主要比较在测序批次、提取批次、中心、笼位、板位和采样时间上尽量平衡。随机化用于降低已知和未知混杂；阻断（blocking）用于在不可避免的批次或空间结构内进行公平比较。
-
-最危险的情况是：
-
-> 所有病例在批次 A，所有对照在批次 B。
-
-此时“疾病效应”和“批次效应”不可辨识。统计校正不能从没有交叉信息的设计中估计两个独立效应。相同问题也会出现在地点与暴露、笼位与处理、中心与疾病完全重合时。
-
-### 5. 统计效力不是研究结束后的解释工具
-
-统计效力（power）是在真实效应达到预设大小时，研究拒绝零假设的概率。设计阶段至少要指定：
-
-1. 主要终点和统计模型；
-2. 有科学意义的最小效应；
-3. 方差或距离分布；
-4. 双侧显著性水平 $\alpha$；
-5. 目标效力 $1-\beta$；
-6. 组间比例、失访率和不可用样本率；
-7. 多重检验策略。
-
-研究结束后用观测到的 P 值计算“observed power”通常只是在重新表达 P 值，不能挽救阴性结果。更有信息的做法是报告效应量、置信区间，并说明研究能排除或无法排除多大的效应。
-
-<details>
-<summary><strong>深入：为什么 PERMANOVA 样本量不能直接照搬 t 检验</strong></summary>
-
-两独立组连续终点可用标准化均值差 $d$ 表示效应，并在给定分布假设下计算样本量。PERMANOVA 的效力则同时受到以下因素影响：
-
-- 组内群落距离分布和离散度；
-- 组间样本量及其不平衡；
-- 所选距离度量；
-- 群落组成与零值结构；
-- 协变量、分层和允许的置换方式；
-- 目标总体效应而非样本内偏高的 $R^2$。
-
-[Kelly 等](https://doi.org/10.1093/bioinformatics/btv183)提出基于 pilot 距离信息的 PERMANOVA 样本量估计，并强调样本 $R^2$ 对总体效应存在偏倚。[La Rosa 等](https://doi.org/10.1371/journal.pone.0052078)和[Ferdous 等](https://doi.org/10.1038/s41385-022-00548-1)也说明，微生物组效力计算必须与数据类型和检验对应。
-
-因此，本篇的曲线只针对一个明确的连续主要终点——固定测序深度下的 Shannon 指数——用于演示敏感性分析。若主要终点是 PERMANOVA、差异丰度或预测性能，应基于相应模型、pilot 数据和设计结构模拟，而不是把图中的 $n$ 直接套用。
-
-</details>
-
-::: {.callout-note title="真实数据中的设计警报"}
-本例 90 个样本分为 inland wetland、coastal wetland 和 Tibetan Plateau 三组。30 个 non-saline 样本全部来自 inland wetland；60 个 saline 样本全部来自另外两组。因此 `Salinity` 与 `Group` 完全混杂，`Type` 也嵌套在 `Group` 内。盐碱状态的比较不能被解释为脱离地理/湿地类型的独立盐碱效应。
-:::
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载真实数据和定义作图函数</strong></summary>
-
-首次运行安装以下 CRAN 包：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "vegan", "ggplot2", "scales", "digest", "lme4"
-))
-```
-
-数据固定使用 `microeco 2.0.0` 源码包中的真实湿地 16S 表。以下代码下载固定版本、核对 SHA-256，并导出扩增子通用三件套：
-
-```{r}
-#| eval: false
-archive <- "data/raw/microeco_2.0.0.tar.gz"
-source_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/",
-  "microeco/microeco_2.0.0.tar.gz"
-)
-expected_sha256 <- paste0(
-  "454a3b71ceeea86bdd54f475a12b5bac",
-  "9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) {
-  download.file(source_url, archive, mode = "wb")
-}
-observed_sha256 <- digest::digest(
-  file = archive,
-  algo = "sha256",
-  serialize = FALSE
-)
-stopifnot(identical(observed_sha256, expected_sha256))
-
-required <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-utils::untar(archive, files = required, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name),
-    x,
-    check.names = FALSE
-  )
-  utils::write.table(
-    out,
-    path,
-    sep = "\t",
-    quote = FALSE,
-    row.names = FALSE,
-    na = ""
-  )
-}
-
-write_tsv(data_env$otu_table_16S, "FeatureID", "data/small/otutab.tsv")
-write_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
   "data/small/taxonomy.tsv"
 )
-write_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-出版级函数直接定义在文章内：
-
 ```{r}
+#| results: hold
+#| label: reader-step-02
 library(vegan)
 library(ggplot2)
 
@@ -284,14 +145,11 @@ save_pub <- function(
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套读取并核对设计
+### 从三件套读取并核对设计
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 otutab <- read.delim(
   "data/small/otutab.tsv",
   row.names = 1,
@@ -326,11 +184,107 @@ taxonomy[1:5, , drop = FALSE]
 head(metadata)
 ```
 
-### 2. 画出交叉表，而不是只看每列频数
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/6c3ebab44401839f38b8d9356cb2f338ecfc9a3f/examples/03-study-design.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "vegan", "ggplot2", "scales", "digest", "lme4"
+))
+```
+
+</details>
+
+## 从科学问题倒推设计 {#sec-theory}
+
+### 先写清 estimand，再计算样本量
+
+**Estimand（目标估计量）**是研究真正要估计的量。例如：
+
+- 两个处理组在第 8 周 Shannon 指数的平均差；
+- 干预后整体群落 Bray–Curtis 距离中由处理解释的变异比例；
+- 某个预先指定菌属在病例与对照之间的对数丰度比；
+- 同一个体从基线到治疗后的变化量之组间差异。
+
+如果只写“比较两组菌群是否不同”，就无法唯一确定主要终点、统计检验、效应量或样本量。α 多样性、PERMANOVA、差异丰度和分类模型的效力函数不同，不能用一个通用的“每组至少 20 例”覆盖所有问题。
+
+### 实验单位、观测单位和技术重复不是一回事
+
+- **实验单位（experimental unit）**：能够独立接受处理、暴露或被随机分组的最小单位。
+- **观测单位（observational unit）**：实际被测量的样本。
+- **技术重复（technical replicate）**：对同一生物材料重复提取、PCR 或测序。
+
+若处理施加在笼位，笼位通常是实验单位；若处理施加在动物，动物才可能是实验单位。共居动物共享环境和微生物来源，不能默认彼此独立。[Reish 等](https://doi.org/10.1128/aem.01033-24)审阅宿主—微生物组研究后指出，伪重复和实验单位描述不足仍很常见。
+
+### 配对和重复测量要写进模型，而不是只连一条线
+
+配对设计通过比较同一个体内的变化，消除稳定的个体间差异。它通常比同样人数的完全独立设计更有效，但前提是：
+
+- 配对关系在 `SubjectID` 中明确记录；
+- 每个时间点的缺失机制被报告；
+- 模型包含个体随机截距或等价的配对结构；
+- 置换检验被限制在设计允许的交换范围内。
+
+一位受试者有两个时间点时，独立样本量仍是“受试者数/完整配对数”，不是样本管数。把 30 人 × 2 时间点写成 $N=60$ 个独立样本会造成伪重复。
+
+### 平衡、随机化和阻断决定能否解释结果
+
+理想设计让主要比较在测序批次、提取批次、中心、笼位、板位和采样时间上尽量平衡。随机化用于降低已知和未知混杂；阻断（blocking）用于在不可避免的批次或空间结构内进行公平比较。
+
+最危险的情况是：
+
+> 所有病例在批次 A，所有对照在批次 B。
+
+此时“疾病效应”和“批次效应”不可辨识。统计校正不能从没有交叉信息的设计中估计两个独立效应。相同问题也会出现在地点与暴露、笼位与处理、中心与疾病完全重合时。
+
+### 统计效力不是研究结束后的解释工具
+
+统计效力（power）是在真实效应达到预设大小时，研究拒绝零假设的概率。设计阶段至少要指定：
+
+1. 主要终点和统计模型；
+2. 有科学意义的最小效应；
+3. 方差或距离分布；
+4. 双侧显著性水平 $\alpha$；
+5. 目标效力 $1-\beta$；
+6. 组间比例、失访率和不可用样本率；
+7. 多重检验策略。
+
+研究结束后用观测到的 P 值计算“observed power”通常只是在重新表达 P 值，不能挽救阴性结果。更有信息的做法是报告效应量、置信区间，并说明研究能排除或无法排除多大的效应。
+
+<details>
+<summary><strong>深入：为什么 PERMANOVA 样本量不能直接照搬 t 检验</strong></summary>
+
+两独立组连续终点可用标准化均值差 $d$ 表示效应，并在给定分布假设下计算样本量。PERMANOVA 的效力则同时受到以下因素影响：
+
+- 组内群落距离分布和离散度；
+- 组间样本量及其不平衡；
+- 所选距离度量；
+- 群落组成与零值结构；
+- 协变量、分层和允许的置换方式；
+- 目标总体效应而非样本内偏高的 $R^2$。
+
+[Kelly 等](https://doi.org/10.1093/bioinformatics/btv183)提出基于 pilot 距离信息的 PERMANOVA 样本量估计，并强调样本 $R^2$ 对总体效应存在偏倚。[La Rosa 等](https://doi.org/10.1371/journal.pone.0052078)和[Ferdous 等](https://doi.org/10.1038/s41385-022-00548-1)也说明，微生物组效力计算必须与数据类型和检验对应。
+
+因此，本篇的曲线只针对一个明确的连续主要终点——固定测序深度下的 Shannon 指数——用于演示敏感性分析。若主要终点是 PERMANOVA、差异丰度或预测性能，应基于相应模型、pilot 数据和设计结构模拟，而不是把图中的 $n$ 直接套用。
+
+</details>
+
+::: {.callout-note title="真实数据中的设计警报"}
+本例 90 个样本分为 inland wetland、coastal wetland 和 Tibetan Plateau 三组。30 个 non-saline 样本全部来自 inland wetland；60 个 saline 样本全部来自另外两组。因此 `Salinity` 与 `Group` 完全混杂，`Type` 也嵌套在 `Group` 内。盐碱状态的比较不能被解释为脱离地理/湿地类型的独立盐碱效应。
+:::
+
+## 先检查混杂，再估计样本量 {#sec-code}
+
+### 画出交叉表，而不是只看每列频数
 
 单独运行 `table(metadata$Group)` 和 `table(metadata$Saline)` 都会得到看似合理的样本量；只有交叉表能暴露两个变量没有交叉。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 group_labels <- c(
   IW = "Inland wetland",
   CW = "Coastal wetland",
@@ -386,11 +340,13 @@ stopifnot(
 
 因此，在这份数据里拟合 `outcome ~ Group + Salinity` 不能得到可识别的两个独立效应。软件可能删除共线项或返回秩亏模型，但这不是“完成了统计校正”。
 
-### 3. 用固定深度计算 pilot Shannon 指数
+### 用固定深度计算 pilot Shannon 指数
 
 为了让本例的随机抽样可复现，先把每个样本稀释到最小测序深度，再计算 Shannon 指数。这里的目的只是构造一个明确的连续主要终点进行样本量敏感性分析；稀释并不是所有 α 多样性推断的默认答案。
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 library_sizes <- colSums(otutab)
 rarefaction_depth <- min(library_sizes)
 
@@ -436,11 +392,13 @@ alpha_summary
 
 稀释深度为每样本 `r format(rarefaction_depth, big.mark = ",")` reads。`Non-saline soil` 的 Shannon 均值为 `r sprintf("%.3f", alpha_summary["Non-saline soil", "Mean"])`（$n=`r alpha_summary["Non-saline soil", "N"]`$），`Saline soil` 为 `r sprintf("%.3f", alpha_summary["Saline soil", "Mean"])`（$n=`r alpha_summary["Saline soil", "N"]`$）。
 
-### 4. 估计标准化差异及其不确定性
+### 估计标准化差异及其不确定性
 
 这里把效应方向定义为 `Non-saline soil − Saline soil`，用 pooled SD 标准化。bootstrap 在每组内部有放回抽样 2,000 次，并固定随机种子。
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 cohen_d <- function(x, y) {
   nx <- length(x)
   ny <- length(y)
@@ -503,7 +461,7 @@ data.frame(
 
 本例得到 $d=`r sprintf("%.3f", pilot_d)`$，bootstrap 95% CI 为 `r sprintf("%.3f", pilot_ci[1])` 到 `r sprintf("%.3f", pilot_ci[2])`，Welch 检验 $P=`r sprintf("%.3f", pilot_test$p.value)`$。区间跨过 0，效应估计很不精确；更重要的是，盐碱状态与湿地组完全混杂，所以这个 $d$ 不能解释为独立的盐碱效应。
 
-### 5. 做 prospective sensitivity analysis
+### 做 prospective sensitivity analysis
 
 假设未来研究：
 
@@ -514,6 +472,8 @@ data.frame(
 - 标准化效应分别为 0.20、当前 pilot 点估计和 0.50。
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 pilot_effect <- abs(pilot_d)
 effect_scenarios <- data.frame(
   Scenario = c(
@@ -587,11 +547,14 @@ n80
 
 若把 $d=`r sprintf("%.3f", pilot_effect)`$ 当作未来研究的规划值，在这些理想化假设下达到 80% power 约需每组 `r n80$NPerGroup[n80$Scenario == "Pilot estimate"]` 个独立样本；当前较小组的 $n=`r current_smaller_group`$ 对该效应只有约 `r sprintf("%.1f", 100 * current_pilot_power)`% 的理论效力。由于 pilot 效应不确定且存在混杂，正式方案应同时比较多个效应情景，并增加失访、提取失败和质控淘汰余量。
 
-## 出版级美化 {#sec-polish}
+## 从交叉设计与效力曲线判断研究可行性 {#sec-polish}
 
-### 1. 设计混杂热图
+### 设计混杂热图
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
+#| fig-show: hide
 design_counts$GroupLabel <- factor(
   design_counts$GroupLabel,
   levels = rev(c(
@@ -669,9 +632,14 @@ save_pub(
 )
 ```
 
-### 2. 样本量—效力敏感性曲线
+![样本分组与盐碱状态的交叉表；空单元格揭示完全混杂。](../figures/03-design-confounding.png){#fig-design-confounding}
+
+### 样本量—效力敏感性曲线
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
+#| fig-show: hide
 scenario_labels <- c(
   "Small effect" = "Small effect (d = 0.20)",
   "Pilot estimate" = sprintf(
@@ -790,6 +758,8 @@ save_pub(
 )
 ```
 
+![三种标准化效应量下，两独立组主要终点的样本量—效力敏感性曲线。](../figures/03-power-sensitivity.png){#fig-power-sensitivity}
+
 两张图均导出为 PDF、PNG 和 300 dpi LZW-TIFF。图内所有文字均为英文；正文负责解释研究设计的生物学含义。
 
 ## 常见坑 {#sec-pitfalls}
@@ -811,7 +781,7 @@ save_pub(
 图 @fig-power-sensitivity 使用当前数据的 Shannon 标准化差异作为一个不确定的规划情景。它不证明盐碱状态影响 Shannon，也不意味着所有 16S 研究都需要每组 304 例。你的效应、方差、组间比例、配对相关、协变量和主要统计模型改变后，样本量会随之改变。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告研究设计与样本量依据的方法与限制 {#sec-methods}
 
 下面模板把实验单位、主要终点、混杂检查和样本量假设写完整。方括号内容应在研究开始前按方案替换：
 
@@ -829,9 +799,9 @@ Results 中建议同时报告：
 - 实际使用的阻断、随机效应和置换限制；
 - 与预注册/方案相比的任何偏离。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将研究设计与样本量依据用于自己的研究 {#sec-own-data}
 
-### 1. metadata 至少要记录什么
+### metadata 至少要记录什么
 
 标准三件套路径只需替换为你的文件。metadata 每行对应一个样本，建议至少包含：
 
@@ -849,7 +819,7 @@ Results 中建议同时报告：
 
 独立个体横断面研究没有重复测量时，`SubjectID` 仍应存在，并与每个独立单位一一对应。若处理施加在笼或样地，`SubjectID` 应改为真正接受处理的单位，而不是每只动物或每个土芯。
 
-### 2. 先运行三张设计表
+### 先运行三张设计表
 
 ```{r}
 #| eval: false
@@ -889,7 +859,7 @@ xtabs(~ Group + Site, data = metadata)
 
 看到 0 单元格时，不是所有情况都必须放弃研究；但要判断它代表随机缺失、稀疏分层，还是两个变量完全重合。完全重合的效应无法通过增加模型项分离。
 
-### 3. 配对或纵向终点
+### 配对或纵向终点
 
 两个完整时间点的连续终点可先计算个体内差值；多个时间点或不完整随访更适合混合模型：
 
@@ -942,7 +912,7 @@ vegan::adonis2(
 
 允许怎样置换取决于随机化和采样结构。若时间有固定顺序、存在嵌套笼位/中心，或组别是个体间因素，不能机械套用“按 SubjectID 分块”；应先把可交换单位画清楚，再定义置换方案。
 
-### 4. 把样本量变成可审查的假设
+### 把样本量变成可审查的假设
 
 正式方案至少保存一张情景表：
 
