@@ -57,12 +57,12 @@
 <text x='475.18' y='193.84' text-anchor='end' style='font-size: 8.54px; font-weight: bold; font-family: "Arial";' textLength='81.67px' lengthAdjust='spacingAndGlyphs'>Metadata absent</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwyMzguMTE=)'>
-<text x='107.73' y='193.83' text-anchor='end' style='font-size: 8.50px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='98.45px' lengthAdjust='spacingAndGlyphs'>Blocked or clustered</text>
-<text x='107.73' y='150.59' text-anchor='end' style='font-size: 8.50px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='95.28px' lengthAdjust='spacingAndGlyphs'>Repeated measures</text>
-<text x='107.73' y='107.35' text-anchor='end' style='font-size: 8.50px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='99.76px' lengthAdjust='spacingAndGlyphs'>Paired two-condition</text>
-<text x='107.73' y='64.11' text-anchor='end' style='font-size: 8.50px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='97.22px' lengthAdjust='spacingAndGlyphs'>Independent groups</text>
-<text x='7.97' y='28.71' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='247.36px' lengthAdjust='spacingAndGlyphs'>Selected branch: independent three-group comparison</text>
-<text x='7.97' y='15.52' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='245.28px' lengthAdjust='spacingAndGlyphs'>Choose the test from the sampling design</text>
-<text x='111.77' y='228.64' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='333.42px' lengthAdjust='spacingAndGlyphs'>No subject, pair, time, or declared block identifier is present in the demonstration metadata.</text>
+<text x='107.73' y='193.83' text-anchor='end' style='font-size: 8.50px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='98.45px' lengthAdjust='spacingAndGlyphs'>Blocked or clustered</text>
+<text x='107.73' y='150.59' text-anchor='end' style='font-size: 8.50px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='95.28px' lengthAdjust='spacingAndGlyphs'>Repeated measures</text>
+<text x='107.73' y='107.35' text-anchor='end' style='font-size: 8.50px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='99.76px' lengthAdjust='spacingAndGlyphs'>Paired two-condition</text>
+<text x='107.73' y='64.11' text-anchor='end' style='font-size: 8.50px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='97.22px' lengthAdjust='spacingAndGlyphs'>Independent groups</text>
+<text x='7.97' y='28.71' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='247.36px' lengthAdjust='spacingAndGlyphs'>Selected branch: independent three-group comparison</text>
+<text x='7.97' y='15.52' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='245.28px' lengthAdjust='spacingAndGlyphs'>Choose the test from the sampling design</text>
+<text x='111.77' y='228.64' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='333.42px' lengthAdjust='spacingAndGlyphs'>No subject, pair, time, or declared block identifier is present in the demonstration metadata.</text>
 </g>
 </svg>

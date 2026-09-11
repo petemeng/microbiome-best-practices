@@ -50,13 +50,13 @@
 <text x='32.12' y='214.08' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>72</text>
 <text x='32.12' y='150.16' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.27px' lengthAdjust='spacingAndGlyphs'>300</text>
 <text x='32.12' y='66.04' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.27px' lengthAdjust='spacingAndGlyphs'>600</text>
-<polyline points='34.11,231.35 36.60,231.35 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<polyline points='34.11,211.16 36.60,211.16 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<polyline points='34.11,147.24 36.60,147.24 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<polyline points='34.11,63.13 36.60,63.13 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<polyline points='126.07,233.84 126.07,231.35 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<polyline points='275.18,233.84 275.18,231.35 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<polyline points='424.29,233.84 424.29,231.35 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
+<polyline points='34.11,231.35 36.60,231.35 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='34.11,211.16 36.60,211.16 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='34.11,147.24 36.60,147.24 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='34.11,63.13 36.60,63.13 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='126.07,233.84 126.07,231.35 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='275.18,233.84 275.18,231.35 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
+<polyline points='424.29,233.84 424.29,231.35 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <text x='126.07' y='241.67' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.10px' lengthAdjust='spacingAndGlyphs'>72 ppi</text>
 <text x='275.18' y='241.67' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='30.19px' lengthAdjust='spacingAndGlyphs'>300 ppi</text>
 <text x='424.29' y='241.67' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='30.19px' lengthAdjust='spacingAndGlyphs'>600 ppi</text>

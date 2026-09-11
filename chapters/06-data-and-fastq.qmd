@@ -55,7 +55,7 @@ reader-reproduction:
 | Barcode 1% | `.../atacama-soils/1p/barcodes.fastq.gz` | `c07f517e...ff3c0f` |
 | Metadata | `.../atacama-soils/sample_metadata.tsv` | `7cff810a...c5b3bd` |
 
-完整 URL、完整校验值、2,000-record 摘录的生成规则和摘录文件校验值均保存在 `data/small/fastq/source_summary.json`。本篇的图是根据真实 reads 重新计算的原创图，不复制论文图版。
+完整 URL、完整校验值、2,000-record 摘录的生成规则和摘录文件校验值均保存在 `data/small/fastq/source_summary.json`。
 
 ## 下载并读取本次分析的数据 {#sec-setup}
 
@@ -351,7 +351,7 @@ $$
 
 </details>
 
-### multiplexed 与 demultiplexed 是两种文件合同
+### 区分尚未拆样与已经拆样的 FASTQ 文件
 
 **Multiplexed EMP paired-end：**
 
@@ -898,7 +898,7 @@ p_architecture
 
 这张图不声称所有项目都使用 515F/806R，也不把示意长度伪装成测量值。换引物区域时需要重画 primer、insert 和 overlap 的关系，并把实际 primer sequence 写进 Methods。
 
-### 图 2：FASTQ anatomy 使用真实 record，但避免长字符串挤压
+### 图 2：读懂一条真实 FASTQ 记录的四行结构
 
 ```{r}
 #| results: hold

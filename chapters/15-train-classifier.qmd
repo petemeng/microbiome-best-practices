@@ -1,6 +1,6 @@
 ---
 title: "训练你自己引物区的分类器"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -19,10 +19,6 @@ fig-dpi: 300
 fig-format: png
 ---
 
-> **分析目标：**从 SILVA 138.2 完整 SSU 发布提取与 515F/806R 一致的 V4 参考区，训练当前 QIIME 2 环境可读取的 Naive Bayes 分类器；用不泄漏序列的 known-lineage 留出集比较 confidence 0.50、0.70、0.90，再用全部参考重训生产模型。  
-> **输入文件：**SILVA 138.2 SSURef NR99 V4 exact-sequence LCA 参考 FASTA 与 taxonomy、366 条真实 V4 ASV、对应 5,213 条 reads 的频数。换成自己的数据时，还需标准 `otutab.tsv`、`metadata.tsv` 和与 ASV ID 对齐的代表序列 FASTA；本篇生成新的 `taxonomy.tsv`。  
-> **预计资源：**本次 262,752 条区域参考在 4 个分类线程下，两次训练约 13.2 分钟；导入、三档留出分类、三档真实 ASV 分类、maximum validation 与审计合计约 30–40 分钟。建议预留 16 GB 内存和 2 GB 工作空间。  
-> **执行策略：**参考拆分、两次训练、六次分类、QIIME taxonomy evaluation、Artifact validation 与 provenance 已一次性实跑；网页构建保留 `eval: false`，避免每次渲染重新训练模型。
 
 ## 为什么分类器必须匹配你的引物区域？ {#sec-target}
 
@@ -92,199 +88,26 @@ Production classifier
 
 这里的 366 条 ASV 来自固定 commit `f282ad2bafb3ca90190ec87290066ee1985df655` 的真实 nf-core V4 MiSeq 数据。原始 10,000 对 reads 经 anchored、IUPAC-aware 515F/806R 去引物和 DADA2 后保留 5,213 对非嵌合 reads。它们用于测试模型在真实 query 上的分类深度和方法敏感性；原数据没有独立生态分组，因此不据此推断处理效应。
 
-## 分类器必须匹配引物和扩增区域 {#sec-theory}
+## 开始前：数据与运行环境 {#sec-setup}
 
-### 1. “区域特异”是让训练集与实验可见信息一致
+在 Linux 或 WSL2 的项目文件夹中运行下面的下载命令。下载后保留这里的相对目录，后续命令使用同一组文件。
 
-测序读到的是 V4，不是完整 16S。若直接用全长 SSU 训练，模型会在训练阶段看见 query 永远不会提供的 k-mer；不同参考记录还可能在 V4 上完全相同，却在全长其他区域可区分。
-
-本次参考准备路径是：
-
-```text
-SILVA 138.2 full SSU
-  → match 515F/806R
-  → retain 200–400 nt amplicons
-  → exact-sequence dereplication
-  → least-common-ancestor taxonomy
-  → region-specific classifier
+```bash
+base_url="https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa"
+for file in \
+  env/qiime2.yml \
+  scripts/validate_region_classifier.py
+do
+  mkdir -p "$(dirname "$file")"
+  curl --fail --location --retry 3 "$base_url/$file" --output "$file" || break
+done
 ```
 
-区域提取并不会凭空提高生物学分辨率。它解决的是训练域与 query 域不一致；如果两个 genus 在 V4 上不可区分，正确做法是回退到共同祖先，而不是强行给出一个更深名称。
-
-### 2. reference taxonomy 必须先固定
-
-本次 SILVA 合同固定为 domain、phylum、class、order、family、genus 六层。原始 description 中可能出现 species 文本，但没有把它提升为本分类器的 species 输出。这样做把两个问题分开：
-
-- 模型能否在 V4 上支持某个标签；
-- 数据库文本是否碰巧含有更深名称。
-
-短 V4 的 genus 标签仍然是参考库条件下的推断；species 或 strain 结论需要额外 marker、培养、基因组或其他正交证据。
-
-### 3. exact-sequence LCA 防止重复参考投票
-
-同一条 V4 序列可能来自多条完整 SSU 记录。若重复项全部进入训练，出现次数多的 lineage 会获得额外权重；若同一序列对应不同 genus，模型还会被要求学习一个从序列本身无法决定的标签。
-
-exact-sequence LCA 的处理是：
-
-```text
-identical V4 sequence
-  reference A: d__; p__; c__; o__; f__; g__A
-  reference B: d__; p__; c__; o__; f__; g__B
-
-retained label
-  d__; p__; c__; o__; f__; g__
-```
-
-这不是“丢掉已知 genus”，而是把不可辨识性写进训练标签。
-
-### 4. 为什么不能拿训练集自己评估
-
-把同一序列同时放进训练和测试，会得到几乎没有意义的高分。本次先对 262,752 条已经 exact-dereplicated 的序列按完整 genus lineage 分组，再在每个非 singleton lineage 内按固定 SHA-256 顺序留下约 10%：
-
-```text
-all reference records:   262,752
-training records:        236,516
-holdout records:          26,236
-shared IDs:                    0
-shared sequences:              0
-holdout lineages unseen
-  in training:                 0
-```
-
-711 个 singleton lineage 全部留在 training，确保生产参考范围不因验证拆分而无意义地丢失；它们不参与 holdout。
-
-::: {.callout-warning title="这个留出集故意只回答一个较窄的问题"}
-所有 holdout lineage 在 training 中都已有其他参考，因此它评估的是同一 release 内 **known-lineage interpolation**。它通常比独立 mock community、跨 release 测试或真正 novel lineage 更容易，不能写成“真实样本 genus 准确率为 93.8%”。
-:::
-
-### 5. precision、recall、F1 与 abstention 要一起看
-
-对每个 taxonomy rank，本次定义：
-
-\[
-\mathrm{Precision} =
-\frac{\mathrm{Correct}}
-{\mathrm{Correct}+\mathrm{Incorrect}}
-\]
-
-\[
-\mathrm{Recall} =
-\frac{\mathrm{Correct}}
-{\mathrm{Expected}}
-\]
-
-\[
-\mathrm{F1} =
-\frac{2 \times \mathrm{Precision} \times \mathrm{Recall}}
-{\mathrm{Precision}+\mathrm{Recall}}
-\]
-
-其中：
-
-- `incorrect`：模型给了该层标签，但名称错误；
-- `abstained`：模型没有把 taxonomy 延伸到该层；
-- `expected`：reference 在该层有可评估标签的记录数。
-
-只报 precision 会奖励过度保守的模型；只报 recall 会掩盖错误深层标签；只报“有多少 ASV 被注释”则完全不知道名称是否正确。
-
-### 6. confidence 越高，不等于模型“整体越好”
-
-在 q2-feature-classifier 中，confidence 控制何时截断 taxonomy。阈值升高通常提高已给出标签的 precision，同时增加 abstention。
-
-本次 genus 层：
-
-| Confidence | Correct | Incorrect | Abstained | Precision | Recall | F1 |
-|---:|---:|---:|---:|---:|---:|---:|
-| 0.50 | 21,811 | 2,084 | 1,980 | 0.9128 | 0.8429 | **0.8765** |
-| 0.70 | 20,695 | 1,361 | 3,819 | 0.9383 | 0.7998 | 0.8635 |
-| 0.90 | 18,926 | 765 | 6,184 | **0.9612** | 0.7314 | 0.8307 |
-
-0.50 在这套内部留出集上得到最高 genus F1；0.70 将错误 genus 从 2,084 降到 1,361，以 recall 下降约 4.3 个百分点为代价；0.90 继续提高 precision，却使真实 query 的 genus read coverage 从 80.9% 降到 70.4%。
-
-因此本页用 0.70 作为主分析的平衡点，但不把它写成普适最优值：
-
-- 探索性筛查、后续会人工核对：可考虑 0.50，并保留敏感性分析；
-- 常规群落描述：0.70 是可解释的折中；
-- 错误深层标签代价很高：可考虑 0.90，或直接在更高 rank 汇报。
-
-confidence 是模型截断参数，不是经外部校准的“这个 genus 有 70% 概率为真”。
-
-### 7. 这里训练的 Naive Bayes 合同是什么
-
-本次把会影响模型的参数全部显式写出：
-
-```text
-feature analyzer:      char_wb
-k-mer range:           7 to 7
-hashed features:       8,192
-alternate sign:        false
-normalization:         L2
-MultinomialNB alpha:   0.001
-fit prior:             false
-class weights:         not supplied
-chunk size:            20,000
-```
-
-分类时固定：
-
-```text
-read orientation:      same
-reads per batch:       20,000
-parallel jobs:         4
-confidence:            0.50 / 0.70 / 0.90
-```
-
-`same` 适用于本次已经统一为正向的代表序列。若自己的 ASV FASTA 方向不确定，应先检查流程保证的 orientation，再决定使用 `same`、`reverse-complement` 或 `auto`；不要把方向搜索当作无成本默认。
-
-### 8. classifier 与 scikit-learn 版本是一组合同
-
-QIIME classifier 内部保存了序列化的 scikit-learn pipeline。旧环境训练的模型在新环境中可能：
-
-- 无法反序列化；
-- 能读取但发出版本警告；
-- 因 feature pipeline 或依赖变化得到不可比结果。
-
-因此 archive 至少要同时保存：
-
-- classifier QZA；
-- QIIME 2 和 q2-feature-classifier 版本；
-- scikit-learn、joblib、NumPy、SciPy 版本；
-- reference FASTA/taxonomy checksum；
-- 训练命令和 Artifact provenance。
-
-### 9. 验证后必须用全参考重新训练
-
-236,516 条 training reference 生成的是验证模型，只用于估计 holdout 表现。阈值确定后，本次重新用全部 262,752 条参考训练生产 classifier。否则会故意丢掉 26,236 条已知参考，并把验证过程中的缺口带进正式样本。
-
-```text
-holdout classifier
-  → choose/report threshold
-  → discard as production deliverable
-
-all-reference classifier
-  → classify study ASVs
-  → archive with versions and provenance
-```
-
-### 10. 方法一致性不是 ground truth
-
-在 confidence 0.70 下，Naive Bayes 与同一 SILVA 区域参考的 consensus-VSEARCH 在 303 个都有 genus 标签的 ASV 中有 293 个 exact-name match；按 reads 加权是 3,711/3,797，约 97.74%。
-
-这个高一致性说明本数据的大多数高丰度标签对算法选择不敏感，但不能证明共同标签正确。两种方法共享：
-
-- 同一 query；
-- 同一 SILVA release；
-- 同一区域 reference；
-- 同一 taxonomy schema。
-
-共享偏差也会让二者一致。真正的 accuracy 仍需要已知组成 mock community、人工整理 isolate 或其他独立 truth set。
-
-## 准备工作 {#sec-setup}
 
 <details>
-<summary><strong>展开：固定环境、真实数据、checksum 与内联作图函数</strong></summary>
+<summary>本次分析的数据、环境与图形设置</summary>
 
-### 1. 安装并核对 QIIME 2 环境
+### 安装并核对 QIIME 2 环境
 
 项目提供已验证的 `env/qiime2.yml`：
 
@@ -331,7 +154,7 @@ qiime tools cache-create --cache work/15-classifier-cache
 
 `--use-cache` 必须指向 `qiime tools cache-create` 创建的 QIIME cache，普通空目录不等价。
 
-### 2. 检查真实参考与 query
+### 检查真实参考与 query
 
 ```{bash}
 DATA="data/small/taxonomy-databases"
@@ -381,7 +204,7 @@ metadata.tsv
   SampleID<TAB>Group<TAB>Batch...
 ```
 
-### 3. 安装 R 作图依赖并内联出版函数
+### 安装 R 作图依赖并内联出版函数
 
 ```{r}
 install.packages(
@@ -478,9 +301,197 @@ save_pub <- function(
 
 </details>
 
-## 可复制代码 {#sec-code}
 
-### 1. 从完整 reference 提取与引物一致的区域
+## 分类器必须匹配引物和扩增区域 {#sec-theory}
+
+### “区域特异”是让训练集与实验可见信息一致
+
+测序读到的是 V4，不是完整 16S。若直接用全长 SSU 训练，模型会在训练阶段看见 query 永远不会提供的 k-mer；不同参考记录还可能在 V4 上完全相同，却在全长其他区域可区分。
+
+本次参考准备路径是：
+
+```text
+SILVA 138.2 full SSU
+  → match 515F/806R
+  → retain 200–400 nt amplicons
+  → exact-sequence dereplication
+  → least-common-ancestor taxonomy
+  → region-specific classifier
+```
+
+区域提取并不会凭空提高生物学分辨率。它解决的是训练域与 query 域不一致；如果两个 genus 在 V4 上不可区分，正确做法是回退到共同祖先，而不是强行给出一个更深名称。
+
+### reference taxonomy 必须先固定
+
+本次 SILVA 合同固定为 domain、phylum、class、order、family、genus 六层。原始 description 中可能出现 species 文本，但没有把它提升为本分类器的 species 输出。这样做把两个问题分开：
+
+- 模型能否在 V4 上支持某个标签；
+- 数据库文本是否碰巧含有更深名称。
+
+短 V4 的 genus 标签仍然是参考库条件下的推断；species 或 strain 结论需要额外 marker、培养、基因组或其他正交证据。
+
+### exact-sequence LCA 防止重复参考投票
+
+同一条 V4 序列可能来自多条完整 SSU 记录。若重复项全部进入训练，出现次数多的 lineage 会获得额外权重；若同一序列对应不同 genus，模型还会被要求学习一个从序列本身无法决定的标签。
+
+exact-sequence LCA 的处理是：
+
+```text
+identical V4 sequence
+  reference A: d__; p__; c__; o__; f__; g__A
+  reference B: d__; p__; c__; o__; f__; g__B
+
+retained label
+  d__; p__; c__; o__; f__; g__
+```
+
+这不是“丢掉已知 genus”，而是把不可辨识性写进训练标签。
+
+### 为什么不能拿训练集自己评估
+
+把同一序列同时放进训练和测试，会得到几乎没有意义的高分。本次先对 262,752 条已经 exact-dereplicated 的序列按完整 genus lineage 分组，再在每个非 singleton lineage 内按固定 SHA-256 顺序留下约 10%：
+
+```text
+all reference records:   262,752
+training records:        236,516
+holdout records:          26,236
+shared IDs:                    0
+shared sequences:              0
+holdout lineages unseen
+  in training:                 0
+```
+
+711 个 singleton lineage 全部留在 training，确保生产参考范围不因验证拆分而无意义地丢失；它们不参与 holdout。
+
+::: {.callout-warning title="这个留出集故意只回答一个较窄的问题"}
+所有 holdout lineage 在 training 中都已有其他参考，因此它评估的是同一 release 内 **known-lineage interpolation**。它通常比独立 mock community、跨 release 测试或真正 novel lineage 更容易，不能写成“真实样本 genus 准确率为 93.8%”。
+:::
+
+### precision、recall、F1 与 abstention 要一起看
+
+对每个 taxonomy rank，本次定义：
+
+\[
+\mathrm{Precision} =
+\frac{\mathrm{Correct}}
+{\mathrm{Correct}+\mathrm{Incorrect}}
+\]
+
+\[
+\mathrm{Recall} =
+\frac{\mathrm{Correct}}
+{\mathrm{Expected}}
+\]
+
+\[
+\mathrm{F1} =
+\frac{2 \times \mathrm{Precision} \times \mathrm{Recall}}
+{\mathrm{Precision}+\mathrm{Recall}}
+\]
+
+其中：
+
+- `incorrect`：模型给了该层标签，但名称错误；
+- `abstained`：模型没有把 taxonomy 延伸到该层；
+- `expected`：reference 在该层有可评估标签的记录数。
+
+只报 precision 会奖励过度保守的模型；只报 recall 会掩盖错误深层标签；只报“有多少 ASV 被注释”则完全不知道名称是否正确。
+
+### confidence 越高，不等于模型“整体越好”
+
+在 q2-feature-classifier 中，confidence 控制何时截断 taxonomy。阈值升高通常提高已给出标签的 precision，同时增加 abstention。
+
+本次 genus 层：
+
+| Confidence | Correct | Incorrect | Abstained | Precision | Recall | F1 |
+|---:|---:|---:|---:|---:|---:|---:|
+| 0.50 | 21,811 | 2,084 | 1,980 | 0.9128 | 0.8429 | **0.8765** |
+| 0.70 | 20,695 | 1,361 | 3,819 | 0.9383 | 0.7998 | 0.8635 |
+| 0.90 | 18,926 | 765 | 6,184 | **0.9612** | 0.7314 | 0.8307 |
+
+0.50 在这套内部留出集上得到最高 genus F1；0.70 将错误 genus 从 2,084 降到 1,361，以 recall 下降约 4.3 个百分点为代价；0.90 继续提高 precision，却使真实 query 的 genus read coverage 从 80.9% 降到 70.4%。
+
+因此本页用 0.70 作为主分析的平衡点，但不把它写成普适最优值：
+
+- 探索性筛查、后续会人工核对：可考虑 0.50，并保留敏感性分析；
+- 常规群落描述：0.70 是可解释的折中；
+- 错误深层标签代价很高：可考虑 0.90，或直接在更高 rank 汇报。
+
+confidence 是模型截断参数，不是经外部校准的“这个 genus 有 70% 概率为真”。
+
+### 明确 Naive Bayes 分类器的参考库、区域与训练设置
+
+本次把会影响模型的参数全部显式写出：
+
+```text
+feature analyzer:      char_wb
+k-mer range:           7 to 7
+hashed features:       8,192
+alternate sign:        false
+normalization:         L2
+MultinomialNB alpha:   0.001
+fit prior:             false
+class weights:         not supplied
+chunk size:            20,000
+```
+
+分类时固定：
+
+```text
+read orientation:      same
+reads per batch:       20,000
+parallel jobs:         4
+confidence:            0.50 / 0.70 / 0.90
+```
+
+`same` 适用于本次已经统一为正向的代表序列。若自己的 ASV FASTA 方向不确定，应先检查流程保证的 orientation，再决定使用 `same`、`reverse-complement` 或 `auto`；不要把方向搜索当作无成本默认。
+
+### 分类器必须与 scikit-learn 版本兼容
+
+QIIME classifier 内部保存了序列化的 scikit-learn pipeline。旧环境训练的模型在新环境中可能：
+
+- 无法反序列化；
+- 能读取但发出版本警告；
+- 因 feature pipeline 或依赖变化得到不可比结果。
+
+因此 archive 至少要同时保存：
+
+- classifier QZA；
+- QIIME 2 和 q2-feature-classifier 版本；
+- scikit-learn、joblib、NumPy、SciPy 版本；
+- reference FASTA/taxonomy checksum；
+- 训练命令和 Artifact provenance。
+
+### 验证后必须用全参考重新训练
+
+236,516 条 training reference 生成的是验证模型，只用于估计 holdout 表现。阈值确定后，本次重新用全部 262,752 条参考训练生产 classifier。否则会故意丢掉 26,236 条已知参考，并把验证过程中的缺口带进正式样本。
+
+```text
+holdout classifier
+  → choose/report threshold
+  → discard as production deliverable
+
+all-reference classifier
+  → classify study ASVs
+  → archive with versions and provenance
+```
+
+### 方法一致性不是 ground truth
+
+在 confidence 0.70 下，Naive Bayes 与同一 SILVA 区域参考的 consensus-VSEARCH 在 303 个都有 genus 标签的 ASV 中有 293 个 exact-name match；按 reads 加权是 3,711/3,797，约 97.74%。
+
+这个高一致性说明本数据的大多数高丰度标签对算法选择不敏感，但不能证明共同标签正确。两种方法共享：
+
+- 同一 query；
+- 同一 SILVA release；
+- 同一区域 reference；
+- 同一 taxonomy schema。
+
+共享偏差也会让二者一致。真正的 accuracy 仍需要已知组成 mock community、人工整理 isolate 或其他独立 truth set。
+
+## 构建区域分类器并检查迁移表现 {#sec-code}
+
+### 从完整 reference 提取与引物一致的区域
 
 如果已经下载完整 SILVA sequences 和固定 taxonomy Artifact，先提取实验区域：
 
@@ -547,7 +558,7 @@ qiime tools import \
   --validate-level max
 ```
 
-### 2. 先建立不泄漏的验证拆分
+### 先建立不泄漏的验证拆分
 
 本页的完整拆分 membership 已保存为 `reference-split-membership.tsv.gz`。核心规则是按 domain–genus 完整 lineage 分组、singleton 留在 training、其他 lineage 按固定 SHA-256 顺序取约 10% holdout：
 
@@ -675,7 +686,7 @@ qiime tools import \
   --validate-level max
 ```
 
-### 3. 训练验证 classifier
+### 训练验证 classifier
 
 ```{bash}
 qiime feature-classifier fit-classifier-naive-bayes \
@@ -693,7 +704,7 @@ qiime feature-classifier fit-classifier-naive-bayes \
   --use-cache work/15-classifier-cache
 ```
 
-### 4. 在三个阈值上分类 holdout
+### 在三个阈值上分类 holdout
 
 三次命令除 confidence 和输出名外完全相同：
 
@@ -741,7 +752,7 @@ qiime quality-control evaluate-taxonomy \
   --use-cache work/15-classifier-cache
 ```
 
-### 5. 用全部 reference 重训生产 classifier
+### 用全部参考序列重训用于正式分析的分类器
 
 评估结束后，重新使用全部 262,752 条 reference：
 
@@ -761,7 +772,7 @@ qiime feature-classifier fit-classifier-naive-bayes \
   --use-cache work/15-classifier-cache
 ```
 
-### 6. 分类真实 ASV，并保留阈值敏感性
+### 分类真实 ASV，并保留阈值敏感性
 
 主分析：
 
@@ -803,7 +814,7 @@ qiime feature-classifier classify-sklearn \
   --use-cache work/15-classifier-cache
 ```
 
-### 7. 在本篇内重算 sequence-search comparator
+### 在本篇内重算 sequence-search comparator
 
 方法一致性图不读取其他章节的分类结果，而是用本篇已导入的 query、SILVA V4 sequences 和 taxonomy 重新运行同一套 bounded consensus-VSEARCH：
 
@@ -833,7 +844,7 @@ qiime feature-classifier classify-consensus-vsearch \
 
 这两个 comparator Artifact 服务于方法敏感性审计，不取代生产 Naive Bayes taxonomy。
 
-### 8. 导出 taxonomy，回到通用三件套
+### 导出 taxonomy，回到通用三件套
 
 ```{bash}
 qiime tools export \
@@ -895,7 +906,7 @@ taxonomy.tsv   features × ranks
 metadata.tsv   samples × variables
 ```
 
-### 9. 一次性运行完整审计
+### 一次性运行完整审计
 
 项目脚本把固定拆分、两次训练、六次分类、指标、图形、maximum validation 和 provenance 合在同一入口：
 
@@ -935,9 +946,9 @@ column -t -s $'\t' \
 
 必须得到 `80 / 80 PASS`，再把 classifier 用于正式数据。
 
-## 出版级美化 {#sec-publication}
+## 比较分类器置信度与未见谱系表现 {#sec-publication}
 
-### 1. 验证主图同时放 precision、recall 和 F1
+### 验证主图同时放 precision、recall 和 F1
 
 ```{r}
 holdout <- read_tsv(
@@ -1000,7 +1011,7 @@ save_pub(
 
 图题必须出现 `known-lineage` 或 `same-release interpolation`，避免读者把内部留出误读成外部准确率。
 
-### 2. 正式样本用 read-weighted coverage 展示阈值代价
+### 正式样本用 read-weighted coverage 展示阈值代价
 
 ```{r}
 query_cov <- read_tsv(
@@ -1048,7 +1059,7 @@ save_pub(
 
 ASV-weighted 和 read-weighted 结果都应保存在表中；主图可优先使用 read-weighted coverage，因为它更接近后续丰度图实际保留的数据量。
 
-### 3. 方法比较图必须把 coverage 与 agreement 分开
+### 分开比较注释覆盖率与方法一致性
 
 Naive Bayes 和 sequence-search 的可注释集合并不相同。exact-name agreement 的分母只能是“两种方法在该层都给出标签”的 comparable ASVs/reads，不能用全部 366 个 ASV。
 
@@ -1063,7 +1074,7 @@ Exact agreement:              293 ASVs / 3,711 reads
 
 图例应写 `Exact agreement among comparable reads`，不要简写为 `Accuracy`。
 
-### 4. 主文、补充材料和归档各放什么
+### 主文、补充材料和归档各放什么
 
 | 位置 | 最少内容 |
 |---|---|
@@ -1091,7 +1102,7 @@ classifier 文件本身不能替代 Methods；Methods 也不能替代可读取�
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告区域分类器与验证设计 {#sec-methods}
 
 ### 区域参考与训练模板
 
@@ -1107,9 +1118,9 @@ classifier 文件本身不能替代 Methods；Methods 也不能替代可读取�
 
 如果用了 independent mock community，应把第二段的 known-lineage split 换成 mock 的真实组成、理论拷贝数、预期 taxonomy 和混样批次，不要仍沿用这里的内部验证措辞。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将区域分类器与验证设计用于自己的研究 {#sec-own-data}
 
-### 1. 先写 classifier contract
+### 先确定目标区域、参考序列与分类器参数
 
 在运行前填完：
 
@@ -1129,7 +1140,7 @@ classifier 文件本身不能替代 Methods；Methods 也不能替代可读取�
 
 缺少其中任一项，classifier 都无法被别人准确复现。
 
-### 2. 准备四个输入
+### 准备四个输入
 
 ```text
 reference-sequences.fasta
@@ -1140,7 +1151,7 @@ otutab.tsv + metadata.tsv
 
 taxonomy 在本篇生成，因此分析开始时的 query 侧不是已有 `taxonomy.tsv`，而是 `rep-seqs.fasta`。代表序列 ID 必须与 `otutab.tsv` 第一列完全一致；样本列必须与 `metadata.tsv` 的 `SampleID` 完全一致。
 
-### 3. 只改路径、引物和输出前缀
+### 只改路径、引物和输出前缀
 
 复制代码时至少替换：
 
@@ -1155,7 +1166,7 @@ PREFIX="your-region-your-database-release"
 
 不要沿用本页 `515F/806R`、200–400 nt 或 `same` orientation，除非它们确实与实验一致。
 
-### 4. 优先使用独立 truth set
+### 优先使用独立 truth set
 
 验证证据从强到弱可写为：
 
@@ -1169,7 +1180,7 @@ matched mock community / cultured isolates
 
 最后一项几乎不能支持泛化性能。没有 mock 时，应明确写出限制，并在更高 taxonomy rank 上报告结论。
 
-### 5. 阈值按错误代价选择
+### 阈值按错误代价选择
 
 先定义研究中哪种错误更贵：
 
@@ -1180,7 +1191,7 @@ matched mock community / cultured isolates
 
 不要只因为 QIIME 默认是 0.70 就省略验证。
 
-### 6. 交付标准三件套与模型归档
+### 交付标准三件套与模型归档
 
 最终至少交付：
 

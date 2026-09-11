@@ -1,6 +1,6 @@
 ---
 title: "多界微生物组：16S＋ITS/18S 联合分析"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,69 +17,64 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/49-multi-kingdom.R
+  packages:
+  - ggplot2
+  - jsonlite
+  - permute
+  - ragg
+  - readr
+  - scales
+  - svglite
+  - vegan
 ---
-
-> **分析目标：**把同一样本的 bacterial 16S、fungal ITS 与 oomycete amplicon profiles 放进一个可审计框架：每个 kingdom 独立过滤与排序，再检验跨 kingdom community concordance，最后在控制 soil × compartment 后筛跨界 feature associations，并用分层 bootstrap 评估方向稳定性。  
-> **输入文件：**bacterial 三件套 `data/small/multi-kingdom-duran/{otutab,taxonomy,metadata}.tsv`；另加严格配对的 `fungi-otutab.tsv`/`fungi-taxonomy.tsv` 与 `oomycete-otutab.tsv`/`oomycete-taxonomy.tsv`。  
-> **预计资源：**36 个完整配对样本（3 soils × 3 compartments × 4 replicates）；三套 PCoA、6 次 Procrustes tests、1,200 对 correlation 与 30 对 × 500 次分层 bootstrap，普通笔记本约 1 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 多界分析首先解决测量尺度与样本配对 {#sec-target}
 
-[Durán et al. (2018)](https://doi.org/10.1016/j.cell.2018.10.020)联合细菌、真菌与 oomycete communities 研究 Arabidopsis root microbiota 的 interkingdom structure 与植物存活。本页不转载论文原图，而是从作者公开 count/taxonomy/design files 构建 36 个完全配对的 biological samples，重绘三界 ordination、Procrustes concordance、shared-niche confounding 与稳定候选边。
+[Durán et al. (2018)](https://doi.org/10.1016/j.cell.2018.10.020)联合细菌、真菌与 oomycete communities 研究 Arabidopsis root microbiota 的 interkingdom structure 与植物存活。
 
 ::: {.callout-important title="先给结论"}
 三个 kingdom 的 observed sample configurations 两两一致（Procrustes $q=0.001$）。去除 soil × compartment 均值后，bacteria–fungi concordance 不再显著（$r=0.382,q=0.236$），而 bacteria–oomycete 与 fungi–oomycete 仍保留较弱一致性（$q=0.015$ 与 0.003）。跨 feature 的 1,200 对检验中，raw FDR hits 有 505 对，niche-adjusted 后只剩 2 对；两对的分层 bootstrap sign stability 分别为 99.6% 与 99.8%。这是候选关联，不是已证实的跨界互作。
 :::
 
-## 多界整合先保证“同一样本、不同数据生成过程” {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 三个 kingdom 必须独立做 feature QC
+需要 R，以及 `ggplot2`、`jsonlite`、`permute`、`ragg`、`readr`、`scales`、`svglite`、`vegan`。本次使用同一批样本的细菌、真菌和卵菌丰度与分类表，以及共同的样本信息表。
 
-16S、ITS 与 oomycete primers 的 amplification efficiency、copy number、taxonomy resolution 和 sequencing depth 不可比。不能把三张 raw count tables 纵向拼接后算一个相对丰度；本文分别做 prevalence filter、transformation 与 distance，再在 sample level 比较结构。
-
-### 2. sample pairing 是跨界分析的基本单位
-
-本数据每个 `SampleID` 唯一对应同一 soil、compartment 与 replicate 的三个 libraries。library names 可以不同，但必须通过显式 key 映射；取交集后若不是预期的 36 个完整 pairs，立即停止。
-
-### 3. Procrustes 区分 global concordance 与 shared niche
-
-Observed concordance 可能只说明 root、rhizosphere、soil 对所有 kingdom 都有强 selection。本文再对每套 ordination axes 回归 `Soil * Compartment`，并把 permutations 限制在 9 个 niche cells 内，检验 replicate-level residual concordance。
-
-### 4. feature association 要控制环境并统一 FDR family
-
-每界先按 CLR variance outcome-blind 地取 20 个 features；三个跨界组合共 $20\times20\times3=1{,}200$ 对。raw 与 niche-adjusted Spearman 分别计算，但 adjusted p-values 在完整 1,200 对上统一 BH correction。
-
-### 5. statistical edge 不等于 ecological interaction
-
-正相关可来自共同环境偏好、宿主 filtering、间接网络或 compositional coupling；负相关也不自动等于竞争。要把“association”升级为“interaction”，至少需要 perturbation、synthetic community、isolate/co-culture、time ordering 或可验证的 molecular mechanism。
-
-<details>
-<summary><strong>深入：为何还要做分层 bootstrap</strong></summary>
-
-单次 correlation 的小 p-value 可能由 36 个样本中的少数 points 驱动。本文在每个 `Soil × Compartment` cell 内有放回抽 4 个 replicates，重新拟合 niche model 并计算 residual Spearman，重复 500 次。95% interval 与 sign stability 检查 effect direction 是否依赖个别 replicate；它不能替代 external validation。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "jsonlite", "permute", "ragg", "readr", "scales",
-  "svglite", "systemfonts", "vegan"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "scripts/run_article49_multi_kingdom.R",
+  "data/small/multi-kingdom-duran/fungi-otutab.tsv",
+  "data/small/multi-kingdom-duran/fungi-taxonomy.tsv",
+  "data/small/multi-kingdom-duran/metadata.tsv",
+  "data/small/multi-kingdom-duran/oomycete-otutab.tsv",
+  "data/small/multi-kingdom-duran/oomycete-taxonomy.tsv",
+  "data/small/multi-kingdom-duran/otutab.tsv",
+  "data/small/multi-kingdom-duran/source-summary.json",
+  "data/small/multi-kingdom-duran/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-
 ```{r}
+#| results: hold
 #| label: setup-multikingdom-theme
 library(ggplot2)
 
 set.seed(20260749)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -122,13 +117,10 @@ save_pub <- function(plot, file_base, width = 89, height = 70, units = "mm", dpi
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从 bacterial 三件套开始，并接入两个严格配对 views
+### 读取细菌三件套，再按样本 ID 合并另外两类群落数据
 
 ```{r}
+#| results: hold
 #| label: read-multikingdom-data
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE,
@@ -169,7 +161,75 @@ head(taxonomy$Bacteria)
 head(metadata)
 ```
 
-### 2. 每个 kingdom 独立 Hellinger/Bray PCoA
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/49-multi-kingdom.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "jsonlite", "permute", "ragg", "readr", "scales",
+  "svglite", "systemfonts", "vegan"
+))
+```
+
+</details>
+
+## 多界整合先保证“同一样本、不同数据生成过程” {#sec-theory}
+
+### 分别过滤三个生物界的特征
+
+16S、ITS 与 oomycete primers 的 amplification efficiency、copy number、taxonomy resolution 和 sequencing depth 不可比。不能把三张 raw count tables 纵向拼接后算一个相对丰度；本文分别做 prevalence filter、transformation 与 distance，再在 sample level 比较结构。
+
+### sample pairing 是跨界分析的基本单位
+
+本数据每个 `SampleID` 唯一对应同一 soil、compartment 与 replicate 的三个 libraries。library names 可以不同，但必须通过显式 key 映射；取交集后若不是预期的 36 个完整 pairs，立即停止。
+
+### 比较整体一致性，并检查共同环境的影响
+
+Observed concordance 可能只说明 root、rhizosphere、soil 对所有 kingdom 都有强 selection。本文再对每套 ordination axes 回归 `Soil * Compartment`，并把 permutations 限制在 9 个 niche cells 内，检验 replicate-level residual concordance。
+
+### 调整环境因素后统一校正跨界关联检验
+
+每界先按 CLR variance 不使用结局信息 地取 20 个 features；三个跨界组合共 $20\times20\times3=1{,}200$ 对。raw 与 niche-adjusted Spearman 分别计算，但 adjusted p-values 在完整 1,200 对上统一 BH correction。
+
+### 统计关联不等于生态相互作用
+
+正相关可来自共同环境偏好、宿主 filtering、间接网络或 compositional coupling；负相关也不自动等于竞争。要把“association”升级为“interaction”，至少需要 perturbation、synthetic community、isolate/co-culture、time ordering 或可验证的 molecular mechanism。
+
+<details>
+<summary><strong>深入：为何还要做分层 bootstrap</strong></summary>
+
+单次 correlation 的小 p-value 可能由 36 个样本中的少数 points 驱动。本文在每个 `Soil × Compartment` cell 内有放回抽 4 个 replicates，重新拟合 niche model 并计算 residual Spearman，重复 500 次。95% interval 与 sign stability 检查 effect direction 是否依赖个别 replicate；它不能替代 external validation。
+
+</details>
+
+## 各界独立处理，再比较共同样本结构 {#sec-code}
+
+### 区分生态位共享与跨界关联
+
+从三界配对数据重新计算排序、生态位调整与跨界关联，并进行分层 bootstrap。
+
+```{r}
+#| label: reader-native-computation
+#| results: hide
+run_analysis <- function(command, args) {
+  output <- system2(command, args, stdout = TRUE, stderr = TRUE)
+  status <- attr(output, "status")
+  if (!is.null(status) && status != 0L) stop(paste(tail(output, 20), collapse = "\n"))
+  invisible(output)
+}
+run_analysis(file.path(R.home("bin"), "Rscript"), c("--vanilla", "scripts/run_article49_multi_kingdom.R"))
+```
+
+完整计算脚本：[run_article49_multi_kingdom.R](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article49_multi_kingdom.R)。
+
+
+### 每个 kingdom 独立 Hellinger/Bray PCoA
+
+<details class="wechat-omit">
+<summary>模型调用与参数</summary>
 
 ```{r}
 #| eval: false
@@ -184,7 +244,12 @@ lapply(bray, function(d) {
 })
 ```
 
-### 3. observed 与 niche-adjusted Procrustes
+</details>
+
+### 比较调整环境因素前后的 Procrustes 结果
+
+<details class="wechat-omit">
+<summary>模型调用与参数</summary>
 
 ```{r}
 #| eval: false
@@ -201,7 +266,12 @@ protest(
 )
 ```
 
-### 4. 统一 1,200 对 FDR，并对领先候选做分层 bootstrap
+</details>
+
+### 统一 1,200 对 FDR，并对领先候选做分层 bootstrap
+
+<details class="wechat-omit">
+<summary>模型调用与参数</summary>
 
 ```{r}
 #| eval: false
@@ -223,14 +293,13 @@ adjusted <- lapply(selected, function(x) lm.fit(design, x)$residuals)
 set.seed(20260726)
 ```
 
+</details>
+
 完整固定运行命令为：
 
-```{bash}
-#| eval: false
-R_LIBS_USER="$PWD/.r-lib" Rscript scripts/run_article49_multi_kingdom.R
-```
 
 ```{r}
+#| results: hold
 #| label: load-multikingdom-results
 result_dir <- "results/49-multi-kingdom"
 ordination_scores <- readr::read_tsv(
@@ -272,11 +341,12 @@ head(associations, 6)
 同一样本共现 < longitudinal precedence < perturbation response < isolate/co-culture reproducibility < molecular mechanism。扩增子横断面结果位于第一层，即使 FDR 和 bootstrap 都通过也不能跳级。
 :::
 
-## 出版级美化 {#sec-beautify}
+## 把跨界一致性与具体关联分开解释 {#sec-beautify}
 
 ### 图 1：三个 kingdom 的独立 PCoA
 
 ```{r}
+#| results: hold
 #| label: fig-multikingdom-pcoa
 #| fig-cap: "Independent Bray–Curtis PCoA for bacterial, fungal and oomycete profiles."
 axis_1 <- setNames(
@@ -310,9 +380,10 @@ save_pub(p49_1, "figures/49-multi-kingdom/49-1-three-kingdom-pcoa", 180, 82)
 p49_1
 ```
 
-### 图 2：shared-niche adjustment 后的 concordance
+### 图 2：生态位因素调整 后的 concordance
 
 ```{r}
+#| results: hold
 #| label: fig-multikingdom-procrustes
 #| fig-cap: "Pairwise Procrustes concordance before and after soil-by-compartment adjustment."
 procrustes_summary$Pair <- factor(
@@ -337,9 +408,10 @@ save_pub(p49_2, "figures/49-multi-kingdom/49-2-procrustes-audit", 180, 80)
 p49_2
 ```
 
-### 图 3：raw association 的 shared-niche inflation
+### 图 3：共同环境会放大未经调整的关联
 
 ```{r}
+#| results: hold
 #| label: fig-multikingdom-confounding
 #| fig-cap: "Raw and niche-adjusted cross-kingdom correlations across the complete testing family."
 associations$Status <- ifelse(
@@ -367,9 +439,10 @@ save_pub(p49_3, "figures/49-multi-kingdom/49-3-shared-niche-audit", 89, 82)
 p49_3
 ```
 
-### 图 4：bootstrap-stable adjusted candidates
+### 图 4：筛选在重采样中稳定的调整后关联
 
 ```{r}
+#| results: hold
 #| label: fig-multikingdom-stability
 #| fig-cap: "Bootstrap intervals and sign stability for the 15 leading adjusted associations."
 bootstrapped <- associations[is.finite(associations$SignStability), ]
@@ -411,11 +484,11 @@ p49_4
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告多界样本配对与整合的方法与限制 {#sec-methods}
 
 > Bacterial 16S, fungal ITS and oomycete amplicon profiles were matched for 36 biological samples spanning three soils, three compartments and four replicates per soil-by-compartment cell. Each kingdom was filtered and transformed independently. Hellinger-transformed Bray–Curtis distances were ordinated separately, and pairwise community concordance was tested using symmetric Procrustes analysis with 999 permutations. To assess shared-niche confounding, ordination axes and feature-level CLR values were residualized against soil, compartment and their interaction; permutations and 500 bootstrap resamples were restricted within soil-by-compartment cells. Twenty prevalent, high-variance features per kingdom were selected without using association outcomes. Spearman associations were tested across all 1,200 cross-kingdom pairs and adjusted jointly using the Benjamini–Hochberg procedure. Edges were designated stable only when adjusted P<0.05 and bootstrap sign stability was at least 90%; they were interpreted as candidate associations rather than ecological interactions.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将多界样本配对与整合用于自己的研究 {#sec-own-data}
 
 1. 保留 bacterial `otutab/taxonomy/metadata` 三件套，再为每个额外 kingdom 提供独立 count/taxonomy table；metadata 中建立显式 biological sample key。
 2. 若某个 kingdom 缺样，不要以 0 填充“未测”；先定义 complete-case、pairwise 或 missing-data strategy。

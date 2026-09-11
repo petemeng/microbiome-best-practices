@@ -59,11 +59,11 @@
 <rect x='73.88' y='72.29' width='138.69' height='138.69' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHwyNTIuMjh8MC4wMHwyNTIuMjg=)'>
-<text x='69.40' y='207.59' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='69.40' y='176.07' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='69.40' y='144.55' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='69.40' y='113.03' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='69.40' y='81.51' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='69.40' y='207.59' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='69.40' y='176.07' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='69.40' y='144.55' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='69.40' y='113.03' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='69.40' y='81.51' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>1.00</text>
 <polyline points='71.39,204.68 73.88,204.68 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='71.39,173.16 73.88,173.16 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='71.39,141.64 73.88,141.64 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -74,19 +74,19 @@
 <polyline points='143.22,213.47 143.22,210.98 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='174.74,213.47 174.74,210.98 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='206.26,213.47 206.26,210.98 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='80.18' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='111.70' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='143.22' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='174.74' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='206.26' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='143.22' y='232.74' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='152.30px' lengthAdjust='spacingAndGlyphs'>Mean predicted CD probability</text>
-<text transform='translate(47.01,141.64) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='107.60px' lengthAdjust='spacingAndGlyphs'>Observed CD fraction</text>
+<text x='80.18' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='111.70' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='143.22' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='174.74' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='206.26' y='221.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='143.22' y='232.74' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='152.30px' lengthAdjust='spacingAndGlyphs'>Mean predicted CD probability</text>
+<text transform='translate(47.01,141.64) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='107.60px' lengthAdjust='spacingAndGlyphs'>Observed CD fraction</text>
 <rect x='98.17' y='35.09' width='90.10' height='27.24' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
-<text x='103.15' y='52.36' style='font-size: 10.00px; font-family: "DejaVu Sans";' textLength='42.72px' lengthAdjust='spacingAndGlyphs'>Samples</text>
+<text x='103.15' y='52.36' style='font-size: 10.00px; font-family: "Arial";' textLength='42.72px' lengthAdjust='spacingAndGlyphs'>Samples</text>
 <circle cx='159.49' cy='48.71' r='5.19' style='stroke-width: 0.71; stroke: #E69F00; fill: #E69F00;' />
-<text x='173.11' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>19</text>
-<text x='39.72' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='97.47px' lengthAdjust='spacingAndGlyphs'>Brier score = 0.036</text>
-<text x='39.72' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='144.42px' lengthAdjust='spacingAndGlyphs'>Out-of-fold calibration</text>
-<text x='73.88' y='245.64' style='font-size: 8.00px;fill: #666666; font-family: "DejaVu Sans";' textLength='87.72px' lengthAdjust='spacingAndGlyphs'>Five equal-count bins.</text>
+<text x='173.11' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>19</text>
+<text x='39.72' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='97.47px' lengthAdjust='spacingAndGlyphs'>Brier score = 0.036</text>
+<text x='39.72' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='144.42px' lengthAdjust='spacingAndGlyphs'>Out-of-fold calibration</text>
+<text x='73.88' y='245.64' style='font-size: 8.00px;fill: #666666; font-family: "Arial";' textLength='87.72px' lengthAdjust='spacingAndGlyphs'>Five equal-count bins.</text>
 </g>
 </svg>

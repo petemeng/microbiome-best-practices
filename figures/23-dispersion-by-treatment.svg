@@ -86,11 +86,11 @@
 <rect x='35.19' y='31.58' width='479.07' height='208.50' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwyOTQuODA=)'>
-<text x='31.15' y='219.69' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.40</text>
-<text x='31.15' y='182.40' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.45</text>
-<text x='31.15' y='145.11' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='31.15' y='107.83' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.55</text>
-<text x='31.15' y='70.54' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.60</text>
+<text x='31.15' y='219.69' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.40</text>
+<text x='31.15' y='182.40' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.45</text>
+<text x='31.15' y='145.11' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='31.15' y='107.83' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.55</text>
+<text x='31.15' y='70.54' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.60</text>
 <polyline points='32.95,217.06 35.19,217.06 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.95,179.78 35.19,179.78 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.95,142.49 35.19,142.49 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -100,19 +100,19 @@
 <polyline points='217.69,242.32 217.69,240.08 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='331.75,242.32 331.75,240.08 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='445.82,242.32 445.82,240.08 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='103.63' y='250.09' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='34.50px' lengthAdjust='spacingAndGlyphs'>Ambient</text>
-<text x='103.63' y='258.94' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='40.87px' lengthAdjust='spacingAndGlyphs'>Unclipped</text>
-<text x='217.69' y='250.09' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='34.50px' lengthAdjust='spacingAndGlyphs'>Ambient</text>
-<text x='217.69' y='258.94' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='30.90px' lengthAdjust='spacingAndGlyphs'>Clipped</text>
-<text x='331.75' y='250.09' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='34.02px' lengthAdjust='spacingAndGlyphs'>Warmed</text>
-<text x='331.75' y='258.94' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='40.87px' lengthAdjust='spacingAndGlyphs'>Unclipped</text>
-<text x='445.82' y='250.09' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='34.02px' lengthAdjust='spacingAndGlyphs'>Warmed</text>
-<text x='445.82' y='258.94' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='30.90px' lengthAdjust='spacingAndGlyphs'>Clipped</text>
-<text x='274.72' y='269.45' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='45.80px' lengthAdjust='spacingAndGlyphs'>Treatment</text>
-<text transform='translate(11.04,135.83) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='120.64px' lengthAdjust='spacingAndGlyphs'>Distance to spatial median</text>
-<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='280.09px' lengthAdjust='spacingAndGlyphs'>Spatial median, bias-adjusted; F = 0.403, restricted P = 0.371</text>
-<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='252.19px' lengthAdjust='spacingAndGlyphs'>PERMDISP tests spread, not group location</text>
-<text x='35.19' y='281.05' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='287.06px' lengthAdjust='spacingAndGlyphs'>Points are 24 biological soil samples; crosses are group means of the distances.</text>
-<text x='35.19' y='288.82' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='235.07px' lengthAdjust='spacingAndGlyphs'>A non-significant result is not proof that dispersions are identical.</text>
+<text x='103.63' y='250.09' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='34.50px' lengthAdjust='spacingAndGlyphs'>Ambient</text>
+<text x='103.63' y='258.94' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='40.87px' lengthAdjust='spacingAndGlyphs'>Unclipped</text>
+<text x='217.69' y='250.09' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='34.50px' lengthAdjust='spacingAndGlyphs'>Ambient</text>
+<text x='217.69' y='258.94' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='30.90px' lengthAdjust='spacingAndGlyphs'>Clipped</text>
+<text x='331.75' y='250.09' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='34.02px' lengthAdjust='spacingAndGlyphs'>Warmed</text>
+<text x='331.75' y='258.94' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='40.87px' lengthAdjust='spacingAndGlyphs'>Unclipped</text>
+<text x='445.82' y='250.09' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='34.02px' lengthAdjust='spacingAndGlyphs'>Warmed</text>
+<text x='445.82' y='258.94' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='30.90px' lengthAdjust='spacingAndGlyphs'>Clipped</text>
+<text x='274.72' y='269.45' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='45.80px' lengthAdjust='spacingAndGlyphs'>Treatment</text>
+<text transform='translate(11.04,135.83) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='120.64px' lengthAdjust='spacingAndGlyphs'>Distance to spatial median</text>
+<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='280.09px' lengthAdjust='spacingAndGlyphs'>Spatial median, bias-adjusted; F = 0.403, restricted P = 0.371</text>
+<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='252.19px' lengthAdjust='spacingAndGlyphs'>PERMDISP tests spread, not group location</text>
+<text x='35.19' y='281.05' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='287.06px' lengthAdjust='spacingAndGlyphs'>Points are 24 biological soil samples; crosses are group means of the distances.</text>
+<text x='35.19' y='288.82' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='235.07px' lengthAdjust='spacingAndGlyphs'>A non-significant result is not proof that dispersions are identical.</text>
 </g>
 </svg>

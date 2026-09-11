@@ -13679,15 +13679,15 @@
 <line x1='310.85' y1='126.02' x2='308.15' y2='124.32' style='stroke-width: 1.07; stroke: #17202A;' />
 <line x1='225.64' y1='128.80' x2='228.21' y2='127.18' style='stroke-width: 1.07; stroke: #17202A;' />
 <line x1='113.35' y1='131.07' x2='116.04' y2='129.37' style='stroke-width: 1.07; stroke: #17202A;' />
-<text x='446.54' y='60.53' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='128.56px' lengthAdjust='spacingAndGlyphs'>G · Clostridium sensu stricto 13 (OTU_1)</text>
-<text x='450.20' y='72.55' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='79.45px' lengthAdjust='spacingAndGlyphs'>G · Arthrobacter (OTU_2)</text>
-<text x='462.63' y='96.35' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='96.55px' lengthAdjust='spacingAndGlyphs'>F · DA101 soil group (OTU_36)</text>
-<text x='471.38' y='84.44' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='76.80px' lengthAdjust='spacingAndGlyphs'>G · Thiobacillus (OTU_5)</text>
-<text x='364.55' y='84.49' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='123.65px' lengthAdjust='spacingAndGlyphs'>C · Bacteroidetes vadinHA17 (OTU_12)</text>
-<text x='246.85' y='119.75' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='91.94px' lengthAdjust='spacingAndGlyphs'>G · Sulfuricurvum (OTU_826)</text>
-<text x='318.26' y='132.48' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='104.90px' lengthAdjust='spacingAndGlyphs'>G · Flavobacterium (OTU_13463)</text>
-<text x='218.29' y='135.26' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='75.24px' lengthAdjust='spacingAndGlyphs'>C · JG37-AG-4 (OTU_42)</text>
-<text x='105.95' y='137.53' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "DejaVu Sans";' textLength='88.39px' lengthAdjust='spacingAndGlyphs'>G · Psychrobacter (OTU_39)</text>
+<text x='446.54' y='60.53' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='128.56px' lengthAdjust='spacingAndGlyphs'>G · Clostridium sensu stricto 13 (OTU_1)</text>
+<text x='450.20' y='72.55' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='79.45px' lengthAdjust='spacingAndGlyphs'>G · Arthrobacter (OTU_2)</text>
+<text x='462.63' y='96.35' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='96.55px' lengthAdjust='spacingAndGlyphs'>F · DA101 soil group (OTU_36)</text>
+<text x='471.38' y='84.44' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='76.80px' lengthAdjust='spacingAndGlyphs'>G · Thiobacillus (OTU_5)</text>
+<text x='364.55' y='84.49' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='123.65px' lengthAdjust='spacingAndGlyphs'>C · Bacteroidetes vadinHA17 (OTU_12)</text>
+<text x='246.85' y='119.75' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='91.94px' lengthAdjust='spacingAndGlyphs'>G · Sulfuricurvum (OTU_826)</text>
+<text x='318.26' y='132.48' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='104.90px' lengthAdjust='spacingAndGlyphs'>G · Flavobacterium (OTU_13463)</text>
+<text x='218.29' y='135.26' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='75.24px' lengthAdjust='spacingAndGlyphs'>C · JG37-AG-4 (OTU_42)</text>
+<text x='105.95' y='137.53' text-anchor='middle' style='font-size: 6.40px;fill: #17202A; font-family: "Arial";' textLength='88.39px' lengthAdjust='spacingAndGlyphs'>G · Psychrobacter (OTU_39)</text>
 <line x1='44.06' y1='304.40' x2='46.89' y2='304.40' style='stroke-width: 0.53;' />
 <line x1='44.06' y1='295.49' x2='46.89' y2='295.49' style='stroke-width: 0.53;' />
 <line x1='44.06' y1='289.18' x2='46.89' y2='289.18' style='stroke-width: 0.53;' />
@@ -13740,11 +13740,11 @@
 <rect x='44.06' y='29.82' width='470.45' height='275.04' style='stroke-width: 0.82; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwzNzQuMTc=)'>
-<text x='40.25' y='271.53' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>0.000%</text>
-<text x='40.25' y='220.97' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>0.001%</text>
-<text x='40.25' y='170.40' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>0.010%</text>
-<text x='40.25' y='119.84' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>0.100%</text>
-<text x='40.25' y='69.28' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>1.000%</text>
+<text x='40.25' y='271.53' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>0.000%</text>
+<text x='40.25' y='220.97' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>0.001%</text>
+<text x='40.25' y='170.40' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>0.010%</text>
+<text x='40.25' y='119.84' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>0.100%</text>
+<text x='40.25' y='69.28' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='25.93px' lengthAdjust='spacingAndGlyphs'>1.000%</text>
 <polyline points='41.94,269.06 44.06,269.06 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='41.94,218.49 44.06,218.49 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='41.94,167.93 44.06,167.93 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -13756,28 +13756,28 @@
 <polyline points='321.72,306.98 321.72,304.86 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='413.50,306.98 413.50,304.86 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='505.28,306.98 505.28,304.86 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='46.38' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='138.16' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>20%</text>
-<text x='229.94' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>40%</text>
-<text x='321.72' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>60%</text>
-<text x='413.50' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>80%</text>
-<text x='505.28' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='19.44px' lengthAdjust='spacingAndGlyphs'>100%</text>
-<text x='279.28' y='323.35' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='189.90px' lengthAdjust='spacingAndGlyphs'>Prevalence at the 0.01% detection threshold</text>
-<text transform='translate(10.43,167.34) rotate(-90)' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='169.34px' lengthAdjust='spacingAndGlyphs'>Equal-sample mean relative abundance</text>
+<text x='46.38' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='138.16' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>20%</text>
+<text x='229.94' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>40%</text>
+<text x='321.72' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>60%</text>
+<text x='413.50' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>80%</text>
+<text x='505.28' y='313.63' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='19.44px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='279.28' y='323.35' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='189.90px' lengthAdjust='spacingAndGlyphs'>Prevalence at the 0.01% detection threshold</text>
+<text transform='translate(10.43,167.34) rotate(-90)' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='169.34px' lengthAdjust='spacingAndGlyphs'>Equal-sample mean relative abundance</text>
 <rect x='52.25' y='333.59' width='454.07' height='25.75' style='stroke-width: 0.82; stroke: none; fill: #FFFFFF;' />
-<text x='56.48' y='349.57' style='font-size: 8.50px; font-family: "DejaVu Sans";' textLength='56.38px' lengthAdjust='spacingAndGlyphs'>Feature state</text>
+<text x='56.48' y='349.57' style='font-size: 8.50px; font-family: "Arial";' textLength='56.38px' lengthAdjust='spacingAndGlyphs'>Feature state</text>
 <circle cx='125.74' cy='346.47' r='1.58' style='stroke-width: 0.71; stroke: #0072B2; stroke-opacity: 0.58; fill: #0072B2; fill-opacity: 0.58;' />
 <circle cx='194.63' cy='346.47' r='1.58' style='stroke-width: 0.71; stroke: #D55E00; stroke-opacity: 0.58; fill: #D55E00; fill-opacity: 0.58;' />
 <circle cx='280.70' cy='346.47' r='1.58' style='stroke-width: 0.71; stroke: #56B4E9; stroke-opacity: 0.58; fill: #56B4E9; fill-opacity: 0.58;' />
 <circle cx='361.92' cy='346.47' r='1.58' style='stroke-width: 0.71; stroke: #9CA3AF; stroke-opacity: 0.58; fill: #9CA3AF; fill-opacity: 0.58;' />
 <circle cx='445.37' cy='346.47' r='1.58' style='stroke-width: 0.71; stroke: #CC79A7; stroke-opacity: 0.58; fill: #CC79A7; fill-opacity: 0.58;' />
-<text x='138.61' y='348.94' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='43.14px' lengthAdjust='spacingAndGlyphs'>Primary core</text>
-<text x='207.50' y='348.94' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='60.33px' lengthAdjust='spacingAndGlyphs'>Conditionally rare</text>
-<text x='293.58' y='348.94' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='55.47px' lengthAdjust='spacingAndGlyphs'>Persistently rare</text>
-<text x='374.80' y='348.94' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='57.70px' lengthAdjust='spacingAndGlyphs'>Sampling-limited</text>
-<text x='458.24' y='348.94' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='43.84px' lengthAdjust='spacingAndGlyphs'>Intermediate</text>
-<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='300.10px' lengthAdjust='spacingAndGlyphs'>Primary core: at least 0.01% abundance in at least 80% of 90 samples</text>
-<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "DejaVu Sans";' textLength='377.14px' lengthAdjust='spacingAndGlyphs'>Core membership depends on an explicit abundance–occupancy rule</text>
-<text x='44.06' y='368.53' style='font-size: 6.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='568.92px' lengthAdjust='spacingAndGlyphs'>Each point is one feature/OTU; all-read denominators and equal sample weights are retained. The horizontal guide marks 0.1% mean abundance, not a core boundary.</text>
+<text x='138.61' y='348.94' style='font-size: 6.80px; font-family: "Arial";' textLength='43.14px' lengthAdjust='spacingAndGlyphs'>Primary core</text>
+<text x='207.50' y='348.94' style='font-size: 6.80px; font-family: "Arial";' textLength='60.33px' lengthAdjust='spacingAndGlyphs'>Conditionally rare</text>
+<text x='293.58' y='348.94' style='font-size: 6.80px; font-family: "Arial";' textLength='55.47px' lengthAdjust='spacingAndGlyphs'>Persistently rare</text>
+<text x='374.80' y='348.94' style='font-size: 6.80px; font-family: "Arial";' textLength='57.70px' lengthAdjust='spacingAndGlyphs'>Sampling-limited</text>
+<text x='458.24' y='348.94' style='font-size: 6.80px; font-family: "Arial";' textLength='43.84px' lengthAdjust='spacingAndGlyphs'>Intermediate</text>
+<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "Arial";' textLength='300.10px' lengthAdjust='spacingAndGlyphs'>Primary core: at least 0.01% abundance in at least 80% of 90 samples</text>
+<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "Arial";' textLength='377.14px' lengthAdjust='spacingAndGlyphs'>Core membership depends on an explicit abundance–occupancy rule</text>
+<text x='44.06' y='368.53' style='font-size: 6.80px;fill: #666666; font-family: "Arial";' textLength='568.92px' lengthAdjust='spacingAndGlyphs'>Each point is one feature/OTU; all-read denominators and equal sample weights are retained. The horizontal guide marks 0.1% mean abundance, not a core boundary.</text>
 </g>
 </svg>

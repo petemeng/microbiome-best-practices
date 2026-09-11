@@ -1,6 +1,6 @@
 ---
 title: "WGCNA 用于微生物组：模块、性状关联与候选 hub"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,20 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/37-microbial-wgcna.R
+  packages:
+  - WGCNA
+  - ggdendro
+  - ggplot2
+  - ggrepel
+  - knitr
+  - patchwork
+  - ragg
+  - svglite
 ---
-
-> **分析目标：**把真实 16S 属级 counts 转成 CLR abundance profile，完成 soft-threshold、signed WGCNA、dynamic tree cut、module eigengene–trait correlation、BH 校正、hub candidate 与 pseudocount sensitivity。  
-> **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；额外读取同源 `environment.tsv` 作为 module–trait 分析。  
-> **预计资源：**90 个样本、422 个预先过滤的命名属；WGCNA 1.74、4 线程通常 1–3 分钟、峰值内存约 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## WGCNA 模块是共变模式，不是生态功能单元 {#sec-target}
 
@@ -33,63 +42,37 @@ WGCNA 可以把共同变化的 taxa 压缩成模块，但微生物 abundance 是
 
 本页仍使用 CW、IW、TW 各 30 个真实样本。已知 genus reads 只占全部 reads 的一部分，因此 WGCNA 的 estimand 明确限定为“可命名且通过过滤的属级子群”，不会把模块结果外推到整张 ASV 表。
 
-## WGCNA 是软阈值模块模型，不是另一种差异分析 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 从 correlation 到 signed adjacency
+需要 R，以及 `WGCNA`、`ggdendro`、`ggplot2`、`ggrepel`、`knitr`、`patchwork`、`ragg`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表，以及本次分析使用的实测环境变量或系统发育信息。
 
-对 taxon $i,j$ 的 robust correlation $r_{ij}$，signed network 使用
-
-$$
-a_{ij}=\left(\frac{1+r_{ij}}{2}\right)^\beta,
-$$
-
-其中 $\beta$ 是 soft-threshold power。负相关被压向 0，强正相关保留较大权重；与 hard threshold 相比，不必把 `r=0.59` 与 `r=0.60` 切成无边/有边。
-
-### 2. Soft-threshold 不是追逐最高 $R^2$
-
-`pickSoftThreshold()` 给 scale-free topology fit 与 mean connectivity。只追求高 $R^2$ 会选择过大的 power，把网络压得几乎没有连接。本页预先规定：选择第一个 `signed R² >= 0.80` 且 `mean connectivity >= 5` 的 power；若没有同时满足者，才在 connectivity 合格的候选中选择最高 $R^2$，并显式报告失败。
-
-### 3. TOM 与 dynamic tree cut 找共同变化模块
-
-Topological overlap matrix（TOM）不仅看两个 taxa 是否直接相关，还看它们是否共享邻居。`blockwiseModules()` 在 `1-TOM` 层次树上 dynamic cut，并合并 eigengene correlation 高的模块。灰色（grey）节点表示没有进入任何稳定模块，不应硬塞进最近模块。
-
-### 4. Module eigengene 把数百个 taxa 压成一个轴
-
-Module eigengene 是模块 abundance profile 的第一主成分。它与 CW/IW/TW one-vs-rest 指示变量及预设环境因子做 correlation；所有 module × trait tests 组成一个 BH family。强 correlation 仍可能来自 group–environment 共线性，不能解释为该环境变量驱动模块。
-
-### 5. Hub 至少要同时满足 membership 与 connectivity
-
-本页候选 hub 需同时满足：模块 membership `|kME| >= 0.80`，且 within-module connectivity 位于本模块前 10%。这比只按 degree 排名更清楚，但仍是数据驱动候选。功能验证、跨队列 preservation 和去除候选 taxon 后的模块稳定性才是升级证据。
-
-<details>
-<summary><strong>深入：为什么 RNA-seq 的 WGCNA 代码不能原样搬到 16S 百分比</strong></summary>
-
-百分比总和固定会制造负依赖，零值又使 log transform 不可直接计算。本页用固定 0.5 replacement 做 CLR，并用 1.0 replacement 重跑全部模块作为 sensitivity。CLR correlation 仍依赖 zero replacement、filter 和 reference frame，因此 module assignment sensitivity 必须进入结果，而不是只在 Methods 里写一句“数据已标准化”。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装锁定依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggdendro", "ggplot2", "ggrepel", "patchwork", "ragg", "readr",
-  "scales", "svglite", "systemfonts", "WGCNA"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/environment.tsv",
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-本页实跑 `WGCNA` 1.74。旧版 1.72-5 与当前 `xfun` 可出现 namespace 冲突，因此应使用本页锁定的依赖版本，不要混用系统旧包。
-
 ```{r}
+#| results: hold
 #| label: setup-wgcna-theme
 library(ggplot2)
 library(WGCNA)
 
 set.seed(20260737)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -150,13 +133,10 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套生成 90 × 422 的命名属 CLR 矩阵
+### 从三件套生成 90 × 422 的命名属 CLR 矩阵
 
 ```{r}
+#| results: hold
 #| label: read-wgcna-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -242,9 +222,62 @@ data.frame(
 )
 ```
 
-### 2. 用双门槛选择 soft-threshold power
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/37-microbial-wgcna.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ggdendro", "ggplot2", "ggrepel", "patchwork", "ragg", "readr",
+  "scales", "svglite", "systemfonts", "WGCNA"
+))
+```
+
+</details>
+
+## WGCNA 是软阈值模块模型，不是另一种差异分析 {#sec-theory}
+
+### 将相关性转换为有符号邻接矩阵
+
+对 taxon $i,j$ 的 robust correlation $r_{ij}$，signed network 使用
+
+$$
+a_{ij}=\left(\frac{1+r_{ij}}{2}\right)^\beta,
+$$
+
+其中 $\beta$ 是 soft-threshold power。负相关被压向 0，强正相关保留较大权重；与 hard threshold 相比，不必把 `r=0.59` 与 `r=0.60` 切成无边/有边。
+
+### Soft-threshold 不是追逐最高 $R^2$
+
+`pickSoftThreshold()` 给 scale-free topology fit 与 mean connectivity。只追求高 $R^2$ 会选择过大的 power，把网络压得几乎没有连接。本页预先规定：选择第一个 `signed R² >= 0.80` 且 `mean connectivity >= 5` 的 power；若没有同时满足者，才在 connectivity 合格的候选中选择最高 $R^2$，并显式报告失败。
+
+### 用拓扑重叠与动态剪切识别共同变化的模块
+
+Topological overlap matrix（TOM）不仅看两个 taxa 是否直接相关，还看它们是否共享邻居。`blockwiseModules()` 在 `1-TOM` 层次树上 dynamic cut，并合并 eigengene correlation 高的模块。灰色（grey）节点表示没有进入任何稳定模块，不应硬塞进最近模块。
+
+### 用第一主成分概括一个模块的丰度变化
+
+Module eigengene 是模块 abundance profile 的第一主成分。它与 CW/IW/TW one-vs-rest 指示变量及预设环境因子做 correlation；所有 module × trait tests 组成一个 BH family。强 correlation 仍可能来自 group–environment 共线性，不能解释为该环境变量驱动模块。
+
+### 候选枢纽节点应同时具备较高模块归属度与连接度
+
+本页候选 hub 需同时满足：模块 membership `|kME| >= 0.80`，且 within-module connectivity 位于本模块前 10%。这比只按 degree 排名更清楚，但仍是数据驱动候选。功能验证、跨队列 preservation 和去除候选 taxon 后的模块稳定性才是升级证据。
+
+<details>
+<summary><strong>深入：为什么 RNA-seq 的 WGCNA 代码不能原样搬到 16S 百分比</strong></summary>
+
+百分比总和固定会制造负依赖，零值又使 log transform 不可直接计算。本页用固定 0.5 replacement 做 CLR，并用 1.0 replacement 重跑全部模块作为 sensitivity。CLR correlation 仍依赖 zero replacement、filter 和 reference frame，因此 module assignment sensitivity 必须进入结果，而不是只在 Methods 里写一句“数据已标准化”。
+
+</details>
+
+## 从软阈值到模块，再关联实测性状 {#sec-code}
+
+### 用双门槛选择 soft-threshold power
+
+```{r}
+#| results: hold
 #| label: select-wgcna-power
 powers <- c(1:12, 14, 16, 18, 20)
 soft_threshold <- WGCNA::pickSoftThreshold(
@@ -281,9 +314,10 @@ data.frame(
 )
 ```
 
-### 3. 构建 signed TOM、识别并合并模块
+### 构建 signed TOM、识别并合并模块
 
 ```{r}
+#| results: hold
 #| label: fit-microbial-wgcna
 set.seed(20260737)
 wgcna_fit <- WGCNA::blockwiseModules(
@@ -320,9 +354,10 @@ stopifnot(
 module_sizes
 ```
 
-### 4. Module eigengene–trait correlation 与统一 BH
+### Module eigengene–trait correlation 与统一 BH
 
 ```{r}
+#| results: hold
 #| label: correlate-wgcna-traits
 trait_data <- data.frame(
   CW = as.integer(metadata$Group == "CW"),
@@ -369,9 +404,10 @@ data.frame(
 )
 ```
 
-### 5. 候选 hub 与 pseudocount sensitivity
+### 筛选候选枢纽节点，并检查伪计数的影响
 
 ```{r}
+#| results: hold
 #| label: audit-wgcna-hubs
 adjacency_matrix <- WGCNA::adjacency(
   dat_expr,
@@ -464,6 +500,7 @@ data.frame(
 ## 模块、性状和 hub 的结论边界 {#sec-audit}
 
 ```{r}
+#| results: hold
 #| label: wgcna-audit-table
 wgcna_audit <- data.frame(
   Dimension = c(
@@ -499,11 +536,12 @@ knitr::kable(wgcna_audit, caption = "Microbiome WGCNA audit contract")
 
 0.5 与 1.0 replacement 的 module assignment adjusted Rand index 为 `r sprintf("%.3f", pseudocount_ari)`，说明总体结构较接近但并非完全不变。候选 hub 共 `r sum(hub_ledger$CandidateHub)` 个，正文与图中坚持使用 candidate，而不改写为已验证 keystone。
 
-## 出版级美化 {#sec-publication}
+## 把模块关系与候选hub分开解释 {#sec-publication}
 
 ### 图 1：soft-threshold 双门槛
 
 ```{r}
+#| results: hold
 #| label: fig-soft-threshold
 #| fig-width: 7.1
 #| fig-height: 4.8
@@ -557,9 +595,10 @@ save_pub(
 soft_threshold_plot
 ```
 
-### 图 2：TOM dendrogram 与 module strip
+### 图 2：展示拓扑重叠聚类树与模块划分
 
 ```{r}
+#| results: hold
 #| label: fig-module-dendrogram
 #| fig-width: 7.1
 #| fig-height: 5.2
@@ -617,6 +656,7 @@ dendrogram_plot
 ### 图 3：Module–trait heatmap 同时显示 r 与 BH q
 
 ```{r}
+#| results: hold
 #| label: fig-module-trait
 #| fig-width: 7.1
 #| fig-height: 5.4
@@ -667,9 +707,10 @@ save_pub(
 module_trait_plot
 ```
 
-### 图 4：candidate hub 与 module sensitivity
+### 图 4：检查候选枢纽节点与模块划分的稳定性
 
 ```{r}
+#| results: hold
 #| label: fig-hub-sensitivity
 #| fig-width: 7.1
 #| fig-height: 5.4
@@ -720,8 +761,8 @@ hub_plot
 ```
 
 ```{r}
+#| results: hold
 #| label: verify-microbial-wgcna
-#| echo: false
 result_dir <- "results/37-microbial-wgcna"
 dir.create(result_dir, recursive = TRUE, showWarnings = FALSE)
 utils::write.table(
@@ -782,11 +823,11 @@ stopifnot(
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告模块识别与性状关联的方法与限制 {#sec-methods}
 
 > Genus-level counts were aggregated by complete lineage and filtered independently of traits (prevalence ≥20% and total abundance ≥100 reads), retaining 422 named genera across 90 samples. Counts were transformed using a 0.5-count replacement followed by sample-wise centred log-ratio transformation. A signed WGCNA network was constructed with biweight midcorrelation (`maxPOutliers=0.10`). The soft-threshold power was selected as the first value satisfying signed scale-free topology R² ≥0.80 and mean connectivity ≥5 (power 7). Modules were detected from signed topological overlap using dynamic tree cutting (`deepSplit=2`, minimum module size 20) and merged at eigengene dissimilarity 0.25. Module eigengenes were correlated with three one-vs-rest wetland indicators and five prespecified environmental traits; all 32 tests were adjusted together using Benjamini–Hochberg. Candidate hubs required |kME| ≥0.80 and within-module connectivity in the module-specific upper decile. The full network was refitted with a 1.0-count replacement, and assignment sensitivity was summarized by adjusted Rand index. Random seeds were fixed at 20260737.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将模块识别与性状关联用于自己的研究 {#sec-own-data}
 
 ```{r}
 #| eval: false

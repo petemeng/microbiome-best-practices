@@ -1393,7 +1393,7 @@
 </defs>
 <g clip-path='url(#cpMTI1LjUyfDI3MS4xNXw3Mi4yOXw4Ny43Ng==)'>
 <rect x='125.52' y='72.29' width='145.63' height='15.47' style='stroke-width: 0.97; stroke: #B3B3B3; fill: #F2F2F2;' />
-<text x='198.33' y='82.94' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='70.04px' lengthAdjust='spacingAndGlyphs'>Group-adjusted</text>
+<text x='198.33' y='82.94' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='70.04px' lengthAdjust='spacingAndGlyphs'>Group-adjusted</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwyMjEuMTA=)'>
 </g>
@@ -1404,29 +1404,29 @@
 </defs>
 <g clip-path='url(#cpMjc2LjEzfDQyMS43N3w3Mi4yOXw4Ny43Ng==)'>
 <rect x='276.13' y='72.29' width='145.63' height='15.47' style='stroke-width: 0.97; stroke: #B3B3B3; fill: #F2F2F2;' />
-<text x='348.95' y='82.94' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='43.02px' lengthAdjust='spacingAndGlyphs'>Observed</text>
+<text x='348.95' y='82.94' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='43.02px' lengthAdjust='spacingAndGlyphs'>Observed</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwyMjEuMTA=)'>
 <polyline points='175.54,194.77 175.54,192.28 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='229.12,194.77 229.12,192.28 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='175.54' y='202.59' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='229.12' y='202.59' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.1</text>
+<text x='175.54' y='202.59' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='229.12' y='202.59' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.1</text>
 <polyline points='326.15,194.77 326.15,192.28 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='379.73,194.77 379.73,192.28 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='326.15' y='202.59' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='379.73' y='202.59' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.1</text>
-<text x='121.04' y='192.65' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.70px' lengthAdjust='spacingAndGlyphs'>-0.10</text>
-<text x='121.04' y='165.86' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.70px' lengthAdjust='spacingAndGlyphs'>-0.05</text>
-<text x='121.04' y='139.07' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='121.04' y='112.28' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.05</text>
+<text x='326.15' y='202.59' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='379.73' y='202.59' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.1</text>
+<text x='121.04' y='192.65' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='20.70px' lengthAdjust='spacingAndGlyphs'>-0.10</text>
+<text x='121.04' y='165.86' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='20.70px' lengthAdjust='spacingAndGlyphs'>-0.05</text>
+<text x='121.04' y='139.07' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='121.04' y='112.28' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.05</text>
 <polyline points='123.03,189.73 125.52,189.73 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='123.03,162.94 125.52,162.94 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='123.03,136.15 125.52,136.15 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='123.03,109.36 125.52,109.36 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='273.64' y='214.04' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='85.09px' lengthAdjust='spacingAndGlyphs'>Procrustes axis 1</text>
-<text transform='translate(95.76,140.02) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='85.09px' lengthAdjust='spacingAndGlyphs'>Procrustes axis 2</text>
+<text x='273.64' y='214.04' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='85.09px' lengthAdjust='spacingAndGlyphs'>Procrustes axis 1</text>
+<text transform='translate(95.76,140.02) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='85.09px' lengthAdjust='spacingAndGlyphs'>Procrustes axis 2</text>
 <rect x='171.19' y='35.09' width='204.91' height='27.24' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
-<text x='176.17' y='52.36' style='font-size: 10.00px; font-family: "DejaVu Sans";' textLength='61.11px' lengthAdjust='spacingAndGlyphs'>Study group</text>
+<text x='176.17' y='52.36' style='font-size: 10.00px; font-family: "Arial";' textLength='61.11px' lengthAdjust='spacingAndGlyphs'>Study group</text>
 <line x1='243.98' y1='48.71' x2='257.81' y2='48.71' style='stroke-width: 0.53; stroke: #D55E00; stroke-opacity: 0.28; stroke-linecap: butt;' />
 <circle cx='250.90' cy='48.71' r='1.21' style='stroke-width: 0.71; stroke: #D55E00; stroke-opacity: 0.75; fill: #D55E00; fill-opacity: 0.75;' />
 <circle cx='250.90' cy='48.71' r='1.31' style='stroke-width: 0.71; stroke: #D55E00;' />
@@ -1436,10 +1436,10 @@
 <line x1='339.14' y1='48.71' x2='352.97' y2='48.71' style='stroke-width: 0.53; stroke: #E69F00; stroke-opacity: 0.28; stroke-linecap: butt;' />
 <circle cx='346.05' cy='48.71' r='1.21' style='stroke-width: 0.71; stroke: #E69F00; stroke-opacity: 0.75; fill: #E69F00; fill-opacity: 0.75;' />
 <circle cx='346.05' cy='48.71' r='1.31' style='stroke-width: 0.71; stroke: #E69F00;' />
-<text x='264.52' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='11.74px' lengthAdjust='spacingAndGlyphs'>CD</text>
-<text x='303.50' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='28.93px' lengthAdjust='spacingAndGlyphs'>Control</text>
-<text x='359.68' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='11.44px' lengthAdjust='spacingAndGlyphs'>UC</text>
-<text x='88.47' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='232.55px' lengthAdjust='spacingAndGlyphs'>Filled: microbiome; open: rotated metabolome</text>
-<text x='88.47' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='253.36px' lengthAdjust='spacingAndGlyphs'>Microbiome–metabolome configuration</text>
+<text x='264.52' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='11.74px' lengthAdjust='spacingAndGlyphs'>CD</text>
+<text x='303.50' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='28.93px' lengthAdjust='spacingAndGlyphs'>Control</text>
+<text x='359.68' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='11.44px' lengthAdjust='spacingAndGlyphs'>UC</text>
+<text x='88.47' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='232.55px' lengthAdjust='spacingAndGlyphs'>Filled: microbiome; open: rotated metabolome</text>
+<text x='88.47' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='253.36px' lengthAdjust='spacingAndGlyphs'>Microbiome–metabolome configuration</text>
 </g>
 </svg>

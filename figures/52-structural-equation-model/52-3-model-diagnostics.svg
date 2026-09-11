@@ -161,25 +161,25 @@
 <rect x='31.83' y='61.35' width='160.59' height='219.05' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTEuODE=)'>
-<text x='27.80' y='247.21' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
-<text x='27.80' y='202.76' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='27.80' y='158.30' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='27.80' y='113.84' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='27.80' y='69.38' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='27.80' y='247.21' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
+<text x='27.80' y='202.76' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='27.80' y='158.30' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='27.80' y='113.84' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='27.80' y='69.38' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>3</text>
 <polyline points='29.59,244.59 31.83,244.59 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='29.59,200.14 31.83,200.14 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='29.59,155.68 31.83,155.68 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='29.59,111.22 31.83,111.22 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='29.59,66.76 31.83,66.76 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(16.52,170.88) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='123.64px' lengthAdjust='spacingAndGlyphs'>Observed log TOC (z-score)</text>
+<text transform='translate(16.52,170.88) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='123.64px' lengthAdjust='spacingAndGlyphs'>Observed log TOC (z-score)</text>
 <polyline points='61.18,282.64 61.18,280.40 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='105.64,282.64 105.64,280.40 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='150.10,282.64 150.10,280.40 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='61.18' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
-<text x='105.64' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='150.10' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='112.13' y='299.98' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='122.59px' lengthAdjust='spacingAndGlyphs'>Predicted log TOC (z-score)</text>
-<text x='9.96' y='17.51' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='173.15px' lengthAdjust='spacingAndGlyphs'>A. Observed versus predicted</text>
+<text x='61.18' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
+<text x='105.64' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='150.10' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='112.13' y='299.98' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='122.59px' lengthAdjust='spacingAndGlyphs'>Predicted log TOC (z-score)</text>
+<text x='9.96' y='17.51' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='173.15px' lengthAdjust='spacingAndGlyphs'>A. Observed versus predicted</text>
 </g>
 <defs>
   <clipPath id='cpMjMwLjExfDUwMC4yN3w2MS4zNXwyODAuNDA='>
@@ -292,12 +292,12 @@
 <rect x='230.11' y='61.35' width='270.16' height='219.05' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTEuODE=)'>
-<text x='226.08' y='253.56' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
-<text x='226.08' y='216.46' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='226.08' y='179.35' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='226.08' y='142.25' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='226.08' y='105.14' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='226.08' y='68.04' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>1.5</text>
+<text x='226.08' y='253.56' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='226.08' y='216.46' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='226.08' y='179.35' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='226.08' y='142.25' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='226.08' y='105.14' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='226.08' y='68.04' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>1.5</text>
 <polyline points='227.87,250.94 230.11,250.94 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='227.87,213.84 230.11,213.84 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='227.87,176.73 230.11,176.73 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
@@ -307,19 +307,19 @@
 <polyline points='279.49,282.64 279.49,280.40 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='354.28,282.64 354.28,280.40 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='429.07,282.64 429.07,280.40 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='279.49' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
-<text x='354.28' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='429.07' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='365.19' y='299.98' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='122.59px' lengthAdjust='spacingAndGlyphs'>Predicted log TOC (z-score)</text>
-<text transform='translate(207.95,170.88) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='38.00px' lengthAdjust='spacingAndGlyphs'>Residual</text>
-<text x='201.39' y='17.51' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='123.16px' lengthAdjust='spacingAndGlyphs'>B. Residual structure</text>
+<text x='279.49' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
+<text x='354.28' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='429.07' y='289.68' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='365.19' y='299.98' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='122.59px' lengthAdjust='spacingAndGlyphs'>Predicted log TOC (z-score)</text>
+<text transform='translate(207.95,170.88) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='38.00px' lengthAdjust='spacingAndGlyphs'>Residual</text>
+<text x='201.39' y='17.51' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='123.16px' lengthAdjust='spacingAndGlyphs'>B. Residual structure</text>
 <rect x='172.85' y='24.14' width='186.41' height='26.25' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
-<text x='177.33' y='40.55' style='font-size: 9.00px; font-family: "DejaVu Sans";' textLength='65.86px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
+<text x='177.33' y='40.55' style='font-size: 9.00px; font-family: "Arial";' textLength='65.86px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
 <circle cx='256.31' cy='37.27' r='2.27' style='stroke-width: 0.71; stroke: #0072B2; stroke-opacity: 0.80; fill: #0072B2; fill-opacity: 0.80;' />
 <circle cx='294.68' cy='37.27' r='2.27' style='stroke-width: 0.71; stroke: #E69F00; stroke-opacity: 0.80; fill: #E69F00; fill-opacity: 0.80;' />
 <circle cx='330.15' cy='37.27' r='2.27' style='stroke-width: 0.71; stroke: #009E73; stroke-opacity: 0.80; fill: #009E73; fill-opacity: 0.80;' />
-<text x='269.44' y='39.89' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='12.12px' lengthAdjust='spacingAndGlyphs'>CW</text>
-<text x='307.81' y='39.89' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='9.22px' lengthAdjust='spacingAndGlyphs'>IW</text>
-<text x='343.28' y='39.89' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='11.50px' lengthAdjust='spacingAndGlyphs'>TW</text>
+<text x='269.44' y='39.89' style='font-size: 7.20px; font-family: "Arial";' textLength='12.12px' lengthAdjust='spacingAndGlyphs'>CW</text>
+<text x='307.81' y='39.89' style='font-size: 7.20px; font-family: "Arial";' textLength='9.22px' lengthAdjust='spacingAndGlyphs'>IW</text>
+<text x='343.28' y='39.89' style='font-size: 7.20px; font-family: "Arial";' textLength='11.50px' lengthAdjust='spacingAndGlyphs'>TW</text>
 </g>
 </svg>

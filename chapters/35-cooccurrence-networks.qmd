@@ -1,6 +1,6 @@
 ---
 title: "共现网络基础：SparCC/SPIEC-EASI/ggClusterNet"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,20 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/35-cooccurrence-networks.R
+  packages:
+  - SpiecEasi
+  - ggplot2
+  - ggrepel
+  - igraph
+  - knitr
+  - patchwork
+  - ragg
+  - svglite
 ---
-
-> **分析目标：**从真实 16S counts 推断属级 association network，对比 SparCC marginal correlations 与 SPIEC-EASI sparse conditional associations，审计 permutation resolution、StARS stability、方法重叠和 group-driven edges；ggClusterNet 作为布局/工作流层讨论，不把漂亮网络当作交互证据。  
-> **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**90 个样本、40 个 group-blind 高信息属；SparCC 200 次 bootstrap/permutation + SPIEC-EASI 50 次 StARS subsampling，单线程通常 4–8 分钟、峰值内存约 2–4 GB；三张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 共现网络不是微生物互作网络 {#sec-target}
 
@@ -33,69 +42,36 @@ Network edge 最多表示在当前样本、feature filter、composition referenc
 
 本页使用 `microeco` 2.0.0 的真实湿地数据，纳入 CW、IW、TW 各 30 个样本。网络只包含具有可报告 genus label 的 40 个 group-blind 高信息属，不把 unclassified residual 当节点。由于 pooled groups 本身可能制造相关，所有 SparCC edges 额外与 group-centered CLR correlation 对照。
 
-## 相关、条件关联和生态作用是三层证据 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. Ordinary correlation 会被 closure 扭曲
+需要 R，以及 `SpiecEasi`、`ggplot2`、`ggrepel`、`igraph`、`knitr`、`patchwork`、`ragg`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-对 composition $x_i$，所有份额加和为 1。一个 taxon 的份额增加会迫使其他份额下降，因此普通 Pearson/Spearman 可产生结构性负相关。SparCC 假定底层 log absolute abundances 的 correlation network 较稀疏，从 log-ratio variance 近似恢复 correlation。
-
-### 2. SparCC edge 是 marginal association
-
-SparCC 的 $r_{ij}$概括 taxon $i$ 与 $j$ 的成对 association；第三个 taxon、环境梯度或 group separation 都可能同时驱动二者。本页用 permutation 得经验 p-value、BH q-value，再要求 `|r|>=0.30`。Permutation 数决定 p-value 分辨率，200 次只能得到约 `1/201` 的最小加一校正 p-value，适合教程与筛查，不是大规模最终确认的终点。
-
-### 3. SPIEC-EASI edge 是 sparse conditional association
-
-SPIEC-EASI 先做 composition-aware transformation，再估计 sparse graphical model。Meinshausen–Bühlmann（MB）neighborhood selection 中，若在其余 taxa 条件下 $i$ 与 $j$ 的 regression coefficient 被保留，就形成 edge。StARS 用 subsampling 选择 sparsity，使平均 instability 不超过目标范围；本页记录 selected instability、edge stability 和完整参数。
-
-### 4. Pooling groups 可制造 Simpson's paradox
-
-若某两个 genus 都在 CW 高、在 IW 低，即使组内互不关联，合并后也可能显著正相关。本页对 selected count table 做 `log2(count+0.5)` CLR，再在每个 group 内减去 taxon 均值；SparCC edge 只有在 group-centered CLR 中仍保持同方向且 `|r|>=0.20`，才标记为 group-robust sensitivity。这个诊断不能替代正式的 covariate-aware network model，但能暴露明显 group-driven edges。
-
-### 5. ggClusterNet 是工作流与布局层，不是独立真值层
-
-[ggClusterNet](https://doi.org/10.1002/imt2.32)可计算 correlation、网络指标并提供多种布局。布局只改变节点坐标，threshold 只改变显示边；二者都不增加 edge validity。本文主路径先由 SparCC/SPIEC-EASI生成可审计 edge table，再用 `igraph` 固定 seed 布局。若换 ggClusterNet，应把同一 edge/node ledger 传入或核对其内部参数，而不是让“一键出图”隐藏 inference contract。
-
-<details>
-<summary><strong>深入：为什么没有 gold-standard network 时不能按图形相似度选方法</strong></summary>
-
-自然群落通常没有完整、方向明确的已验证交互网。边数多、模块漂亮或 scale-free 拟合高都不证明准确；不同 sampling depth、prevalence filter 和 node count 本身会改变这些拓扑量。方法选择应基于 estimand、composition handling、sparsity assumption、stability、simulation/positive controls 与外部验证，而不是挑最像期刊配图的一张。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装锁定依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "boot", "ggplot2", "ggrepel", "igraph", "patchwork", "pulsar",
-  "ragg", "readr", "remotes", "scales", "svglite", "systemfonts"
-))
-
-# R 4.4 / Bioconductor 3.19 兼容的官方 SPIEC-EASI 快照：
-remotes::install_github(
-  "zdk123/SpiecEasi@c463727",
-  upgrade = "never"
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/taxonomy.tsv"
 )
-
-# ggClusterNet 是可选布局/工作流层；安装后记录实际 commit SHA：
-remotes::install_github(
-  "taowenmicro/ggClusterNet",
-  upgrade = "never"
-)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-本页实跑 `SpiecEasi` 1.1.2（官方仓库 commit `c463727`）。ggClusterNet 未进入主计算依赖；其 GitHub master 会变化，正式项目应把安装当日 SHA 写进 lockfile。
-
 ```{r}
+#| results: hold
 #| label: setup-network-theme
 library(ggplot2)
 library(SpiecEasi)
 
 set.seed(20260735)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -158,13 +134,10 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套生成 90 × 40 的命名属矩阵
+### 从三件套生成 90 × 40 的命名属矩阵
 
 ```{r}
+#| results: hold
 #| label: read-network-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -258,9 +231,68 @@ data.frame(
 )
 ```
 
-### 2. SparCC + 200 次 bootstrap/permutation
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/35-cooccurrence-networks.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "boot", "ggplot2", "ggrepel", "igraph", "patchwork", "pulsar",
+  "ragg", "readr", "remotes", "scales", "svglite", "systemfonts"
+))
+
+# R 4.4 / Bioconductor 3.19 兼容的官方 SPIEC-EASI 快照：
+remotes::install_github(
+  "zdk123/SpiecEasi@c463727",
+  upgrade = "never"
+)
+
+# ggClusterNet 是可选布局/工作流层；安装后记录实际 commit SHA：
+remotes::install_github(
+  "taowenmicro/ggClusterNet",
+  upgrade = "never"
+)
+```
+
+</details>
+
+## 相关、条件关联和生态作用是三层证据 {#sec-theory}
+
+### 固定总和约束会扭曲普通相关性
+
+对 composition $x_i$，所有份额加和为 1。一个 taxon 的份额增加会迫使其他份额下降，因此普通 Pearson/Spearman 可产生结构性负相关。SparCC 假定底层 log absolute abundances 的 correlation network 较稀疏，从 log-ratio variance 近似恢复 correlation。
+
+### SparCC 的连边表示边际关联
+
+SparCC 的 $r_{ij}$概括 taxon $i$ 与 $j$ 的成对 association；第三个 taxon、环境梯度或 group separation 都可能同时驱动二者。本页用 permutation 得经验 p-value、BH q-value，再要求 `|r|>=0.30`。Permutation 数决定 p-value 分辨率，200 次只能得到约 `1/201` 的最小加一校正 p-value，适合教程与筛查，不是大规模最终确认的终点。
+
+### SPIEC-EASI 的连边表示稀疏条件关联
+
+SPIEC-EASI 先做 composition-aware transformation，再估计 sparse graphical model。Meinshausen–Bühlmann（MB）neighborhood selection 中，若在其余 taxa 条件下 $i$ 与 $j$ 的 regression coefficient 被保留，就形成 edge。StARS 用 subsampling 选择 sparsity，使平均 instability 不超过目标范围；本页记录 selected instability、edge stability 和完整参数。
+
+### 合并不同分组可能产生辛普森悖论
+
+若某两个 genus 都在 CW 高、在 IW 低，即使组内互不关联，合并后也可能显著正相关。本页对 selected count table 做 `log2(count+0.5)` CLR，再在每个 group 内减去 taxon 均值；SparCC edge 只有在 group-centered CLR 中仍保持同方向且 `|r|>=0.20`，才标记为 group-robust sensitivity。这个诊断不能替代正式的 covariate-aware network model，但能暴露明显 group-driven edges。
+
+### ggClusterNet 是工作流与布局层，不是独立真值层
+
+[ggClusterNet](https://doi.org/10.1002/imt2.32)可计算 correlation、网络指标并提供多种布局。布局只改变节点坐标，threshold 只改变显示边；二者都不增加 edge validity。本文主路径先由 SparCC/SPIEC-EASI生成可审计 edge table，再用 `igraph` 固定 seed 布局。若换 ggClusterNet，应把同一 edge/node ledger 传入或核对其内部参数，而不是让“一键出图”隐藏 inference contract。
+
+<details>
+<summary><strong>深入：为什么没有 gold-standard network 时不能按图形相似度选方法</strong></summary>
+
+自然群落通常没有完整、方向明确的已验证交互网。边数多、模块漂亮或 scale-free 拟合高都不证明准确；不同 sampling depth、prevalence filter 和 node count 本身会改变这些拓扑量。方法选择应基于 estimand、composition handling、sparsity assumption、stability、simulation/positive controls 与外部验证，而不是挑最像期刊配图的一张。
+
+</details>
+
+## 比较边际相关与条件关联网络 {#sec-code}
+
+### SparCC + 200 次 bootstrap/permutation
+
+```{r}
+#| results: hold
 #| label: run-sparcc
 sparcc_replicates <- 200L
 set.seed(20260735)
@@ -323,9 +355,10 @@ stopifnot(
 
 200 次 permutation 的 p-value 分辨率较粗；最终投稿应把 replicate 数提高到至少 1,000，并检查 200/500/1,000 的 edge set 是否稳定。这里把 `|r|>=0.30`和 BH 同时作为筛查门槛，不把零 p-value 或单一 correlation threshold 当作验证。
 
-### 3. SPIEC-EASI MB + StARS
+### SPIEC-EASI MB + StARS
 
 ```{r}
+#| results: hold
 #| label: run-spiec-easi
 set.seed(20260735)
 spiec_fit <- SpiecEasi::spiec.easi(
@@ -372,9 +405,10 @@ stopifnot(
 )
 ```
 
-### 4. 用 canonical edge key 比较方法
+### 按相同节点对比较两种方法的连边
 
 ```{r}
+#| results: hold
 #| label: compare-network-methods
 edge_key <- function(from, to) {
   paste(pmin(from, to), pmax(from, to), sep = " || ")
@@ -426,9 +460,10 @@ network_method_summary <- data.frame(
 network_method_summary
 ```
 
-### 5. 审计 pooled-group edge
+### 审计 pooled-group edge
 
 ```{r}
+#| results: hold
 #| label: audit-network-group-centering
 log_counts <- log2(sample_by_taxon + 0.5)
 clr_values <- log_counts - rowMeans(log_counts)
@@ -468,9 +503,10 @@ group_audit_summary
 
 Group-centering 使用的是显式 0.5 replacement 的 CLR Spearman sensitivity，不是另一个正式网络。若结论依赖 treatment-specific network，应增加每组样本量、用适配的 differential/covariate-aware network 模型，并比较 edge selection uncertainty；30 个样本/组不足以支持大规模组间网络差异宣称。
 
-### 6. 生成固定布局的 node/edge ledger
+### 保存固定布局下的节点表与连边表
 
 ```{r}
+#| results: hold
 #| label: build-network-layout
 network_graph <- igraph::graph_from_data_frame(
   spiec_edges[, c("From", "To")],
@@ -524,6 +560,7 @@ stopifnot(
 ## 怎样判断一条网络边是否稳定？ {#sec-audit}
 
 ```{r}
+#| results: hold
 #| label: network-audit-table
 network_audit <- data.frame(
   Dimension = c(
@@ -557,11 +594,12 @@ SparCC 与 SPIEC-EASI disagreement 不是软件错误：marginal correlation 可
 
 ggClusterNet 的强项是网络工作流、模块化布局与拓扑汇总；升级用法是先冻结 edge table，再让布局函数读取，不让内部 correlation/threshold 默默重算。每次导出 node coordinates、node table、edge table 和 package commit，确保图能在 Cytoscape、Gephi、igraph 或 ggClusterNet 间重建。
 
-## 出版级美化 {#sec-publication}
+## 区分稳定关联与分组混杂产生的边 {#sec-publication}
 
-### 图 1：SparCC correlation matrix 叠加 SPIEC-EASI edges
+### 图 1：在 SparCC 相关矩阵上标注 SPIEC-EASI 连边
 
 ```{r}
+#| results: hold
 #| label: fig-network-matrix
 #| fig-width: 7.1
 #| fig-height: 6.5
@@ -613,9 +651,10 @@ save_pub(network_matrix_plot, "figures/35-network-matrix", width = 180, height =
 network_matrix_plot
 ```
 
-### 图 2：固定 seed 的 SPIEC-EASI association network
+### 图 2：在固定随机种子下绘制 SPIEC-EASI 关联网络
 
 ```{r}
+#| results: hold
 #| label: fig-spiec-network
 #| fig-width: 7.1
 #| fig-height: 5.8
@@ -682,9 +721,10 @@ save_pub(spiec_network_plot, "figures/35-spiec-network", width = 180, height = 1
 spiec_network_plot
 ```
 
-### 图 3：边数、方法交集和 group sensitivity 进入同一账本
+### 图 3：比较网络边数、方法间一致性与分组敏感性
 
 ```{r}
+#| results: hold
 #| label: fig-network-edge-audit
 #| fig-width: 7.1
 #| fig-height: 4.5
@@ -758,8 +798,8 @@ edge_audit_plot
 ```
 
 ```{r}
+#| results: hold
 #| label: verify-cooccurrence-network
-#| echo: false
 expected_bases <- c(
   "figures/35-network-matrix", "figures/35-spiec-network",
   "figures/35-network-edge-audit"
@@ -816,15 +856,15 @@ Degree 对 node filter、penalty 和 sampling uncertainty 高度敏感。Keyston
 记录 `method`、correlation/partial-association estimator、p/q rule、r threshold、node filter、layout、cluster algorithm 和 random seed；布局不是 inference。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告网络推断与关联边界的方法与限制 {#sec-methods}
 
 > Genus-level microbial association networks were inferred from the raw count table of 90 wetland samples (30 CW, 30 IW, and 30 TW). ASVs with reportable genus assignments were aggregated using complete taxonomic lineages. Genera present in at least 20% of samples and represented by at least 100 reads were eligible; the 40 genera with the largest group-blind prevalence × log(1 + total reads) score were retained. Unclassified reads were not represented as network nodes. SparCC correlations were estimated with SpiecEasi 1.1.2 using seed 20260735. Empirical two-sided p-values were obtained from 200 bootstrap/permutation replicates, corrected with an add-one rule, and adjusted by the Benjamini–Hochberg method across all 780 taxon pairs; SparCC edges required |r| >= 0.30 and q < 0.05. SPIEC-EASI was fitted independently using Meinshausen–Bühlmann neighborhood selection, 20 lambda values, a minimum lambda ratio of 0.01, and StARS selection based on 50 subsamples with seed 20260735. The selected adjacency matrix, symmetrized coefficients, edge-selection stability, selected lambda, and StARS instability were retained. Edge sets were compared by canonical undirected keys and Jaccard similarity. To assess pooled-group structure, SparCC edges were compared with Spearman correlations of CLR coordinates centered within each wetland group; an edge was marked group-robust when the sign was retained and |r| >= 0.20. Network layouts were generated with a fixed-seed Fruchterman–Reingold algorithm and were not used for edge inference. Edges were interpreted as statistical associations, not ecological interactions or causal effects.
 
 把 node contract、body site/environment、covariates、replicate 数、penalty path、StARS threshold 和 validation plan 替换为你的设计。最终投稿把 SparCC permutation 提高到至少 1,000，并报告 edge-set sensitivity。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将网络推断与关联边界用于自己的研究 {#sec-own-data}
 
-### 1. 只改三件套路径、rank 与 node filter
+### 只改三件套路径、rank 与 node filter
 
 ```{r}
 #| eval: false
@@ -839,7 +879,7 @@ maximum_nodes <- 40L
 group_column <- "Treatment"
 ```
 
-### 2. taxonomy 单列时先拆七列
+### taxonomy 单列时先拆七列
 
 ```{r}
 #| eval: false
@@ -855,7 +895,7 @@ names(taxonomy) <- rank_names
 rownames(taxonomy) <- taxonomy_raw$FeatureID
 ```
 
-### 3. 先问你的网络 estimand
+### 先问你的网络 estimand
 
 - 全队列的平均 association structure；
 - 调整 age/batch/environment 后的 conditional structure；
@@ -865,7 +905,7 @@ rownames(taxonomy) <- taxonomy_raw$FeatureID
 
 这五类问题不能靠换 layout 回答。先确定 estimand，再选择支持 covariates、longitudinal 或 differential network 的模型；每组只有几十个样本时，宁可降低 node 数和结论强度。
 
-### 4. ggClusterNet 作为可替换的可视化层
+### ggClusterNet 作为可替换的可视化层
 
 ```{r}
 #| eval: false

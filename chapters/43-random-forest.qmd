@@ -1,6 +1,6 @@
 ---
 title: "随机森林分类与回归：ROC、重要性与防过拟合"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,20 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/43-random-forest.R
+  packages:
+  - ggplot2
+  - pROC
+  - patchwork
+  - ragg
+  - ranger
+  - readr
+  - scales
+  - svglite
 ---
-
-> **分析目标：**在真实 Crohn's disease cohort 上用 nested cross-validation 训练 genus-level random forest classifier，并用同一 16S profile 回归独立 flow-cytometry microbial load；输出 out-of-fold ROC、calibration、label-permutation null、跨折重要性稳定性和回归误差。  
-> **输入文件：**三件套 `data/small/absolute-quantification/{otutab,taxonomy,metadata}.tsv`；回归额外读取独立测得的 `cell-load.tsv`。  
-> **预计资源：**234 个属、95 个同 cohort 样本（29 CD、66 healthy）；3×5 outer folds、3-fold inner tuning、50 次 label permutation，约 2–5 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 随机森林的首要任务是外部可泛化，而非训练集 AUC {#sec-target}
 
@@ -33,59 +42,39 @@ fig-format: png
 
 本页只保留 `Cohort == "Disease"` 的 95 个样本，避免把额外 study controls 与病例队列混合。分类标签是观察性 CD/healthy，不等价于病因；回归结局是独立 flow-cytometry cells/g，而不是 sequencing library size。
 
-## 评估单位必须是未来样本 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. nested CV 把调参和估计泛化误差分开
+需要 R，以及 `ggplot2`、`pROC`、`patchwork`、`ragg`、`ranger`、`readr`、`scales`、`svglite`。本次使用微生物组三张表以及实测细胞负荷表，分别用于分类与回归任务。
 
-每个 outer split 保留 test fold；仅在 outer training set 内用 inner CV 选择 `mtry` 与 `min.node.size`。随后用完整 outer training set 重做 prevalence filter、CLR 和模型拟合，最后预测 outer test。重复 3 次 5-fold CV 后，每个样本获得 3 个 out-of-fold probabilities，取均值用于 sample-level performance。
-
-### 2. CLR 也可能泄漏
-
-对 training fold 先筛选 features $F_{train}$，再计算
-
-$$
-z_{is}=\log(Y_{is}+0.5)-\frac{1}{|F_{train}|}\sum_{j\in F_{train}}\log(Y_{js}+0.5).
-$$
-
-test sample 只能使用 training 锁定的 $F_{train}$；若先在全数据挑高变 taxa，再 CV，test distribution 已参与 feature engineering。
-
-### 3. AUC、calibration 与 threshold 回答不同问题
-
-ROC AUC 衡量随机抽取一个 case 与一个 control 时模型排序正确的概率；它不保证概率校准，也不决定临床 threshold。Brier score 与 calibration curve 检查 probability quality。若要报告 sensitivity/specificity，threshold 必须在 training data 或预先指定，不能在 test ROC 上挑 Youden point。
-
-### 4. permutation importance 不是因果效应
-
-某 feature 被打乱后性能下降，说明模型在当前相关结构中依赖它。高度相关的 taxa 会分摊或替代 importance；closure、batch 和 medication 也可能让重要属成为 proxy。本文报告 outer-fold top-10 stability，而不把一次 full-data ranking 当“biomarker certainty”。
-
-<details>
-<summary><strong>深入：为什么重复 CV 的每一行不能当独立样本</strong></summary>
-
-同一样本在 3 次 repeats 中出现 3 个 prediction，这三行共享 outcome，不能直接当作 $n=285$ 计算 CI。本文先对同一样本取平均，再以 95 个 biological samples 为 bootstrap unit。若一个受试者有多个时间点，fold assignment 还必须按 subject/block 分组。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "patchwork", "pROC", "ragg", "ranger", "readr",
-  "scales", "svglite", "systemfonts"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/absolute-quantification/cell-load.tsv",
+  "data/small/absolute-quantification/metadata.tsv",
+  "data/small/absolute-quantification/otutab.tsv",
+  "data/small/absolute-quantification/source-summary.json",
+  "data/small/absolute-quantification/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-
 ```{r}
+#| results: hold
 #| label: setup-random-forest-theme
 library(ggplot2)
 library(patchwork)
 library(ranger)
 
 set.seed(20260743)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -124,13 +113,10 @@ save_pub <- function(plot, file_base, width = 89, height = 70, units = "mm", dpi
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套与独立 cell-load outcome
+### 读取三件套与独立 cell-load outcome
 
 ```{r}
+#| results: hold
 #| label: read-random-forest-data
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE,
@@ -168,9 +154,58 @@ head(metadata)
 summary(log10_cell_load)
 ```
 
-### 2. 定义 fold-safe filtering、CLR 与 metrics
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/43-random-forest.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "patchwork", "pROC", "ragg", "ranger", "readr",
+  "scales", "svglite", "systemfonts"
+))
+```
+
+</details>
+
+## 评估单位必须是未来样本 {#sec-theory}
+
+### nested CV 把调参和估计泛化误差分开
+
+每个 outer split 保留 test fold；仅在 outer training set 内用 inner CV 选择 `mtry` 与 `min.node.size`。随后用完整 outer training set 重做 prevalence filter、CLR 和模型拟合，最后预测 outer test。重复 3 次 5-fold CV 后，每个样本获得 3 个 out-of-fold probabilities，取均值用于 sample-level performance。
+
+### CLR 也可能泄漏
+
+对 training fold 先筛选 features $F_{train}$，再计算
+
+$$
+z_{is}=\log(Y_{is}+0.5)-\frac{1}{|F_{train}|}\sum_{j\in F_{train}}\log(Y_{js}+0.5).
+$$
+
+test sample 只能使用 training 锁定的 $F_{train}$；若先在全数据挑高变 taxa，再 CV，test distribution 已参与 feature engineering。
+
+### AUC、calibration 与 threshold 回答不同问题
+
+ROC AUC 衡量随机抽取一个 case 与一个 control 时模型排序正确的概率；它不保证概率校准，也不决定临床 threshold。Brier score 与 calibration curve 检查 probability quality。若要报告 sensitivity/specificity，threshold 必须在 training data 或预先指定，不能在 test ROC 上挑 Youden point。
+
+### permutation importance 不是因果效应
+
+某 feature 被打乱后性能下降，说明模型在当前相关结构中依赖它。高度相关的 taxa 会分摊或替代 importance；closure、batch 和 medication 也可能让重要属成为 proxy。本文报告 outer-fold top-10 stability，而不把一次 full-data ranking 当“biomarker certainty”。
+
+<details>
+<summary><strong>深入：为什么重复 CV 的每一行不能当独立样本</strong></summary>
+
+同一样本在 3 次 repeats 中出现 3 个 prediction，这三行共享 outcome，不能直接当作 $n=285$ 计算 CI。本文先对同一样本取平均，再以 95 个 biological samples 为 bootstrap unit。若一个受试者有多个时间点，fold assignment 还必须按 subject/block 分组。
+
+</details>
+
+## 把筛选和调参限制在训练折内 {#sec-code}
+
+### 定义 fold-safe filtering、CLR 与 metrics
+
+```{r}
+#| results: hold
 #| label: define-random-forest-helpers
 make_stratified_folds <- function(strata, k, seed) {
   set.seed(seed)
@@ -204,9 +239,10 @@ make_numeric_strata <- function(x, groups = 5L) {
 }
 ```
 
-### 3. nested CV 分类：inner tune，outer predict
+### 嵌套交叉验证：内层调参，外层评估预测
 
 ```{r}
+#| results: hold
 #| label: nested-random-forest-classification
 classification_grid <- expand.grid(
   MtryFraction = c(0.10, 0.30, 0.60), MinNodeSize = c(3L, 10L)
@@ -305,9 +341,10 @@ data.frame(AUC = classification_auc, AUC_CI_Lower = auc_ci[1],
            AUC_CI_Upper = auc_ci[2], Brier = classification_brier)
 ```
 
-### 4. label permutation 与 importance stability
+### 用标签置换和重采样检查预测与特征稳定性
 
 ```{r}
+#| results: hold
 #| label: audit-random-forest-overfit
 best_row <- tuning_ledger[which.max(tuning_ledger$MeanInnerAUC), ]
 fixed_fold <- make_stratified_folds(outcome, 5L, 20260743)
@@ -352,9 +389,10 @@ importance_summary <- importance_summary[order(-importance_summary$Top10, -impor
 head(importance_summary, 12)
 ```
 
-### 5. 用相同规则 nested-CV 回归 microbial load
+### 用相同规则 nested-CV 回归 microbial load
 
 ```{r}
+#| results: hold
 #| label: nested-random-forest-regression
 regression_grid <- classification_grid
 regression_predictions <- list()
@@ -442,11 +480,12 @@ data.frame(CrossValidatedRMSE = regression_rmse, CrossValidatedMAE = regression_
 这里的 95 个样本只演示一个公开 cohort 内的 internal validation。重复 CV 可降低 split 偶然性，却不能估计跨研究 primer、平台、地区和诊疗流程漂移。第 44 篇将把整个 cohort 留出作为 test domain。
 :::
 
-## 出版级美化 {#sec-beautify}
+## 从ROC继续检查校准、置换与稳定性 {#sec-beautify}
 
-### 1. out-of-fold ROC
+### out-of-fold ROC
 
 ```{r}
+#| results: hold
 #| label: fig-nested-roc
 #| fig-cap: "Sample-level out-of-fold ROC from repeated nested cross-validation."
 roc_object <- pROC::roc(sample_predictions$Truth, sample_predictions$ProbabilityCD,
@@ -468,9 +507,10 @@ save_pub(p_roc, "figures/43-nested-roc", 105, 92)
 p_roc
 ```
 
-### 2. probability calibration
+### probability calibration
 
 ```{r}
+#| results: hold
 #| label: fig-rf-calibration
 #| fig-cap: "Observed disease frequency across out-of-fold probability bins."
 sample_predictions$Bin <- cut(rank(sample_predictions$ProbabilityCD, ties.method = "first"),
@@ -495,9 +535,10 @@ save_pub(p_calibration, "figures/43-calibration", 89, 89)
 p_calibration
 ```
 
-### 3. label null 与 importance stability
+### 展示标签置换结果与特征重要性稳定性
 
 ```{r}
+#| results: hold
 #| label: fig-permutation-importance
 #| fig-cap: "Label-permutation null and cross-fold stability of permutation importance."
 p_null <- ggplot(data.frame(AUC = permutation_auc), aes(AUC)) +
@@ -519,9 +560,10 @@ save_pub(p_audit, "figures/43-permutation-importance", 178, 95)
 p_audit
 ```
 
-### 4. microbial-load regression
+### microbial-load regression
 
 ```{r}
+#| results: hold
 #| label: fig-rf-regression
 #| fig-cap: "Observed versus out-of-fold predicted microbial load."
 p_regression <- ggplot(regression_sample, aes(Observed, Predicted)) +
@@ -539,6 +581,7 @@ p_regression
 ```
 
 ```{r}
+#| results: hold
 #| label: export-random-forest-results
 dir.create("results/43-random-forest", recursive = TRUE, showWarnings = FALSE)
 readr::write_tsv(outer_predictions, "results/43-random-forest/classification-outer-predictions.tsv")
@@ -570,11 +613,11 @@ readr::write_tsv(data.frame(
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告嵌套交叉验证与预测性能的方法与限制 {#sec-methods}
 
 > Random-forest models were evaluated using three repeats of nested five-fold cross-validation. All sample-distribution-dependent operations were refitted within each training split: genera were retained at ≥10% prevalence and ≥20 total reads, the 100 highest-variance training genera were selected, and centered-log-ratio values were computed with a pseudocount of 0.5 using the training-defined feature set. Within each outer training split, three-fold inner cross-validation selected `mtry` from 10%, 30%, or 60% of retained features and `min.node.size` from 3 or 10. The locked model generated probabilities or continuous predictions only for the held-out outer fold. Repeated predictions were averaged within biological sample before estimating ROC AUC, Brier score, RMSE, MAE, and R²; the AUC confidence interval used 1,000 stratified sample-level bootstrap resamples. A 50-run label-permutation analysis used fixed folds, and taxon importance was summarized by permutation importance and top-10 frequency across outer models. No test-fold information was used for preprocessing, tuning, or threshold selection.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将嵌套交叉验证与预测性能用于自己的研究 {#sec-own-data}
 
 替换三件套路径和 outcome 列即可；回归必须提供独立连续结局，不能拿 library size 冒充 microbial load：
 

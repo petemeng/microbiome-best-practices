@@ -1,6 +1,6 @@
 ---
 title: "微生物来源追踪：SourceTracker / FEAST 与传播证据"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,19 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/50-source-tracking.R
+  packages:
+  - FEAST
+  - ggplot2
+  - jsonlite
+  - ragg
+  - readr
+  - scales
+  - svglite
 ---
-
-> **分析目标：**把一个 sink 样本表示为候选 source communities 与 Unknown 的 mixture；在 FEAST 与 SourceTracker2 上使用同一真实公开数据和 5,000-read depth，比对来源比例、Monte Carlo uncertainty、leave-one-source-sample-out 回判与 missing-source sensitivity，并划清“来源相似”与“传播证据”的边界。  
-> **输入文件：**通用三件套 `data/small/source-tracking-feast/{otutab,taxonomy,metadata}.tsv`；metadata 额外包含 `SourceSink`、`SourceClass` 与 FEAST `id`。  
-> **预计资源：**官方 FEAST demo 的 10 个样本、1,839 个 anonymous taxa；FEAST 主分析＋8 次 leave-one-out＋4 次 missing-source audit 约 2 分钟，SourceTracker2 10 chains/20 draws 的主分析与 8 次 leave-one-out 在旧版 CPU 实现上约 12 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 来源追踪估计贡献比例，不证明传播路径 {#sec-target}
 
@@ -31,70 +39,39 @@ fig-format: png
 两种方法都把 `infant gut 1` sink 的最大已知来源判为 `infant gut`，但 FEAST 给 66.9%、Unknown 18.5%，SourceTracker2 给 92.9%、Unknown 0.44%。两者对 8 个可留一验证的 sources，其已知类别回判率都只有 50%。**最大来源标签一致，不代表比例可互换；Unknown 更不是“真实未知比例”的直接测量。**
 :::
 
-## 来源追踪的结果取决于参考来源集 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. sink 被表示为候选 sources 的 mixture
+需要 R，以及 `FEAST`、`ggplot2`、`jsonlite`、`ragg`、`readr`、`scales`、`svglite`。本次使用来源与待解释样本的 count、taxonomy 和 metadata 表；source/sink 身份保留在样本表中。
 
-设 source $k$ 的 feature distribution 为 $\theta_k$，sink 的 mixture weights 为 $\pi_k$，则模型近似
-
-$$
-p(x_{\mathrm{sink}}) = \sum_{k=1}^{K}\pi_k\theta_k + \pi_U\theta_U,
-\qquad \sum_k\pi_k+\pi_U=1.
-$$
-
-FEAST 用 expectation-maximization 快速估计；SourceTracker2 用 Bayesian Gibbs sampling。两者的 priors、source pooling、unknown model 与 optimization 不同，因此比例不应被视为算法无关的物理量。
-
-### 2. reference source coverage 决定 estimand
-
-模型只能在你提供的 candidate sources 中分配。缺少真正来源时，信号可能进入 Unknown，也可能被最相似的已知 source 吸收。本页逐一删除 source class：删除 infant gut 后，FEAST Unknown 反而从 18.5% 降到 13.2%，其余权重被 adult skin/soil 吸收，直接说明 Unknown 不是“未采样来源”的单调计量器。
-
-### 3. leave-one-out 是最小可行校准
-
-把一个已知 source sample 暂作 sink，并从对应 source pool 删除，再看是否回判到其真实 class。只有至少两个 replicates 的 class 才能做这种验证；本例 infant gut 只有一个 source，因此不参与 leave-one-out accuracy。
-
-### 4. read-level mixture 不是 strain transmission
-
-16S/OTU-level source similarity无法区分共享高层 taxon、环境共同暴露与真正 donor-to-recipient transmission。传播结论至少需要高分辨率 strain/SNV sharing、方向与时间顺序、污染排除、背景人群比较，理想情况下再加 epidemiological contact 或 intervention evidence。
-
-<details>
-<summary><strong>深入：Unknown 应怎样写进论文</strong></summary>
-
-Unknown 是“在给定 reference panel、特征空间、depth、prior/algorithm 下，无法由候选 sources 解释的模型分量”。它可能包含真正未采样来源、candidate source 内部变异、批次差异、测序误差、模型失配或过度平滑。最稳妥的写法是 model-dependent unexplained fraction，并同时给 missing-source sensitivity。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装两套算法并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "jsonlite", "patchwork", "ragg", "readr", "remotes",
-  "scales", "svglite", "systemfonts"
-))
-remotes::install_github(
-  "cozygene/FEAST",
-  ref = "2f8f3df8051e0e08341f597a9f4693bfb76b3bf6"
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "scripts/run_article50_feast.R",
+  "scripts/run_article50_sourcetracker.py",
+  "env/sourcetracker2.yml",
+  "data/small/source-tracking-feast/metadata.tsv",
+  "data/small/source-tracking-feast/otutab.tsv",
+  "data/small/source-tracking-feast/source-summary.json",
+  "data/small/source-tracking-feast/taxonomy.tsv"
 )
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
-
-```{bash}
-#| eval: false
-mamba env create -f env/sourcetracker2.yml
-conda activate sourcetracker2
-```
-
-SourceTracker2 2.0.1 仍引用 NumPy 2 已移除的 `np.int`；下文在调用前使用 `np.int = int` 的局部兼容垫片，不修改算法或安装包。
-
 
 ```{r}
+#| results: hold
 #| label: setup-source-tracking-theme
 library(ggplot2)
 
 set.seed(20260750)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -137,13 +114,10 @@ save_pub <- function(plot, file_base, width = 89, height = 70, units = "mm", dpi
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套读起，并验证 source/sink contract
+### 从三件套读起，并验证 来源与待解释样本的输入格式
 
 ```{r}
+#| results: hold
 #| label: read-source-tracking-data
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE,
@@ -179,9 +153,91 @@ head(taxonomy)
 metadata
 ```
 
-### 2. FEAST 主分析
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/50-source-tracking.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "jsonlite", "patchwork", "ragg", "readr", "remotes",
+  "scales", "svglite", "systemfonts"
+))
+remotes::install_github(
+  "cozygene/FEAST",
+  ref = "2f8f3df8051e0e08341f597a9f4693bfb76b3bf6"
+)
+```
+
+</details>
+
+## 来源追踪的结果取决于参考来源集 {#sec-theory}
+
+### 把待追踪样本看作多个候选来源的混合
+
+设 source $k$ 的 feature distribution 为 $\theta_k$，sink 的 mixture weights 为 $\pi_k$，则模型近似
+
+$$
+p(x_{\mathrm{sink}}) = \sum_{k=1}^{K}\pi_k\theta_k + \pi_U\theta_U,
+\qquad \sum_k\pi_k+\pi_U=1.
+$$
+
+FEAST 用 expectation-maximization 快速估计；SourceTracker2 用 Bayesian Gibbs sampling。两者的 priors、source pooling、unknown model 与 optimization 不同，因此比例不应被视为算法无关的物理量。
+
+### 来源库决定了贡献比例的含义
+
+模型只能在你提供的 candidate sources 中分配。缺少真正来源时，信号可能进入 Unknown，也可能被最相似的已知 source 吸收。本页逐一删除 source class：删除 infant gut 后，FEAST Unknown 反而从 18.5% 降到 13.2%，其余权重被 adult skin/soil 吸收，直接说明 Unknown 不是“未采样来源”的单调计量器。
+
+### 先用已知来源的样本检查模型
+
+把一个已知 source sample 暂作 sink，并从对应 source pool 删除，再看是否回判到其真实 class。只有至少两个 replicates 的 class 才能做这种验证；本例 infant gut 只有一个 source，因此不参与 leave-one-out accuracy。
+
+### 来源组成相似不等于菌株传播
+
+16S/OTU-level source similarity无法区分共享高层 taxon、环境共同暴露与真正 donor-to-recipient transmission。传播结论至少需要高分辨率 strain/SNV sharing、方向与时间顺序、污染排除、背景人群比较，理想情况下再加 epidemiological contact 或 intervention evidence。
+
+<details>
+<summary><strong>深入：Unknown 应怎样写进论文</strong></summary>
+
+Unknown 是“在给定 reference panel、特征空间、depth、prior/algorithm 下，无法由候选 sources 解释的模型分量”。它可能包含真正未采样来源、candidate source 内部变异、批次差异、测序误差、模型失配或过度平滑。最稳妥的写法是 model-dependent unexplained fraction，并同时给 missing-source sensitivity。
+
+</details>
+
+## 根据来源库估计贡献，并检查遗漏来源 {#sec-code}
+
+### 在相同来源集下比较两种模型
+
+在相同输入与测序深度下重新运行 FEAST 和 SourceTracker2，同时计算留一来源与遗漏来源敏感性。
+
+先在 Linux 或 WSL2 终端创建对应环境，回到 R 后运行计算代码。
+
+```bash
+conda env create --prefix ./sourcetracker-env --file env/sourcetracker2.yml
+```
+
+```{r}
+#| label: reader-native-computation
+#| results: hide
+run_analysis <- function(command, args) {
+  output <- system2(command, args, stdout = TRUE, stderr = TRUE)
+  status <- attr(output, "status")
+  if (!is.null(status) && status != 0L) stop(paste(tail(output, 20), collapse = "\n"))
+  invisible(output)
+}
+run_analysis(file.path(R.home("bin"), "Rscript"), c("--vanilla", "scripts/run_article50_feast.R"))
+run_analysis(Sys.getenv("SOURCETRACKER_PYTHON", "sourcetracker-env/bin/python"), c("scripts/run_article50_sourcetracker.py"))
+```
+
+完整计算脚本：[run_article50_feast.R](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article50_feast.R)、[run_article50_sourcetracker.py](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article50_sourcetracker.py)。
+
+
+### FEAST 主分析
 
 FEAST 要求 samples × taxa count matrix，metadata 中列名为 `Env`、`SourceSink`、`id`。固定 `COVERAGE=5000`，并在每次稀释/EM 前设 seed。
+
+<details class="wechat-omit">
+<summary>模型调用与参数</summary>
 
 ```{r}
 #| eval: false
@@ -203,7 +259,12 @@ fit <- FEAST(
 # FEAST 输出每个 source sample 的 weight；按 metadata$SourceClass 求和后作图。
 ```
 
-### 3. leave-one-out 与 missing-source audit
+</details>
+
+### leave-one-out 与 missing-source audit
+
+<details class="wechat-omit">
+<summary>模型调用与参数</summary>
 
 ```{r}
 #| eval: false
@@ -222,7 +283,12 @@ for (removed_class in unique(metadata[source_ids, "SourceClass"])) {
 }
 ```
 
-### 4. SourceTracker2：相同 source classes、depth 与随机种子
+</details>
+
+### SourceTracker2：相同 source classes、depth 与随机种子
+
+<details class="wechat-omit">
+<summary>模型调用与参数</summary>
 
 ```{python}
 #| eval: false
@@ -243,15 +309,13 @@ mean, monte_carlo_sd = _gibbs(
 )
 ```
 
+</details>
+
 完整固定运行命令为：
 
-```{bash}
-#| eval: false
-R_LIBS_USER="$PWD/.r-lib" Rscript scripts/run_article50_feast.R
-conda run -n sourcetracker2 python scripts/run_article50_sourcetracker.py
-```
 
 ```{r}
+#| results: hold
 #| label: load-source-tracking-results
 result_dir <- "results/50-source-tracking"
 feast_main <- readr::read_tsv(
@@ -305,11 +369,12 @@ rbind(
 “Infant gut contributed 92.9% of the sink, proving transmission”同时犯了两处错误：92.9% 是 SourceTracker2 在特定 reference panel 下的 model allocation；16S profile 也无法证明 donor、方向或 strain identity。
 :::
 
-## 出版级美化 {#sec-beautify}
+## 同时查看来源比例、未知部分与留一验证 {#sec-beautify}
 
-### 图 1：FEAST 主 sink 的 class-level allocation
+### 图 1：FEAST 估计的各类来源贡献
 
 ```{r}
+#| results: hold
 #| label: fig-feast-main
 #| fig-cap: "FEAST class-level source contributions for the official infant-gut sink."
 source_colors <- c(
@@ -342,6 +407,7 @@ p50_1
 ### 图 2：同一数据、不同算法
 
 ```{r}
+#| results: hold
 #| label: fig-source-tracker-comparison
 #| fig-cap: "FEAST and SourceTracker2 allocations for the same sink and candidate source classes."
 method_comparison <- rbind(
@@ -375,6 +441,7 @@ p50_2
 ### 图 3：leave-one-out calibration
 
 ```{r}
+#| results: hold
 #| label: fig-source-tracking-loo
 #| fig-cap: "Leave-one-source-sample-out contribution profiles for FEAST and SourceTracker2."
 feast_loo_long <- reshape(
@@ -414,6 +481,7 @@ p50_3
 ### 图 4：missing-source sensitivity
 
 ```{r}
+#| results: hold
 #| label: fig-feast-missing-source
 #| fig-cap: "FEAST allocation after removing each candidate source class."
 scenario_order <- c("None", "Infant gut", "Adult gut", "Adult skin", "Soil")
@@ -446,11 +514,11 @@ p50_4
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告来源追踪与校准的方法与限制 {#sec-methods}
 
 > Source attribution was evaluated using the official FEAST example comprising one sink, nine source samples, four candidate source classes and 1,839 anonymous taxa. Count tables and metadata were aligned by exact sample identifier. FEAST v0.1.0 was run for 1,000 EM iterations at a coverage of 5,000 reads using seed 20260726, and sample-level weights were summed within pre-specified source classes. SourceTracker2 v2.0.1 used the same source classes and depth, alpha1=0.001, alpha2=0.001, beta=10, 10 restarts, two draws per restart, burn-in 100 and thinning delay 10. Classes with at least two source replicates were evaluated by leave-one-source-sample-out classification; FEAST was additionally rerun after removing each source class. Unknown was interpreted as a model-dependent unexplained fraction. Amplicon-level attribution was not considered evidence of strain transmission or directionality.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将来源追踪与校准用于自己的研究 {#sec-own-data}
 
 1. 替换三件套；metadata 至少增加 `SourceSink` 与预先定义的 `SourceClass`。FEAST 多 sink/source-set 设计还需正确的 `id`。
 2. sources/sinks 必须同批处理；若必须跨 study，先做 negative controls、batch sensitivity 与 matched-pipeline reprocessing。

@@ -108,37 +108,37 @@
 <line x1='334.93' y1='84.02' x2='332.82' y2='86.17' style='stroke-width: 1.07;' />
 <line x1='289.13' y1='38.08' x2='286.96' y2='40.61' style='stroke-width: 1.07;' />
 <line x1='236.54' y1='41.30' x2='238.64' y2='43.45' style='stroke-width: 1.07;' />
-<text x='205.80' y='180.31' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='76.58px' lengthAdjust='spacingAndGlyphs'>Candidatus Solibacter</text>
-<text x='149.99' y='164.17' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='37.65px' lengthAdjust='spacingAndGlyphs'>Variibacter</text>
-<text x='271.32' y='62.90' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='38.74px' lengthAdjust='spacingAndGlyphs'>Acidovorax</text>
-<text x='195.25' y='157.53' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='38.45px' lengthAdjust='spacingAndGlyphs'>Bryobacter</text>
-<text x='190.76' y='221.80' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='39.64px' lengthAdjust='spacingAndGlyphs'>Haliangium</text>
-<text x='208.30' y='64.97' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='39.35px' lengthAdjust='spacingAndGlyphs'>Pedobacter</text>
-<text x='168.16' y='201.01' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='45.77px' lengthAdjust='spacingAndGlyphs'>Algoriphagus</text>
-<text x='339.73' y='82.22' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='49.61px' lengthAdjust='spacingAndGlyphs'>Desulfobulbus</text>
-<text x='314.90' y='38.38' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='47.94px' lengthAdjust='spacingAndGlyphs'>Erythrobacter</text>
-<text x='231.77' y='39.50' text-anchor='middle' style='font-size: 6.97px; font-family: "DejaVu Sans";' textLength='53.08px' lengthAdjust='spacingAndGlyphs'>Ferruginibacter</text>
+<text x='205.80' y='180.31' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='76.58px' lengthAdjust='spacingAndGlyphs'>Candidatus Solibacter</text>
+<text x='149.99' y='164.17' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='37.65px' lengthAdjust='spacingAndGlyphs'>Variibacter</text>
+<text x='271.32' y='62.90' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='38.74px' lengthAdjust='spacingAndGlyphs'>Acidovorax</text>
+<text x='195.25' y='157.53' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='38.45px' lengthAdjust='spacingAndGlyphs'>Bryobacter</text>
+<text x='190.76' y='221.80' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='39.64px' lengthAdjust='spacingAndGlyphs'>Haliangium</text>
+<text x='208.30' y='64.97' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='39.35px' lengthAdjust='spacingAndGlyphs'>Pedobacter</text>
+<text x='168.16' y='201.01' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='45.77px' lengthAdjust='spacingAndGlyphs'>Algoriphagus</text>
+<text x='339.73' y='82.22' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='49.61px' lengthAdjust='spacingAndGlyphs'>Desulfobulbus</text>
+<text x='314.90' y='38.38' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='47.94px' lengthAdjust='spacingAndGlyphs'>Erythrobacter</text>
+<text x='231.77' y='39.50' text-anchor='middle' style='font-size: 6.97px; font-family: "Arial";' textLength='53.08px' lengthAdjust='spacingAndGlyphs'>Ferruginibacter</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw0MTYuNjk=)'>
-<text x='145.73' y='300.52' style='font-size: 11.00px; font-family: "DejaVu Sans";' textLength='88.88px' lengthAdjust='spacingAndGlyphs'>Association sign</text>
+<text x='145.73' y='300.52' style='font-size: 11.00px; font-family: "Arial";' textLength='88.88px' lengthAdjust='spacingAndGlyphs'>Association sign</text>
 <line x1='241.82' y1='296.51' x2='255.64' y2='296.51' style='stroke-width: 1.07; stroke: #0072B2;' />
 <line x1='309.55' y1='296.51' x2='323.37' y2='296.51' style='stroke-width: 1.07; stroke: #D55E00;' />
-<text x='262.85' y='299.72' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='39.49px' lengthAdjust='spacingAndGlyphs'>Negative</text>
-<text x='330.58' y='299.72' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='33.93px' lengthAdjust='spacingAndGlyphs'>Positive</text>
-<text x='97.89' y='336.38' style='font-size: 11.00px; font-family: "DejaVu Sans";' textLength='40.85px' lengthAdjust='spacingAndGlyphs'>Phylum</text>
+<text x='262.85' y='299.72' style='font-size: 8.80px; font-family: "Arial";' textLength='39.49px' lengthAdjust='spacingAndGlyphs'>Negative</text>
+<text x='330.58' y='299.72' style='font-size: 8.80px; font-family: "Arial";' textLength='33.93px' lengthAdjust='spacingAndGlyphs'>Positive</text>
+<text x='97.89' y='336.38' style='font-size: 11.00px; font-family: "Arial";' textLength='40.85px' lengthAdjust='spacingAndGlyphs'>Phylum</text>
 <circle cx='152.87' cy='320.99' r='1.92' style='stroke-width: 0.64; stroke: #FFFFFF; fill: #009E73;' />
 <circle cx='152.87' cy='343.75' r='1.92' style='stroke-width: 0.64; stroke: #FFFFFF; fill: #CC79A7;' />
 <circle cx='244.80' cy='320.99' r='1.92' style='stroke-width: 0.64; stroke: #FFFFFF; fill: #56B4E9;' />
 <circle cx='244.80' cy='343.75' r='1.92' style='stroke-width: 0.64; stroke: #FFFFFF; fill: #E69F00;' />
 <circle cx='333.88' cy='320.99' r='1.92' style='stroke-width: 0.64; stroke: #FFFFFF; fill: #8A8A8A;' />
 <circle cx='333.88' cy='343.75' r='1.92' style='stroke-width: 0.64; stroke: #FFFFFF; fill: #0072B2;' />
-<text x='166.99' y='324.20' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='60.26px' lengthAdjust='spacingAndGlyphs'>Acidobacteria</text>
-<text x='166.99' y='346.96' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='63.70px' lengthAdjust='spacingAndGlyphs'>Actinobacteria</text>
-<text x='258.92' y='324.20' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='60.83px' lengthAdjust='spacingAndGlyphs'>Bacteroidetes</text>
-<text x='258.92' y='346.96' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='45.21px' lengthAdjust='spacingAndGlyphs'>Firmicutes</text>
-<text x='348.00' y='324.20' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='51.98px' lengthAdjust='spacingAndGlyphs'>Other phyla</text>
-<text x='348.00' y='346.96' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='64.35px' lengthAdjust='spacingAndGlyphs'>Proteobacteria</text>
-<text x='164.92' y='386.13' style='font-size: 11.00px; font-family: "DejaVu Sans";' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>Degree</text>
+<text x='166.99' y='324.20' style='font-size: 8.80px; font-family: "Arial";' textLength='60.26px' lengthAdjust='spacingAndGlyphs'>Acidobacteria</text>
+<text x='166.99' y='346.96' style='font-size: 8.80px; font-family: "Arial";' textLength='63.70px' lengthAdjust='spacingAndGlyphs'>Actinobacteria</text>
+<text x='258.92' y='324.20' style='font-size: 8.80px; font-family: "Arial";' textLength='60.83px' lengthAdjust='spacingAndGlyphs'>Bacteroidetes</text>
+<text x='258.92' y='346.96' style='font-size: 8.80px; font-family: "Arial";' textLength='45.21px' lengthAdjust='spacingAndGlyphs'>Firmicutes</text>
+<text x='348.00' y='324.20' style='font-size: 8.80px; font-family: "Arial";' textLength='51.98px' lengthAdjust='spacingAndGlyphs'>Other phyla</text>
+<text x='348.00' y='346.96' style='font-size: 8.80px; font-family: "Arial";' textLength='64.35px' lengthAdjust='spacingAndGlyphs'>Proteobacteria</text>
+<text x='164.92' y='386.13' style='font-size: 11.00px; font-family: "Arial";' textLength='40.04px' lengthAdjust='spacingAndGlyphs'>Degree</text>
 <circle cx='219.08' cy='369.80' r='2.67' style='stroke-width: 0.64; stroke: #FFFFFF;' />
 <circle cx='219.08' cy='395.07' r='4.84' style='stroke-width: 0.64; stroke: #FFFFFF;' />
 <circle cx='252.91' cy='369.80' r='5.75' style='stroke-width: 0.64; stroke: #FFFFFF;' />
@@ -146,15 +146,15 @@
 <circle cx='287.69' cy='369.80' r='7.02' style='stroke-width: 0.64; stroke: #FFFFFF;' />
 <circle cx='287.69' cy='395.07' r='7.54' style='stroke-width: 0.64; stroke: #FFFFFF;' />
 <circle cx='324.04' cy='369.80' r='8.00' style='stroke-width: 0.64; stroke: #FFFFFF;' />
-<text x='233.20' y='373.00' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='233.20' y='398.27' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='267.03' y='373.00' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='267.03' y='398.27' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>3</text>
-<text x='302.76' y='373.00' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>4</text>
-<text x='302.76' y='398.27' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>5</text>
-<text x='339.72' y='373.00' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>6</text>
-<text x='121.75' y='27.83' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='278.52px' lengthAdjust='spacingAndGlyphs'>MB neighborhood selection; 30 edges; StARS instability 0.037</text>
-<text x='121.75' y='13.50' style='font-size: 11.00px; font-weight: bold; font-family: "DejaVu Sans";' textLength='316.29px' lengthAdjust='spacingAndGlyphs'>SPIEC-EASI sparse conditional-association network</text>
-<text x='121.75' y='415.24' style='font-size: 7.00px;fill: #666666; font-family: "DejaVu Sans";' textLength='414.48px' lengthAdjust='spacingAndGlyphs'>Edge width is |symmetrized MB coefficient| and alpha is selection stability. Labels mark the ten highest-degree nodes.</text>
+<text x='233.20' y='373.00' style='font-size: 8.80px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='233.20' y='398.27' style='font-size: 8.80px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='267.03' y='373.00' style='font-size: 8.80px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='267.03' y='398.27' style='font-size: 8.80px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='302.76' y='373.00' style='font-size: 8.80px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>4</text>
+<text x='302.76' y='398.27' style='font-size: 8.80px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='339.72' y='373.00' style='font-size: 8.80px; font-family: "Arial";' textLength='5.59px' lengthAdjust='spacingAndGlyphs'>6</text>
+<text x='121.75' y='27.83' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='278.52px' lengthAdjust='spacingAndGlyphs'>MB neighborhood selection; 30 edges; StARS instability 0.037</text>
+<text x='121.75' y='13.50' style='font-size: 11.00px; font-weight: bold; font-family: "Arial";' textLength='316.29px' lengthAdjust='spacingAndGlyphs'>SPIEC-EASI sparse conditional-association network</text>
+<text x='121.75' y='415.24' style='font-size: 7.00px;fill: #666666; font-family: "Arial";' textLength='414.48px' lengthAdjust='spacingAndGlyphs'>Edge width is |symmetrized MB coefficient| and alpha is selection stability. Labels mark the ten highest-degree nodes.</text>
 </g>
 </svg>

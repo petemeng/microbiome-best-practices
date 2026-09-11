@@ -70,17 +70,17 @@
 <rect x='61.04' y='79.70' width='42.92' height='202.33' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6B7280;' />
 <rect x='127.08' y='86.42' width='42.92' height='195.61' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2;' />
 <rect x='193.11' y='273.64' width='42.92' height='8.40' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00;' />
-<text x='82.50' y='77.67' text-anchor='middle' style='font-size: 7.97px; font-family: "DejaVu Sans";' textLength='27.84px' lengthAdjust='spacingAndGlyphs'>14,096</text>
-<text x='148.54' y='84.39' text-anchor='middle' style='font-size: 7.97px; font-family: "DejaVu Sans";' textLength='27.84px' lengthAdjust='spacingAndGlyphs'>13,628</text>
-<text x='214.57' y='271.61' text-anchor='middle' style='font-size: 7.97px; font-family: "DejaVu Sans";' textLength='15.18px' lengthAdjust='spacingAndGlyphs'>585</text>
+<text x='82.50' y='77.67' text-anchor='middle' style='font-size: 7.97px; font-family: "Arial";' textLength='27.84px' lengthAdjust='spacingAndGlyphs'>14,096</text>
+<text x='148.54' y='84.39' text-anchor='middle' style='font-size: 7.97px; font-family: "Arial";' textLength='27.84px' lengthAdjust='spacingAndGlyphs'>13,628</text>
+<text x='214.57' y='271.61' text-anchor='middle' style='font-size: 7.97px; font-family: "Arial";' textLength='15.18px' lengthAdjust='spacingAndGlyphs'>585</text>
 <rect x='42.88' y='51.38' width='211.32' height='230.66' style='stroke-width: 0.78; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDUuODM=)'>
-<text x='39.29' y='284.36' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.07px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='39.29' y='226.95' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.27px' lengthAdjust='spacingAndGlyphs'>4000</text>
-<text x='39.29' y='169.53' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.27px' lengthAdjust='spacingAndGlyphs'>8000</text>
-<text x='39.29' y='112.12' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.34px' lengthAdjust='spacingAndGlyphs'>12000</text>
-<text x='39.29' y='54.70' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.34px' lengthAdjust='spacingAndGlyphs'>16000</text>
+<text x='39.29' y='284.36' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='4.07px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='39.29' y='226.95' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='16.27px' lengthAdjust='spacingAndGlyphs'>4000</text>
+<text x='39.29' y='169.53' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='16.27px' lengthAdjust='spacingAndGlyphs'>8000</text>
+<text x='39.29' y='112.12' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='20.34px' lengthAdjust='spacingAndGlyphs'>12000</text>
+<text x='39.29' y='54.70' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='20.34px' lengthAdjust='spacingAndGlyphs'>16000</text>
 <polyline points='40.89,282.03 42.88,282.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='40.89,224.62 42.88,224.62 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='40.89,167.20 42.88,167.20 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -89,11 +89,11 @@
 <polyline points='82.50,284.03 82.50,282.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='148.54,284.03 148.54,282.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='214.57,284.03 214.57,282.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text transform='translate(84.40,289.88) rotate(-24)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='36.85px' lengthAdjust='spacingAndGlyphs'>Source tree</text>
-<text transform='translate(150.43,289.88) rotate(-24)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='37.21px' lengthAdjust='spacingAndGlyphs'>Count table</text>
-<text transform='translate(216.47,289.88) rotate(-24)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='54.23px' lengthAdjust='spacingAndGlyphs'>Primary universe</text>
-<text transform='translate(15.30,166.71) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='56.95px' lengthAdjust='spacingAndGlyphs'>Tips / features</text>
-<text x='9.46' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "DejaVu Sans";' textLength='186.27px' lengthAdjust='spacingAndGlyphs'>A. Tree tips are explicitly reconciled</text>
+<text transform='translate(84.40,289.88) rotate(-24)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='36.85px' lengthAdjust='spacingAndGlyphs'>Source tree</text>
+<text transform='translate(150.43,289.88) rotate(-24)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='37.21px' lengthAdjust='spacingAndGlyphs'>Count table</text>
+<text transform='translate(216.47,289.88) rotate(-24)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='54.23px' lengthAdjust='spacingAndGlyphs'>Primary universe</text>
+<text transform='translate(15.30,166.71) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='56.95px' lengthAdjust='spacingAndGlyphs'>Tips / features</text>
+<text x='9.46' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "Arial";' textLength='186.27px' lengthAdjust='spacingAndGlyphs'>A. Tree tips are explicitly reconciled</text>
 </g>
 <defs>
   <clipPath id='cpMjg5LjQ1fDUwMC43N3w1MS4zOHwyODIuMDM='>
@@ -217,10 +217,10 @@
 <rect x='289.45' y='51.38' width='211.32' height='230.66' style='stroke-width: 0.78; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDUuODM=)'>
-<text x='285.87' y='235.60' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>30%</text>
-<text x='285.87' y='176.34' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='285.87' y='117.09' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>70%</text>
-<text x='285.87' y='57.83' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>90%</text>
+<text x='285.87' y='235.60' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>30%</text>
+<text x='285.87' y='176.34' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='285.87' y='117.09' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>70%</text>
+<text x='285.87' y='57.83' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>90%</text>
 <polyline points='287.46,233.27 289.45,233.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='287.46,174.01 289.45,174.01 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='287.46,114.76 289.45,114.76 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -228,13 +228,13 @@
 <polyline points='329.08,284.03 329.08,282.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='395.11,284.03 395.11,282.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='461.15,284.03 461.15,282.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='329.08' y='290.28' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>CW</text>
-<text x='395.11' y='290.28' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.21px' lengthAdjust='spacingAndGlyphs'>IW</text>
-<text x='461.15' y='290.28' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>TW</text>
-<text x='395.11' y='320.98' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='58.56px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
-<text transform='translate(268.00,166.71) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='91.82px' lengthAdjust='spacingAndGlyphs'>Retained sample reads</text>
-<text x='262.17' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='103.44px' lengthAdjust='spacingAndGlyphs'>Pooled coverage = 47.4%</text>
-<text x='262.17' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "DejaVu Sans";' textLength='167.60px' lengthAdjust='spacingAndGlyphs'>B. Dominant-OTU read retention</text>
+<text x='329.08' y='290.28' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>CW</text>
+<text x='395.11' y='290.28' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='8.21px' lengthAdjust='spacingAndGlyphs'>IW</text>
+<text x='461.15' y='290.28' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>TW</text>
+<text x='395.11' y='320.98' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='58.56px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
+<text transform='translate(268.00,166.71) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='91.82px' lengthAdjust='spacingAndGlyphs'>Retained sample reads</text>
+<text x='262.17' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "Arial";' textLength='103.44px' lengthAdjust='spacingAndGlyphs'>Pooled coverage = 47.4%</text>
+<text x='262.17' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "Arial";' textLength='167.60px' lengthAdjust='spacingAndGlyphs'>B. Dominant-OTU read retention</text>
 <text x='500.77' y='338.52' text-anchor='end' style='font-size: 8.80px; font-family: "Arial";' textLength='339.82px' lengthAdjust='spacingAndGlyphs'>The primary result describes 585 dominant OTUs, not the full rare biosphere.</text>
 <text x='9.46' y='15.10' style='font-size: 13.20px; font-family: "Arial";' textLength='394.36px' lengthAdjust='spacingAndGlyphs'>Phylogenetic inference begins with a feature-universe audit</text>
 </g>

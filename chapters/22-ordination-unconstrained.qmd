@@ -1,6 +1,6 @@
 ---
 title: "非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,15 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/22-ordination-unconstrained.R
+  packages:
+  - ggplot2
+  - scales
+  - vegan
 ---
-
-> **分析目标：**用 Bray–Curtis PCoA 展示样本整体群落结构，同时完成 PERMANOVA 与组内离散度检验。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**示例数据 90 个样本、13,628 个 OTU；普通笔记本约 2–5 分钟，内存低于 1 GB。
 
 ## 排序图展示的是距离结构，不是组间检验 {#sec-target}
 
@@ -42,126 +46,32 @@ fig-format: png
 PCoA 展示距离矩阵的主要结构；PERMANOVA 检验组中心是否存在差异；`betadisper` 检查组内离散度是否不同。只有散点“看起来分开”不能替代统计检验，PERMANOVA 显著也必须结合离散度结果解释。
 :::
 
-## 为什么先算距离，再做排序 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-先记住三条：
+需要 R，以及 `ggplot2`、`scales`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表，以及本次分析使用的实测环境变量或系统发育信息。
 
-1. **PCoA 的输入是样本间距离矩阵。** 选用 Bray–Curtis、Jaccard 还是 UniFrac，往往比最后选哪种二维排序更影响结论。
-2. **Bray–Curtis 关注丰度组成差异。** 对测序深度不同的计数表，先转换为样本内相对丰度，避免总 reads 数主导距离。
-3. **排序轴不是“菌群好坏轴”。** 它们只是尽量保存样本间距离的数学方向，不能按坐标正负赋予生物学价值。
-
-<details>
-<summary><strong>深入：PCoA、NMDS 与 CLR-PCA 怎么选</strong></summary>
-
-**PCoA（principal coordinates analysis，主坐标分析）**
-
-PCoA 可以接收任意距离矩阵。Bray–Curtis PCoA 是 16S 研究中最常见的整体群落结构展示。非欧氏距离有时会产生负特征值，可使用 Lingoes 或 Cailliez 校正；本例用 `cmdscale(add = TRUE)` 添加 Lingoes 常数。
-
-**NMDS（non-metric multidimensional scaling，非度量多维标度）**
-
-NMDS 优先保存距离的秩次，而非距离的绝对数值。它没有“轴解释方差”，必须报告 stress。经验上 stress < 0.1 通常很好，0.1–0.2 可用于谨慎解释，> 0.2 时二维表示可能失真。NMDS 依赖随机初值，因此必须固定随机种子。
-
-**CLR-PCA（centered log-ratio PCA，中心对数比 PCA）**
-
-CLR 将成分数据映射到欧氏空间，PCA 后的欧氏距离对应 Aitchison 距离。但零值不能直接取对数；简单伪计数会影响结果，尤其是稀疏表。本例把 CLR-PCA作为敏感性分析，并明确报告零替代值与 prevalence 筛选阈值。若它是主要结论，优先考虑 robust Aitchison / RPCA，并比较不同零处理方案。
-
-</details>
-
-::: {.callout-note title="本例为什么按盐碱状态画主图"}
-按盐碱状态分组时，PERMANOVA 显著而组内离散度检验不显著，适合演示“位置差异 + 离散度核查”的完整证据链。若改按三类湿地地理组分析，本数据的组内离散度检验也会显著，此时不能把 PERMANOVA 结果简单解释为组中心差异。
-:::
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载真实数据和定义作图函数</strong></summary>
-
-首次运行安装以下 CRAN 包：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c("vegan", "ggplot2", "scales", "digest"))
-```
-
-数据固定使用 `microeco 2.0.0` 源码包中的真实 16S 示例表。下面代码下载版本锁定的压缩包、核对 SHA-256，并导出标准三件套；同时导出第 24 篇会用到的环境因子表。
-
-```{r}
-#| eval: false
-archive <- "data/raw/microeco_2.0.0.tar.gz"
-source_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/",
-  "microeco/microeco_2.0.0.tar.gz"
-)
-expected_sha256 <- paste0(
-  "454a3b71ceeea86bdd54f475a12b5bac",
-  "9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) {
-  download.file(source_url, archive, mode = "wb")
-}
-observed_sha256 <- digest::digest(
-  file = archive,
-  algo = "sha256",
-  serialize = FALSE
-)
-stopifnot(identical(observed_sha256, expected_sha256))
-
-required <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData",
-  "microeco/data/env_data_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-utils::untar(archive, files = required, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name),
-    x,
-    check.names = FALSE
-  )
-  utils::write.table(
-    out,
-    path,
-    sep = "\t",
-    quote = FALSE,
-    row.names = FALSE,
-    na = ""
-  )
-}
-
-write_tsv(data_env$otu_table_16S, "FeatureID", "data/small/otutab.tsv")
-write_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/environment.tsv",
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
   "data/small/taxonomy.tsv"
 )
-write_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-write_tsv(
-  data_env$env_data_16S,
-  "SampleID",
-  "data/small/environment.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-每篇文章需要的出版级函数直接定义在这里：
-
 ```{r}
+#| results: hold
+#| label: reader-step-02
 library(vegan)
 library(ggplot2)
 
@@ -234,16 +144,13 @@ save_pub <- function(
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并检查方向
+### 读取三件套并检查方向
 
 OTU 表必须是“特征 × 样本”，taxonomy 的行名与 OTU 特征一致，metadata 的行名与 OTU 样本一致。
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 otutab <- read.delim(
   "data/small/otutab.tsv",
   row.names = 1,
@@ -275,11 +182,56 @@ taxonomy[1:5, , drop = FALSE]
 head(metadata)
 ```
 
-### 2. 低 prevalence 筛选与 Bray–Curtis 距离
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/22-ordination-unconstrained.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c("vegan", "ggplot2", "scales", "digest"))
+```
+
+</details>
+
+## 为什么先算距离，再做排序 {#sec-theory}
+
+先记住三条：
+
+1. **PCoA 的输入是样本间距离矩阵。** 选用 Bray–Curtis、Jaccard 还是 UniFrac，往往比最后选哪种二维排序更影响结论。
+2. **Bray–Curtis 关注丰度组成差异。** 对测序深度不同的计数表，先转换为样本内相对丰度，避免总 reads 数主导距离。
+3. **排序轴不是“菌群好坏轴”。** 它们只是尽量保存样本间距离的数学方向，不能按坐标正负赋予生物学价值。
+
+<details>
+<summary><strong>深入：PCoA、NMDS 与 CLR-PCA 怎么选</strong></summary>
+
+**PCoA（principal coordinates analysis，主坐标分析）**
+
+PCoA 可以接收任意距离矩阵。Bray–Curtis PCoA 是 16S 研究中最常见的整体群落结构展示。非欧氏距离有时会产生负特征值，可使用 Lingoes 或 Cailliez 校正；本例用 `cmdscale(add = TRUE)` 添加 Lingoes 常数。
+
+**NMDS（non-metric multidimensional scaling，非度量多维标度）**
+
+NMDS 优先保存距离的秩次，而非距离的绝对数值。它没有“轴解释方差”，必须报告 stress。经验上 stress < 0.1 通常很好，0.1–0.2 可用于谨慎解释，> 0.2 时二维表示可能失真。NMDS 依赖随机初值，因此必须固定随机种子。
+
+**CLR-PCA（centered log-ratio PCA，中心对数比 PCA）**
+
+CLR 将成分数据映射到欧氏空间，PCA 后的欧氏距离对应 Aitchison 距离。但零值不能直接取对数；简单伪计数会影响结果，尤其是稀疏表。本例把 CLR-PCA作为敏感性分析，并明确报告零替代值与 prevalence 筛选阈值。若它是主要结论，优先考虑 robust Aitchison / RPCA，并比较不同零处理方案。
+
+</details>
+
+::: {.callout-note title="本例为什么按盐碱状态画主图"}
+按盐碱状态分组时，PERMANOVA 显著而组内离散度检验不显著，适合演示“位置差异 + 离散度核查”的完整证据链。若改按三类湿地地理组分析，本数据的组内离散度检验也会显著，此时不能把 PERMANOVA 结果简单解释为组中心差异。
+:::
+
+## 从距离矩阵得到PCoA、NMDS与CLR-PCA {#sec-code}
+
+### 低 prevalence 筛选与 Bray–Curtis 距离
 
 保留至少在 5% 样本中检出的特征。这个阈值用于降低极低频特征对计算和噪声的影响，正式研究应报告阈值并做敏感性分析。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 min_prevalence <- 0.05
 min_samples <- ceiling(min_prevalence * ncol(otutab))
 keep_feature <- rowSums(otutab > 0) >= min_samples
@@ -301,9 +253,11 @@ c(
 )
 ```
 
-### 3. PCoA 坐标
+### PCoA 坐标
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 pcoa_fit <- stats::cmdscale(
   dist_bray,
   k = 2,
@@ -326,11 +280,13 @@ head(pcoa_df)
 round(pcoa_variance, 2)
 ```
 
-### 4. PERMANOVA 与组内离散度
+### PERMANOVA 与组内离散度
 
 示例样本按独立样本进行 999 次自由置换。若研究包含配对、重复测量、区组或采样点层级，必须限制置换范围。
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 set.seed(20260718)
 permanova <- vegan::adonis2(
   dist_bray ~ Salinity,
@@ -360,9 +316,11 @@ dispersion_p <- unname(dispersion_test$tab$`Pr(>F)`[1])
 
 本例中，PERMANOVA 说明两类土壤的整体群落结构存在统计差异；离散度检验未发现显著差异，因此结果不太可能仅由某一组更分散造成。这里的 P 值仍需结合真实研究设计解释。
 
-### 5. NMDS：用 stress 判断二维表示是否可靠
+### NMDS：用 stress 判断二维表示是否可靠
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 set.seed(20260718)
 nmds_fit <- vegan::metaMDS(
   dist_bray,
@@ -393,11 +351,13 @@ p_nmds
 nmds_fit$stress
 ```
 
-### 6. CLR-PCA：把零处理写进分析假设
+### CLR-PCA：把零处理写进分析假设
 
 下面保留至少 20% 样本中出现的特征，并用 `0.5` read 作为零替代值。这是透明、易复现的敏感性分析，不应被描述为唯一正确的零处理方案。
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 clr_min_prevalence <- 0.20
 keep_clr <- rowSums(otutab > 0) >=
   ceiling(clr_min_prevalence * ncol(otutab))
@@ -435,11 +395,13 @@ p_clr
 
 如果 Bray–Curtis PCoA 与 CLR-PCA 给出不同故事，先检查稀疏度、零替代、prevalence 阈值和极高丰度特征，而不是选择“更好看”的一张。
 
-## 出版级美化 {#sec-polish}
+## 在排序图中保留距离、拟合与检验信息 {#sec-polish}
 
 主图把检验结果放在图内，避免图注与分析版本脱节。轴解释率来自当前 PCoA 模型，不能手工抄写。
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 format_p <- function(p) {
   if (is.na(p)) {
     return("= NA")
@@ -513,7 +475,7 @@ save_pub(
 将 `Salinity` 换为 `metadata$Group` 后，本示例数据的 PERMANOVA 与 dispersion test 都显著。此时可以说“组间群落分布存在差异”，但不能把差异全部归因于组中心移动。这个检查不应因主图看起来分得很开而省略。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告距离、排序和离散度检验的方法与限制 {#sec-methods}
 
 下面英文可直接替换分组名、筛选阈值和置换设计：
 
@@ -521,7 +483,7 @@ save_pub(
 
 若真实数据有 `SubjectID`、`SiteID` 或 `Batch`，最后一句必须改成实际的受限置换设计。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将距离、排序和离散度检验用于自己的研究 {#sec-own-data}
 
 只需替换三个路径和分组列名：
 

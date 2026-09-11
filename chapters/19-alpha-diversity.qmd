@@ -6,21 +6,30 @@ execute:
   freeze: auto
   warning: false
   message: false
+author: "Peter"
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/19-alpha-diversity.R
+  packages:
+  - dplyr
+  - ggplot2
+  - iNEXT
+  - jsonlite
+  - phyloseq
+  - ragg
+  - scales
+  - svglite
+  - systemfonts
+  - vegan
 ---
 
 ## Alpha 多样性到底在量化什么？ {#sec-paper-figure}
 
 Alpha 多样性（alpha diversity）描述的是**单个样本内部**检测到多少类群，以及丰度在这些类群之间分配得多均匀。论文里常见的 Shannon 箱线图只是最终摘要；在比较分组之前，还应先回答三个测量问题：样本测了多深、测得多完整、结论是否依赖某一种指数或标准化方法。
 
-本页使用 An 等中国湿地研究随 `microeco 2.0.0` 分发的真实 16S 数据：13,628 个 OTU、90 个样本、1,619,670 条 reads，内陆湿地、沿海湿地和青藏高原湿地各 30 个样本。[原始数据论文](https://doi.org/10.1016/j.geoderma.2018.09.035)与 [`microeco` 软件论文](https://doi.org/10.1093/femsec/fiaa255)提供了可引用的数据来源。以下四张图均由三件套重新计算，不复制原论文图。
+本页使用 An 等中国湿地研究随 `microeco 2.0.0` 分发的真实 16S 数据：13,628 个 OTU、90 个样本、1,619,670 条 reads，内陆湿地、沿海湿地和青藏高原湿地各 30 个样本。[原始数据论文](https://doi.org/10.1016/j.geoderma.2018.09.035)与 [`microeco` 软件论文](https://doi.org/10.1093/femsec/fiaa255)提供了可引用的数据来源。
 
-![原始 Observed richness 与测序深度仍有很强的秩相关；sample coverage 是另一项诊断，不能被 library size 替代。](../figures/19-depth-completeness-audit.png){#fig-depth-completeness}
-
-![90 条逐样本稀释曲线。粗线和阴影仅汇总组内中位数与四分位距；它们不是组间检验。](../figures/19-rarefaction-curves.png){#fig-rarefaction-curves}
-
-![每个点把原始 plug-in 值与 10,000 reads 或 90% coverage 下的解析估计配对比较。q=0 对标准化最敏感。](../figures/19-standardization-comparison.png){#fig-standardization-comparison}
-
-![90% sample coverage 下的 Hill profile。q=0、1、2 全部换成“有效 feature 数”，因此可在同一量纲解释。](../figures/19-hill-profile.png){#fig-hill-profile}
 
 ::: {.callout-important title="先记住四个结论"}
 
@@ -33,158 +42,30 @@ Alpha 多样性（alpha diversity）描述的是**单个样本内部**检测到�
 
 本数据的 library size 为 10,364–37,374 reads。若所有样本都按 10,000 reads 比较，可保留 90/90 个样本，但相当于不利用 44.4% 的已测 reads。改按 90% coverage 比较时，56 个样本需要 interpolation，34 个样本需要短程 extrapolation，最大推算 effort 为原 library size 的 1.453 倍。两条路径都应连同目标值和代价一起报告。
 
-## 每个指数到底在测什么 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-preparation}
 
-### 1. Richness、evenness 和 dominance 不是同一个问题
+需要 R，以及 `dplyr`、`ggplot2`、`iNEXT`、`jsonlite`、`phyloseq`、`ragg`、`scales`、`svglite`、`systemfonts`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-设样本中第 \(i\) 个 feature 的相对丰度为 \(p_i\)，检测到的 feature 数为 \(S_{obs}\)。常见指标可整理为：
-
-| 指标 | 定义或直觉 | 单位 | 对稀有 feature 的敏感度 |
-|---|---|---|---|
-| Observed | 检测到的非零 feature 数 | features | 高 |
-| Chao1 | 用 singleton/doubleton 修正未检出 richness | features | 很高 |
-| Shannon | \(-\sum p_i\log p_i\) | entropy | 中等 |
-| Simpson | `vegan` 中为 \(1-\sum p_i^2\) | probability | 低 |
-| Pielou | \(H'/\log(S_{obs})\) | 0–1 ratio | 中等 |
-| Hill \(q=0\) | \(S_{obs}\) | effective features | 高 |
-| Hill \(q=1\) | \(\exp(H')\) | effective features | 中等 |
-| Hill \(q=2\) | \(1/\sum p_i^2\) | effective features | 低 |
-
-Observed 只计算“见过多少个”；Shannon 同时受 richness 和均匀度影响；Simpson 更强调优势 feature。它们不应被互换命名。例如，`vegan::diversity(index = "simpson")` 返回的是 \(1-\sum p_i^2\)，而不是 inverse Simpson。
-
-<details>
-<summary><strong>深入：Chao1 与 sample coverage 为什么都盯着 singleton</strong></summary>
-
-若 \(f_1\) 和 \(f_2\) 分别表示样本中只出现 1 次和 2 次的 feature 数，经典 Chao1 的核心修正项与 \(f_1^2/(2f_2)\) 有关；软件会对 \(f_2=0\) 等边界情况使用修正公式。singleton 越多，未观察 richness 的证据通常越强。
-
-Good's sample coverage 的直观估计为：
-
-\[
-\hat C = 1-\frac{f_1}{n}
-\]
-
-其中 \(n\) 是该样本的总 reads。它估计下一条 read 落在已观测 feature 中的概率，而不是“环境中 90% 的细胞或物种已经被测到”。PCR 偏好、16S 拷贝数、引物覆盖和分类数据库误差仍然存在。
-
-在计算 Observed、Chao1 和 coverage 前删除 singleton，会直接改写这些估计量所需的信息。低丰度过滤可用于其他下游任务，但必须与原始 richness 估计分开。
-
-</details>
-
-### 2. 稀释曲线、等 reads 和等 coverage 回答不同问题
-
-**Sample-size rarefaction** 问：“如果每个样本只使用相同数量的 reads，期望看到多少 diversity？”它把测序量固定下来，但不同样本在该深度下可能具有不同完整度。
-
-**Coverage-based standardization** 问：“如果每个样本都比较到相同的样本完整度，期望 diversity 是多少？”它允许对测得更完整的样本做 interpolation，也允许对不够完整的样本做有限 extrapolation。
-
-本页使用解析 rarefaction / extrapolation，不生成随机抽平 count table。这样重复运行不会因一次随机丢 reads 而改变结果，也不会诱使人把抽平表误用于后续差异丰度模型。
-
-::: {.callout-note title="稀释曲线接近平台不等于测序绝对充分"}
-曲线只描述当前 feature 定义和处理流程下，继续增加 reads 对观测 richness 的预期收益。平台外观还受横轴范围、singleton、测序错误处理和分类分辨率影响。应同时报告 library size、coverage、目标深度或目标 coverage，以及 extrapolation 范围。
-:::
-
-### 3. Hill numbers 把三个指标放回同一量纲
-
-Hill number 的一般形式为：
-
-\[
-{}^qD=\left(\sum_i p_i^q\right)^{1/(1-q)}
-\]
-
-当 \(q\) 增大，稀有 feature 的权重降低：
-
-- \(q=0\)：每个被检测 feature 权重相同，对稀有 feature 最敏感；
-- \(q=1\)：极限形式为 \(\exp(H')\)，兼顾 richness 与 evenness；
-- \(q=2\)：为 inverse Simpson，主要反映优势 feature。
-
-“Hill \(q=1=800\)”可以读作：该样本的 Shannon 多样性，相当于 800 个等丰度 feature。这个解释比直接比较 entropy 值更直观。
-
-## 准备工作 {#sec-preparation}
-
-<details open>
-<summary><strong>展开：安装依赖、获取真实三件套并定义完整作图函数</strong></summary>
-
-本页实测环境为 R 4.4.1、`vegan 2.6-6.1`、`phyloseq 1.48.0`、`iNEXT 3.0.2` 和 `ggplot2 3.5.2`。首次安装可执行：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "digest", "dplyr", "ggplot2", "iNEXT", "jsonlite", "ragg",
-  "readr", "scales", "svglite", "systemfonts", "tibble",
-  "tidyr", "vegan"
-))
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
-  install.packages("BiocManager")
-}
-BiocManager::install("phyloseq")
-```
-
-真实数据来自 CRAN 归档中的 `microeco 2.0.0`。下面代码锁定源码包版本、核对 SHA-256，并直接导出 `otutab`、`taxonomy` 和 `metadata`：
-
-```{r}
-#| eval: false
-dir.create("downloads", showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-
-microeco_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/microeco/",
-  "microeco_2.0.0.tar.gz"
-)
-microeco_tar <- "downloads/microeco_2.0.0.tar.gz"
-if (!file.exists(microeco_tar)) {
-  download.file(microeco_url, microeco_tar, mode = "wb")
-}
-
-stopifnot(
-  digest::digest(
-    file = microeco_tar,
-    algo = "sha256",
-    serialize = FALSE
-  ) == "454a3b71ceeea86bdd54f475a12b5bac9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-required_data <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-untar(microeco_tar, files = required_data, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required_data) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_keyed_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    stats::setNames(list(rownames(x)), id_name),
-    x,
-    check.names = FALSE
-  )
-  readr::write_tsv(out, path)
-}
-
-write_keyed_tsv(
-  data_env$otu_table_16S,
-  "FeatureID",
-  "data/small/otutab.tsv"
-)
-write_keyed_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
   "data/small/taxonomy.tsv"
 )
-write_keyed_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-下面是本页使用的完整出版函数：
-
 ```{r}
+#| results: hold
 #| label: setup
 #| include: true
 set.seed(20260721)
@@ -199,11 +80,11 @@ missing_packages <- required_packages[
 ]
 stopifnot(length(missing_packages) == 0L)
 
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 font_info <- systemfonts::font_info(font_pub)
 stopifnot(
   nrow(font_info) >= 1L,
-  identical(font_info$family[[1L]], font_pub),
+  nzchar(font_info$family[[1L]]),
   file.exists(font_info$path[[1L]]),
   isTRUE(font_info$scalable[[1L]])
 )
@@ -309,15 +190,12 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并按 ID 对齐
+### 读取三件套并按 ID 对齐
 
 下面的主流程在普通工作站约需 1 分钟，峰值内存低于 1 GB。`otutab` 必须是 feature × sample 的非负整数表；这里不在 richness 计算前做 prevalence 或 abundance 过滤。
 
 ```{r}
+#| results: hold
 #| label: read-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -384,6 +262,8 @@ head(metadata)
 标准三件套也可以组装成 `phyloseq` 对象，但原始表仍是本页的计算起点：
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 ps <- phyloseq::phyloseq(
   phyloseq::otu_table(otutab, taxa_are_rows = TRUE),
   phyloseq::tax_table(as.matrix(taxonomy)),
@@ -392,9 +272,97 @@ ps <- phyloseq::phyloseq(
 ps
 ```
 
-### 2. 在未过滤计数上计算完整 Alpha 指数表
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/19-alpha-diversity.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "digest", "dplyr", "ggplot2", "iNEXT", "jsonlite", "ragg",
+  "readr", "scales", "svglite", "systemfonts", "tibble",
+  "tidyr", "vegan"
+))
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+BiocManager::install("phyloseq")
+```
+
+</details>
+
+## 每个指数到底在测什么 {#sec-theory}
+
+### Richness、evenness 和 dominance 不是同一个问题
+
+设样本中第 \(i\) 个 feature 的相对丰度为 \(p_i\)，检测到的 feature 数为 \(S_{obs}\)。常见指标可整理为：
+
+| 指标 | 定义或直觉 | 单位 | 对稀有 feature 的敏感度 |
+|---|---|---|---|
+| Observed | 检测到的非零 feature 数 | features | 高 |
+| Chao1 | 用 singleton/doubleton 修正未检出 richness | features | 很高 |
+| Shannon | \(-\sum p_i\log p_i\) | entropy | 中等 |
+| Simpson | `vegan` 中为 \(1-\sum p_i^2\) | probability | 低 |
+| Pielou | \(H'/\log(S_{obs})\) | 0–1 ratio | 中等 |
+| Hill \(q=0\) | \(S_{obs}\) | effective features | 高 |
+| Hill \(q=1\) | \(\exp(H')\) | effective features | 中等 |
+| Hill \(q=2\) | \(1/\sum p_i^2\) | effective features | 低 |
+
+Observed 只计算“见过多少个”；Shannon 同时受 richness 和均匀度影响；Simpson 更强调优势 feature。它们不应被互换命名。例如，`vegan::diversity(index = "simpson")` 返回的是 \(1-\sum p_i^2\)，而不是 inverse Simpson。
+
+<details>
+<summary><strong>深入：Chao1 与 sample coverage 为什么都盯着 singleton</strong></summary>
+
+若 \(f_1\) 和 \(f_2\) 分别表示样本中只出现 1 次和 2 次的 feature 数，经典 Chao1 的核心修正项与 \(f_1^2/(2f_2)\) 有关；软件会对 \(f_2=0\) 等边界情况使用修正公式。singleton 越多，未观察 richness 的证据通常越强。
+
+Good's sample coverage 的直观估计为：
+
+\[
+\hat C = 1-\frac{f_1}{n}
+\]
+
+其中 \(n\) 是该样本的总 reads。它估计下一条 read 落在已观测 feature 中的概率，而不是“环境中 90% 的细胞或物种已经被测到”。PCR 偏好、16S 拷贝数、引物覆盖和分类数据库误差仍然存在。
+
+在计算 Observed、Chao1 和 coverage 前删除 singleton，会直接改写这些估计量所需的信息。低丰度过滤可用于其他下游任务，但必须与原始 richness 估计分开。
+
+</details>
+
+### 稀释曲线、相同读数和相同覆盖度回答不同问题
+
+**Sample-size rarefaction** 问：“如果每个样本只使用相同数量的 reads，期望看到多少 diversity？”它把测序量固定下来，但不同样本在该深度下可能具有不同完整度。
+
+**Coverage-based standardization** 问：“如果每个样本都比较到相同的样本完整度，期望 diversity 是多少？”它允许对测得更完整的样本做 interpolation，也允许对不够完整的样本做有限 extrapolation。
+
+本页使用解析 rarefaction / extrapolation，不生成随机抽平 count table。这样重复运行不会因一次随机丢 reads 而改变结果，也不会诱使人把抽平表误用于后续差异丰度模型。
+
+::: {.callout-note title="稀释曲线接近平台不等于测序绝对充分"}
+曲线只描述当前 feature 定义和处理流程下，继续增加 reads 对观测 richness 的预期收益。平台外观还受横轴范围、singleton、测序错误处理和分类分辨率影响。应同时报告 library size、coverage、目标深度或目标 coverage，以及 extrapolation 范围。
+:::
+
+### Hill numbers 把三个指标放回同一量纲
+
+Hill number 的一般形式为：
+
+\[
+{}^qD=\left(\sum_i p_i^q\right)^{1/(1-q)}
+\]
+
+当 \(q\) 增大，稀有 feature 的权重降低：
+
+- \(q=0\)：每个被检测 feature 权重相同，对稀有 feature 最敏感；
+- \(q=1\)：极限形式为 \(\exp(H')\)，兼顾 richness 与 evenness；
+- \(q=2\)：为 inverse Simpson，主要反映优势 feature。
+
+“Hill \(q=1=800\)”可以读作：该样本的 Shannon 多样性，相当于 800 个等丰度 feature。这个解释比直接比较 entropy 值更直观。
+
+## 从测序深度比较到相同完整度 {#sec-code}
+
+### 在未过滤计数上计算完整 Alpha 指数表
+
+```{r}
+#| results: hold
+#| label: reader-step-05
 community <- t(otutab)
 library_size <- rowSums(community)
 observed <- vegan::specnumber(community)
@@ -481,11 +449,13 @@ c(
 
 本数据的 raw coverage 为 86.25%–95.32%，但 raw Observed 与 depth 的相关仍达到 0.781。高 coverage 不代表 richness 已对测序深度完全不敏感。
 
-### 3. 用解析稀释得到 10,000-read 比较值和逐样本曲线
+### 用解析稀释得到 10,000-read 比较值和逐样本曲线
 
 10,000 reads 低于所有样本的最浅 library，因此全部样本都可做 interpolation。`iNEXT::estimateD()` 直接返回期望 diversity，不创建一次随机抽样后的新 count table。
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 abundance_list <- setNames(
   lapply(seq_len(nrow(community)), function(i) {
     as.numeric(community[i, community[i, ] > 0])
@@ -575,11 +545,13 @@ size_cost <- data.frame(
 size_cost
 ```
 
-### 4. 按 90% coverage 比较，并检查 extrapolation 边界
+### 在 90% 覆盖度下比较，并检查是否需要过度外推
 
 目标 coverage 不是越高越好。阈值越高，需要 extrapolation 的样本越多，推算距离也越长。这里先比较 0.88、0.90、0.92，再选择最大 effort ratio 不超过 1.5 的 0.90 作为展示值。
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 coverage_levels <- c(0.88, 0.90, 0.92)
 coverage_sensitivity <- do.call(
   rbind,
@@ -659,9 +631,11 @@ c(
 )
 ```
 
-### 5. 比较 Hill orders 对标准化的敏感性
+### 比较 Hill orders 对标准化的敏感性
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 raw_hill <- rbind(
   data.frame(
     SampleID = alpha_raw$SampleID,
@@ -726,9 +700,11 @@ rank_stability
 
 对 \(q=0\)，raw 与标准化后的样本排序相关只有约 0.54；对 \(q=1\) 约为 0.99，对 \(q=2\) 几乎为 1。也就是说，测序量和 coverage 的选择主要影响稀有 feature 驱动的 richness，而优势 feature 驱动的结论更稳定。这个结果是诊断，不是选择 \(q=2\) 来回避问题的理由。
 
-### 6. 生成组别描述表，不在这里做组间检验
+### 生成组别描述表，不在这里做组间检验
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 standardized_hill <- rbind(
   transform(
     raw_hill[c("SampleID", "Group", "GroupLabel", "Order", "HillD")],
@@ -761,11 +737,14 @@ group_descriptive_summary
 
 中位数和四分位距只描述当前 90 个样本。独立样本、配对或重复测量需要不同的检验设计；零膨胀、协变量和批次也不能用一个未经设计核查的 Wilcoxon 检验代替。
 
-## 出版级美化 {#sec-publication}
+## 用稀释曲线与Hill profile解释多样性 {#sec-publication}
 
-### 1. 深度与完整度必须分成两个 panel
+### 深度与完整度必须分成两个 panel
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
+#| fig-show: hide
 depth_plot_data <- rbind(
   data.frame(
     SampleID = alpha_raw$SampleID,
@@ -841,9 +820,14 @@ save_pub(
 )
 ```
 
-### 2. 稀释曲线必须以样本为单位
+![原始 Observed richness 与测序深度仍有很强的秩相关；sample coverage 是另一项诊断，不能被 library size 替代。](../figures/19-depth-completeness-audit.png){#fig-depth-completeness}
+
+### 稀释曲线必须以样本为单位
 
 ```{r}
+#| results: hold
+#| label: reader-step-11
+#| fig-show: hide
 curve_summary <- rarefaction_curve_data |>
   dplyr::group_by(GroupLabel, TargetReads) |>
   dplyr::summarise(
@@ -914,9 +898,14 @@ save_pub(
 )
 ```
 
-### 3. 用相同坐标单位比较两种标准化
+![90 条逐样本稀释曲线。粗线和阴影仅汇总组内中位数与四分位距；它们不是组间检验。](../figures/19-rarefaction-curves.png){#fig-rarefaction-curves}
+
+### 用相同坐标单位比较两种标准化
 
 ```{r}
+#| results: hold
+#| label: reader-step-12
+#| fig-show: hide
 raw_for_plot <- raw_hill[c("SampleID", "Order", "HillD")]
 names(raw_for_plot)[[3L]] <- "RawHillD"
 size_for_plot <- alpha_size[
@@ -1001,9 +990,14 @@ save_pub(
 )
 ```
 
-### 4. Hill profile 使用 log y 轴，但不对数据取 log 后再解释
+![每个点把原始 plug-in 值与 10,000 reads 或 90% coverage 下的解析估计配对比较。q=0 对标准化最敏感。](../figures/19-standardization-comparison.png){#fig-standardization-comparison}
+
+### 用对数坐标展示 Hill 多样性，但按原始数值解释
 
 ```{r}
+#| results: hold
+#| label: reader-step-13
+#| fig-show: hide
 coverage_profile <- alpha_coverage
 coverage_profile$OrderLabel <- coverage_profile$Order
 coverage_profile_summary <- coverage_profile |>
@@ -1090,7 +1084,9 @@ save_pub(
 )
 ```
 
-### 5. 对导出文件做机器回验
+![90% sample coverage 下的 Hill profile。q=0、1、2 全部换成“有效 feature 数”，因此可在同一量纲解释。](../figures/19-hill-profile.png){#fig-hill-profile}
+
+### 对导出文件做机器回验
 
 完整验证器会核对输入 SHA-256、包版本、指标公式、`phyloseq`/`vegan` 数值一致性、coverage sensitivity、随机边界、PDF 字体嵌入、SVG 文本节点、位图像素、实际 ppi、物理尺寸和 TIFF LZW 压缩：
 
@@ -1106,6 +1102,8 @@ Rscript --vanilla scripts/validate_alpha_diversity.R \
 项目内存在审计结果时，下面代码会强制要求 193 项全部通过；单独复制正文代码时，不需要该结果目录也能完成前面的计算和出图。
 
 ```{r}
+#| results: hold
+#| label: reader-step-14
 audit_summary_path <- paste0(
   "results/19-alpha-diversity/",
   "alpha-diversity-summary.json"
@@ -1149,7 +1147,7 @@ if (file.exists(audit_summary_path)) {
 当前图中的粗线、IQR 和组中位数只用于描述。组间推断必须先确定独立、配对、重复测量或多协变量设计，再选择相应模型并处理多重比较。先看描述图再不断尝试检验，也会产生选择性报告风险。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告多样性指数与标准化的方法与限制 {#sec-methods}
 
 下面英文可直接替换 feature 类型、目标深度和目标 coverage：
 
@@ -1157,9 +1155,9 @@ if (file.exists(audit_summary_path)) {
 
 若使用 ASV，应把 `feature` 替换为 ASV；若 0.90 coverage 会导致过长 extrapolation，应报告实际选用的阈值和敏感性分析，不能照抄上述数字。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将多样性指数与标准化用于自己的研究 {#sec-own-data}
 
-### 1. 只替换三件套路径和分组列
+### 只替换三件套路径和分组列
 
 ```{r}
 #| eval: false
@@ -1189,7 +1187,7 @@ metadata$AnalysisGroup <- factor(metadata[[group_col]])
 - `metadata`：行是样本，至少包含分组列；图中若有中文分组名，先 recode 成英文；
 - 样本或 feature 顺序不一致时，按 ID 显式重排，不能只取交集后假定顺序正确。
 
-### 2. 不要机械照抄 10,000 reads
+### 不要机械照抄 10,000 reads
 
 先检查 `sort(colSums(otutab))`。目标 reads 至少要说明：
 
@@ -1198,11 +1196,11 @@ metadata$AnalysisGroup <- factor(metadata[[group_col]])
 - richness 排序在多个目标深度下是否稳定；
 - 这个标准化表是否仅用于 diversity/距离，而不是所有下游模型。
 
-### 3. Coverage 目标也要做 sensitivity analysis
+### Coverage 目标也要做 sensitivity analysis
 
 至少比较 3 个相邻目标，例如 0.85、0.90、0.95，并记录每个目标下的 interpolation/extrapolation 样本数、median implied reads 和 maximum effort ratio。若结论只在长程 extrapolation 下出现，应降低目标、增加测序，或把不确定性写进结论。
 
-### 4. 组间检验还需要研究设计信息
+### 组间检验还需要研究设计信息
 
 三件套足以计算 Alpha 指数，但正式推断还要从 metadata 确认：
 

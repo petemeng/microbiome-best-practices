@@ -7,9 +7,9 @@
   "spearman_tested_pairs": 12000,
   "spearman_fdr_hits": 4166,
   "cca_canonical_correlations": [
-    0.9997625482324894,
-    0.9993638236488163,
-    0.9990188798343462
+    0.99976254823249,
+    0.9993638236488153,
+    0.9990188798343471
   ],
   "mmvec_implementation": "biocore/mmvec native MMvec class",
   "mmvec_train_samples": 153,
@@ -22,7 +22,7 @@
   "mofa_factors_retained": 4,
   "mofa_total_variance_explained_by_view": {
     "Metabolome": 0.3259248380408615,
-    "Microbiome": 0.34829472134082795
+    "Microbiome": 0.34829472134082773
   },
   "mofa_group_associated_factors_fdr": 3,
   "versions": {

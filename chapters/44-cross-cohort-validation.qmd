@@ -1,6 +1,6 @@
 ---
 title: "跨队列 meta 分析与外部验证"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,15 +17,24 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/44-cross-cohort-validation.R
+  packages:
+  - ggplot2
+  - ggrepel
+  - metafor
+  - pROC
+  - ragg
+  - ranger
+  - readr
+  - svglite
 ---
-
-> **分析目标：**在三个独立 colorectal cancer（CRC）16S cohorts 中分别估计 genus-level CLR effect，再用 random-effects meta-analysis 合并；同时执行 leave-one-study-out external validation，审计跨研究 heterogeneity 与模型 transportability。  
-> **输入文件：**每个研究独立的 `data/small/cross-cohort-crc/<study>/{otutab,taxonomy,metadata}.tsv` 三件套。  
-> **预计资源：**Xiang 43、Zhao 102、Zackular 60 个 CRC/control stool samples；genus aggregation、random-effects models 与三个外部验证模型通常 2–5 分钟、峰值内存低于 3 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 跨队列验证必须把异质性作为结果 {#sec-target}
 
-[Duvallet et al. (2017)](https://doi.org/10.1038/s41467-017-01973-8)用统一处理的公开研究区分 disease-specific 与跨疾病 microbial signatures；[Wirbel et al. (2019)](https://doi.org/10.1038/s41591-019-0406-6)展示 CRC shotgun cohorts 的跨研究 meta-analysis 与 external classification。这里不转载论文原图，而是在 MicrobiomeHD 三个真实 CRC 16S cohorts 上重绘 study separation、random-effects forest、heterogeneity map 与 leave-one-study-out ROC。
+[Duvallet et al. (2017)](https://doi.org/10.1038/s41467-017-01973-8)用统一处理的公开研究区分 disease-specific 与跨疾病 microbial signatures；[Wirbel et al. (2019)](https://doi.org/10.1038/s41591-019-0406-6)展示 CRC shotgun cohorts 的跨研究 meta-analysis 与 external classification。
 
 ::: {.callout-important title="先给结论"}
 把所有样本合并后随机切 train/test，主要检验“能否识别混合数据中的同分布样本”，不是“能否迁移到新研究”。跨队列证据应保留 study boundary：每个队列独立估计 effect，再做 random-effects meta；预测时把整个从未参与 preprocessing 与 tuning 的 cohort 留作外部 test。
@@ -33,63 +42,43 @@ fig-format: png
 
 数据来自 MicrobiomeHD Zenodo record 10.5281/zenodo.1146764 的 standardized 16S outputs，许可为 CC BY-NC 4.0。本页仅保留 CRC 与 healthy controls；Zackular cohort 的 adenoma 与 mock samples 在分析前排除。三项研究的 amplicon region、platform、geography 与 preprocessing lineage 不完全相同，这正是需要 study-level validation 的原因。
 
-## 队列异质性不是需要隐藏的噪声 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 每个 study 先产生可比较的 effect 与 uncertainty
+需要 R，以及 `ggplot2`、`ggrepel`、`metafor`、`pROC`、`ragg`、`ranger`、`readr`、`svglite`。本次使用三个公开结直肠癌队列各自的 count、taxonomy 和 metadata 表；队列身份不能在合并时丢失。
 
-对 genus $g$，在每个 study 内对 pseudocount-0.5 CLR abundance 拟合
-
-$$
-z_{gs}=\beta_{0g}+\beta_{1g}I(\mathrm{CRC})+\epsilon_{gs}.
-$$
-
-$\hat\beta_{1g}$ 是 CRC–control 的 within-study mean difference，标准误由该 study 的 biological samples 决定。不同 studies 不共享 sample-level residual variance，也不先用一个 batch coefficient“抹平”。
-
-### 2. random-effects meta 允许真效应跨研究变化
-
-$$
-\hat\theta_j\sim N(\theta_j, s_j^2),\qquad
-\theta_j\sim N(\mu,\tau^2).
-$$
-
-REML 估计 between-study variance $\tau^2$；$I^2$ 描述观测差异中归因于 heterogeneity 的比例。只有 2–3 个 studies 时，$I^2$ 很不稳定，因此同时展示每项研究的方向、CI 与 leave-one-study-out sensitivity，不把一个阈值当真理。
-
-### 3. external validation 的 test domain 不能参与选择
-
-留出 Zackular 时，Xiang+Zhao 才是 training universe。shared genera、prevalence/variance filter、CLR basis、hyperparameters 都只能由这两个 studies 确定；Zackular 只在模型锁定后映射缺失 features、计算 CLR 并预测一次。
-
-### 4. pooled probability 不一定可直接合并
-
-三个 held-out cohorts 来自三个不同模型，class prevalence 与 calibration 不同。本文按 cohort 报 AUC，并给 macro mean；不把三组 probability 拼起来制造一个“总 AUC”。若目标是部署 probability，还需目标人群 prevalence 下的 recalibration 与 decision-curve analysis。
-
-<details>
-<summary><strong>深入：何时才考虑 harmonization</strong></summary>
-
-MMUPHin、ConQuR 等方法可用于 association meta-analysis 或 abundance harmonization，但它们不能把不可识别的 study–phenotype confounding 变成可识别。任何 data-driven correction 都必须在 training studies 内拟合，再冻结后应用到 external test；若某 study 全是病例、另一 study 全是对照，study 与 disease 完全混杂，算法无法恢复 disease effect。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "ggrepel", "metafor", "patchwork", "pROC", "ragg",
-  "ranger", "readr", "scales", "svglite", "systemfonts", "vegan"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/cross-cohort-crc/crc_xiang/metadata.tsv",
+  "data/small/cross-cohort-crc/crc_xiang/otutab.tsv",
+  "data/small/cross-cohort-crc/crc_xiang/taxonomy.tsv",
+  "data/small/cross-cohort-crc/crc_zackular/metadata.tsv",
+  "data/small/cross-cohort-crc/crc_zackular/otutab.tsv",
+  "data/small/cross-cohort-crc/crc_zackular/taxonomy.tsv",
+  "data/small/cross-cohort-crc/crc_zhao/metadata.tsv",
+  "data/small/cross-cohort-crc/crc_zhao/otutab.tsv",
+  "data/small/cross-cohort-crc/crc_zhao/taxonomy.tsv",
+  "data/small/cross-cohort-crc/source-summary.json"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-
 ```{r}
+#| results: hold
 #| label: setup-cross-cohort-theme
 library(ggplot2)
 library(metafor)
 
 set.seed(20260744)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -128,13 +117,10 @@ save_pub <- function(plot, file_base, width = 89, height = 70, units = "mm", dpi
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 每个队列独立读取三件套，再聚合到 genus
+### 每个队列独立读取三件套，再聚合到 genus
 
 ```{r}
+#| results: hold
 #| label: read-cross-cohort-triads
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE,
@@ -185,9 +171,63 @@ stopifnot(
 dimension_ledger
 ```
 
-### 2. outcome-blind 定义 meta-analysis genus universe
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/44-cross-cohort-validation.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "ggrepel", "metafor", "patchwork", "pROC", "ragg",
+  "ranger", "readr", "scales", "svglite", "systemfonts", "vegan"
+))
+```
+
+</details>
+
+## 队列异质性不是需要隐藏的噪声 {#sec-theory}
+
+### 先在每个研究中估计可比较的效应量与不确定性
+
+对 genus $g$，在每个 study 内对 pseudocount-0.5 CLR abundance 拟合
+
+$$
+z_{gs}=\beta_{0g}+\beta_{1g}I(\mathrm{CRC})+\epsilon_{gs}.
+$$
+
+$\hat\beta_{1g}$ 是 CRC–control 的 within-study mean difference，标准误由该 study 的 biological samples 决定。不同 studies 不共享 sample-level residual variance，也不先用一个 batch coefficient“抹平”。
+
+### random-effects meta 允许真效应跨研究变化
+
+$$
+\hat\theta_j\sim N(\theta_j, s_j^2),\qquad
+\theta_j\sim N(\mu,\tau^2).
+$$
+
+REML 估计 between-study variance $\tau^2$；$I^2$ 描述观测差异中归因于 heterogeneity 的比例。只有 2–3 个 studies 时，$I^2$ 很不稳定，因此同时展示每项研究的方向、CI 与 leave-one-study-out sensitivity，不把一个阈值当真理。
+
+### 外部验证队列不能参与特征选择或调参
+
+留出 Zackular 时，Xiang+Zhao 才是 training universe。shared genera、prevalence/variance filter、CLR basis、hyperparameters 都只能由这两个 studies 确定；Zackular 只在模型锁定后映射缺失 features、计算 CLR 并预测一次。
+
+### pooled probability 不一定可直接合并
+
+三个 held-out cohorts 来自三个不同模型，class prevalence 与 calibration 不同。本文按 cohort 报 AUC，并给 macro mean；不把三组 probability 拼起来制造一个“总 AUC”。若目标是部署 probability，还需目标人群 prevalence 下的 recalibration 与 decision-curve analysis。
+
+<details>
+<summary><strong>深入：何时才考虑 harmonization</strong></summary>
+
+MMUPHin、ConQuR 等方法可用于 association meta-analysis 或 abundance harmonization，但它们不能把不可识别的 study–phenotype confounding 变成可识别。任何 data-driven correction 都必须在 training studies 内拟合，再冻结后应用到 external test；若某 study 全是病例、另一 study 全是对照，study 与 disease 完全混杂，算法无法恢复 disease effect。
+
+</details>
+
+## 保留队列差异，再做合并估计和外部验证 {#sec-code}
+
+### 不查看结局标签，先确定可合并分析的属
+
+```{r}
+#| results: hold
 #| label: define-meta-genus-universe
 eligible_by_study <- lapply(studies, function(study) {
   rownames(study$counts)[rowMeans(study$counts > 0) >= 0.10 & rowSums(study$counts) >= 20]
@@ -210,9 +250,10 @@ clr_transform <- function(counts, pseudocount = 0.5) {
 study_clr <- lapply(studies, function(study) clr_transform(align_counts(study$counts, meta_genera)))
 ```
 
-### 3. 逐 study effect，再做 REML random-effects meta
+### 先估计各研究的效应，再进行随机效应汇总分析
 
 ```{r}
+#| results: hold
 #| label: random-effects-genus-meta
 study_effects <- do.call(rbind, lapply(study_names, function(study) {
   group <- studies[[study]]$metadata$Group
@@ -244,9 +285,10 @@ stopifnot(nrow(meta_results) == length(meta_genera), all(meta_results$I2 >= 0 & 
 head(meta_results, 12)
 ```
 
-### 4. leave-one-study-out external classification
+### leave-one-study-out external classification
 
 ```{r}
+#| results: hold
 #| label: leave-one-study-out-classification
 auc_score <- function(truth, probability) {
   as.numeric(pROC::auc(truth, probability, levels = c("Control", "CRC"),
@@ -343,11 +385,12 @@ external_performance
 只有三个 cohorts 时，不要把 `I² < 50%` 写成“无异质性”。更稳妥的表述是：列出三个 study effects、REML pooled estimate、tau²/I²、direction agreement 和 leave-one-study-out结果，并把新增独立 cohort 作为下一步验证。
 :::
 
-## 出版级美化 {#sec-beautify}
+## 同时报告平均效应、异质性与外部表现 {#sec-beautify}
 
-### 1. study separation
+### study separation
 
 ```{r}
+#| results: hold
 #| label: fig-cohort-pcoa
 #| fig-cap: "Aitchison ordination exposes study structure before phenotype modeling."
 ordination_genera <- meta_genera
@@ -373,9 +416,10 @@ save_pub(p_pcoa, "figures/44-cohort-pcoa", 115, 95)
 p_pcoa
 ```
 
-### 2. 一个代表 genus 的 forest plot
+### 用代表性属的森林图比较各研究结果
 
 ```{r}
+#| results: hold
 #| label: fig-meta-forest
 #| fig-cap: "Study-specific and random-effects estimates for a representative genus."
 forest_genus <- meta_results$Genus[1]
@@ -404,9 +448,10 @@ save_pub(p_forest, "figures/44-meta-forest", 115, 82)
 p_forest
 ```
 
-### 3. pooled effect 与 heterogeneity
+### 同时报告合并效应与研究间异质性
 
 ```{r}
+#| results: hold
 #| label: fig-meta-heterogeneity
 #| fig-cap: "Pooled effects are interpreted jointly with cross-study heterogeneity."
 label_meta <- unique(rbind(
@@ -430,9 +475,10 @@ save_pub(p_heterogeneity, "figures/44-heterogeneity", 135, 100)
 p_heterogeneity
 ```
 
-### 4. 整队列外部验证 ROC
+### 整队列外部验证 ROC
 
 ```{r}
+#| results: hold
 #| label: fig-external-validation
 #| fig-cap: "Each ROC curve comes from a cohort excluded from all preprocessing and tuning."
 external_roc <- do.call(rbind, lapply(unique(external_predictions$HeldOutStudy), function(study) {
@@ -462,6 +508,7 @@ p_external
 ```
 
 ```{r}
+#| results: hold
 #| label: export-cross-cohort-results
 dir.create("results/44-cross-cohort-validation", recursive = TRUE, showWarnings = FALSE)
 readr::write_tsv(dimension_ledger, "results/44-cross-cohort-validation/cohort-dimensions.tsv")
@@ -485,11 +532,11 @@ readr::write_tsv(tuning_results, "results/44-cross-cohort-validation/training-st
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告跨队列合并与外部验证的方法与限制 {#sec-methods}
 
 > Three independently processed CRC 16S cohorts from MicrobiomeHD (Xiang, Zhao, and Zackular) were analyzed without pooling sample-level residuals. Features were aggregated to named genera, and the meta-analysis universe comprised genera with ≥10% prevalence and ≥20 reads in at least two cohorts. Within each cohort, pseudocount-0.5 CLR abundance was regressed on CRC status to obtain the CRC-minus-control estimate and standard error. Genus-specific effects were combined using REML random-effects models; Benjamini–Hochberg correction covered the complete genus universe, and tau², I², study directions, and confidence intervals were retained. Predictive transportability was assessed by leave-one-study-out validation. Shared-feature filtering, variance ranking, CLR basis, and random-forest tuning were derived exclusively from the two training studies; tuning used reciprocal study-level validation, and the held-out cohort was predicted once after model locking. AUC and Brier score were reported separately for each external cohort, with macro-mean AUC used only as a summary.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将跨队列合并与外部验证用于自己的研究 {#sec-own-data}
 
 每个 cohort 都要保留自己的三件套目录，并在 metadata 中提供统一英文 outcome：
 

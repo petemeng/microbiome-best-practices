@@ -23,7 +23,7 @@ import yaml
 from lxml import etree, html
 from PIL import Image, ImageOps
 
-from reader_reproducibility import coalesce_rendered_code, validate_reader_contract
+from reader_reproducibility import coalesce_rendered_code, omit_generic_reader_helpers, validate_reader_contract
 
 
 MAX_TITLE_CHARS = 64
@@ -571,6 +571,7 @@ def sanitize_article(
     removed_wechat_omit_blocks = remove_explicit_wechat_omissions(main)
     removed_bootstrap_blocks = remove_wechat_bootstrap(main)
     coalesce_rendered_code(source_qmd.read_text(encoding="utf-8"), main)
+    omit_generic_reader_helpers(source_qmd.read_text(encoding="utf-8"), main)
     localize_figure_labels(main)
     stripped_install_calls = flatten_code(main)
     transform_special_blocks(main)
@@ -695,7 +696,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             "author": args.author,
             "digest": digest,
             "content": content,
-            "content_source_url": args.review_url,
+            "content_source_url": args.review_url.replace("{qmd_path}", str(qmd_path)),
             "thumb_media_id": None,
             "show_cover_pic": 1,
             "need_open_comment": 0,
@@ -767,7 +768,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
             r"<h2[^>]*>\s*准备工作\s*</h2>|"
             r"展开：[^<]{0,80}(?:安装依赖|定义作图函数|出版级函数)|"
             r"整仓库(?:运行时|使用者|用户|的一次性|的验收器)|"
-            r"只复制(?:本页|本文)|单篇复现|独立运行以上",
+            r"只复制(?:本页|本文)|单篇复现|独立运行以上|执行策略：",
             draft["content"],
             flags=re.I,
         ):
@@ -775,8 +776,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         if re.search(
             r"<h2[^>]*>\s*(?:理论：|为什么这么做)|"
             r"隐藏决定|"
-            r"(?:这里|本页|本文|本篇|我们)[^。<]{0,40}"
-            r"不复制[^。<]{0,24}(?:原图|成图)",
+            r"不(?:复制|嵌入|拼贴)[^。\n<]{0,24}(?:原图|成图|论文图)",
             draft["content"],
             flags=re.I,
         ):

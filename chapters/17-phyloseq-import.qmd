@@ -1,6 +1,6 @@
 ---
 title: "导出到 R：构建 phyloseq 对象、数据结构详解"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,12 +17,22 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/17-phyloseq-import.R
+  packages:
+  - Biostrings
+  - ape
+  - digest
+  - dplyr
+  - ggplot2
+  - phyloseq
+  - readr
+  - tibble
+  - tidyr
 ---
 
-> **分析目标：**把 QIIME 2 导出的真实 ASV 计数、七级 taxonomy、sample metadata、代表序列和 rooted tree 组装成一个五组件 `phyloseq` 对象；在构建前核对方向与 ID，在保存后核对 RDS 往返一致性。  
-> **输入文件：**`data/small/phyloseq-import/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`、`representative-sequences.fasta.gz` 和 `rooted-insertion-tree.nwk.gz`。  
-> **预计资源：**读取 203,818-tip 完整树并裁剪、构建对象和回验通常需要 20–90 秒；建议预留 1–2 GB 内存。  
-> **执行策略：**正文从可校验的输入文件重新构建对象，`execute: eval: true`；发布前另用独立校验脚本完成 82 项检查，并输出 PDF、PNG、350 dpi LZW TIFF、审计表和运行日志。
 
 ## 把 QIIME 2 结果正确装进 phyloseq {#sec-target}
 
@@ -78,208 +88,35 @@ phyloseq object
 
 四个 library labels 来自 nf-core 测试文件名。`S103`、`S115`、`base` 和 `suffix_a` 描述文件集合，不是处理、病例状态或生物学重复，因此这里只验证数据结构，不做组间推断。
 
-## phyloseq 如何保持特征、分类和样本一致 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-preparation}
 
-### 1. 导出是数据合同转换，不是一次复制粘贴
+需要 R，以及 `Biostrings`、`ape`、`digest`、`dplyr`、`ggplot2`、`phyloseq`、`readr`、`tibble`、`tidyr`。本次使用nf-core ampliseq V4 示例的 count、taxonomy、metadata 三张表，以及代表序列和插入树。
 
-QIIME 2 Artifact（`.qza`）把数据、semantic type、格式和 provenance 打包在一起；R 中的矩阵、data frame、`phylo` 和 `DNAStringSet` 则是分析对象。`qiime tools export` 会把 Artifact 的数据部分写成标准文件，但导出文件不再携带完整 Artifact provenance。
-
-因此应同时保存两类证据：
-
-| 资产 | 负责回答的问题 |
-|---|---|
-| 原始 `.qza` + `qiime tools peek` / provenance | 数据从哪里来、用什么参数产生 |
-| 导出的 TSV / FASTA / Newick + SHA-256 | R 实际读取了哪一份字节 |
-| R 对象审计 | 转换是否保留 feature、sample、reads 和树尖端 |
-| `sessionInfo()` / lockfile | R 与包版本是什么 |
-
-一个可靠的 R 入口不能只写“从 QIIME 2 导入”，还要明确导出的是哪种 semantic type、怎样转换方向，以及如何证明 ID 没有被截断或自动丢弃。
-
-### 2. 三件套决定主体，序列和树扩展能力
-
-最小的群落对象由三件套组成：
-
-```text
-otutab:    features x samples
-taxonomy:  features x taxonomic ranks
-metadata:  samples x variables
-```
-
-它们分别进入：
-
-```text
-otu_table   <- counts
-tax_table   <- taxonomy
-sample_data <- metadata
-```
-
-若再加入代表序列与系统发育树，对象可扩展为五组件：
-
-```text
-refseq   <- ASV sequences
-phy_tree <- rooted ASV tree
-```
-
-三组件对象足以进行许多非系统发育分析；Faith's PD、weighted UniFrac 和 unweighted UniFrac 等指标还需要 ID 对齐、含枝长的 rooted tree。保留 `refseq` 也便于追踪具体 ASV、重新注释和导出序列。
-
-### 3. 对象必须是多个 ID 集合的受审计交集
-
-设计数表 feature 集合为 (F_c)，taxonomy 为 (F_t)，代表序列为 (F_s)，树尖端为 (F_p)。进入五组件对象的 ASV 集合应为：
-
-\[
-F = F_c \cap F_t \cap F_s \cap F_p
-\]
-
-sample 集合则是计数表列名与 metadata 行名的交集：
-
-\[
-S = S_c \cap S_m
-\]
-
-真正重要的不是交集能算出来，而是集合差是否符合预期。若 taxonomy 少 20 个 ASV，构造器可能只保留共同部分；对象仍能生成，但 feature 数和 reads 已改变。正式分析应在构造器之前显式计算：
-
-```r
-setdiff(count_feature_ids, taxonomy_feature_ids)
-setdiff(count_sample_ids, metadata_sample_ids)
-```
-
-只有预先定义为允许的差异才能保留。例如完整 SEPP insertion tree 中有 203,452 个 reference-only tips，这些参考尖端不是 feature table 中的 ASV，可以在审计后裁剪；taxonomy 缺失一个 count feature 则不是同一类情况。
-
-### 4. `taxa_are_rows` 是方向合同，不是装饰参数
-
-本页计数矩阵是 `features × samples`，因此必须写：
-
-```r
-phyloseq::otu_table(otu_matrix, taxa_are_rows = TRUE)
-```
-
-若输入是 `samples × features`，应先根据 feature ID 与 taxonomy ID 的匹配关系判断方向，再转置矩阵。不要因为“行数比列数多”就猜测方向；小型研究、聚合表或过滤后的数据完全可能打破这种经验。
-
-方向错误有时仍会生成对象，随后产生荒谬的 `ntaxa()`、`nsamples()` 或 library size。至少要反查：
-
-```text
-number of taxa
-number of samples
-sample-wise read totals
-taxa_are_rows flag
-```
-
-### 5. 完整 reference-placement tree 要先解释、再裁剪
-
-本例的完整 SEPP tree 有 203,818 个 tips：366 个 query ASV 加 203,452 个 reference tips。完整树保留 reference placement 的坐标和来源证据，但 feature table 只有 366 个 ASV。
-
-对象构建前显式执行：
-
-```r
-query_tree <- ape::keep.tip(full_tree, feature_ids)
-```
-
-并核对裁剪后仍然：
-
-- 有 366 个且仅有 366 个目标 tips；
-- rooted；
-- branch lengths 无缺失、无负值；
-- tip labels 与 `otutab` feature IDs 完全集合相等。
-
-显式裁剪比依赖构造器内部求交集更容易审计，也避免把 20 万个 reference-only tips 长期塞进每个下游对象。完整 tree 文件仍应作为来源资产归档。
-
-### 6. 导入时保留原始整数计数
-
-相对丰度、稀释、CLR 和其他变换服务于不同问题，不应覆盖唯一的原始计数入口。对象中的 `otu_table` 先保留非负整数 counts：
-
-```text
-raw count object
-  ├─ composition display      -> relative abundance copy
-  ├─ count model              -> raw-count copy + model offsets
-  ├─ phylogenetic diversity   -> filtered/rarefied copy
-  └─ Aitchison analysis       -> zero-aware log-ratio copy
-```
-
-这样每条分析分支都能追溯到同一个 count ledger。若直接把相对丰度写回主体对象，后续 DESeq2、library size 审计和 reads 加权 taxonomy coverage 都会失去原始含义。
-
-### 7. taxonomy 的空值是测量边界
-
-taxonomy table 有七列不等于每条 ASV 都有七级注释。本例中：
-
-| Rank | Assigned ASVs | Assigned reads | Read-weighted coverage |
-|---|---:|---:|---:|
-| Domain | 366 | 5,213 | 100.0% |
-| Phylum | 354 | 5,153 | 98.8% |
-| Family | 333 | 5,011 | 96.1% |
-| Genus | 318 | 4,217 | 80.9% |
-| Species | 0 | 0 | 0.0% |
-
-空字符串、`NA`、`Unassigned` 和前缀后没有名称的值，都不能当作已注释。Species 覆盖为 0 时，不能把 Genus 名称复制到 Species 列，也不能以 ASV 序列唯一为由声称物种水平分辨率。
-
-### 8. RDS 是经过验证的派生物，不是不可追溯的起点
-
-`saveRDS()` 适合保存完整 S4 对象，避免每次交互都重新读取并对齐五类文件。但 RDS 应在三件套、序列、树和环境通过检查后生成，并与以下信息一起归档：
-
-- 输入路径与 SHA-256；
-- R、Bioconductor 与 `phyloseq` 版本；
-- feature/sample/read counts；
-- 组件名称与方向；
-- 构建脚本和验证日志。
-
-只收到一个来历不明的 `ps.rds` 时，很难证明计数是否已变换、taxonomy 用了哪个数据库、树是否裁剪正确或 metadata 是否被重排。
-
-<details>
-<summary><strong>深入：为什么对象构建前后要检查两次</strong></summary>
-
-构建前检查的是输入合同：
-
-```text
-IDs unique
-sets reconcile
-counts integer and non-negative
-orientation explicit
-tree rooted and branch lengths valid
-```
-
-构建后检查的是转换结果：
-
-```text
-class and component names
-ntaxa / nsamples / total reads
-sample_sums
-tree tips and refseq names
-RDS reload parity
-```
-
-两类检查捕捉的问题不同。前者能指出哪个源文件错了；后者能发现构造器求交集、排序或序列化带来的变化。只做后者时，常只能看到“少了多少”，却不知道丢失发生在哪个组件。
-
-</details>
-
-## 准备工作 {#sec-preparation}
-
-<details open>
-<summary><strong>展开：安装依赖、固定版本并定义作图函数</strong></summary>
-
-本页实测环境为 R 4.4.1、Bioconductor 3.19、`phyloseq` 1.48.0、`ape` 5.8、`Biostrings` 2.72.1、`readr` 2.1.5 和 `ggplot2` 3.5.2。首次安装可执行：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ape", "digest", "dplyr", "ggplot2", "jsonlite", "readr",
-  "scales", "tibble", "tidyr"
-))
-
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
-  install.packages("BiocManager")
-}
-BiocManager::install(
-  c("phyloseq", "Biostrings"),
-  version = "3.19",
-  ask = FALSE,
-  update = FALSE
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "scripts/validate_phyloseq_import.R",
+  "data/small/phyloseq-import/metadata.tsv",
+  "data/small/phyloseq-import/otutab.tsv",
+  "data/small/phyloseq-import/representative-sequences.fasta.gz",
+  "data/small/phyloseq-import/rooted-insertion-tree.nwk.gz",
+  "data/small/phyloseq-import/source-summary.json",
+  "data/small/phyloseq-import/taxonomy-confidence.tsv",
+  "data/small/phyloseq-import/taxonomy.tsv"
 )
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-新环境若采用更新的 R/Bioconductor 组合，应把实际版本写入锁文件并重跑全部检查，不要强行把不兼容的 Bioconductor release 安装到当前 R。
-
-下面的作图函数直接内联，可用于本页和自己的重绘：
-
 ```{r}
+#| results: hold
 #| label: setup
 #| include: true
 set.seed(20260721)
@@ -351,11 +188,7 @@ save_pub <- function(plot, stem, width = 125, height = 95, dpi = 350) {
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从 QIIME 2 导出标准文件
+### 从 QIIME 2 导出标准文件
 
 若手中仍是 Artifact，可在 QIIME 2 环境中导出。输出目录应分别创建，避免同名文件互相覆盖：
 
@@ -389,11 +222,230 @@ BIOM 转出的第一行可能是注释，feature ID 列名也可能是 `#OTU ID`
 
 本页使用已经规范化并固定哈希的真实文件，来源记录见 `source-summary.json`。它们不是从某个先前保存的 R 对象读取。
 
-### 2. 校验输入文件字节
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/17-phyloseq-import.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "ape", "digest", "dplyr", "ggplot2", "jsonlite", "readr",
+  "scales", "tibble", "tidyr"
+))
+
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+BiocManager::install(
+  c("phyloseq", "Biostrings"),
+  version = "3.19",
+  ask = FALSE,
+  update = FALSE
+)
+```
+
+</details>
+
+## phyloseq 如何保持特征、分类和样本一致 {#sec-theory}
+
+### 导出后重新核对文件格式与 ID
+
+QIIME 2 Artifact（`.qza`）把数据、semantic type、格式和 provenance 打包在一起；R 中的矩阵、data frame、`phylo` 和 `DNAStringSet` 则是分析对象。`qiime tools export` 会把 Artifact 的数据部分写成标准文件，但导出文件不再携带完整 Artifact provenance。
+
+因此应同时保存两类证据：
+
+| 资产 | 负责回答的问题 |
+|---|---|
+| 原始 `.qza` + `qiime tools peek` / provenance | 数据从哪里来、用什么参数产生 |
+| 导出的 TSV / FASTA / Newick + SHA-256 | R 实际读取了哪一份字节 |
+| R 对象审计 | 转换是否保留 feature、sample、reads 和树尖端 |
+| `sessionInfo()` / lockfile | R 与包版本是什么 |
+
+一个可靠的 R 入口不能只写“从 QIIME 2 导入”，还要明确导出的是哪种 semantic type、怎样转换方向，以及如何证明 ID 没有被截断或自动丢弃。
+
+### 三件套决定主体，序列和树扩展能力
+
+最小的群落对象由三件套组成：
+
+```text
+otutab:    features x samples
+taxonomy:  features x taxonomic ranks
+metadata:  samples x variables
+```
+
+它们分别进入：
+
+```text
+otu_table   <- counts
+tax_table   <- taxonomy
+sample_data <- metadata
+```
+
+若再加入代表序列与系统发育树，对象可扩展为五组件：
+
+```text
+refseq   <- ASV sequences
+phy_tree <- rooted ASV tree
+```
+
+三组件对象足以进行许多非系统发育分析；Faith's PD、weighted UniFrac 和 unweighted UniFrac 等指标还需要 ID 对齐、含枝长的 rooted tree。保留 `refseq` 也便于追踪具体 ASV、重新注释和导出序列。
+
+### 样本、特征、序列与树必须按 ID 对应
+
+设计数表 feature 集合为 (F_c)，taxonomy 为 (F_t)，代表序列为 (F_s)，树尖端为 (F_p)。进入五组件对象的 ASV 集合应为：
+
+\[
+F = F_c \cap F_t \cap F_s \cap F_p
+\]
+
+sample 集合则是计数表列名与 metadata 行名的交集：
+
+\[
+S = S_c \cap S_m
+\]
+
+真正重要的不是交集能算出来，而是集合差是否符合预期。若 taxonomy 少 20 个 ASV，构造器可能只保留共同部分；对象仍能生成，但 feature 数和 reads 已改变。正式分析应在构造器之前显式计算：
+
+```r
+setdiff(count_feature_ids, taxonomy_feature_ids)
+setdiff(count_sample_ids, metadata_sample_ids)
+```
+
+只有预先定义为允许的差异才能保留。例如完整 SEPP insertion tree 中有 203,452 个 reference-only tips，这些参考尖端不是 feature table 中的 ASV，可以在审计后裁剪；taxonomy 缺失一个 count feature 则不是同一类情况。
+
+### 用 `taxa_are_rows` 明确特征位于行还是列
+
+本页计数矩阵是 `features × samples`，因此必须写：
+
+```r
+phyloseq::otu_table(otu_matrix, taxa_are_rows = TRUE)
+```
+
+若输入是 `samples × features`，应先根据 feature ID 与 taxonomy ID 的匹配关系判断方向，再转置矩阵。不要因为“行数比列数多”就猜测方向；小型研究、聚合表或过滤后的数据完全可能打破这种经验。
+
+方向错误有时仍会生成对象，随后产生荒谬的 `ntaxa()`、`nsamples()` 或 library size。至少要反查：
+
+```text
+number of taxa
+number of samples
+sample-wise read totals
+taxa_are_rows flag
+```
+
+### 完整 reference-placement tree 要先解释、再裁剪
+
+本例的完整 SEPP tree 有 203,818 个 tips：366 个 query ASV 加 203,452 个 reference tips。完整树保留 reference placement 的坐标和来源证据，但 feature table 只有 366 个 ASV。
+
+对象构建前显式执行：
+
+```r
+query_tree <- ape::keep.tip(full_tree, feature_ids)
+```
+
+并核对裁剪后仍然：
+
+- 有 366 个且仅有 366 个目标 tips；
+- rooted；
+- branch lengths 无缺失、无负值；
+- tip labels 与 `otutab` feature IDs 完全集合相等。
+
+显式裁剪比依赖构造器内部求交集更容易审计，也避免把 20 万个 reference-only tips 长期塞进每个下游对象。完整 tree 文件仍应作为来源资产归档。
+
+### 导入时保留原始整数计数
+
+相对丰度、稀释、CLR 和其他变换服务于不同问题，不应覆盖唯一的原始计数入口。对象中的 `otu_table` 先保留非负整数 counts：
+
+```text
+raw count object
+  ├─ composition display      -> relative abundance copy
+  ├─ count model              -> raw-count copy + model offsets
+  ├─ phylogenetic diversity   -> filtered/rarefied copy
+  └─ Aitchison analysis       -> zero-aware log-ratio copy
+```
+
+这样每条分析分支都能追溯到同一个 count ledger。若直接把相对丰度写回主体对象，后续 DESeq2、library size 审计和 reads 加权 taxonomy coverage 都会失去原始含义。
+
+### taxonomy 的空值是测量边界
+
+taxonomy table 有七列不等于每条 ASV 都有七级注释。本例中：
+
+| Rank | Assigned ASVs | Assigned reads | Read-weighted coverage |
+|---|---:|---:|---:|
+| Domain | 366 | 5,213 | 100.0% |
+| Phylum | 354 | 5,153 | 98.8% |
+| Family | 333 | 5,011 | 96.1% |
+| Genus | 318 | 4,217 | 80.9% |
+| Species | 0 | 0 | 0.0% |
+
+空字符串、`NA`、`Unassigned` 和前缀后没有名称的值，都不能当作已注释。Species 覆盖为 0 时，不能把 Genus 名称复制到 Species 列，也不能以 ASV 序列唯一为由声称物种水平分辨率。
+
+### RDS 是经过验证的派生物，不是不可追溯的起点
+
+`saveRDS()` 适合保存完整 S4 对象，避免每次交互都重新读取并对齐五类文件。但 RDS 应在三件套、序列、树和环境通过检查后生成，并与以下信息一起归档：
+
+- 输入路径与 SHA-256；
+- R、Bioconductor 与 `phyloseq` 版本；
+- feature/sample/read counts；
+- 组件名称与方向；
+- 构建脚本和验证日志。
+
+只收到一个来历不明的 `ps.rds` 时，很难证明计数是否已变换、taxonomy 用了哪个数据库、树是否裁剪正确或 metadata 是否被重排。
+
+<details>
+<summary><strong>深入：为什么对象构建前后要检查两次</strong></summary>
+
+构建前检查的是输入合同：
+
+```text
+IDs unique
+sets reconcile
+counts integer and non-negative
+orientation explicit
+tree rooted and branch lengths valid
+```
+
+构建后检查的是转换结果：
+
+```text
+class and component names
+ntaxa / nsamples / total reads
+sample_sums
+tree tips and refseq names
+RDS reload parity
+```
+
+两类检查捕捉的问题不同。前者能指出哪个源文件错了；后者能发现构造器求交集、排序或序列化带来的变化。只做后者时，常只能看到“少了多少”，却不知道丢失发生在哪个组件。
+
+</details>
+
+## 按ID对齐三张表、序列与树 {#sec-code}
+
+### 同时核对样本、特征与树的对应关系
+
+核对三张表、代表序列和树，并生成对应的四张诊断图。
+
+```{r}
+#| label: reader-native-computation
+#| results: hide
+run_analysis <- function(command, args) {
+  output <- system2(command, args, stdout = TRUE, stderr = TRUE)
+  status <- attr(output, "status")
+  if (!is.null(status) && status != 0L) stop(paste(tail(output, 20), collapse = "\n"))
+  invisible(output)
+}
+run_analysis(file.path(R.home("bin"), "Rscript"), c("--vanilla", "scripts/validate_phyloseq_import.R", "--project-root", ".", "--input-dir", "data/small/phyloseq-import", "--output-dir", "results/17-phyloseq-import", "--figure-dir", "figures"))
+```
+
+完整计算脚本：[validate_phyloseq_import.R](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/validate_phyloseq_import.R)。
+
+
+### 校验输入文件字节
 
 先固定路径与 SHA-256。只要文件内容改变，代码立即停止：
 
 ```{r}
+#| results: hold
 #| label: input-hashes
 input_dir <- "data/small/phyloseq-import"
 
@@ -436,11 +488,12 @@ stopifnot(all(hash_audit$status == "PASS"))
 hash_audit
 ```
 
-### 3. 读取三件套并确认方向
+### 读取三件套并确认方向
 
 首列作为 key，而不是普通分析变量：
 
 ```{r}
+#| results: hold
 #| label: read-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -491,6 +544,7 @@ list(
 看清三张表的结构：
 
 ```{r}
+#| results: hold
 #| label: display-input-structure
 utils::head(
   data.frame(FeatureID = rownames(otutab), otutab, check.names = FALSE),
@@ -509,6 +563,7 @@ utils::head(
 样本 reads 与 observed ASVs 是最直接的方向回验：
 
 ```{r}
+#| results: hold
 #| label: sample-count-audit
 sample_audit <- tibble::tibble(
   SampleID = sample_ids,
@@ -524,11 +579,12 @@ stopifnot(
 sample_audit
 ```
 
-### 4. 读取代表序列与完整 rooted tree
+### 读取代表序列与完整 rooted tree
 
 先核对 FASTA header，再把完整树明确裁剪到计数表 ASV：
 
 ```{r}
+#| results: hold
 #| label: sequences-and-tree
 sequences <- Biostrings::readDNAStringSet(
   "data/small/phyloseq-import/representative-sequences.fasta.gz"
@@ -570,11 +626,12 @@ tibble::tibble(
 )
 ```
 
-### 5. 在构造器之前完成 ID gate
+### 构建对象前检查各组件的 ID 是否匹配
 
 对账表应明确区分 feature IDs 与 sample IDs：
 
 ```{r}
+#| results: hold
 #| label: id-gate
 id_gate <- tibble::tribble(
   ~Component, ~Domain, ~Expected, ~Matched, ~Missing, ~Unexpected,
@@ -604,11 +661,12 @@ stopifnot(
 id_gate
 ```
 
-### 6. 构建五组件 `phyloseq` 对象
+### 构建五组件 `phyloseq` 对象
 
 先按计数表顺序重排其他组件，再构建对象：
 
 ```{r}
+#| results: hold
 #| label: build-phyloseq
 taxonomy <- taxonomy[feature_ids, , drop = FALSE]
 metadata <- metadata[sample_ids, , drop = FALSE]
@@ -667,11 +725,12 @@ object_summary
 
 `phyloseq` 的内部 slot 名为 `sam_data`，面向读者的 accessor 是 `sample_data()`。分析代码应优先使用 accessor，而不是直接操作 S4 slot。
 
-### 7. 反向核对 taxonomy、样本计数和组件
+### 反向核对 taxonomy、样本计数和组件
 
 构建后再次从对象取值：
 
 ```{r}
+#| results: hold
 #| label: reverse-audit
 object_taxonomy <- as(
   phyloseq::tax_table(ps),
@@ -710,11 +769,12 @@ phyloseq::rank_names(ps)
 phyloseq::sample_variables(ps)
 ```
 
-### 8. 保存并回读 RDS
+### 保存并回读 RDS
 
 保存之前已完成输入与对象检查。回读后比较 class、组件、维度、reads 和 ID：
 
 ```{r}
+#| results: hold
 #| label: rds-roundtrip
 rds_path <- "results/17-phyloseq-import/atacama-v4-phyloseq.rds"
 dir.create(dirname(rds_path), recursive = TRUE, showWarnings = FALSE)
@@ -765,9 +825,9 @@ Rscript --vanilla scripts/validate_phyloseq_import.R \
 
 该脚本还固定 R 与包版本、七份输入哈希、序列长度、完整树与裁剪树、五个对象组件、逐样本 reads、逐 rank taxonomy 覆盖和 RDS 往返结果。机器可读总表在 `results/17-phyloseq-import/validation-checks.tsv`。
 
-## 出版级美化 {#sec-visualization}
+## 检查对象构建前后的样本和特征 {#sec-visualization}
 
-### 1. 先画数据合同，再画生态结果
+### 先检查哪些特征和读数进入了分析
 
 对象入口最值得展示的不是一个 `str(ps)` 截图，而是能回答以下问题的审计图：
 
@@ -829,7 +889,7 @@ save_pub(
 
 图内的 title、axis、legend、sample labels 和 annotation 使用英文；中文解释留在正文。这样可直接进入英文论文，也能减少跨平台字体差异。
 
-### 2. 图形导出与主张保持一致
+### 图形导出与主张保持一致
 
 本页四张正式图均输出：
 
@@ -870,7 +930,7 @@ taxonomy coverage 同时给 ASV-weighted 和 read-weighted 结果。前者回答
 自动保留共同 taxa 可以让代码继续运行，却会掩盖拼写差异、截断的 FASTA header、taxonomy 缺行或 tree tip 命名错误。只有已经解释并记录的 reference-only tips 才能在明确规则下裁剪。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告phyloseq对象构建的方法与限制 {#sec-methods}
 
 下面模板可直接替换方括号内容：
 
@@ -878,9 +938,9 @@ taxonomy coverage 同时给 ASV-weighted 和 read-weighted 结果。前者回答
 
 若没有 tree 或 representative sequences，应删除对应组件和句子；不能把三组件对象写成完成了系统发育分析。若正文分析使用了过滤、稀释、相对丰度或 log-ratio 变换，还要在相应 Methods 段落另行说明，不能用“构建了 phyloseq 对象”代替预处理细节。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将phyloseq对象构建用于自己的研究 {#sec-own-data}
 
-### 1. 准备三件套和可选的两个组件
+### 准备三件套和可选的两个组件
 
 | 文件 | 必需性 | 合同 |
 |---|---|---|
@@ -902,7 +962,7 @@ tree_path <- "data/rooted-tree.nwk.gz"
 
 然后保留本文的 `read_keyed_tsv()`、方向检查、集合对账、对象反查和 RDS 回验。不要删除检查里的 expected 值后直接运行；应把 366、4、5,213 等示例数字替换成自己在冻结输入后签字确认的数值。
 
-### 2. taxonomy 只有一个 `Taxon` 字符串时完整拆列
+### taxonomy 只有一个 `Taxon` 字符串时完整拆列
 
 QIIME 2 常导出 `Feature ID`、`Taxon`、`Confidence`。下面代码把分号分隔字符串转成七列，并保留 confidence 供敏感性检查：
 
@@ -953,7 +1013,7 @@ readr::write_tsv(
 
 不同数据库可能使用 `D_0__`、`Kingdom` 或更多/更少 ranks。先根据数据库合同建立明确 crosswalk，再改列名；不要只按字符串位置猜。
 
-### 3. 用 ID 判断计数表是否需要转置
+### 用 ID 判断计数表是否需要转置
 
 ```{r}
 #| eval: false
@@ -985,7 +1045,7 @@ stopifnot(
 )
 ```
 
-### 4. 没有 tree 或序列时构建三组件对象
+### 没有 tree 或序列时构建三组件对象
 
 ```{r}
 #| eval: false
@@ -998,7 +1058,7 @@ ps_three <- phyloseq::phyloseq(
 
 此时 Bray–Curtis、Jaccard、Aitchison、组成展示和许多差异丰度方法仍可开展；Faith's PD 与 UniFrac 不可用。若后来补入 tree，必须重新做 feature-tip 对账和对象 reads retention，而不是直接把任意 Newick 文件塞进对象。
 
-### 5. 在正式下游分析前完成签字
+### 开始下游分析前完成输入检查
 
 - counts 是未归一化的非负整数，方向由 ID 证明；
 - taxonomy feature IDs 与 count features 完全一致，未注释层级保持缺失；

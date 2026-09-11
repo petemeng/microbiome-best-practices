@@ -64,11 +64,11 @@
 <rect x='44.20' y='35.09' width='366.53' height='172.47' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwyNTUuMTI=)'>
-<text x='39.72' y='210.48' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.69px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='39.72' y='167.36' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>25%</text>
-<text x='39.72' y='124.24' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='39.72' y='81.12' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>75%</text>
-<text x='39.72' y='38.01' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='22.87px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='39.72' y='210.48' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.69px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='39.72' y='167.36' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>25%</text>
+<text x='39.72' y='124.24' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='39.72' y='81.12' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>75%</text>
+<text x='39.72' y='38.01' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='22.87px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <polyline points='41.71,207.56 44.20,207.56 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='41.71,164.44 44.20,164.44 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='41.71,121.33 44.20,121.33 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -79,26 +79,26 @@
 <polyline points='227.47,210.05 227.47,207.56 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='297.96,210.05 297.96,207.56 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='368.45,210.05 368.45,207.56 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(89.41,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.87px' lengthAdjust='spacingAndGlyphs'>None</text>
-<text transform='translate(159.90,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='39.18px' lengthAdjust='spacingAndGlyphs'>Infant gut</text>
-<text transform='translate(230.39,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='36.66px' lengthAdjust='spacingAndGlyphs'>Adult gut</text>
-<text transform='translate(300.87,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='39.47px' lengthAdjust='spacingAndGlyphs'>Adult skin</text>
-<text transform='translate(371.36,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.42px' lengthAdjust='spacingAndGlyphs'>Soil</text>
-<text x='227.47' y='248.06' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='111.36px' lengthAdjust='spacingAndGlyphs'>Removed source class</text>
-<text transform='translate(12.27,121.33) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='114.34px' lengthAdjust='spacingAndGlyphs'>Estimated contribution</text>
+<text transform='translate(89.41,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='20.87px' lengthAdjust='spacingAndGlyphs'>None</text>
+<text transform='translate(159.90,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='39.18px' lengthAdjust='spacingAndGlyphs'>Infant gut</text>
+<text transform='translate(230.39,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='36.66px' lengthAdjust='spacingAndGlyphs'>Adult gut</text>
+<text transform='translate(300.87,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='39.47px' lengthAdjust='spacingAndGlyphs'>Adult skin</text>
+<text transform='translate(371.36,217.10) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='14.42px' lengthAdjust='spacingAndGlyphs'>Soil</text>
+<text x='227.47' y='248.06' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='111.36px' lengthAdjust='spacingAndGlyphs'>Removed source class</text>
+<text transform='translate(12.27,121.33) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='114.34px' lengthAdjust='spacingAndGlyphs'>Estimated contribution</text>
 <rect x='420.70' y='65.97' width='84.55' height='110.72' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
-<text x='425.68' y='79.28' style='font-size: 10.00px; font-family: "DejaVu Sans";' textLength='74.59px' lengthAdjust='spacingAndGlyphs'>Allocated class</text>
+<text x='425.68' y='79.28' style='font-size: 10.00px; font-family: "Arial";' textLength='74.59px' lengthAdjust='spacingAndGlyphs'>Allocated class</text>
 <rect x='425.97' y='85.59' width='16.71' height='16.71' style='stroke-width: 0.43; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2;' />
 <rect x='425.97' y='102.87' width='16.71' height='16.71' style='stroke-width: 0.43; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00;' />
 <rect x='425.97' y='120.15' width='16.71' height='16.71' style='stroke-width: 0.43; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #CC79A7;' />
 <rect x='425.97' y='137.43' width='16.71' height='16.71' style='stroke-width: 0.43; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #009E73;' />
 <rect x='425.97' y='154.71' width='16.71' height='16.71' style='stroke-width: 0.43; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #6B7280;' />
-<text x='447.94' y='96.86' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='39.18px' lengthAdjust='spacingAndGlyphs'>Infant gut</text>
-<text x='447.94' y='114.14' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='36.66px' lengthAdjust='spacingAndGlyphs'>Adult gut</text>
-<text x='447.94' y='131.42' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='39.47px' lengthAdjust='spacingAndGlyphs'>Adult skin</text>
-<text x='447.94' y='148.70' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='14.42px' lengthAdjust='spacingAndGlyphs'>Soil</text>
-<text x='447.94' y='165.98' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='37.13px' lengthAdjust='spacingAndGlyphs'>Unknown</text>
-<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='417.68px' lengthAdjust='spacingAndGlyphs'>Unknown is model-dependent and need not increase when a true source is omitted</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='168.90px' lengthAdjust='spacingAndGlyphs'>Missing-source sensitivity</text>
+<text x='447.94' y='96.86' style='font-size: 8.00px; font-family: "Arial";' textLength='39.18px' lengthAdjust='spacingAndGlyphs'>Infant gut</text>
+<text x='447.94' y='114.14' style='font-size: 8.00px; font-family: "Arial";' textLength='36.66px' lengthAdjust='spacingAndGlyphs'>Adult gut</text>
+<text x='447.94' y='131.42' style='font-size: 8.00px; font-family: "Arial";' textLength='39.47px' lengthAdjust='spacingAndGlyphs'>Adult skin</text>
+<text x='447.94' y='148.70' style='font-size: 8.00px; font-family: "Arial";' textLength='14.42px' lengthAdjust='spacingAndGlyphs'>Soil</text>
+<text x='447.94' y='165.98' style='font-size: 8.00px; font-family: "Arial";' textLength='37.13px' lengthAdjust='spacingAndGlyphs'>Unknown</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='417.68px' lengthAdjust='spacingAndGlyphs'>Unknown is model-dependent and need not increase when a true source is omitted</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='168.90px' lengthAdjust='spacingAndGlyphs'>Missing-source sensitivity</text>
 </g>
 </svg>

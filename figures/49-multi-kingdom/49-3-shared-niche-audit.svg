@@ -1255,11 +1255,11 @@
 <rect x='76.46' y='72.29' width='131.32' height='131.32' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHwyNTIuMjh8MC4wMHwyMzIuNDQ=)'>
-<text x='71.98' y='200.56' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
-<text x='71.98' y='170.72' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='71.98' y='140.87' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='71.98' y='111.03' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='71.98' y='81.18' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='71.98' y='200.56' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='71.98' y='170.72' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='71.98' y='140.87' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='71.98' y='111.03' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='71.98' y='81.18' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>1.0</text>
 <polyline points='73.97,197.65 76.46,197.65 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='73.97,167.80 76.46,167.80 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='73.97,137.96 76.46,137.96 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -1270,22 +1270,22 @@
 <polyline points='142.12,206.11 142.12,203.62 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='171.97,206.11 171.97,203.62 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='201.81,206.11 201.81,203.62 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='82.43' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
-<text x='112.27' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='142.12' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='171.97' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='201.81' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='142.12' y='225.38' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='94.92px' lengthAdjust='spacingAndGlyphs'>Raw Spearman rho</text>
-<text transform='translate(51.80,137.96) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='148.98px' lengthAdjust='spacingAndGlyphs'>Niche-adjusted Spearman rho</text>
+<text x='82.43' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='112.27' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='142.12' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='171.97' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='201.81' y='213.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='142.12' y='225.38' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='94.92px' lengthAdjust='spacingAndGlyphs'>Raw Spearman rho</text>
+<text transform='translate(51.80,137.96) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='148.98px' lengthAdjust='spacingAndGlyphs'>Niche-adjusted Spearman rho</text>
 <rect x='29.91' y='35.09' width='224.43' height='27.24' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
-<text x='34.89' y='52.36' style='font-size: 10.00px; font-family: "DejaVu Sans";' textLength='48.30px' lengthAdjust='spacingAndGlyphs'>BH status</text>
+<text x='34.89' y='52.36' style='font-size: 10.00px; font-family: "Arial";' textLength='48.30px' lengthAdjust='spacingAndGlyphs'>BH status</text>
 <circle cx='96.81' cy='48.71' r='1.63' style='stroke-width: 0.71; stroke: #0072B2; stroke-opacity: 0.62; fill: #0072B2; fill-opacity: 0.62;' />
 <circle cx='142.64' cy='48.71' r='1.63' style='stroke-width: 0.71; stroke: #CDD1D5; stroke-opacity: 0.62; fill: #CDD1D5; fill-opacity: 0.62;' />
 <circle cx='199.44' cy='48.71' r='1.63' style='stroke-width: 0.71; stroke: #E69F00; stroke-opacity: 0.62; fill: #E69F00; fill-opacity: 0.62;' />
-<text x='110.43' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='18.59px' lengthAdjust='spacingAndGlyphs'>Both</text>
-<text x='156.26' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='29.56px' lengthAdjust='spacingAndGlyphs'>Neither</text>
-<text x='213.06' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='36.30px' lengthAdjust='spacingAndGlyphs'>Raw only</text>
-<text x='44.50' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='166.12px' lengthAdjust='spacingAndGlyphs'>Effect sign changed for 491 pairs</text>
-<text x='44.50' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='203.85px' lengthAdjust='spacingAndGlyphs'>Raw 505 to adjusted 2 FDR hits</text>
+<text x='110.43' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='18.59px' lengthAdjust='spacingAndGlyphs'>Both</text>
+<text x='156.26' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='29.56px' lengthAdjust='spacingAndGlyphs'>Neither</text>
+<text x='213.06' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='36.30px' lengthAdjust='spacingAndGlyphs'>Raw only</text>
+<text x='44.50' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='166.12px' lengthAdjust='spacingAndGlyphs'>Effect sign changed for 491 pairs</text>
+<text x='44.50' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='203.85px' lengthAdjust='spacingAndGlyphs'>Raw 505 to adjusted 2 FDR hits</text>
 </g>
 </svg>

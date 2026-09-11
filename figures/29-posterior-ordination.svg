@@ -338,11 +338,11 @@
 <rect x='147.78' y='30.87' width='218.92' height='209.91' style='stroke-width: 0.85; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw0ODEuODl8MC4wMHwzNTQuMzM=)'>
-<text x='143.84' y='236.96' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.22px' lengthAdjust='spacingAndGlyphs'>-0.50</text>
-<text x='143.84' y='196.03' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.22px' lengthAdjust='spacingAndGlyphs'>-0.25</text>
-<text x='143.84' y='155.11' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.67px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='143.84' y='114.19' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.67px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='143.84' y='73.27' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.67px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='143.84' y='236.96' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='18.22px' lengthAdjust='spacingAndGlyphs'>-0.50</text>
+<text x='143.84' y='196.03' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='18.22px' lengthAdjust='spacingAndGlyphs'>-0.25</text>
+<text x='143.84' y='155.11' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.67px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='143.84' y='114.19' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.67px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='143.84' y='73.27' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.67px' lengthAdjust='spacingAndGlyphs'>0.50</text>
 <polyline points='145.59,234.39 147.78,234.39 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='145.59,193.47 147.78,193.47 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='145.59,152.55 147.78,152.55 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -353,32 +353,32 @@
 <polyline points='263.86,242.97 263.86,240.77 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='312.97,242.97 312.97,240.77 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='362.07,242.97 362.07,240.77 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='165.65' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.74px' lengthAdjust='spacingAndGlyphs'>-0.6</text>
-<text x='214.76' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.74px' lengthAdjust='spacingAndGlyphs'>-0.3</text>
-<text x='263.86' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.20px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='312.97' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.20px' lengthAdjust='spacingAndGlyphs'>0.3</text>
-<text x='362.07' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.20px' lengthAdjust='spacingAndGlyphs'>0.6</text>
-<text x='257.24' y='259.92' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='190.22px' lengthAdjust='spacingAndGlyphs'>PCoA 1 (12.2% of positive eigenvalue sum)</text>
-<text transform='translate(121.60,135.82) rotate(-90)' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='184.62px' lengthAdjust='spacingAndGlyphs'>PCoA 2 (6.8% of positive eigenvalue sum)</text>
+<text x='165.65' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='13.74px' lengthAdjust='spacingAndGlyphs'>-0.6</text>
+<text x='214.76' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='13.74px' lengthAdjust='spacingAndGlyphs'>-0.3</text>
+<text x='263.86' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='11.20px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='312.97' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='11.20px' lengthAdjust='spacingAndGlyphs'>0.3</text>
+<text x='362.07' y='249.85' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='11.20px' lengthAdjust='spacingAndGlyphs'>0.6</text>
+<text x='257.24' y='259.92' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "Arial";' textLength='190.22px' lengthAdjust='spacingAndGlyphs'>PCoA 1 (12.2% of positive eigenvalue sum)</text>
+<text transform='translate(121.60,135.82) rotate(-90)' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "Arial";' textLength='184.62px' lengthAdjust='spacingAndGlyphs'>PCoA 2 (6.8% of positive eigenvalue sum)</text>
 <rect x='127.28' y='270.51' width='259.93' height='26.05' style='stroke-width: 0.85; stroke: none; fill: #FFFFFF;' />
-<text x='131.66' y='286.74' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='47.04px' lengthAdjust='spacingAndGlyphs'>DMM state</text>
+<text x='131.66' y='286.74' style='font-size: 8.80px; font-family: "Arial";' textLength='47.04px' lengthAdjust='spacingAndGlyphs'>DMM state</text>
 <circle cx='191.72' cy='283.53' r='2.74' style='stroke-width: 0.78; stroke: #0072B2; fill: #0072B2;' />
 <circle cx='242.52' cy='283.53' r='2.74' style='stroke-width: 0.78; stroke: #E69F00; fill: #E69F00;' />
 <circle cx='293.24' cy='283.53' r='2.74' style='stroke-width: 0.78; stroke: #009E73; fill: #009E73;' />
 <circle cx='344.29' cy='283.53' r='2.74' style='stroke-width: 0.78; stroke: #CC79A7; fill: #CC79A7;' />
-<text x='204.75' y='286.10' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='24.75px' lengthAdjust='spacingAndGlyphs'>DMM-A</text>
-<text x='255.55' y='286.10' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='24.67px' lengthAdjust='spacingAndGlyphs'>DMM-B</text>
-<text x='306.26' y='286.10' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='25.01px' lengthAdjust='spacingAndGlyphs'>DMM-C</text>
-<text x='357.31' y='286.10' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='25.51px' lengthAdjust='spacingAndGlyphs'>DMM-D</text>
+<text x='204.75' y='286.10' style='font-size: 7.04px; font-family: "Arial";' textLength='24.75px' lengthAdjust='spacingAndGlyphs'>DMM-A</text>
+<text x='255.55' y='286.10' style='font-size: 7.04px; font-family: "Arial";' textLength='24.67px' lengthAdjust='spacingAndGlyphs'>DMM-B</text>
+<text x='306.26' y='286.10' style='font-size: 7.04px; font-family: "Arial";' textLength='25.01px' lengthAdjust='spacingAndGlyphs'>DMM-C</text>
+<text x='357.31' y='286.10' style='font-size: 7.04px; font-family: "Arial";' textLength='25.51px' lengthAdjust='spacingAndGlyphs'>DMM-D</text>
 <rect x='115.34' y='305.33' width='283.80' height='26.05' style='stroke-width: 0.85; stroke: none; fill: #FFFFFF;' />
-<text x='119.73' y='321.56' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='102.77px' lengthAdjust='spacingAndGlyphs'>Assignment confidence</text>
+<text x='119.73' y='321.56' style='font-size: 8.80px; font-family: "Arial";' textLength='102.77px' lengthAdjust='spacingAndGlyphs'>Assignment confidence</text>
 <circle cx='235.52' cy='318.35' r='2.74' style='stroke-width: 0.78;' />
 <circle cx='318.70' cy='318.35' r='2.74' style='stroke-width: 0.78; stroke: none; fill: #000000;' />
-<text x='248.54' y='320.91' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='57.14px' lengthAdjust='spacingAndGlyphs'>Posterior &lt; 0.80</text>
-<text x='331.72' y='320.91' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='63.04px' lengthAdjust='spacingAndGlyphs'>Posterior &gt;= 0.80</text>
-<text x='115.18' y='24.66' style='font-size: 8.80px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='308.05px' lengthAdjust='spacingAndGlyphs'>Bray-Curtis PCoA is shown only as a two-dimensional descriptive view</text>
-<text x='115.18' y='11.76' style='font-size: 10.12px; font-weight: bold; font-family: "DejaVu Sans";' textLength='342.40px' lengthAdjust='spacingAndGlyphs'>DMM states are posterior assignments, not PCoA quadrants</text>
-<text x='147.78' y='340.88' style='font-size: 7.04px;fill: #666666; font-family: "DejaVu Sans";' textLength='277.02px' lengthAdjust='spacingAndGlyphs'>Crosses are state centroids. Open points have maximum posterior below 0.80.</text>
-<text x='147.78' y='348.49' style='font-size: 7.04px;fill: #666666; font-family: "DejaVu Sans";' textLength='251.27px' lengthAdjust='spacingAndGlyphs'>The DMM was fitted to raw counts; ordination did not define the states.</text>
+<text x='248.54' y='320.91' style='font-size: 7.04px; font-family: "Arial";' textLength='57.14px' lengthAdjust='spacingAndGlyphs'>Posterior &lt; 0.80</text>
+<text x='331.72' y='320.91' style='font-size: 7.04px; font-family: "Arial";' textLength='63.04px' lengthAdjust='spacingAndGlyphs'>Posterior &gt;= 0.80</text>
+<text x='115.18' y='24.66' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='308.05px' lengthAdjust='spacingAndGlyphs'>Bray-Curtis PCoA is shown only as a two-dimensional descriptive view</text>
+<text x='115.18' y='11.76' style='font-size: 10.12px; font-weight: bold; font-family: "Arial";' textLength='342.40px' lengthAdjust='spacingAndGlyphs'>DMM states are posterior assignments, not PCoA quadrants</text>
+<text x='147.78' y='340.88' style='font-size: 7.04px;fill: #666666; font-family: "Arial";' textLength='277.02px' lengthAdjust='spacingAndGlyphs'>Crosses are state centroids. Open points have maximum posterior below 0.80.</text>
+<text x='147.78' y='348.49' style='font-size: 7.04px;fill: #666666; font-family: "Arial";' textLength='251.27px' lengthAdjust='spacingAndGlyphs'>The DMM was fitted to raw counts; ordination did not define the states.</text>
 </g>
 </svg>

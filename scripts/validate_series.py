@@ -152,13 +152,14 @@ PROHIBITED_PUBLIC_PATTERNS = (
     "只复制本文",
     "独立运行以上",
     "隐藏决定",
+    "执行策略：",
 )
 PROHIBITED_PUBLIC_REGEXES = (
     r'(?m)^title:\s*"第\s*\d{2}\s*篇\s*·',
     r"(?m)^##\s+这一步对应论文里的哪张图",
     r"(?m)^##\s+理论：",
     r"(?m)^##\s+(?:理论：)?为什么这么做",
-    r"不复制[^。\n]{0,24}(?:原图|成图)",
+    r"不(?:复制|嵌入|拼贴)[^。\n<]{0,24}(?:原图|成图|论文图)",
     r"(?m)^\s*number-sections:\s*true\s*$",
 )
 
@@ -1290,7 +1291,7 @@ def main() -> int:
                 "from mmvec.multimodal import MMvec",
                 "from mofapy2.run.entry_point import entry_point",
                 "mmvec-native",
-                "multiomics-native",
+                "env/multiomics.yml",
                 "ValidationMAE",
                 "48-1-cca-overfit-audit",
                 "48-4-mofa-summary",
@@ -1394,7 +1395,7 @@ def main() -> int:
             "不同研究设计的结论上限",
             "为什么需要跨设计三角验证",
             "病例–对照研究",
-            "人群随机干预",
+            "人群饮食干预",
             "转移、救援和机制实验",
             "三角验证",
             "55-1-evidence-ladder",

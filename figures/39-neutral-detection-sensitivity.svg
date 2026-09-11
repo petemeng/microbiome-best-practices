@@ -87,21 +87,21 @@
 <rect x='36.77' y='39.90' width='212.33' height='263.68' style='stroke-width: 0.78; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDUuODM=)'>
-<text x='33.19' y='247.36' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>0.01</text>
-<text x='33.19' y='158.11' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>0.03</text>
-<text x='33.19' y='60.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>0.10</text>
+<text x='33.19' y='247.36' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>0.01</text>
+<text x='33.19' y='158.11' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>0.03</text>
+<text x='33.19' y='60.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>0.10</text>
 <polyline points='34.78,245.03 36.77,245.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='34.78,155.78 36.77,155.78 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='34.78,57.98 36.77,57.98 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='46.42,305.57 46.42,303.57 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='142.94,305.57 142.94,303.57 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='239.45,305.57 239.45,303.57 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='46.42' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-05</text>
-<text x='142.94' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-04</text>
-<text x='239.45' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-03</text>
-<text x='142.94' y='320.98' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='79.10px' lengthAdjust='spacingAndGlyphs'>Detection threshold</text>
-<text transform='translate(15.30,171.73) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='92.84px' lengthAdjust='spacingAndGlyphs'>Migration parameter m</text>
-<text x='9.46' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "DejaVu Sans";' textLength='112.79px' lengthAdjust='spacingAndGlyphs'>A. Migration estimate</text>
+<text x='46.42' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-05</text>
+<text x='142.94' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-04</text>
+<text x='239.45' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-03</text>
+<text x='142.94' y='320.98' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='79.10px' lengthAdjust='spacingAndGlyphs'>Detection threshold</text>
+<text transform='translate(15.30,171.73) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='92.84px' lengthAdjust='spacingAndGlyphs'>Migration parameter m</text>
+<text x='9.46' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "Arial";' textLength='112.79px' lengthAdjust='spacingAndGlyphs'>A. Migration estimate</text>
 </g>
 <defs>
   <clipPath id='cpMjg4LjQ1fDUwMC43N3wzOS45MHwzMDMuNTc='>
@@ -140,11 +140,11 @@
 <rect x='288.45' y='39.90' width='212.33' height='263.68' style='stroke-width: 0.78; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDUuODM=)'>
-<text x='284.86' y='267.25' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.700</text>
-<text x='284.86' y='211.47' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.725</text>
-<text x='284.86' y='155.69' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.750</text>
-<text x='284.86' y='99.91' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.775</text>
-<text x='284.86' y='44.14' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.800</text>
+<text x='284.86' y='267.25' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.700</text>
+<text x='284.86' y='211.47' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.725</text>
+<text x='284.86' y='155.69' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.750</text>
+<text x='284.86' y='99.91' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.775</text>
+<text x='284.86' y='44.14' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.30px' lengthAdjust='spacingAndGlyphs'>0.800</text>
 <polyline points='286.45,264.92 288.45,264.92 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='286.45,209.14 288.45,209.14 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='286.45,153.36 288.45,153.36 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -153,12 +153,12 @@
 <polyline points='298.10,305.57 298.10,303.57 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='394.61,305.57 394.61,303.57 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='491.12,305.57 491.12,303.57 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='298.10' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-05</text>
-<text x='394.61' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-04</text>
-<text x='491.12' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-03</text>
-<text x='394.61' y='320.98' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='79.10px' lengthAdjust='spacingAndGlyphs'>Detection threshold</text>
-<text transform='translate(262.90,171.73) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='35.33px' lengthAdjust='spacingAndGlyphs'>Model R²</text>
-<text x='257.07' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "DejaVu Sans";' textLength='144.47px' lengthAdjust='spacingAndGlyphs'>B. Abundance-occupancy fit</text>
+<text x='298.10' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-05</text>
+<text x='394.61' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-04</text>
+<text x='491.12' y='311.82' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.44px' lengthAdjust='spacingAndGlyphs'>1e-03</text>
+<text x='394.61' y='320.98' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='79.10px' lengthAdjust='spacingAndGlyphs'>Detection threshold</text>
+<text transform='translate(262.90,171.73) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='35.33px' lengthAdjust='spacingAndGlyphs'>Model R²</text>
+<text x='257.07' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "Arial";' textLength='144.47px' lengthAdjust='spacingAndGlyphs'>B. Abundance-occupancy fit</text>
 <text x='500.77' y='338.52' text-anchor='end' style='font-size: 8.80px; font-family: "Arial";' textLength='283.26px' lengthAdjust='spacingAndGlyphs'>Dashed lines mark the primary threshold (1 / mean library size).</text>
 <text x='9.46' y='15.10' style='font-size: 13.20px; font-family: "Arial";' textLength='382.77px' lengthAdjust='spacingAndGlyphs'>Observation limits are part of the neutral-model estimand</text>
 </g>

@@ -1,6 +1,6 @@
 ---
 title: "方差解构：envfit/Mantel/VPA 变异分解"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,19 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/25-environment-variance.R
+  packages:
+  - ggplot2
+  - jsonlite
+  - permute
+  - ragg
+  - scales
+  - svglite
+  - vegan
 ---
-
-> **分析目标：**把环境变量与群落差异之间的关系拆成三类证据：二维排序上的梯度拟合、距离矩阵关联，以及环境组和场景组的独立/共享调整后变异比例。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`、`environment.tsv`。  
-> **预计资源：**示例含 13,628 个 OTU、90 个样本和 11 个环境变量；999 次固定置换、4 个 prevalence 分支及四张 600 ppi 图通常需要 3–6 分钟，峰值内存低于 1 GB。
 
 ## 环境变量能解释多少变异，取决于问题分解 {#sec-target}
 
@@ -43,151 +51,37 @@ fig-format: png
 Hellinger VPA 的 combined adjusted (R^2=0.282)：纯土壤变量占 9.7%，纯 wetland group 占 11.4%，共享部分占 7.1%，未解释部分占 71.8%；两个纯组分的 Holm-adjusted (P=0.002)。`Group` 与 `Saline` 在这批数据中完全混杂，因此这些比例是统计关联分解，不能被写成盐度或地域的因果贡献。
 :::
 
-## 三种方法回答三个不同问题 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### envfit：变量与“当前排序图”是否对齐
+需要 R，以及 `ggplot2`、`jsonlite`、`permute`、`ragg`、`scales`、`svglite`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表，以及本次分析使用的实测环境变量或系统发育信息。
 
-`vegan::envfit()`把连续变量投影到已经完成的排序空间。箭头方向表示变量增加方向；箭头长度与当前展示轴上的相关强度有关。对连续变量，`envfit` 输出的 (r^2) 是变量与所提供排序坐标之间的 squared correlation。
-
-本例把 11 个连续变量同时拟合到 Bray–Curtis PCoA 的前两轴，并把 11 个置换 P 值作为一个检验族做 Benjamini–Hochberg（BH）校正。图上只标出校正后显著变量中 (r^2) 最高的 7 个，完整 11 个结果仍保留在表中。
-
-::: {.callout-warning title="箭头长不等于解释率高"}
-若重要信息落在第三轴以后，变量在二维图上的箭头可能很短。反过来，二维箭头很长也不代表它独立解释了完整群落表中的同等比例，更不证明因果。要回答多维 explained fraction，应使用 RDA/db-RDA、PERMANOVA 或 VPA，并报告相应的 (R^2)。
-:::
-
-### Mantel：两个距离结构是否同向变化
-
-Mantel 检验把两个距离矩阵的下三角元素相关起来，并通过样本标签置换建立零分布。本例预先定义三组环境距离：
-
-| 距离块 | 变量 | 距离定义 |
-|---|---|---|
-| Edaphic | pH、TOC、NH4、NO3、Conductivity | 各列 Z-score 后的 Euclidean distance |
-| Climate | Temperature、Precipitation | 各列 Z-score 后的 Euclidean distance |
-| Geographic | Latitude、Longitude | Haversine great-circle distance（km） |
-
-主检验用 Spearman 相关，三个 P 值做 Holm 校正。距离中的变量先标准化，否则 Conductivity 这类数值跨度大的列会主导 Euclidean distance。
-
-<details>
-<summary><strong>深入：为什么 partial Mantel 只放敏感性分析</strong></summary>
-
-partial Mantel 尝试在控制第三个距离矩阵后关联另外两个距离矩阵，但“控制距离”不等于在原始变量尺度上完成可靠的混杂调整。空间自相关下，它还可能出现错误率失控；[Guillot & Rousset (2013)](https://doi.org/10.1111/2041-210X.12018)对此给出系统批评。
-
-`vegan` 文档还特别提醒，partial Mantel 的非 Pearson 相关实现可能有问题。因此本页只额外给出 Pearson partial Mantel 作为敏感性结果，不把它放进主检验族，也不据此声称“排除了地理影响”。需要正式控制空间结构时，应在样本级模型中显式加入空间坐标、空间基函数或研究设计中的 site/block。
-
-</details>
-
-### VPA：两个预测集合的独立和共享 adjusted R²
-
-VPA 把 Hellinger-transformed community matrix 的变异拆成：
-
-\[
-1=[a]+[b]+[c]+[d]
-\]
-
-- ([a])：edaphic set 在控制 wetland group 后的纯组分；
-- ([b])：wetland group 在控制 edaphic set 后的纯组分；
-- ([c])：两组预测变量共享的算术重叠；
-- ([d])：未解释部分。
-
-这里使用 adjusted (R^2)，因为原始 (R^2) 会随着预测变量数量增加而上升。只有 ([a]) 和 ([b]) 能通过 partial RDA 直接检验；共享组分 ([c]) 不能唯一归属给某一组变量，也不能直接做置换检验。共享组分在其他数据中可能为负值，那是调整后估计与共线性共同作用的结果，不应强制截断成 0。
-
-::: {.callout-note title="先看共线性，再定义变量集合"}
-11 个变量中有 4 对 (|r|\ge 0.80)，其中 TOC 与 TN 的 Pearson (r=0.988)。因此 TN 不进入主 edaphic set，避免几乎重复计入同一梯度；它仍保留在 `envfit` 描述性检验中。变量集合应由问题和测量含义预先定义，不能根据哪个组合 P 最小再反选。
-:::
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载真实数据和定义作图函数</strong></summary>
-
-首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "digest", "ggplot2", "jsonlite", "permute", "ragg",
-  "readr", "scales", "svglite", "systemfonts", "vegan"
-))
-```
-
-下载固定版本数据、核对 SHA-256，并导出标准三件套和环境表：
-
-```{r}
-#| eval: false
-archive <- "data/raw/microeco_2.0.0.tar.gz"
-source_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/",
-  "microeco/microeco_2.0.0.tar.gz"
-)
-expected_archive_sha256 <- paste0(
-  "454a3b71ceeea86bdd54f475a12b5bac",
-  "9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) {
-  download.file(source_url, archive, mode = "wb")
-}
-stopifnot(identical(
-  digest::digest(file = archive, algo = "sha256", serialize = FALSE),
-  expected_archive_sha256
-))
-
-required <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData",
-  "microeco/data/env_data_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-utils::untar(archive, files = required, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_keyed_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name), x,
-    check.names = FALSE
-  )
-  utils::write.table(
-    out, path, sep = "\t", quote = FALSE,
-    row.names = FALSE, na = ""
-  )
-}
-
-write_keyed_tsv(data_env$otu_table_16S, "FeatureID", "data/small/otutab.tsv")
-write_keyed_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/environment.tsv",
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
   "data/small/taxonomy.tsv"
 )
-write_keyed_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-write_keyed_tsv(
-  data_env$env_data_16S,
-  "SampleID",
-  "data/small/environment.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-出版级函数直接内联；图内统一使用英文和 `DejaVu Sans`：
-
 ```{r}
+#| results: hold
 #| label: setup-packages-theme
 library(ggplot2)
 library(vegan)
 
 set.seed(20260725)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 
 pal_pub <- c(
   blue = "#0072B2",
@@ -269,16 +163,12 @@ save_pub <- function(
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取四张表并锁定样本顺序
+### 读取四张表并锁定样本顺序
 
 三件套仍是群落数据入口；`environment.tsv`是本分析额外需要的样本级环境表。环境表可包含更多样本，进入模型前按三件套共同样本显式取交集和排序。
 
 ```{r}
+#| results: hold
 #| label: read-environment-variance-inputs
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -384,9 +274,79 @@ head(environment)
 
 样本顺序必须在 counts、metadata、environment 和所有距离矩阵中保持一致。这里得到 13,628 × 90 的 count matrix，总计 1,619,670 reads；环境源表有 200 个样本，其中 90 个与三件套匹配。
 
-### 2. 先审计设计与环境变量相关性
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/25-environment-variance.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "digest", "ggplot2", "jsonlite", "permute", "ragg",
+  "readr", "scales", "svglite", "systemfonts", "vegan"
+))
+```
+
+</details>
+
+## 三种方法回答三个不同问题 {#sec-theory}
+
+### envfit：变量与“当前排序图”是否对齐
+
+`vegan::envfit()`把连续变量投影到已经完成的排序空间。箭头方向表示变量增加方向；箭头长度与当前展示轴上的相关强度有关。对连续变量，`envfit` 输出的 (r^2) 是变量与所提供排序坐标之间的 squared correlation。
+
+本例把 11 个连续变量同时拟合到 Bray–Curtis PCoA 的前两轴，并把 11 个置换 P 值作为一个检验族做 Benjamini–Hochberg（BH）校正。图上只标出校正后显著变量中 (r^2) 最高的 7 个，完整 11 个结果仍保留在表中。
+
+::: {.callout-warning title="箭头长不等于解释率高"}
+若重要信息落在第三轴以后，变量在二维图上的箭头可能很短。反过来，二维箭头很长也不代表它独立解释了完整群落表中的同等比例，更不证明因果。要回答多维 explained fraction，应使用 RDA/db-RDA、PERMANOVA 或 VPA，并报告相应的 (R^2)。
+:::
+
+### Mantel：两个距离结构是否同向变化
+
+Mantel 检验把两个距离矩阵的下三角元素相关起来，并通过样本标签置换建立零分布。本例预先定义三组环境距离：
+
+| 距离块 | 变量 | 距离定义 |
+|---|---|---|
+| Edaphic | pH、TOC、NH4、NO3、Conductivity | 各列 Z-score 后的 Euclidean distance |
+| Climate | Temperature、Precipitation | 各列 Z-score 后的 Euclidean distance |
+| Geographic | Latitude、Longitude | Haversine great-circle distance（km） |
+
+主检验用 Spearman 相关，三个 P 值做 Holm 校正。距离中的变量先标准化，否则 Conductivity 这类数值跨度大的列会主导 Euclidean distance。
+
+<details>
+<summary><strong>深入：为什么 partial Mantel 只放敏感性分析</strong></summary>
+
+partial Mantel 尝试在控制第三个距离矩阵后关联另外两个距离矩阵，但“控制距离”不等于在原始变量尺度上完成可靠的混杂调整。空间自相关下，它还可能出现错误率失控；[Guillot & Rousset (2013)](https://doi.org/10.1111/2041-210X.12018)对此给出系统批评。
+
+`vegan` 文档还特别提醒，partial Mantel 的非 Pearson 相关实现可能有问题。因此本页只额外给出 Pearson partial Mantel 作为敏感性结果，不把它放进主检验族，也不据此声称“排除了地理影响”。需要正式控制空间结构时，应在样本级模型中显式加入空间坐标、空间基函数或研究设计中的 site/block。
+
+</details>
+
+### VPA：两个预测集合的独立和共享 adjusted R²
+
+VPA 把 Hellinger-transformed community matrix 的变异拆成：
+
+\[
+1=[a]+[b]+[c]+[d]
+\]
+
+- ([a])：edaphic set 在控制 wetland group 后的纯组分；
+- ([b])：wetland group 在控制 edaphic set 后的纯组分；
+- ([c])：两组预测变量共享的算术重叠；
+- ([d])：未解释部分。
+
+这里使用 adjusted (R^2)，因为原始 (R^2) 会随着预测变量数量增加而上升。只有 ([a]) 和 ([b]) 能通过 partial RDA 直接检验；共享组分 ([c]) 不能唯一归属给某一组变量，也不能直接做置换检验。共享组分在其他数据中可能为负值，那是调整后估计与共线性共同作用的结果，不应强制截断成 0。
+
+::: {.callout-note title="先看共线性，再定义变量集合"}
+11 个变量中有 4 对 (|r|\ge 0.80)，其中 TOC 与 TN 的 Pearson (r=0.988)。因此 TN 不进入主 edaphic set，避免几乎重复计入同一梯度；它仍保留在 `envfit` 描述性检验中。变量集合应由问题和测量含义预先定义，不能根据哪个组合 P 最小再反选。
+:::
+
+## 比较环境关联与独立解释比例 {#sec-code}
+
+### 先审计设计与环境变量相关性
+
+```{r}
+#| results: hold
 #| label: audit-design-collinearity
 design_cross <- with(metadata, table(Group, Saline))
 design_cross
@@ -422,11 +382,12 @@ high_correlation_pairs
 公开 metadata 没有 subject、pair、block、site、time 或 batch 标识，因此示例只能按独立样本做自由置换。这是可用信息下的分析边界，不是对原始采样独立性的额外证明。自己的数据只要有重复测量、区组、家庭、笼位或地点层级，就必须据此限制置换。
 :::
 
-### 3. 固定 feature filter、两种群落表示和置换矩阵
+### 固定 feature filter、两种群落表示和置换矩阵
 
 `envfit` 与 Mantel 使用 relative-abundance Bray–Curtis；VPA 使用 Hellinger-transformed count matrix。两条分支不能混称为同一种标准化。
 
 ```{r}
+#| results: hold
 #| label: prepare-community-permutations
 primary_seed <- 20260725L
 permutation_count <- 999L
@@ -476,11 +437,12 @@ data.frame(
 )
 ```
 
-### 4. PCoA 后运行 envfit，并校正 11 个检验
+### PCoA 后运行 envfit，并校正 11 个检验
 
 先完成 unconstrained ordination，再把环境变量作为外部向量拟合；`envfit` 不会反过来改变 PCoA 坐标。
 
 ```{r}
+#| results: hold
 #| label: run-envfit
 pcoa <- vegan::wcmdscale(
   bray_distance,
@@ -538,9 +500,10 @@ envfit_results[, c(
 
 本数据的 Bray–Curtis 距离没有负 eigenvalues，因此虽然显式请求了 `add = "lingoes"`，实际加常数为 0。代码保留该选项，避免换数据后静默忽略非欧氏距离问题；坐标轴百分比按正 eigenvalues 计算。
 
-### 5. 把环境变量预注册成三个 Mantel 距离块
+### 把环境变量预注册成三个 Mantel 距离块
 
 ```{r}
+#| results: hold
 #| label: run-mantel-family
 edaphic_names <- c("pH", "TOC", "NH4", "NO3", "Conductivity")
 climate_names <- c("Temperature", "Precipitation")
@@ -609,9 +572,10 @@ mantel_results
 
 不要把 `0.587` 写成“地理解释了 58.7% 群落变异”。它表示样本对的 geographic distance 与 Bray–Curtis distance 有较强的单调正相关；样本对彼此不独立，所以 P 值来自样本标签置换，而不是普通相关检验。
 
-### 6. partial Mantel 只作为带警告的敏感性结果
+### partial Mantel 只作为带警告的敏感性结果
 
 ```{r}
+#| results: hold
 #| label: run-partial-mantel-sensitivity
 set.seed(primary_seed)
 partial_mantel <- vegan::mantel.partial(
@@ -636,11 +600,12 @@ partial_mantel_sensitivity
 
 结果为 (r=0.188)、(P=0.001)，但这不会升级为“控制地理后土壤仍有独立因果作用”。它只说明在这一特定距离残差化定义下仍见正相关，正式结论仍依赖样本级设计和模型。
 
-### 7. 用 Hellinger RDA 做两集合 VPA
+### 用 Hellinger RDA 做两集合 VPA
 
 主 edaphic set 含五个变量；`Group` 是三水平因子。TN 因与 TOC 几乎重复而不进入该集合，Saline 因与 Group 完全混杂而不与 Group 同时解释为独立预测变量。
 
 ```{r}
+#| results: hold
 #| label: run-vpa
 group_df <- data.frame(Group = metadata$Group, row.names = sample_ids)
 variation_partition_object <- vegan::varpart(
@@ -717,9 +682,10 @@ data.frame(
 variation_fraction_tests
 ```
 
-### 8. 检查 VIF、conditioning 和 prevalence 敏感性
+### 检查 VIF、conditioning 和 prevalence 敏感性
 
 ```{r}
+#| results: hold
 #| label: run-vpa-sensitivity
 combined_vif <- vegan::vif.cca(combined_rda)
 vif_audit <- data.frame(
@@ -805,11 +771,12 @@ prevalence_sensitivity
 
 combined model 的最大 VIF 为 2.14，没有达到预设的 review threshold 5。prevalence 从 0% 调到 20% 时，pure edaphic adjusted (R^2) 为 0.096–0.103，edaphic Mantel (r) 为 0.329–0.340；方向和量级稳定，但主分支仍应按预先声明的 5% 阈值报告，而不是挑最漂亮的一行。
 
-## 出版级美化 {#sec-publication}
+## 从环境相关图读到变异分解 {#sec-publication}
 
-### 1. 相关性热图先暴露环境变量的冗余
+### 相关性热图先暴露环境变量的冗余
 
 ```{r}
+#| results: hold
 #| label: fig-environment-correlation
 #| fig-cap: "环境变量 Pearson 相关性。黑框表示 |r| ≥ 0.80；TN 与 TOC 近乎冗余，因此 TN 不进入主 VPA edaphic set。"
 #| fig-width: 7.2
@@ -898,9 +865,10 @@ correlation_plot
 
 图内只标出 (|r|\ge 0.50) 的系数，避免数字墙；完整矩阵仍由 `correlation_matrix` 保存。高相关不自动说明删谁，应结合测量含义、研究假设和模型用途决定。
 
-### 2. envfit 图只展示强箭头，完整检验留在表中
+### envfit 图只展示强箭头，完整检验留在表中
 
 ```{r}
+#| results: hold
 #| label: fig-envfit-pcoa
 #| fig-cap: "Bray–Curtis PCoA 与 envfit。仅标出 10 个 BH 显著变量中二维 r² 最高的 7 个；箭头不是因果效应或完整群落解释率。"
 #| fig-width: 7.2
@@ -1028,9 +996,10 @@ envfit_plot
 
 颜色和形状同时编码分组，即使黑白打印也能区分；椭圆只帮助阅读样本分布，不进入任何显著性检验。
 
-### 3. Mantel 图同时画效应方向和 multiplicity-adjusted P
+### Mantel 图同时画效应方向和 multiplicity-adjusted P
 
 ```{r}
+#| results: hold
 #| label: fig-mantel-distance-blocks
 #| fig-cap: "三个预设 Mantel 距离块及一个 partial Mantel 敏感性结果。蓝色主检验标注 Holm-adjusted P；橙色 partial Mantel 标注原始 P 且不进入主结论。"
 #| fig-width: 7.2
@@ -1132,9 +1101,10 @@ save_pub(
 mantel_plot
 ```
 
-### 4. VPA 用带符号的条形图，不伪造重叠圆面积
+### VPA 用带符号的条形图，不伪造重叠圆面积
 
 ```{r}
+#| results: hold
 #| label: fig-variation-partition
 #| fig-cap: "Hellinger community matrix 的 adjusted variation partition。只有两个 pure fractions 可直接检验；shared fraction 是算术重叠，不能归因给某一组变量。"
 #| fig-width: 7.2
@@ -1216,6 +1186,7 @@ Rscript --vanilla scripts/validate_environment_variance.R \
 ```
 
 ```{r}
+#| results: hold
 #| label: verify-environment-variance-audit
 audit_path <-
   "results/25-environment-variance/environment-variance-summary.json"
@@ -1276,7 +1247,7 @@ partial Mantel 不是一般性的空间因果调整。把它限定为敏感性�
 本数据中 Inland wetland 全为 non-saline，另两组全为 saline。Group 与 Saline 完全混杂，无法从这些样本中分开估计；VPA 的 pure group fraction 只能称为 wetland-group context association。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告环境关联与变异分解的方法与限制 {#sec-methods}
 
 > Features present in at least 5% of samples (≥5 of 90 samples) were retained, yielding 11,113 OTUs. For ordination fitting and Mantel analyses, counts were converted to within-sample relative abundances and Bray–Curtis dissimilarities were calculated. A two-axis principal coordinates analysis was fitted with the Lingoes option; the observed distance matrix required an additive constant of zero. Eleven standardized continuous covariates were fitted to the displayed ordination using `envfit`, with Benjamini–Hochberg correction across the 11 permutation tests. Three prespecified environmental distance blocks—edaphic, climatic, and geographic—were tested against Bray–Curtis dissimilarity using one-sided Spearman Mantel tests and Holm correction across the three tests. Geographic distances were Haversine great-circle distances, whereas edaphic and climatic distances were Euclidean distances calculated after variable-wise Z-standardization. Community counts were Hellinger transformed for variation partitioning. Adjusted variation was partitioned between five edaphic variables (pH, total organic carbon, ammonium, nitrate, and conductivity) and a three-level wetland-group factor; total nitrogen was excluded from this set because of near redundancy with total organic carbon (Pearson r = 0.988). The two pure fractions were tested by partial RDA and Holm corrected; the shared fraction was not tested directly. All tests used the same 999-row free-permutation matrix generated with seed 20260725. Because no repeat, block, site, time, or batch identifier was available in the public metadata, inference assumes exchangeable samples. Partial Mantel analysis was reported as a non-primary sensitivity analysis. All analyses were performed in R 4.4.1 with vegan 2.6-6.1.
 
@@ -1284,9 +1255,9 @@ partial Mantel 不是一般性的空间因果调整。把它限定为敏感性�
 
 > Ten of 11 covariates were associated with the displayed two-axis PCoA after BH correction. Edaphic, climatic, and geographic distances were positively associated with Bray–Curtis dissimilarity (Spearman r = 0.332, 0.395, and 0.587, respectively; Holm-adjusted P = 0.003 for each). The combined edaphic and wetland-group model accounted for an adjusted 28.2% of Hellinger-transformed community variation. Pure edaphic, pure wetland-group, shared, and unexplained fractions were 9.7%, 11.4%, 7.1%, and 71.8%, respectively; both pure fractions had Holm-adjusted P = 0.002. Wetland group was completely confounded with salinity, so the group fraction was interpreted as contextual association rather than a salinity effect.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将环境关联与变异分解用于自己的研究 {#sec-own-data}
 
-### 1. 只替换四个路径和分组列名
+### 只替换四个路径和分组列名
 
 ```{r}
 #| eval: false
@@ -1306,7 +1277,7 @@ metadata$Group <- factor(metadata[[group_column]])
 - `metadata.tsv`：行名与 `otutab` sample IDs 一致；
 - `environment.tsv`：行为 sample、列为可解释的数值环境变量，可包含额外样本但不能有重复 ID。
 
-### 2. 预先写下三个分析合同
+### 预先确定三个分析的变量、距离与置换方案
 
 在运行前固定：
 
@@ -1316,7 +1287,7 @@ metadata$Group <- factor(metadata[[group_column]])
 
 若变量单位不同，Euclidean environmental distance 前必须 Z-score。若变量含大量缺失，不要让每个检验偷偷使用不同样本子集；先定义共同 complete cases，输出保留/剔除样本表。
 
-### 3. 按研究设计生成合法置换
+### 按研究设计生成合法置换
 
 独立样本可以沿用自由置换。完全区组示例：
 
@@ -1334,11 +1305,11 @@ permutation_matrix <- permute::shuffleSet(
 
 纵向、split-plot 或多层采样还要设置 `Plots()` / `Within()` 结构，不能只把所有样本放进同一个 block。先画清随机化和采样层级，再写 `how()`。
 
-### 4. 两个以上预测集合时先考虑可解释性
+### 两个以上预测集合时先考虑可解释性
 
 `varpart()`最多可接收四个解释表，但集合越多，组分数量和不可检验共享部分增长越快。优先选择有明确科学含义的少量 blocks，例如 soil chemistry、climate、space；每个 block 内先处理冗余，再报告 adjusted fractions 和可检验边界。
 
-### 5. 结果至少保留六张审计表
+### 结果至少保留六张审计表
 
 - 环境变量缺失、单位、均值、标准差和取值范围；
 - 变量相关矩阵与高相关 pairs；

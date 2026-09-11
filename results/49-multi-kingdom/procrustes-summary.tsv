@@ -1,7 +1,7 @@
 Pair	Model	Correlation	PValue	QValue
-Bacteria vs Fungi	Observed	0.823161954310134	0.001	0.001
+Bacteria vs Fungi	Observed	0.823161954310133	0.001	0.001
 Bacteria vs Fungi	Niche-adjusted	0.382070209031932	0.236	0.236
 Bacteria vs Oomycete	Observed	0.712784895087255	0.001	0.001
-Bacteria vs Oomycete	Niche-adjusted	0.518178133940204	0.01	0.015
-Fungi vs Oomycete	Observed	0.784423198368528	0.001	0.001
+Bacteria vs Oomycete	Niche-adjusted	0.518178133940203	0.01	0.015
+Fungi vs Oomycete	Observed	0.784423198368529	0.001	0.001
 Fungi vs Oomycete	Niche-adjusted	0.610902170353269	0.001	0.003

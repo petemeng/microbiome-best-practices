@@ -66,20 +66,20 @@
 <circle cx='244.40' cy='219.45' r='2.59' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
 <circle cx='323.11' cy='207.44' r='2.59' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
 <circle cx='401.83' cy='181.29' r='2.59' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
-<text x='176.70' y='85.02' style='font-size: 6.83px;fill: #0072B2; font-family: "DejaVu Sans";' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>94.8%</text>
-<text x='176.70' y='146.07' style='font-size: 6.83px;fill: #E69F00; font-family: "DejaVu Sans";' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>59.0%</text>
-<text x='176.70' y='187.40' style='font-size: 6.83px;fill: #009E73; font-family: "DejaVu Sans";' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>34.8%</text>
-<text x='176.70' y='206.32' style='font-size: 6.83px;fill: #CC79A7; font-family: "DejaVu Sans";' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>23.7%</text>
-<text x='176.70' y='230.45' style='font-size: 6.83px;fill: #D55E00; font-family: "DejaVu Sans";' textLength='17.34px' lengthAdjust='spacingAndGlyphs'>9.5%</text>
+<text x='176.70' y='85.02' style='font-size: 6.83px;fill: #0072B2; font-family: "Arial";' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>94.8%</text>
+<text x='176.70' y='146.07' style='font-size: 6.83px;fill: #E69F00; font-family: "Arial";' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>59.0%</text>
+<text x='176.70' y='187.40' style='font-size: 6.83px;fill: #009E73; font-family: "Arial";' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>34.8%</text>
+<text x='176.70' y='206.32' style='font-size: 6.83px;fill: #CC79A7; font-family: "Arial";' textLength='21.68px' lengthAdjust='spacingAndGlyphs'>23.7%</text>
+<text x='176.70' y='230.45' style='font-size: 6.83px;fill: #D55E00; font-family: "Arial";' textLength='17.34px' lengthAdjust='spacingAndGlyphs'>9.5%</text>
 <rect x='39.73' y='66.79' width='409.33' height='177.41' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw0NTMuNTR8MC4wMHwyODkuMTM=)'>
-<text x='35.70' y='246.83' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.40px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='35.70' y='212.72' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>20%</text>
-<text x='35.70' y='178.61' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>40%</text>
-<text x='35.70' y='144.50' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>60%</text>
-<text x='35.70' y='110.39' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>80%</text>
-<text x='35.70' y='76.29' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.54px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='35.70' y='246.83' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.40px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='35.70' y='212.72' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>20%</text>
+<text x='35.70' y='178.61' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>40%</text>
+<text x='35.70' y='144.50' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>60%</text>
+<text x='35.70' y='110.39' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>80%</text>
+<text x='35.70' y='76.29' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.54px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <polyline points='37.49,244.21 39.73,244.21 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='37.49,210.10 39.73,210.10 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='37.49,175.99 39.73,175.99 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -91,15 +91,15 @@
 <polyline points='244.40,246.45 244.40,244.21 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='323.11,246.45 323.11,244.21 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='401.83,246.45 401.83,244.21 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='86.96' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.99px' lengthAdjust='spacingAndGlyphs'>Top 5</text>
-<text x='165.68' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='23.56px' lengthAdjust='spacingAndGlyphs'>Top 10</text>
-<text x='244.40' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='23.56px' lengthAdjust='spacingAndGlyphs'>Top 20</text>
-<text x='323.11' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='23.56px' lengthAdjust='spacingAndGlyphs'>Top 50</text>
-<text x='401.83' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='34.74px' lengthAdjust='spacingAndGlyphs'>All known</text>
-<text x='244.40' y='263.78' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='67.31px' lengthAdjust='spacingAndGlyphs'>Display branch</text>
-<text transform='translate(11.04,155.50) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='116.34px' lengthAdjust='spacingAndGlyphs'>Mean covered abundance</text>
+<text x='86.96' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='18.99px' lengthAdjust='spacingAndGlyphs'>Top 5</text>
+<text x='165.68' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='23.56px' lengthAdjust='spacingAndGlyphs'>Top 10</text>
+<text x='244.40' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='23.56px' lengthAdjust='spacingAndGlyphs'>Top 20</text>
+<text x='323.11' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='23.56px' lengthAdjust='spacingAndGlyphs'>Top 50</text>
+<text x='401.83' y='253.48' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='34.74px' lengthAdjust='spacingAndGlyphs'>All known</text>
+<text x='244.40' y='263.78' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='67.31px' lengthAdjust='spacingAndGlyphs'>Display branch</text>
+<text transform='translate(11.04,155.50) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='116.34px' lengthAdjust='spacingAndGlyphs'>Mean covered abundance</text>
 <rect x='107.06' y='31.58' width='274.68' height='26.25' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
-<text x='111.54' y='47.98' style='font-size: 9.00px; font-family: "DejaVu Sans";' textLength='22.49px' lengthAdjust='spacingAndGlyphs'>Rank</text>
+<text x='111.54' y='47.98' style='font-size: 9.00px; font-family: "Arial";' textLength='22.49px' lengthAdjust='spacingAndGlyphs'>Rank</text>
 <line x1='140.24' y1='44.70' x2='154.07' y2='44.70' style='stroke-width: 1.71; stroke: #0072B2; stroke-linecap: butt;' />
 <circle cx='147.16' cy='44.70' r='2.59' style='stroke-width: 0.71; stroke: #0072B2; fill: #0072B2;' />
 <line x1='193.19' y1='44.70' x2='207.01' y2='44.70' style='stroke-width: 1.71; stroke: #E69F00; stroke-linecap: butt;' />
@@ -110,14 +110,14 @@
 <circle cx='291.92' cy='44.70' r='2.59' style='stroke-width: 0.71; stroke: #CC79A7; fill: #CC79A7;' />
 <line x1='334.37' y1='44.70' x2='348.20' y2='44.70' style='stroke-width: 1.71; stroke: #D55E00; stroke-linecap: butt;' />
 <circle cx='341.28' cy='44.70' r='2.59' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
-<text x='160.28' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>Phylum</text>
-<text x='213.22' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='18.91px' lengthAdjust='spacingAndGlyphs'>Class</text>
-<text x='258.38' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='20.42px' lengthAdjust='spacingAndGlyphs'>Order</text>
-<text x='305.04' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='23.12px' lengthAdjust='spacingAndGlyphs'>Family</text>
-<text x='354.41' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='22.85px' lengthAdjust='spacingAndGlyphs'>Genus</text>
-<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='290.77px' lengthAdjust='spacingAndGlyphs'>Coverage is measured against all reads after per-sample closure</text>
-<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='324.55px' lengthAdjust='spacingAndGlyphs'>Top 10 does not mean the same coverage at every rank</text>
-<text x='39.73' y='275.38' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='225.37px' lengthAdjust='spacingAndGlyphs'>Top-10 coverage falls from 94.8% at phylum to 9.5% at genus;</text>
-<text x='39.73' y='283.15' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='203.13px' lengthAdjust='spacingAndGlyphs'> All known retains the rank-specific unclassified fraction.</text>
+<text x='160.28' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='26.70px' lengthAdjust='spacingAndGlyphs'>Phylum</text>
+<text x='213.22' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='18.91px' lengthAdjust='spacingAndGlyphs'>Class</text>
+<text x='258.38' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='20.42px' lengthAdjust='spacingAndGlyphs'>Order</text>
+<text x='305.04' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='23.12px' lengthAdjust='spacingAndGlyphs'>Family</text>
+<text x='354.41' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='22.85px' lengthAdjust='spacingAndGlyphs'>Genus</text>
+<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='290.77px' lengthAdjust='spacingAndGlyphs'>Coverage is measured against all reads after per-sample closure</text>
+<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='324.55px' lengthAdjust='spacingAndGlyphs'>Top 10 does not mean the same coverage at every rank</text>
+<text x='39.73' y='275.38' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='225.37px' lengthAdjust='spacingAndGlyphs'>Top-10 coverage falls from 94.8% at phylum to 9.5% at genus;</text>
+<text x='39.73' y='283.15' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='203.13px' lengthAdjust='spacingAndGlyphs'> All known retains the rank-specific unclassified fraction.</text>
 </g>
 </svg>

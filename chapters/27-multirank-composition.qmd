@@ -1,6 +1,6 @@
 ---
 title: "多分类级组成（门→纲→目→科→属逐级）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,17 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/27-multirank-composition.R
+  packages:
+  - ggplot2
+  - ragg
+  - readr
+  - scales
+  - svglite
 ---
-
-> **分析目标：**从同一张 feature count table 同时生成 Phylum、Class、Order、Family、Genus 五级组成结果，并让 rank、lineage、缺失父级、Top-N 与分母都可审计。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**示例含 13,628 个 OTU、90 个样本和 1,619,670 reads；五级聚合、完整 lineage 审计与四张 600 ppi 图通常需 1–3 分钟，峰值内存低于 1 GB。
 
 ## 分类层级越细，信息损失越大 {#sec-target}
 
@@ -37,133 +43,35 @@ fig-format: png
 共有 **754** 条完整 Phylum→Genus lineage，合计覆盖 34.38% reads；丰度最高的 12 条完整 lineage 仅覆盖 10.19%。另外有 324 个 features（2.52% reads）出现“Family 未知、Genus 已知”，这些断裂路径被原样保留，不根据 genus 反推或补写 family。
 :::
 
-## 多分类级不是把五张表直接拼起来 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 每个 rank 都有自己的 100%，跨 rank 不能相加
+需要 R，以及 `ggplot2`、`ragg`、`readr`、`scales`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-对样本 (j)，把 feature counts 聚合到 rank (r) 后：
-
-\[
-p_{krj}=\frac{x_{krj}}{\sum_k x_{krj}}, \qquad
-\sum_k p_{krj}=1.
-\]
-
-同一条 read 会同时贡献给它的 phylum、class、order、family 和 genus。五个 rank 各自闭合到 100%，并不意味着把五级比例相加后得到新的“总丰度”；那会把同一证据重复计算五次。
-
-### 2. 联合键至少是 `Rank + Lineage`，不能只用显示名
-
-裸名称并不天然唯一。本数据有 13 个名称出现在多个 rank，例如 `Acidobacteria` 同时可见于 Phylum 和 Class。Family 层还有 `Family XII` 与 `FamilyI` 分别对应多个父系路径。联合表应保存：
-
-```text
-RankQualifiedTaxon = "P · Acidobacteria"
-LineageKey = "Acidobacteria > ... > Candidatus Solibacter"
-```
-
-前者防止跨 rank 合并，后者防止同一 rank 内的多父系同名标签被错误压成一个 lineage。
-
-### 3. 缺失父级是证据边界，不是待自动补齐的空格
-
-本数据在 Phylum→Class、Class→Order、Order→Family 三个 transition 中没有“父级未知、子级已知”的记录；Family→Genus 却有 324 个 features、17 个 genus 落在这种断裂路径中。它们可能来自参考库的 rank 结构或分类器输出，不能仅凭 genus 名称反推 family。
-
-`Incertae Sedis` 也不等于空注释：它表示来源数据库提供了一个未定位置的命名标签。本页保留原标签、单独审计，但不把它写成已完全解析的标准分类单元。
-
-### 4. 同一个 Top 10，在不同 rank 覆盖率完全不同
-
-按 90 个样本的等权均值选择全局 Top 10，Phylum、Class、Order、Family、Genus 的平均覆盖率分别为 94.80%、59.00%、34.77%、23.67%、9.52%。Top-N 是排版决定，不是跨 rank 等价的生物学过滤器。
-
-<details>
-<summary><strong>深入：完整 lineage 与“该 rank 有名称”为什么不是一回事</strong></summary>
-
-“Genus 有名称”只检查 genus 单元格是否非空；“完整 Phylum→Genus lineage”要求五级连续可追踪。本例 genus named fraction 为 36.89%，完整 genus lineage 只有 34.38%，差出的 2.52% 正是 family 缺失但 genus 已知的断裂路径。层级图若要求连线，应使用完整 lineage；rank 独立汇总则可以保留这些 genus，但必须显式标注缺失父级。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载真实数据和定义作图函数</strong></summary>
-
-首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "digest", "ggplot2", "jsonlite", "ragg", "readr",
-  "scales", "svglite", "systemfonts"
-))
-```
-
-下载 `microeco` 2.0.0 源码包、核对 SHA-256，并导出三件套：
-
-```{r}
-#| eval: false
-archive <- "data/raw/microeco_2.0.0.tar.gz"
-source_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/",
-  "microeco/microeco_2.0.0.tar.gz"
-)
-expected_archive_sha256 <- paste0(
-  "454a3b71ceeea86bdd54f475a12b5bac",
-  "9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) {
-  download.file(source_url, archive, mode = "wb")
-}
-stopifnot(identical(
-  digest::digest(file = archive, algo = "sha256", serialize = FALSE),
-  expected_archive_sha256
-))
-
-required <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-utils::untar(archive, files = required, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_keyed_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name), x,
-    check.names = FALSE
-  )
-  utils::write.table(
-    out, path, sep = "\t", quote = FALSE,
-    row.names = FALSE, na = ""
-  )
-}
-
-write_keyed_tsv(data_env$otu_table_16S, "FeatureID", "data/small/otutab.tsv")
-write_keyed_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
   "data/small/taxonomy.tsv"
 )
-write_keyed_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-出版级函数直接内联；图内统一使用英文和 `DejaVu Sans`：
-
 ```{r}
+#| results: hold
 #| label: setup-multirank-packages-theme
 library(ggplot2)
 
 set.seed(20260727)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 
 pal_pub <- c(
   blue = "#0072B2",
@@ -263,13 +171,10 @@ wrap_label <- function(x, width = 16L) {
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并锁定方向、ID 和哈希
+### 读取三件套并锁定方向、ID 和哈希
 
 ```{r}
+#| results: hold
 #| label: read-multirank-inputs
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -347,15 +252,75 @@ data.frame(
 先查看三张表，而不是只接受一个看不见内部结构的对象：
 
 ```{r}
+#| results: hold
 #| label: preview-multirank-inputs
 otutab[1:5, 1:5, drop = FALSE]
 taxonomy[1:6, , drop = FALSE]
 metadata[1:6, , drop = FALSE]
 ```
 
-### 2. 逐 rank 聚合，并保留 rank-qualified label
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/27-multirank-composition.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "digest", "ggplot2", "jsonlite", "ragg", "readr",
+  "scales", "svglite", "systemfonts"
+))
+```
+
+</details>
+
+## 多分类级不是把五张表直接拼起来 {#sec-theory}
+
+### 各分类层级分别归一化，不能跨层级相加
+
+对样本 (j)，把 feature counts 聚合到 rank (r) 后：
+
+\[
+p_{krj}=\frac{x_{krj}}{\sum_k x_{krj}}, \qquad
+\sum_k p_{krj}=1.
+\]
+
+同一条 read 会同时贡献给它的 phylum、class、order、family 和 genus。五个 rank 各自闭合到 100%，并不意味着把五级比例相加后得到新的“总丰度”；那会把同一证据重复计算五次。
+
+### 联合键至少是 `Rank + Lineage`，不能只用显示名
+
+裸名称并不天然唯一。本数据有 13 个名称出现在多个 rank，例如 `Acidobacteria` 同时可见于 Phylum 和 Class。Family 层还有 `Family XII` 与 `FamilyI` 分别对应多个父系路径。联合表应保存：
+
+```text
+RankQualifiedTaxon = "P · Acidobacteria"
+LineageKey = "Acidobacteria > ... > Candidatus Solibacter"
+```
+
+前者防止跨 rank 合并，后者防止同一 rank 内的多父系同名标签被错误压成一个 lineage。
+
+### 缺失父级是证据边界，不是待自动补齐的空格
+
+本数据在 Phylum→Class、Class→Order、Order→Family 三个 transition 中没有“父级未知、子级已知”的记录；Family→Genus 却有 324 个 features、17 个 genus 落在这种断裂路径中。它们可能来自参考库的 rank 结构或分类器输出，不能仅凭 genus 名称反推 family。
+
+`Incertae Sedis` 也不等于空注释：它表示来源数据库提供了一个未定位置的命名标签。本页保留原标签、单独审计，但不把它写成已完全解析的标准分类单元。
+
+### 同一个 Top 10，在不同 rank 覆盖率完全不同
+
+按 90 个样本的等权均值选择全局 Top 10，Phylum、Class、Order、Family、Genus 的平均覆盖率分别为 94.80%、59.00%、34.77%、23.67%、9.52%。Top-N 是排版决定，不是跨 rank 等价的生物学过滤器。
+
+<details>
+<summary><strong>深入：完整 lineage 与“该 rank 有名称”为什么不是一回事</strong></summary>
+
+“Genus 有名称”只检查 genus 单元格是否非空；“完整 Phylum→Genus lineage”要求五级连续可追踪。本例 genus named fraction 为 36.89%，完整 genus lineage 只有 34.38%，差出的 2.52% 正是 family 缺失但 genus 已知的断裂路径。层级图若要求连线，应使用完整 lineage；rank 独立汇总则可以保留这些 genus，但必须显式标注缺失父级。
+
+</details>
+
+## 逐级聚合，同时保留分类层级关系 {#sec-code}
+
+### 逐层聚合，并在标签中标明分类层级
+
+```{r}
+#| results: hold
 #| label: aggregate-multirank-composition
 rank_names <- c("Phylum", "Class", "Order", "Family", "Genus")
 rank_prefix <- c(
@@ -425,9 +390,10 @@ rank_resolution
 
 门到属的标签数依次为 56、128、217、394、772；标签越来越多，并不代表可解释 reads 越来越多。属水平正好相反：大量 reads 停在更高 rank。
 
-### 3. 逐组审计注释分辨率，不删除 Unknown
+### 逐组审计注释分辨率，不删除 Unknown
 
 ```{r}
+#| results: hold
 #| label: audit-rank-resolution-by-group
 group_resolution_rows <- list()
 for (rank_name in rank_names) {
@@ -466,9 +432,10 @@ subset(group_rank_resolution, Rank == "Genus")
 Inland wetland 的 `Unknown genus` 平均为 71.01%，Tibetan wetland 为 56.69%。若各样本删除 Unknown 后重新闭合，两个组的已知 genus 会被不同程度放大；这既改变数值，也改变组间视觉距离。
 :::
 
-### 4. 建 lineage key，审计断裂路径与同名冲突
+### 建 lineage key，审计断裂路径与同名冲突
 
 ```{r}
+#| results: hold
 #| label: audit-lineage-hierarchy
 feature_equal_mean <- rowMeans(relative_feature)
 known_matrix <- vapply(
@@ -515,6 +482,7 @@ lineage_gap_audit
 再检查同一 rank 内，一个裸名称是否对应多个父系：
 
 ```{r}
+#| results: hold
 #| label: audit-parent-specific-name-collisions
 collision_rows <- list()
 for (i in 2:length(rank_names)) {
@@ -552,9 +520,10 @@ label_collision_audit
 
 `Family XII` 和 `FamilyI` 必须由 parent path 区分。若只按 family 显示名聚合，它们可以作为 rank composition 的一个标签；若要画 lineage 或追踪父子关系，则必须使用完整路径键。
 
-### 5. 固定每级 Top 5，并保留 Top-N coverage 敏感性
+### 固定每级 Top 5，并保留 Top-N coverage 敏感性
 
 ```{r}
+#| results: hold
 #| label: prepare-multirank-top-taxa
 rank_top_rows <- list()
 rank_group_rows <- list()
@@ -602,6 +571,7 @@ rank_top_taxa
 Top-N sensitivity 将 `Top 5/10/20/50` 与该 rank 的全部已知标签放在同一分母下比较：
 
 ```{r}
+#| results: hold
 #| label: audit-multirank-topn-coverage
 top_n_rows <- list()
 for (rank_name in rank_names) {
@@ -636,9 +606,10 @@ rank_topn_sensitivity <- do.call(rbind, top_n_rows)
 subset(rank_topn_sensitivity, NLabel == "Top 10")
 ```
 
-### 6. 把 pooled reads 和 known-only 留在敏感性分支
+### 检查合并读数或排除未注释类群后结果是否改变
 
 ```{r}
+#| results: hold
 #| label: audit-multirank-denominator-weighting
 aggregation_rows <- list()
 denominator_rows <- list()
@@ -693,9 +664,10 @@ denominator_sensitivity[
 
 已知属在 inland wetland 的分母最小，`Candidatus Solibacter` 从 all-read 2.38% 变成 known-only 9.66%，增加 7.27 个百分点。这不是生物学变化，而是分母改变。
 
-### 7. 选择完整优势 lineage，而不是孤立 genus 名
+### 选择完整优势 lineage，而不是孤立 genus 名
 
 ```{r}
+#| results: hold
 #| label: prepare-dominant-complete-lineages
 complete_mask <- complete_depth == length(rank_names)
 complete_rel <- rowsum(
@@ -762,9 +734,10 @@ data.frame(
 )
 ```
 
-### 8. 保存完整表与敏感性审计
+### 保存完整表与敏感性审计
 
 ```{r}
+#| results: hold
 #| label: save-multirank-audit-tables
 result_dir <- "results/27-multirank-composition"
 dir.create(result_dir, recursive = TRUE, showWarnings = FALSE)
@@ -824,11 +797,12 @@ readr::write_tsv(
 )
 ```
 
-## 出版级美化：四张图各回答一个层级问题 {#sec-publication}
+## 在覆盖率与可读性之间选择分类层级 {#sec-publication}
 
-### 1. 注释分辨率阶梯：先看每一级还有多少 reads 可命名
+### 注释分辨率阶梯：先看每一级还有多少 reads 可命名
 
 ```{r}
+#| results: hold
 #| label: fig-rank-resolution-cascade
 #| fig-cap: "Phylum→Genus 注释分辨率阶梯。"
 #| fig-width: 7.2
@@ -903,9 +877,10 @@ cascade_plot
 
 这张图先回答“这个 rank 在每组还能解析多少 reads”。它不是测序质量评分，更不是组间显著性检验；但如果各组注释率差异明显，后续 known-only 图必须格外谨慎。
 
-### 2. 多层级气泡图：Top 5 名单跨组固定
+### 多层级气泡图：Top 5 名单跨组固定
 
 ```{r}
+#| results: hold
 #| label: fig-multirank-bubble
 #| fig-cap: "五个分类级的全局 Top 5 与 Unknown。"
 #| fig-width: 7.2
@@ -985,9 +960,10 @@ bubble_plot
 
 点面积表示以全部 reads 为分母的组均值，颜色表示该聚合 taxon 在组内样本中的非零比例。二者回答不同问题：高 prevalence 不保证高平均丰度，高平均丰度也可能由少数样本驱动。
 
-### 3. Lineage ladder：每一行是一条可追踪路径
+### Lineage ladder：每一行是一条可追踪路径
 
 ```{r}
+#| results: hold
 #| label: fig-lineage-ladder
 #| fig-cap: "丰度最高的 12 条完整 Phylum→Genus lineage。"
 #| fig-width: 7.2
@@ -1061,9 +1037,10 @@ ladder_plot
 
 每个格子的颜色是“共享该路径前缀的所有 features”的总体丰度，因此越靠左的父节点通常更深。颜色用于提供上级背景，不能沿同一行相加。`Marinicella` 路径中的 `Order Incertae Sedis` 和 `Family Incertae Sedis` 被保留，清楚标示它的未定位置边界。
 
-### 4. Top-N coverage：把排版损失画出来
+### Top-N coverage：把排版损失画出来
 
 ```{r}
+#| results: hold
 #| label: fig-topn-coverage
 #| fig-cap: "不同 rank 的 Top-N 覆盖率。"
 #| fig-width: 7.2
@@ -1142,8 +1119,8 @@ topn_plot
 这张图把 Top-N 的视觉损失量化。属水平即使显示 Top 50 已知 genus，也只覆盖 21.56% 的全部 reads；完整已知 genus 合计也只有 36.89%。因此属图必须同时报告 Unknown，并把完整结果表留给复查。
 
 ```{r}
+#| results: hold
 #| label: verify-multirank-composition-audit
-#| echo: false
 expected_known <- c(
   Phylum = 0.996536217607761,
   Class = 0.967978544271532,
@@ -1212,15 +1189,15 @@ known-only 是条件比例。本数据最大放大为 7.27 个百分点，且三
 注释率曲线、气泡大小、lineage ladder 和 Top-N coverage 都是描述性证据。显著性、协变量和重复测量应由预先选择的差异丰度模型处理。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告多分类级组成的方法与限制 {#sec-methods}
 
 > Taxonomic composition was calculated independently at the phylum, class, order, family, and genus ranks from the unrarefied feature-count table. Counts were converted to within-sample relative abundances before group summaries, and biological samples received equal weight. Empty assignments were retained as rank-specific Unknown categories, whereas named Incertae Sedis assignments were preserved as unresolved database labels. Taxa were identified by rank-qualified labels, and hierarchical displays used complete lineage keys without imputing missing parent ranks. The five most abundant named taxa at each rank were selected globally across all 90 samples and reused across groups; Top-5, Top-10, Top-20, Top-50, pooled-read, and classified-read-only results were retained as sensitivity analyses. All displayed proportions used total reads as the primary denominator, and the figures were interpreted descriptively rather than as differential-abundance tests.
 
 替换样本数、Top-N、分组变量和实际 sensitivity 分支即可；若使用 known-only 图，必须把 `total reads` 改成 `classified reads`，不能让代码与 Methods 使用不同分母。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将多分类级组成用于自己的研究 {#sec-own-data}
 
-### 1. 只替换三件套路径和分组列
+### 只替换三件套路径和分组列
 
 ```{r}
 #| eval: false
@@ -1234,7 +1211,7 @@ group_column <- "Treatment"
 
 `otutab` 必须是 feature × sample；`taxonomy` 行名必须与 feature 完全一致；`metadata` 行名必须覆盖全部样本。先核对集合，再按 count table 顺序重排 taxonomy 与 metadata。
 
-### 2. 先写下五级合同
+### 分析前确定五个分类层级的展示规则
 
 ```{r}
 #| eval: false
@@ -1247,7 +1224,7 @@ missing_parent_rule <- "retain; never backfill from child"
 
 论文图如果只需要 Phylum、Family、Genus，也应在运行前固定这三个 rank，而不是看完结果后挑最漂亮的层级。
 
-### 3. taxonomy 只有一列字符串时，先拆成七列
+### taxonomy 只有一列字符串时，先拆成七列
 
 ```{r}
 #| eval: false
@@ -1271,11 +1248,11 @@ rownames(taxonomy) <- taxonomy_raw$FeatureID
 
 不要把缺失的 Species 自动复制成 Genus，也不要用 genus 名补写 family。缺失值应由 `clean_taxon()` 转成 rank-specific Unknown。
 
-### 4. 有技术重复时先恢复生物学样本单位
+### 有技术重复时先恢复生物学样本单位
 
 如果多个测序库来自同一生物学样本，应先按预声明规则合并原始 counts，再做逐样本 closure。不能把技术库当作独立样本等权平均，否则一个受试者会获得更多权重。
 
-### 5. 最少保留这些审计输出
+### 报告结果时需要保留哪些信息
 
 - 清洗后的 feature × 五级 taxonomy lineage map；
 - 每个 rank 的完整 sample-level relative-abundance 表；

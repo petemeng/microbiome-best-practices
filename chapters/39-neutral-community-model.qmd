@@ -1,6 +1,6 @@
 ---
 title: "中性群落模型：Sloan 拟合、迁入率与偏离类群"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,15 +17,24 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/39-neutral-community-model.R
+  packages:
+  - ggplot2
+  - ggrepel
+  - knitr
+  - patchwork
+  - ragg
+  - scales
+  - svglite
+  - vegan
 ---
-
-> **分析目标：**用 Sloan neutral community model（NCM）拟合 OTU 的 metacommunity mean relative abundance 与 sample occupancy，估计 immigration parameter $m$，识别高于、低于和落入 neutral predictive envelope 的 OTU，并审计 detection rule、测序深度和 regional pool 对结论的影响。  
-> **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**13,628 个 OTU、90 个样本；主模型、分组模型、800 次 sample bootstrap、一次 10,000-read rarefaction 与 17 个 detection thresholds，通常 2–5 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 中性模型的偏离不等于确定性机制 {#sec-target}
 
-[Sloan et al. (2006)](https://doi.org/10.1111/j.1462-2920.2005.00956.x)给出了微生物 neutral community model；[Burns et al. (2016)](https://doi.org/10.1038/ismej.2015.142)用 abundance–occupancy 曲线比较斑马鱼不同发育阶段的中性拟合。这里不转载论文原图，而是在公开湿地 16S 数据上重绘 abundance–occupancy envelope、分组 immigration estimate、classification sensitivity 和 detection-limit sensitivity。
+[Sloan et al. (2006)](https://doi.org/10.1111/j.1462-2920.2005.00956.x)给出了微生物 neutral community model；[Burns et al. (2016)](https://doi.org/10.1038/ismej.2015.142)用 abundance–occupancy 曲线比较斑马鱼不同发育阶段的中性拟合。
 
 ::: {.callout-important title="先给结论"}
 NCM 检验的是一个明确的观测模式：在给定 metacommunity pool、局部群落大小和 detection rule 后，taxon 的平均相对丰度能否解释它出现于多少样本。较高 $R^2$ 表示该低维 stochastic model 能复现 occupancy pattern；它**不等于**选择不存在，也不意味着落在 envelope 内的每个 OTU 都是生态学上“中性”的。
@@ -33,71 +42,36 @@ NCM 检验的是一个明确的观测模式：在给定 metacommunity pool、局
 
 本页使用 `microeco` 2.0.0 随包分发的真实中国湿地 OTU 表：CW、IW、TW 各 30 个样本，共 1,619,670 reads。主模型把全部 90 个样本定义为一个 regional pool；组内模型改变了 pool 和平均 library size，因此只作为分层描述，不把三个 $m$ 当作无偏处理效应比较。
 
-## 曲线、参数和偏离各自回答什么 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. abundance–occupancy 是模型的观测接口
+需要 R，以及 `ggplot2`、`ggrepel`、`knitr`、`patchwork`、`ragg`、`scales`、`svglite`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-对 taxon $i$，先计算其在 metacommunity 中的平均相对丰度 $p_i$ 与在局部样本中的 occupancy $f_i$。给定平均局部群落大小 $N$、migration parameter $m$ 和 detection threshold $d$，本页使用 beta distribution 的连续近似：
-
-$$
-\hat f_i = 1 - F_{\mathrm{Beta}}\left(d;\,Nm p_i,\,Nm(1-p_i)\right).
-$$
-
-主分析把 $d$ 设为 $1/N$，即平均 library 中约 1 read 的相对丰度。$m$ 通过最小化 observed occupancy 与 predicted occupancy 的平方误差估计；$Nm$ 常被解释为 immigration 与 local community size 的组合强度。
-
-### 2. envelope 是 predictive classification，不是 taxon 性格测试
-
-本页用 $n$ 个样本下的 exact binomial 2.5%–97.5% quantiles 构造 predicted occupancy envelope：
-
-- **Above neutral**：observed occupancy 高于上界，可能包含广泛选择、持续输入、聚合误差或 detection bias；
-- **Below neutral**：低于下界，可能包含环境过滤、dispersal barrier、竞争、批次或技术 dropout；
-- **Neutral envelope**：当前数据分辨率下没有偏离该模型的证据。
-
-第三类不能改写成“证明中性”。模型有误、区间较宽或统计功效不足时，taxon 同样可能落入 envelope。
-
-### 3. $R^2$ 是 pattern fit，不是过程占比
-
-这里报告
-
-$$
-R^2 = 1 - \frac{\sum_i(f_i-\hat f_i)^2}
-{\sum_i(f_i-\bar f)^2}.
-$$
-
-它描述 abundance–occupancy curve 的拟合度，不是“中性过程解释了多少群落构建”。同一份数据中的 compositional sampling、heterogeneous selection 与 dispersal limitation 可以共同产生良好拟合。
-
-### 4. regional pool 和 detection rule 是 estimand 的组成部分
-
-把三个湿地合并或拆开、用 presence (>0) 或固定 relative-abundance threshold、是否 rarefy，都会改变 occupancy 和 $N$。因此模型必须连同 pool、detection、depth handling 和 taxonomic resolution 报告；不能只给一个 $m$ 与 $R^2$。
-
-<details>
-<summary><strong>深入：为什么不用显著性检验替代 envelope</strong></summary>
-
-13,628 个 OTU 的 occupancy 不是彼此独立的：每个样本的测序深度有限，OTU 相对丰度具有 closure，多数稀有 OTU 共享 detection constraint。逐 OTU 套普通回归 p-value 会制造一个并不存在的独立检验族。本页保留模型预测区间用于诊断，并把 sample bootstrap 用在总体参数 $m$ 的不确定性上。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "ggrepel", "patchwork", "ragg", "readr", "scales",
-  "svglite", "systemfonts", "vegan"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-
 ```{r}
+#| results: hold
 #| label: setup-neutral-model-theme
 library(ggplot2)
 library(vegan)
 
 set.seed(20260739)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -158,13 +132,10 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套读取并锁定 sample order
+### 从三件套读取并锁定 sample order
 
 ```{r}
+#| results: hold
 #| label: read-neutral-model-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -226,9 +197,71 @@ head(taxonomy[, rank_names])
 head(metadata)
 ```
 
-### 2. 拟合 Sloan NCM 并构造 predictive envelope
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/39-neutral-community-model.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "ggrepel", "patchwork", "ragg", "readr", "scales",
+  "svglite", "systemfonts", "vegan"
+))
+```
+
+</details>
+
+## 曲线、参数和偏离各自回答什么 {#sec-theory}
+
+### abundance–occupancy 是模型的观测接口
+
+对 taxon $i$，先计算其在 metacommunity 中的平均相对丰度 $p_i$ 与在局部样本中的 occupancy $f_i$。给定平均局部群落大小 $N$、migration parameter $m$ 和 detection threshold $d$，本页使用 beta distribution 的连续近似：
+
+$$
+\hat f_i = 1 - F_{\mathrm{Beta}}\left(d;\,Nm p_i,\,Nm(1-p_i)\right).
+$$
+
+主分析把 $d$ 设为 $1/N$，即平均 library 中约 1 read 的相对丰度。$m$ 通过最小化 observed occupancy 与 predicted occupancy 的平方误差估计；$Nm$ 常被解释为 immigration 与 local community size 的组合强度。
+
+### 预测区间用于比较模型与观测，不能定义类群的生态属性
+
+本页用 $n$ 个样本下的 exact binomial 2.5%–97.5% quantiles 构造 predicted occupancy envelope：
+
+- **Above neutral**：observed occupancy 高于上界，可能包含广泛选择、持续输入、聚合误差或 detection bias；
+- **Below neutral**：低于下界，可能包含环境过滤、dispersal barrier、竞争、批次或技术 dropout；
+- **Neutral envelope**：当前数据分辨率下没有偏离该模型的证据。
+
+第三类不能改写成“证明中性”。模型有误、区间较宽或统计功效不足时，taxon 同样可能落入 envelope。
+
+### $R^2$ 是 pattern fit，不是过程占比
+
+这里报告
+
+$$
+R^2 = 1 - \frac{\sum_i(f_i-\hat f_i)^2}
+{\sum_i(f_i-\bar f)^2}.
+$$
+
+它描述 abundance–occupancy curve 的拟合度，不是“中性过程解释了多少群落构建”。同一份数据中的 compositional sampling、heterogeneous selection 与 dispersal limitation 可以共同产生良好拟合。
+
+### 区域类群库与检出规则会影响模型估计
+
+把三个湿地合并或拆开、用 presence (>0) 或固定 relative-abundance threshold、是否 rarefy，都会改变 occupancy 和 $N$。因此模型必须连同 pool、detection、depth handling 和 taxonomic resolution 报告；不能只给一个 $m$ 与 $R^2$。
+
+<details>
+<summary><strong>深入：为什么不用显著性检验替代 envelope</strong></summary>
+
+13,628 个 OTU 的 occupancy 不是彼此独立的：每个样本的测序深度有限，OTU 相对丰度具有 closure，多数稀有 OTU 共享 detection constraint。逐 OTU 套普通回归 p-value 会制造一个并不存在的独立检验族。本页保留模型预测区间用于诊断，并把 sample bootstrap 用在总体参数 $m$ 的不确定性上。
+
+</details>
+
+## 拟合出现频率与平均丰度的关系 {#sec-code}
+
+### 拟合 Sloan NCM 并构造 predictive envelope
+
+```{r}
+#| results: hold
 #| label: fit-neutral-community-model
 fit_ncm <- function(counts, detection = NULL) {
   stopifnot(all(counts >= 0), all(colSums(counts) > 0))
@@ -312,9 +345,10 @@ primary_summary
 classification_summary
 ```
 
-### 3. 对 $m$ 做 sample bootstrap，并分层拟合三个 wetland pools
+### 对迁入参数 $m$ 进行样本重采样，并分别拟合三类湿地
 
 ```{r}
+#| results: hold
 #| label: bootstrap-neutral-immigration
 bootstrap_migration <- function(counts, replicates, seed) {
   set.seed(seed)
@@ -355,9 +389,10 @@ pool_ledger <- rbind(
 pool_ledger
 ```
 
-### 4. detection 与测序深度敏感性
+### detection 与测序深度敏感性
 
 ```{r}
+#| results: hold
 #| label: audit-neutral-sensitivity
 fixed_detection_fit <- fit_ncm(otutab, detection = 1e-4)
 set.seed(20260739)
@@ -423,6 +458,7 @@ classification_agreement
 ## 迁入率与偏离类群的解释边界 {#sec-audit}
 
 ```{r}
+#| results: hold
 #| label: neutral-model-audit-table
 neutral_model_audit <- data.frame(
   Dimension = c(
@@ -459,11 +495,12 @@ knitr::kable(
 
 三个湿地的 group-specific $m$ 不能直接归因为 habitat effect：拆分后 local sample number、metacommunity composition、mean depth 与 spatial extent 同时改变。可靠比较应在匹配设计中 bootstrap pool definition，并把环境协变量与批次纳入独立分析。
 
-## 出版级美化 {#sec-publication}
+## 区分模型参数、拟合不足与偏离类群 {#sec-publication}
 
-### 图 1：abundance–occupancy curve 与 95% envelope
+### 图 1：丰度与检出率的关系及 95% 预测区间
 
 ```{r}
+#| results: hold
 #| label: fig-neutral-abundance-occupancy
 #| fig-width: 7.1
 #| fig-height: 5.6
@@ -527,6 +564,7 @@ neutral_curve_plot
 ### 图 2：pool-specific immigration estimates
 
 ```{r}
+#| results: hold
 #| label: fig-neutral-pool-migration
 #| fig-width: 7.1
 #| fig-height: 4.8
@@ -566,6 +604,7 @@ pool_plot
 ### 图 3：OTU classification 的预处理敏感性
 
 ```{r}
+#| results: hold
 #| label: fig-neutral-classification-sensitivity
 #| fig-width: 7.1
 #| fig-height: 4.8
@@ -609,9 +648,10 @@ save_pub(
 class_sensitivity_plot
 ```
 
-### 图 4：detection limit sensitivity curve
+### 图 4：检查检出阈值改变后模型是否稳定
 
 ```{r}
+#| results: hold
 #| label: fig-neutral-detection-sensitivity
 #| fig-width: 7.1
 #| fig-height: 4.8
@@ -659,8 +699,8 @@ detection_plot
 ```
 
 ```{r}
+#| results: hold
 #| label: verify-neutral-community-model
-#| echo: false
 result_dir <- "results/39-neutral-community-model"
 dir.create(result_dir, recursive = TRUE, showWarnings = FALSE)
 utils::write.table(
@@ -721,11 +761,11 @@ stopifnot(
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告中性群落模型的方法与限制 {#sec-methods}
 
 > The OTU table, taxonomy and metadata were read independently and aligned by sample identifier. The metacommunity comprised 13,628 OTUs in 90 wetland samples (1,619,670 reads; 30 samples each from CW, IW and TW). For each OTU, mean metacommunity relative abundance and occupancy above a prespecified detection limit of one read per mean library ($d=1/N$) were calculated. The Sloan neutral community model was fitted by minimizing squared error between observed occupancy and the beta-distribution prediction over $10^{-8}\le m\le1$. Exact-binomial 95% predictive limits classified OTUs as above, below or within the neutral envelope. Parameter uncertainty was estimated using 200 sample-bootstrap replicates for the pooled dataset and each wetland-specific pool. Sensitivity analyses used a fixed relative-abundance threshold of $10^{-4}$, deterministic rarefaction to 10,000 reads per sample, and 17 detection limits from $10^{-5}$ to $10^{-3}$. Random seeds were fixed at 20260739–20260742. $R^2$ was interpreted as abundance–occupancy fit rather than a fraction of neutral assembly.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将中性群落模型用于自己的研究 {#sec-own-data}
 
 ```{r}
 #| eval: false

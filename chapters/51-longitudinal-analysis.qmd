@@ -1,6 +1,6 @@
 ---
 title: "纵向：线性混合模型/轨迹/volatility"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,19 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/51-longitudinal-analysis.R
+  packages:
+  - emmeans
+  - ggplot2
+  - nlme
+  - patchwork
+  - ragg
+  - svglite
+  - vegan
 ---
-
-> **分析目标：**在重复测量设计中，用线性混合模型估计 Shannon 多样性的组别×时间效应，用 Bray–Curtis 轨迹和相邻时间点 volatility 描述个体内群落变化。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；metadata 还需包含个体 ID、组别和有序时间点。  
-> **预计资源：**真实示例为 130 个 HITChip 分类单元、222 个样本、38 位参与者和 6 个时间点；普通笔记本约 2–5 分钟，内存低于 1 GB。
 
 ## 纵向分析的独立单位是受试者，不是时间点 {#sec-target}
 
@@ -31,129 +39,38 @@ fig-format: png
 
 本例使用 O'Keefe 等人的两周饮食互换研究：非裔美国人与南非农村参与者在基线饮食与互换饮食阶段被重复采样。原研究结合微生物、代谢物和黏膜标志物评估饮食改变；公开的 `dietswap` 对象提供 222 个 HITChip 16S 系统发育芯片丰度谱。[原始论文](https://doi.org/10.1038/ncomms7342)、[Dryad 数据记录](https://doi.org/10.5061/dryad.1mn1n)和[Bioconductor 数据包](https://bioconductor.org/packages/3.19/bioc/html/microbiome.html)给出了可引用来源。
 
-HITChip 不是扩增子测序；它的丰度预处理不能照搬到 ASV 表，但“特征×样本 → 样本内指标 → 重复测量模型”的下游逻辑相同。这里不转载论文原图，而是从公开表格重算四张图。
+HITChip 不是扩增子测序；它的丰度预处理不能照搬到 ASV 表，但“特征×样本 → 样本内指标 → 重复测量模型”的下游逻辑相同。
 
 ::: {.callout-important title="纵向连线不等于纵向检验"}
 把同一个体的点连起来只是一种展示。推断必须在模型中声明同一个体内的相关性；把 222 个样本当作 222 个独立观察，会低估标准误并制造过度显著。
 :::
 
-## 为什么普通线性模型不够 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-对第 (i) 位参与者在时间 (t) 的 Shannon 多样性，可写成：
+需要 R，以及 `emmeans`、`ggplot2`、`nlme`、`patchwork`、`ragg`、`svglite`、`vegan`。本次使用饮食互换研究的 HITChip 丰度、分类和样本信息表；它们不是扩增子计数，模型需保留受试者和时间点。
 
-\[
-y_{it}=\beta_0+\beta_1\mathrm{Cohort}_i+\beta_2\mathrm{Time}_t+
-\beta_3(\mathrm{Cohort}_i\times\mathrm{Time}_t)+b_i+\epsilon_{it},
-\]
-
-其中 (b_i\) 是个体随机截距，吸收稳定的个体间差异。`Cohort × Time` 交互项检验的是“两组随时间的改变是否不同”，不是某一组单独是否显著。
-
-先记住四点：
-
-1. **时间先按因子建模。** 只有六个预设时间点时，因子模型不强迫轨迹为直线，也便于定位差异发生在哪个阶段。
-2. **个体是随机效应或置换区组。** 重复测量的独立单位是参与者，不是粪便样本。
-3. **AR(1) 是候选结构，不是默认真理。** 相邻时间点残差可能更相似，但样本少、缺失不规则时，额外参数未必改善模型。
-4. **volatility 是个体内距离。** 本例定义为同一参与者相邻观测之间的 Bray–Curtis 距离；值越大表示该时间窗群落改变越大。
-
-<details>
-<summary><strong>深入：随机截距、随机斜率和 AR(1) 分别解决什么</strong></summary>
-
-- 随机截距允许每位参与者有不同基线；
-- 随机斜率允许每位参与者有不同时间趋势，但需要足够个体和时间点；
-- AR(1) 描述同一个体残差随时间间隔衰减的相关性。
-
-三者不是互相替代。复杂模型应由设计和诊断支持，不能只因 AIC 略降就无限加参数。若时间间隔不等，连续时间相关结构 `corCAR1` 往往比离散 `corAR1` 更合适；若结局是计数或比例，则需匹配分布的广义混合模型。
-
-</details>
-
-::: {.callout-note title="缺失时间点可以保留，但需说明缺失机制"}
-混合模型不要求每个人都有全部六个时间点。本例 222 个样本来自 38 人，理论满格为 228 个观测。模型在“给定已纳入协变量后缺失近似随机”的假设下使用可用观测；若失访与症状恶化有关，应做缺失机制与敏感性分析。
-:::
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、获取真实数据和定义作图函数</strong></summary>
-
-首次运行安装依赖：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "nlme", "emmeans", "vegan", "ggplot2", "patchwork",
-  "scales", "digest", "svglite", "ragg"
-))
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
-  install.packages("BiocManager")
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/longitudinal-dietswap/metadata.tsv",
+  "data/small/longitudinal-dietswap/otutab.tsv",
+  "data/small/longitudinal-dietswap/source-summary.json",
+  "data/small/longitudinal-dietswap/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
 }
-BiocManager::install(c("phyloseq", "microbiome"))
 ```
 
-下面把固定版本源码包中的 `dietswap` 对象导出为标准三件套。SHA-256 可防止下载内容悄然变化。
-
 ```{r}
-#| eval: false
-archive <- "data/raw/microbiome_1.26.0.tar.gz"
-url <- paste0(
-  "https://bioconductor.org/packages/3.19/bioc/src/contrib/",
-  "microbiome_1.26.0.tar.gz"
-)
-expected <- paste0(
-  "67cc6d117ce9dfbbc472fba828e1bb0d",
-  "48c621fb574f4f8d3424f6cc9a77fdab"
-)
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small/longitudinal-dietswap", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) download.file(url, archive, mode = "wb")
-stopifnot(identical(
-  digest::digest(archive, algo = "sha256", file = TRUE), expected
-))
-
-tmp <- tempfile("dietswap-")
-dir.create(tmp)
-utils::untar(archive, files = "microbiome/data/dietswap.rda", exdir = tmp)
-e <- new.env(parent = emptyenv())
-load(file.path(tmp, "microbiome", "data", "dietswap.rda"), envir = e)
-ps <- e$dietswap
-
-original_names <- phyloseq::taxa_names(ps)
-feature_ids <- sprintf("HT_%03d", seq_along(original_names))
-otutab <- as(phyloseq::otu_table(ps), "matrix")
-rownames(otutab) <- feature_ids
-tax0 <- as.data.frame(as(phyloseq::tax_table(ps), "matrix"))
-taxonomy <- data.frame(
-  Kingdom = "Bacteria", Phylum = tax0$Phylum, Class = "", Order = "",
-  Family = tax0$Family, Genus = tax0$Genus, Species = "",
-  DisplayName = original_names, row.names = feature_ids,
-  check.names = FALSE
-)
-meta0 <- as.data.frame(phyloseq::sample_data(ps))
-metadata <- data.frame(
-  SubjectID = meta0$subject,
-  Sex = tools::toTitleCase(as.character(meta0$sex)),
-  Cohort = ifelse(meta0$nationality == "AAM", "African American", "Rural African"),
-  OriginalCohortCode = meta0$nationality,
-  PhaseCode = meta0$group,
-  Timepoint = as.integer(meta0$timepoint),
-  TimeWithinPhase = as.integer(meta0$timepoint.within.group),
-  BMIGroup = tools::toTitleCase(as.character(meta0$bmi_group)),
-  row.names = meta0$sample,
-  check.names = FALSE
-)
-write_piece <- function(x, id, path) {
-  out <- data.frame(setNames(list(rownames(x)), id), x, check.names = FALSE)
-  write.table(out, path, sep = "\t", quote = FALSE, row.names = FALSE, na = "")
-}
-base <- "data/small/longitudinal-dietswap"
-write_piece(otutab, "FeatureID", file.path(base, "otutab.tsv"))
-write_piece(taxonomy, "FeatureID", file.path(base, "taxonomy.tsv"))
-write_piece(metadata, "SampleID", file.path(base, "metadata.tsv"))
-unlink(tmp, recursive = TRUE)
-```
-
-出版级作图函数直接定义如下：
-
-```{r}
+#| results: hold
+#| label: reader-step-02
 .libPaths(c(".r-lib", .libPaths()))
 library(nlme)
 library(emmeans)
@@ -162,7 +79,7 @@ library(ggplot2)
 library(patchwork)
 
 set.seed(20260751)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -207,14 +124,11 @@ save_pub <- function(plot, file_base, width = 180, height = 125,
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并核对重复测量结构
+### 读取三件套并核对重复测量结构
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 base <- "data/small/longitudinal-dietswap"
 otutab <- as.matrix(read.delim(
   file.path(base, "otutab.tsv"), row.names = 1, check.names = FALSE
@@ -242,6 +156,8 @@ with(metadata, table(Cohort, Timepoint))
 先把每个样本转为相对丰度并计算 Shannon。组名在进入图片前统一成英文。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 relative <- sweep(otutab, 2, colSums(otutab), "/")
 metadata$Shannon <- -colSums(ifelse(
   relative > 0, relative * log(relative), 0
@@ -256,11 +172,67 @@ metadata$TimeLabel <- factor(
 )
 ```
 
-### 2. 拟合随机截距主模型
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/51-longitudinal-analysis.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "nlme", "emmeans", "vegan", "ggplot2", "patchwork",
+  "scales", "digest", "svglite", "ragg"
+))
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+  install.packages("BiocManager")
+}
+BiocManager::install(c("phyloseq", "microbiome"))
+```
+
+</details>
+
+## 为什么普通线性模型不够 {#sec-theory}
+
+对第 (i) 位参与者在时间 (t) 的 Shannon 多样性，可写成：
+
+\[
+y_{it}=\beta_0+\beta_1\mathrm{Cohort}_i+\beta_2\mathrm{Time}_t+
+\beta_3(\mathrm{Cohort}_i\times\mathrm{Time}_t)+b_i+\epsilon_{it},
+\]
+
+其中 (b_i\) 是个体随机截距，吸收稳定的个体间差异。`Cohort × Time` 交互项检验的是“两组随时间的改变是否不同”，不是某一组单独是否显著。
+
+先记住四点：
+
+1. **时间先按因子建模。** 只有六个预设时间点时，因子模型不强迫轨迹为直线，也便于定位差异发生在哪个阶段。
+2. **个体是随机效应或置换区组。** 重复测量的独立单位是参与者，不是粪便样本。
+3. **AR(1) 是候选结构，不是默认真理。** 相邻时间点残差可能更相似，但样本少、缺失不规则时，额外参数未必改善模型。
+4. **volatility 是个体内距离。** 本例定义为同一参与者相邻观测之间的 Bray–Curtis 距离；值越大表示该时间窗群落改变越大。
+
+<details>
+<summary><strong>深入：随机截距、随机斜率和 AR(1) 分别解决什么</strong></summary>
+
+- 随机截距允许每位参与者有不同基线；
+- 随机斜率允许每位参与者有不同时间趋势，但需要足够个体和时间点；
+- AR(1) 描述同一个体残差随时间间隔衰减的相关性。
+
+三者不是互相替代。复杂模型应由设计和诊断支持，不能只因 AIC 略降就无限加参数。若时间间隔不等，连续时间相关结构 `corCAR1` 往往比离散 `corAR1` 更合适；若结局是计数或比例，则需匹配分布的广义混合模型。
+
+</details>
+
+::: {.callout-note title="缺失时间点可以保留，但需说明缺失机制"}
+混合模型不要求每个人都有全部六个时间点。本例 222 个样本来自 38 人，理论满格为 228 个观测。模型在“给定已纳入协变量后缺失近似随机”的假设下使用可用观测；若失访与症状恶化有关，应做缺失机制与敏感性分析。
+:::
+
+## 用个体内模型比较时间变化 {#sec-code}
+
+### 拟合随机截距主模型
 
 模型比较必须用最大似然（ML）；固定效应估计与区间再用限制最大似然（REML）。不要用 REML 比较固定效应不同的模型。
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 fit_ri_ml <- nlme::lme(
   Shannon ~ Cohort * TimeFactor,
   random = ~ 1 | SubjectID,
@@ -284,9 +256,11 @@ summary(fit_ri)$tTable
 
 随机截距模型中，`Rural African × T4` 交互估计为 0.529（P = 0.011），表示两组从 T1 到 T4 的 Shannon 改变量相差约 0.53。T6 交互也为正，但这些时间点检验没有做跨全部结局与分类单元的多重校正，不能挑一个 P 值写成全局结论。
 
-### 3. 得到模型边际均值轨迹
+### 得到模型边际均值轨迹
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 model_means <- as.data.frame(emmeans::emmeans(
   fit_ri, ~ Cohort * TimeFactor
 ))
@@ -326,9 +300,11 @@ p_alpha
 save_pub(p_alpha, "figures/51-longitudinal-analysis/51-1-alpha-trajectories")
 ```
 
-### 4. 在 Bray–Curtis 空间画个体轨迹
+### 在 Bray–Curtis 空间画个体轨迹
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 bray <- vegan::vegdist(t(relative), method = "bray")
 pcoa <- stats::cmdscale(bray, k = 5, eig = TRUE, add = TRUE)
 pcoa_scores <- data.frame(
@@ -381,9 +357,11 @@ save_pub(p_pcoa, "figures/51-longitudinal-analysis/51-2-pcoa-trajectories",
 
 PCoA 轨迹适合展示方向，却不能把二维箭头长度当成完整 Bray–Curtis 改变量。定量比较应回到原始距离矩阵。
 
-### 5. 计算相邻时间点 volatility
+### 计算相邻时间点 volatility
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 bray_matrix <- as.matrix(bray)
 volatility <- do.call(rbind, lapply(split(metadata, metadata$SubjectID), function(x) {
   x <- x[order(x$Timepoint), , drop = FALSE]
@@ -448,6 +426,8 @@ save_pub(p_volatility, "figures/51-longitudinal-analysis/51-3-volatility")
 下面把全部组别×时间交互的区间并排，并对 T4−T1 改变量按**参与者**自助抽样。若按样本行抽样，会破坏重复测量结构。
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 extract_fixed <- function(model, label) {
   x <- summary(model)$tTable
   critical <- qt(0.975, df = x[, "DF"])
@@ -531,7 +511,7 @@ save_pub(p_audit, "figures/51-longitudinal-analysis/51-4-model-audit",
 4. 看到纵向先后顺序，就把观察到的改变写成饮食导致的机制。纵向设计加强时间信息，但仍需随机化、依从性、共干预和缺失机制支持因果解释。
 :::
 
-## 出版级美化 {#sec-publication}
+## 把组平均轨迹与个体波动一起展示 {#sec-publication}
 
 四张图承担不同信息，不要堆进一张拥挤的“全能图”：
 
@@ -542,13 +522,13 @@ save_pub(p_audit, "figures/51-longitudinal-analysis/51-4-model-audit",
 
 `save_pub()` 已同时导出带可编辑文字的 PDF/SVG，以及 600 ppi 的 PNG/TIFF。图中组名、轴、图例和注释均为英文，可直接进入英文稿件。
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告重复测量与时间变化的方法与限制 {#sec-methods}
 
 > Longitudinal alpha-diversity was analysed using linear mixed-effects models with participant-specific random intercepts. Cohort, categorical study timepoint, and their interaction were included as fixed effects. Models were fitted by restricted maximum likelihood for effect estimation; maximum-likelihood fits were used to compare a random-intercept model with an AR(1) residual correlation model. Estimated marginal means and 95% confidence intervals were reported. Community trajectories were visualised by principal coordinates analysis of Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Within-participant volatility was defined as the Bray–Curtis dissimilarity between consecutive observed timepoints and was analysed using a mixed-effects model with participant as a random intercept. Random procedures used fixed seeds, and participant-level bootstrap resampling was used as a sensitivity analysis.
 
 把 `cohort`、时间定义、随机效应、相关结构、距离、缺失处理、软件版本和 bootstrap 次数替换为自己的实际设置。若主模型用了随机斜率、非线性样条或广义分布，也必须写明。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将重复测量与时间变化用于自己的研究 {#sec-own-data}
 
 三张表仍保持：
 

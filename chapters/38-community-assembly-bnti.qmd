@@ -1,6 +1,6 @@
 ---
 title: "βNTI + RCbray：确定性与随机过程的条件性证据"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,20 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/38-community-assembly-bnti.R
+  packages:
+  - ape
+  - ggplot2
+  - iCAMP
+  - knitr
+  - patchwork
+  - ragg
+  - scales
+  - svglite
 ---
-
-> **分析目标：**从真实 16S 三件套与同源有根系统树计算 abundance-weighted βNTI 和 RCbray，按 Stegen 框架分类 pairwise assembly process，并在解释前审计 tree-tip 合同、dominant-OTU filter、短距离 phylogenetic signal、随机数流与过滤敏感性。  
-> **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；额外读取 `environment.tsv` 与 `rooted-tree.nwk.gz`。  
-> **预计资源：**90 个样本、585 个主分析 OTU、999 次 βNTI 与 999 次 RCbray null randomizations；8 个本地 workers 通常 8–18 分钟、峰值内存约 4–8 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## βNTI 与 RCbray 提供的是条件性组装证据 {#sec-target}
 
@@ -33,71 +42,39 @@ fig-format: png
 
 本页使用 `microeco` 2.0.0 随数据分发的真实 14,096-tip rooted 16S tree。树覆盖全部 13,628 个 count-table OTU，另有 468 个未进入 count table 的 tips；代码先按当前 feature universe 裁剪，不让 `ape` 或 iCAMP 静默重排。
 
-## 先用 βNTI 判断 selection，再用 RCbray 分流 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. βMNTD 与 βNTI
+需要 R，以及 `ape`、`ggplot2`、`iCAMP`、`knitr`、`patchwork`、`ragg`、`scales`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表，以及本次分析使用的实测环境变量或系统发育信息。
 
-Abundance-weighted β mean nearest taxon distance（βMNTD）计算两个样本间每个 taxon 到另一群落最近亲缘 taxon 的距离。Taxon labels 在固定树上随机化后，βNTI 是 observed βMNTD 相对 null mean 的标准化偏离：
-
-$$
-\beta NTI = \frac{\beta MNTD_{obs}-\mu(\beta MNTD_{null})}
-{\sigma(\beta MNTD_{null})}.
-$$
-
-`βNTI > +1.96` 表示 turnover 高于 null，常标为 heterogeneous selection；`βNTI < -1.96` 表示 turnover 低于 null，常标为 homogeneous selection。
-
-### 2. 只有 |βNTI| 不超过 1.96 才进入 RCbray
-
-当 phylogenetic turnover 没有越过 selection gate，再用 abundance-based RCbray：
-
-- `RCbray > +0.95`：dispersal limitation；
-- `RCbray < -0.95`：homogenizing dispersal；
-- `|RCbray| <= 0.95`：undominated，可能混合 weak selection、weak dispersal、drift 与 diversification。
-
-这是一套 operational classification；“undominated”不等于只有 drift，“dispersal limitation”也不是实测迁移率。
-
-### 3. 为什么必须先查 phylogenetic signal
-
-βNTI 用近缘关系代理 niche similarity。若近缘 taxa 在所研究环境尺度上没有相似 niche，phylogenetic turnover 不能可靠映射到 selection。本页为 retained OTUs 计算 pH、conductivity、TOC 的 abundance-weighted niche optima，在最近 10% phylogenetic distances 内检验“系统距离越大，niche difference 是否越大”，并用 499 次 taxon-label permutation 与三项 BH 控制。
-
-### 4. Regional pool 与 feature filter 改变 null expectation
-
-本页主分析预先保留 prevalence ≥10%、total reads ≥500 的 dominant OTUs；这样把运行规模固定为 585 taxa，但只覆盖部分 reads。严格阈值 `total reads ≥1000` 另行重跑 199 次 null sensitivity。二者估计的是不同 dominant-community universes，不能把 filter-dependent fractions 写成全群落定律。
-
-### 5. Parallel null model 也要有确定性随机数流
-
-`iCAMP 1.5.12` 的公开函数没有 `seed` 参数，并在内部新建 PSOCK cluster。仅在主进程 `set.seed()` 不能保证 worker streams 相同。本页复制函数到当前会话并在内部 `parLapply()` 前插入 `clusterSetRNGStream()`；不修改安装包 namespace，两次运行可逐值复现。
-
-<details>
-<summary><strong>深入：为什么 process fractions 不能当成样本级独立比例</strong></summary>
-
-90 个样本产生 4,005 个 pair，但同一样本参与 89 个 pair，因此 pairwise labels 不是 4,005 个独立观测。堆叠比例是描述性汇总；若要比较组间 fractions，应在 site/subject 层 bootstrap 或采用维护 pair dependence 的层级模型，而不是对 pair labels 做普通卡方检验。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装锁定依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ape", "ggplot2", "iCAMP", "patchwork", "ragg", "readr",
-  "scales", "svglite", "systemfonts"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/environment.tsv",
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/rooted-tree.nwk.gz",
+  "data/small/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-本页实跑 `iCAMP` 1.5.12 与 `ape` 5.8。
-
 ```{r}
+#| results: hold
 #| label: setup-bnti-theme
 library(ggplot2)
 library(ape)
 library(iCAMP)
 
 set.seed(20260738)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -158,13 +135,10 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套、环境表与真实有根树
+### 读取三件套、环境表与真实有根树
 
 ```{r}
+#| results: hold
 #| label: read-bnti-inputs
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -213,9 +187,69 @@ stopifnot(
 tree_tip_contract
 ```
 
-### 2. 固定 dominant-OTU universe 并裁树
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/38-community-assembly-bnti.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ape", "ggplot2", "iCAMP", "patchwork", "ragg", "readr",
+  "scales", "svglite", "systemfonts"
+))
+```
+
+</details>
+
+## 先用 βNTI 判断 selection，再用 RCbray 分流 {#sec-theory}
+
+### βMNTD 与 βNTI
+
+Abundance-weighted β mean nearest taxon distance（βMNTD）计算两个样本间每个 taxon 到另一群落最近亲缘 taxon 的距离。Taxon labels 在固定树上随机化后，βNTI 是 observed βMNTD 相对 null mean 的标准化偏离：
+
+$$
+\beta NTI = \frac{\beta MNTD_{obs}-\mu(\beta MNTD_{null})}
+{\sigma(\beta MNTD_{null})}.
+$$
+
+`βNTI > +1.96` 表示 turnover 高于 null，常标为 heterogeneous selection；`βNTI < -1.96` 表示 turnover 低于 null，常标为 homogeneous selection。
+
+### 只有 |βNTI| 不超过 1.96 才进入 RCbray
+
+当 phylogenetic turnover 没有越过 selection gate，再用 abundance-based RCbray：
+
+- `RCbray > +0.95`：dispersal limitation；
+- `RCbray < -0.95`：homogenizing dispersal；
+- `|RCbray| <= 0.95`：undominated，可能混合 weak selection、weak dispersal、drift 与 diversification。
+
+这是一套 operational classification；“undominated”不等于只有 drift，“dispersal limitation”也不是实测迁移率。
+
+### 为什么必须先查 phylogenetic signal
+
+βNTI 用近缘关系代理 niche similarity。若近缘 taxa 在所研究环境尺度上没有相似 niche，phylogenetic turnover 不能可靠映射到 selection。本页为 retained OTUs 计算 pH、conductivity、TOC 的 abundance-weighted niche optima，在最近 10% phylogenetic distances 内检验“系统距离越大，niche difference 是否越大”，并用 499 次 taxon-label permutation 与三项 BH 控制。
+
+### 区域类群库与特征过滤会改变零模型的参照
+
+本页主分析预先保留 prevalence ≥10%、total reads ≥500 的 dominant OTUs；这样把运行规模固定为 585 taxa，但只覆盖部分 reads。严格阈值 `total reads ≥1000` 另行重跑 199 次 null sensitivity。二者估计的是不同 dominant-community universes，不能把 filter-dependent fractions 写成全群落定律。
+
+### Parallel null model 也要有确定性随机数流
+
+`iCAMP 1.5.12` 的公开函数没有 `seed` 参数，并在内部新建 PSOCK cluster。仅在主进程 `set.seed()` 不能保证 worker streams 相同。本页复制函数到当前会话并在内部 `parLapply()` 前插入 `clusterSetRNGStream()`；不修改安装包 namespace，两次运行可逐值复现。
+
+<details>
+<summary><strong>深入：为什么 process fractions 不能当成样本级独立比例</strong></summary>
+
+90 个样本产生 4,005 个 pair，但同一样本参与 89 个 pair，因此 pairwise labels 不是 4,005 个独立观测。堆叠比例是描述性汇总；若要比较组间 fractions，应在 site/subject 层 bootstrap 或采用维护 pair dependence 的层级模型，而不是对 pair labels 做普通卡方检验。
+
+</details>
+
+## 在系统发育假设下计算βNTI与RCbray {#sec-code}
+
+### 确定优势 OTU 集合，并保留对应的树枝
+
+```{r}
+#| results: hold
 #| label: filter-bnti-features
 primary_keep <- rowMeans(otutab > 0) >= 0.10 & rowSums(otutab) >= 500
 primary_counts <- otutab[primary_keep, , drop = FALSE]
@@ -250,9 +284,10 @@ data.frame(
 )
 ```
 
-### 3. 先检验最近 10% 系统距离的 niche signal
+### 先检验最近 10% 系统距离的 niche signal
 
 ```{r}
+#| results: hold
 #| label: test-short-range-phylogenetic-signal
 relative_abundance <- sweep(otutab, 2L, colSums(otutab), "/")
 retained_relative <- relative_abundance[primary_keep, , drop = FALSE]
@@ -312,9 +347,10 @@ phylogenetic_signal_gate <- if (
 signal_results
 ```
 
-### 4. 给 iCAMP worker 注入确定性 RNG stream
+### 为 iCAMP 的并行计算固定随机数流
 
 ```{r}
+#| results: hold
 #| label: seed-icamp-parallel-functions
 seed_icamp_function <- function(fun, target, seed) {
   function_text <- paste(deparse(fun), collapse = "\n")
@@ -373,9 +409,10 @@ probe_two <- seeded_bnti(
 stopifnot(identical(probe_one, probe_two))
 ```
 
-### 5. 正式运行 999 次 βNTI 与 RCbray null models
+### 正式运行 999 次 βNTI 与 RCbray null models
 
 ```{r}
+#| results: hold
 #| label: run-bnti-rcbray
 primary_randomizations <- 999L
 bnti_fit <- seeded_bnti(
@@ -458,9 +495,10 @@ stopifnot(
 as.data.frame(prop.table(table(assembly_pairs$Process)))
 ```
 
-### 6. 用更严格 feature filter 重跑敏感性
+### 用更严格 feature filter 重跑敏感性
 
 ```{r}
+#| results: hold
 #| label: audit-bnti-filter-sensitivity
 strict_keep <- rowMeans(otutab > 0) >= 0.10 & rowSums(otutab) >= 1000
 strict_community <- t(otutab[strict_keep, , drop = FALSE])
@@ -538,6 +576,7 @@ data.frame(
 ## 阈值、树和 null model 怎样改变组装比例？ {#sec-audit}
 
 ```{r}
+#| results: hold
 #| label: bnti-audit-table
 bnti_audit <- data.frame(
   Dimension = c(
@@ -573,11 +612,12 @@ knitr::kable(bnti_audit, caption = "βNTI/RCbray interpretation audit")
 
 严格过滤仅保留 `r sum(strict_keep)` 个 OTU、`r scales::percent(sum(otutab[strict_keep, ]) / sum(otutab), accuracy = 0.1)` reads；与主模型的 pairwise process agreement 为 `r scales::percent(filter_process_agreement, accuracy = 0.1)`。若关键结论随 filter 明显变化，投稿时应扩大计算资源、降低过滤并报告完整 sensitivity grid。
 
-## 出版级美化 {#sec-publication}
+## 解释组装比例前先检查null model {#sec-publication}
 
-### 图 1：tree-tip 与 retained-read 合同
+### 图 1：检查树上的特征覆盖了多少读数
 
 ```{r}
+#| results: hold
 #| label: fig-tree-filter
 #| fig-width: 7.1
 #| fig-height: 4.8
@@ -636,9 +676,10 @@ save_pub(tree_filter_plot, "figures/38-tree-filter", width = 180, height = 122)
 tree_filter_plot
 ```
 
-### 图 2：βNTI–RCbray sequential process map
+### 图 2：按 βNTI 和 RCbray 依次判断群落构建过程
 
 ```{r}
+#| results: hold
 #| label: fig-bnti-rcbray
 #| fig-width: 7.1
 #| fig-height: 5.6
@@ -675,9 +716,10 @@ save_pub(bnti_rc_plot, "figures/38-bnti-rcbray", width = 180, height = 148)
 bnti_rc_plot
 ```
 
-### 图 3：不同 pair scope 的 descriptive process fractions
+### 图 3：比较不同样本配对范围内的过程占比
 
 ```{r}
+#| results: hold
 #| label: fig-process-fractions
 #| fig-width: 7.1
 #| fig-height: 4.8
@@ -713,6 +755,7 @@ process_fraction_plot
 ### 图 4：phylogenetic-signal 与 filter sensitivity
 
 ```{r}
+#| results: hold
 #| label: fig-phylogenetic-signal
 #| fig-width: 7.1
 #| fig-height: 5.0
@@ -787,8 +830,8 @@ signal_filter_plot
 ```
 
 ```{r}
+#| results: hold
 #| label: verify-community-assembly-bnti
-#| echo: false
 result_dir <- "results/38-community-assembly-bnti"
 dir.create(result_dir, recursive = TRUE, showWarnings = FALSE)
 utils::write.table(
@@ -848,11 +891,11 @@ stopifnot(
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告群落构建模型与条件假设的方法与限制 {#sec-methods}
 
 > The OTU table, taxonomy and metadata were read independently and aligned to the rooted branch-length phylogeny distributed with the same `microeco 2.0.0` dataset. The source tree contained 14,096 tips, included all 13,628 count-table OTUs and had 468 extra tips, which were explicitly pruned. The primary dominant-OTU universe required prevalence ≥10% and total abundance ≥500 reads, retaining 585 OTUs and 47.4% of all reads. Before process attribution, short-range phylogenetic signal was evaluated for abundance-weighted pH, conductivity and TOC optima among the closest 10% of phylogenetic distances using 499 taxon-label permutations and Benjamini–Hochberg adjustment. Abundance-weighted βNTI and RCbray were then estimated with 999 null randomizations using `iCAMP 1.5.12`; deterministic L'Ecuyer worker streams were injected with `clusterSetRNGStream` before each internal parallel loop. Pairs with βNTI >1.96 or <−1.96 were assigned to heterogeneous or homogeneous selection, respectively. Remaining pairs were assigned to dispersal limitation (RCbray >0.95), homogenizing dispersal (RCbray <−0.95), or undominated processes. A stricter ≥1,000-read universe was refitted with 199 null randomizations as a preprocessing sensitivity analysis. Random seeds were fixed at 20260738 and documented in the result ledger.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将群落构建模型与条件假设用于自己的研究 {#sec-own-data}
 
 ```{r}
 #| eval: false

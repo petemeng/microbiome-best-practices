@@ -1,6 +1,6 @@
 ---
 title: "PERMANOVA + betadisper（必配）+ ANOSIM/MRPP"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,21 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/23-permanova-dispersion.R
+  packages:
+  - digest
+  - ggplot2
+  - jsonlite
+  - permute
+  - ragg
+  - readr
+  - scales
+  - svglite
+  - vegan
 ---
-
-> **分析目标：**在真实 split-plot 16S 数据中区分群落中心位置与组内离散度，按实验设计限制置换，并同时报告 PERMANOVA 效应量、PERMDISP、计划成对比较和敏感性分析。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**示例含 16,825 个 OTU、56 个 PCR/tag 技术文库和 24 个生物学土壤样本；9,999 次受限置换及四张 600 ppi 图通常少于 2 分钟，峰值内存低于 1 GB。
 
 ## PERMANOVA 必须与离散度检验一起解释 {#sec-target}
 
@@ -42,248 +52,31 @@ PERMANOVA 常对应论文中的 PCoA/NMDS 分组图和一张含 pseudo-F、(R^2)
 这个信号不能简化成“所有处理比较都显著”。Warming、Clipping 与交互项的 Holm-adjusted P 分别为 0.132、0.120 和 0.120；四个计划 simple effects 的 Holm-adjusted P 均为 0.125。更重要的是，保留全部 16,825 个 feature、仍使用同一合法置换时，omnibus P 变为 0.7642。因而结论应写成：**主预处理分支检测到条件性的整体位置差异，未见全局 dispersion 证据，但结果对 feature filter 敏感，不能宣称稳健而普遍的处理效应。**
 :::
 
-## PERMANOVA 与 PERMDISP 回答不同问题 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 先分清 location 和 dispersion
+需要 R，以及 `digest`、`ggplot2`、`jsonlite`、`permute`、`ragg`、`readr`、`scales`、`svglite`、`vegan`。本次使用用于分组比较的 count、taxonomy、metadata 三张表；样本表保留重复与区组信息。
 
-PERMANOVA 把距离矩阵中的平方和分解到模型项，比较组中心位置相关的 explained variation；常见输出是 pseudo-F、(R^2) 和 permutation P value。PERMDISP 则把每个样本到所属组 spatial median 或 centroid 的距离作为响应，检验各组 spread 是否不同。
-
-两者必须一起读：
-
-| PERMANOVA | PERMDISP | 可支持的表述 |
-|---|---|---|
-| 显著 | 不显著 | 与组中心位置差异一致，但仍需看设计、效应量和敏感性 |
-| 显著 | 显著 | location 与 dispersion 混在一起，不能只写“群落组成不同” |
-| 不显著 | 显著 | 没有中心差异证据，但 spread 不同本身可能有生物学意义 |
-| 不显著 | 不显著 | 当前精度下两类检验都未拒绝原假设，不等于各组完全相同 |
-
-[Warton et al. (2012)](https://doi.org/10.1111/j.2041-210X.2011.00127.x)系统说明了 distance-based multivariate tests 中 location 与 dispersion 的混淆风险。`betadisper(type = "median", bias.adjust = TRUE)`在本例中提供与主距离相配套的 spread 检验；二维 PCoA 只用于展示，推断仍使用完整距离空间。
-
-### 实验单位先于置换次数
-
-本数据有四层结构：
-
-```text
-6 Blocks
-└── 2 Main plots per block: Ambient / Warmed
-    └── 2 Subplots per main plot: Unclipped / Clipped
-        └── 1 biological soil sample
-            └── 1–3 PCR/tag technical libraries
-```
-
-因此每个区组有 8 种合法 treatment relabellings：whole-plot warming 可交换一次，两个 main plot 内的 clipping 可各交换一次，即 (2^3=8)。六个区组共有：
-
-\[
-8^6=262{,}144
-\]
-
-种合法 assignments（包含观察到的 identity）。主分析从其余 262,143 个 assignments 中以固定种子无放回抽取 9,999 个。置换 P 值按
-
-\[
-P=\frac{b+1}{m+1}
-\]
-
-计算，因此 9,999 次置换的最小 P 为 0.0001。四个 planned simple effects 各有 6 对区组配对，穷举 63 个 non-identity swaps；连同观察顺序后，最小 P 为 (1/64=0.015625)。
-
-::: {.callout-warning title="只写 strata = Block 仍可能不够"}
-`strata = Block`只能阻止样本跨区组交换，不能自动表达 whole plot 与 subplot 的不同交换规则。复杂 split-plot、crossover、family/cage 或纵向设计必须从随机化方案反推 exchangeability；若随机化记录不清楚，应先补设计合同，而不是增加置换次数。
-:::
-
-### total R²、partial R² 与 P 值不能互换
-
-本页同时报告两种比例：
-
-- **total (R^2)**：某项平方和占全部距离平方和的比例；
-- **partial (R^2)**：某项平方和占“该项 + residual”平方和的比例，即在先吸收 block 后的条件尺度。
-
-P 值还受到可交换单位数、置换空间和样本量影响。小 P 不代表效应大，大 (R^2) 也不保证估计精确。这里区组 total (R^2=0.469) 远大于 treatment total (R^2=0.098)，正说明设计结构不是可忽略的代码选项。
-
-<details>
-<summary><strong>深入：ANOSIM 和 MRPP 为什么只能做次要敏感性分析</strong></summary>
-
-ANOSIM 比较 between-group 与 within-group 距离秩，统计量 (R>0) 才与“组内更近、组间更远”的常规分离方向一致。MRPP 的 chance-corrected agreement (A>0) 表示组内一致性高于随机期望。二者的统计量不等同于 PERMANOVA (R^2)，也不能替代 location/dispersion 分解。
-
-本例用同一受限置换矩阵得到 ANOSIM (R=-0.0948, P=0.0066) 和 MRPP (A=-0.0200, P=0.0122)。小 P 伴随负方向，表示观察到的组内相似性并没有沿常规“组内更近”的方向增强。把这两个 P 值列为“又有两种方法验证显著”会倒置统计量含义；本页只把它们保存为诊断性 sensitivity outputs。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、导出真实数据和定义作图函数</strong></summary>
-
-R 4.4 / Bioconductor 3.19 环境首次安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "BiocManager", "digest", "ggplot2", "jsonlite", "permute",
-  "ragg", "readr", "scales", "svglite", "systemfonts", "vegan"
-))
-BiocManager::install(version = "3.19", ask = FALSE)
-BiocManager::install("phyloseq", version = "3.19", ask = FALSE)
-```
-
-下面从 `phyloseq` 1.48.0 内置 `soilrep` 对象导出标准三件套。源对象没有 `tax_table`；taxonomy 的七个 rank 列因此明确留空，并用 `TaxonomyStatus` 记录边界。本分析不使用 taxonomy，不能为填满表格而虚构注释。
-
-```{r}
-#| eval: false
-library(digest)
-library(jsonlite)
-library(phyloseq)
-
-stopifnot(as.character(packageVersion("phyloseq")) == "1.48.0")
-source_rdata <- system.file("data", "soilrep.RData", package = "phyloseq")
-expected_source_sha256 <- paste0(
-  "47b25a0a033b794fca1db30ae6fdb68",
-  "c55a44e6c4cd0d1be76788d1d77b51f36"
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/permanova-dispersion/metadata.tsv",
+  "data/small/permanova-dispersion/otutab.tsv",
+  "data/small/permanova-dispersion/source-summary.json",
+  "data/small/permanova-dispersion/taxonomy.tsv"
 )
-observed_source_sha256 <- digest(
-  file = source_rdata,
-  algo = "sha256",
-  serialize = FALSE
-)
-stopifnot(identical(observed_source_sha256, expected_source_sha256))
-
-data_env <- new.env(parent = emptyenv())
-load(source_rdata, envir = data_env)
-ps <- data_env$soilrep
-
-otutab <- as(otu_table(ps), "matrix")
-if (!taxa_are_rows(ps)) otutab <- t(otutab)
-metadata_source <- as.data.frame(sample_data(ps))
-metadata_source <- data.frame(
-  lapply(metadata_source, as.character),
-  row.names = rownames(metadata_source),
-  check.names = FALSE
-)
-
-biological_id <- metadata_source$Sample
-block_id <- sub("^([0-9]+).*$", "\\1", biological_id)
-warming <- ifelse(metadata_source$warmed == "yes", "Warmed", "Ambient")
-clipping <- ifelse(metadata_source$clipped == "yes", "Clipped", "Unclipped")
-treatment_label <- paste(warming, clipping, sep = " + ")
-main_plot_id <- paste0("Block ", block_id, " / ", warming)
-library_count <- unname(table(biological_id)[biological_id])
-technical_index <- ave(seq_along(biological_id), biological_id, FUN = seq_along)
-
-metadata <- data.frame(
-  SourceTreatment = metadata_source$Treatment,
-  SourceWarmed = metadata_source$warmed,
-  SourceClipped = metadata_source$clipped,
-  BiologicalSampleID = biological_id,
-  Block = paste("Block", block_id),
-  MainPlot = main_plot_id,
-  Warming = warming,
-  Clipping = clipping,
-  Treatment = treatment_label,
-  TechnicalLibraryIndex = as.integer(technical_index),
-  TechnicalLibraryCount = as.integer(library_count),
-  row.names = rownames(metadata_source),
-  check.names = FALSE
-)
-
-taxonomy <- data.frame(
-  Kingdom = rep(NA_character_, nrow(otutab)),
-  Phylum = rep(NA_character_, nrow(otutab)),
-  Class = rep(NA_character_, nrow(otutab)),
-  Order = rep(NA_character_, nrow(otutab)),
-  Family = rep(NA_character_, nrow(otutab)),
-  Genus = rep(NA_character_, nrow(otutab)),
-  Species = rep(NA_character_, nrow(otutab)),
-  TaxonomyStatus = rep(
-    paste(
-      "Not distributed with phyloseq::soilrep;",
-      "not used in this analysis"
-    ),
-    nrow(otutab)
-  ),
-  row.names = rownames(otutab),
-  check.names = FALSE
-)
-
-write_keyed_tsv <- function(x, id_name, path) {
-  out <- data.frame(setNames(list(rownames(x)), id_name), x, check.names = FALSE)
-  write.table(
-    out, path, sep = "\t", quote = FALSE,
-    row.names = FALSE, na = ""
-  )
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
 }
-
-output_dir <- "data/small/permanova-dispersion"
-dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
-otutab_path <- file.path(output_dir, "otutab.tsv")
-taxonomy_path <- file.path(output_dir, "taxonomy.tsv")
-metadata_path <- file.path(output_dir, "metadata.tsv")
-write_keyed_tsv(otutab, "FeatureID", otutab_path)
-write_keyed_tsv(taxonomy, "FeatureID", taxonomy_path)
-write_keyed_tsv(metadata, "LibraryID", metadata_path)
-
-output_sha256 <- vapply(
-  c(otutab_path, taxonomy_path, metadata_path),
-  digest,
-  character(1),
-  algo = "sha256",
-  serialize = FALSE,
-  file = TRUE
-)
-names(output_sha256) <- basename(names(output_sha256))
-replicate_distribution <- table(table(metadata$BiologicalSampleID))
-
-source_summary <- list(
-  source = "phyloseq::soilrep",
-  source_file = "phyloseq/data/soilrep.RData",
-  phyloseq_version = "1.48.0",
-  source_sha256 = observed_source_sha256,
-  source_bytes = unname(file.info(source_rdata)$size),
-  primary_study = list(
-    title = paste(
-      "Reproducibility and quantitation of amplicon",
-      "sequencing-based detection"
-    ),
-    citation = paste(
-      "Zhou J, Wu L, Deng Y, et al.",
-      "ISME Journal. 2011;5:1303-1313."
-    ),
-    doi = "10.1038/ismej.2011.11"
-  ),
-  license = "phyloseq package AGPL-3",
-  features = unname(nrow(otutab)),
-  technical_libraries = unname(ncol(otutab)),
-  biological_samples = unname(length(unique(metadata$BiologicalSampleID))),
-  blocks = unname(length(unique(metadata$Block))),
-  main_plots = unname(length(unique(metadata$MainPlot))),
-  treatments = unname(length(unique(metadata$Treatment))),
-  reads = unname(sum(otutab)),
-  minimum_library_size = unname(min(colSums(otutab))),
-  median_library_size = unname(median(colSums(otutab))),
-  maximum_library_size = unname(max(colSums(otutab))),
-  biological_samples_with_1_library = unname(
-    as.integer(replicate_distribution[["1"]])
-  ),
-  biological_samples_with_2_libraries = unname(
-    as.integer(replicate_distribution[["2"]])
-  ),
-  biological_samples_with_3_libraries = unname(
-    as.integer(replicate_distribution[["3"]])
-  ),
-  taxonomy_status = paste(
-    "The packaged soilrep object has no tax_table; seven rank columns",
-    "are deliberately empty and TaxonomyStatus records this boundary."
-  ),
-  output_sha256 = as.list(output_sha256)
-)
-write_json(
-  source_summary,
-  file.path(output_dir, "source-summary.json"),
-  auto_unbox = TRUE,
-  pretty = TRUE
-)
 ```
 
-分析所需包、随机种子和出版级函数全部内联：
-
 ```{r}
+#| results: hold
 #| label: setup
 library(digest)
 library(ggplot2)
@@ -295,7 +88,7 @@ library(vegan)
 
 set.seed(20260723)
 
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -375,16 +168,12 @@ format_p <- function(p) {
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并锁定数据身份
+### 读取三件套并锁定数据身份
 
 `otutab` 是 feature × technical library 的原始非负整数表。taxonomy 保留标准接口，但本数据源没有 rank annotations；metadata 明确给出技术文库所属的 biological sample、block、main plot 和处理。
 
 ```{r}
+#| results: hold
 #| label: read-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -464,11 +253,96 @@ taxonomy[1:5, , drop = FALSE]
 head(metadata)
 ```
 
-### 2. 把技术文库聚合回 24 个实验单位
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/23-permanova-dispersion.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "BiocManager", "digest", "ggplot2", "jsonlite", "permute",
+  "ragg", "readr", "scales", "svglite", "systemfonts", "vegan"
+))
+BiocManager::install(version = "3.19", ask = FALSE)
+BiocManager::install("phyloseq", version = "3.19", ask = FALSE)
+```
+
+</details>
+
+## PERMANOVA 与 PERMDISP 回答不同问题 {#sec-theory}
+
+### 先区分组间中心差异与组内离散程度
+
+PERMANOVA 把距离矩阵中的平方和分解到模型项，比较组中心位置相关的 explained variation；常见输出是 pseudo-F、(R^2) 和 permutation P value。PERMDISP 则把每个样本到所属组 spatial median 或 centroid 的距离作为响应，检验各组 spread 是否不同。
+
+两者必须一起读：
+
+| PERMANOVA | PERMDISP | 可支持的表述 |
+|---|---|---|
+| 显著 | 不显著 | 与组中心位置差异一致，但仍需看设计、效应量和敏感性 |
+| 显著 | 显著 | location 与 dispersion 混在一起，不能只写“群落组成不同” |
+| 不显著 | 显著 | 没有中心差异证据，但 spread 不同本身可能有生物学意义 |
+| 不显著 | 不显著 | 当前精度下两类检验都未拒绝原假设，不等于各组完全相同 |
+
+[Warton et al. (2012)](https://doi.org/10.1111/j.2041-210X.2011.00127.x)系统说明了 distance-based multivariate tests 中 location 与 dispersion 的混淆风险。`betadisper(type = "median", bias.adjust = TRUE)`在本例中提供与主距离相配套的 spread 检验；二维 PCoA 只用于展示，推断仍使用完整距离空间。
+
+### 实验单位先于置换次数
+
+本数据有四层结构：
+
+```text
+6 Blocks
+└── 2 Main plots per block: Ambient / Warmed
+    └── 2 Subplots per main plot: Unclipped / Clipped
+        └── 1 biological soil sample
+            └── 1–3 PCR/tag technical libraries
+```
+
+因此每个区组有 8 种合法 treatment relabellings：whole-plot warming 可交换一次，两个 main plot 内的 clipping 可各交换一次，即 (2^3=8)。六个区组共有：
+
+\[
+8^6=262{,}144
+\]
+
+种合法 assignments（包含观察到的 identity）。主分析从其余 262,143 个 assignments 中以固定种子无放回抽取 9,999 个。置换 P 值按
+
+\[
+P=\frac{b+1}{m+1}
+\]
+
+计算，因此 9,999 次置换的最小 P 为 0.0001。四个 planned simple effects 各有 6 对区组配对，穷举 63 个 non-identity swaps；连同观察顺序后，最小 P 为 (1/64=0.015625)。
+
+::: {.callout-warning title="只写 strata = Block 仍可能不够"}
+`strata = Block`只能阻止样本跨区组交换，不能自动表达 whole plot 与 subplot 的不同交换规则。复杂 split-plot、crossover、family/cage 或纵向设计必须从随机化方案反推 exchangeability；若随机化记录不清楚，应先补设计合同，而不是增加置换次数。
+:::
+
+### total R²、partial R² 与 P 值不能互换
+
+本页同时报告两种比例：
+
+- **total (R^2)**：某项平方和占全部距离平方和的比例；
+- **partial (R^2)**：某项平方和占“该项 + residual”平方和的比例，即在先吸收 block 后的条件尺度。
+
+P 值还受到可交换单位数、置换空间和样本量影响。小 P 不代表效应大，大 (R^2) 也不保证估计精确。这里区组 total (R^2=0.469) 远大于 treatment total (R^2=0.098)，正说明设计结构不是可忽略的代码选项。
+
+<details>
+<summary><strong>深入：ANOSIM 和 MRPP 为什么只能做次要敏感性分析</strong></summary>
+
+ANOSIM 比较 between-group 与 within-group 距离秩，统计量 (R>0) 才与“组内更近、组间更远”的常规分离方向一致。MRPP 的 chance-corrected agreement (A>0) 表示组内一致性高于随机期望。二者的统计量不等同于 PERMANOVA (R^2)，也不能替代 location/dispersion 分解。
+
+本例用同一受限置换矩阵得到 ANOSIM (R=-0.0948, P=0.0066) 和 MRPP (A=-0.0200, P=0.0122)。小 P 伴随负方向，表示观察到的组内相似性并没有沿常规“组内更近”的方向增强。把这两个 P 值列为“又有两种方法验证显著”会倒置统计量含义；本页只把它们保存为诊断性 sensitivity outputs。
+
+</details>
+
+## 同时检验群落中心与组内离散度 {#sec-code}
+
+### 把技术文库聚合回 24 个实验单位
 
 同一 `BiologicalSampleID` 下的技术文库共享同一处理标签，因而无法提供独立的 treatment replication。计数应先相加；对技术文库求平均 relative abundance 会让 1、2、3 个文库的土壤样本获得不同隐含权重。
 
 ```{r}
+#| results: hold
 #| label: aggregate-units
 treatment_levels <- c(
   "Ambient + Unclipped", "Ambient + Clipped",
@@ -545,11 +419,12 @@ design_audit <- data.frame(
 design_audit
 ```
 
-### 3. 预先固定 feature filter 和主距离
+### 预先固定 feature filter 和主距离
 
 主 filter 在**技术文库层**复现原研究规则；推断距离在**聚合后的生物学样本层**计算。两层不能交换顺序。
 
 ```{r}
+#| results: hold
 #| label: primary-distance
 presence_by_treatment <- vapply(treatment_levels, function(group) {
   rowSums(otutab[, metadata$Treatment == group, drop = FALSE] > 0)
@@ -584,11 +459,12 @@ data.frame(
 )
 ```
 
-### 4. 明确生成合法 split-plot 置换矩阵
+### 明确生成合法 split-plot 置换矩阵
 
 `make_splitplot_permutations()`为每个区组编码三个二元交换：whole plot 一次、两个 main plot 内各一次。`permute::how()`在这里作为独立的置换空间计数审计；真正传给 `adonis2()` 和 `permutest()`的是显式矩阵。
 
 ```{r}
+#| results: hold
 #| label: restricted-permutations
 make_splitplot_permutations <- function(meta, nset, seed) {
   block_levels <- levels(meta$Block)
@@ -704,11 +580,12 @@ stopifnot(
 permutation_contract
 ```
 
-### 5. 运行 omnibus 与 factorial PERMANOVA
+### 分别进行整体分组检验与多因素 PERMANOVA
 
 `Block`先进入模型以吸收区组差异；四水平 `Treatment` 是预先指定的 primary omnibus。factorial decomposition 用于描述 Warming、Clipping 与 interaction，并把三个 P 值作为一个 Holm family。
 
 ```{r}
+#| results: hold
 #| label: permanova
 set.seed(primary_seed)
 omnibus_fit <- vegan::adonis2(
@@ -768,11 +645,12 @@ permanova_factorial
 `adonis2(..., by = "terms")`给出 sequential sums of squares。当前 2 × 2 balanced design 的 Warming、Clipping 与 interaction 平方和经换序核对一致；不平衡 observational metadata 中，项顺序可能改变结果，应预先确定模型、检查 marginal tests，并报告共线性和不可辨识项。
 :::
 
-### 6. 四个计划 simple effects：穷举区组内配对交换
+### 四个计划 simple effects：穷举区组内配对交换
 
 每个 simple effect 都比较 12 个生物学样本、6 个 blocks。63 个 non-identity paired swaps 全部进入检验，四个 P 值再作为一个 Holm family。
 
 ```{r}
+#| results: hold
 #| label: pairwise-permanova
 make_paired_permutations <- function(meta) {
   block_levels <- levels(meta$Block)
@@ -866,11 +744,12 @@ pairwise_permanova$RejectHolm05 <-
 pairwise_permanova
 ```
 
-### 7. 必配 PERMDISP，并保留 ANOSIM/MRPP 的方向
+### 必配 PERMDISP，并保留 ANOSIM/MRPP 的方向
 
 PERMDISP 使用与 primary PERMANOVA 完全相同的 Bray–Curtis 和 9,999 行合法置换矩阵。`type = "median"`降低 centroid 对极端点的敏感性；`bias.adjust = TRUE`修正小组样本量下到中心距离的向下偏差。
 
 ```{r}
+#| results: hold
 #| label: dispersion-alternatives
 dispersion_model <- vegan::betadisper(
   primary_distance,
@@ -938,11 +817,12 @@ dispersion_global
 alternative_tests
 ```
 
-### 8. 做两条有效和两条故意无效的敏感性分支
+### 做两条有效和两条故意无效的敏感性分支
 
 第一条敏感性分支只改变 feature filter，仍可用于评估结论稳健性。后两条故意打破 exchangeability 或实验单位，用于量化“错误分析会把结果改成什么”，但不能作为平行证据。
 
 ```{r}
+#| results: hold
 #| label: sensitivity
 make_free_permutations <- function(n, nset, seed) {
   set.seed(seed)
@@ -1046,13 +926,14 @@ sensitivity_analysis
 
 主 filter 与不做 prevalence filter 的 total (R^2) 接近，但受限置换 P 值从 0.0065 变为 0.7642。说明“排序图大致相似”不能替代推断稳健性；feature space 改变了在合法随机化分布中的相对位置。
 
-## 出版级美化 {#sec-publication}
+## 把设计、效应量和离散度放在一起解释 {#sec-publication}
 
-### 1. 先把随机化单位画清楚
+### 先把随机化单位画清楚
 
 每个格子是一个生物学土壤样本；格内数字显示它由多少 technical libraries 聚合而来。图内只使用英文，处理以颜色和文字同时编码。
 
 ```{r}
+#| results: hold
 #| label: fig-design
 #| fig-cap: "Split-plot 设计与实验单位。每格进入推断一次，技术文库先相加。"
 #| fig-width: 10.5
@@ -1129,11 +1010,12 @@ save_pub(
 design_plot
 ```
 
-### 2. 同一张图并列展示 location 与 spread
+### 同时展示群落中心差异与组内离散程度
 
 彩色叉号是四组 spatial medians，线段是每个样本到所属 median 的二维投影。PERMDISP 实际使用完整坐标空间的距离，不能从二维线段长度重算。
 
 ```{r}
+#| results: hold
 #| label: fig-pcoa-dispersion
 #| fig-cap: "Bray–Curtis PCoA、四组 spatial medians 与 PERMANOVA/PERMDISP 联合读图。"
 #| fig-width: 10.5
@@ -1217,11 +1099,12 @@ save_pub(
 pcoa_plot
 ```
 
-### 3. 计划比较用效应量和校正后 P 值，不用星号墙
+### 计划比较用效应量和校正后 P 值，不用星号墙
 
 四个 partial (R^2) 约为 0.185–0.194，但离散的 exact permutation grid 和完整 Holm family 使校正后 P 均为 0.125。图同时显示 effect magnitude 与 multiplicity decision。
 
 ```{r}
+#| results: hold
 #| label: fig-pairwise
 #| fig-cap: "四个预先指定 simple effects 的 partial R² 与 Holm-adjusted P。"
 #| fig-width: 10.5
@@ -1284,11 +1167,12 @@ save_pub(
 pairwise_plot
 ```
 
-### 4. 单独展示每个样本到 spatial median 的距离
+### 单独展示每个样本到 spatial median 的距离
 
 箱体用于概括分布，全部 24 个点仍保留；黑色叉号表示组均值。未显著的 PERMDISP 不应改写为“方差齐性已被证明”。
 
 ```{r}
+#| results: hold
 #| label: fig-dispersion
 #| fig-cap: "四组到 spatial median 的完整距离分布与受限 PERMDISP。"
 #| fig-width: 10.5
@@ -1349,7 +1233,7 @@ dispersion_plot
 
 四张主图均生成 PDF、SVG、600 ppi PNG 与 LZW-compressed TIFF。PDF/SVG 是排版主文件，PNG 适合网页与公众号，TIFF 用于要求高分辨率位图的投稿系统。
 
-### 5. 对完整分析做机器回验
+### 对完整分析做机器回验
 
 验证器会重新读取三件套，核对输入 checksum、实验单位聚合、1,824-feature 主 filter、262,144 个合法 assignments、9,999 行唯一置换、omnibus/factorial/pairwise/PERMDISP/ANOSIM/MRPP、四条敏感性分支、字体和四种图形格式：
 
@@ -1365,6 +1249,7 @@ Rscript --vanilla scripts/validate_permanova_dispersion.R \
 审计结果存在时，下面代码要求 214 项全部通过；只使用前面的分析代码时不依赖该目录。
 
 ```{r}
+#| results: hold
 #| label: audit-gate
 audit_summary_path <- paste0(
   "results/23-permanova-dispersion/",
@@ -1414,7 +1299,7 @@ if (file.exists(audit_summary_path)) {
 PCoA 中点的颜色、椭圆和 hull 都不会告诉软件哪些标签可交换。exchangeability 只能来自随机化、采样和重复测量记录；缺少这份记录时，最漂亮的图也不能修复无效 P 值。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告置换设计与群落差异的方法与限制 {#sec-methods}
 
 下面英文与本例实际代码和结果一致：
 
@@ -1422,9 +1307,9 @@ PCoA 中点的颜色、椭圆和 hull 都不会告诉软件哪些标签可交换
 
 正式稿还要补充：每层随机化发生在何时、每个 biological sample 的定义、技术重复为何合并、样本排除、primary distance/filter 的预注册依据，以及是否还有 batch、site、subject 或时间结构。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将置换设计与群落差异用于自己的研究 {#sec-own-data}
 
-### 1. 只替换路径和 metadata 列名
+### 只替换路径和 metadata 列名
 
 ```{r}
 #| eval: false
@@ -1459,7 +1344,7 @@ metadata$AnalysisGroup <- factor(metadata[[group_col]])
 - 图内中文分组先 recode 成英文；
 - primary filter、standardization、distance、model terms、contrasts 和 multiplicity family 在看 P 值前写下。
 
-### 2. 完全独立样本分支
+### 完全独立样本分支
 
 只有当每一列就是一个独立实验单位、没有配对或聚类时，才可自由置换：
 
@@ -1493,7 +1378,7 @@ fit
 disp_test
 ```
 
-### 3. 简单 complete-block 或 paired 分支
+### 简单 complete-block 或 paired 分支
 
 若每个 block/subject 下各 treatment 恰好一次，可把交换限制在 block 内：
 
@@ -1524,7 +1409,7 @@ fit
 
 这里仍要核对每个 block 内的 treatment balance。若 subject 有基线/末次、缺失 visit、carryover 或不等间隔时间，普通 block 内自由置换未必对应原始设计。
 
-### 4. split-plot、纵向或多层聚类分支
+### split-plot、纵向或多层聚类分支
 
 复杂设计先画出随机化树，再为每层写出：
 
@@ -1537,7 +1422,7 @@ fit
 
 `permute::how()`支持 blocks、plots、within，以及 `free`、`series`、`grid` 等结构；但软件参数不能替代真实随机化记录。若设计像本例一样包含 whole plot 和 subplot，建议保存显式 permutation matrix、identity/duplicate/legal-row audit 和 SHA-256，而不是只在 Methods 写“permutations were stratified”。
 
-### 5. 为每个结论保留四件证据
+### 为每个结论保留四件证据
 
 最终结果至少同时输出：
 

@@ -66,24 +66,24 @@
 <polyline points='192.17,274.48 192.17,67.52 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
 <rect x='158.79' y='252.67' width='66.77' height='21.81' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #CC79A7;' />
 <rect x='60.61' y='104.33' width='66.77' height='170.15' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00;' />
-<text x='192.17' y='250.49' text-anchor='middle' style='font-size: 8.54px; font-family: "DejaVu Sans";' textLength='10.86px' lengthAdjust='spacingAndGlyphs'>30</text>
-<text x='93.99' y='102.15' text-anchor='middle' style='font-size: 8.54px; font-family: "DejaVu Sans";' textLength='16.29px' lengthAdjust='spacingAndGlyphs'>234</text>
+<text x='192.17' y='250.49' text-anchor='middle' style='font-size: 8.54px; font-family: "Arial";' textLength='10.86px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text x='93.99' y='102.15' text-anchor='middle' style='font-size: 8.54px; font-family: "Arial";' textLength='16.29px' lengthAdjust='spacingAndGlyphs'>234</text>
 <rect x='35.08' y='67.52' width='216.00' height='206.96' style='stroke-width: 0.79; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMjUuOTg=)'>
-<text x='31.45' y='276.84' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.11px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='31.45' y='204.13' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.33px' lengthAdjust='spacingAndGlyphs'>100</text>
-<text x='31.45' y='131.41' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.33px' lengthAdjust='spacingAndGlyphs'>200</text>
+<text x='31.45' y='276.84' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='4.11px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='31.45' y='204.13' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='12.33px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='31.45' y='131.41' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='12.33px' lengthAdjust='spacingAndGlyphs'>200</text>
 <polyline points='33.06,274.48 35.08,274.48 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='33.06,201.77 35.08,201.77 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='33.06,129.05 35.08,129.05 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='93.99,276.50 93.99,274.48 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='192.17,276.50 192.17,274.48 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text transform='translate(95.76,282.49) rotate(-22)' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='39.58px' lengthAdjust='spacingAndGlyphs'>SparCC only</text>
-<text transform='translate(193.94,282.49) rotate(-22)' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='45.40px' lengthAdjust='spacingAndGlyphs'>Both methods</text>
-<text transform='translate(15.41,171.00) rotate(-90)' text-anchor='middle' style='font-size: 8.10px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='62.11px' lengthAdjust='spacingAndGlyphs'>Selected edges</text>
-<text x='9.51' y='61.80' style='font-size: 8.10px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='97.70px' lengthAdjust='spacingAndGlyphs'>Edge-set Jaccard = 0.11</text>
-<text x='9.51' y='49.94' style='font-size: 9.31px; font-weight: bold; font-family: "DejaVu Sans";' textLength='152.03px' lengthAdjust='spacingAndGlyphs'>A. Method-specific edge sets</text>
+<text transform='translate(95.76,282.49) rotate(-22)' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='39.58px' lengthAdjust='spacingAndGlyphs'>SparCC only</text>
+<text transform='translate(193.94,282.49) rotate(-22)' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='45.40px' lengthAdjust='spacingAndGlyphs'>Both methods</text>
+<text transform='translate(15.41,171.00) rotate(-90)' text-anchor='middle' style='font-size: 8.10px;fill: #1A1A1A; font-family: "Arial";' textLength='62.11px' lengthAdjust='spacingAndGlyphs'>Selected edges</text>
+<text x='9.51' y='61.80' style='font-size: 8.10px;fill: #4D4D4D; font-family: "Arial";' textLength='97.70px' lengthAdjust='spacingAndGlyphs'>Edge-set Jaccard = 0.11</text>
+<text x='9.51' y='49.94' style='font-size: 9.31px; font-weight: bold; font-family: "Arial";' textLength='152.03px' lengthAdjust='spacingAndGlyphs'>A. Method-specific edge sets</text>
 </g>
 <defs>
   <clipPath id='cpMjg0LjcyfDUwMC43Mnw2Ny41MnwyNzQuNDg='>
@@ -100,26 +100,26 @@
 <polyline points='441.81,274.48 441.81,67.52 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
 <rect x='313.19' y='104.63' width='60.87' height='169.85' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #009E73;' />
 <rect x='411.37' y='156.89' width='60.87' height='117.59' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6B7280;' />
-<text x='343.63' y='102.45' text-anchor='middle' style='font-size: 8.54px; font-family: "DejaVu Sans";' textLength='16.29px' lengthAdjust='spacingAndGlyphs'>156</text>
-<text x='441.81' y='154.72' text-anchor='middle' style='font-size: 8.54px; font-family: "DejaVu Sans";' textLength='16.29px' lengthAdjust='spacingAndGlyphs'>108</text>
+<text x='343.63' y='102.45' text-anchor='middle' style='font-size: 8.54px; font-family: "Arial";' textLength='16.29px' lengthAdjust='spacingAndGlyphs'>156</text>
+<text x='441.81' y='154.72' text-anchor='middle' style='font-size: 8.54px; font-family: "Arial";' textLength='16.29px' lengthAdjust='spacingAndGlyphs'>108</text>
 <rect x='284.72' y='67.52' width='216.00' height='206.96' style='stroke-width: 0.79; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMjUuOTg=)'>
-<text x='281.09' y='276.84' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.11px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='281.09' y='222.40' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.22px' lengthAdjust='spacingAndGlyphs'>50</text>
-<text x='281.09' y='167.96' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.33px' lengthAdjust='spacingAndGlyphs'>100</text>
-<text x='281.09' y='113.52' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.33px' lengthAdjust='spacingAndGlyphs'>150</text>
+<text x='281.09' y='276.84' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='4.11px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='281.09' y='222.40' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='8.22px' lengthAdjust='spacingAndGlyphs'>50</text>
+<text x='281.09' y='167.96' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='12.33px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='281.09' y='113.52' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='12.33px' lengthAdjust='spacingAndGlyphs'>150</text>
 <polyline points='282.70,274.48 284.72,274.48 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='282.70,220.04 284.72,220.04 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='282.70,165.60 284.72,165.60 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='282.70,111.16 284.72,111.16 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='343.63,276.50 343.63,274.48 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='441.81,276.50 441.81,274.48 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text transform='translate(345.39,282.49) rotate(-22)' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='42.58px' lengthAdjust='spacingAndGlyphs'>Group-robust</text>
-<text transform='translate(443.58,282.49) rotate(-22)' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='50.75px' lengthAdjust='spacingAndGlyphs'>Group-sensitive</text>
-<text transform='translate(265.05,171.00) rotate(-90)' text-anchor='middle' style='font-size: 8.10px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='56.88px' lengthAdjust='spacingAndGlyphs'>SparCC edges</text>
-<text x='259.15' y='61.80' style='font-size: 8.10px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='229.48px' lengthAdjust='spacingAndGlyphs'>Same sign and |group-centered CLR Spearman| &gt;= 0.20</text>
-<text x='259.15' y='49.94' style='font-size: 9.31px; font-weight: bold; font-family: "DejaVu Sans";' textLength='170.62px' lengthAdjust='spacingAndGlyphs'>B. SparCC group-centering audit</text>
+<text transform='translate(345.39,282.49) rotate(-22)' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='42.58px' lengthAdjust='spacingAndGlyphs'>Group-robust</text>
+<text transform='translate(443.58,282.49) rotate(-22)' text-anchor='end' style='font-size: 6.48px;fill: #1A1A1A; font-family: "Arial";' textLength='50.75px' lengthAdjust='spacingAndGlyphs'>Group-sensitive</text>
+<text transform='translate(265.05,171.00) rotate(-90)' text-anchor='middle' style='font-size: 8.10px;fill: #1A1A1A; font-family: "Arial";' textLength='56.88px' lengthAdjust='spacingAndGlyphs'>SparCC edges</text>
+<text x='259.15' y='61.80' style='font-size: 8.10px;fill: #4D4D4D; font-family: "Arial";' textLength='229.48px' lengthAdjust='spacingAndGlyphs'>Same sign and |group-centered CLR Spearman| &gt;= 0.20</text>
+<text x='259.15' y='49.94' style='font-size: 9.31px; font-weight: bold; font-family: "Arial";' textLength='170.62px' lengthAdjust='spacingAndGlyphs'>B. SparCC group-centering audit</text>
 <text x='500.72' y='318.68' text-anchor='end' style='font-size: 8.80px; font-family: "Arial";' textLength='255.24px' lengthAdjust='spacingAndGlyphs'>Neither panel validates ecological interaction or causality.</text>
 <text x='9.51' y='31.34' style='font-size: 11.00px; font-family: "Arial";' textLength='355.60px' lengthAdjust='spacingAndGlyphs'>Method overlap and group sensitivity answer different questions</text>
 <text x='9.51' y='15.10' style='font-size: 13.20px; font-family: "Arial";' textLength='295.17px' lengthAdjust='spacingAndGlyphs'>A network figure needs an edge audit ledger</text>

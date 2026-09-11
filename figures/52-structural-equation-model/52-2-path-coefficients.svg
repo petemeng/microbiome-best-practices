@@ -155,7 +155,7 @@
 </defs>
 <g clip-path='url(#cpNzcuNjF8MjU4LjIxfDIxNC4wMXwyMjcuOTI=)'>
 <rect x='77.61' y='214.01' width='180.60' height='13.91' style='stroke-width: 0.87; stroke: #333333; fill: #D9D9D9;' />
-<text x='167.91' y='223.59' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='31.60px' lengthAdjust='spacingAndGlyphs'>Shannon</text>
+<text x='167.91' y='223.59' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='31.60px' lengthAdjust='spacingAndGlyphs'>Shannon</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzODIuNjg=)'>
 </g>
@@ -166,7 +166,7 @@
 </defs>
 <g clip-path='url(#cpMzI1LjE1fDUwNS43NXwyMTQuMDF8MjI3Ljky)'>
 <rect x='325.15' y='214.01' width='180.60' height='13.91' style='stroke-width: 0.87; stroke: #333333; fill: #D9D9D9;' />
-<text x='415.45' y='223.59' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='28.31px' lengthAdjust='spacingAndGlyphs'>log TOC</text>
+<text x='415.45' y='223.59' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='28.31px' lengthAdjust='spacingAndGlyphs'>log TOC</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzODIuNjg=)'>
 </g>
@@ -177,7 +177,7 @@
 </defs>
 <g clip-path='url(#cpNzcuNjF8MjU4LjIxfDY2Ljc5fDgwLjcw)'>
 <rect x='77.61' y='66.79' width='180.60' height='13.91' style='stroke-width: 0.87; stroke: #333333; fill: #D9D9D9;' />
-<text x='167.91' y='76.37' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.96px' lengthAdjust='spacingAndGlyphs'>pH</text>
+<text x='167.91' y='76.37' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='9.96px' lengthAdjust='spacingAndGlyphs'>pH</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzODIuNjg=)'>
 </g>
@@ -188,58 +188,58 @@
 </defs>
 <g clip-path='url(#cpMzI1LjE1fDUwNS43NXw2Ni43OXw4MC43MA==)'>
 <rect x='325.15' y='66.79' width='180.60' height='13.91' style='stroke-width: 0.87; stroke: #333333; fill: #D9D9D9;' />
-<text x='415.45' y='76.37' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='58.42px' lengthAdjust='spacingAndGlyphs'>log Conductivity</text>
+<text x='415.45' y='76.37' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='58.42px' lengthAdjust='spacingAndGlyphs'>log Conductivity</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzODIuNjg=)'>
 <polyline points='110.78,358.99 110.78,356.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='163.42,358.99 163.42,356.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='216.05,358.99 216.05,356.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='110.78' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
-<text x='163.42' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='216.05' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='110.78' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
+<text x='163.42' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='216.05' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
 <polyline points='358.32,358.99 358.32,356.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='410.96,358.99 410.96,356.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='463.59,358.99 463.59,356.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='358.32' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
-<text x='410.96' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='463.59' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='321.12' y='177.01' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='44.91px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
-<text x='321.12' y='118.46' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='45.52px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
+<text x='358.32' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='7.16px' lengthAdjust='spacingAndGlyphs'>-1</text>
+<text x='410.96' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='463.59' y='366.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='4.57px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='321.12' y='177.01' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='44.91px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
+<text x='321.12' y='118.46' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='45.52px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
 <polyline points='322.91,174.39 325.15,174.39 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='322.91,115.84 325.15,115.84 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='321.12' y='344.50' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='31.60px' lengthAdjust='spacingAndGlyphs'>Shannon</text>
-<text x='321.12' y='319.73' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='58.42px' lengthAdjust='spacingAndGlyphs'>log Conductivity</text>
-<text x='321.12' y='294.96' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.96px' lengthAdjust='spacingAndGlyphs'>pH</text>
-<text x='321.12' y='270.18' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='44.91px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
-<text x='321.12' y='245.41' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='45.52px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
+<text x='321.12' y='344.50' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='31.60px' lengthAdjust='spacingAndGlyphs'>Shannon</text>
+<text x='321.12' y='319.73' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='58.42px' lengthAdjust='spacingAndGlyphs'>log Conductivity</text>
+<text x='321.12' y='294.96' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='9.96px' lengthAdjust='spacingAndGlyphs'>pH</text>
+<text x='321.12' y='270.18' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='44.91px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
+<text x='321.12' y='245.41' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='45.52px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
 <polyline points='322.91,341.88 325.15,341.88 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='322.91,317.11 325.15,317.11 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='322.91,292.34 325.15,292.34 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='322.91,267.56 325.15,267.56 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='322.91,242.79 325.15,242.79 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='73.58' y='177.01' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='44.91px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
-<text x='73.58' y='118.46' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='45.52px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
+<text x='73.58' y='177.01' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='44.91px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
+<text x='73.58' y='118.46' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='45.52px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
 <polyline points='75.37,174.39 77.61,174.39 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='75.37,115.84 77.61,115.84 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='73.58' y='340.96' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='58.42px' lengthAdjust='spacingAndGlyphs'>log Conductivity</text>
-<text x='73.58' y='310.29' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.96px' lengthAdjust='spacingAndGlyphs'>pH</text>
-<text x='73.58' y='279.62' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='44.91px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
-<text x='73.58' y='248.95' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='45.52px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
+<text x='73.58' y='340.96' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='58.42px' lengthAdjust='spacingAndGlyphs'>log Conductivity</text>
+<text x='73.58' y='310.29' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='9.96px' lengthAdjust='spacingAndGlyphs'>pH</text>
+<text x='73.58' y='279.62' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='44.91px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
+<text x='73.58' y='248.95' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='45.52px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
 <polyline points='75.37,338.34 77.61,338.34 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='75.37,307.67 77.61,307.67 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='75.37,277.00 77.61,277.00 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='75.37,246.33 77.61,246.33 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='291.68' y='376.32' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='109.26px' lengthAdjust='spacingAndGlyphs'>Standardised coefficient</text>
-<text transform='translate(11.04,218.73) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='40.20px' lengthAdjust='spacingAndGlyphs'>Predictor</text>
+<text x='291.68' y='376.32' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='109.26px' lengthAdjust='spacingAndGlyphs'>Standardised coefficient</text>
+<text transform='translate(11.04,218.73) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='40.20px' lengthAdjust='spacingAndGlyphs'>Predictor</text>
 <rect x='230.91' y='31.58' width='121.55' height='26.25' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
-<text x='235.39' y='47.98' style='font-size: 9.00px; font-family: "DejaVu Sans";' textLength='38.71px' lengthAdjust='spacingAndGlyphs'>P &lt; 0.05</text>
+<text x='235.39' y='47.98' style='font-size: 9.00px; font-family: "Arial";' textLength='38.71px' lengthAdjust='spacingAndGlyphs'>P &lt; 0.05</text>
 <line x1='280.32' y1='44.70' x2='294.14' y2='44.70' style='stroke-width: 1.07; stroke: #6B7280; stroke-linecap: butt;' />
 <circle cx='287.23' cy='44.70' r='2.49' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
 <line x1='316.34' y1='44.70' x2='330.16' y2='44.70' style='stroke-width: 1.07; stroke: #0072B2; stroke-linecap: butt;' />
 <circle cx='323.25' cy='44.70' r='2.49' style='stroke-width: 0.71; stroke: #0072B2; fill: #0072B2;' />
-<text x='300.35' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>No</text>
-<text x='336.38' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='11.60px' lengthAdjust='spacingAndGlyphs'>Yes</text>
-<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='350.22px' lengthAdjust='spacingAndGlyphs'>Intervals are 95% confidence intervals; habitat group coefficients are omitted</text>
-<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='223.24px' lengthAdjust='spacingAndGlyphs'>Standardised component-model paths</text>
+<text x='300.35' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='9.78px' lengthAdjust='spacingAndGlyphs'>No</text>
+<text x='336.38' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='11.60px' lengthAdjust='spacingAndGlyphs'>Yes</text>
+<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='350.22px' lengthAdjust='spacingAndGlyphs'>Intervals are 95% confidence intervals; habitat group coefficients are omitted</text>
+<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='223.24px' lengthAdjust='spacingAndGlyphs'>Standardised component-model paths</text>
 </g>
 </svg>

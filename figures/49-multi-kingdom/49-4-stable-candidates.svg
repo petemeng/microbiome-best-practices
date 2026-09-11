@@ -112,21 +112,21 @@
 <rect x='179.90' y='17.62' width='183.23' height='275.36' style='stroke-width: 0.82; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTcuNDg=)'>
-<text x='176.09' y='284.59' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='147.49px' lengthAdjust='spacingAndGlyphs'>mitochondria (OTU_48)  |  Pythium (OTU_1)</text>
-<text x='176.09' y='266.47' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='149.79px' lengthAdjust='spacingAndGlyphs'>Serratia (OTU_180)  |  Apodachlya (OTU_23)</text>
-<text x='176.09' y='248.36' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='131.98px' lengthAdjust='spacingAndGlyphs'>OTU_64 (OTU_64)  |  OTU_25 (OTU_25)</text>
-<text x='176.09' y='230.24' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='132.33px' lengthAdjust='spacingAndGlyphs'>elongata (OTU_16)  |  Pythium (OTU_5)</text>
-<text x='176.09' y='212.13' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='164.63px' lengthAdjust='spacingAndGlyphs'>Enterobacteriaceae (OTU_51)  |  Albugo (OTU_2)</text>
-<text x='176.09' y='194.01' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='129.38px' lengthAdjust='spacingAndGlyphs'>Serratia (OTU_180)  |  Albugo (OTU_2)</text>
-<text x='176.09' y='175.89' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='129.88px' lengthAdjust='spacingAndGlyphs'>caryae (OTU_49)  |  Pythium (OTU_12)</text>
-<text x='176.09' y='157.78' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='136.48px' lengthAdjust='spacingAndGlyphs'>AG_A (OTU_86)  |  Apodachlya (OTU_23)</text>
-<text x='176.09' y='139.66' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='171.86px' lengthAdjust='spacingAndGlyphs'>Enterobacteriaceae (OTU_51)  |  OTU_18 (OTU_18)</text>
-<text x='176.09' y='121.55' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='129.02px' lengthAdjust='spacingAndGlyphs'>OTU_19 (OTU_19)  |  Pythium (OTU_7)</text>
-<text x='176.09' y='103.43' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='133.73px' lengthAdjust='spacingAndGlyphs'>agrostis (OTU_47)  |  Pythium (OTU_24)</text>
-<text x='176.09' y='85.31' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='121.28px' lengthAdjust='spacingAndGlyphs'>caryae (OTU_49)  |  Albugo (OTU_2)</text>
-<text x='176.09' y='67.20' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='152.70px' lengthAdjust='spacingAndGlyphs'>Agrobacterium (OTU_24)  |  Phoma (OTU_37)</text>
-<text x='176.09' y='49.08' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='131.98px' lengthAdjust='spacingAndGlyphs'>OTU_59 (OTU_59)  |  OTU_25 (OTU_25)</text>
-<text x='176.09' y='30.97' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='133.35px' lengthAdjust='spacingAndGlyphs'>OTU_18 (OTU_18)  |  Pythium (OTU_24)</text>
+<text x='176.09' y='284.59' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='147.49px' lengthAdjust='spacingAndGlyphs'>mitochondria (OTU_48)  |  Pythium (OTU_1)</text>
+<text x='176.09' y='266.47' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='149.79px' lengthAdjust='spacingAndGlyphs'>Serratia (OTU_180)  |  Apodachlya (OTU_23)</text>
+<text x='176.09' y='248.36' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='131.98px' lengthAdjust='spacingAndGlyphs'>OTU_64 (OTU_64)  |  OTU_25 (OTU_25)</text>
+<text x='176.09' y='230.24' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='132.33px' lengthAdjust='spacingAndGlyphs'>elongata (OTU_16)  |  Pythium (OTU_5)</text>
+<text x='176.09' y='212.13' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='164.63px' lengthAdjust='spacingAndGlyphs'>Enterobacteriaceae (OTU_51)  |  Albugo (OTU_2)</text>
+<text x='176.09' y='194.01' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='129.38px' lengthAdjust='spacingAndGlyphs'>Serratia (OTU_180)  |  Albugo (OTU_2)</text>
+<text x='176.09' y='175.89' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='129.88px' lengthAdjust='spacingAndGlyphs'>caryae (OTU_49)  |  Pythium (OTU_12)</text>
+<text x='176.09' y='157.78' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='136.48px' lengthAdjust='spacingAndGlyphs'>AG_A (OTU_86)  |  Apodachlya (OTU_23)</text>
+<text x='176.09' y='139.66' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='171.86px' lengthAdjust='spacingAndGlyphs'>Enterobacteriaceae (OTU_51)  |  OTU_18 (OTU_18)</text>
+<text x='176.09' y='121.55' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='129.02px' lengthAdjust='spacingAndGlyphs'>OTU_19 (OTU_19)  |  Pythium (OTU_7)</text>
+<text x='176.09' y='103.43' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='133.73px' lengthAdjust='spacingAndGlyphs'>agrostis (OTU_47)  |  Pythium (OTU_24)</text>
+<text x='176.09' y='85.31' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='121.28px' lengthAdjust='spacingAndGlyphs'>caryae (OTU_49)  |  Albugo (OTU_2)</text>
+<text x='176.09' y='67.20' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='152.70px' lengthAdjust='spacingAndGlyphs'>Agrobacterium (OTU_24)  |  Phoma (OTU_37)</text>
+<text x='176.09' y='49.08' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='131.98px' lengthAdjust='spacingAndGlyphs'>OTU_59 (OTU_59)  |  OTU_25 (OTU_25)</text>
+<text x='176.09' y='30.97' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='133.35px' lengthAdjust='spacingAndGlyphs'>OTU_18 (OTU_18)  |  Pythium (OTU_24)</text>
 <polyline points='177.78,282.11 179.90,282.11 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='177.78,264.00 179.90,264.00 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='177.78,245.88 179.90,245.88 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
@@ -145,26 +145,26 @@
 <polyline points='218.41,295.10 218.41,292.98 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='269.41,295.10 269.41,292.98 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='320.41,295.10 320.41,292.98 ' style='stroke-width: 0.82; stroke: #333333; stroke-linecap: butt;' />
-<text x='218.41' y='301.75' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='269.41' y='301.75' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='320.41' y='301.75' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='271.52' y='311.47' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='126.68px' lengthAdjust='spacingAndGlyphs'>Niche-adjusted Spearman rho</text>
+<text x='218.41' y='301.75' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='269.41' y='301.75' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='320.41' y='301.75' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='271.52' y='311.47' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='126.68px' lengthAdjust='spacingAndGlyphs'>Niche-adjusted Spearman rho</text>
 <rect x='371.60' y='87.19' width='63.55' height='72.51' style='stroke-width: 0.82; stroke: none; fill: #FFFFFF;' />
-<text x='375.83' y='98.51' style='font-size: 8.50px; font-family: "DejaVu Sans";' textLength='55.08px' lengthAdjust='spacingAndGlyphs'>Sign stability</text>
+<text x='375.83' y='98.51' style='font-size: 8.50px; font-family: "Arial";' textLength='55.08px' lengthAdjust='spacingAndGlyphs'>Sign stability</text>
 <circle cx='384.47' cy='112.27' r='3.63' style='stroke-width: 0.71; stroke: #000000; stroke-opacity: 0.90; fill: #000000; fill-opacity: 0.90;' />
 <circle cx='384.47' cy='129.55' r='4.20' style='stroke-width: 0.71; stroke: #000000; stroke-opacity: 0.90; fill: #000000; fill-opacity: 0.90;' />
 <circle cx='384.47' cy='146.83' r='4.62' style='stroke-width: 0.71; stroke: #000000; stroke-opacity: 0.90; fill: #000000; fill-opacity: 0.90;' />
-<text x='397.35' y='114.75' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>98%</text>
-<text x='397.35' y='132.03' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>99%</text>
-<text x='397.35' y='149.31' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='19.44px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='397.35' y='114.75' style='font-size: 6.80px; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>98%</text>
+<text x='397.35' y='132.03' style='font-size: 6.80px; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>99%</text>
+<text x='397.35' y='149.31' style='font-size: 6.80px; font-family: "Arial";' textLength='19.44px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <rect x='371.60' y='168.18' width='134.40' height='55.23' style='stroke-width: 0.82; stroke: none; fill: #FFFFFF;' />
-<text x='375.83' y='179.49' style='font-size: 8.50px; font-family: "DejaVu Sans";' textLength='36.20px' lengthAdjust='spacingAndGlyphs'>Decision</text>
+<text x='375.83' y='179.49' style='font-size: 8.50px; font-family: "Arial";' textLength='36.20px' lengthAdjust='spacingAndGlyphs'>Decision</text>
 <line x1='377.56' y1='193.25' x2='391.38' y2='193.25' style='stroke-width: 1.17; stroke: #6B7280; stroke-linecap: butt;' />
 <circle cx='384.47' cy='193.25' r='1.95' style='stroke-width: 0.71; stroke: #6B7280; stroke-opacity: 0.90; fill: #6B7280; fill-opacity: 0.90;' />
 <line x1='377.56' y1='210.53' x2='391.38' y2='210.53' style='stroke-width: 1.17; stroke: #0072B2; stroke-linecap: butt;' />
 <circle cx='384.47' cy='210.53' r='1.95' style='stroke-width: 0.71; stroke: #0072B2; stroke-opacity: 0.90; fill: #0072B2; fill-opacity: 0.90;' />
-<text x='397.35' y='195.73' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='39.28px' lengthAdjust='spacingAndGlyphs'>Exploratory</text>
-<text x='397.35' y='213.01' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='104.42px' lengthAdjust='spacingAndGlyphs'>q &lt; 0.05 and stability &gt;= 90%</text>
-<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "DejaVu Sans";' textLength='163.17px' lengthAdjust='spacingAndGlyphs'>Adjusted association stability</text>
+<text x='397.35' y='195.73' style='font-size: 6.80px; font-family: "Arial";' textLength='39.28px' lengthAdjust='spacingAndGlyphs'>Exploratory</text>
+<text x='397.35' y='213.01' style='font-size: 6.80px; font-family: "Arial";' textLength='104.42px' lengthAdjust='spacingAndGlyphs'>q &lt; 0.05 and stability &gt;= 90%</text>
+<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "Arial";' textLength='163.17px' lengthAdjust='spacingAndGlyphs'>Adjusted association stability</text>
 </g>
 </svg>

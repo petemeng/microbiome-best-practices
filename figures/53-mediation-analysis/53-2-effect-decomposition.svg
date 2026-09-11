@@ -53,9 +53,9 @@
 <rect x='71.29' y='35.09' width='433.96' height='247.90' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTEuODE=)'>
-<text x='66.81' y='239.42' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='44.25px' lengthAdjust='spacingAndGlyphs'>Total effect</text>
-<text x='66.81' y='161.95' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='48.34px' lengthAdjust='spacingAndGlyphs'>ADE (direct)</text>
-<text x='66.81' y='84.49' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='61.83px' lengthAdjust='spacingAndGlyphs'>ACME (indirect)</text>
+<text x='66.81' y='239.42' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='44.25px' lengthAdjust='spacingAndGlyphs'>Total effect</text>
+<text x='66.81' y='161.95' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='48.34px' lengthAdjust='spacingAndGlyphs'>ADE (direct)</text>
+<text x='66.81' y='84.49' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='61.83px' lengthAdjust='spacingAndGlyphs'>ACME (indirect)</text>
 <polyline points='68.80,236.51 71.29,236.51 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='68.80,159.04 71.29,159.04 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='68.80,81.57 71.29,81.57 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -63,12 +63,12 @@
 <polyline points='263.38,285.48 263.38,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='377.18,285.48 377.18,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='490.97,285.48 490.97,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='149.58' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
-<text x='263.38' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='377.18' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='490.97' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.8</text>
-<text x='288.27' y='304.75' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='229.08px' lengthAdjust='spacingAndGlyphs'>Effect on log calprotectin scale (95% interval)</text>
-<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='270.38px' lengthAdjust='spacingAndGlyphs'>Quasi-Bayesian intervals from 2,000 simulation draws</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='325.16px' lengthAdjust='spacingAndGlyphs'>None of the decomposed effects excludes the null</text>
+<text x='149.58' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
+<text x='263.38' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='377.18' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='490.97' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.8</text>
+<text x='288.27' y='304.75' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='229.08px' lengthAdjust='spacingAndGlyphs'>Effect on log calprotectin scale (95% interval)</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='270.38px' lengthAdjust='spacingAndGlyphs'>Quasi-Bayesian intervals from 2,000 simulation draws</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='325.16px' lengthAdjust='spacingAndGlyphs'>None of the decomposed effects excludes the null</text>
 </g>
 </svg>

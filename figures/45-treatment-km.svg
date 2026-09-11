@@ -52,11 +52,11 @@
 <rect x='44.20' y='72.29' width='262.63' height='141.52' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHwzMTEuODF8MC4wMHwyNTUuMTI=)'>
-<text x='39.72' y='210.30' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.69px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='39.72' y='178.14' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>25%</text>
-<text x='39.72' y='145.97' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='39.72' y='113.81' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>75%</text>
-<text x='39.72' y='81.64' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='22.87px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='39.72' y='210.30' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.69px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='39.72' y='178.14' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>25%</text>
+<text x='39.72' y='145.97' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='39.72' y='113.81' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>75%</text>
+<text x='39.72' y='81.64' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='22.87px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <polyline points='41.71,207.38 44.20,207.38 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='41.71,175.22 44.20,175.22 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='41.71,143.06 44.20,143.06 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -68,24 +68,24 @@
 <polyline points='205.36,216.31 205.36,213.82 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='255.10,216.31 255.10,213.82 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='304.84,216.31 304.84,213.82 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='56.14' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='105.88' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>5</text>
-<text x='155.62' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>10</text>
-<text x='205.36' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>15</text>
-<text x='255.10' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>20</text>
-<text x='304.84' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>25</text>
-<text x='175.52' y='235.58' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='218.08px' lengthAdjust='spacingAndGlyphs'>Weeks since baseline microbiome sampling</text>
-<text transform='translate(12.27,143.06) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='100.05px' lengthAdjust='spacingAndGlyphs'>T1D-free probability</text>
+<text x='56.14' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='105.88' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>5</text>
+<text x='155.62' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='205.36' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>15</text>
+<text x='255.10' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='304.84' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='10.18px' lengthAdjust='spacingAndGlyphs'>25</text>
+<text x='175.52' y='235.58' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='218.08px' lengthAdjust='spacingAndGlyphs'>Weeks since baseline microbiome sampling</text>
+<text transform='translate(12.27,143.06) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='100.05px' lengthAdjust='spacingAndGlyphs'>T1D-free probability</text>
 <rect x='89.90' y='35.09' width='171.22' height='27.24' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
-<text x='94.89' y='52.36' style='font-size: 10.00px; font-family: "DejaVu Sans";' textLength='50.89px' lengthAdjust='spacingAndGlyphs'>Treatment</text>
+<text x='94.89' y='52.36' style='font-size: 10.00px; font-family: "Arial";' textLength='50.89px' lengthAdjust='spacingAndGlyphs'>Treatment</text>
 <rect x='151.47' y='40.78' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2; fill-opacity: 0.13;' />
 <line x1='152.49' y1='48.71' x2='166.31' y2='48.71' style='stroke-width: 2.03; stroke: #0072B2; stroke-linecap: butt;' />
 <rect x='207.64' y='40.78' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00; fill-opacity: 0.13;' />
 <line x1='208.66' y1='48.71' x2='222.48' y2='48.71' style='stroke-width: 2.03; stroke: #E69F00; stroke-linecap: butt;' />
-<text x='173.02' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='28.93px' lengthAdjust='spacingAndGlyphs'>Control</text>
-<text x='229.19' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='26.96px' lengthAdjust='spacingAndGlyphs'>Tylosin</text>
-<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='103.13px' lengthAdjust='spacingAndGlyphs'>Log-rank p = 0.0027</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='118.57px' lengthAdjust='spacingAndGlyphs'>Time to T1D onset</text>
-<text x='44.20' y='248.47' style='font-size: 8.00px;fill: #666666; font-family: "DejaVu Sans";' textLength='239.43px' lengthAdjust='spacingAndGlyphs'>Pointwise 95% CI; baseline samples collected at weeks 6–8.</text>
+<text x='173.02' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='28.93px' lengthAdjust='spacingAndGlyphs'>Control</text>
+<text x='229.19' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='26.96px' lengthAdjust='spacingAndGlyphs'>Tylosin</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='103.13px' lengthAdjust='spacingAndGlyphs'>Log-rank p = 0.0027</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='118.57px' lengthAdjust='spacingAndGlyphs'>Time to T1D onset</text>
+<text x='44.20' y='248.47' style='font-size: 8.00px;fill: #666666; font-family: "Arial";' textLength='239.43px' lengthAdjust='spacingAndGlyphs'>Pointwise 95% CI; baseline samples collected at weeks 6–8.</text>
 </g>
 </svg>

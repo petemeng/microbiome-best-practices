@@ -1,6 +1,6 @@
 ---
 title: "Alpha 组间检验 + 复现顶刊箱线图"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,25 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/20-alpha-group-tests.R
+  packages:
+  - digest
+  - dplyr
+  - emmeans
+  - ggplot2
+  - iNEXT
+  - jsonlite
+  - lmerTest
+  - ragg
+  - readr
+  - scales
+  - svglite
+  - tidyr
+  - vegan
 ---
-
-> **分析目标：**比较三个湿地组的 coverage-standardized Alpha diversity，同时报告总体检验、效应量、置信区间和多重比较，而不是只在箱线图上添加星号。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**真实示例含 90 个样本、13,628 个 OTU；完整计算与 5,000 次 bootstrap 通常少于 2 分钟，峰值内存低于 1 GB。
 
 ## 组间显著不等于生态差异重要 {#sec-target}
 
@@ -43,157 +57,30 @@ fig-format: png
 三个 coverage-standardized Hill 指标的 Kruskal–Wallis 检验均未通过 Holm 校正；九个计划成对比较也没有一个通过 Holm 校正。未经标准化的 raw (q=0) 有一个未校正的名义信号（P = 0.035），但在 10,000 reads 和 90% coverage 下分别变为 P = 0.511 与 P = 0.216。这个例子说明，星号可能首先反映测量口径，而不是稳健的组间生物学差异。
 :::
 
-## 检验之前先锁定设计、指标和检验族 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-最短的决策顺序是：
+需要 R，以及 `digest`、`dplyr`、`emmeans`、`ggplot2`、`iNEXT`、`jsonlite`、`lmerTest`、`ragg`、`readr`、`scales`、`svglite`、`tidyr`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-1. **确认实验单位是否独立。** 同一受试者、地点、窝、家庭或时间序列中的观测不能当作独立样本。
-2. **预先确定主要 Alpha 指标。** 本例使用相同量纲的 Hill (q=0,1,2)，主口径固定为 90% sample coverage。
-3. **定义一个检验族。** 三个总体检验一起做 Holm 校正；三个指标 × 三个 pair 的九个计划比较构成另一个完整检验族。
-4. **同时报告效应量与区间。** P 值不说明差异有多大；Cliff's delta 表示两组随机抽样时谁更可能取得较高值。
-
-### 独立、配对和重复测量不是三个按钮
-
-| 数据结构 | metadata 最低要求 | 典型分析 |
-|---|---|---|
-| 独立两组 | `Group`，每个实验单位只出现一次 | Wilcoxon–Mann–Whitney 或 Welch t test |
-| 独立三组及以上 | `Group`，每个实验单位只出现一次 | Kruskal–Wallis 或 Welch one-way test |
-| 配对两条件 | `SubjectID`/`PairID` + `Condition` | paired Wilcoxon 或 paired t test |
-| 重复测量 | `SubjectID` + `Time` + `Condition` | mixed-effects model 或适当的纵向模型 |
-| 区组/聚类 | `Block`、`SiteID`、`Family`、`Cage`、`Center` 等 | 在模型或重采样中保留聚类结构 |
-
-当前 metadata 只有 `Group`、`Type` 和 `Saline`，没有 subject、pair、time 或声明的 block 标识，因此可执行的演示分支是三组独立样本分析。**列不存在并不能证明生物学独立**；真实项目仍要回查采样表和实验记录。
-
-<details>
-<summary><strong>深入：Kruskal–Wallis 检验的不是“中位数”三个字</strong></summary>
-
-Kruskal–Wallis 先对所有观测联合排序，再比较各组秩和。其原假设涉及组间分布，而不是无条件地只比较中位数。只有各组分布形状和尺度近似、差异可理解为位置平移时，才可把结果简化解释为位置或中位数差异。
-
-因此本例同时做三件事：
-
-- 画出全部样本、violin 轮廓和 boxplot；
-- 保存各组 skewness、IQR 与 Tukey outlier 诊断；
-- 用 Cliff's delta 描述随机抽取一个 A 组样本和一个 B 组样本时的序优势。
-
-Cliff's delta 定义为：
-
-\[
-\delta=P(X_A>X_B)-P(X_A<X_B), \qquad -1\leq\delta\leq 1.
-\]
-
-当 \(\delta>0\) 时，A 组样本倾向于高于 B 组；\(\delta=0\) 表示没有总体序优势。`ProbabilitySuperiority = (delta + 1) / 2` 将相同信息转换为更直观的概率尺度，并把 ties 各分一半。
-
-</details>
-
-<details>
-<summary><strong>深入：为什么不先跑 Shapiro–Wilk 再挑检验</strong></summary>
-
-用同一批数据先检验正态性，再根据 P 值决定 t test 或秩检验，会把一个数据驱动的模型选择步骤隐藏进最终 P 值。样本量小时，正态性检验可能没有能力发现偏离；样本量大时，又可能对不重要的轻微偏离非常敏感。
-
-更透明的做法是：
-
-1. 根据 estimand 和设计预先指定主分析；
-2. 用分布图和残差诊断解释模型是否合适；
-3. 用有清楚 estimand 的替代模型做 sensitivity analysis；
-4. 不根据哪一个方法更显著来选择最终结果。
-
-本例预先把秩分布比较设为主分析，并把不等方差 Welch mean comparison 设为敏感性分析。两条路线都没有显著结果。
-
-</details>
-
-::: {.callout-warning title="示例数据的 Group 与 Saline 完全混杂"}
-`IW` 全部是 non-saline soil，而 `CW` 与 `TW` 全部是 saline soil。因此，即使发现 Group 差异，也不能把它单独归因于地理类别或盐碱状态。本章演示的是组间统计与作图合同，不提供地理或盐碱因果结论。
-:::
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载真实数据和定义作图函数</strong></summary>
-
-首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "digest", "dplyr", "emmeans", "ggplot2", "iNEXT", "jsonlite",
-  "lme4", "lmerTest", "ragg", "readr", "scales", "svglite",
-  "systemfonts", "vegan"
-))
-```
-
-数据固定使用 `microeco` 2.0.0 源码包中的真实 16S 示例表。下面代码下载版本锁定的压缩包、核对 SHA-256，并导出标准三件套：
-
-```{r}
-#| eval: false
-archive <- "data/raw/microeco_2.0.0.tar.gz"
-source_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/",
-  "microeco/microeco_2.0.0.tar.gz"
-)
-expected_sha256 <- paste0(
-  "454a3b71ceeea86bdd54f475a12b5bac",
-  "9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) {
-  download.file(source_url, archive, mode = "wb")
-}
-observed_sha256 <- digest::digest(
-  file = archive,
-  algo = "sha256",
-  serialize = FALSE
-)
-stopifnot(identical(observed_sha256, expected_sha256))
-
-required <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-utils::untar(archive, files = required, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_keyed_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name),
-    x,
-    check.names = FALSE
-  )
-  utils::write.table(
-    out,
-    path,
-    sep = "\t",
-    quote = FALSE,
-    row.names = FALSE,
-    na = ""
-  )
-}
-
-write_keyed_tsv(data_env$otu_table_16S, "FeatureID", "data/small/otutab.tsv")
-write_keyed_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
   "data/small/taxonomy.tsv"
 )
-write_keyed_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-本页需要的包与出版级函数全部内联：
-
 ```{r}
+#| results: hold
 #| label: setup
 library(digest)
 library(dplyr)
@@ -205,7 +92,7 @@ library(vegan)
 
 set.seed(20260721)
 
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 
 pal_pub <- c(
   blue = "#0072B2",
@@ -321,16 +208,12 @@ save_pub <- function(
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并按 ID 对齐
+### 读取三件套并按 ID 对齐
 
 `otutab` 必须是 feature × sample 的非负整数表。Alpha richness 对 singleton 很敏感，因此这里不在计算前做 prevalence 或 abundance 过滤。
 
 ```{r}
+#| results: hold
 #| label: read-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -394,11 +277,93 @@ taxonomy[1:5, , drop = FALSE]
 head(metadata)
 ```
 
-### 2. 先让 metadata 决定分析分支
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/20-alpha-group-tests.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "digest", "dplyr", "emmeans", "ggplot2", "iNEXT", "jsonlite",
+  "lme4", "lmerTest", "ragg", "readr", "scales", "svglite",
+  "systemfonts", "vegan"
+))
+```
+
+</details>
+
+## 检验之前先锁定设计、指标和检验族 {#sec-theory}
+
+最短的决策顺序是：
+
+1. **确认实验单位是否独立。** 同一受试者、地点、窝、家庭或时间序列中的观测不能当作独立样本。
+2. **预先确定主要 Alpha 指标。** 本例使用相同量纲的 Hill (q=0,1,2)，主口径固定为 90% sample coverage。
+3. **定义一个检验族。** 三个总体检验一起做 Holm 校正；三个指标 × 三个 pair 的九个计划比较构成另一个完整检验族。
+4. **同时报告效应量与区间。** P 值不说明差异有多大；Cliff's delta 表示两组随机抽样时谁更可能取得较高值。
+
+### 独立、配对和重复测量不是三个按钮
+
+| 数据结构 | metadata 最低要求 | 典型分析 |
+|---|---|---|
+| 独立两组 | `Group`，每个实验单位只出现一次 | Wilcoxon–Mann–Whitney 或 Welch t test |
+| 独立三组及以上 | `Group`，每个实验单位只出现一次 | Kruskal–Wallis 或 Welch one-way test |
+| 配对两条件 | `SubjectID`/`PairID` + `Condition` | paired Wilcoxon 或 paired t test |
+| 重复测量 | `SubjectID` + `Time` + `Condition` | mixed-effects model 或适当的纵向模型 |
+| 区组/聚类 | `Block`、`SiteID`、`Family`、`Cage`、`Center` 等 | 在模型或重采样中保留聚类结构 |
+
+当前 metadata 只有 `Group`、`Type` 和 `Saline`，没有 subject、pair、time 或声明的 block 标识，因此可执行的演示分支是三组独立样本分析。**列不存在并不能证明生物学独立**；真实项目仍要回查采样表和实验记录。
+
+<details>
+<summary><strong>深入：Kruskal–Wallis 检验的不是“中位数”三个字</strong></summary>
+
+Kruskal–Wallis 先对所有观测联合排序，再比较各组秩和。其原假设涉及组间分布，而不是无条件地只比较中位数。只有各组分布形状和尺度近似、差异可理解为位置平移时，才可把结果简化解释为位置或中位数差异。
+
+因此本例同时做三件事：
+
+- 画出全部样本、violin 轮廓和 boxplot；
+- 保存各组 skewness、IQR 与 Tukey outlier 诊断；
+- 用 Cliff's delta 描述随机抽取一个 A 组样本和一个 B 组样本时的序优势。
+
+Cliff's delta 定义为：
+
+\[
+\delta=P(X_A>X_B)-P(X_A<X_B), \qquad -1\leq\delta\leq 1.
+\]
+
+当 \(\delta>0\) 时，A 组样本倾向于高于 B 组；\(\delta=0\) 表示没有总体序优势。`ProbabilitySuperiority = (delta + 1) / 2` 将相同信息转换为更直观的概率尺度，并把 ties 各分一半。
+
+</details>
+
+<details>
+<summary><strong>深入：为什么不先跑 Shapiro–Wilk 再挑检验</strong></summary>
+
+用同一批数据先检验正态性，再根据 P 值决定 t test 或秩检验，会把一个数据驱动的模型选择步骤隐藏进最终 P 值。样本量小时，正态性检验可能没有能力发现偏离；样本量大时，又可能对不重要的轻微偏离非常敏感。
+
+更透明的做法是：
+
+1. 根据 estimand 和设计预先指定主分析；
+2. 用分布图和残差诊断解释模型是否合适；
+3. 用有清楚 estimand 的替代模型做 sensitivity analysis；
+4. 不根据哪一个方法更显著来选择最终结果。
+
+本例预先把秩分布比较设为主分析，并把不等方差 Welch mean comparison 设为敏感性分析。两条路线都没有显著结果。
+
+</details>
+
+::: {.callout-warning title="示例数据的 Group 与 Saline 完全混杂"}
+`IW` 全部是 non-saline soil，而 `CW` 与 `TW` 全部是 saline soil。因此，即使发现 Group 差异，也不能把它单独归因于地理类别或盐碱状态。本章演示的是组间统计与作图合同，不提供地理或盐碱因果结论。
+:::
+
+## 按实验设计选择Alpha多样性检验 {#sec-code}
+
+### 先让 metadata 决定分析分支
 
 下面的审计不会把缺失列自动解释成“独立”；它只说明当前表能支持哪条计算路线。独立性仍需由采样设计确认。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 subject_candidates <- c("SubjectID", "Subject", "ParticipantID")
 pair_candidates <- c("PairID", "Pair", "MatchedSet")
 time_candidates <- c("Time", "Timepoint", "Visit")
@@ -448,11 +413,13 @@ with(metadata, table(Group, Saline))
 
 `Group × Saline` 表显示完全混杂。后面的 P 值描述三个标签下的样本分布，不识别单独的地理或盐碱效应。
 
-### 3. 从计数表独立计算三种测量口径
+### 从计数表独立计算三种测量口径
 
 主分析使用 90% sample coverage；raw 与 10,000 reads 只用于 sensitivity analysis。三种结果都在本页从计数表计算，不把外部 Alpha 结果表作为隐性输入。
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 community <- t(otutab)
 library_size <- rowSums(community)
 observed <- vegan::specnumber(community)
@@ -598,9 +565,11 @@ c(
 )
 ```
 
-### 4. 先描述分布，但不让诊断替我们选择 P 值
+### 先描述分布，但不让诊断替我们选择 P 值
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 sample_skewness <- function(x) {
   n <- length(x)
   s <- sd(x)
@@ -646,11 +615,13 @@ distribution_diagnostics
 
 `q=1` 与 `q=2` 在部分组有长尾和 Tukey outliers，所以正文把 Kruskal–Wallis 解释为秩分布比较，而不把它缩写成“中位数检验”。
 
-### 5. 三个总体检验构成一个主检验族
+### 三个总体检验构成一个主检验族
 
 epsilon-squared 使用 \((H-k+1)/(n-k)\)，负的小样本估计截为 0。它描述秩差异的总体量级，不替代原始分布图。
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 omnibus_rows <- lapply(0:2, function(order_q) {
   x <- alpha_coverage[
     alpha_coverage$Order == order_q,
@@ -687,11 +658,13 @@ omnibus_tests
 
 这里的“没有拒绝原假设”不等于证明三组完全相同；它表示当前样本与分析精度不足以支持预先指定的组间差异声明。
 
-### 6. 九个计划成对比较统一做 Holm 校正
+### 九个计划成对比较统一做 Holm 校正
 
 每个 contrast 的方向固定为 `GroupA minus GroupB`。bootstrap 在两组内部各自重采样，保留原组样本数，不把所有样本混合后再抽。
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 cliffs_delta <- function(x, y) {
   differences <- outer(x, y, "-")
   (sum(differences > 0) - sum(differences < 0)) /
@@ -786,9 +759,11 @@ pairwise_tests
 
 最大的观察效应出现在 (q=0) 的 Inland wetland vs Tibetan Plateau：Cliff's \(\delta=0.258\)，95% bootstrap CI 为 -0.033 到 0.547，九项全局 Holm P = 0.789。区间跨过 0，因此数据同时容许接近无效应和中等正向优势；只看点估计会夸大确定性。
 
-### 7. 把 Welch 与标准化选择放入敏感性分析
+### 把 Welch 与标准化选择放入敏感性分析
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 welch_sensitivity <- bind_rows(lapply(0:2, function(order_q) {
   x <- alpha_coverage[
     alpha_coverage$Order == order_q,
@@ -855,11 +830,13 @@ standardization_sensitivity
 
 Welch sensitivity 的三个 Holm P 分别为 0.422、1.000 和 1.000，与主分析方向一致。标准化敏感性中只有 raw (q=0) 的未校正 P 低于 0.05；把九项诊断作为同一族做 Holm 校正后，它也变为 0.311。
 
-## 出版级美化 {#sec-publication}
+## 同时展示样本分布、效应与区间 {#sec-publication}
 
-### 1. 先画设计选择图
+### 先画设计选择图
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
 design_plot_data <- data.frame(
   Branch = factor(
     c(
@@ -954,9 +931,11 @@ save_pub(
 )
 ```
 
-### 2. 主图保留每个样本，不用星号代替结果
+### 主图保留每个样本，不用星号代替结果
 
 ```{r}
+#| results: hold
+#| label: reader-step-11
 format_p <- function(p) {
   ifelse(
     is.na(p),
@@ -1049,9 +1028,11 @@ save_pub(
 )
 ```
 
-### 3. 用敏感性图暴露标准化依赖
+### 用敏感性图暴露标准化依赖
 
 ```{r}
+#| results: hold
+#| label: reader-step-12
 sensitivity_plot_data <- standardization_sensitivity |>
   mutate(
     OrderLabel = factor(
@@ -1139,9 +1120,11 @@ save_pub(
 )
 ```
 
-### 4. 成对结果用效应量 forest plot，而不是括号森林
+### 成对结果用效应量 forest plot，而不是括号森林
 
 ```{r}
+#| results: hold
+#| label: reader-step-13
 forest_plot_data <- pairwise_tests |>
   mutate(
     OrderPanel = factor(
@@ -1225,7 +1208,7 @@ save_pub(
 
 四张图均生成 PDF、SVG、600 ppi PNG 与 LZW-compressed TIFF。PDF/SVG 用于排版，PNG 适合网页与公众号，TIFF 用于要求高分辨率位图的期刊系统。
 
-### 5. 对完整分析做机器回验
+### 对完整分析做机器回验
 
 验证器会重新读取三件套并核对输入 checksum、设计分支、coverage 计算、三个总体检验、九个成对比较、5,000 次 bootstrap、Holm 检验族、四种文件格式、物理尺寸、字体、SVG text nodes、600 ppi 和 TIFF LZW compression：
 
@@ -1241,6 +1224,8 @@ Rscript --vanilla scripts/validate_alpha_group_tests.R \
 项目审计结果存在时，下面代码要求全部 188 项通过；只复制分析代码时，不需要该审计目录也能完成前面的计算和出图。
 
 ```{r}
+#| results: hold
+#| label: reader-step-14
 audit_summary_path <- paste0(
   "results/20-alpha-group-tests/",
   "alpha-group-tests-summary.json"
@@ -1289,7 +1274,7 @@ if (file.exists(audit_summary_path)) {
 若同一 SubjectID 在两个条件下被重复采样，普通 jitter + boxplot 会隐藏配对。应增加连接同一 subject 的细线或画 within-subject change，并使用 paired test；三个以上时间点通常需要纵向模型，而不是把每个时间点拆成多个独立 Wilcoxon。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告Alpha多样性组间比较的方法与限制 {#sec-methods}
 
 下面英文与本例实际代码和结果一致：
 
@@ -1297,9 +1282,9 @@ if (file.exists(audit_summary_path)) {
 
 正式稿还要把 `Group` 的生物学定义、实验单位、排除标准、缺失值处理和混杂变量写清楚。若 metadata 有 repeated measures，上面“analysed as three independent groups”必须替换成真实的 mixed-model 或 paired design。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将Alpha多样性组间比较用于自己的研究 {#sec-own-data}
 
-### 1. 替换三件套路径和分组列
+### 替换三件套路径和分组列
 
 ```{r}
 #| eval: false
@@ -1331,7 +1316,7 @@ metadata$AnalysisGroup <- factor(metadata[[group_col]])
 - 图中的中文分组先 recode 成英文；
 - 任何 subject、pair、time、site、batch、family、cage 或 center 列都要保留，不能为了简化表格而删除。
 
-### 2. 独立样本分支
+### 独立样本分支
 
 两个独立组可运行一个预先指定的 rank-sum comparison；三个以上独立组先做 omnibus，再输出所有计划 contrasts。不要根据总体 P 是否低于 0.05 才决定隐藏或显示预先计划的 pairwise estimates。
 
@@ -1362,7 +1347,7 @@ fit
 
 若主要 estimand 是 mean difference，并且 residual diagnostics 支持连续模型，可预先选择 Welch test 或带协变量的 linear model；“non-parametric”并不自动等于更正确。
 
-### 3. 配对两条件分支
+### 配对两条件分支
 
 先保留完整 pair，再显式按 `SubjectID` 对齐。不能只把 `paired = TRUE` 加到两列未排序的数据上。
 
@@ -1402,7 +1387,7 @@ paired_fit
 
 图中应按 `SubjectID` 连接两次观测，并报告 within-subject change 的效应量与区间。
 
-### 4. 三个以上时间点或重复测量分支
+### 三个以上时间点或重复测量分支
 
 重复测量通常需要 mixed-effects model。下面是连续响应经 `log1p` 转换后的起点；随机截距、随机斜率、时间函数和残差结构要由真实采样设计决定。
 
@@ -1438,7 +1423,7 @@ pairs(planned_contrasts, adjust = "holm")
 
 如果随机斜率导致 singular fit，不要悄悄删除它；先检查每个 subject 的时间点数、时间变化和设计可辨识性，再报告简化理由。
 
-### 5. 在看结果前写下检验族
+### 在看结果前写下检验族
 
 至少固定以下内容：
 

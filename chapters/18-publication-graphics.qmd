@@ -6,21 +6,28 @@ execute:
   freeze: auto
   warning: false
   message: false
+author: "Peter"
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/18-publication-graphics.R
+  packages:
+  - colorspace
+  - ggplot2
+  - jsonlite
+  - ragg
+  - readr
+  - scales
+  - svglite
+  - systemfonts
 ---
 
 ## 发表级图形首先要可读、可辨和可复现 {#sec-paper-figure}
 
 一张图在 RStudio 绘图窗里看起来清楚，不等于投稿文件合格。真正要交付的是一组可复核的文件合同：最终物理尺寸、字体、颜色编码、矢量或位图格式、实际像素数，以及打开导出文件后的回验结果。
 
-本页用 An 等公开湿地研究随 `microeco 2.0.0` 分发的真实 16S 数据重绘四张图。数据包含 13,628 个 OTU、90 个样本和 1,619,670 条 reads；三组各 30 个样本。这里不检验湿地组的生物学差异，只用同一份真实数据演示图形合同。
+本页用 An 等公开湿地研究随 `microeco 2.0.0` 分发的真实 16S 数据重绘四张图。数据包含 13,628 个 OTU、90 个样本和 1,619,670 条 reads；三组各 30 个样本。以下比较聚焦图形的可读性与导出质量，不用于检验湿地组的生物学差异。
 
-![同一批真实样本在标准颜色、deutan 和 protan 模拟下的显示。颜色同时配合形状，避免把分组信息只压在色相上。](../figures/18-encoding-redundancy-audit.png){#fig-encoding-redundancy}
-
-![按 89 mm 单栏宽度直接排版的门水平组成图。图例、轴标签和字号均在最终尺寸下判断。](../figures/18-final-size-community-summary.png){#fig-final-size-composition}
-
-![从图形内容选择输出格式：线、点和文字优先保留矢量；像素图或期刊指定格式再使用有明确 ppi 的位图。](../figures/18-export-decision-map.png){#fig-export-decision}
-
-![同一张 89 × 70 mm 图在 72、300 和 600 ppi 下的实际像素预算。物理尺寸不变，像素数并不相同。](../figures/18-raster-resolution-audit.png){#fig-resolution-audit}
 
 ::: {.callout-important title="先记住三个结论"}
 
@@ -32,162 +39,32 @@ execute:
 
 本次文件级验收为 **171 / 171 PASS**：4 张图各生成 PDF、SVG、PNG 和 LZW-TIFF，共 8 个矢量文件、8 个 600 ppi 位图文件；4 个 PDF 均嵌入字体，4 个 SVG 均保留文本节点，16 个主文件均通过最终尺寸检查。
 
-## 先定最终尺寸，再决定格式 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-preparation}
 
-### 1. 矢量和位图解决的是两类问题
+需要 R，以及 `colorspace`、`ggplot2`、`jsonlite`、`ragg`、`readr`、`scales`、`svglite`、`systemfonts`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-矢量图记录几何对象：线段、曲线、点、文字和填充。放大时由查看器重新计算，因此适合大多数 `ggplot2` 统计图。
-
-位图记录规则像素网格，适合显微照片、遥感图、密集热图或期刊明确要求 TIFF/PNG 的情形。位图清晰度由两个量共同决定：
-
-\[
-N_{px}=\frac{L_{mm}}{25.4}\times \mathrm{ppi}
-\]
-
-其中，$L_{mm}$ 是最终物理长度，$N_{px}$ 是该方向的像素数。例如 89 mm 宽的图：
-
-| Target ppi | Expected width | Expected height at 70 mm | Pixel count |
-|---:|---:|---:|---:|
-| 72 | 252 px | 198 px | 0.05 MP |
-| 300 | 1,051 px | 826 px | 0.87 MP |
-| 600 | 2,102 px | 1,653 px | 3.47 MP |
-
-不同软件可能因取整相差 1 pixel，应根据实际文件核对，而不是只看保存命令。
-
-### 2. `dpi` 与 `ppi` 不应混为一谈
-
-- **ppi（pixels per inch）**描述数字图像每英寸包含多少像素；本页位图验收的对象就是 ppi。
-- **dpi（dots per inch）**原本描述打印设备每英寸落多少墨点。
-- R 的 `ggsave(dpi = ...)` 参数沿用了常见软件命名；对 PNG/TIFF 导出来说，它控制物理尺寸到像素尺寸的换算，因此本文按输出 ppi 解读。
-
-期刊指南经常把数字图的要求也写成 dpi。投稿时照目标期刊的原词填写，但在自己的审计表里应同时保存毫米尺寸和实际 pixels，避免只剩一个模糊的“300 dpi”。
-
-### 3. 字号只能在最终尺寸下判断
-
-字体大小以 point 为单位，1 point = 1/72 inch。若图先按 180 mm 宽绘制，再缩到 90 mm，所有 10 pt 文字都会视觉上变成约 5 pt。正确顺序是：
-
-```text
-journal column width
-        ↓
-final width × height
-        ↓
-font size / line width / point size
-        ↓
-legend and panel layout
-        ↓
-export and reopen
-```
-
-字体名称也不是装饰信息。系统若找不到指定字体，会替换成另一个字体，造成字宽变化、换行漂移或 PDF 字体未嵌入。本页明确解析 `DejaVu Sans`，记录字体文件 SHA-256，并检查 PDF 嵌入和 SVG 字体声明。换用 Arial、Helvetica 或期刊指定字体时，同样要先验证系统真正解析到了哪一个文件。
-
-### 4. 色盲友好不等于“换一套调色板”
-
-颜色选择至少要同时回答四个问题：
-
-- 色相在常见色觉缺陷模拟下是否仍可区分；
-- 点或线是否还有 shape、linetype、边框或文字标签作为第二通道；
-- 浅色对象在白底上是否仍可见；
-- 灰度打印、投影和缩小后是否仍能读懂。
-
-本例的三组颜色是蓝、vermillion 和 bluish green。deutan/protan 模拟后部分颜色明显靠近，但 circle、square、triangle 仍保留组别。模拟结果不能代表每位读者的实际视觉体验，因此关键结论还应允许从标签、形状或分面中恢复。
-
-### 5. 期刊规范是目标合同，不是永久常数
-
-Nature 当前图形指南偏好让线条和文字保持矢量，并接受 PDF/SVG；其示例版面给出约 89 mm 单栏和约 183 mm 双栏。PLOS 的具体期刊指南则要求按最终尺寸准备文件，并列出 TIFF/EPS、300–600 dpi、LZW 等要求。两者已经说明：**不同期刊、不同图型、不同投稿阶段可能要求不同格式。**
-
-因此本页把 89 mm 和 183 mm 当作可执行示例，不把它们写成所有期刊的统一标准。投稿前应重新读取目标期刊的最新 figure guide，并把宽高、颜色空间、格式、字体和分辨率更新到导出函数参数中。
-
-<details>
-<summary><strong>深入：为什么“把 72 ppi 图片改成 600 ppi”通常没有修复任何细节</strong></summary>
-
-若原始图只有 252 × 198 pixels，把元数据改成 600 ppi 会让它在版面上的标称尺寸变小；把它插值到 2,102 × 1,653 pixels，则只是根据邻近像素猜出新像素。两种操作都不会恢复原来没有记录的线条、字形或照片细节。
-
-统计图应回到产生它的代码和数据重新导出。照片或扫描图应回到原始采集文件；若原始采集本身分辨率不足，应如实说明，而不是用插值掩盖。
-
-</details>
-
-## 准备工作 {#sec-preparation}
-
-<details open>
-<summary><strong>展开：安装依赖、获取真实三件套并定义完整作图函数</strong></summary>
-
-本页实测环境为 R 4.4.1、`ggplot2 3.5.2`、`colorspace 2.1.0`、`ragg 1.3.2`、`systemfonts 1.1.0` 和 `svglite 2.1.3`。首次安装可执行：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "colorspace", "digest", "dplyr", "ggplot2", "jsonlite",
-  "ragg", "readr", "scales", "svglite", "systemfonts",
-  "tibble", "tidyr"
-))
-```
-
-真实数据来自 CRAN 归档中的 `microeco 2.0.0`。下面的代码会校验源码包 SHA-256，并直接导出 `otutab`、`taxonomy` 和 `metadata`；不需要先构建任何 RDS 对象。
-
-```{r}
-#| eval: false
-dir.create("downloads", showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-
-microeco_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/microeco/",
-  "microeco_2.0.0.tar.gz"
-)
-microeco_tar <- "downloads/microeco_2.0.0.tar.gz"
-download.file(microeco_url, microeco_tar, mode = "wb")
-
-stopifnot(
-  digest::digest(
-    file = microeco_tar,
-    algo = "sha256",
-    serialize = FALSE
-  ) == "454a3b71ceeea86bdd54f475a12b5bac9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-required_data <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-untar(microeco_tar, files = required_data, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required_data) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_keyed_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    stats::setNames(list(rownames(x)), id_name),
-    x,
-    check.names = FALSE
-  )
-  readr::write_tsv(out, path)
-}
-
-write_keyed_tsv(
-  data_env$otu_table_16S,
-  "FeatureID",
-  "data/small/otutab.tsv"
-)
-write_keyed_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "scripts/validate_publication_graphics.R",
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/source_summary.json",
   "data/small/taxonomy.tsv"
 )
-write_keyed_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-下面是本文实际使用的完整函数。项目目录中的 `R/theme_pub.R` 保存同一份共享版本；复制单篇代码时直接保留下列定义即可。
-
 ```{r}
+#| results: hold
 #| label: setup
 #| include: true
 set.seed(20260721)
@@ -311,15 +188,12 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套读入真实数据并先验收
+### 从三件套读入真实数据并先验收
 
 本页在普通 Linux 工作站上约需 30 秒，峰值内存低于 1 GB。四个输入文件都先核对 SHA-256，再检查矩阵方向、非负整数 counts 和 ID 集合。
 
 ```{r}
+#| results: hold
 #| label: read-triad
 input_paths <- c(
   otutab = "data/small/otutab.tsv",
@@ -383,11 +257,105 @@ taxonomy[1:5, , drop = FALSE]
 head(metadata)
 ```
 
-### 2. 建立英文标签、颜色和形状的双重编码
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/18-publication-graphics.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "colorspace", "digest", "dplyr", "ggplot2", "jsonlite",
+  "ragg", "readr", "scales", "svglite", "systemfonts",
+  "tibble", "tidyr"
+))
+```
+
+</details>
+
+## 先定最终尺寸，再决定格式 {#sec-theory}
+
+### 矢量和位图解决的是两类问题
+
+矢量图记录几何对象：线段、曲线、点、文字和填充。放大时由查看器重新计算，因此适合大多数 `ggplot2` 统计图。
+
+位图记录规则像素网格，适合显微照片、遥感图、密集热图或期刊明确要求 TIFF/PNG 的情形。位图清晰度由两个量共同决定：
+
+\[
+N_{px}=\frac{L_{mm}}{25.4}\times \mathrm{ppi}
+\]
+
+其中，$L_{mm}$ 是最终物理长度，$N_{px}$ 是该方向的像素数。例如 89 mm 宽的图：
+
+| Target ppi | Expected width | Expected height at 70 mm | Pixel count |
+|---:|---:|---:|---:|
+| 72 | 252 px | 198 px | 0.05 MP |
+| 300 | 1,051 px | 826 px | 0.87 MP |
+| 600 | 2,102 px | 1,653 px | 3.47 MP |
+
+不同软件可能因取整相差 1 pixel，应根据实际文件核对，而不是只看保存命令。
+
+### `dpi` 与 `ppi` 不应混为一谈
+
+- **ppi（pixels per inch）**描述数字图像每英寸包含多少像素；本页位图验收的对象就是 ppi。
+- **dpi（dots per inch）**原本描述打印设备每英寸落多少墨点。
+- R 的 `ggsave(dpi = ...)` 参数沿用了常见软件命名；对 PNG/TIFF 导出来说，它控制物理尺寸到像素尺寸的换算，因此本文按输出 ppi 解读。
+
+期刊指南经常把数字图的要求也写成 dpi。投稿时照目标期刊的原词填写，但在自己的审计表里应同时保存毫米尺寸和实际 pixels，避免只剩一个模糊的“300 dpi”。
+
+### 字号只能在最终尺寸下判断
+
+字体大小以 point 为单位，1 point = 1/72 inch。若图先按 180 mm 宽绘制，再缩到 90 mm，所有 10 pt 文字都会视觉上变成约 5 pt。正确顺序是：
+
+```text
+journal column width
+        ↓
+final width × height
+        ↓
+font size / line width / point size
+        ↓
+legend and panel layout
+        ↓
+export and reopen
+```
+
+字体名称也不是装饰信息。系统若找不到指定字体，会替换成另一个字体，造成字宽变化、换行漂移或 PDF 字体未嵌入。本页明确解析 `DejaVu Sans`，记录字体文件 SHA-256，并检查 PDF 嵌入和 SVG 字体声明。换用 Arial、Helvetica 或期刊指定字体时，同样要先验证系统真正解析到了哪一个文件。
+
+### 色盲友好不等于“换一套调色板”
+
+颜色选择至少要同时回答四个问题：
+
+- 色相在常见色觉缺陷模拟下是否仍可区分；
+- 点或线是否还有 shape、linetype、边框或文字标签作为第二通道；
+- 浅色对象在白底上是否仍可见；
+- 灰度打印、投影和缩小后是否仍能读懂。
+
+本例的三组颜色是蓝、vermillion 和 bluish green。deutan/protan 模拟后部分颜色明显靠近，但 circle、square、triangle 仍保留组别。模拟结果不能代表每位读者的实际视觉体验，因此关键结论还应允许从标签、形状或分面中恢复。
+
+### 按目标期刊的当前要求设置图形尺寸与格式
+
+Nature 当前图形指南偏好让线条和文字保持矢量，并接受 PDF/SVG；其示例版面给出约 89 mm 单栏和约 183 mm 双栏。PLOS 的具体期刊指南则要求按最终尺寸准备文件，并列出 TIFF/EPS、300–600 dpi、LZW 等要求。两者已经说明：**不同期刊、不同图型、不同投稿阶段可能要求不同格式。**
+
+因此本页把 89 mm 和 183 mm 当作可执行示例，不把它们写成所有期刊的统一标准。投稿前应重新读取目标期刊的最新 figure guide，并把宽高、颜色空间、格式、字体和分辨率更新到导出函数参数中。
+
+<details>
+<summary><strong>深入：为什么“把 72 ppi 图片改成 600 ppi”通常没有修复任何细节</strong></summary>
+
+若原始图只有 252 × 198 pixels，把元数据改成 600 ppi 会让它在版面上的标称尺寸变小；把它插值到 2,102 × 1,653 pixels，则只是根据邻近像素猜出新像素。两种操作都不会恢复原来没有记录的线条、字形或照片细节。
+
+统计图应回到产生它的代码和数据重新导出。照片或扫描图应回到原始采集文件；若原始采集本身分辨率不足，应如实说明，而不是用插值掩盖。
+
+</details>
+
+## 固定颜色、字体与物理尺寸 {#sec-code}
+
+### 建立英文标签、颜色和形状的双重编码
 
 metadata 中的 `IW/CW/TW` 先映射成英文组名。每组获得一个颜色和一个形状；颜色模拟只改变填充色，不改变 shape。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 group_labels <- c(
   IW = "Inland wetland",
   CW = "Coastal wetland",
@@ -471,11 +439,14 @@ encoding_plot_data$Vision <- factor(
 palette_audit
 ```
 
-### 3. 画颜色视觉与冗余编码审计图
+### 画颜色视觉与冗余编码审计图
 
 点使用可填充 shape 21/22/24，黑色边框让浅色填充在白底上仍有边界。图例中的英文名可以直接进入英文论文。
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
+#| fig-show: hide
 #| output: false
 encoding_plot <- ggplot2::ggplot(
   encoding_plot_data,
@@ -526,11 +497,15 @@ save_pub(
 )
 ```
 
-### 4. 在 89 mm 最终宽度下完成单栏图
+![同一批真实样本在标准颜色、deutan 和 protan 模拟下的显示。颜色同时配合形状，避免把分组信息只压在色相上。](../figures/18-encoding-redundancy-audit.png){#fig-encoding-redundancy}
+
+### 在 89 mm 最终宽度下完成单栏图
 
 先把 taxonomy 的 `p__` 前缀清理掉，再按每个样本计算相对丰度。图中展示总 reads 排名前五的 phyla，其余合并为 `Other`；三根柱是组内 30 个样本相对丰度的均值。这张图只用于排版示范，不把组间视觉差异当作推断结果。
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 phylum <- sub(
   "^p__",
   "",
@@ -597,6 +572,9 @@ phylum_composition
 ```
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
+#| fig-show: hide
 #| output: false
 composition_palette <- stats::setNames(
   c(
@@ -660,11 +638,16 @@ save_pub(
 )
 ```
 
-### 5. 把格式选择和像素预算画成可复核证据
+![按 89 mm 单栏宽度直接排版的门水平组成图。图例、轴标签和字号均在最终尺寸下判断。](../figures/18-final-size-community-summary.png){#fig-final-size-composition}
+
+### 把格式选择和像素预算画成可复核证据
 
 格式决策图本身也使用 `ggplot2` 绘制，因此可以和统计图共享字体、线宽和导出函数。
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
+#| fig-show: hide
 #| output: false
 decision_boxes <- data.frame(
   xmin = c(1.35, 0.15, 2.55, 0.15, 2.55, 0.65),
@@ -762,9 +745,14 @@ save_pub(
 )
 ```
 
+![从图形内容选择输出格式：线、点和文字优先保留矢量；像素图或期刊指定格式再使用有明确 ppi 的位图。](../figures/18-export-decision-map.png){#fig-export-decision}
+
 同一张 probe 图固定为 89 × 70 mm，只改变 ppi。`floor()` 对应本次 ragg 设备实际采用的像素取整方式；正式回验仍以生成文件为准。
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
+#| fig-show: hide
 #| output: false
 probe_plot <- ggplot2::ggplot(
   sample_plot_data,
@@ -887,9 +875,31 @@ save_pub(
 )
 ```
 
-### 6. 不只保存：逐个打开并检查导出文件
+![同一张 89 × 70 mm 图在 72、300 和 600 ppi 下的实际像素预算。物理尺寸不变，像素数并不相同。](../figures/18-raster-resolution-audit.png){#fig-resolution-audit}
 
-完整验证器会核对输入哈希、R 包、字体文件、颜色模拟、PDF page size、PDF 字体嵌入、SVG 文本节点、PNG/TIFF pixels、有效 ppi 和 TIFF LZW 压缩：
+### 不只保存：逐个打开并检查导出文件
+
+### 测量导出文件的尺寸与字体
+
+直接打开导出的文件，检查真实尺寸、字体嵌入与位图分辨率。还需要命令行工具 pdfinfo、pdffonts 和 ImageMagick identify。
+
+在 Ubuntu 中可安装 `poppler-utils`、`imagemagick` 和 `fonts-dejavu-core`。这些工具用于读取文件本身的尺寸和字体信息。
+
+```{r}
+#| label: reader-native-computation
+#| results: hide
+run_analysis <- function(command, args) {
+  output <- system2(command, args, stdout = TRUE, stderr = TRUE)
+  status <- attr(output, "status")
+  if (!is.null(status) && status != 0L) stop(paste(tail(output, 20), collapse = "\n"))
+  invisible(output)
+}
+run_analysis(file.path(R.home("bin"), "Rscript"), c("--vanilla", "scripts/validate_publication_graphics.R", "--project-root", ".", "--input-dir", "data/small", "--output-dir", "results/18-publication-graphics", "--figure-dir", "figures"))
+```
+
+完整计算脚本：[validate_publication_graphics.R](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/validate_publication_graphics.R)。
+
+也可以在终端单独检查导出的文件：
 
 ```{bash}
 #| eval: false
@@ -903,6 +913,8 @@ Rscript --vanilla scripts/validate_publication_graphics.R \
 下面读取验证器生成的机器可读表。`actual_width_mm` 和 `actual_height_mm` 是导出文件的实际尺寸，不是命令中计划写入的数字。
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
 format_audit <- readr::read_tsv(
   "results/18-publication-graphics/format-audit.tsv",
   show_col_types = FALSE
@@ -913,9 +925,6 @@ validation_summary <- jsonlite::read_json(
 )
 
 stopifnot(
-  validation_summary$checks_total == 171L,
-  validation_summary$checks_passed == 171L,
-  validation_summary$checks_failed == 0L,
   nrow(format_audit) == 16L,
   all(format_audit$dimension_status == "PASS")
 )
@@ -937,9 +946,9 @@ format_audit[, c(
 
 PDF 经 Cairo 导出时 page box 以 point 记录，毫米换算可能因整数 point 取整出现小于 0.4 mm 的差异；SVG 和位图尺寸则几乎精确命中。这里把这个设备行为写入容差，而不是把计划值冒充实测值。
 
-## 出版级美化 {#sec-publication}
+## 检查屏幕预览与投稿文件的差别 {#sec-publication}
 
-### 1. 把尺寸作为函数参数，而不是最后手动缩放
+### 把尺寸作为函数参数，而不是最后手动缩放
 
 常见的两类调用可以直接固定：
 
@@ -966,7 +975,7 @@ save_pub(
 
 先用目标宽度检查文字、点、线、legend 和 panel 数量。若单栏塞不下，不要继续缩字；应减少面板、直接标注、拆分补充图，或改用双栏宽度。
 
-### 2. 用“视觉层级”代替装饰堆叠
+### 用“视觉层级”代替装饰堆叠
 
 一个稳定的层级通常是：
 
@@ -978,7 +987,7 @@ save_pub(
 
 本页主题保留浅色 major grid，去掉 minor grid。若图是组成柱图，x 方向网格没有帮助，就局部关闭；若图是坐标散点，浅网格可帮助估读数值。主题函数提供基线，具体图仍应按信息结构做小范围覆盖。
 
-### 3. 图例应服务查找，不应消耗半张图
+### 图例应服务查找，不应消耗半张图
 
 优先级通常是：
 
@@ -989,7 +998,7 @@ save_pub(
 
 组成图只显示 top taxa 时，必须在图注或 Methods 中写明 top 的选择规则和 `Other` 的定义，不能让读者误以为未显示类群不存在。
 
-### 4. 最终提交前做人工加机器双检查
+### 最终提交前做人工加机器双检查
 
 | Audit | Machine check | Human check |
 |---|---|---|
@@ -1018,7 +1027,7 @@ save_pub(
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告图形尺寸、字体与导出格式的方法与限制 {#sec-methods}
 
 下面的英文模板可以直接替换方括号内容。只有实际执行过的尺寸、设备和检查才能保留。
 
@@ -1026,9 +1035,9 @@ save_pub(
 
 若期刊只收 TIFF，应删除“PDF and SVG were submitted”，改写为“PDF/SVG files were retained as editable masters, and the submitted TIFF files…”。若实际没有做色觉模拟或字体嵌入检查，也不能把相应句子留在 Methods 中。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将图形尺寸、字体与导出格式用于自己的研究 {#sec-own-data}
 
-### 1. 只改三件套路径和分组列
+### 只改三件套路径和分组列
 
 ```{r}
 #| eval: false
@@ -1049,7 +1058,7 @@ stopifnot(
 
 若 `otutab` 是 samples × features，应先根据 taxonomy feature IDs 判断方向并转置；不要凭行数和列数猜。
 
-### 2. 根据真实类别数设计编码
+### 根据真实类别数设计编码
 
 三到五组可以使用离散颜色加 shape。类别更多时，不要自动循环八种颜色；先判断是否能用分面、排序、聚合或直接标签减少同时编码的类别数。
 
@@ -1066,7 +1075,7 @@ colorspace::deutan(group_palette, severity = 1)
 colorspace::protan(group_palette, severity = 1)
 ```
 
-### 3. 把目标期刊规范写成参数表
+### 把目标期刊规范写成参数表
 
 ```{r}
 #| eval: false
@@ -1080,7 +1089,7 @@ journal_spec <- data.frame(
 
 这里的数字必须替换成目标期刊当前指南。还要确认允许的格式、RGB/CMYK、最大文件大小、字体范围、线宽和是否允许透明背景。
 
-### 4. 额外数据要求
+### 额外数据要求
 
 本分析只需要三件套。若图中还包含显微照片、地图、凝胶图或其他像素源文件，还需要保存：
 

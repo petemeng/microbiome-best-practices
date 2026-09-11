@@ -1,6 +1,6 @@
 ---
 title: "微生物组与时间结局：Cox、Kaplan–Meier 与时间依赖 ROC"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,20 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/45-survival-analysis.R
+  packages:
+  - ggplot2
+  - glmnet
+  - ragg
+  - readr
+  - scales
+  - survival
+  - svglite
+  - timeROC
 ---
-
-> **分析目标：**把 baseline 16S profile 与后续事件时间正确对齐：用 Kaplan–Meier 描述预先定义的 treatment groups，用调整 Sex/Treatment 的逐 genus Cox 模型估计 hazard ratio 并检验 proportional-hazards assumption，再用 training-only ridge-Cox 预测独立 test set 的 time-dependent ROC。  
-> **输入文件：**三件套 `data/small/survival-t1d/{otutab,taxonomy,metadata}.tsv`；metadata 必须额外含 event/censor time、event indicator、Sex 与 Treatment。  
-> **预计资源：**348 个 OTU、173 只 NOD mice、118 次 T1D onset events；逐 genus Cox、固定 70/30 split、ridge-Cox 与 test-only timeROC 通常少于 2 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ::: {.callout-important title="这类分析比普通三件套多需要什么"}
 每个样本还必须有：`FollowUpTime`、`Event`（1=发生目标事件，0=右删失）、明确的 time origin，以及准备调整的临床/实验 covariates。只有 case/control 标签不能做 survival analysis；把随访末是否患病当普通二分类会丢失 censoring 与事件时间。
@@ -29,76 +38,43 @@ fig-format: png
 
 ## 时间结局分析需要同时定义起点、事件和删失 {#sec-target}
 
-[Zhang et al. (2018)](https://doi.org/10.1038/s41564-018-0251-7)研究 early-life antibiotics、gut microbiome 与 NOD mice type 1 diabetes development；[Gu et al. (2023)](https://doi.org/10.1128/spectrum.05059-22)基于该公开数据提出 MiSurv。以下分析使用 6–8-week baseline 16S tables，依次检查 treatment KM、adjusted genus HR、PH diagnostic 与 locked-test time-dependent ROC。
+[Zhang et al. (2018)](https://doi.org/10.1038/s41564-018-0251-7)研究 early-life antibiotics、gut microbiome 与 NOD mice type 1 diabetes development；[Gu et al. (2023)](https://doi.org/10.1128/spectrum.05059-22)基于该公开数据提出 MiSurv。以下分析使用 6–8-week baseline 16S tables，依次检查 treatment KM、adjusted genus HR、PH diagnostic 与 锁定测试集 time-dependent ROC。
 
 ::: {.callout-warning title="结局边界"}
 这里的 event 是 **NOD 小鼠 T1D 起病**，不是人类死亡、overall survival 或临床无进展生存。示例展示统计接口；把代码迁移到人群研究时，必须重新定义 time origin、competing events、loss to follow-up 与 covariates。
 :::
 
-## 生存分析必须先定义起点、删失和预测时点 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 生存对象包含时间和事件状态
+需要 R，以及 `ggplot2`、`glmnet`、`ragg`、`readr`、`scales`、`survival`、`svglite`、`timeROC`。本次使用微生物组三张表；样本信息还包含随访时间、事件与删失信息。
 
-样本在 6–8 weeks 采集；原始 `T1Dweek` 是 onset 或 censoring age，因此对每只小鼠定义
-
-$$
-T_i=\mathrm{T1Dweek}_i-\mathrm{SamplingWeek}_i.
-$$
-
-`Event=1` 表示随访中发生 T1D onset，`Event=0` 表示截至该时间仍未发生并被 right-censored。所有 microbial predictors 必须来自 time zero 或之前，否则会产生 immortal-time/data leakage。
-
-### 2. Kaplan–Meier 描述预先定义 groups
-
-$$
-\hat S(t)=\prod_{t_j\le t}\left(1-\frac{d_j}{n_j}\right).
-$$
-
-KM 适合展示 Treatment 等实验前定义的组。连续 microbial abundance 不应为了画漂亮曲线就在全数据寻找“最佳 cutoff”；主分析保留连续 CLR predictor。
-
-### 3. Cox 模型估计相对 hazard
-
-$$
-h_i(t)=h_0(t)\exp(\beta_g z_{ig}+\gamma_1\mathrm{Sex}_i+\gamma_2\mathrm{Treatment}_i).
-$$
-
-这里 $z_{ig}$ 是 genus CLR abundance 的 1-SD standardization，$e^{\beta_g}$ 为每增加 1 SD 的 adjusted hazard ratio。每个 genus 模型共同调整 Sex 与 Treatment，所有 genus p-values 一次 BH correction。
-
-### 4. proportional hazards 需要诊断
-
-Cox 假设 covariate effect 不随时间变化。Schoenfeld residual test/plot 若提示 violation，应考虑 time-varying coefficient、stratified Cox、restricted mean survival time 或分段模型，而不是只删去不合假设的结果。
-
-### 5. time-dependent ROC 依赖 horizon
-
-同一 risk score 在 10、15、20 weeks 的 discrimination 可以不同。本文的 ridge-Cox preprocessing、feature selection、lambda 和 risk cutoff 全部由 training set 决定；test set 只用于一次性 C-index/timeROC。没有 external cohort，因此仍属于 held-out internal validation。
-
-<details>
-<summary><strong>深入：竞争风险何时不可忽略</strong></summary>
-
-若“非目标死亡”会阻止目标事件发生，它不是普通 censoring。cause-specific Cox 回答当前 event-free 个体的瞬时 cause-specific hazard；Fine–Gray 回答 cumulative-incidence subdistribution。Methods 必须说明 competing event 定义与 estimand。本小鼠数据只分 T1D onset 与 right censoring，因此不虚构 competing event branch。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "glmnet", "ragg", "readr", "scales", "survival",
-  "svglite", "systemfonts", "timeROC"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/survival-t1d/metadata.tsv",
+  "data/small/survival-t1d/otutab.tsv",
+  "data/small/survival-t1d/source-summary.json",
+  "data/small/survival-t1d/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-
 ```{r}
+#| results: hold
 #| label: setup-survival-theme
 library(ggplot2)
 library(survival)
 
 set.seed(20260745)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -137,13 +113,10 @@ save_pub <- function(plot, file_base, width = 89, height = 70, units = "mm", dpi
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并定义 time origin
+### 读取三件套，并确定随访起点
 
 ```{r}
+#| results: hold
 #| label: read-survival-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE,
@@ -181,9 +154,70 @@ head(taxonomy)
 head(metadata)
 ```
 
-### 2. 聚合到 genus，并保留连续 CLR predictors
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/45-survival-analysis.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "glmnet", "ragg", "readr", "scales", "survival",
+  "svglite", "systemfonts", "timeROC"
+))
+```
+
+</details>
+
+## 生存分析必须先定义起点、删失和预测时点 {#sec-theory}
+
+### 生存对象包含时间和事件状态
+
+样本在 6–8 weeks 采集；原始 `T1Dweek` 是 onset 或 censoring age，因此对每只小鼠定义
+
+$$
+T_i=\mathrm{T1Dweek}_i-\mathrm{SamplingWeek}_i.
+$$
+
+`Event=1` 表示随访中发生 T1D onset，`Event=0` 表示截至该时间仍未发生并被 right-censored。所有 microbial predictors 必须来自 time zero 或之前，否则会产生 immortal-time/data leakage。
+
+### 用 Kaplan–Meier 曲线描述预先确定的分组
+
+$$
+\hat S(t)=\prod_{t_j\le t}\left(1-\frac{d_j}{n_j}\right).
+$$
+
+KM 适合展示 Treatment 等实验前定义的组。连续 microbial abundance 不应为了画漂亮曲线就在全数据寻找“最佳 cutoff”；主分析保留连续 CLR predictor。
+
+### 用 Cox 模型估计瞬时风险比
+
+$$
+h_i(t)=h_0(t)\exp(\beta_g z_{ig}+\gamma_1\mathrm{Sex}_i+\gamma_2\mathrm{Treatment}_i).
+$$
+
+这里 $z_{ig}$ 是 genus CLR abundance 的 1-SD standardization，$e^{\beta_g}$ 为每增加 1 SD 的 adjusted hazard ratio。每个 genus 模型共同调整 Sex 与 Treatment，所有 genus p-values 一次 BH correction。
+
+### 检查比例风险假设是否成立
+
+Cox 假设 covariate effect 不随时间变化。Schoenfeld residual test/plot 若提示 violation，应考虑 time-varying coefficient、stratified Cox、restricted mean survival time 或分段模型，而不是只删去不合假设的结果。
+
+### 在明确的随访时间点评估预测能力
+
+同一 risk score 在 10、15、20 weeks 的 discrimination 可以不同。本文的 ridge-Cox preprocessing、feature selection、lambda 和 risk cutoff 全部由 training set 决定；test set 只用于一次性 C-index/timeROC。没有 external cohort，因此仍属于 held-out internal validation。
+
+<details>
+<summary><strong>深入：竞争风险何时不可忽略</strong></summary>
+
+若“非目标死亡”会阻止目标事件发生，它不是普通 censoring。cause-specific Cox 回答当前 event-free 个体的瞬时 cause-specific hazard；Fine–Gray 回答 cumulative-incidence subdistribution。Methods 必须说明 competing event 定义与 estimand。本小鼠数据只分 T1D onset 与 right censoring，因此不虚构 competing event branch。
+
+</details>
+
+## 定义随访，再拟合Cox与锁定测试集 {#sec-code}
+
+### 聚合到 genus，并保留连续 CLR predictors
+
+```{r}
+#| results: hold
 #| label: prepare-survival-genera
 clean_genus <- function(x) {
   x <- sub("^[A-Za-z]__", "", trimws(as.character(x)))
@@ -204,9 +238,10 @@ data.frame(NamedGenera = nrow(genus_counts), EligibleGenera = nrow(analysis_coun
            ReadsAssignedToNamedGenus = sum(genus_counts))
 ```
 
-### 3. 预定义 Treatment 的 Kaplan–Meier 描述
+### 预定义 Treatment 的 Kaplan–Meier 描述
 
 ```{r}
+#| results: hold
 #| label: fit-treatment-km
 survival_object <- survival::Surv(metadata$FollowUpWeeks, metadata$Event)
 km_treatment <- survival::survfit(survival_object ~ Treatment, data = metadata, conf.type = "log-log")
@@ -230,9 +265,10 @@ km_data <- rbind(
 data.frame(LogRankChiSquare = logrank$chisq, LogRankP = logrank_p)
 ```
 
-### 4. 逐 genus adjusted Cox 与 PH audit
+### 逐属拟合调整后的 Cox 模型，并检查比例风险假设
 
 ```{r}
+#| results: hold
 #| label: fit-adjusted-genus-cox
 fit_one_genus <- function(genus_name) {
   genus_z <- as.numeric(scale(clr[genus_name, ]))
@@ -263,9 +299,10 @@ stopifnot(all(cox_results$HR > 0), all(cox_results$CILower > 0))
 head(cox_results, 12)
 ```
 
-### 5. training-only ridge Cox 与 locked test
+### 在训练集拟合岭惩罚 Cox 模型，在留出集评估
 
 ```{r}
+#| results: hold
 #| label: train-ridge-cox
 make_stratified_folds <- function(strata, k, seed) {
   set.seed(seed)
@@ -348,11 +385,12 @@ data.frame(Lambda1SE = lambda_locked, TestCIndex = test_concordance,
 本文不按 outcome 寻找最佳阈值。若需要展示 ridge risk strata，使用 training risk score 的 median 作为预先声明的 cutoff，并原样应用到 test；test KM/log-rank 只能算 held-out descriptive validation，不能再优化 threshold。
 :::
 
-## 出版级美化 {#sec-beautify}
+## 同时阅读生存曲线、风险比和预测误差 {#sec-beautify}
 
-### 1. 预定义 treatment Kaplan–Meier
+### 预定义 treatment Kaplan–Meier
 
 ```{r}
+#| results: hold
 #| label: fig-treatment-km
 #| fig-cap: "Kaplan–Meier curves for treatment groups defined before follow-up."
 p_km <- ggplot(km_data, aes(Time, Survival, colour = Treatment, fill = Treatment)) +
@@ -369,9 +407,10 @@ save_pub(p_km, "figures/45-treatment-km", 110, 90)
 p_km
 ```
 
-### 2. adjusted genus hazard ratios
+### 展示调整后的属级风险比与置信区间
 
 ```{r}
+#| results: hold
 #| label: fig-taxon-cox
 #| fig-cap: "Adjusted hazard ratios per 1-SD increase in genus CLR abundance."
 forest_genus <- head(cox_results, 12)
@@ -390,9 +429,10 @@ save_pub(p_cox, "figures/45-taxon-cox", 120, 100)
 p_cox
 ```
 
-### 3. top genus 的 Schoenfeld residual audit
+### 用 Schoenfeld 残差检查代表性类群的比例风险假设
 
 ```{r}
+#| results: hold
 #| label: fig-ph-diagnostic
 #| fig-cap: "Scaled Schoenfeld residuals diagnose time-varying genus effects."
 diagnostic_genus <- as.character(cox_results$Genus[1])
@@ -423,9 +463,10 @@ save_pub(p_ph, "figures/45-ph-diagnostics", 110, 90)
 p_ph
 ```
 
-### 4. locked-test time-dependent ROC
+### 在留出测试集上绘制时间依赖 ROC 曲线
 
 ```{r}
+#| results: hold
 #| label: fig-time-dependent-roc
 #| fig-cap: "Time-dependent ROC curves evaluated only in the locked test set."
 time_roc_data <- do.call(rbind, lapply(seq_along(horizons), function(index) {
@@ -457,6 +498,7 @@ p_time_roc
 ```
 
 ```{r}
+#| results: hold
 #| label: export-survival-results
 dir.create("results/45-survival-analysis", recursive = TRUE, showWarnings = FALSE)
 readr::write_tsv(km_data, "results/45-survival-analysis/treatment-km.tsv")
@@ -487,11 +529,11 @@ readr::write_tsv(data.frame(
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告生存结局与删失处理的方法与限制 {#sec-methods}
 
 > Baseline fecal 16S profiles were obtained from NOD mice at 6–8 weeks of age. Follow-up time was defined separately for each mouse as the recorded T1D-onset or censoring age minus its microbiome sampling week, and the event indicator denoted T1D onset. Named OTUs were aggregated to genus; genera present in ≥10% of samples with ≥20 reads were CLR-transformed using a pseudocount of 0.5. Treatment groups were defined before follow-up and summarized using Kaplan–Meier estimates and a log-rank test. For association analysis, separate Cox proportional-hazards models estimated the hazard ratio per 1-SD genus CLR increase while adjusting for sex and treatment; genus p-values and Schoenfeld-test p-values were Benjamini–Hochberg corrected. For prediction, a fixed event-stratified 70/30 split was created before feature filtering. Training data alone selected up to 50 high-variance genera and five-fold cross-validation selected the 1-SE penalty for a ridge Cox model. The locked linear predictor was evaluated once in the test set using Harrell concordance and IPCW time-dependent AUC at 10, 15, and 20 weeks. When a risk stratum was required, the training median score was applied unchanged to test samples.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将生存结局与删失处理用于自己的研究 {#sec-own-data}
 
 三件套之外，metadata 至少要有以下列：
 

@@ -1,6 +1,6 @@
 ---
 title: "DADA2 出 ASV（截断参数怎么定）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -19,10 +19,6 @@ fig-dpi: 300
 fig-format: png
 ---
 
-> **分析目标：**从 primer-trimmed 双端 FASTQ 的质量分布和扩增子长度出发，确定 DADA2 的截断、expected-error、拼接和去嵌合体参数，得到可审计的 ASV 表与代表序列。  
-> **输入文件：**4 个真实 MiSeq V4 样本；每个样本原始 2,500 对 reads，去引物后共 8,614 对。正文包含从下载、导入、去引物到 DADA2 的完整命令。  
-> **预计资源：**示例数据约 2.5 MB；单个主参数分支通常 1–2 分钟，5 组敏感性分析与 Artifact 验收约 5–7 分钟，峰值内存低于 2 GB。真实项目的耗时和临时磁盘随 reads 数与样本数增加。  
-> **执行策略：**QIIME 2、5 组 DADA2 参数、预期失败探针、Artifact maximum validation、provenance 和出图均已一次性实跑；网页构建使用 `eval: false`，避免重复执行上游去噪。
 
 ## 截断参数决定能保留多少有效 ASV {#sec-target}
 
@@ -86,240 +82,12 @@ Validation:                    122 / 122 PASS
 
 该仓库没有为这 8 个技术测试文件附上独立生物学研究 accession。因此本页只用它们验证 DADA2 的输入、参数和损失账本，不对样本 `1/1a/2/2a` 做生态学解释。
 
-## DADA2 如何从 reads 推断 ASV {#sec-theory}
-
-### 1. DADA2 输出的是 ASV，不是按相似度聚类的 OTU
-
-传统 OTU 流程常把达到 97% 或 99% 相似度的序列聚成一组。DADA2 则建立测序错误模型，从观测 reads 中推断样本内真实存在的扩增子序列；输出的每个 feature 对应一条确定的 nucleotide sequence。
-
-这带来三个实际好处：
-
-- 单碱基差异不会因为固定相似度阈值自动被合并；
-- 相同序列可用稳定 hash ID 在合适条件下跨表对应；
-- 代表序列可以直接用于分类注释、系统发育和脱靶检查。
-
-但 **ASV 不等于物种**。一条 253-nt V4 序列可能无法区分多个 species；同一微生物基因组也可能含不同 16S rRNA gene copies。ASV 只表示“在本扩增区域、经过本流程推断出的精确序列变体”。
-
-### 2. `denoise-paired` 是五道连续门，不是一个黑箱
-
-q2-dada2 的 paired-end 主线可写成：
-
-```text
-input
-  → filter/truncate
-  → learn errors and infer sequences
-  → merge R1/R2
-  → remove chimeras
-  → feature table + representative sequences + stats
-```
-
-本例的总账是：
-
-| Stage | Read pairs | Loss from previous stage | Fraction of input |
-|---|---:|---:|---:|
-| Input | 8,614 | — | 100.00% |
-| Filtered | 7,641 | 973 | 88.71% |
-| Denoised | 5,886 | 1,755 | 68.33% |
-| Merged | 5,257 | 629 | 61.03% |
-| Non-chimeric | 5,213 | 44 | 60.52% |
-
-每种损失指向不同问题：
-
-- **过滤损失大**：read 长度不足、expected errors 过高、`trunc-q` 提前截断或参数过严；
-- **去噪损失大**：质量模型无法支持这些 reads 形成可靠 sequence inference；
-- **拼接损失大**：overlap 不足、overlap 中存在 mismatch、方向或引物处理错误；
-- **嵌合体损失大**：PCR chimera、低复杂度数据，或 parent-abundance 规则需要复核。
-
-只报告“保留 60.52%”会丢掉定位信息。审稿时更有价值的是完整 stage ledger 和逐样本分布。
-
-### 3. `trim-left` 与 `trunc-len` 切的是两端
-
-以 R1 为例：
-
-```text
-5′                                              3′
-|-- trim-left -->|------ retained ------|<- trunc-len cut
-```
-
-- `trim-left-f/r` 从 **5′ 端**删除固定长度；
-- `trunc-len-f/r` 在指定坐标截掉 **3′ 尾部**；
-- `trunc-len = 0` 表示不做固定坐标截断；
-- 若某条 read 原本短于非零 `trunc-len`，该 read 会直接被丢弃。
-
-本页引物已经由 Cutadapt 删除，因此：
-
-```text
-trim-left-f = 0
-trim-left-r = 0
-```
-
-如果又填入 19/20，会二次删除真实生物序列。只有当去引物后仍有固定 spacer、低质量起始循环或明确的技术前缀时，才重新设置 `trim-left`。
-
-### 4. `maxEE` 衡量整条 read 的错误负担
-
-单个碱基的 Phred score \(Q\) 对应错误概率：
-
-\[
-p_{\mathrm{error}} = 10^{-Q/10}
-\]
-
-一条 read 的 expected errors（EE）是各位置错误概率之和：
-
-\[
-EE = \sum_{i=1}^{L} 10^{-Q_i/10}
-\]
-
-因此两条“平均质量相近”的 reads 可能有不同 EE：一条 read 若在尾部积累多个低质量碱基，整条 read 更容易超过 `maxEE`。
-
-本例比较了：
-
-| Candidate | `trunc F/R` | `maxEE F/R` | Non-chimeric pairs | Retention |
-|---|---:|---:|---:|---:|
-| No 3′ truncation | 0 / 0 | 2 / 2 | 4,861 | 56.43% |
-| Keep reverse tail | 220 / 220 | 2 / 2 | 5,117 | 59.40% |
-| **Selected** | **220 / 200** | **2 / 2** | **5,213** | **60.52%** |
-| Shortened | 180 / 150 | 2 / 2 | 5,223 | 60.63% |
-| Strict maxEE | 220 / 200 | 1 / 1 | 4,478 | 51.99% |
-
-两个容易误判的地方：
-
-1. `180/150` 比 `220/200` 多保留 10 对 reads，不足以补偿额外删除的 90 nt 信息；
-2. `maxEE=1/1` 并不天然更“严谨”，本数据中它比主参数少保留 735 对非嵌合 reads。
-
-参数目标不是最大化 reads，也不是最大化 ASV 数，而是在技术可靠性和信息保留之间建立可解释的平衡。
-
-### 5. 双端截断必须先算 overlap
-
-最基本的预算是：
-
-\[
-O_{\mathrm{expected}} =
-L_F + L_R - L_{\mathrm{insert}}
-\]
-
-其中：
-
-- \(L_F\)：截断后 R1 长度；
-- \(L_R\)：截断后 R2 长度；
-- \(L_{\mathrm{insert}}\)：去引物后的真实扩增子长度；
-- \(O_{\mathrm{expected}}\)：理论 overlap。
-
-q2-dada2 2026.4 的 `denoise-paired` 默认要求至少 12 nt overlap，并默认不允许 overlap mismatch。本例：
-
-```text
-Modal insert:              253 nt
-Selected read budget:      220 + 200 = 420 nt
-Modal overlap estimate:    420 - 253 = 167 nt
-
-Longest observed ASV:      303 nt
-Minimum observed estimate: 420 - 303 = 117 nt
-Required overlap:          12 nt
-```
-
-即使按最长的 303-nt 输出估计，仍有 105 nt 安全余量。
-
-反例 `130/120`：
-
-```text
-130 + 120 - 253 = -3 nt
-```
-
-连主峰扩增子都覆盖不全，更不可能达到 12 nt overlap。真实运行在没有有效 sequence table 时失败；这不是“DADA2 突然坏了”，而是参数在几何上不可能。
-
-::: {.callout-warning title="不要只用一个理论扩增子长度"}
-V4 主峰在本例是 253 nt，但输出中还有 254–256 nt 和 285–303 nt 序列。选择截断长度时应给真实长度变异留余量，并在得到 ASV 后回头检查长度分布。较长序列可能是目标类群的真实插入，也可能是非特异扩增；没有分类和比对证据时不能只凭长度删除。
-:::
-
-### 6. 质量图提出候选，敏感性分析做最终裁决
-
-质量分布不是一个自动阈值生成器。建议按以下顺序：
-
-1. 在 **去引物之后**重新生成 R1/R2 quality summary；
-2. 查看 median，同时查看 9th/25th percentile 和 cycle coverage；
-3. 列出 2–4 组质量合理的候选截断；
-4. 用预期扩增子长度计算每组 overlap；
-5. 在代表整个 run/批次的样本上比较完整 DADA2 ledger；
-6. 选择一个参数合同，并对同一技术 run 一致执行；
-7. 审计逐样本 retention、ASV 长度、阴性/阳性对照和 provenance。
-
-不存在“所有 MiSeq V4 都用 220/200”这一规则。本页数值只属于本次数据。
-
-### 7. error model、pooling 与可重复性
-
-本例 q2-dada2 调用 DADA2 1.38.0，并采用：
-
-```text
-pooling_method = independent
-n_reads_learn  = 1,000,000
-n_threads      = 1
-```
-
-`n_reads_learn` 是误差学习上限；小数据没有 100 万条 reads 时，DADA2 使用可用数据。本例主参数实际用 7,641 对过滤后 reads 学习。
-
-`independent` 分别对样本推断序列；`pseudo` 会先独立运行一轮，再利用多样本中重复出现的 ASV 作为先验提高低丰度检出。pseudo-pooling 可能提高灵敏度，也会增加计算量；不能因为“ASV 更多”就自动采用。
-
-本次固定环境中 `learnErrors()` 的 `randomize` 默认值为 `FALSE`，并使用单线程，因此没有需要人为设置的随机抽样种子。q2-dada2 CLI 也没有暴露 `seed` 参数。真正需要保存的是：
-
-- QIIME 2、q2-dada2 与 DADA2 版本；
-- 完整参数；
-- 输入 Artifact；
-- provenance；
-- error-learning 模式和线程数。
-
-### 8. hashed feature ID 也不能替代批次设计
-
-q2-dada2 默认用序列 hash 生成 feature ID。相同 nucleotide sequence 会得到相同 ID，这便于合并完全可比的表。
-
-但 QIIME 2 文档明确提醒：只有在 **相同参数** 下运行的表才应合并。实践中还应同时要求：
-
-- 相同扩增区域与 primer pair；
-- 相同 read layout；
-- 一致的 primer trimming；
-- 相同 DADA2 参数；
-- 技术 run 的 error learning 合理；
-- 没有把不同长度的序列空间强行视为同一 feature space。
-
-不同 run 可以独立学习 error model；若最终合并，应先保证输出 ASV 序列定义可比，再用 batch-aware 统计处理技术差异。
+## 开始前：数据与运行环境 {#sec-setup}
 
 <details>
-<summary><strong>深入：为什么不能用“ASV 数最多”选参数</strong></summary>
+<summary>本次分析的数据、环境与图形设置</summary>
 
-ASV 数同时受以下因素影响：
-
-- 保留 reads 数；
-- 每条 read 的有效长度；
-- error model；
-- 样本 pooling；
-- chimera 去除；
-- 真实群落复杂度；
-- 测序误差和非特异扩增。
-
-截得更短可能让更多 reads 通过过滤，却减少可用于区分序列变体的位点；截得更长可能保留信息，却让低质量尾部增加过滤损失。宽松参数还可能留下更多错误或 chimera。
-
-本例 `180/150`：
-
-```text
-Non-chimeric pairs: 5,223
-ASVs:                323
-```
-
-主参数 `220/200`：
-
-```text
-Non-chimeric pairs: 5,213
-ASVs:                366
-```
-
-不能把 366 简单解释为“更真实”，也不能把 5,223 简单解释为“更好”。主参数被选择，是因为它与极短方案有几乎相同的最终 read retention，同时保留更多序列信息、具有充足 overlap，并且逐样本账本稳定。ASV 数只作为结果审计的一部分。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：固定环境、真实数据、导入去引物与作图函数</strong></summary>
-
-### 1. 安装固定 QIIME 2 环境
+### 安装固定 QIIME 2 环境
 
 下面使用 QIIME 2 2026.4 amplicon distribution。若已经安装同名环境，只需运行验证命令。
 
@@ -355,7 +123,7 @@ export MPLCONFIGDIR="${PWD}/.cache/matplotlib"
 mkdir -p "${NUMBA_CACHE_DIR}" "${MPLCONFIGDIR}"
 ```
 
-### 2. 下载 4 个真实 paired-end 样本
+### 下载 4 个真实 paired-end 样本
 
 ```{bash}
 mkdir -p data/raw/nfcore-v4
@@ -391,7 +159,7 @@ sha256sum -c SHA256SUMS
 cd ../../..
 ```
 
-### 3. 独立导入并去除 515F/806R
+### 独立导入并去除 515F/806R
 
 ```{bash}
 mkdir -p work/12-dada2 results/12-dada2
@@ -438,7 +206,7 @@ conda run -n microbiome-qiime2-2026.4 \
 
 浏览 `trimmed-summary.qzv`，确认去引物后的质量和长度；不要沿用去引物前的 cycle 坐标。
 
-### 4. 内联出版级作图函数
+### 图形设置与导出
 
 ```{r}
 library(ggplot2)
@@ -527,9 +295,238 @@ save_pub <- function(
 
 </details>
 
-## 可复制代码 {#sec-code}
 
-### 1. 先把截断写成 overlap 预算
+## DADA2 如何从 reads 推断 ASV {#sec-theory}
+
+### DADA2 输出的是 ASV，不是按相似度聚类的 OTU
+
+传统 OTU 流程常把达到 97% 或 99% 相似度的序列聚成一组。DADA2 则建立测序错误模型，从观测 reads 中推断样本内真实存在的扩增子序列；输出的每个 feature 对应一条确定的 nucleotide sequence。
+
+这带来三个实际好处：
+
+- 单碱基差异不会因为固定相似度阈值自动被合并；
+- 相同序列可用稳定 hash ID 在合适条件下跨表对应；
+- 代表序列可以直接用于分类注释、系统发育和脱靶检查。
+
+但 **ASV 不等于物种**。一条 253-nt V4 序列可能无法区分多个 species；同一微生物基因组也可能含不同 16S rRNA gene copies。ASV 只表示“在本扩增区域、经过本流程推断出的精确序列变体”。
+
+### `denoise-paired` 是五道连续门，不是一个黑箱
+
+q2-dada2 的 paired-end 主线可写成：
+
+```text
+input
+  → filter/truncate
+  → learn errors and infer sequences
+  → merge R1/R2
+  → remove chimeras
+  → feature table + representative sequences + stats
+```
+
+本例的总账是：
+
+| Stage | Read pairs | Loss from previous stage | Fraction of input |
+|---|---:|---:|---:|
+| Input | 8,614 | — | 100.00% |
+| Filtered | 7,641 | 973 | 88.71% |
+| Denoised | 5,886 | 1,755 | 68.33% |
+| Merged | 5,257 | 629 | 61.03% |
+| Non-chimeric | 5,213 | 44 | 60.52% |
+
+每种损失指向不同问题：
+
+- **过滤损失大**：read 长度不足、expected errors 过高、`trunc-q` 提前截断或参数过严；
+- **去噪损失大**：质量模型无法支持这些 reads 形成可靠 sequence inference；
+- **拼接损失大**：overlap 不足、overlap 中存在 mismatch、方向或引物处理错误；
+- **嵌合体损失大**：PCR chimera、低复杂度数据，或 parent-abundance 规则需要复核。
+
+只报告“保留 60.52%”会丢掉定位信息。审稿时更有价值的是完整 stage ledger 和逐样本分布。
+
+### `trim-left` 与 `trunc-len` 切的是两端
+
+以 R1 为例：
+
+```text
+5′                                              3′
+|-- trim-left -->|------ retained ------|<- trunc-len cut
+```
+
+- `trim-left-f/r` 从 **5′ 端**删除固定长度；
+- `trunc-len-f/r` 在指定坐标截掉 **3′ 尾部**；
+- `trunc-len = 0` 表示不做固定坐标截断；
+- 若某条 read 原本短于非零 `trunc-len`，该 read 会直接被丢弃。
+
+本页引物已经由 Cutadapt 删除，因此：
+
+```text
+trim-left-f = 0
+trim-left-r = 0
+```
+
+如果又填入 19/20，会二次删除真实生物序列。只有当去引物后仍有固定 spacer、低质量起始循环或明确的技术前缀时，才重新设置 `trim-left`。
+
+### `maxEE` 衡量整条 read 的错误负担
+
+单个碱基的 Phred score \(Q\) 对应错误概率：
+
+\[
+p_{\mathrm{error}} = 10^{-Q/10}
+\]
+
+一条 read 的 expected errors（EE）是各位置错误概率之和：
+
+\[
+EE = \sum_{i=1}^{L} 10^{-Q_i/10}
+\]
+
+因此两条“平均质量相近”的 reads 可能有不同 EE：一条 read 若在尾部积累多个低质量碱基，整条 read 更容易超过 `maxEE`。
+
+本例比较了：
+
+| Candidate | `trunc F/R` | `maxEE F/R` | Non-chimeric pairs | Retention |
+|---|---:|---:|---:|---:|
+| No 3′ truncation | 0 / 0 | 2 / 2 | 4,861 | 56.43% |
+| Keep reverse tail | 220 / 220 | 2 / 2 | 5,117 | 59.40% |
+| **Selected** | **220 / 200** | **2 / 2** | **5,213** | **60.52%** |
+| Shortened | 180 / 150 | 2 / 2 | 5,223 | 60.63% |
+| Strict maxEE | 220 / 200 | 1 / 1 | 4,478 | 51.99% |
+
+两个容易误判的地方：
+
+1. `180/150` 比 `220/200` 多保留 10 对 reads，不足以补偿额外删除的 90 nt 信息；
+2. `maxEE=1/1` 并不天然更“严谨”，本数据中它比主参数少保留 735 对非嵌合 reads。
+
+参数目标不是最大化 reads，也不是最大化 ASV 数，而是在技术可靠性和信息保留之间建立可解释的平衡。
+
+### 双端截断必须先算 overlap
+
+最基本的预算是：
+
+\[
+O_{\mathrm{expected}} =
+L_F + L_R - L_{\mathrm{insert}}
+\]
+
+其中：
+
+- \(L_F\)：截断后 R1 长度；
+- \(L_R\)：截断后 R2 长度；
+- \(L_{\mathrm{insert}}\)：去引物后的真实扩增子长度；
+- \(O_{\mathrm{expected}}\)：理论 overlap。
+
+q2-dada2 2026.4 的 `denoise-paired` 默认要求至少 12 nt overlap，并默认不允许 overlap mismatch。本例：
+
+```text
+Modal insert:              253 nt
+Selected read budget:      220 + 200 = 420 nt
+Modal overlap estimate:    420 - 253 = 167 nt
+
+Longest observed ASV:      303 nt
+Minimum observed estimate: 420 - 303 = 117 nt
+Required overlap:          12 nt
+```
+
+即使按最长的 303-nt 输出估计，仍有 105 nt 安全余量。
+
+反例 `130/120`：
+
+```text
+130 + 120 - 253 = -3 nt
+```
+
+连主峰扩增子都覆盖不全，更不可能达到 12 nt overlap。真实运行在没有有效 sequence table 时失败；这不是“DADA2 突然坏了”，而是参数在几何上不可能。
+
+::: {.callout-warning title="不要只用一个理论扩增子长度"}
+V4 主峰在本例是 253 nt，但输出中还有 254–256 nt 和 285–303 nt 序列。选择截断长度时应给真实长度变异留余量，并在得到 ASV 后回头检查长度分布。较长序列可能是目标类群的真实插入，也可能是非特异扩增；没有分类和比对证据时不能只凭长度删除。
+:::
+
+### 质量图提出候选，敏感性分析做最终裁决
+
+质量分布不是一个自动阈值生成器。建议按以下顺序：
+
+1. 在 **去引物之后**重新生成 R1/R2 quality summary；
+2. 查看 median，同时查看 9th/25th percentile 和 cycle coverage；
+3. 列出 2–4 组质量合理的候选截断；
+4. 用预期扩增子长度计算每组 overlap；
+5. 在代表整个 run/批次的样本上比较完整 DADA2 ledger；
+6. 选择一个参数合同，并对同一技术 run 一致执行；
+7. 审计逐样本 retention、ASV 长度、阴性/阳性对照和 provenance。
+
+不存在“所有 MiSeq V4 都用 220/200”这一规则。本页数值只属于本次数据。
+
+### error model、pooling 与可重复性
+
+本例 q2-dada2 调用 DADA2 1.38.0，并采用：
+
+```text
+pooling_method = independent
+n_reads_learn  = 1,000,000
+n_threads      = 1
+```
+
+`n_reads_learn` 是误差学习上限；小数据没有 100 万条 reads 时，DADA2 使用可用数据。本例主参数实际用 7,641 对过滤后 reads 学习。
+
+`independent` 分别对样本推断序列；`pseudo` 会先独立运行一轮，再利用多样本中重复出现的 ASV 作为先验提高低丰度检出。pseudo-pooling 可能提高灵敏度，也会增加计算量；不能因为“ASV 更多”就自动采用。
+
+本次固定环境中 `learnErrors()` 的 `randomize` 默认值为 `FALSE`，并使用单线程，因此没有需要人为设置的随机抽样种子。q2-dada2 CLI 也没有暴露 `seed` 参数。真正需要保存的是：
+
+- QIIME 2、q2-dada2 与 DADA2 版本；
+- 完整参数；
+- 输入 Artifact；
+- provenance；
+- error-learning 模式和线程数。
+
+### hashed feature ID 也不能替代批次设计
+
+q2-dada2 默认用序列 hash 生成 feature ID。相同 nucleotide sequence 会得到相同 ID，这便于合并完全可比的表。
+
+但 QIIME 2 文档明确提醒：只有在 **相同参数** 下运行的表才应合并。实践中还应同时要求：
+
+- 相同扩增区域与 primer pair；
+- 相同 read layout；
+- 一致的 primer trimming；
+- 相同 DADA2 参数；
+- 技术 run 的 error learning 合理；
+- 没有把不同长度的序列空间强行视为同一 feature space。
+
+不同 run 可以独立学习 error model；若最终合并，应先保证输出 ASV 序列定义可比，再用 batch-aware 统计处理技术差异。
+
+<details>
+<summary><strong>深入：为什么不能用“ASV 数最多”选参数</strong></summary>
+
+ASV 数同时受以下因素影响：
+
+- 保留 reads 数；
+- 每条 read 的有效长度；
+- error model；
+- 样本 pooling；
+- chimera 去除；
+- 真实群落复杂度；
+- 测序误差和非特异扩增。
+
+截得更短可能让更多 reads 通过过滤，却减少可用于区分序列变体的位点；截得更长可能保留信息，却让低质量尾部增加过滤损失。宽松参数还可能留下更多错误或 chimera。
+
+本例 `180/150`：
+
+```text
+Non-chimeric pairs: 5,223
+ASVs:                323
+```
+
+主参数 `220/200`：
+
+```text
+Non-chimeric pairs: 5,213
+ASVs:                366
+```
+
+不能把 366 简单解释为“更真实”，也不能把 5,223 简单解释为“更好”。主参数被选择，是因为它与极短方案有几乎相同的最终 read retention，同时保留更多序列信息、具有充足 overlap，并且逐样本账本稳定。ASV 数只作为结果审计的一部分。
+
+</details>
+
+## 比较截断候选并生成ASV表 {#sec-code}
+
+### 先把截断写成 overlap 预算
 
 本例先用 V4 的已知范围提出候选，再用 DADA2 输出回验实际长度。
 
@@ -558,7 +555,7 @@ insert=303 nt, overlap=117 nt, margin=105 nt
 
 若 margin 小于 0，候选参数在几何上不能满足当前 `min-overlap`。不要先运行几小时再从报错猜原因。
 
-### 2. 运行主参数 DADA2
+### 运行主参数 DADA2
 
 ```{bash}
 mkdir -p results/12-dada2
@@ -596,7 +593,7 @@ conda run -n microbiome-qiime2-2026.4 \
 - `retain-all-samples` 保留最终为 0 的样本，避免它们悄悄从表中消失；
 - 4 个输出都要保存，不能只留 table。
 
-### 3. 生成 QIIME 2 可视化
+### 生成 QIIME 2 可视化
 
 QIIME 2 2026.4 的 `feature-table summarize` 是三输出 pipeline：
 
@@ -626,7 +623,7 @@ conda run -n microbiome-qiime2-2026.4 \
 
 不要照搬旧版本的单一 `--o-visualization` 参数；先以本机 `--help` 为准。
 
-### 4. 导出并审计 DADA2 stats
+### 导出并审计 DADA2 stats
 
 ```{bash}
 mkdir -p results/12-dada2/export-stats
@@ -672,7 +669,7 @@ print(totals)
 print("Final retention:", totals["non-chimeric"] / totals["input"])
 ```
 
-### 5. 导出 ASV 表、代表序列与 metadata
+### 导出 ASV 表、代表序列与 metadata
 
 ```{bash}
 mkdir -p data/small/dada2 \
@@ -721,7 +718,7 @@ metadata.tsv
 
 `taxonomy.tsv` 必须由真实分类器结果生成，不能为了凑齐文件而伪造分类。分类完成后再把它与 `otutab.tsv` 和 `metadata.tsv` 组成下游通用三件套。
 
-### 6. 检查代表序列长度
+### 检查代表序列长度
 
 ```{python}
 from collections import Counter
@@ -750,7 +747,7 @@ print("Length distribution:", dict(sorted(counts.items())))
 
 本例应得到 366 条序列；其中 361 条为 252–256 nt，另外 5 条为 285–303 nt。把长度异常作为审计标签，等分类、比对和对照证据齐全后再决定是否过滤。
 
-### 7. 参数敏感性只用于选合同
+### 根据敏感性分析选择参数
 
 对示例数据可运行以下 5 组候选：
 
@@ -764,9 +761,9 @@ strict-ee:         F=220, R=200, maxEE=1/1
 
 真实研究建议先用覆盖不同 sequencing run、plate、处理组和质量水平的代表样本比较候选。选定后，对整个技术 run 使用同一个合同；不要为每个样本单独调参数，否则样本间可观察序列区域会发生变化。
 
-## 出版级美化 {#sec-publication}
+## 从每一步保留率定位数据损失 {#sec-publication}
 
-### 1. 主图画损失发生在哪里
+### 主图画损失发生在哪里
 
 “DADA2 retained 60.52%”不如五阶段 ledger 信息量大。推荐：
 
@@ -823,7 +820,7 @@ save_pub(
 
 图内标题、轴、图例、样本名和注释一律使用英文。
 
-### 2. ASV 数必须与长度和 reads 一起报告
+### ASV 数必须与长度和 reads 一起报告
 
 单独写“获得 366 个 ASVs”没有质量含义。至少同时报告：
 
@@ -835,7 +832,7 @@ save_pub(
 - controls 的表现；
 - 分类前是否做了其他 feature filtering。
 
-### 3. 把主参数写进图注
+### 把主参数写进图注
 
 可直接改数字的英文图注：
 
@@ -851,7 +848,7 @@ quality profiles, an explicit overlap budget, and a
 five-profile sensitivity analysis.
 ```
 
-### 4. 三种格式承担不同任务
+### 三种格式承担不同任务
 
 - PDF：矢量文字和线条，优先用于论文排版；
 - PNG：网页和公众号预览，本页使用 350 dpi；
@@ -883,7 +880,7 @@ five-profile sensitivity analysis.
 先计算 `trunc_f + trunc_r - insert_length`，再检查 primer 是否已经正确去除、R1/R2 方向、`min-overlap`、`max-merge-mismatch` 和真实 ASV 长度。不要先通过允许大量 overlap mismatch 来“救回”数据。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告DADA2参数与ASV生成 {#sec-methods}
 
 ### Paired-end V4 示例
 
@@ -923,9 +920,9 @@ flagged for subsequent taxonomic and off-target review.
 - ASV 数和长度审计；
 - 异常样本、controls 与异常序列的处置。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将DADA2参数与ASV生成用于自己的研究 {#sec-own-data}
 
-### 1. 准备三个 run-level 输入
+### 准备三个 run-level 输入
 
 这一阶段需要：
 
@@ -937,7 +934,7 @@ flagged for subsequent taxonomic and off-target review.
 
 若手头只有 FASTQ，就使用准备工作中的 manifest → import → primer trimming 命令；不要依赖另一个章节的中间文件。
 
-### 2. 为每个技术 run 建候选表
+### 为每个技术 run 建候选表
 
 ```text
 Candidate ID
@@ -959,7 +956,7 @@ reason for candidate
 - 一个合理的 `maxEE` 敏感性分支；
 - 一个 overlap 明确失败的负对照只用于验证公式，不进入正式分析。
 
-### 3. 用同一套验收选择参数
+### 用同一套验收选择参数
 
 每个候选比较：
 
@@ -985,7 +982,7 @@ provenance
 - 为极小 retention 增益牺牲大量信息；
 - ASV 长度与目标区域严重不符。
 
-### 4. 按 layout 选择 DADA2 action
+### 根据单端或双端数据选择 DADA2 命令
 
 ```text
 Illumina paired-end
@@ -1000,7 +997,7 @@ PacBio CCS
 
 single-end 没有 merge 和 paired overlap；不能把 paired-end 的截断公式机械套过去。长读长 CCS 还需要 platform-specific 的 primer、orientation、length 和 error-model 审计。
 
-### 5. 明确本篇输出边界
+### 明确本篇输出边界
 
 DADA2 完成后保留：
 

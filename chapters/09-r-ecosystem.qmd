@@ -1,6 +1,6 @@
 ---
 title: "安装 R/RStudio + 关键包生态（phyloseq/microeco/tidyverse）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -19,10 +19,6 @@ fig-dpi: 300
 fig-format: png
 ---
 
-> **分析目标：**建立可复现的 R 微生物组环境，并用真实 `otutab`、`taxonomy`、`metadata` 同时构建 `phyloseq` 与 `microeco::microtable` 对象，核对转换前后的数据同一性。  
-> **输入文件：**`env/renv.lock`，以及 `data/small/otutab.tsv`、`data/small/taxonomy.tsv`、`data/small/metadata.tsv`。  
-> **预计资源：**首次安装通常 10–40 分钟，取决于是否有二进制包和编译缓存；真实三件套验收约 15 秒，峰值内存约 1–2 GB。  
-> **执行策略：**安装、锁文件、namespace 和对象验收已用 `Rscript --vanilla` 一次性实跑并保存审计结果；网页渲染使用 `eval: false`，避免每次构建重复安装包。
 
 ## R 端分析需要哪些核心对象与包？ {#sec-target}
 
@@ -56,171 +52,26 @@ Sample-wise maximum absolute difference: 0
 Required checks: 26 / 26 PASS
 ```
 
-## R 微生物组环境到底由哪些层组成 {#sec-theory}
+## 开始前：数据与运行环境 {#sec-setup}
 
-### 1. R 是运行时，RStudio 是 IDE
-
-R 执行统计计算；RStudio 是 **integrated development environment（集成开发环境，IDE）**，提供脚本编辑、项目导航、帮助、绘图窗格和调试工具。
-
-两者关系类似：
-
-```text
-R        = engine
-RStudio  = cockpit
-```
-
-安装 RStudio 不等于安装了合适版本的 R。反过来，没有 RStudio 也可以在终端执行：
+在 Linux 或 WSL2 的项目文件夹中运行下面的下载命令。下载后保留这里的相对目录，后续命令使用同一组文件。
 
 ```bash
-Rscript --vanilla analysis.R
+base_url="https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa"
+for file in \
+  data/small/metadata.tsv \
+  data/small/otutab.tsv \
+  data/small/taxonomy.tsv \
+  env/renv.lock \
+  scripts/validate_r_ecosystem.R
+do
+  mkdir -p "$(dirname "$file")"
+  curl --fail --location --retry 3 "$base_url/$file" --output "$file" || break
+done
 ```
 
-`--vanilla` 会减少用户级启动文件、历史文件和已保存 workspace 对结果的隐性影响。自动化、服务器和论文复现应至少保留一条不依赖 IDE 点击操作的 `Rscript` 路径。
 
-### 2. R、CRAN 与 Bioconductor 有不同的版本节奏
-
-`tidyverse`、`microeco`、`vegan`、`renv` 等主要来自 CRAN；`phyloseq` 来自 Bioconductor。Bioconductor 每个 release 与特定 R 大版本配套，不能把任意 Bioconductor release 强行装进任意 R。
-
-本次固定组合是：
-
-| 层级 | 固定版本 | 说明 |
-|---|---:|---|
-| R | 4.4.1 | 统计运行时 |
-| Bioconductor | 3.19 | 与 R 4.4 配套的 release |
-| phyloseq | 1.48.0 | Bioconductor 3.19 |
-| microeco | 2.0.0 | 固定真实数据与接口版本 |
-| tidyverse | 2.0.0 | 数据导入、整理与可视化语法集合 |
-| vegan | 2.6-6.1 | 生态距离、排序与置换统计 |
-
-这里使用历史固定组合是为了复现实测结果，不表示新项目永远应该停留在旧版本。新项目可以采用当前兼容的 R/Bioconductor 组合，但升级后必须重跑完整 QA，再生成新的锁文件。
-
-### 3. “包生态”不是把所有包都 `library()` 一遍
-
-不同包承担不同责任：
-
-| 层级 | 包 | 主要责任 |
-|---|---|---|
-| 输入与整理 | `readr`、`dplyr`、`tidyr`、`tibble` | 读取、连接、长宽转换、变量管理 |
-| 通用对象 | `phyloseq` | S4 容器，统一 OTU、taxonomy、metadata 与 tree |
-| 工作流对象 | `microeco` | R6 容器和生态分析模块 |
-| 生态统计 | `vegan` | 距离、排序、PERMANOVA、约束模型 |
-| 作图 | `ggplot2` | 图层语法与出版级导出 |
-| 环境锁定 | `renv` | 记录包版本、来源与依赖 |
-| 证据记录 | `sessioninfo` | 输出运行时、平台和包信息 |
-
-调用函数时优先写包前缀：
-
-```r
-dplyr::filter(...)
-stats::filter(...)
-```
-
-这比依赖 `library()` 的加载顺序更容易审计，也能避免 `filter()`、`select()` 等同名函数被错误解析。
-
-### 4. phyloseq 与 microeco 是不同的对象模型
-
-`phyloseq` 使用 S4 对象：
-
-```r
-phyloseq(
-  otu_table(...),
-  tax_table(...),
-  sample_data(...)
-)
-```
-
-它适合显式 slot、严格 accessor 和大量生态包之间的对象交换。
-
-`microeco` 使用 R6 对象：
-
-```r
-microtable$new(
-  otu_table = ...,
-  tax_table = ...,
-  sample_table = ...
-)
-```
-
-R6 方法常直接修改对象自身。下面两行不一定产生两个互不影响的深拷贝：
-
-```r
-dataset_b <- dataset_a
-dataset_b$tidy_dataset()
-```
-
-需要保留原对象时，应使用对应的 clone 机制：
-
-```r
-dataset_b <- dataset_a$clone(deep = TRUE)
-```
-
-### 5. 三件套方向是对象构建的第一道门
-
-本项目统一约定：
-
-```text
-otutab:    features × samples
-taxonomy:  features × taxonomic ranks
-metadata:  samples × variables
-```
-
-因此：
-
-```r
-phyloseq::otu_table(otu_matrix, taxa_are_rows = TRUE)
-```
-
-如果你的 OTU 表是 samples × features，必须先转置，或把 `taxa_are_rows` 设为 `FALSE`。一个对象“成功创建”不自动证明方向正确；必须继续核对：
-
-```r
-ntaxa(ps)
-nsamples(ps)
-sample_sums(ps)
-```
-
-### 6. renv 锁的是 R 包，不是整个计算机
-
-`renv.lock` 记录包版本、来源和依赖，可由 `renv::restore()` 恢复项目库。但它不会替你安装：
-
-- 对应版本的 R；
-- 系统级 C/C++/Fortran 编译器；
-- `libxml2`、`libcurl`、`fontconfig`、`harfbuzz` 等系统开发库；
-- Quarto/Pandoc；
-- 操作系统本身。
-
-因此完整环境证据至少包括：
-
-```text
-R version
-Bioconductor release
-renv.lock
-system / container description
-session information
-real-data smoke test
-```
-
-<details>
-<summary><strong>深入：为什么只记录 sessionInfo() 仍然不够</strong></summary>
-
-`sessionInfo()` 记录“这一次运行加载了什么”，适合追溯；但它不能自动在另一台机器上安装同一批包。`renv.lock` 可以描述如何恢复包，却不能证明恢复后的数据入口和对象转换仍然正确。
-
-两者应分工：
-
-| 证据 | 回答的问题 |
-|---|---|
-| `sessionInfo()` / `sessioninfo` | 这一次究竟运行了什么 |
-| `renv.lock` | 如何恢复同一批 R 包 |
-| 三件套 SHA-256 | 输入是否还是同一份 |
-| 对象回验 | 转换是否保留 feature、sample 与 reads |
-| Docker/系统记录 | 编译器和系统库是什么 |
-
-这也是为什么本次验收同时保存版本审计、锁文件审计、输入哈希和对象同一性，而不是只贴一段 console 输出。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-### 1. 安装顺序
+### 安装顺序
 
 建议按以下顺序安装：
 
@@ -260,7 +111,7 @@ sudo apt install -y \
 
 发行版仓库中的 R 版本不一定等于本次固定的 R 4.4.1。需要严格复现时，应安装对应 R 版本或使用预先验证的容器，而不是在不同 R 大版本下强行恢复旧 Bioconductor。
 
-### 2. 两种包安装路径
+### 两种包安装路径
 
 **路径 A：恢复本次固定环境。**
 
@@ -313,10 +164,10 @@ renv::snapshot()
 
 路径 B 可能得到更新版本，不能直接套用本次固定版本的 QA 数字；应在自己的环境重新运行对象回验并记录实际版本。
 
-### 3. 内联作图函数
+### 内联作图函数
 
 <details>
-<summary><strong>展开：复制依赖与出版级作图函数</strong></summary>
+<summary>本次分析的数据、环境与图形设置</summary>
 
 ```{r}
 #| eval: false
@@ -412,7 +263,170 @@ save_pub <- function(
 
 </details>
 
-## 可复制代码 {#sec-code}
+
+## R 微生物组环境到底由哪些层组成 {#sec-theory}
+
+### R 是运行时，RStudio 是 IDE
+
+R 执行统计计算；RStudio 是 **integrated development environment（集成开发环境，IDE）**，提供脚本编辑、项目导航、帮助、绘图窗格和调试工具。
+
+两者关系类似：
+
+```text
+R        = engine
+RStudio  = cockpit
+```
+
+安装 RStudio 不等于安装了合适版本的 R。反过来，没有 RStudio 也可以在终端执行：
+
+```bash
+Rscript --vanilla analysis.R
+```
+
+`--vanilla` 会减少用户级启动文件、历史文件和已保存 workspace 对结果的隐性影响。自动化、服务器和论文复现应至少保留一条不依赖 IDE 点击操作的 `Rscript` 路径。
+
+### R、CRAN 与 Bioconductor 有不同的版本节奏
+
+`tidyverse`、`microeco`、`vegan`、`renv` 等主要来自 CRAN；`phyloseq` 来自 Bioconductor。Bioconductor 每个 release 与特定 R 大版本配套，不能把任意 Bioconductor release 强行装进任意 R。
+
+本次固定组合是：
+
+| 层级 | 固定版本 | 说明 |
+|---|---:|---|
+| R | 4.4.1 | 统计运行时 |
+| Bioconductor | 3.19 | 与 R 4.4 配套的 release |
+| phyloseq | 1.48.0 | Bioconductor 3.19 |
+| microeco | 2.0.0 | 固定真实数据与接口版本 |
+| tidyverse | 2.0.0 | 数据导入、整理与可视化语法集合 |
+| vegan | 2.6-6.1 | 生态距离、排序与置换统计 |
+
+这里使用历史固定组合是为了复现实测结果，不表示新项目永远应该停留在旧版本。新项目可以采用当前兼容的 R/Bioconductor 组合，但升级后必须重跑完整 QA，再生成新的锁文件。
+
+### “包生态”不是把所有包都 `library()` 一遍
+
+不同包承担不同责任：
+
+| 层级 | 包 | 主要责任 |
+|---|---|---|
+| 输入与整理 | `readr`、`dplyr`、`tidyr`、`tibble` | 读取、连接、长宽转换、变量管理 |
+| 通用对象 | `phyloseq` | S4 容器，统一 OTU、taxonomy、metadata 与 tree |
+| 工作流对象 | `microeco` | R6 容器和生态分析模块 |
+| 生态统计 | `vegan` | 距离、排序、PERMANOVA、约束模型 |
+| 作图 | `ggplot2` | 图层语法与出版级导出 |
+| 环境锁定 | `renv` | 记录包版本、来源与依赖 |
+| 证据记录 | `sessioninfo` | 输出运行时、平台和包信息 |
+
+调用函数时优先写包前缀：
+
+```r
+dplyr::filter(...)
+stats::filter(...)
+```
+
+这比依赖 `library()` 的加载顺序更容易审计，也能避免 `filter()`、`select()` 等同名函数被错误解析。
+
+### phyloseq 与 microeco 是不同的对象模型
+
+`phyloseq` 使用 S4 对象：
+
+```r
+phyloseq(
+  otu_table(...),
+  tax_table(...),
+  sample_data(...)
+)
+```
+
+它适合显式 slot、严格 accessor 和大量生态包之间的对象交换。
+
+`microeco` 使用 R6 对象：
+
+```r
+microtable$new(
+  otu_table = ...,
+  tax_table = ...,
+  sample_table = ...
+)
+```
+
+R6 方法常直接修改对象自身。下面两行不一定产生两个互不影响的深拷贝：
+
+```r
+dataset_b <- dataset_a
+dataset_b$tidy_dataset()
+```
+
+需要保留原对象时，应使用对应的 clone 机制：
+
+```r
+dataset_b <- dataset_a$clone(deep = TRUE)
+```
+
+### 三件套方向是对象构建的第一道门
+
+本项目统一约定：
+
+```text
+otutab:    features × samples
+taxonomy:  features × taxonomic ranks
+metadata:  samples × variables
+```
+
+因此：
+
+```r
+phyloseq::otu_table(otu_matrix, taxa_are_rows = TRUE)
+```
+
+如果你的 OTU 表是 samples × features，必须先转置，或把 `taxa_are_rows` 设为 `FALSE`。一个对象“成功创建”不自动证明方向正确；必须继续核对：
+
+```r
+ntaxa(ps)
+nsamples(ps)
+sample_sums(ps)
+```
+
+### renv 锁的是 R 包，不是整个计算机
+
+`renv.lock` 记录包版本、来源和依赖，可由 `renv::restore()` 恢复项目库。但它不会替你安装：
+
+- 对应版本的 R；
+- 系统级 C/C++/Fortran 编译器；
+- `libxml2`、`libcurl`、`fontconfig`、`harfbuzz` 等系统开发库；
+- Quarto/Pandoc；
+- 操作系统本身。
+
+因此完整环境证据至少包括：
+
+```text
+R version
+Bioconductor release
+renv.lock
+system / container description
+session information
+real-data smoke test
+```
+
+<details>
+<summary><strong>深入：为什么只记录 sessionInfo() 仍然不够</strong></summary>
+
+`sessionInfo()` 记录“这一次运行加载了什么”，适合追溯；但它不能自动在另一台机器上安装同一批包。`renv.lock` 可以描述如何恢复包，却不能证明恢复后的数据入口和对象转换仍然正确。
+
+两者应分工：
+
+| 证据 | 回答的问题 |
+|---|---|
+| `sessionInfo()` / `sessioninfo` | 这一次究竟运行了什么 |
+| `renv.lock` | 如何恢复同一批 R 包 |
+| 三件套 SHA-256 | 输入是否还是同一份 |
+| 对象回验 | 转换是否保留 feature、sample 与 reads |
+| Docker/系统记录 | 编译器和系统库是什么 |
+
+这也是为什么本次验收同时保存版本审计、锁文件审计、输入哈希和对象同一性，而不是只贴一段 console 输出。
+
+</details>
+
+## 读取三张表并选择合适的R对象 {#sec-code}
 
 ### 确认 R、Rscript 与 Bioconductor 版本
 
@@ -598,7 +612,7 @@ storage.mode(tax_matrix) <- "character"
 
 `check.names = FALSE` 很重要：它避免 R 自动把样本名中的连字符等字符改写成点号。
 
-### 在构建对象前核对数据合同
+### 构建对象前核对数据格式与 ID
 
 ```r
 #| eval: false
@@ -797,9 +811,9 @@ Rscript --vanilla scripts/validate_r_ecosystem.R \
 }
 ```
 
-## 出版级美化 {#sec-publication}
+## 检查对象转换和分析结果是否一致 {#sec-publication}
 
-### 1. 用同一性图证明对象转换没有改数据
+### 用同一性图证明对象转换没有改数据
 
 把两个对象的逐样本 library size 整成长表：
 
@@ -896,7 +910,7 @@ save_pub(
 )
 ```
 
-### 2. 环境图只呈现稳定合同
+### 检查软件版本、输入文件与对象是否匹配
 
 适合放进补充材料的稳定信息包括：
 
@@ -915,7 +929,7 @@ save_pub(
 - 本机用户名和绝对路径；
 - 某次下载缓存位置。
 
-### 3. 图形导出
+### 图形导出
 
 网页展示 PNG，投稿与后续编辑保留 PDF；期刊要求位图时提供 300 dpi 以上 LZW TIFF。导出后检查：
 
@@ -988,7 +1002,7 @@ Linux 源码包可能需要 GCC、gfortran、curl/XML/SSL/font 系统头文件�
 RDS 适合加速项目内部工作，但会绑定对象类和包版本。正式交付仍应保留可读的 `otutab`、`taxonomy`、`metadata` 与 checksum。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告R环境与数据对象 {#sec-methods}
 
 ### 英文模板
 
@@ -1021,9 +1035,9 @@ session information and input SHA-256 values were retained.
 没有实际使用 RStudio 的交互功能时，不必把 RStudio 版本当成分析方法；没有执行对象同一性检查时，也不要写“data integrity was verified”。
 :::
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将R环境与数据对象用于自己的研究 {#sec-own-data}
 
-### 1. 只改路径和分组列
+### 只改路径和分组列
 
 ```r
 #| eval: false
@@ -1049,7 +1063,7 @@ metadata <- read.delim(
 )
 ```
 
-### 2. 自动判断是否需要转置
+### 自动判断是否需要转置
 
 ```r
 #| eval: false
@@ -1081,7 +1095,7 @@ stopifnot(
 )
 ```
 
-### 3. taxonomy 只有一列分号字符串
+### taxonomy 只有一列分号字符串
 
 如果 taxonomy 形如：
 
@@ -1118,7 +1132,7 @@ taxonomy[] <- lapply(
 )
 ```
 
-### 4. metadata 中含中文分组
+### metadata 中含中文分组
 
 作图前映射为英文：
 
@@ -1131,7 +1145,7 @@ metadata$Treatment <- dplyr::recode(
 )
 ```
 
-### 5. 构建两种对象并回验
+### 构建两种对象并回验
 
 ```r
 #| eval: false

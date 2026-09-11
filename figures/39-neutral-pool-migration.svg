@@ -56,10 +56,10 @@
 <rect x='49.82' y='30.15' width='456.13' height='245.73' style='stroke-width: 0.83; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDUuODM=)'>
-<text x='45.96' y='243.29' text-anchor='end' style='font-size: 6.88px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.99px' lengthAdjust='spacingAndGlyphs'>TW</text>
-<text x='45.96' y='184.78' text-anchor='end' style='font-size: 6.88px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.83px' lengthAdjust='spacingAndGlyphs'>IW</text>
-<text x='45.96' y='126.27' text-anchor='end' style='font-size: 6.88px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.60px' lengthAdjust='spacingAndGlyphs'>CW</text>
-<text x='45.96' y='67.76' text-anchor='end' style='font-size: 6.88px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='41.68px' lengthAdjust='spacingAndGlyphs'>All wetlands</text>
+<text x='45.96' y='243.29' text-anchor='end' style='font-size: 6.88px;fill: #1A1A1A; font-family: "Arial";' textLength='10.99px' lengthAdjust='spacingAndGlyphs'>TW</text>
+<text x='45.96' y='184.78' text-anchor='end' style='font-size: 6.88px;fill: #1A1A1A; font-family: "Arial";' textLength='8.83px' lengthAdjust='spacingAndGlyphs'>IW</text>
+<text x='45.96' y='126.27' text-anchor='end' style='font-size: 6.88px;fill: #1A1A1A; font-family: "Arial";' textLength='11.60px' lengthAdjust='spacingAndGlyphs'>CW</text>
+<text x='45.96' y='67.76' text-anchor='end' style='font-size: 6.88px;fill: #1A1A1A; font-family: "Arial";' textLength='41.68px' lengthAdjust='spacingAndGlyphs'>All wetlands</text>
 <polyline points='47.68,240.78 49.82,240.78 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='47.68,182.27 49.82,182.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='47.68,123.77 49.82,123.77 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -67,24 +67,24 @@
 <polyline points='99.74,278.03 99.74,275.89 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='330.79,278.03 330.79,275.89 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='465.94,278.03 465.94,275.89 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='99.74' y='284.75' text-anchor='middle' style='font-size: 6.88px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.94px' lengthAdjust='spacingAndGlyphs'>0.1</text>
-<text x='330.79' y='284.75' text-anchor='middle' style='font-size: 6.88px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.94px' lengthAdjust='spacingAndGlyphs'>0.2</text>
-<text x='465.94' y='284.75' text-anchor='middle' style='font-size: 6.88px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.94px' lengthAdjust='spacingAndGlyphs'>0.3</text>
-<text x='277.89' y='294.59' text-anchor='middle' style='font-size: 8.60px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='147.23px' lengthAdjust='spacingAndGlyphs'>Migration parameter m (log scale)</text>
+<text x='99.74' y='284.75' text-anchor='middle' style='font-size: 6.88px;fill: #1A1A1A; font-family: "Arial";' textLength='10.94px' lengthAdjust='spacingAndGlyphs'>0.1</text>
+<text x='330.79' y='284.75' text-anchor='middle' style='font-size: 6.88px;fill: #1A1A1A; font-family: "Arial";' textLength='10.94px' lengthAdjust='spacingAndGlyphs'>0.2</text>
+<text x='465.94' y='284.75' text-anchor='middle' style='font-size: 6.88px;fill: #1A1A1A; font-family: "Arial";' textLength='10.94px' lengthAdjust='spacingAndGlyphs'>0.3</text>
+<text x='277.89' y='294.59' text-anchor='middle' style='font-size: 8.60px;fill: #1A1A1A; font-family: "Arial";' textLength='147.23px' lengthAdjust='spacingAndGlyphs'>Migration parameter m (log scale)</text>
 <rect x='25.76' y='304.95' width='252.42' height='25.87' style='stroke-width: 0.83; stroke: none; fill: #FFFFFF;' />
-<text x='30.04' y='321.01' style='font-size: 8.60px; font-family: "DejaVu Sans";' textLength='37.98px' lengthAdjust='spacingAndGlyphs'>Model R²</text>
+<text x='30.04' y='321.01' style='font-size: 8.60px; font-family: "Arial";' textLength='37.98px' lengthAdjust='spacingAndGlyphs'>Model R²</text>
 <circle cx='80.95' cy='317.88' r='5.09' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
 <circle cx='122.12' cy='317.88' r='5.69' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
 <circle cx='163.28' cy='317.88' r='6.15' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
 <circle cx='204.45' cy='317.88' r='6.53' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
 <circle cx='245.63' cy='317.88' r='6.87' style='stroke-width: 0.71; stroke: none; fill: #000000;' />
-<text x='93.87' y='320.39' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.68</text>
-<text x='135.04' y='320.39' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.70</text>
-<text x='176.21' y='320.39' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.72</text>
-<text x='217.38' y='320.39' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.74</text>
-<text x='258.57' y='320.39' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.76</text>
+<text x='93.87' y='320.39' style='font-size: 6.88px; font-family: "Arial";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.68</text>
+<text x='135.04' y='320.39' style='font-size: 6.88px; font-family: "Arial";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.70</text>
+<text x='176.21' y='320.39' style='font-size: 6.88px; font-family: "Arial";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.72</text>
+<text x='217.38' y='320.39' style='font-size: 6.88px; font-family: "Arial";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.74</text>
+<text x='258.57' y='320.39' style='font-size: 6.88px; font-family: "Arial";' textLength='15.32px' lengthAdjust='spacingAndGlyphs'>0.76</text>
 <rect x='286.74' y='304.95' width='243.27' height='25.85' style='stroke-width: 0.83; stroke: none; fill: #FFFFFF;' />
-<text x='291.03' y='321.00' style='font-size: 8.60px; font-family: "DejaVu Sans";' textLength='58.21px' lengthAdjust='spacingAndGlyphs'>Regional pool</text>
+<text x='291.03' y='321.00' style='font-size: 8.60px; font-family: "Arial";' textLength='58.21px' lengthAdjust='spacingAndGlyphs'>Regional pool</text>
 <line x1='355.25' y1='317.87' x2='369.07' y2='317.87' style='stroke-width: 1.49; stroke: #009E73; stroke-linecap: butt;' />
 <circle cx='362.16' cy='317.87' r='1.95' style='stroke-width: 0.71; stroke: none; fill: #009E73;' />
 <line x1='392.09' y1='317.87' x2='405.92' y2='317.87' style='stroke-width: 1.49; stroke: #E69F00; stroke-linecap: butt;' />
@@ -93,12 +93,12 @@
 <circle cx='433.68' cy='317.87' r='1.95' style='stroke-width: 0.71; stroke: none; fill: #0072B2;' />
 <line x1='464.21' y1='317.87' x2='478.04' y2='317.87' style='stroke-width: 1.49; stroke: #6B7280; stroke-linecap: butt;' />
 <circle cx='471.13' cy='317.87' r='1.95' style='stroke-width: 0.71; stroke: none; fill: #6B7280;' />
-<text x='375.09' y='320.38' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='10.99px' lengthAdjust='spacingAndGlyphs'>TW</text>
-<text x='411.93' y='320.38' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='8.83px' lengthAdjust='spacingAndGlyphs'>IW</text>
-<text x='446.60' y='320.38' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='11.60px' lengthAdjust='spacingAndGlyphs'>CW</text>
-<text x='484.05' y='320.38' style='font-size: 6.88px; font-family: "DejaVu Sans";' textLength='41.68px' lengthAdjust='spacingAndGlyphs'>All wetlands</text>
-<text x='4.28' y='24.08' style='font-size: 8.60px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='299.29px' lengthAdjust='spacingAndGlyphs'>Points: fitted m; bars: 95% sample-bootstrap interval (200 replicates)</text>
-<text x='4.28' y='11.48' style='font-size: 9.89px; font-weight: bold; font-family: "DejaVu Sans";' textLength='333.39px' lengthAdjust='spacingAndGlyphs'>Immigration estimates depend on the defined regional pool</text>
-<text x='49.82' y='340.11' style='font-size: 6.88px;fill: #666666; font-family: "DejaVu Sans";' textLength='321.06px' lengthAdjust='spacingAndGlyphs'>Group-specific fits also change sample number, mean depth, composition and spatial extent.</text>
+<text x='375.09' y='320.38' style='font-size: 6.88px; font-family: "Arial";' textLength='10.99px' lengthAdjust='spacingAndGlyphs'>TW</text>
+<text x='411.93' y='320.38' style='font-size: 6.88px; font-family: "Arial";' textLength='8.83px' lengthAdjust='spacingAndGlyphs'>IW</text>
+<text x='446.60' y='320.38' style='font-size: 6.88px; font-family: "Arial";' textLength='11.60px' lengthAdjust='spacingAndGlyphs'>CW</text>
+<text x='484.05' y='320.38' style='font-size: 6.88px; font-family: "Arial";' textLength='41.68px' lengthAdjust='spacingAndGlyphs'>All wetlands</text>
+<text x='4.28' y='24.08' style='font-size: 8.60px;fill: #4D4D4D; font-family: "Arial";' textLength='299.29px' lengthAdjust='spacingAndGlyphs'>Points: fitted m; bars: 95% sample-bootstrap interval (200 replicates)</text>
+<text x='4.28' y='11.48' style='font-size: 9.89px; font-weight: bold; font-family: "Arial";' textLength='333.39px' lengthAdjust='spacingAndGlyphs'>Immigration estimates depend on the defined regional pool</text>
+<text x='49.82' y='340.11' style='font-size: 6.88px;fill: #666666; font-family: "Arial";' textLength='321.06px' lengthAdjust='spacingAndGlyphs'>Group-specific fits also change sample number, mean depth, composition and spatial extent.</text>
 </g>
 </svg>

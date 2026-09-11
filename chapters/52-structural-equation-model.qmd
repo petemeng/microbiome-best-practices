@@ -1,6 +1,6 @@
 ---
 title: "结构方程模型：从环境因子到微生物再到表型"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,18 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/52-structural-equation-model.R
+  packages:
+  - ggplot2
+  - patchwork
+  - piecewiseSEM
+  - plspm
+  - ragg
+  - svglite
 ---
-
-> **分析目标：**用预先声明的分段结构方程模型（piecewise SEM）检验“气候 → 土壤化学 → 微生物多样性 → 土壤有机碳”路径与数据是否相容，并用 PLS-PM 做估计器敏感性分析。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`，以及逐样本实测的 `environment.tsv`；后者必须包含环境因子和表型，不能由 OTU 表虚构。  
-> **预计资源：**真实示例为 13,628 个 OTU、90 个样本、4 个实测环境变量和 1 个实测表型；普通笔记本约 3–8 分钟，内存低于 1 GB。
 
 ## SEM 先从可证伪的因果图开始 {#sec-target}
 
@@ -39,98 +46,32 @@ fig-format: png
 全局拟合未拒绝一个图，只说明该图蕴含的条件独立关系没有与当前数据明显冲突。反向箭头、共同原因、测量误差或另一张竞争图也可能得到相似拟合；横断面 SEM 不会自动创造时间顺序。
 :::
 
-## SEM 把哪些关系放进同一个模型 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-传统单个回归只估计一个结局。分段 SEM 把多个回归连接起来，例如：
+需要 R，以及 `ggplot2`、`patchwork`、`piecewiseSEM`、`plspm`、`ragg`、`svglite`。本次使用湿地三张表及实测环境因子表；环境暴露和表型不能由菌群丰度臆造。
 
-\[
-\begin{aligned}
-\mathrm{pH} &\leftarrow \mathrm{Temperature}+\mathrm{Precipitation}+\mathrm{Group},\\
-\log(\mathrm{EC}) &\leftarrow \mathrm{Temperature}+\mathrm{Precipitation}+\mathrm{Group},\\
-\mathrm{Shannon} &\leftarrow \mathrm{pH}+\log(\mathrm{EC})+\mathrm{Climate}+\mathrm{Group},\\
-\log(\mathrm{TOC}) &\leftarrow \mathrm{Shannon}+\mathrm{pH}+\log(\mathrm{EC})+\mathrm{Climate}+\mathrm{Group}.
-\end{aligned}
-\]
-
-`piecewiseSEM` 对每个响应拟合独立模型，再用 directed separation（定向分离）检查图所蕴含的缺失路径。Fisher's C 的小 P 值表示至少有应独立的变量仍存在条件关联，因而拒绝当前图；大 P 值不代表图唯一或为真。
-
-<details>
-<summary><strong>深入：piecewise SEM、协方差型 SEM 与 PLS-PM 怎么选</strong></summary>
-
-**piecewise SEM** 允许每个分量使用线性模型、广义模型或混合模型，适合生态学中的层级设计和中等样本量。它的全局检验围绕图的条件独立声明。
-
-**协方差型 SEM**（如 `lavaan`）直接拟合整体协方差结构，适合有明确潜变量测量模型且样本量足够的场景。微生物组常见的稀疏成分数据和小样本会使模型不稳定；不能用拟合指标掩盖不收敛或不识别。
-
-**PLS-PM** 偏向预测和方差解释，对分布要求较弱，也可构建多指标 block；但传统全局拟合指标不能替代因果结构检验。本例只把它用作“换一种估计器，关键路径是否同方向且区间排除零”的敏感性分析。
-
-</details>
-
-### 三条建模底线
-
-1. **箭头在看数据前由理论、时间顺序和设计确定。** 不从相关矩阵自动搜索一张最好看的网络。
-2. **调整变量不能被误叫作可干预暴露。** 本例 `Group` 控制宏观湿地差异，但不能解释成随机处理。
-3. **一个 alpha 指标不是“微生物组潜变量”。** Shannon 只描述多样性；若科学问题是特定功能或组成轴，应预先定义更合适且可验证的指标。
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、获取真实数据和定义作图函数</strong></summary>
-
-首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "piecewiseSEM", "plspm", "ggplot2", "patchwork", "scales",
-  "digest", "svglite", "ragg"
-))
-```
-
-数据固定使用 `microeco 2.0.0` 源码包中的真实表。下面下载、核对 SHA-256，并导出三件套和环境表。
-
-```{r}
-#| eval: false
-archive <- "data/raw/microeco_2.0.0.tar.gz"
-url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/microeco/",
-  "microeco_2.0.0.tar.gz"
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/environment.tsv",
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/taxonomy.tsv"
 )
-expected <- paste0(
-  "454a3b71ceeea86bdd54f475a12b5bac",
-  "9c3b124f663b8dc6e560827fca89ebfd"
-)
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) download.file(url, archive, mode = "wb")
-stopifnot(identical(
-  digest::digest(archive, algo = "sha256", file = TRUE), expected
-))
-
-files <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData",
-  "microeco/data/env_data_16S.RData"
-)
-tmp <- tempfile("microeco-")
-dir.create(tmp)
-utils::untar(archive, files = files, exdir = tmp)
-e <- new.env(parent = emptyenv())
-for (f in files) load(file.path(tmp, f), envir = e)
-write_piece <- function(x, id, path) {
-  out <- data.frame(setNames(list(rownames(x)), id), x, check.names = FALSE)
-  write.table(out, path, sep = "\t", quote = FALSE, row.names = FALSE, na = "")
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
 }
-write_piece(e$otu_table_16S, "FeatureID", "data/small/otutab.tsv")
-write_piece(e$taxonomy_table_16S, "FeatureID", "data/small/taxonomy.tsv")
-write_piece(e$sample_info_16S, "SampleID", "data/small/metadata.tsv")
-write_piece(e$env_data_16S, "SampleID", "data/small/environment.tsv")
-unlink(tmp, recursive = TRUE)
 ```
 
-出版级作图函数直接内联：
-
 ```{r}
+#| results: hold
+#| label: reader-step-02
 .libPaths(c(".r-lib", .libPaths()))
 library(piecewiseSEM)
 library(plspm)
@@ -138,7 +79,7 @@ library(ggplot2)
 library(patchwork)
 
 set.seed(20260752)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -182,14 +123,11 @@ save_pub <- function(plot, file_base, width = 180, height = 120,
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套与实测环境/表型表
+### 读取三件套与实测环境/表型表
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 otutab <- as.matrix(read.delim(
   "data/small/otutab.tsv", row.names = 1, check.names = FALSE
 ))
@@ -223,11 +161,62 @@ head(environment[, c("pH", "Conductivity", "TOC", "Temperature", "Precipitation"
 
 `environment.tsv` 原有 200 行，只有与三件套共同的 90 个样本进入 SEM。任何合并后的静默丢样都应打印并解释。
 
-### 2. 构建预先声明的分析表
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/52-structural-equation-model.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "piecewiseSEM", "plspm", "ggplot2", "patchwork", "scales",
+  "digest", "svglite", "ragg"
+))
+```
+
+</details>
+
+## SEM 把哪些关系放进同一个模型 {#sec-theory}
+
+传统单个回归只估计一个结局。分段 SEM 把多个回归连接起来，例如：
+
+\[
+\begin{aligned}
+\mathrm{pH} &\leftarrow \mathrm{Temperature}+\mathrm{Precipitation}+\mathrm{Group},\\
+\log(\mathrm{EC}) &\leftarrow \mathrm{Temperature}+\mathrm{Precipitation}+\mathrm{Group},\\
+\mathrm{Shannon} &\leftarrow \mathrm{pH}+\log(\mathrm{EC})+\mathrm{Climate}+\mathrm{Group},\\
+\log(\mathrm{TOC}) &\leftarrow \mathrm{Shannon}+\mathrm{pH}+\log(\mathrm{EC})+\mathrm{Climate}+\mathrm{Group}.
+\end{aligned}
+\]
+
+`piecewiseSEM` 对每个响应拟合独立模型，再用 directed separation（定向分离）检查图所蕴含的缺失路径。Fisher's C 的小 P 值表示至少有应独立的变量仍存在条件关联，因而拒绝当前图；大 P 值不代表图唯一或为真。
+
+<details>
+<summary><strong>深入：piecewise SEM、协方差型 SEM 与 PLS-PM 怎么选</strong></summary>
+
+**piecewise SEM** 允许每个分量使用线性模型、广义模型或混合模型，适合生态学中的层级设计和中等样本量。它的全局检验围绕图的条件独立声明。
+
+**协方差型 SEM**（如 `lavaan`）直接拟合整体协方差结构，适合有明确潜变量测量模型且样本量足够的场景。微生物组常见的稀疏成分数据和小样本会使模型不稳定；不能用拟合指标掩盖不收敛或不识别。
+
+**PLS-PM** 偏向预测和方差解释，对分布要求较弱，也可构建多指标 block；但传统全局拟合指标不能替代因果结构检验。本例只把它用作“换一种估计器，关键路径是否同方向且区间排除零”的敏感性分析。
+
+</details>
+
+### 三条建模底线
+
+1. **箭头在看数据前由理论、时间顺序和设计确定。** 不从相关矩阵自动搜索一张最好看的网络。
+2. **调整变量不能被误叫作可干预暴露。** 本例 `Group` 控制宏观湿地差异，但不能解释成随机处理。
+3. **一个 alpha 指标不是“微生物组潜变量”。** Shannon 只描述多样性；若科学问题是特定功能或组成轴，应预先定义更合适且可验证的指标。
+
+## 先定义路径，再拟合结构方程 {#sec-code}
+
+### 构建预先声明的分析表
 
 对偏斜的电导率和 TOC 做 `log1p`，再把连续变量标准化，使不同量纲的路径系数可比较。`Group` 用原始研究的三个英文代码 `CW/IW/TW`，并进入每个分量模型。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 relative <- sweep(otutab, 2, colSums(otutab), "/")
 shannon <- -colSums(ifelse(relative > 0, relative * log(relative), 0))
 z <- function(x) as.numeric(scale(x))
@@ -251,11 +240,13 @@ sem_data <- data.frame(
 summary(sem_data)
 ```
 
-### 3. 拟合完整的分段 SEM
+### 拟合完整的分段 SEM
 
 公式就是 DAG 的可执行版本。每条没写入公式的路径都隐含一个条件独立声明，因此不能拟合后再偷偷补箭头而不把它标为探索性分析。
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 main_models <- list(
   acidity = lm(pHZ ~ TempZ + PrecipZ + Group, data = sem_data),
   salinity = lm(LogECZ ~ TempZ + PrecipZ + Group, data = sem_data),
@@ -283,9 +274,11 @@ piecewiseSEM::coefs(sem_main)
 
 完整图的 Fisher's C = 4.514，df = 2，P = 0.105：当前数据没有拒绝图蕴含的条件独立结构。关键的 `Shannon → log TOC` 标准化系数为 −0.012（95% CI −0.155 至 0.131，P = 0.865），没有支持微生物多样性与 TOC 的直接路径。
 
-### 4. 提取标准化路径并重绘 DAG
+### 提取标准化路径并重绘 DAG
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 extract_paths <- function(model, response, model_name) {
   x <- summary(model)$coefficients
   x <- x[!grepl("^\\(Intercept\\)$|^Group", rownames(x)), , drop = FALSE]
@@ -364,9 +357,11 @@ save_pub(p_dag, "figures/52-structural-equation-model/52-1-prespecified-dag",
          height = 100)
 ```
 
-### 5. 画完整路径系数
+### 画完整路径系数
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 plot_paths <- main_paths
 plot_paths$Response <- factor(
   plot_paths$Response,
@@ -403,6 +398,8 @@ save_pub(p_paths, "figures/52-structural-equation-model/52-2-path-coefficients",
 一个常见但过强的写法是删掉气候到 Shannon 和 TOC 的直接路径，暗示所有作用只能经过 pH/电导率。把这个“中介限定图”明确拟合，而不是从不显著路径倒推出完全中介：
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 reduced_models <- list(
   acidity = main_models$acidity,
   salinity = main_models$salinity,
@@ -435,6 +432,8 @@ sem_fit
 ### PLS-PM 作为估计器敏感性分析
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 inner <- matrix(
   0, 5, 5,
   dimnames = list(
@@ -470,6 +469,8 @@ PLS-PM 的 GOF 为 0.460，但它不能把箭头升级为因果。更值得看�
 ### 残差与全局结构一起看
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
 sem_data$PredictedTOCZ <- predict(main_models$carbon)
 sem_data$ResidualTOCZ <- residuals(main_models$carbon)
 group_colours <- c(
@@ -507,6 +508,8 @@ save_pub(p_diagnostics,
 ```
 
 ```{r}
+#| results: hold
+#| label: reader-step-11
 sem_fit$Compatible <- sem_fit$PValue >= 0.05
 p_fit <- ggplot(sem_fit, aes(PValue, Model, colour = Compatible)) +
   geom_vline(xintercept = 0.05, linetype = 2, colour = pal_pub[["vermillion"]]) +
@@ -554,19 +557,19 @@ save_pub(p_audit, "figures/52-structural-equation-model/52-4-model-audit",
 - `Group`、批次和空间位置若同时代表多种差异，调整它们不能恢复一个不存在的随机实验。
 :::
 
-## 出版级美化 {#sec-publication}
+## 检查路径、拟合与替代解释 {#sec-publication}
 
 路径图应把“科学结构”和“统计结果”分开：节点写变量含义，箭头颜色只区分焦点路径与其余直接路径；完整数值放系数森林图。每个箭头都塞系数、P 值和星号会让读者看不到结构，也容易只注意显著路径。
 
 推荐正文组合为：预设 DAG + 全部标准化系数；补充材料放 directed-separation 表、竞争图比较、残差诊断和 PLS-PM bootstrap。`save_pub()` 输出 PDF/SVG 与 600 ppi PNG/TIFF，所有图内文字为英文。
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告结构方程的假设与拟合的方法与限制 {#sec-methods}
 
 > We evaluated a pre-specified causal graph using piecewise structural equation modelling. Measured temperature and precipitation were modelled as upstream climatic predictors; soil pH and log-transformed conductivity represented soil chemistry; Shannon diversity represented the microbial community; and log-transformed total organic carbon was the measured phenotype. Continuous variables were standardised before analysis, and wetland group was included as an adjustment factor in every component model. Global graph compatibility was assessed using tests of directed separation and Fisher's C. Standardised component-model coefficients with 95% confidence intervals were reported. A more restrictive mediation-only graph was evaluated as a falsification model. Partial least-squares path modelling with 2,000 fixed-seed bootstrap resamples was used as an estimator-family sensitivity analysis. Graph compatibility was not interpreted as proof of causality.
 
 请把变量的实测方法、取样时间、预设图依据、变换、层级结构、缺失处理、bootstrap 次数和软件版本替换为真实信息。若 DAG 在看结果后修改，应把修改过程与最终模型标为探索性。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将结构方程的假设与拟合用于自己的研究 {#sec-own-data}
 
 除三件套外，必须准备一张以 `SampleID` 为行名的实测表：
 

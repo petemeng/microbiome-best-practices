@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Keep a chapter's executable R code identical across QMD, script and WeChat.
+"""Keep the full R workflow faithful to QMD and WeChat excerpts faithful to it.
 
 This is a packaging check, not a substitute for running the extracted public
 code in a fresh R session and an empty working directory.
@@ -11,6 +11,8 @@ import argparse
 import hashlib
 import json
 import re
+import subprocess
+from functools import lru_cache
 from pathlib import Path
 
 import yaml
@@ -64,12 +66,76 @@ def script_text(source: str, blocks: list[tuple[str, str]]) -> str:
     return header + "\n" + "\n\n".join(code for _, code in blocks) + "\n"
 
 
+GENERIC_HELPERS = ('font_pub', 'pal_pub', 'scale_color_pub', 'scale_fill_pub', 'theme_pub', 'save_pub')
+
+
+@lru_cache(maxsize=256)
+def decisive_code(code: str) -> str:
+    """Omit only named, top-level plotting bootstrap assignments from WeChat.
+
+    R parses expression boundaries; nested functions, strings and scientific
+    input/analysis functions cannot accidentally be removed by a text regex.
+    The complete executable code remains unchanged in QMD and its R download.
+    """
+    if not re.search(r'^\s*(?:' + '|'.join(GENERIC_HELPERS) + r')\s*(?:<-|=)', code, re.M):
+        return code
+    parser = r'''
+code <- paste(readLines(file("stdin"), warn = FALSE), collapse = "\n")
+parsed <- parse(text = code, keep.source = TRUE)
+refs <- attr(parsed, "srcref")
+names <- c("font_pub", "pal_pub", "scale_color_pub", "scale_fill_pub", "theme_pub", "save_pub")
+for (i in seq_along(parsed)) {
+  expr <- parsed[[i]]
+  if (is.call(expr) && is.symbol(expr[[1]]) && as.character(expr[[1]]) %in% c("<-", "=") &&
+      is.symbol(expr[[2]]) && as.character(expr[[2]]) %in% names) {
+    ref <- refs[[i]]
+    cat(ref[1], ref[2], ref[3], ref[4], sep = "\t"); cat("\n")
+  }
+}
+'''
+    run = subprocess.run(['Rscript', '--vanilla', '-e', parser], input=code,
+                         text=True, capture_output=True, check=True)
+    lines = code.splitlines()
+    omitted = set()
+    for row in run.stdout.splitlines():
+        first, start, last, end = map(int, row.split('\t'))
+        prefix = lines[first - 1].encode()[:start - 1].decode()
+        suffix = lines[last - 1].encode()[end:].decode().strip()
+        if prefix.strip() or (suffix and not suffix.startswith('#')):
+            raise ValueError('A generic helper shares a line with another expression')
+        omitted.update(range(first - 1, last))
+    return normalize_code(re.sub(r'\n{3,}', '\n\n', '\n'.join(
+        line for index, line in enumerate(lines) if index not in omitted)))
+
+
+def omit_generic_reader_helpers(source: str, main) -> int:
+    """Transform verified rendered source blocks, never the runnable R download."""
+    if not frontmatter(source).get('reader-reproduction', {}).get('required'):
+        return 0
+    replacements = {code: decisive_code(code) for _, code in reader_blocks(source)}
+    changed = 0
+    for pre in list(main.xpath('.//pre')):
+        original = normalize_code(pre.text_content())
+        if original not in replacements or replacements[original] == original:
+            continue
+        replacement = replacements[original]
+        if replacement:
+            for child in list(pre):pre.remove(child)
+            pre.text = replacement
+        else:
+            pre.getparent().remove(pre)
+        changed += 1
+    return changed
+
+
 def public_blocks(source: str, content: str) -> list[tuple[str, str]]:
-    expected = reader_blocks(source)
+    expected = [(label, decisive_code(code)) for label, code in reader_blocks(source)]
     displayed = [normalize_code(pre.text_content()) for pre in html.fromstring(content).xpath(".//pre")]
     selected = []
     cursor = 0
     for label, code in expected:
+        if not code:
+            continue
         try:
             position = displayed.index(code, cursor)
         except ValueError as exc:
@@ -124,11 +190,13 @@ def validate_reader_contract(source_qmd: Path, content: str, project: Path | Non
     if not config.get("required", False):
         return {"required": False}
     blocks = public_blocks(source, content)
-    expected_script = script_text(source, blocks)
+    full_blocks = reader_blocks(source)
+    expected_script = script_text(source, full_blocks)
     report = {
         "required": True,
         "status": "passed",
         "code_blocks": len(blocks),
+        "public_code_policy": "analysis code with complete downloadable R workflow; generic plotting bootstrap omitted",
         "code_sha256": hashlib.sha256(expected_script.encode()).hexdigest(),
     }
     if project is not None:
@@ -152,7 +220,7 @@ def main() -> None:
     if args.article:
         content = args.article.read_text(encoding="utf-8")
         report = validate_reader_contract(args.qmd, content, args.project_root)
-        blocks = public_blocks(source, content)
+        blocks = reader_blocks(source)
     else:
         blocks = reader_blocks(source)
         report = {"code_blocks": len(blocks)}

@@ -142,21 +142,21 @@
 <rect x='31.45' y='29.82' width='395.18' height='290.99' style='stroke-width: 0.82; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw0MzAuODd8MC4wMHwzNDUuODM=)'>
-<text x='27.64' y='314.25' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.99px' lengthAdjust='spacingAndGlyphs'>1B</text>
-<text x='27.64' y='239.05' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.99px' lengthAdjust='spacingAndGlyphs'>3B</text>
-<text x='27.64' y='156.65' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.32px' lengthAdjust='spacingAndGlyphs'>10B</text>
-<text x='27.64' y='81.45' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.32px' lengthAdjust='spacingAndGlyphs'>30B</text>
+<text x='27.64' y='314.25' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='8.99px' lengthAdjust='spacingAndGlyphs'>1B</text>
+<text x='27.64' y='239.05' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='8.99px' lengthAdjust='spacingAndGlyphs'>3B</text>
+<text x='27.64' y='156.65' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.32px' lengthAdjust='spacingAndGlyphs'>10B</text>
+<text x='27.64' y='81.45' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.32px' lengthAdjust='spacingAndGlyphs'>30B</text>
 <polyline points='29.34,311.77 31.45,311.77 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='29.34,236.58 31.45,236.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='29.34,154.17 31.45,154.17 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='29.34,78.97 31.45,78.97 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='139.23,322.94 139.23,320.82 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='318.86,322.94 318.86,320.82 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='139.23' y='329.58' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='26.34px' lengthAdjust='spacingAndGlyphs'>Healthy</text>
-<text x='318.86' y='329.58' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>CD</text>
-<text transform='translate(10.43,175.32) rotate(-90)' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='195.54px' lengthAdjust='spacingAndGlyphs'>Flow-cytometry cell load (cells/g frozen feces)</text>
-<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='254.46px' lengthAdjust='spacingAndGlyphs'>Primary comparison restricted to the shared Disease cohort</text>
-<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "DejaVu Sans";' textLength='340.91px' lengthAdjust='spacingAndGlyphs'>Crohn's disease samples have a different microbial-load scale</text>
-<text x='31.45' y='340.18' style='font-size: 6.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='328.80px' lengthAdjust='spacingAndGlyphs'>Median log2 ratio (CD / Healthy) = -1.63; bootstrap 95% CI -2.80 to -0.78; Wilcoxon p = 6.3e-07.</text>
+<text x='139.23' y='329.58' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='26.34px' lengthAdjust='spacingAndGlyphs'>Healthy</text>
+<text x='318.86' y='329.58' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>CD</text>
+<text transform='translate(10.43,175.32) rotate(-90)' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='195.54px' lengthAdjust='spacingAndGlyphs'>Flow-cytometry cell load (cells/g frozen feces)</text>
+<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "Arial";' textLength='254.46px' lengthAdjust='spacingAndGlyphs'>Primary comparison restricted to the shared Disease cohort</text>
+<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "Arial";' textLength='340.91px' lengthAdjust='spacingAndGlyphs'>Crohn's disease samples have a different microbial-load scale</text>
+<text x='31.45' y='340.18' style='font-size: 6.80px;fill: #666666; font-family: "Arial";' textLength='328.80px' lengthAdjust='spacingAndGlyphs'>Median log2 ratio (CD / Healthy) = -1.63; bootstrap 95% CI -2.80 to -0.78; Wilcoxon p = 6.3e-07.</text>
 </g>
 </svg>

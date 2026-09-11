@@ -64,11 +64,11 @@
 <rect x='115.44' y='35.09' width='389.81' height='247.90' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTEuODE=)'>
-<text x='110.96' y='257.30' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='63.11px' lengthAdjust='spacingAndGlyphs'>Weighted mode</text>
-<text x='110.96' y='209.63' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='52.55px' lengthAdjust='spacingAndGlyphs'>Simple mode</text>
-<text x='110.96' y='161.95' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='70.41px' lengthAdjust='spacingAndGlyphs'>Weighted median</text>
-<text x='110.96' y='114.28' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>MR Egger</text>
-<text x='110.96' y='66.61' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='105.98px' lengthAdjust='spacingAndGlyphs'>Inverse variance weighted</text>
+<text x='110.96' y='257.30' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='63.11px' lengthAdjust='spacingAndGlyphs'>Weighted mode</text>
+<text x='110.96' y='209.63' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='52.55px' lengthAdjust='spacingAndGlyphs'>Simple mode</text>
+<text x='110.96' y='161.95' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='70.41px' lengthAdjust='spacingAndGlyphs'>Weighted median</text>
+<text x='110.96' y='114.28' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='38.43px' lengthAdjust='spacingAndGlyphs'>MR Egger</text>
+<text x='110.96' y='66.61' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='105.98px' lengthAdjust='spacingAndGlyphs'>Inverse variance weighted</text>
 <polyline points='112.95,254.38 115.44,254.38 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='112.95,206.71 115.44,206.71 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='112.95,159.04 115.44,159.04 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -79,13 +79,13 @@
 <polyline points='309.07,285.48 309.07,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='396.44,285.48 396.44,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='483.80,285.48 483.80,282.99 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='134.35' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.6</text>
-<text x='221.71' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.3</text>
-<text x='309.07' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='396.44' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.3</text>
-<text x='483.80' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.6</text>
-<text x='310.35' y='304.75' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='195.25px' lengthAdjust='spacingAndGlyphs'>MR estimate (95% confidence interval)</text>
-<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='378.33px' lengthAdjust='spacingAndGlyphs'>Effects are log-odds of IBD per unit higher genetically predicted abundance</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='267.11px' lengthAdjust='spacingAndGlyphs'>Sensitivity estimators all include the null</text>
+<text x='134.35' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.6</text>
+<text x='221.71' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.3</text>
+<text x='309.07' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='396.44' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.3</text>
+<text x='483.80' y='293.30' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.6</text>
+<text x='310.35' y='304.75' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='195.25px' lengthAdjust='spacingAndGlyphs'>MR estimate (95% confidence interval)</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='378.33px' lengthAdjust='spacingAndGlyphs'>Effects are log-odds of IBD per unit higher genetically predicted abundance</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='267.11px' lengthAdjust='spacingAndGlyphs'>Sensitivity estimators all include the null</text>
 </g>
 </svg>

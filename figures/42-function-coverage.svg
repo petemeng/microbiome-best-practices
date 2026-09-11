@@ -143,11 +143,11 @@
 <rect x='44.20' y='20.73' width='262.63' height='182.27' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHwzMTEuODF8MC4wMHwyMzIuNDQ=)'>
-<text x='39.72' y='197.64' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.69px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='39.72' y='156.21' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>25%</text>
-<text x='39.72' y='114.79' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='39.72' y='73.36' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>75%</text>
-<text x='39.72' y='31.93' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='22.87px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='39.72' y='197.64' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.69px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='39.72' y='156.21' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>25%</text>
+<text x='39.72' y='114.79' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='39.72' y='73.36' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>75%</text>
+<text x='39.72' y='31.93' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='22.87px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <polyline points='41.71,194.72 44.20,194.72 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='41.71,153.29 44.20,153.29 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='41.71,111.87 44.20,111.87 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -156,11 +156,11 @@
 <polyline points='93.45,205.50 93.45,203.00 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='175.52,205.50 175.52,203.00 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='257.59,205.50 257.59,203.00 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='93.45' y='213.32' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.50px' lengthAdjust='spacingAndGlyphs'>CW</text>
-<text x='175.52' y='213.32' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.27px' lengthAdjust='spacingAndGlyphs'>IW</text>
-<text x='257.59' y='213.32' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.80px' lengthAdjust='spacingAndGlyphs'>TW</text>
-<text transform='translate(12.27,111.87) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='119.42px' lengthAdjust='spacingAndGlyphs'>Annotated read fraction</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='205.49px' lengthAdjust='spacingAndGlyphs'>FAPROTAX annotation coverage</text>
-<text x='44.20' y='225.80' style='font-size: 8.00px;fill: #666666; font-family: "DejaVu Sans";' textLength='185.43px' lengthAdjust='spacingAndGlyphs'>Coverage precedes multi-function duplication.</text>
+<text x='93.45' y='213.32' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='13.50px' lengthAdjust='spacingAndGlyphs'>CW</text>
+<text x='175.52' y='213.32' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='10.27px' lengthAdjust='spacingAndGlyphs'>IW</text>
+<text x='257.59' y='213.32' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.80px' lengthAdjust='spacingAndGlyphs'>TW</text>
+<text transform='translate(12.27,111.87) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='119.42px' lengthAdjust='spacingAndGlyphs'>Annotated read fraction</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='205.49px' lengthAdjust='spacingAndGlyphs'>FAPROTAX annotation coverage</text>
+<text x='44.20' y='225.80' style='font-size: 8.00px;fill: #666666; font-family: "Arial";' textLength='185.43px' lengthAdjust='spacingAndGlyphs'>Coverage precedes multi-function duplication.</text>
 </g>
 </svg>

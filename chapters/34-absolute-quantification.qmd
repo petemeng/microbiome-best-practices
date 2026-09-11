@@ -1,6 +1,6 @@
 ---
 title: "绝对定量陷阱：相对丰度 vs QMP/spike-in"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,18 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/34-absolute-quantification.R
+  packages:
+  - ggplot2
+  - ggrepel
+  - knitr
+  - ragg
+  - scales
+  - svglite
 ---
-
-> **分析目标：**把 16S relative abundance 与独立 flow-cytometry microbial load 结合成 quantitative microbiome profile（QMP），比较 Crohn's disease（CD）与同 cohort healthy controls，并定位相对与定量结论发生方向/显著性分歧的属。  
-> **输入文件：**标准三件套 `data/small/absolute-quantification/{otutab,taxonomy,metadata}.tsv`，外加每样本 `cell-load.tsv`。  
-> **预计资源：**234 个属、135 个样本、4,080,996 reads；主比较限定同一 Disease cohort 的 29 个 CD 与 66 个 healthy samples；普通笔记本少于 1 分钟、峰值内存低于 1 GB；三张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 相对丰度不能替代微生物总负荷 {#sec-target}
 
@@ -33,100 +40,37 @@ fig-format: png
 
 本页数据来自 `reconsi` 1.16.0 随包分发的 `Vandeputte` phyloseq object，原始研究同时提供 genus counts 与 flow cytometry。主比较只用 `Cohort == "Disease"`，避免把额外 40 个 study controls 与病例队列直接混合；健康状态仍是观察性标签，不能据此推出疾病因果菌。
 
-## QMP 如何把样本总负荷带回组成数据 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. Relative abundance 丢失总负荷
+需要 R，以及 `ggplot2`、`ggrepel`、`knitr`、`ragg`、`scales`、`svglite`。本次使用三张微生物组表以及实测细胞负荷表；绝对定量不能只靠相对丰度推算。
 
-对 taxon $i$、样本 $s$，测序比例为
-
-$$
-p_{is}=\frac{Y_{is}}{\sum_jY_{js}}.
-$$
-
-所有 $p_{is}$ 加和为 1；单凭 `p` 无法区分“taxon 本身减少”与“其他 taxa 增加导致份额减少”。Raw library size 也不是负荷，因为它由上机分配、测序深度和质控共同决定。
-
-### 2. Flow-cytometry QMP 的核心换算
-
-若独立测得样本总 microbial load $L_s$（cells per gram frozen feces），则
-
-$$
-\widehat A_{is}=p_{is}\times L_s.
-$$
-
-$\widehat A_{is}$恢复了样本间总量刻度，但仍假定 sequencing proportion 可代表 cell composition。DNA extraction、PCR、primer、16S copy number 和 cell lysis bias 不会因为乘了 `L_s` 自动消失。
-
-### 3. Spike-in、qPCR/ddPCR 与 flow cytometry 校准的对象不同
-
-- **Flow cytometry**计数满足 gating/staining 条件的 cells，适合总细胞负荷；需要处理碎片、聚团、活死染色和样本基质。
-- **Universal 16S qPCR/ddPCR**估计 gene copies；需要扩增效率、标准曲线/partition、抑制、含水量和 16S copy-number 解释。
-- **Cell/DNA spike-in**用已知加入量恢复 scale；加入时点决定它能控制 extraction、PCR 和 sequencing 流程中的哪些环节。
-
-三者的单位不是自动可互换的。Methods 必须写清 `cells/g`、`gene copies/g`、`genome equivalents/g` 或“相对 spike-in 的 calibrated units”。
-
-### 4. 同 cohort 比较先于统计模型
-
-本数据有 `Disease` 与 `Study` 两个 cohort 标签。若把 29 个 CD 与全部 106 个 healthy controls直接比较，cohort 与 health status 部分重叠，protocol/collection difference 可能混入效应。因此主分析只保留 Disease cohort 中的 29 CD + 66 healthy；额外 40 个 controls 留作外部敏感性，而不是悄悄扩大样本量。
-
-<details>
-<summary><strong>深入：为什么 QMP 仍不是“真实细胞数金标准”</strong></summary>
-
-换算把总负荷测量误差和 composition 测量误差相乘。某属的细胞裂解率、DNA回收率、primer mismatch、扩增效率与 rrn copy number 都可造成 taxon-specific bias；flow cytometry 又有 sample-specific gating 与染色误差。QMP 是带有可声明假设的 calibrated estimate。若研究结论依赖某个目标 taxon，还应做 taxon-specific qPCR/ddPCR、培养、FISH 或标准物质验证。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、导出真实数据并定义作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "BiocManager", "ggplot2", "ggrepel", "jsonlite", "patchwork", "ragg", "readr",
-  "scales", "svglite", "systemfonts"
-))
-BiocManager::install(version = "3.19", ask = FALSE)
-BiocManager::install(c("phyloseq", "reconsi"), ask = FALSE)
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/absolute-quantification/cell-load.tsv",
+  "data/small/absolute-quantification/metadata.tsv",
+  "data/small/absolute-quantification/otutab.tsv",
+  "data/small/absolute-quantification/source-summary.json",
+  "data/small/absolute-quantification/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-从 `reconsi` 1.16.0 重新导出三件套和 cell load 的最小代码如下。包内 `Vandeputte` 已附带在 package environment；taxonomy 只填 `Genus`，因为该对象没有分发其他 rank：
-
 ```{r}
-#| eval: false
-suppressPackageStartupMessages({
-  library(reconsi)
-  library(phyloseq)
-})
-stopifnot(as.character(packageVersion("reconsi")) == "1.16.0")
-ps_source <- get("Vandeputte", pos = "package:reconsi")
-otutab <- t(as(otu_table(ps_source), "matrix"))
-metadata_source <- as(sample_data(ps_source), "data.frame")
-taxonomy <- data.frame(
-  Kingdom = NA, Phylum = NA, Class = NA, Order = NA,
-  Family = NA, Genus = rownames(otutab), Species = NA,
-  row.names = rownames(otutab)
-)
-metadata <- data.frame(
-  SubjectID = metadata_source$ID,
-  Cohort = metadata_source$Cohort,
-  HealthStatus = metadata_source$Health.status,
-  row.names = rownames(metadata_source)
-)
-cell_load <- data.frame(
-  AbsoluteCellLoad = metadata_source$absCountFrozen,
-  Unit = "cells per gram frozen feces",
-  row.names = rownames(metadata_source)
-)
-```
-
-出版级函数直接内联：
-
-```{r}
+#| results: hold
 #| label: setup-absolute-theme
 library(ggplot2)
 
 set.seed(20260734)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -189,13 +133,10 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套和额外的 cell-load 表
+### 读取三件套和额外的 cell-load 表
 
 ```{r}
+#| results: hold
 #| label: read-absolute-data
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -241,9 +182,70 @@ head(metadata_all)
 head(cell_load_all)
 ```
 
-### 2. 只保留同一 Disease cohort
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/34-absolute-quantification.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "BiocManager", "ggplot2", "ggrepel", "jsonlite", "patchwork", "ragg", "readr",
+  "scales", "svglite", "systemfonts"
+))
+BiocManager::install(version = "3.19", ask = FALSE)
+BiocManager::install(c("phyloseq", "reconsi"), ask = FALSE)
+```
+
+</details>
+
+## QMP 如何把样本总负荷带回组成数据 {#sec-theory}
+
+### Relative abundance 丢失总负荷
+
+对 taxon $i$、样本 $s$，测序比例为
+
+$$
+p_{is}=\frac{Y_{is}}{\sum_jY_{js}}.
+$$
+
+所有 $p_{is}$ 加和为 1；单凭 `p` 无法区分“taxon 本身减少”与“其他 taxa 增加导致份额减少”。Raw library size 也不是负荷，因为它由上机分配、测序深度和质控共同决定。
+
+### Flow-cytometry QMP 的核心换算
+
+若独立测得样本总 microbial load $L_s$（cells per gram frozen feces），则
+
+$$
+\widehat A_{is}=p_{is}\times L_s.
+$$
+
+$\widehat A_{is}$恢复了样本间总量刻度，但仍假定 sequencing proportion 可代表 cell composition。DNA extraction、PCR、primer、16S copy number 和 cell lysis bias 不会因为乘了 `L_s` 自动消失。
+
+### Spike-in、qPCR/ddPCR 与 flow cytometry 校准的对象不同
+
+- **Flow cytometry**计数满足 gating/staining 条件的 cells，适合总细胞负荷；需要处理碎片、聚团、活死染色和样本基质。
+- **Universal 16S qPCR/ddPCR**估计 gene copies；需要扩增效率、标准曲线/partition、抑制、含水量和 16S copy-number 解释。
+- **Cell/DNA spike-in**用已知加入量恢复 scale；加入时点决定它能控制 extraction、PCR 和 sequencing 流程中的哪些环节。
+
+三者的单位不是自动可互换的。Methods 必须写清 `cells/g`、`gene copies/g`、`genome equivalents/g` 或“相对 spike-in 的 calibrated units”。
+
+### 同 cohort 比较先于统计模型
+
+本数据有 `Disease` 与 `Study` 两个 cohort 标签。若把 29 个 CD 与全部 106 个 healthy controls直接比较，cohort 与 health status 部分重叠，protocol/collection difference 可能混入效应。因此主分析只保留 Disease cohort 中的 29 CD + 66 healthy；额外 40 个 controls 留作外部敏感性，而不是悄悄扩大样本量。
+
+<details>
+<summary><strong>深入：为什么 QMP 仍不是“真实细胞数金标准”</strong></summary>
+
+换算把总负荷测量误差和 composition 测量误差相乘。某属的细胞裂解率、DNA回收率、primer mismatch、扩增效率与 rrn copy number 都可造成 taxon-specific bias；flow cytometry 又有 sample-specific gating 与染色误差。QMP 是带有可声明假设的 calibrated estimate。若研究结论依赖某个目标 taxon，还应做 taxon-specific qPCR/ddPCR、培养、FISH 或标准物质验证。
+
+</details>
+
+## 把相对组成与实测细胞负荷结合 {#sec-code}
+
+### 只保留同一 Disease cohort
+
+```{r}
+#| results: hold
 #| label: subset-absolute-cohort
 sample_ids <- rownames(metadata_all)[metadata_all$Cohort == "Disease"]
 metadata <- metadata_all[sample_ids, , drop = FALSE]
@@ -265,9 +267,10 @@ table(metadata$Cohort, metadata$HealthStatus)
 summary(cell_load$AbsoluteCellLoad)
 ```
 
-### 3. 计算 QMP，并审计总负荷差异
+### 计算 QMP，并审计总负荷差异
 
 ```{r}
+#| results: hold
 #| label: calculate-qmp
 library_size <- colSums(counts)
 relative_abundance <- sweep(counts, 2L, library_size, "/")
@@ -316,9 +319,10 @@ load_summary <- data.frame(
 load_summary
 ```
 
-### 4. 在相对与定量尺度分别做同一 feature screen
+### 在相对与定量尺度分别做同一 feature screen
 
 ```{r}
+#| results: hold
 #| label: compare-relative-quantitative
 prevalence <- rowMeans(counts > 0)
 eligible <- prevalence >= 0.10 & rowSums(counts) >= 20
@@ -405,9 +409,10 @@ head(scale_comparison, 15)
 
 这些 Wilcoxon + BH 结果用于比较测量尺度，不取代复杂队列的协变量 DA 模型。真正的病例–对照研究应在相对/定量两个 endpoint 上使用同一协变量、batch 和 subject contract。
 
-### 5. 自动选择一个尺度分歧最大的可解释属
+### 自动选择一个尺度分歧最大的可解释属
 
 ```{r}
+#| results: hold
 #| label: select-qmp-exemplar
 exemplar_pool <- scale_comparison[
   scale_comparison$ReportableGenus & (
@@ -454,6 +459,7 @@ exemplar
 ## QMP 与 spike-in 仍需哪些校准？ {#sec-audit}
 
 ```{r}
+#| results: hold
 #| label: absolute-audit-table
 absolute_audit <- data.frame(
   Dimension = c(
@@ -485,11 +491,12 @@ Vandeputte 的工作流把总细胞负荷带回 composition，是对 relative pr
 
 Spike-in 的升级点是“何时加入”。Extraction 前加入的 intact-cell spike可追踪更多处理步骤；PCR 前 DNA spike不控制 lysis/extraction；上机前 library spike控制的范围更窄。选择要由 estimand 与误差来源决定，不能只看哪种最方便。
 
-## 出版级美化 {#sec-publication}
+## 比较相对变化和定量变化的方向 {#sec-publication}
 
 ### 图 1：先画独立测得的 microbial load
 
 ```{r}
+#| results: hold
 #| label: fig-microbial-load
 #| fig-width: 6.0
 #| fig-height: 4.8
@@ -531,9 +538,10 @@ save_pub(load_plot, "figures/34-microbial-load", width = 152, height = 122)
 load_plot
 ```
 
-### 图 2：同一属在 relative 与 quantitative scale 上可能移动象限
+### 图 2：同一属的相对丰度与定量变化方向可能不同
 
 ```{r}
+#| results: hold
 #| label: fig-relative-quantitative-effects
 #| fig-width: 6.7
 #| fig-height: 5.2
@@ -589,6 +597,7 @@ effect_plot
 ### 图 3：把一个分歧属的两种纵轴并排
 
 ```{r}
+#| results: hold
 #| label: fig-qmp-exemplar
 #| fig-width: 7.1
 #| fig-height: 4.4
@@ -628,8 +637,8 @@ exemplar_plot
 ```
 
 ```{r}
+#| results: hold
 #| label: verify-absolute-quantification
-#| echo: false
 expected_bases <- c(
   "figures/34-microbial-load",
   "figures/34-relative-quantitative-effects",
@@ -682,15 +691,15 @@ QMP恢复 sample scale，不自动校正 taxon-specific measurement bias。关�
 观察性病例–对照数据还受药物、炎症、饮食、排便、年龄和 batch 影响。绝对单位提高测量解释力，不自动提高因果等级。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告微生物负荷与定量组成的方法与限制 {#sec-methods}
 
 > Quantitative microbiome profiles were generated from the Vandeputte genus-count dataset distributed with reconsi 1.16.0 and matched flow-cytometry microbial loads. The primary comparison was restricted to the shared Disease cohort (29 Crohn's disease and 66 healthy samples), excluding 40 healthy samples from the separate Study cohort. For each sample, genus-level sequencing proportions were calculated by total-sum scaling the raw count table and multiplied by the matched flow-cytometry estimate in cells per gram of frozen feces. Thus, quantitative abundance for genus i in sample s was estimated as p_is × L_s, where p_is is the sequencing proportion and L_s is the independently measured microbial load. Total-load differences were summarized by the CD/healthy median ratio, a Wilcoxon rank-sum test, Cliff's delta, and a 2,000-replicate percentile bootstrap confidence interval using seed 20260734. Taxa present in at least 10% of the 95 samples and represented by at least 20 reads were screened on both relative and quantitative scales using the same Wilcoxon test and separate within-scale Benjamini–Hochberg corrections. Unclassified source bins were retained in the tested denominator but were ineligible for highlighted labels or exemplar selection. Feature-wise effects were differences in median log2 abundance after adding half the smallest observed positive value for that feature and scale. Relative and quantitative estimates were interpreted as complementary measurements; quantitative profiles were not assumed to remove taxon-specific extraction, primer, PCR, or 16S-copy-number bias.
 
 替换 load platform、单位、sample mass、gating/standard curve、spike-in identity/amount/加入时点、missing-data rule、协变量模型和 technical replicate 处理。若研究用 wet-weight，要说明含水量是否校正。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将微生物负荷与定量组成用于自己的研究 {#sec-own-data}
 
-### 1. 三件套之外还必须有一张 matched scale 表
+### 三件套之外还必须有一张 matched scale 表
 
 ```{r}
 #| eval: false
@@ -706,7 +715,7 @@ stopifnot(identical(
 
 `cell-load.tsv`至少包含 `SampleID`、数值、unit、measurement batch、QC status；qPCR还要有 efficiency/curve 或 ddPCR partition QC，spike-in 还要有加入量、加入时点与回收率。
 
-### 2. taxonomy 单列时先拆七列
+### taxonomy 单列时先拆七列
 
 ```{r}
 #| eval: false
@@ -722,7 +731,7 @@ names(taxonomy) <- rank_names
 rownames(taxonomy) <- taxonomy_raw$FeatureID
 ```
 
-### 3. 根据测量方式改公式，不要只改变量名
+### 根据测量方式改公式，不要只改变量名
 
 - Total-load QMP：`taxon proportion × total cells/g`；
 - Universal 16S：`taxon proportion × total 16S copies/g`；

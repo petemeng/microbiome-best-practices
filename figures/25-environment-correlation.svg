@@ -131,41 +131,41 @@
 <rect x='197.28' y='31.83' width='23.71' height='23.71' style='stroke-width: 1.81; stroke: #111111; stroke-linecap: butt; stroke-linejoin: miter;' />
 <rect x='220.99' y='102.97' width='23.71' height='23.71' style='stroke-width: 1.81; stroke: #111111; stroke-linecap: butt; stroke-linejoin: miter;' />
 <rect x='363.26' y='150.39' width='23.71' height='23.71' style='stroke-width: 1.81; stroke: #111111; stroke-linecap: butt; stroke-linejoin: miter;' />
-<text x='138.00' y='46.28' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='161.71' y='69.99' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='185.42' y='69.99' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.86</text>
-<text x='185.42' y='93.70' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='209.13' y='46.28' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.85</text>
-<text x='209.13' y='117.41' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='232.84' y='46.28' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.71</text>
-<text x='232.84' y='117.41' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>0.85</text>
-<text x='232.84' y='141.13' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='256.56' y='164.84' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='280.27' y='188.55' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='303.98' y='212.26' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='327.69' y='164.84' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.55</text>
-<text x='327.69' y='235.97' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='351.40' y='46.28' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.55</text>
-<text x='351.40' y='117.41' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>0.63</text>
-<text x='351.40' y='141.13' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='351.40' y='259.69' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='375.12' y='164.84' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>0.99</text>
-<text x='375.12' y='235.97' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.54</text>
-<text x='375.12' y='283.40' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "DejaVu Sans";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='138.00' y='46.28' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='161.71' y='69.99' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='185.42' y='69.99' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.86</text>
+<text x='185.42' y='93.70' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='209.13' y='46.28' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.85</text>
+<text x='209.13' y='117.41' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='232.84' y='46.28' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.71</text>
+<text x='232.84' y='117.41' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>0.85</text>
+<text x='232.84' y='141.13' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='256.56' y='164.84' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='280.27' y='188.55' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='303.98' y='212.26' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='327.69' y='164.84' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.55</text>
+<text x='327.69' y='235.97' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='351.40' y='46.28' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.55</text>
+<text x='351.40' y='117.41' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>0.63</text>
+<text x='351.40' y='141.13' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='351.40' y='259.69' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='375.12' y='164.84' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>0.99</text>
+<text x='375.12' y='235.97' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='18.39px' lengthAdjust='spacingAndGlyphs'>-0.54</text>
+<text x='375.12' y='283.40' text-anchor='middle' style='font-size: 7.11px;fill: #111111; font-family: "Arial";' textLength='15.83px' lengthAdjust='spacingAndGlyphs'>1.00</text>
 <rect x='123.77' y='29.46' width='265.57' height='265.57' style='stroke-width: 0.81; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwzNTcuMTc=)'>
-<text x='120.00' y='283.50' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.04px' lengthAdjust='spacingAndGlyphs'>TN</text>
-<text x='120.00' y='259.79' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='46.42px' lengthAdjust='spacingAndGlyphs'>Conductivity</text>
-<text x='120.00' y='236.07' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.25px' lengthAdjust='spacingAndGlyphs'>pH</text>
-<text x='120.00' y='212.36' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.05px' lengthAdjust='spacingAndGlyphs'>NO3</text>
-<text x='120.00' y='188.65' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.79px' lengthAdjust='spacingAndGlyphs'>NH4</text>
-<text x='120.00' y='164.94' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.49px' lengthAdjust='spacingAndGlyphs'>TOC</text>
-<text x='120.00' y='141.23' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='46.17px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
-<text x='120.00' y='117.51' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='46.79px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
-<text x='120.00' y='93.80' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='28.86px' lengthAdjust='spacingAndGlyphs'>Altitude</text>
-<text x='120.00' y='70.09' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='36.73px' lengthAdjust='spacingAndGlyphs'>Longitude</text>
-<text x='120.00' y='46.38' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='30.40px' lengthAdjust='spacingAndGlyphs'>Latitude</text>
+<text x='120.00' y='283.50' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.04px' lengthAdjust='spacingAndGlyphs'>TN</text>
+<text x='120.00' y='259.79' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='46.42px' lengthAdjust='spacingAndGlyphs'>Conductivity</text>
+<text x='120.00' y='236.07' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.25px' lengthAdjust='spacingAndGlyphs'>pH</text>
+<text x='120.00' y='212.36' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='16.05px' lengthAdjust='spacingAndGlyphs'>NO3</text>
+<text x='120.00' y='188.65' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='15.79px' lengthAdjust='spacingAndGlyphs'>NH4</text>
+<text x='120.00' y='164.94' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='15.49px' lengthAdjust='spacingAndGlyphs'>TOC</text>
+<text x='120.00' y='141.23' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='46.17px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
+<text x='120.00' y='117.51' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='46.79px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
+<text x='120.00' y='93.80' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='28.86px' lengthAdjust='spacingAndGlyphs'>Altitude</text>
+<text x='120.00' y='70.09' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='36.73px' lengthAdjust='spacingAndGlyphs'>Longitude</text>
+<text x='120.00' y='46.38' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='30.40px' lengthAdjust='spacingAndGlyphs'>Latitude</text>
 <polyline points='121.68,280.81 123.77,280.81 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='121.68,257.09 123.77,257.09 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='121.68,233.38 123.77,233.38 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -188,19 +188,19 @@
 <polyline points='327.69,297.12 327.69,295.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='351.40,297.12 351.40,295.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='375.12,297.12 375.12,295.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text transform='translate(141.60,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='30.40px' lengthAdjust='spacingAndGlyphs'>Latitude</text>
-<text transform='translate(165.31,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='36.73px' lengthAdjust='spacingAndGlyphs'>Longitude</text>
-<text transform='translate(189.02,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='28.86px' lengthAdjust='spacingAndGlyphs'>Altitude</text>
-<text transform='translate(212.74,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='46.79px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
-<text transform='translate(236.45,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='46.17px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
-<text transform='translate(260.16,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.49px' lengthAdjust='spacingAndGlyphs'>TOC</text>
-<text transform='translate(283.87,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.79px' lengthAdjust='spacingAndGlyphs'>NH4</text>
-<text transform='translate(307.58,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.05px' lengthAdjust='spacingAndGlyphs'>NO3</text>
-<text transform='translate(331.30,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.25px' lengthAdjust='spacingAndGlyphs'>pH</text>
-<text transform='translate(355.01,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='46.42px' lengthAdjust='spacingAndGlyphs'>Conductivity</text>
-<text transform='translate(378.72,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.04px' lengthAdjust='spacingAndGlyphs'>TN</text>
+<text transform='translate(141.60,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='30.40px' lengthAdjust='spacingAndGlyphs'>Latitude</text>
+<text transform='translate(165.31,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='36.73px' lengthAdjust='spacingAndGlyphs'>Longitude</text>
+<text transform='translate(189.02,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='28.86px' lengthAdjust='spacingAndGlyphs'>Altitude</text>
+<text transform='translate(212.74,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='46.79px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
+<text transform='translate(236.45,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='46.17px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
+<text transform='translate(260.16,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='15.49px' lengthAdjust='spacingAndGlyphs'>TOC</text>
+<text transform='translate(283.87,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='15.79px' lengthAdjust='spacingAndGlyphs'>NH4</text>
+<text transform='translate(307.58,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='16.05px' lengthAdjust='spacingAndGlyphs'>NO3</text>
+<text transform='translate(331.30,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.25px' lengthAdjust='spacingAndGlyphs'>pH</text>
+<text transform='translate(355.01,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='46.42px' lengthAdjust='spacingAndGlyphs'>Conductivity</text>
+<text transform='translate(378.72,302.80) rotate(-42)' text-anchor='end' style='font-size: 7.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.04px' lengthAdjust='spacingAndGlyphs'>TN</text>
 <rect x='397.71' y='108.84' width='47.81' height='106.81' style='stroke-width: 0.81; stroke: none; fill: #FFFFFF;' />
-<text x='401.90' y='120.01' style='font-size: 8.40px; font-family: "DejaVu Sans";' textLength='39.44px' lengthAdjust='spacingAndGlyphs'>Pearson r</text>
+<text x='401.90' y='120.01' style='font-size: 8.40px; font-family: "Arial";' textLength='39.44px' lengthAdjust='spacingAndGlyphs'>Pearson r</text>
 <image width='17.28' height='86.40' x='401.90' y='125.07' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAAAtElEQVQ4jbWQSRKDQAwD2yLvzK/zF6qAUQ4U+wwwWW5tW5Jd5vXEimgQ0aCIx0RaekKEGHXrMkOKzPRGLyZSlHRHx4VE55KJDmUcr4pAqMJ2fukolk68614xZReVGexDSwNd7qgKKNqy5Yde1S4ygWwjG5Rmso3STN9NfxY1En8996vTbGRu6rZ59ckp890b8Snzv1RK2dFdb1o+yUZSplPdsCMmGryh3qDeRh2gzkatQa3NGyZDc4nlPvOJAAAAAElFTkSuQmCC'/>
 <polyline points='415.72,211.32 419.18,211.32 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='415.72,189.79 419.18,189.79 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
@@ -212,14 +212,14 @@
 <polyline points='405.35,168.27 401.90,168.27 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='405.35,146.74 401.90,146.74 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='405.35,125.21 401.90,125.21 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<text x='423.36' y='213.77' style='font-size: 6.72px; font-family: "DejaVu Sans";' textLength='13.12px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
-<text x='423.36' y='192.24' style='font-size: 6.72px; font-family: "DejaVu Sans";' textLength='13.12px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='423.36' y='170.71' style='font-size: 6.72px; font-family: "DejaVu Sans";' textLength='10.69px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='423.36' y='149.19' style='font-size: 6.72px; font-family: "DejaVu Sans";' textLength='10.69px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='423.36' y='127.66' style='font-size: 6.72px; font-family: "DejaVu Sans";' textLength='10.69px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='73.22' y='23.53' style='font-size: 8.40px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='272.79px' lengthAdjust='spacingAndGlyphs'>Black outlines mark |r| &gt;= 0.80; labels are shown for |r| &gt;= 0.50</text>
-<text x='73.22' y='11.23' style='font-size: 9.66px; font-weight: bold; font-family: "DejaVu Sans";' textLength='254.28px' lengthAdjust='spacingAndGlyphs'>Environmental covariates are not independent</text>
-<text x='123.77' y='344.33' style='font-size: 6.72px;fill: #666666; font-family: "DejaVu Sans";' textLength='169.61px' lengthAdjust='spacingAndGlyphs'>All 11 variables enter the descriptive envfit family.</text>
-<text x='123.77' y='351.58' style='font-size: 6.72px;fill: #666666; font-family: "DejaVu Sans";' textLength='288.92px' lengthAdjust='spacingAndGlyphs'>TN is excluded from the primary edaphic set because it is nearly redundant with TOC.</text>
+<text x='423.36' y='213.77' style='font-size: 6.72px; font-family: "Arial";' textLength='13.12px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='423.36' y='192.24' style='font-size: 6.72px; font-family: "Arial";' textLength='13.12px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='423.36' y='170.71' style='font-size: 6.72px; font-family: "Arial";' textLength='10.69px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='423.36' y='149.19' style='font-size: 6.72px; font-family: "Arial";' textLength='10.69px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='423.36' y='127.66' style='font-size: 6.72px; font-family: "Arial";' textLength='10.69px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='73.22' y='23.53' style='font-size: 8.40px;fill: #4D4D4D; font-family: "Arial";' textLength='272.79px' lengthAdjust='spacingAndGlyphs'>Black outlines mark |r| &gt;= 0.80; labels are shown for |r| &gt;= 0.50</text>
+<text x='73.22' y='11.23' style='font-size: 9.66px; font-weight: bold; font-family: "Arial";' textLength='254.28px' lengthAdjust='spacingAndGlyphs'>Environmental covariates are not independent</text>
+<text x='123.77' y='344.33' style='font-size: 6.72px;fill: #666666; font-family: "Arial";' textLength='169.61px' lengthAdjust='spacingAndGlyphs'>All 11 variables enter the descriptive envfit family.</text>
+<text x='123.77' y='351.58' style='font-size: 6.72px;fill: #666666; font-family: "Arial";' textLength='288.92px' lengthAdjust='spacingAndGlyphs'>TN is excluded from the primary edaphic set because it is nearly redundant with TOC.</text>
 </g>
 </svg>

@@ -1,6 +1,6 @@
 ---
 title: "相关整合：Procrustes/Mantel/HAllA"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,74 +17,63 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/46-procrustes-mantel-halla.R
+  packages:
+  - ggplot2
+  - jsonlite
+  - permute
+  - ragg
+  - readr
+  - svglite
+  - vegan
 ---
-
-> **分析目标：**在严格配对的微生物组—代谢组样本上，先用 Procrustes 与 Mantel 检验两个数据块的整体一致性，再用 HAllA 寻找层级化的局部关联；同时比较疾病组校正前后结果，避免把共同分组效应误写成菌—代谢物联系。  
-> **输入文件：**通用三件套 `data/small/paired-ibd-multiomics/{otutab,taxonomy,metadata}.tsv`，另加同一样本的 `metabolites.tsv` 与 `metabolite-annotation.tsv`。  
-> **预计资源：**220 个配对样本；全局检验约 1 分钟，25 × 40 个特征的 HAllA（999 permutations）约 2 分钟、峰值内存低于 2 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 跨组学相关首先要保证样本与统计单位对齐 {#sec-target}
 
-[Franzosa et al. (2019)](https://doi.org/10.1038/s41564-018-0306-4)联合粪便宏基因组与代谢组刻画 IBD；公开整理仓库提供可追溯的配对 genus counts、metabolites 与 diagnosis metadata。本页不转载论文原图，而是用该数据重绘整体 concordance、分组混杂审计和 HAllA association ranking。
+[Franzosa et al. (2019)](https://doi.org/10.1038/s41564-018-0306-4)联合粪便宏基因组与代谢组刻画 IBD；公开整理仓库提供可追溯的配对 genus counts、metabolites 与 diagnosis metadata。
 
 ::: {.callout-important title="先给结论"}
 Observed 数据中 Procrustes correlation 为 0.588、Mantel Spearman 为 0.597；校正 Control/CD/UC 后仍分别为 0.529 与 0.554（四次 permutation test 均为 $P=0.001$）。不过，1,000 对候选关联的 FDR hits 从 437 降到 350。**整体结构相似不等于每条边可靠，局部相关也不等于代谢转化或因果。**
 :::
 
-## 整体一致与局部关联回答不同问题 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. Procrustes 比较两个低维构型
+需要 R，以及 `ggplot2`、`jsonlite`、`permute`、`ragg`、`readr`、`svglite`、`vegan`。本次使用配对的微生物组、代谢组、样本信息及代谢物注释表。
 
-先分别对微生物 CLR matrix 与 log-scaled metabolite matrix 求样本距离并排序。Procrustes 通过旋转、缩放和平移，把一个构型对齐到另一个构型；相关系数越高，表示样本在两个空间中的相对位置越一致。
-
-### 2. Mantel 比较两张距离矩阵
-
-Mantel statistic 是两张样本距离矩阵上三角元素的相关。它能检验整体 distance concordance，但不能定位是哪一对菌—代谢物驱动结果，也不替代 multivariable model。空间、自相关、重复测量或 family structure 存在时，必须按设计限制 permutations。
-
-### 3. HAllA 在相关矩阵上找层级 blocks
-
-HAllA 同时聚类两个 feature sets，并在 hierarchy 中寻找显著的 association blocks，减少逐对展示造成的信息碎片。本文用 Spearman、999 permutations、BH FDR 0.05 与 FNR threshold 0.20；block 是统计摘要，不是 biochemical pathway。
-
-### 4. 共同 diagnosis 会制造跨组学相关
-
-若某菌和某代谢物都在 IBD 中升高，即使个体内没有直接联系，合并三组后仍会相关。本文先对每个 feature 回归 `StudyGroup`，再对 residuals 计算局部关联；全局校正版同样先去除组均值，并把 permutations 限制在组内。
-
-<details>
-<summary><strong>深入：为什么 Mantel 显著不能替代 feature-level model</strong></summary>
-
-Mantel statistic 把所有 pairwise distances 压缩成一个数；不同机制可产生相同 statistic。它还无法告诉你 effect direction、单个 feature 的不确定性或 clinical covariates 是否充分调整。最稳妥的定位是：用它回答“两个视图是否共享结构”，再用预先限定的 feature-level model 回答“哪些关系值得验证”。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "eva", "ggplot2", "jsonlite", "permute", "ragg", "readr", "scales",
-  "svglite", "systemfonts", "vegan", "XICOR"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "scripts/run_article46_global_concordance.R",
+  "scripts/run_article46_halla.py",
+  "env/multiomics.yml",
+  "data/small/paired-ibd-multiomics/metabolite-annotation.tsv",
+  "data/small/paired-ibd-multiomics/metabolites.tsv",
+  "data/small/paired-ibd-multiomics/metadata.tsv",
+  "data/small/paired-ibd-multiomics/otutab.tsv",
+  "data/small/paired-ibd-multiomics/source-summary.json",
+  "data/small/paired-ibd-multiomics/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
-
-HAllA 与第 48 篇使用同一份固定 Python environment；HAllA 版本为 0.8.40：
-
-```{bash}
-#| eval: false
-mamba env create -f env/multiomics.yml
-conda activate multiomics-native
-python -c 'from halla import HAllA; print("HAllA import: OK")'
-```
-
 
 ```{r}
+#| results: hold
 #| label: setup-integration-theme
 library(ggplot2)
 
 set.seed(20260746)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -127,13 +116,10 @@ save_pub <- function(plot, file_base, width = 89, height = 70, units = "mm", dpi
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套与配对代谢组读起
+### 从三件套与配对代谢组读起
 
 ```{r}
+#| results: hold
 #| label: read-paired-ibd-data
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE,
@@ -174,9 +160,80 @@ head(metadata)
 head(metabolites[, 1:5])
 ```
 
-### 2. 全局 Procrustes 与 Mantel：同时做 group-adjusted audit
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/46-procrustes-mantel-halla.R)。脚本包含数据下载、计算和图形导出。
 
-下面是完整计算核心；固定输出已经随页面读取，重新计算时运行同样代码即可。
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "eva", "ggplot2", "jsonlite", "permute", "ragg", "readr", "scales",
+  "svglite", "systemfonts", "vegan", "XICOR"
+))
+```
+
+</details>
+
+## 整体一致与局部关联回答不同问题 {#sec-theory}
+
+### Procrustes 比较两个低维构型
+
+先分别对微生物 CLR matrix 与 log-scaled metabolite matrix 求样本距离并排序。Procrustes 通过旋转、缩放和平移，把一个构型对齐到另一个构型；相关系数越高，表示样本在两个空间中的相对位置越一致。
+
+### Mantel 比较两张距离矩阵
+
+Mantel statistic 是两张样本距离矩阵上三角元素的相关。它能检验整体 distance concordance，但不能定位是哪一对菌—代谢物驱动结果，也不替代 multivariable model。空间、自相关、重复测量或 family structure 存在时，必须按设计限制 permutations。
+
+### HAllA 在相关矩阵上找层级 blocks
+
+HAllA 同时聚类两个 feature sets，并在 hierarchy 中寻找显著的 association blocks，减少逐对展示造成的信息碎片。本文用 Spearman、999 permutations、BH FDR 0.05 与 FNR threshold 0.20；block 是统计摘要，不是 biochemical pathway。
+
+### 共同 diagnosis 会制造跨组学相关
+
+若某菌和某代谢物都在 IBD 中升高，即使个体内没有直接联系，合并三组后仍会相关。本文先对每个 feature 回归 `StudyGroup`，再对 residuals 计算局部关联；全局校正版同样先去除组均值，并把 permutations 限制在组内。
+
+<details>
+<summary><strong>深入：为什么 Mantel 显著不能替代 feature-level model</strong></summary>
+
+Mantel statistic 把所有 pairwise distances 压缩成一个数；不同机制可产生相同 statistic。它还无法告诉你 effect direction、单个 feature 的不确定性或 clinical covariates 是否充分调整。最稳妥的定位是：用它回答“两个视图是否共享结构”，再用预先限定的 feature-level model 回答“哪些关系值得验证”。
+
+</details>
+
+## 先比较整体一致性，再寻找局部关联 {#sec-code}
+
+### 同时检验整体一致性与局部相关
+
+从配对数据重新计算整体一致性、分组调整后的局部相关和 HAllA。
+
+先在 Linux 或 WSL2 终端创建对应环境，回到 R 后运行计算代码。
+
+```bash
+conda env create --prefix ./multiomics-env --file env/multiomics.yml
+```
+
+```{r}
+#| label: reader-native-computation
+#| results: hide
+run_analysis <- function(command, args) {
+  output <- system2(command, args, stdout = TRUE, stderr = TRUE)
+  status <- attr(output, "status")
+  if (!is.null(status) && status != 0L) stop(paste(tail(output, 20), collapse = "\n"))
+  invisible(output)
+}
+run_analysis(file.path(R.home("bin"), "Rscript"), c("--vanilla", "scripts/run_article46_global_concordance.R"))
+run_analysis(Sys.getenv("MULTIOMICS_PYTHON", "multiomics-env/bin/python"), c("scripts/run_article46_halla.py"))
+```
+
+完整计算脚本：[run_article46_global_concordance.R](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article46_global_concordance.R)、[run_article46_halla.py](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article46_halla.py)。
+
+
+### 全局 Procrustes 与 Mantel：同时做 group-adjusted audit
+
+整体检验同时保留未调整和组内调整的统计量；关键变换如下。
+
+<details class="wechat-omit">
+<summary>模型调用与参数</summary>
 
 ```{r}
 #| eval: false
@@ -209,7 +266,10 @@ for (model_name in names(views)) {
 }
 ```
 
+</details>
+
 ```{r}
+#| results: hold
 #| label: load-global-concordance
 result_dir <- "results/46-integration"
 global_tests <- readr::read_tsv(
@@ -222,9 +282,12 @@ stopifnot(nrow(global_tests) == 4L, all(global_tests$QValue <= 0.001))
 global_tests
 ```
 
-### 3. 局部相关与 HAllA
+### 局部相关与 HAllA
 
 先按 CLR/log1p variance 固定 25 个菌和 40 个代谢物，对每个 feature 回归 `StudyGroup`。HAllA 的核心调用如下；输入表是 features × samples。
+
+<details class="wechat-omit">
+<summary>模型调用与参数</summary>
 
 ```{python}
 #| eval: false
@@ -244,7 +307,10 @@ model.load(
 model.run()
 ```
 
+</details>
+
 ```{r}
+#| results: hold
 #| label: load-halla-results
 raw_pairs <- readr::read_tsv(
   file.path(result_dir, "pairwise-raw.tsv"), show_col_types = FALSE
@@ -284,11 +350,12 @@ head(halla_blocks, 5)
 HAllA 找到 70 个显著 blocks、350 个显著 feature pairs，并不表示存在 350 条直接代谢反应。宿主炎症、饮食、药物、肠道 transit 与总生物量都可能同时改变两个视图。
 :::
 
-## 出版级美化 {#sec-beautify}
+## 区分组间分离与组内跨组学关联 {#sec-beautify}
 
 ### 图 1：配对样本的 Procrustes arrows
 
 ```{r}
+#| results: hold
 #| label: fig-integration-procrustes
 #| fig-cap: "Paired sample configurations before and after diagnosis-group adjustment."
 group_colors <- c(
@@ -316,9 +383,10 @@ save_pub(p46_1, "figures/46-integration/46-1-procrustes", 180, 78)
 p46_1
 ```
 
-### 图 2：global statistic 与 permutation uncertainty
+### 图 2：展示整体关联统计量与置换结果
 
 ```{r}
+#| results: hold
 #| label: fig-integration-global-tests
 #| fig-cap: "Global concordance remains after removing diagnosis-group means."
 global_tests$YPosition <- ifelse(global_tests$Method == "Mantel", 1, 2) +
@@ -345,6 +413,7 @@ p46_2
 ### 图 3：分组校正如何改变 1,000 条局部相关
 
 ```{r}
+#| results: hold
 #| label: fig-integration-confounding
 #| fig-cap: "Pairwise associations before and after adjustment for study group."
 pair_audit <- merge(
@@ -382,6 +451,7 @@ p46_3
 ### 图 4：HAllA 输入中最强的 group-adjusted pairs
 
 ```{r}
+#| results: hold
 #| label: fig-integration-halla
 #| fig-cap: "Top group-adjusted microbe–metabolite associations entering HAllA."
 top_halla <- head(adjusted_pairs, 15)
@@ -418,11 +488,11 @@ p46_4
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告跨组学关联与混杂调整的方法与限制 {#sec-methods}
 
 > Paired microbiome and metabolome profiles were available for 220 samples (56 controls, 88 Crohn's disease and 76 ulcerative colitis). Microbial counts were transformed using a pseudocount-0.5 centered log-ratio transformation; metabolite intensities were log1p-transformed and feature-standardized. Global concordance was quantified using symmetric Procrustes analysis and Spearman Mantel tests with 999 permutations. Diagnosis-adjusted analyses were performed on residuals from feature-wise models containing study group, with permutations restricted within diagnosis groups. For local integration, 25 microbial and 40 metabolite features were selected by outcome-blind variance, tested with Spearman association, and analyzed with HAllA v0.8.40 using 999 permutations, Benjamini–Hochberg FDR 0.05 and FNR threshold 0.20. Effect estimates and adjusted P values were reported; associations were not interpreted as causal or metabolic-production evidence.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将跨组学关联与混杂调整用于自己的研究 {#sec-own-data}
 
 1. 替换 `otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`、`metabolites.tsv` 和 annotation 路径；两个 abundance tables 的列必须与 metadata 行名完全一致。
 2. 把 `StudyGroup` 换成你的 diagnosis/treatment 列；若有 batch、age、sex、site 或 repeated subject，把它们加入 residualization model，并按采样设计限制 permutations。

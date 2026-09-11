@@ -126,7 +126,7 @@
 </defs>
 <g clip-path='url(#cpMTUwLjM5fDI2OC45NHwyOS44Mnw0NC4wOQ==)'>
 <rect x='150.39' y='29.82' width='118.55' height='14.27' style='stroke-width: 0.64; stroke: #B3B3B3; fill: #F2F2F2;' />
-<text x='209.66' y='39.87' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='23.57px' lengthAdjust='spacingAndGlyphs'>q = 0</text>
+<text x='209.66' y='39.87' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='23.57px' lengthAdjust='spacingAndGlyphs'>q = 0</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwzMDAuNDc=)'>
 </g>
@@ -137,7 +137,7 @@
 </defs>
 <g clip-path='url(#cpMjczLjE3fDM5MS43MnwyOS44Mnw0NC4wOQ==)'>
 <rect x='273.17' y='29.82' width='118.55' height='14.27' style='stroke-width: 0.64; stroke: #B3B3B3; fill: #F2F2F2;' />
-<text x='332.45' y='39.87' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='23.57px' lengthAdjust='spacingAndGlyphs'>q = 1</text>
+<text x='332.45' y='39.87' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='23.57px' lengthAdjust='spacingAndGlyphs'>q = 1</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwzMDAuNDc=)'>
 </g>
@@ -148,7 +148,7 @@
 </defs>
 <g clip-path='url(#cpMzk1Ljk2fDUxNC41MXwyOS44Mnw0NC4wOQ==)'>
 <rect x='395.96' y='29.82' width='118.55' height='14.27' style='stroke-width: 0.64; stroke: #B3B3B3; fill: #F2F2F2;' />
-<text x='455.23' y='39.87' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='23.57px' lengthAdjust='spacingAndGlyphs'>q = 2</text>
+<text x='455.23' y='39.87' text-anchor='middle' style='font-size: 8.00px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='23.57px' lengthAdjust='spacingAndGlyphs'>q = 2</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwzMDAuNDc=)'>
 <polyline points='155.78,260.15 155.78,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -156,41 +156,41 @@
 <polyline points='209.66,260.15 209.66,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='236.61,260.15 236.61,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='263.55,260.15 263.55,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='155.78' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
-<text x='182.72' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='209.66' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='236.61' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='263.55' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='155.78' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='182.72' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='209.66' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='236.61' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='263.55' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
 <polyline points='278.56,260.15 278.56,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='305.50,260.15 305.50,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='332.45,260.15 332.45,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='359.39,260.15 359.39,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='386.33,260.15 386.33,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='278.56' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
-<text x='305.50' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='332.45' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='359.39' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='386.33' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='278.56' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='305.50' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='332.45' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='359.39' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='386.33' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
 <polyline points='401.35,260.15 401.35,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='428.29,260.15 428.29,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='455.23,260.15 455.23,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='482.17,260.15 482.17,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='509.12,260.15 509.12,258.03 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='401.35' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
-<text x='428.29' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='455.23' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='482.17' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='509.12' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='146.58' y='220.58' text-anchor='end' style='font-size: 7.30px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='142.34px' lengthAdjust='spacingAndGlyphs'>Coastal wetland minus Tibetan Plateau</text>
-<text x='146.58' y='153.72' text-anchor='end' style='font-size: 7.30px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='137.69px' lengthAdjust='spacingAndGlyphs'>Inland wetland minus Tibetan Plateau</text>
-<text x='146.58' y='86.86' text-anchor='end' style='font-size: 7.30px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='139.27px' lengthAdjust='spacingAndGlyphs'>Inland wetland minus Coastal wetland</text>
+<text x='401.35' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='428.29' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='455.23' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='482.17' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='509.12' y='266.80' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='146.58' y='220.58' text-anchor='end' style='font-size: 7.30px;fill: #1A1A1A; font-family: "Arial";' textLength='142.34px' lengthAdjust='spacingAndGlyphs'>Coastal wetland minus Tibetan Plateau</text>
+<text x='146.58' y='153.72' text-anchor='end' style='font-size: 7.30px;fill: #1A1A1A; font-family: "Arial";' textLength='137.69px' lengthAdjust='spacingAndGlyphs'>Inland wetland minus Tibetan Plateau</text>
+<text x='146.58' y='86.86' text-anchor='end' style='font-size: 7.30px;fill: #1A1A1A; font-family: "Arial";' textLength='139.27px' lengthAdjust='spacingAndGlyphs'>Inland wetland minus Coastal wetland</text>
 <polyline points='148.27,217.92 150.39,217.92 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='148.27,151.06 150.39,151.06 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='148.27,84.21 150.39,84.21 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='332.45' y='276.52' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='157.10px' lengthAdjust='spacingAndGlyphs'>Cliff's delta (Group A minus Group B)</text>
-<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='259.37px' lengthAdjust='spacingAndGlyphs'>Cliff's delta with stratified bootstrap 95% percentile intervals</text>
-<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "DejaVu Sans";' textLength='249.35px' lengthAdjust='spacingAndGlyphs'>Pairwise dominance effects remain uncertain</text>
-<text x='150.39' y='287.48' style='font-size: 6.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='333.08px' lengthAdjust='spacingAndGlyphs'>Positive values mean that a random Group A sample tends to have higher diversity than Group B.</text>
-<text x='150.39' y='294.83' style='font-size: 6.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='175.65px' lengthAdjust='spacingAndGlyphs'>Holm adjustment covers all nine planned contrasts.</text>
+<text x='332.45' y='276.52' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='157.10px' lengthAdjust='spacingAndGlyphs'>Cliff's delta (Group A minus Group B)</text>
+<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "Arial";' textLength='259.37px' lengthAdjust='spacingAndGlyphs'>Cliff's delta with stratified bootstrap 95% percentile intervals</text>
+<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "Arial";' textLength='249.35px' lengthAdjust='spacingAndGlyphs'>Pairwise dominance effects remain uncertain</text>
+<text x='150.39' y='287.48' style='font-size: 6.80px;fill: #666666; font-family: "Arial";' textLength='333.08px' lengthAdjust='spacingAndGlyphs'>Positive values mean that a random Group A sample tends to have higher diversity than Group B.</text>
+<text x='150.39' y='294.83' style='font-size: 6.80px;fill: #666666; font-family: "Arial";' textLength='175.65px' lengthAdjust='spacingAndGlyphs'>Holm adjustment covers all nine planned contrasts.</text>
 </g>
 </svg>

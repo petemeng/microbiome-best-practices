@@ -75,8 +75,8 @@
 <rect x='86.08' y='72.27' width='117.27' height='236.48' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDAuMTY=)'>
-<text x='82.04' y='246.88' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='72.08px' lengthAdjust='spacingAndGlyphs'>Full direct-path DAG</text>
-<text x='82.04' y='139.39' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='71.32px' lengthAdjust='spacingAndGlyphs'>Mediation-only DAG</text>
+<text x='82.04' y='246.88' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='72.08px' lengthAdjust='spacingAndGlyphs'>Full direct-path DAG</text>
+<text x='82.04' y='139.39' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='71.32px' lengthAdjust='spacingAndGlyphs'>Mediation-only DAG</text>
 <polyline points='83.84,244.25 86.08,244.25 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='83.84,136.76 86.08,136.76 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='91.41,310.99 91.41,308.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
@@ -85,23 +85,23 @@
 <polyline points='157.62,310.99 157.62,308.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='179.69,310.99 179.69,308.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='201.77,310.99 201.77,308.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='91.41' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.000</text>
-<text x='113.48' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.025</text>
-<text x='135.55' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.050</text>
-<text x='157.62' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.075</text>
-<text x='179.69' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.100</text>
-<text x='201.77' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.125</text>
-<text x='144.71' y='328.32' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='78.68px' lengthAdjust='spacingAndGlyphs'>Fisher's C P value</text>
+<text x='91.41' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.000</text>
+<text x='113.48' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.025</text>
+<text x='135.55' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.050</text>
+<text x='157.62' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.075</text>
+<text x='179.69' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.100</text>
+<text x='201.77' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>0.125</text>
+<text x='144.71' y='328.32' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='78.68px' lengthAdjust='spacingAndGlyphs'>Fisher's C P value</text>
 <rect x='51.99' y='37.06' width='185.45' height='26.25' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
-<text x='56.47' y='53.46' style='font-size: 9.00px; font-family: "DejaVu Sans";' textLength='51.56px' lengthAdjust='spacingAndGlyphs'>Compatible</text>
+<text x='56.47' y='53.46' style='font-size: 9.00px; font-family: "Arial";' textLength='51.56px' lengthAdjust='spacingAndGlyphs'>Compatible</text>
 <line x1='114.24' y1='50.18' x2='128.06' y2='50.18' style='stroke-width: 1.71; stroke: #D55E00; stroke-linecap: butt;' />
 <circle cx='121.15' cy='50.18' r='3.34' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
 <line x1='171.74' y1='50.18' x2='185.56' y2='50.18' style='stroke-width: 1.71; stroke: #009E73; stroke-linecap: butt;' />
 <circle cx='178.65' cy='50.18' r='3.34' style='stroke-width: 0.71; stroke: #009E73; fill: #009E73;' />
-<text x='134.27' y='52.80' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='31.26px' lengthAdjust='spacingAndGlyphs'>Rejected</text>
-<text x='191.78' y='52.80' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='41.18px' lengthAdjust='spacingAndGlyphs'>Compatible</text>
-<text x='9.96' y='30.70' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='118.63px' lengthAdjust='spacingAndGlyphs'>P &lt; 0.05 rejects the graph</text>
-<text x='9.96' y='17.51' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='159.09px' lengthAdjust='spacingAndGlyphs'>A. Directed-separation test</text>
+<text x='134.27' y='52.80' style='font-size: 7.20px; font-family: "Arial";' textLength='31.26px' lengthAdjust='spacingAndGlyphs'>Rejected</text>
+<text x='191.78' y='52.80' style='font-size: 7.20px; font-family: "Arial";' textLength='41.18px' lengthAdjust='spacingAndGlyphs'>Compatible</text>
+<text x='9.96' y='30.70' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='118.63px' lengthAdjust='spacingAndGlyphs'>P &lt; 0.05 rejects the graph</text>
+<text x='9.96' y='17.51' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='159.09px' lengthAdjust='spacingAndGlyphs'>A. Directed-separation test</text>
 </g>
 <defs>
   <clipPath id='cpMzAyLjM5fDUwMC4yN3w3Mi4yN3wzMDguNzU='>
@@ -154,13 +154,13 @@
 <rect x='302.39' y='72.27' width='197.89' height='236.48' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDAuMTY=)'>
-<text x='298.35' y='291.66' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='68.00px' lengthAdjust='spacingAndGlyphs'>Acidity  -&gt;  Carbon</text>
-<text x='298.35' y='258.82' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='86.04px' lengthAdjust='spacingAndGlyphs'>Salinity  -&gt;  Microbiome</text>
-<text x='298.35' y='225.97' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='69.75px' lengthAdjust='spacingAndGlyphs'>Climate  -&gt;  Acidity</text>
-<text x='298.35' y='193.13' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='85.36px' lengthAdjust='spacingAndGlyphs'>Microbiome  -&gt;  Carbon</text>
-<text x='298.35' y='160.29' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='70.22px' lengthAdjust='spacingAndGlyphs'>Salinity  -&gt;  Carbon</text>
-<text x='298.35' y='127.44' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='83.82px' lengthAdjust='spacingAndGlyphs'>Acidity  -&gt;  Microbiome</text>
-<text x='298.35' y='94.60' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='71.97px' lengthAdjust='spacingAndGlyphs'>Climate  -&gt;  Salinity</text>
+<text x='298.35' y='291.66' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='68.00px' lengthAdjust='spacingAndGlyphs'>Acidity  -&gt;  Carbon</text>
+<text x='298.35' y='258.82' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='86.04px' lengthAdjust='spacingAndGlyphs'>Salinity  -&gt;  Microbiome</text>
+<text x='298.35' y='225.97' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='69.75px' lengthAdjust='spacingAndGlyphs'>Climate  -&gt;  Acidity</text>
+<text x='298.35' y='193.13' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='85.36px' lengthAdjust='spacingAndGlyphs'>Microbiome  -&gt;  Carbon</text>
+<text x='298.35' y='160.29' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='70.22px' lengthAdjust='spacingAndGlyphs'>Salinity  -&gt;  Carbon</text>
+<text x='298.35' y='127.44' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='83.82px' lengthAdjust='spacingAndGlyphs'>Acidity  -&gt;  Microbiome</text>
+<text x='298.35' y='94.60' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='71.97px' lengthAdjust='spacingAndGlyphs'>Climate  -&gt;  Salinity</text>
 <polyline points='300.14,289.04 302.39,289.04 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='300.14,256.20 302.39,256.20 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='300.14,223.35 302.39,223.35 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
@@ -173,13 +173,13 @@
 <polyline points='400.95,310.99 400.95,308.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='449.11,310.99 449.11,308.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='497.27,310.99 497.27,308.75 ' style='stroke-width: 0.87; stroke: #333333; stroke-linecap: butt;' />
-<text x='304.63' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-0.8</text>
-<text x='352.79' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
-<text x='400.95' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='449.11' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='497.27' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.8</text>
-<text x='401.33' y='328.32' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='156.41px' lengthAdjust='spacingAndGlyphs'>PLS path coefficient (95% interval)</text>
-<text x='212.31' y='30.70' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='274.98px' lengthAdjust='spacingAndGlyphs'>Percentile intervals from 2,000 sample-level bootstrap draws</text>
-<text x='212.31' y='17.51' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='153.26px' lengthAdjust='spacingAndGlyphs'>B. PLS-PM estimator audit</text>
+<text x='304.63' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-0.8</text>
+<text x='352.79' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
+<text x='400.95' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='449.11' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='497.27' y='318.02' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.8</text>
+<text x='401.33' y='328.32' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='156.41px' lengthAdjust='spacingAndGlyphs'>PLS path coefficient (95% interval)</text>
+<text x='212.31' y='30.70' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='274.98px' lengthAdjust='spacingAndGlyphs'>Percentile intervals from 2,000 sample-level bootstrap draws</text>
+<text x='212.31' y='17.51' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='153.26px' lengthAdjust='spacingAndGlyphs'>B. PLS-PM estimator audit</text>
 </g>
 </svg>

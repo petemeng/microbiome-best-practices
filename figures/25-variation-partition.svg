@@ -40,17 +40,17 @@
 <rect x='134.43' y='143.84' width='32.03' height='31.23' style='stroke-width: 0.75; stroke: #333333; stroke-linecap: butt; stroke-linejoin: miter; fill: #CC79A7;' />
 <rect x='134.43' y='192.64' width='324.23' height='31.23' style='stroke-width: 0.75; stroke: #333333; stroke-linecap: butt; stroke-linejoin: miter; fill: #9CA3AF;' />
 <line x1='134.43' y1='237.54' x2='134.43' y2='32.58' style='stroke-width: 0.85; stroke: #333333; stroke-linecap: butt;' />
-<text x='179.95' y='65.17' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='23.10px' lengthAdjust='spacingAndGlyphs'>9.7%</text>
-<text x='188.23' y='113.97' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='28.89px' lengthAdjust='spacingAndGlyphs'>11.4%</text>
-<text x='168.31' y='162.77' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='23.10px' lengthAdjust='spacingAndGlyphs'>7.1%</text>
-<text x='460.97' y='211.57' style='font-size: 9.10px; font-family: "DejaVu Sans";' textLength='28.89px' lengthAdjust='spacingAndGlyphs'>71.8%</text>
+<text x='179.95' y='65.17' style='font-size: 9.10px; font-family: "Arial";' textLength='23.10px' lengthAdjust='spacingAndGlyphs'>9.7%</text>
+<text x='188.23' y='113.97' style='font-size: 9.10px; font-family: "Arial";' textLength='28.89px' lengthAdjust='spacingAndGlyphs'>11.4%</text>
+<text x='168.31' y='162.77' style='font-size: 9.10px; font-family: "Arial";' textLength='23.10px' lengthAdjust='spacingAndGlyphs'>7.1%</text>
+<text x='460.97' y='211.57' style='font-size: 9.10px; font-family: "Arial";' textLength='28.89px' lengthAdjust='spacingAndGlyphs'>71.8%</text>
 <rect x='127.95' y='32.58' width='372.86' height='204.96' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwyODMuNDY=)'>
-<text x='123.91' y='210.88' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='44.86px' lengthAdjust='spacingAndGlyphs'>Unexplained</text>
-<text x='123.91' y='162.08' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='118.43px' lengthAdjust='spacingAndGlyphs'>Shared edaphic + wetland group</text>
-<text x='123.91' y='113.28' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='105.50px' lengthAdjust='spacingAndGlyphs'>Pure wetland group | edaphic</text>
-<text x='123.91' y='64.48' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='105.50px' lengthAdjust='spacingAndGlyphs'>Pure edaphic | wetland group</text>
+<text x='123.91' y='210.88' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='44.86px' lengthAdjust='spacingAndGlyphs'>Unexplained</text>
+<text x='123.91' y='162.08' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='118.43px' lengthAdjust='spacingAndGlyphs'>Shared edaphic + wetland group</text>
+<text x='123.91' y='113.28' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='105.50px' lengthAdjust='spacingAndGlyphs'>Pure wetland group | edaphic</text>
+<text x='123.91' y='64.48' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='105.50px' lengthAdjust='spacingAndGlyphs'>Pure edaphic | wetland group</text>
 <polyline points='125.71,208.26 127.95,208.26 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='125.71,159.46 127.95,159.46 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='125.71,110.66 127.95,110.66 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -60,15 +60,15 @@
 <polyline points='315.00,239.78 315.00,237.54 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='405.28,239.78 405.28,237.54 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='495.56,239.78 495.56,237.54 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='134.43' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.40px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='224.71' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>20%</text>
-<text x='315.00' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>40%</text>
-<text x='405.28' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>60%</text>
-<text x='495.56' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>80%</text>
-<text x='314.38' y='257.11' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='227.90px' lengthAdjust='spacingAndGlyphs'>Adjusted fraction of Hellinger community variation</text>
-<text x='5.48' y='26.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='314.32px' lengthAdjust='spacingAndGlyphs'>Combined adjusted R2 = 0.282; both pure fractions Holm P &lt;= 0.002</text>
-<text x='5.48' y='13.03' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='391.86px' lengthAdjust='spacingAndGlyphs'>Adjusted variation partition separates unique and shared fractions</text>
-<text x='127.95' y='268.71' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='271.65px' lengthAdjust='spacingAndGlyphs'>Shared variation is not directly testable or attributable to one predictor set.</text>
-<text x='127.95' y='276.49' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='328.02px' lengthAdjust='spacingAndGlyphs'>Wetland group is a broad context variable and is completely confounded with salinity here.</text>
+<text x='134.43' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.40px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='224.71' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>20%</text>
+<text x='315.00' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>40%</text>
+<text x='405.28' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>60%</text>
+<text x='495.56' y='246.82' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>80%</text>
+<text x='314.38' y='257.11' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='227.90px' lengthAdjust='spacingAndGlyphs'>Adjusted fraction of Hellinger community variation</text>
+<text x='5.48' y='26.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='314.32px' lengthAdjust='spacingAndGlyphs'>Combined adjusted R2 = 0.282; both pure fractions Holm P &lt;= 0.002</text>
+<text x='5.48' y='13.03' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='391.86px' lengthAdjust='spacingAndGlyphs'>Adjusted variation partition separates unique and shared fractions</text>
+<text x='127.95' y='268.71' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='271.65px' lengthAdjust='spacingAndGlyphs'>Shared variation is not directly testable or attributable to one predictor set.</text>
+<text x='127.95' y='276.49' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='328.02px' lengthAdjust='spacingAndGlyphs'>Wetland group is a broad context variable and is completely confounded with salinity here.</text>
 </g>
 </svg>

@@ -50,11 +50,11 @@
 <rect x='37.57' y='29.82' width='468.43' height='231.64' style='stroke-width: 0.82; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDUuODM=)'>
-<text x='33.76' y='263.94' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='33.76' y='206.03' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>25%</text>
-<text x='33.76' y='148.12' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='33.76' y='90.21' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>75%</text>
-<text x='33.76' y='32.30' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='19.44px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='33.76' y='263.94' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='33.76' y='206.03' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>25%</text>
+<text x='33.76' y='148.12' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='33.76' y='90.21' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.11px' lengthAdjust='spacingAndGlyphs'>75%</text>
+<text x='33.76' y='32.30' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='19.44px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <polyline points='35.46,261.46 37.57,261.46 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='35.46,203.55 37.57,203.55 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='35.46,145.64 37.57,145.64 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -63,20 +63,20 @@
 <polyline points='125.40,263.58 125.40,261.46 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='271.79,263.58 271.79,261.46 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='418.17,263.58 418.17,261.46 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text transform='translate(126.93,269.98) rotate(-18)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='82.36px' lengthAdjust='spacingAndGlyphs'>Primary: 1 / mean depth</text>
-<text transform='translate(273.32,269.98) rotate(-18)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='79.57px' lengthAdjust='spacingAndGlyphs'>Fixed relative threshold</text>
-<text transform='translate(419.70,269.98) rotate(-18)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='73.07px' lengthAdjust='spacingAndGlyphs'>Rarefied to 10k reads</text>
-<text transform='translate(10.43,145.64) rotate(-90)' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='70.08px' lengthAdjust='spacingAndGlyphs'>Fraction of OTUs</text>
+<text transform='translate(126.93,269.98) rotate(-18)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='82.36px' lengthAdjust='spacingAndGlyphs'>Primary: 1 / mean depth</text>
+<text transform='translate(273.32,269.98) rotate(-18)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='79.57px' lengthAdjust='spacingAndGlyphs'>Fixed relative threshold</text>
+<text transform='translate(419.70,269.98) rotate(-18)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='73.07px' lengthAdjust='spacingAndGlyphs'>Rarefied to 10k reads</text>
+<text transform='translate(10.43,145.64) rotate(-90)' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='70.08px' lengthAdjust='spacingAndGlyphs'>Fraction of OTUs</text>
 <rect x='119.48' y='305.25' width='304.62' height='25.75' style='stroke-width: 0.82; stroke: none; fill: #FFFFFF;' />
-<text x='123.71' y='321.22' style='font-size: 8.50px; font-family: "DejaVu Sans";' textLength='65.72px' lengthAdjust='spacingAndGlyphs'>Predictive class</text>
+<text x='123.71' y='321.22' style='font-size: 8.50px; font-family: "Arial";' textLength='65.72px' lengthAdjust='spacingAndGlyphs'>Predictive class</text>
 <rect x='194.09' y='309.90' width='16.43' height='16.43' style='stroke-width: 0.64; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2;' />
 <rect x='266.75' y='309.90' width='16.43' height='16.43' style='stroke-width: 0.64; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #6B7280;' />
 <rect x='350.98' y='309.90' width='16.43' height='16.43' style='stroke-width: 0.64; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #D55E00;' />
-<text x='215.18' y='320.60' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='46.92px' lengthAdjust='spacingAndGlyphs'>Below neutral</text>
-<text x='287.84' y='320.60' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='58.48px' lengthAdjust='spacingAndGlyphs'>Neutral envelope</text>
-<text x='372.07' y='320.60' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='47.79px' lengthAdjust='spacingAndGlyphs'>Above neutral</text>
-<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='298.97px' lengthAdjust='spacingAndGlyphs'>Agreement with primary labels: fixed threshold 68.7%; rarefied 84.3%</text>
-<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "DejaVu Sans";' textLength='301.26px' lengthAdjust='spacingAndGlyphs'>Predictive labels move when observation rules change</text>
-<text x='37.57' y='340.18' style='font-size: 6.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='240.18px' lengthAdjust='spacingAndGlyphs'>Rarefaction is used only as a sensitivity analysis, with seed 20260739.</text>
+<text x='215.18' y='320.60' style='font-size: 6.80px; font-family: "Arial";' textLength='46.92px' lengthAdjust='spacingAndGlyphs'>Below neutral</text>
+<text x='287.84' y='320.60' style='font-size: 6.80px; font-family: "Arial";' textLength='58.48px' lengthAdjust='spacingAndGlyphs'>Neutral envelope</text>
+<text x='372.07' y='320.60' style='font-size: 6.80px; font-family: "Arial";' textLength='47.79px' lengthAdjust='spacingAndGlyphs'>Above neutral</text>
+<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "Arial";' textLength='298.97px' lengthAdjust='spacingAndGlyphs'>Agreement with primary labels: fixed threshold 68.7%; rarefied 84.3%</text>
+<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "Arial";' textLength='301.26px' lengthAdjust='spacingAndGlyphs'>Predictive labels move when observation rules change</text>
+<text x='37.57' y='340.18' style='font-size: 6.80px;fill: #666666; font-family: "Arial";' textLength='240.18px' lengthAdjust='spacingAndGlyphs'>Rarefaction is used only as a sensitivity analysis, with seed 20260739.</text>
 </g>
 </svg>

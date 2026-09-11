@@ -46,14 +46,14 @@
 <text x='255.12' y='216.50' text-anchor='middle' style='font-size: 8.54px; font-family: "Arial";' textLength='44.05px' lengthAdjust='spacingAndGlyphs'>c' = 0.086</text>
 <text x='255.12' y='226.74' text-anchor='middle' style='font-size: 8.54px; font-family: "Arial";' textLength='42.16px' lengthAdjust='spacingAndGlyphs'>P = 0.772</text>
 <text x='255.12' y='258.81' text-anchor='middle' style='font-size: 9.39px;fill: #444444; font-family: "Arial";' textLength='186.26px' lengthAdjust='spacingAndGlyphs'>ACME = 0.010 (95% CI -0.105 to 0.137)</text>
-<text x='162.17' y='54.19' style='font-size: 11.00px; font-family: "DejaVu Sans";' textLength='24.16px' lengthAdjust='spacingAndGlyphs'>Path</text>
+<text x='162.17' y='54.19' style='font-size: 11.00px; font-family: "Arial";' textLength='24.16px' lengthAdjust='spacingAndGlyphs'>Path</text>
 <line x1='193.54' y1='50.18' x2='207.36' y2='50.18' style='stroke-width: 2.24; stroke: #D55E00; stroke-linecap: butt;' />
 <polygon points='201.22,53.73 207.36,50.18 201.22,46.64 ' style='stroke-width: 2.24; stroke: #D55E00; stroke-linecap: butt; fill: #D55E00;' />
 <line x1='270.92' y1='50.18' x2='284.74' y2='50.18' style='stroke-width: 2.24; stroke: #0072B2; stroke-linecap: butt;' />
 <polygon points='278.60,53.73 284.74,50.18 278.60,46.64 ' style='stroke-width: 2.24; stroke: #0072B2; stroke-linecap: butt; fill: #0072B2;' />
-<text x='214.57' y='53.39' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='49.14px' lengthAdjust='spacingAndGlyphs'>Direct path</text>
-<text x='291.95' y='53.39' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='56.12px' lengthAdjust='spacingAndGlyphs'>Indirect path</text>
-<text x='14.94' y='39.46' style='font-size: 10.00px;fill: #555555; font-family: "DejaVu Sans";' textLength='387.76px' lengthAdjust='spacingAndGlyphs'>Adjusted for disease group, age and three concomitant medication indicators</text>
-<text x='14.94' y='24.19' style='font-size: 12.00px; font-weight: bold; font-family: "DejaVu Sans";' textLength='387.77px' lengthAdjust='spacingAndGlyphs'>Cross-sectional mediation decomposes a model, not time</text>
+<text x='214.57' y='53.39' style='font-size: 8.80px; font-family: "Arial";' textLength='49.14px' lengthAdjust='spacingAndGlyphs'>Direct path</text>
+<text x='291.95' y='53.39' style='font-size: 8.80px; font-family: "Arial";' textLength='56.12px' lengthAdjust='spacingAndGlyphs'>Indirect path</text>
+<text x='14.94' y='39.46' style='font-size: 10.00px;fill: #555555; font-family: "Arial";' textLength='387.76px' lengthAdjust='spacingAndGlyphs'>Adjusted for disease group, age and three concomitant medication indicators</text>
+<text x='14.94' y='24.19' style='font-size: 12.00px; font-weight: bold; font-family: "Arial";' textLength='387.77px' lengthAdjust='spacingAndGlyphs'>Cross-sectional mediation decomposes a model, not time</text>
 </g>
 </svg>

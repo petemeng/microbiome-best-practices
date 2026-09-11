@@ -164,10 +164,10 @@
 <rect x='29.31' y='35.09' width='277.52' height='178.73' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHwzMTEuODF8MC4wMHwyNTUuMTI=)'>
-<text x='24.82' y='216.61' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.98px' lengthAdjust='spacingAndGlyphs'>-4</text>
-<text x='24.82' y='171.57' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.98px' lengthAdjust='spacingAndGlyphs'>-2</text>
-<text x='24.82' y='126.54' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='24.82' y='81.51' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='24.82' y='216.61' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='7.98px' lengthAdjust='spacingAndGlyphs'>-4</text>
+<text x='24.82' y='171.57' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='7.98px' lengthAdjust='spacingAndGlyphs'>-2</text>
+<text x='24.82' y='126.54' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='24.82' y='81.51' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>2</text>
 <polyline points='26.82,213.69 29.31,213.69 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='26.82,168.66 29.31,168.66 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='26.82,123.63 29.31,123.63 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -176,14 +176,14 @@
 <polyline points='117.17,216.31 117.17,213.82 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='192.43,216.31 192.43,213.82 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='267.68,216.31 267.68,213.82 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='41.92' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='117.17' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.2</text>
-<text x='192.43' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='267.68' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.6</text>
-<text x='168.07' y='235.58' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='137.79px' lengthAdjust='spacingAndGlyphs'>KM-transformed event time</text>
-<text transform='translate(12.27,124.45) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='134.86px' lengthAdjust='spacingAndGlyphs'>Scaled Schoenfeld residual</text>
-<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='130.92px' lengthAdjust='spacingAndGlyphs'>Schoenfeld test p = 0.528</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='275.59px' lengthAdjust='spacingAndGlyphs'>Proportional-hazards audit: Ruminococcus</text>
-<text x='29.31' y='248.47' style='font-size: 8.00px;fill: #666666; font-family: "DejaVu Sans";' textLength='242.10px' lengthAdjust='spacingAndGlyphs'>A systematic time trend suggests a time-varying coefficient.</text>
+<text x='41.92' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='117.17' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.2</text>
+<text x='192.43' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='267.68' y='224.13' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.6</text>
+<text x='168.07' y='235.58' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='137.79px' lengthAdjust='spacingAndGlyphs'>KM-transformed event time</text>
+<text transform='translate(12.27,124.45) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='134.86px' lengthAdjust='spacingAndGlyphs'>Scaled Schoenfeld residual</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='130.92px' lengthAdjust='spacingAndGlyphs'>Schoenfeld test p = 0.528</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='275.59px' lengthAdjust='spacingAndGlyphs'>Proportional-hazards audit: Ruminococcus</text>
+<text x='29.31' y='248.47' style='font-size: 8.00px;fill: #666666; font-family: "Arial";' textLength='242.10px' lengthAdjust='spacingAndGlyphs'>A systematic time trend suggests a time-varying coefficient.</text>
 </g>
 </svg>

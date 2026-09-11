@@ -321,8 +321,8 @@
 <rect x='26.42' y='72.29' width='478.83' height='253.21' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNTQuMzM=)'>
-<text x='21.94' y='245.52' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>2</text>
-<text x='21.94' y='159.27' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>3</text>
+<text x='21.94' y='245.52' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>2</text>
+<text x='21.94' y='159.27' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='5.09px' lengthAdjust='spacingAndGlyphs'>3</text>
 <polyline points='23.93,242.61 26.42,242.61 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='23.93,156.36 26.42,156.36 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='48.19,328.00 48.19,325.51 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -331,16 +331,16 @@
 <polyline points='309.37,328.00 309.37,325.51 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='396.43,328.00 396.43,325.51 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='483.49,328.00 483.49,325.51 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='48.19' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T1</text>
-<text x='135.25' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T2</text>
-<text x='222.31' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T3</text>
-<text x='309.37' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T4</text>
-<text x='396.43' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T5</text>
-<text x='483.49' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T6</text>
-<text x='265.84' y='347.27' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='80.17px' lengthAdjust='spacingAndGlyphs'>Study timepoint</text>
-<text transform='translate(12.27,198.90) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='90.27px' lengthAdjust='spacingAndGlyphs'>Shannon diversity</text>
+<text x='48.19' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T1</text>
+<text x='135.25' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T2</text>
+<text x='222.31' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T3</text>
+<text x='309.37' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T4</text>
+<text x='396.43' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T5</text>
+<text x='483.49' y='335.82' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='9.98px' lengthAdjust='spacingAndGlyphs'>T6</text>
+<text x='265.84' y='347.27' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='80.17px' lengthAdjust='spacingAndGlyphs'>Study timepoint</text>
+<text transform='translate(12.27,198.90) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='90.27px' lengthAdjust='spacingAndGlyphs'>Shannon diversity</text>
 <rect x='157.01' y='35.09' width='217.66' height='27.24' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
-<text x='161.99' y='52.36' style='font-size: 10.00px; font-family: "DejaVu Sans";' textLength='33.60px' lengthAdjust='spacingAndGlyphs'>Cohort</text>
+<text x='161.99' y='52.36' style='font-size: 10.00px; font-family: "Arial";' textLength='33.60px' lengthAdjust='spacingAndGlyphs'>Cohort</text>
 <line x1='202.29' y1='48.71' x2='216.12' y2='48.71' style='stroke-width: 0.75; stroke: #0072B2; stroke-opacity: 0.17; stroke-linecap: butt;' />
 <circle cx='209.21' cy='48.71' r='1.31' style='stroke-width: 0.71; stroke: #0072B2; stroke-opacity: 0.25; fill: #0072B2; fill-opacity: 0.25;' />
 <rect x='201.28' y='40.78' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2; fill-opacity: 0.16;' />
@@ -351,9 +351,9 @@
 <rect x='297.02' y='40.78' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00; fill-opacity: 0.16;' />
 <line x1='298.04' y1='48.71' x2='311.86' y2='48.71' style='stroke-width: 2.24; stroke: #E69F00; stroke-linecap: butt;' />
 <circle cx='304.95' cy='48.71' r='2.59' style='stroke-width: 0.71; stroke: #E69F00; fill: #E69F00;' />
-<text x='222.83' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='68.50px' lengthAdjust='spacingAndGlyphs'>African American</text>
-<text x='318.57' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='51.11px' lengthAdjust='spacingAndGlyphs'>Rural African</text>
-<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='396.19px' lengthAdjust='spacingAndGlyphs'>Thin lines: participants; thick lines and bands: mixed-model means and 95% CI</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='234.56px' lengthAdjust='spacingAndGlyphs'>Within-subject diversity trajectories</text>
+<text x='222.83' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='68.50px' lengthAdjust='spacingAndGlyphs'>African American</text>
+<text x='318.57' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='51.11px' lengthAdjust='spacingAndGlyphs'>Rural African</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='396.19px' lengthAdjust='spacingAndGlyphs'>Thin lines: participants; thick lines and bands: mixed-model means and 95% CI</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='234.56px' lengthAdjust='spacingAndGlyphs'>Within-subject diversity trajectories</text>
 </g>
 </svg>

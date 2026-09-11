@@ -47,14 +47,14 @@
 <text x='366.35' y='107.17' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='88.03px' lengthAdjust='spacingAndGlyphs'>Shannon -&gt; carbon</text>
 <text x='366.35' y='120.28' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='113.92px' lengthAdjust='spacingAndGlyphs'>beta = -0.012, P = 0.865</text>
 <text x='255.12' y='246.63' text-anchor='middle' style='font-size: 8.82px;fill: #666666; font-family: "Arial";' textLength='226.82px' lengthAdjust='spacingAndGlyphs'>Wetland group adjusted in every component model</text>
-<text x='178.06' y='54.19' style='font-size: 11.00px; font-family: "DejaVu Sans";' textLength='48.49px' lengthAdjust='spacingAndGlyphs'>Path role</text>
+<text x='178.06' y='54.19' style='font-size: 11.00px; font-family: "Arial";' textLength='48.49px' lengthAdjust='spacingAndGlyphs'>Path role</text>
 <line x1='233.76' y1='50.18' x2='247.58' y2='50.18' style='stroke-width: 2.13; stroke: #6B7280; stroke-linecap: butt;' />
 <polygon points='241.69,53.58 247.58,50.18 241.69,46.78 ' style='stroke-width: 2.13; stroke: #6B7280; stroke-linecap: butt; fill: #6B7280;' />
 <line x1='288.34' y1='50.18' x2='302.16' y2='50.18' style='stroke-width: 2.13; stroke: #D55E00; stroke-linecap: butt;' />
 <polygon points='296.27,53.58 302.16,50.18 296.27,46.78 ' style='stroke-width: 2.13; stroke: #D55E00; stroke-linecap: butt; fill: #D55E00;' />
-<text x='254.79' y='53.39' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='26.34px' lengthAdjust='spacingAndGlyphs'>Direct</text>
-<text x='309.37' y='53.39' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='22.81px' lengthAdjust='spacingAndGlyphs'>Focal</text>
-<text x='14.94' y='39.46' style='font-size: 10.00px;fill: #555555; font-family: "DejaVu Sans";' textLength='281.16px' lengthAdjust='spacingAndGlyphs'>A compatible graph is not proof that any arrow is causal</text>
-<text x='14.94' y='24.19' style='font-size: 12.00px; font-weight: bold; font-family: "DejaVu Sans";' textLength='443.58px' lengthAdjust='spacingAndGlyphs'>A pre-specified path model separates direct and mediated routes</text>
+<text x='254.79' y='53.39' style='font-size: 8.80px; font-family: "Arial";' textLength='26.34px' lengthAdjust='spacingAndGlyphs'>Direct</text>
+<text x='309.37' y='53.39' style='font-size: 8.80px; font-family: "Arial";' textLength='22.81px' lengthAdjust='spacingAndGlyphs'>Focal</text>
+<text x='14.94' y='39.46' style='font-size: 10.00px;fill: #555555; font-family: "Arial";' textLength='281.16px' lengthAdjust='spacingAndGlyphs'>A compatible graph is not proof that any arrow is causal</text>
+<text x='14.94' y='24.19' style='font-size: 12.00px; font-weight: bold; font-family: "Arial";' textLength='443.58px' lengthAdjust='spacingAndGlyphs'>A pre-specified path model separates direct and mediated routes</text>
 </g>
 </svg>

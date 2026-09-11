@@ -1,6 +1,6 @@
 ---
 title: "去引物 + 引物区分支决策（V4 / V3–V4 / 全长 / 单双端）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -19,10 +19,6 @@ fig-dpi: 300
 fig-format: png
 ---
 
-> **分析目标：**先用真实 reads 判断 PCR 引物是否仍位于 R1/R2 的 5′ 端，再选择“去引物”或“跳过去引物”分支；完整审计正确/错误引物、锚定/非锚定搜索、成对保留率、长度变化和 QIIME 2 provenance。  
-> **输入文件：**4 个样本、每样本 2,500 对的真实 MiSeq V4 FASTQ；另用 2,000 对真实 Atacama EMP reads 验证“同为 V4 但无需去引物”的分支。  
-> **预计资源：**示例输入约 2.5 MB；固定环境中的 50 项完整验收约 6–8 分钟，峰值内存低于 2 GB。完整研究的耗时和临时磁盘近似随 reads 数增加。  
-> **执行策略：**导入、探针搜索、`q2-cutadapt`、Artifact 校验、provenance 审计与出图已一次性实跑；网页渲染使用 `eval: false`，避免每次构建重复执行上游处理。
 
 ## 去引物前，先确认扩增区域和读长结构 {#sec-target}
 
@@ -78,175 +74,27 @@ Required checks:                50 / 50 PASS
 
 负例来自 QIIME 2 Atacama soils 1% paired-end 数据。其原始研究考察干旱度对荒漠土壤微生物组的影响；这里使用确定性抽取的 2,000 对 reads，只验证“已从扩增子内部开始测序”的处理分支，不重新解释研究结论。[Neilson et al., 2017](https://doi.org/10.1128/mSystems.00195-16)
 
-## 引物和接头为什么必须先去除 {#sec-theory}
+## 开始前：数据与运行环境 {#sec-setup}
 
-### 1. 引物名称只是标签，序列才是计算输入
-
-“515F/806R”在不同年代和协议中可能指向不同退化碱基版本。Earth Microbiome Project（EMP）列出的两组 V4 序列为：
-
-| Primer version | Forward primer, 5′→3′ | Reverse primer, 5′→3′ |
-|---|---|---|
-| Updated: 515F (Parada) / 806R (Apprill) | `GTGYCAGCMGCCGCGGTAA` | `GGACTACNVGGGTWTCTAAT` |
-| Original: 515F / 806R | `GTGCCAGCMGCCGCGGTAA` | `GGACTACHVGGGTWTCTAAT` |
-
-`Y`、`M`、`N`、`V`、`W`、`H` 都是 IUPAC 退化碱基。若把它们当普通字符，或擅自改成一个具体碱基，会系统性漏掉本应匹配的类群。EMP 也明确提醒：**不要只看 primer name，必须核对完整序列。**
-
-同理，“V3–V4”也不是唯一的一对字符串。341F 常与 785R、805R 或 806R 家族成员组合；接头、heterogeneity spacer、linker 和测序引物还可能改变 FASTQ 的前缀结构。必须从 wet-lab sheet、测序中心说明或论文补充方法取得本次 run 的 5′→3′ 序列。
-
-### 2. PCR 引物参与建库，不代表它一定成为 FASTQ 的前 20 个碱基
-
-PCR primer 决定扩增边界；sequencing primer 决定仪器从哪个位置开始识别碱基。两者可能相同，也可能不同。
-
-**常规 primer-retained library**
-
-```text
-R1: 515F + biological insert ------------------->
-R2: 806R + biological insert <-------------------
-```
-
-这种情况下，R1 的 5′ 端应命中 forward primer，R2 的 5′ 端应命中 reverse primer。去掉引物后，示例数据的中位长度由 249/249 nt 变成 230/229 nt，正好对应 19/20 nt 的引物长度。
-
-**EMP custom sequencing-primer library**
-
-EMP 的 Read 1 / Read 2 sequencing primer 本身含有 PCR primer、pad 和 linker。测序延伸从这些 oligo 的 3′ 端之后开始，因此被识别并写入 FASTQ 的第一个碱基已经位于扩增子内部。Atacama 的实际 reads 对原始 515F/806R 锚定探针为 0/2,000；若此时强制 `--discard-untrimmed`，会把全部数据清空。
-
-因此需要同时核对：
-
-- PCR primer；
-- sequencing primer；
-- adapter / linker / spacer 构造；
-- reads 是否由测序中心预先 trimming；
-- 实际 R1/R2 的 5′ 序列。
-
-### 3. R1 与 R2 使用的是“各自 FASTQ 中实际出现的方向”
-
-对短扩增子 paired-end reads，Cutadapt 的基本写法是：
+在 Linux 或 WSL2 的项目文件夹中运行下面的下载命令。下载后保留这里的相对目录，后续命令使用同一组文件。
 
 ```bash
--g '^FWDPRIMER' -G '^REVPRIMER'
+base_url="https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa"
+for file in \
+  env/qiime2.yml \
+  scripts/prepare_fastq_excerpt.py \
+  scripts/validate_primer_trimming.py
+do
+  mkdir -p "$(dirname "$file")"
+  curl --fail --location --retry 3 "$base_url/$file" --output "$file" || break
+done
 ```
 
-其中：
-
-- 小写 `-g` / QIIME 2 `front-f` 搜索 R1 的 5′ 端；
-- 大写 `-G` / QIIME 2 `front-r` 搜索 R2 的 5′ 端；
-- 本例 R2 开头实际是 `GGACTAC...`，因此 `front-r` 直接写 `GGACTACNVGGGTWTCTAAT`；
-- 不要因为文件名是 R2 就无条件先做 reverse complement。
-
-反向互补只在 read-through 或 linked-adapter 表达式中按结构需要加入。例如 Cutadapt 对可能读穿整个短扩增子的建议形式是：
-
-```text
-R1: ^FWDPRIMER...RCREVPRIMER
-R2: ^REVPRIMER...RCFWDPRIMER
-```
-
-这里的 `RCREVPRIMER` 与 `RCFWDPRIMER` 必须由使用者明确提供；Cutadapt 不会替你自动反向互补。若 reads 长度不可能读到另一端，就只处理两个 5′ front primers，避免让多余的 3′ 搜索制造误匹配。
-
-### 4. `^`、minimum overlap 与 error rate 共同定义“命中”
-
-本例主分析采用：
-
-```text
-5′ anchor:          ^
-minimum overlap:    15 nt
-maximum error rate: 0.10
-adapter wildcards:  enabled
-read wildcards:     disabled
-indels:             enabled
-```
-
-含义如下：
-
-- `^` 把“引物应位于 read 起点”写成可检验假设；
-- `overlap = 15` 要求 19/20 nt 引物至少有 15 nt 参与比对，降低短随机片段命中；
-- `error_rate = 0.10` 允许测序误差和有限 indel，但不是允许任意错配；
-- adapter 端解释 IUPAC 退化碱基；
-- read 中的 `N` 不充当通配符，避免低质量未知碱基轻易“匹配”引物。
-
-这些不是所有研究的固定参数。短引物、长 spacer、引物前残留条形码、非零长度异质性 spacer，都可能需要不同模型。参数应由文库结构决定，并通过正对照、空白和逐样本统计验证。
-
-去掉 `^` 后，本例多保留 13 对 reads：
-
-| Search mode | Retained pairs | Retention |
-|---|---:|---:|
-| Correct primers, anchored | 8,614 | 86.14% |
-| Correct primers, unanchored | 8,627 | 86.27% |
-
-这 13 对只能作为“值得复核”的敏感性差异，不能自动判为更好。若协议说明引物必须位于第一个碱基，非锚定命中可能来自 read 内部相似片段、前置 spacer，或上游处理不一致。
-
-### 5. `discard-untrimmed` 是成对过滤器，不是无害开关
-
-paired-end 模式下，Cutadapt 默认按 pair 过滤。使用两端 front primer 和 `--discard-untrimmed` 时，只要 R1 或 R2 未满足命中条件，整对 reads 就不进入输出。
-
-本例样本 `1` 中：
-
-```text
-R1 matches:      1,839 / 2,500
-R2 matches:      1,819 / 2,500
-Retained pairs:  1,810 / 2,500
-```
-
-最终 1,810 不是 R1 或 R2 命中数的简单平均，而是双端共同满足规则的 pair 数。正因如此，推荐两步执行：
-
-1. 用 `--action=none` 或不启用 discard 的方式做**非破坏性探针**；
-2. 只有当序列、方向、样本分布和协议互相支持时，才运行真正 trimming，并审计每个样本的 pair retention。
-
-::: {.callout-warning title="不存在通用的“80% 引物命中率及格线”"}
-引物命中率取决于上游是否预剪切、测序起点、正反向质量、spacer、非特异扩增和对照设计。72.4% 可以暴露某个样本的异常，但不能仅凭一个全局百分比自动删除；0% 也可能是正确的 SKIP 分支。判断必须回到协议和逐样本证据。
-:::
-
-### 6. 错误区域引物是一个必要的负对照
-
-把一组 341F/805R-family V3–V4 序列错误地用于本例 V4 reads，锚定搜索保留：
-
-```text
-0 / 10,000 read pairs
-```
-
-这说明区域假设可以被真实 reads 否证。反过来，如果“错误区域”也得到大量命中，应检查：
-
-- 是否使用了过短 overlap；
-- 是否取消锚定后在 read 内部找到相似片段；
-- 是否混入多个 amplicon panel；
-- 是否存在 spacer / inline barcode；
-- 是否把 adapter 当成 primer；
-- 文件是否来自预期 run。
-
-### 7. V4、V3–V4、全长和单双端不能共用一套 trimming 逻辑
-
-| Assay branch | Read layout | Primer evidence | Recommended action | Downstream consequence |
-|---|---|---|---|---|
-| V4, primer retained | Paired short reads | R1/R2 5′ 端分别命中记录的 primer pair | 锚定 trimming；审计 paired retention | 重新查看质量和 overlap；DADA2 不再重复 trim primer |
-| V4, primer absent | Paired short reads | 无一致 5′ 命中，协议证明从扩增子内部测序 | 跳过去引物 | 直接进入质量截断；不能把所有 reads 丢掉 |
-| V3–V4 | Paired short reads | 核对本 run 的 341F/805R-family 序列与方向 | 按 run 去引物后再 denoise | 插入片段更长，merge 对截断长度更敏感 |
-| Full-length 16S | Single long read | 一条 molecule 中可能出现两端边界 | linked / orientation-aware trimming | 不做 paired merge；使用适配平台的长读长 denoising |
-| Short-read single-end | One acquired direction | 只能检查实际测得的一端 | 若存在，仅去该端 front primer | 无法证明缺失 mate 的引物状态，也不做 paired merge |
-
-不同区域的 reads 不应在去引物和 denoising 前混在一起。区域不同意味着可观察的分类位点、扩增偏倚、参考序列裁剪范围和 ASV 序列空间都不同。即使最终需要跨 run 汇总，也应先按区域独立完成 trimming、denoising 和分类，再在明确可比的分类层级上设计整合分析。
 
 <details>
-<summary><strong>深入：何时需要 linked adapter</strong></summary>
+<summary>本次分析的数据、环境与图形设置</summary>
 
-若 read 长度足以穿过整个扩增子，R1 除了 5′ forward primer，还可能在 3′ 端读到 reverse primer 的反向互补；R2 同理。此时只剪 5′ primer 会在 read 尾部留下另一端技术序列。
-
-Cutadapt 的 linked adapter 用 `...` 把必需的 5′ 部分和另一端部分连接。是否要求两端都出现、是否允许其中一端缺失、pair filtering 使用 `any`、`both` 还是 `first`，都会改变保留集合。必须用已知构造或 mock community 验证，不能把短读长命令机械搬到全长 16S/PacBio/ONT。
-
-对长读长数据还要额外考虑：
-
-- molecule 方向是否混合；
-- concatemer 或多次扩增子串联；
-- primer 是否允许反向互补搜索；
-- full-length 长度窗口；
-- 平台特异的质量模型和 chimera 处理。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装环境、下载真实数据和定义作图函数</strong></summary>
-
-### 1. 安装固定环境
+### 安装固定环境
 
 从项目根目录创建 QIIME 2 2026.4 环境：
 
@@ -275,7 +123,7 @@ install.packages(c(
 ))
 ```
 
-### 2. 下载 primer-retained V4 FASTQ
+### 下载 primer-retained V4 FASTQ
 
 以下 8 个 gzip 文件从固定 commit 原样复制，没有抽样或改写：
 
@@ -334,7 +182,7 @@ AABBBFFFDFFAGGGGGGGGGGHFHHGGA2E2EFGGGG1...
 
 第二条 read 以 `GTGTCAGCMGCCGCGGTAA` 的实际变体开头；退化位点 `Y` 可匹配这里的 `T`。第一条全为 `N`，会自然成为未命中记录，这也解释了为什么不能期待所有 reads 都通过 primer gate。
 
-### 3. 获取 Atacama “primer absent” 对照
+### 获取 Atacama “primer absent” 对照
 
 仓库中的 `data/small/fastq/forward.fastq.gz` 和 `reverse.fastq.gz` 是从官方 135,487 对 1% 数据中等间距、保持顺序地抽取 2,000 对。若需从来源重建：
 
@@ -365,7 +213,7 @@ python3 scripts/prepare_fastq_excerpt.py \
 
 来源和摘录 SHA-256 均记录于 `data/small/fastq/source_summary.json`。
 
-### 4. 内联出版级作图函数
+### 图形设置与导出
 
 ```{r}
 library(ggplot2)
@@ -454,9 +302,173 @@ save_pub <- function(
 
 </details>
 
-## 可复制代码 {#sec-code}
 
-### 1. 先做非破坏性 5′ primer probe
+## 引物和接头为什么必须先去除 {#sec-theory}
+
+### 引物名称只是标签，序列才是计算输入
+
+“515F/806R”在不同年代和协议中可能指向不同退化碱基版本。Earth Microbiome Project（EMP）列出的两组 V4 序列为：
+
+| Primer version | Forward primer, 5′→3′ | Reverse primer, 5′→3′ |
+|---|---|---|
+| Updated: 515F (Parada) / 806R (Apprill) | `GTGYCAGCMGCCGCGGTAA` | `GGACTACNVGGGTWTCTAAT` |
+| Original: 515F / 806R | `GTGCCAGCMGCCGCGGTAA` | `GGACTACHVGGGTWTCTAAT` |
+
+`Y`、`M`、`N`、`V`、`W`、`H` 都是 IUPAC 退化碱基。若把它们当普通字符，或擅自改成一个具体碱基，会系统性漏掉本应匹配的类群。EMP 也明确提醒：**不要只看 primer name，必须核对完整序列。**
+
+同理，“V3–V4”也不是唯一的一对字符串。341F 常与 785R、805R 或 806R 家族成员组合；接头、heterogeneity spacer、linker 和测序引物还可能改变 FASTQ 的前缀结构。必须从 wet-lab sheet、测序中心说明或论文补充方法取得本次 run 的 5′→3′ 序列。
+
+### PCR 引物参与建库，不代表它一定成为 FASTQ 的前 20 个碱基
+
+PCR primer 决定扩增边界；sequencing primer 决定仪器从哪个位置开始识别碱基。两者可能相同，也可能不同。
+
+**常规 primer-retained library**
+
+```text
+R1: 515F + biological insert ------------------->
+R2: 806R + biological insert <-------------------
+```
+
+这种情况下，R1 的 5′ 端应命中 forward primer，R2 的 5′ 端应命中 reverse primer。去掉引物后，示例数据的中位长度由 249/249 nt 变成 230/229 nt，正好对应 19/20 nt 的引物长度。
+
+**EMP custom sequencing-primer library**
+
+EMP 的 Read 1 / Read 2 sequencing primer 本身含有 PCR primer、pad 和 linker。测序延伸从这些 oligo 的 3′ 端之后开始，因此被识别并写入 FASTQ 的第一个碱基已经位于扩增子内部。Atacama 的实际 reads 对原始 515F/806R 锚定探针为 0/2,000；若此时强制 `--discard-untrimmed`，会把全部数据清空。
+
+因此需要同时核对：
+
+- PCR primer；
+- sequencing primer；
+- adapter / linker / spacer 构造；
+- reads 是否由测序中心预先 trimming；
+- 实际 R1/R2 的 5′ 序列。
+
+### R1 与 R2 使用的是“各自 FASTQ 中实际出现的方向”
+
+对短扩增子 paired-end reads，Cutadapt 的基本写法是：
+
+```bash
+-g '^FWDPRIMER' -G '^REVPRIMER'
+```
+
+其中：
+
+- 小写 `-g` / QIIME 2 `front-f` 搜索 R1 的 5′ 端；
+- 大写 `-G` / QIIME 2 `front-r` 搜索 R2 的 5′ 端；
+- 本例 R2 开头实际是 `GGACTAC...`，因此 `front-r` 直接写 `GGACTACNVGGGTWTCTAAT`；
+- 不要因为文件名是 R2 就无条件先做 reverse complement。
+
+反向互补只在 read-through 或 linked-adapter 表达式中按结构需要加入。例如 Cutadapt 对可能读穿整个短扩增子的建议形式是：
+
+```text
+R1: ^FWDPRIMER...RCREVPRIMER
+R2: ^REVPRIMER...RCFWDPRIMER
+```
+
+这里的 `RCREVPRIMER` 与 `RCFWDPRIMER` 必须由使用者明确提供；Cutadapt 不会替你自动反向互补。若 reads 长度不可能读到另一端，就只处理两个 5′ front primers，避免让多余的 3′ 搜索制造误匹配。
+
+### 锚定符号、最短匹配长度与错误率共同决定引物匹配
+
+本例主分析采用：
+
+```text
+5′ anchor:          ^
+minimum overlap:    15 nt
+maximum error rate: 0.10
+adapter wildcards:  enabled
+read wildcards:     disabled
+indels:             enabled
+```
+
+含义如下：
+
+- `^` 把“引物应位于 read 起点”写成可检验假设；
+- `overlap = 15` 要求 19/20 nt 引物至少有 15 nt 参与比对，降低短随机片段命中；
+- `error_rate = 0.10` 允许测序误差和有限 indel，但不是允许任意错配；
+- adapter 端解释 IUPAC 退化碱基；
+- read 中的 `N` 不充当通配符，避免低质量未知碱基轻易“匹配”引物。
+
+这些不是所有研究的固定参数。短引物、长 spacer、引物前残留条形码、非零长度异质性 spacer，都可能需要不同模型。参数应由文库结构决定，并通过正对照、空白和逐样本统计验证。
+
+去掉 `^` 后，本例多保留 13 对 reads：
+
+| Search mode | Retained pairs | Retention |
+|---|---:|---:|
+| Correct primers, anchored | 8,614 | 86.14% |
+| Correct primers, unanchored | 8,627 | 86.27% |
+
+这 13 对只能作为“值得复核”的敏感性差异，不能自动判为更好。若协议说明引物必须位于第一个碱基，非锚定命中可能来自 read 内部相似片段、前置 spacer，或上游处理不一致。
+
+### `discard-untrimmed` 是成对过滤器，不是无害开关
+
+paired-end 模式下，Cutadapt 默认按 pair 过滤。使用两端 front primer 和 `--discard-untrimmed` 时，只要 R1 或 R2 未满足命中条件，整对 reads 就不进入输出。
+
+本例样本 `1` 中：
+
+```text
+R1 matches:      1,839 / 2,500
+R2 matches:      1,819 / 2,500
+Retained pairs:  1,810 / 2,500
+```
+
+最终 1,810 不是 R1 或 R2 命中数的简单平均，而是双端共同满足规则的 pair 数。正因如此，推荐两步执行：
+
+1. 用 `--action=none` 或不启用 discard 的方式做**非破坏性探针**；
+2. 只有当序列、方向、样本分布和协议互相支持时，才运行真正 trimming，并审计每个样本的 pair retention。
+
+::: {.callout-warning title="不存在通用的“80% 引物命中率及格线”"}
+引物命中率取决于上游是否预剪切、测序起点、正反向质量、spacer、非特异扩增和对照设计。72.4% 可以暴露某个样本的异常，但不能仅凭一个全局百分比自动删除；0% 也可能是正确的 SKIP 分支。判断必须回到协议和逐样本证据。
+:::
+
+### 错误区域引物是一个必要的负对照
+
+把一组 341F/805R-family V3–V4 序列错误地用于本例 V4 reads，锚定搜索保留：
+
+```text
+0 / 10,000 read pairs
+```
+
+这说明区域假设可以被真实 reads 否证。反过来，如果“错误区域”也得到大量命中，应检查：
+
+- 是否使用了过短 overlap；
+- 是否取消锚定后在 read 内部找到相似片段；
+- 是否混入多个 amplicon panel；
+- 是否存在 spacer / inline barcode；
+- 是否把 adapter 当成 primer；
+- 文件是否来自预期 run。
+
+### V4、V3–V4、全长和单双端不能共用一套 trimming 逻辑
+
+| Assay branch | Read layout | Primer evidence | Recommended action | Downstream consequence |
+|---|---|---|---|---|
+| V4, primer retained | Paired short reads | R1/R2 5′ 端分别命中记录的 primer pair | 锚定 trimming；审计 paired retention | 重新查看质量和 overlap；DADA2 不再重复 trim primer |
+| V4, primer absent | Paired short reads | 无一致 5′ 命中，协议证明从扩增子内部测序 | 跳过去引物 | 直接进入质量截断；不能把所有 reads 丢掉 |
+| V3–V4 | Paired short reads | 核对本 run 的 341F/805R-family 序列与方向 | 按 run 去引物后再 denoise | 插入片段更长，merge 对截断长度更敏感 |
+| Full-length 16S | Single long read | 一条 molecule 中可能出现两端边界 | linked / orientation-aware trimming | 不做 paired merge；使用适配平台的长读长 denoising |
+| Short-read single-end | One acquired direction | 只能检查实际测得的一端 | 若存在，仅去该端 front primer | 无法证明缺失 mate 的引物状态，也不做 paired merge |
+
+不同区域的 reads 不应在去引物和 denoising 前混在一起。区域不同意味着可观察的分类位点、扩增偏倚、参考序列裁剪范围和 ASV 序列空间都不同。即使最终需要跨 run 汇总，也应先按区域独立完成 trimming、denoising 和分类，再在明确可比的分类层级上设计整合分析。
+
+<details>
+<summary><strong>深入：何时需要 linked adapter</strong></summary>
+
+若 read 长度足以穿过整个扩增子，R1 除了 5′ forward primer，还可能在 3′ 端读到 reverse primer 的反向互补；R2 同理。此时只剪 5′ primer 会在 read 尾部留下另一端技术序列。
+
+Cutadapt 的 linked adapter 用 `...` 把必需的 5′ 部分和另一端部分连接。是否要求两端都出现、是否允许其中一端缺失、pair filtering 使用 `any`、`both` 还是 `first`，都会改变保留集合。必须用已知构造或 mock community 验证，不能把短读长命令机械搬到全长 16S/PacBio/ONT。
+
+对长读长数据还要额外考虑：
+
+- molecule 方向是否混合；
+- concatemer 或多次扩增子串联；
+- primer 是否允许反向互补搜索；
+- full-length 长度窗口；
+- 平台特异的质量模型和 chimera 处理。
+
+</details>
+
+## 检查并去除引物序列 {#sec-code}
+
+### 先做非破坏性 5′ primer probe
 
 定义本 run 的实际引物：
 
@@ -540,7 +552,7 @@ Decision:          SKIP
 
 这里不能追加 `--discard-untrimmed`。0 命中与 EMP sequencing-primer 结构一致，正确操作是保留 reads，继续评估质量截断。
 
-### 2. 导入 primer-retained paired-end FASTQ
+### 导入 primer-retained paired-end FASTQ
 
 这些文件符合 Casava 1.8 单 lane 命名规则。只把 FASTQ 放入导入目录，避免把 JSON 等旁文件混入 DirectoryFormat：
 
@@ -588,7 +600,7 @@ conda run -n microbiome-qiime2-2026.4 \
     work/11-primer-trimming/nfcore-v4-demux-summary.qzv
 ```
 
-### 3. 用 `q2-cutadapt` 成对去引物
+### 用 `q2-cutadapt` 成对去引物
 
 非破坏性探针已经支持“引物位于两个 mates 的第一个碱基”这一假设，因此主分析使用 5′ anchor 并启用成对丢弃：
 
@@ -626,7 +638,7 @@ conda run -n microbiome-qiime2-2026.4 \
 
 QIIME 2 的 `q2-cutadapt` 输出 Artifact 和 provenance，但详细的逐样本 match report 仍需直接读取 Cutadapt JSON 或另行审计。不要只看到 `.qza` 成功生成就跳过 retention table。
 
-### 4. trimming 后重新做质量与长度审计
+### trimming 后重新做质量与长度审计
 
 ```{bash}
 conda run -n microbiome-qiime2-2026.4 \
@@ -665,7 +677,7 @@ conda run -n microbiome-qiime2-2026.4 \
 
 每个样本都得到同样的 19/20 nt 中位变化，支持“去掉的是预期引物，而非随机剪掉一段”的解释。下一步选择 DADA2 截断参数时，应查看 trimming **之后**的质量曲线，并把 primer 对应的 `trim-left-f/r` 设为 0，避免重复去除。
 
-### 5. 做锚定与错误区域敏感性分析
+### 做锚定与错误区域敏感性分析
 
 主分析之外再执行两个探针：
 
@@ -708,7 +720,7 @@ conda run -n microbiome-qiime2-2026.4 \
 | Wrong V3–V4 | Anchored | 10,000 | 0 | Reject hypothesis |
 | Atacama original V4 | Anchored | 2,000 | 0 | Skip trimming |
 
-### 6. 运行完整的 50 项验收
+### 运行完整的 50 项验收
 
 下面的可复用验证器会重新导入数据、运行 QIIME 2 与 12 个 Cutadapt 分支探针、校验 FASTQ 同步与长度、审计 provenance，并生成所有 TSV、JSON、日志和图：
 
@@ -761,9 +773,9 @@ results/11-primer-trimming/
 
 `.qza` 的 UUID 每次运行会变化，因此不要求 Artifact archive SHA-256 跨运行一致。稳定验收对象是输入 FASTQ 哈希、semantic type、data format、参数、provenance action、样本数、read counts、长度变化和所有审计表。
 
-## 出版级美化 {#sec-publication}
+## 比较去引物前后的保留率与长度 {#sec-publication}
 
-### 1. 主图优先展示逐样本 retention，而不是只报全局平均
+### 主图优先展示逐样本 retention，而不是只报全局平均
 
 ```{r}
 retention <- readr::read_tsv(
@@ -829,7 +841,7 @@ save_pub(
 - R1/R2 primer-match 差值；
 - trimming 前后 read-length ridge/violin plot。
 
-### 2. 把技术结论写进图注
+### 把技术结论写进图注
 
 推荐图注模板：
 
@@ -852,7 +864,7 @@ against the library protocol and controls.
 - trimming 前后数据量；
 - 异常样本如何处置。
 
-### 3. 三种格式承担不同任务
+### 三种格式承担不同任务
 
 - PDF：矢量文字和线条，优先用于排版；
 - PNG：网页和公众号预览，本页使用 350 dpi；
@@ -882,7 +894,7 @@ against the library protocol and controls.
 按顺序检查：文件是否已预剪切 → 引物完整序列 → R1/R2 方向 → spacer/inline barcode → `^` 是否合理 → IUPAC 设置 → overlap/error rate → paired filter。不要先通过放宽所有参数来“救回”reads。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告引物序列与切除参数 {#sec-methods}
 
 ### Primer-retained paired-end 示例
 
@@ -929,9 +941,9 @@ profiles.
 - 异常样本和 controls 的处理；
 - primer absent 时的协议证据。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将引物序列与切除参数用于自己的研究 {#sec-own-data}
 
-### 1. 先建立 run-level primer sheet
+### 先建立 run-level primer sheet
 
 每个测序 run 至少记录：
 
@@ -948,7 +960,7 @@ profiles.
 
 不要只在文件名中写 `V4`。如果两个 run 的任何 primer sequence、spacer 或 read layout 不同，先作为独立分支处理。
 
-### 2. 只改路径和本 run 的序列
+### 只改路径和本 run 的序列
 
 ```{bash}
 INPUT_R1="raw/Sample01_R1.fastq.gz"
@@ -983,7 +995,7 @@ conda run -n microbiome-qiime2-2026.4 \
 - 长度变化；
 - 按 extraction plate、PCR plate 和 sequencing run 分层的分布。
 
-### 3. 按证据选择分支
+### 按证据选择分支
 
 ```text
 Documented primers + coherent 5′ matches

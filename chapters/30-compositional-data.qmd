@@ -1,6 +1,6 @@
 ---
 title: "CoDA 成分数据原理：为什么不能比原始丰度"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,18 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/30-compositional-data.R
+  packages:
+  - ggplot2
+  - ggrepel
+  - knitr
+  - ragg
+  - scales
+  - svglite
 ---
-
-> **分析目标：**把 16S count table 当作成分数据（compositional data）审计，区分 raw reads、relative abundance 与 log-ratio 各自回答的问题，并用真实湿地数据演示 closure、reference frame 和 zero replacement。  
-> **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**13,628 个 ASV、90 个样本、1,619,670 reads；普通笔记本通常少于 1 分钟、峰值内存低于 1 GB；三张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 微生物丰度是成分数据 {#sec-target}
 
@@ -33,72 +40,35 @@ fig-format: png
 
 本页数据来自 `microeco` 2.0.0 随包分发的真实湿地 16S 数据，包含 conventional wetland（CW）、intensive wetland（IW）和 temporal wetland（TW）各 30 个样本。分析始终从三件套读起；属级已知 reads 仅占全部 reads 的一部分，未注释部分保留为 denominator residual，不被解释成一个生物学 taxon。
 
-## 读数只给比例尺，不给绝对刻度 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. Closure 会把一个分子的变化传给所有分子
+需要 R，以及 `ggplot2`、`ggrepel`、`knitr`、`ragg`、`scales`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-若样本的绝对数量向量为 $a=(a_1,\ldots,a_D)$，测序后常见的相对丰度是
-
-$$
-x_i = \mathcal{C}(a)_i = \frac{a_i}{\sum_{j=1}^D a_j},
-\qquad \sum_i x_i=1.
-$$
-
-即便只有 $a_1$ 真正增加，分母也会变大，使所有 $i\ne1$ 的 $x_i$ 被动下降。这个负向联动来自数学闭合，不等于物种之间发生抑制。
-
-### 2. Raw count 也不是 absolute abundance
-
-对 feature $i$、样本 $s$，一个简化的观测模型是
-
-$$
-Y_{is}\mid N_s,p_{is}\sim\mathrm{Multinomial}(N_s,p_{is}),
-$$
-
-其中 $N_s$ 是 library size，$p_{is}$ 是测到的组成。`Y` 增加可能来自 `p` 增加，也可能只是该样本测得更深；PCR、提取和 16S copy number 还会带来 taxon-specific bias。因此不能直接把 raw reads 画成“菌量”。
-
-### 3. Log-ratio 明确写出 reference frame
-
-Additive log-ratio（ALR）比较 taxon $i$ 与 reference $r$：
-
-$$
-\operatorname{alr}_{i:r}=\log_2\frac{x_i}{x_r}.
-$$
-
-Centered log-ratio（CLR）使用样本内所有组成的几何均值 $g(x)$：
-
-$$
-\operatorname{clr}_i=\log_2\frac{x_i}{g(x)}.
-$$
-
-两者回答的都是相对问题。ALR 的 reference 必须稳定且有生物学含义；CLR 的 reference 是整套 feature 的几何均值，因此 feature filtering 与 zero replacement 都会改变坐标。
-
-<details>
-<summary><strong>深入：为什么 CLR 总和为 0，协方差仍是奇异的</strong></summary>
-
-对任一样本，$\sum_i\operatorname{clr}(x_i)=0$。CLR 把 $D$ 维 composition 放在一个 $D-1$ 维子空间中，所以常规协方差矩阵不满秩。Aitchison geometry 使用 log-ratio 距离处理这个约束；不应把 CLR 后的每一列误当成彼此独立的普通连续变量。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "ggrepel", "patchwork", "ragg", "readr", "scales",
-  "svglite", "systemfonts"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-
 ```{r}
+#| results: hold
 #| label: setup-coda-theme
 library(ggplot2)
 
 set.seed(20260730)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -164,13 +134,10 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并核对结构
+### 读取三件套并核对结构
 
 ```{r}
+#| results: hold
 #| label: read-coda-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -209,9 +176,73 @@ head(taxonomy)
 head(metadata)
 ```
 
-### 2. 按完整 lineage 聚合到 genus，并保留分母残差
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/30-compositional-data.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "ggrepel", "patchwork", "ragg", "readr", "scales",
+  "svglite", "systemfonts"
+))
+```
+
+</details>
+
+## 读数只给比例尺，不给绝对刻度 {#sec-theory}
+
+### Closure 会把一个分子的变化传给所有分子
+
+若样本的绝对数量向量为 $a=(a_1,\ldots,a_D)$，测序后常见的相对丰度是
+
+$$
+x_i = \mathcal{C}(a)_i = \frac{a_i}{\sum_{j=1}^D a_j},
+\qquad \sum_i x_i=1.
+$$
+
+即便只有 $a_1$ 真正增加，分母也会变大，使所有 $i\ne1$ 的 $x_i$ 被动下降。这个负向联动来自数学闭合，不等于物种之间发生抑制。
+
+### 原始读数也不等于绝对丰度
+
+对 feature $i$、样本 $s$，一个简化的观测模型是
+
+$$
+Y_{is}\mid N_s,p_{is}\sim\mathrm{Multinomial}(N_s,p_{is}),
+$$
+
+其中 $N_s$ 是 library size，$p_{is}$ 是测到的组成。`Y` 增加可能来自 `p` 增加，也可能只是该样本测得更深；PCR、提取和 16S copy number 还会带来 taxon-specific bias。因此不能直接把 raw reads 画成“菌量”。
+
+### Log-ratio 明确写出 reference frame
+
+Additive log-ratio（ALR）比较 taxon $i$ 与 reference $r$：
+
+$$
+\operatorname{alr}_{i:r}=\log_2\frac{x_i}{x_r}.
+$$
+
+Centered log-ratio（CLR）使用样本内所有组成的几何均值 $g(x)$：
+
+$$
+\operatorname{clr}_i=\log_2\frac{x_i}{g(x)}.
+$$
+
+两者回答的都是相对问题。ALR 的 reference 必须稳定且有生物学含义；CLR 的 reference 是整套 feature 的几何均值，因此 feature filtering 与 zero replacement 都会改变坐标。
+
+<details>
+<summary><strong>深入：为什么 CLR 总和为 0，协方差仍是奇异的</strong></summary>
+
+对任一样本，$\sum_i\operatorname{clr}(x_i)=0$。CLR 把 $D$ 维 composition 放在一个 $D-1$ 维子空间中，所以常规协方差矩阵不满秩。Aitchison geometry 使用 log-ratio 距离处理这个约束；不应把 CLR 后的每一列误当成彼此独立的普通连续变量。
+
+</details>
+
+## 比较原始丰度、相对丰度与对数比 {#sec-code}
+
+### 按完整分类谱系聚合到属，保留未归入目标属的读数
+
+```{r}
+#| results: hold
 #| label: aggregate-coda-genus
 rank_names <- c(
   "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"
@@ -283,9 +314,10 @@ data.frame(
 
 `Unclassified_residual`只让分母仍代表全部 reads；它不进入生物学命名、显著性列表或网络节点。
 
-### 3. 在真实组成上制造一个“只有一个属增加”的反事实
+### 在真实组成上制造一个“只有一个属增加”的反事实
 
 ```{r}
+#| results: hold
 #| label: coda-closure-counterfactual
 named_ids <- rownames(genus_info)[genus_info$Reportable]
 target_id <- named_ids[which.max(rowSums(genus_counts[named_ids, , drop = FALSE]))]
@@ -325,9 +357,10 @@ closure_audit[order(closure_audit$RelativeFoldChange), ][1:8, ]
 
 反事实中所有未改变属的 absolute fold change 都是 1；但 closure 后，它们共享同一个小于 1 的 relative fold change。这种同步下降完全由分母变化产生。
 
-### 4. 同一属同时保留 raw、relative 与 CLR
+### 同一属同时保留 raw、relative 与 CLR
 
 ```{r}
+#| results: hold
 #| label: coda-three-scales
 library_size <- colSums(otutab)
 relative_all <- sweep(genus_counts, 2L, library_size, "/")
@@ -366,9 +399,10 @@ stopifnot(all.equal(
 
 CLR 中的 `0.5` 是显式 sensitivity parameter，不是“真实的半条 read”。正式分析要比较合理的 zero replacement，或使用能把采样不确定性纳入模型的方法。
 
-### 5. 换三个 reference，看同一 contrast 如何移动
+### 换三个 reference，看同一 contrast 如何移动
 
 ```{r}
+#| results: hold
 #| label: coda-reference-frame
 reference_candidates <- setdiff(
   named_ids[order(rowSums(genus_counts[named_ids, , drop = FALSE]), decreasing = TRUE)],
@@ -398,6 +432,7 @@ ALR effect 的方向和大小属于“target 相对 reference”的性质。若�
 ## 零值、分母与参考框架怎样改变结论？ {#sec-audit}
 
 ```{r}
+#| results: hold
 #| label: coda-audit-table
 coda_audit <- data.frame(
   InputOrClaim = c(
@@ -427,11 +462,12 @@ knitr::kable(coda_audit, caption = "Compositional audit ledger")
 
 最重要的升级不是在所有分析前机械地做 CLR，而是先写清 estimand：要比较**比例、相对某个 reference 的 abundance，还是单位样本中的绝对数量**。差异丰度、网络和多变量模型需要各自匹配的 composition-aware 方法；一个 transformation 不能替代研究设计、污染控制和测量校准。
 
-## 出版级美化 {#sec-publication}
+## 看清分母与参照改变了什么 {#sec-publication}
 
 ### 图 1：closure 把单一变化扩散到全部相对丰度
 
 ```{r}
+#| results: hold
 #| label: fig-coda-closure
 #| fig-width: 6.7
 #| fig-height: 4.8
@@ -491,6 +527,7 @@ closure_plot
 ### 图 2：同一属的三种纵轴不是同一个 estimand
 
 ```{r}
+#| results: hold
 #| label: fig-coda-three-scales
 #| fig-width: 7.1
 #| fig-height: 4.6
@@ -523,6 +560,7 @@ three_scales_plot
 ### 图 3：reference 不是图例细节，而是效应定义
 
 ```{r}
+#| results: hold
 #| label: fig-coda-reference
 #| fig-width: 6.7
 #| fig-height: 4.2
@@ -554,8 +592,8 @@ reference_plot
 ```
 
 ```{r}
+#| results: hold
 #| label: verify-coda-results
-#| echo: false
 stopifnot(
   target_id %in% rownames(genus_counts),
   length(reference_candidates) == 3L,
@@ -597,15 +635,15 @@ CLR difference 是相对几何均值的 log-ratio difference，不是 absolute f
 这会把 reference 选择变成未校正的多重尝试。reference 或稳定 reference set 应在查看目标 contrast 前预声明，并做敏感性分析。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告组成数据变换与参照的方法与限制 {#sec-methods}
 
 > Amplicon counts were treated as compositional observations rather than absolute microbial loads. The feature table, seven-rank taxonomy table, and sample metadata were imported independently and aligned by explicit identifiers. ASVs were aggregated at genus rank using the complete taxonomic lineage as the grouping key. Reads lacking a reportable genus assignment were retained as a single denominator residual but were excluded from taxon-level interpretation. Raw read counts, total-sum-scaled relative abundances, and centered log-ratio coordinates were retained as distinct measurement scales. CLR coordinates were calculated as log2(count + 0.5) minus the sample-wise mean log2(count + 0.5); the 0.5-count replacement was prespecified and treated as a sensitivity parameter. To demonstrate closure, the empirical mean genus-count composition was perturbed by multiplying the most abundant named genus by four while holding all remaining absolute values fixed before reclosure. Additive log-ratio sensitivity was evaluated against the three most abundant named non-target genera. All figures used English labels and were exported as PDF, SVG, 600 ppi PNG, and 600 ppi LZW-compressed TIFF.
 
 把 genus rank、zero replacement、reference set 和数据实际单位替换为你的合同。若有绝对负荷，Methods 还要给样本质量/体积、测量平台、校准曲线、回收率和 normalization formula。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将组成数据变换与参照用于自己的研究 {#sec-own-data}
 
-### 1. 只改三件套路径和分组列
+### 只改三件套路径和分组列
 
 ```{r}
 #| eval: false
@@ -617,7 +655,7 @@ group_column <- "Treatment"
 
 `otutab` 必须是 feature × sample 的非负整数表；taxonomy 行名与 feature 对齐，metadata 行名与 sample 对齐。先核对 ID、重复、缺失和 library size，再谈 transformation。
 
-### 2. taxonomy 只有一列时内联拆成七列
+### taxonomy 只有一列时内联拆成七列
 
 ```{r}
 #| eval: false
@@ -635,7 +673,7 @@ names(taxonomy) <- rank_names
 rownames(taxonomy) <- taxonomy_raw$FeatureID
 ```
 
-### 3. 在代码前写一句 estimand
+### 在代码前写一句 estimand
 
 - “比较 treatment 后 taxon 相对预声明 reference set 的变化”；或
 - “比较单位克样本中的 taxon cell abundance”；或

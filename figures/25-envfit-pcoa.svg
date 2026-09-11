@@ -153,17 +153,17 @@
 <line x1='311.07' y1='203.99' x2='296.20' y2='195.32' style='stroke-width: 0.75; stroke: #777777; stroke-linecap: butt;' />
 <line x1='305.21' y1='207.69' x2='296.54' y2='221.32' style='stroke-width: 0.75; stroke: #777777; stroke-linecap: butt;' />
 <line x1='286.23' y1='143.49' x2='291.19' y2='133.58' style='stroke-width: 0.75; stroke: #777777; stroke-linecap: butt;' />
-<text x='330.57' y='194.85' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "DejaVu Sans";' textLength='57.22px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
-<text x='204.96' y='204.91' text-anchor='end' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "DejaVu Sans";' textLength='37.53px' lengthAdjust='spacingAndGlyphs'>Latitude</text>
-<text x='258.28' y='114.66' text-anchor='middle' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "DejaVu Sans";' textLength='35.97px' lengthAdjust='spacingAndGlyphs'>Altitude</text>
-<text x='247.30' y='243.76' text-anchor='middle' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "DejaVu Sans";' textLength='45.18px' lengthAdjust='spacingAndGlyphs'>Longitude</text>
-<text x='296.20' y='198.22' text-anchor='end' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "DejaVu Sans";' textLength='56.48px' lengthAdjust='spacingAndGlyphs'>Conductivity</text>
-<text x='296.54' y='224.22' text-anchor='middle' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "DejaVu Sans";' textLength='57.85px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
-<text x='291.19' y='136.48' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "DejaVu Sans";' textLength='12.36px' lengthAdjust='spacingAndGlyphs'>pH</text>
+<text x='330.57' y='194.85' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "Arial";' textLength='57.22px' lengthAdjust='spacingAndGlyphs'>Temperature</text>
+<text x='204.96' y='204.91' text-anchor='end' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "Arial";' textLength='37.53px' lengthAdjust='spacingAndGlyphs'>Latitude</text>
+<text x='258.28' y='114.66' text-anchor='middle' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "Arial";' textLength='35.97px' lengthAdjust='spacingAndGlyphs'>Altitude</text>
+<text x='247.30' y='243.76' text-anchor='middle' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "Arial";' textLength='45.18px' lengthAdjust='spacingAndGlyphs'>Longitude</text>
+<text x='296.20' y='198.22' text-anchor='end' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "Arial";' textLength='56.48px' lengthAdjust='spacingAndGlyphs'>Conductivity</text>
+<text x='296.54' y='224.22' text-anchor='middle' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "Arial";' textLength='57.85px' lengthAdjust='spacingAndGlyphs'>Precipitation</text>
+<text x='291.19' y='136.48' style='font-size: 7.97px; font-weight: bold;fill: #111111; font-family: "Arial";' textLength='12.36px' lengthAdjust='spacingAndGlyphs'>pH</text>
 <rect x='126.67' y='66.79' width='298.69' height='234.11' style='stroke-width: 0.87; stroke: #333333;' />
-<text x='122.64' y='243.53' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.59px' lengthAdjust='spacingAndGlyphs'>-0.25</text>
-<text x='122.64' y='181.59' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='122.64' y='119.64' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='122.64' y='243.53' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='18.59px' lengthAdjust='spacingAndGlyphs'>-0.25</text>
+<text x='122.64' y='181.59' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='122.64' y='119.64' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='16.00px' lengthAdjust='spacingAndGlyphs'>0.25</text>
 <polyline points='124.43,240.91 126.67,240.91 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='124.43,178.96 126.67,178.96 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='124.43,117.02 126.67,117.02 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -171,23 +171,23 @@
 <polyline points='267.71,303.14 267.71,300.90 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='342.05,303.14 342.05,300.90 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='416.38,303.14 416.38,300.90 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='193.38' y='310.17' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-0.3</text>
-<text x='267.71' y='310.17' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='342.05' y='310.17' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.3</text>
-<text x='416.38' y='310.17' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.6</text>
-<text x='276.02' y='320.47' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='137.56px' lengthAdjust='spacingAndGlyphs'>PCoA1 (14.2% positive inertia)</text>
-<text transform='translate(99.93,183.85) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='137.56px' lengthAdjust='spacingAndGlyphs'>PCoA2 (11.7% positive inertia)</text>
+<text x='193.38' y='310.17' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='14.02px' lengthAdjust='spacingAndGlyphs'>-0.3</text>
+<text x='267.71' y='310.17' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='342.05' y='310.17' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.3</text>
+<text x='416.38' y='310.17' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>0.6</text>
+<text x='276.02' y='320.47' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='137.56px' lengthAdjust='spacingAndGlyphs'>PCoA1 (14.2% positive inertia)</text>
+<text transform='translate(99.93,183.85) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='137.56px' lengthAdjust='spacingAndGlyphs'>PCoA2 (11.7% positive inertia)</text>
 <rect x='111.15' y='31.58' width='329.74' height='26.25' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
-<text x='115.63' y='47.98' style='font-size: 9.00px; font-weight: bold; font-family: "DejaVu Sans";' textLength='75.07px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
+<text x='115.63' y='47.98' style='font-size: 9.00px; font-weight: bold; font-family: "Arial";' textLength='75.07px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
 <circle cx='203.83' cy='44.70' r='2.92' style='stroke-width: 0.71; stroke: none; fill: #0072B2; fill-opacity: 0.83;' />
 <polygon points='283.19,40.17 287.12,46.97 279.26,46.97 ' style='stroke-width: 0.71; stroke: none; fill: #D55E00; fill-opacity: 0.83;' />
 <polygon points='364.22,47.62 370.05,47.62 370.05,41.79 364.22,41.79 ' style='stroke-width: 0.71; stroke: none; fill: #009E73; fill-opacity: 0.83;' />
-<text x='216.95' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='53.11px' lengthAdjust='spacingAndGlyphs'>Inland wetland</text>
-<text x='296.31' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='57.70px' lengthAdjust='spacingAndGlyphs'>Coastal wetland</text>
-<text x='380.26' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='56.15px' lengthAdjust='spacingAndGlyphs'>Tibetan Plateau</text>
-<text x='93.37' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='329.03px' lengthAdjust='spacingAndGlyphs'>Top 7 of 10 BH-significant variables; all 11 tests remain in the audit table</text>
-<text x='93.37' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='356.02px' lengthAdjust='spacingAndGlyphs'>envfit overlays external gradients on an unconstrained PCoA</text>
-<text x='126.67' y='332.07' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='265.67px' lengthAdjust='spacingAndGlyphs'>Arrow direction and length describe association with this two-axis display.</text>
-<text x='126.67' y='339.85' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='236.97px' lengthAdjust='spacingAndGlyphs'>They are not causal effects or full-community explained fractions.</text>
+<text x='216.95' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='53.11px' lengthAdjust='spacingAndGlyphs'>Inland wetland</text>
+<text x='296.31' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='57.70px' lengthAdjust='spacingAndGlyphs'>Coastal wetland</text>
+<text x='380.26' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='56.15px' lengthAdjust='spacingAndGlyphs'>Tibetan Plateau</text>
+<text x='93.37' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='329.03px' lengthAdjust='spacingAndGlyphs'>Top 7 of 10 BH-significant variables; all 11 tests remain in the audit table</text>
+<text x='93.37' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='356.02px' lengthAdjust='spacingAndGlyphs'>envfit overlays external gradients on an unconstrained PCoA</text>
+<text x='126.67' y='332.07' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='265.67px' lengthAdjust='spacingAndGlyphs'>Arrow direction and length describe association with this two-axis display.</text>
+<text x='126.67' y='339.85' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='236.97px' lengthAdjust='spacingAndGlyphs'>They are not causal effects or full-community explained fractions.</text>
 </g>
 </svg>

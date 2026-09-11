@@ -1,6 +1,6 @@
 ---
 title: "导入数据 + provenance + 质控（FastQC/MultiQC）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -19,10 +19,6 @@ fig-dpi: 300
 fig-format: png
 ---
 
-> **分析目标：**把仍处于 multiplexed 状态的真实 paired-end FASTQ 导入 QIIME 2，按样本 barcode 拆分，核对 semantic type、样本产量、逐位置质量和完整 provenance；同时用 FastQC 与 MultiQC 完成文件级原始数据审计。  
-> **输入文件：**`data/small/fastq/forward.fastq.gz`、`reverse.fastq.gz`、`barcodes.fastq.gz`、`metadata.tsv`，以及锁定环境 `env/qiime2.yml`、`env/raw-qc.yml`。  
-> **预计资源：**本页使用的 2,000-pair 真实摘录约 0.5 MB，完整验收约 3–5 分钟、峰值内存低于 2 GB；完整研究数据的耗时和空间近似随 reads 数增长。  
-> **执行策略：**导入、拆样、FastQC、MultiQC 与 provenance 审计已在固定环境中一次性实跑；网页渲染使用 `eval: false`，避免每次构建生成新的 Artifact UUID 或重复运行上游工具。
 
 ## 先让每一步输入、输出和来源可追溯 {#sec-target}
 
@@ -71,172 +67,29 @@ Required checks:             45 / 45 PASS
 这里从官方 135,487 对 reads 中等间距抽取 2,000 对，用于快速、确定性地验证接口。未在摘录中观察到的 19 个 metadata 样本，可能只是没有任何被抽中的 reads；**不能据此判定这些样本在完整研究中测序失败，也不能把 34.6% 当作完整数据的拆样率。**
 :::
 
-## 导入、拆样与质控分别回答什么 {#sec-theory}
+## 开始前：数据与运行环境 {#sec-setup}
 
-### 1. 先判断数据处于哪个状态
-
-paired-end FASTQ 常见的三种状态如下：
-
-| 数据状态 | 文件外观 | QIIME 2 入口 |
-|---|---|---|
-| Multiplexed EMP | 全部样本共用 `forward`、`reverse`、`barcodes` 三个文件 | `EMPPairedEndSequences` |
-| 已按样本拆分 | 每个样本各有 R1/R2，另有 manifest | `SampleData[PairedEndSequencesWithQuality]` |
-| Casava 1.8 拆分目录 | 每个样本按 Illumina 规则命名 R1/R2 | `CasavaOneEightSingleLanePerSampleDirFmt` |
-
-文件扩展名都是 `.fastq.gz`，并不表示它们处于同一个生物信息学状态。把 multiplexed 三文件误写进 per-sample manifest，会绕过真正需要的 barcode mapping；把已经拆样的数据再交给 EMP demultiplex，则没有对应的独立 barcode stream。
-
-这组真实输入仍是 multiplexed EMP paired-end 数据，因此第一步类型为：
-
-```text
-EMPPairedEndSequences
-```
-
-只有完成 barcode mapping 后，输出才变为：
-
-```text
-SampleData[PairedEndSequencesWithQuality]
-```
-
-### 2. 五层门禁不能合并成一个“QC 通过”
-
-| 层级 | 代表工具或检查 | 主要问题 |
-|---|---|---|
-| 字节与结构 | SHA-256、gzip、FASTQ 四行结构 | 文件是否完整、内容是否漂移 |
-| 三流配对 | record 数、read ID、顺序 | forward/reverse/barcode 是否仍一一对应 |
-| 文件级诊断 | FastQC | 每条输入流的质量、组成、重复、adapter 信号 |
-| 样本级诊断 | QIIME 2 `demux` | barcode 是否能映射、每个样本获得多少 reads |
-| 可追溯性 | QIIME 2 provenance | 实际 action、参数、输入与软件环境是什么 |
-
-FastQC 不知道哪一条 read 属于哪个样本；拆样之前，它只能报告整条 multiplexed 文件的汇总。反过来，QIIME 2 拆样成功也不自动证明原始 gzip 没有被替换，或所有 FastQC 模块都得到过审阅。
-
-### 3. barcode 方向是实验协议的一部分
-
-QIIME 2 的 `demux emp-paired` 区分两种反向互补操作：
-
-```text
---p-rev-comp-barcodes
---p-rev-comp-mapping-barcodes
-```
-
-前者反向互补测序得到的 barcode reads；后者反向互补 metadata 中记录的 mapping barcodes。它们不是可互换的“修复开关”。
-
-Atacama 官方教程明确要求：
+在 Linux 或 WSL2 的项目文件夹中运行下面的下载命令。下载后保留这里的相对目录，后续命令使用同一组文件。
 
 ```bash
---p-rev-comp-mapping-barcodes
+base_url="https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa"
+for file in \
+  data/small/fastq/barcodes.fastq.gz \
+  data/small/fastq/forward.fastq.gz \
+  data/small/fastq/metadata.tsv \
+  data/small/fastq/reverse.fastq.gz \
+  data/small/fastq/source_summary.json \
+  env/qiime2.yml \
+  env/raw-qc.yml \
+  scripts/validate_import_provenance_qc.py
+do
+  mkdir -p "$(dirname "$file")"
+  curl --fail --location --retry 3 "$base_url/$file" --output "$file" || break
+done
 ```
 
-本次若省略该参数，受控探针得到 `No sequences were mapped`。加回后，2,000 对摘录 reads 中有 692 对被分配到 56 个样本。这是对协议和参数方向的验证，不是通过反复切换参数寻找“映射率最高”的组合。
 
-### 4. Golay error correction 只适用于相应 barcode 设计
-
-`demux emp-paired` 默认启用 12-nt Golay error correction。它能够在协议允许范围内纠正 barcode 错误，并输出 `ErrorCorrectionDetails`。
-
-本次 2,000 条 barcode reads 的审计为：
-
-| Mapping status | Barcode errors | Records | Percent |
-|---|---:|---:|---:|
-| Mapped | 0 | 614 | 30.70% |
-| Mapped | 1 | 30 | 1.50% |
-| Mapped | 2 | 27 | 1.35% |
-| Mapped | 3 | 21 | 1.05% |
-| Unmapped | 0 | 870 | 43.50% |
-| Unmapped | 1–4 | 438 | 21.90% |
-
-不要因为软件提供 Golay 纠错，就默认任意长度、任意设计的 index 都适用。若实验不是 EMP 12-nt Golay barcode，应依据建库协议选择对应 demultiplex 方法，不能机械照搬这里的参数。
-
-### 5. QZA、QZV 与 provenance 的责任不同
-
-- `.qza` 是带 semantic type 和 provenance 的数据 Artifact；
-- `.qzv` 是带 provenance 的 Visualization；
-- `qiime tools export` 导出的是数据表示，导出的普通文件不再携带完整 QIIME 2 provenance；
-- 每次 action 会生成新的 UUID，因此整个 archive 的 SHA-256 通常不是跨运行固定值。
-
-本次质量摘要 `.qzv` 的祖先链含三个 action：
-
-```text
-import
-└── demux.emp_paired
-    └── demux.summarize
-```
-
-稳定的验收对象应包括输入哈希、semantic type、data format、action、参数、样本计数和模块表；UUID 与 archive 整体哈希用于标识某一次运行，但不应被要求在重新运行时保持不变。
-
-<details>
-<summary><strong>深入：provenance 能记录什么，又不能替你做什么</strong></summary>
-
-QIIME 2 provenance 可记录：
-
-- action 和 plugin；
-- 参数值；
-- 输入与输出 UUID；
-- framework/plugin 版本；
-- citations；
-- action 接收到的 metadata。
-
-它不能自动证明：
-
-- 上机样本标签与真实生物样本没有贴错；
-- FASTQ 在首次进入 QIIME 2 之前的传输历史完整；
-- metadata 中每个临床字段都正确；
-- 某个参数在科学上最合理；
-- 导出后由外部软件执行的步骤仍被 QIIME 2 追踪。
-
-因此 provenance 是审计链，不是科学合理性的自动认证。共享 `.qza` 或 `.qzv` 前还要考虑嵌入 metadata 的隐私风险。
-
-</details>
-
-### 6. FastQC 的颜色不是扩增子样本删除规则
-
-FastQC 的阈值面向多种测序应用。扩增子文库具有共同引物起点、有限扩增区域和 PCR 扩增，天然不满足随机 shotgun 文库的一些假设。
-
-本次三条流中，“Per base sequence quality”均为 PASS，但还出现：
-
-| 模块 | 典型状态 | 扩增子语境中的解释 |
-|---|---|---|
-| Per base sequence content | WARN/FAIL | 共同引物和保守位点使起始碱基不均衡 |
-| Per sequence GC content | FAIL | 靶区与群落组成形成非随机 GC 分布 |
-| Sequence Duplication Levels | PASS/FAIL | PCR 与有限靶区使重复 reads 常见 |
-| Overrepresented sequences | FAIL | 真实高丰度扩增子、primer 或污染都可能造成 |
-| Adapter Content | PASS/WARN | 需结合接头、引物和 read-through 判断 |
-| Per tile sequence quality | PASS/WARN | 更接近仪器空间问题，应查看具体 tile 图 |
-
-正确用法是：
-
-1. 找异常流和异常 cycle；
-2. 与建库结构、阴性对照、拆样率和后续 DADA2 retention 联合判断；
-3. 保留完整模块表；
-4. 不把一个红色 FAIL 自动翻译成“删除样本”。
-
-### 7. MultiQC 聚合报告，不重新分析 FASTQ
-
-MultiQC 读取 FastQC 的结果文件，把多个报告统一到一个 HTML 和机器可读表中。它不会重新计算碱基质量，也不会替你选择截断长度。
-
-本次 MultiQC 汇总：
-
-| Stream | Total sequences | GC | Duplicates | Mean length | Failed modules |
-|---|---:|---:|---:|---:|---:|
-| Barcode | 2,000 | 47% | 69.55% | 12 nt | 27.27% |
-| Forward | 2,000 | 54% | 51.05% | 151 nt | 36.36% |
-| Reverse | 2,000 | 55% | 25.80% | 151 nt | 27.27% |
-
-这些数字帮助快速发现流之间的差异；它们不替代逐模块图，也不替代拆样后的逐样本深度。
-
-### 8. 质量摘要中的随机抽样必须被记录
-
-`qiime demux summarize` 的 `--p-n` 表示用于质量曲线的随机序列数，默认 10,000。若输入多于 `n`，质量曲线来自抽样；逐样本 read counts 仍来自全部输入。
-
-本页摘录仅有 692 对已拆样 reads，设置：
-
-```bash
---p-n 10000
-```
-
-因此曲线实际使用全部 692 对，不再发生随机子抽样。完整研究若 reads 远多于 10,000，应在 Methods 记录 `n`；若需要比较两次质量曲线，应固定软件版本并保留原始 `.qzv`，不要假设随机抽样结果逐像素一致。
-
-## 准备工作 {#sec-setup}
-
-### 1. 获取真实数据
+### 获取真实数据
 
 本页使用 Neilson 等人的 Atacama aridity gradient 土壤 16S 数据。官方 QIIME 2 2024.5 教程提供 1% multiplexed paired-end 数据：
 
@@ -275,7 +128,7 @@ c07f517e920d9e3924ce1e87102f057232b57041947523b90d560f68a0ff3c0f  barcodes.fastq
 整套 1% 数据可直接继续分析。为了快速复现本页数字，项目还提供了从 135,487 个同步 record 中等间距、保持顺序选择 2,000 个 record 的摘录。
 
 <details>
-<summary><strong>展开：生成同步且确定性的 2,000-record 摘录</strong></summary>
+<summary>本次分析的数据、环境与图形设置</summary>
 
 下面代码只选择 record，不改变序列、质量或三条流的相对顺序。保存为 `make_excerpt.py`：
 
@@ -391,7 +244,7 @@ d2fa5841d150fead5a73067a267ec531221de11c512a38ec32ada03f1621bf65  reverse.fastq.
 
 </details>
 
-### 2. 安装两个独立环境
+### 安装两个独立环境
 
 QIIME 2 与 FastQC/MultiQC 分开锁定，减少 Java、Python 与 R 依赖互相牵连：
 
@@ -425,7 +278,7 @@ conda run -n microbiome-fastqc-multiqc \
 
 使用 `python -m multiqc` 可以避免 PATH 中残留的用户级 `multiqc` 启动脚本抢先于锁定环境。
 
-### 3. 准备可写缓存与结果目录
+### 准备可写缓存与结果目录
 
 ```bash
 export XDG_CACHE_HOME="${TMPDIR:-/tmp}/article10-cache/xdg"
@@ -440,10 +293,10 @@ mkdir -p \
   results/10-import-provenance-qc/multiqc
 ```
 
-### 4. 内联作图函数
+### 内联作图函数
 
 <details>
-<summary><strong>展开：安装 R 绘图依赖并定义出版级函数</strong></summary>
+<summary>本次分析的数据、环境与图形设置</summary>
 
 ```r
 install.packages(
@@ -544,9 +397,173 @@ save_pub <- function(
 
 </details>
 
-## 可复制代码 {#sec-code}
 
-### 步骤 1：核对 gzip、record 数与三流同步
+## 导入、拆样与质控分别回答什么 {#sec-theory}
+
+### 先判断数据处于哪个状态
+
+paired-end FASTQ 常见的三种状态如下：
+
+| 数据状态 | 文件外观 | QIIME 2 入口 |
+|---|---|---|
+| Multiplexed EMP | 全部样本共用 `forward`、`reverse`、`barcodes` 三个文件 | `EMPPairedEndSequences` |
+| 已按样本拆分 | 每个样本各有 R1/R2，另有 manifest | `SampleData[PairedEndSequencesWithQuality]` |
+| Casava 1.8 拆分目录 | 每个样本按 Illumina 规则命名 R1/R2 | `CasavaOneEightSingleLanePerSampleDirFmt` |
+
+文件扩展名都是 `.fastq.gz`，并不表示它们处于同一个生物信息学状态。把 multiplexed 三文件误写进 per-sample manifest，会绕过真正需要的 barcode mapping；把已经拆样的数据再交给 EMP demultiplex，则没有对应的独立 barcode stream。
+
+这组真实输入仍是 multiplexed EMP paired-end 数据，因此第一步类型为：
+
+```text
+EMPPairedEndSequences
+```
+
+只有完成 barcode mapping 后，输出才变为：
+
+```text
+SampleData[PairedEndSequencesWithQuality]
+```
+
+### 分开检查导入中的五类问题
+
+| 层级 | 代表工具或检查 | 主要问题 |
+|---|---|---|
+| 字节与结构 | SHA-256、gzip、FASTQ 四行结构 | 文件是否完整、内容是否漂移 |
+| 三流配对 | record 数、read ID、顺序 | forward/reverse/barcode 是否仍一一对应 |
+| 文件级诊断 | FastQC | 每条输入流的质量、组成、重复、adapter 信号 |
+| 样本级诊断 | QIIME 2 `demux` | barcode 是否能映射、每个样本获得多少 reads |
+| 可追溯性 | QIIME 2 provenance | 实际 action、参数、输入与软件环境是什么 |
+
+FastQC 不知道哪一条 read 属于哪个样本；拆样之前，它只能报告整条 multiplexed 文件的汇总。反过来，QIIME 2 拆样成功也不自动证明原始 gzip 没有被替换，或所有 FastQC 模块都得到过审阅。
+
+### barcode 方向是实验协议的一部分
+
+QIIME 2 的 `demux emp-paired` 区分两种反向互补操作：
+
+```text
+--p-rev-comp-barcodes
+--p-rev-comp-mapping-barcodes
+```
+
+前者反向互补测序得到的 barcode reads；后者反向互补 metadata 中记录的 mapping barcodes。它们不是可互换的“修复开关”。
+
+Atacama 官方教程明确要求：
+
+```bash
+--p-rev-comp-mapping-barcodes
+```
+
+本次若省略该参数，受控探针得到 `No sequences were mapped`。加回后，2,000 对摘录 reads 中有 692 对被分配到 56 个样本。这是对协议和参数方向的验证，不是通过反复切换参数寻找“映射率最高”的组合。
+
+### Golay 纠错仅适用于对应的条形码设计
+
+`demux emp-paired` 默认启用 12-nt Golay error correction。它能够在协议允许范围内纠正 barcode 错误，并输出 `ErrorCorrectionDetails`。
+
+本次 2,000 条 barcode reads 的审计为：
+
+| Mapping status | Barcode errors | Records | Percent |
+|---|---:|---:|---:|
+| Mapped | 0 | 614 | 30.70% |
+| Mapped | 1 | 30 | 1.50% |
+| Mapped | 2 | 27 | 1.35% |
+| Mapped | 3 | 21 | 1.05% |
+| Unmapped | 0 | 870 | 43.50% |
+| Unmapped | 1–4 | 438 | 21.90% |
+
+不要因为软件提供 Golay 纠错，就默认任意长度、任意设计的 index 都适用。若实验不是 EMP 12-nt Golay barcode，应依据建库协议选择对应 demultiplex 方法，不能机械照搬这里的参数。
+
+### QZA、QZV 与 provenance 的责任不同
+
+- `.qza` 是带 semantic type 和 provenance 的数据 Artifact；
+- `.qzv` 是带 provenance 的 Visualization；
+- `qiime tools export` 导出的是数据表示，导出的普通文件不再携带完整 QIIME 2 provenance；
+- 每次 action 会生成新的 UUID，因此整个 archive 的 SHA-256 通常不是跨运行固定值。
+
+本次质量摘要 `.qzv` 的祖先链含三个 action：
+
+```text
+import
+└── demux.emp_paired
+    └── demux.summarize
+```
+
+稳定的验收对象应包括输入哈希、semantic type、data format、action、参数、样本计数和模块表；UUID 与 archive 整体哈希用于标识某一次运行，但不应被要求在重新运行时保持不变。
+
+<details>
+<summary><strong>深入：provenance 能记录什么，又不能替你做什么</strong></summary>
+
+QIIME 2 provenance 可记录：
+
+- action 和 plugin；
+- 参数值；
+- 输入与输出 UUID；
+- framework/plugin 版本；
+- citations；
+- action 接收到的 metadata。
+
+它不能自动证明：
+
+- 上机样本标签与真实生物样本没有贴错；
+- FASTQ 在首次进入 QIIME 2 之前的传输历史完整；
+- metadata 中每个临床字段都正确；
+- 某个参数在科学上最合理；
+- 导出后由外部软件执行的步骤仍被 QIIME 2 追踪。
+
+因此 provenance 是审计链，不是科学合理性的自动认证。共享 `.qza` 或 `.qzv` 前还要考虑嵌入 metadata 的隐私风险。
+
+</details>
+
+### FastQC 的颜色不是扩增子样本删除规则
+
+FastQC 的阈值面向多种测序应用。扩增子文库具有共同引物起点、有限扩增区域和 PCR 扩增，天然不满足随机 shotgun 文库的一些假设。
+
+本次三条流中，“Per base sequence quality”均为 PASS，但还出现：
+
+| 模块 | 典型状态 | 扩增子语境中的解释 |
+|---|---|---|
+| Per base sequence content | WARN/FAIL | 共同引物和保守位点使起始碱基不均衡 |
+| Per sequence GC content | FAIL | 靶区与群落组成形成非随机 GC 分布 |
+| Sequence Duplication Levels | PASS/FAIL | PCR 与有限靶区使重复 reads 常见 |
+| Overrepresented sequences | FAIL | 真实高丰度扩增子、primer 或污染都可能造成 |
+| Adapter Content | PASS/WARN | 需结合接头、引物和 read-through 判断 |
+| Per tile sequence quality | PASS/WARN | 更接近仪器空间问题，应查看具体 tile 图 |
+
+正确用法是：
+
+1. 找异常流和异常 cycle；
+2. 与建库结构、阴性对照、拆样率和后续 DADA2 retention 联合判断；
+3. 保留完整模块表；
+4. 不把一个红色 FAIL 自动翻译成“删除样本”。
+
+### MultiQC 聚合报告，不重新分析 FASTQ
+
+MultiQC 读取 FastQC 的结果文件，把多个报告统一到一个 HTML 和机器可读表中。它不会重新计算碱基质量，也不会替你选择截断长度。
+
+本次 MultiQC 汇总：
+
+| Stream | Total sequences | GC | Duplicates | Mean length | Failed modules |
+|---|---:|---:|---:|---:|---:|
+| Barcode | 2,000 | 47% | 69.55% | 12 nt | 27.27% |
+| Forward | 2,000 | 54% | 51.05% | 151 nt | 36.36% |
+| Reverse | 2,000 | 55% | 25.80% | 151 nt | 27.27% |
+
+这些数字帮助快速发现流之间的差异；它们不替代逐模块图，也不替代拆样后的逐样本深度。
+
+### 质量摘要中的随机抽样必须被记录
+
+`qiime demux summarize` 的 `--p-n` 表示用于质量曲线的随机序列数，默认 10,000。若输入多于 `n`，质量曲线来自抽样；逐样本 read counts 仍来自全部输入。
+
+本页摘录仅有 692 对已拆样 reads，设置：
+
+```bash
+--p-n 10000
+```
+
+因此曲线实际使用全部 692 对，不再发生随机子抽样。完整研究若 reads 远多于 10,000，应在 Methods 记录 `n`；若需要比较两次质量曲线，应固定软件版本并保留原始 `.qzv`，不要假设随机抽样结果逐像素一致。
+
+## 导入FASTQ，检查拆样和质量 {#sec-code}
+
+### 核对 gzip、record 数与三流同步
 
 先验证 gzip：
 
@@ -616,7 +633,7 @@ print(dict(zip((path.name for path in paths), counts)))
  'barcodes.fastq.gz': 2000}
 ```
 
-### 步骤 2：核对 metadata 与 barcode 合同
+### 核对样本信息与条形码是否对应
 
 ```python
 import csv
@@ -651,7 +668,7 @@ BAQ1370.3       GCGCCGAATCTT      Baquedano      BAQ1370    2
 BAQ1370.1.3     ATAAAGAGGAGG      Baquedano      BAQ1370    3
 ```
 
-### 步骤 3：建立 EMP 输入目录
+### 建立 EMP 输入目录
 
 `EMPPairedEndDirFmt` 要求三个固定文件名：
 
@@ -666,7 +683,7 @@ cp data/small/fastq/barcodes.fastq.gz \
 
 不要把 `metadata.tsv` 放进这个目录。metadata 在拆样 action 中单独传入。
 
-### 步骤 4：导入为正确 semantic type
+### 导入为正确 semantic type
 
 ```bash
 conda run -n microbiome-qiime2-2026.4 \
@@ -680,7 +697,7 @@ conda run -n microbiome-qiime2-2026.4 \
 
 `--validate-level max` 会执行更完整的格式检查；大文件因此耗时更久，但适合作为正式输入门禁。
 
-### 步骤 5：独立验证 type、format 与 archive
+### 独立验证 type、format 与 archive
 
 ```bash
 conda run -n microbiome-qiime2-2026.4 \
@@ -703,7 +720,7 @@ Validation   PASS at level=max
 
 UUID 每次新导入都会变化，不要把本次 UUID 写成跨运行断言。
 
-### 步骤 6：按 Atacama barcode 方向拆样
+### 按 Atacama barcode 方向拆样
 
 ```bash
 conda run -n microbiome-qiime2-2026.4 \
@@ -732,7 +749,7 @@ atacama-demux-details.qza
 省略 `--p-rev-comp-mapping-barcodes` 时，本数据返回 `No sequences were mapped`。这发生在 barcode mapping 层，和 DADA2 截断长度、去噪质量阈值无关。应回查建库协议、barcode 文件与 metadata 方向，而不是调整下游参数。
 :::
 
-### 步骤 7：验证拆样 Artifact
+### 验证拆样 Artifact
 
 ```bash
 conda run -n microbiome-qiime2-2026.4 \
@@ -757,7 +774,7 @@ Data format: SingleLanePerSamplePairedEndFastqDirFmt
 Validation:  PASS at level=max
 ```
 
-### 步骤 8：生成样本产量与质量摘要
+### 生成样本产量与质量摘要
 
 ```bash
 conda run -n microbiome-qiime2-2026.4 \
@@ -790,7 +807,7 @@ Range:             1–28 pairs
 
 forward 与 reverse 的逐样本计数完全相同，这是 paired-end 拆样输出的必要一致性检查。
 
-### 步骤 9：提取 provenance、复现脚本与引用
+### 提取 provenance、复现脚本与引用
 
 生成 CLI replay：
 
@@ -818,7 +835,7 @@ conda run -n microbiome-qiime2-2026.4 \
 
 `--no-use-recorded-metadata` 使 replay 默认要求显式提供 metadata，而不是静默复用 archive 中捕获的原始表。正式共享前仍应打开脚本，核对路径、参数和 metadata 字段。
 
-### 步骤 10：对三条原始流运行 FastQC
+### 对三条原始流运行 FastQC
 
 ```bash
 conda run -n microbiome-fastqc-multiqc \
@@ -840,7 +857,7 @@ conda run -n microbiome-fastqc-multiqc \
 
 HTML 适合人工阅读；ZIP 中的 `summary.txt`、`fastqc_data.txt` 等适合自动审计。保留两者，不要只截一张界面图。
 
-### 步骤 11：用 MultiQC 聚合 FastQC
+### 用 MultiQC 聚合 FastQC
 
 ```bash
 conda run -n microbiome-fastqc-multiqc \
@@ -865,7 +882,7 @@ MultiQC complete
 
 若日志显示 2 份而预期 3 份，应先查缺失文件和 sample-name collision，不要把已有 2 份报告当成“聚合成功”。
 
-### 步骤 12：运行机器可读的完整验收
+### 运行机器可读的完整验收
 
 项目中的验证器从原始四文件重新开始，重建 QZA/QZV、FastQC、MultiQC、审计表和出版图：
 
@@ -908,9 +925,9 @@ python3 scripts/validate_import_provenance_qc.py \
 }
 ```
 
-## 出版级美化 {#sec-publication}
+## 从质量分布判断是否可以进入去噪 {#sec-publication}
 
-### 1. 把 FastQC 状态画成可审计矩阵
+### 把 FastQC 状态画成可审计矩阵
 
 FastQC 截图不利于比较三条流。先把 ZIP 中的模块状态整理为：
 
@@ -981,7 +998,7 @@ save_pub(
 
 图中只显示状态，不把 FAIL 等同于排除。正文或图注必须说明扩增子组成、GC、重复与过度代表序列的解释边界。
 
-### 2. 拆样产量按 reads 排序，不按样本字母排序
+### 拆样产量按 reads 排序，不按样本字母排序
 
 ```{r}
 #| eval: false
@@ -1028,7 +1045,7 @@ save_pub(
 
 排序后容易看出长尾和低深度样本。正式研究中应基于完整数据、阴性对照、后续 denoising retention 和预注册规则决定去留，不能从本页摘录图读取阈值。
 
-### 3. provenance 图只放稳定证据
+### provenance 图只放稳定证据
 
 流程图中优先呈现：
 
@@ -1054,7 +1071,7 @@ embedded metadata values
 
 完整信息应留在 QZA/QZV、机器可读审计表与补充材料中。
 
-### 4. 图内全英文，图注解释限制
+### 图内全英文，图注解释限制
 
 推荐图内标签：
 
@@ -1076,7 +1093,7 @@ PASS / WARN / FAIL
 - FastQC 状态是否被用作删除规则；
 - barcode 方向和 error-correction 方案。
 
-### 5. 导出尺寸与格式
+### 导出尺寸与格式
 
 - 双栏综合图：宽 170–180 mm；
 - 单栏子图：宽 85–90 mm；
@@ -1144,7 +1161,7 @@ QIIME 2 action 可把接收到的 metadata 捕获进 provenance。患者标识�
 DADA2 需要已按样本组织的序列。barcode mapping 尚未解决时，调整 truncation、maxEE 或 pooling 都不会修复样本身份。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告数据导入、拆样与质量控制 {#sec-methods}
 
 ### 英文模板：正式研究
 
@@ -1169,9 +1186,9 @@ DADA2 需要已按样本组织的序列。barcode mapping 尚未解决时，调�
 
 不要把摘录的 692/2,000、56 个样本或 1–28 reads 直接写进自己的研究 Methods。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将数据导入、拆样与质量控制用于自己的研究 {#sec-own-data}
 
-### 1. 先用决策表选择入口
+### 先用决策表选择入口
 
 | 你拿到的数据 | 应使用的入口 |
 |---|---|
@@ -1183,7 +1200,7 @@ DADA2 需要已按样本组织的序列。barcode mapping 尚未解决时，调�
 
 在确认状态前，不要先复制某条 import 命令。
 
-### 2. 已拆样 paired-end：使用 manifest
+### 已拆样 paired-end：使用 manifest
 
 manifest 为三列、路径使用绝对路径：
 
@@ -1207,7 +1224,7 @@ conda run -n microbiome-qiime2-2026.4 \
 
 若仪器使用 Phred+64，必须选择匹配格式；不要因为大多数现代 Illumina 是 Phred+33 就跳过确认。
 
-### 3. 已拆样 single-end：使用单端 manifest
+### 已拆样 single-end：使用单端 manifest
 
 ```text
 sample-id	absolute-filepath
@@ -1225,7 +1242,7 @@ conda run -n microbiome-qiime2-2026.4 \
   --output-path demux-single.qza
 ```
 
-### 4. EMP 三流：替换路径和 barcode 列
+### EMP 三流：替换路径和 barcode 列
 
 目录仍需：
 
@@ -1254,7 +1271,7 @@ S02	TGCATGCATGCA
 
 将这些决定写入运行配置和 Methods，不要只留在聊天记录。
 
-### 5. 为完整数据重新计算验收表
+### 为完整数据重新计算验收表
 
 至少输出：
 
@@ -1281,7 +1298,7 @@ MultiQC report count
 - 批次、lane、plate 与 extraction 信息；
 - 失败样本是否可重测。
 
-### 6. metadata 含敏感字段时先去标识化
+### metadata 含敏感字段时先去标识化
 
 公开工作流只保留分析必需字段：
 
@@ -1295,7 +1312,7 @@ non-identifying covariates
 
 将姓名、病历号、精确地址、联系电话和直接身份标识保存在受控系统中，不要先传入 QIIME 2 再试图从 provenance 中删除。
 
-### 7. 建立自己的稳定验收合同
+### 为自己的数据制定明确的输入检查条件
 
 把会随运行变化和不应变化的内容分开：
 

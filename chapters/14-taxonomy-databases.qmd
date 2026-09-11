@@ -1,6 +1,6 @@
 ---
 title: "物种注释 + 数据库选择（SILVA/GTDB/Greengenes2）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -19,10 +19,6 @@ fig-dpi: 300
 fig-format: png
 ---
 
-> **分析目标：**给同一批真实 16S V4 ASV 分别匹配 SILVA 138.2、GTDB R11-RS232 与 Greengenes2 2024.09，分开回答“数据库覆盖了什么”“短扩增子能注释到哪一层”“不同名称是否真的代表生物差异”。  
-> **输入文件：**366 条真实 V4 ASV、对应的 5,213 条非嵌合 reads 频数，以及从三个官方完整发布用同一 515F/806R 合同提取并做 exact-sequence LCA 去冗余的参考序列与 taxonomy。  
-> **预计资源：**区域参考资产压缩后约 22 MB；4 线程导入、maximum validation、三次 consensus-VSEARCH 分类和审计通常约 15–25 分钟，建议预留 8 GB 内存。若从三个完整官方发布重新提取区域参考，需要额外磁盘、网络和更长的一次性运行时间。  
-> **执行策略：**完整发布下载、区域提取、LCA 去冗余、三库分类、Artifact validation 与 provenance 审计均已一次性实跑；网页构建使用 `eval: false`，避免重复执行上游重任务。
 
 ## 分类结果首先取决于参考数据库 {#sec-target}
 
@@ -90,208 +86,27 @@ Validation:                       91 / 91 PASS
 
 这 366 条 ASV 来自固定 commit `f282ad2bafb3ca90190ec87290066ee1985df655` 的真实 nf-core/test-datasets V4 MiSeq 数据。原始 10,000 对 reads 经 anchored、IUPAC-aware 515F/806R 去引物和 DADA2 后保留 5,213 对非嵌合 reads。这里使用其代表序列和真实频数做数据库合同验证；原数据没有独立的生态研究分组，因此不据此比较环境或处理效应。
 
-## 分类结果为什么取决于数据库和分类器 {#sec-theory}
+## 开始前：数据与运行环境 {#sec-setup}
 
-### 1. 三个数据库回答的问题不同
+在 Linux 或 WSL2 的项目文件夹中运行下面的下载命令。下载后保留这里的相对目录，后续命令使用同一组文件。
 
-| Database | 核心证据来源 | 更适合优先考虑的场景 | 必须说明的边界 |
-|---|---|---|---|
-| SILVA 138.2 SSURef NR99 | 整理后的 SSU rRNA 序列与 SILVA taxonomy | 广泛环境调查、需要 Bacteria/Archaea 并保留更广 SSU scope | taxonomy 与 genome phylogeny 不必完全一致；本次 fixed-rank 合同止于 genus |
-| GTDB R11-RS232 | 代表基因组系统发育与 genome taxonomy，从代表基因组提取 SSU | 希望扩增子名称与 GTDB genome/MAG 工作尽量同源 | 并非每个代表基因组都有完整、可靠且与 genome tree 一致的 16S；这里是 93,770 条 species-representative SSU，不是 901,341 个基因组 |
-| Greengenes2 2024.09 | Web of Life backbone、全长 16S 与大规模 V4 placement | 扩增子与 shotgun、Qiita 或 tree-native 分析需要统一参考框架 | 不是旧 Greengenes 13_8；2024.09 taxonomy 基于 GTDB R220 与 LTP 08/2023，不是本页另行比较的 GTDB R232 |
-
-没有一个数据库对所有问题都“最好”。选择顺序应是：
-
-```text
-biological question
-  → marker and primer region
-  → target taxon scope
-  → nomenclature / cross-study compatibility
-  → database release and reference subset
-  → classifier and parameters
-  → sensitivity analysis if conclusions depend on labels
+```bash
+base_url="https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa"
+for file in \
+  env/qiime2.yml \
+  scripts/prepare_taxonomy_database_assets.py \
+  scripts/validate_taxonomy_databases.py
+do
+  mkdir -p "$(dirname "$file")"
+  curl --fail --location --retry 3 "$base_url/$file" --output "$file" || break
+done
 ```
 
-### 2. “完整发布”与“可用于本实验的参考”是两层对象
-
-本次先审计完整官方资产，再从每个资产提取同一区域：
-
-```text
-full release
-  → 515F/806R primer matching
-  → 200–400 nt V4 amplicons
-  → exact-sequence dereplication
-  → least-common-ancestor taxonomy
-  → QIIME 2 FeatureData[Sequence] + FeatureData[Taxonomy]
-```
-
-这一步很重要。若把 SILVA 的全长 SSU、GTDB 的区域参考和一个预训练 Greengenes2 classifier 直接并排，观察到的差异会同时混合：
-
-- reference scope；
-- primer-region availability；
-- 重复序列权重；
-- taxonomy schema；
-- classification algorithm；
-- classifier training version。
-
-那样无法把差异归因到数据库。
-
-### 3. 为什么必须按 primer pair 提取同一区域
-
-短扩增子只包含全长 16S 的一部分。全长参考中某些记录：
-
-- 缺少目标区域；
-- 在 primer 位点有 mismatch；
-- 方向相反；
-- 提取后超出合理长度；
-- 不同全长序列在 V4 上完全相同。
-
-本次三个数据库统一使用：
-
-```text
-515F: GTGYCAGCMGCCGCGGTAA
-806R: GGACTACNVGGGTWTCTAAT
-primer identity: 0.80
-length: 200–400 nt
-orientation: both
-```
-
-因此图 @fig-reference-scope 中的规模差异是可审计的 reference-scope 结果，不是把三个不等价对象硬放在一起。
-
-### 4. exact-sequence LCA 去冗余解决什么
-
-提取后，多个全长参考可能产生完全相同的 V4 序列。如果保留所有副本，某个重复较多的 lineage 会在 consensus 中获得额外权重。本次用 RESCRIPt 对 identity = 1.0 的区域序列去冗余，并在标签冲突时保留 least common ancestor（LCA）：
-
-```text
-same V4 sequence
-  label A: d__; p__; c__; o__; f__; g__A
-  label B: d__; p__; c__; o__; f__; g__B
-
-LCA result
-  d__; p__; c__; o__; f__; g__
-```
-
-LCA 丢掉的是短区域无法区分的过深标签，不是生物信息“被浪费”。如果完全相同的 V4 序列对应多个 genus，短 V4 本来就不能凭序列本身决定其中一个。
-
-### 5. 分类器也必须固定
-
-三次分类均使用：
-
-```text
-q2-feature-classifier classify-consensus-vsearch
-maxaccepts = 50
-maxrejects = all
-identity = 0.80
-query coverage = 0.80
-strand = both
-top hits only = true
-maxhits = all
-minimum consensus = 0.51
-```
-
-`top-hits-only` 先保留具有最高 percent identity 的 hits，再计算 taxonomy consensus。`minimum consensus = 0.51` 表示某层至少有 51% 的纳入 hits 支持同一标签，否则在该层回退。
-
-::: {.callout-note title="这不是全数据库 exhaustive search"}
-QIIME 2 文档说明，只有 `maxaccepts = all` 且 `maxrejects = all` 才遍历完整数据库。本次固定 `maxaccepts = 50`，是相同参数下的有界比较，避免三个大库的重复执行失去可操作性。若关键结论依赖少数边界 ASV，应把 `maxaccepts = all` 作为敏感性分析，并在 Methods 中如实报告运行合同。
-:::
-
-### 6. 同时报告 ASV 比例和 read-weighted 比例
-
-ASV coverage 回答“有多少种不同序列拿到标签”；read-weighted coverage 回答“样本中有多少 reads 属于这些序列”。两者分母不同：
-
-\[
-\text{ASV coverage}_r =
-\frac{\#\{i:\text{ASV }i\text{ 在 rank }r\text{ 有标签}\}}
-{\#\{\text{all query ASVs}\}}
-\]
-
-\[
-\text{Read-weighted coverage}_r =
-\frac{\sum_i n_i I(i\text{ 在 rank }r\text{ 有标签})}
-{\sum_i n_i}
-\]
-
-本例中 SILVA 注释 358/366 个 ASV，但覆盖 5,181/5,213 条 reads。说明未注释 ASV 多为低频序列。若只报告 ASV 比例，会夸大它们在总 reads 中的影响；若只报告 reads，又会隐藏稀有 ASV 的 reference gap。
-
-### 7. species label 不等于 species-level resolution
-
-本例 read-weighted species label coverage 为：
-
-| Database | Reads with a species string |
-|---|---:|
-| SILVA | 0.0% |
-| GTDB | 53.9% |
-| Greengenes2 | 34.9% |
-
-这不表示 GTDB 已“鉴定出 53.9% 的真实物种”。原因包括：
-
-- 253 nt 左右的 V4 片段可能由多个 species 共享；
-- GTDB 的 `s__` 来自代表基因组 taxonomy；
-- exact V4 序列与 species 名之间可能是一对多；
-- 16S 多拷贝、数据库误注释和命名更新仍会影响标签；
-- 菌株级证据通常需要更长序列、全长 16S、培养、基因组或其他正交验证。
-
-因此正文可写“assigned a database species label”，不应写“species confirmed”。
-
-### 8. 脱靶与 Unassigned 不能在分类前消失
-
-本次保留全部分类结果后得到：
-
-| Database | Bacteria | Archaea | Chloroplast/plastid | Mitochondria | Unassigned |
-|---|---:|---:|---:|---:|---:|
-| SILVA | 279 ASVs / 3,983 reads | 75 / 1,181 | 1 / 4 | 3 / 13 | 8 / 32 |
-| GTDB | 281 / 3,973 | 75 / 1,176 | 0 / 0 | 0 / 0 | 10 / 64 |
-| Greengenes2 | 301 / 4,072 | 59 / 1,108 | 0 / 0 | 2 / 5 | 4 / 28 |
-
-GTDB 没有给出 organelle 标签，不等于实验中不存在 organelle reads；它也可能反映 reference scope。过滤应发生在看到结果之后，并保留每个样本的过滤账本：
-
-```text
-all classified features
-  → report Unassigned
-  → report chloroplast / plastid
-  → report mitochondria
-  → apply preregistered exclusion rule
-  → export filtered otutab + taxonomy + metadata
-```
-
-### 9. exact-name agreement 不是准确率
-
-在双方都有标签的 ASV 中，严格名称一致率如下：
-
-| Pair | Phylum | Class | Order | Family | Genus |
-|---|---:|---:|---:|---:|---:|
-| SILVA vs GTDB | 37.3% | 45.6% | 33.6% | 10.4% | 4.7% |
-| SILVA vs Greengenes2 | 66.4% | 51.6% | 24.2% | 12.4% | 5.9% |
-| GTDB vs Greengenes2 | 42.3% | 40.6% | 52.1% | 45.0% | 26.5% |
-
-这是一个刻意严格的字符串比较。它会把下列情况都记为不一致：
-
-- 同一 lineage 的新旧名称；
-- GTDB 的拆分后缀或 placeholder；
-- 不同 rank propagation；
-- 一方回退到较浅 LCA；
-- 真正的 reference/hit 差异。
-
-因此它适合证明“名称依赖数据库”，不适合宣布某个库更准确。若需要判断生物对应关系，应增加 synonym mapping、NCBI/GTDB crosswalk、系统发育位置和 mock-community truth。
-
-### 10. 预训练 sklearn classifier 还有版本合同
-
-Naive Bayes classifier QZA 内含训练时的 scikit-learn 对象。旧 classifier 即使数据库名称正确，也可能因为训练版本与当前 scikit-learn 1.7.1 不兼容而无法安全加载。QIIME 2 Library 也把 classifier 与特定 QIIME/scikit-learn 组合绑定。
-
-本次刻意使用 sequence-search classifier，不加载旧 pickle。需要速度更快的 region-specific Naive Bayes 时，应在当前环境中从已锁定的区域参考重新训练，并记录：
-
-- reference sequence/taxonomy SHA-256；
-- primer-region extraction；
-- fit-classifier 版本；
-- scikit-learn 版本；
-- cross-validation 或 mock-community evaluation。
-
-## 准备工作 {#sec-setup}
 
 <details>
-<summary><strong>展开：固定环境、真实数据、参考资产与作图函数</strong></summary>
+<summary>本次分析的数据、环境与图形设置</summary>
 
-### 1. 安装固定 QIIME 2 环境
+### 安装固定 QIIME 2 环境
 
 项目提供已经验证的 `env/qiime2.yml`：
 
@@ -319,7 +134,7 @@ mkdir -p \
   "${MPLCONFIGDIR}"
 ```
 
-### 2. 检查本页的小型固定资产
+### 检查本页的小型固定资产
 
 ```{bash}
 DATA="data/small/taxonomy-databases"
@@ -383,7 +198,7 @@ abundance TSV
   Feature ID<TAB>Frequency<TAB>No. of Samples Observed In
 ```
 
-### 3. 需要从完整官方发布重建时
+### 需要从完整官方发布重建时
 
 完整来源分别为：
 
@@ -407,7 +222,7 @@ python3 scripts/prepare_taxonomy_database_assets.py \
 
 GTDB R232 release notes 已把 16S 识别改为贴近 Prokka 的 `barnap` 并使用 396 bp minimum；发布目录内旧通用 `METHODS`/`FILE_DESCRIPTIONS` 仍含 `nhmmer`/200 bp 文本。应分开记录两套文档，并以实际 FASTA 的 397–1,919 bp 长度审计为准。
 
-### 4. 安装 R 作图依赖并内联出版函数
+### 安装 R 作图依赖并内联出版函数
 
 ```{r}
 install.packages(
@@ -504,9 +319,206 @@ save_pub <- function(
 
 </details>
 
-## 可复制代码 {#sec-code}
 
-### 1. 建立工作目录并导入 query ASV
+## 分类结果为什么取决于数据库和分类器 {#sec-theory}
+
+### 三个数据库回答的问题不同
+
+| Database | 核心证据来源 | 更适合优先考虑的场景 | 必须说明的边界 |
+|---|---|---|---|
+| SILVA 138.2 SSURef NR99 | 整理后的 SSU rRNA 序列与 SILVA taxonomy | 广泛环境调查、需要 Bacteria/Archaea 并保留更广 SSU scope | taxonomy 与 genome phylogeny 不必完全一致；本次 fixed-rank 合同止于 genus |
+| GTDB R11-RS232 | 代表基因组系统发育与 genome taxonomy，从代表基因组提取 SSU | 希望扩增子名称与 GTDB genome/MAG 工作尽量同源 | 并非每个代表基因组都有完整、可靠且与 genome tree 一致的 16S；这里是 93,770 条 species-representative SSU，不是 901,341 个基因组 |
+| Greengenes2 2024.09 | Web of Life backbone、全长 16S 与大规模 V4 placement | 扩增子与 shotgun、Qiita 或 tree-native 分析需要统一参考框架 | 不是旧 Greengenes 13_8；2024.09 taxonomy 基于 GTDB R220 与 LTP 08/2023，不是本页另行比较的 GTDB R232 |
+
+没有一个数据库对所有问题都“最好”。选择顺序应是：
+
+```text
+biological question
+  → marker and primer region
+  → target taxon scope
+  → nomenclature / cross-study compatibility
+  → database release and reference subset
+  → classifier and parameters
+  → sensitivity analysis if conclusions depend on labels
+```
+
+### “完整发布”与“可用于本实验的参考”是两层对象
+
+本次先审计完整官方资产，再从每个资产提取同一区域：
+
+```text
+full release
+  → 515F/806R primer matching
+  → 200–400 nt V4 amplicons
+  → exact-sequence dereplication
+  → least-common-ancestor taxonomy
+  → QIIME 2 FeatureData[Sequence] + FeatureData[Taxonomy]
+```
+
+这一步很重要。若把 SILVA 的全长 SSU、GTDB 的区域参考和一个预训练 Greengenes2 classifier 直接并排，观察到的差异会同时混合：
+
+- reference scope；
+- primer-region availability；
+- 重复序列权重；
+- taxonomy schema；
+- classification algorithm；
+- classifier training version。
+
+那样无法把差异归因到数据库。
+
+### 为什么必须按 primer pair 提取同一区域
+
+短扩增子只包含全长 16S 的一部分。全长参考中某些记录：
+
+- 缺少目标区域；
+- 在 primer 位点有 mismatch；
+- 方向相反；
+- 提取后超出合理长度；
+- 不同全长序列在 V4 上完全相同。
+
+本次三个数据库统一使用：
+
+```text
+515F: GTGYCAGCMGCCGCGGTAA
+806R: GGACTACNVGGGTWTCTAAT
+primer identity: 0.80
+length: 200–400 nt
+orientation: both
+```
+
+因此图 @fig-reference-scope 中的规模差异是可审计的 reference-scope 结果，不是把三个不等价对象硬放在一起。
+
+### exact-sequence LCA 去冗余解决什么
+
+提取后，多个全长参考可能产生完全相同的 V4 序列。如果保留所有副本，某个重复较多的 lineage 会在 consensus 中获得额外权重。本次用 RESCRIPt 对 identity = 1.0 的区域序列去冗余，并在标签冲突时保留 least common ancestor（LCA）：
+
+```text
+same V4 sequence
+  label A: d__; p__; c__; o__; f__; g__A
+  label B: d__; p__; c__; o__; f__; g__B
+
+LCA result
+  d__; p__; c__; o__; f__; g__
+```
+
+LCA 丢掉的是短区域无法区分的过深标签，不是生物信息“被浪费”。如果完全相同的 V4 序列对应多个 genus，短 V4 本来就不能凭序列本身决定其中一个。
+
+### 分类器也必须固定
+
+三次分类均使用：
+
+```text
+q2-feature-classifier classify-consensus-vsearch
+maxaccepts = 50
+maxrejects = all
+identity = 0.80
+query coverage = 0.80
+strand = both
+top hits only = true
+maxhits = all
+minimum consensus = 0.51
+```
+
+`top-hits-only` 先保留具有最高 percent identity 的 hits，再计算 taxonomy consensus。`minimum consensus = 0.51` 表示某层至少有 51% 的纳入 hits 支持同一标签，否则在该层回退。
+
+::: {.callout-note title="这不是全数据库 exhaustive search"}
+QIIME 2 文档说明，只有 `maxaccepts = all` 且 `maxrejects = all` 才遍历完整数据库。本次固定 `maxaccepts = 50`，是相同参数下的有界比较，避免三个大库的重复执行失去可操作性。若关键结论依赖少数边界 ASV，应把 `maxaccepts = all` 作为敏感性分析，并在 Methods 中如实报告运行合同。
+:::
+
+### 同时报告 ASV 比例和 read-weighted 比例
+
+ASV coverage 回答“有多少种不同序列拿到标签”；read-weighted coverage 回答“样本中有多少 reads 属于这些序列”。两者分母不同：
+
+\[
+\text{ASV coverage}_r =
+\frac{\#\{i:\text{ASV }i\text{ 在 rank }r\text{ 有标签}\}}
+{\#\{\text{all query ASVs}\}}
+\]
+
+\[
+\text{Read-weighted coverage}_r =
+\frac{\sum_i n_i I(i\text{ 在 rank }r\text{ 有标签})}
+{\sum_i n_i}
+\]
+
+本例中 SILVA 注释 358/366 个 ASV，但覆盖 5,181/5,213 条 reads。说明未注释 ASV 多为低频序列。若只报告 ASV 比例，会夸大它们在总 reads 中的影响；若只报告 reads，又会隐藏稀有 ASV 的 reference gap。
+
+### 出现物种名称不代表已达到物种分辨率
+
+本例 read-weighted species label coverage 为：
+
+| Database | Reads with a species string |
+|---|---:|
+| SILVA | 0.0% |
+| GTDB | 53.9% |
+| Greengenes2 | 34.9% |
+
+这不表示 GTDB 已“鉴定出 53.9% 的真实物种”。原因包括：
+
+- 253 nt 左右的 V4 片段可能由多个 species 共享；
+- GTDB 的 `s__` 来自代表基因组 taxonomy；
+- exact V4 序列与 species 名之间可能是一对多；
+- 16S 多拷贝、数据库误注释和命名更新仍会影响标签；
+- 菌株级证据通常需要更长序列、全长 16S、培养、基因组或其他正交验证。
+
+因此正文可写“assigned a database species label”，不应写“species confirmed”。
+
+### 脱靶与 Unassigned 不能在分类前消失
+
+本次保留全部分类结果后得到：
+
+| Database | Bacteria | Archaea | Chloroplast/plastid | Mitochondria | Unassigned |
+|---|---:|---:|---:|---:|---:|
+| SILVA | 279 ASVs / 3,983 reads | 75 / 1,181 | 1 / 4 | 3 / 13 | 8 / 32 |
+| GTDB | 281 / 3,973 | 75 / 1,176 | 0 / 0 | 0 / 0 | 10 / 64 |
+| Greengenes2 | 301 / 4,072 | 59 / 1,108 | 0 / 0 | 2 / 5 | 4 / 28 |
+
+GTDB 没有给出 organelle 标签，不等于实验中不存在 organelle reads；它也可能反映 reference scope。过滤应发生在看到结果之后，并保留每个样本的过滤账本：
+
+```text
+all classified features
+  → report Unassigned
+  → report chloroplast / plastid
+  → report mitochondria
+  → apply preregistered exclusion rule
+  → export filtered otutab + taxonomy + metadata
+```
+
+### exact-name agreement 不是准确率
+
+在双方都有标签的 ASV 中，严格名称一致率如下：
+
+| Pair | Phylum | Class | Order | Family | Genus |
+|---|---:|---:|---:|---:|---:|
+| SILVA vs GTDB | 37.3% | 45.6% | 33.6% | 10.4% | 4.7% |
+| SILVA vs Greengenes2 | 66.4% | 51.6% | 24.2% | 12.4% | 5.9% |
+| GTDB vs Greengenes2 | 42.3% | 40.6% | 52.1% | 45.0% | 26.5% |
+
+这是一个刻意严格的字符串比较。它会把下列情况都记为不一致：
+
+- 同一 lineage 的新旧名称；
+- GTDB 的拆分后缀或 placeholder；
+- 不同 rank propagation；
+- 一方回退到较浅 LCA；
+- 真正的 reference/hit 差异。
+
+因此它适合证明“名称依赖数据库”，不适合宣布某个库更准确。若需要判断生物对应关系，应增加 synonym mapping、NCBI/GTDB crosswalk、系统发育位置和 mock-community truth。
+
+### 预训练分类器还需要匹配 scikit-learn 版本
+
+Naive Bayes classifier QZA 内含训练时的 scikit-learn 对象。旧 classifier 即使数据库名称正确，也可能因为训练版本与当前 scikit-learn 1.7.1 不兼容而无法安全加载。QIIME 2 Library 也把 classifier 与特定 QIIME/scikit-learn 组合绑定。
+
+本次刻意使用 sequence-search classifier，不加载旧 pickle。需要速度更快的 region-specific Naive Bayes 时，应在当前环境中从已锁定的区域参考重新训练，并记录：
+
+- reference sequence/taxonomy SHA-256；
+- primer-region extraction；
+- fit-classifier 版本；
+- scikit-learn 版本；
+- cross-validation 或 mock-community evaluation。
+
+## 准备参考库并比较分类注释 {#sec-code}
+
+### 建立工作目录并导入 query ASV
 
 ```{bash}
 set -euo pipefail
@@ -532,7 +544,7 @@ qiime tools validate \
 
 这一步直接从独立打包的真实代表序列开始，不要求存在某个隐含的 `ps.rds`。你自己的数据需把 DADA2/QIIME 2 导出的 `rep-seqs.qza` 放到同一位置；ASV table 与 metadata 在注释完成后按 ID 对齐。
 
-### 2. 导入三套区域参考
+### 导入三套区域参考
 
 ```{bash}
 prepare_reference () {
@@ -576,7 +588,7 @@ prepare_reference \
   "${DATA}/greengenes2-2024.09-v4-taxonomy.tsv.gz"
 ```
 
-### 3. 用同一套 consensus-VSEARCH 参数分类
+### 用同一套 consensus-VSEARCH 参数分类
 
 ```{bash}
 classify_database () {
@@ -617,7 +629,7 @@ classify_database greengenes2
 
 `--p-output-no-hits` 让 366 个 query 都保留在 taxonomy 输出中；没有合格 hit 的 ASV 写为 `Unassigned`，不会在导出时悄悄消失。
 
-### 4. 导出 taxonomy 与 search results
+### 导出分类注释与序列搜索结果
 
 ```{bash}
 for key in silva gtdb greengenes2; do
@@ -646,7 +658,7 @@ Feature ID    Taxon    Consensus
 
 旧版本或其他 action 可能使用 `Confidence`。解析器应按列名识别，不能假定第三列永远叫同一个名字。
 
-### 5. 一次性运行完整审计
+### 一次性运行完整审计
 
 ```{bash}
 python3 scripts/validate_taxonomy_databases.py \
@@ -676,7 +688,7 @@ GTDB:         356 / 366 ASVs; 5,149 / 5,213 reads
 Greengenes2:  362 / 366 ASVs; 5,185 / 5,213 reads
 ```
 
-### 6. 选择主数据库后生成标准三件套
+### 选择主数据库后生成标准三件套
 
 数据库选择应在看处理组差异之前预注册。假设研究主合同选择 SILVA，先把 QIIME 2 feature table 导出为 TSV，再与 taxonomy 和 metadata 对齐：
 
@@ -752,7 +764,7 @@ readr::write_tsv(metadata, "metadata.tsv")
 
 SILVA 本次只提供六层 fixed-rank taxonomy，`Species` 会是 `NA`。不要把空 species 自动填成 genus，也不要把未分类标签改成一个真实 taxon。
 
-### 7. 过滤脱靶时同时保存审计表
+### 过滤脱靶时同时保存审计表
 
 ```{r}
 taxonomy_flagged <- taxonomy |>
@@ -801,9 +813,9 @@ readr::write_tsv(metadata, "results/metadata.filtered.tsv")
 
 若 `otutab` 的行是样本、列是 ASV，应先显式转置；不要靠维度“看起来差不多”猜方向。
 
-## 出版级美化 {#sec-publication}
+## 把参考覆盖率与注释差异一起解释 {#sec-publication}
 
-### 1. 主图优先展示逐级覆盖，而不是只给一个 assignment %
+### 主图优先展示逐级覆盖，而不是只给一个 assignment %
 
 ```{r}
 rank_coverage <- readr::read_tsv(
@@ -864,7 +876,7 @@ save_pub(
 
 轴、图例和标签全部使用英文，可直接进入英文稿。正文解释中再说明分母是 5,213 条真实 reads。
 
-### 2. reference scope 用对数轴，但不要暗示“大就是准”
+### reference scope 用对数轴，但不要暗示“大就是准”
 
 ```{r}
 reference_scope <- readr::read_tsv(
@@ -923,7 +935,7 @@ save_pub(
 
 图注要明确：full reference、primer-matched 与 LCA unique 是三个处理阶段；柱高不是 precision、recall 或 accuracy。
 
-### 3. concordance 热图必须写“exact-name”
+### concordance 热图必须写“exact-name”
 
 若图题只写 `Taxonomy concordance`，读者容易把它理解成生物分类准确率。应写：
 
@@ -938,7 +950,7 @@ Exact-name concordance among jointly assigned ASVs
 - 未执行 synonym mapping；
 - 名称变化不代表样本发生生物变化。
 
-### 4. 主文、补充材料与审计文件分工
+### 主文、补充材料与审计文件分工
 
 建议：
 
@@ -983,7 +995,7 @@ classifier QZA 中的 pickle 与 scikit-learn 训练版本绑定。版本不匹�
 “99% 被注释”可能仅表示 domain 有标签。必须分别报告 domain–species，并同时给 ASV-based 与 read-weighted 分母。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告分类数据库与注释 {#sec-methods}
 
 ### 主分析模板
 
@@ -995,9 +1007,9 @@ classifier QZA 中的 pickle 与 scikit-learn 训练版本绑定。版本不匹�
 
 若你的主数据库、primer、区域、identity 或 `maxaccepts` 不同，必须改成实际值。不要从这段模板复制一个代码中没有执行的参数。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将分类数据库与注释用于自己的研究 {#sec-own-data}
 
-### 1. 先写一张 taxonomy contract
+### 先确定分类数据库、版本和注释参数
 
 在分类前记录：
 
@@ -1017,7 +1029,7 @@ classifier QZA 中的 pickle 与 scikit-learn 训练版本绑定。版本不匹�
 
 研究问题若要求与 MAG/shotgun 的 GTDB 名称对齐，可以把 GTDB 设为主合同；若要求与历史 SILVA 队列可比，可以固定 SILVA。选择依据应在看组间显著性之前确定。
 
-### 2. 准备四个输入
+### 准备四个输入
 
 ```text
 rep-seqs.fasta or rep-seqs.qza
@@ -1035,7 +1047,7 @@ reference contract
 
 taxonomy 是本章要生成的第三张表。若你从已有三件套开始重新注释，旧 `taxonomy.tsv` 只能作为对照，不能作为新 classifier 的输入真值。
 
-### 3. 只改路径与主数据库
+### 只改路径与主数据库
 
 ```{bash}
 QUERY="your-project/rep-seqs.qza"
@@ -1046,7 +1058,7 @@ PRIMARY_DB="silva"
 
 然后复用上面的导入、分类、导出和 ID 对齐代码。不要因为自己的数据量更大就静默更改 identity、query coverage 或 consensus；若确实修改，要把它当作新的分析合同。
 
-### 4. 每个样本都要有过滤账本
+### 报告每个样本过滤前后的序列数
 
 至少输出：
 
@@ -1063,7 +1075,7 @@ retained_reads
 
 若处理组与 unassigned/off-target burden 相关，差异丰度结果可能受选择偏差影响。此时应展示敏感性分析，而不是只给过滤后的漂亮组成图。
 
-### 5. 跨数据库敏感性关注结论，不追求标签全相同
+### 跨数据库敏感性关注结论，不追求标签全相同
 
 可比较：
 
@@ -1075,7 +1087,7 @@ retained_reads
 
 若 genus 名称变化但同一条 ASV 的组间效应方向与不确定性不变，应报告为命名敏感，而不是两个互相矛盾的生物发现。
 
-### 6. 输出三件套与完整审计
+### 输出三件套与完整审计
 
 最终交付：
 

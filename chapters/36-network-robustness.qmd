@@ -1,6 +1,6 @@
 ---
 title: "网络进阶：鲁棒性、拓扑角色与组间比较"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,21 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/36-network-robustness.R
+  packages:
+  - SpiecEasi
+  - ggplot2
+  - ggrepel
+  - igraph
+  - knitr
+  - patchwork
+  - ragg
+  - scales
+  - svglite
 ---
-
-> **分析目标：**在真实 16S association network 上计算 Zi–Pi 拓扑角色、节点移除鲁棒性和 density-matched 组间 rewiring；同时审计 edge uncertainty、网络推断方法和环境分组对“keystone”结论的影响。  
-> **输入文件：**`data/small/otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**90 个样本、40 个预先筛选的命名属；SPIEC-EASI 50 次 StARS subsampling、SparCC 100 次样本 bootstrap、组间 499 次置换与每组 500 次 bootstrap，通常 6–12 分钟、峰值内存约 2–4 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 网络差异必须先证明推断过程可比 {#sec-target}
 
@@ -33,75 +43,36 @@ Zi–Pi、degree 和节点移除曲线描述的是**推断网络的拓扑**，�
 
 本页使用 `microeco` 2.0.0 的真实湿地三件套，CW、IW、TW 各 30 个样本。所有 feature 筛选在看分组网络前一次完成；SparCC 与 SPIEC-EASI 都读取同一个 90 × 40 count matrix。组间网络使用同样 40 个节点并强制保留相同边数，避免把 node count 或 density 差异误写成生态稳定性差异。
 
-## 拓扑角色、鲁棒性和组间差异是三个问题 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. Zi 与 Pi 先问“节点连到哪里”
+需要 R，以及 `SpiecEasi`、`ggplot2`、`ggrepel`、`igraph`、`knitr`、`patchwork`、`ragg`、`scales`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-对节点 $i$，within-module degree z-score 为
-
-$$
-Z_i = \frac{k_{i,s}-\bar{k}_s}{\sigma_{k_s}},
-$$
-
-其中 $k_{i,s}$ 是节点连向自身模块 $s$ 的加权 degree。Participation coefficient 为
-
-$$
-P_i = 1 - \sum_s \left(\frac{k_{i,s}}{k_i}\right)^2.
-$$
-
-经典阈值把 $Z_i>2.5$ 视为 hub、$P_i>0.62$ 视为 connector。阈值来自复杂网络角色分类，不是微生物 keystone 的生物学验证标准；模块算法、edge threshold 或 association method 一变，角色也可能改变。
-
-### 2. 节点移除曲线回答“这张图怎样断开”
-
-本页从初始最大连通分量开始，逐步删除节点并记录剩余 largest connected component（LCC）比例：
-
-- **Random failure**：500 个随机删除顺序，报告中位数与 95% 区间；
-- **Degree attack**：每一步重新计算 degree，删除当前最高者；
-- **Betweenness attack**：每一步重新计算 betweenness，删除当前最高者。
-
-曲线下面积越小，表示该推断图在这种删除规则下更快碎裂。它不能自动等同于群落抗扰性、功能稳定性或恢复力。
-
-### 3. 组间网络必须控制比较基线
-
-不同组的样本量、节点数和 edge density 会系统性改变 modularity、clustering 和 path length。本页三组均为 30 个样本，使用同一 40-node universe，并把每组 CLR-Spearman 网络截取为与 pooled SPIEC-EASI 相同的 edge count。然后用 499 次 group-label permutation 检验平均 pairwise edge Jaccard 是否异常低，再用每组 500 次 sample bootstrap 记录 edge selection frequency。
-
-### 4. “网络差异”仍可能是环境差异
-
-CW、IW、TW 同时对应不同地理与盐度环境，不是随机处理。显著 rewiring 只表示网络结构与这些观测分组关联，不能拆成盐度、空间、土壤性质或真实互作变化的单独效应。
-
-<details>
-<summary><strong>深入：为什么这里同时保留 SparCC 与 SPIEC-EASI</strong></summary>
-
-SparCC 给较稠密的 marginal association network，适合展示模块角色和 attack curve；SPIEC-EASI 给 sparse conditional association network。若两者产生的 component 数、giant component 和 role count 差别很大，这个差别本身就是拓扑结论不稳的证据，而不是挑一张更漂亮的图隐藏掉。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装锁定依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "ggrepel", "igraph", "patchwork", "ragg", "readr",
-  "remotes", "scales", "svglite", "systemfonts"
-))
-remotes::install_github(
-  "zdk123/SpiecEasi@c463727",
-  upgrade = "never"
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/taxonomy.tsv"
 )
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-本页实跑 `SpiecEasi` 1.1.2（官方仓库 commit `c463727`）。
-
 ```{r}
+#| results: hold
 #| label: setup-network-robustness-theme
 library(ggplot2)
 library(SpiecEasi)
 
 set.seed(20260736)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -162,13 +133,10 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套固定 40-node universe
+### 从三件套中确定用于比较的 40 个节点
 
 ```{r}
+#| results: hold
 #| label: read-network-robustness-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -261,9 +229,74 @@ data.frame(
 )
 ```
 
-### 2. 独立推断 SparCC 与 SPIEC-EASI 网络
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/36-network-robustness.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "ggrepel", "igraph", "patchwork", "ragg", "readr",
+  "remotes", "scales", "svglite", "systemfonts"
+))
+remotes::install_github(
+  "zdk123/SpiecEasi@c463727",
+  upgrade = "never"
+)
+```
+
+</details>
+
+## 拓扑角色、鲁棒性和组间差异是三个问题 {#sec-theory}
+
+### Zi 与 Pi 先问“节点连到哪里”
+
+对节点 $i$，within-module degree z-score 为
+
+$$
+Z_i = \frac{k_{i,s}-\bar{k}_s}{\sigma_{k_s}},
+$$
+
+其中 $k_{i,s}$ 是节点连向自身模块 $s$ 的加权 degree。Participation coefficient 为
+
+$$
+P_i = 1 - \sum_s \left(\frac{k_{i,s}}{k_i}\right)^2.
+$$
+
+经典阈值把 $Z_i>2.5$ 视为 hub、$P_i>0.62$ 视为 connector。阈值来自复杂网络角色分类，不是微生物 keystone 的生物学验证标准；模块算法、edge threshold 或 association method 一变，角色也可能改变。
+
+### 节点移除曲线回答“这张图怎样断开”
+
+本页从初始最大连通分量开始，逐步删除节点并记录剩余 largest connected component（LCC）比例：
+
+- **Random failure**：500 个随机删除顺序，报告中位数与 95% 区间；
+- **Degree attack**：每一步重新计算 degree，删除当前最高者；
+- **Betweenness attack**：每一步重新计算 betweenness，删除当前最高者。
+
+曲线下面积越小，表示该推断图在这种删除规则下更快碎裂。它不能自动等同于群落抗扰性、功能稳定性或恢复力。
+
+### 组间网络必须控制比较基线
+
+不同组的样本量、节点数和 edge density 会系统性改变 modularity、clustering 和 path length。本页三组均为 30 个样本，使用同一 40-node universe，并把每组 CLR-Spearman 网络截取为与 pooled SPIEC-EASI 相同的 edge count。然后用 499 次 group-label permutation 检验平均 pairwise edge Jaccard 是否异常低，再用每组 500 次 sample bootstrap 记录 edge selection frequency。
+
+### “网络差异”仍可能是环境差异
+
+CW、IW、TW 同时对应不同地理与盐度环境，不是随机处理。显著 rewiring 只表示网络结构与这些观测分组关联，不能拆成盐度、空间、土壤性质或真实互作变化的单独效应。
+
+<details>
+<summary><strong>深入：为什么这里同时保留 SparCC 与 SPIEC-EASI</strong></summary>
+
+SparCC 给较稠密的 marginal association network，适合展示模块角色和 attack curve；SPIEC-EASI 给 sparse conditional association network。若两者产生的 component 数、giant component 和 role count 差别很大，这个差别本身就是拓扑结论不稳的证据，而不是挑一张更漂亮的图隐藏掉。
+
+</details>
+
+## 在可比条件下检查网络角色与鲁棒性 {#sec-code}
+
+### 独立推断 SparCC 与 SPIEC-EASI 网络
+
+```{r}
+#| results: hold
 #| label: infer-robustness-networks
 set.seed(20260736)
 sparcc_cor <- SpiecEasi::sparcc(sample_by_taxon)$Cor
@@ -355,9 +388,10 @@ stopifnot(
 )
 ```
 
-### 3. 计算 Zi–Pi，并把方法敏感性写进同一 ledger
+### 计算 Zi–Pi，并比较不同推断方法下的节点角色
 
 ```{r}
+#| results: hold
 #| label: calculate-zi-pi
 calculate_roles <- function(graph, method) {
   set.seed(20260736)
@@ -456,9 +490,10 @@ role_summary <- role_summary[role_summary$Nodes > 0, ]
 role_summary
 ```
 
-### 4. 自适应 node attack 与曲线下面积
+### 自适应 node attack 与曲线下面积
 
 ```{r}
+#| results: hold
 #| label: calculate-network-attacks
 giant_component <- function(graph) {
   component <- igraph::components(graph)
@@ -554,9 +589,10 @@ attack_summary <- rbind(
 attack_summary
 ```
 
-### 5. Density-matched 组间网络、置换和 bootstrap
+### Density-matched 组间网络、置换和 bootstrap
 
 ```{r}
+#| results: hold
 #| label: compare-density-matched-networks
 clr <- log2(sample_by_taxon + 0.5)
 clr <- clr - rowMeans(clr)
@@ -648,6 +684,7 @@ data.frame(
 ## 组间网络比较必须统一推断条件 {#sec-audit}
 
 ```{r}
+#| results: hold
 #| label: network-robustness-audit-table
 network_robustness_audit <- data.frame(
   Dimension = c(
@@ -684,11 +721,12 @@ knitr::kable(
 
 三组 density-matched 网络的平均 edge Jaccard 为 `r sprintf("%.3f", observed_mean_jaccard)`；499 次标签置换的 lower-tail p-value 为 `r sprintf("%.3f", rewiring_p)`。这是 group-associated rewiring 证据，但 CW/IW/TW 与空间、盐度和多项环境因子共同变化，因此不是盐度或地理因素的单独效应。
 
-## 出版级美化 {#sec-publication}
+## 检查拓扑结论是否依赖密度和删除策略 {#sec-publication}
 
 ### 图 1：Zi–Pi role cartography
 
 ```{r}
+#| results: hold
 #| label: fig-role-cartography
 #| fig-width: 7.1
 #| fig-height: 5.7
@@ -736,9 +774,10 @@ save_pub(role_plot, "figures/36-role-cartography", width = 180, height = 145)
 role_plot
 ```
 
-### 图 2：random failure 与 adaptive attack
+### 图 2：比较随机删除与自适应定向删除节点的影响
 
 ```{r}
+#| results: hold
 #| label: fig-attack-robustness
 #| fig-width: 7.1
 #| fig-height: 4.8
@@ -796,9 +835,10 @@ save_pub(
 attack_plot
 ```
 
-### 图 3：组间 rewiring 与 permutation null
+### 图 3：用置换检验判断组间网络差异
 
 ```{r}
+#| results: hold
 #| label: fig-group-rewiring
 #| fig-width: 7.1
 #| fig-height: 4.8
@@ -859,9 +899,10 @@ save_pub(
 group_rewiring_plot
 ```
 
-### 图 4：推断方法改变 topology 与 robustness
+### 图 4：检查推断方法对网络结构和稳健性的影响
 
 ```{r}
+#| results: hold
 #| label: fig-topology-sensitivity
 #| fig-width: 7.1
 #| fig-height: 5.2
@@ -923,8 +964,8 @@ topology_panel
 ```
 
 ```{r}
+#| results: hold
 #| label: verify-network-robustness
-#| echo: false
 result_dir <- "results/36-network-robustness"
 dir.create(result_dir, recursive = TRUE, showWarnings = FALSE)
 utils::write.table(
@@ -980,11 +1021,11 @@ stopifnot(
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告网络比较与鲁棒性的方法与限制 {#sec-methods}
 
 > Genus-level counts were filtered independently of group labels (prevalence ≥20% and total abundance ≥100 reads), and the 40 highest prespecified prevalence–abundance scores were retained. A SparCC association graph was defined at |r| ≥0.30 and audited with 100 non-parametric sample bootstraps. A sparse conditional network was independently estimated using SPIEC-EASI neighbourhood selection (20 lambda values and 50 StARS subsamples). Louvain modules were calculated from absolute edge weights, and node roles were summarized using within-module degree z-score and participation coefficient; these labels were interpreted as topology-dependent candidates rather than validated keystone taxa. Robustness was assessed on the initial giant component using 500 random node-removal sequences and adaptive degree- and betweenness-targeted removal. Group-specific CLR-Spearman networks used the same 40 nodes, 30 samples per group and a density matched to the pooled SPIEC-EASI graph. Mean pairwise edge Jaccard was evaluated using 499 label permutations, and edge selection frequencies were estimated with 500 within-group sample bootstraps. Random seeds were fixed at 20260736.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将网络比较与鲁棒性用于自己的研究 {#sec-own-data}
 
 ```{r}
 #| eval: false

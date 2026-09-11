@@ -82,9 +82,9 @@
 <rect x='23.84' y='51.38' width='227.30' height='259.21' style='stroke-width: 0.78; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNTQuMzM=)'>
-<text x='20.25' y='264.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>CW</text>
-<text x='20.25' y='183.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.21px' lengthAdjust='spacingAndGlyphs'>IW</text>
-<text x='20.25' y='102.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>TW</text>
+<text x='20.25' y='264.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>CW</text>
+<text x='20.25' y='183.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='8.21px' lengthAdjust='spacingAndGlyphs'>IW</text>
+<text x='20.25' y='102.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>TW</text>
 <polyline points='21.84,261.98 23.84,261.98 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='21.84,180.98 23.84,180.98 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='21.84,99.98 23.84,99.98 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -92,13 +92,13 @@
 <polyline points='108.38,312.58 108.38,310.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='174.59,312.58 174.59,310.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='240.80,312.58 240.80,310.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='42.16' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.54px' lengthAdjust='spacingAndGlyphs'>-0.15</text>
-<text x='108.38' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.54px' lengthAdjust='spacingAndGlyphs'>-0.10</text>
-<text x='174.59' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='16.54px' lengthAdjust='spacingAndGlyphs'>-0.05</text>
-<text x='240.80' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='137.48' y='327.99' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='53.20px' lengthAdjust='spacingAndGlyphs'>Log-log slope</text>
-<text x='9.46' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='164.06px' lengthAdjust='spacingAndGlyphs'>Estimate and ordinary-regression 95% CI</text>
-<text x='9.46' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "DejaVu Sans";' textLength='149.29px' lengthAdjust='spacingAndGlyphs'>A. Within-region decay slope</text>
+<text x='42.16' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='16.54px' lengthAdjust='spacingAndGlyphs'>-0.15</text>
+<text x='108.38' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='16.54px' lengthAdjust='spacingAndGlyphs'>-0.10</text>
+<text x='174.59' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='16.54px' lengthAdjust='spacingAndGlyphs'>-0.05</text>
+<text x='240.80' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.23px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='137.48' y='327.99' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='53.20px' lengthAdjust='spacingAndGlyphs'>Log-log slope</text>
+<text x='9.46' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "Arial";' textLength='164.06px' lengthAdjust='spacingAndGlyphs'>Estimate and ordinary-regression 95% CI</text>
+<text x='9.46' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "Arial";' textLength='149.29px' lengthAdjust='spacingAndGlyphs'>A. Within-region decay slope</text>
 </g>
 <defs>
   <clipPath id='cpMjczLjQ4fDUwMC43N3w1MS4zOHwzMTAuNTg='>
@@ -119,15 +119,15 @@
 <circle cx='444.38' cy='261.98' r='3.56' style='stroke-width: 0.71; stroke: #0072B2; fill: #0072B2;' />
 <circle cx='392.29' cy='180.98' r='3.56' style='stroke-width: 0.71; stroke: #E69F00; fill: #E69F00;' />
 <circle cx='296.60' cy='99.98' r='3.56' style='stroke-width: 0.71; stroke: #009E73; fill: #009E73;' />
-<text x='458.45' y='264.57' style='font-size: 7.11px;fill: #0072B2; font-family: "DejaVu Sans";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>p = 0.001</text>
-<text x='406.36' y='183.57' style='font-size: 7.11px;fill: #E69F00; font-family: "DejaVu Sans";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>p = 0.001</text>
-<text x='310.68' y='102.57' style='font-size: 7.11px;fill: #009E73; font-family: "DejaVu Sans";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>p = 0.287</text>
+<text x='458.45' y='264.57' style='font-size: 7.11px;fill: #0072B2; font-family: "Arial";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>p = 0.001</text>
+<text x='406.36' y='183.57' style='font-size: 7.11px;fill: #E69F00; font-family: "Arial";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>p = 0.001</text>
+<text x='310.68' y='102.57' style='font-size: 7.11px;fill: #009E73; font-family: "Arial";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>p = 0.287</text>
 <rect x='273.48' y='51.38' width='227.30' height='259.21' style='stroke-width: 0.78; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNTQuMzM=)'>
-<text x='269.89' y='264.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>CW</text>
-<text x='269.89' y='183.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.21px' lengthAdjust='spacingAndGlyphs'>IW</text>
-<text x='269.89' y='102.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>TW</text>
+<text x='269.89' y='264.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.79px' lengthAdjust='spacingAndGlyphs'>CW</text>
+<text x='269.89' y='183.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='8.21px' lengthAdjust='spacingAndGlyphs'>IW</text>
+<text x='269.89' y='102.31' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.22px' lengthAdjust='spacingAndGlyphs'>TW</text>
 <polyline points='271.48,261.98 273.48,261.98 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='271.48,180.98 273.48,180.98 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='271.48,99.98 273.48,99.98 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -136,15 +136,15 @@
 <polyline points='388.80,312.58 388.80,310.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='439.98,312.58 439.98,310.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='491.16,312.58 491.16,310.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='286.44' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='337.62' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.2</text>
-<text x='388.80' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='439.98' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.6</text>
-<text x='491.16' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.8</text>
-<text x='387.12' y='327.99' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='86.25px' lengthAdjust='spacingAndGlyphs'>Spearman Mantel rho</text>
-<text x='259.10' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='168.91px' lengthAdjust='spacingAndGlyphs'>999 sample-label permutations per region</text>
-<text x='259.10' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "DejaVu Sans";' textLength='137.75px' lengthAdjust='spacingAndGlyphs'>B. Mantel rank association</text>
-<text x='17.43' y='345.03' style='font-size: 8.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='393.76px' lengthAdjust='spacingAndGlyphs'>Slope CIs ignore pair dependence; Mantel does not separate environment from dispersal.</text>
+<text x='286.44' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='337.62' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.2</text>
+<text x='388.80' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='439.98' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.6</text>
+<text x='491.16' y='318.83' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.8</text>
+<text x='387.12' y='327.99' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='86.25px' lengthAdjust='spacingAndGlyphs'>Spearman Mantel rho</text>
+<text x='259.10' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "Arial";' textLength='168.91px' lengthAdjust='spacingAndGlyphs'>999 sample-label permutations per region</text>
+<text x='259.10' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "Arial";' textLength='137.75px' lengthAdjust='spacingAndGlyphs'>B. Mantel rank association</text>
+<text x='17.43' y='345.03' style='font-size: 8.80px;fill: #666666; font-family: "Arial";' textLength='393.76px' lengthAdjust='spacingAndGlyphs'>Slope CIs ignore pair dependence; Mantel does not separate environment from dispersal.</text>
 <text x='9.46' y='15.10' style='font-size: 13.20px; font-family: "Arial";' textLength='426.79px' lengthAdjust='spacingAndGlyphs'>Effect size and permutation evidence answer different questions</text>
 </g>
 </svg>

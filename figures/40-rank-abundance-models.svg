@@ -2982,9 +2982,9 @@
 <rect x='43.08' y='50.69' width='256.74' height='248.99' style='stroke-width: 0.76; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNzQuMTc=)'>
-<text x='39.58' y='257.44' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.99px' lengthAdjust='spacingAndGlyphs'>1e-02</text>
-<text x='39.58' y='175.75' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.97px' lengthAdjust='spacingAndGlyphs'>1e+00</text>
-<text x='39.58' y='94.05' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.97px' lengthAdjust='spacingAndGlyphs'>1e+02</text>
+<text x='39.58' y='257.44' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='17.99px' lengthAdjust='spacingAndGlyphs'>1e-02</text>
+<text x='39.58' y='175.75' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='20.97px' lengthAdjust='spacingAndGlyphs'>1e+00</text>
+<text x='39.58' y='94.05' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='20.97px' lengthAdjust='spacingAndGlyphs'>1e+02</text>
 <polyline points='41.14,255.17 43.08,255.17 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='41.14,173.47 43.08,173.47 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='41.14,91.78 43.08,91.78 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -2992,26 +2992,26 @@
 <polyline points='122.14,301.62 122.14,299.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='189.52,301.62 189.52,299.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='256.91,301.62 256.91,299.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='54.75' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='3.97px' lengthAdjust='spacingAndGlyphs'>1</text>
-<text x='122.14' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>10</text>
-<text x='189.52' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.90px' lengthAdjust='spacingAndGlyphs'>100</text>
-<text x='256.91' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.87px' lengthAdjust='spacingAndGlyphs'>1000</text>
-<text x='171.45' y='316.64' text-anchor='middle' style='font-size: 7.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='63.82px' lengthAdjust='spacingAndGlyphs'>Abundance rank</text>
-<text transform='translate(15.05,175.18) rotate(-90)' text-anchor='middle' style='font-size: 7.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='44.06px' lengthAdjust='spacingAndGlyphs'>Read count</text>
+<text x='54.75' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='3.97px' lengthAdjust='spacingAndGlyphs'>1</text>
+<text x='122.14' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>10</text>
+<text x='189.52' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='11.90px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='256.91' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='15.87px' lengthAdjust='spacingAndGlyphs'>1000</text>
+<text x='171.45' y='316.64' text-anchor='middle' style='font-size: 7.80px;fill: #1A1A1A; font-family: "Arial";' textLength='63.82px' lengthAdjust='spacingAndGlyphs'>Abundance rank</text>
+<text transform='translate(15.05,175.18) rotate(-90)' text-anchor='middle' style='font-size: 7.80px;fill: #1A1A1A; font-family: "Arial";' textLength='44.06px' lengthAdjust='spacingAndGlyphs'>Read count</text>
 <rect x='19.17' y='326.03' width='304.55' height='25.05' style='stroke-width: 0.76; stroke: none; fill: #FFFFFF;' />
-<text x='23.06' y='341.40' style='font-size: 7.80px; font-family: "DejaVu Sans";' textLength='43.20px' lengthAdjust='spacingAndGlyphs'>RAD model</text>
+<text x='23.06' y='341.40' style='font-size: 7.80px; font-family: "Arial";' textLength='43.20px' lengthAdjust='spacingAndGlyphs'>RAD model</text>
 <line x1='71.87' y1='338.56' x2='85.70' y2='338.56' style='stroke-width: 1.39; stroke: #009E73; stroke-linecap: butt;' />
 <line x1='129.92' y1='338.56' x2='143.74' y2='338.56' style='stroke-width: 1.39; stroke: #D55E00; stroke-linecap: butt;' />
 <line x1='190.31' y1='338.56' x2='204.13' y2='338.56' style='stroke-width: 1.39; stroke: #6B7280; stroke-linecap: butt;' />
 <line x1='227.45' y1='338.56' x2='241.27' y2='338.56' style='stroke-width: 1.39; stroke: #E69F00; stroke-linecap: butt;' />
 <line x1='288.24' y1='338.56' x2='302.06' y2='338.56' style='stroke-width: 1.39; stroke: #0072B2; stroke-linecap: butt;' />
-<text x='91.31' y='340.83' style='font-size: 6.24px; font-family: "DejaVu Sans";' textLength='33.00px' lengthAdjust='spacingAndGlyphs'>Lognormal</text>
-<text x='149.36' y='340.83' style='font-size: 6.24px; font-family: "DejaVu Sans";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>Mandelbrot</text>
-<text x='209.75' y='340.83' style='font-size: 6.24px; font-family: "DejaVu Sans";' textLength='12.09px' lengthAdjust='spacingAndGlyphs'>Null</text>
-<text x='246.89' y='340.83' style='font-size: 6.24px; font-family: "DejaVu Sans";' textLength='35.74px' lengthAdjust='spacingAndGlyphs'>Preemption</text>
-<text x='307.68' y='340.83' style='font-size: 6.24px; font-family: "DejaVu Sans";' textLength='12.16px' lengthAdjust='spacingAndGlyphs'>Zipf</text>
-<text x='9.36' y='45.18' style='font-size: 7.80px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='110.43px' lengthAdjust='spacingAndGlyphs'>S182 (CW); richness = 2908</text>
-<text x='9.36' y='33.74' style='font-size: 8.97px; font-weight: bold; font-family: "DejaVu Sans";' textLength='190.60px' lengthAdjust='spacingAndGlyphs'>A. Representative rank-abundance fit</text>
+<text x='91.31' y='340.83' style='font-size: 6.24px; font-family: "Arial";' textLength='33.00px' lengthAdjust='spacingAndGlyphs'>Lognormal</text>
+<text x='149.36' y='340.83' style='font-size: 6.24px; font-family: "Arial";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>Mandelbrot</text>
+<text x='209.75' y='340.83' style='font-size: 6.24px; font-family: "Arial";' textLength='12.09px' lengthAdjust='spacingAndGlyphs'>Null</text>
+<text x='246.89' y='340.83' style='font-size: 6.24px; font-family: "Arial";' textLength='35.74px' lengthAdjust='spacingAndGlyphs'>Preemption</text>
+<text x='307.68' y='340.83' style='font-size: 6.24px; font-family: "Arial";' textLength='12.16px' lengthAdjust='spacingAndGlyphs'>Zipf</text>
+<text x='9.36' y='45.18' style='font-size: 7.80px;fill: #4D4D4D; font-family: "Arial";' textLength='110.43px' lengthAdjust='spacingAndGlyphs'>S182 (CW); richness = 2908</text>
+<text x='9.36' y='33.74' style='font-size: 8.97px; font-weight: bold; font-family: "Arial";' textLength='190.60px' lengthAdjust='spacingAndGlyphs'>A. Representative rank-abundance fit</text>
 <rect x='346.83' y='50.69' width='154.04' height='248.99' style='stroke-width: 0.76; stroke: none; fill: #FFFFFF;' />
 <polyline points='346.83,270.95 500.87,270.95 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
 <polyline points='346.83,223.06 500.87,223.06 ' style='stroke-width: 0.53; stroke: #E6E6E6; stroke-linecap: butt;' />
@@ -3028,17 +3028,17 @@
 <rect x='346.83' y='254.67' width='0.00' height='32.56' style='stroke-width: 0.64; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #009E73;' />
 <rect x='346.83' y='111.02' width='27.03' height='32.56' style='stroke-width: 0.64; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2;' />
 <rect x='346.83' y='63.14' width='135.13' height='32.56' style='stroke-width: 0.64; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #D55E00;' />
-<text x='347.56' y='225.86' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='4.88px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='347.56' y='177.98' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='4.88px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='347.56' y='273.74' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='4.88px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='375.32' y='130.10' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='9.76px' lengthAdjust='spacingAndGlyphs'>15</text>
-<text x='483.42' y='82.21' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='9.76px' lengthAdjust='spacingAndGlyphs'>75</text>
+<text x='347.56' y='225.86' style='font-size: 7.68px; font-family: "Arial";' textLength='4.88px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='347.56' y='177.98' style='font-size: 7.68px; font-family: "Arial";' textLength='4.88px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='347.56' y='273.74' style='font-size: 7.68px; font-family: "Arial";' textLength='4.88px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='375.32' y='130.10' style='font-size: 7.68px; font-family: "Arial";' textLength='9.76px' lengthAdjust='spacingAndGlyphs'>15</text>
+<text x='483.42' y='82.21' style='font-size: 7.68px; font-family: "Arial";' textLength='9.76px' lengthAdjust='spacingAndGlyphs'>75</text>
 <rect x='346.83' y='50.69' width='154.04' height='248.99' style='stroke-width: 0.76; stroke: #333333;' />
-<text x='343.33' y='273.22' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='33.00px' lengthAdjust='spacingAndGlyphs'>Lognormal</text>
-<text x='343.33' y='225.34' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.09px' lengthAdjust='spacingAndGlyphs'>Null</text>
-<text x='343.33' y='177.45' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='35.74px' lengthAdjust='spacingAndGlyphs'>Preemption</text>
-<text x='343.33' y='129.57' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.16px' lengthAdjust='spacingAndGlyphs'>Zipf</text>
-<text x='343.33' y='81.69' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>Mandelbrot</text>
+<text x='343.33' y='273.22' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='33.00px' lengthAdjust='spacingAndGlyphs'>Lognormal</text>
+<text x='343.33' y='225.34' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='12.09px' lengthAdjust='spacingAndGlyphs'>Null</text>
+<text x='343.33' y='177.45' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='35.74px' lengthAdjust='spacingAndGlyphs'>Preemption</text>
+<text x='343.33' y='129.57' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='12.16px' lengthAdjust='spacingAndGlyphs'>Zipf</text>
+<text x='343.33' y='81.69' text-anchor='end' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='35.34px' lengthAdjust='spacingAndGlyphs'>Mandelbrot</text>
 <polyline points='344.88,270.95 346.83,270.95 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='344.88,223.06 346.83,223.06 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='344.88,175.18 346.83,175.18 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -3049,14 +3049,14 @@
 <polyline points='418.89,301.62 418.89,299.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='454.93,301.62 454.93,299.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='490.96,301.62 490.96,299.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='346.83' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='3.97px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='382.86' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>20</text>
-<text x='418.89' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>40</text>
-<text x='454.93' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>60</text>
-<text x='490.96' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>80</text>
-<text x='423.85' y='316.64' text-anchor='middle' style='font-size: 7.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='33.29px' lengthAdjust='spacingAndGlyphs'>Samples</text>
-<text x='307.59' y='45.18' style='font-size: 7.80px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='105.54px' lengthAdjust='spacingAndGlyphs'>3 captured fitting warnings</text>
-<text x='307.59' y='33.74' style='font-size: 8.97px; font-weight: bold; font-family: "DejaVu Sans";' textLength='170.69px' lengthAdjust='spacingAndGlyphs'>B. Best AIC model across samples</text>
+<text x='346.83' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='3.97px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='382.86' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='418.89' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>40</text>
+<text x='454.93' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>60</text>
+<text x='490.96' y='307.72' text-anchor='middle' style='font-size: 6.24px;fill: #1A1A1A; font-family: "Arial";' textLength='7.93px' lengthAdjust='spacingAndGlyphs'>80</text>
+<text x='423.85' y='316.64' text-anchor='middle' style='font-size: 7.80px;fill: #1A1A1A; font-family: "Arial";' textLength='33.29px' lengthAdjust='spacingAndGlyphs'>Samples</text>
+<text x='307.59' y='45.18' style='font-size: 7.80px;fill: #4D4D4D; font-family: "Arial";' textLength='105.54px' lengthAdjust='spacingAndGlyphs'>3 captured fitting warnings</text>
+<text x='307.59' y='33.74' style='font-size: 8.97px; font-weight: bold; font-family: "Arial";' textLength='170.69px' lengthAdjust='spacingAndGlyphs'>B. Best AIC model across samples</text>
 <text x='500.87' y='366.86' text-anchor='end' style='font-size: 8.80px; font-family: "Arial";' textLength='478.08px' lengthAdjust='spacingAndGlyphs'>Model winners are relative to the five-model candidate set; each biological sample was fitted independently.</text>
 <text x='9.36' y='15.10' style='font-size: 13.20px; font-family: "Arial";' textLength='401.47px' lengthAdjust='spacingAndGlyphs'>RAD models summarize dominance, not unique mechanisms</text>
 </g>

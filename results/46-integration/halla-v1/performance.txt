@@ -23,7 +23,7 @@ HAllA version:	0.8.40
     fnr thresh                    : 0.2
     rank cluster                  : best
   output:
-    dir                           : /media/desk16/tly9658/wechat/16s/results/46-integration/halla-v1
+    dir                           : results/46-integration/halla-v1
     verbose                       : True
 
 --Results--
@@ -33,8 +33,8 @@ Number of significant associations                          : 350
 Number of significant clusters                              : 70
 
 --Durations--
-Loading and preprocessing data                              : 0:00:00.041876
-Computing pairwise similarities, p-values, q-values         : 0:00:00.959368
-Performing hierarchical clustering                          : 0:00:00.685684
-Finding densely associated blocks                           : 0:00:00.046169
-Total execution time                                        : 0:00:01.733098
+Loading and preprocessing data                              : 0:00:00.053802
+Computing pairwise similarities, p-values, q-values         : 0:00:01.126938
+Performing hierarchical clustering                          : 0:00:00.902592
+Finding densely associated blocks                           : 0:00:00.051258
+Total execution time                                        : 0:00:02.134591

@@ -462,11 +462,11 @@
 <rect x='34.40' y='30.87' width='443.10' height='226.81' style='stroke-width: 0.85; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw0ODEuODl8MC4wMHwzMjguODI=)'>
-<text x='30.46' y='260.24' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.16px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='30.46' y='211.95' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>20%</text>
-<text x='30.46' y='163.66' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>40%</text>
-<text x='30.46' y='115.36' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>60%</text>
-<text x='30.46' y='67.07' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>80%</text>
+<text x='30.46' y='260.24' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='11.16px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='30.46' y='211.95' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>20%</text>
+<text x='30.46' y='163.66' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>40%</text>
+<text x='30.46' y='115.36' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>60%</text>
+<text x='30.46' y='67.07' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>80%</text>
 <polyline points='32.21,257.68 34.40,257.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.21,209.39 34.40,209.39 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.21,161.09 34.40,161.09 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -476,14 +476,14 @@
 <polyline points='203.20,259.87 203.20,257.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='308.70,259.87 308.70,257.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='414.21,259.87 414.21,257.68 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='97.70' y='266.75' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='22.36px' lengthAdjust='spacingAndGlyphs'>0.01%</text>
-<text x='203.20' y='266.75' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='22.36px' lengthAdjust='spacingAndGlyphs'>0.05%</text>
-<text x='308.70' y='266.75' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.88px' lengthAdjust='spacingAndGlyphs'>0.1%</text>
-<text x='414.21' y='266.75' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.88px' lengthAdjust='spacingAndGlyphs'>0.5%</text>
-<text x='255.95' y='276.82' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='139.79px' lengthAdjust='spacingAndGlyphs'>Local rare-abundance threshold</text>
-<text transform='translate(10.80,144.28) rotate(-90)' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='186.57px' lengthAdjust='spacingAndGlyphs'>Relative-abundance mass below threshold</text>
+<text x='97.70' y='266.75' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='22.36px' lengthAdjust='spacingAndGlyphs'>0.01%</text>
+<text x='203.20' y='266.75' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='22.36px' lengthAdjust='spacingAndGlyphs'>0.05%</text>
+<text x='308.70' y='266.75' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='17.88px' lengthAdjust='spacingAndGlyphs'>0.1%</text>
+<text x='414.21' y='266.75' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='17.88px' lengthAdjust='spacingAndGlyphs'>0.5%</text>
+<text x='255.95' y='276.82' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "Arial";' textLength='139.79px' lengthAdjust='spacingAndGlyphs'>Local rare-abundance threshold</text>
+<text transform='translate(10.80,144.28) rotate(-90)' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "Arial";' textLength='186.57px' lengthAdjust='spacingAndGlyphs'>Relative-abundance mass below threshold</text>
 <rect x='97.77' y='287.42' width='316.37' height='26.05' style='stroke-width: 0.85; stroke: none; fill: #FFFFFF;' />
-<text x='102.16' y='303.65' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='64.39px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
+<text x='102.16' y='303.65' style='font-size: 8.80px; font-family: "Arial";' textLength='64.39px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
 <polyline points='179.57,307.35 179.57,304.76 ' style='stroke-width: 0.96; stroke: #E69F00; stroke-linecap: butt; stroke-linejoin: miter;' />
 <polyline points='179.57,296.12 179.57,293.53 ' style='stroke-width: 0.96; stroke: #E69F00; stroke-linecap: butt; stroke-linejoin: miter;' />
 <rect x='173.09' y='296.12' width='12.96' height='8.64' style='stroke-width: 0.96; stroke: #E69F00; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00; fill-opacity: 0.35;' />
@@ -505,11 +505,11 @@
 <circle cx='340.12' cy='300.44' r='1.26' style='stroke-width: 0.71; stroke: #009E73; stroke-opacity: 0.30; fill: #009E73; fill-opacity: 0.30;' />
 <line x1='333.20' y1='300.44' x2='347.03' y2='300.44' style='stroke-width: 1.92; stroke: #009E73; stroke-linecap: butt;' />
 <circle cx='340.12' cy='300.44' r='2.84' style='stroke-width: 0.99; stroke: #009E73; fill: #009E73;' />
-<text x='192.59' y='303.00' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='51.98px' lengthAdjust='spacingAndGlyphs'>Inland wetland</text>
-<text x='270.62' y='303.00' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='56.48px' lengthAdjust='spacingAndGlyphs'>Coastal wetland</text>
-<text x='353.14' y='303.00' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='56.61px' lengthAdjust='spacingAndGlyphs'>Tibetan wetland</text>
-<text x='4.38' y='24.66' style='font-size: 8.80px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='404.86px' lengthAdjust='spacingAndGlyphs'>Local rare mass sums features below the selected abundance threshold within each sample</text>
-<text x='4.38' y='11.76' style='font-size: 10.12px; font-weight: bold; font-family: "DejaVu Sans";' textLength='338.31px' lengthAdjust='spacingAndGlyphs'>The measured rare-biosphere mass is threshold dependent</text>
-<text x='34.40' y='322.97' style='font-size: 7.04px;fill: #666666; font-family: "DejaVu Sans";' textLength='589.31px' lengthAdjust='spacingAndGlyphs'>The highlighted 0.1% rule gives a 44.2% equal-sample mean (range 23.3–59.4%). Points are samples; lines connect descriptive group means without hypothesis tests.</text>
+<text x='192.59' y='303.00' style='font-size: 7.04px; font-family: "Arial";' textLength='51.98px' lengthAdjust='spacingAndGlyphs'>Inland wetland</text>
+<text x='270.62' y='303.00' style='font-size: 7.04px; font-family: "Arial";' textLength='56.48px' lengthAdjust='spacingAndGlyphs'>Coastal wetland</text>
+<text x='353.14' y='303.00' style='font-size: 7.04px; font-family: "Arial";' textLength='56.61px' lengthAdjust='spacingAndGlyphs'>Tibetan wetland</text>
+<text x='4.38' y='24.66' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='404.86px' lengthAdjust='spacingAndGlyphs'>Local rare mass sums features below the selected abundance threshold within each sample</text>
+<text x='4.38' y='11.76' style='font-size: 10.12px; font-weight: bold; font-family: "Arial";' textLength='338.31px' lengthAdjust='spacingAndGlyphs'>The measured rare-biosphere mass is threshold dependent</text>
+<text x='34.40' y='322.97' style='font-size: 7.04px;fill: #666666; font-family: "Arial";' textLength='589.31px' lengthAdjust='spacingAndGlyphs'>The highlighted 0.1% rule gives a 44.2% equal-sample mean (range 23.3–59.4%). Points are samples; lines connect descriptive group means without hypothesis tests.</text>
 </g>
 </svg>

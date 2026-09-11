@@ -70,29 +70,29 @@
 <circle cx='144.65' cy='90.94' r='3.56' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
 <circle cx='247.68' cy='156.89' r='3.56' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
 <circle cx='134.61' cy='222.84' r='3.56' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
-<text x='147.73' y='78.37' style='font-size: 7.11px;fill: #D55E00; font-family: "DejaVu Sans";' textLength='30.82px' lengthAdjust='spacingAndGlyphs'>q=0.042</text>
-<text x='244.59' y='144.31' text-anchor='end' style='font-size: 7.11px;fill: #D55E00; font-family: "DejaVu Sans";' textLength='30.82px' lengthAdjust='spacingAndGlyphs'>q=0.006</text>
-<text x='137.69' y='210.26' style='font-size: 7.11px;fill: #6B7280; font-family: "DejaVu Sans";' textLength='30.82px' lengthAdjust='spacingAndGlyphs'>q=0.102</text>
+<text x='147.73' y='78.37' style='font-size: 7.11px;fill: #D55E00; font-family: "Arial";' textLength='30.82px' lengthAdjust='spacingAndGlyphs'>q=0.042</text>
+<text x='244.59' y='144.31' text-anchor='end' style='font-size: 7.11px;fill: #D55E00; font-family: "Arial";' textLength='30.82px' lengthAdjust='spacingAndGlyphs'>q=0.006</text>
+<text x='137.69' y='210.26' style='font-size: 7.11px;fill: #6B7280; font-family: "Arial";' textLength='30.82px' lengthAdjust='spacingAndGlyphs'>q=0.102</text>
 <rect x='53.25' y='51.38' width='214.30' height='211.03' style='stroke-width: 0.78; stroke: #333333;' />
-<text x='49.66' y='225.17' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.40px' lengthAdjust='spacingAndGlyphs'>TOC</text>
-<text x='49.66' y='159.22' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='40.20px' lengthAdjust='spacingAndGlyphs'>Conductivity</text>
-<text x='49.66' y='93.27' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.87px' lengthAdjust='spacingAndGlyphs'>pH</text>
+<text x='49.66' y='225.17' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='13.40px' lengthAdjust='spacingAndGlyphs'>TOC</text>
+<text x='49.66' y='159.22' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='40.20px' lengthAdjust='spacingAndGlyphs'>Conductivity</text>
+<text x='49.66' y='93.27' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='8.87px' lengthAdjust='spacingAndGlyphs'>pH</text>
 <polyline points='51.26,222.84 53.25,222.84 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='51.26,156.89 53.25,156.89 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='51.26,90.94 53.25,90.94 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='110.70,264.40 110.70,262.41 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='190.22,264.40 190.22,262.41 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='110.70' y='270.65' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='190.22' y='270.65' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.1</text>
-<text x='160.40' y='301.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='182.10px' lengthAdjust='spacingAndGlyphs'>Phylogenetic distance vs niche difference rho</text>
+<text x='110.70' y='270.65' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='190.22' y='270.65' text-anchor='middle' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.17px' lengthAdjust='spacingAndGlyphs'>0.1</text>
+<text x='160.40' y='301.93' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='182.10px' lengthAdjust='spacingAndGlyphs'>Phylogenetic distance vs niche difference rho</text>
 <rect x='85.69' y='311.56' width='149.42' height='25.25' style='stroke-width: 0.78; stroke: none; fill: #FFFFFF;' />
-<text x='89.68' y='327.10' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='54.76px' lengthAdjust='spacingAndGlyphs'>BH supported</text>
+<text x='89.68' y='327.10' style='font-size: 8.00px; font-family: "Arial";' textLength='54.76px' lengthAdjust='spacingAndGlyphs'>BH supported</text>
 <circle cx='157.06' cy='324.19' r='3.56' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
 <circle cx='201.44' cy='324.19' r='3.56' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
-<text x='169.68' y='326.52' style='font-size: 6.40px; font-family: "DejaVu Sans";' textLength='19.13px' lengthAdjust='spacingAndGlyphs'>FALSE</text>
-<text x='214.06' y='326.52' style='font-size: 6.40px; font-family: "DejaVu Sans";' textLength='17.06px' lengthAdjust='spacingAndGlyphs'>TRUE</text>
-<text x='9.46' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='201.19px' lengthAdjust='spacingAndGlyphs'>Observed rho with 95% label-permutation interval</text>
-<text x='9.46' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "DejaVu Sans";' textLength='168.20px' lengthAdjust='spacingAndGlyphs'>A. Short-range niche signal gate</text>
+<text x='169.68' y='326.52' style='font-size: 6.40px; font-family: "Arial";' textLength='19.13px' lengthAdjust='spacingAndGlyphs'>FALSE</text>
+<text x='214.06' y='326.52' style='font-size: 6.40px; font-family: "Arial";' textLength='17.06px' lengthAdjust='spacingAndGlyphs'>TRUE</text>
+<text x='9.46' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "Arial";' textLength='201.19px' lengthAdjust='spacingAndGlyphs'>Observed rho with 95% label-permutation interval</text>
+<text x='9.46' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "Arial";' textLength='168.20px' lengthAdjust='spacingAndGlyphs'>A. Short-range niche signal gate</text>
 </g>
 <defs>
   <clipPath id='cpMzA2Ljg4fDUwMC43N3w1MS4zOHwyNjIuNDE='>
@@ -121,11 +121,11 @@
 <rect x='306.88' y='51.38' width='193.89' height='211.03' style='stroke-width: 0.78; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNjAuMDA=)'>
-<text x='303.29' y='264.73' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.14px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='303.29' y='211.98' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>25%</text>
-<text x='303.29' y='159.22' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='303.29' y='106.46' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>75%</text>
-<text x='303.29' y='53.70' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.28px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='303.29' y='264.73' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='10.14px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='303.29' y='211.98' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>25%</text>
+<text x='303.29' y='159.22' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='303.29' y='106.46' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='14.21px' lengthAdjust='spacingAndGlyphs'>75%</text>
+<text x='303.29' y='53.70' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='18.28px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <polyline points='304.89,262.41 306.88,262.41 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='304.89,209.65 306.88,209.65 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='304.89,156.89 306.88,156.89 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -133,11 +133,11 @@
 <polyline points='304.89,51.38 306.88,51.38 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='359.76,264.40 359.76,262.41 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='447.89,264.40 447.89,262.41 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text transform='translate(361.35,270.37) rotate(-20)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='61.67px' lengthAdjust='spacingAndGlyphs'>Total reads &gt;= 500</text>
-<text transform='translate(449.48,270.37) rotate(-20)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='65.74px' lengthAdjust='spacingAndGlyphs'>Total reads &gt;= 1000</text>
-<text transform='translate(281.35,156.89) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='95.16px' lengthAdjust='spacingAndGlyphs'>Overall process fraction</text>
-<text x='275.52' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='138.25px' lengthAdjust='spacingAndGlyphs'>Pairwise label agreement = 81.4%</text>
-<text x='275.52' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "DejaVu Sans";' textLength='140.08px' lengthAdjust='spacingAndGlyphs'>B. Feature-filter sensitivity</text>
+<text transform='translate(361.35,270.37) rotate(-20)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='61.67px' lengthAdjust='spacingAndGlyphs'>Total reads &gt;= 500</text>
+<text transform='translate(449.48,270.37) rotate(-20)' text-anchor='end' style='font-size: 6.40px;fill: #1A1A1A; font-family: "Arial";' textLength='65.74px' lengthAdjust='spacingAndGlyphs'>Total reads &gt;= 1000</text>
+<text transform='translate(281.35,156.89) rotate(-90)' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='95.16px' lengthAdjust='spacingAndGlyphs'>Overall process fraction</text>
+<text x='275.52' y='45.73' style='font-size: 8.00px;fill: #4D4D4D; font-family: "Arial";' textLength='138.25px' lengthAdjust='spacingAndGlyphs'>Pairwise label agreement = 81.4%</text>
+<text x='275.52' y='34.00' style='font-size: 9.20px; font-weight: bold; font-family: "Arial";' textLength='140.08px' lengthAdjust='spacingAndGlyphs'>B. Feature-filter sensitivity</text>
 <text x='500.77' y='352.69' text-anchor='end' style='font-size: 8.80px; font-family: "Arial";' textLength='421.99px' lengthAdjust='spacingAndGlyphs'>The primary analysis covers 47.4% of reads; rare-biosphere processes are outside its estimand.</text>
 <text x='9.46' y='15.10' style='font-size: 13.20px; font-family: "Arial";' textLength='446.46px' lengthAdjust='spacingAndGlyphs'>Assembly-process labels need assumption and preprocessing gates</text>
 </g>

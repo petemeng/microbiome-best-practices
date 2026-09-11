@@ -147,10 +147,10 @@
 <rect x='51.84' y='70.42' width='311.69' height='171.75' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHwzNjguNTB8MC4wMHwyODMuNDY=)'>
-<text x='47.35' y='229.66' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.01%</text>
-<text x='47.35' y='187.47' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.10%</text>
-<text x='47.35' y='145.27' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>1.00%</text>
-<text x='47.35' y='103.08' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='30.51px' lengthAdjust='spacingAndGlyphs'>10.00%</text>
+<text x='47.35' y='229.66' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.01%</text>
+<text x='47.35' y='187.47' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.10%</text>
+<text x='47.35' y='145.27' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>1.00%</text>
+<text x='47.35' y='103.08' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='30.51px' lengthAdjust='spacingAndGlyphs'>10.00%</text>
 <polyline points='49.35,226.75 51.84,226.75 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='49.35,184.55 51.84,184.55 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='49.35,142.36 51.84,142.36 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -160,15 +160,15 @@
 <polyline points='201.37,244.65 201.37,242.16 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='259.93,244.65 259.93,242.16 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='318.49,244.65 318.49,242.16 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='84.25' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.00%</text>
-<text x='142.81' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.01%</text>
-<text x='201.37' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.10%</text>
-<text x='259.93' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>1.00%</text>
-<text x='318.49' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='30.51px' lengthAdjust='spacingAndGlyphs'>10.00%</text>
-<text x='207.68' y='263.93' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='181.34px' lengthAdjust='spacingAndGlyphs'>Mean assignment share: full lineage</text>
-<text transform='translate(12.27,156.29) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='180.78px' lengthAdjust='spacingAndGlyphs'>Mean assignment share: genus only</text>
+<text x='84.25' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.00%</text>
+<text x='142.81' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.01%</text>
+<text x='201.37' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>0.10%</text>
+<text x='259.93' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='25.42px' lengthAdjust='spacingAndGlyphs'>1.00%</text>
+<text x='318.49' y='252.48' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='30.51px' lengthAdjust='spacingAndGlyphs'>10.00%</text>
+<text x='207.68' y='263.93' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='181.34px' lengthAdjust='spacingAndGlyphs'>Mean assignment share: full lineage</text>
+<text transform='translate(12.27,156.29) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='180.78px' lengthAdjust='spacingAndGlyphs'>Mean assignment share: genus only</text>
 <rect x='128.47' y='20.73' width='158.43' height='39.72' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
-<text x='133.45' y='44.24' style='font-size: 10.00px; font-family: "DejaVu Sans";' textLength='57.08px' lengthAdjust='spacingAndGlyphs'>Sample rho</text>
+<text x='133.45' y='44.24' style='font-size: 10.00px; font-family: "Arial";' textLength='57.08px' lengthAdjust='spacingAndGlyphs'>Sample rho</text>
 <image width='86.40' height='17.28' x='195.51' y='25.72' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAABCAYAAABkOJMpAAAAqklEQVQ4jZWSURIDIQhDXzxob93zpB/rVHGBbWf8ISYkgnq/MBoIgQYwQEKMWGsAAgkYSNpqJRzdOKGWpifPGglg05wckixL88V46sWm7bgkWTneFf11aCO+tCsrnO9sfZNZPc2ozJfttskT/Xufau80/nn2oseGZTvrcvXcyq+aTb6H86/8onGrqbL+5+Mwgyp39IuadWeDMfNgXy1tY9hwT5yJ++Df+3wA/tsntpkvXqQAAAAASUVORK5CYII='/>
 <polyline points='205.21,39.54 205.21,43.00 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='233.14,39.54 233.14,43.00 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
@@ -176,10 +176,10 @@
 <polyline points='205.21,29.17 205.21,25.72 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='233.14,29.17 233.14,25.72 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='261.07,29.17 261.07,25.72 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<text x='205.21' y='53.81' text-anchor='middle' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='233.14' y='53.81' text-anchor='middle' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.2</text>
-<text x='261.07' y='53.81' text-anchor='middle' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='210.36px' lengthAdjust='spacingAndGlyphs'>Taxonomic-resolution sensitivity</text>
-<text x='51.84' y='276.82' style='font-size: 8.00px;fill: #666666; font-family: "DejaVu Sans";' textLength='312.96px' lengthAdjust='spacingAndGlyphs'>Large departures from the diagonal identify taxonomy-dependent predictions.</text>
+<text x='205.21' y='53.81' text-anchor='middle' style='font-size: 8.00px; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='233.14' y='53.81' text-anchor='middle' style='font-size: 8.00px; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.2</text>
+<text x='261.07' y='53.81' text-anchor='middle' style='font-size: 8.00px; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='210.36px' lengthAdjust='spacingAndGlyphs'>Taxonomic-resolution sensitivity</text>
+<text x='51.84' y='276.82' style='font-size: 8.00px;fill: #666666; font-family: "Arial";' textLength='312.96px' lengthAdjust='spacingAndGlyphs'>Large departures from the diagonal identify taxonomy-dependent predictions.</text>
 </g>
 </svg>

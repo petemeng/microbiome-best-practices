@@ -59,10 +59,10 @@
 <rect x='61.07' y='35.09' width='259.93' height='156.05' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHwzMjUuOTh8MC4wMHwyMzIuNDQ=)'>
-<text x='56.59' y='171.76' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='51.61px' lengthAdjust='spacingAndGlyphs'>REML pooled</text>
-<text x='56.59' y='134.61' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='34.65px' lengthAdjust='spacingAndGlyphs'>Zackular</text>
-<text x='56.59' y='97.45' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.35px' lengthAdjust='spacingAndGlyphs'>Zhao</text>
-<text x='56.59' y='60.30' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='22.75px' lengthAdjust='spacingAndGlyphs'>Xiang</text>
+<text x='56.59' y='171.76' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='51.61px' lengthAdjust='spacingAndGlyphs'>REML pooled</text>
+<text x='56.59' y='134.61' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='34.65px' lengthAdjust='spacingAndGlyphs'>Zackular</text>
+<text x='56.59' y='97.45' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='20.35px' lengthAdjust='spacingAndGlyphs'>Zhao</text>
+<text x='56.59' y='60.30' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='22.75px' lengthAdjust='spacingAndGlyphs'>Xiang</text>
 <polyline points='58.58,168.85 61.07,168.85 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='58.58,131.69 61.07,131.69 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='58.58,94.54 61.07,94.54 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -72,14 +72,14 @@
 <polyline points='214.72,193.63 214.72,191.14 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='266.28,193.63 266.28,191.14 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='317.84,193.63 317.84,191.14 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='111.60' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
-<text x='163.16' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='214.72' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
-<text x='266.28' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.8</text>
-<text x='317.84' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>1.2</text>
-<text x='191.04' y='212.90' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='177.61px' lengthAdjust='spacingAndGlyphs'>CRC − control CLR mean difference</text>
-<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='250.59px' lengthAdjust='spacingAndGlyphs'>Peptostreptococcus · I² = 0.0% · BH p = 0.000118</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='197.04px' lengthAdjust='spacingAndGlyphs'>Random-effects meta-analysis</text>
-<text x='61.07' y='225.80' style='font-size: 8.00px;fill: #666666; font-family: "DejaVu Sans";' textLength='257.19px' lengthAdjust='spacingAndGlyphs'>Study intervals are estimate ± 1.96 SE; pooled interval is REML.</text>
+<text x='111.60' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='15.61px' lengthAdjust='spacingAndGlyphs'>-0.4</text>
+<text x='163.16' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='214.72' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.4</text>
+<text x='266.28' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>0.8</text>
+<text x='317.84' y='201.45' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.72px' lengthAdjust='spacingAndGlyphs'>1.2</text>
+<text x='191.04' y='212.90' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='177.61px' lengthAdjust='spacingAndGlyphs'>CRC − control CLR mean difference</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='250.59px' lengthAdjust='spacingAndGlyphs'>Peptostreptococcus · I² = 0.0% · BH p = 0.000118</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='197.04px' lengthAdjust='spacingAndGlyphs'>Random-effects meta-analysis</text>
+<text x='61.07' y='225.80' style='font-size: 8.00px;fill: #666666; font-family: "Arial";' textLength='257.19px' lengthAdjust='spacingAndGlyphs'>Study intervals are estimate ± 1.96 SE; pooled interval is REML.</text>
 </g>
 </svg>

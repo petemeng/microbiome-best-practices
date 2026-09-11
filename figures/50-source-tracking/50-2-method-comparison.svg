@@ -68,11 +68,11 @@
 <rect x='44.20' y='72.29' width='461.05' height='124.46' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwyMzIuNDQ=)'>
-<text x='39.72' y='194.01' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.69px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='39.72' y='165.72' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>25%</text>
-<text x='39.72' y='137.44' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='39.72' y='109.15' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>75%</text>
-<text x='39.72' y='80.87' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='22.87px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='39.72' y='194.01' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='12.69px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='39.72' y='165.72' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>25%</text>
+<text x='39.72' y='137.44' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='39.72' y='109.15' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.78px' lengthAdjust='spacingAndGlyphs'>75%</text>
+<text x='39.72' y='80.87' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='22.87px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <polyline points='41.71,191.09 44.20,191.09 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='41.71,162.81 44.20,162.81 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='41.71,134.52 44.20,134.52 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -83,19 +83,19 @@
 <polyline points='274.73,199.24 274.73,196.75 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='363.39,199.24 363.39,196.75 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='452.06,199.24 452.06,196.75 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text transform='translate(100.32,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='39.18px' lengthAdjust='spacingAndGlyphs'>Infant gut</text>
-<text transform='translate(188.98,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='36.66px' lengthAdjust='spacingAndGlyphs'>Adult gut</text>
-<text transform='translate(277.65,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='39.47px' lengthAdjust='spacingAndGlyphs'>Adult skin</text>
-<text transform='translate(366.31,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.42px' lengthAdjust='spacingAndGlyphs'>Soil</text>
-<text transform='translate(454.97,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='37.13px' lengthAdjust='spacingAndGlyphs'>Unknown</text>
-<text transform='translate(12.27,134.52) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='114.34px' lengthAdjust='spacingAndGlyphs'>Estimated contribution</text>
+<text transform='translate(100.32,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='39.18px' lengthAdjust='spacingAndGlyphs'>Infant gut</text>
+<text transform='translate(188.98,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='36.66px' lengthAdjust='spacingAndGlyphs'>Adult gut</text>
+<text transform='translate(277.65,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='39.47px' lengthAdjust='spacingAndGlyphs'>Adult skin</text>
+<text transform='translate(366.31,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='14.42px' lengthAdjust='spacingAndGlyphs'>Soil</text>
+<text transform='translate(454.97,206.28) rotate(-30)' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='37.13px' lengthAdjust='spacingAndGlyphs'>Unknown</text>
+<text transform='translate(12.27,134.52) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='114.34px' lengthAdjust='spacingAndGlyphs'>Estimated contribution</text>
 <rect x='180.48' y='35.09' width='188.49' height='27.24' style='stroke-width: 0.97; stroke: none; fill: #FFFFFF;' />
-<text x='185.47' y='52.36' style='font-size: 10.00px; font-family: "DejaVu Sans";' textLength='37.51px' lengthAdjust='spacingAndGlyphs'>Method</text>
+<text x='185.47' y='52.36' style='font-size: 10.00px; font-family: "Arial";' textLength='37.51px' lengthAdjust='spacingAndGlyphs'>Method</text>
 <rect x='228.67' y='40.78' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2;' />
 <rect x='281.00' y='40.78' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00;' />
-<text x='250.22' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='25.09px' lengthAdjust='spacingAndGlyphs'>FEAST</text>
-<text x='302.56' y='51.63' style='font-size: 8.00px; font-family: "DejaVu Sans";' textLength='61.44px' lengthAdjust='spacingAndGlyphs'>SourceTracker2</text>
-<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='345.94px' lengthAdjust='spacingAndGlyphs'>SourceTracker2 bars show Monte Carlo SD, not biological uncertainty</text>
-<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='206.60px' lengthAdjust='spacingAndGlyphs'>Algorithm-dependent allocation</text>
+<text x='250.22' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='25.09px' lengthAdjust='spacingAndGlyphs'>FEAST</text>
+<text x='302.56' y='51.63' style='font-size: 8.00px; font-family: "Arial";' textLength='61.44px' lengthAdjust='spacingAndGlyphs'>SourceTracker2</text>
+<text x='4.98' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='345.94px' lengthAdjust='spacingAndGlyphs'>SourceTracker2 bars show Monte Carlo SD, not biological uncertainty</text>
+<text x='4.98' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='206.60px' lengthAdjust='spacingAndGlyphs'>Algorithm-dependent allocation</text>
 </g>
 </svg>

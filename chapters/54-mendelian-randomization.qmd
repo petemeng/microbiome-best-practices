@@ -1,6 +1,6 @@
 ---
 title: "孟德尔随机化：工具变量、水平多效性与敏感性分析"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,21 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/54-mendelian-randomization.R
+  packages:
+  - MRPRESSO
+  - TwoSampleMR
+  - ggplot2
+  - ggrepel
+  - patchwork
+  - ragg
+  - svglite
 ---
 
-> **分析目标：**用 two-sample Mendelian randomization（MR）评估遗传预测的 `Bifidobacterium` 菌属丰度与炎症性肠病（IBD）风险，并系统审计工具强度、等位基因对齐、水平多效性、方向性和共定位。  
 > **额外数据：**MR 不能从 `otutab/taxonomy/metadata` 直接计算；必须另有暴露 GWAS 与结局 GWAS 的逐 SNP 汇总统计，至少包括 effect/other allele、beta、SE、P 值，最好还有 effect-allele frequency 与完整位点统计。  
-> **预计资源：**教学子集为 6 个候选 SNP、5 个对齐后工具；2,000 次 MR-PRESSO 模拟约 1–3 分钟，内存低于 1 GB。
 
 ## MR 的可信度由工具变量假设决定 {#sec-target}
 
@@ -37,133 +47,32 @@ fig-format: png
 MR 的因果解释依赖三个不可由一次回归完全验证的假设：工具与暴露相关；工具不受暴露–结局混杂影响；工具只经暴露影响结局。菌群 GWAS 的弱工具、祖源差异、菌定义不一致、水平多效性和宿主位点共享尤其容易破坏这些条件。
 :::
 
-## 孟德尔随机化依赖哪三项工具变量假设 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-对工具 SNP (G_j)、微生物暴露 (X) 和结局 (Y)，Wald ratio 为：
+需要 R，以及 `MRPRESSO`、`TwoSampleMR`、`ggplot2`、`ggrepel`、`patchwork`、`ragg`、`svglite`。本次使用筛选后的 MiBioGen 暴露、结局 GWAS 汇总统计和变异筛选记录；MR 的输入不是 16S 三件套。
 
-\[
-\hat\beta_{MR,j}=\frac{\hat\beta_{Y G,j}}{\hat\beta_{X G,j}}.
-\]
-
-IVW（inverse-variance weighted）将多个 ratio 按精度合并。它依赖：
-
-1. **Relevance（相关性）**：(G\) 能预测 (X\)。常用近似 (F=(\beta_X/SE_X)^2\)，但 F > 10 只是经验筛查，不是强工具保证。
-2. **Independence（独立性）**：(G\) 与 (X-Y\) 混杂因素独立；人群分层、家系结构和择偶可破坏它。
-3. **Exclusion restriction（排除限制）**：(G\) 不经 (X\) 之外的路径影响 (Y\)。这正是水平多效性的核心风险。
-
-<details>
-<summary><strong>深入：不同敏感性估计器保护什么</strong></summary>
-
-- **IVW**：在所有工具有效，或无方向性多效性时效率高；异质性提示 ratio 不一致。
-- **MR-Egger**：截距检验平均方向性多效性，斜率在 InSIDE 假设下可较稳健，但工具少时功效极低且易受弱工具影响。
-- **Weighted median**：当至少一半权重来自有效工具时可一致。
-- **Mode estimators**：假设最大的一簇相似 ratio 来自有效工具，通常区间较宽。
-- **MR-PRESSO**：寻找异常多效性工具并比较校正前后结果；没有检测到 outlier 不等于没有多效性。
-
-所有方法都可能在共同假设同时失败时一致地给出错误答案。敏感性分析的价值是压力测试，不是“多数投票即真”。
-
-</details>
-
-### 微生物 MR 的专属审计
-
-- 暴露 GWAS 中的“属”可能由不同 16S 区域、分类库、相对丰度变换和 cohort-specific prevalence 定义；
-- 暴露 beta 的一单位到底代表标准化丰度、presence/absence 还是秩正态值，决定效应量如何解释；
-- 两个 GWAS 的祖源、样本重叠和协变量策略影响偏倚；
-- 同一宿主位点同时关联菌和 IBD，不代表由菌介导；需要 locus colocalisation 区分共享因果变异与 LD 中的两个信号。
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载公开汇总统计和定义作图函数</strong></summary>
-
-首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "remotes", "jsonlite", "digest", "ggplot2", "ggrepel", "patchwork",
-  "scales", "svglite", "ragg"
-))
-remotes::install_github("MRCIEU/TwoSampleMR@v0.6.6")
-remotes::install_github("rondolab/MR-PRESSO")
-```
-
-下面从 MiBioGen 官方文件筛选预先指定的候选 SNP，并从 GWAS Catalog summary-statistics API 取得 GCST004131 的对齐记录。原始 API JSON 应保留，以便将来审计接口内容变化。
-
-```{r}
-#| eval: false
-mibiogen_path <- "data/raw/MBG.allHits.p1e4.txt"
-mibiogen_url <- "https://molgenis26.gcc.rug.nl/downloads/MiBioGen/MBG.allHits.p1e4.txt"
-expected_sha <- "37001a83d060596fe0b97b63d6a397f01f43a29add2925d406916b7a50b5883e"
-raw_api <- "data/raw/mr-mibiogen"
-out_dir <- "data/small/mr-mibiogen"
-dir.create(dirname(mibiogen_path), recursive = TRUE, showWarnings = FALSE)
-dir.create(raw_api, recursive = TRUE, showWarnings = FALSE)
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(mibiogen_path)) download.file(mibiogen_url, mibiogen_path, mode = "wb")
-stopifnot(identical(
-  digest::digest(mibiogen_path, algo = "sha256", file = TRUE), expected_sha
-))
-
-exposure_id <- "genus.Bifidobacterium.id.436"
-outcome_id <- "GCST004131"
-rsids <- c("rs182549", "rs73797465", "rs857444", "rs10841473", "rs7322849", "rs75344046")
-mbg <- read.delim(mibiogen_path, check.names = FALSE)
-x <- mbg[mbg$bac == exposure_id & mbg$rsID %in% rsids, ]
-x <- x[match(rsids, x$rsID), ]
-stopifnot(nrow(x) == 6, all(x$P.weightedSumZ < 5e-6), !anyDuplicated(x$chr))
-exposure <- data.frame(
-  SNP = x$rsID, exposure = "Bifidobacterium genus abundance",
-  id.exposure = exposure_id,
-  chr.exposure = x$chr, pos.exposure = x$bp,
-  effect_allele.exposure = toupper(x$eff.allele),
-  other_allele.exposure = toupper(x$ref.allele),
-  beta.exposure = x$beta, se.exposure = x$SE,
-  pval.exposure = x$P.weightedSumZ, eaf.exposure = NA_real_,
-  samplesize.exposure = x$N, ncohorts.exposure = x$Ncohorts,
-  check.names = FALSE
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/mr-mibiogen/exposure.tsv",
+  "data/small/mr-mibiogen/outcome.tsv",
+  "data/small/mr-mibiogen/selection-ledger.tsv",
+  "data/small/mr-mibiogen/source-summary.json"
 )
-exposure$FStatistic <- (exposure$beta.exposure / exposure$se.exposure)^2
-
-priority <- c(`10` = 1, `5` = 2, `12` = 3, `11` = 4, `6` = 5, `13` = 6)
-get_outcome <- function(rsid) {
-  url <- paste0(
-    "https://www.ebi.ac.uk/gwas/summary-statistics/api/associations/",
-    rsid, "?study_accession=", outcome_id, "&reveal=all"
-  )
-  cache <- file.path(raw_api, paste0(outcome_id, "-", rsid, ".json"))
-  if (!file.exists(cache)) download.file(url, cache, mode = "wb",
-                                        headers = "User-Agent: microbiome-best-practices/1.0")
-  payload <- jsonlite::read_json(cache, simplifyVector = FALSE)
-  rows <- payload[["_embedded"]][["associations"]]
-  usable <- Filter(function(z) {
-    identical(z$study_accession, outcome_id) &&
-      !is.null(z$hm_effect_allele) && !is.null(z$hm_other_allele) &&
-      !is.null(z$hm_beta) && !is.null(z$standard_error)
-  }, rows)
-  rank <- vapply(usable, function(z) priority[as.character(z$hm_code)], numeric(1))
-  z <- usable[[which.min(rank)]]
-  data.frame(
-    SNP = rsid, outcome = "Inflammatory bowel disease", id.outcome = outcome_id,
-    chr.outcome = z$chromosome, pos.outcome = z$base_pair_location,
-    effect_allele.outcome = toupper(z$hm_effect_allele),
-    other_allele.outcome = toupper(z$hm_other_allele),
-    beta.outcome = z$hm_beta, se.outcome = z$standard_error,
-    pval.outcome = z$p_value, samplesize.outcome = 59957,
-    ncase.outcome = 25042, ncontrol.outcome = 34915,
-    eaf.outcome = NA_real_, check.names = FALSE
-  )
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
 }
-outcome <- do.call(rbind, lapply(rsids, get_outcome))
-write.table(exposure, file.path(out_dir, "exposure.tsv"), sep = "\t",
-            quote = FALSE, row.names = FALSE, na = "")
-write.table(outcome, file.path(out_dir, "outcome.tsv"), sep = "\t",
-            quote = FALSE, row.names = FALSE, na = "")
 ```
 
-出版级作图函数直接内联：
-
 ```{r}
+#| results: hold
+#| label: reader-step-02
 .libPaths(c(".r-lib", .libPaths()))
 library(TwoSampleMR)
 library(MRPRESSO)
@@ -172,7 +81,7 @@ library(ggrepel)
 library(patchwork)
 
 set.seed(20260754)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -216,14 +125,11 @@ save_pub <- function(plot, file_base, width = 180, height = 115,
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取并审计暴露/结局汇总统计
+### 读取并审计暴露/结局汇总统计
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 base <- "data/small/mr-mibiogen"
 exposure <- read.delim(
   file.path(base, "exposure.tsv"), check.names = FALSE, stringsAsFactors = FALSE
@@ -243,11 +149,66 @@ outcome
 
 候选工具的最小近似 F = 20.77，但最弱位点仍只达到暴露 GWAS 的 suggestive threshold，而非传统 genome-wide significance。菌群性状遗传解释度较低时，F 筛查不能替代弱工具稳健分析。
 
-### 2. 等位基因 harmonisation
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/54-mendelian-randomization.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "remotes", "jsonlite", "digest", "ggplot2", "ggrepel", "patchwork",
+  "scales", "svglite", "ragg"
+))
+remotes::install_github("MRCIEU/TwoSampleMR@v0.6.6")
+remotes::install_github("rondolab/MR-PRESSO")
+```
+
+</details>
+
+## 孟德尔随机化依赖哪三项工具变量假设 {#sec-theory}
+
+对工具 SNP (G_j)、微生物暴露 (X) 和结局 (Y)，Wald ratio 为：
+
+\[
+\hat\beta_{MR,j}=\frac{\hat\beta_{Y G,j}}{\hat\beta_{X G,j}}.
+\]
+
+IVW（inverse-variance weighted）将多个 ratio 按精度合并。它依赖：
+
+1. **Relevance（相关性）**：(G\) 能预测 (X\)。常用近似 (F=(\beta_X/SE_X)^2\)，但 F > 10 只是经验筛查，不是强工具保证。
+2. **Independence（独立性）**：(G\) 与 (X-Y\) 混杂因素独立；人群分层、家系结构和择偶可破坏它。
+3. **Exclusion restriction（排除限制）**：(G\) 不经 (X\) 之外的路径影响 (Y\)。这正是水平多效性的核心风险。
+
+<details>
+<summary><strong>深入：不同敏感性估计器保护什么</strong></summary>
+
+- **IVW**：在所有工具有效，或无方向性多效性时效率高；异质性提示 ratio 不一致。
+- **MR-Egger**：截距检验平均方向性多效性，斜率在 InSIDE 假设下可较稳健，但工具少时功效极低且易受弱工具影响。
+- **Weighted median**：当至少一半权重来自有效工具时可一致。
+- **Mode estimators**：假设最大的一簇相似 ratio 来自有效工具，通常区间较宽。
+- **MR-PRESSO**：寻找异常多效性工具并比较校正前后结果；没有检测到 outlier 不等于没有多效性。
+
+所有方法都可能在共同假设同时失败时一致地给出错误答案。敏感性分析的价值是压力测试，不是“多数投票即真”。
+
+</details>
+
+### 微生物 MR 的专属审计
+
+- 暴露 GWAS 中的“属”可能由不同 16S 区域、分类库、相对丰度变换和 cohort-specific prevalence 定义；
+- 暴露 beta 的一单位到底代表标准化丰度、presence/absence 还是秩正态值，决定效应量如何解释；
+- 两个 GWAS 的祖源、样本重叠和协变量策略影响偏倚；
+- 同一宿主位点同时关联菌和 IBD，不代表由菌介导；需要 locus colocalisation 区分共享因果变异与 LD 中的两个信号。
+
+## 对齐变异，再检查工具强度和多效性 {#sec-code}
+
+### 等位基因 harmonisation
 
 同一个 SNP 在两份 GWAS 中可能以相反 effect allele 报告。`harmonise_data(action = 2)` 对齐方向，并在缺少 allele frequency 时删除不能可靠判向的 palindromic SNP。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 harmonised <- TwoSampleMR::harmonise_data(exposure, outcome, action = 2)
 harmonisation_ledger <- harmonised[, c(
   "SNP", "effect_allele.exposure", "other_allele.exposure",
@@ -262,9 +223,11 @@ stopifnot(nrow(analysis_data) == 5)
 
 `rs10841473` 是 C/G palindromic SNP，且两份紧凑表没有 effect-allele frequency，无法判断 strand，因而删除。不能为了增加工具数而强行保留。
 
-### 3. 主估计与稳健估计器
+### 主估计与稳健估计器
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 methods <- c(
   "mr_ivw", "mr_egger_regression", "mr_weighted_median",
   "mr_simple_mode", "mr_weighted_mode"
@@ -281,9 +244,11 @@ mr_results[, c("method", "nsnp", "b", "se", "pval", "Lower", "Upper", "OR")]
 
 IVW 估计为 −0.0167（SE = 0.1065，P = 0.876），对应 OR = 0.984（95% CI 0.798–1.212）。MR-Egger、weighted median 和两种 mode 的区间也均包含零。这里的“每单位更高 abundance”沿用 MiBioGen 暴露标度，不能写成“每增加 1% 相对丰度”。
 
-### 4. 散点图：每个 SNP 的方向与方法斜率
+### 散点图：每个 SNP 的方向与方法斜率
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 ivw <- mr_results[mr_results$method == "Inverse variance weighted", ]
 egger <- mr_results[mr_results$method == "MR Egger", ]
 median <- mr_results[mr_results$method == "Weighted median", ]
@@ -333,9 +298,11 @@ save_pub(p_scatter, "figures/54-mendelian-randomization/54-1-harmonised-scatter"
          height = 120)
 ```
 
-### 5. 森林图：不要只报告 IVW
+### 森林图：不要只报告 IVW
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 mr_results$method <- factor(
   mr_results$method,
   levels = rev(c(
@@ -366,6 +333,8 @@ save_pub(p_methods, "figures/54-mendelian-randomization/54-2-method-forest",
 ### 异质性、Egger 截距与 MR-PRESSO
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 heterogeneity <- TwoSampleMR::mr_heterogeneity(analysis_data)
 egger_intercept <- TwoSampleMR::mr_pleiotropy_test(analysis_data)
 heterogeneity
@@ -387,6 +356,8 @@ IVW Cochran's Q P = 0.106，Egger intercept = −0.0075（P = 0.825），MR-PRES
 ### Leave-one-out 只能发现单点主导
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 leave_one_out <- TwoSampleMR::mr_leaveoneout(analysis_data)
 leave_one_out$Lower <- leave_one_out$b - qnorm(0.975) * leave_one_out$se
 leave_one_out$Upper <- leave_one_out$b + qnorm(0.975) * leave_one_out$se
@@ -415,6 +386,8 @@ save_pub(p_loo, "figures/54-mendelian-randomization/54-3-leave-one-out",
 ### 把无法完成的诊断也写进结果
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
 presso_global_p <- presso[["MR-PRESSO results"]][["Global Test"]]$Pvalue
 assumption_audit <- data.frame(
   Assumption = c(
@@ -507,19 +480,19 @@ save_pub(p_audit, "figures/54-mendelian-randomization/54-4-assumption-audit",
 - 空结果写成“证明该菌对疾病无因果作用”。宽区间通常只表示数据还不能排除有意义的正负效应。
 :::
 
-## 出版级美化 {#sec-publication}
+## 比较主估计与方向性、稳健性分析 {#sec-publication}
 
 MR 主图建议用“散点 + 方法森林图”，把 leave-one-out 与 assumption audit 放补充材料。森林图必须有零参考线、方法名、SNP 数和 95% CI；二元结局可补充 OR，但不要把暴露标度误写成百分比。
 
 图注应同时说明：候选/保留 SNP 数、harmonisation action、工具选择与 clumping、效应单位、样本量以及哪些诊断不可得。`save_pub()` 已输出 PDF/SVG 和 600 ppi PNG/TIFF，图中文字全部为英文。
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告遗传工具与MR敏感性分析的方法与限制 {#sec-methods}
 
 > We performed two-sample Mendelian randomisation using summary associations for MiBioGen genus-level *Bifidobacterium* abundance and inflammatory bowel disease (GCST004131; 25,042 cases and 34,915 controls). Candidate instruments were selected at P < 5×10^-6. For this compact teaching analysis, one outcome-available variant per chromosome was retained before harmonisation; this cross-chromosome rule was not considered a substitute for ancestry-matched LD clumping. Effect alleles were harmonised using `TwoSampleMR` with action 2, and one palindromic variant without allele-frequency information was excluded. The inverse-variance weighted estimator was primary; MR-Egger, weighted-median, simple-mode and weighted-mode estimators were sensitivity analyses. Heterogeneity, the MR-Egger intercept, leave-one-out estimates and MR-PRESSO with 2,000 fixed-seed simulations were evaluated. Steiger directionality and locus colocalisation were not estimable because effect-allele frequencies and full locus-level exposure statistics, respectively, were unavailable. Results were therefore treated as a limited teaching analysis rather than definitive causal evidence.
 
 正式论文必须把上述“cross-chromosome rule”替换为真正执行的 clumping 参数，并补充 population、exposure scale、software version、sample overlap、Steiger、bidirectional MR、colocalisation 和数据 accession。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将遗传工具与MR敏感性分析用于自己的研究 {#sec-own-data}
 
 你的 16S 三件套只能定义表型和发现问题，不能充当 MR 暴露 GWAS。还需两张独立汇总统计表：
 

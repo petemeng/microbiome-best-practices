@@ -1,6 +1,6 @@
 ---
 title: "Beta 距离度量：Bray/Jaccard/UniFrac/Aitchison/Robust Aitchison（DEICODE）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,23 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/21-beta-distances.R
+  packages:
+  - ape
+  - digest
+  - dplyr
+  - ggplot2
+  - jsonlite
+  - phyloseq
+  - ragg
+  - readr
+  - svglite
+  - tidyr
+  - vegan
 ---
-
-> **分析目标：**在同一批真实 16S 样本上计算 Bray–Curtis、binary Jaccard、unweighted/weighted UniFrac、Aitchison 与 Robust Aitchison，明确每个距离测量什么、需要怎样标准化，以及零值和系统发育树怎样改变结果。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；UniFrac 额外需要 `rooted-tree.nwk.gz`。  
-> **预计资源：**示例数据含 26 个样本、18,988 个非空 OTU、28,216,678 reads；R 距离计算与 gemelli RPCA 通常少于 1 分钟，峰值内存约 2 GB。
 
 ## 不同 Beta 距离回答不同问题 {#sec-target}
 
@@ -35,190 +47,43 @@ fig-format: png
 
 本页不根据哪个距离“最能把组分开”来挑主结果，也不进行组间显著性检验。距离应由研究问题预先决定；PERMANOVA 与 dispersion test 是后续推断步骤。
 
-## 距离不是画图选项，而是测量定义 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-先用一张表锁定六种度量的解释边界：
 
-| 距离 | 主要信息 | 是否需要树 | 零值处理 | 本例标准化 |
-|---|---|---:|---|---|
-| Bray–Curtis | feature 丰度差异 | 否 | 零可直接存在 | 50,000 reads；另与原始相对丰度核对 |
-| binary Jaccard | feature 出现/缺失 | 否 | 零表示未检出 | 50,000 reads |
-| unweighted UniFrac | 出现/缺失所在的独有分支长度 | 是 | 零表示该 tip 未检出 | 50,000 reads |
-| weighted UniFrac | 分支上的相对丰度差异 | 是 | 零与丰度共同进入 | 50,000 reads |
-| Aitchison | CLR 后的 log-ratio 差异 | 否 | 必须声明 zero replacement | 未抽平；过滤后加 0.5 |
-| Robust Aitchison | 只在观测非零项上做 rclr，再用 RPCA 补全低秩结构 | 否 | 不给观测零机械加伪计数 | 未抽平；与 Aitchison 同一过滤集 |
 
-### Bray–Curtis 与 Jaccard：丰度和出现不是一回事
+需要 R，以及 `ape`、`digest`、`dplyr`、`ggplot2`、`jsonlite`、`phyloseq`、`ragg`、`readr`、`svglite`、`tidyr`、`vegan`。本次使用用于距离比较的 count、taxonomy、metadata 三张表及系统发育树。
 
-两个样本 (i,j) 的 Bray–Curtis dissimilarity 可写为：
-
-\[
-d_{BC}(i,j)=\frac{\sum_k |x_{ik}-x_{jk}|}
-{\sum_k(x_{ik}+x_{jk})}.
-\]
-
-它对共同高丰度 feature 更敏感。binary Jaccard 先把计数变为 0/1，再比较两样本 feature 集合的交集与并集：
-
-\[
-d_J(i,j)=1-\frac{|A_i\cap A_j|}{|A_i\cup A_j|}.
-\]
-
-因此，一个 feature 从 1 read 变为 10,000 reads 不改变 binary Jaccard，却会改变 Bray–Curtis。presence/absence 还很容易受测序深度影响：低深度样本更可能漏检稀有 feature，所以本例把四个生态距离放在同一份 50,000 reads 稀释表上比较。
-
-### UniFrac：比较的是树上分支，而不是 taxonomy 字符串
-
-Unweighted UniFrac 根据只出现在某一群落中的系统发育分支长度计算距离；weighted UniFrac 再把分支上的丰度纳入权重。[Lozupone & Knight (2005)](https://doi.org/10.1128/AEM.71.12.8228-8235.2005)与[Lozupone et al. (2007)](https://doi.org/10.1128/AEM.01996-06)分别给出核心方法与定量/定性比较。
-
-这意味着 UniFrac 至少需要三个不可省略的门禁：
-
-1. 树已经定根（rooted）；
-2. 每条边有有限、非负的 branch length；
-3. 树 tips 与计数表 feature ID 精确对应。
-
-如果 tip 不匹配，不能静默取交集后继续。被删掉的是哪些 ASV、丢失多少 reads、是否偏向某些类群，都必须先形成审计表。
-
-### Aitchison：相对信息应在 log-ratio 几何中比较
-
-微生物计数受总测序量约束。对正值组成向量 (x_i)，centered log-ratio（CLR）为：
-
-\[
-\operatorname{clr}(x_{ik})=
-\log x_{ik}-\frac{1}{D}\sum_{l=1}^{D}\log x_{il},
-\]
-
-两个样本 CLR 向量的欧氏距离就是 Aitchison distance。问题在于 (log(0)) 不存在。给所有零加 0.5、1 或其他 pseudocount 是一个分析假设，不是无害的格式修复。
-
-<details>
-<summary><strong>深入：Robust Aitchison 与旧 DEICODE 名称的关系</strong></summary>
-
-[Martino et al. (2019)](https://doi.org/10.1128/mSystems.00016-19)提出的 DEICODE 方法族，先对每个样本的观测非零项做 robust CLR（rclr），把零当作缺失位置，再用低秩 matrix completion / robust PCA（RPCA）估计样本与 feature 结构。它不是“换了一个固定伪计数的 CLR”。
-
-当前维护实现是 [`gemelli`](https://github.com/biocore/gemelli)。本例固定 `gemelli 0.0.13`、3 个 components、5 次 OptSpace iterations 和显式 ARPACK seed；输出再统一 PC 方向并写到 12 位小数。这里保留“DEICODE”作为读者熟悉的方法族名称，但实际运行使用维护中的 gemelli，而不是旧的 DEICODE 仓库。
-
-</details>
-
-### PCoA 的负特征值要先审计
-
-PCoA 尝试在欧氏坐标中保存输入距离。如果距离不是严格 Euclidean，分解可能出现负特征值。处理顺序应是：
-
-1. 保存全部原始 eigenvalues；
-2. 报告负特征值数量及其相对量级；
-3. 只有存在实质性负值时才明确使用 Lingoes 或 Cailliez correction；
-4. 在图注和 Methods 中写明校正，而不是静默改变距离。
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、导出真实数据、配置 gemelli 和定义作图函数</strong></summary>
-
-R 4.4 与 Bioconductor 3.19 环境首次安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "BiocManager", "ape", "digest", "dplyr", "ggplot2", "jsonlite",
-  "ragg", "readr", "scales", "svglite", "systemfonts", "tibble",
-  "tidyr", "vegan"
-))
-BiocManager::install(version = "3.19", ask = FALSE)
-BiocManager::install("phyloseq", version = "3.19", ask = FALSE)
-```
-
-Robust Aitchison 使用独立 Python 3.12 环境，避免与 QIIME 2 或 R 环境互相覆盖：
-
-```{bash}
-#| eval: false
-python3.12 -m venv .tools/gemelli-0.0.13
-.tools/gemelli-0.0.13/bin/python -m pip install --upgrade "pip==26.0.1"
-.tools/gemelli-0.0.13/bin/python -m pip install \
-  "gemelli==0.0.13" \
-  "numpy==2.4.2" \
-  "pandas==2.3.3" \
-  "scipy==1.17.1" \
-  "scikit-learn==1.7.1" \
-  "scikit-bio==0.7.2" \
-  "biom-format==2.1.17" \
-  "h5py==3.15.1" \
-  "matplotlib==3.10.8" \
-  "seaborn==0.13.2" \
-  "click==8.1.8" \
-  "iow==1.0.8" \
-  "tax2tree==1.1" \
-  "nose==1.3.7"
-.tools/gemelli-0.0.13/bin/python -m pip check
-```
-
-下面从 `phyloseq 1.48.0` 内置的 `GlobalPatterns` 真实对象导出三件套和 rooted tree。源对象含 19,216 个 OTU，其中 228 个在全部样本中计数为零；删除这些空行后保留 18,988 个 OTU，reads 总数不变。
-
-```{r}
-#| eval: false
-library(ape)
-library(digest)
-library(phyloseq)
-library(readr)
-
-stopifnot(as.character(packageVersion("phyloseq")) == "1.48.0")
-data("GlobalPatterns", package = "phyloseq")
-ps <- prune_taxa(taxa_sums(GlobalPatterns) > 0, GlobalPatterns)
-
-otutab <- as(otu_table(ps), "matrix")
-if (!taxa_are_rows(ps)) otutab <- t(otutab)
-taxonomy <- as(tax_table(ps), "matrix")
-metadata <- data.frame(sample_data(ps), check.names = FALSE)
-tree <- phy_tree(ps)
-
-metadata <- metadata[colnames(otutab), , drop = FALSE]
-habitat_map <- c(
-  "Feces" = "Human-associated",
-  "Skin" = "Human-associated",
-  "Tongue" = "Human-associated",
-  "Freshwater" = "Freshwater",
-  "Freshwater (creek)" = "Freshwater",
-  "Ocean" = "Marine/estuarine",
-  "Sediment (estuary)" = "Marine/estuarine",
-  "Soil" = "Soil",
-  "Mock" = "Mock"
-)
-
-metadata_out <- data.frame(
-  SampleID = rownames(metadata),
-  SampleType = as.character(metadata$SampleType),
-  HabitatClass = unname(habitat_map[as.character(metadata$SampleType)]),
-  Primer = as.character(metadata$Primer),
-  Final_Barcode = as.character(metadata$Final_Barcode),
-  Barcode_truncated_plus_T = as.character(metadata$Barcode_truncated_plus_T),
-  Barcode_full_length = as.character(metadata$Barcode_full_length),
-  Description = as.character(metadata$Description),
-  check.names = FALSE
-)
-
-dir.create("data/small/beta-distances", recursive = TRUE, showWarnings = FALSE)
-write_tsv(
-  tibble::as_tibble(otutab, rownames = "FeatureID"),
-  "data/small/beta-distances/otutab.tsv"
-)
-write_tsv(
-  tibble::as_tibble(taxonomy, rownames = "FeatureID"),
-  "data/small/beta-distances/taxonomy.tsv",
-  na = ""
-)
-write_tsv(
-  metadata_out,
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "env/gemelli.yml",
+  "scripts/run_gemelli_rpca.py",
   "data/small/beta-distances/metadata.tsv",
-  na = ""
-)
-tree_con <- gzfile(
+  "data/small/beta-distances/otutab.tsv",
   "data/small/beta-distances/rooted-tree.nwk.gz",
-  open = "wt",
-  compression = 9
+  "data/small/beta-distances/source-summary.json",
+  "data/small/beta-distances/taxonomy.tsv"
 )
-writeLines(write.tree(tree), tree_con, useBytes = TRUE)
-close(tree_con)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-本页所需的包、随机种子和出版级函数全部内联：
+Robust Aitchison 还需要 gemelli 的独立 Python 环境。上述文件下载后，在 Linux 或 WSL2 终端执行：
+
+```bash
+conda env create --prefix ./gemelli-env --file env/gemelli.yml
+```
+
 
 ```{r}
+#| results: hold
 #| label: setup
 library(ape)
 library(digest)
@@ -232,7 +97,7 @@ library(vegan)
 
 set.seed(20260722)
 
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 
 pal_pub <- c(
   blue = "#0072B2",
@@ -320,15 +185,12 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套读起，并单独读取根树
+### 从三件套读起，并单独读取根树
 
 `otutab` 的方向固定为 feature × sample。taxonomy 虽不直接进入距离公式，仍与计数表一起核对，避免分析数据和注释数据来自不同版本。
 
 ```{r}
+#| results: hold
 #| label: read-inputs
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -401,9 +263,101 @@ taxonomy[1:5, , drop = FALSE]
 head(metadata)
 ```
 
-### 2. 在算 UniFrac 前锁死树合同
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/21-beta-distances.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "BiocManager", "ape", "digest", "dplyr", "ggplot2", "jsonlite",
+  "ragg", "readr", "scales", "svglite", "systemfonts", "tibble",
+  "tidyr", "vegan"
+))
+BiocManager::install(version = "3.19", ask = FALSE)
+BiocManager::install("phyloseq", version = "3.19", ask = FALSE)
+```
+
+</details>
+
+## 距离不是画图选项，而是测量定义 {#sec-theory}
+
+先用一张表锁定六种度量的解释边界：
+
+| 距离 | 主要信息 | 是否需要树 | 零值处理 | 本例标准化 |
+|---|---|---:|---|---|
+| Bray–Curtis | feature 丰度差异 | 否 | 零可直接存在 | 50,000 reads；另与原始相对丰度核对 |
+| binary Jaccard | feature 出现/缺失 | 否 | 零表示未检出 | 50,000 reads |
+| unweighted UniFrac | 出现/缺失所在的独有分支长度 | 是 | 零表示该 tip 未检出 | 50,000 reads |
+| weighted UniFrac | 分支上的相对丰度差异 | 是 | 零与丰度共同进入 | 50,000 reads |
+| Aitchison | CLR 后的 log-ratio 差异 | 否 | 必须声明 zero replacement | 未抽平；过滤后加 0.5 |
+| Robust Aitchison | 只在观测非零项上做 rclr，再用 RPCA 补全低秩结构 | 否 | 不给观测零机械加伪计数 | 未抽平；与 Aitchison 同一过滤集 |
+
+### Bray–Curtis 与 Jaccard：丰度和出现不是一回事
+
+两个样本 (i,j) 的 Bray–Curtis dissimilarity 可写为：
+
+\[
+d_{BC}(i,j)=\frac{\sum_k |x_{ik}-x_{jk}|}
+{\sum_k(x_{ik}+x_{jk})}.
+\]
+
+它对共同高丰度 feature 更敏感。binary Jaccard 先把计数变为 0/1，再比较两样本 feature 集合的交集与并集：
+
+\[
+d_J(i,j)=1-\frac{|A_i\cap A_j|}{|A_i\cup A_j|}.
+\]
+
+因此，一个 feature 从 1 read 变为 10,000 reads 不改变 binary Jaccard，却会改变 Bray–Curtis。presence/absence 还很容易受测序深度影响：低深度样本更可能漏检稀有 feature，所以本例把四个生态距离放在同一份 50,000 reads 稀释表上比较。
+
+### UniFrac：比较的是树上分支，而不是 taxonomy 字符串
+
+Unweighted UniFrac 根据只出现在某一群落中的系统发育分支长度计算距离；weighted UniFrac 再把分支上的丰度纳入权重。[Lozupone & Knight (2005)](https://doi.org/10.1128/AEM.71.12.8228-8235.2005)与[Lozupone et al. (2007)](https://doi.org/10.1128/AEM.01996-06)分别给出核心方法与定量/定性比较。
+
+这意味着 UniFrac 至少需要三个不可省略的门禁：
+
+1. 树已经定根（rooted）；
+2. 每条边有有限、非负的 branch length；
+3. 树 tips 与计数表 feature ID 精确对应。
+
+如果 tip 不匹配，不能静默取交集后继续。被删掉的是哪些 ASV、丢失多少 reads、是否偏向某些类群，都必须先形成审计表。
+
+### Aitchison：相对信息应在 log-ratio 几何中比较
+
+微生物计数受总测序量约束。对正值组成向量 (x_i)，centered log-ratio（CLR）为：
+
+\[
+\operatorname{clr}(x_{ik})=
+\log x_{ik}-\frac{1}{D}\sum_{l=1}^{D}\log x_{il},
+\]
+
+两个样本 CLR 向量的欧氏距离就是 Aitchison distance。问题在于 (log(0)) 不存在。给所有零加 0.5、1 或其他 pseudocount 是一个分析假设，不是无害的格式修复。
+
+<details>
+<summary><strong>深入：Robust Aitchison 与旧 DEICODE 名称的关系</strong></summary>
+
+[Martino et al. (2019)](https://doi.org/10.1128/mSystems.00016-19)提出的 DEICODE 方法族，先对每个样本的观测非零项做 robust CLR（rclr），把零当作缺失位置，再用低秩 matrix completion / robust PCA（RPCA）估计样本与 feature 结构。它不是“换了一个固定伪计数的 CLR”。
+
+当前维护实现是 [`gemelli`](https://github.com/biocore/gemelli)。本例固定 `gemelli 0.0.13`、3 个 components、5 次 OptSpace iterations 和显式 ARPACK seed；输出再统一 PC 方向并写到 12 位小数。这里保留“DEICODE”作为读者熟悉的方法族名称，但实际运行使用维护中的 gemelli，而不是旧的 DEICODE 仓库。
+
+</details>
+
+### PCoA 的负特征值要先审计
+
+PCoA 尝试在欧氏坐标中保存输入距离。如果距离不是严格 Euclidean，分解可能出现负特征值。处理顺序应是：
+
+1. 保存全部原始 eigenvalues；
+2. 报告负特征值数量及其相对量级；
+3. 只有存在实质性负值时才明确使用 Lingoes 或 Cailliez correction；
+4. 在图注和 Methods 中写明校正，而不是静默改变距离。
+
+## 计算生态距离与组成性距离 {#sec-code}
+
+### 计算 UniFrac 前核对树、特征与枝长
+
+```{r}
+#| results: hold
 #| label: tree-gate
 tree_audit <- data.frame(
   Metric = c(
@@ -439,11 +393,12 @@ stopifnot(
 tree_audit
 ```
 
-### 3. 为生态距离固定同一测序深度
+### 为生态距离固定同一测序深度
 
 本例所有样本至少有 58,688 reads，因此固定 50,000 reads 可保留 26 个样本。随机抽样只执行一次并固定 seed；这张表只服务于距离比较，不作为 feature-level differential abundance 的通用输入。
 
 ```{r}
+#| results: hold
 #| label: rarefy-ecological
 community <- t(otutab)
 library_size <- rowSums(community)
@@ -476,9 +431,10 @@ c(
 )
 ```
 
-### 4. 计算 Bray、Jaccard 和两种 UniFrac
+### 计算 Bray、Jaccard 和两种 UniFrac
 
 ```{r}
+#| results: hold
 #| label: ecological-distances
 bray <- vegan::vegdist(community_rarefied, method = "bray")
 jaccard <- vegan::vegdist(
@@ -526,11 +482,12 @@ bray_sensitivity_rho
 
 本数据中两条 Bray 路线的距离秩相关为 `r sprintf("%.3f", bray_sensitivity_rho)`。这是一项数据集特异的敏感性结果，不是“Bray 永远不受标准化影响”的保证。
 
-### 5. 在未抽平计数上计算经典 Aitchison
+### 在未抽平计数上计算经典 Aitchison
 
 为与 gemelli 默认的稀有 feature 控制一致，两个 Aitchison 分支都保留 total count > 10 且 prevalence > 10% 的 feature。阈值是排除极少信息行的分析决策，必须在 Methods 中报告。
 
 ```{r}
+#| results: hold
 #| label: classic-aitchison
 feature_total <- rowSums(otutab)
 feature_prevalence <- rowMeans(otutab > 0)
@@ -565,15 +522,16 @@ c(
 )
 ```
 
-### 6. 用维护中的 gemelli 计算 Robust Aitchison
+### 用维护中的 gemelli 计算 Robust Aitchison
 
 下面命令固定 3 个 components、5 次 iterations、同一 feature filter 和 seed。仓库附带的 runner 还固定 ARPACK 初始化、统一任意 PC 符号并把浮点输出规范到 12 位。
 
 ```{r}
+#| results: hold
 #| label: robust-aitchison
 gemelli_python <- Sys.getenv(
   "GEMELLI_PYTHON",
-  ".tools/gemelli-0.0.13/bin/python"
+  "gemelli-env/bin/python"
 )
 gemelli_runner <- Sys.getenv(
   "GEMELLI_RUNNER",
@@ -743,6 +701,7 @@ print(f"gemelli RPCA complete: {processed.shape[0]} features x "
 读取 Robust Aitchison 距离，并严格按三件套样本顺序排列：
 
 ```{r}
+#| results: hold
 #| label: read-robust-distance
 robust_frame <- readr::read_tsv(
   "results/21-beta-distances/robust-aitchison-distance.tsv",
@@ -762,9 +721,10 @@ robust_aitchison <- as.dist(
 )
 ```
 
-### 7. 把六个距离放进同一审计框架
+### 把六个距离放进同一审计框架
 
 ```{r}
+#| results: hold
 #| label: distance-audit
 align_distance <- function(distance, ids = sample_ids) {
   matrix <- as.matrix(distance)
@@ -823,11 +783,12 @@ distance_summary
 
 这里的 within/between median 只是帮助理解距离尺度的描述量，不是显著性检验。尤其不能因为某个 ratio 最大，就在看到分组后把该距离改成主分析。
 
-### 8. 比较距离秩次，而不是比较数值单位
+### 比较距离秩次，而不是比较数值单位
 
 Aitchison 的数值可达数百，Robust Aitchison 约为 0–5，而 UniFrac 常在 0–1。直接比较“谁的平均距离更大”没有意义；下面用同一组 325 个样本对的 Spearman correlation 比较远近秩次。
 
 ```{r}
+#| results: hold
 #| label: distance-correlations
 metric_levels <- names(distances)
 distance_vectors <- do.call(cbind, lapply(distances, as.vector))
@@ -854,9 +815,10 @@ round(distance_cor_matrix, 3)
 
 高相关表示这批样本中许多 pair 的远近次序相似，不会消除定义差异。尤其是 Jaccard 无法回答“差异是否集中在深分化的系统发育分支”，Aitchison 也不等于 Bray–Curtis 的另一种缩放。
 
-### 9. 审计伪计数敏感性
+### 审计伪计数敏感性
 
 ```{r}
+#| results: hold
 #| label: pseudocount-sensitivity
 pseudocount_distances <- list(
   "0.1" = align_distance(aitchison_pc01),
@@ -889,9 +851,10 @@ aitchison_pseudocount_sensitivity
 
 0.1、0.5、1.0 三个 pseudocount 与默认 0.5 的距离秩相关均高于 0.995，但它们与 Robust Aitchison 的相关从 `r sprintf("%.3f", min(aitchison_pseudocount_sensitivity$SpearmanToRobustAitchison))` 到 `r sprintf("%.3f", max(aitchison_pseudocount_sensitivity$SpearmanToRobustAitchison))`。这说明本例对三个常见伪计数总体较稳定，却仍不能把 observed-only rclr/RPCA 当成固定伪计数 CLR。
 
-### 10. PCoA 前先保存负特征值审计
+### PCoA 前先保存负特征值审计
 
 ```{r}
+#| results: hold
 #| label: pcoa-audit
 pcoa_score_rows <- list()
 pcoa_audit_rows <- list()
@@ -968,6 +931,7 @@ weighted UniFrac 的 3 个负特征值只占正特征值绝对和的 `r sprintf(
 把主要中间结果保存为可审计 TSV：
 
 ```{r}
+#| results: hold
 #| label: save-audit-tables
 dir.create("results/21-beta-distances", recursive = TRUE, showWarnings = FALSE)
 readr::write_tsv(
@@ -992,11 +956,12 @@ readr::write_tsv(
 )
 ```
 
-## 出版级美化 {#sec-figure}
+## 比较距离矩阵与排序结果的一致性 {#sec-figure}
 
 ### 图 1：先展示“每个距离用了什么信息”
 
 ```{r}
+#| results: hold
 #| label: fig-distance-choice
 #| fig-width: 7.2
 #| fig-height: 3.7
@@ -1062,6 +1027,7 @@ choice_plot
 ### 图 2：距离相关热图
 
 ```{r}
+#| results: hold
 #| label: fig-distance-correlation
 #| fig-width: 7.2
 #| fig-height: 4.4
@@ -1113,6 +1079,7 @@ correlation_plot
 ### 图 3：同一样本的六种 PCoA 几何
 
 ```{r}
+#| results: hold
 #| label: fig-pcoa-comparison
 #| fig-width: 7.2
 #| fig-height: 5.2
@@ -1211,6 +1178,7 @@ pcoa_plot
 ### 图 4：零值处理敏感性
 
 ```{r}
+#| results: hold
 #| label: fig-zero-sensitivity
 #| fig-width: 7.2
 #| fig-height: 3.8
@@ -1349,7 +1317,7 @@ stopifnot(
 `GlobalPatterns` 只有 26 个样本，habitat 类别的样本数不平衡，且不同样本类型还伴随采样来源和实验背景差异。本页只比较距离定义与几何，不把 within/between 描述量解释为 habitat 的独立效应。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告距离定义与零值处理的方法与限制 {#sec-methods}
 
 下面英文模板与本页实际代码一致；换数据时修改方括号中的主距离、深度、分组变量和敏感性范围：
 
@@ -1357,7 +1325,7 @@ stopifnot(
 
 如果文章只预先指定一种主距离，可把其他五种压缩为 sensitivity analysis，并在主文/补充材料明确区分。不要把“所有距离都跑过”写成“结果稳健”，除非方向、效应量和推断结论确实一致。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将距离定义与零值处理用于自己的研究 {#sec-own-data}
 
 首先只改路径和计划用于着色的 metadata 列：
 

@@ -49,11 +49,11 @@
 <rect x='38.88' y='30.87' width='466.97' height='243.82' style='stroke-width: 0.85; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzNDUuODM=)'>
-<text x='34.94' y='266.17' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.16px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='34.94' y='210.76' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>25%</text>
-<text x='34.94' y='155.34' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='34.94' y='99.93' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>75%</text>
-<text x='34.94' y='44.52' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.12px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='34.94' y='266.17' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='11.16px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='34.94' y='210.76' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>25%</text>
+<text x='34.94' y='155.34' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='34.94' y='99.93' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>75%</text>
+<text x='34.94' y='44.52' text-anchor='end' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='20.12px' lengthAdjust='spacingAndGlyphs'>100%</text>
 <polyline points='36.69,263.61 38.88,263.61 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='36.69,208.19 38.88,208.19 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='36.69,152.78 38.88,152.78 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -64,23 +64,23 @@
 <polyline points='272.37,276.88 272.37,274.69 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='378.50,276.88 378.50,274.69 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='484.63,276.88 484.63,274.69 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='60.11' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.16px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='166.24' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>25%</text>
-<text x='272.37' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>50%</text>
-<text x='378.50' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>75%</text>
-<text x='484.63' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.12px' lengthAdjust='spacingAndGlyphs'>100%</text>
-<text x='272.37' y='293.83' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='69.34px' lengthAdjust='spacingAndGlyphs'>Nodes removed</text>
-<text transform='translate(10.80,152.78) rotate(-90)' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='196.33px' lengthAdjust='spacingAndGlyphs'>Largest connected component / initial nodes</text>
+<text x='60.11' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='11.16px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='166.24' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>25%</text>
+<text x='272.37' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>50%</text>
+<text x='378.50' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='15.64px' lengthAdjust='spacingAndGlyphs'>75%</text>
+<text x='484.63' y='283.76' text-anchor='middle' style='font-size: 7.04px;fill: #1A1A1A; font-family: "Arial";' textLength='20.12px' lengthAdjust='spacingAndGlyphs'>100%</text>
+<text x='272.37' y='293.83' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "Arial";' textLength='69.34px' lengthAdjust='spacingAndGlyphs'>Nodes removed</text>
+<text transform='translate(10.80,152.78) rotate(-90)' text-anchor='middle' style='font-size: 8.80px;fill: #1A1A1A; font-family: "Arial";' textLength='196.33px' lengthAdjust='spacingAndGlyphs'>Largest connected component / initial nodes</text>
 <rect x='112.56' y='304.42' width='319.61' height='26.05' style='stroke-width: 0.85; stroke: none; fill: #FFFFFF;' />
-<text x='116.95' y='320.66' style='font-size: 8.80px; font-family: "DejaVu Sans";' textLength='57.97px' lengthAdjust='spacingAndGlyphs'>Removal rule</text>
+<text x='116.95' y='320.66' style='font-size: 8.80px; font-family: "Arial";' textLength='57.97px' lengthAdjust='spacingAndGlyphs'>Removal rule</text>
 <line x1='181.03' y1='317.45' x2='194.86' y2='317.45' style='stroke-width: 2.03; stroke: #0072B2; stroke-linecap: butt;' />
 <line x1='278.29' y1='317.45' x2='292.11' y2='317.45' style='stroke-width: 2.03; stroke: #D55E00; stroke-linecap: butt;' />
 <line x1='354.26' y1='317.45' x2='368.08' y2='317.45' style='stroke-width: 1.92; stroke: #6B7280; stroke-linecap: butt;' />
-<text x='200.97' y='320.01' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='71.21px' lengthAdjust='spacingAndGlyphs'>Betweenness attack</text>
-<text x='298.22' y='320.01' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='49.92px' lengthAdjust='spacingAndGlyphs'>Degree attack</text>
-<text x='374.20' y='320.01' style='font-size: 7.04px; font-family: "DejaVu Sans";' textLength='53.59px' lengthAdjust='spacingAndGlyphs'>Random failure</text>
-<text x='4.38' y='24.66' style='font-size: 8.80px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='242.94px' lengthAdjust='spacingAndGlyphs'>AUC: random 0.495; degree 0.419; betweenness 0.379</text>
-<text x='4.38' y='11.76' style='font-size: 10.12px; font-weight: bold; font-family: "DejaVu Sans";' textLength='340.59px' lengthAdjust='spacingAndGlyphs'>Targeted node removal fragments the inferred graph faster</text>
-<text x='38.88' y='339.98' style='font-size: 7.04px;fill: #666666; font-family: "DejaVu Sans";' textLength='392.57px' lengthAdjust='spacingAndGlyphs'>Ribbon: 95% interval across 500 random removal orders. Targeted scores are recalculated after every removal.</text>
+<text x='200.97' y='320.01' style='font-size: 7.04px; font-family: "Arial";' textLength='71.21px' lengthAdjust='spacingAndGlyphs'>Betweenness attack</text>
+<text x='298.22' y='320.01' style='font-size: 7.04px; font-family: "Arial";' textLength='49.92px' lengthAdjust='spacingAndGlyphs'>Degree attack</text>
+<text x='374.20' y='320.01' style='font-size: 7.04px; font-family: "Arial";' textLength='53.59px' lengthAdjust='spacingAndGlyphs'>Random failure</text>
+<text x='4.38' y='24.66' style='font-size: 8.80px;fill: #4D4D4D; font-family: "Arial";' textLength='242.94px' lengthAdjust='spacingAndGlyphs'>AUC: random 0.495; degree 0.419; betweenness 0.379</text>
+<text x='4.38' y='11.76' style='font-size: 10.12px; font-weight: bold; font-family: "Arial";' textLength='340.59px' lengthAdjust='spacingAndGlyphs'>Targeted node removal fragments the inferred graph faster</text>
+<text x='38.88' y='339.98' style='font-size: 7.04px;fill: #666666; font-family: "Arial";' textLength='392.57px' lengthAdjust='spacingAndGlyphs'>Ribbon: 95% interval across 500 random removal orders. Targeted scores are recalculated after every removal.</text>
 </g>
 </svg>

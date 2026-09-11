@@ -1,6 +1,6 @@
 ---
 title: "FAPROTAX、Tax4Fun2 与 BugBase：环境功能类群"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,15 +17,23 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/42-functional-guilds.R
+  packages:
+  - ggplot2
+  - ggrepel
+  - microeco
+  - ragg
+  - readr
+  - scales
+  - svglite
 ---
-
-> **分析目标：**用 FAPROTAX 把 16S taxonomy 映射到可解释的 prokaryotic functional groups，逐样本报告 annotation coverage、功能组成与组间差异，并用 genus-only remapping 审计结果对 taxonomic resolution 的依赖。  
-> **输入文件：**通用三件套 `data/small/{otutab,taxonomy,metadata}.tsv`。Tax4Fun2 另需 representative sequences；BugBase 另需 OTU table、Greengenes-compatible taxonomy 和 normalized input。  
-> **预计资源：**13,628 个 OTU、90 个湿地样本；两次 FAPROTAX mapping 与 93 个功能的组间检验，普通笔记本约 1 分钟、峰值内存低于 1 GB；四张图导出为 PDF/SVG/600 ppi PNG/LZW-TIFF。
 
 ## 功能类群注释依赖数据库规则与分类分辨率 {#sec-target}
 
-[Louca et al. (2016)](https://doi.org/10.1126/science.aaf4507)用 taxonomy–function literature mapping 描述全球海洋微生物功能；[Wemheuer et al. (2020)](https://doi.org/10.1186/s40168-020-00815-y)则以 Tax4Fun2 引入 reference-data-based functional prediction 与 functional redundancy index。这里不转载论文原图，而是在公开湿地 16S 数据上重绘 annotation coverage、功能组成、组别 heatmap 和 taxonomic-resolution sensitivity。
+[Louca et al. (2016)](https://doi.org/10.1126/science.aaf4507)用 taxonomy–function literature mapping 描述全球海洋微生物功能；[Wemheuer et al. (2020)](https://doi.org/10.1186/s40168-020-00815-y)则以 Tax4Fun2 引入 reference-data-based functional prediction 与 functional redundancy index。
 
 ::: {.callout-important title="先给结论"}
 FAPROTAX、Tax4Fun2 和 BugBase 都是**从扩增子数据推断潜在功能**，不是测到基因、转录本或代谢通量。结果首先受 primer、taxonomy/sequence reference、annotation coverage 与数据库版本约束；主图必须把 coverage 与功能结果并列，论文措辞使用“predicted”或“putative”。
@@ -33,64 +41,36 @@ FAPROTAX、Tax4Fun2 和 BugBase 都是**从扩增子数据推断潜在功能**�
 
 本页使用 `microeco` 2.0.0 随包分发的真实中国湿地 16S 数据，CW、IW、TW 各 30 个样本。FAPROTAX 数据库版本由运行日志记录；同一个 OTU 可以匹配多个功能，因此功能条目的相对份额是 **annotation assignments 的组成**，不能解释为互斥细胞比例。
 
-## 三种工具估计的对象并不相同 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. FAPROTAX 是 taxonomy-to-trait literature mapping
+需要 R，以及 `ggplot2`、`ggrepel`、`microeco`、`ragg`、`readr`、`scales`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
 
-对 OTU $i$ 与功能 $k$，数据库给出二元映射 $M_{ik}\in\{0,1\}$。样本 $s$ 的功能 assignment abundance 为
-
-$$
-A_{ks}=\sum_i M_{ik}Y_{is}.
-$$
-
-同一 taxon 可对应多个功能，所以 $\sum_k A_{ks}$ 可以大于 mapped reads。这里另外计算
-
-$$
-C_s=\frac{\sum_{i:\sum_kM_{ik}>0}Y_{is}}{\sum_iY_{is}},
-$$
-
-即至少获得一个 FAPROTAX annotation 的 read fraction。它是解释功能图之前必须报告的 coverage。
-
-### 2. Tax4Fun2 从 representative sequence 邻近参考基因组
-
-Tax4Fun2 不是简单读 taxonomy；它将 representative sequences 与 reference genomes 对齐，再汇总 KEGG ortholog predictions，并可报告 fraction of sequences unexplained 与 functional redundancy。若只有 `otutab/taxonomy/metadata` 而没有代表序列，不能假装运行 Tax4Fun2。
-
-### 3. BugBase 汇总的是高层 microbial phenotypes
-
-BugBase 预测 aerobic、anaerobic、biofilm-forming、Gram-positive 等 phenotype，依赖 compatible taxonomic reference、copy-number normalization 与预计算 trait tables。它与 FAPROTAX pathways、Tax4Fun2 KOs 不在同一层级，不能把三个工具的条目直接做“多数投票”。
-
-### 4. 功能 assignments 仍是 compositional data
-
-本页对每个样本的 assignment counts 做 closure，再以 pseudocount 0.5 计算 CLR；每个功能用 Kruskal–Wallis 检验 CW/IW/TW 差异，93 个 p-value 统一做 Benjamini–Hochberg correction，并同时报告 epsilon-squared effect size。筛图依据 effect size 与 adjusted p-value，不只按最小 p-value。
-
-<details>
-<summary><strong>深入：为什么不能用 16S 功能预测替代 shotgun metagenomics</strong></summary>
-
-同一分类单元内部可以存在 accessory-gene variation、水平基因转移和 strain-specific pathways；参考基因组与环境样本之间的系统发育距离又会引入 extrapolation。shotgun metagenomics 至少直接观察 DNA functional potential，metatranscriptomics/proteomics/metabolomics分别更接近 expression、protein 与 biochemical outcome。16S prediction 适合生成低成本假设和设计验证实验，不适合作为某通路真实增强的唯一证据。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖并定义出版级作图函数</strong></summary>
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "ggplot2", "ggrepel", "microeco", "patchwork", "ragg", "readr", "scales",
-  "svglite", "systemfonts"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-
 ```{r}
+#| results: hold
 #| label: setup-functional-guild-theme
 library(ggplot2)
 library(microeco)
 
 set.seed(20260742)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -133,13 +113,10 @@ save_pub <- function(plot, file_base, width = 89, height = 70, units = "mm", dpi
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 从三件套读取并构建 `microtable`
+### 从三件套读取并构建 `microtable`
 
 ```{r}
+#| results: hold
 #| label: read-functional-guild-triad
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE,
@@ -176,9 +153,64 @@ head(taxonomy)
 head(metadata)
 ```
 
-### 2. 映射 FAPROTAX，并单独计算 annotation coverage
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/42-functional-guilds.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "ggplot2", "ggrepel", "microeco", "patchwork", "ragg", "readr", "scales",
+  "svglite", "systemfonts"
+))
+```
+
+</details>
+
+## 三种工具估计的对象并不相同 {#sec-theory}
+
+### FAPROTAX 是 taxonomy-to-trait literature mapping
+
+对 OTU $i$ 与功能 $k$，数据库给出二元映射 $M_{ik}\in\{0,1\}$。样本 $s$ 的功能 assignment abundance 为
+
+$$
+A_{ks}=\sum_i M_{ik}Y_{is}.
+$$
+
+同一 taxon 可对应多个功能，所以 $\sum_k A_{ks}$ 可以大于 mapped reads。这里另外计算
+
+$$
+C_s=\frac{\sum_{i:\sum_kM_{ik}>0}Y_{is}}{\sum_iY_{is}},
+$$
+
+即至少获得一个 FAPROTAX annotation 的 read fraction。它是解释功能图之前必须报告的 coverage。
+
+### Tax4Fun2 从 representative sequence 邻近参考基因组
+
+Tax4Fun2 不是简单读 taxonomy；它将 representative sequences 与 reference genomes 对齐，再汇总 KEGG ortholog predictions，并可报告 fraction of sequences unexplained 与 functional redundancy。若只有 `otutab/taxonomy/metadata` 而没有代表序列，不能假装运行 Tax4Fun2。
+
+### BugBase 汇总的是高层 microbial phenotypes
+
+BugBase 预测 aerobic、anaerobic、biofilm-forming、Gram-positive 等 phenotype，依赖 compatible taxonomic reference、copy-number normalization 与预计算 trait tables。它与 FAPROTAX pathways、Tax4Fun2 KOs 不在同一层级，不能把三个工具的条目直接做“多数投票”。
+
+### 功能注释汇总仍然具有组成性
+
+本页对每个样本的 assignment counts 做 closure，再以 pseudocount 0.5 计算 CLR；每个功能用 Kruskal–Wallis 检验 CW/IW/TW 差异，93 个 p-value 统一做 Benjamini–Hochberg correction，并同时报告 epsilon-squared effect size。筛图依据 effect size 与 adjusted p-value，不只按最小 p-value。
+
+<details>
+<summary><strong>深入：为什么不能用 16S 功能预测替代 shotgun metagenomics</strong></summary>
+
+同一分类单元内部可以存在 accessory-gene variation、水平基因转移和 strain-specific pathways；参考基因组与环境样本之间的系统发育距离又会引入 extrapolation。shotgun metagenomics 至少直接观察 DNA functional potential，metatranscriptomics/proteomics/metabolomics分别更接近 expression、protein 与 biochemical outcome。16S prediction 适合生成低成本假设和设计验证实验，不适合作为某通路真实增强的唯一证据。
+
+</details>
+
+## 按数据库规则映射功能类群 {#sec-code}
+
+### 映射 FAPROTAX，并单独计算 annotation coverage
+
+```{r}
+#| results: hold
 #| label: map-faprotax
 faprotax <- microeco::trans_func$new(dataset)
 faprotax$cal_func(prok_database = "FAPROTAX")
@@ -207,9 +239,10 @@ stopifnot(
 mapping_summary
 ```
 
-### 3. 计算 assignment composition 与多重检验
+### 计算 assignment composition 与多重检验
 
 ```{r}
+#| results: hold
 #| label: test-faprotax-functions
 assignment_share <- sweep(function_counts, 2L, colSums(function_counts), "/")
 clr_counts <- log(function_counts + 0.5)
@@ -236,9 +269,10 @@ stopifnot(nrow(function_tests) == 93L, all(function_tests$AdjustedP >= function_
 head(function_tests, 12)
 ```
 
-### 4. 用 genus-only remapping 审计 taxonomy resolution
+### 仅保留属级信息重新注释，检查分类分辨率的影响
 
 ```{r}
+#| results: hold
 #| label: faprotax-resolution-sensitivity
 taxonomy_genus <- taxonomy
 taxonomy_genus[, setdiff(colnames(taxonomy_genus), "Genus")] <- ""
@@ -288,11 +322,12 @@ resolution_coverage
 Tax4Fun2 必须保留与 count table 完全一致的 representative-sequence IDs，并报告 reference version、sequence identity/coverage、FTU/FSU 与 FRI；BugBase 必须记录 compatible taxonomy、normalization、phenotype threshold 和 unmapped fraction。只有三件套而缺代表序列时，本页的 FAPROTAX branch 可以运行，但 Tax4Fun2 branch 尚不具备合法输入。
 :::
 
-## 出版级美化 {#sec-beautify}
+## 把预测结果与注释覆盖率一起展示 {#sec-beautify}
 
-### 1. annotation coverage
+### annotation coverage
 
 ```{r}
+#| results: hold
 #| label: fig-functional-coverage
 #| fig-cap: "FAPROTAX annotation coverage must accompany predicted functions."
 p_coverage <- ggplot(coverage_ledger, aes(Group, AnnotationCoverage, colour = Group)) +
@@ -308,9 +343,10 @@ save_pub(p_coverage, "figures/42-function-coverage", 110, 82)
 p_coverage
 ```
 
-### 2. Top function assignment composition
+### 展示主要功能类别的注释组成
 
 ```{r}
+#| results: hold
 #| label: fig-functional-composition
 #| fig-cap: "Group means of the most abundant FAPROTAX assignment categories."
 top_functions <- names(sort(rowMeans(assignment_share), decreasing = TRUE))[1:10]
@@ -334,9 +370,10 @@ save_pub(p_composition, "figures/42-functional-composition", 178, 105)
 p_composition
 ```
 
-### 3. effect-size-ranked heatmap
+### effect-size-ranked heatmap
 
 ```{r}
+#| results: hold
 #| label: fig-functional-heatmap
 #| fig-cap: "Group-level CLR profiles for functions with the largest omnibus effects."
 heat_functions <- function_tests$Function[1:12]
@@ -356,9 +393,10 @@ save_pub(p_heat, "figures/42-functional-heatmap", 135, 105)
 p_heat
 ```
 
-### 4. taxonomic-resolution sensitivity
+### taxonomic-resolution sensitivity
 
 ```{r}
+#| results: hold
 #| label: fig-functional-sensitivity
 #| fig-cap: "Function means inferred from full lineages versus genus-only taxonomy."
 label_rows <- head(function_sensitivity[order(-function_sensitivity$MeanAbsoluteDifference), ], 8)
@@ -380,6 +418,7 @@ p_sensitivity
 ```
 
 ```{r}
+#| results: hold
 #| label: export-functional-guild-results
 dir.create("results/42-functional-guilds", recursive = TRUE, showWarnings = FALSE)
 readr::write_tsv(mapping_summary, "results/42-functional-guilds/mapping-summary.tsv")
@@ -401,11 +440,11 @@ readr::write_tsv(resolution_coverage, "results/42-functional-guilds/resolution-c
 
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告功能类群数据库映射的方法与限制 {#sec-methods}
 
 > Putative prokaryotic functional groups were inferred from the feature-by-sample 16S count table and seven-rank taxonomy using `microeco` v2.0.0 and its bundled FAPROTAX v1.2.12 mapping. For each sample, annotation coverage was defined as the fraction of reads assigned to at least one FAPROTAX group. Because taxa may receive multiple labels, functional profiles were interpreted as relative shares of annotation assignments rather than mutually exclusive cell fractions. Function counts were transformed by centered log ratio after adding 0.5, and group differences were tested using Kruskal–Wallis tests; all 93 functions were corrected together using the Benjamini–Hochberg procedure, with epsilon-squared reported as effect size. Robustness to taxonomic resolution was evaluated by repeating the complete mapping using genus-only taxonomy. Predicted functions were treated as hypotheses and were not interpreted as direct measurements of genes or metabolic activity.
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将功能类群数据库映射用于自己的研究 {#sec-own-data}
 
 只需替换三条路径与分组列名：
 

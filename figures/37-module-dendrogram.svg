@@ -2140,20 +2140,20 @@
 <rect x='480.86' y='313.51' width='1.06' height='11.91' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A52A2A;' />
 <rect x='481.87' y='313.51' width='1.06' height='11.91' style='stroke-width: 0.21; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #A52A2A;' />
 <rect x='35.02' y='31.57' width='469.24' height='307.85' style='stroke-width: 0.82; stroke: #333333;' />
-<text x='31.21' y='312.68' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='31.21' y='245.46' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='31.21' y='178.24' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='31.21' y='111.01' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='31.21' y='43.79' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='31.21' y='312.68' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='31.21' y='245.46' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='31.21' y='178.24' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='31.21' y='111.01' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='31.21' y='43.79' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='15.14px' lengthAdjust='spacingAndGlyphs'>1.00</text>
 <polyline points='32.90,310.20 35.02,310.20 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.90,242.98 35.02,242.98 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.90,175.76 35.02,175.76 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.90,108.54 35.02,108.54 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.90,41.32 35.02,41.32 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='269.64' y='349.85' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='187.09px' lengthAdjust='spacingAndGlyphs'>Genera ordered by signed TOM dissimilarity</text>
-<text transform='translate(12.18,185.49) rotate(-90)' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='73.16px' lengthAdjust='spacingAndGlyphs'>Clustering height</text>
-<text x='5.98' y='25.56' style='font-size: 8.50px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='213.49px' lengthAdjust='spacingAndGlyphs'>115 genera remain grey; merge cut height = 0.25</text>
-<text x='5.98' y='13.10' style='font-size: 9.77px; font-weight: bold; font-family: "DejaVu Sans";' textLength='281.15px' lengthAdjust='spacingAndGlyphs'>Dynamic tree cut separates four non-grey modules</text>
-<text x='35.02' y='360.81' style='font-size: 6.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='227.20px' lengthAdjust='spacingAndGlyphs'>Module colours are arbitrary identifiers, not biological annotations.</text>
+<text x='269.64' y='349.85' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='187.09px' lengthAdjust='spacingAndGlyphs'>Genera ordered by signed TOM dissimilarity</text>
+<text transform='translate(12.18,185.49) rotate(-90)' text-anchor='middle' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='73.16px' lengthAdjust='spacingAndGlyphs'>Clustering height</text>
+<text x='5.98' y='25.56' style='font-size: 8.50px;fill: #4D4D4D; font-family: "Arial";' textLength='213.49px' lengthAdjust='spacingAndGlyphs'>115 genera remain grey; merge cut height = 0.25</text>
+<text x='5.98' y='13.10' style='font-size: 9.77px; font-weight: bold; font-family: "Arial";' textLength='281.15px' lengthAdjust='spacingAndGlyphs'>Dynamic tree cut separates four non-grey modules</text>
+<text x='35.02' y='360.81' style='font-size: 6.80px;fill: #666666; font-family: "Arial";' textLength='227.20px' lengthAdjust='spacingAndGlyphs'>Module colours are arbitrary identifiers, not biological annotations.</text>
 </g>
 </svg>

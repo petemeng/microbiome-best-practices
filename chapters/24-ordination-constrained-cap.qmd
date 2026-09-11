@@ -1,6 +1,6 @@
 ---
 title: "约束排序：CAP/db-RDA/RDA/CCA（复现）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,16 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/24-ordination-constrained-cap.R
+  packages:
+  - ggplot2
+  - ggrepel
+  - scales
+  - vegan
 ---
-
-> **分析目标：**用 CAP / db-RDA 量化预先指定的环境因子与整体群落结构之间的关系，并绘制样本、分组和环境箭头。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`、`environment.tsv`。  
-> **预计资源：**示例数据 90 个样本、13,628 个 OTU、5 个候选环境变量；普通笔记本约 3–8 分钟，内存低于 1 GB。
 
 ## 约束排序回答环境解释了多少群落差异 {#sec-target}
 
@@ -42,138 +47,32 @@ fig-format: png
 CAP 是有监督模型：坐标轴专门呈现可由给定变量解释的变异。因此分离更明显是模型定义的结果，不是独立证据。证据来自预先设定的假设、调整后 \(R^2\)、置换检验、共线性检查和与研究设计一致的置换方案。
 :::
 
-## CAP 到底约束了什么 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-群落总变异可分为两部分：
+需要 R，以及 `ggplot2`、`ggrepel`、`scales`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表，以及本次分析使用的实测环境变量或系统发育信息。
 
-\[
-\text{Total variation}
-=
-\text{Constrained variation}
-+
-\text{Residual variation}
-\]
-
-约束部分是当前预测变量能够解释的群落变异，残差部分是模型没有解释的变异。原始 \(R^2\) 随变量数量增加而单调上升，因此多变量模型应同时报告调整后 \(R^2\)。
-
-### RDA、CCA 与 CAP/db-RDA 的选择
-
-- **RDA（redundancy analysis）**：本质上是多响应线性回归后做 PCA，适合 Hellinger 或 CLR 等近欧氏表示。
-- **CCA（canonical correspondence analysis）**：基于卡方距离和单峰响应假设，常用于沿长环境梯度的经典群落生态数据。
-- **db-RDA（distance-based RDA）/ CAP**：先用距离表示群落差异，再用预测变量约束排序，可结合 Bray–Curtis 等非欧氏距离。
-
-`vegan::capscale()` 和 `vegan::dbrda()` 都可拟合基于距离的约束模型。这里用 `capscale(..., distance = "bray", add = "lingoes")`，显式处理 Bray–Curtis 可能产生的负特征值。
-
-<details>
-<summary><strong>深入：箭头、样本点和分组颜色分别代表什么</strong></summary>
-
-连续变量的箭头方向表示该变量增加的方向，箭头长度反映它与当前二维排序空间的关联强度。两个箭头夹角较小通常表示正相关，方向相反通常表示负相关，接近直角表示当前二维投影中的相关较弱。
-
-这些解释有三项限制：
-
-1. 箭头是多维模型在二维平面的投影，短箭头可能只是信息落在更高轴；
-2. 箭头表示关联，不证明因果；
-3. 图上用颜色标出的 `Group` 可以只用于展示。若 `Group` 没进入公式，它不是该模型的约束变量。
-
-因子变量进入公式后通常显示为水平质心；连续变量显示为 biplot arrows。不要把两者都解释成连续梯度。
-
-</details>
-
-::: {.callout-note title="为什么同时做顺序检验和边际检验"}
-`anova(model, by = "terms")` 按公式顺序逐项加入变量，结果依赖变量排列；`by = "margin"` 检验每个变量在控制其余变量后的边际贡献。本例两者都运行：前者复现预先指定的建模顺序，后者用于判断独立贡献。
-:::
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、下载真实数据和定义作图函数</strong></summary>
-
-首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c("vegan", "ggplot2", "ggrepel", "scales", "digest"))
-```
-
-下载固定版本数据、核对 SHA-256，并导出四张标准表：
-
-```{r}
-#| eval: false
-archive <- "data/raw/microeco_2.0.0.tar.gz"
-source_url <- paste0(
-  "https://cran.r-project.org/src/contrib/Archive/",
-  "microeco/microeco_2.0.0.tar.gz"
-)
-expected_sha256 <- paste0(
-  "454a3b71ceeea86bdd54f475a12b5bac",
-  "9c3b124f663b8dc6e560827fca89ebfd"
-)
-
-dir.create("data/raw", recursive = TRUE, showWarnings = FALSE)
-dir.create("data/small", recursive = TRUE, showWarnings = FALSE)
-if (!file.exists(archive)) {
-  download.file(source_url, archive, mode = "wb")
-}
-observed_sha256 <- digest::digest(
-  file = archive,
-  algo = "sha256",
-  serialize = FALSE
-)
-stopifnot(identical(observed_sha256, expected_sha256))
-
-required <- c(
-  "microeco/data/otu_table_16S.RData",
-  "microeco/data/taxonomy_table_16S.RData",
-  "microeco/data/sample_info_16S.RData",
-  "microeco/data/env_data_16S.RData"
-)
-extract_dir <- tempfile("microeco-data-")
-dir.create(extract_dir)
-utils::untar(archive, files = required, exdir = extract_dir)
-
-data_env <- new.env(parent = emptyenv())
-for (relative_path in required) {
-  load(file.path(extract_dir, relative_path), envir = data_env)
-}
-
-write_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name),
-    x,
-    check.names = FALSE
-  )
-  utils::write.table(
-    out,
-    path,
-    sep = "\t",
-    quote = FALSE,
-    row.names = FALSE,
-    na = ""
-  )
-}
-
-write_tsv(data_env$otu_table_16S, "FeatureID", "data/small/otutab.tsv")
-write_tsv(
-  data_env$taxonomy_table_16S,
-  "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/environment.tsv",
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
   "data/small/taxonomy.tsv"
 )
-write_tsv(
-  data_env$sample_info_16S,
-  "SampleID",
-  "data/small/metadata.tsv"
-)
-write_tsv(
-  data_env$env_data_16S,
-  "SampleID",
-  "data/small/environment.tsv"
-)
-unlink(extract_dir, recursive = TRUE)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-出版级函数直接内联：
-
 ```{r}
+#| results: hold
+#| label: reader-step-02
 library(vegan)
 library(ggplot2)
 
@@ -246,14 +145,11 @@ save_pub <- function(
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取四张表并按 ID 对齐
+### 读取四张表并按 ID 对齐
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 otutab <- read.delim(
   "data/small/otutab.tsv",
   row.names = 1,
@@ -294,11 +190,68 @@ head(metadata)
 head(environment)
 ```
 
-### 2. 构建用于 Bray–Curtis 的群落矩阵
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/24-ordination-constrained-cap.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c("vegan", "ggplot2", "ggrepel", "scales", "digest"))
+```
+
+</details>
+
+## CAP 到底约束了什么 {#sec-theory}
+
+群落总变异可分为两部分：
+
+\[
+\text{Total variation}
+=
+\text{Constrained variation}
++
+\text{Residual variation}
+\]
+
+约束部分是当前预测变量能够解释的群落变异，残差部分是模型没有解释的变异。原始 \(R^2\) 随变量数量增加而单调上升，因此多变量模型应同时报告调整后 \(R^2\)。
+
+### RDA、CCA 与 CAP/db-RDA 的选择
+
+- **RDA（redundancy analysis）**：本质上是多响应线性回归后做 PCA，适合 Hellinger 或 CLR 等近欧氏表示。
+- **CCA（canonical correspondence analysis）**：基于卡方距离和单峰响应假设，常用于沿长环境梯度的经典群落生态数据。
+- **db-RDA（distance-based RDA）/ CAP**：先用距离表示群落差异，再用预测变量约束排序，可结合 Bray–Curtis 等非欧氏距离。
+
+`vegan::capscale()` 和 `vegan::dbrda()` 都可拟合基于距离的约束模型。这里用 `capscale(..., distance = "bray", add = "lingoes")`，显式处理 Bray–Curtis 可能产生的负特征值。
+
+<details>
+<summary><strong>深入：箭头、样本点和分组颜色分别代表什么</strong></summary>
+
+连续变量的箭头方向表示该变量增加的方向，箭头长度反映它与当前二维排序空间的关联强度。两个箭头夹角较小通常表示正相关，方向相反通常表示负相关，接近直角表示当前二维投影中的相关较弱。
+
+这些解释有三项限制：
+
+1. 箭头是多维模型在二维平面的投影，短箭头可能只是信息落在更高轴；
+2. 箭头表示关联，不证明因果；
+3. 图上用颜色标出的 `Group` 可以只用于展示。若 `Group` 没进入公式，它不是该模型的约束变量。
+
+因子变量进入公式后通常显示为水平质心；连续变量显示为 biplot arrows。不要把两者都解释成连续梯度。
+
+</details>
+
+::: {.callout-note title="为什么同时做顺序检验和边际检验"}
+`anova(model, by = "terms")` 按公式顺序逐项加入变量，结果依赖变量排列；`by = "margin"` 检验每个变量在控制其余变量后的边际贡献。本例两者都运行：前者复现预先指定的建模顺序，后者用于判断独立贡献。
+:::
+
+## 检验预先指定变量与群落结构的关系 {#sec-code}
+
+### 构建用于 Bray–Curtis 的群落矩阵
 
 与非约束排序一致，保留至少在 5% 样本中检出的特征，并转换为样本内相对丰度。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 min_prevalence <- 0.05
 min_samples <- ceiling(min_prevalence * ncol(otutab))
 keep_feature <- rowSums(otutab > 0) >= min_samples
@@ -333,11 +286,13 @@ c(
 table(metadata$Group)
 ```
 
-### 3. 先看一个单因子 CAP 模型
+### 先看一个单因子 CAP 模型
 
 这个模型把湿地地理组作为约束变量。图上分开是预期结果，模型显著性仍由置换检验决定。
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 cap_group <- vegan::capscale(
   comm_rel ~ Group,
   data = metadata,
@@ -356,11 +311,13 @@ cap_group_test
 cap_group_r2
 ```
 
-### 4. 预先确定环境变量并处理缺失值
+### 预先确定环境变量并处理缺失值
 
 本例选择 `pH`、`TOC`、`NH4`、`NO3` 和 `Conductivity`。其中 pH 与电导率来自原研究的主要环境结论，其余三项代表碳、铵态氮和硝态氮。变量在建模前做 Z-score 标准化，使量纲可比。
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 predictors <- c(
   "pH",
   "TOC",
@@ -388,9 +345,11 @@ stopifnot(
 summary(model_data)
 ```
 
-### 5. 拟合环境 CAP，并检查 \(R^2\) 与共线性
+### 拟合环境 CAP，并检查 \(R^2\) 与共线性
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 cap_env <- vegan::capscale(
   comm_env ~ pH + TOC + NH4 + NO3 + Conductivity,
   data = model_data,
@@ -407,11 +366,13 @@ cap_env_vif
 
 本例所有 VIF 均低于 2，没有明显多重共线性。VIF 很高时，应依据科学问题删除或合并变量，不能为了获得更漂亮的箭头保留冗余预测因子。
 
-### 6. 整体、逐项、边际和逐轴置换检验
+### 整体、逐项、边际和逐轴置换检验
 
 每次随机置换前都固定种子。`by = "terms"` 是顺序检验，`by = "margin"` 是控制其他变量后的边际检验。
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 set.seed(20260718)
 cap_env_overall <- anova(
   cap_env,
@@ -451,11 +412,13 @@ cap_env_r2_adjusted <- unname(cap_env_r2$adj.r.squared)
 
 注意 `NO3` 在顺序检验与边际检验中的结论可能不同：前者会把先进入模型的变量解释后的剩余变异依次分配，后者检验控制全部其他变量后的贡献。这正是不能只贴一张箭头图的原因。
 
-### 7. 提取当前环境模型的坐标和轴标签
+### 提取当前环境模型的坐标和轴标签
 
 轴百分比按“受约束变异内部的占比”计算，并在标签中明确写出 `constrained`。调整后 \(R^2\) 则衡量全部五个变量对总群落变异的解释比例。
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 env_eigenvalues_mod2 <- cap_env$CCA$eig
 env_axis_percent_mod2 <- 100 *
   env_eigenvalues_mod2[1:2] /
@@ -511,11 +474,13 @@ arrow_scores_mod2
 
 每个模型都必须重新提取 eigenvalues 和 labels。不能把单因子模型的 `CAP1` 百分比复制到环境模型。
 
-## 出版级美化 {#sec-polish}
+## 正确解释约束轴和环境箭头 {#sec-polish}
 
 箭头缩放只改变绘图长度，不进入模型计算。环境变量是约束项，地理组仅用于给样本点着色。
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
 format_p <- function(p) {
   if (is.na(p)) {
     return("= NA")
@@ -614,7 +579,7 @@ save_pub(
 本数据来自不同地理湿地，环境梯度与地理组可能相关。主模型描述的是环境因子与群落结构的总体关联，不证明环境因子的独立因果效应。若目标是估计“控制地理组后的环境关联”，可拟合 `... + Condition(Group)` 的 partial CAP，并使用与采样层级一致的置换设计。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告约束排序与置换检验的方法与限制 {#sec-methods}
 
 可直接替换变量名、阈值和置换限制：
 
@@ -622,7 +587,7 @@ save_pub(
 
 若样本属于同一受试者、站点或区组，应把最后的置换描述改成实际限制，例如“permutations were restricted within site”。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将约束排序与置换检验用于自己的研究 {#sec-own-data}
 
 ### 四张表的最低要求
 

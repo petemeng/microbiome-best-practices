@@ -152,11 +152,11 @@
 <rect x='39.76' y='66.79' width='474.50' height='149.07' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwyNjAuNzk=)'>
-<text x='35.73' y='201.20' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.14px' lengthAdjust='spacingAndGlyphs'>30</text>
-<text x='35.73' y='170.35' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.72px' lengthAdjust='spacingAndGlyphs'>100</text>
-<text x='35.73' y='142.20' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.72px' lengthAdjust='spacingAndGlyphs'>300</text>
-<text x='35.73' y='111.35' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>1,000</text>
-<text x='35.73' y='83.20' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>3,000</text>
+<text x='35.73' y='201.20' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='9.14px' lengthAdjust='spacingAndGlyphs'>30</text>
+<text x='35.73' y='170.35' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='13.72px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='35.73' y='142.20' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='13.72px' lengthAdjust='spacingAndGlyphs'>300</text>
+<text x='35.73' y='111.35' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>1,000</text>
+<text x='35.73' y='83.20' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='20.57px' lengthAdjust='spacingAndGlyphs'>3,000</text>
 <polyline points='37.52,198.58 39.76,198.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='37.52,167.73 39.76,167.73 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='37.52,139.58 39.76,139.58 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -165,27 +165,27 @@
 <polyline points='61.33,218.10 61.33,215.86 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='277.01,218.10 277.01,215.86 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='492.69,218.10 492.69,215.86 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='61.33' y='225.14' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='19.72px' lengthAdjust='spacingAndGlyphs'>q = 0</text>
-<text x='61.33' y='232.91' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='32.74px' lengthAdjust='spacingAndGlyphs'>rare taxa</text>
-<text x='277.01' y='225.14' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='19.72px' lengthAdjust='spacingAndGlyphs'>q = 1</text>
-<text x='277.01' y='232.91' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='32.87px' lengthAdjust='spacingAndGlyphs'>balanced</text>
-<text x='492.69' y='225.14' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='19.72px' lengthAdjust='spacingAndGlyphs'>q = 2</text>
-<text x='492.69' y='232.91' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='52.46px' lengthAdjust='spacingAndGlyphs'>dominant taxa</text>
-<text x='277.01' y='243.21' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='41.12px' lengthAdjust='spacingAndGlyphs'>Hill order</text>
-<text transform='translate(11.04,141.33) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='129.08px' lengthAdjust='spacingAndGlyphs'>Effective features (log scale)</text>
+<text x='61.33' y='225.14' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='19.72px' lengthAdjust='spacingAndGlyphs'>q = 0</text>
+<text x='61.33' y='232.91' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='32.74px' lengthAdjust='spacingAndGlyphs'>rare taxa</text>
+<text x='277.01' y='225.14' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='19.72px' lengthAdjust='spacingAndGlyphs'>q = 1</text>
+<text x='277.01' y='232.91' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='32.87px' lengthAdjust='spacingAndGlyphs'>balanced</text>
+<text x='492.69' y='225.14' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='19.72px' lengthAdjust='spacingAndGlyphs'>q = 2</text>
+<text x='492.69' y='232.91' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='52.46px' lengthAdjust='spacingAndGlyphs'>dominant taxa</text>
+<text x='277.01' y='243.21' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='41.12px' lengthAdjust='spacingAndGlyphs'>Hill order</text>
+<text transform='translate(11.04,141.33) rotate(-90)' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='129.08px' lengthAdjust='spacingAndGlyphs'>Effective features (log scale)</text>
 <rect x='116.75' y='31.58' width='320.52' height='26.25' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
-<text x='121.23' y='47.98' style='font-size: 9.00px; font-family: "DejaVu Sans";' textLength='65.86px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
+<text x='121.23' y='47.98' style='font-size: 9.00px; font-family: "Arial";' textLength='65.86px' lengthAdjust='spacingAndGlyphs'>Wetland group</text>
 <rect x='192.28' y='36.77' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #0072B2; fill-opacity: 0.14;' />
 <circle cx='200.21' cy='44.70' r='2.56' style='stroke-width: 0.43; stroke: #1A1A1A; fill: #0072B2;' />
 <rect x='271.64' y='36.77' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #D55E00; fill-opacity: 0.14;' />
 <circle cx='279.57' cy='44.70' r='2.56' style='stroke-width: 0.43; stroke: #1A1A1A; fill: #D55E00;' />
 <rect x='355.59' y='36.77' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #009E73; fill-opacity: 0.14;' />
 <circle cx='363.52' cy='44.70' r='2.56' style='stroke-width: 0.43; stroke: #1A1A1A; fill: #009E73;' />
-<text x='213.33' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='53.11px' lengthAdjust='spacingAndGlyphs'>Inland wetland</text>
-<text x='292.70' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='57.70px' lengthAdjust='spacingAndGlyphs'>Coastal wetland</text>
-<text x='376.64' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='56.15px' lengthAdjust='spacingAndGlyphs'>Tibetan Plateau</text>
-<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='216.24px' lengthAdjust='spacingAndGlyphs'>Diversity standardized to 90% sample coverage</text>
-<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='334.63px' lengthAdjust='spacingAndGlyphs'>Hill profiles put all three orders in effective-feature units</text>
-<text x='39.76' y='254.81' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='284.59px' lengthAdjust='spacingAndGlyphs'>Lines and IQRs are descriptive; group hypothesis tests are not performed here.</text>
+<text x='213.33' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='53.11px' lengthAdjust='spacingAndGlyphs'>Inland wetland</text>
+<text x='292.70' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='57.70px' lengthAdjust='spacingAndGlyphs'>Coastal wetland</text>
+<text x='376.64' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='56.15px' lengthAdjust='spacingAndGlyphs'>Tibetan Plateau</text>
+<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='216.24px' lengthAdjust='spacingAndGlyphs'>Diversity standardized to 90% sample coverage</text>
+<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='334.63px' lengthAdjust='spacingAndGlyphs'>Hill profiles put all three orders in effective-feature units</text>
+<text x='39.76' y='254.81' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='284.59px' lengthAdjust='spacingAndGlyphs'>Lines and IQRs are descriptive; group hypothesis tests are not performed here.</text>
 </g>
 </svg>

@@ -270,7 +270,7 @@
 </defs>
 <g clip-path='url(#cpNDEuODV8MjY0LjkyfDI4Ljc2fDQxLjQz)'>
 <rect x='41.85' y='28.76' width='223.07' height='12.67' style='stroke-width: 0.64; stroke: #B3B3B3; fill: #F2F2F2;' />
-<text x='153.38' y='37.48' text-anchor='middle' style='font-size: 6.56px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='121.13px' lengthAdjust='spacingAndGlyphs'>Quantitative abundance (cells/g)</text>
+<text x='153.38' y='37.48' text-anchor='middle' style='font-size: 6.56px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='121.13px' lengthAdjust='spacingAndGlyphs'>Quantitative abundance (cells/g)</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTcuNDg=)'>
 </g>
@@ -281,36 +281,36 @@
 </defs>
 <g clip-path='url(#cpMjgzLjA4fDUwNi4xNXwyOC43Nnw0MS40Mw==)'>
 <rect x='283.08' y='28.76' width='223.07' height='12.67' style='stroke-width: 0.64; stroke: #B3B3B3; fill: #F2F2F2;' />
-<text x='394.62' y='37.48' text-anchor='middle' style='font-size: 6.56px; font-weight: bold;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='87.82px' lengthAdjust='spacingAndGlyphs'>Relative abundance (%)</text>
+<text x='394.62' y='37.48' text-anchor='middle' style='font-size: 6.56px; font-weight: bold;fill: #1A1A1A; font-family: "Arial";' textLength='87.82px' lengthAdjust='spacingAndGlyphs'>Relative abundance (%)</text>
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTcuNDg=)'>
 <polyline points='102.69,295.41 102.69,293.37 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='204.08,295.41 204.08,293.37 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='102.69' y='301.82' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.37px' lengthAdjust='spacingAndGlyphs'>Healthy</text>
-<text x='204.08' y='301.82' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.61px' lengthAdjust='spacingAndGlyphs'>CD</text>
+<text x='102.69' y='301.82' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='25.37px' lengthAdjust='spacingAndGlyphs'>Healthy</text>
+<text x='204.08' y='301.82' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='9.61px' lengthAdjust='spacingAndGlyphs'>CD</text>
 <polyline points='343.92,295.41 343.92,293.37 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='445.31,295.41 445.31,293.37 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='343.92' y='301.82' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.37px' lengthAdjust='spacingAndGlyphs'>Healthy</text>
-<text x='445.31' y='301.82' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='9.61px' lengthAdjust='spacingAndGlyphs'>CD</text>
-<text x='279.41' y='284.30' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='279.41' y='225.12' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='279.41' y='169.21' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='279.41' y='118.52' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>1.5</text>
-<text x='279.41' y='73.51' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>2.0</text>
+<text x='343.92' y='301.82' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='25.37px' lengthAdjust='spacingAndGlyphs'>Healthy</text>
+<text x='445.31' y='301.82' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='9.61px' lengthAdjust='spacingAndGlyphs'>CD</text>
+<text x='279.41' y='284.30' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='279.41' y='225.12' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='279.41' y='169.21' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='279.41' y='118.52' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>1.5</text>
+<text x='279.41' y='73.51' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='10.40px' lengthAdjust='spacingAndGlyphs'>2.0</text>
 <polyline points='281.04,281.91 283.08,281.91 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='281.04,222.73 283.08,222.73 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='281.04,166.82 283.08,166.82 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='281.04,116.14 283.08,116.14 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='281.04,71.12 283.08,71.12 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='38.17' y='284.30' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.16px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='38.17' y='55.64' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='18.13px' lengthAdjust='spacingAndGlyphs'>500M</text>
-<text x='38.17' y='47.73' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='24.37px' lengthAdjust='spacingAndGlyphs'>1 000M</text>
+<text x='38.17' y='284.30' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='4.16px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='38.17' y='55.64' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='18.13px' lengthAdjust='spacingAndGlyphs'>500M</text>
+<text x='38.17' y='47.73' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='24.37px' lengthAdjust='spacingAndGlyphs'>1 000M</text>
 <polyline points='39.81,281.91 41.85,281.91 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='39.81,53.25 41.85,53.25 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='39.81,45.34 41.85,45.34 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text transform='translate(10.05,167.40) rotate(-90)' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='64.36px' lengthAdjust='spacingAndGlyphs'>Observed value</text>
-<text x='4.08' y='22.97' style='font-size: 8.20px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='265.38px' lengthAdjust='spacingAndGlyphs'>Relative effect 0.02 (q 0.14); quantitative effect -2.49 (q 0.0029)</text>
-<text x='4.08' y='10.95' style='font-size: 9.43px; font-weight: bold; font-family: "DejaVu Sans";' textLength='265.80px' lengthAdjust='spacingAndGlyphs'>Desulfovibrio: the denominator changes the story</text>
-<text x='41.85' y='312.03' style='font-size: 6.56px;fill: #666666; font-family: "DejaVu Sans";' textLength='319.85px' lengthAdjust='spacingAndGlyphs'>Quantitative values equal within-sample sequencing proportions × matched flow-cytometry load.</text>
+<text transform='translate(10.05,167.40) rotate(-90)' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='64.36px' lengthAdjust='spacingAndGlyphs'>Observed value</text>
+<text x='4.08' y='22.97' style='font-size: 8.20px;fill: #4D4D4D; font-family: "Arial";' textLength='265.38px' lengthAdjust='spacingAndGlyphs'>Relative effect 0.02 (q 0.14); quantitative effect -2.49 (q 0.0029)</text>
+<text x='4.08' y='10.95' style='font-size: 9.43px; font-weight: bold; font-family: "Arial";' textLength='265.80px' lengthAdjust='spacingAndGlyphs'>Desulfovibrio: the denominator changes the story</text>
+<text x='41.85' y='312.03' style='font-size: 6.56px;fill: #666666; font-family: "Arial";' textLength='319.85px' lengthAdjust='spacingAndGlyphs'>Quantitative values equal within-sample sequencing proportions × matched flow-cytometry load.</text>
 </g>
 </svg>

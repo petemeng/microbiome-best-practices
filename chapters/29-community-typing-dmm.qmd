@@ -1,6 +1,6 @@
 ---
 title: "群落分型 DMM（肠型/CST）"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,15 +17,24 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/29-community-typing-dmm.R
+  packages:
+  - DirichletMultinomial
+  - ggplot2
+  - knitr
+  - ragg
+  - readr
+  - scales
+  - svglite
+  - vegan
 ---
-
-> **分析目标：**用 Dirichlet-multinomial mixture（DMM，Dirichlet–多项式混合模型）从原始属级计数估计概率性群落状态，同时审计成分数、初始化、标签交换、后验不确定性、特征过滤、测序深度与重复样本稳定性。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`。  
-> **预计资源：**示例含 278 个样本、130 个来源属级类别和 570,851 reads；42 个 fresh fits 各用一次性 R 进程、最多 8 个并发，通常需 3–6 分钟，峰值内存约 1–2 GB，四张图以 PDF/SVG/600 ppi PNG/LZW-TIFF 导出。
 
 ## 群落分型是概率模型，不是天然类别 {#sec-target}
 
-群落分型常见于论文中的三类图：模型证据随 component 数 `k` 的曲线、按“肠型”（enterotype）或阴道群落状态型（community state type, CST）着色的排序图，以及各状态优势类群的组成热图。Holmes 等人的原文可直接查看 [Figure 1：Laplace model evidence](https://doi.org/10.1371/journal.pone.0030126.g001)、[Figure 2：按四个 component 着色的 NMDS](https://doi.org/10.1371/journal.pone.0030126.g002) 和 [Table 4：BMI 与 component 的列联表](https://doi.org/10.1371/journal.pone.0030126.t004)。PLOS ONE 原文采用 CC BY 许可；这里不嵌入原图，而是沿用“模型选择—排序显示—component 解释”的信息结构，从公开计数重绘并增加不确定性与稳定性审计。真正需要回答的不是“软件能分成几类”，而是：**离散状态是否比连续梯度更有支持，样本属于某状态的把握有多大，换一种合理的数据处理后结论是否仍成立。**
+群落分型常见于论文中的三类图：模型证据随 component 数 `k` 的曲线、按“肠型”（enterotype）或阴道群落状态型（community state type, CST）着色的排序图，以及各状态优势类群的组成热图。Holmes 等人的原文可直接查看 [Figure 1：Laplace model evidence](https://doi.org/10.1371/journal.pone.0030126.g001)、[Figure 2：按四个 component 着色的 NMDS](https://doi.org/10.1371/journal.pone.0030126.g002) 和 [Table 4：BMI 与 component 的列联表](https://doi.org/10.1371/journal.pone.0030126.t004)。真正需要回答的不是“软件能分成几类”，而是：**离散状态是否比连续梯度更有支持，样本属于某状态的把握有多大，换一种合理的数据处理后结论是否仍成立。**
 
 本页使用 `DirichletMultinomial` 1.46.0 随包分发的真实 Twins 属级 16S 计数。原队列来自 [Turnbaugh et al. (2009)](https://doi.org/10.1038/nature07540) 的双胞胎肠道微生物组研究；[Holmes et al. (2012)](https://doi.org/10.1371/journal.pone.0030126)用这组数据演示 DMM。包内表保留 278 个样本、570,851 reads、129 个命名 genus 加一个来源标签拼作 `Uknown` 的未分类项。这里保留原始标签和计数，只在图中把 `Uknown` 显示为 `Unclassified`。
 
@@ -43,171 +52,36 @@ fig-format: png
 
 模型选择、后验着色 PCoA、component profile 热图和稳定性账本共同检查分型是否可解释且稳定。
 
-## DMM 给的是概率状态，不是血型式类别 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-### 1. 单个 Dirichlet–多项式同时描述组成和过度离散
+需要 R，以及 `DirichletMultinomial`、`ggplot2`、`knitr`、`ragg`、`readr`、`scales`、`svglite`、`vegan`。本次使用群落分型示例的 count、taxonomy 和 metadata 三张表。
 
-设样本 `j` 的属级计数向量为 `x[j]`，总 reads 为 `N[j]`。普通 multinomial 假定每个样本共享固定组成 `p`；Dirichlet–multinomial 先让样本组成从 Dirichlet distribution 波动，再生成计数：
-
-$$
-p_j \sim \mathrm{Dirichlet}(\alpha), \qquad
-x_j \mid p_j \sim \mathrm{Multinomial}(N_j,p_j).
-$$
-
-`alpha` 的相对大小描述 component 的期望组成，总浓度与样本间离散程度相关。DMM 再混合 `k` 个这样的分布：
-
-$$
-P(x_j)=\sum_{c=1}^{k}\pi_c\,
-P_{\mathrm{DM}}(x_j\mid\alpha_c).
-$$
-
-模型把每个样本的总 reads `N[j]` 纳入 likelihood，所以主输入应是非负整数 counts。相对丰度、CLR 或人为伪计数属于不同测量对象，不能悄悄传给这条 DMM 主分支。
-
-### 2. `k` 是模型选择问题，不是看图数云团
-
-`DirichletMultinomial::dmn()`给出 negative log evidence 的 Laplace approximation，以及 AIC 和 BIC。三者都以较小为优，但复杂度惩罚与近似方式不同。只展示支持目标 `k` 的一个准则，会隐藏模型选择不确定性。
-
-本例的 fresh fit 中，Laplace、AIC、BIC 分别偏向 4、2、1。二维 PCoA 只是高维距离的投影；即使颜色看似分开，也不能反过来决定 DMM component 数。
-
-### 3. Hard assignment 会丢掉边界信息
-
-对样本 `j`，模型返回每个 component 的 posterior probability：
-
-$$
-r_{jc}=P(z_j=c\mid x_j).
-$$
-
-`which.max(r[j, ])` 只保留最高者。最大 posterior 接近 0.5 和接近 1 的样本被同样画成一个实心颜色，会制造虚假确定性。因此至少保留：所有 component posterior、最大 posterior、normalized entropy，以及预声明的低置信度标记。
-
-### 4. Mixture label 会交换
-
-同一个 partition 可以在一次拟合中叫 component 1，在另一次拟合中叫 component 3；这叫 label switching。直接比较数字标签会把等价解误判为不稳定。本页先按 component expected profile 做 Jensen–Shannon divergence matching，再计算 ARI。主模型内部则按 Bacteroides、Prevotella 和原始 component index 的固定顺序赋 `DMM-A`–`DMM-D`。
-
-这个规则只负责**稳定命名**。`DMM-A` 不等于“Bacteroides enterotype”，`DMM-D` 也不等于疾病亚型；component profile 是完整分布，不是由一个优势菌定义的诊断。
-
-### 5. Enterotype 与 CST 需要不同语境的外部证据
-
-[Arumugam et al. (2011)](https://doi.org/10.1038/nature09944)提出肠道 enterotype；[Ravel et al. (2011)](https://doi.org/10.1073/pnas.1002611107)描述阴道 CST。[Koren et al. (2013)](https://doi.org/10.1371/journal.pcbi.1002863)和 [Costea et al. (2018)](https://doi.org/10.1038/s41564-017-0072-8)都提醒：不同身体部位和队列可能呈离散模式，也可能是连续梯度；cluster 支持、稳定性、可迁移性和临床含义必须分别验证。
-
-因此“发现四个 state”最多说明当前数据与合同下的概率模型支持一个四 component 描述。要升级为可复用的 enterotype/CST，还需要外部队列、批次与测序区域敏感性、纵向转移、协变量调整和生物学验证。
-
-<details>
-<summary><strong>深入：为什么模型已经考虑 read depth，仍要做 depth sensitivity</strong></summary>
-
-DMM 条件在每个样本的总 reads 上建模，因此不需要为了主拟合先把所有样本抽到同一深度。但极浅文库仍提供更宽的抽样不确定性，稀有 feature 的可见性也随深度变化；feature filter 与 sample inclusion 还能改变 likelihood 的维度和样本集合。Depth sensitivity 检查的是结论对观测设计和信息量的依赖，不是宣称 rarefaction 比原始 count likelihood 更正确。
-
-</details>
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、导出真实三件套和定义作图函数</strong></summary>
-
-R 4.4 与 Bioconductor 3.19 的锁定安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "BiocManager", "digest", "ggplot2", "jsonlite", "ragg", "readr",
-  "scales", "svglite", "systemfonts", "vegan"
-))
-BiocManager::install(version = "3.19", ask = FALSE)
-BiocManager::install("DirichletMultinomial", ask = FALSE)
-```
-
-从 `DirichletMultinomial` 1.46.0 的 `extdata` 导出标准三件套。`otutab` 保持 feature × sample；taxonomy 只在 `Genus` 填入来源标签，因为包内没有分发其余 rank：
-
-```{r}
-#| eval: false
-stopifnot(
-  identical(
-    as.character(packageVersion("DirichletMultinomial")),
-    "1.46.0"
-  )
-)
-
-twins_path <- system.file(
-  "extdata", "Twins.csv", package = "DirichletMultinomial"
-)
-phenotype_path <- system.file(
-  "extdata", "TwinStudy.t", package = "DirichletMultinomial"
-)
-stopifnot(
-  digest::digest(twins_path, algo = "sha256", file = TRUE) ==
-    "b6a231acded317b49b7fd800bf8b4ce12a75340c5b88499b51e92d72528f93ba",
-  digest::digest(phenotype_path, algo = "sha256", file = TRUE) ==
-    "4286c3f9255f7f1ce7f5c5ac5e60d4e27284fe358ceb553108748c67ab4d8b05"
-)
-
-otutab <- as.matrix(read.csv(
-  twins_path, row.names = 1, check.names = FALSE
-))
-storage.mode(otutab) <- "integer"
-bmi_code <- scan(phenotype_path, what = integer(), quiet = TRUE)
-
-taxonomy <- data.frame(
-  Kingdom = NA_character_, Phylum = NA_character_,
-  Class = NA_character_, Order = NA_character_,
-  Family = NA_character_, Genus = rownames(otutab),
-  Species = NA_character_,
-  row.names = rownames(otutab),
-  check.names = FALSE
-)
-
-sample_ids <- colnames(otutab)
-participant_key <- sub("\\.2$", "", sample_ids)
-metadata <- data.frame(
-  BMIClass = c("Lean", "Obese", "Overweight")[bmi_code + 1L],
-  BMIClassCode = bmi_code,
-  ParticipantKey = participant_key,
-  SourceSuffix = ifelse(
-    grepl("\\.2$", sample_ids), "Dot2 suffix", "No suffix"
-  ),
-  SamplesPerParticipantKey = as.integer(
-    table(participant_key)[participant_key]
-  ),
-  row.names = sample_ids,
-  check.names = FALSE
-)
-
-write_keyed_tsv <- function(x, id_name, path) {
-  out <- data.frame(
-    setNames(list(rownames(x)), id_name), x,
-    check.names = FALSE
-  )
-  write.table(
-    out, path, sep = "\t", quote = FALSE,
-    row.names = FALSE, na = ""
-  )
-}
-
-dir.create(
-  "data/small/community-typing-dmm",
-  recursive = TRUE,
-  showWarnings = FALSE
-)
-write_keyed_tsv(
-  otutab, "FeatureID",
-  "data/small/community-typing-dmm/otutab.tsv"
-)
-write_keyed_tsv(
-  taxonomy, "FeatureID",
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/community-typing-dmm/metadata.tsv",
+  "data/small/community-typing-dmm/otutab.tsv",
+  "data/small/community-typing-dmm/source-summary.json",
   "data/small/community-typing-dmm/taxonomy.tsv"
 )
-write_keyed_tsv(
-  metadata, "SampleID",
-  "data/small/community-typing-dmm/metadata.tsv"
-)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-出版级函数直接内联。图内统一使用英文、DejaVu Sans 和色觉友好配色：
-
 ```{r}
+#| results: hold
 #| label: setup-dmm-packages-theme
 library(ggplot2)
 
 set.seed(20260729)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 
 pal_pub <- c(
   blue = "#0072B2",
@@ -293,13 +167,10 @@ save_pub <- function(
 }
 ```
 
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并锁定 count contract
+### 读取三件套，检查是否保留了原始整数计数
 
 ```{r}
+#| results: hold
 #| label: read-dmm-inputs
 read_keyed_tsv <- function(path) {
   x <- readr::read_tsv(
@@ -397,9 +268,84 @@ list(
 
 `otutab` 的列总和是 library size；DMM 需要转置成 sample × feature 后拟合。taxonomy 的空 rank 是公开数据边界，不应补造。`ParticipantKey` 与 `SourceSuffix` 是从字符串确定性派生的审计字段，不替代临床访视记录。
 
-### 2. 预声明主模型和稳定命名规则
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/29-community-typing-dmm.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
 
 ```{r}
+#| eval: false
+install.packages(c(
+  "BiocManager", "digest", "ggplot2", "jsonlite", "ragg", "readr",
+  "scales", "svglite", "systemfonts", "vegan"
+))
+BiocManager::install(version = "3.19", ask = FALSE)
+BiocManager::install("DirichletMultinomial", ask = FALSE)
+```
+
+</details>
+
+## DMM 给的是概率状态，不是血型式类别 {#sec-theory}
+
+### 单个 Dirichlet–多项式同时描述组成和过度离散
+
+设样本 `j` 的属级计数向量为 `x[j]`，总 reads 为 `N[j]`。普通 multinomial 假定每个样本共享固定组成 `p`；Dirichlet–multinomial 先让样本组成从 Dirichlet distribution 波动，再生成计数：
+
+$$
+p_j \sim \mathrm{Dirichlet}(\alpha), \qquad
+x_j \mid p_j \sim \mathrm{Multinomial}(N_j,p_j).
+$$
+
+`alpha` 的相对大小描述 component 的期望组成，总浓度与样本间离散程度相关。DMM 再混合 `k` 个这样的分布：
+
+$$
+P(x_j)=\sum_{c=1}^{k}\pi_c\,
+P_{\mathrm{DM}}(x_j\mid\alpha_c).
+$$
+
+模型把每个样本的总 reads `N[j]` 纳入 likelihood，所以主输入应是非负整数 counts。相对丰度、CLR 或人为伪计数属于不同测量对象，不能悄悄传给这条 DMM 主分支。
+
+### `k` 是模型选择问题，不是看图数云团
+
+`DirichletMultinomial::dmn()`给出 negative log evidence 的 Laplace approximation，以及 AIC 和 BIC。三者都以较小为优，但复杂度惩罚与近似方式不同。只展示支持目标 `k` 的一个准则，会隐藏模型选择不确定性。
+
+本例的 fresh fit 中，Laplace、AIC、BIC 分别偏向 4、2、1。二维 PCoA 只是高维距离的投影；即使颜色看似分开，也不能反过来决定 DMM component 数。
+
+### 只给一个分型标签，会掩盖边界样本的不确定性
+
+对样本 `j`，模型返回每个 component 的 posterior probability：
+
+$$
+r_{jc}=P(z_j=c\mid x_j).
+$$
+
+`which.max(r[j, ])` 只保留最高者。最大 posterior 接近 0.5 和接近 1 的样本被同样画成一个实心颜色，会制造虚假确定性。因此至少保留：所有 component posterior、最大 posterior、normalized entropy，以及预声明的低置信度标记。
+
+### 不同拟合中的分型编号不一定对应同一群落
+
+同一个 partition 可以在一次拟合中叫 component 1，在另一次拟合中叫 component 3；这叫 label switching。直接比较数字标签会把等价解误判为不稳定。本页先按 component expected profile 做 Jensen–Shannon divergence matching，再计算 ARI。主模型内部则按 Bacteroides、Prevotella 和原始 component index 的固定顺序赋 `DMM-A`–`DMM-D`。
+
+这个规则只负责**稳定命名**。`DMM-A` 不等于“Bacteroides enterotype”，`DMM-D` 也不等于疾病亚型；component profile 是完整分布，不是由一个优势菌定义的诊断。
+
+### Enterotype 与 CST 需要不同语境的外部证据
+
+[Arumugam et al. (2011)](https://doi.org/10.1038/nature09944)提出肠道 enterotype；[Ravel et al. (2011)](https://doi.org/10.1073/pnas.1002611107)描述阴道 CST。[Koren et al. (2013)](https://doi.org/10.1371/journal.pcbi.1002863)和 [Costea et al. (2018)](https://doi.org/10.1038/s41564-017-0072-8)都提醒：不同身体部位和队列可能呈离散模式，也可能是连续梯度；cluster 支持、稳定性、可迁移性和临床含义必须分别验证。
+
+因此“发现四个 state”最多说明当前数据与合同下的概率模型支持一个四 component 描述。要升级为可复用的 enterotype/CST，还需要外部队列、批次与测序区域敏感性、纵向转移、协变量调整和生物学验证。
+
+<details>
+<summary><strong>深入：为什么模型已经考虑 read depth，仍要做 depth sensitivity</strong></summary>
+
+DMM 条件在每个样本的总 reads 上建模，因此不需要为了主拟合先把所有样本抽到同一深度。但极浅文库仍提供更宽的抽样不确定性，稀有 feature 的可见性也随深度变化；feature filter 与 sample inclusion 还能改变 likelihood 的维度和样本集合。Depth sensitivity 检查的是结论对观测设计和信息量的依赖，不是宣称 rarefaction 比原始 count likelihood 更正确。
+
+</details>
+
+## 拟合DMM并检查分型是否稳定 {#sec-code}
+
+### 预声明主模型和稳定命名规则
+
+```{r}
+#| results: hold
 #| label: define-dmm-contract-functions
 primary_seed <- 20260729L
 candidate_k <- 1:7
@@ -486,9 +432,10 @@ match_profiles <- function(primary_profiles, candidate_profiles) {
 
 标签规则预先固定为：Bacteroides fitted proportion 从高到低；若相同，再按 Prevotella 从高到低；仍相同则按原始 component index。不同 sensitivity fit 则用完整 profile 的最小 Jensen–Shannon divergence 一一匹配。
 
-### 3. 构造四条 sensitivity branch
+### 比较过滤、测序深度、抽平和重复采样的影响
 
 ```{r}
+#| results: hold
 #| label: prepare-dmm-sensitivity-branches
 feature_prevalence <- rowMeans(counts > 0L)
 prevalence_features <- rownames(counts)[feature_prevalence >= 0.05]
@@ -550,9 +497,10 @@ data.frame(
 
 `Rarefied to 1,000` 只包含原深度至少 1,000 的 247 个样本；它是 sensitivity branch，不替代主 count model。`One per participant` 优先保留无 `.2` 后缀的样本，若某 key 只有 `.2`，则保留该样本，共 154 个。
 
-### 4. 每个模型都用一次性 R 进程拟合
+### 每个模型都用一次性 R 进程拟合
 
 ```{r}
+#| results: hold
 #| label: fit-dmm-model-grid
 #| cache: true
 candidate_jobs <- expand.grid(
@@ -645,11 +593,12 @@ get_candidate_fit <- function(branch, k) {
 }
 ```
 
-这里不复用 worker：每批最多并发 8 个 PSOCK worker，而每个 worker 只完成一个 fit 就退出。每个进程都显式限制为单线程并接收独立 seed。在本次环境中，复用 worker 时，同一个 `dmn(seed=...)` 曾因前序 fit 历史而进入不同解；一次性进程把进程状态也纳入确定性合同。并行只缩短墙钟时间，不改变每个 fit 的输入、seed 或选择规则。
+这里不复用 worker：每批最多并发 8 个 PSOCK worker，而每个 worker 只完成一个 fit 就退出。每个进程都显式限制为单线程并接收独立 seed。在本次环境中，复用 worker 时，同一个 `dmn(seed=...)` 曾因前序 fit 历史而进入不同解；为每次拟合启动新进程，可以避免前次计算留下的状态影响结果。并行只缩短墙钟时间，不改变每个 fit 的输入、seed 或选择规则。
 
-### 5. 同时查看 Laplace、AIC 和 BIC
+### 同时查看 Laplace、AIC 和 BIC
 
 ```{r}
+#| results: hold
 #| label: summarize-dmm-selection
 model_selection <- do.call(rbind, lapply(
   seq_len(nrow(candidate_jobs)),
@@ -694,9 +643,10 @@ knitr::kable(
 
 最低值分别是 Laplace `k=4`、AIC `k=2`、BIC `k=1`。后续用 `k=4` 是执行预声明的 Laplace 规则，不是宣称 AIC/BIC 错误。
 
-### 6. Canonicalize component，并保留全部 posterior
+### 统一分型命名，并保留每个样本的归属概率
 
 ```{r}
+#| results: hold
 #| label: canonicalize-dmm-components
 primary_fit <- get_candidate_fit("Primary", 4L)
 profiles_raw <- fit_profiles(primary_fit)
@@ -756,6 +706,7 @@ knitr::kable(
 所有 posterior 都应写出，而不是只保存 `State`：
 
 ```{r}
+#| results: hold
 #| label: create-dmm-posterior-table
 sample_posteriors <- data.frame(
   SampleID = rownames(posteriors),
@@ -776,9 +727,10 @@ sample_posteriors <- data.frame(
 head(sample_posteriors, 8)
 ```
 
-### 7. 区分 fresh fit 与包内 reference fit
+### 区分本次重新拟合与软件包提供的参考结果
 
 ```{r}
+#| results: hold
 #| label: compare-dmm-reference-fit
 reference_environment <- new.env(parent = emptyenv())
 data(
@@ -834,9 +786,10 @@ stopifnot(
 
 Fresh `k=4` Laplace 约为 38,838.42，包内 reference 约为 38,781.10。两者都选 `k=4`，profile-matched partition 的 ARI 为 1，但 Laplace 数值并不相同；包内对象不能冒充本次 fresh fit。
 
-### 8. 初始化、过滤、深度和单人单样本审计
+### 初始化、过滤、深度和单人单样本审计
 
 ```{r}
+#| results: hold
 #| label: audit-dmm-stability
 initialization_fits <- c(
   list(primary_fit),
@@ -928,9 +881,10 @@ knitr::kable(
 
 `SelectedKLaplace` 检查模型阶数是否改变；`FixedK4ARI` 则在 component 数固定后检查 assignment 是否改变。两者不能互相替代。
 
-### 9. 重复样本与外部 metadata 只做描述
+### 重复样本与外部 metadata 只做描述
 
 ```{r}
+#| results: hold
 #| label: audit-dmm-repeats-metadata
 participant_counts <- table(metadata$ParticipantKey)
 paired_keys <- names(participant_counts)[participant_counts == 2L]
@@ -991,9 +945,10 @@ knitr::kable(
 
 同一 key 的两份样本并非独立实验单位；家庭、连续 BMI、饮食、药物和正式 visit metadata 也没有完整分发。因此不运行普通卡方检验，也不把 BMI 交叉表写成疾病关联。
 
-### 10. 计算仅用于显示的 Bray–Curtis PCoA
+### 计算仅用于显示的 Bray–Curtis PCoA
 
 ```{r}
+#| results: hold
 #| label: compute-dmm-ordination
 relative_samples <- sweep(
   sample_counts, 1L, rowSums(sample_counts), "/"
@@ -1033,13 +988,14 @@ PCoA 使用相对丰度 Bray–Curtis，只承担可视化；DMM assignment 来�
 
 ## DMM 分型最容易在哪些地方失真？ {#sec-audit-upgrade}
 
-### 1. 先忠实还原原文分析合同
+### 先明确原研究的数据、过滤规则与模型设置
 
 [Holmes、Harris 与 Quince（2012）](https://doi.org/10.1371/journal.pone.0030126)从“sample × genus frequency matrix”出发，用 Dirichlet–multinomial mixture 显式处理离散计数、稀疏性、不同文库大小与 component 内过度离散。他们逐步增加 component 数，以 Laplace approximation to the negative log model evidence 选择模型；Twins 数据在四 component 处达到最低值。随后用 Bray–Curtis NMDS 显示样本与 Dirichlet component means，并强调样本不一定属于二维图中最近的 component mean。BMI 与 component 的关系则另列成表，不参与无监督拟合。
 
 本页忠实保留了四个关键点：输入仍是原始属级频数；`k` 由模型证据而不是肉眼看排序图决定；assignment 来自 DMM posterior 而不是最近质心；BMIClass 在拟合完成后才进入描述。`DirichletMultinomial` 随包的 `fit` 对象也单独保留为 reference，避免把历史对象误写成本次重新拟合。
 
 ```{r}
+#| results: hold
 #| label: audit-original-vs-upgraded-dmm
 audit_upgrade <- data.frame(
   Dimension = c(
@@ -1075,14 +1031,14 @@ knitr::kable(
 )
 ```
 
-### 2. 哪些原结论在这次重跑中保留
+### 哪些原结论在这次重跑中保留
 
 - 原文与包内 reference fit 都以 Laplace criterion 支持四个 component；固定 seed 的 fresh fit 也选择 `k=4`。
 - 原文指出 component 的均值和变异程度都不同；本页的完整 fitted profiles 与 component summaries 保留这两个层面，不用单个“优势菌”替代整个分布。
 - 原文 Figure 2 已提醒“最近二维质心”不等于 model assignment；本页进一步把 posterior confidence 编码到排序图中。
 - 原文没有把 BMI 写成一个独立、确定的肥胖菌群类型；本页也不把四个 state 改名为疾病亚型。
 
-### 3. 哪些地方需要按今天的标准升级
+### 哪些地方需要按今天的标准升级
 
 第一，**不能只保存一个 optimizer 结果**。本次八个 one-shot starts 得到相同 partition，但不同 start 的 Laplace 值仍略有差异；实际研究仍应预声明 start 数，以最优目标值选最终 fit，并保存全部 seed、目标值和 assignment agreement。每个 fit 使用一次性进程，可避免前序模型状态成为未记录的隐藏输入。
 
@@ -1098,11 +1054,12 @@ knitr::kable(
 主文同时给 model-selection curves、component profiles、posterior-aware ordination 与 stability ledger；补充材料交付每个 fit 的 criterion、component matching、所有样本 posterior、初始化 agreement、过滤/深度敏感性和重复样本转移表。只有外部队列中的 profile transportability、posterior calibration 与纵向稳定性也成立时，才适合把数据内的 `DMM-A`–`DMM-D` 提升为可复用的 enterotype/CST 名称。
 :::
 
-## 出版级美化 {#sec-publication}
+## 同时查看模型选择、后验概率与组成差异 {#sec-publication}
 
-### 图 1：三个准则和两个 fit source 同图
+### 图 1：比较三种模型选择准则与参考拟合结果
 
 ```{r}
+#| results: hold
 #| label: fig-dmm-model-selection
 #| fig-width: 6.7
 #| fig-height: 6.2
@@ -1181,9 +1138,10 @@ model_selection_plot
 
 开放圆圈让读者直接看到：Laplace 的两个来源都在 4 最小，但 AIC/BIC 支持更简单的模型。完整曲线比单独写“最佳 `k=4`”更诚实。
 
-### 图 2：posterior uncertainty 进入排序图
+### 图 2：在排序图中标出归属不确定的样本
 
 ```{r}
+#| results: hold
 #| label: fig-dmm-posterior-ordination
 #| fig-width: 6.7
 #| fig-height: 4.9
@@ -1266,9 +1224,10 @@ posterior_ordination_plot
 
 空心点标出最大 posterior `<0.80` 的 8 个样本；颜色、形状和透明度共同编码，灰度打印时仍能识别低置信度点。
 
-### 图 3：展示完整 component profile，而不是贴单菌标签
+### 图 3：用完整群落组成解释分型，而不是只看一个菌属
 
 ```{r}
+#| results: hold
 #| label: fig-dmm-component-profiles
 #| fig-width: 6.5
 #| fig-height: 4.8
@@ -1368,9 +1327,10 @@ component_profiles_plot
 
 四列都包含多个 genus 和大比例未分类 reads。优势项有助于描述 component，却不足以给状态贴功能、健康或病理标签。
 
-### 图 4：把稳定性证据做成一张账本
+### 图 4：比较不同处理与初始化下的分型稳定性
 
 ```{r}
+#| results: hold
 #| label: fig-dmm-stability-audit
 #| fig-width: 7.1
 #| fig-height: 5.3
@@ -1476,8 +1436,8 @@ stability_audit_plot
 这张图把四类问题分开：optimizer 是否落入局部解、预处理是否改变 assignment、最佳 `k` 是否改变、同一 participant key 的两份样本是否保持状态。不能用其中一个面板替代另外三个。
 
 ```{r}
+#| results: hold
 #| label: verify-dmm-audit
-#| echo: false
 stopifnot(
   selected_for("Primary", "Laplace") == 4L,
   selected_for("Primary", "AIC") == 2L,
@@ -1562,15 +1522,15 @@ Expected profile 是相对 read composition。没有绝对负荷、功能实验�
 身体部位、扩增区域、数据库、队列构成、药物与饮食都可能移动 component。外部数据应重新估计或执行预注册的 label-transfer/validation，而不是按几个 genus 阈值硬套名称。
 :::
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告群落分型与稳定性的方法与限制 {#sec-methods}
 
 > Community states were estimated from the unrarefied, non-negative integer genus-count matrix using Dirichlet-multinomial mixture models implemented in DirichletMultinomial 1.46.0. Candidate models with one to seven components were fitted with seed 20260729, and the primary component count was selected by the minimum Laplace approximation; AIC and BIC were retained as parallel diagnostics. A minimum assigned-component size of max(10, 5% of samples) was prespecified. For the selected four-component model, component labels were canonicalized by decreasing fitted Bacteroides proportion, followed by decreasing Prevotella proportion and raw component index. All component posterior probabilities, the maximum posterior probability, and normalized entropy were retained; assignments with maximum posterior probability below 0.80 were marked as low confidence. Initialization sensitivity was assessed across seeds 20260729–20260736 using one fresh, single-threaded R process per fit. Components across fits were matched by minimum Jensen–Shannon divergence between fitted profiles before adjusted Rand indices were calculated. Sensitivity analyses repeated model selection after 5% prevalence filtering, exclusion of libraries below 1,000 reads, deterministic rarefaction of eligible libraries to 1,000 reads, and selection of one sample per suffix-derived participant key. Bray–Curtis PCoA was used only for descriptive visualization and did not define state membership. BMI class and repeated-source-sample transitions were summarized descriptively without disease-association testing because family, visit, continuous BMI, medication, and dietary covariates were not fully available.
 
 替换版本、feature rank、candidate `k`、主准则、seed、最小 component size、低置信度阈值和 sensitivity contract。若最终采用多个 start 中目标值最小的模型，应明确写出 start 数和选择规则，而不是只给最终 seed。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将群落分型与稳定性用于自己的研究 {#sec-own-data}
 
-### 1. 只替换三件套路径和 metadata 列
+### 只替换三件套路径和 metadata 列
 
 ```{r}
 #| eval: false
@@ -1586,7 +1546,7 @@ external_group_column <- "Phenotype"
 
 `otutab` 必须是 feature × sample 的 raw integer counts；taxonomy 行名与 feature 一致；metadata 行名覆盖全部样本。若输入已经是百分比或 CLR，回到未转换 count table。
 
-### 2. 在看结果前写下模型合同
+### 在拟合前确定模型设置与选择标准
 
 ```{r}
 #| eval: false
@@ -1603,7 +1563,7 @@ depth_sensitivity <- 1000L
 
 Candidate range 应由样本量、预期最小 state 和研究问题决定。不要看到 `k=7` 仍在下降后临时扩大范围，却不重新定义小类门槛和验证计划。
 
-### 3. taxonomy 只有一列字符串时先拆成七列
+### taxonomy 只有一列字符串时先拆成七列
 
 ```{r}
 #| eval: false
@@ -1627,7 +1587,7 @@ rownames(taxonomy) <- taxonomy_raw$FeatureID
 
 聚合到 genus 时按完整 lineage key 处理同名 taxa；多个空 genus 不应未经说明地并成一个人工高丰度 `Unknown`。
 
-### 4. 外部验证至少分三层
+### 外部验证至少分三层
 
 1. **Internal stability**：多初始化、bootstrap/subsample、过滤和深度敏感性；
 2. **Temporal stability**：同一 subject 的状态保持、转移概率和 posterior 变化；
@@ -1635,7 +1595,7 @@ rownames(taxonomy) <- taxonomy_raw$FeatureID
 
 疾病或环境关联应使用独立实验单位并调整预声明协变量。状态是自变量、因变量还是分层变量，要在看 association 结果前确定。
 
-### 5. 最少保留这些审计输出
+### 报告结果时需要保留哪些信息
 
 - 每个 `k`、每个 seed 的 Laplace/AIC/BIC 与运行状态；
 - 每个 component 的 mixture weight、theta、完整 expected profile 和 assigned size；

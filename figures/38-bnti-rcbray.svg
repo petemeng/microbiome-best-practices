@@ -4052,11 +4052,11 @@
 <rect x='34.38' y='29.82' width='471.62' height='286.67' style='stroke-width: 0.82; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHw0MTkuNTM=)'>
-<text x='30.57' y='305.94' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
-<text x='30.57' y='240.79' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
-<text x='30.57' y='175.64' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='30.57' y='110.48' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='30.57' y='45.33' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='30.57' y='305.94' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-1.0</text>
+<text x='30.57' y='240.79' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-0.5</text>
+<text x='30.57' y='175.64' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='30.57' y='110.48' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='30.57' y='45.33' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
 <polyline points='32.27,303.47 34.38,303.47 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.27,238.31 34.38,238.31 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='32.27,173.16 34.38,173.16 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -4067,31 +4067,31 @@
 <polyline points='230.30,318.61 230.30,316.50 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='328.11,318.61 328.11,316.50 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='425.91,318.61 425.91,316.50 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='34.70' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-2.5</text>
-<text x='132.50' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='230.30' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>2.5</text>
-<text x='328.11' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>5.0</text>
-<text x='425.91' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>7.5</text>
+<text x='34.70' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='13.27px' lengthAdjust='spacingAndGlyphs'>-2.5</text>
+<text x='132.50' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='230.30' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>2.5</text>
+<text x='328.11' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>5.0</text>
+<text x='425.91' y='325.26' text-anchor='middle' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>7.5</text>
 <text x='262.10' y='334.99' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Standard Symbols PS";' textLength='2.12px' lengthAdjust='spacingAndGlyphs'>β</text>
-<text x='264.23' y='334.99' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='14.05px' lengthAdjust='spacingAndGlyphs'>NTI</text>
-<text transform='translate(10.55,185.71) rotate(-90)' style='font-size: 8.50px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>RC</text>
-<text transform='translate(12.18,174.28) rotate(-90)' style='font-size: 5.95px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.08px' lengthAdjust='spacingAndGlyphs'>B</text>
-<text transform='translate(12.18,170.21) rotate(-90)' style='font-size: 5.95px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='2.44px' lengthAdjust='spacingAndGlyphs'>r</text>
-<text transform='translate(12.18,167.77) rotate(-90)' style='font-size: 5.95px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='3.64px' lengthAdjust='spacingAndGlyphs'>a</text>
-<text transform='translate(12.18,164.12) rotate(-90)' style='font-size: 5.95px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='3.51px' lengthAdjust='spacingAndGlyphs'>y</text>
+<text x='264.23' y='334.99' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='14.05px' lengthAdjust='spacingAndGlyphs'>NTI</text>
+<text transform='translate(10.55,185.71) rotate(-90)' style='font-size: 8.50px;fill: #1A1A1A; font-family: "Arial";' textLength='11.43px' lengthAdjust='spacingAndGlyphs'>RC</text>
+<text transform='translate(12.18,174.28) rotate(-90)' style='font-size: 5.95px;fill: #1A1A1A; font-family: "Arial";' textLength='4.08px' lengthAdjust='spacingAndGlyphs'>B</text>
+<text transform='translate(12.18,170.21) rotate(-90)' style='font-size: 5.95px;fill: #1A1A1A; font-family: "Arial";' textLength='2.44px' lengthAdjust='spacingAndGlyphs'>r</text>
+<text transform='translate(12.18,167.77) rotate(-90)' style='font-size: 5.95px;fill: #1A1A1A; font-family: "Arial";' textLength='3.64px' lengthAdjust='spacingAndGlyphs'>a</text>
+<text transform='translate(12.18,164.12) rotate(-90)' style='font-size: 5.95px;fill: #1A1A1A; font-family: "Arial";' textLength='3.51px' lengthAdjust='spacingAndGlyphs'>y</text>
 <rect x='113.33' y='345.23' width='313.72' height='59.47' style='stroke-width: 0.82; stroke: none; fill: #FFFFFF;' />
-<text x='117.57' y='356.55' style='font-size: 8.50px; font-family: "DejaVu Sans";' textLength='32.26px' lengthAdjust='spacingAndGlyphs'>Process</text>
+<text x='117.57' y='356.55' style='font-size: 8.50px; font-family: "Arial";' textLength='32.26px' lengthAdjust='spacingAndGlyphs'>Process</text>
 <circle cx='126.21' cy='370.31' r='1.69' style='stroke-width: 0.71; stroke: #D55E00; stroke-opacity: 0.42; fill: #D55E00; fill-opacity: 0.42;' />
 <circle cx='344.12' cy='370.31' r='1.69' style='stroke-width: 0.71; stroke: #E69F00; stroke-opacity: 0.42; fill: #E69F00; fill-opacity: 0.42;' />
 <circle cx='126.21' cy='391.82' r='1.69' style='stroke-width: 0.71; stroke: #009E73; stroke-opacity: 0.42; fill: #009E73; fill-opacity: 0.42;' />
 <circle cx='236.60' cy='391.82' r='1.69' style='stroke-width: 0.71; stroke: #6B7280; stroke-opacity: 0.42; fill: #6B7280; fill-opacity: 0.42;' />
-<text x='139.08' y='372.78' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='84.65px' lengthAdjust='spacingAndGlyphs'>Heterogeneous selection</text>
-<text x='249.48' y='372.78' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='81.76px' lengthAdjust='spacingAndGlyphs'>Homogeneous selection</text>
-<text x='356.99' y='372.78' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='65.83px' lengthAdjust='spacingAndGlyphs'>Dispersal limitation</text>
-<text x='139.08' y='394.30' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='81.60px' lengthAdjust='spacingAndGlyphs'>Homogenizing dispersal</text>
-<text x='249.48' y='394.30' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='45.89px' lengthAdjust='spacingAndGlyphs'>Undominated</text>
-<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='313.83px' lengthAdjust='spacingAndGlyphs'>CONDITIONAL PASS; 4005 pairwise comparisons; 999 null randomizations</text>
-<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "DejaVu Sans";' textLength='203.74px' lengthAdjust='spacingAndGlyphs'>Selection is evaluated before RCbray</text>
-<text x='34.38' y='413.88' style='font-size: 6.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='326.47px' lengthAdjust='spacingAndGlyphs'>RCbray labels apply only to pairs with |βNTI| &lt;= 1.96; points are not independent observations.</text>
+<text x='139.08' y='372.78' style='font-size: 6.80px; font-family: "Arial";' textLength='84.65px' lengthAdjust='spacingAndGlyphs'>Heterogeneous selection</text>
+<text x='249.48' y='372.78' style='font-size: 6.80px; font-family: "Arial";' textLength='81.76px' lengthAdjust='spacingAndGlyphs'>Homogeneous selection</text>
+<text x='356.99' y='372.78' style='font-size: 6.80px; font-family: "Arial";' textLength='65.83px' lengthAdjust='spacingAndGlyphs'>Dispersal limitation</text>
+<text x='139.08' y='394.30' style='font-size: 6.80px; font-family: "Arial";' textLength='81.60px' lengthAdjust='spacingAndGlyphs'>Homogenizing dispersal</text>
+<text x='249.48' y='394.30' style='font-size: 6.80px; font-family: "Arial";' textLength='45.89px' lengthAdjust='spacingAndGlyphs'>Undominated</text>
+<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "Arial";' textLength='313.83px' lengthAdjust='spacingAndGlyphs'>CONDITIONAL PASS; 4005 pairwise comparisons; 999 null randomizations</text>
+<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "Arial";' textLength='203.74px' lengthAdjust='spacingAndGlyphs'>Selection is evaluated before RCbray</text>
+<text x='34.38' y='413.88' style='font-size: 6.80px;fill: #666666; font-family: "Arial";' textLength='326.47px' lengthAdjust='spacingAndGlyphs'>RCbray labels apply only to pairs with |βNTI| &lt;= 1.96; points are not independent observations.</text>
 </g>
 </svg>

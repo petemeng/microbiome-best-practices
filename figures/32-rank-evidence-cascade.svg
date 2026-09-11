@@ -71,17 +71,17 @@
 <rect x='118.01' y='163.42' width='44.21' height='90.85' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #E69F00;' />
 <rect x='186.03' y='253.40' width='44.21' height='0.87' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6B7280;' />
 <line x1='31.28' y1='241.98' x2='248.95' y2='241.98' style='stroke-width: 1.07; stroke: #555555; stroke-dasharray: 2.85,2.85; stroke-linecap: butt;' />
-<text x='72.09' y='85.39' text-anchor='middle' style='font-size: 7.97px; font-family: "DejaVu Sans";' textLength='25.27px' lengthAdjust='spacingAndGlyphs'>67.6%</text>
-<text x='140.12' y='160.81' text-anchor='middle' style='font-size: 7.97px; font-family: "DejaVu Sans";' textLength='25.27px' lengthAdjust='spacingAndGlyphs'>37.0%</text>
-<text x='208.14' y='250.78' text-anchor='middle' style='font-size: 7.97px; font-family: "DejaVu Sans";' textLength='20.21px' lengthAdjust='spacingAndGlyphs'>0.4%</text>
+<text x='72.09' y='85.39' text-anchor='middle' style='font-size: 7.97px; font-family: "Arial";' textLength='25.27px' lengthAdjust='spacingAndGlyphs'>67.6%</text>
+<text x='140.12' y='160.81' text-anchor='middle' style='font-size: 7.97px; font-family: "Arial";' textLength='25.27px' lengthAdjust='spacingAndGlyphs'>37.0%</text>
+<text x='208.14' y='250.78' text-anchor='middle' style='font-size: 7.97px; font-family: "Arial";' textLength='20.21px' lengthAdjust='spacingAndGlyphs'>0.4%</text>
 <rect x='31.28' y='56.11' width='217.67' height='198.16' style='stroke-width: 0.80; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTcuNDg=)'>
-<text x='27.60' y='256.65' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.16px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='27.60' y='207.49' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>20</text>
-<text x='27.60' y='158.33' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>40</text>
-<text x='27.60' y='109.17' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>60</text>
-<text x='27.60' y='60.01' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>80</text>
+<text x='27.60' y='256.65' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='4.16px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='27.60' y='207.49' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>20</text>
+<text x='27.60' y='158.33' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>40</text>
+<text x='27.60' y='109.17' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>60</text>
+<text x='27.60' y='60.01' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>80</text>
 <polyline points='29.24,254.27 31.28,254.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='29.24,205.11 31.28,205.11 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='29.24,155.94 31.28,155.94 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -90,12 +90,12 @@
 <polyline points='72.09,256.31 72.09,254.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='140.12,256.31 140.12,254.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='208.14,256.31 208.14,254.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='72.09' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='21.07px' lengthAdjust='spacingAndGlyphs'>Family</text>
-<text x='140.12' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.80px' lengthAdjust='spacingAndGlyphs'>Genus</text>
-<text x='208.14' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.19px' lengthAdjust='spacingAndGlyphs'>Species</text>
-<text transform='translate(15.53,155.19) rotate(-90)' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='136.74px' lengthAdjust='spacingAndGlyphs'>Reads with a reportable label (%)</text>
-<text x='9.56' y='50.06' style='font-size: 9.43px; font-weight: bold; font-family: "DejaVu Sans";' textLength='125.33px' lengthAdjust='spacingAndGlyphs'>A. Annotation coverage</text>
-<text x='31.28' y='306.56' style='font-size: 6.56px;fill: #666666; font-family: "DejaVu Sans";' textLength='163.96px' lengthAdjust='spacingAndGlyphs'>Dashed line: prespecified 5% read-coverage gate.</text>
+<text x='72.09' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='21.07px' lengthAdjust='spacingAndGlyphs'>Family</text>
+<text x='140.12' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='20.80px' lengthAdjust='spacingAndGlyphs'>Genus</text>
+<text x='208.14' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='25.19px' lengthAdjust='spacingAndGlyphs'>Species</text>
+<text transform='translate(15.53,155.19) rotate(-90)' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='136.74px' lengthAdjust='spacingAndGlyphs'>Reads with a reportable label (%)</text>
+<text x='9.56' y='50.06' style='font-size: 9.43px; font-weight: bold; font-family: "Arial";' textLength='125.33px' lengthAdjust='spacingAndGlyphs'>A. Annotation coverage</text>
+<text x='31.28' y='306.56' style='font-size: 6.56px;fill: #666666; font-family: "Arial";' textLength='163.96px' lengthAdjust='spacingAndGlyphs'>Dashed line: prespecified 5% read-coverage gate.</text>
 </g>
 <defs>
   <clipPath id='cpMjgzLjAwfDUwMC42N3w1Ni4xMXwyNTQuMjc='>
@@ -115,20 +115,20 @@
 <rect x='301.71' y='103.35' width='44.21' height='150.92' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #009E73;' />
 <rect x='369.73' y='103.35' width='44.21' height='150.92' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #009E73;' />
 <rect x='437.75' y='212.24' width='44.21' height='42.03' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6B7280;' />
-<text x='323.81' y='90.19' text-anchor='middle' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='19.14px' lengthAdjust='spacingAndGlyphs'>PASS</text>
-<text x='323.81' y='98.48' text-anchor='middle' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='61.69px' lengthAdjust='spacingAndGlyphs'>50 reported hits</text>
-<text x='391.84' y='90.19' text-anchor='middle' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='19.14px' lengthAdjust='spacingAndGlyphs'>PASS</text>
-<text x='391.84' y='98.48' text-anchor='middle' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='61.69px' lengthAdjust='spacingAndGlyphs'>47 reported hits</text>
-<text x='459.86' y='199.08' text-anchor='middle' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='15.49px' lengthAdjust='spacingAndGlyphs'>FAIL</text>
-<text x='459.86' y='207.38' text-anchor='middle' style='font-size: 7.68px; font-family: "DejaVu Sans";' textLength='56.81px' lengthAdjust='spacingAndGlyphs'>0 reported hits</text>
+<text x='323.81' y='90.19' text-anchor='middle' style='font-size: 7.68px; font-family: "Arial";' textLength='19.14px' lengthAdjust='spacingAndGlyphs'>PASS</text>
+<text x='323.81' y='98.48' text-anchor='middle' style='font-size: 7.68px; font-family: "Arial";' textLength='61.69px' lengthAdjust='spacingAndGlyphs'>50 reported hits</text>
+<text x='391.84' y='90.19' text-anchor='middle' style='font-size: 7.68px; font-family: "Arial";' textLength='19.14px' lengthAdjust='spacingAndGlyphs'>PASS</text>
+<text x='391.84' y='98.48' text-anchor='middle' style='font-size: 7.68px; font-family: "Arial";' textLength='61.69px' lengthAdjust='spacingAndGlyphs'>47 reported hits</text>
+<text x='459.86' y='199.08' text-anchor='middle' style='font-size: 7.68px; font-family: "Arial";' textLength='15.49px' lengthAdjust='spacingAndGlyphs'>FAIL</text>
+<text x='459.86' y='207.38' text-anchor='middle' style='font-size: 7.68px; font-family: "Arial";' textLength='56.81px' lengthAdjust='spacingAndGlyphs'>0 reported hits</text>
 <rect x='283.00' y='56.11' width='217.67' height='198.16' style='stroke-width: 0.80; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMTcuNDg=)'>
-<text x='279.32' y='256.65' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='4.16px' lengthAdjust='spacingAndGlyphs'>0</text>
-<text x='279.32' y='208.89' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>25</text>
-<text x='279.32' y='161.13' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>50</text>
-<text x='279.32' y='113.37' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>75</text>
-<text x='279.32' y='65.61' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='12.48px' lengthAdjust='spacingAndGlyphs'>100</text>
+<text x='279.32' y='256.65' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='4.16px' lengthAdjust='spacingAndGlyphs'>0</text>
+<text x='279.32' y='208.89' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>25</text>
+<text x='279.32' y='161.13' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>50</text>
+<text x='279.32' y='113.37' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='8.32px' lengthAdjust='spacingAndGlyphs'>75</text>
+<text x='279.32' y='65.61' text-anchor='end' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='12.48px' lengthAdjust='spacingAndGlyphs'>100</text>
 <polyline points='280.96,254.27 283.00,254.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='280.96,206.51 283.00,206.51 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='280.96,158.75 283.00,158.75 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -137,18 +137,18 @@
 <polyline points='323.81,256.31 323.81,254.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='391.84,256.31 391.84,254.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='459.86,256.31 459.86,254.27 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='323.81' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='21.07px' lengthAdjust='spacingAndGlyphs'>Family</text>
-<text x='391.84' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='20.80px' lengthAdjust='spacingAndGlyphs'>Genus</text>
-<text x='459.86' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='25.19px' lengthAdjust='spacingAndGlyphs'>Species</text>
-<text transform='translate(263.09,155.19) rotate(-90)' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='93.93px' lengthAdjust='spacingAndGlyphs'>Reportable taxa tested</text>
+<text x='323.81' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='21.07px' lengthAdjust='spacingAndGlyphs'>Family</text>
+<text x='391.84' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='20.80px' lengthAdjust='spacingAndGlyphs'>Genus</text>
+<text x='459.86' y='262.72' text-anchor='middle' style='font-size: 6.56px;fill: #1A1A1A; font-family: "Arial";' textLength='25.19px' lengthAdjust='spacingAndGlyphs'>Species</text>
+<text transform='translate(263.09,155.19) rotate(-90)' text-anchor='middle' style='font-size: 8.20px;fill: #1A1A1A; font-family: "Arial";' textLength='93.93px' lengthAdjust='spacingAndGlyphs'>Reportable taxa tested</text>
 <rect x='317.10' y='272.25' width='149.48' height='25.45' style='stroke-width: 0.80; stroke: none; fill: #FFFFFF;' />
-<text x='321.18' y='287.96' style='font-size: 8.20px; font-family: "DejaVu Sans";' textLength='60.88px' lengthAdjust='spacingAndGlyphs'>Reporting gate</text>
+<text x='321.18' y='287.96' style='font-size: 8.20px; font-family: "Arial";' textLength='60.88px' lengthAdjust='spacingAndGlyphs'>Reporting gate</text>
 <rect x='386.85' y='277.04' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #6B7280;' />
 <rect x='425.52' y='277.04' width='15.86' height='15.86' style='stroke-width: 1.07; stroke: none; stroke-linecap: butt; stroke-linejoin: miter; fill: #009E73;' />
-<text x='407.51' y='287.36' style='font-size: 6.56px; font-family: "DejaVu Sans";' textLength='13.22px' lengthAdjust='spacingAndGlyphs'>FAIL</text>
-<text x='446.18' y='287.36' style='font-size: 6.56px; font-family: "DejaVu Sans";' textLength='16.32px' lengthAdjust='spacingAndGlyphs'>PASS</text>
-<text x='257.12' y='50.06' style='font-size: 9.43px; font-weight: bold; font-family: "DejaVu Sans";' textLength='202.52px' lengthAdjust='spacingAndGlyphs'>B. Rank-specific testing and reporting</text>
-<text x='283.00' y='306.56' style='font-size: 6.56px;fill: #666666; font-family: "DejaVu Sans";' textLength='163.88px' lengthAdjust='spacingAndGlyphs'>Statistical hits at a failed rank remain exploratory.</text>
+<text x='407.51' y='287.36' style='font-size: 6.56px; font-family: "Arial";' textLength='13.22px' lengthAdjust='spacingAndGlyphs'>FAIL</text>
+<text x='446.18' y='287.36' style='font-size: 6.56px; font-family: "Arial";' textLength='16.32px' lengthAdjust='spacingAndGlyphs'>PASS</text>
+<text x='257.12' y='50.06' style='font-size: 9.43px; font-weight: bold; font-family: "Arial";' textLength='202.52px' lengthAdjust='spacingAndGlyphs'>B. Rank-specific testing and reporting</text>
+<text x='283.00' y='306.56' style='font-size: 6.56px;fill: #666666; font-family: "Arial";' textLength='163.88px' lengthAdjust='spacingAndGlyphs'>Statistical hits at a failed rank remain exploratory.</text>
 <text x='9.56' y='31.34' style='font-size: 11.00px; font-family: "Arial";' textLength='474.49px' lengthAdjust='spacingAndGlyphs'>Same samples and contrast; each rank is independently collapsed, filtered and tested</text>
 <text x='9.56' y='15.10' style='font-size: 13.20px; font-family: "Arial";' textLength='329.68px' lengthAdjust='spacingAndGlyphs'>Taxonomic resolution must pass an evidence gate</text>
 </g>

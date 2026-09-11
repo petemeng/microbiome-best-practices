@@ -42,17 +42,17 @@
 <circle cx='316.69' cy='127.90' r='3.77' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
 <circle cx='318.60' cy='166.09' r='3.77' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
 <circle cx='326.79' cy='204.28' r='3.77' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
-<text x='327.39' y='92.45' style='font-size: 7.54px;fill: #333333; font-family: "DejaVu Sans";' textLength='129.75px' lengthAdjust='spacingAndGlyphs'>Partial R² = 0.185  |  Holm P 0.125</text>
-<text x='327.07' y='130.65' style='font-size: 7.54px;fill: #333333; font-family: "DejaVu Sans";' textLength='129.75px' lengthAdjust='spacingAndGlyphs'>Partial R² = 0.185  |  Holm P 0.125</text>
-<text x='328.98' y='168.84' style='font-size: 7.54px;fill: #333333; font-family: "DejaVu Sans";' textLength='129.75px' lengthAdjust='spacingAndGlyphs'>Partial R² = 0.187  |  Holm P 0.125</text>
-<text x='337.17' y='207.03' style='font-size: 7.54px;fill: #333333; font-family: "DejaVu Sans";' textLength='129.75px' lengthAdjust='spacingAndGlyphs'>Partial R² = 0.194  |  Holm P 0.125</text>
+<text x='327.39' y='92.45' style='font-size: 7.54px;fill: #333333; font-family: "Arial";' textLength='129.75px' lengthAdjust='spacingAndGlyphs'>Partial R² = 0.185  |  Holm P 0.125</text>
+<text x='327.07' y='130.65' style='font-size: 7.54px;fill: #333333; font-family: "Arial";' textLength='129.75px' lengthAdjust='spacingAndGlyphs'>Partial R² = 0.185  |  Holm P 0.125</text>
+<text x='328.98' y='168.84' style='font-size: 7.54px;fill: #333333; font-family: "Arial";' textLength='129.75px' lengthAdjust='spacingAndGlyphs'>Partial R² = 0.187  |  Holm P 0.125</text>
+<text x='337.17' y='207.03' style='font-size: 7.54px;fill: #333333; font-family: "Arial";' textLength='129.75px' lengthAdjust='spacingAndGlyphs'>Partial R² = 0.194  |  Holm P 0.125</text>
 <rect x='83.36' y='66.79' width='430.89' height='160.41' style='stroke-width: 0.87; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwyNzIuMTM=)'>
-<text x='79.33' y='206.90' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='66.10px' lengthAdjust='spacingAndGlyphs'>Clipping | Warmed</text>
-<text x='79.33' y='168.71' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='66.51px' lengthAdjust='spacingAndGlyphs'>Clipping | Ambient</text>
-<text x='79.33' y='130.52' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='66.10px' lengthAdjust='spacingAndGlyphs'>Warming | Clipped</text>
-<text x='79.33' y='92.33' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='74.84px' lengthAdjust='spacingAndGlyphs'>Warming | Unclipped</text>
+<text x='79.33' y='206.90' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='66.10px' lengthAdjust='spacingAndGlyphs'>Clipping | Warmed</text>
+<text x='79.33' y='168.71' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='66.51px' lengthAdjust='spacingAndGlyphs'>Clipping | Ambient</text>
+<text x='79.33' y='130.52' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='66.10px' lengthAdjust='spacingAndGlyphs'>Warming | Clipped</text>
+<text x='79.33' y='92.33' text-anchor='end' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='74.84px' lengthAdjust='spacingAndGlyphs'>Warming | Unclipped</text>
 <polyline points='81.12,204.28 83.36,204.28 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='81.12,166.09 83.36,166.09 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='81.12,127.90 83.36,127.90 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -61,18 +61,18 @@
 <polyline points='218.47,229.44 218.47,227.20 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='333.99,229.44 333.99,227.20 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='449.51,229.44 449.51,227.20 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text x='102.95' y='236.47' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='11.40px' lengthAdjust='spacingAndGlyphs'>0%</text>
-<text x='218.47' y='236.47' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>10%</text>
-<text x='333.99' y='236.47' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>20%</text>
-<text x='449.51' y='236.47' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>30%</text>
-<text x='298.81' y='246.77' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='116.62px' lengthAdjust='spacingAndGlyphs'>Partial variance explained</text>
+<text x='102.95' y='236.47' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='11.40px' lengthAdjust='spacingAndGlyphs'>0%</text>
+<text x='218.47' y='236.47' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>10%</text>
+<text x='333.99' y='236.47' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>20%</text>
+<text x='449.51' y='236.47' text-anchor='middle' style='font-size: 7.20px;fill: #1A1A1A; font-family: "Arial";' textLength='15.97px' lengthAdjust='spacingAndGlyphs'>30%</text>
+<text x='298.81' y='246.77' text-anchor='middle' style='font-size: 9.00px;fill: #1A1A1A; font-family: "Arial";' textLength='116.62px' lengthAdjust='spacingAndGlyphs'>Partial variance explained</text>
 <rect x='190.90' y='31.58' width='215.82' height='26.25' style='stroke-width: 0.87; stroke: none; fill: #FFFFFF;' />
-<text x='195.38' y='47.98' style='font-size: 9.00px; font-family: "DejaVu Sans";' textLength='88.94px' lengthAdjust='spacingAndGlyphs'>Multiplicity decision</text>
+<text x='195.38' y='47.98' style='font-size: 9.00px; font-family: "Arial";' textLength='88.94px' lengthAdjust='spacingAndGlyphs'>Multiplicity decision</text>
 <circle cx='297.45' cy='44.70' r='3.77' style='stroke-width: 0.71; stroke: #6B7280; fill: #6B7280;' />
-<text x='310.57' y='47.32' style='font-size: 7.20px; font-family: "DejaVu Sans";' textLength='91.67px' lengthAdjust='spacingAndGlyphs'>Holm-adjusted P &gt;= 0.05</text>
-<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='299.87px' lengthAdjust='spacingAndGlyphs'>Each contrast enumerates 63 non-identity swaps across six blocks</text>
-<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "DejaVu Sans";' textLength='316.12px' lengthAdjust='spacingAndGlyphs'>Planned simple effects use exact paired permutations</text>
-<text x='83.36' y='258.37' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='190.09px' lengthAdjust='spacingAndGlyphs'>The four prespecified P values form one Holm family.</text>
-<text x='83.36' y='266.15' style='font-size: 7.20px;fill: #666666; font-family: "DejaVu Sans";' textLength='287.94px' lengthAdjust='spacingAndGlyphs'>With 64 assignments including the observed order, the minimum P is 0.015625.</text>
+<text x='310.57' y='47.32' style='font-size: 7.20px; font-family: "Arial";' textLength='91.67px' lengthAdjust='spacingAndGlyphs'>Holm-adjusted P &gt;= 0.05</text>
+<text x='4.48' y='25.22' style='font-size: 9.00px;fill: #4D4D4D; font-family: "Arial";' textLength='299.87px' lengthAdjust='spacingAndGlyphs'>Each contrast enumerates 63 non-identity swaps across six blocks</text>
+<text x='4.48' y='12.03' style='font-size: 10.35px; font-weight: bold; font-family: "Arial";' textLength='316.12px' lengthAdjust='spacingAndGlyphs'>Planned simple effects use exact paired permutations</text>
+<text x='83.36' y='258.37' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='190.09px' lengthAdjust='spacingAndGlyphs'>The four prespecified P values form one Holm family.</text>
+<text x='83.36' y='266.15' style='font-size: 7.20px;fill: #666666; font-family: "Arial";' textLength='287.94px' lengthAdjust='spacingAndGlyphs'>With 64 assignments including the observed order, the minimum P is 0.015625.</text>
 </g>
 </svg>

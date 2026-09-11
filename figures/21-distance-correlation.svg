@@ -117,12 +117,12 @@
 <rect x='76.16' y='29.82' width='377.92' height='224.73' style='stroke-width: 0.82; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MTguNzR8MC4wMHwzMTcuNDg=)'>
-<text x='72.35' y='235.28' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='56.71px' lengthAdjust='spacingAndGlyphs'>Robust Aitchison</text>
-<text x='72.35' y='199.03' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='31.14px' lengthAdjust='spacingAndGlyphs'>Aitchison</text>
-<text x='72.35' y='162.79' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='59.60px' lengthAdjust='spacingAndGlyphs'>Weighted UniFrac</text>
-<text x='72.35' y='126.54' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='68.12px' lengthAdjust='spacingAndGlyphs'>Unweighted UniFrac</text>
-<text x='72.35' y='90.29' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='24.78px' lengthAdjust='spacingAndGlyphs'>Jaccard</text>
-<text x='72.35' y='54.05' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='37.92px' lengthAdjust='spacingAndGlyphs'>Bray-Curtis</text>
+<text x='72.35' y='235.28' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='56.71px' lengthAdjust='spacingAndGlyphs'>Robust Aitchison</text>
+<text x='72.35' y='199.03' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='31.14px' lengthAdjust='spacingAndGlyphs'>Aitchison</text>
+<text x='72.35' y='162.79' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='59.60px' lengthAdjust='spacingAndGlyphs'>Weighted UniFrac</text>
+<text x='72.35' y='126.54' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='68.12px' lengthAdjust='spacingAndGlyphs'>Unweighted UniFrac</text>
+<text x='72.35' y='90.29' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='24.78px' lengthAdjust='spacingAndGlyphs'>Jaccard</text>
+<text x='72.35' y='54.05' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='37.92px' lengthAdjust='spacingAndGlyphs'>Bray-Curtis</text>
 <polyline points='74.05,232.80 76.16,232.80 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='74.05,196.56 76.16,196.56 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='74.05,160.31 76.16,160.31 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
@@ -135,15 +135,15 @@
 <polyline points='295.60,256.67 295.60,254.55 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='356.56,256.67 356.56,254.55 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
 <polyline points='417.52,256.67 417.52,254.55 ' style='stroke-width: 0.64; stroke: #1A1A1A; stroke-linecap: butt;' />
-<text transform='translate(115.58,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='37.92px' lengthAdjust='spacingAndGlyphs'>Bray-Curtis</text>
-<text transform='translate(176.53,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='24.78px' lengthAdjust='spacingAndGlyphs'>Jaccard</text>
-<text transform='translate(237.49,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='68.12px' lengthAdjust='spacingAndGlyphs'>Unweighted UniFrac</text>
-<text transform='translate(298.45,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='59.60px' lengthAdjust='spacingAndGlyphs'>Weighted UniFrac</text>
-<text transform='translate(359.40,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='31.14px' lengthAdjust='spacingAndGlyphs'>Aitchison</text>
-<text transform='translate(420.36,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='56.71px' lengthAdjust='spacingAndGlyphs'>Robust Aitchison</text>
+<text transform='translate(115.58,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='37.92px' lengthAdjust='spacingAndGlyphs'>Bray-Curtis</text>
+<text transform='translate(176.53,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='24.78px' lengthAdjust='spacingAndGlyphs'>Jaccard</text>
+<text transform='translate(237.49,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='68.12px' lengthAdjust='spacingAndGlyphs'>Unweighted UniFrac</text>
+<text transform='translate(298.45,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='59.60px' lengthAdjust='spacingAndGlyphs'>Weighted UniFrac</text>
+<text transform='translate(359.40,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='31.14px' lengthAdjust='spacingAndGlyphs'>Aitchison</text>
+<text transform='translate(420.36,262.42) rotate(-35)' text-anchor='end' style='font-size: 6.80px;fill: #1A1A1A; font-family: "Arial";' textLength='56.71px' lengthAdjust='spacingAndGlyphs'>Robust Aitchison</text>
 <rect x='462.56' y='84.06' width='51.95' height='116.25' style='stroke-width: 0.82; stroke: none; fill: #FFFFFF;' />
-<text x='466.79' y='95.38' style='font-size: 8.50px; font-family: "DejaVu Sans";' textLength='43.48px' lengthAdjust='spacingAndGlyphs'>Spearman</text>
-<text x='466.79' y='104.56' style='font-size: 8.50px; font-family: "DejaVu Sans";' textLength='13.95px' lengthAdjust='spacingAndGlyphs'>rho</text>
+<text x='466.79' y='95.38' style='font-size: 8.50px; font-family: "Arial";' textLength='43.48px' lengthAdjust='spacingAndGlyphs'>Spearman</text>
+<text x='466.79' y='104.56' style='font-size: 8.50px; font-family: "Arial";' textLength='13.95px' lengthAdjust='spacingAndGlyphs'>rho</text>
 <image width='17.28' height='86.40' x='466.79' y='109.68' preserveAspectRatio='none' xlink:href='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAEsCAYAAAACUNnVAAAAvUlEQVQ4jbWSQRKDMAwDV6Z8uE/rB9tDaRI7NoRDbwhba4kBnq+37QLbEd+nh4RtgG0C2yTMALModbyTl4YwiTZte3Gqw3slm8NLhUMeIA/oSTPA5JgBSgAWKZcAsrsBkCb1MjuUkKkLluQ5EKsJvEyrngZncW8omDWq7sKvB41Ml2ga9OVBylMGnublylZ640qSZVjpn+6i23kWLYbMvosWQ95J36Z/aT4O7jaP3ju/yjSo/peywnAt8bprHxhsBjtRPUU0AAAAAElFTkSuQmCC'/>
 <polyline points='480.62,195.94 484.07,195.94 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='480.62,152.88 484.07,152.88 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
@@ -151,11 +151,11 @@
 <polyline points='470.25,195.94 466.79,195.94 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='470.25,152.88 466.79,152.88 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
 <polyline points='470.25,109.82 466.79,109.82 ' style='stroke-width: 0.38; stroke: #FFFFFF; stroke-linecap: butt;' />
-<text x='488.31' y='198.41' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
-<text x='488.31' y='155.36' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
-<text x='488.31' y='112.30' style='font-size: 6.80px; font-family: "DejaVu Sans";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
-<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='234.66px' lengthAdjust='spacingAndGlyphs'>Spearman correlation across all 325 pairwise distances</text>
-<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "DejaVu Sans";' textLength='294.14px' lengthAdjust='spacingAndGlyphs'>Metric choice changes the rank order of sample pairs</text>
-<text x='76.16' y='311.83' style='font-size: 6.80px;fill: #666666; font-family: "DejaVu Sans";' textLength='293.30px' lengthAdjust='spacingAndGlyphs'>High correlation in this dataset does not make two metric definitions interchangeable.</text>
+<text x='488.31' y='198.41' style='font-size: 6.80px; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.0</text>
+<text x='488.31' y='155.36' style='font-size: 6.80px; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>0.5</text>
+<text x='488.31' y='112.30' style='font-size: 6.80px; font-family: "Arial";' textLength='10.81px' lengthAdjust='spacingAndGlyphs'>1.0</text>
+<text x='4.23' y='23.82' style='font-size: 8.50px;fill: #4D4D4D; font-family: "Arial";' textLength='234.66px' lengthAdjust='spacingAndGlyphs'>Spearman correlation across all 325 pairwise distances</text>
+<text x='4.23' y='11.35' style='font-size: 9.77px; font-weight: bold; font-family: "Arial";' textLength='294.14px' lengthAdjust='spacingAndGlyphs'>Metric choice changes the rank order of sample pairs</text>
+<text x='76.16' y='311.83' style='font-size: 6.80px;fill: #666666; font-family: "Arial";' textLength='293.30px' lengthAdjust='spacingAndGlyphs'>High correlation in this dataset does not make two metric definitions interchangeable.</text>
 </g>
 </svg>

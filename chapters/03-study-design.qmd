@@ -461,7 +461,7 @@ data.frame(
 
 本例得到 $d=`r sprintf("%.3f", pilot_d)`$，bootstrap 95% CI 为 `r sprintf("%.3f", pilot_ci[1])` 到 `r sprintf("%.3f", pilot_ci[2])`，Welch 检验 $P=`r sprintf("%.3f", pilot_test$p.value)`$。区间跨过 0，效应估计很不精确；更重要的是，盐碱状态与湿地组完全混杂，所以这个 $d$ 不能解释为独立的盐碱效应。
 
-### 做 prospective sensitivity analysis
+### 在研究开始前比较不同样本量下的检验能力
 
 假设未来研究：
 

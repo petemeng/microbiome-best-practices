@@ -54,11 +54,11 @@
 <rect x='73.70' y='35.09' width='184.40' height='184.40' style='stroke-width: 0.97; stroke: #333333;' />
 </g>
 <g clip-path='url(#cpMC4wMHwyOTcuNjR8MC4wMHwyNjAuNzk=)'>
-<text x='69.22' y='214.02' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='69.22' y='172.11' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='69.22' y='130.20' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='69.22' y='88.30' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='69.22' y='46.39' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='69.22' y='214.02' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='69.22' y='172.11' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='69.22' y='130.20' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='69.22' y='88.30' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='69.22' y='46.39' text-anchor='end' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>1.00</text>
 <polyline points='71.21,211.10 73.70,211.10 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='71.21,169.20 73.70,169.20 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='71.21,127.29 73.70,127.29 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
@@ -69,15 +69,15 @@
 <polyline points='165.90,221.98 165.90,219.49 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='207.81,221.98 207.81,219.49 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
 <polyline points='249.72,221.98 249.72,219.49 ' style='stroke-width: 0.97; stroke: #333333; stroke-linecap: butt;' />
-<text x='82.08' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
-<text x='123.99' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.25</text>
-<text x='165.90' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.50</text>
-<text x='207.81' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.75</text>
-<text x='249.72' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>1.00</text>
-<text x='165.90' y='241.25' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='91.46px' lengthAdjust='spacingAndGlyphs'>False-positive rate</text>
-<text transform='translate(46.83,127.29) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "DejaVu Sans";' textLength='87.59px' lengthAdjust='spacingAndGlyphs'>True-positive rate</text>
-<text x='39.54' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "DejaVu Sans";' textLength='145.68px' lengthAdjust='spacingAndGlyphs'>AUC 0.99 (95% CI 0.98–1.00)</text>
-<text x='39.54' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "DejaVu Sans";' textLength='210.32px' lengthAdjust='spacingAndGlyphs'>Nested-CV disease classification</text>
-<text x='73.70' y='254.14' style='font-size: 8.00px;fill: #666666; font-family: "DejaVu Sans";' textLength='195.75px' lengthAdjust='spacingAndGlyphs'>One averaged out-of-fold probability per sample.</text>
+<text x='82.08' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.00</text>
+<text x='123.99' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.25</text>
+<text x='165.90' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.50</text>
+<text x='207.81' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>0.75</text>
+<text x='249.72' y='229.80' text-anchor='middle' style='font-size: 8.00px;fill: #1A1A1A; font-family: "Arial";' textLength='17.81px' lengthAdjust='spacingAndGlyphs'>1.00</text>
+<text x='165.90' y='241.25' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='91.46px' lengthAdjust='spacingAndGlyphs'>False-positive rate</text>
+<text transform='translate(46.83,127.29) rotate(-90)' text-anchor='middle' style='font-size: 10.00px;fill: #1A1A1A; font-family: "Arial";' textLength='87.59px' lengthAdjust='spacingAndGlyphs'>True-positive rate</text>
+<text x='39.54' y='28.03' style='font-size: 10.00px;fill: #4D4D4D; font-family: "Arial";' textLength='145.68px' lengthAdjust='spacingAndGlyphs'>AUC 0.99 (95% CI 0.98–1.00)</text>
+<text x='39.54' y='13.36' style='font-size: 11.50px; font-weight: bold; font-family: "Arial";' textLength='210.32px' lengthAdjust='spacingAndGlyphs'>Nested-CV disease classification</text>
+<text x='73.70' y='254.14' style='font-size: 8.00px;fill: #666666; font-family: "Arial";' textLength='195.75px' lengthAdjust='spacingAndGlyphs'>One averaged out-of-fold probability per sample.</text>
 </g>
 </svg>

@@ -1,6 +1,6 @@
 ---
 title: "中介分析：暴露 → 微生物 → 结局"
-author: "微生物组分析最佳实践 · 16S 系列"
+author: "Peter"
 date: last-modified
 format:
   html:
@@ -17,11 +17,17 @@ execute:
   message: false
 fig-dpi: 300
 fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/53-mediation-analysis.R
+  packages:
+  - ggplot2
+  - mediation
+  - patchwork
+  - ragg
+  - svglite
 ---
-
-> **分析目标：**把暴露对结局的模型关联分解为经微生物中介的间接效应（ACME）与未经过该中介的直接效应（ADE），并审计时间顺序、未测混杂和成分数据变换。  
-> **输入文件：**`otutab.tsv`、`taxonomy.tsv`、`metadata.tsv`；metadata 还需包含暴露、结局以及暴露–中介和中介–结局两条关系的混杂变量。  
-> **预计资源：**真实示例最终纳入 108 个 IBD 样本、250 个候选菌属；2,000 次 quasi-Bayesian simulation 约 1–3 分钟，内存低于 1 GB。
 
 ## 中介效应依赖时间顺序与不可检验假设 {#sec-target}
 
@@ -42,142 +48,41 @@ fig-format: png
 即使 ACME 显著，横断面同日测量也无法排除炎症改变菌群、疾病严重程度同时决定用药与炎症，或其它药物共同改变菌群。可靠中介证据优先来自分时点测量、随机暴露、充分混杂控制和独立验证。
 :::
 
-## 总效应如何分解为间接效应和直接效应 {#sec-theory}
+## 下载并读取本次分析的数据 {#sec-setup}
 
-最简单的线性中介模型由两条回归组成：
+需要 R，以及 `ggplot2`、`mediation`、`patchwork`、`ragg`、`svglite`。本次使用配对的微生物组、代谢组和样本信息表；同次采样不提供暴露、中介和结局的时间顺序。
 
-\[
-M = \alpha_0 + aA + \boldsymbol{\alpha}^{T}\mathbf{C}+\epsilon_M,
-\]
-
-\[
-Y = \beta_0 + c'A + bM + \boldsymbol{\beta}^{T}\mathbf{C}+\epsilon_Y.
-\]
-
-在线性、无 (A\times M) 交互的情形，间接效应近似为 (a\times b)，直接效应为 (c'\)，总效应为两者之和。`mediation::mediate()` 用潜在结局框架计算 average causal mediation effect（ACME）和 average direct effect（ADE），也能处理交互及更一般的模型组合。
-
-### 识别所需的关键假设
-
-因果解释至少依赖：
-
-1. 暴露–结局、暴露–中介关系不存在未控制混杂；
-2. 给定暴露与协变量后，中介–结局关系不存在未控制混杂；
-3. 不存在被暴露影响、同时又混杂中介–结局关系的变量；
-4. 一致性、positivity、正确模型形式和可靠测量；
-5. 暴露先于中介，中介先于结局。
-
-本例的当前用药并非随机分配，疾病严重者更可能接受 steroid，属于典型 confounding by indication（适应证混杂）。现有调整不能保证消除它。
-
-<details>
-<summary><strong>深入：为什么“总效应不显著”不阻止估计间接效应</strong></summary>
-
-现代中介分析不要求先得到显著总效应。直接与间接路径可能方向相反而互相抵消，或者总效应检验功效不足。不过，这不等于可以忽略科学设计：没有可信的 (A\rightarrow M\) 与 (M\rightarrow Y\) 时间顺序时，把任意相关菌放入中介模型只是在重新参数化相关性。
-
-“proportion mediated” 在总效应接近零、方向相反或区间跨零时尤其不稳定，可能小于 0 或大于 1。本例不把它画进主结果，也不作百分比解释。
-
-</details>
-
-### 微生物中介的额外难点
-
-- 单个菌的相对丰度是成分的一部分，改变可能来自其它成分或总生物量；
-- 零值处理与筛选会改变中介定义；
-- 在数百菌中挑 ACME 最显著者会产生严重多重检验和选择偏倚；
-- 菌群通常是高维、相互依赖的多重中介，逐菌模型不能自动给出群落总中介效应。
-
-## 准备工作 {#sec-setup}
-
-<details>
-<summary><strong>展开：安装依赖、获取真实数据和定义作图函数</strong></summary>
-
-首次运行安装：
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
 
 ```{r}
-#| eval: false
-install.packages(c(
-  "mediation", "ggplot2", "patchwork", "scales", "digest",
-  "svglite", "ragg"
-))
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/paired-ibd-multiomics/metabolite-annotation.tsv",
+  "data/small/paired-ibd-multiomics/metabolites.tsv",
+  "data/small/paired-ibd-multiomics/metadata.tsv",
+  "data/small/paired-ibd-multiomics/otutab.tsv",
+  "data/small/paired-ibd-multiomics/source-summary.json",
+  "data/small/paired-ibd-multiomics/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
 ```
 
-只需从固定 GitHub commit 下载 genus counts 和 metadata，并导出标准三件套。下面完整代码保留 prevalence≥10% 后按总量取前 250 个菌属；筛选不使用结局。
-
 ```{r}
-#| eval: false
-commit <- "89a519d8c832008fbc6e650453e83e2f04858d02"
-base_url <- paste0(
-  "https://raw.githubusercontent.com/borenstein-lab/",
-  "microbiome-metabolome-curated-data/", commit,
-  "/data/processed_data/FRANZOSA_IBD_2019"
-)
-raw_dir <- "data/raw/articles-46-50/franzosa-ibd-2019"
-out_dir <- "data/small/paired-ibd-multiomics"
-dir.create(raw_dir, recursive = TRUE, showWarnings = FALSE)
-dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
-checksums <- c(
-  "genera.counts.tsv" = "f89aa7832be4ec75081eaa8f38ce4e80bdaf2b7c2e42f09f73e3e5eb35b58ae4",
-  "metadata.tsv" = "f7396e3d6838b3b30f78b02bd568753757f84c956cd351966dbe654d50285376"
-)
-for (name in names(checksums)) {
-  path <- file.path(raw_dir, name)
-  if (!file.exists(path)) download.file(paste0(base_url, "/", name), path, mode = "wb")
-  stopifnot(identical(
-    digest::digest(path, algo = "sha256", file = TRUE), checksums[[name]]
-  ))
-}
-
-genera <- read.delim(file.path(raw_dir, "genera.counts.tsv"),
-                     row.names = 1, check.names = FALSE)
-metadata <- read.delim(file.path(raw_dir, "metadata.tsv"),
-                       row.names = 1, check.names = FALSE)
-samples <- rownames(metadata)[rownames(metadata) %in% rownames(genera)]
-genera <- genera[samples, , drop = FALSE]
-metadata <- metadata[samples, , drop = FALSE]
-eligible <- colSums(genera > 0) >= ceiling(0.10 * nrow(genera))
-selected <- names(sort(colSums(genera[, eligible, drop = FALSE]), decreasing = TRUE))[1:250]
-feature_ids <- sprintf("MB_G%03d", seq_along(selected))
-otutab <- t(as.matrix(genera[, selected, drop = FALSE]))
-rownames(otutab) <- feature_ids
-
-extract_rank <- function(lineage, prefix) {
-  pieces <- strsplit(lineage, ";", fixed = TRUE)
-  vapply(pieces, function(x) {
-    hit <- trimws(x)[startsWith(trimws(x), paste0(prefix, "__"))]
-    if (length(hit)) sub(paste0("^", prefix, "__"), "", hit[1]) else ""
-  }, character(1))
-}
-taxonomy <- data.frame(
-  Kingdom = extract_rank(selected, "d"), Phylum = extract_rank(selected, "p"),
-  Class = extract_rank(selected, "c"), Order = extract_rank(selected, "o"),
-  Family = extract_rank(selected, "f"), Genus = extract_rank(selected, "g"),
-  Species = extract_rank(selected, "s"), Lineage = selected,
-  row.names = feature_ids, check.names = FALSE
-)
-taxonomy$DisplayName <- ifelse(
-  taxonomy$Genus != "", taxonomy$Genus,
-  ifelse(taxonomy$Family != "", taxonomy$Family, feature_ids)
-)
-names(metadata)[names(metadata) == "Study.Group"] <- "StudyGroup"
-names(metadata)[names(metadata) == "Fecal.Calprotectin"] <- "FecalCalprotectin"
-
-write_piece <- function(x, id, path) {
-  out <- data.frame(setNames(list(rownames(x)), id), x, check.names = FALSE)
-  write.table(out, path, sep = "\t", quote = FALSE, row.names = FALSE, na = "")
-}
-write_piece(otutab, "FeatureID", file.path(out_dir, "otutab.tsv"))
-write_piece(taxonomy, "FeatureID", file.path(out_dir, "taxonomy.tsv"))
-write_piece(metadata, "SampleID", file.path(out_dir, "metadata.tsv"))
-```
-
-出版级作图函数直接内联：
-
-```{r}
+#| results: hold
+#| label: reader-step-02
 .libPaths(c(".r-lib", .libPaths()))
 library(mediation)
 library(ggplot2)
 library(patchwork)
 
 set.seed(20260753)
-font_pub <- "DejaVu Sans"
+font_pub <- "sans"
 pal_pub <- c(
   blue = "#0072B2", orange = "#E69F00", green = "#009E73",
   vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
@@ -221,14 +126,11 @@ save_pub <- function(plot, file_base, width = 180, height = 110,
 }
 ```
 
-
-</details>
-
-## 可复制代码 {#sec-code}
-
-### 1. 读取三件套并冻结分析样本
+### 读取三件套并冻结分析样本
 
 ```{r}
+#| results: hold
+#| label: reader-step-03
 base <- "data/small/paired-ibd-multiomics"
 otutab <- as.matrix(read.delim(
   file.path(base, "otutab.tsv"), row.names = 1, check.names = FALSE
@@ -254,6 +156,8 @@ head(metadata)
 只纳入 CD/UC，并在建模前按所有必需列定义 complete-case 集。病例状态和药物的空字符串不能被当成 `No`。
 
 ```{r}
+#| results: hold
+#| label: reader-step-04
 complete <- metadata$StudyGroup %in% c("CD", "UC") &
   !is.na(metadata$FecalCalprotectin) &
   metadata$steroids %in% c("No", "Yes") &
@@ -269,11 +173,72 @@ table(metadata[sample_ids, "steroids"])
 
 最终为 63 个 CD、45 个 UC；28 个当前使用 steroid，80 个未使用。这个不平衡会反映在不确定性中。
 
-### 2. 明确定义成分型中介
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/53-mediation-analysis.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "mediation", "ggplot2", "patchwork", "scales", "digest",
+  "svglite", "ragg"
+))
+```
+
+</details>
+
+## 总效应如何分解为间接效应和直接效应 {#sec-theory}
+
+最简单的线性中介模型由两条回归组成：
+
+\[
+M = \alpha_0 + aA + \boldsymbol{\alpha}^{T}\mathbf{C}+\epsilon_M,
+\]
+
+\[
+Y = \beta_0 + c'A + bM + \boldsymbol{\beta}^{T}\mathbf{C}+\epsilon_Y.
+\]
+
+在线性、无 (A\times M) 交互的情形，间接效应近似为 (a\times b)，直接效应为 (c'\)，总效应为两者之和。`mediation::mediate()` 用潜在结局框架计算 average causal mediation effect（ACME）和 average direct effect（ADE），也能处理交互及更一般的模型组合。
+
+### 识别所需的关键假设
+
+因果解释至少依赖：
+
+1. 暴露–结局、暴露–中介关系不存在未控制混杂；
+2. 给定暴露与协变量后，中介–结局关系不存在未控制混杂；
+3. 不存在被暴露影响、同时又混杂中介–结局关系的变量；
+4. 一致性、positivity、正确模型形式和可靠测量；
+5. 暴露先于中介，中介先于结局。
+
+本例的当前用药并非随机分配，疾病严重者更可能接受 steroid，属于典型 confounding by indication（适应证混杂）。现有调整不能保证消除它。
+
+<details>
+<summary><strong>深入：为什么“总效应不显著”不阻止估计间接效应</strong></summary>
+
+现代中介分析不要求先得到显著总效应。直接与间接路径可能方向相反而互相抵消，或者总效应检验功效不足。不过，这不等于可以忽略科学设计：没有可信的 (A\rightarrow M\) 与 (M\rightarrow Y\) 时间顺序时，把任意相关菌放入中介模型只是在重新参数化相关性。
+
+“proportion mediated” 在总效应接近零、方向相反或区间跨零时尤其不稳定，可能小于 0 或大于 1。本例不把它画进主结果，也不作百分比解释。
+
+</details>
+
+### 微生物中介的额外难点
+
+- 单个菌的相对丰度是成分的一部分，改变可能来自其它成分或总生物量；
+- 零值处理与筛选会改变中介定义；
+- 在数百菌中挑 ACME 最显著者会产生严重多重检验和选择偏倚；
+- 菌群通常是高维、相互依赖的多重中介，逐菌模型不能自动给出群落总中介效应。
+
+## 分解效应，并检查未测混杂敏感性 {#sec-code}
+
+### 明确定义成分型中介
 
 先给全部 250 个候选菌统一加 0.5，再做 CLR；不能只对 `Faecalibacterium` 单独取对数，因为 CLR 的参照是同一样本的几何均值。
 
 ```{r}
+#| results: hold
+#| label: reader-step-05
 z <- function(x) as.numeric(scale(x))
 make_mediator <- function(pseudocount) {
   logged <- log(otutab[, sample_ids, drop = FALSE] + pseudocount)
@@ -297,11 +262,13 @@ analysis_data <- data.frame(
 head(analysis_data)
 ```
 
-### 3. 拟合中介模型与结局模型
+### 拟合中介模型与结局模型
 
 两个回归必须使用相同样本和预先选择的协变量。这里把函数封装起来，确保主分析与伪计数敏感性分析使用相同模型。
 
 ```{r}
+#| results: hold
+#| label: reader-step-06
 fit_mediation <- function(data, simulations, seed) {
   mediator_model <- lm(
     FaecalibacteriumCLR ~ SteroidExposure + StudyGroup + AgeZ +
@@ -330,9 +297,11 @@ main_summary
 
 得到 ACME = 0.010（95% CI −0.105 至 0.137，P = 0.846），ADE = 0.102（95% CI −0.606 至 0.781），total effect = 0.113（95% CI −0.571 至 0.759）。三者均未排除零，因此数据不支持非零间接效应。
 
-### 4. 提取路径并画三节点图
+### 提取路径并画三节点图
 
 ```{r}
+#| results: hold
+#| label: reader-step-07
 path_a <- coef(summary(main_fit$mediator))["SteroidExposureYes", "Estimate"]
 path_a_p <- coef(summary(main_fit$mediator))["SteroidExposureYes", "Pr(>|t|)"]
 path_b <- coef(summary(main_fit$outcome))["FaecalibacteriumCLR", "Estimate"]
@@ -401,9 +370,11 @@ p_dag
 save_pub(p_dag, "figures/53-mediation-analysis/53-1-mediation-dag", height = 105)
 ```
 
-### 5. 用区间展示效应分解
+### 用区间展示效应分解
 
 ```{r}
+#| results: hold
+#| label: reader-step-08
 effects <- data.frame(
   Effect = c("ACME (indirect)", "ADE (direct)", "Total effect"),
   Estimate = c(main_summary$d.avg, main_summary$z.avg, main_summary$tau.coef),
@@ -438,6 +409,8 @@ save_pub(p_effects, "figures/53-mediation-analysis/53-2-effect-decomposition")
 `medsens()` 令两条回归的残差相关为假定值 \(\rho\)。它不是“校正掉混杂”，而是显示结论如何随未测混杂强度变化。
 
 ```{r}
+#| results: hold
+#| label: reader-step-09
 set.seed(20260753)
 sensitivity_fit <- mediation::medsens(
   main_fit$mediation, rho.by = 0.05, effect.type = "indirect"
@@ -468,6 +441,8 @@ save_pub(p_sensitivity, "figures/53-mediation-analysis/53-3-unmeasured-confoundi
 ### 审计伪计数，并回到观测数据
 
 ```{r}
+#| results: hold
+#| label: reader-step-10
 pseudocounts <- c(0.25, 0.5, 1)
 transformation_sensitivity <- do.call(rbind, lapply(seq_along(pseudocounts), function(i) {
   d <- analysis_data
@@ -484,6 +459,8 @@ transformation_sensitivity
 三个伪计数下 ACME 均接近零且区间跨零；这说明空结果没有被该组简单零处理选择扭转，但并不证明 CLR 单菌中介就是唯一正确构造。
 
 ```{r}
+#| results: hold
+#| label: reader-step-11
 steroid_colours <- c(No = pal_pub[["blue"]], Yes = pal_pub[["vermillion"]])
 p_obs_a <- ggplot(
   analysis_data,
@@ -540,19 +517,19 @@ save_pub(p_observed, "figures/53-mediation-analysis/53-4-observed-data",
 - 把 `medsens` 曲线当作已校正的因果结果，而不是假设压力测试。
 :::
 
-## 出版级美化 {#sec-publication}
+## 把间接效应与因果假设一起呈现 {#sec-publication}
 
 主图只保留三类效应及 95% 区间，零参考线比显著性星号更直接。路径图负责交代科学问题和调整集，效应图负责不确定性，观测数据图负责暴露两组的重叠与离群值，敏感性图放主文或补充材料取决于因果主张强度。
 
 不建议画单一“中介饼图”：当直接和间接效应方向相反或总效应接近零时，比例没有稳定含义。`save_pub()` 已输出 PDF/SVG 和 600 ppi PNG/TIFF，图内全部使用英文。
 
-## 这段 Methods 怎么写 {#sec-methods}
+## 报告中介效应与敏感性分析的方法与限制 {#sec-methods}
 
 > We evaluated whether genus-level *Faecalibacterium* abundance mediated the association between current corticosteroid use and faecal calprotectin among participants with Crohn's disease or ulcerative colitis. Genus counts were transformed by adding a pseudocount of 0.5, applying the centred log-ratio transformation across the pre-specified feature set, and standardising the resulting *Faecalibacterium* value. Faecal calprotectin was log1p-transformed. The mediator and outcome models adjusted for disease group, age, antibiotic use, immunosuppressant use, and mesalamine use. Average causal mediation, average direct, and total effects were estimated using 2,000 fixed-seed quasi-Bayesian simulation draws with heteroskedasticity-robust standard errors. Sensitivity analyses varied the assumed mediator–outcome residual correlation and the CLR pseudocount. Because exposure, mediator, and outcome were measured cross-sectionally and treatment was not randomised, estimates were interpreted as model-based decompositions rather than confirmed causal mediation.
 
 把暴露时间、微生物采样时间、结局时间、调整集依据、变换、模拟/自助次数和缺失处理改成真实信息。若使用 bootstrap，说明重抽样单位；纵向或多中心数据通常应按受试者或中心保持聚类结构。
 
-## 换成你自己的数据怎么做 {#sec-own-data}
+## 将中介效应与敏感性分析用于自己的研究 {#sec-own-data}
 
 三件套路径替换后，必须再映射：
 
