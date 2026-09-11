@@ -1,0 +1,7 @@
+name: microbiome-qiime2-2026.4
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - itsxpress=2.1.4=pyhdfd78af_0
+  - biopython=1.87=py312h4c3975b_0

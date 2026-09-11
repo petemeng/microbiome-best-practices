@@ -1,0 +1,9 @@
+Assumption	Status	Evidence
+Instrument strength	Supported	Minimum F = 20.8
+LD independence	Partial	One SNP per chromosome; no ancestry-matched clumping
+Allele harmonisation	Partial	5 of 6 SNPs retained
+Directional pleiotropy	Low power	Egger intercept P = 0.825
+Outlier pleiotropy	No signal	MR-PRESSO global P = 0.183
+Steiger directionality	Unavailable	Effect-allele frequencies absent
+Population overlap	Unresolved	Cohort overlap cannot be excluded from compact files
+Locus colocalisation	Unavailable	Top-hit exposure file lacks full locus statistics

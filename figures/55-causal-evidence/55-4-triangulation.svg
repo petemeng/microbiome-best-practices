@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='svglite' width='510.24pt' height='325.98pt' viewBox='0 0 510.24 325.98'>
+<defs>
+  <style type='text/css'><![CDATA[
+    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+    .svglite text {
+      white-space: pre;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpMC4wMHw1MTAuMjR8MC4wMHwzMjUuOTg='>
+    <rect x='0.00' y='0.00' width='510.24' height='325.98' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw1MTAuMjR8MC4wMHwzMjUuOTg=)'>
+<line x1='102.47' y1='107.20' x2='401.05' y2='189.01' style='stroke-width: 1.60; stroke: #0072B2; stroke-opacity: 0.80; stroke-linecap: butt;' />
+<polygon points='395.29,190.52 401.05,189.01 396.87,184.78 ' style='stroke-width: 1.60; stroke: #0072B2; stroke-opacity: 0.80; stroke-linecap: butt; fill: #0072B2; fill-opacity: 0.80;' />
+<line x1='102.47' y1='189.01' x2='401.05' y2='189.01' style='stroke-width: 1.60; stroke: #0072B2; stroke-opacity: 0.80; stroke-linecap: butt;' />
+<polygon points='395.90,191.98 401.05,189.01 395.90,186.03 ' style='stroke-width: 1.60; stroke: #0072B2; stroke-opacity: 0.80; stroke-linecap: butt; fill: #0072B2; fill-opacity: 0.80;' />
+<line x1='102.47' y1='270.82' x2='401.05' y2='189.01' style='stroke-width: 1.60; stroke: #0072B2; stroke-opacity: 0.80; stroke-linecap: butt;' />
+<polygon points='396.87,193.24 401.05,189.01 395.29,187.50 ' style='stroke-width: 1.60; stroke: #0072B2; stroke-opacity: 0.80; stroke-linecap: butt; fill: #0072B2; fill-opacity: 0.80;' />
+<line x1='270.42' y1='107.20' x2='401.05' y2='189.01' style='stroke-width: 1.60; stroke: #E69F00; stroke-opacity: 0.80; stroke-linecap: butt;' />
+<polygon points='395.10,188.79 401.05,189.01 398.26,183.75 ' style='stroke-width: 1.60; stroke: #E69F00; stroke-opacity: 0.80; stroke-linecap: butt; fill: #E69F00; fill-opacity: 0.80;' />
+<line x1='270.42' y1='189.01' x2='401.05' y2='189.01' style='stroke-width: 1.60; stroke: #E69F00; stroke-opacity: 0.80; stroke-linecap: butt;' />
+<polygon points='395.90,191.98 401.05,189.01 395.90,186.03 ' style='stroke-width: 1.60; stroke: #E69F00; stroke-opacity: 0.80; stroke-linecap: butt; fill: #E69F00; fill-opacity: 0.80;' />
+<line x1='270.42' y1='270.82' x2='401.05' y2='189.01' style='stroke-width: 1.60; stroke: #E69F00; stroke-opacity: 0.80; stroke-linecap: butt;' />
+<polygon points='398.26,194.27 401.05,189.01 395.10,189.22 ' style='stroke-width: 1.60; stroke: #E69F00; stroke-opacity: 0.80; stroke-linecap: butt; fill: #E69F00; fill-opacity: 0.80;' />
+<polygon points='48.37,112.92 114.76,112.92 114.70,112.91 114.96,112.90 115.22,112.85 115.47,112.76 115.69,112.63 115.90,112.46 116.07,112.26 116.21,112.04 116.32,111.80 116.38,111.54 116.40,111.28 116.40,111.28 116.40,103.12 116.40,103.12 116.38,102.85 116.32,102.60 116.21,102.35 116.07,102.13 115.90,101.93 115.69,101.77 115.47,101.64 115.22,101.54 114.96,101.49 114.76,101.48 48.37,101.48 48.57,101.49 48.30,101.48 48.04,101.51 47.79,101.58 47.55,101.70 47.33,101.85 47.14,102.03 46.98,102.24 46.86,102.47 46.78,102.72 46.73,102.98 46.73,103.12 46.73,111.28 46.73,111.15 46.73,111.41 46.78,111.67 46.86,111.92 46.98,112.15 47.14,112.36 47.33,112.55 47.55,112.70 47.79,112.81 48.04,112.88 48.30,112.91 ' style='stroke-width: 0.75; fill: #DFEDF6;' />
+<text x='81.57' y='110.51' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='64.86px' lengthAdjust='spacingAndGlyphs'>Human cohort</text>
+<polygon points='49.14,194.73 113.99,194.73 113.93,194.73 114.19,194.72 114.45,194.66 114.70,194.57 114.92,194.44 115.13,194.27 115.30,194.07 115.44,193.85 115.55,193.61 115.61,193.35 115.63,193.09 115.63,193.09 115.63,184.93 115.63,184.93 115.61,184.67 115.55,184.41 115.44,184.17 115.30,183.94 115.13,183.75 114.92,183.58 114.70,183.45 114.45,183.35 114.19,183.30 113.99,183.29 49.14,183.29 49.34,183.30 49.07,183.29 48.81,183.32 48.56,183.40 48.32,183.51 48.10,183.66 47.91,183.84 47.75,184.05 47.63,184.29 47.55,184.54 47.51,184.80 47.50,184.93 47.50,193.09 47.51,192.96 47.51,193.22 47.55,193.48 47.63,193.73 47.75,193.96 47.91,194.18 48.10,194.36 48.32,194.51 48.56,194.62 48.81,194.69 49.07,194.73 ' style='stroke-width: 0.75; fill: #DFEDF6;' />
+<text x='81.57' y='192.32' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='63.32px' lengthAdjust='spacingAndGlyphs'>Genetic proxy</text>
+<polygon points='35.30,276.54 127.83,276.54 127.77,276.54 128.03,276.53 128.29,276.48 128.54,276.38 128.77,276.25 128.97,276.08 129.14,275.89 129.29,275.66 129.39,275.42 129.45,275.16 129.47,274.90 129.47,274.90 129.47,266.74 129.47,266.74 129.45,266.48 129.39,266.22 129.29,265.98 129.14,265.76 128.97,265.56 128.77,265.39 128.54,265.26 128.29,265.17 128.03,265.11 127.83,265.10 35.30,265.10 35.49,265.11 35.23,265.10 34.97,265.13 34.72,265.21 34.48,265.32 34.26,265.47 34.07,265.65 33.91,265.86 33.79,266.10 33.71,266.35 33.66,266.61 33.66,266.74 33.66,274.90 33.66,274.77 33.66,275.03 33.71,275.29 33.79,275.54 33.91,275.78 34.07,275.99 34.26,276.17 34.48,276.32 34.72,276.43 34.97,276.51 35.23,276.54 ' style='stroke-width: 0.75; fill: #DFEDF6;' />
+<text x='81.57' y='274.14' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='91.01px' lengthAdjust='spacingAndGlyphs'>Human intervention</text>
+<polygon points='203.13,112.92 295.91,112.92 295.84,112.91 296.11,112.90 296.37,112.85 296.61,112.76 296.84,112.63 297.05,112.46 297.22,112.26 297.36,112.04 297.47,111.80 297.53,111.54 297.55,111.28 297.55,111.28 297.55,103.12 297.55,103.12 297.53,102.85 297.47,102.60 297.36,102.35 297.22,102.13 297.05,101.93 296.84,101.77 296.61,101.64 296.37,101.54 296.11,101.49 295.91,101.48 203.13,101.48 203.33,101.49 203.06,101.48 202.80,101.51 202.55,101.58 202.31,101.70 202.09,101.85 201.90,102.03 201.74,102.24 201.62,102.47 201.54,102.72 201.49,102.98 201.49,103.12 201.49,111.28 201.49,111.15 201.49,111.41 201.54,111.67 201.62,111.92 201.74,112.15 201.90,112.36 202.09,112.55 202.31,112.70 202.55,112.81 202.80,112.88 203.06,112.91 ' style='stroke-width: 0.75; fill: #F8E7C8;' />
+<text x='249.52' y='110.51' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='91.25px' lengthAdjust='spacingAndGlyphs'>Gnotobiotic transfer</text>
+<polygon points='214.54,194.73 284.50,194.73 284.44,194.73 284.70,194.72 284.96,194.66 285.21,194.57 285.43,194.44 285.64,194.27 285.81,194.07 285.95,193.85 286.06,193.61 286.12,193.35 286.14,193.09 286.14,193.09 286.14,184.93 286.14,184.93 286.12,184.67 286.06,184.41 285.95,184.17 285.81,183.94 285.64,183.75 285.43,183.58 285.21,183.45 284.96,183.35 284.70,183.30 284.50,183.29 214.54,183.29 214.73,183.30 214.47,183.29 214.21,183.32 213.96,183.40 213.72,183.51 213.50,183.66 213.31,183.84 213.15,184.05 213.03,184.29 212.95,184.54 212.90,184.80 212.90,184.93 212.90,193.09 212.90,192.96 212.90,193.22 212.95,193.48 213.03,193.73 213.15,193.96 213.31,194.18 213.50,194.36 213.72,194.51 213.96,194.62 214.21,194.69 214.47,194.73 ' style='stroke-width: 0.75; fill: #F8E7C8;' />
+<text x='249.52' y='192.32' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='68.44px' lengthAdjust='spacingAndGlyphs'>Defined isolate</text>
+<polygon points='212.25,276.54 286.79,276.54 286.73,276.54 286.99,276.53 287.25,276.48 287.49,276.38 287.72,276.25 287.93,276.08 288.10,275.89 288.24,275.66 288.35,275.42 288.41,275.16 288.43,274.90 288.43,274.90 288.43,266.74 288.43,266.74 288.41,266.48 288.35,266.22 288.24,265.98 288.10,265.76 287.93,265.56 287.72,265.39 287.49,265.26 287.25,265.17 286.99,265.11 286.79,265.10 212.25,265.10 212.44,265.11 212.18,265.10 211.92,265.13 211.67,265.21 211.43,265.32 211.21,265.47 211.02,265.65 210.86,265.86 210.74,266.10 210.66,266.35 210.61,266.61 210.61,266.74 210.61,274.90 210.61,274.77 210.61,275.03 210.66,275.29 210.74,275.54 210.86,275.78 211.02,275.99 211.21,276.17 211.43,276.32 211.67,276.43 211.92,276.51 212.18,276.54 ' style='stroke-width: 0.75; fill: #F8E7C8;' />
+<text x='249.52' y='274.14' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='73.02px' lengthAdjust='spacingAndGlyphs'>Molecular assay</text>
+<polygon points='374.23,194.73 475.65,194.73 475.58,194.73 475.84,194.72 476.10,194.66 476.35,194.57 476.58,194.44 476.78,194.27 476.96,194.07 477.10,193.85 477.20,193.61 477.26,193.35 477.28,193.09 477.28,193.09 477.28,184.93 477.28,184.93 477.26,184.67 477.20,184.41 477.10,184.17 476.96,183.94 476.78,183.75 476.58,183.58 476.35,183.45 476.10,183.35 475.84,183.30 475.65,183.29 374.23,183.29 374.43,183.30 374.16,183.29 373.90,183.32 373.65,183.40 373.41,183.51 373.19,183.66 373.00,183.84 372.85,184.05 372.72,184.29 372.64,184.54 372.60,184.80 372.59,184.93 372.59,193.09 372.60,192.96 372.60,193.22 372.64,193.48 372.72,193.73 372.85,193.96 373.00,194.18 373.19,194.36 373.41,194.51 373.65,194.62 373.90,194.69 374.16,194.73 ' style='stroke-width: 0.75; fill: #DCEFE2;' />
+<text x='424.94' y='192.32' text-anchor='middle' style='font-size: 9.10px; font-family: "Arial";' textLength='99.89px' lengthAdjust='spacingAndGlyphs'>Bounded causal claim</text>
+<text x='163.68' y='76.36' text-anchor='middle' style='font-size: 9.67px;fill: #444444; font-family: "Arial";' textLength='300.27px' lengthAdjust='spacingAndGlyphs'>Different biases should point to the same bounded conclusion</text>
+<text x='424.94' y='228.52' text-anchor='middle' style='font-size: 8.54px;fill: #555555; font-family: "Arial";' textLength='128.66px' lengthAdjust='spacingAndGlyphs'>Specific population, exposure,</text>
+<text x='424.94' y='240.81' text-anchor='middle' style='font-size: 8.54px;fill: #555555; font-family: "Arial";' textLength='108.34px' lengthAdjust='spacingAndGlyphs'>outcome and mechanism</text>
+<text x='14.94' y='39.46' style='font-size: 10.00px;fill: #555555; font-family: "DejaVu Sans";' textLength='391.68px' lengthAdjust='spacingAndGlyphs'>Repeating the same observational design does not create a new evidence tier</text>
+<text x='14.94' y='24.19' style='font-size: 12.00px; font-weight: bold; font-family: "DejaVu Sans";' textLength='439.41px' lengthAdjust='spacingAndGlyphs'>Triangulation is convergence across independent bias structures</text>
+</g>
+</svg>

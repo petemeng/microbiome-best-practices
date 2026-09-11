@@ -1,0 +1,5 @@
+FractionCode	Fraction	AdjustedR2	Testable	Interpretation
+[a]	Pure edaphic | wetland group	0.09673210232139029	TRUE	Unique association of five soil variables after conditioning group
+[b]	Pure wetland group | edaphic	0.11404958577479929	TRUE	Unique association of three-level wetland group after conditioning soil
+[c]	Shared edaphic + wetland group	0.07096357603778314	FALSE	Overlap is arithmetic and cannot be assigned uniquely or tested directly
+[d]	Unexplained	0.7182547358660273	FALSE	Residual Hellinger community variation

@@ -1,0 +1,2111 @@
+{
+  "status": "passed",
+  "articles": [
+    30,
+    31,
+    32,
+    33,
+    34,
+    35
+  ],
+  "article_count": 6,
+  "primary_figure_count": 19,
+  "format_file_count": 76,
+  "checks_total": 359,
+  "checks_passed": 359,
+  "checks_failed": 0,
+  "failed_checks": [],
+  "checks": [
+    {
+      "id": "article-30-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/30-compositional-data.qmd"
+    },
+    {
+      "id": "article-30-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-30-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-30-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-30-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-30-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-30-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-30-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-30-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-30-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-30-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-30-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-30-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-30-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-30-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-30-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/30-compositional-data.html"
+    },
+    {
+      "id": "article-30-html-title",
+      "status": "PASS",
+      "detail": "CoDA 成分数据原理：为什么不能比原始丰度"
+    },
+    {
+      "id": "figure-30-closure-artifact-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-closure-artifact.pdf"
+    },
+    {
+      "id": "signature-30-closure-artifact-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-30-closure-artifact-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-closure-artifact.svg"
+    },
+    {
+      "id": "signature-30-closure-artifact-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-30-closure-artifact-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-30-closure-artifact-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-closure-artifact.png"
+    },
+    {
+      "id": "raster-30-closure-artifact-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-30-closure-artifact-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        2881
+      ]
+    },
+    {
+      "id": "figure-30-closure-artifact-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-closure-artifact.tiff"
+    },
+    {
+      "id": "raster-30-closure-artifact-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-30-closure-artifact-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        2881
+      ]
+    },
+    {
+      "id": "raster-30-closure-artifact-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-30-measurement-scales-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-measurement-scales.pdf"
+    },
+    {
+      "id": "signature-30-measurement-scales-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-30-measurement-scales-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-measurement-scales.svg"
+    },
+    {
+      "id": "signature-30-measurement-scales-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-30-measurement-scales-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-30-measurement-scales-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-measurement-scales.png"
+    },
+    {
+      "id": "raster-30-measurement-scales-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-30-measurement-scales-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2740
+      ]
+    },
+    {
+      "id": "figure-30-measurement-scales-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-measurement-scales.tiff"
+    },
+    {
+      "id": "raster-30-measurement-scales-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-30-measurement-scales-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2740
+      ]
+    },
+    {
+      "id": "raster-30-measurement-scales-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-30-reference-frame-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-reference-frame.pdf"
+    },
+    {
+      "id": "signature-30-reference-frame-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-30-reference-frame-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-reference-frame.svg"
+    },
+    {
+      "id": "signature-30-reference-frame-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-30-reference-frame-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-30-reference-frame-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-reference-frame.png"
+    },
+    {
+      "id": "raster-30-reference-frame-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-30-reference-frame-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        2527
+      ]
+    },
+    {
+      "id": "figure-30-reference-frame-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/30-reference-frame.tiff"
+    },
+    {
+      "id": "raster-30-reference-frame-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-30-reference-frame-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        2527
+      ]
+    },
+    {
+      "id": "raster-30-reference-frame-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-31-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/31-da-methods.qmd"
+    },
+    {
+      "id": "article-31-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-31-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-31-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-31-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-31-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-31-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-31-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-31-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-31-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-31-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-31-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-31-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-31-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-31-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-31-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/31-da-methods.html"
+    },
+    {
+      "id": "article-31-html-title",
+      "status": "PASS",
+      "detail": "差异方法横评（ANCOM-BC2/ALDEx2/MaAsLin2/LEfSe/corncob）"
+    },
+    {
+      "id": "figure-31-da-hit-counts-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-hit-counts.pdf"
+    },
+    {
+      "id": "signature-31-da-hit-counts-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-31-da-hit-counts-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-hit-counts.svg"
+    },
+    {
+      "id": "signature-31-da-hit-counts-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-31-da-hit-counts-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-31-da-hit-counts-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-hit-counts.png"
+    },
+    {
+      "id": "raster-31-da-hit-counts-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-31-da-hit-counts-png-pixels",
+      "status": "PASS",
+      "detail": [
+        3897,
+        2527
+      ]
+    },
+    {
+      "id": "figure-31-da-hit-counts-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-hit-counts.tiff"
+    },
+    {
+      "id": "raster-31-da-hit-counts-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-31-da-hit-counts-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        3897,
+        2527
+      ]
+    },
+    {
+      "id": "raster-31-da-hit-counts-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-31-da-jaccard-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-jaccard.pdf"
+    },
+    {
+      "id": "signature-31-da-jaccard-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-31-da-jaccard-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-jaccard.svg"
+    },
+    {
+      "id": "signature-31-da-jaccard-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-31-da-jaccard-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-31-da-jaccard-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-jaccard.png"
+    },
+    {
+      "id": "raster-31-da-jaccard-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-31-da-jaccard-png-pixels",
+      "status": "PASS",
+      "detail": [
+        3590,
+        3118
+      ]
+    },
+    {
+      "id": "figure-31-da-jaccard-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-jaccard.tiff"
+    },
+    {
+      "id": "raster-31-da-jaccard-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-31-da-jaccard-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        3590,
+        3118
+      ]
+    },
+    {
+      "id": "raster-31-da-jaccard-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-31-da-evidence-map-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-evidence-map.pdf"
+    },
+    {
+      "id": "signature-31-da-evidence-map-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-31-da-evidence-map-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-evidence-map.svg"
+    },
+    {
+      "id": "signature-31-da-evidence-map-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-31-da-evidence-map-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-31-da-evidence-map-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-evidence-map.png"
+    },
+    {
+      "id": "raster-31-da-evidence-map-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-31-da-evidence-map-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3732
+      ]
+    },
+    {
+      "id": "figure-31-da-evidence-map-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/31-da-evidence-map.tiff"
+    },
+    {
+      "id": "raster-31-da-evidence-map-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-31-da-evidence-map-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3732
+      ]
+    },
+    {
+      "id": "raster-31-da-evidence-map-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-32-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/32-multirank-da.qmd"
+    },
+    {
+      "id": "article-32-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-32-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-32-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-32-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-32-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-32-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-32-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-32-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-32-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-32-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-32-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-32-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-32-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-32-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-32-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/32-multirank-da.html"
+    },
+    {
+      "id": "article-32-html-title",
+      "status": "PASS",
+      "detail": "多分类级差异（差异科/属/种，collapse 逐级）"
+    },
+    {
+      "id": "figure-32-rank-evidence-cascade-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-rank-evidence-cascade.pdf"
+    },
+    {
+      "id": "signature-32-rank-evidence-cascade-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-32-rank-evidence-cascade-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-rank-evidence-cascade.svg"
+    },
+    {
+      "id": "signature-32-rank-evidence-cascade-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-32-rank-evidence-cascade-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-32-rank-evidence-cascade-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-rank-evidence-cascade.png"
+    },
+    {
+      "id": "raster-32-rank-evidence-cascade-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-32-rank-evidence-cascade-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2645
+      ]
+    },
+    {
+      "id": "figure-32-rank-evidence-cascade-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-rank-evidence-cascade.tiff"
+    },
+    {
+      "id": "raster-32-rank-evidence-cascade-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-32-rank-evidence-cascade-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2645
+      ]
+    },
+    {
+      "id": "raster-32-rank-evidence-cascade-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-32-multirank-effect-map-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-multirank-effect-map.pdf"
+    },
+    {
+      "id": "signature-32-multirank-effect-map-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-32-multirank-effect-map-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-multirank-effect-map.svg"
+    },
+    {
+      "id": "signature-32-multirank-effect-map-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-32-multirank-effect-map-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-32-multirank-effect-map-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-multirank-effect-map.png"
+    },
+    {
+      "id": "raster-32-multirank-effect-map-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-32-multirank-effect-map-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3590
+      ]
+    },
+    {
+      "id": "figure-32-multirank-effect-map-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-multirank-effect-map.tiff"
+    },
+    {
+      "id": "raster-32-multirank-effect-map-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-32-multirank-effect-map-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3590
+      ]
+    },
+    {
+      "id": "raster-32-multirank-effect-map-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-32-family-genus-coherence-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-family-genus-coherence.pdf"
+    },
+    {
+      "id": "signature-32-family-genus-coherence-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-32-family-genus-coherence-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-family-genus-coherence.svg"
+    },
+    {
+      "id": "signature-32-family-genus-coherence-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-32-family-genus-coherence-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-32-family-genus-coherence-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-family-genus-coherence.png"
+    },
+    {
+      "id": "raster-32-family-genus-coherence-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-32-family-genus-coherence-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        3000
+      ]
+    },
+    {
+      "id": "figure-32-family-genus-coherence-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/32-family-genus-coherence.tiff"
+    },
+    {
+      "id": "raster-32-family-genus-coherence-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-32-family-genus-coherence-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        3000
+      ]
+    },
+    {
+      "id": "raster-32-family-genus-coherence-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-33-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/33-da-visualization.qmd"
+    },
+    {
+      "id": "article-33-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-33-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-33-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-33-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-33-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-33-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-33-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-33-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-33-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-33-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-33-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-33-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-33-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-33-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-33-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/33-da-visualization.html"
+    },
+    {
+      "id": "article-33-html-title",
+      "status": "PASS",
+      "detail": "差异可视化：火山/LEfSe cladogram/Manhattan/森林图"
+    },
+    {
+      "id": "figure-33-da-volcano-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-volcano.pdf"
+    },
+    {
+      "id": "signature-33-da-volcano-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-33-da-volcano-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-volcano.svg"
+    },
+    {
+      "id": "signature-33-da-volcano-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-33-da-volcano-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-33-da-volcano-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-volcano.png"
+    },
+    {
+      "id": "raster-33-da-volcano-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-33-da-volcano-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        3000
+      ]
+    },
+    {
+      "id": "figure-33-da-volcano-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-volcano.tiff"
+    },
+    {
+      "id": "raster-33-da-volcano-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-33-da-volcano-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        3000
+      ]
+    },
+    {
+      "id": "raster-33-da-volcano-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-33-da-cladogram-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-cladogram.pdf"
+    },
+    {
+      "id": "signature-33-da-cladogram-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-33-da-cladogram-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-cladogram.svg"
+    },
+    {
+      "id": "signature-33-da-cladogram-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-33-da-cladogram-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-33-da-cladogram-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-cladogram.png"
+    },
+    {
+      "id": "raster-33-da-cladogram-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-33-da-cladogram-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        4251
+      ]
+    },
+    {
+      "id": "figure-33-da-cladogram-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-cladogram.tiff"
+    },
+    {
+      "id": "raster-33-da-cladogram-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-33-da-cladogram-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        4251
+      ]
+    },
+    {
+      "id": "raster-33-da-cladogram-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-33-da-manhattan-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-manhattan.pdf"
+    },
+    {
+      "id": "signature-33-da-manhattan-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-33-da-manhattan-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-manhattan.svg"
+    },
+    {
+      "id": "signature-33-da-manhattan-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-33-da-manhattan-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-33-da-manhattan-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-manhattan.png"
+    },
+    {
+      "id": "raster-33-da-manhattan-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-33-da-manhattan-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2763
+      ]
+    },
+    {
+      "id": "figure-33-da-manhattan-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-manhattan.tiff"
+    },
+    {
+      "id": "raster-33-da-manhattan-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-33-da-manhattan-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2763
+      ]
+    },
+    {
+      "id": "raster-33-da-manhattan-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-33-da-forest-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-forest.pdf"
+    },
+    {
+      "id": "signature-33-da-forest-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-33-da-forest-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-forest.svg"
+    },
+    {
+      "id": "signature-33-da-forest-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-33-da-forest-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-33-da-forest-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-forest.png"
+    },
+    {
+      "id": "raster-33-da-forest-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-33-da-forest-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        3472
+      ]
+    },
+    {
+      "id": "figure-33-da-forest-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/33-da-forest.tiff"
+    },
+    {
+      "id": "raster-33-da-forest-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-33-da-forest-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        3472
+      ]
+    },
+    {
+      "id": "raster-33-da-forest-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-34-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/34-absolute-quantification.qmd"
+    },
+    {
+      "id": "article-34-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-34-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-34-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-34-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-34-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-34-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-34-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-34-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-34-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-34-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-34-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-34-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-34-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-34-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-34-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/34-absolute-quantification.html"
+    },
+    {
+      "id": "article-34-html-title",
+      "status": "PASS",
+      "detail": "绝对定量陷阱：相对丰度 vs QMP/spike-in"
+    },
+    {
+      "id": "figure-34-microbial-load-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-microbial-load.pdf"
+    },
+    {
+      "id": "signature-34-microbial-load-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-34-microbial-load-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-microbial-load.svg"
+    },
+    {
+      "id": "signature-34-microbial-load-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-34-microbial-load-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-34-microbial-load-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-microbial-load.png"
+    },
+    {
+      "id": "raster-34-microbial-load-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-34-microbial-load-png-pixels",
+      "status": "PASS",
+      "detail": [
+        3590,
+        2881
+      ]
+    },
+    {
+      "id": "figure-34-microbial-load-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-microbial-load.tiff"
+    },
+    {
+      "id": "raster-34-microbial-load-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-34-microbial-load-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        3590,
+        2881
+      ]
+    },
+    {
+      "id": "raster-34-microbial-load-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-34-relative-quantitative-effects-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-relative-quantitative-effects.pdf"
+    },
+    {
+      "id": "signature-34-relative-quantitative-effects-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-34-relative-quantitative-effects-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-relative-quantitative-effects.svg"
+    },
+    {
+      "id": "signature-34-relative-quantitative-effects-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-34-relative-quantitative-effects-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-34-relative-quantitative-effects-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-relative-quantitative-effects.png"
+    },
+    {
+      "id": "raster-34-relative-quantitative-effects-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-34-relative-quantitative-effects-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        3118
+      ]
+    },
+    {
+      "id": "figure-34-relative-quantitative-effects-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-relative-quantitative-effects.tiff"
+    },
+    {
+      "id": "raster-34-relative-quantitative-effects-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-34-relative-quantitative-effects-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4015,
+        3118
+      ]
+    },
+    {
+      "id": "raster-34-relative-quantitative-effects-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-34-qmp-exemplar-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-qmp-exemplar.pdf"
+    },
+    {
+      "id": "signature-34-qmp-exemplar-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-34-qmp-exemplar-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-qmp-exemplar.svg"
+    },
+    {
+      "id": "signature-34-qmp-exemplar-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-34-qmp-exemplar-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-34-qmp-exemplar-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-qmp-exemplar.png"
+    },
+    {
+      "id": "raster-34-qmp-exemplar-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-34-qmp-exemplar-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2645
+      ]
+    },
+    {
+      "id": "figure-34-qmp-exemplar-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/34-qmp-exemplar.tiff"
+    },
+    {
+      "id": "raster-34-qmp-exemplar-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-34-qmp-exemplar-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2645
+      ]
+    },
+    {
+      "id": "raster-34-qmp-exemplar-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-35-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/35-cooccurrence-networks.qmd"
+    },
+    {
+      "id": "article-35-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-35-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-35-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-35-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-35-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-35-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-35-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-35-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-35-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-35-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-35-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-35-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-35-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-35-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-35-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/35-cooccurrence-networks.html"
+    },
+    {
+      "id": "article-35-html-title",
+      "status": "PASS",
+      "detail": "共现网络基础：SparCC/SPIEC-EASI/ggClusterNet"
+    },
+    {
+      "id": "figure-35-network-matrix-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-network-matrix.pdf"
+    },
+    {
+      "id": "signature-35-network-matrix-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-35-network-matrix-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-network-matrix.svg"
+    },
+    {
+      "id": "signature-35-network-matrix-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-35-network-matrix-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-35-network-matrix-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-network-matrix.png"
+    },
+    {
+      "id": "raster-35-network-matrix-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-35-network-matrix-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3897
+      ]
+    },
+    {
+      "id": "figure-35-network-matrix-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-network-matrix.tiff"
+    },
+    {
+      "id": "raster-35-network-matrix-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-35-network-matrix-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3897
+      ]
+    },
+    {
+      "id": "raster-35-network-matrix-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-35-spiec-network-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-spiec-network.pdf"
+    },
+    {
+      "id": "signature-35-spiec-network-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-35-spiec-network-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-spiec-network.svg"
+    },
+    {
+      "id": "signature-35-spiec-network-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-35-spiec-network-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-35-spiec-network-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-spiec-network.png"
+    },
+    {
+      "id": "raster-35-spiec-network-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-35-spiec-network-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3472
+      ]
+    },
+    {
+      "id": "figure-35-spiec-network-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-spiec-network.tiff"
+    },
+    {
+      "id": "raster-35-spiec-network-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-35-spiec-network-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3472
+      ]
+    },
+    {
+      "id": "raster-35-spiec-network-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-35-network-edge-audit-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-network-edge-audit.pdf"
+    },
+    {
+      "id": "signature-35-network-edge-audit-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-35-network-edge-audit-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-network-edge-audit.svg"
+    },
+    {
+      "id": "signature-35-network-edge-audit-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-35-network-edge-audit-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-35-network-edge-audit-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-network-edge-audit.png"
+    },
+    {
+      "id": "raster-35-network-edge-audit-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-35-network-edge-audit-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2716
+      ]
+    },
+    {
+      "id": "figure-35-network-edge-audit-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/35-network-edge-audit.tiff"
+    },
+    {
+      "id": "raster-35-network-edge-audit-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-35-network-edge-audit-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2716
+      ]
+    },
+    {
+      "id": "raster-35-network-edge-audit-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-file-count",
+      "status": "PASS",
+      "detail": 76
+    },
+    {
+      "id": "wetland-triad-contract",
+      "status": "PASS",
+      "detail": [
+        13628,
+        90,
+        1619670
+      ]
+    },
+    {
+      "id": "absolute-triad-contract",
+      "status": "PASS",
+      "detail": [
+        234,
+        135,
+        4080996
+      ]
+    },
+    {
+      "id": "absolute-source-summary-sha256",
+      "status": "PASS",
+      "detail": "8ac35a7119d1772d5d1c92f30c051f2fb3bdb2b5d3dca3f83c885528352d9d94"
+    },
+    {
+      "id": "renv-package-count",
+      "status": "PASS",
+      "detail": 418
+    },
+    {
+      "id": "renv-ANCOMBC",
+      "status": "PASS",
+      "detail": "2.6.0"
+    },
+    {
+      "id": "renv-ALDEx2",
+      "status": "PASS",
+      "detail": "1.36.0"
+    },
+    {
+      "id": "renv-Maaslin2",
+      "status": "PASS",
+      "detail": "1.18.0"
+    },
+    {
+      "id": "renv-lefser",
+      "status": "PASS",
+      "detail": "1.14.0"
+    },
+    {
+      "id": "renv-corncob",
+      "status": "PASS",
+      "detail": "0.4.2"
+    },
+    {
+      "id": "renv-reconsi",
+      "status": "PASS",
+      "detail": "1.16.0"
+    },
+    {
+      "id": "renv-SpiecEasi",
+      "status": "PASS",
+      "detail": "1.1.2"
+    },
+    {
+      "id": "renv-SpiecEasi-sha",
+      "status": "PASS",
+      "detail": "c463727a51d0df34db0c670d3b170195bb3d4eba"
+    },
+    {
+      "id": "result-31-da-methods-7f3745b2",
+      "status": "PASS",
+      "detail": "ANCOM-BC2     79          44"
+    },
+    {
+      "id": "result-31-da-methods-d232b952",
+      "status": "PASS",
+      "detail": "ALDEx2     79          47"
+    },
+    {
+      "id": "result-31-da-methods-1c1989d6",
+      "status": "PASS",
+      "detail": "MaAsLin2     79          52"
+    },
+    {
+      "id": "result-31-da-methods-36689699",
+      "status": "PASS",
+      "detail": "LEfSe + BH     79          51"
+    },
+    {
+      "id": "result-31-da-methods-5ac7ba7a",
+      "status": "PASS",
+      "detail": "corncob     79          62"
+    },
+    {
+      "id": "result-32-multirank-da-c8e7cf74",
+      "status": "PASS",
+      "detail": "67.6%"
+    },
+    {
+      "id": "result-32-multirank-da-82f1eb8c",
+      "status": "PASS",
+      "detail": "37.0%"
+    },
+    {
+      "id": "result-32-multirank-da-6965c251",
+      "status": "PASS",
+      "detail": "0.35%"
+    },
+    {
+      "id": "result-32-multirank-da-fd6a5ecb",
+      "status": "PASS",
+      "detail": "FAIL"
+    },
+    {
+      "id": "result-34-absolute-quantification-654d1d6d",
+      "status": "PASS",
+      "detail": "Desulfovibrio"
+    },
+    {
+      "id": "result-34-absolute-quantification-46328337",
+      "status": "PASS",
+      "detail": "Quantitative only"
+    },
+    {
+      "id": "result-34-absolute-quantification-2aec729b",
+      "status": "PASS",
+      "detail": "0.002948167"
+    },
+    {
+      "id": "result-35-cooccurrence-networks-be6056ce",
+      "status": "PASS",
+      "detail": "264.00000000"
+    },
+    {
+      "id": "result-35-cooccurrence-networks-bcbaf858",
+      "status": "PASS",
+      "detail": "30.00000000"
+    },
+    {
+      "id": "result-35-cooccurrence-networks-a348402a",
+      "status": "PASS",
+      "detail": "0.03718974"
+    },
+    {
+      "id": "result-35-cooccurrence-networks-9ab82aa9",
+      "status": "PASS",
+      "detail": "0.5909091"
+    }
+  ]
+}

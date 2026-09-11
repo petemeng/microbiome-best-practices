@@ -1,0 +1,834 @@
+---
+title: "差异可视化：火山/LEfSe cladogram/Manhattan/森林图"
+author: "Peter"
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    number-sections: false
+execute:
+  eval: true
+  freeze: auto
+  warning: false
+  message: false
+fig-dpi: 300
+fig-format: png
+reader-reproduction:
+  required: true
+  label-policy: all-executed
+  script: examples/33-da-visualization.R
+  packages:
+  - ANCOMBC
+  - S4Vectors
+  - SummarizedExperiment
+  - ggplot2
+  - ggraph
+  - ggrepel
+  - igraph
+  - knitr
+  - lefser
+  - phyloseq
+  - ragg
+  - readr
+  - svglite
+---
+
+## 差异图应该展示效应、不确定性和多重检验 {#sec-target}
+
+[Segata et al. (2011)](https://doi.org/10.1186/gb-2011-12-6-r60)用 LDA bar plot 与 cladogram 展示跨 taxonomy 层级 biomarker；现代微生物组论文还常用 volcano、按 phylum 分块的 Manhattan 和 effect-size forest plot。以下用湿地数据比较四类图各自适合回答什么问题。它们共享一份 master table，差别只在视觉任务：筛查全局、定位 lineage、观察 taxonomy block、读取效应与区间。
+
+::: {.callout-important title="先给结论"}
+Volcano 的远点、cladogram 的彩色分支、Manhattan 的高峰和 forest 的置信区间必须能回到同一个 `FeatureID`、contrast 和 q-value。图形不能重新定义显著性。主分析使用 ANCOM-BC2；cladogram 另保留 LEfSe LDA score，但对全部 tested genera 追加 BH，并明确它是辅助 taxonomy view。Forest plot 承担定量解读，其他图只负责导航。
+:::
+
+本页使用 `microeco` 2.0.0 的真实湿地三件套，预声明 CW 对 IW。属级 feature selection 只看总体 prevalence 和总体 reads；未注释 residual 进入 denominator，却从四种图的生物学标注中排除。
+
+## 下载并读取本次分析的数据 {#sec-setup}
+
+需要 R，以及 `ANCOMBC`、`S4Vectors`、`SummarizedExperiment`、`ggplot2`、`ggraph`、`ggrepel`、`igraph`、`knitr`、`lefser`、`phyloseq`、`ragg`、`readr`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
+
+在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：
+
+```{r}
+#| label: reader-download
+#| results: hide
+options(timeout = 600)
+data_url <- "https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"
+input_files <- c(
+  "data/small/metadata.tsv",
+  "data/small/otutab.tsv",
+  "data/small/taxonomy.tsv"
+)
+for (path in input_files) {
+  dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+  if (!file.exists(path)) download.file(paste0(data_url, path), path, mode = "wb", quiet = TRUE)
+}
+```
+
+```{r}
+#| results: hold
+#| label: setup-da-visualization-theme
+library(ggplot2)
+
+set.seed(20260733)
+font_pub <- "sans"
+pal_pub <- c(
+  blue = "#0072B2", orange = "#E69F00", green = "#009E73",
+  vermillion = "#D55E00", purple = "#CC79A7", sky = "#56B4E9",
+  yellow = "#F0E442", grey = "#6B7280"
+)
+scale_color_pub <- function(..., values = unname(pal_pub)) {
+  ggplot2::scale_color_manual(..., values = values)
+}
+scale_fill_pub <- function(..., values = unname(pal_pub)) {
+  ggplot2::scale_fill_manual(..., values = values)
+}
+theme_pub <- function(base_size = 10, base_family = font_pub) {
+  ggplot2::theme_bw(base_size = base_size, base_family = base_family) +
+    ggplot2::theme(
+      panel.grid.minor = ggplot2::element_blank(),
+      panel.grid.major = ggplot2::element_line(
+        colour = "#E6E6E6", linewidth = 0.25
+      ),
+      axis.text = ggplot2::element_text(colour = "#1A1A1A"),
+      axis.title = ggplot2::element_text(colour = "#1A1A1A"),
+      axis.ticks = ggplot2::element_line(colour = "#1A1A1A", linewidth = 0.3),
+      plot.title.position = "plot",
+      plot.title = ggplot2::element_text(
+        face = "bold", size = ggplot2::rel(1.15)
+      ),
+      plot.subtitle = ggplot2::element_text(colour = "#4D4D4D"),
+      plot.caption = ggplot2::element_text(colour = "#666666", hjust = 0),
+      strip.background = ggplot2::element_rect(
+        fill = "#F2F2F2", colour = "#B3B3B3", linewidth = 0.3
+      ),
+      strip.text = ggplot2::element_text(face = "bold"),
+      legend.key = ggplot2::element_blank(), legend.position = "top"
+    )
+}
+save_pub <- function(
+  plot, file_base, width = 89, height = 70, units = "mm",
+  dpi = 600, write_svg = TRUE, write_tiff = TRUE,
+  base_family = font_pub
+) {
+  dir.create(dirname(file_base), recursive = TRUE, showWarnings = FALSE)
+  ggplot2::ggsave(
+    paste0(file_base, ".pdf"), plot, width = width, height = height,
+    units = units, device = grDevices::cairo_pdf,
+    family = base_family, bg = "white"
+  )
+  if (write_svg) ggplot2::ggsave(
+    paste0(file_base, ".svg"), plot, width = width, height = height,
+    units = units, device = svglite::svglite, bg = "white"
+  )
+  ggplot2::ggsave(
+    paste0(file_base, ".png"), plot, width = width, height = height,
+    units = units, dpi = dpi, device = ragg::agg_png, bg = "white"
+  )
+  if (write_tiff) ggplot2::ggsave(
+    paste0(file_base, ".tiff"), plot, width = width, height = height,
+    units = units, dpi = dpi, device = ragg::agg_tiff,
+    compression = "lzw", bg = "white"
+  )
+  invisible(plot)
+}
+```
+
+### 读取三件套，确定参与检验的属
+
+```{r}
+#| results: hold
+#| label: read-da-visualization-triad
+read_keyed_tsv <- function(path) {
+  x <- readr::read_tsv(
+    path, show_col_types = FALSE, progress = FALSE,
+    name_repair = "minimal", na = character()
+  )
+  ids <- as.character(x[[1L]])
+  stopifnot(!anyDuplicated(ids))
+  out <- as.data.frame(x[-1L], check.names = FALSE)
+  rownames(out) <- ids
+  out
+}
+otutab_raw <- read_keyed_tsv("data/small/otutab.tsv")
+taxonomy <- read_keyed_tsv("data/small/taxonomy.tsv")
+metadata_all <- read_keyed_tsv("data/small/metadata.tsv")
+otutab_all <- as.matrix(data.frame(
+  lapply(otutab_raw, as.integer), check.names = FALSE
+))
+rownames(otutab_all) <- rownames(otutab_raw)
+sample_ids <- rownames(metadata_all)[metadata_all$Group %in% c("IW", "CW")]
+metadata <- metadata_all[sample_ids, , drop = FALSE]
+metadata$Group <- relevel(factor(metadata$Group), ref = "IW")
+otutab <- otutab_all[, sample_ids, drop = FALSE]
+
+rank_names <- c(
+  "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"
+)
+clean_taxon <- function(x) {
+  x <- sub("^[A-Za-z]__", "", trimws(as.character(x)))
+  x[
+    is.na(x) | x == "" |
+      grepl(
+        "unclassified|unknown|unassigned|uncultured|metagenome",
+        x, ignore.case = TRUE
+      )
+  ] <- NA_character_
+  x
+}
+taxonomy_clean <- as.data.frame(
+  lapply(taxonomy[rownames(otutab), rank_names], clean_taxon),
+  check.names = FALSE
+)
+known_genus <- !is.na(taxonomy_clean$Genus)
+lineage_key <- apply(
+  taxonomy_clean[known_genus, rank_names[1:6], drop = FALSE], 1L,
+  function(x) paste(ifelse(is.na(x), "?", x), collapse = ";")
+)
+genus_counts <- rowsum(
+  otutab[known_genus, , drop = FALSE], lineage_key, reorder = FALSE
+)
+lineages <- rownames(genus_counts)
+lineage_matrix <- do.call(rbind, strsplit(lineages, ";", fixed = TRUE))
+colnames(lineage_matrix) <- rank_names[1:6]
+labels <- lineage_matrix[, "Genus"]
+feature_ids <- make.unique(paste0("Genus:", labels))
+rownames(genus_counts) <- feature_ids
+feature_info <- data.frame(
+  FeatureID = feature_ids,
+  as.data.frame(lineage_matrix, stringsAsFactors = FALSE),
+  DisplayTaxon = labels,
+  Lineage = lineages,
+  Reportable = TRUE,
+  stringsAsFactors = FALSE,
+  row.names = feature_ids,
+  check.names = FALSE
+)
+genus_counts <- rbind(
+  genus_counts,
+  Unclassified_residual = colSums(otutab[!known_genus, , drop = FALSE])
+)
+feature_info <- rbind(
+  feature_info,
+  data.frame(
+    FeatureID = "Unclassified_residual",
+    Kingdom = NA, Phylum = NA, Class = NA, Order = NA, Family = NA, Genus = NA,
+    DisplayTaxon = "Unclassified residual",
+    Lineage = "Unclassified at genus rank", Reportable = FALSE,
+    row.names = "Unclassified_residual", check.names = FALSE
+  )
+)
+
+prevalence <- rowMeans(genus_counts > 0)
+total_reads <- rowSums(genus_counts)
+eligible <- prevalence >= 0.10 & total_reads >= 20
+score <- prevalence * log1p(total_reads)
+selected_ids <- names(sort(score[eligible], decreasing = TRUE))[1:80]
+counts <- genus_counts[selected_ids, , drop = FALSE]
+feature_info <- feature_info[selected_ids, , drop = FALSE]
+
+stopifnot(
+  nrow(counts) == 80L, ncol(counts) == 60L,
+  sum(feature_info$Reportable) == 79L,
+  "Unclassified_residual" %in% rownames(counts)
+)
+```
+
+[下载完整 R 脚本](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/33-da-visualization.R)。脚本包含数据下载、计算和图形导出。
+
+<details class="wechat-omit">
+<summary>首次使用时安装 R 包</summary>
+
+```{r}
+#| eval: false
+install.packages(c(
+  "BiocManager", "ggraph", "ggplot2", "ggrepel", "igraph", "phyloseq",
+  "ragg", "readr", "scales", "svglite", "systemfonts"
+))
+BiocManager::install(version = "3.19", ask = FALSE)
+BiocManager::install(
+  c("ANCOMBC", "lefser", "SummarizedExperiment"), ask = FALSE
+)
+```
+
+</details>
+
+## 四种图回答四个不同问题 {#sec-theory}
+
+### Volcano：全表筛查，不是 effect uncertainty 图
+
+横轴放 ANCOM-BC2 bias-corrected log fold change，纵轴放 $-\log_{10}(q)$。它同时显示方向与 statistical evidence，但不显示 standard error/CI 的宽度；极端点可能由稀疏、低 prevalence 或模型不稳定造成。标签只给预声明的少量 top rows，完整表另存。
+
+### Cladogram：taxonomy context，不是系统发育树
+
+Kingdom→Phylum→Class→Order→Family→Genus 的分类层级不是 branch-length phylogeny。Cladogram 可显示显著 genus 所在 lineage，却不能推出进化距离，也不能让 parent 自动继承 child 的显著性。本文只给通过 BH + LDA 门槛的 genus 叶节点着色，内部节点保持中性。
+
+### Manhattan：看 taxonomy block 与集中性
+
+横轴按 Phylum 和 genus 排序，纵轴仍是 $-\log_{10}(q)$。它适合发现信号是否集中在少数 phylum，也能显示 tested denominator；但 taxonomy 顺序不是连续基因组坐标，相邻点不代表遗传连锁。
+
+### Forest：给出可解释的 effect 与 95% CI
+
+对 coefficient $\hat\beta$ 和 standard error $SE$，Wald interval 为
+
+$$
+\hat\beta\pm1.96\,SE.
+$$
+
+Forest plot最接近可审稿的定量图：读者能看到方向、effect size 与 precision。CI 仍依赖模型假设；它不是 absolute abundance fold change，也不能替代 raw distribution 和 sensitivity analysis。
+
+<details>
+<summary><strong>深入：为什么 q-value threshold 与 effect threshold 要分开画</strong></summary>
+
+`q<0.05`控制的是一组检验中的错误发现期望；`|log fold change|>=log(2)`是本页为了标签和视觉重点预声明的 practical-effect filter。后者不改变 q-value，也不应被描述为新的显著性检验。Volcano 中分别画横线和竖线，表格同时保留 `StatisticallySignificant` 与 `Highlighted` 两列。
+
+</details>
+
+## 让四类图共享同一份差异结果 {#sec-code}
+
+### ANCOM-BC2 生成主结果表
+
+```{r}
+#| results: hold
+#| label: run-da-visualization-ancombc2
+taxonomy_model <- matrix(
+  feature_info$DisplayTaxon,
+  ncol = 1L,
+  dimnames = list(rownames(feature_info), "Genus")
+)
+ps <- phyloseq::phyloseq(
+  phyloseq::otu_table(counts, taxa_are_rows = TRUE),
+  phyloseq::tax_table(taxonomy_model),
+  phyloseq::sample_data(metadata)
+)
+
+set.seed(20260733)
+ancom_warnings <- character()
+ancom_fit <- withCallingHandlers(
+  ANCOMBC::ancombc2(
+    data = ps,
+    fix_formula = "Group",
+    p_adj_method = "BH",
+    pseudo_sens = FALSE,
+    prv_cut = 0,
+    lib_cut = 0,
+    group = "Group",
+    struc_zero = TRUE,
+    neg_lb = FALSE,
+    global = FALSE,
+    pairwise = FALSE,
+    dunnet = FALSE,
+    trend = FALSE,
+    n_cl = 1,
+    verbose = FALSE
+  ),
+  warning = function(w) {
+    ancom_warnings <<- c(ancom_warnings, conditionMessage(w))
+    invokeRestart("muffleWarning")
+  }
+)
+ancom_res <- ancom_fit$res
+master_results <- data.frame(
+  FeatureID = ancom_res$taxon,
+  EffectCW = ancom_res$lfc_GroupCW,
+  StandardError = ancom_res$se_GroupCW,
+  PValue = ancom_res$p_GroupCW,
+  QValue = ancom_res$q_GroupCW,
+  stringsAsFactors = FALSE
+)
+master_results <- cbind(
+  master_results,
+  feature_info[master_results$FeatureID, c(
+    "Kingdom", "Phylum", "Class", "Order", "Family", "Genus",
+    "DisplayTaxon", "Lineage", "Reportable"
+  )]
+)
+master_results$CI95Lower <- master_results$EffectCW -
+  1.96 * master_results$StandardError
+master_results$CI95Upper <- master_results$EffectCW +
+  1.96 * master_results$StandardError
+master_results$StatisticallySignificant <- with(
+  master_results,
+  Reportable & is.finite(QValue) & QValue < 0.05
+)
+practical_threshold <- log(2)
+master_results$Highlighted <- with(
+  master_results,
+  StatisticallySignificant & abs(EffectCW) >= practical_threshold
+)
+master_results$Direction <- ifelse(
+  master_results$EffectCW >= 0, "Higher in CW", "Higher in IW"
+)
+
+stopifnot(
+  nrow(master_results) == 80L,
+  sum(master_results$Reportable) == 79L,
+  sum(is.finite(master_results$EffectCW) & is.finite(master_results$StandardError)) >= 76L,
+  all(master_results$CI95Lower <= master_results$CI95Upper, na.rm = TRUE)
+)
+
+head(master_results[order(master_results$QValue), c(
+  "FeatureID", "DisplayTaxon", "Phylum", "EffectCW",
+  "CI95Lower", "CI95Upper", "QValue", "Highlighted"
+)], 12)
+```
+
+### 用 LEfSe 结果标注分类层级图
+
+```{r}
+#| results: hold
+#| label: run-da-visualization-lefse
+relative_per_million <- sweep(counts, 2L, colSums(counts), "/") * 1e6
+lefse_input <- SummarizedExperiment::SummarizedExperiment(
+  assays = list(relative_abundance = relative_per_million),
+  colData = S4Vectors::DataFrame(
+    GROUP = metadata$Group, row.names = rownames(metadata)
+  )
+)
+set.seed(20260733)
+lefse_fit <- lefser::lefser(
+  lefse_input,
+  kruskal.threshold = 1,
+  wilcox.threshold = 1,
+  lda.threshold = 0,
+  groupCol = "GROUP",
+  checkAbundances = TRUE
+)
+lefse_scores <- setNames(lefse_fit$scores, lefse_fit$Names)
+lefse_p <- vapply(rownames(counts), function(feature_id) {
+  stats::wilcox.test(
+    relative_per_million[feature_id, metadata$Group == "CW"],
+    relative_per_million[feature_id, metadata$Group == "IW"],
+    exact = FALSE
+  )$p.value
+}, numeric(1))
+lefse_q <- stats::p.adjust(lefse_p, method = "BH")
+descriptive_direction <- rowMeans(
+  log2(counts[, metadata$Group == "CW", drop = FALSE] + 0.5)
+) - rowMeans(
+  log2(counts[, metadata$Group == "IW", drop = FALSE] + 0.5)
+)
+lefse_results <- data.frame(
+  FeatureID = rownames(counts),
+  LDAScore = sign(descriptive_direction) * abs(lefse_scores[rownames(counts)]),
+  QValue = unname(lefse_q[rownames(counts)]),
+  Reportable = feature_info[rownames(counts), "Reportable"],
+  stringsAsFactors = FALSE
+)
+lefse_results$CladogramEligible <- with(
+  lefse_results,
+  Reportable & is.finite(LDAScore) & QValue < 0.05 & abs(LDAScore) >= 2
+)
+```
+
+### 从 LEfSe 叶节点构建 taxonomy graph
+
+```{r}
+#| results: hold
+#| label: build-audited-cladogram
+leaf_candidates <- lefse_results[lefse_results$CladogramEligible, ]
+leaf_candidates <- leaf_candidates[order(-abs(leaf_candidates$LDAScore)), ]
+leaf_candidates <- head(leaf_candidates, 24L)
+leaf_info <- feature_info[leaf_candidates$FeatureID, , drop = FALSE]
+leaf_direction <- setNames(
+  ifelse(leaf_candidates$LDAScore >= 0, "Higher in CW", "Higher in IW"),
+  leaf_candidates$FeatureID
+)
+
+edge_rows <- list()
+node_rows <- list(data.frame(
+  name = "Root", Label = "Bacteria", Rank = "Root",
+  Evidence = "Context", stringsAsFactors = FALSE
+))
+for (feature_id in rownames(leaf_info)) {
+  parts <- unlist(leaf_info[feature_id, rank_names[1:6]], use.names = FALSE)
+  parent <- "Root"
+  for (j in seq_along(parts)) {
+    node_id <- paste(parts[seq_len(j)], collapse = ";")
+    edge_rows[[length(edge_rows) + 1L]] <- data.frame(
+      from = parent, to = node_id, stringsAsFactors = FALSE
+    )
+    node_rows[[length(node_rows) + 1L]] <- data.frame(
+      name = node_id,
+      Label = parts[[j]],
+      Rank = rank_names[[j]],
+      Evidence = if (j == 6L) leaf_direction[[feature_id]] else "Context",
+      stringsAsFactors = FALSE
+    )
+    parent <- node_id
+  }
+}
+cladogram_edges <- unique(do.call(rbind, edge_rows))
+cladogram_nodes <- unique(do.call(rbind, node_rows))
+cladogram_graph <- igraph::graph_from_data_frame(
+  cladogram_edges, directed = TRUE, vertices = cladogram_nodes
+)
+
+stopifnot(
+  igraph::is_dag(cladogram_graph),
+  nrow(leaf_candidates) >= 8L,
+  all(leaf_candidates$FeatureID %in% rownames(feature_info))
+)
+```
+
+## 图形不能补救错误的差异检验 {#sec-audit}
+
+```{r}
+#| results: hold
+#| label: da-visualization-audit-table
+visual_audit <- data.frame(
+  View = c("Volcano", "Cladogram", "Manhattan", "Forest"),
+  PrimaryQuestion = c(
+    "Where are direction and q-value extremes?",
+    "Which taxonomic lineages contain supported leaves?",
+    "Are signals concentrated in taxonomic blocks?",
+    "How large and precise are selected effects?"
+  ),
+  RequiredFields = c(
+    "effect, q, label policy",
+    "full lineage, LDA, all-feature BH",
+    "phylum, stable order, q",
+    "effect, SE or CI, contrast"
+  ),
+  ProhibitedInference = c(
+    "Distance from origin proves biology",
+    "Internal nodes inherit significance",
+    "Adjacent taxa are genetically linked",
+    "CI proves absolute abundance or causality"
+  ),
+  stringsAsFactors = FALSE
+)
+knitr::kable(visual_audit, caption = "One master table, four visual tasks")
+```
+
+四张图的筛选必须可重放。本文的 volcano label、forest rows 和 cladogram leaves 都由显式排序与门槛生成；Manhattan 显示全部 79 个可报告属。任何人工移除重叠标签、挑“故事更好”的菌或换方向色，都要写入图形审计表。
+
+LEfSe 的升级尤其重要：LDA score 不是 p-value，经典 raw-p screen 也不是 BH。本文用全 feature Wilcoxon + BH 定义 cladogram eligibility，再用 LDA 只做 effect-relevance 和排序；这仍是辅助分析，不覆盖 ANCOM-BC2 主表。
+
+## 用火山图定位，再用森林图定量解释 {#sec-publication}
+
+### 图 1：Volcano 同时显示统计门槛和 practical-effect 门槛
+
+```{r}
+#| results: hold
+#| label: fig-da-volcano
+#| fig-width: 6.7
+#| fig-height: 5.0
+volcano_data <- master_results[master_results$Reportable, ]
+volcano_data$PlotQ <- pmax(volcano_data$QValue, 1e-12)
+volcano_data$Status <- ifelse(
+  volcano_data$Highlighted, volcano_data$Direction, "Not highlighted"
+)
+label_data <- head(
+  volcano_data[order(volcano_data$QValue, -abs(volcano_data$EffectCW)), ],
+  12L
+)
+
+volcano_plot <- ggplot(
+  volcano_data,
+  aes(x = EffectCW, y = -log10(PlotQ), colour = Status)
+) +
+  geom_hline(yintercept = -log10(0.05), linetype = "22", colour = "#666666") +
+  geom_vline(
+    xintercept = c(-practical_threshold, practical_threshold),
+    linetype = "22", colour = "#999999"
+  ) +
+  geom_point(size = 2.0, alpha = 0.82) +
+  ggrepel::geom_text_repel(
+    data = label_data, aes(label = DisplayTaxon),
+    family = font_pub, size = 2.5, min.segment.length = 0,
+    max.overlaps = Inf, show.legend = FALSE
+  ) +
+  scale_colour_manual(values = c(
+    "Higher in CW" = pal_pub[["vermillion"]],
+    "Higher in IW" = pal_pub[["blue"]],
+    "Not highlighted" = "#B8B8B8"
+  )) +
+  labs(
+    title = "Volcano plot: evidence and practical effect are separate",
+    subtitle = "ANCOM-BC2, CW versus IW; labels are the 12 smallest-q genera",
+    x = "Bias-corrected log fold change (positive = higher in CW)",
+    y = expression(-log[10](BH~q)), colour = "Display status",
+    caption = "Horizontal line: q = 0.05; vertical lines: |log fold change| = log(2)."
+  ) +
+  theme_pub(base_size = 8.5) +
+  theme(legend.position = "bottom")
+
+save_pub(volcano_plot, "figures/33-da-volcano", width = 170, height = 127)
+volcano_plot
+```
+
+### 图 2：Cladogram 只给通过审计的 genus 叶节点着色
+
+```{r}
+#| results: hold
+#| label: fig-da-cladogram
+#| fig-width: 7.1
+#| fig-height: 7.1
+cladogram_plot <- ggraph::ggraph(
+  cladogram_graph, layout = "dendrogram", circular = TRUE
+) +
+  ggraph::geom_edge_diagonal(colour = "#C7C7C7", alpha = 0.72, linewidth = 0.45) +
+  ggraph::geom_node_point(
+    aes(colour = Evidence, size = Rank == "Genus"), alpha = 0.92
+  ) +
+  ggraph::geom_node_text(
+    aes(label = ifelse(Rank == "Genus", Label, "")),
+    repel = TRUE, family = font_pub, size = 2.35,
+    max.overlaps = Inf, show.legend = FALSE
+  ) +
+  scale_colour_manual(values = c(
+    "Higher in CW" = pal_pub[["vermillion"]],
+    "Higher in IW" = pal_pub[["blue"]],
+    "Context" = "#A8A8A8"
+  )) +
+  scale_size_manual(values = c(`FALSE` = 1.4, `TRUE` = 3.1), guide = "none") +
+  labs(
+    title = "Audited LEfSe cladogram",
+    subtitle = "Leaves require all-feature BH q < 0.05 and |LDA| >= 2",
+    colour = "Genus direction",
+    caption = paste0(
+      "Internal nodes provide taxonomy context and are not called significant. ",
+      "This is a taxonomy dendrogram, not a branch-length phylogeny."
+    )
+  ) +
+  theme_void(base_family = font_pub) +
+  theme(
+    plot.title = element_text(face = "bold", size = 11),
+    plot.subtitle = element_text(colour = "#4D4D4D", size = 9),
+    plot.caption = element_text(colour = "#666666", hjust = 0, size = 7),
+    legend.position = "bottom"
+  )
+
+save_pub(cladogram_plot, "figures/33-da-cladogram", width = 180, height = 180)
+cladogram_plot
+```
+
+### 图 3：按分类层级展示全部受检属的结果
+
+```{r}
+#| results: hold
+#| label: fig-da-manhattan
+#| fig-width: 7.1
+#| fig-height: 4.6
+manhattan_data <- master_results[master_results$Reportable, ]
+manhattan_data$PhylumDisplay <- ifelse(
+  is.na(manhattan_data$Phylum) | manhattan_data$Phylum == "?",
+  "Unresolved phylum", manhattan_data$Phylum
+)
+phylum_order <- names(sort(tapply(
+  manhattan_data$QValue, manhattan_data$PhylumDisplay, min, na.rm = TRUE
+)))
+manhattan_data <- manhattan_data[order(
+  match(manhattan_data$PhylumDisplay, phylum_order),
+  manhattan_data$QValue, manhattan_data$DisplayTaxon
+), ]
+manhattan_data$Index <- seq_len(nrow(manhattan_data))
+manhattan_data$PlotQ <- pmax(manhattan_data$QValue, 1e-12)
+phylum_centres <- aggregate(Index ~ PhylumDisplay, manhattan_data, mean)
+phylum_centres <- phylum_centres[match(phylum_order, phylum_centres$PhylumDisplay), ]
+phylum_palette <- setNames(
+  rep(c(
+    pal_pub[["blue"]], pal_pub[["orange"]], pal_pub[["green"]],
+    pal_pub[["purple"]], pal_pub[["sky"]], pal_pub[["vermillion"]],
+    "#7A7A7A", "#B28E00"
+  ), length.out = length(phylum_order)),
+  phylum_order
+)
+
+manhattan_plot <- ggplot(
+  manhattan_data,
+  aes(x = Index, y = -log10(PlotQ), colour = PhylumDisplay)
+) +
+  geom_hline(yintercept = -log10(0.05), linetype = "22", colour = "#666666") +
+  geom_point(aes(shape = Highlighted), size = 2.0, alpha = 0.86, stroke = 0.65) +
+  scale_colour_manual(values = phylum_palette) +
+  scale_shape_manual(values = c(`FALSE` = 1, `TRUE` = 16), guide = "none") +
+  scale_x_continuous(
+    breaks = phylum_centres$Index,
+    labels = phylum_centres$PhylumDisplay,
+    expand = expansion(mult = c(0.02, 0.02))
+  ) +
+  labs(
+    title = "Taxonomic Manhattan plot retains the full tested denominator",
+    subtitle = "Open points are not highlighted; filled points pass q and practical-effect thresholds",
+    x = "Phylum block", y = expression(-log[10](BH~q)),
+    colour = "Phylum",
+    caption = "Horizontal order is taxonomic bookkeeping, not a genomic coordinate or phylogenetic distance."
+  ) +
+  theme_pub(base_size = 8.0) +
+  theme(
+    axis.text.x = element_text(angle = 32, hjust = 1),
+    legend.position = "none",
+    panel.grid.major.x = element_blank()
+  )
+
+save_pub(manhattan_plot, "figures/33-da-manhattan", width = 180, height = 117)
+manhattan_plot
+```
+
+### 图 4：用森林图展示效应量与不确定性
+
+```{r}
+#| results: hold
+#| label: fig-da-forest
+#| fig-width: 6.7
+#| fig-height: 5.8
+forest_data <- master_results[
+  master_results$Reportable & master_results$StatisticallySignificant &
+    is.finite(master_results$CI95Lower) & is.finite(master_results$CI95Upper),
+]
+forest_data <- head(
+  forest_data[order(forest_data$QValue, -abs(forest_data$EffectCW)), ],
+  16L
+)
+forest_data$DisplayTaxon <- factor(
+  forest_data$DisplayTaxon,
+  levels = rev(forest_data$DisplayTaxon)
+)
+
+forest_plot <- ggplot(
+  forest_data,
+  aes(x = EffectCW, y = DisplayTaxon, colour = Direction)
+) +
+  geom_vline(xintercept = 0, linetype = "22", colour = "#666666") +
+  geom_errorbarh(
+    aes(xmin = CI95Lower, xmax = CI95Upper),
+    height = 0.22, linewidth = 0.65
+  ) +
+  geom_point(size = 2.5) +
+  scale_colour_manual(values = c(
+    "Higher in CW" = pal_pub[["vermillion"]],
+    "Higher in IW" = pal_pub[["blue"]]
+  )) +
+  labs(
+    title = "Forest plot makes effect precision visible",
+    subtitle = "Sixteen smallest-q reportable genera from the ANCOM-BC2 master table",
+    x = "Bias-corrected log fold change with Wald 95% CI",
+    y = "Genus", colour = "Direction",
+    caption = "Positive estimates indicate higher abundance in CW relative to IW; intervals are model based."
+  ) +
+  theme_pub(base_size = 8.2) +
+  theme(legend.position = "bottom")
+
+save_pub(forest_plot, "figures/33-da-forest", width = 170, height = 147)
+forest_plot
+```
+
+```{r}
+#| results: hold
+#| label: verify-da-visualization
+expected_bases <- c(
+  "figures/33-da-volcano", "figures/33-da-cladogram",
+  "figures/33-da-manhattan", "figures/33-da-forest"
+)
+expected_files <- as.vector(outer(
+  expected_bases, c(".pdf", ".svg", ".png", ".tiff"), paste0
+))
+stopifnot(
+  all(file.exists(expected_files)),
+  nrow(volcano_data) == 79L,
+  nrow(manhattan_data) == 79L,
+  nrow(forest_data) == 16L,
+  nrow(leaf_candidates) >= 8L,
+  all(master_results$FeatureID %in% rownames(feature_info))
+)
+```
+
+## 常见坑 {#sec-pitfalls}
+
+::: {.callout-caution title="坑 1：四张图各筛一套 taxa"}
+先生成 master table，再写 deterministic view rule。图中任何点都应能用 `FeatureID` 回查 effect、SE、p、q、lineage 和 status。
+:::
+
+::: {.callout-caution title="坑 2：用 raw p 画 volcano，却标 q=0.05"}
+纵轴变量与门槛必须一致。若画 `-log10(p)`，横线就是 raw-p 门槛；本文画 `-log10(q)`。
+:::
+
+::: {.callout-caution title="坑 3：在 volcano 标几十个名字"}
+标签策略要预声明并限制数量；完整结果放表。重叠标签不是删掉不喜欢结果的理由。
+:::
+
+::: {.callout-caution title="坑 4：把 cladogram 当 phylogenetic tree"}
+Taxonomic ranks 没有 branch length，也未使用 sequence alignment。若要进化解释，应另建 ASV tree 并做 phylogenetic analysis。
+:::
+
+::: {.callout-caution title="坑 5：让内部节点继承 LEfSe 显著性"}
+Child hit 不证明 parent 或 sibling。内部节点只提供 context；每个 rank 的证据需要独立检验。
+:::
+
+::: {.callout-caution title="坑 6：Manhattan 只画显著点"}
+保留全部 tested rows 才能看清 denominator、taxonomy block 和选择压力。只画 hits 会制造峰值密集的错觉。
+:::
+
+::: {.callout-caution title="坑 7：Forest 只给点估计"}
+没有 SE/CI 的“森林图”只是条形图。报告 effect unit、contrast、interval method 与失败/非有限行。
+:::
+
+::: {.callout-caution title="坑 8：颜色方向在不同图中反转"}
+固定正值 = CW higher、红 = CW、蓝 = IW；Methods、图例和结果表共享同一 mapping。不要按软件默认 level 临时换色。
+:::
+
+## 报告差异图的效应与筛选规则的方法与限制 {#sec-methods}
+
+> Publication figures were generated from a single prespecified genus-level differential-abundance master table. ASVs were aggregated by complete taxonomic lineage; genera present in at least 10% of the 60 CW/IW samples and represented by at least 20 total reads were eligible, and 80 rows were retained using a group-blind prevalence × log(1 + total reads) score (79 reportable genera plus one non-reportable denominator residual). ANCOM-BC2 2.6.0 was fitted with `Group` as a fixed effect, IW as the reference, BH correction, and seed 20260733. Effects were oriented so that positive values indicated higher abundance in CW. Statistical significance was defined as q < 0.05; a prespecified |log fold change| >= log(2) threshold was used only for visual highlighting. Volcano and taxonomic Manhattan plots displayed all reportable tested genera. The forest plot displayed the 16 smallest-q significant genera with model-based Wald 95% confidence intervals. For the auxiliary cladogram, lefser 1.14.0 LDA scores were retained only for genera passing an all-feature Wilcoxon BH q < 0.05 and |LDA| >= 2; the 24 largest absolute LDA scores were displayed as colored genus leaves. Internal taxonomic nodes were not called significant, and the cladogram was not interpreted as a branch-length phylogeny. All plot labels were in English and figures were exported as PDF, SVG, 600 ppi PNG, and 600 ppi LZW-compressed TIFF.
+
+替换主方法、effect unit、threshold、label count 和 CI method。若 primary model 使用 mixed effect、bootstrap 或 robust SE，forest plot 必须读取对应区间，不能用这里的 Wald 公式代替。
+
+## 将差异图的效应与筛选规则用于自己的研究 {#sec-own-data}
+
+### 只改三件套路径与 contrast
+
+```{r}
+#| eval: false
+otutab_raw <- read_keyed_tsv("your_data/otutab.tsv")
+taxonomy <- read_keyed_tsv("your_data/taxonomy.tsv")
+metadata_all <- read_keyed_tsv("your_data/metadata.tsv")
+metadata_all$Treatment <- relevel(
+  factor(metadata_all$Treatment), ref = "Control"
+)
+```
+
+### taxonomy 单列时先拆七列
+
+```{r}
+#| eval: false
+rank_names <- c(
+  "Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species"
+)
+parts <- strsplit(taxonomy_raw$Taxon, ";", fixed = TRUE)
+taxonomy_matrix <- t(vapply(parts, function(x) {
+  x <- trimws(x); length(x) <- 7L; x
+}, character(7L)))
+taxonomy <- as.data.frame(taxonomy_matrix, stringsAsFactors = FALSE)
+names(taxonomy) <- rank_names
+rownames(taxonomy) <- taxonomy_raw$FeatureID
+```
+
+### 先导出 master table，再画图
+
+```{r}
+#| eval: false
+readr::write_tsv(master_results, "results/da-master-table.tsv")
+label_policy <- list(
+  volcano = "12 smallest q-values",
+  forest = "16 smallest-q significant rows with finite CI",
+  cladogram = "BH q < 0.05, |LDA| >= 2, top 24 |LDA|",
+  manhattan = "all reportable tested rows"
+)
+```
+
+Master table 是权威结果；图的 row selection、颜色和排序都写成代码。投稿时把 master table、图形脚本、session/lockfile 和 taxonomy database version 一起交付。
+
+## 参考 {#sec-references}
+
+1. Segata N, Izard J, Waldron L, et al. Metagenomic biomarker discovery and explanation. *Genome Biology*. 2011;12:R60. [doi:10.1186/gb-2011-12-6-r60](https://doi.org/10.1186/gb-2011-12-6-r60).
+2. Lin H, Peddada SD. Analysis of compositions of microbiomes with bias correction. *Nature Communications*. 2020;11:3514. [doi:10.1038/s41467-020-17041-7](https://doi.org/10.1038/s41467-020-17041-7).
+3. Nearing JT, Douglas GM, Hayes MG, et al. Microbiome differential abundance methods produce different results across 38 datasets. *Nature Communications*. 2022;13:342. [doi:10.1038/s41467-022-28034-z](https://doi.org/10.1038/s41467-022-28034-z).
+4. Wickham H. ggplot2: Elegant Graphics for Data Analysis. Springer; 2016. [ggplot2 documentation](https://ggplot2.tidyverse.org/).
+5. Pedersen TL. ggraph: An Implementation of Grammar of Graphics for Graphs and Networks. [ggraph documentation](https://ggraph.data-imaginist.com/).
+6. Liu C, Cui Y, Li X, Yao M. microeco: an R package for data mining in microbial community ecology. *FEMS Microbiology Ecology*. 2021;97(2):fiaa255. [doi:10.1093/femsec/fiaa255](https://doi.org/10.1093/femsec/fiaa255).

@@ -1,0 +1,8 @@
+component	observed_version	expected_version	status
+QIIME 2	2026.4.0	2026.4.0	PASS
+q2-feature-classifier	2026.4.0	2026.4.0	PASS
+RESCRIPt	2026.4.0	2026.4.0	PASS
+scikit-learn	1.7.1	1.7.1	PASS
+joblib	1.5.3	1.5.3	PASS
+NumPy	2.4.2	2.4.2	PASS
+SciPy	1.17.1	1.17.1	PASS

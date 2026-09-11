@@ -1,0 +1,4 @@
+file	target_ppi	width_mm	height_mm	pixel_width	pixel_height	expected_pixel_width	expected_pixel_height	effective_ppi_x	effective_ppi_y	megapixels	bytes
+resolution-probe-72ppi.png	72	89	70	252	198	252	198	71.91910112359551	71.84571428571428	0.049896	12309
+resolution-probe-300ppi.png	300	89	70	1051	826	1051	826	299.9483146067416	299.72	0.868126	71043
+resolution-probe-600ppi.png	600	89	70	2102	1653	2102	1653	599.8966292134832	599.8028571428572	3.474606	171149

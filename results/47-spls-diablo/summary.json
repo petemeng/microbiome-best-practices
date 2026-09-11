@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "seed": 20260726,
+  "samples": 220,
+  "train_samples": 153,
+  "test_samples": 67,
+  "train_group_counts": {
+    "Control": 39,
+    "CD": 61,
+    "UC": 53
+  },
+  "test_group_counts": {
+    "Control": 17,
+    "CD": 27,
+    "UC": 23
+  },
+  "retained_microbe_features": 60,
+  "retained_metabolite_features": 80,
+  "spls_train_correlations": [
+    0.8845,
+    0.738
+  ],
+  "spls_test_correlations": [
+    0.8831,
+    0.5017
+  ],
+  "tune_grid": {
+    "Microbiome": [5, 10, 15],
+    "Metabolome": [5, 10, 15]
+  },
+  "tuned_keepX": {
+    "Microbiome": [10, 15],
+    "Metabolome": [5, 15]
+  },
+  "repeated_cv_weighted_vote_ber_component2": 0.3772,
+  "test_accuracy": 0.6567,
+  "test_balanced_accuracy": 0.6758,
+  "test_ber": 0.3242,
+  "test_macro_auc": 0.7984,
+  "stable_selected_features_rate_ge_0_8": 26,
+  "versions": {
+    "R": "4.4.1",
+    "mixOmics": "6.26.0",
+    "pROC": "1.18.5"
+  }
+}

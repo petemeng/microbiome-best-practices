@@ -1,0 +1,25 @@
+BiologicalSampleID	Treatment	DistanceToSpatialMedian
+1UC	Ambient + Unclipped	0.4781633290527444
+1CC	Ambient + Clipped	0.3818424296844298
+1UW	Warmed + Unclipped	0.4835051727471169
+1CW	Warmed + Clipped	0.44019695570377304
+2UC	Ambient + Unclipped	0.4303425465534578
+2CC	Ambient + Clipped	0.4580481390594185
+2UW	Warmed + Unclipped	0.3893582559581209
+2CW	Warmed + Clipped	0.533243273286622
+3UC	Ambient + Unclipped	0.485003663811784
+3CC	Ambient + Clipped	0.40071170607570755
+3UW	Warmed + Unclipped	0.4124268166702975
+3CW	Warmed + Clipped	0.4267367556716725
+4UC	Ambient + Unclipped	0.4750605227196622
+4CC	Ambient + Clipped	0.47236255899984625
+4UW	Warmed + Unclipped	0.4055865357417509
+4CW	Warmed + Clipped	0.47558154882471804
+5UC	Ambient + Unclipped	0.6360250403740404
+5CC	Ambient + Clipped	0.6255818465794702
+5UW	Warmed + Unclipped	0.619920398004818
+5CW	Warmed + Clipped	0.5441933739987408
+6UC	Ambient + Unclipped	0.46626222664050365
+6CC	Ambient + Clipped	0.5500505685104116
+6UW	Warmed + Unclipped	0.4213423485227088
+6CW	Warmed + Clipped	0.593061219007054

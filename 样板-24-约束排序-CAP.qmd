@@ -1,0 +1,359 @@
+---
+title: "第 24 篇 · 约束排序:CAP / db-RDA / RDA / CCA——在你指定的变量方向上把组间差异\"逼\"出来"
+author: "微生物组分析最佳实践 · 16S 系列"
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    number-sections: true
+execute:
+  eval: true
+  freeze: auto
+  warning: false
+  message: false
+fig-dpi: 300
+fig-format: png
+---
+
+> **本篇属于:** 第 5 部分 · 多样性 → 排序
+> **需要:** R 环境 + `microeco`、`vegan`、`ggplot2` 三个包(下方【准备工作】一键装好)
+> **数据:** 用 `microeco` 内置的真实 16S 土壤数据集(含 OTU 表、样本信息、以及一批真实环境理化因子),装包即得、无需下载,因此本篇从头到尾可直接跑通
+> **预计:** 阅读 20 分钟,跑通 10 分钟
+
+---
+
+## 这一步对应论文里的哪张图 {#sec-target}
+
+第 22 篇我们画的 PCoA / NMDS 是**非约束排序**:它只看菌群数据本身,找出样本天然的最大变异方向,然后我们**事后**去看分组有没有碰巧分开。问题来了——真实数据里,组间差异常常被个体差异、批次、年龄等**更大的变异**盖住,于是 PCoA 上两组点混在一起,看起来"没差异",但其实差异是有的,只是不在前两个主坐标轴上。
+
+**约束排序(constrained ordination)** 就是为这个场景生的。它回答的是一个更聚焦的问题——
+
+> **"在我指定的变量(分组 / 环境因子 / 临床指标)的方向上,菌群能被解释、被分开多少?"**
+
+它是**有监督**的:把你关心的变量作为约束放进排序,只提取"与这些变量相关"的那部分变异,把无关噪音排除掉。所以当非约束排序看不出分离时,约束排序常常能把真实的组间结构"逼"出来。这类图在环境微生物和多因子队列文章里极常见,角落里通常标着 `Constrained = 23.1%, P = 0.001`。
+
+::: {.callout-note title="目标图长什么样"}
+一张 2D 散点:X/Y 轴是 `CAP1`/`CAP2`(不是 PCoA 轴),样本按分组着色、罩 95% 椭圆;可选叠加环境因子箭头(箭头方向 = 该因子增大的方向,长度 = 相关强度);角落标注"受约束方差占比 + 置换检验 P 值"。
+:::
+
+**CAP、RDA、CCA、db-RDA 一句话分清**(细节见下方理论):
+
+- **RDA**(冗余分析):约束排序里最基础的,但隐含**欧氏距离**,不适合稀疏的菌群原始丰度。
+- **CCA**(典范对应分析):隐含**卡方距离**,老牌但对稀有类群过度敏感,近年用得少。
+- **CAP / db-RDA**(基于距离的约束排序):**能配任意生态距离**(Bray-Curtis、UniFrac……),这正是微生物组需要的,也是本篇主角。
+
+> `vegan` 里 `capscale()` 和 `dbrda()` 都做基于距离的约束排序(两者在处理非欧距离的负特征值上略有不同,教学上先用 `capscale()`)。
+
+---
+
+## 理论:约束排序到底"约束"了什么 {#sec-theory}
+
+先给结论,赶时间的看这三句:
+
+1. **非约束排序找的是"数据里最大的变异";约束排序找的是"能被你的变量解释的那部分变异"。** 前者无监督,后者有监督。
+2. **它把总变异(total inertia)劈成两块:受约束部分(constrained,你的变量解释的)和残差部分(unconstrained)。** 受约束占比越高,说明你的变量越能解释菌群结构。
+3. **正因为有监督,它天生容易"过拟合"——变量放多了,几乎一定能把组分开,哪怕纯属噪音。所以约束排序的结论必须靠置换检验(permutation test)背书,不能只看图分没分开。** 这是本篇最重要的一条。
+
+<details>
+<summary>**深入:CAP 的计算过程,以及为什么它能配任意距离(可跳过)**</summary>
+
+**CAP(Canonical Analysis of Principal coordinates,主坐标典范分析,Anderson & Willis 2003)** 的巧妙之处在于分三步:
+
+1. 先像 PCoA 一样,把任意生态距离矩阵(比如 Bray-Curtis)转成一组主坐标轴——**这一步就把"距离"翻译成了欧氏空间里的坐标**。
+2. 再对这些主坐标做**典范判别 / RDA**,即找出"与约束变量线性相关最强"的方向。
+3. 结果的 CAP 轴,就是"最能被你的变量解释"的群落变异方向。
+
+第 1 步是关键:因为先过了一遍 PCoA,CAP **不再受限于欧氏距离**,你可以喂给它 Bray-Curtis、Jaccard、UniFrac 等任何适合菌群的距离。这就是它比 RDA(锁死欧氏)、CCA(锁死卡方)灵活的根本原因。
+
+**RDA / CCA / CAP(db-RDA)怎么选:**
+
+- 数据是**已做过 CLR / Hellinger 变换的近欧氏矩阵** → RDA 可用。
+- 想用**生态距离(Bray/UniFrac)** → CAP / db-RDA(本篇)。
+- 单纯的**卡方假设、老流程复现** → CCA。
+
+**约束变量可以是:** 分组因子(疾病 vs 健康——此时 CAP 退化为组间判别)、连续环境/临床变量(pH、BMI、用药剂量)、或两者混合。混合时,因子在图上显示为**质心(centroid)**,连续变量显示为**箭头(arrow)**。
+
+</details>
+
+::: {.callout-important title="约束排序分开 ≠ 差异显著"}
+约束排序**一定**会让样本沿你的变量方向分开——这是它的数学目的,不是发现。哪怕把随机噪音当变量喂进去,图上也会"分开"。**唯一能证明差异真实的,是置换检验(`anova.cca`)显著**。所以本篇每张图都必须配一个 P 值,后面代码会一步步做。
+:::
+
+---
+
+## 准备工作(首次运行执行一次) {#sec-setup}
+
+<details>
+<summary>**点开:安装依赖 + 定义作图函数(单看本篇即可复现)**</summary>
+
+```{r}
+#| eval: false
+# —— 首次运行:安装本篇用到的包(都在 CRAN 上)——
+install.packages(c("microeco", "vegan", "ggplot2"))
+```
+
+```{r}
+# —— 出版级作图配方:配色 + 主题 + 导出函数 ——
+# (整仓库使用者可改为 source("R/theme_pub.R");单看本篇直接运行下面即可)
+library(ggplot2)
+
+# 色盲友好调色板(Okabe-Ito),最多 8 组
+pal_pub <- c("#0072B2", "#D55E00", "#009E73", "#CC79A7",
+             "#E69F00", "#56B4E9", "#F0E442", "#999999")
+scale_color_pub <- function(...) scale_color_manual(values = pal_pub, ...)
+scale_fill_pub  <- function(...) scale_fill_manual(values = pal_pub, ...)
+
+theme_pub <- function(base_size = 12) {
+  theme_bw(base_size = base_size) +
+    theme(
+      panel.grid        = element_blank(),
+      axis.text         = element_text(color = "black"),
+      axis.ticks        = element_line(color = "black", linewidth = 0.3),
+      legend.key        = element_blank(),
+      legend.background = element_rect(fill = alpha("white", 0.6), color = NA)
+    )
+}
+
+# 一次导出 PDF(矢量,字体嵌入)+ PNG,物理尺寸按期刊分栏(mm)
+save_pub <- function(plot, file_base, width = 85, height = 85, units = "mm", dpi = 300) {
+  ggsave(paste0(file_base, ".pdf"), plot, width = width, height = height,
+         units = units, device = cairo_pdf)
+  ggsave(paste0(file_base, ".png"), plot, width = width, height = height,
+         units = units, dpi = dpi)
+  invisible(plot)
+}
+```
+
+</details>
+
+---
+
+## 可复制代码:从数据到 CAP {#sec-code}
+
+> **数据来源:** 本篇用 `microeco` 包内置的真实 16S 数据集。它来自一项已发表的土壤微生物研究,随 `microeco` 包分发,`data()` 即可载入、无需下载。`microeco` 是刘永鑫团队维护、发表于 *FEMS Microbiology Ecology*(Liu et al. 2021)的微生物组分析包,数据与包的出处见文末参考。选它是因为它同时提供了 OTU 表**和一批真实的环境理化因子**(pH、含水量、速效养分等)——约束排序正需要这样的环境变量,这是玩具数据给不了的。
+
+### 第 0 步:载入数据并看清结构
+
+```{r}
+library(microeco)
+library(vegan)
+
+# microeco 内置的真实 16S 数据集,四张表一次载入
+data(otu_table_16S)       # 特征表:行 = OTU,列 = 样本
+data(taxonomy_table_16S)  # 物种注释
+data(sample_info_16S)     # 样本信息(分组等)
+data(env_data_16S)        # 真实环境理化因子(约束排序的解释变量)
+
+# —— 先看清每张表长什么样(养成拿到数据先 head 的习惯)——
+otu_table_16S[1:5, 1:5]   # OTU × 样本
+head(sample_info_16S)     # 含分组列 Group
+head(env_data_16S)        # pH / 含水量 / 速效养分 等连续变量
+```
+
+```{r}
+# capscale 要求"行=样本、列=特征",所以把 OTU 表转置
+comm <- t(otu_table_16S)
+
+# 对齐样本顺序(三张表的样本必须一一对应)
+comm     <- comm[rownames(sample_info_16S), ]
+env      <- env_data_16S[rownames(sample_info_16S), ]
+
+# 图内文字用英文(便于投稿,也避免部分环境缺中文字体时乱码)
+GROUP <- "Group"          # sample_info_16S 里的分组列名
+```
+
+::: {.callout-note title="和你的 16S 三件套怎么对应"}
+`otu_table_16S` 就是你的 `otutab`、`sample_info_16S` 就是你的 `metadata`、`env_data_16S` 是你另外测的环境/临床变量表(可以就是 metadata 里的若干数值列)。约束排序**不需要 taxonomy 表**。换成你自己的数据只需把这几张换成你的文件,见文末。
+:::
+
+### 第 1 步:CAP——用分组变量约束(主力方案)
+
+```{r}
+set.seed(123)   # 置换检验含随机过程,固定种子保证可复现
+
+# capscale 公式:群落 ~ 约束变量;distance 可换成 jaccard/(w)unifrac 等
+# add = TRUE 用 Lingoes 校正非欧距离产生的负特征值
+mod <- capscale(comm ~ sample_info_16S[[GROUP]],
+                distance = "bray", add = TRUE)
+
+mod   # 打印:看 Constrained / Unconstrained 惯量(inertia)的分配
+```
+
+### 第 2 步:置换检验——证明"分开"是真的(最关键)
+
+```{r}
+set.seed(123)
+# (a) 整体显著性:约束变量整体能否解释群落结构
+aov_all <- anova(mod, permutations = 999)
+aov_all
+
+set.seed(123)
+# (b) 逐轴显著性:哪几条 CAP 轴是可信的
+aov_axis <- anova(mod, by = "axis", permutations = 999)
+aov_axis
+
+# 受约束方差占总方差的比例(报告用)
+prop_constrained <- mod$CCA$tot.chi / mod$tot.chi
+p_overall <- aov_all$`Pr(>F)`[1]
+sprintf("Constrained = %.1f%%, P = %.3f", 100 * prop_constrained, p_overall)
+```
+
+::: {.callout-warning title="多个变量时,先查共线性再解读"}
+如果你约束了多个变量(如 `~ A1 + Moisture + Manure`),它们之间可能高度相关,导致每个变量的效应被错误分配。用方差膨胀因子检查:`vif.cca(mod)`,**VIF > 10 的变量要考虑删除或合并**。单个分组变量(如本例)不涉及这个问题。
+:::
+
+### 第 3 步:取出坐标,准备作图
+
+```{r}
+# scaling = 2 侧重展示物种/变量关系;要侧重样本间距离可用 scaling = 1
+site_sc <- as.data.frame(scores(mod, display = "sites", scaling = 2))
+site_sc$Group <- sample_info_16S[[GROUP]]
+
+# 轴标签:CAP 轴特征值占总惯量的百分比
+eig <- mod$CCA$eig
+lab1 <- sprintf("CAP1 (%.1f%%)", 100 * eig[1] / mod$tot.chi)
+lab2 <- sprintf("CAP2 (%.1f%%)", 100 * eig[2] / mod$tot.chi)
+
+stat_lab <- sprintf("Constrained = %.1f%%\nP = %.3f",
+                    100 * prop_constrained, p_overall)
+```
+
+---
+
+## 出版级美化 {#sec-polish}
+
+```{r}
+p <- ggplot(site_sc, aes(x = CAP1, y = CAP2, color = Group, fill = Group)) +
+  stat_ellipse(aes(group = Group), type = "t", level = 0.95,
+               linewidth = 0.5, alpha = 0.9) +
+  geom_point(size = 2.6, alpha = 0.9, stroke = 0) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey80", linewidth = 0.3) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "grey80", linewidth = 0.3) +
+  scale_color_pub() + scale_fill_pub() +
+  labs(x = lab1, y = lab2, color = NULL, fill = NULL) +
+  annotate("text", x = Inf, y = -Inf, label = stat_lab,
+           hjust = 1.05, vjust = -0.4, size = 3.2, lineheight = 0.9) +
+  coord_equal() +
+  theme_pub(base_size = 12) +
+  theme(legend.position = c(0.02, 0.98),
+        legend.justification = c(0, 1),
+        aspect.ratio = 1)
+
+p
+```
+
+```{r}
+save_pub(p, "figures/Fig_CAP_management", width = 85, height = 85)
+```
+
+### 进阶:叠加环境因子箭头
+
+约束排序最有信息量的图,是在样本点上叠加**环境因子箭头**——箭头指向该因子增大的方向,能一眼看出"哪个环境梯度驱动了群落变化"。
+
+```{r}
+set.seed(123)
+# 用全部环境理化因子约束群落(env 的列名见前面 head(env_data_16S));
+# comm ~ . 表示"用 data 里的每一列作为约束变量",省去逐个列名手写
+mod2 <- capscale(comm ~ ., data = env, distance = "bray", add = TRUE)
+
+# 连续变量的箭头 = biplot scores;因子的位置 = 质心 centroid
+bp <- as.data.frame(scores(mod2, display = "bp", scaling = 2))
+bp$var <- rownames(bp)
+
+site2 <- as.data.frame(scores(mod2, display = "sites", scaling = 2))
+site2$Group <- sample_info_16S[[GROUP]]
+
+arrow_scale <- 2   # 箭头视觉放大系数,只影响观感不影响方向
+
+pb <- ggplot(site2, aes(CAP1, CAP2)) +
+  geom_point(aes(color = Group), size = 2.6, alpha = 0.9, stroke = 0) +
+  geom_segment(data = bp,
+               aes(x = 0, y = 0, xend = CAP1 * arrow_scale, yend = CAP2 * arrow_scale),
+               arrow = arrow(length = unit(0.02, "npc")),
+               color = "grey30", linewidth = 0.4) +
+  geom_text(data = bp,
+            aes(x = CAP1 * arrow_scale, y = CAP2 * arrow_scale, label = var),
+            color = "grey20", size = 3, vjust = -0.4) +
+  scale_color_pub() +
+  labs(x = lab1, y = lab2, color = NULL) +
+  coord_equal() +
+  theme_pub(base_size = 12) +
+  theme(aspect.ratio = 1)
+
+pb
+```
+
+::: {.callout-tip title="发表级的三个隐形细节"}
+- **CAP 轴不是 PCoA 轴,别写错标签。** 约束排序的轴叫 CAP1/CAP2(或 RDA1/CCA1),百分比是"占总惯量的比例",和 PCoA 的解释方差含义不同,方法和图注要写清。
+- **箭头放大系数要在图注说明。** 箭头常需乘一个系数才看得清,这只影响观感、不改变方向和相对长度,但要在图注注明"arrows scaled for visualization"。
+- **矢量导出 + 物理尺寸。** 用 `cairo_pdf` 嵌字体、按期刊分栏(单栏 ~85mm)给物理尺寸,别导出后硬缩放。
+:::
+
+---
+
+## 常见坑方框 {#sec-pitfalls}
+
+::: {.callout-caution title="约束排序的六个高频错误(审稿人专盯这些)"}
+1. **只看图分开、不做置换检验。** 这是最致命的错误。约束排序必然分开,**没有 `anova.cca` 的 P 值,图就没有意义**。整体、逐项、逐轴的检验都要报。
+2. **变量塞太多 → 过拟合。** 约束变量个数接近样本数时,受约束方差会虚高到接近 100%,纯属过拟合。变量要少而有据,或用 `ordiR2step()` 做前向选择,并报**校正后的 R²**(`RsquareAdj(mod)`)。
+3. **忽略共线性。** 多个相关变量一起约束会互相干扰,`vif.cca()` 查 VIF,>10 要处理。
+4. **距离选择和数据不匹配。** 对原始丰度用了隐含欧氏距离的 RDA(应先 Hellinger/CLR 变换,或改用 CAP+Bray)。
+5. **CAP 轴当 PCoA 轴解读。** 百分比基数不同,不能和非约束排序直接比大小。
+6. **样本量太小硬做约束排序。** 样本比变量还少时结果不可信;小样本优先用非约束排序 + PERMANOVA(第 23 篇)。
+:::
+
+---
+
+## 这段 Methods 怎么写 {#sec-methods}
+
+> To test whether community composition varied along the measured explanatory variables, we performed distance-based constrained ordination (CAP) on Bray–Curtis dissimilarities using `capscale` (`vegan` v2.6). The overall significance of the constraint and of individual terms and axes was assessed by permutation tests (`anova.cca`, 999 permutations). Multicollinearity among predictors was checked with variance inflation factors (VIF < 10 retained). The constrained ordination explained XX.X% of the total inertia (P = 0.00X). Ordination axes were plotted with `ggplot2`; environmental variables are shown as biplot arrows (scaled for visualization).
+
+**要点:** ①用了什么距离,②`capscale`/`vegan` 版本,③**置换检验做了(整体+逐项)**,④**VIF 查了共线性**,⑤受约束方差占比 + P 值,⑥箭头做了缩放要声明。数字按实际填。
+
+---
+
+## 换成你自己的数据怎么做 {#sec-yourdata}
+
+本篇代码对你自己的 16S 数据只需两处替换:
+
+```r
+# 1) 把 otu_table_16S 换成你的特征表(注意:capscale 要"行=样本",所以 otutab 要转置)
+otu <- read.delim("otutab.txt", row.names = 1, sep = "\t", check.names = FALSE)
+comm <- t(otu)                      # 行 = 样本,列 = 特征
+
+# 2) 把 sample_info_16S 换成你的 metadata(行 = 样本,含分组/环境变量)
+meta <- read.delim("metadata.txt", row.names = 1, sep = "\t", check.names = FALSE)
+
+# 确保 comm 与 meta 的样本顺序一致
+comm <- comm[rownames(meta), ]
+
+# 之后照第 1 步:约束变量按需替换
+mod <- capscale(comm ~ Group, data = meta, distance = "bray", add = TRUE)
+```
+
+几个按需微调:
+
+- **约束连续变量(pH、BMI、用药剂量):** 直接写进公式 `comm ~ pH + BMI`,图上会画成箭头。
+- **控制混杂(把年龄/批次当协变量剔除):** 用条件约束 `comm ~ Group + Condition(Age + Batch)`,即"扣除年龄和批次后,分组还能解释多少"。
+- **换距离:** `distance = "jaccard"` 或先建树后用 UniFrac(需借 `phyloseq` 算距离再喂 `dbrda`)。
+- **想强调成分数据正道:** 对 CLR 变换后的矩阵直接做 RDA(此时欧氏距离即 Aitchison 距离)。
+
+---
+
+## 小结与下一篇
+
+这一篇你拿到了:一张能在"指定变量方向"上把组间差异逼出来的 CAP 图、叠加环境因子箭头的进阶版、以及"约束排序必须用置换检验背书"的判断力。约束排序和第 22 篇的非约束排序是一对——**非约束看数据天然结构,约束看你的假设能解释多少**,论文里常常两张都放。
+
+**下一篇(第 25 篇):方差解构——envfit / Mantel / VPA,把"每个因子各解释了多少方差"拆开排序。** 这是顶刊队列文章的开场标配,和本篇的约束排序是同一套思路的延伸。
+
+---
+
+## 参考 {#sec-refs}
+
+- **数据与 R 包:** Liu C, Cui Y, Li X, Yao M. microeco: an R package for data mining in microbial community ecology. *FEMS Microbiology Ecology*, 2021, 97(2): fiaa255. 本篇的 `otu_table_16S` / `sample_info_16S` / `taxonomy_table_16S` / `env_data_16S` 即随该包分发的真实 16S 数据集。包主页与教程:<https://github.com/ChiLiubio/microeco>
+- **CAP 方法原文:** Anderson MJ, Willis TJ. Canonical analysis of principal coordinates: a useful method of constrained ordination for ecology. *Ecology*, 2003, 84(2): 511–525.
+- **vegan:** Oksanen J, et al. vegan: Community Ecology Package. R package. <https://CRAN.R-project.org/package=vegan>

@@ -1,0 +1,5 @@
+stem	width_mm	height_mm	raster_ppi
+28-occupancy-abundance	183	132	600
+28-group-core-membership	165	118	600
+28-threshold-depth-sensitivity	170	112	600
+28-rare-biosphere-mass	170	116	600

@@ -1,0 +1,13 @@
+status=passed
+checks=80/80
+reference_records=262752
+training_records=236516
+holdout_records=26236
+query_asvs=366
+query_reads=5213
+
+FAILED CHECKS:
+
+INTERPRETATION BOUNDARY:
+Same-release known-lineage interpolation; not an independent mock-community or cross-release accuracy estimate.
+Naive Bayes versus sequence-search agreement is a method-sensitivity audit, not proof that either label is true.

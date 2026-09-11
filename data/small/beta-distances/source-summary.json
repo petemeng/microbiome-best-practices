@@ -1,0 +1,62 @@
+{
+  "dataset": "GlobalPatterns",
+  "source": "phyloseq 1.48.0 packaged data",
+  "source_file": {
+    "path": "phyloseq/data/GlobalPatterns.RData",
+    "bytes": 435652,
+    "sha256": "bea90c3c48275ea874e0c9400b133da1647e4cddd11b39f89a3d8ffd78512d2d"
+  },
+  "primary_study": {
+    "citation": "Caporaso JG et al. Global patterns of 16S rRNA diversity at a depth of millions of sequences per sample. PNAS. 2011;108:4516-4522.",
+    "doi": "10.1073/pnas.1000080107",
+    "pmcid": "PMC3063599"
+  },
+  "package": {
+    "name": "phyloseq",
+    "version": "1.48.0",
+    "license": "AGPL-3"
+  },
+  "dimensions": {
+    "source_features": 19216,
+    "zero_sum_features_removed": 228,
+    "features": 18988,
+    "samples": 26,
+    "reads": 28216678,
+    "min_depth": 58688,
+    "median_depth": 1106849,
+    "max_depth": 2357181,
+    "zero_fraction": 0.7881698562655,
+    "sample_types": 9,
+    "habitat_classes": 5
+  },
+  "phylogeny": {
+    "rooted": true,
+    "tips": 18988,
+    "internal_nodes": 18987,
+    "branch_lengths_present": true,
+    "negative_branch_lengths": 0,
+    "tip_set_matches_counts": true
+  },
+  "files": {
+    "otutab": {
+      "path": "data/small/beta-distances/otutab.tsv",
+      "bytes": 1164612,
+      "sha256": "727073a3f26aff6730ad54b55c11e1d52bd5d3d34f99dbf75d125d2e84d9722d"
+    },
+    "taxonomy": {
+      "path": "data/small/beta-distances/taxonomy.tsv",
+      "bytes": 1486290,
+      "sha256": "1189e6e2a02474a665283f6b9962ec25716b6c7faf66011a6506e87a69ddf0ff"
+    },
+    "metadata": {
+      "path": "data/small/beta-distances/metadata.tsv",
+      "bytes": 2569,
+      "sha256": "c708b3b89edbb26a4aab26b5e575cdefef1eae28b9b7f93cea5f8f2edfc94221"
+    },
+    "tree": {
+      "path": "data/small/beta-distances/rooted-tree.nwk.gz",
+      "bytes": 238339,
+      "sha256": "535f512b3018da462a416b8f04ef36369bf1c1e383510494a790508361fc8c15"
+    }
+  }
+}

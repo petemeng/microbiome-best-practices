@@ -1,0 +1,51 @@
+# Article 09 R ecosystem and object-contract audit
+validation_date: 2026-07-21
+status: passed
+R: 4.4.1 (64-bit)
+Bioconductor: 3.19
+renv.lock records: 146
+renv.lock SHA-256: b8c21ded85872cac456403c79013e1ad6b4c519e40c8f5aaa83b6842543cdd2d
+
+## Required checks
+r-version	PASS	observed=4.4.1	expected=4.4.1
+r-architecture	PASS	observed=64-bit	expected=64-bit
+bioconductor-version	PASS	observed=3.19	expected=3.19
+lock-r-version	PASS	observed=4.4.1	expected=4.4.1
+lock-package-records	PASS	observed=146	expected=>=146
+package-namespaces	PASS	observed=12	expected=12
+package-versions	PASS	observed=12	expected=12
+lock-package-versions	PASS	observed=12	expected=12
+lock-package-sources	PASS	observed=12	expected=12
+otutab-sha256	PASS	observed=76fa79c38da889f35978dc86da4641a270961746709ff38049ee5f67e3c6f7a3	expected=76fa79c38da889f35978dc86da4641a270961746709ff38049ee5f67e3c6f7a3
+taxonomy-sha256	PASS	observed=725280bb9a0cd9bda7b540022e92af945ceed52527f8b2d220b055b4489f6901	expected=725280bb9a0cd9bda7b540022e92af945ceed52527f8b2d220b055b4489f6901
+metadata-sha256	PASS	observed=df24771dccf27607ddf922c6bca2cafa876d946fbe2e09d14b601accce66ba64	expected=df24771dccf27607ddf922c6bca2cafa876d946fbe2e09d14b601accce66ba64
+otutab-dimensions	PASS	observed=13628 × 90	expected=13628 × 90
+taxonomy-dimensions	PASS	observed=13628 × 7	expected=13628 × 7
+metadata-dimensions	PASS	observed=90 × 3	expected=90 × 3
+unique-feature-ids	PASS	observed=0	expected=0 duplicated IDs
+unique-sample-ids	PASS	observed=0	expected=0 duplicated IDs
+feature-id-alignment	PASS	observed=13628	expected=13628
+sample-id-alignment	PASS	observed=90	expected=90
+nonnegative-integer-counts	PASS	observed=TRUE	expected=TRUE
+total-reads	PASS	observed=1619670	expected=1619670
+phyloseq-contract	PASS	observed=13628/90/1619670	expected=13628/90/1619670
+microtable-contract	PASS	observed=13628/90/1619670	expected=13628/90/1619670
+object-parity-six-metrics	PASS	observed=6	expected=6
+sample-library-parity	PASS	observed=90	expected=90
+tidyverse-complete-sample-audit	PASS	observed=90	expected=90
+
+## Real triad
+otutab: 13628 features x 90 samples
+taxonomy: 13628 features x 7 ranks
+metadata: 90 samples x 3 variables
+total reads: 1619670
+
+## Object parity
+phyloseq	features	13628	PASS
+phyloseq	samples	90	PASS
+phyloseq	total_reads	1619670	PASS
+microtable	features	13628	PASS
+microtable	samples	90	PASS
+microtable	total_reads	1619670	PASS
+
+Checks passed: 26 / 26

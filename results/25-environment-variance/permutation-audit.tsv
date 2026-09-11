@@ -1,0 +1,2 @@
+Seed	Samples	Mode	Reason	Requested	Generated	UniqueRows	IdentityRows	LegalRows	MinimumP	MatrixSHA256	DeterministicRepeat
+20260725	90	Free sample-label permutations	Metadata has no subject, pair, block, site, time or batch identifier; samples are treated as independent for this public-data example	999	999	999	0	999	0.001	e69df77a49350b4f40997d316bb62a7eb69749f03882ff8c74ed41966e891499	TRUE

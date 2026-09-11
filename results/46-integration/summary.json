@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "seed": 20260726,
+  "samples": 220,
+  "microbe_features": 25,
+  "metabolite_features": 40,
+  "tested_pairs": 1000,
+  "raw_pairwise_fdr_hits": 437,
+  "group_residual_pairwise_fdr_hits": 350,
+  "halla_significant_pairs": 350,
+  "halla_significant_blocks": 70,
+  "halla_metric": "Spearman",
+  "permutations": 999,
+  "fdr_method": "Benjamini-Hochberg",
+  "fnr_threshold": 0.2,
+  "group_adjustment": "feature-wise residualization on StudyGroup before HAllA"
+}

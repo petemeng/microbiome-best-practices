@@ -1,0 +1,19 @@
+{
+  "exposure": "Bifidobacterium genus abundance",
+  "outcome": "Inflammatory bowel disease",
+  "candidate_instruments": 6,
+  "retained_instruments": 5,
+  "dropped_palindromic": "rs10841473",
+  "minimum_candidate_f": 20.7695,
+  "ivw_beta": -0.0167,
+  "ivw_se": 0.1065,
+  "ivw_p": 0.8756,
+  "ivw_or": 0.9835,
+  "ivw_heterogeneity_p": 0.1063,
+  "egger_intercept": -0.0075,
+  "egger_intercept_p": 0.8254,
+  "mr_presso_global_p": 0.183,
+  "steiger_status": "Not estimable because compact source records lack effect-allele frequencies",
+  "colocalisation_status": "Not estimable from a top-hit-only exposure file",
+  "interpretation": "This compact teaching analysis finds no robust evidence that genetically predicted Bifidobacterium abundance changes IBD risk; design limitations prevent a causal claim."
+}

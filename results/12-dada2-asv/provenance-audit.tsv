@@ -1,0 +1,4 @@
+member	kind	plugin	action	parameters
+0bf16bac-7b74-4125-92cc-cddd62517b0a/provenance/action/action.yaml	method	!ref 'environment:plugins:dada2'	denoise_paired	"{""chimera_method"": ""consensus"", ""hashed_feature_ids"": ""true"", ""max_ee_f"": ""2.0"", ""max_ee_r"": ""2.0"", ""min_overlap"": ""12"", ""n_reads_learn"": ""1000000"", ""n_threads"": ""1"", ""pooling_method"": ""independent"", ""trim_left_f"": ""0"", ""trim_left_r"": ""0"", ""trunc_len_f"": ""220"", ""trunc_len_r"": ""200""}"
+0bf16bac-7b74-4125-92cc-cddd62517b0a/provenance/artifacts/37321f82-1246-4292-b411-7f4044b072f0/action/action.yaml	method	!ref 'environment:plugins:cutadapt'	trim_paired	{}
+0bf16bac-7b74-4125-92cc-cddd62517b0a/provenance/artifacts/97bdbdc8-e0ab-45aa-8ad3-4a7c998bf681/action/action.yaml	import		import	{}

@@ -1,0 +1,26 @@
+{
+  "dataset": "FRANZOSA_IBD_2019",
+  "citation": "Franzosa et al. Nature Microbiology 2019; doi:10.1038/s41564-018-0306-4",
+  "curated_resource": "Muller et al. Scientific Data 2022; doi:10.1038/s41597-022-01644-2",
+  "repository": "https://github.com/borenstein-lab/microbiome-metabolome-curated-data",
+  "commit": "89a519d8c832008fbc6e650453e83e2f04858d02",
+  "raw_sha256": {
+    "genera.counts.tsv": "f89aa7832be4ec75081eaa8f38ce4e80bdaf2b7c2e42f09f73e3e5eb35b58ae4",
+    "metadata.tsv": "f7396e3d6838b3b30f78b02bd568753757f84c956cd351966dbe654d50285376",
+    "mtb.map.tsv": "0dcdcce04a4e9b2b9b1632a410959baa4802ea9e14fc7c44f63bc17f699e5c65",
+    "mtb.tsv": "528b5e5953bd3697dd1ecf551d810d536c0679bd922e3fa3a6956c1412c6288c"
+  },
+  "samples": 220,
+  "group_counts": {
+    "Control": 56,
+    "CD": 88,
+    "UC": 76
+  },
+  "original_microbe_features": 11720,
+  "retained_microbe_features": 250,
+  "microbe_filter": "prevalence >=10%; top 250 by total count",
+  "original_metabolite_features": 8848,
+  "retained_metabolite_features": 277,
+  "metabolite_filter": "high-confidence named features; up to top 300 by log1p variance",
+  "contract": "otutab/taxonomy/metadata plus paired metabolites and metabolite annotation"
+}

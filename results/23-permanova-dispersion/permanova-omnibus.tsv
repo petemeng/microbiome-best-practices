@@ -1,0 +1,2 @@
+Term	Df	SumOfSquares	ConditioningBlockR2	R2Total	R2Partial	PseudoF	PValue	Permutations	MinimumP	PermutationScheme
+Treatment (4 levels)	3	0.5176344628731275	0.4689156041247877	0.09808712306941238	0.18469215784012546	1.1326528967932397	0.0065	9999	1e-4	Block + whole-plot + within-main-plot

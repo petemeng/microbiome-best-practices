@@ -1,0 +1,4 @@
+Branch	InputFeatures	RetainedFeatures	ThresholdDefinedBeforeTesting	UsedForPrimaryInference
+Primary: >=4 tagged libraries in any treatment	16825	1824	TRUE	TRUE
+Sensitivity: no prevalence filter	16825	16825	TRUE	FALSE
+Descriptive: >=3 biological samples overall	16825	6039	TRUE	FALSE

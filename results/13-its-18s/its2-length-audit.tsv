@@ -1,0 +1,9 @@
+stage	sample_id	direction	reads	length_min	length_q1	length_median	length_q3	length_max	expected_errors_median	expected_errors_p95
+Raw	sample1	R1	2500	68	274.0	274.0	274.0	282	1.3976	9.9803
+Raw	sample1	R2	2500	95	281.0	281.0	281.0	301	2.8716	10.1037
+Raw	sample2	R1	2500	93	274.0	274.0	274.0	282	1.5592	9.8469
+Raw	sample2	R2	2500	95	281.0	281.0	281.0	301	2.2564	10.828
+ITSxpress	sample1	R1	1034	141	149.0	163.0	163.0	221	0.1	2.8933
+ITSxpress	sample1	R2	1034	141	149.0	163.0	163.0	243	0.1155	1.9489
+ITSxpress	sample2	R1	1031	148	163.0	189.0	205.0	219	0.2698	3.3139
+ITSxpress	sample2	R2	1031	148	163.0	189.0	205.0	241	0.1915	2.9908

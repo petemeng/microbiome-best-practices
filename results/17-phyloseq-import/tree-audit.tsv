@@ -1,0 +1,3 @@
+tree	tips	query_tips	reference_only_tips	internal_nodes	rooted	missing_branch_lengths	negative_branch_lengths	status
+Complete SEPP insertion tree	203818	366	203452	203817	TRUE	0	0	PASS
+ASV-pruned object tree	366	366	0	365	TRUE	0	0	PASS

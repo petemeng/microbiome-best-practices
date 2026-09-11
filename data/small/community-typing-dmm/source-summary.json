@@ -1,0 +1,72 @@
+{
+  "dataset": "Holmes Twins genus-count table",
+  "source": "DirichletMultinomial 1.46.0 packaged extdata",
+  "source_files": [
+    {
+      "path": "DirichletMultinomial/extdata/Twins.csv",
+      "bytes": 80573,
+      "sha256": "b6a231acded317b49b7fd800bf8b4ce12a75340c5b88499b51e92d72528f93ba"
+    },
+    {
+      "path": "DirichletMultinomial/extdata/TwinStudy.t",
+      "bytes": 556,
+      "sha256": "4286c3f9255f7f1ce7f5c5ac5e60d4e27284fe358ceb553108748c67ab4d8b05"
+    }
+  ],
+  "package": {
+    "name": "DirichletMultinomial",
+    "version": "1.46.0",
+    "license": "LGPL-3",
+    "description_sha256": "756bf239f1445d79b2e728479238ed50cbcbe8f4308a7947fa4d877ebe55da6a",
+    "doi": "10.18129/B9.bioc.DirichletMultinomial"
+  },
+  "primary_study": {
+    "citation": "Turnbaugh PJ, Hamady M, Yatsunenko T, et al. Nature. 2009;457:480-484.",
+    "doi": "10.1038/nature07540"
+  },
+  "dmm_study": {
+    "citation": "Holmes I, Harris K, Quince C. PLOS ONE. 2012;7(2):e30126.",
+    "doi": "10.1371/journal.pone.0030126"
+  },
+  "dimensions": {
+    "features": 130,
+    "samples": 278,
+    "reads": 570851,
+    "minimum_library_size": 53,
+    "median_library_size": 1597.5,
+    "maximum_library_size": 10585,
+    "zero_fraction": 0.783646928611
+  },
+  "metadata": {
+    "bmi_class_counts": {
+      "Lean": 61,
+      "Obese": 193,
+      "Overweight": 24
+    },
+    "participant_keys": 154,
+    "keys_with_two_source_samples": 124,
+    "keys_with_one_source_sample": 30,
+    "no_suffix_only_keys": 26,
+    "dot2_suffix_only_keys": 4,
+    "suffix_boundary": "ParticipantKey and SourceSuffix are deterministic string-derived audit fields. The package does not distribute a clinical visit table, so suffix order is not independently validated as visit timing."
+  },
+  "taxonomy_boundary": "The source table contains 129 named genus labels plus its original misspelled 'Uknown' category. Source labels are preserved in taxonomy.tsv; figures may display that category as 'Unclassified' without altering counts.",
+  "count_contract": "otutab.tsv contains raw non-negative integer counts with features in rows and samples in columns; no relative-abundance conversion, pseudocount, filtering, or rarefaction is applied during export.",
+  "files": {
+    "otutab": {
+      "path": "data/small/community-typing-dmm/otutab.tsv",
+      "bytes": 80578,
+      "sha256": "28de822c434aedade101e66ac60a61df38124c9b59357095599fbd278f2ecb41"
+    },
+    "taxonomy": {
+      "path": "data/small/community-typing-dmm/taxonomy.tsv",
+      "bytes": 15987,
+      "sha256": "9eaa0bf788ad1db8c314a59e774c8935bdaa33a51135eaf606c11d5a497dff08"
+    },
+    "metadata": {
+      "path": "data/small/community-typing-dmm/metadata.tsv",
+      "bytes": 14500,
+      "sha256": "0368c9129c7d77f381688465141593a2c61a229368d2fc411c9017e1abe04409"
+    }
+  }
+}

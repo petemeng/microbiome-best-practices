@@ -1,0 +1,10 @@
+Classification	OTUs	Model	Fraction
+Above neutral	4531	Primary: 1 / mean depth	0.332477252714999
+Below neutral	1086	Primary: 1 / mean depth	0.0796888758438509
+Neutral envelope	8011	Primary: 1 / mean depth	0.587833871441151
+Above neutral	1530	Fixed relative threshold	0.11226885823305
+Below neutral	561	Fixed relative threshold	0.0411652480187849
+Neutral envelope	11537	Fixed relative threshold	0.846565893748165
+Above neutral	5606	Rarefied to 10k reads	0.411358966832991
+Below neutral	841	Rarefied to 10k reads	0.0617111828588201
+Neutral envelope	7181	Rarefied to 10k reads	0.526929850308189

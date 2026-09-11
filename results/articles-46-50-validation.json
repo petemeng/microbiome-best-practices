@@ -1,0 +1,2996 @@
+{
+  "status": "passed",
+  "articles": [
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "article_count": 5,
+  "primary_figure_count": 20,
+  "format_file_count": 80,
+  "checks_total": 435,
+  "checks_passed": 435,
+  "checks_failed": 0,
+  "failed_checks": [],
+  "checks": [
+    {
+      "id": "article-46-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/46-procrustes-mantel-halla.qmd"
+    },
+    {
+      "id": "article-46-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-46-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-46-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-46-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-46-manifest-title",
+      "status": "PASS",
+      "detail": {
+        "manifest": "相关整合：Procrustes/Mantel/HAllA",
+        "qmd": "相关整合：Procrustes/Mantel/HAllA"
+      }
+    },
+    {
+      "id": "article-46-inline-theme",
+      "status": "PASS",
+      "detail": "pal_pub/theme_pub/save_pub inline"
+    },
+    {
+      "id": "article-46-no-source-theme",
+      "status": "PASS",
+      "detail": "no executable external theme dependency"
+    },
+    {
+      "id": "article-46-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-46-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-46-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-46-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-46-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-46-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-46-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-46-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-46-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-46-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-46-token-16a14988",
+      "status": "PASS",
+      "detail": "data/small/paired-ibd-multiomics"
+    },
+    {
+      "id": "article-46-token-588087b4",
+      "status": "PASS",
+      "detail": "protest("
+    },
+    {
+      "id": "article-46-token-5f8c0913",
+      "status": "PASS",
+      "detail": "mantel("
+    },
+    {
+      "id": "article-46-token-354a866f",
+      "status": "PASS",
+      "detail": "from halla import HAllA"
+    },
+    {
+      "id": "article-46-token-9f62b401",
+      "status": "PASS",
+      "detail": "pairwise-group-residual.tsv"
+    },
+    {
+      "id": "article-46-token-bf963746",
+      "status": "PASS",
+      "detail": "46-4-halla-associations"
+    },
+    {
+      "id": "article-46-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/46-procrustes-mantel-halla.html"
+    },
+    {
+      "id": "article-46-html-title",
+      "status": "PASS",
+      "detail": "相关整合：Procrustes/Mantel/HAllA"
+    },
+    {
+      "id": "figure-46-integration/46-1-procrustes-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-1-procrustes.pdf"
+    },
+    {
+      "id": "signature-46-integration/46-1-procrustes-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-46-integration/46-1-procrustes-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-1-procrustes.svg"
+    },
+    {
+      "id": "signature-46-integration/46-1-procrustes-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-46-integration/46-1-procrustes-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-46-integration/46-1-procrustes-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-1-procrustes.png"
+    },
+    {
+      "id": "raster-46-integration/46-1-procrustes-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-1-procrustes-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1842
+      ]
+    },
+    {
+      "id": "figure-46-integration/46-1-procrustes-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-1-procrustes.tiff"
+    },
+    {
+      "id": "raster-46-integration/46-1-procrustes-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-1-procrustes-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1842
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-1-procrustes-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-46-integration/46-2-global-tests-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-2-global-tests.pdf"
+    },
+    {
+      "id": "signature-46-integration/46-2-global-tests-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-46-integration/46-2-global-tests-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-2-global-tests.svg"
+    },
+    {
+      "id": "signature-46-integration/46-2-global-tests-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-46-integration/46-2-global-tests-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-46-integration/46-2-global-tests-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-2-global-tests.png"
+    },
+    {
+      "id": "raster-46-integration/46-2-global-tests-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-2-global-tests-png-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1559
+      ]
+    },
+    {
+      "id": "figure-46-integration/46-2-global-tests-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-2-global-tests.tiff"
+    },
+    {
+      "id": "raster-46-integration/46-2-global-tests-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-2-global-tests-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1559
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-2-global-tests-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-46-integration/46-3-confounding-audit-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-3-confounding-audit.pdf"
+    },
+    {
+      "id": "signature-46-integration/46-3-confounding-audit-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-46-integration/46-3-confounding-audit-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-3-confounding-audit.svg"
+    },
+    {
+      "id": "signature-46-integration/46-3-confounding-audit-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-46-integration/46-3-confounding-audit-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-46-integration/46-3-confounding-audit-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-3-confounding-audit.png"
+    },
+    {
+      "id": "raster-46-integration/46-3-confounding-audit-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-3-confounding-audit-png-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1937
+      ]
+    },
+    {
+      "id": "figure-46-integration/46-3-confounding-audit-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-3-confounding-audit.tiff"
+    },
+    {
+      "id": "raster-46-integration/46-3-confounding-audit-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-3-confounding-audit-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1937
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-3-confounding-audit-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-46-integration/46-4-halla-associations-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-4-halla-associations.pdf"
+    },
+    {
+      "id": "signature-46-integration/46-4-halla-associations-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-46-integration/46-4-halla-associations-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-4-halla-associations.svg"
+    },
+    {
+      "id": "signature-46-integration/46-4-halla-associations-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-46-integration/46-4-halla-associations-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-46-integration/46-4-halla-associations-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-4-halla-associations.png"
+    },
+    {
+      "id": "raster-46-integration/46-4-halla-associations-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-4-halla-associations-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2480
+      ]
+    },
+    {
+      "id": "figure-46-integration/46-4-halla-associations-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/46-integration/46-4-halla-associations.tiff"
+    },
+    {
+      "id": "raster-46-integration/46-4-halla-associations-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-4-halla-associations-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2480
+      ]
+    },
+    {
+      "id": "raster-46-integration/46-4-halla-associations-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-47-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/47-spls-diablo.qmd"
+    },
+    {
+      "id": "article-47-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-47-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-47-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-47-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-47-manifest-title",
+      "status": "PASS",
+      "detail": {
+        "manifest": "sPLS/DIABLO（mixOmics）",
+        "qmd": "sPLS/DIABLO（mixOmics）"
+      }
+    },
+    {
+      "id": "article-47-inline-theme",
+      "status": "PASS",
+      "detail": "pal_pub/theme_pub/save_pub inline"
+    },
+    {
+      "id": "article-47-no-source-theme",
+      "status": "PASS",
+      "detail": "no executable external theme dependency"
+    },
+    {
+      "id": "article-47-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-47-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-47-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-47-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-47-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-47-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-47-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-47-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-47-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-47-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-47-token-16a14988",
+      "status": "PASS",
+      "detail": "data/small/paired-ibd-multiomics"
+    },
+    {
+      "id": "article-47-token-7592a8ae",
+      "status": "PASS",
+      "detail": "spls("
+    },
+    {
+      "id": "article-47-token-a9b13954",
+      "status": "PASS",
+      "detail": "tune.block.splsda("
+    },
+    {
+      "id": "article-47-token-a47b7b5a",
+      "status": "PASS",
+      "detail": "block.splsda("
+    },
+    {
+      "id": "article-47-token-5752cdda",
+      "status": "PASS",
+      "detail": "test-predictions.tsv"
+    },
+    {
+      "id": "article-47-token-b6e10376",
+      "status": "PASS",
+      "detail": "47-4-feature-stability"
+    },
+    {
+      "id": "article-47-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/47-spls-diablo.html"
+    },
+    {
+      "id": "article-47-html-title",
+      "status": "PASS",
+      "detail": "sPLS/DIABLO（mixOmics）"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-1-spls-generalization-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-1-spls-generalization.pdf"
+    },
+    {
+      "id": "signature-47-spls-diablo/47-1-spls-generalization-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-1-spls-generalization-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-1-spls-generalization.svg"
+    },
+    {
+      "id": "signature-47-spls-diablo/47-1-spls-generalization-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-47-spls-diablo/47-1-spls-generalization-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-1-spls-generalization-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-1-spls-generalization.png"
+    },
+    {
+      "id": "raster-47-spls-diablo/47-1-spls-generalization-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-1-spls-generalization-png-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1653
+      ]
+    },
+    {
+      "id": "figure-47-spls-diablo/47-1-spls-generalization-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-1-spls-generalization.tiff"
+    },
+    {
+      "id": "raster-47-spls-diablo/47-1-spls-generalization-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-1-spls-generalization-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1653
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-1-spls-generalization-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-2-diablo-scores-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-2-diablo-scores.pdf"
+    },
+    {
+      "id": "signature-47-spls-diablo/47-2-diablo-scores-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-2-diablo-scores-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-2-diablo-scores.svg"
+    },
+    {
+      "id": "signature-47-spls-diablo/47-2-diablo-scores-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-47-spls-diablo/47-2-diablo-scores-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-2-diablo-scores-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-2-diablo-scores.png"
+    },
+    {
+      "id": "raster-47-spls-diablo/47-2-diablo-scores-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-2-diablo-scores-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1937
+      ]
+    },
+    {
+      "id": "figure-47-spls-diablo/47-2-diablo-scores-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-2-diablo-scores.tiff"
+    },
+    {
+      "id": "raster-47-spls-diablo/47-2-diablo-scores-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-2-diablo-scores-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1937
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-2-diablo-scores-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-3-test-performance-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-3-test-performance.pdf"
+    },
+    {
+      "id": "signature-47-spls-diablo/47-3-test-performance-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-3-test-performance-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-3-test-performance.svg"
+    },
+    {
+      "id": "signature-47-spls-diablo/47-3-test-performance-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-47-spls-diablo/47-3-test-performance-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-3-test-performance-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-3-test-performance.png"
+    },
+    {
+      "id": "raster-47-spls-diablo/47-3-test-performance-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-3-test-performance-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1937
+      ]
+    },
+    {
+      "id": "figure-47-spls-diablo/47-3-test-performance-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-3-test-performance.tiff"
+    },
+    {
+      "id": "raster-47-spls-diablo/47-3-test-performance-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-3-test-performance-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1937
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-3-test-performance-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-4-feature-stability-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-4-feature-stability.pdf"
+    },
+    {
+      "id": "signature-47-spls-diablo/47-4-feature-stability-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-4-feature-stability-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-4-feature-stability.svg"
+    },
+    {
+      "id": "signature-47-spls-diablo/47-4-feature-stability-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-47-spls-diablo/47-4-feature-stability-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-47-spls-diablo/47-4-feature-stability-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-4-feature-stability.png"
+    },
+    {
+      "id": "raster-47-spls-diablo/47-4-feature-stability-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-4-feature-stability-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2480
+      ]
+    },
+    {
+      "id": "figure-47-spls-diablo/47-4-feature-stability-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/47-spls-diablo/47-4-feature-stability.tiff"
+    },
+    {
+      "id": "raster-47-spls-diablo/47-4-feature-stability-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-4-feature-stability-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2480
+      ]
+    },
+    {
+      "id": "raster-47-spls-diablo/47-4-feature-stability-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-48-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/48-mmvec-mofa.qmd"
+    },
+    {
+      "id": "article-48-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-48-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-48-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-48-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-48-manifest-title",
+      "status": "PASS",
+      "detail": {
+        "manifest": "MMvec/MOFA（菌×代谢物）",
+        "qmd": "MMvec/MOFA（菌×代谢物）"
+      }
+    },
+    {
+      "id": "article-48-inline-theme",
+      "status": "PASS",
+      "detail": "pal_pub/theme_pub/save_pub inline"
+    },
+    {
+      "id": "article-48-no-source-theme",
+      "status": "PASS",
+      "detail": "no executable external theme dependency"
+    },
+    {
+      "id": "article-48-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-48-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-48-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-48-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-48-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-48-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-48-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-48-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-48-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-48-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-48-token-16a14988",
+      "status": "PASS",
+      "detail": "data/small/paired-ibd-multiomics"
+    },
+    {
+      "id": "article-48-token-36434dfb",
+      "status": "PASS",
+      "detail": "from mmvec.multimodal import MMvec"
+    },
+    {
+      "id": "article-48-token-bb82f116",
+      "status": "PASS",
+      "detail": "from mofapy2.run.entry_point import entry_point"
+    },
+    {
+      "id": "article-48-token-8d078bf8",
+      "status": "PASS",
+      "detail": "ValidationMAE"
+    },
+    {
+      "id": "article-48-token-1940b177",
+      "status": "PASS",
+      "detail": "mmvec-native"
+    },
+    {
+      "id": "article-48-token-8dbe489b",
+      "status": "PASS",
+      "detail": "multiomics-native"
+    },
+    {
+      "id": "article-48-token-61234a49",
+      "status": "PASS",
+      "detail": "48-4-mofa-summary"
+    },
+    {
+      "id": "article-48-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/48-mmvec-mofa.html"
+    },
+    {
+      "id": "article-48-html-title",
+      "status": "PASS",
+      "detail": "MMvec/MOFA（菌×代谢物）"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-1-cca-overfit-audit-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-1-cca-overfit-audit.pdf"
+    },
+    {
+      "id": "signature-48-mmvec-mofa/48-1-cca-overfit-audit-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-1-cca-overfit-audit-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-1-cca-overfit-audit.svg"
+    },
+    {
+      "id": "signature-48-mmvec-mofa/48-1-cca-overfit-audit-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-48-mmvec-mofa/48-1-cca-overfit-audit-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-1-cca-overfit-audit-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-1-cca-overfit-audit.png"
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-1-cca-overfit-audit-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-1-cca-overfit-audit-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1842
+      ]
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-1-cca-overfit-audit-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-1-cca-overfit-audit.tiff"
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-1-cca-overfit-audit-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-1-cca-overfit-audit-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1842
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-1-cca-overfit-audit-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-2-mmvec-loss-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-2-mmvec-loss.pdf"
+    },
+    {
+      "id": "signature-48-mmvec-mofa/48-2-mmvec-loss-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-2-mmvec-loss-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-2-mmvec-loss.svg"
+    },
+    {
+      "id": "signature-48-mmvec-mofa/48-2-mmvec-loss-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-48-mmvec-mofa/48-2-mmvec-loss-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-2-mmvec-loss-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-2-mmvec-loss.png"
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-2-mmvec-loss-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-2-mmvec-loss-png-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        2078
+      ]
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-2-mmvec-loss-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-2-mmvec-loss.tiff"
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-2-mmvec-loss-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-2-mmvec-loss-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        2078
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-2-mmvec-loss-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-3-mmvec-top-pairs-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-3-mmvec-top-pairs.pdf"
+    },
+    {
+      "id": "signature-48-mmvec-mofa/48-3-mmvec-top-pairs-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-3-mmvec-top-pairs-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-3-mmvec-top-pairs.svg"
+    },
+    {
+      "id": "signature-48-mmvec-mofa/48-3-mmvec-top-pairs-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-48-mmvec-mofa/48-3-mmvec-top-pairs-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-3-mmvec-top-pairs-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-3-mmvec-top-pairs.png"
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-3-mmvec-top-pairs-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-3-mmvec-top-pairs-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2480
+      ]
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-3-mmvec-top-pairs-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-3-mmvec-top-pairs.tiff"
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-3-mmvec-top-pairs-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-3-mmvec-top-pairs-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2480
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-3-mmvec-top-pairs-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-4-mofa-summary-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-4-mofa-summary.pdf"
+    },
+    {
+      "id": "signature-48-mmvec-mofa/48-4-mofa-summary-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-4-mofa-summary-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-4-mofa-summary.svg"
+    },
+    {
+      "id": "signature-48-mmvec-mofa/48-4-mofa-summary-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-48-mmvec-mofa/48-4-mofa-summary-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-4-mofa-summary-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-4-mofa-summary.png"
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-4-mofa-summary-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-4-mofa-summary-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3188
+      ]
+    },
+    {
+      "id": "figure-48-mmvec-mofa/48-4-mofa-summary-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/48-mmvec-mofa/48-4-mofa-summary.tiff"
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-4-mofa-summary-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-4-mofa-summary-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3188
+      ]
+    },
+    {
+      "id": "raster-48-mmvec-mofa/48-4-mofa-summary-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-49-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/49-multi-kingdom.qmd"
+    },
+    {
+      "id": "article-49-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-49-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-49-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-49-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-49-manifest-title",
+      "status": "PASS",
+      "detail": {
+        "manifest": "多界微生物组：16S＋ITS/18S 联合分析",
+        "qmd": "多界微生物组：16S＋ITS/18S 联合分析"
+      }
+    },
+    {
+      "id": "article-49-inline-theme",
+      "status": "PASS",
+      "detail": "pal_pub/theme_pub/save_pub inline"
+    },
+    {
+      "id": "article-49-no-source-theme",
+      "status": "PASS",
+      "detail": "no executable external theme dependency"
+    },
+    {
+      "id": "article-49-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-49-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-49-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-49-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-49-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-49-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-49-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-49-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-49-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-49-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-49-token-b0b8cc10",
+      "status": "PASS",
+      "detail": "data/small/multi-kingdom-duran"
+    },
+    {
+      "id": "article-49-token-8df0e2e8",
+      "status": "PASS",
+      "detail": "fungi-otutab.tsv"
+    },
+    {
+      "id": "article-49-token-df138fbd",
+      "status": "PASS",
+      "detail": "oomycete-otutab.tsv"
+    },
+    {
+      "id": "article-49-token-775fdca1",
+      "status": "PASS",
+      "detail": "adonis2("
+    },
+    {
+      "id": "article-49-token-588087b4",
+      "status": "PASS",
+      "detail": "protest("
+    },
+    {
+      "id": "article-49-token-5d411744",
+      "status": "PASS",
+      "detail": "cross-kingdom-associations.tsv"
+    },
+    {
+      "id": "article-49-token-e5cd2568",
+      "status": "PASS",
+      "detail": "49-4-stable-candidates"
+    },
+    {
+      "id": "article-49-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/49-multi-kingdom.html"
+    },
+    {
+      "id": "article-49-html-title",
+      "status": "PASS",
+      "detail": "多界微生物组：16S＋ITS/18S 联合分析"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-1-three-kingdom-pcoa-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-1-three-kingdom-pcoa.pdf"
+    },
+    {
+      "id": "signature-49-multi-kingdom/49-1-three-kingdom-pcoa-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-1-three-kingdom-pcoa-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-1-three-kingdom-pcoa.svg"
+    },
+    {
+      "id": "signature-49-multi-kingdom/49-1-three-kingdom-pcoa-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-49-multi-kingdom/49-1-three-kingdom-pcoa-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-1-three-kingdom-pcoa-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-1-three-kingdom-pcoa.png"
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-1-three-kingdom-pcoa-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-1-three-kingdom-pcoa-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1937
+      ]
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-1-three-kingdom-pcoa-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-1-three-kingdom-pcoa.tiff"
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-1-three-kingdom-pcoa-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-1-three-kingdom-pcoa-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1937
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-1-three-kingdom-pcoa-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-2-procrustes-audit-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-2-procrustes-audit.pdf"
+    },
+    {
+      "id": "signature-49-multi-kingdom/49-2-procrustes-audit-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-2-procrustes-audit-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-2-procrustes-audit.svg"
+    },
+    {
+      "id": "signature-49-multi-kingdom/49-2-procrustes-audit-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-49-multi-kingdom/49-2-procrustes-audit-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-2-procrustes-audit-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-2-procrustes-audit.png"
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-2-procrustes-audit-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-2-procrustes-audit-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1889
+      ]
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-2-procrustes-audit-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-2-procrustes-audit.tiff"
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-2-procrustes-audit-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-2-procrustes-audit-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1889
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-2-procrustes-audit-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-3-shared-niche-audit-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-3-shared-niche-audit.pdf"
+    },
+    {
+      "id": "signature-49-multi-kingdom/49-3-shared-niche-audit-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-3-shared-niche-audit-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-3-shared-niche-audit.svg"
+    },
+    {
+      "id": "signature-49-multi-kingdom/49-3-shared-niche-audit-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-49-multi-kingdom/49-3-shared-niche-audit-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-3-shared-niche-audit-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-3-shared-niche-audit.png"
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-3-shared-niche-audit-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-3-shared-niche-audit-png-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1937
+      ]
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-3-shared-niche-audit-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-3-shared-niche-audit.tiff"
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-3-shared-niche-audit-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-3-shared-niche-audit-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1937
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-3-shared-niche-audit-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-4-stable-candidates-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-4-stable-candidates.pdf"
+    },
+    {
+      "id": "signature-49-multi-kingdom/49-4-stable-candidates-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-4-stable-candidates-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-4-stable-candidates.svg"
+    },
+    {
+      "id": "signature-49-multi-kingdom/49-4-stable-candidates-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-49-multi-kingdom/49-4-stable-candidates-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-4-stable-candidates-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-4-stable-candidates.png"
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-4-stable-candidates-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-4-stable-candidates-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2645
+      ]
+    },
+    {
+      "id": "figure-49-multi-kingdom/49-4-stable-candidates-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/49-multi-kingdom/49-4-stable-candidates.tiff"
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-4-stable-candidates-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-4-stable-candidates-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2645
+      ]
+    },
+    {
+      "id": "raster-49-multi-kingdom/49-4-stable-candidates-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "article-50-qmd",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/chapters/50-source-tracking.qmd"
+    },
+    {
+      "id": "article-50-eval",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-50-freeze",
+      "status": "PASS",
+      "detail": {
+        "eval": true,
+        "freeze": "auto",
+        "warning": false,
+        "message": false
+      }
+    },
+    {
+      "id": "article-50-not-draft",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "article-50-seed",
+      "status": "PASS",
+      "detail": "set.seed present"
+    },
+    {
+      "id": "article-50-manifest-title",
+      "status": "PASS",
+      "detail": {
+        "manifest": "微生物来源追踪：SourceTracker / FEAST 与传播证据",
+        "qmd": "微生物来源追踪：SourceTracker / FEAST 与传播证据"
+      }
+    },
+    {
+      "id": "article-50-inline-theme",
+      "status": "PASS",
+      "detail": "pal_pub/theme_pub/save_pub inline"
+    },
+    {
+      "id": "article-50-no-source-theme",
+      "status": "PASS",
+      "detail": "no executable external theme dependency"
+    },
+    {
+      "id": "article-50-section-832f94bf",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:target|paper-figure)\\}"
+    },
+    {
+      "id": "article-50-section-6477d7f1",
+      "status": "PASS",
+      "detail": "\\{#sec-theory\\}"
+    },
+    {
+      "id": "article-50-section-b95e4291",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:setup|preparation)\\}"
+    },
+    {
+      "id": "article-50-section-36847a29",
+      "status": "PASS",
+      "detail": "\\{#sec-code\\}"
+    },
+    {
+      "id": "article-50-section-c9897832",
+      "status": "PASS",
+      "detail": "\\{#sec-audit\\}"
+    },
+    {
+      "id": "article-50-section-e4c8d951",
+      "status": "PASS",
+      "detail": "\\{#sec-(?:publication|polish|beautify|visualization|figure)\\}"
+    },
+    {
+      "id": "article-50-section-f94d5096",
+      "status": "PASS",
+      "detail": "常见.*(?:坑|误判)"
+    },
+    {
+      "id": "article-50-section-b85dac7f",
+      "status": "PASS",
+      "detail": "\\{#sec-methods\\}"
+    },
+    {
+      "id": "article-50-section-34420cf5",
+      "status": "PASS",
+      "detail": "\\{#sec-own-data\\}"
+    },
+    {
+      "id": "article-50-section-f4c9a69f",
+      "status": "PASS",
+      "detail": "\\{#sec-references\\}"
+    },
+    {
+      "id": "article-50-token-b5d89bc4",
+      "status": "PASS",
+      "detail": "data/small/source-tracking-feast"
+    },
+    {
+      "id": "article-50-token-a352f207",
+      "status": "PASS",
+      "detail": "library(FEAST)"
+    },
+    {
+      "id": "article-50-token-c4b7a72f",
+      "status": "PASS",
+      "detail": "FEAST("
+    },
+    {
+      "id": "article-50-token-6796cf9e",
+      "status": "PASS",
+      "detail": "from sourcetracker._sourcetracker import _gibbs"
+    },
+    {
+      "id": "article-50-token-6fc89390",
+      "status": "PASS",
+      "detail": "feast-missing-source.tsv"
+    },
+    {
+      "id": "article-50-token-e4b91f7b",
+      "status": "PASS",
+      "detail": "50-4-missing-source"
+    },
+    {
+      "id": "article-50-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/50-source-tracking.html"
+    },
+    {
+      "id": "article-50-html-title",
+      "status": "PASS",
+      "detail": "微生物来源追踪：SourceTracker / FEAST 与传播证据"
+    },
+    {
+      "id": "figure-50-source-tracking/50-1-feast-main-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-1-feast-main.pdf"
+    },
+    {
+      "id": "signature-50-source-tracking/50-1-feast-main-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-50-source-tracking/50-1-feast-main-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-1-feast-main.svg"
+    },
+    {
+      "id": "signature-50-source-tracking/50-1-feast-main-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-50-source-tracking/50-1-feast-main-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-50-source-tracking/50-1-feast-main-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-1-feast-main.png"
+    },
+    {
+      "id": "raster-50-source-tracking/50-1-feast-main-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-1-feast-main-png-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1842
+      ]
+    },
+    {
+      "id": "figure-50-source-tracking/50-1-feast-main-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-1-feast-main.tiff"
+    },
+    {
+      "id": "raster-50-source-tracking/50-1-feast-main-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-1-feast-main-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        2102,
+        1842
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-1-feast-main-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-50-source-tracking/50-2-method-comparison-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-2-method-comparison.pdf"
+    },
+    {
+      "id": "signature-50-source-tracking/50-2-method-comparison-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-50-source-tracking/50-2-method-comparison-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-2-method-comparison.svg"
+    },
+    {
+      "id": "signature-50-source-tracking/50-2-method-comparison-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-50-source-tracking/50-2-method-comparison-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-50-source-tracking/50-2-method-comparison-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-2-method-comparison.png"
+    },
+    {
+      "id": "raster-50-source-tracking/50-2-method-comparison-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-2-method-comparison-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1937
+      ]
+    },
+    {
+      "id": "figure-50-source-tracking/50-2-method-comparison-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-2-method-comparison.tiff"
+    },
+    {
+      "id": "raster-50-source-tracking/50-2-method-comparison-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-2-method-comparison-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        1937
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-2-method-comparison-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-50-source-tracking/50-3-loo-calibration-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-3-loo-calibration.pdf"
+    },
+    {
+      "id": "signature-50-source-tracking/50-3-loo-calibration-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-50-source-tracking/50-3-loo-calibration-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-3-loo-calibration.svg"
+    },
+    {
+      "id": "signature-50-source-tracking/50-3-loo-calibration-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-50-source-tracking/50-3-loo-calibration-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-50-source-tracking/50-3-loo-calibration-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-3-loo-calibration.png"
+    },
+    {
+      "id": "raster-50-source-tracking/50-3-loo-calibration-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-3-loo-calibration-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3188
+      ]
+    },
+    {
+      "id": "figure-50-source-tracking/50-3-loo-calibration-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-3-loo-calibration.tiff"
+    },
+    {
+      "id": "raster-50-source-tracking/50-3-loo-calibration-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-3-loo-calibration-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        3188
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-3-loo-calibration-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-50-source-tracking/50-4-missing-source-pdf",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-4-missing-source.pdf"
+    },
+    {
+      "id": "signature-50-source-tracking/50-4-missing-source-pdf",
+      "status": "PASS",
+      "detail": "PDF signature"
+    },
+    {
+      "id": "figure-50-source-tracking/50-4-missing-source-svg",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-4-missing-source.svg"
+    },
+    {
+      "id": "signature-50-source-tracking/50-4-missing-source-svg",
+      "status": "PASS",
+      "detail": "SVG root"
+    },
+    {
+      "id": "english-50-source-tracking/50-4-missing-source-svg",
+      "status": "PASS",
+      "detail": "no CJK plot text"
+    },
+    {
+      "id": "figure-50-source-tracking/50-4-missing-source-png",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-4-missing-source.png"
+    },
+    {
+      "id": "raster-50-source-tracking/50-4-missing-source-png-dpi",
+      "status": "PASS",
+      "detail": [
+        599.9988,
+        599.9988
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-4-missing-source-png-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2125
+      ]
+    },
+    {
+      "id": "figure-50-source-tracking/50-4-missing-source-tiff",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/figures/50-source-tracking/50-4-missing-source.tiff"
+    },
+    {
+      "id": "raster-50-source-tracking/50-4-missing-source-tiff-dpi",
+      "status": "PASS",
+      "detail": [
+        "600.0",
+        "600.0"
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-4-missing-source-tiff-pixels",
+      "status": "PASS",
+      "detail": [
+        4251,
+        2125
+      ]
+    },
+    {
+      "id": "raster-50-source-tracking/50-4-missing-source-tiff-lzw",
+      "status": "PASS",
+      "detail": "tiff_lzw"
+    },
+    {
+      "id": "figure-file-count",
+      "status": "PASS",
+      "detail": 80
+    },
+    {
+      "id": "paired-source-commit",
+      "status": "PASS",
+      "detail": "89a519d8c832008fbc6e650453e83e2f04858d02"
+    },
+    {
+      "id": "paired-otutab-shape",
+      "status": "PASS",
+      "detail": [
+        250,
+        220
+      ]
+    },
+    {
+      "id": "paired-taxonomy-shape",
+      "status": "PASS",
+      "detail": [
+        250,
+        9
+      ]
+    },
+    {
+      "id": "paired-metabolites-shape",
+      "status": "PASS",
+      "detail": [
+        277,
+        220
+      ]
+    },
+    {
+      "id": "paired-metabolite-annotation",
+      "status": "PASS",
+      "detail": [
+        277,
+        11
+      ]
+    },
+    {
+      "id": "paired-groups",
+      "status": "PASS",
+      "detail": {
+        "CD": 88,
+        "UC": 76,
+        "Control": 56
+      }
+    },
+    {
+      "id": "paired-sample-order-microbes",
+      "status": "PASS",
+      "detail": "exact order"
+    },
+    {
+      "id": "paired-sample-order-metabolites",
+      "status": "PASS",
+      "detail": "exact order"
+    },
+    {
+      "id": "kingdom-source-commit",
+      "status": "PASS",
+      "detail": "6db5e85cc5d442fd95fcdcb7250b72fa9e2ff900"
+    },
+    {
+      "id": "kingdom-bacteria-shape",
+      "status": "PASS",
+      "detail": [
+        772,
+        36
+      ]
+    },
+    {
+      "id": "kingdom-fungi-shape",
+      "status": "PASS",
+      "detail": [
+        1063,
+        36
+      ]
+    },
+    {
+      "id": "kingdom-oomycete-shape",
+      "status": "PASS",
+      "detail": [
+        219,
+        36
+      ]
+    },
+    {
+      "id": "kingdom-soil-balance",
+      "status": "PASS",
+      "detail": {
+        "GE": 12,
+        "PU": 12,
+        "SD": 12
+      }
+    },
+    {
+      "id": "kingdom-compartment-balance",
+      "status": "PASS",
+      "detail": {
+        "Rhizosphere": 12,
+        "Root": 12,
+        "Soil": 12
+      }
+    },
+    {
+      "id": "tracking-source-commit",
+      "status": "PASS",
+      "detail": "2f8f3df8051e0e08341f597a9f4693bfb76b3bf6"
+    },
+    {
+      "id": "tracking-otutab-shape",
+      "status": "PASS",
+      "detail": [
+        1839,
+        10
+      ]
+    },
+    {
+      "id": "tracking-source-sink-count",
+      "status": "PASS",
+      "detail": {
+        "Sink": 1,
+        "Source": 9
+      }
+    },
+    {
+      "id": "renv-package-count",
+      "status": "PASS",
+      "detail": 418
+    },
+    {
+      "id": "renv-mixOmics",
+      "status": "PASS",
+      "detail": "6.26.0"
+    },
+    {
+      "id": "renv-FEAST",
+      "status": "PASS",
+      "detail": "0.1.0"
+    },
+    {
+      "id": "renv-XICOR",
+      "status": "PASS",
+      "detail": "0.4.1"
+    },
+    {
+      "id": "renv-eva",
+      "status": "PASS",
+      "detail": "0.2.7"
+    },
+    {
+      "id": "renv-psychTools",
+      "status": "PASS",
+      "detail": "2.6.4"
+    },
+    {
+      "id": "renv-corpcor",
+      "status": "PASS",
+      "detail": "1.6.10"
+    },
+    {
+      "id": "renv-cowplot",
+      "status": "PASS",
+      "detail": "1.1.3"
+    },
+    {
+      "id": "renv-ellipse",
+      "status": "PASS",
+      "detail": "0.5.0"
+    },
+    {
+      "id": "renv-ggthemes",
+      "status": "PASS",
+      "detail": "5.1.0"
+    },
+    {
+      "id": "renv-mnormt",
+      "status": "PASS",
+      "detail": "2.1.1"
+    },
+    {
+      "id": "renv-psych",
+      "status": "PASS",
+      "detail": "2.4.3"
+    },
+    {
+      "id": "renv-rARPACK",
+      "status": "PASS",
+      "detail": "0.11-0"
+    },
+    {
+      "id": "renv-FEAST-source-commit",
+      "status": "PASS",
+      "detail": "2f8f3df8051e0e08341f597a9f4693bfb76b3bf6"
+    },
+    {
+      "id": "mmvec-env-native-name",
+      "status": "PASS",
+      "detail": "mmvec-native"
+    },
+    {
+      "id": "mmvec-env-python=3.7.16",
+      "status": "PASS",
+      "detail": "python=3.7.16"
+    },
+    {
+      "id": "mmvec-env-tensorflow=1.15.0",
+      "status": "PASS",
+      "detail": "tensorflow=1.15.0"
+    },
+    {
+      "id": "mmvec-env-mmvec=1.0.5",
+      "status": "PASS",
+      "detail": "mmvec=1.0.5"
+    },
+    {
+      "id": "multiomics-env-native-name",
+      "status": "PASS",
+      "detail": "multiomics-native"
+    },
+    {
+      "id": "multiomics-env-HAllA==0.8.40",
+      "status": "PASS",
+      "detail": "HAllA==0.8.40"
+    },
+    {
+      "id": "multiomics-env-mofapy2==0.7.4",
+      "status": "PASS",
+      "detail": "mofapy2==0.7.4"
+    },
+    {
+      "id": "multiomics-env-scikit-learn=1.7.2",
+      "status": "PASS",
+      "detail": "scikit-learn=1.7.2"
+    },
+    {
+      "id": "article-48-native-api-contract",
+      "status": "PASS",
+      "detail": "native MMvec + mofapy2 entry points"
+    },
+    {
+      "id": "result-46-status",
+      "status": "PASS",
+      "detail": "passed"
+    },
+    {
+      "id": "result-46-pairs",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "microbe_features": 25,
+        "metabolite_features": 40,
+        "tested_pairs": 1000,
+        "raw_pairwise_fdr_hits": 437,
+        "group_residual_pairwise_fdr_hits": 350,
+        "halla_significant_pairs": 350,
+        "halla_significant_blocks": 70,
+        "halla_metric": "Spearman",
+        "permutations": 999,
+        "fdr_method": "Benjamini-Hochberg",
+        "fnr_threshold": 0.2,
+        "group_adjustment": "feature-wise residualization on StudyGroup before HAllA"
+      }
+    },
+    {
+      "id": "result-46-halla",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "microbe_features": 25,
+        "metabolite_features": 40,
+        "tested_pairs": 1000,
+        "raw_pairwise_fdr_hits": 437,
+        "group_residual_pairwise_fdr_hits": 350,
+        "halla_significant_pairs": 350,
+        "halla_significant_blocks": 70,
+        "halla_metric": "Spearman",
+        "permutations": 999,
+        "fdr_method": "Benjamini-Hochberg",
+        "fnr_threshold": 0.2,
+        "group_adjustment": "feature-wise residualization on StudyGroup before HAllA"
+      }
+    },
+    {
+      "id": "result-46-global-statistics",
+      "status": "PASS",
+      "detail": {
+        "Observed / Procrustes": 0.588107476116809,
+        "Observed / Mantel": 0.597317089319856,
+        "Group-adjusted / Procrustes": 0.528801294555665,
+        "Group-adjusted / Mantel": 0.554311306676936
+      }
+    },
+    {
+      "id": "result-47-split",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "train_samples": 153,
+        "test_samples": 67,
+        "train_group_counts": {
+          "Control": 39,
+          "CD": 61,
+          "UC": 53
+        },
+        "test_group_counts": {
+          "Control": 17,
+          "CD": 27,
+          "UC": 23
+        },
+        "retained_microbe_features": 60,
+        "retained_metabolite_features": 80,
+        "spls_train_correlations": [
+          0.8845,
+          0.738
+        ],
+        "spls_test_correlations": [
+          0.8831,
+          0.5017
+        ],
+        "tune_grid": {
+          "Microbiome": [
+            5,
+            10,
+            15
+          ],
+          "Metabolome": [
+            5,
+            10,
+            15
+          ]
+        },
+        "tuned_keepX": {
+          "Microbiome": [
+            10,
+            15
+          ],
+          "Metabolome": [
+            5,
+            15
+          ]
+        },
+        "repeated_cv_weighted_vote_ber_component2": 0.3772,
+        "test_accuracy": 0.6567,
+        "test_balanced_accuracy": 0.6758,
+        "test_ber": 0.3242,
+        "test_macro_auc": 0.7984,
+        "stable_selected_features_rate_ge_0_8": 26,
+        "versions": {
+          "R": "4.4.1",
+          "mixOmics": "6.26.0",
+          "pROC": "1.18.5"
+        }
+      }
+    },
+    {
+      "id": "result-47-test-performance",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "train_samples": 153,
+        "test_samples": 67,
+        "train_group_counts": {
+          "Control": 39,
+          "CD": 61,
+          "UC": 53
+        },
+        "test_group_counts": {
+          "Control": 17,
+          "CD": 27,
+          "UC": 23
+        },
+        "retained_microbe_features": 60,
+        "retained_metabolite_features": 80,
+        "spls_train_correlations": [
+          0.8845,
+          0.738
+        ],
+        "spls_test_correlations": [
+          0.8831,
+          0.5017
+        ],
+        "tune_grid": {
+          "Microbiome": [
+            5,
+            10,
+            15
+          ],
+          "Metabolome": [
+            5,
+            10,
+            15
+          ]
+        },
+        "tuned_keepX": {
+          "Microbiome": [
+            10,
+            15
+          ],
+          "Metabolome": [
+            5,
+            15
+          ]
+        },
+        "repeated_cv_weighted_vote_ber_component2": 0.3772,
+        "test_accuracy": 0.6567,
+        "test_balanced_accuracy": 0.6758,
+        "test_ber": 0.3242,
+        "test_macro_auc": 0.7984,
+        "stable_selected_features_rate_ge_0_8": 26,
+        "versions": {
+          "R": "4.4.1",
+          "mixOmics": "6.26.0",
+          "pROC": "1.18.5"
+        }
+      }
+    },
+    {
+      "id": "result-47-stability",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "train_samples": 153,
+        "test_samples": 67,
+        "train_group_counts": {
+          "Control": 39,
+          "CD": 61,
+          "UC": 53
+        },
+        "test_group_counts": {
+          "Control": 17,
+          "CD": 27,
+          "UC": 23
+        },
+        "retained_microbe_features": 60,
+        "retained_metabolite_features": 80,
+        "spls_train_correlations": [
+          0.8845,
+          0.738
+        ],
+        "spls_test_correlations": [
+          0.8831,
+          0.5017
+        ],
+        "tune_grid": {
+          "Microbiome": [
+            5,
+            10,
+            15
+          ],
+          "Metabolome": [
+            5,
+            10,
+            15
+          ]
+        },
+        "tuned_keepX": {
+          "Microbiome": [
+            10,
+            15
+          ],
+          "Metabolome": [
+            5,
+            15
+          ]
+        },
+        "repeated_cv_weighted_vote_ber_component2": 0.3772,
+        "test_accuracy": 0.6567,
+        "test_balanced_accuracy": 0.6758,
+        "test_ber": 0.3242,
+        "test_macro_auc": 0.7984,
+        "stable_selected_features_rate_ge_0_8": 26,
+        "versions": {
+          "R": "4.4.1",
+          "mixOmics": "6.26.0",
+          "pROC": "1.18.5"
+        }
+      }
+    },
+    {
+      "id": "result-48-native-implementation",
+      "status": "PASS",
+      "detail": "biocore/mmvec native MMvec class"
+    },
+    {
+      "id": "result-48-split",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "microbe_features": 100,
+        "metabolite_features": 120,
+        "spearman_tested_pairs": 12000,
+        "spearman_fdr_hits": 4166,
+        "cca_canonical_correlations": [
+          0.9997625482324894,
+          0.9993638236488163,
+          0.9990188798343462
+        ],
+        "mmvec_implementation": "biocore/mmvec native MMvec class",
+        "mmvec_train_samples": 153,
+        "mmvec_holdout_samples": 67,
+        "mmvec_epochs_run": 100,
+        "mmvec_best_epoch_one_based": 100,
+        "mmvec_best_validation_mae": 1844.2938232421875,
+        "mmvec_probability_max_row_sum_error": 6.8833827526759706e-15,
+        "spearman_mmvec_top50_pair_overlap": 0,
+        "mofa_factors_retained": 4,
+        "mofa_total_variance_explained_by_view": {
+          "Metabolome": 0.3259248380408615,
+          "Microbiome": 0.34829472134082795
+        },
+        "mofa_group_associated_factors_fdr": 3,
+        "versions": {
+          "python": "3.10.19",
+          "mmvec": "1.0.5",
+          "tensorflow": "1.15.0",
+          "mofapy2": "0.7.4",
+          "scikit_learn": "1.7.2"
+        }
+      }
+    },
+    {
+      "id": "result-48-best-epoch",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "microbe_features": 100,
+        "metabolite_features": 120,
+        "spearman_tested_pairs": 12000,
+        "spearman_fdr_hits": 4166,
+        "cca_canonical_correlations": [
+          0.9997625482324894,
+          0.9993638236488163,
+          0.9990188798343462
+        ],
+        "mmvec_implementation": "biocore/mmvec native MMvec class",
+        "mmvec_train_samples": 153,
+        "mmvec_holdout_samples": 67,
+        "mmvec_epochs_run": 100,
+        "mmvec_best_epoch_one_based": 100,
+        "mmvec_best_validation_mae": 1844.2938232421875,
+        "mmvec_probability_max_row_sum_error": 6.8833827526759706e-15,
+        "spearman_mmvec_top50_pair_overlap": 0,
+        "mofa_factors_retained": 4,
+        "mofa_total_variance_explained_by_view": {
+          "Metabolome": 0.3259248380408615,
+          "Microbiome": 0.34829472134082795
+        },
+        "mofa_group_associated_factors_fdr": 3,
+        "versions": {
+          "python": "3.10.19",
+          "mmvec": "1.0.5",
+          "tensorflow": "1.15.0",
+          "mofapy2": "0.7.4",
+          "scikit_learn": "1.7.2"
+        }
+      }
+    },
+    {
+      "id": "result-48-probability-contract",
+      "status": "PASS",
+      "detail": 6.8833827526759706e-15
+    },
+    {
+      "id": "result-48-mofa",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "microbe_features": 100,
+        "metabolite_features": 120,
+        "spearman_tested_pairs": 12000,
+        "spearman_fdr_hits": 4166,
+        "cca_canonical_correlations": [
+          0.9997625482324894,
+          0.9993638236488163,
+          0.9990188798343462
+        ],
+        "mmvec_implementation": "biocore/mmvec native MMvec class",
+        "mmvec_train_samples": 153,
+        "mmvec_holdout_samples": 67,
+        "mmvec_epochs_run": 100,
+        "mmvec_best_epoch_one_based": 100,
+        "mmvec_best_validation_mae": 1844.2938232421875,
+        "mmvec_probability_max_row_sum_error": 6.8833827526759706e-15,
+        "spearman_mmvec_top50_pair_overlap": 0,
+        "mofa_factors_retained": 4,
+        "mofa_total_variance_explained_by_view": {
+          "Metabolome": 0.3259248380408615,
+          "Microbiome": 0.34829472134082795
+        },
+        "mofa_group_associated_factors_fdr": 3,
+        "versions": {
+          "python": "3.10.19",
+          "mmvec": "1.0.5",
+          "tensorflow": "1.15.0",
+          "mofapy2": "0.7.4",
+          "scikit_learn": "1.7.2"
+        }
+      }
+    },
+    {
+      "id": "result-48-method-overlap",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 220,
+        "microbe_features": 100,
+        "metabolite_features": 120,
+        "spearman_tested_pairs": 12000,
+        "spearman_fdr_hits": 4166,
+        "cca_canonical_correlations": [
+          0.9997625482324894,
+          0.9993638236488163,
+          0.9990188798343462
+        ],
+        "mmvec_implementation": "biocore/mmvec native MMvec class",
+        "mmvec_train_samples": 153,
+        "mmvec_holdout_samples": 67,
+        "mmvec_epochs_run": 100,
+        "mmvec_best_epoch_one_based": 100,
+        "mmvec_best_validation_mae": 1844.2938232421875,
+        "mmvec_probability_max_row_sum_error": 6.8833827526759706e-15,
+        "spearman_mmvec_top50_pair_overlap": 0,
+        "mofa_factors_retained": 4,
+        "mofa_total_variance_explained_by_view": {
+          "Metabolome": 0.3259248380408615,
+          "Microbiome": 0.34829472134082795
+        },
+        "mofa_group_associated_factors_fdr": 3,
+        "versions": {
+          "python": "3.10.19",
+          "mmvec": "1.0.5",
+          "tensorflow": "1.15.0",
+          "mofapy2": "0.7.4",
+          "scikit_learn": "1.7.2"
+        }
+      }
+    },
+    {
+      "id": "result-48-native-versions",
+      "status": "PASS",
+      "detail": {
+        "python": "3.10.19",
+        "mmvec": "1.0.5",
+        "tensorflow": "1.15.0",
+        "mofapy2": "0.7.4",
+        "scikit_learn": "1.7.2"
+      }
+    },
+    {
+      "id": "result-48-no-obsolete-wrapper-output",
+      "status": "PASS",
+      "detail": "obsolete output absent"
+    },
+    {
+      "id": "result-49-design",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 36,
+        "balanced_design_cells": 9,
+        "replicates_per_cell": 4,
+        "input_features": {
+          "Bacteria": 772,
+          "Fungi": 1063,
+          "Oomycete": 219
+        },
+        "selected_features": {
+          "Bacteria": 20,
+          "Fungi": 20,
+          "Oomycete": 20
+        },
+        "procrustes_observed_q_lt_0_05": 3,
+        "procrustes_adjusted_q_lt_0_05": 2,
+        "tested_cross_kingdom_pairs": 1200,
+        "raw_cross_kingdom_q_lt_0_05": 505,
+        "adjusted_cross_kingdom_q_lt_0_05": 2,
+        "sign_changed_after_adjustment": 491,
+        "bootstrapped_candidates": 30,
+        "stable_candidates_q_lt_0_05": 2,
+        "versions": {
+          "R": "4.4.1",
+          "vegan": "2.6.6.1",
+          "permute": "0.9.7"
+        }
+      }
+    },
+    {
+      "id": "result-49-associations",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 36,
+        "balanced_design_cells": 9,
+        "replicates_per_cell": 4,
+        "input_features": {
+          "Bacteria": 772,
+          "Fungi": 1063,
+          "Oomycete": 219
+        },
+        "selected_features": {
+          "Bacteria": 20,
+          "Fungi": 20,
+          "Oomycete": 20
+        },
+        "procrustes_observed_q_lt_0_05": 3,
+        "procrustes_adjusted_q_lt_0_05": 2,
+        "tested_cross_kingdom_pairs": 1200,
+        "raw_cross_kingdom_q_lt_0_05": 505,
+        "adjusted_cross_kingdom_q_lt_0_05": 2,
+        "sign_changed_after_adjustment": 491,
+        "bootstrapped_candidates": 30,
+        "stable_candidates_q_lt_0_05": 2,
+        "versions": {
+          "R": "4.4.1",
+          "vegan": "2.6.6.1",
+          "permute": "0.9.7"
+        }
+      }
+    },
+    {
+      "id": "result-49-stable",
+      "status": "PASS",
+      "detail": {
+        "status": "passed",
+        "seed": 20260726,
+        "samples": 36,
+        "balanced_design_cells": 9,
+        "replicates_per_cell": 4,
+        "input_features": {
+          "Bacteria": 772,
+          "Fungi": 1063,
+          "Oomycete": 219
+        },
+        "selected_features": {
+          "Bacteria": 20,
+          "Fungi": 20,
+          "Oomycete": 20
+        },
+        "procrustes_observed_q_lt_0_05": 3,
+        "procrustes_adjusted_q_lt_0_05": 2,
+        "tested_cross_kingdom_pairs": 1200,
+        "raw_cross_kingdom_q_lt_0_05": 505,
+        "adjusted_cross_kingdom_q_lt_0_05": 2,
+        "sign_changed_after_adjustment": 491,
+        "bootstrapped_candidates": 30,
+        "stable_candidates_q_lt_0_05": 2,
+        "versions": {
+          "R": "4.4.1",
+          "vegan": "2.6.6.1",
+          "permute": "0.9.7"
+        }
+      }
+    },
+    {
+      "id": "result-50-largest-source",
+      "status": "PASS",
+      "detail": {
+        "FEAST": "Infant gut",
+        "SourceTracker2": "Infant gut"
+      }
+    },
+    {
+      "id": "result-50-unknown",
+      "status": "PASS",
+      "detail": {
+        "FEAST": 0.1854,
+        "SourceTracker2": 0.004399999999999999
+      }
+    },
+    {
+      "id": "result-50-loo",
+      "status": "PASS",
+      "detail": {
+        "FEAST": 0.5,
+        "SourceTracker2": 0.5
+      }
+    },
+    {
+      "id": "result-50-missing-source-nonmonotonic",
+      "status": "PASS",
+      "detail": {
+        "None": 0.1854,
+        "Infant gut": 0.1324,
+        "Adult gut": 0.2189,
+        "Adult skin": 0.1834,
+        "Soil": 0.161
+      }
+    }
+  ]
+}

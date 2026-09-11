@@ -1,0 +1,92 @@
+check_id	observed	expected	status
+query-fasta-sha256	fa71915be8007d36ec70f85d28401f5a94d0d33eca323782cc937cfc4bcf1af4	fa71915be8007d36ec70f85d28401f5a94d0d33eca323782cc937cfc4bcf1af4	PASS
+query-abundance-sha256	a80e3b94d8632c48fb6c01e788e842c022c3b1ee64b79dc94456618328895e6e	a80e3b94d8632c48fb6c01e788e842c022c3b1ee64b79dc94456618328895e6e	PASS
+query-records	366	366	PASS
+query-total-reads	5213	5213	PASS
+query-source-artifact-lineage	results/12-dada2-asv/dada2-rep-seqs.qza	results/12-dada2-asv/dada2-rep-seqs.qza	PASS
+silva-release	138.2	138.2	PASS
+silva-license	CC BY 4.0	CC BY 4.0	PASS
+silva-full-records	510495	510495	PASS
+silva-v4-sequence-sha256	3a251d263bd4e12c96023c84b3f2e255b8bcb0d5865dc6f299f9918e6be3a808	3a251d263bd4e12c96023c84b3f2e255b8bcb0d5865dc6f299f9918e6be3a808	PASS
+silva-v4-taxonomy-sha256	f49320aaa32aa70af5c5a48649786e3bb4177868da5da4d2143d0a54c5fa47b0	f49320aaa32aa70af5c5a48649786e3bb4177868da5da4d2143d0a54c5fa47b0	PASS
+silva-raw-v4-records	450770	450770	PASS
+silva-lca-v4-records	262752	262752	PASS
+silva-v4-id-contract	0	0	PASS
+silva-v4-length-contract	[200, 400]	200..400	PASS
+silva-primer-contract	['GTGYCAGCMGCCGCGGTAA', 'GGACTACNVGGGTWTCTAAT']	['GTGYCAGCMGCCGCGGTAA', 'GGACTACNVGGGTWTCTAAT']	PASS
+silva-lca-dereplication	least common ancestor	least common ancestor	PASS
+gtdb-release	R11-RS232	R11-RS232	PASS
+gtdb-license	CC BY-SA 4.0	CC BY-SA 4.0	PASS
+gtdb-full-records	93770	93770	PASS
+gtdb-v4-sequence-sha256	3c4234b4defcdc3d8c3b4d1e8956b12288bccd853a4b7f3a3003847c32e6e250	3c4234b4defcdc3d8c3b4d1e8956b12288bccd853a4b7f3a3003847c32e6e250	PASS
+gtdb-v4-taxonomy-sha256	a23d0d4f62183e949c868c3f25aace3acdebb9362ae0bb1d0e9fe81e74c43fe0	a23d0d4f62183e949c868c3f25aace3acdebb9362ae0bb1d0e9fe81e74c43fe0	PASS
+gtdb-raw-v4-records	79669	79669	PASS
+gtdb-lca-v4-records	51985	51985	PASS
+gtdb-v4-id-contract	0	0	PASS
+gtdb-v4-length-contract	[200, 364]	200..400	PASS
+gtdb-primer-contract	['GTGYCAGCMGCCGCGGTAA', 'GGACTACNVGGGTWTCTAAT']	['GTGYCAGCMGCCGCGGTAA', 'GGACTACNVGGGTWTCTAAT']	PASS
+gtdb-lca-dereplication	least common ancestor	least common ancestor	PASS
+greengenes2-release	2024.09	2024.09	PASS
+greengenes2-license	BSD-3-Clause	BSD-3-Clause	PASS
+greengenes2-full-records	337506	337506	PASS
+greengenes2-v4-sequence-sha256	330fe7f400c84c1e454ca9193bcc49f078b01c7880a8bfb99cbe4c0c3c1c14d2	330fe7f400c84c1e454ca9193bcc49f078b01c7880a8bfb99cbe4c0c3c1c14d2	PASS
+greengenes2-v4-taxonomy-sha256	9594e9ae78a568672891693207fd4dcc31f8eada83b931031642fafcff2684bd	9594e9ae78a568672891693207fd4dcc31f8eada83b931031642fafcff2684bd	PASS
+greengenes2-raw-v4-records	335976	335976	PASS
+greengenes2-lca-v4-records	98185	98185	PASS
+greengenes2-v4-id-contract	0	0	PASS
+greengenes2-v4-length-contract	[200, 399]	200..400	PASS
+greengenes2-primer-contract	['GTGYCAGCMGCCGCGGTAA', 'GGACTACNVGGGTWTCTAAT']	['GTGYCAGCMGCCGCGGTAA', 'GGACTACNVGGGTWTCTAAT']	PASS
+greengenes2-lca-dereplication	least common ancestor	least common ancestor	PASS
+silva-species-not-promoted	RESCRIPt fixed six ranks (domain through genus), rank propagation enabled, species labels intentionally excluded	species labels intentionally excluded	PASS
+gtdb-r232-release-note-method	R232 changed 16S identification/extraction to mirror Prokka barnap and set a 396 bp minimum.	barnap + 396 bp	PASS
+gtdb-legacy-documentation-separated	Bundled METHODS and FILE_DESCRIPTIONS still describe nhmmer and a 200 bp threshold; actual FASTA lengths are audited.	nhmmer + 200 bp recorded separately	PASS
+greengenes2-taxonomy-basis	{'gtdb': 'R220', 'ltp': '08/2023', 'organelle_sequences': 'SILVA 138.1'}	{'gtdb': 'R220', 'ltp': '08/2023'}	PASS
+environment-qiime-2	2026.4.0	2026.4.0	PASS
+environment-q2-feature-classifier	2026.4.0	2026.4.0	PASS
+environment-rescript	2026.4.0	2026.4.0	PASS
+environment-vsearch	2.30.4	2.30.4	PASS
+environment-scikit-learn	1.7.1	1.7.1	PASS
+environment-legacy-public-sklearn-classifiers	not loaded	not loaded; consensus-VSEARCH used	PASS
+silva-taxonomy-semantic-type	FeatureData[Taxonomy]	FeatureData[Taxonomy]	PASS
+silva-taxonomy-provenance	[('feature-classifier', 'classify_consensus_vsearch'), ('feature-classifier', 'find_consensus_annotation'), ('feature-classifier', 'vsearch_global')]	feature-classifier:classify_consensus_vsearch	PASS
+silva-search-results-semantic-type	FeatureData[BLAST6]	FeatureData[BLAST6]	PASS
+silva-search-results-provenance	[('feature-classifier', 'classify_consensus_vsearch'), ('feature-classifier', 'vsearch_global')]	feature-classifier:classify_consensus_vsearch	PASS
+silva-classification-query-coverage	366	366	PASS
+gtdb-taxonomy-semantic-type	FeatureData[Taxonomy]	FeatureData[Taxonomy]	PASS
+gtdb-taxonomy-provenance	[('feature-classifier', 'classify_consensus_vsearch'), ('feature-classifier', 'find_consensus_annotation'), ('feature-classifier', 'vsearch_global')]	feature-classifier:classify_consensus_vsearch	PASS
+gtdb-search-results-semantic-type	FeatureData[BLAST6]	FeatureData[BLAST6]	PASS
+gtdb-search-results-provenance	[('feature-classifier', 'classify_consensus_vsearch'), ('feature-classifier', 'vsearch_global')]	feature-classifier:classify_consensus_vsearch	PASS
+gtdb-classification-query-coverage	366	366	PASS
+greengenes2-taxonomy-semantic-type	FeatureData[Taxonomy]	FeatureData[Taxonomy]	PASS
+greengenes2-taxonomy-provenance	[('feature-classifier', 'classify_consensus_vsearch'), ('feature-classifier', 'find_consensus_annotation'), ('feature-classifier', 'vsearch_global')]	feature-classifier:classify_consensus_vsearch	PASS
+greengenes2-search-results-semantic-type	FeatureData[BLAST6]	FeatureData[BLAST6]	PASS
+greengenes2-search-results-provenance	[('feature-classifier', 'classify_consensus_vsearch'), ('feature-classifier', 'vsearch_global')]	feature-classifier:classify_consensus_vsearch	PASS
+greengenes2-classification-query-coverage	366	366	PASS
+silva-assignment-nonzero	358	> 0	PASS
+silva-rank-monotonic	[358, 354, 354, 351, 351, 341, 0]	non-increasing	PASS
+silva-category-ledger-asvs	366	366	PASS
+silva-category-ledger-reads	5213	5213	PASS
+gtdb-assignment-nonzero	356	> 0	PASS
+gtdb-rank-monotonic	[356, 350, 349, 343, 337, 311, 273]	non-increasing	PASS
+gtdb-category-ledger-asvs	366	366	PASS
+gtdb-category-ledger-reads	5213	5213	PASS
+greengenes2-assignment-nonzero	362	> 0	PASS
+greengenes2-rank-monotonic	[362, 359, 356, 349, 336, 272, 186]	non-increasing	PASS
+greengenes2-category-ledger-asvs	366	366	PASS
+greengenes2-category-ledger-reads	5213	5213	PASS
+crosswalk-records	366	366	PASS
+crosswalk-asv-ledger	366	366	PASS
+crosswalk-read-ledger	5213	5213	PASS
+database-effect-observed	323	> 0	PASS
+figure-14-database-decision-map.pdf	26059	> 0 bytes	PASS
+figure-14-database-decision-map.png	316984	> 0 bytes	PASS
+figure-14-database-decision-map.tiff	593332	> 0 bytes	PASS
+figure-14-reference-scope-audit.pdf	22498	> 0 bytes	PASS
+figure-14-reference-scope-audit.png	153884	> 0 bytes	PASS
+figure-14-reference-scope-audit.tiff	698402	> 0 bytes	PASS
+figure-14-rank-assignment-coverage.pdf	24661	> 0 bytes	PASS
+figure-14-rank-assignment-coverage.png	263687	> 0 bytes	PASS
+figure-14-rank-assignment-coverage.tiff	460968	> 0 bytes	PASS
+figure-14-taxonomy-concordance.pdf	29959	> 0 bytes	PASS
+figure-14-taxonomy-concordance.png	174057	> 0 bytes	PASS
+figure-14-taxonomy-concordance.tiff	796686	> 0 bytes	PASS

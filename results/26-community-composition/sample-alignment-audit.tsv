@@ -1,0 +1,91 @@
+SampleID	CountTable	Metadata	GroupCode	Group	TypeCode	Type	LibrarySize	DisplayOrder
+S1	TRUE	TRUE	IW	Inland wetland	NE	Northeast	25542	1
+S2	TRUE	TRUE	IW	Inland wetland	NE	Northeast	26764	2
+S3	TRUE	TRUE	IW	Inland wetland	NE	Northeast	12843	3
+S4	TRUE	TRUE	IW	Inland wetland	NE	Northeast	13280	4
+S5	TRUE	TRUE	IW	Inland wetland	NE	Northeast	17640	5
+S6	TRUE	TRUE	IW	Inland wetland	NE	Northeast	22525	6
+S7	TRUE	TRUE	IW	Inland wetland	NE	Northeast	17370	7
+S9	TRUE	TRUE	IW	Inland wetland	NE	Northeast	25295	8
+S10	TRUE	TRUE	IW	Inland wetland	NE	Northeast	31793	9
+S11	TRUE	TRUE	IW	Inland wetland	NE	Northeast	16285	10
+S12	TRUE	TRUE	IW	Inland wetland	NE	Northeast	11457	11
+S13	TRUE	TRUE	IW	Inland wetland	NE	Northeast	13580	12
+S15	TRUE	TRUE	IW	Inland wetland	NW	Northwest	20864	25
+S16	TRUE	TRUE	IW	Inland wetland	NW	Northwest	14312	26
+S17	TRUE	TRUE	IW	Inland wetland	NW	Northwest	28215	27
+S18	TRUE	TRUE	IW	Inland wetland	NW	Northwest	27945	28
+S19	TRUE	TRUE	IW	Inland wetland	NW	Northwest	15540	29
+S20	TRUE	TRUE	IW	Inland wetland	NW	Northwest	17170	30
+S22	TRUE	TRUE	IW	Inland wetland	NE	Northeast	21718	13
+S23	TRUE	TRUE	IW	Inland wetland	NE	Northeast	16485	14
+S24	TRUE	TRUE	IW	Inland wetland	NE	Northeast	12309	15
+S25	TRUE	TRUE	IW	Inland wetland	NE	Northeast	37374	16
+S26	TRUE	TRUE	IW	Inland wetland	NE	Northeast	35104	17
+S27	TRUE	TRUE	IW	Inland wetland	NE	Northeast	16624	18
+S28	TRUE	TRUE	IW	Inland wetland	NE	Northeast	25853	19
+S30	TRUE	TRUE	IW	Inland wetland	NE	Northeast	12291	20
+S34	TRUE	TRUE	IW	Inland wetland	NE	Northeast	18989	21
+S35	TRUE	TRUE	IW	Inland wetland	NE	Northeast	11275	22
+S36	TRUE	TRUE	IW	Inland wetland	NE	Northeast	13034	23
+S37	TRUE	TRUE	IW	Inland wetland	NE	Northeast	16809	24
+S61	TRUE	TRUE	CW	Coastal wetland	NC	North China	14698	31
+S62	TRUE	TRUE	CW	Coastal wetland	NC	North China	15680	32
+S63	TRUE	TRUE	CW	Coastal wetland	NC	North China	15609	33
+S65	TRUE	TRUE	CW	Coastal wetland	NC	North China	34398	34
+S85	TRUE	TRUE	CW	Coastal wetland	NC	North China	15864	35
+S86	TRUE	TRUE	CW	Coastal wetland	NC	North China	15086	36
+S87	TRUE	TRUE	CW	Coastal wetland	NC	North China	13090	37
+S88	TRUE	TRUE	CW	Coastal wetland	NC	North China	15375	38
+S89	TRUE	TRUE	CW	Coastal wetland	NC	North China	20685	39
+S112	TRUE	TRUE	CW	Coastal wetland	YML	Yangtze middle-lower	18765	58
+S113	TRUE	TRUE	CW	Coastal wetland	YML	Yangtze middle-lower	31578	59
+S114	TRUE	TRUE	CW	Coastal wetland	YML	Yangtze middle-lower	30628	60
+S161	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	14746	40
+S162	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	20882	41
+S164	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	10674	42
+S165	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	13592	43
+S166	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	14975	44
+S167	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	12562	45
+S168	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	10364	46
+S169	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	21929	47
+S170	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	13259	48
+S171	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	15143	49
+S172	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	15230	50
+S173	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	11362	51
+S174	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	12288	52
+S175	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	12201	53
+S176	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	14640	54
+S177	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	11140	55
+S179	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	10365	56
+S182	TRUE	TRUE	CW	Coastal wetland	SC	Southern coast	13019	57
+S187	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	25908	61
+S188	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	15143	62
+S191	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	11594	63
+S194	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	14479	64
+S196	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	16626	65
+S197	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	14934	66
+S198	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	17006	67
+S201	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	31839	68
+S202	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	21086	69
+S203	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	16941	70
+S204	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	11920	71
+S205	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	12491	72
+S206	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	10672	73
+S207	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	16427	74
+S208	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	11223	75
+S209	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	12991	76
+S210	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	25846	77
+S213	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	15440	78
+S214	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	16604	79
+S215	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	18461	80
+S216	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	13572	81
+S217	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	28229	82
+S218	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	24813	83
+S219	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	14303	84
+S220	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	10597	85
+S221	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	15539	86
+S222	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	17704	87
+S223	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	19783	88
+S224	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	17417	89
+S225	TRUE	TRUE	TW	Tibetan wetland	QTP	Qinghai-Tibet Plateau	33970	90

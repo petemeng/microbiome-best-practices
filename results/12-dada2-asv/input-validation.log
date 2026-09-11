@@ -1,0 +1,6 @@
+$ conda run -n microbiome-qiime2-2026.4 qiime tools validate --level max <PROJECT_ROOT>/results/11-primer-trimming/nfcore-v4-trimmed.qza
+[exit_code] 0
+[stdout]
+Result <PROJECT_ROOT>/results/11-primer-trimming/nfcore-v4-trimmed.qza appears to be valid at level=max.
+[stderr]
+

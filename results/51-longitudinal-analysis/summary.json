@@ -1,0 +1,12 @@
+{
+  "samples": 222,
+  "subjects": 38,
+  "complete_consecutive_pairs": 180,
+  "random_intercept_aic": 326.2578,
+  "ar1_aic": 326.2104,
+  "ar1_phi": 0.1383,
+  "ar1_likelihood_ratio_p": 0.1525,
+  "cohort_time_t4_interaction": 0.5288,
+  "cohort_time_t4_p": 0.0112,
+  "note": "Association estimates describe the observed six-timepoint cohort and do not by themselves establish a diet-mediated causal effect."
+}

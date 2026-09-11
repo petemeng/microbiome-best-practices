@@ -1,0 +1,5 @@
+sample_id	library_label	filename_set	reads	observed_asvs	library_percent	status
+1	Library_1	S103	1144	82	21.945137157107233	PASS
+1a	Library_1a	S103	1251	133	23.997698062535967	PASS
+2	Library_2	S115	1503	106	28.831766737003644	PASS
+2a	Library_2a	S115	1315	138	25.225398043353156	PASS

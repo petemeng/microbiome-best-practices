@@ -1,0 +1,80 @@
+{
+  "bundle_id": "nfcore-v4-phyloseq-input-v1",
+  "counts_and_sequences": {
+    "commit": "f282ad2bafb3ca90190ec87290066ee1985df655",
+    "license": "MIT",
+    "processing": "QIIME 2/q2-dada2 2026.4.0; 220/200 truncation; maxEE 2/2",
+    "source": "nf-core/test-datasets ampliseq testdata"
+  },
+  "data_boundary": "The four library labels are nf-core test-data file identifiers. FilenameSet and FilenameVariant describe filenames only and are not biological groups.",
+  "dimensions": {
+    "features": 366,
+    "reads": 5213,
+    "representative_sequences": 366,
+    "samples": 4,
+    "taxonomy_ranks": 7
+  },
+  "files": {
+    "metadata.tsv": {
+      "bytes": 244,
+      "sha256": "6628dd51051c53884e82c540ceaff8cc34f69900a78d372239a2ed41ff5b7263"
+    },
+    "otutab.tsv": {
+      "bytes": 15162,
+      "sha256": "6c43bb8f929f935b60e42ed32737632d3be18ddd491f5298ba3a6abd6e3f18a9"
+    },
+    "representative-sequences.fasta.gz": {
+      "bytes": 26340,
+      "sha256": "a19e083cfb0ab757d557569bdf76aa3de78576ae35033a7e69a647976a370bc2"
+    },
+    "rooted-insertion-tree.nwk.gz": {
+      "bytes": 2380267,
+      "sha256": "7e541e2ed9e3f81d9b6c6bf98999335e7f684a37ac5dd5f2b56e61b2f4c4c47c"
+    },
+    "taxonomy-confidence.tsv": {
+      "bytes": 56043,
+      "sha256": "26fd4c66301f97c6feac8f3302ab19f269e9429c9ce65dea5c66ae277eca55b7"
+    },
+    "taxonomy.tsv": {
+      "bytes": 47119,
+      "sha256": "8ef235ea19923307eef4d8e1905c2f34b78cf25cf1a83f08aa00353f2c5c0d38"
+    }
+  },
+  "purpose": "Self-contained Article 17 phyloseq import contract",
+  "schema_version": 1,
+  "source_artifacts": {
+    "feature_table": {
+      "filename": "dada2-table.qza",
+      "sha256": "7a93c56db828f9873e64bcc23dee4ea239a26cda84f6383bf63595b7613bfa8b",
+      "uuid": "0bf16bac-7b74-4125-92cc-cddd62517b0a"
+    },
+    "representative_sequences": {
+      "filename": "dada2-rep-seqs.qza",
+      "sha256": "6898f4fb7496a709f3737ccf62f387535aa4044531728f3df68bf3df7d5eaa13",
+      "uuid": "61d5e273-caa4-406e-a477-e42c7af4bd5a"
+    },
+    "rooted_tree": {
+      "filename": "sepp-insertion-tree.qza",
+      "sha256": "d77ea464b7c29a5ae695d2525acc404c177b2de8c47e2c2fca9e46e1f556b71b",
+      "uuid": "76670697-5f72-4337-9ec8-94625e3fbab2"
+    },
+    "taxonomy": {
+      "filename": "query-taxonomy-c070.qza",
+      "sha256": "19187da43590e51a10329ca9b9b659707f935b27040e46072c831e5bb79f7458",
+      "uuid": "8e308322-f298-46b9-b970-d65d8608864c"
+    }
+  },
+  "taxonomy": {
+    "license": "CC BY 4.0",
+    "method": "q2-feature-classifier classify-sklearn, confidence 0.70",
+    "reference": "SILVA 138.2 SSURef NR99 515F/806R V4 LCA reference"
+  },
+  "tree": {
+    "full_tree_tips": 203818,
+    "method": "q2-fragment-insertion sepp, alignment subset 1000, placement subset 5000",
+    "note": "The bundle contains the complete insertion tree, not a query-only diagnostic tree.",
+    "query_tips": 366,
+    "reference": "QIIME 2 Greengenes 13_8 99% SEPP reference database",
+    "reference_tips": 203452
+  }
+}

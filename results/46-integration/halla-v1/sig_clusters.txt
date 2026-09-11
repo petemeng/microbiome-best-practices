@@ -1,0 +1,71 @@
+cluster_rank	cluster_X	cluster_Y	best_adjusted_pvalue
+1	Lacticaseibacillus [MB_G193];Pediococcus [MB_G103];Limosilactobacillus [MB_G072];Lactobacillus [MB_G050];Enterococcus_B [MB_G054];Fusobacterium [MB_G124];Escherichia [MB_G008];Klebsiella [MB_G017];Citrobacter [MB_G134];Enterobacter [MB_G086];Acidaminococcus [MB_G048];Anaeroglobus [MB_G130];Haemophilus_D [MB_G055];Longicatena [MB_G128];Ruminococcus_B [MB_G011]	carnosol [MT_M010];hydrocinnamic acid [MT_M011];taurochenodesoxycholic acid [MT_M007];glycoursodeoxycholic acid [MT_M019];C3-DC-CH3 carnitine [MT_M022];alpha-muricholate [MT_M002];5alpha-cholestanol [MT_M023];C20:5 LPC [MT_M035];C34:1 PC plasmalogen-A [MT_M037];C20:4 carnitine [MT_M009];N-methylproline [MT_M025];creatinine [MT_M005];creatine [MT_M028];C2 carnitine [MT_M004];C4 carnitine [MT_M020]	1.019111188130954e-19
+2	Lacticaseibacillus [MB_G193];Pediococcus [MB_G103];Limosilactobacillus [MB_G072];Lactobacillus [MB_G050];Enterococcus_B [MB_G054];Fusobacterium [MB_G124];Escherichia [MB_G008];Klebsiella [MB_G017];Citrobacter [MB_G134];Enterobacter [MB_G086];Acidaminococcus [MB_G048];Anaeroglobus [MB_G130];Haemophilus_D [MB_G055];Longicatena [MB_G128];Ruminococcus_B [MB_G011]	deoxycholic acid [MT_M015];glycodeoxycholic acid [MT_M018]	6.480842590245096e-16
+3	CAG-417 [MB_G202]	C34:1 PC plasmalogen-A [MT_M037];C20:4 carnitine [MT_M009];N-methylproline [MT_M025];creatinine [MT_M005];creatine [MT_M028];C2 carnitine [MT_M004];C4 carnitine [MT_M020]	1.6339617957766442e-06
+4	Longicatena [MB_G128]	C56:1 TAG [MT_M017];C56:2 TAG [MT_M026];C56:3 TAG [MT_M030];C56:6 TAG [MT_M031];C56:5 TAG [MT_M040]	2.6865374617947243e-06
+5	Ruminococcus_B [MB_G011]	imidazole propionate [MT_M034]	7.752471780507467e-06
+6	Enterococcus_B [MB_G054];Fusobacterium [MB_G124];Escherichia [MB_G008];Klebsiella [MB_G017];Citrobacter [MB_G134];Enterobacter [MB_G086]	C54:9 TAG [MT_M001];C52:6 TAG [MT_M016];C54:8 TAG [MT_M024]	1.0554308106883959e-05
+7	Scatacola_A [MB_G116]	4-hydroxystyrene [MT_M003];atenolol [MT_M006]	0.00010189273140195629
+8	Haemophilus_D [MB_G055]	C44:1 TAG [MT_M032];C46:1 TAG [MT_M036];C42:0 TAG [MT_M012];C42:0 TAG [MT_M014];C44:0 TAG [MT_M027]	0.0002049844958389429
+9	Pediococcus [MB_G103];Limosilactobacillus [MB_G072];Lactobacillus [MB_G050]	C56:7 TAG [MT_M038];C54:9 TAG [MT_M001];C52:6 TAG [MT_M016];C54:8 TAG [MT_M024]	0.0002859881847356982
+10	Scatacola_A [MB_G116]	C2 carnitine [MT_M004];C4 carnitine [MT_M020]	0.00031829738127104126
+11	Ruminococcus_B [MB_G011]	atenolol [MT_M006]	0.0004392652612139415
+12	Anaeroglobus [MB_G130];Haemophilus_D [MB_G055]	C54:9 TAG [MT_M001];C52:6 TAG [MT_M016];C54:8 TAG [MT_M024]	0.0006035977344406941
+13	CAG-417 [MB_G202]	deoxycholic acid [MT_M015];glycodeoxycholic acid [MT_M018]	0.000720057857057791
+14	Fusobacterium [MB_G124];Escherichia [MB_G008];Klebsiella [MB_G017];Citrobacter [MB_G134];Enterobacter [MB_G086]	C56:2 TAG [MT_M026]	0.0009094147690286229
+15	Pediococcus [MB_G103]	4-hydroxystyrene [MT_M003]	0.0013198634064383492
+16	Lacticaseibacillus [MB_G193];Pediococcus [MB_G103];Limosilactobacillus [MB_G072];Lactobacillus [MB_G050]	C56:1 TAG [MT_M017];C56:2 TAG [MT_M026];C56:3 TAG [MT_M030];C56:6 TAG [MT_M031];C56:5 TAG [MT_M040]	0.0014419206884357355
+17	CAG-417 [MB_G202]	taurochenodesoxycholic acid [MT_M007]	0.0017635002593757536
+18	Klebsiella [MB_G017]	4-hydroxystyrene [MT_M003]	0.0021830243576454163
+19	Akkermansia [MB_G015]	C56:1 TAG [MT_M017];C56:2 TAG [MT_M026];C56:3 TAG [MT_M030]	0.002232305510072985
+20	Scatacola_A [MB_G116]	hydrocinnamic acid [MT_M011]	0.003003317338760091
+21	Scatacola_A [MB_G116]	creatine [MT_M028]	0.003003317338760091
+22	Phascolarctobacterium [MB_G062]	taurodeoxycholic acid [MT_M013];taurolithocholic acid [MT_M021]	0.0037253059645567395
+23	Haemophilus_D [MB_G055]	atenolol [MT_M006]	0.004768455429875505
+24	Akkermansia [MB_G015]	ethyl glucuronide [MT_M029]	0.0053096002393227025
+25	Acidaminococcus [MB_G048]	atenolol [MT_M006]	0.005328340918310514
+26	Fusobacterium [MB_G124]	4-hydroxystyrene [MT_M003]	0.005624432614864258
+27	Merdimorpha [MB_G184]	creatinine [MT_M005]	0.006168702005524028
+28	Scatocola [MB_G173]	C34:1 PC plasmalogen-A [MT_M037]	0.006762011792353856
+29	Klebsiella [MB_G017]	taurodeoxycholic acid [MT_M013]	0.007155747981785071
+30	Scatacola_A [MB_G116]	deoxycholic acid [MT_M015];glycodeoxycholic acid [MT_M018]	0.007674347647050661
+31	CAG-417 [MB_G202]	saccharin [MT_M008]	0.007696975250438077
+32	Merdimorpha [MB_G184]	4-hydroxystyrene [MT_M003]	0.007760518289807413
+33	Enterobacter [MB_G086]	C56:1 TAG [MT_M017]	0.007760518289807413
+34	Scatacola_A [MB_G116]	taurodeoxycholic acid [MT_M013]	0.007871294824819122
+35	Ruminococcus_B [MB_G011]	C54:9 TAG [MT_M001]	0.010059496182327626
+36	Scatacola_A [MB_G116]	C20:4 carnitine [MT_M009]	0.011124408654462913
+37	Ruminococcus_B [MB_G011]	3-methylxanthine [MT_M033]	0.012312038856895819
+38	Phascolarctobacterium [MB_G062]	C56:7 TAG [MT_M038]	0.012316172677681984
+39	Phascolarctobacterium [MB_G062]	4-hydroxystyrene [MT_M003]	0.012421732084073345
+40	Longicatena [MB_G128]	imidazole propionate [MT_M034]	0.012501551833110218
+41	Enterococcus_B [MB_G054]	p-hydroxyphenylacetate [MT_M039]	0.01302416365949886
+42	Limosilactobacillus [MB_G072]	4-hydroxystyrene [MT_M003]	0.014407831388721537
+43	Merdimorpha [MB_G184]	taurodeoxycholic acid [MT_M013];taurolithocholic acid [MT_M021]	0.014636731395387058
+44	Scatacola_A [MB_G116]	p-hydroxyphenylacetate [MT_M039]	0.015424253574856914
+45	Anaeroglobus [MB_G130]	atenolol [MT_M006]	0.01630359210962215
+46	Ruminococcus_B [MB_G011]	p-hydroxyphenylacetate [MT_M039]	0.01912201453479642
+47	Anaeroglobus [MB_G130]	3-methylxanthine [MT_M033]	0.019659332493786038
+48	Phascolarctobacterium [MB_G062]	p-hydroxyphenylacetate [MT_M039]	0.019731190510006203
+49	Akkermansia [MB_G015]	4-hydroxystyrene [MT_M003]	0.02153392139341936
+50	Bifidobacterium [MB_G007]	3-methylxanthine [MT_M033]	0.024167448846756912
+51	Ruminococcus_B [MB_G011]	C52:6 TAG [MT_M016]	0.024544128641269446
+52	Merdimorpha [MB_G184]	C3-DC-CH3 carnitine [MT_M022];alpha-muricholate [MT_M002];5alpha-cholestanol [MT_M023]	0.024882151202877695
+53	Lacticaseibacillus [MB_G193]	taurodeoxycholic acid [MT_M013]	0.02695900610943137
+54	Enterobacter [MB_G086]	C56:3 TAG [MT_M030]	0.028868654252819727
+55	Scatacola_A [MB_G116]	glycoursodeoxycholic acid [MT_M019]	0.030700396282531166
+56	Scatocola [MB_G173]	C3-DC-CH3 carnitine [MT_M022]	0.031079151999785327
+57	Bifidobacterium [MB_G007]	alpha-muricholate [MT_M002]	0.03124501225958436
+58	Scatacola_A [MB_G116]	C3-DC-CH3 carnitine [MT_M022]	0.03209555260426718
+59	Phascolarctobacterium [MB_G062]	C56:6 TAG [MT_M031]	0.034887567042254285
+60	Scatacola_A [MB_G116]	C34:1 PC plasmalogen-A [MT_M037]	0.035124904914542815
+61	Enterobacter [MB_G086]	taurodeoxycholic acid [MT_M013]	0.03622074680445035
+62	Scatocola [MB_G173]	glycoursodeoxycholic acid [MT_M019]	0.03729061544003674
+63	Enterobacter [MB_G086]	p-hydroxyphenylacetate [MT_M039]	0.038706737421531814
+64	Phascolarctobacterium [MB_G062]	creatine [MT_M028]	0.0419993465473448
+65	CAG-417 [MB_G202]	C3-DC-CH3 carnitine [MT_M022]	0.04207668339660175
+66	Fusobacterium [MB_G124]	C56:1 TAG [MT_M017]	0.043847860701003216
+67	Bifidobacterium [MB_G007]	atenolol [MT_M006]	0.0449609546318482
+68	Parasutterella [MB_G067]	ethyl glucuronide [MT_M029]	0.04670614780191608
+69	Acidaminococcus [MB_G048]	C56:2 TAG [MT_M026]	0.04758509575307465
+70	Fusobacterium [MB_G124]	C42:0 TAG [MT_M012]	0.049704801653211915

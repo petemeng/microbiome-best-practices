@@ -1,0 +1,487 @@
+{
+  "status": "passed",
+  "scope": "Articles 01–55 local release assets",
+  "manifest": "/media/desk16/tly9658/wechat/16s/tutorial.yaml",
+  "manifest_hash": "be85a69a362e657f1d6c40387e467a8f3f4bcdf43b4278c84b96ee2111740c76",
+  "run_key": "ff4dd0588e10a487",
+  "formal_count": 55,
+  "html_count": 55,
+  "components": {
+    "articles_01_29_full_qa": {
+      "path": "/media/desk16/tly9658/wechat/16s/qa_report.json",
+      "sha256": "04dd646418b7fdea7caf36fd2ae16932447f99729b1304312f97ee68da76e251",
+      "status": "passed",
+      "checks_passed": null,
+      "checks_failed": null
+    },
+    "series_contract": {
+      "path": "/media/desk16/tly9658/wechat/16s/results/scaffold_validation.json",
+      "sha256": "9d84d0c88b75a7f0e03ce43edac979a89c83f371b1628da3ed0ec42a57d5d7e1",
+      "status": "passed",
+      "checks_passed": null,
+      "checks_failed": null
+    },
+    "articles_30_35": {
+      "path": "/media/desk16/tly9658/wechat/16s/results/articles-30-35-validation.json",
+      "sha256": "c00e7a385b00b0ce9be8429b28675c46a0b2ab39dc8b844f402f9f0f2fa3fab9",
+      "status": "passed",
+      "checks_passed": 359,
+      "checks_failed": 0
+    },
+    "articles_36_40": {
+      "path": "/media/desk16/tly9658/wechat/16s/results/articles-36-40-validation.json",
+      "sha256": "3d4dc1bdbfae151b03eb442f72d9b38f316a2c4e90e10df6301644ae5596464b",
+      "status": "passed",
+      "checks_passed": 406,
+      "checks_failed": 0
+    },
+    "articles_41_45": {
+      "path": "/media/desk16/tly9658/wechat/16s/results/articles-41-45-validation.json",
+      "sha256": "444e72c59b42e1e42908b7308e6997cfca77ff4e75b403a2c2ab4eaa1ca3b1b2",
+      "status": "passed",
+      "checks_passed": 445,
+      "checks_failed": 0
+    },
+    "articles_46_50": {
+      "path": "/media/desk16/tly9658/wechat/16s/results/articles-46-50-validation.json",
+      "sha256": "f7a8cf87b51727399bff988cb724767bc255c34c3d4cdaa5513d6e429d7220a3",
+      "status": "passed",
+      "checks_passed": 435,
+      "checks_failed": 0
+    },
+    "articles_51_55": {
+      "path": "/media/desk16/tly9658/wechat/16s/results/articles-51-55-validation.json",
+      "sha256": "37c8d6d89b69087bccd2e243f4ab0ccc260fc7f799f9bdd1af1197900bbab60c",
+      "status": "passed",
+      "checks_passed": 422,
+      "checks_failed": 0
+    }
+  },
+  "checks_total": 73,
+  "checks_passed": 73,
+  "checks_failed": 0,
+  "failed_checks": [],
+  "checks": [
+    {
+      "id": "component-articles_01_29_full_qa-exists",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/qa_report.json"
+    },
+    {
+      "id": "component-articles_01_29_full_qa-passed",
+      "status": "PASS",
+      "detail": "passed"
+    },
+    {
+      "id": "component-series_contract-exists",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/results/scaffold_validation.json"
+    },
+    {
+      "id": "component-series_contract-passed",
+      "status": "PASS",
+      "detail": "passed"
+    },
+    {
+      "id": "component-articles_30_35-exists",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/results/articles-30-35-validation.json"
+    },
+    {
+      "id": "component-articles_30_35-passed",
+      "status": "PASS",
+      "detail": "passed"
+    },
+    {
+      "id": "component-articles_36_40-exists",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/results/articles-36-40-validation.json"
+    },
+    {
+      "id": "component-articles_36_40-passed",
+      "status": "PASS",
+      "detail": "passed"
+    },
+    {
+      "id": "component-articles_41_45-exists",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/results/articles-41-45-validation.json"
+    },
+    {
+      "id": "component-articles_41_45-passed",
+      "status": "PASS",
+      "detail": "passed"
+    },
+    {
+      "id": "component-articles_46_50-exists",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/results/articles-46-50-validation.json"
+    },
+    {
+      "id": "component-articles_46_50-passed",
+      "status": "PASS",
+      "detail": "passed"
+    },
+    {
+      "id": "component-articles_51_55-exists",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/results/articles-51-55-validation.json"
+    },
+    {
+      "id": "component-articles_51_55-passed",
+      "status": "PASS",
+      "detail": "passed"
+    },
+    {
+      "id": "formal-series-coverage",
+      "status": "PASS",
+      "detail": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55
+      ]
+    },
+    {
+      "id": "manifest-formal-count",
+      "status": "PASS",
+      "detail": 55
+    },
+    {
+      "id": "manifest-total-count",
+      "status": "PASS",
+      "detail": 55
+    },
+    {
+      "id": "article-01-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/index.html"
+    },
+    {
+      "id": "article-02-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/02-scope-and-limits.html"
+    },
+    {
+      "id": "article-03-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/03-study-design.html"
+    },
+    {
+      "id": "article-04-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/04-contamination-controls.html"
+    },
+    {
+      "id": "article-05-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/05-batch-effects.html"
+    },
+    {
+      "id": "article-06-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/06-data-and-fastq.html"
+    },
+    {
+      "id": "article-07-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/07-wsl2-conda.html"
+    },
+    {
+      "id": "article-08-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/08-qiime2-install.html"
+    },
+    {
+      "id": "article-09-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/09-r-ecosystem.html"
+    },
+    {
+      "id": "article-10-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/10-import-provenance-qc.html"
+    },
+    {
+      "id": "article-11-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/11-primer-trimming.html"
+    },
+    {
+      "id": "article-12-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/12-dada2-asv.html"
+    },
+    {
+      "id": "article-13-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/13-its-18s.html"
+    },
+    {
+      "id": "article-14-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/14-taxonomy-databases.html"
+    },
+    {
+      "id": "article-15-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/15-train-classifier.html"
+    },
+    {
+      "id": "article-16-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/16-sepp-phylogeny.html"
+    },
+    {
+      "id": "article-17-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/17-phyloseq-import.html"
+    },
+    {
+      "id": "article-18-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/18-publication-graphics.html"
+    },
+    {
+      "id": "article-19-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/19-alpha-diversity.html"
+    },
+    {
+      "id": "article-20-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/20-alpha-group-tests.html"
+    },
+    {
+      "id": "article-21-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/21-beta-distances.html"
+    },
+    {
+      "id": "article-22-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/22-ordination-unconstrained.html"
+    },
+    {
+      "id": "article-23-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/23-permanova-dispersion.html"
+    },
+    {
+      "id": "article-24-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/24-ordination-constrained-cap.html"
+    },
+    {
+      "id": "article-25-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/25-environment-variance.html"
+    },
+    {
+      "id": "article-26-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/26-community-composition.html"
+    },
+    {
+      "id": "article-27-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/27-multirank-composition.html"
+    },
+    {
+      "id": "article-28-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/28-core-rare-biosphere.html"
+    },
+    {
+      "id": "article-29-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/29-community-typing-dmm.html"
+    },
+    {
+      "id": "article-30-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/30-compositional-data.html"
+    },
+    {
+      "id": "article-31-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/31-da-methods.html"
+    },
+    {
+      "id": "article-32-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/32-multirank-da.html"
+    },
+    {
+      "id": "article-33-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/33-da-visualization.html"
+    },
+    {
+      "id": "article-34-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/34-absolute-quantification.html"
+    },
+    {
+      "id": "article-35-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/35-cooccurrence-networks.html"
+    },
+    {
+      "id": "article-36-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/36-network-robustness.html"
+    },
+    {
+      "id": "article-37-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/37-microbial-wgcna.html"
+    },
+    {
+      "id": "article-38-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/38-community-assembly-bnti.html"
+    },
+    {
+      "id": "article-39-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/39-neutral-community-model.html"
+    },
+    {
+      "id": "article-40-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/40-niche-distance-decay.html"
+    },
+    {
+      "id": "article-41-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/41-picrust2.html"
+    },
+    {
+      "id": "article-42-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/42-functional-guilds.html"
+    },
+    {
+      "id": "article-43-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/43-random-forest.html"
+    },
+    {
+      "id": "article-44-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/44-cross-cohort-validation.html"
+    },
+    {
+      "id": "article-45-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/45-survival-analysis.html"
+    },
+    {
+      "id": "article-46-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/46-procrustes-mantel-halla.html"
+    },
+    {
+      "id": "article-47-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/47-spls-diablo.html"
+    },
+    {
+      "id": "article-48-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/48-mmvec-mofa.html"
+    },
+    {
+      "id": "article-49-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/49-multi-kingdom.html"
+    },
+    {
+      "id": "article-50-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/50-source-tracking.html"
+    },
+    {
+      "id": "article-51-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/51-longitudinal-analysis.html"
+    },
+    {
+      "id": "article-52-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/52-structural-equation-model.html"
+    },
+    {
+      "id": "article-53-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/53-mediation-analysis.html"
+    },
+    {
+      "id": "article-54-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/54-mendelian-randomization.html"
+    },
+    {
+      "id": "article-55-html",
+      "status": "PASS",
+      "detail": "/media/desk16/tly9658/wechat/16s/_site/chapters/55-causal-evidence.html"
+    },
+    {
+      "id": "formal-html-count",
+      "status": "PASS",
+      "detail": 55
+    }
+  ]
+}

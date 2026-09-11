@@ -1,0 +1,71 @@
+{
+  "article": 20,
+  "title": "Alpha diversity group tests and publication graphics",
+  "dataset": {
+    "source": "microeco 2.0.0 wetland 16S example",
+    "features": 13628,
+    "samples": 90,
+    "reads": 1619670,
+    "min_depth": 10364,
+    "median_depth": 15644.5,
+    "max_depth": 37374
+  },
+  "design": {
+    "selected_branch": "Independent three-group",
+    "groups": 3,
+    "samples_per_group": [30, 30, 30],
+    "subject_identifier_present": false,
+    "pair_identifier_present": false,
+    "time_identifier_present": false,
+    "declared_block_present": false
+  },
+  "standardization": {
+    "primary": "90% sample coverage",
+    "target_coverage": 0.9,
+    "rarefaction_samples": 56,
+    "extrapolation_samples": 34,
+    "max_effort_ratio": 1.4527550103,
+    "size_sensitivity_reads": 10000
+  },
+  "analysis": {
+    "primary_metrics": 3,
+    "omnibus_tests": 3,
+    "omnibus_rejections_holm": 0,
+    "pairwise_tests": 9,
+    "pairwise_rejections_holm": 0,
+    "bootstrap_replicates": 5000,
+    "raw_q0_p": 0.034594819719,
+    "size_q0_p": 0.51136505491,
+    "coverage_q0_p": 0.21638501727,
+    "sensitivity_rejections_holm9": 0
+  },
+  "graphics": {
+    "font_family": "DejaVu Sans",
+    "primary_figures": 4,
+    "vector_files": 8,
+    "raster_files": 8,
+    "format_files": 16,
+    "raster_ppi": 600,
+    "svg_files_with_text": 4,
+    "pdf_files_with_embedded_font": 4,
+    "lzw_tiff_files": 4,
+    "dimension_checks_passed": 16
+  },
+  "versions": {
+    "digest": "0.6.36",
+    "dplyr": "1.1.4",
+    "ggplot2": "3.5.2",
+    "iNEXT": "3.0.2",
+    "jsonlite": "1.8.8",
+    "ragg": "1.3.2",
+    "readr": "2.1.5",
+    "scales": "1.3.0",
+    "svglite": "2.1.3",
+    "systemfonts": "1.1.0",
+    "tidyr": "1.3.1",
+    "vegan": "2.6-6.1"
+  },
+  "checks_total": 188,
+  "checks_passed": 188,
+  "checks_failed": 0
+}

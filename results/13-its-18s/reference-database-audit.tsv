@@ -1,0 +1,4 @@
+database	asset	marker_scope	release	record_summary	taxonomy_contract	compatibility	identifier_or_sha256
+UNITE	Raw QIIME fungi release	Fungal ITS	v10.0 · 2025-02-19	20,295 RefS; 81,842 RepS	8 labels; raw taxonomy includes sh__	Source taxonomy for classifier training	doi:10.15156/BIO/3301241
+UNITE	Pre-trained dynamic fungi classifier	Fungal ITS	v10.0 · 2025-02-19	Classifier artifact	7 biological rank labels; sh__ removed before fitting	QIIME 2 2026.4	5df2370f89b7b64766c0d969ddc5374d3951fdb8bda598ae54ff15cf86b0fca0
+PR2	Full SSU DADA2 FASTA	Eukaryotic 18S / SSU	v5.1.1 · 2025-10-27	240,201 records; 54,122 unique taxonomy strings	9 ranks; no empty rank fields	DADA2 FASTA; import/train as required	0c8728abcbb2126eed2c7e587f820cbce39c138cdfdb51239bbf18621498462d

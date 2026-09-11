@@ -1,0 +1,7 @@
+Metric	Test	Term	Df	R2	F	P	Stage
+Aitchison	PERMANOVA	Habitat	6	0.154092221790419	21.7823065995543	0.001	Before adjustment
+Aitchison	PERMANOVA	Subject	2	0.211732108379399	89.7906522750305	0.001	Before adjustment
+Aitchison	PERMANOVA	Plate	3	0.0128257949336099	3.62608046507214	0.001	Before adjustment
+Aitchison after diagnostic adjustment	PERMANOVA	Habitat	6	0.156568744813938	21.8596270798517	0.001	After adjustment
+Aitchison after diagnostic adjustment	PERMANOVA	Subject	2	0.21432835683426	89.7715177815724	0.001	After adjustment
+Aitchison after diagnostic adjustment	PERMANOVA	Plate	3	0	0	1	After adjustment

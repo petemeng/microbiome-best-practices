@@ -1,0 +1,1951 @@
+Metric	SampleA	SampleB	HabitatA	HabitatB	PairType	Distance
+Bray-Curtis	CL3	CC1	Soil	Soil	Within habitat	0.61028
+Bray-Curtis	CL3	SV1	Soil	Soil	Within habitat	0.85374
+Bray-Curtis	CC1	SV1	Soil	Soil	Within habitat	0.7944
+Bray-Curtis	CL3	M31Fcsw	Soil	Human-associated	Between habitats	0.99532
+Bray-Curtis	CC1	M31Fcsw	Soil	Human-associated	Between habitats	0.9977
+Bray-Curtis	SV1	M31Fcsw	Soil	Human-associated	Between habitats	0.99724
+Bray-Curtis	CL3	M11Fcsw	Soil	Human-associated	Between habitats	0.99532
+Bray-Curtis	CC1	M11Fcsw	Soil	Human-associated	Between habitats	0.99818
+Bray-Curtis	SV1	M11Fcsw	Soil	Human-associated	Between habitats	0.99752
+Bray-Curtis	M31Fcsw	M11Fcsw	Human-associated	Human-associated	Within habitat	0.55032
+Bray-Curtis	CL3	M31Plmr	Soil	Human-associated	Between habitats	0.98744
+Bray-Curtis	CC1	M31Plmr	Soil	Human-associated	Between habitats	0.97986
+Bray-Curtis	SV1	M31Plmr	Soil	Human-associated	Between habitats	0.98328
+Bray-Curtis	M31Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	0.98706
+Bray-Curtis	M11Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	0.99586
+Bray-Curtis	CL3	M11Plmr	Soil	Human-associated	Between habitats	0.95702
+Bray-Curtis	CC1	M11Plmr	Soil	Human-associated	Between habitats	0.93134
+Bray-Curtis	SV1	M11Plmr	Soil	Human-associated	Between habitats	0.9368
+Bray-Curtis	M31Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	0.9838
+Bray-Curtis	M11Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	0.9908
+Bray-Curtis	M31Plmr	M11Plmr	Human-associated	Human-associated	Within habitat	0.80832
+Bray-Curtis	CL3	F21Plmr	Soil	Human-associated	Between habitats	0.9766
+Bray-Curtis	CC1	F21Plmr	Soil	Human-associated	Between habitats	0.9581
+Bray-Curtis	SV1	F21Plmr	Soil	Human-associated	Between habitats	0.9539
+Bray-Curtis	M31Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	0.99132
+Bray-Curtis	M11Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	0.9963
+Bray-Curtis	M31Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.47608
+Bray-Curtis	M11Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.7409
+Bray-Curtis	CL3	M31Tong	Soil	Human-associated	Between habitats	0.99632
+Bray-Curtis	CC1	M31Tong	Soil	Human-associated	Between habitats	0.99702
+Bray-Curtis	SV1	M31Tong	Soil	Human-associated	Between habitats	0.99634
+Bray-Curtis	M31Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	0.99676
+Bray-Curtis	M11Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	0.9975
+Bray-Curtis	M31Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.73348
+Bray-Curtis	M11Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.958
+Bray-Curtis	F21Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.76892
+Bray-Curtis	CL3	M11Tong	Soil	Human-associated	Between habitats	0.98188
+Bray-Curtis	CC1	M11Tong	Soil	Human-associated	Between habitats	0.98034
+Bray-Curtis	SV1	M11Tong	Soil	Human-associated	Between habitats	0.98604
+Bray-Curtis	M31Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	0.9889
+Bray-Curtis	M11Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	0.9899
+Bray-Curtis	M31Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.6992
+Bray-Curtis	M11Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.9271
+Bray-Curtis	F21Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.71024
+Bray-Curtis	M31Tong	M11Tong	Human-associated	Human-associated	Within habitat	0.59812
+Bray-Curtis	CL3	LMEpi24M	Soil	Freshwater	Between habitats	0.98614
+Bray-Curtis	CC1	LMEpi24M	Soil	Freshwater	Between habitats	0.97762
+Bray-Curtis	SV1	LMEpi24M	Soil	Freshwater	Between habitats	0.98828
+Bray-Curtis	M31Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	0.99812
+Bray-Curtis	M11Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	0.99854
+Bray-Curtis	M31Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.99344
+Bray-Curtis	M11Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.97466
+Bray-Curtis	F21Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.98788
+Bray-Curtis	M31Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.99284
+Bray-Curtis	M11Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.74724
+Bray-Curtis	CL3	SLEpi20M	Soil	Freshwater	Between habitats	0.98698
+Bray-Curtis	CC1	SLEpi20M	Soil	Freshwater	Between habitats	0.97848
+Bray-Curtis	SV1	SLEpi20M	Soil	Freshwater	Between habitats	0.98032
+Bray-Curtis	M31Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	0.99908
+Bray-Curtis	M11Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	0.99912
+Bray-Curtis	M31Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.99402
+Bray-Curtis	M11Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.97862
+Bray-Curtis	F21Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.98806
+Bray-Curtis	M31Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.99564
+Bray-Curtis	M11Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.90444
+Bray-Curtis	LMEpi24M	SLEpi20M	Freshwater	Freshwater	Within habitat	0.79168
+Bray-Curtis	CL3	AQC1cm	Soil	Freshwater	Between habitats	0.9527
+Bray-Curtis	CC1	AQC1cm	Soil	Freshwater	Between habitats	0.93388
+Bray-Curtis	SV1	AQC1cm	Soil	Freshwater	Between habitats	0.96536
+Bray-Curtis	M31Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	0.99098
+Bray-Curtis	M11Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	0.99254
+Bray-Curtis	M31Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.9923
+Bray-Curtis	M11Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.9676
+Bray-Curtis	F21Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.98324
+Bray-Curtis	M31Tong	AQC1cm	Human-associated	Freshwater	Between habitats	0.99
+Bray-Curtis	M11Tong	AQC1cm	Human-associated	Freshwater	Between habitats	0.93998
+Bray-Curtis	LMEpi24M	AQC1cm	Freshwater	Freshwater	Within habitat	0.94818
+Bray-Curtis	SLEpi20M	AQC1cm	Freshwater	Freshwater	Within habitat	0.94428
+Bray-Curtis	CL3	AQC4cm	Soil	Freshwater	Between habitats	0.9601
+Bray-Curtis	CC1	AQC4cm	Soil	Freshwater	Between habitats	0.9467
+Bray-Curtis	SV1	AQC4cm	Soil	Freshwater	Between habitats	0.97402
+Bray-Curtis	M31Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	0.99884
+Bray-Curtis	M11Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	0.99916
+Bray-Curtis	M31Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.99598
+Bray-Curtis	M11Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.97708
+Bray-Curtis	F21Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.98892
+Bray-Curtis	M31Tong	AQC4cm	Human-associated	Freshwater	Between habitats	0.99354
+Bray-Curtis	M11Tong	AQC4cm	Human-associated	Freshwater	Between habitats	0.9617
+Bray-Curtis	LMEpi24M	AQC4cm	Freshwater	Freshwater	Within habitat	0.97336
+Bray-Curtis	SLEpi20M	AQC4cm	Freshwater	Freshwater	Within habitat	0.96094
+Bray-Curtis	AQC1cm	AQC4cm	Freshwater	Freshwater	Within habitat	0.1771
+Bray-Curtis	CL3	AQC7cm	Soil	Freshwater	Between habitats	0.9499
+Bray-Curtis	CC1	AQC7cm	Soil	Freshwater	Between habitats	0.93488
+Bray-Curtis	SV1	AQC7cm	Soil	Freshwater	Between habitats	0.96848
+Bray-Curtis	M31Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	0.99884
+Bray-Curtis	M11Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	0.99892
+Bray-Curtis	M31Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.99554
+Bray-Curtis	M11Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.97328
+Bray-Curtis	F21Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.98762
+Bray-Curtis	M31Tong	AQC7cm	Human-associated	Freshwater	Between habitats	0.99474
+Bray-Curtis	M11Tong	AQC7cm	Human-associated	Freshwater	Between habitats	0.9571
+Bray-Curtis	LMEpi24M	AQC7cm	Freshwater	Freshwater	Within habitat	0.9626
+Bray-Curtis	SLEpi20M	AQC7cm	Freshwater	Freshwater	Within habitat	0.95118
+Bray-Curtis	AQC1cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.22758
+Bray-Curtis	AQC4cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.15432
+Bray-Curtis	CL3	NP2	Soil	Marine/estuarine	Between habitats	0.99464
+Bray-Curtis	CC1	NP2	Soil	Marine/estuarine	Between habitats	0.9932
+Bray-Curtis	SV1	NP2	Soil	Marine/estuarine	Between habitats	0.99505999999999994
+Bray-Curtis	M31Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	0.99896
+Bray-Curtis	M11Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	0.99902
+Bray-Curtis	M31Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.99676
+Bray-Curtis	M11Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.9911
+Bray-Curtis	F21Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.99096
+Bray-Curtis	M31Tong	NP2	Human-associated	Marine/estuarine	Between habitats	0.9901
+Bray-Curtis	M11Tong	NP2	Human-associated	Marine/estuarine	Between habitats	0.97
+Bray-Curtis	LMEpi24M	NP2	Freshwater	Marine/estuarine	Between habitats	0.99144
+Bray-Curtis	SLEpi20M	NP2	Freshwater	Marine/estuarine	Between habitats	0.97306
+Bray-Curtis	AQC1cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.96018
+Bray-Curtis	AQC4cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.96316
+Bray-Curtis	AQC7cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.96688
+Bray-Curtis	CL3	NP3	Soil	Marine/estuarine	Between habitats	0.99444
+Bray-Curtis	CC1	NP3	Soil	Marine/estuarine	Between habitats	0.9921
+Bray-Curtis	SV1	NP3	Soil	Marine/estuarine	Between habitats	0.99222
+Bray-Curtis	M31Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	0.99884
+Bray-Curtis	M11Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	0.99896
+Bray-Curtis	M31Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.99434
+Bray-Curtis	M11Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.98394
+Bray-Curtis	F21Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.98878
+Bray-Curtis	M31Tong	NP3	Human-associated	Marine/estuarine	Between habitats	0.9901
+Bray-Curtis	M11Tong	NP3	Human-associated	Marine/estuarine	Between habitats	0.9706
+Bray-Curtis	LMEpi24M	NP3	Freshwater	Marine/estuarine	Between habitats	0.992
+Bray-Curtis	SLEpi20M	NP3	Freshwater	Marine/estuarine	Between habitats	0.9811
+Bray-Curtis	AQC1cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.96246
+Bray-Curtis	AQC4cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.96842
+Bray-Curtis	AQC7cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.97314
+Bray-Curtis	NP2	NP3	Marine/estuarine	Marine/estuarine	Within habitat	0.7216
+Bray-Curtis	CL3	NP5	Soil	Marine/estuarine	Between habitats	0.9968
+Bray-Curtis	CC1	NP5	Soil	Marine/estuarine	Between habitats	0.99588
+Bray-Curtis	SV1	NP5	Soil	Marine/estuarine	Between habitats	0.99638
+Bray-Curtis	M31Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	0.99868
+Bray-Curtis	M11Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	0.99886
+Bray-Curtis	M31Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.99484
+Bray-Curtis	M11Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.99184
+Bray-Curtis	F21Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.99124
+Bray-Curtis	M31Tong	NP5	Human-associated	Marine/estuarine	Between habitats	0.9881
+Bray-Curtis	M11Tong	NP5	Human-associated	Marine/estuarine	Between habitats	0.97556
+Bray-Curtis	LMEpi24M	NP5	Freshwater	Marine/estuarine	Between habitats	0.99282
+Bray-Curtis	SLEpi20M	NP5	Freshwater	Marine/estuarine	Between habitats	0.9877
+Bray-Curtis	AQC1cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.93302
+Bray-Curtis	AQC4cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.93864
+Bray-Curtis	AQC7cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.94364
+Bray-Curtis	NP2	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.57058
+Bray-Curtis	NP3	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.68306
+Bray-Curtis	CL3	TRRsed1	Soil	Marine/estuarine	Between habitats	0.97824
+Bray-Curtis	CC1	TRRsed1	Soil	Marine/estuarine	Between habitats	0.97774
+Bray-Curtis	SV1	TRRsed1	Soil	Marine/estuarine	Between habitats	0.97844
+Bray-Curtis	M31Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.98458
+Bray-Curtis	M11Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.98768
+Bray-Curtis	M31Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.98186
+Bray-Curtis	M11Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.97274
+Bray-Curtis	F21Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.97252
+Bray-Curtis	M31Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.98296
+Bray-Curtis	M11Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.94324
+Bray-Curtis	LMEpi24M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.97668
+Bray-Curtis	SLEpi20M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.97638
+Bray-Curtis	AQC1cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.9448
+Bray-Curtis	AQC4cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.957
+Bray-Curtis	AQC7cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.95468
+Bray-Curtis	NP2	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.92496
+Bray-Curtis	NP3	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.9155
+Bray-Curtis	NP5	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.91752
+Bray-Curtis	CL3	TRRsed2	Soil	Marine/estuarine	Between habitats	0.9871
+Bray-Curtis	CC1	TRRsed2	Soil	Marine/estuarine	Between habitats	0.9844
+Bray-Curtis	SV1	TRRsed2	Soil	Marine/estuarine	Between habitats	0.98776
+Bray-Curtis	M31Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.9983
+Bray-Curtis	M11Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.99834
+Bray-Curtis	M31Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.98826
+Bray-Curtis	M11Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.96436
+Bray-Curtis	F21Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.96416
+Bray-Curtis	M31Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.99566
+Bray-Curtis	M11Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.98848
+Bray-Curtis	LMEpi24M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.99538
+Bray-Curtis	SLEpi20M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.99494
+Bray-Curtis	AQC1cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.9846
+Bray-Curtis	AQC4cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.9848
+Bray-Curtis	AQC7cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.98236
+Bray-Curtis	NP2	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.98304
+Bray-Curtis	NP3	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.97094
+Bray-Curtis	NP5	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.982
+Bray-Curtis	TRRsed1	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.5492
+Bray-Curtis	CL3	TRRsed3	Soil	Marine/estuarine	Between habitats	0.9815
+Bray-Curtis	CC1	TRRsed3	Soil	Marine/estuarine	Between habitats	0.98262
+Bray-Curtis	SV1	TRRsed3	Soil	Marine/estuarine	Between habitats	0.9852
+Bray-Curtis	M31Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.96016
+Bray-Curtis	M11Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.96512
+Bray-Curtis	M31Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.99074
+Bray-Curtis	M11Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.98222
+Bray-Curtis	F21Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.9857
+Bray-Curtis	M31Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.99344
+Bray-Curtis	M11Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.97834
+Bray-Curtis	LMEpi24M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.99408
+Bray-Curtis	SLEpi20M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.99408
+Bray-Curtis	AQC1cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.97228
+Bray-Curtis	AQC4cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.98048
+Bray-Curtis	AQC7cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.977
+Bray-Curtis	NP2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.98646
+Bray-Curtis	NP3	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.98014
+Bray-Curtis	NP5	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.98468
+Bray-Curtis	TRRsed1	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.60174
+Bray-Curtis	TRRsed2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.43866
+Bray-Curtis	CL3	TS28	Soil	Human-associated	Between habitats	0.99434
+Bray-Curtis	CC1	TS28	Soil	Human-associated	Between habitats	0.9968
+Bray-Curtis	SV1	TS28	Soil	Human-associated	Between habitats	0.99626
+Bray-Curtis	M31Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.64538
+Bray-Curtis	M11Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.78888
+Bray-Curtis	M31Plmr	TS28	Human-associated	Human-associated	Within habitat	0.99498
+Bray-Curtis	M11Plmr	TS28	Human-associated	Human-associated	Within habitat	0.9894
+Bray-Curtis	F21Plmr	TS28	Human-associated	Human-associated	Within habitat	0.99404
+Bray-Curtis	M31Tong	TS28	Human-associated	Human-associated	Within habitat	0.99604
+Bray-Curtis	M11Tong	TS28	Human-associated	Human-associated	Within habitat	0.98776
+Bray-Curtis	LMEpi24M	TS28	Freshwater	Human-associated	Between habitats	0.99778
+Bray-Curtis	SLEpi20M	TS28	Freshwater	Human-associated	Between habitats	0.99834
+Bray-Curtis	AQC1cm	TS28	Freshwater	Human-associated	Between habitats	0.9888
+Bray-Curtis	AQC4cm	TS28	Freshwater	Human-associated	Between habitats	0.99784
+Bray-Curtis	AQC7cm	TS28	Freshwater	Human-associated	Between habitats	0.99788
+Bray-Curtis	NP2	TS28	Marine/estuarine	Human-associated	Between habitats	0.99794
+Bray-Curtis	NP3	TS28	Marine/estuarine	Human-associated	Between habitats	0.99776
+Bray-Curtis	NP5	TS28	Marine/estuarine	Human-associated	Between habitats	0.9975
+Bray-Curtis	TRRsed1	TS28	Marine/estuarine	Human-associated	Between habitats	0.9814
+Bray-Curtis	TRRsed2	TS28	Marine/estuarine	Human-associated	Between habitats	0.9966
+Bray-Curtis	TRRsed3	TS28	Marine/estuarine	Human-associated	Between habitats	0.95094
+Bray-Curtis	CL3	TS29	Soil	Human-associated	Between habitats	0.99432
+Bray-Curtis	CC1	TS29	Soil	Human-associated	Between habitats	0.9969
+Bray-Curtis	SV1	TS29	Soil	Human-associated	Between habitats	0.99626
+Bray-Curtis	M31Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.78582
+Bray-Curtis	M11Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.88888
+Bray-Curtis	M31Plmr	TS29	Human-associated	Human-associated	Within habitat	0.99488
+Bray-Curtis	M11Plmr	TS29	Human-associated	Human-associated	Within habitat	0.98942
+Bray-Curtis	F21Plmr	TS29	Human-associated	Human-associated	Within habitat	0.99396
+Bray-Curtis	M31Tong	TS29	Human-associated	Human-associated	Within habitat	0.99532
+Bray-Curtis	M11Tong	TS29	Human-associated	Human-associated	Within habitat	0.9872
+Bray-Curtis	LMEpi24M	TS29	Freshwater	Human-associated	Between habitats	0.99666
+Bray-Curtis	SLEpi20M	TS29	Freshwater	Human-associated	Between habitats	0.9972
+Bray-Curtis	AQC1cm	TS29	Freshwater	Human-associated	Between habitats	0.98758
+Bray-Curtis	AQC4cm	TS29	Freshwater	Human-associated	Between habitats	0.99662
+Bray-Curtis	AQC7cm	TS29	Freshwater	Human-associated	Between habitats	0.99666
+Bray-Curtis	NP2	TS29	Marine/estuarine	Human-associated	Between habitats	0.99712
+Bray-Curtis	NP3	TS29	Marine/estuarine	Human-associated	Between habitats	0.99702
+Bray-Curtis	NP5	TS29	Marine/estuarine	Human-associated	Between habitats	0.99688
+Bray-Curtis	TRRsed1	TS29	Marine/estuarine	Human-associated	Between habitats	0.9828
+Bray-Curtis	TRRsed2	TS29	Marine/estuarine	Human-associated	Between habitats	0.99712
+Bray-Curtis	TRRsed3	TS29	Marine/estuarine	Human-associated	Between habitats	0.96094
+Bray-Curtis	TS28	TS29	Human-associated	Human-associated	Within habitat	0.62076
+Bray-Curtis	CL3	Even1	Soil	Mock	Between habitats	0.98832
+Bray-Curtis	CC1	Even1	Soil	Mock	Between habitats	0.99188
+Bray-Curtis	SV1	Even1	Soil	Mock	Between habitats	0.9921
+Bray-Curtis	M31Fcsw	Even1	Human-associated	Mock	Between habitats	0.8908
+Bray-Curtis	M11Fcsw	Even1	Human-associated	Mock	Between habitats	0.87974
+Bray-Curtis	M31Plmr	Even1	Human-associated	Mock	Between habitats	0.9932
+Bray-Curtis	M11Plmr	Even1	Human-associated	Mock	Between habitats	0.98856
+Bray-Curtis	F21Plmr	Even1	Human-associated	Mock	Between habitats	0.9884
+Bray-Curtis	M31Tong	Even1	Human-associated	Mock	Between habitats	0.99454
+Bray-Curtis	M11Tong	Even1	Human-associated	Mock	Between habitats	0.98514
+Bray-Curtis	LMEpi24M	Even1	Freshwater	Mock	Between habitats	0.99526
+Bray-Curtis	SLEpi20M	Even1	Freshwater	Mock	Between habitats	0.99416
+Bray-Curtis	AQC1cm	Even1	Freshwater	Mock	Between habitats	0.98634
+Bray-Curtis	AQC4cm	Even1	Freshwater	Mock	Between habitats	0.99272
+Bray-Curtis	AQC7cm	Even1	Freshwater	Mock	Between habitats	0.9928
+Bray-Curtis	NP2	Even1	Marine/estuarine	Mock	Between habitats	0.994
+Bray-Curtis	NP3	Even1	Marine/estuarine	Mock	Between habitats	0.99412
+Bray-Curtis	NP5	Even1	Marine/estuarine	Mock	Between habitats	0.9948
+Bray-Curtis	TRRsed1	Even1	Marine/estuarine	Mock	Between habitats	0.94268
+Bray-Curtis	TRRsed2	Even1	Marine/estuarine	Mock	Between habitats	0.9948
+Bray-Curtis	TRRsed3	Even1	Marine/estuarine	Mock	Between habitats	0.9527
+Bray-Curtis	TS28	Even1	Human-associated	Mock	Between habitats	0.87738
+Bray-Curtis	TS29	Even1	Human-associated	Mock	Between habitats	0.87874
+Bray-Curtis	CL3	Even2	Soil	Mock	Between habitats	0.98912
+Bray-Curtis	CC1	Even2	Soil	Mock	Between habitats	0.992
+Bray-Curtis	SV1	Even2	Soil	Mock	Between habitats	0.99238
+Bray-Curtis	M31Fcsw	Even2	Human-associated	Mock	Between habitats	0.89862
+Bray-Curtis	M11Fcsw	Even2	Human-associated	Mock	Between habitats	0.88946
+Bray-Curtis	M31Plmr	Even2	Human-associated	Mock	Between habitats	0.99322
+Bray-Curtis	M11Plmr	Even2	Human-associated	Mock	Between habitats	0.98948
+Bray-Curtis	F21Plmr	Even2	Human-associated	Mock	Between habitats	0.98946
+Bray-Curtis	M31Tong	Even2	Human-associated	Mock	Between habitats	0.99554
+Bray-Curtis	M11Tong	Even2	Human-associated	Mock	Between habitats	0.98956
+Bray-Curtis	LMEpi24M	Even2	Freshwater	Mock	Between habitats	0.99698
+Bray-Curtis	SLEpi20M	Even2	Freshwater	Mock	Between habitats	0.99758
+Bray-Curtis	AQC1cm	Even2	Freshwater	Mock	Between habitats	0.9907
+Bray-Curtis	AQC4cm	Even2	Freshwater	Mock	Between habitats	0.99654
+Bray-Curtis	AQC7cm	Even2	Freshwater	Mock	Between habitats	0.99656
+Bray-Curtis	NP2	Even2	Marine/estuarine	Mock	Between habitats	0.9973
+Bray-Curtis	NP3	Even2	Marine/estuarine	Mock	Between habitats	0.99704
+Bray-Curtis	NP5	Even2	Marine/estuarine	Mock	Between habitats	0.99684
+Bray-Curtis	TRRsed1	Even2	Marine/estuarine	Mock	Between habitats	0.94728
+Bray-Curtis	TRRsed2	Even2	Marine/estuarine	Mock	Between habitats	0.99668
+Bray-Curtis	TRRsed3	Even2	Marine/estuarine	Mock	Between habitats	0.95654
+Bray-Curtis	TS28	Even2	Human-associated	Mock	Between habitats	0.88458
+Bray-Curtis	TS29	Even2	Human-associated	Mock	Between habitats	0.88524
+Bray-Curtis	Even1	Even2	Mock	Mock	Within habitat	0.07958
+Bray-Curtis	CL3	Even3	Soil	Mock	Between habitats	0.99154
+Bray-Curtis	CC1	Even3	Soil	Mock	Between habitats	0.99446
+Bray-Curtis	SV1	Even3	Soil	Mock	Between habitats	0.99264
+Bray-Curtis	M31Fcsw	Even3	Human-associated	Mock	Between habitats	0.89704
+Bray-Curtis	M11Fcsw	Even3	Human-associated	Mock	Between habitats	0.88604
+Bray-Curtis	M31Plmr	Even3	Human-associated	Mock	Between habitats	0.99338
+Bray-Curtis	M11Plmr	Even3	Human-associated	Mock	Between habitats	0.98964
+Bray-Curtis	F21Plmr	Even3	Human-associated	Mock	Between habitats	0.98992
+Bray-Curtis	M31Tong	Even3	Human-associated	Mock	Between habitats	0.99566
+Bray-Curtis	M11Tong	Even3	Human-associated	Mock	Between habitats	0.9898
+Bray-Curtis	LMEpi24M	Even3	Freshwater	Mock	Between habitats	0.99722
+Bray-Curtis	SLEpi20M	Even3	Freshwater	Mock	Between habitats	0.99736
+Bray-Curtis	AQC1cm	Even3	Freshwater	Mock	Between habitats	0.99174
+Bray-Curtis	AQC4cm	Even3	Freshwater	Mock	Between habitats	0.99756
+Bray-Curtis	AQC7cm	Even3	Freshwater	Mock	Between habitats	0.99728000000000006
+Bray-Curtis	NP2	Even3	Marine/estuarine	Mock	Between habitats	0.99768
+Bray-Curtis	NP3	Even3	Marine/estuarine	Mock	Between habitats	0.99726
+Bray-Curtis	NP5	Even3	Marine/estuarine	Mock	Between habitats	0.9974
+Bray-Curtis	TRRsed1	Even3	Marine/estuarine	Mock	Between habitats	0.94664
+Bray-Curtis	TRRsed2	Even3	Marine/estuarine	Mock	Between habitats	0.99712
+Bray-Curtis	TRRsed3	Even3	Marine/estuarine	Mock	Between habitats	0.95722
+Bray-Curtis	TS28	Even3	Human-associated	Mock	Between habitats	0.88122
+Bray-Curtis	TS29	Even3	Human-associated	Mock	Between habitats	0.8811
+Bray-Curtis	Even1	Even3	Mock	Mock	Within habitat	0.0705
+Bray-Curtis	Even2	Even3	Mock	Mock	Within habitat	0.09148
+Jaccard	CL3	CC1	Soil	Soil	Within habitat	0.5250106883283454
+Jaccard	CL3	SV1	Soil	Soil	Within habitat	0.7051671732522796
+Jaccard	CC1	SV1	Soil	Soil	Within habitat	0.6573663073346016
+Jaccard	CL3	M31Fcsw	Soil	Human-associated	Between habitats	0.9707026186155042
+Jaccard	CC1	M31Fcsw	Soil	Human-associated	Between habitats	0.9808231992516371
+Jaccard	SV1	M31Fcsw	Soil	Human-associated	Between habitats	0.9732973297329733
+Jaccard	CL3	M11Fcsw	Soil	Human-associated	Between habitats	0.9741030482870245
+Jaccard	CC1	M11Fcsw	Soil	Human-associated	Between habitats	0.9854756717501816
+Jaccard	SV1	M11Fcsw	Soil	Human-associated	Between habitats	0.9767368751964791
+Jaccard	M31Fcsw	M11Fcsw	Human-associated	Human-associated	Within habitat	0.7119509703779368
+Jaccard	CL3	M31Plmr	Soil	Human-associated	Between habitats	0.9278055754110078
+Jaccard	CC1	M31Plmr	Soil	Human-associated	Between habitats	0.913536341409202
+Jaccard	SV1	M31Plmr	Soil	Human-associated	Between habitats	0.8960893854748604
+Jaccard	M31Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	0.9323882224645584
+Jaccard	M11Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	0.9439858490566038
+Jaccard	CL3	M11Plmr	Soil	Human-associated	Between habitats	0.8499153259949196
+Jaccard	CC1	M11Plmr	Soil	Human-associated	Between habitats	0.814942996742671
+Jaccard	SV1	M11Plmr	Soil	Human-associated	Between habitats	0.8029894633668219
+Jaccard	M31Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	0.9394717534849596
+Jaccard	M11Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	0.9494793675279599
+Jaccard	M31Plmr	M11Plmr	Human-associated	Human-associated	Within habitat	0.7320237212750185
+Jaccard	CL3	F21Plmr	Soil	Human-associated	Between habitats	0.8940782122905028
+Jaccard	CC1	F21Plmr	Soil	Human-associated	Between habitats	0.864468085106383
+Jaccard	SV1	F21Plmr	Soil	Human-associated	Between habitats	0.8316963100610566
+Jaccard	M31Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	0.9502834714348016
+Jaccard	M11Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	0.964401294498382
+Jaccard	M31Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.6746389891696751
+Jaccard	M11Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.6668963141577678
+Jaccard	CL3	M31Tong	Soil	Human-associated	Between habitats	0.9756364631809472
+Jaccard	CC1	M31Tong	Soil	Human-associated	Between habitats	0.9772164437840515
+Jaccard	SV1	M31Tong	Soil	Human-associated	Between habitats	0.9683462532299743
+Jaccard	M31Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	0.937112488928255
+Jaccard	M11Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	0.9284232365145229
+Jaccard	M31Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.8497340425531915
+Jaccard	M11Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.9095004095004094
+Jaccard	F21Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.8802672147995889
+Jaccard	CL3	M11Tong	Soil	Human-associated	Between habitats	0.9096371620060089
+Jaccard	CC1	M11Tong	Soil	Human-associated	Between habitats	0.9085079093629757
+Jaccard	SV1	M11Tong	Soil	Human-associated	Between habitats	0.9063729346970888
+Jaccard	M31Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	0.9200992555831266
+Jaccard	M11Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	0.9233654876741693
+Jaccard	M31Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.8234782608695652
+Jaccard	M11Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.8227110967324489
+Jaccard	F21Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.8179093293368302
+Jaccard	M31Tong	M11Tong	Human-associated	Human-associated	Within habitat	0.7771500313873195
+Jaccard	CL3	LMEpi24M	Soil	Freshwater	Between habitats	0.943550514376154
+Jaccard	CC1	LMEpi24M	Soil	Freshwater	Between habitats	0.9280136652025378
+Jaccard	SV1	LMEpi24M	Soil	Freshwater	Between habitats	0.9330246913580247
+Jaccard	M31Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	0.9653465346534654
+Jaccard	M11Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	0.9632000000000001
+Jaccard	M31Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.9227027027027027
+Jaccard	M11Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.8958490566037736
+Jaccard	F21Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.907871198568873
+Jaccard	M31Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.8863841298467087
+Jaccard	M11Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.7365714285714287
+Jaccard	CL3	SLEpi20M	Soil	Freshwater	Between habitats	0.9347655226617763
+Jaccard	CC1	SLEpi20M	Soil	Freshwater	Between habitats	0.9168287937743191
+Jaccard	SV1	SLEpi20M	Soil	Freshwater	Between habitats	0.9251451267949892
+Jaccard	M31Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	0.9771812080536914
+Jaccard	M11Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	0.9750755287009064
+Jaccard	M31Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.921218487394958
+Jaccard	M11Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.8981925488749538
+Jaccard	F21Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.9021929824561403
+Jaccard	M31Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.9172932330827067
+Jaccard	M11Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.8035808320168509
+Jaccard	LMEpi24M	SLEpi20M	Freshwater	Freshwater	Within habitat	0.7626984126984127
+Jaccard	CL3	AQC1cm	Soil	Freshwater	Between habitats	0.8421959095801936
+Jaccard	CC1	AQC1cm	Soil	Freshwater	Between habitats	0.8182004509120722
+Jaccard	SV1	AQC1cm	Soil	Freshwater	Between habitats	0.870967741935484
+Jaccard	M31Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	0.9542772861356932
+Jaccard	M11Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	0.9586422161529458
+Jaccard	M31Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.9354838709677419
+Jaccard	M11Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.8713573116303492
+Jaccard	F21Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.9046798736721217
+Jaccard	M31Tong	AQC1cm	Human-associated	Freshwater	Between habitats	0.9142381348875938
+Jaccard	M11Tong	AQC1cm	Human-associated	Freshwater	Between habitats	0.7763741891430521
+Jaccard	LMEpi24M	AQC1cm	Freshwater	Freshwater	Within habitat	0.846987951807229
+Jaccard	SLEpi20M	AQC1cm	Freshwater	Freshwater	Within habitat	0.8205953338696702
+Jaccard	CL3	AQC4cm	Soil	Freshwater	Between habitats	0.8657174151150054
+Jaccard	CC1	AQC4cm	Soil	Freshwater	Between habitats	0.8461857379767828
+Jaccard	SV1	AQC4cm	Soil	Freshwater	Between habitats	0.892079444843264
+Jaccard	M31Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	0.9814528593508501
+Jaccard	M11Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	0.985620377978636
+Jaccard	M31Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.954770551337075
+Jaccard	M11Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.9045964724746126
+Jaccard	F21Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.9212175470008952
+Jaccard	M31Tong	AQC4cm	Human-associated	Freshwater	Between habitats	0.93545534924845275
+Jaccard	M11Tong	AQC4cm	Human-associated	Freshwater	Between habitats	0.8266296809986131
+Jaccard	LMEpi24M	AQC4cm	Freshwater	Freshwater	Within habitat	0.8763146823727387
+Jaccard	SLEpi20M	AQC4cm	Freshwater	Freshwater	Within habitat	0.8438425730004232
+Jaccard	AQC1cm	AQC4cm	Freshwater	Freshwater	Within habitat	0.5442764578833693
+Jaccard	CL3	AQC7cm	Soil	Freshwater	Between habitats	0.8486277873070327
+Jaccard	CC1	AQC7cm	Soil	Freshwater	Between habitats	0.8246580934884671
+Jaccard	SV1	AQC7cm	Soil	Freshwater	Between habitats	0.8801672085462146
+Jaccard	M31Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	0.984560143626571
+Jaccard	M11Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	0.9847386493704693
+Jaccard	M31Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.9548708372237784
+Jaccard	M11Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.902276797134817
+Jaccard	F21Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.9257900677200903
+Jaccard	M31Tong	AQC7cm	Human-associated	Freshwater	Between habitats	0.9503431570448122
+Jaccard	M11Tong	AQC7cm	Human-associated	Freshwater	Between habitats	0.8321358589157413
+Jaccard	LMEpi24M	AQC7cm	Freshwater	Freshwater	Within habitat	0.8679319889284303
+Jaccard	SLEpi20M	AQC7cm	Freshwater	Freshwater	Within habitat	0.8424386381631038
+Jaccard	AQC1cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.5669824086603518
+Jaccard	AQC4cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.484984984984985
+Jaccard	CL3	NP2	Soil	Marine/estuarine	Between habitats	0.961317694035438
+Jaccard	CC1	NP2	Soil	Marine/estuarine	Between habitats	0.9588100686498856
+Jaccard	SV1	NP2	Soil	Marine/estuarine	Between habitats	0.9635790077430455
+Jaccard	M31Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	0.9746835443037974
+Jaccard	M11Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	0.9738700564971752
+Jaccard	M31Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.9568170790878214
+Jaccard	M11Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.9416409200137316
+Jaccard	F21Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.9313322368421052
+Jaccard	M31Tong	NP2	Human-associated	Marine/estuarine	Between habitats	0.8599508599508598
+Jaccard	M11Tong	NP2	Human-associated	Marine/estuarine	Between habitats	0.816591704147926
+Jaccard	LMEpi24M	NP2	Freshwater	Marine/estuarine	Between habitats	0.889261744966443
+Jaccard	SLEpi20M	NP2	Freshwater	Marine/estuarine	Between habitats	0.8710526315789473
+Jaccard	AQC1cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.8367268536304265
+Jaccard	AQC4cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.8270427208627126
+Jaccard	AQC7cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.8490853658536585
+Jaccard	CL3	NP3	Soil	Marine/estuarine	Between habitats	0.9695611137328928
+Jaccard	CC1	NP3	Soil	Marine/estuarine	Between habitats	0.9647289353363814
+Jaccard	SV1	NP3	Soil	Marine/estuarine	Between habitats	0.9610990206746463
+Jaccard	M31Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	0.9741427768409219
+Jaccard	M11Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	0.9746444032158318
+Jaccard	M31Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.9495985727029438
+Jaccard	M11Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.9254901960784313
+Jaccard	F21Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.9223674096848579
+Jaccard	M31Tong	NP3	Human-associated	Marine/estuarine	Between habitats	0.8777231201686578
+Jaccard	M11Tong	NP3	Human-associated	Marine/estuarine	Between habitats	0.8492844364937387
+Jaccard	LMEpi24M	NP3	Freshwater	Marine/estuarine	Between habitats	0.9242336610757663
+Jaccard	SLEpi20M	NP3	Freshwater	Marine/estuarine	Between habitats	0.9177464788732395
+Jaccard	AQC1cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.8984667802385008
+Jaccard	AQC4cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.9187165775401069
+Jaccard	AQC7cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.9328259430840503
+Jaccard	NP2	NP3	Marine/estuarine	Marine/estuarine	Within habitat	0.7409488139825219
+Jaccard	CL3	NP5	Soil	Marine/estuarine	Between habitats	0.9778950012559658
+Jaccard	CC1	NP5	Soil	Marine/estuarine	Between habitats	0.973987108655617
+Jaccard	SV1	NP5	Soil	Marine/estuarine	Between habitats	0.971970802919708
+Jaccard	M31Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	0.9717171717171718
+Jaccard	M11Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	0.9696969696969697
+Jaccard	M31Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.9467485919098823
+Jaccard	M11Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.9366998577524894
+Jaccard	F21Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.9313432835820895
+Jaccard	M31Tong	NP5	Human-associated	Marine/estuarine	Between habitats	0.8265582655826558
+Jaccard	M11Tong	NP5	Human-associated	Marine/estuarine	Between habitats	0.8386932108218479
+Jaccard	LMEpi24M	NP5	Freshwater	Marine/estuarine	Between habitats	0.9264604810996564
+Jaccard	SLEpi20M	NP5	Freshwater	Marine/estuarine	Between habitats	0.9230258792302588
+Jaccard	AQC1cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.8995125609298837
+Jaccard	AQC4cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.9164025356576861
+Jaccard	AQC7cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.936023264267539
+Jaccard	NP2	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.6817484662576687
+Jaccard	NP3	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.6875852660300137
+Jaccard	CL3	TRRsed1	Soil	Marine/estuarine	Between habitats	0.9120702005730659
+Jaccard	CC1	TRRsed1	Soil	Marine/estuarine	Between habitats	0.8999148936170213
+Jaccard	SV1	TRRsed1	Soil	Marine/estuarine	Between habitats	0.8946000000000001
+Jaccard	M31Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.9642333626502492
+Jaccard	M11Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.9700122399020807
+Jaccard	M31Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.9225669583664811
+Jaccard	M11Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.8927304964539007
+Jaccard	F21Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.8892171344165436
+Jaccard	M31Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.9103198153643257
+Jaccard	M11Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.8216350123864574
+Jaccard	LMEpi24M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.9207501512401693
+Jaccard	SLEpi20M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.9215453194650817
+Jaccard	AQC1cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.8490566037735848
+Jaccard	AQC4cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.8749406739439962
+Jaccard	AQC7cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.8793730122671514
+Jaccard	NP2	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.8513721862473018
+Jaccard	NP3	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.8126888217522658
+Jaccard	NP5	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.8433121019108281
+Jaccard	CL3	TRRsed2	Soil	Marine/estuarine	Between habitats	0.926859000406339
+Jaccard	CC1	TRRsed2	Soil	Marine/estuarine	Between habitats	0.9193825042881646
+Jaccard	SV1	TRRsed2	Soil	Marine/estuarine	Between habitats	0.9243353783231084
+Jaccard	M31Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.97837434750186425
+Jaccard	M11Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.9805863708399366
+Jaccard	M31Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.9379668723611562
+Jaccard	M11Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.9175894926603142
+Jaccard	F21Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.9106619800820152
+Jaccard	M31Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.9485140226035998
+Jaccard	M11Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.8923467767545252
+Jaccard	LMEpi24M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.9524348810872028
+Jaccard	SLEpi20M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.9484612532443456
+Jaccard	AQC1cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.900026518164943
+Jaccard	AQC4cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.898744769874477
+Jaccard	AQC7cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.9015654019633855
+Jaccard	NP2	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.8956685499058381
+Jaccard	NP3	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.8703637018365142
+Jaccard	NP5	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.9072363356428021
+Jaccard	TRRsed1	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.632514817950889
+Jaccard	CL3	TRRsed3	Soil	Marine/estuarine	Between habitats	0.9175117004680187
+Jaccard	CC1	TRRsed3	Soil	Marine/estuarine	Between habitats	0.9164386060937786
+Jaccard	SV1	TRRsed3	Soil	Marine/estuarine	Between habitats	0.9196717771539624
+Jaccard	M31Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.9307036247334755
+Jaccard	M11Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.9371727748691099
+Jaccard	M31Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.9356390977443609
+Jaccard	M11Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.9145631067961165
+Jaccard	F21Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.911869031377899
+Jaccard	M31Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.9385496183206106
+Jaccard	M11Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.8741384477075218
+Jaccard	LMEpi24M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.9510682288077188
+Jaccard	SLEpi20M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.9460285132382893
+Jaccard	AQC1cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.8769387236206458
+Jaccard	AQC4cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.8908469226722777
+Jaccard	AQC7cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.8936010037641154
+Jaccard	NP2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.9060150375939849
+Jaccard	NP3	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.8909150113969391
+Jaccard	NP5	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.9174503657262277
+Jaccard	TRRsed1	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.6556256572029443
+Jaccard	TRRsed2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.6002591512795594
+Jaccard	CL3	TS28	Soil	Human-associated	Between habitats	0.9640764331210191
+Jaccard	CC1	TS28	Soil	Human-associated	Between habitats	0.9758565187399402
+Jaccard	SV1	TS28	Soil	Human-associated	Between habitats	0.9655983534254631
+Jaccard	M31Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.6918454935622317
+Jaccard	M11Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.7493087557603686
+Jaccard	M31Plmr	TS28	Human-associated	Human-associated	Within habitat	0.9434156378600823
+Jaccard	M11Plmr	TS28	Human-associated	Human-associated	Within habitat	0.9415308291991495
+Jaccard	F21Plmr	TS28	Human-associated	Human-associated	Within habitat	0.9469920067311737
+Jaccard	M31Tong	TS28	Human-associated	Human-associated	Within habitat	0.9109243697478993
+Jaccard	M11Tong	TS28	Human-associated	Human-associated	Within habitat	0.8997578692493947
+Jaccard	LMEpi24M	TS28	Freshwater	Human-associated	Between habitats	0.955793703951775
+Jaccard	SLEpi20M	TS28	Freshwater	Human-associated	Between habitats	0.9641943734015346
+Jaccard	AQC1cm	TS28	Freshwater	Human-associated	Between habitats	0.9376811594202898
+Jaccard	AQC4cm	TS28	Freshwater	Human-associated	Between habitats	0.9690566037735849
+Jaccard	AQC7cm	TS28	Freshwater	Human-associated	Between habitats	0.9711470795214638
+Jaccard	NP2	TS28	Marine/estuarine	Human-associated	Between habitats	0.9562043795620437
+Jaccard	NP3	TS28	Marine/estuarine	Human-associated	Between habitats	0.9571118349619978
+Jaccard	NP5	TS28	Marine/estuarine	Human-associated	Between habitats	0.949514563106796
+Jaccard	TRRsed1	TS28	Marine/estuarine	Human-associated	Between habitats	0.9435225618631732
+Jaccard	TRRsed2	TS28	Marine/estuarine	Human-associated	Between habitats	0.9630712979890311
+Jaccard	TRRsed3	TS28	Marine/estuarine	Human-associated	Between habitats	0.8973721590909091
+Jaccard	CL3	TS29	Soil	Human-associated	Between habitats	0.9649354073292908
+Jaccard	CC1	TS29	Soil	Human-associated	Between habitats	0.9769978657813613
+Jaccard	SV1	TS29	Soil	Human-associated	Between habitats	0.9685496183206107
+Jaccard	M31Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.7395264116575592
+Jaccard	M11Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.7781124497991968
+Jaccard	M31Plmr	TS29	Human-associated	Human-associated	Within habitat	0.9384359400998336
+Jaccard	M11Plmr	TS29	Human-associated	Human-associated	Within habitat	0.946725860155383
+Jaccard	F21Plmr	TS29	Human-associated	Human-associated	Within habitat	0.9511762094984465
+Jaccard	M31Tong	TS29	Human-associated	Human-associated	Within habitat	0.9104618284637135
+Jaccard	M11Tong	TS29	Human-associated	Human-associated	Within habitat	0.9032921810699589
+Jaccard	LMEpi24M	TS29	Freshwater	Human-associated	Between habitats	0.951219512195122
+Jaccard	SLEpi20M	TS29	Freshwater	Human-associated	Between habitats	0.9599437807449052
+Jaccard	AQC1cm	TS29	Freshwater	Human-associated	Between habitats	0.9278033794162827
+Jaccard	AQC4cm	TS29	Freshwater	Human-associated	Between habitats	0.9648562300319489
+Jaccard	AQC7cm	TS29	Freshwater	Human-associated	Between habitats	0.9700332963374029
+Jaccard	NP2	TS29	Marine/estuarine	Human-associated	Between habitats	0.9590488771466315
+Jaccard	NP3	TS29	Marine/estuarine	Human-associated	Between habitats	0.9627256843331392
+Jaccard	NP5	TS29	Marine/estuarine	Human-associated	Between habitats	0.9556338028169014
+Jaccard	TRRsed1	TS29	Marine/estuarine	Human-associated	Between habitats	0.9544501048846269
+Jaccard	TRRsed2	TS29	Marine/estuarine	Human-associated	Between habitats	0.9698127627053879
+Jaccard	TRRsed3	TS29	Marine/estuarine	Human-associated	Between habitats	0.9163011695906432
+Jaccard	TS28	TS29	Human-associated	Human-associated	Within habitat	0.6594202898550725
+Jaccard	CL3	Even1	Soil	Mock	Between habitats	0.9257987853181939
+Jaccard	CC1	Even1	Soil	Mock	Between habitats	0.9377830750893921
+Jaccard	SV1	Even1	Soil	Mock	Between habitats	0.9365558912386707
+Jaccard	M31Fcsw	Even1	Human-associated	Mock	Between habitats	0.856071964017991
+Jaccard	M11Fcsw	Even1	Human-associated	Mock	Between habitats	0.8805601317957166
+Jaccard	M31Plmr	Even1	Human-associated	Mock	Between habitats	0.9308372334893396
+Jaccard	M11Plmr	Even1	Human-associated	Mock	Between habitats	0.9275206315034087
+Jaccard	F21Plmr	Even1	Human-associated	Mock	Between habitats	0.9322250639386189
+Jaccard	M31Tong	Even1	Human-associated	Mock	Between habitats	0.9
+Jaccard	M11Tong	Even1	Human-associated	Mock	Between habitats	0.866965620328849
+Jaccard	LMEpi24M	Even1	Freshwater	Mock	Between habitats	0.9271477663230241
+Jaccard	SLEpi20M	Even1	Freshwater	Mock	Between habitats	0.9286657859973579
+Jaccard	AQC1cm	Even1	Freshwater	Mock	Between habitats	0.8982350732256854
+Jaccard	AQC4cm	Even1	Freshwater	Mock	Between habitats	0.931196247068022
+Jaccard	AQC7cm	Even1	Freshwater	Mock	Between habitats	0.9379310344827586
+Jaccard	NP2	Even1	Marine/estuarine	Mock	Between habitats	0.922884012539185
+Jaccard	NP3	Even1	Marine/estuarine	Mock	Between habitats	0.9352159468438539
+Jaccard	NP5	Even1	Marine/estuarine	Mock	Between habitats	0.9273927392739274
+Jaccard	TRRsed1	Even1	Marine/estuarine	Mock	Between habitats	0.9000302938503484
+Jaccard	TRRsed2	Even1	Marine/estuarine	Mock	Between habitats	0.937874251497006
+Jaccard	TRRsed3	Even1	Marine/estuarine	Mock	Between habitats	0.8903571428571427
+Jaccard	TS28	Even1	Human-associated	Mock	Between habitats	0.836441893830703
+Jaccard	TS29	Even1	Human-associated	Mock	Between habitats	0.8529411764705882
+Jaccard	CL3	Even2	Soil	Mock	Between habitats	0.9330623306233061
+Jaccard	CC1	Even2	Soil	Mock	Between habitats	0.9391709590385087
+Jaccard	SV1	Even2	Soil	Mock	Between habitats	0.9409375000000001
+Jaccard	M31Fcsw	Even2	Human-associated	Mock	Between habitats	0.8630806845965769
+Jaccard	M11Fcsw	Even2	Human-associated	Mock	Between habitats	0.8846503178928247
+Jaccard	M31Plmr	Even2	Human-associated	Mock	Between habitats	0.9275766016713092
+Jaccard	M11Plmr	Even2	Human-associated	Mock	Between habitats	0.93596425912137
+Jaccard	F21Plmr	Even2	Human-associated	Mock	Between habitats	0.9368562472010747
+Jaccard	M31Tong	Even2	Human-associated	Mock	Between habitats	0.9164345403899722
+Jaccard	M11Tong	Even2	Human-associated	Mock	Between habitats	0.8982005141388174
+Jaccard	LMEpi24M	Even2	Freshwater	Mock	Between habitats	0.9415247964470762
+Jaccard	SLEpi20M	Even2	Freshwater	Mock	Between habitats	0.9536842105263158
+Jaccard	AQC1cm	Even2	Freshwater	Mock	Between habitats	0.9268759571209801
+Jaccard	AQC4cm	Even2	Freshwater	Mock	Between habitats	0.9550381372942593
+Jaccard	AQC7cm	Even2	Freshwater	Mock	Between habitats	0.961738484398217
+Jaccard	NP2	Even2	Marine/estuarine	Mock	Between habitats	0.9503968253968254
+Jaccard	NP3	Even2	Marine/estuarine	Mock	Between habitats	0.9489736070381232
+Jaccard	NP5	Even2	Marine/estuarine	Mock	Between habitats	0.9426751592356688
+Jaccard	TRRsed1	Even2	Marine/estuarine	Mock	Between habitats	0.9260509358698987
+Jaccard	TRRsed2	Even2	Marine/estuarine	Mock	Between habitats	0.9592464436755094
+Jaccard	TRRsed3	Even2	Marine/estuarine	Mock	Between habitats	0.9217391304347826
+Jaccard	TS28	Even2	Human-associated	Mock	Between habitats	0.847758887171561
+Jaccard	TS29	Even2	Human-associated	Mock	Between habitats	0.8541136556403732
+Jaccard	Even1	Even2	Mock	Mock	Within habitat	0.6573741007194245
+Jaccard	CL3	Even3	Soil	Mock	Between habitats	0.9535326086956522
+Jaccard	CC1	Even3	Soil	Mock	Between habitats	0.9589882121807466
+Jaccard	SV1	Even3	Soil	Mock	Between habitats	0.9403272377285852
+Jaccard	M31Fcsw	Even3	Human-associated	Mock	Between habitats	0.8696027633851467
+Jaccard	M11Fcsw	Even3	Human-associated	Mock	Between habitats	0.8869395711500975
+Jaccard	M31Plmr	Even3	Human-associated	Mock	Between habitats	0.9301919720767888
+Jaccard	M11Plmr	Even3	Human-associated	Mock	Between habitats	0.9379310344827586
+Jaccard	F21Plmr	Even3	Human-associated	Mock	Between habitats	0.9323378441437237
+Jaccard	M31Tong	Even3	Human-associated	Mock	Between habitats	0.8969387755102041
+Jaccard	M11Tong	Even3	Human-associated	Mock	Between habitats	0.897642015005359
+Jaccard	LMEpi24M	Even3	Freshwater	Mock	Between habitats	0.9383886255924171
+Jaccard	SLEpi20M	Even3	Freshwater	Mock	Between habitats	0.9483532934131736
+Jaccard	AQC1cm	Even3	Freshwater	Mock	Between habitats	0.9345098039215686
+Jaccard	AQC4cm	Even3	Freshwater	Mock	Between habitats	0.9629171817058095
+Jaccard	AQC7cm	Even3	Freshwater	Mock	Between habitats	0.9672131147540983
+Jaccard	NP2	Even3	Marine/estuarine	Mock	Between habitats	0.9496151154653604
+Jaccard	NP3	Even3	Marine/estuarine	Mock	Between habitats	0.9423434593924365
+Jaccard	NP5	Even3	Marine/estuarine	Mock	Between habitats	0.9389600602863603
+Jaccard	TRRsed1	Even3	Marine/estuarine	Mock	Between habitats	0.913430935709739
+Jaccard	TRRsed2	Even3	Marine/estuarine	Mock	Between habitats	0.9582670906200317
+Jaccard	TRRsed3	Even3	Marine/estuarine	Mock	Between habitats	0.9240506329113923
+Jaccard	TS28	Even3	Human-associated	Mock	Between habitats	0.853061224489796
+Jaccard	TS29	Even3	Human-associated	Mock	Between habitats	0.8541666666666666
+Jaccard	Even1	Even3	Mock	Mock	Within habitat	0.6738925541941565
+Jaccard	Even2	Even3	Mock	Mock	Within habitat	0.6439957492029756
+Unweighted UniFrac	CL3	CC1	Soil	Soil	Within habitat	0.43601904124680496
+Unweighted UniFrac	CL3	SV1	Soil	Soil	Within habitat	0.5786551366254975
+Unweighted UniFrac	CC1	SV1	Soil	Soil	Within habitat	0.5471329886725094
+Unweighted UniFrac	CL3	M31Fcsw	Soil	Human-associated	Between habitats	0.8810769891234839
+Unweighted UniFrac	CC1	M31Fcsw	Soil	Human-associated	Between habitats	0.9058417879300823
+Unweighted UniFrac	SV1	M31Fcsw	Soil	Human-associated	Between habitats	0.878569619214558
+Unweighted UniFrac	CL3	M11Fcsw	Soil	Human-associated	Between habitats	0.8985827538534228
+Unweighted UniFrac	CC1	M11Fcsw	Soil	Human-associated	Between habitats	0.9214849845249463
+Unweighted UniFrac	SV1	M11Fcsw	Soil	Human-associated	Between habitats	0.8915652389902731
+Unweighted UniFrac	M31Fcsw	M11Fcsw	Human-associated	Human-associated	Within habitat	0.5563420118698855
+Unweighted UniFrac	CL3	M31Plmr	Soil	Human-associated	Between habitats	0.8127659222632742
+Unweighted UniFrac	CC1	M31Plmr	Soil	Human-associated	Between habitats	0.8077973802061921
+Unweighted UniFrac	SV1	M31Plmr	Soil	Human-associated	Between habitats	0.7731907092222908
+Unweighted UniFrac	M31Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	0.8013571962145096
+Unweighted UniFrac	M11Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	0.824652284717012
+Unweighted UniFrac	CL3	M11Plmr	Soil	Human-associated	Between habitats	0.7214556575118897
+Unweighted UniFrac	CC1	M11Plmr	Soil	Human-associated	Between habitats	0.7038120555989378
+Unweighted UniFrac	SV1	M11Plmr	Soil	Human-associated	Between habitats	0.6757468298361257
+Unweighted UniFrac	M31Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	0.8213979228020363
+Unweighted UniFrac	M11Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	0.8541908977117587
+Unweighted UniFrac	M31Plmr	M11Plmr	Human-associated	Human-associated	Within habitat	0.5964497168695664
+Unweighted UniFrac	CL3	F21Plmr	Soil	Human-associated	Between habitats	0.7669879402342954
+Unweighted UniFrac	CC1	F21Plmr	Soil	Human-associated	Between habitats	0.754378711636874
+Unweighted UniFrac	SV1	F21Plmr	Soil	Human-associated	Between habitats	0.7077977173264275
+Unweighted UniFrac	M31Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	0.8388318005780676
+Unweighted UniFrac	M11Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	0.8661624731369659
+Unweighted UniFrac	M31Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.5579622616278792
+Unweighted UniFrac	M11Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.5313722751034208
+Unweighted UniFrac	CL3	M31Tong	Soil	Human-associated	Between habitats	0.8721849817482227
+Unweighted UniFrac	CC1	M31Tong	Soil	Human-associated	Between habitats	0.8874275630017265
+Unweighted UniFrac	SV1	M31Tong	Soil	Human-associated	Between habitats	0.8515633078759629
+Unweighted UniFrac	M31Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	0.7816602562825995
+Unweighted UniFrac	M11Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	0.7892602075392238
+Unweighted UniFrac	M31Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.709653416854515
+Unweighted UniFrac	M11Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.764042614541867
+Unweighted UniFrac	F21Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.7316734007992934
+Unweighted UniFrac	CL3	M11Tong	Soil	Human-associated	Between habitats	0.7770804096319972
+Unweighted UniFrac	CC1	M11Tong	Soil	Human-associated	Between habitats	0.7816094586671753
+Unweighted UniFrac	SV1	M11Tong	Soil	Human-associated	Between habitats	0.7684012059383515
+Unweighted UniFrac	M31Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	0.8030446765982698
+Unweighted UniFrac	M11Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	0.822080946414849
+Unweighted UniFrac	M31Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.6869540003343328
+Unweighted UniFrac	M11Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.6518836379564572
+Unweighted UniFrac	F21Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.6540540170721153
+Unweighted UniFrac	M31Tong	M11Tong	Human-associated	Human-associated	Within habitat	0.635260474245389
+Unweighted UniFrac	CL3	LMEpi24M	Soil	Freshwater	Between habitats	0.8175466193116498
+Unweighted UniFrac	CC1	LMEpi24M	Soil	Freshwater	Between habitats	0.8125887484486961
+Unweighted UniFrac	SV1	LMEpi24M	Soil	Freshwater	Between habitats	0.8015370932011083
+Unweighted UniFrac	M31Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	0.8379982937134427
+Unweighted UniFrac	M11Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	0.8538119069351496
+Unweighted UniFrac	M31Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.7741627883207001
+Unweighted UniFrac	M11Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.7439166729270064
+Unweighted UniFrac	F21Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.7554857856977897
+Unweighted UniFrac	M31Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.724710217218541
+Unweighted UniFrac	M11Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.614862253460509
+Unweighted UniFrac	CL3	SLEpi20M	Soil	Freshwater	Between habitats	0.8095640579137344
+Unweighted UniFrac	CC1	SLEpi20M	Soil	Freshwater	Between habitats	0.7900464139829382
+Unweighted UniFrac	SV1	SLEpi20M	Soil	Freshwater	Between habitats	0.7853975318912718
+Unweighted UniFrac	M31Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	0.859170459605955
+Unweighted UniFrac	M11Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	0.8782855474497617
+Unweighted UniFrac	M31Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.7885060559967063
+Unweighted UniFrac	M11Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.7486481442300938
+Unweighted UniFrac	F21Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.7493476051679632
+Unweighted UniFrac	M31Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.760738092479714
+Unweighted UniFrac	M11Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.6627472842169572
+Unweighted UniFrac	LMEpi24M	SLEpi20M	Freshwater	Freshwater	Within habitat	0.5922355011723539
+Unweighted UniFrac	CL3	AQC1cm	Soil	Freshwater	Between habitats	0.7158307828177688
+Unweighted UniFrac	CC1	AQC1cm	Soil	Freshwater	Between habitats	0.6933604743176762
+Unweighted UniFrac	SV1	AQC1cm	Soil	Freshwater	Between habitats	0.7408849380445135
+Unweighted UniFrac	M31Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	0.8661543788729198
+Unweighted UniFrac	M11Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	0.8839466122838487
+Unweighted UniFrac	M31Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.82258010842134
+Unweighted UniFrac	M11Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.7340495086868379
+Unweighted UniFrac	F21Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.7623768898989753
+Unweighted UniFrac	M31Tong	AQC1cm	Human-associated	Freshwater	Between habitats	0.7876355716352662
+Unweighted UniFrac	M11Tong	AQC1cm	Human-associated	Freshwater	Between habitats	0.6244201465543195
+Unweighted UniFrac	LMEpi24M	AQC1cm	Freshwater	Freshwater	Within habitat	0.711724246929577
+Unweighted UniFrac	SLEpi20M	AQC1cm	Freshwater	Freshwater	Within habitat	0.678719668865246
+Unweighted UniFrac	CL3	AQC4cm	Soil	Freshwater	Between habitats	0.7435809830487455
+Unweighted UniFrac	CC1	AQC4cm	Soil	Freshwater	Between habitats	0.7238679897705923
+Unweighted UniFrac	SV1	AQC4cm	Soil	Freshwater	Between habitats	0.7689367679397578
+Unweighted UniFrac	M31Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	0.9004774578400168
+Unweighted UniFrac	M11Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	0.9167584515590791
+Unweighted UniFrac	M31Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.8440572220049085
+Unweighted UniFrac	M11Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.7755018205027545
+Unweighted UniFrac	F21Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.7790523735111844
+Unweighted UniFrac	M31Tong	AQC4cm	Human-associated	Freshwater	Between habitats	0.8180859018126999
+Unweighted UniFrac	M11Tong	AQC4cm	Human-associated	Freshwater	Between habitats	0.6853713889496759
+Unweighted UniFrac	LMEpi24M	AQC4cm	Freshwater	Freshwater	Within habitat	0.7454506972761068
+Unweighted UniFrac	SLEpi20M	AQC4cm	Freshwater	Freshwater	Within habitat	0.7037551416305318
+Unweighted UniFrac	AQC1cm	AQC4cm	Freshwater	Freshwater	Within habitat	0.4317705785634042
+Unweighted UniFrac	CL3	AQC7cm	Soil	Freshwater	Between habitats	0.7242495156819306
+Unweighted UniFrac	CC1	AQC7cm	Soil	Freshwater	Between habitats	0.7018190080795691
+Unweighted UniFrac	SV1	AQC7cm	Soil	Freshwater	Between habitats	0.7525772550786395
+Unweighted UniFrac	M31Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	0.8980843602151044
+Unweighted UniFrac	M11Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	0.9100066092877107
+Unweighted UniFrac	M31Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.846880508516629
+Unweighted UniFrac	M11Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.7766645534632508
+Unweighted UniFrac	F21Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.7874512891455195
+Unweighted UniFrac	M31Tong	AQC7cm	Human-associated	Freshwater	Between habitats	0.8348039873963554
+Unweighted UniFrac	M11Tong	AQC7cm	Human-associated	Freshwater	Between habitats	0.6873918221254023
+Unweighted UniFrac	LMEpi24M	AQC7cm	Freshwater	Freshwater	Within habitat	0.7405818046046072
+Unweighted UniFrac	SLEpi20M	AQC7cm	Freshwater	Freshwater	Within habitat	0.7059273398719611
+Unweighted UniFrac	AQC1cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.4531556874421846
+Unweighted UniFrac	AQC4cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.38147172819647224
+Unweighted UniFrac	CL3	NP2	Soil	Marine/estuarine	Between habitats	0.8553739585700573
+Unweighted UniFrac	CC1	NP2	Soil	Marine/estuarine	Between habitats	0.8600089419957089
+Unweighted UniFrac	SV1	NP2	Soil	Marine/estuarine	Between habitats	0.8512019143273104
+Unweighted UniFrac	M31Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	0.8734254445958305
+Unweighted UniFrac	M11Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	0.8832956298935097
+Unweighted UniFrac	M31Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.8386748533683315
+Unweighted UniFrac	M11Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.8090631691876081
+Unweighted UniFrac	F21Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.7870466708447622
+Unweighted UniFrac	M31Tong	NP2	Human-associated	Marine/estuarine	Between habitats	0.7180037205842776
+Unweighted UniFrac	M11Tong	NP2	Human-associated	Marine/estuarine	Between habitats	0.6611856779666664
+Unweighted UniFrac	LMEpi24M	NP2	Freshwater	Marine/estuarine	Between habitats	0.728585208423482
+Unweighted UniFrac	SLEpi20M	NP2	Freshwater	Marine/estuarine	Between habitats	0.6974465738934612
+Unweighted UniFrac	AQC1cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.695791605113083
+Unweighted UniFrac	AQC4cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.6880045033203321
+Unweighted UniFrac	AQC7cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.705958941593138
+Unweighted UniFrac	CL3	NP3	Soil	Marine/estuarine	Between habitats	0.8678358714065314
+Unweighted UniFrac	CC1	NP3	Soil	Marine/estuarine	Between habitats	0.869772800161858
+Unweighted UniFrac	SV1	NP3	Soil	Marine/estuarine	Between habitats	0.848796973596372
+Unweighted UniFrac	M31Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	0.8740097500212911
+Unweighted UniFrac	M11Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	0.8857280954637055
+Unweighted UniFrac	M31Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.8348021781083176
+Unweighted UniFrac	M11Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.8029678235806961
+Unweighted UniFrac	F21Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.786287980660209
+Unweighted UniFrac	M31Tong	NP3	Human-associated	Marine/estuarine	Between habitats	0.7125297655881947
+Unweighted UniFrac	M11Tong	NP3	Human-associated	Marine/estuarine	Between habitats	0.7037475536772534
+Unweighted UniFrac	LMEpi24M	NP3	Freshwater	Marine/estuarine	Between habitats	0.7626574697300049
+Unweighted UniFrac	SLEpi20M	NP3	Freshwater	Marine/estuarine	Between habitats	0.7612962012018905
+Unweighted UniFrac	AQC1cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.7644080149721156
+Unweighted UniFrac	AQC4cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.7869891869882051
+Unweighted UniFrac	AQC7cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.8044943848584688
+Unweighted UniFrac	NP2	NP3	Marine/estuarine	Marine/estuarine	Within habitat	0.5933940063658959
+Unweighted UniFrac	CL3	NP5	Soil	Marine/estuarine	Between habitats	0.8796371015696572
+Unweighted UniFrac	CC1	NP5	Soil	Marine/estuarine	Between habitats	0.8824494211599153
+Unweighted UniFrac	SV1	NP5	Soil	Marine/estuarine	Between habitats	0.8671587076021081
+Unweighted UniFrac	M31Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	0.8599405063928045
+Unweighted UniFrac	M11Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	0.8688761601046543
+Unweighted UniFrac	M31Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.8269856422025784
+Unweighted UniFrac	M11Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.8025736260049274
+Unweighted UniFrac	F21Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.7909532336621873
+Unweighted UniFrac	M31Tong	NP5	Human-associated	Marine/estuarine	Between habitats	0.6547710559912162
+Unweighted UniFrac	M11Tong	NP5	Human-associated	Marine/estuarine	Between habitats	0.6983687507722838
+Unweighted UniFrac	LMEpi24M	NP5	Freshwater	Marine/estuarine	Between habitats	0.760697867613053
+Unweighted UniFrac	SLEpi20M	NP5	Freshwater	Marine/estuarine	Between habitats	0.7668660468124869
+Unweighted UniFrac	AQC1cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.7713609243643171
+Unweighted UniFrac	AQC4cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.7993845915793074
+Unweighted UniFrac	AQC7cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.8151623768359519
+Unweighted UniFrac	NP2	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.5651887369451065
+Unweighted UniFrac	NP3	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.539775702294079
+Unweighted UniFrac	CL3	TRRsed1	Soil	Marine/estuarine	Between habitats	0.7866539513056247
+Unweighted UniFrac	CC1	TRRsed1	Soil	Marine/estuarine	Between habitats	0.7771927034631996
+Unweighted UniFrac	SV1	TRRsed1	Soil	Marine/estuarine	Between habitats	0.7718575555188579
+Unweighted UniFrac	M31Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.8894203218937606
+Unweighted UniFrac	M11Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.9064344217104436
+Unweighted UniFrac	M31Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.8143797806993806
+Unweighted UniFrac	M11Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.7568113295518836
+Unweighted UniFrac	F21Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.7514166233317219
+Unweighted UniFrac	M31Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.7985595660459577
+Unweighted UniFrac	M11Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.6703714090189192
+Unweighted UniFrac	LMEpi24M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.8011329414545261
+Unweighted UniFrac	SLEpi20M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.7908757302140966
+Unweighted UniFrac	AQC1cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.6970046069518968
+Unweighted UniFrac	AQC4cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.7286530069438303
+Unweighted UniFrac	AQC7cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.7283118876749718
+Unweighted UniFrac	NP2	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.7116154721656972
+Unweighted UniFrac	NP3	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.6824472541052337
+Unweighted UniFrac	NP5	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.7206782305547043
+Unweighted UniFrac	CL3	TRRsed2	Soil	Marine/estuarine	Between habitats	0.7998514672131345
+Unweighted UniFrac	CC1	TRRsed2	Soil	Marine/estuarine	Between habitats	0.7943866808376564
+Unweighted UniFrac	SV1	TRRsed2	Soil	Marine/estuarine	Between habitats	0.8013846736327785
+Unweighted UniFrac	M31Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.9020742315820013
+Unweighted UniFrac	M11Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.9142130051176308
+Unweighted UniFrac	M31Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.8248634249216579
+Unweighted UniFrac	M11Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.7823395702815865
+Unweighted UniFrac	F21Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.7682556804682401
+Unweighted UniFrac	M31Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.826035467817821
+Unweighted UniFrac	M11Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.7412649642840835
+Unweighted UniFrac	LMEpi24M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.8211498594507091
+Unweighted UniFrac	SLEpi20M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.8052674028682637
+Unweighted UniFrac	AQC1cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.7502065415953078
+Unweighted UniFrac	AQC4cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.7457525782582218
+Unweighted UniFrac	AQC7cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.7516289674955973
+Unweighted UniFrac	NP2	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.7407687437486022
+Unweighted UniFrac	NP3	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.7250738313372546
+Unweighted UniFrac	NP5	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.7679253967222713
+Unweighted UniFrac	TRRsed1	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.505980542804304
+Unweighted UniFrac	CL3	TRRsed3	Soil	Marine/estuarine	Between habitats	0.7890420917644283
+Unweighted UniFrac	CC1	TRRsed3	Soil	Marine/estuarine	Between habitats	0.7933719379022242
+Unweighted UniFrac	SV1	TRRsed3	Soil	Marine/estuarine	Between habitats	0.7938570098159545
+Unweighted UniFrac	M31Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.8430346553731423
+Unweighted UniFrac	M11Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.861648286067644
+Unweighted UniFrac	M31Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.8220031585957958
+Unweighted UniFrac	M11Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.7721089710736148
+Unweighted UniFrac	F21Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.7692732616015469
+Unweighted UniFrac	M31Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.8188452182338735
+Unweighted UniFrac	M11Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.7199169617886171
+Unweighted UniFrac	LMEpi24M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.8231131567159543
+Unweighted UniFrac	SLEpi20M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.8123332877972873
+Unweighted UniFrac	AQC1cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.7219283746648937
+Unweighted UniFrac	AQC4cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.7386510887508572
+Unweighted UniFrac	AQC7cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.7397966537291221
+Unweighted UniFrac	NP2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.7636264655125908
+Unweighted UniFrac	NP3	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.7546299816493243
+Unweighted UniFrac	NP5	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.7915934097371272
+Unweighted UniFrac	TRRsed1	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.5284268137586939
+Unweighted UniFrac	TRRsed2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.48102841035152083
+Unweighted UniFrac	CL3	TS28	Soil	Human-associated	Between habitats	0.8662436096364131
+Unweighted UniFrac	CC1	TS28	Soil	Human-associated	Between habitats	0.8915627451031056
+Unweighted UniFrac	SV1	TS28	Soil	Human-associated	Between habitats	0.8592883472177353
+Unweighted UniFrac	M31Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.5658690788676655
+Unweighted UniFrac	M11Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.6132419906714237
+Unweighted UniFrac	M31Plmr	TS28	Human-associated	Human-associated	Within habitat	0.8087488821405994
+Unweighted UniFrac	M11Plmr	TS28	Human-associated	Human-associated	Within habitat	0.8108867496263166
+Unweighted UniFrac	F21Plmr	TS28	Human-associated	Human-associated	Within habitat	0.8114888016327101
+Unweighted UniFrac	M31Tong	TS28	Human-associated	Human-associated	Within habitat	0.7426494573994518
+Unweighted UniFrac	M11Tong	TS28	Human-associated	Human-associated	Within habitat	0.7730531143864644
+Unweighted UniFrac	LMEpi24M	TS28	Freshwater	Human-associated	Between habitats	0.8166439383007686
+Unweighted UniFrac	SLEpi20M	TS28	Freshwater	Human-associated	Between habitats	0.8298962178949609
+Unweighted UniFrac	AQC1cm	TS28	Freshwater	Human-associated	Between habitats	0.8316805723593043
+Unweighted UniFrac	AQC4cm	TS28	Freshwater	Human-associated	Between habitats	0.8685764938424859
+Unweighted UniFrac	AQC7cm	TS28	Freshwater	Human-associated	Between habitats	0.8649408439241344
+Unweighted UniFrac	NP2	TS28	Marine/estuarine	Human-associated	Between habitats	0.8324175009306083
+Unweighted UniFrac	NP3	TS28	Marine/estuarine	Human-associated	Between habitats	0.831334642002369
+Unweighted UniFrac	NP5	TS28	Marine/estuarine	Human-associated	Between habitats	0.815194948903209
+Unweighted UniFrac	TRRsed1	TS28	Marine/estuarine	Human-associated	Between habitats	0.8501527118137268
+Unweighted UniFrac	TRRsed2	TS28	Marine/estuarine	Human-associated	Between habitats	0.8631674308893401
+Unweighted UniFrac	TRRsed3	TS28	Marine/estuarine	Human-associated	Between habitats	0.790922225635858
+Unweighted UniFrac	CL3	TS29	Soil	Human-associated	Between habitats	0.8615045654190548
+Unweighted UniFrac	CC1	TS29	Soil	Human-associated	Between habitats	0.8886332604038715
+Unweighted UniFrac	SV1	TS29	Soil	Human-associated	Between habitats	0.8590322334757317
+Unweighted UniFrac	M31Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.5985099067779268
+Unweighted UniFrac	M11Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.6312831054037223
+Unweighted UniFrac	M31Plmr	TS29	Human-associated	Human-associated	Within habitat	0.7928533546002873
+Unweighted UniFrac	M11Plmr	TS29	Human-associated	Human-associated	Within habitat	0.8094804226517184
+Unweighted UniFrac	F21Plmr	TS29	Human-associated	Human-associated	Within habitat	0.8132047782079109
+Unweighted UniFrac	M31Tong	TS29	Human-associated	Human-associated	Within habitat	0.738020383187599
+Unweighted UniFrac	M11Tong	TS29	Human-associated	Human-associated	Within habitat	0.7698629366335209
+Unweighted UniFrac	LMEpi24M	TS29	Freshwater	Human-associated	Between habitats	0.7856390181073768
+Unweighted UniFrac	SLEpi20M	TS29	Freshwater	Human-associated	Between habitats	0.8072629222446387
+Unweighted UniFrac	AQC1cm	TS29	Freshwater	Human-associated	Between habitats	0.8175007663261831
+Unweighted UniFrac	AQC4cm	TS29	Freshwater	Human-associated	Between habitats	0.8598832833391106
+Unweighted UniFrac	AQC7cm	TS29	Freshwater	Human-associated	Between habitats	0.8663581183148915
+Unweighted UniFrac	NP2	TS29	Marine/estuarine	Human-associated	Between habitats	0.8297175207076584
+Unweighted UniFrac	NP3	TS29	Marine/estuarine	Human-associated	Between habitats	0.8344756940314609
+Unweighted UniFrac	NP5	TS29	Marine/estuarine	Human-associated	Between habitats	0.818357704344966
+Unweighted UniFrac	TRRsed1	TS29	Marine/estuarine	Human-associated	Between habitats	0.8613223445977873
+Unweighted UniFrac	TRRsed2	TS29	Marine/estuarine	Human-associated	Between habitats	0.8735613706382261
+Unweighted UniFrac	TRRsed3	TS29	Marine/estuarine	Human-associated	Between habitats	0.8104008631988707
+Unweighted UniFrac	TS28	TS29	Human-associated	Human-associated	Within habitat	0.5294042822637971
+Unweighted UniFrac	CL3	Even1	Soil	Mock	Between habitats	0.802867331704809
+Unweighted UniFrac	CC1	Even1	Soil	Mock	Between habitats	0.8214151995660836
+Unweighted UniFrac	SV1	Even1	Soil	Mock	Between habitats	0.8039817638927595
+Unweighted UniFrac	M31Fcsw	Even1	Human-associated	Mock	Between habitats	0.720565615278928
+Unweighted UniFrac	M11Fcsw	Even1	Human-associated	Mock	Between habitats	0.7686384587117283
+Unweighted UniFrac	M31Plmr	Even1	Human-associated	Mock	Between habitats	0.7813919074834874
+Unweighted UniFrac	M11Plmr	Even1	Human-associated	Mock	Between habitats	0.7754750017990937
+Unweighted UniFrac	F21Plmr	Even1	Human-associated	Mock	Between habitats	0.7702904904828298
+Unweighted UniFrac	M31Tong	Even1	Human-associated	Mock	Between habitats	0.7244635345208803
+Unweighted UniFrac	M11Tong	Even1	Human-associated	Mock	Between habitats	0.7085013072548803
+Unweighted UniFrac	LMEpi24M	Even1	Freshwater	Mock	Between habitats	0.7429894230876511
+Unweighted UniFrac	SLEpi20M	Even1	Freshwater	Mock	Between habitats	0.7548042007520421
+Unweighted UniFrac	AQC1cm	Even1	Freshwater	Mock	Between habitats	0.7542707270435539
+Unweighted UniFrac	AQC4cm	Even1	Freshwater	Mock	Between habitats	0.7841798228229099
+Unweighted UniFrac	AQC7cm	Even1	Freshwater	Mock	Between habitats	0.7924176606202807
+Unweighted UniFrac	NP2	Even1	Marine/estuarine	Mock	Between habitats	0.7630273764348835
+Unweighted UniFrac	NP3	Even1	Marine/estuarine	Mock	Between habitats	0.7830000744663098
+Unweighted UniFrac	NP5	Even1	Marine/estuarine	Mock	Between habitats	0.7744667251499795
+Unweighted UniFrac	TRRsed1	Even1	Marine/estuarine	Mock	Between habitats	0.7768095234020019
+Unweighted UniFrac	TRRsed2	Even1	Marine/estuarine	Mock	Between habitats	0.7972968511703863
+Unweighted UniFrac	TRRsed3	Even1	Marine/estuarine	Mock	Between habitats	0.7548364313009118
+Unweighted UniFrac	TS28	Even1	Human-associated	Mock	Between habitats	0.681367175238194
+Unweighted UniFrac	TS29	Even1	Human-associated	Mock	Between habitats	0.6905513188866371
+Unweighted UniFrac	CL3	Even2	Soil	Mock	Between habitats	0.8191287646120492
+Unweighted UniFrac	CC1	Even2	Soil	Mock	Between habitats	0.8332938208211151
+Unweighted UniFrac	SV1	Even2	Soil	Mock	Between habitats	0.8084846574897722
+Unweighted UniFrac	M31Fcsw	Even2	Human-associated	Mock	Between habitats	0.7372760602160836
+Unweighted UniFrac	M11Fcsw	Even2	Human-associated	Mock	Between habitats	0.7628146080854796
+Unweighted UniFrac	M31Plmr	Even2	Human-associated	Mock	Between habitats	0.7746132309205273
+Unweighted UniFrac	M11Plmr	Even2	Human-associated	Mock	Between habitats	0.791735257369182
+Unweighted UniFrac	F21Plmr	Even2	Human-associated	Mock	Between habitats	0.7849248081941856
+Unweighted UniFrac	M31Tong	Even2	Human-associated	Mock	Between habitats	0.7308223921724653
+Unweighted UniFrac	M11Tong	Even2	Human-associated	Mock	Between habitats	0.7477448368253662
+Unweighted UniFrac	LMEpi24M	Even2	Freshwater	Mock	Between habitats	0.7578885669096621
+Unweighted UniFrac	SLEpi20M	Even2	Freshwater	Mock	Between habitats	0.779721147350298
+Unweighted UniFrac	AQC1cm	Even2	Freshwater	Mock	Between habitats	0.7873753491461158
+Unweighted UniFrac	AQC4cm	Even2	Freshwater	Mock	Between habitats	0.8173291171805189
+Unweighted UniFrac	AQC7cm	Even2	Freshwater	Mock	Between habitats	0.8290371520156287
+Unweighted UniFrac	NP2	Even2	Marine/estuarine	Mock	Between habitats	0.7986417754765474
+Unweighted UniFrac	NP3	Even2	Marine/estuarine	Mock	Between habitats	0.8036445992310447
+Unweighted UniFrac	NP5	Even2	Marine/estuarine	Mock	Between habitats	0.7897058646867545
+Unweighted UniFrac	TRRsed1	Even2	Marine/estuarine	Mock	Between habitats	0.8131370811828446
+Unweighted UniFrac	TRRsed2	Even2	Marine/estuarine	Mock	Between habitats	0.8338097986311896
+Unweighted UniFrac	TRRsed3	Even2	Marine/estuarine	Mock	Between habitats	0.799482050351545
+Unweighted UniFrac	TS28	Even2	Human-associated	Mock	Between habitats	0.6967549680322933
+Unweighted UniFrac	TS29	Even2	Human-associated	Mock	Between habitats	0.6929381119406075
+Unweighted UniFrac	Even1	Even2	Mock	Mock	Within habitat	0.5439159047608746
+Unweighted UniFrac	CL3	Even3	Soil	Mock	Between habitats	0.8473290173025576
+Unweighted UniFrac	CC1	Even3	Soil	Mock	Between habitats	0.8584509656297086
+Unweighted UniFrac	SV1	Even3	Soil	Mock	Between habitats	0.8219324121066915
+Unweighted UniFrac	M31Fcsw	Even3	Human-associated	Mock	Between habitats	0.7379605583348087
+Unweighted UniFrac	M11Fcsw	Even3	Human-associated	Mock	Between habitats	0.762014068724633
+Unweighted UniFrac	M31Plmr	Even3	Human-associated	Mock	Between habitats	0.7747153124621919
+Unweighted UniFrac	M11Plmr	Even3	Human-associated	Mock	Between habitats	0.800130995219548
+Unweighted UniFrac	F21Plmr	Even3	Human-associated	Mock	Between habitats	0.7857834095259519
+Unweighted UniFrac	M31Tong	Even3	Human-associated	Mock	Between habitats	0.7108249435607273
+Unweighted UniFrac	M11Tong	Even3	Human-associated	Mock	Between habitats	0.7593743910455182
+Unweighted UniFrac	LMEpi24M	Even3	Freshwater	Mock	Between habitats	0.7672795790510316
+Unweighted UniFrac	SLEpi20M	Even3	Freshwater	Mock	Between habitats	0.7784208551345706
+Unweighted UniFrac	AQC1cm	Even3	Freshwater	Mock	Between habitats	0.8160962288690767
+Unweighted UniFrac	AQC4cm	Even3	Freshwater	Mock	Between habitats	0.8443305023888844
+Unweighted UniFrac	AQC7cm	Even3	Freshwater	Mock	Between habitats	0.8530398950800951
+Unweighted UniFrac	NP2	Even3	Marine/estuarine	Mock	Between habitats	0.8006513108496135
+Unweighted UniFrac	NP3	Even3	Marine/estuarine	Mock	Between habitats	0.7918591713036224
+Unweighted UniFrac	NP5	Even3	Marine/estuarine	Mock	Between habitats	0.7882161909841735
+Unweighted UniFrac	TRRsed1	Even3	Marine/estuarine	Mock	Between habitats	0.8129297213768314
+Unweighted UniFrac	TRRsed2	Even3	Marine/estuarine	Mock	Between habitats	0.8421377961196487
+Unweighted UniFrac	TRRsed3	Even3	Marine/estuarine	Mock	Between habitats	0.8107239636069611
+Unweighted UniFrac	TS28	Even3	Human-associated	Mock	Between habitats	0.6957974024263613
+Unweighted UniFrac	TS29	Even3	Human-associated	Mock	Between habitats	0.6865386668635083
+Unweighted UniFrac	Even1	Even3	Mock	Mock	Within habitat	0.5671865962677091
+Unweighted UniFrac	Even2	Even3	Mock	Mock	Within habitat	0.5453486661018355
+Weighted UniFrac	CL3	CC1	Soil	Soil	Within habitat	0.17303697339206708
+Weighted UniFrac	CL3	SV1	Soil	Soil	Within habitat	0.28072432538322734
+Weighted UniFrac	CC1	SV1	Soil	Soil	Within habitat	0.2485235443895974
+Weighted UniFrac	CL3	M31Fcsw	Soil	Human-associated	Between habitats	0.5762148666469528
+Weighted UniFrac	CC1	M31Fcsw	Soil	Human-associated	Between habitats	0.5787180300193907
+Weighted UniFrac	SV1	M31Fcsw	Soil	Human-associated	Between habitats	0.570533913908156
+Weighted UniFrac	CL3	M11Fcsw	Soil	Human-associated	Between habitats	0.5611012936336406
+Weighted UniFrac	CC1	M11Fcsw	Soil	Human-associated	Between habitats	0.5632557396854843
+Weighted UniFrac	SV1	M11Fcsw	Soil	Human-associated	Between habitats	0.5516012362033601
+Weighted UniFrac	M31Fcsw	M11Fcsw	Human-associated	Human-associated	Within habitat	0.19116317332912813
+Weighted UniFrac	CL3	M31Plmr	Soil	Human-associated	Between habitats	0.44992737903921115
+Weighted UniFrac	CC1	M31Plmr	Soil	Human-associated	Between habitats	0.4504635840865455
+Weighted UniFrac	SV1	M31Plmr	Soil	Human-associated	Between habitats	0.4619376167780408
+Weighted UniFrac	M31Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	0.5247230059483259
+Weighted UniFrac	M11Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	0.5482876319626697
+Weighted UniFrac	CL3	M11Plmr	Soil	Human-associated	Between habitats	0.38412819449555957
+Weighted UniFrac	CC1	M11Plmr	Soil	Human-associated	Between habitats	0.3790636931243346
+Weighted UniFrac	SV1	M11Plmr	Soil	Human-associated	Between habitats	0.38661321611934507
+Weighted UniFrac	M31Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	0.565908343302133
+Weighted UniFrac	M11Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	0.5441107896380925
+Weighted UniFrac	M31Plmr	M11Plmr	Human-associated	Human-associated	Within habitat	0.3352721503491996
+Weighted UniFrac	CL3	F21Plmr	Soil	Human-associated	Between habitats	0.43051324463179097
+Weighted UniFrac	CC1	F21Plmr	Soil	Human-associated	Between habitats	0.4306681802729834
+Weighted UniFrac	SV1	F21Plmr	Soil	Human-associated	Between habitats	0.41655039045976766
+Weighted UniFrac	M31Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	0.5145625309995789
+Weighted UniFrac	M11Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	0.5149277231513983
+Weighted UniFrac	M31Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.14861518052401954
+Weighted UniFrac	M11Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.2909219990467039
+Weighted UniFrac	CL3	M31Tong	Soil	Human-associated	Between habitats	0.45598898117946823
+Weighted UniFrac	CC1	M31Tong	Soil	Human-associated	Between habitats	0.45770204011674076
+Weighted UniFrac	SV1	M31Tong	Soil	Human-associated	Between habitats	0.47448979205018166
+Weighted UniFrac	M31Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	0.5567453869711932
+Weighted UniFrac	M11Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	0.5411151078547989
+Weighted UniFrac	M31Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.31470477942384784
+Weighted UniFrac	M11Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.3428311804215355
+Weighted UniFrac	F21Plmr	M31Tong	Human-associated	Human-associated	Within habitat	0.29905547225875573
+Weighted UniFrac	CL3	M11Tong	Soil	Human-associated	Between habitats	0.4484952194106795
+Weighted UniFrac	CC1	M11Tong	Soil	Human-associated	Between habitats	0.44890596853619036
+Weighted UniFrac	SV1	M11Tong	Soil	Human-associated	Between habitats	0.43776541763723303
+Weighted UniFrac	M31Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	0.502219940364762
+Weighted UniFrac	M11Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	0.49721407253610367
+Weighted UniFrac	M31Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.25318544567194917
+Weighted UniFrac	M11Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.3673293099899921
+Weighted UniFrac	F21Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.2046919138208725
+Weighted UniFrac	M31Tong	M11Tong	Human-associated	Human-associated	Within habitat	0.27088394683286593
+Weighted UniFrac	CL3	LMEpi24M	Soil	Freshwater	Between habitats	0.4172634109296686
+Weighted UniFrac	CC1	LMEpi24M	Soil	Freshwater	Between habitats	0.40270548097316317
+Weighted UniFrac	SV1	LMEpi24M	Soil	Freshwater	Between habitats	0.40357337107656027
+Weighted UniFrac	M31Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	0.5812272533843769
+Weighted UniFrac	M11Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	0.5494112582346896
+Weighted UniFrac	M31Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.4517051187430465
+Weighted UniFrac	M11Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.36391337249591377
+Weighted UniFrac	F21Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	0.4101713585601477
+Weighted UniFrac	M31Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.45209283024435737
+Weighted UniFrac	M11Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.36970924381607084
+Weighted UniFrac	CL3	SLEpi20M	Soil	Freshwater	Between habitats	0.38099218658783107
+Weighted UniFrac	CC1	SLEpi20M	Soil	Freshwater	Between habitats	0.36493554925595
+Weighted UniFrac	SV1	SLEpi20M	Soil	Freshwater	Between habitats	0.3557935991904389
+Weighted UniFrac	M31Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	0.5574609677962533
+Weighted UniFrac	M11Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	0.5291643565895446
+Weighted UniFrac	M31Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.4322452371000492
+Weighted UniFrac	M11Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.3414249284029162
+Weighted UniFrac	F21Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	0.3763026416624451
+Weighted UniFrac	M31Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.4342686184922567
+Weighted UniFrac	M11Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.38157997786511366
+Weighted UniFrac	LMEpi24M	SLEpi20M	Freshwater	Freshwater	Within habitat	0.2828516012803044
+Weighted UniFrac	CL3	AQC1cm	Soil	Freshwater	Between habitats	0.4282821053020261
+Weighted UniFrac	CC1	AQC1cm	Soil	Freshwater	Between habitats	0.4198756837587725
+Weighted UniFrac	SV1	AQC1cm	Soil	Freshwater	Between habitats	0.44085745893093836
+Weighted UniFrac	M31Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	0.6117177664100734
+Weighted UniFrac	M11Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	0.5797688993439127
+Weighted UniFrac	M31Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.5106084806100165
+Weighted UniFrac	M11Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.41782530232682796
+Weighted UniFrac	F21Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	0.48055364893483105
+Weighted UniFrac	M31Tong	AQC1cm	Human-associated	Freshwater	Between habitats	0.5005762918742187
+Weighted UniFrac	M11Tong	AQC1cm	Human-associated	Freshwater	Between habitats	0.4657808935363595
+Weighted UniFrac	LMEpi24M	AQC1cm	Freshwater	Freshwater	Within habitat	0.3222494411199345
+Weighted UniFrac	SLEpi20M	AQC1cm	Freshwater	Freshwater	Within habitat	0.41665342294513336
+Weighted UniFrac	CL3	AQC4cm	Soil	Freshwater	Between habitats	0.4546523579531622
+Weighted UniFrac	CC1	AQC4cm	Soil	Freshwater	Between habitats	0.4479820392350976
+Weighted UniFrac	SV1	AQC4cm	Soil	Freshwater	Between habitats	0.4611591481609058
+Weighted UniFrac	M31Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	0.6124574770322659
+Weighted UniFrac	M11Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	0.5800939719338035
+Weighted UniFrac	M31Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.5134029488119599
+Weighted UniFrac	M11Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.43216794152170684
+Weighted UniFrac	F21Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	0.48493439271136946
+Weighted UniFrac	M31Tong	AQC4cm	Human-associated	Freshwater	Between habitats	0.5015472101733295
+Weighted UniFrac	M11Tong	AQC4cm	Human-associated	Freshwater	Between habitats	0.4725295845989572
+Weighted UniFrac	LMEpi24M	AQC4cm	Freshwater	Freshwater	Within habitat	0.33433056337481915
+Weighted UniFrac	SLEpi20M	AQC4cm	Freshwater	Freshwater	Within habitat	0.4274842325185825
+Weighted UniFrac	AQC1cm	AQC4cm	Freshwater	Freshwater	Within habitat	0.05584201107758505
+Weighted UniFrac	CL3	AQC7cm	Soil	Freshwater	Between habitats	0.4240778102931623
+Weighted UniFrac	CC1	AQC7cm	Soil	Freshwater	Between habitats	0.41564509270760236
+Weighted UniFrac	SV1	AQC7cm	Soil	Freshwater	Between habitats	0.4343192657697075
+Weighted UniFrac	M31Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	0.6021932111066898
+Weighted UniFrac	M11Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	0.5696753662632543
+Weighted UniFrac	M31Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.49039062102376896
+Weighted UniFrac	M11Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.4139674232030556
+Weighted UniFrac	F21Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	0.4605228558347422
+Weighted UniFrac	M31Tong	AQC7cm	Human-associated	Freshwater	Between habitats	0.48031529444322507
+Weighted UniFrac	M11Tong	AQC7cm	Human-associated	Freshwater	Between habitats	0.44853857000885516
+Weighted UniFrac	LMEpi24M	AQC7cm	Freshwater	Freshwater	Within habitat	0.31092465270314046
+Weighted UniFrac	SLEpi20M	AQC7cm	Freshwater	Freshwater	Within habitat	0.4014557672736083
+Weighted UniFrac	AQC1cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.08886718965596106
+Weighted UniFrac	AQC4cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.06482308132016075
+Weighted UniFrac	CL3	NP2	Soil	Marine/estuarine	Between habitats	0.3967724749597558
+Weighted UniFrac	CC1	NP2	Soil	Marine/estuarine	Between habitats	0.40139014363916353
+Weighted UniFrac	SV1	NP2	Soil	Marine/estuarine	Between habitats	0.38584241191747626
+Weighted UniFrac	M31Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	0.5589804349357106
+Weighted UniFrac	M11Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	0.5284690110597412
+Weighted UniFrac	M31Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.4686215691265232
+Weighted UniFrac	M11Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.3840359300482911
+Weighted UniFrac	F21Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	0.4070536840927254
+Weighted UniFrac	M31Tong	NP2	Human-associated	Marine/estuarine	Between habitats	0.444284564419359
+Weighted UniFrac	M11Tong	NP2	Human-associated	Marine/estuarine	Between habitats	0.4003652038316098
+Weighted UniFrac	LMEpi24M	NP2	Freshwater	Marine/estuarine	Between habitats	0.35635632233728426
+Weighted UniFrac	SLEpi20M	NP2	Freshwater	Marine/estuarine	Between habitats	0.3530451414846265
+Weighted UniFrac	AQC1cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.3904070809101622
+Weighted UniFrac	AQC4cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.40885748065630817
+Weighted UniFrac	AQC7cm	NP2	Freshwater	Marine/estuarine	Between habitats	0.38679168007962056
+Weighted UniFrac	CL3	NP3	Soil	Marine/estuarine	Between habitats	0.45725085685752104
+Weighted UniFrac	CC1	NP3	Soil	Marine/estuarine	Between habitats	0.4564694214717805
+Weighted UniFrac	SV1	NP3	Soil	Marine/estuarine	Between habitats	0.42029612883608103
+Weighted UniFrac	M31Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	0.441296660752864
+Weighted UniFrac	M11Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	0.4224419330653415
+Weighted UniFrac	M31Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.5091634908550102
+Weighted UniFrac	M11Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.44754889619826593
+Weighted UniFrac	F21Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	0.4531637196502438
+Weighted UniFrac	M31Tong	NP3	Human-associated	Marine/estuarine	Between habitats	0.5022809112229393
+Weighted UniFrac	M11Tong	NP3	Human-associated	Marine/estuarine	Between habitats	0.4666353779388882
+Weighted UniFrac	LMEpi24M	NP3	Freshwater	Marine/estuarine	Between habitats	0.46091973329173125
+Weighted UniFrac	SLEpi20M	NP3	Freshwater	Marine/estuarine	Between habitats	0.42077730386167306
+Weighted UniFrac	AQC1cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.4935147611754472
+Weighted UniFrac	AQC4cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.492319983516149
+Weighted UniFrac	AQC7cm	NP3	Freshwater	Marine/estuarine	Between habitats	0.47061761429442217
+Weighted UniFrac	NP2	NP3	Marine/estuarine	Marine/estuarine	Within habitat	0.2865174898585673
+Weighted UniFrac	CL3	NP5	Soil	Marine/estuarine	Between habitats	0.43690294564351245
+Weighted UniFrac	CC1	NP5	Soil	Marine/estuarine	Between habitats	0.4361846679931953
+Weighted UniFrac	SV1	NP5	Soil	Marine/estuarine	Between habitats	0.4094108558081095
+Weighted UniFrac	M31Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	0.5384247715871429
+Weighted UniFrac	M11Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	0.5104957397781651
+Weighted UniFrac	M31Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.47298092529733704
+Weighted UniFrac	M11Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.3967802714577691
+Weighted UniFrac	F21Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	0.41151363879411806
+Weighted UniFrac	M31Tong	NP5	Human-associated	Marine/estuarine	Between habitats	0.4638733962378181
+Weighted UniFrac	M11Tong	NP5	Human-associated	Marine/estuarine	Between habitats	0.4102348940346759
+Weighted UniFrac	LMEpi24M	NP5	Freshwater	Marine/estuarine	Between habitats	0.364312772375612
+Weighted UniFrac	SLEpi20M	NP5	Freshwater	Marine/estuarine	Between habitats	0.36813497971625025
+Weighted UniFrac	AQC1cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.3787909939790898
+Weighted UniFrac	AQC4cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.3787965307248473
+Weighted UniFrac	AQC7cm	NP5	Freshwater	Marine/estuarine	Between habitats	0.355301295106003
+Weighted UniFrac	NP2	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.18283457199950434
+Weighted UniFrac	NP3	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.2699960195036825
+Weighted UniFrac	CL3	TRRsed1	Soil	Marine/estuarine	Between habitats	0.36025074833900117
+Weighted UniFrac	CC1	TRRsed1	Soil	Marine/estuarine	Between habitats	0.3663952267222931
+Weighted UniFrac	SV1	TRRsed1	Soil	Marine/estuarine	Between habitats	0.36423433251550275
+Weighted UniFrac	M31Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.5527107569100188
+Weighted UniFrac	M11Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.5337789480349244
+Weighted UniFrac	M31Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.42263201203041667
+Weighted UniFrac	M11Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.33117296820425807
+Weighted UniFrac	F21Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.38501592488227065
+Weighted UniFrac	M31Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.3875852893584757
+Weighted UniFrac	M11Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.3989041859115794
+Weighted UniFrac	LMEpi24M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.39794234547966495
+Weighted UniFrac	SLEpi20M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.3642554252736304
+Weighted UniFrac	AQC1cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.4001982645055557
+Weighted UniFrac	AQC4cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.40883559015258913
+Weighted UniFrac	AQC7cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.3745869917423552
+Weighted UniFrac	NP2	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.32228831780256473
+Weighted UniFrac	NP3	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.3875891746542516
+Weighted UniFrac	NP5	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	0.3519613731494666
+Weighted UniFrac	CL3	TRRsed2	Soil	Marine/estuarine	Between habitats	0.38705943504568396
+Weighted UniFrac	CC1	TRRsed2	Soil	Marine/estuarine	Between habitats	0.3947126714055007
+Weighted UniFrac	SV1	TRRsed2	Soil	Marine/estuarine	Between habitats	0.40285117594048786
+Weighted UniFrac	M31Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.5896925704886052
+Weighted UniFrac	M11Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.5651162821679937
+Weighted UniFrac	M31Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.45798876281418627
+Weighted UniFrac	M11Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.3078777824215701
+Weighted UniFrac	F21Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.4235530123913302
+Weighted UniFrac	M31Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.40993135110602835
+Weighted UniFrac	M11Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.4523977959886384
+Weighted UniFrac	LMEpi24M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.4161550843337895
+Weighted UniFrac	SLEpi20M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.39430217577349036
+Weighted UniFrac	AQC1cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.4116005499406336
+Weighted UniFrac	AQC4cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.40509237394839537
+Weighted UniFrac	AQC7cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	0.38654104092063263
+Weighted UniFrac	NP2	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.368512947894269
+Weighted UniFrac	NP3	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.42741681063035614
+Weighted UniFrac	NP5	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.3917877994688388
+Weighted UniFrac	TRRsed1	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.174674736838739
+Weighted UniFrac	CL3	TRRsed3	Soil	Marine/estuarine	Between habitats	0.38685276148562925
+Weighted UniFrac	CC1	TRRsed3	Soil	Marine/estuarine	Between habitats	0.39508725709726494
+Weighted UniFrac	SV1	TRRsed3	Soil	Marine/estuarine	Between habitats	0.3770163174372135
+Weighted UniFrac	M31Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.5608771135437335
+Weighted UniFrac	M11Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.5463464909748403
+Weighted UniFrac	M31Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.4523670359103906
+Weighted UniFrac	M11Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.35333790853062425
+Weighted UniFrac	F21Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.4311663469177908
+Weighted UniFrac	M31Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.4174123633269089
+Weighted UniFrac	M11Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.44819773019809445
+Weighted UniFrac	LMEpi24M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.4436250860860204
+Weighted UniFrac	SLEpi20M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.41949956292550633
+Weighted UniFrac	AQC1cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.44047220348735633
+Weighted UniFrac	AQC4cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.43752869531094185
+Weighted UniFrac	AQC7cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	0.40976721208831723
+Weighted UniFrac	NP2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.3986390278217912
+Weighted UniFrac	NP3	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.44715480119444223
+Weighted UniFrac	NP5	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.4178708623273399
+Weighted UniFrac	TRRsed1	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.18318074636560944
+Weighted UniFrac	TRRsed2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.16195841563019187
+Weighted UniFrac	CL3	TS28	Soil	Human-associated	Between habitats	0.5600040010509478
+Weighted UniFrac	CC1	TS28	Soil	Human-associated	Between habitats	0.5626328315339386
+Weighted UniFrac	SV1	TS28	Soil	Human-associated	Between habitats	0.5537192124098738
+Weighted UniFrac	M31Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.3142374558794977
+Weighted UniFrac	M11Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.46665188185503403
+Weighted UniFrac	M31Plmr	TS28	Human-associated	Human-associated	Within habitat	0.5031177466202083
+Weighted UniFrac	M11Plmr	TS28	Human-associated	Human-associated	Within habitat	0.5526694570699866
+Weighted UniFrac	F21Plmr	TS28	Human-associated	Human-associated	Within habitat	0.49225293174846
+Weighted UniFrac	M31Tong	TS28	Human-associated	Human-associated	Within habitat	0.5368411759266967
+Weighted UniFrac	M11Tong	TS28	Human-associated	Human-associated	Within habitat	0.4797902121842909
+Weighted UniFrac	LMEpi24M	TS28	Freshwater	Human-associated	Between habitats	0.5653996507978795
+Weighted UniFrac	SLEpi20M	TS28	Freshwater	Human-associated	Between habitats	0.5387097700443356
+Weighted UniFrac	AQC1cm	TS28	Freshwater	Human-associated	Between habitats	0.5992748234301616
+Weighted UniFrac	AQC4cm	TS28	Freshwater	Human-associated	Between habitats	0.6012813645136352
+Weighted UniFrac	AQC7cm	TS28	Freshwater	Human-associated	Between habitats	0.5893422437236377
+Weighted UniFrac	NP2	TS28	Marine/estuarine	Human-associated	Between habitats	0.5512148724520726
+Weighted UniFrac	NP3	TS28	Marine/estuarine	Human-associated	Between habitats	0.5805837641200422
+Weighted UniFrac	NP5	TS28	Marine/estuarine	Human-associated	Between habitats	0.5627522513728379
+Weighted UniFrac	TRRsed1	TS28	Marine/estuarine	Human-associated	Between habitats	0.5353983700160077
+Weighted UniFrac	TRRsed2	TS28	Marine/estuarine	Human-associated	Between habitats	0.574943290065512
+Weighted UniFrac	TRRsed3	TS28	Marine/estuarine	Human-associated	Between habitats	0.5441169846797312
+Weighted UniFrac	CL3	TS29	Soil	Human-associated	Between habitats	0.5650013360532904
+Weighted UniFrac	CC1	TS29	Soil	Human-associated	Between habitats	0.5663275428075125
+Weighted UniFrac	SV1	TS29	Soil	Human-associated	Between habitats	0.5724378126208729
+Weighted UniFrac	M31Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.4081937137961017
+Weighted UniFrac	M11Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.5557057480697485
+Weighted UniFrac	M31Plmr	TS29	Human-associated	Human-associated	Within habitat	0.5161428523616465
+Weighted UniFrac	M11Plmr	TS29	Human-associated	Human-associated	Within habitat	0.537608703691325
+Weighted UniFrac	F21Plmr	TS29	Human-associated	Human-associated	Within habitat	0.5305183954069053
+Weighted UniFrac	M31Tong	TS29	Human-associated	Human-associated	Within habitat	0.5692576456618104
+Weighted UniFrac	M11Tong	TS29	Human-associated	Human-associated	Within habitat	0.5381002877436618
+Weighted UniFrac	LMEpi24M	TS29	Freshwater	Human-associated	Between habitats	0.5696854881529977
+Weighted UniFrac	SLEpi20M	TS29	Freshwater	Human-associated	Between habitats	0.5597341705503435
+Weighted UniFrac	AQC1cm	TS29	Freshwater	Human-associated	Between habitats	0.5943402025159341
+Weighted UniFrac	AQC4cm	TS29	Freshwater	Human-associated	Between habitats	0.5978596416113399
+Weighted UniFrac	AQC7cm	TS29	Freshwater	Human-associated	Between habitats	0.5918787991218256
+Weighted UniFrac	NP2	TS29	Marine/estuarine	Human-associated	Between habitats	0.5918387360578257
+Weighted UniFrac	NP3	TS29	Marine/estuarine	Human-associated	Between habitats	0.6211718587222961
+Weighted UniFrac	NP5	TS29	Marine/estuarine	Human-associated	Between habitats	0.5947305384227983
+Weighted UniFrac	TRRsed1	TS29	Marine/estuarine	Human-associated	Between habitats	0.5555134530022533
+Weighted UniFrac	TRRsed2	TS29	Marine/estuarine	Human-associated	Between habitats	0.5686845713342633
+Weighted UniFrac	TRRsed3	TS29	Marine/estuarine	Human-associated	Between habitats	0.5428515579610256
+Weighted UniFrac	TS28	TS29	Human-associated	Human-associated	Within habitat	0.16976465475350894
+Weighted UniFrac	CL3	Even1	Soil	Mock	Between habitats	0.49582596549464186
+Weighted UniFrac	CC1	Even1	Soil	Mock	Between habitats	0.5005952848493508
+Weighted UniFrac	SV1	Even1	Soil	Mock	Between habitats	0.49543211464401027
+Weighted UniFrac	M31Fcsw	Even1	Human-associated	Mock	Between habitats	0.30787278200030305
+Weighted UniFrac	M11Fcsw	Even1	Human-associated	Mock	Between habitats	0.38757011864754304
+Weighted UniFrac	M31Plmr	Even1	Human-associated	Mock	Between habitats	0.38403416852854144
+Weighted UniFrac	M11Plmr	Even1	Human-associated	Mock	Between habitats	0.4325293123111177
+Weighted UniFrac	F21Plmr	Even1	Human-associated	Mock	Between habitats	0.37191185932438553
+Weighted UniFrac	M31Tong	Even1	Human-associated	Mock	Between habitats	0.3929122257058343
+Weighted UniFrac	M11Tong	Even1	Human-associated	Mock	Between habitats	0.35943824527512147
+Weighted UniFrac	LMEpi24M	Even1	Freshwater	Mock	Between habitats	0.5075868104787953
+Weighted UniFrac	SLEpi20M	Even1	Freshwater	Mock	Between habitats	0.47285496697567764
+Weighted UniFrac	AQC1cm	Even1	Freshwater	Mock	Between habitats	0.5500173270878236
+Weighted UniFrac	AQC4cm	Even1	Freshwater	Mock	Between habitats	0.5517038730811992
+Weighted UniFrac	AQC7cm	Even1	Freshwater	Mock	Between habitats	0.5341958082435493
+Weighted UniFrac	NP2	Even1	Marine/estuarine	Mock	Between habitats	0.46899834827897163
+Weighted UniFrac	NP3	Even1	Marine/estuarine	Mock	Between habitats	0.4723019184792541
+Weighted UniFrac	NP5	Even1	Marine/estuarine	Mock	Between habitats	0.4416736853264855
+Weighted UniFrac	TRRsed1	Even1	Marine/estuarine	Mock	Between habitats	0.45054198927895334
+Weighted UniFrac	TRRsed2	Even1	Marine/estuarine	Mock	Between habitats	0.4973401441073886
+Weighted UniFrac	TRRsed3	Even1	Marine/estuarine	Mock	Between habitats	0.4662567142560232
+Weighted UniFrac	TS28	Even1	Human-associated	Mock	Between habitats	0.3393959052049042
+Weighted UniFrac	TS29	Even1	Human-associated	Mock	Between habitats	0.42084020911946524
+Weighted UniFrac	CL3	Even2	Soil	Mock	Between habitats	0.5009620482562342
+Weighted UniFrac	CC1	Even2	Soil	Mock	Between habitats	0.5059087830463445
+Weighted UniFrac	SV1	Even2	Soil	Mock	Between habitats	0.5019218735186378
+Weighted UniFrac	M31Fcsw	Even2	Human-associated	Mock	Between habitats	0.3113981298864289
+Weighted UniFrac	M11Fcsw	Even2	Human-associated	Mock	Between habitats	0.3927132428433274
+Weighted UniFrac	M31Plmr	Even2	Human-associated	Mock	Between habitats	0.38811322899515277
+Weighted UniFrac	M11Plmr	Even2	Human-associated	Mock	Between habitats	0.4400946676652195
+Weighted UniFrac	F21Plmr	Even2	Human-associated	Mock	Between habitats	0.3803227309015883
+Weighted UniFrac	M31Tong	Even2	Human-associated	Mock	Between habitats	0.40016973399004296
+Weighted UniFrac	M11Tong	Even2	Human-associated	Mock	Between habitats	0.3680241171324321
+Weighted UniFrac	LMEpi24M	Even2	Freshwater	Mock	Between habitats	0.515197203071215
+Weighted UniFrac	SLEpi20M	Even2	Freshwater	Mock	Between habitats	0.4810295247196487
+Weighted UniFrac	AQC1cm	Even2	Freshwater	Mock	Between habitats	0.5570036966094415
+Weighted UniFrac	AQC4cm	Even2	Freshwater	Mock	Between habitats	0.5587017216495714
+Weighted UniFrac	AQC7cm	Even2	Freshwater	Mock	Between habitats	0.5413798170896351
+Weighted UniFrac	NP2	Even2	Marine/estuarine	Mock	Between habitats	0.4762755880001128
+Weighted UniFrac	NP3	Even2	Marine/estuarine	Mock	Between habitats	0.47881574980788855
+Weighted UniFrac	NP5	Even2	Marine/estuarine	Mock	Between habitats	0.44941443298299033
+Weighted UniFrac	TRRsed1	Even2	Marine/estuarine	Mock	Between habitats	0.45832761544480455
+Weighted UniFrac	TRRsed2	Even2	Marine/estuarine	Mock	Between habitats	0.5045884453034323
+Weighted UniFrac	TRRsed3	Even2	Marine/estuarine	Mock	Between habitats	0.4731179644924842
+Weighted UniFrac	TS28	Even2	Human-associated	Mock	Between habitats	0.34747079662526237
+Weighted UniFrac	TS29	Even2	Human-associated	Mock	Between habitats	0.4269965170465152
+Weighted UniFrac	Even1	Even2	Mock	Mock	Within habitat	0.027050578954829745
+Weighted UniFrac	CL3	Even3	Soil	Mock	Between habitats	0.498224467606682
+Weighted UniFrac	CC1	Even3	Soil	Mock	Between habitats	0.5031507994709872
+Weighted UniFrac	SV1	Even3	Soil	Mock	Between habitats	0.498426655648917
+Weighted UniFrac	M31Fcsw	Even3	Human-associated	Mock	Between habitats	0.310687539174722
+Weighted UniFrac	M11Fcsw	Even3	Human-associated	Mock	Between habitats	0.3963299230271665
+Weighted UniFrac	M31Plmr	Even3	Human-associated	Mock	Between habitats	0.3812243211067155
+Weighted UniFrac	M11Plmr	Even3	Human-associated	Mock	Between habitats	0.43323323209996567
+Weighted UniFrac	F21Plmr	Even3	Human-associated	Mock	Between habitats	0.37254875688777006
+Weighted UniFrac	M31Tong	Even3	Human-associated	Mock	Between habitats	0.39233552086308954
+Weighted UniFrac	M11Tong	Even3	Human-associated	Mock	Between habitats	0.3607559618983196
+Weighted UniFrac	LMEpi24M	Even3	Freshwater	Mock	Between habitats	0.5111866482085549
+Weighted UniFrac	SLEpi20M	Even3	Freshwater	Mock	Between habitats	0.47676499941284917
+Weighted UniFrac	AQC1cm	Even3	Freshwater	Mock	Between habitats	0.5539660151635238
+Weighted UniFrac	AQC4cm	Even3	Freshwater	Mock	Between habitats	0.555664361743623
+Weighted UniFrac	AQC7cm	Even3	Freshwater	Mock	Between habitats	0.5381410043590429
+Weighted UniFrac	NP2	Even3	Marine/estuarine	Mock	Between habitats	0.4723713397846411
+Weighted UniFrac	NP3	Even3	Marine/estuarine	Mock	Between habitats	0.47945924271773815
+Weighted UniFrac	NP5	Even3	Marine/estuarine	Mock	Between habitats	0.4462716490600778
+Weighted UniFrac	TRRsed1	Even3	Marine/estuarine	Mock	Between habitats	0.4538448388904859
+Weighted UniFrac	TRRsed2	Even3	Marine/estuarine	Mock	Between habitats	0.5002669644546169
+Weighted UniFrac	TRRsed3	Even3	Marine/estuarine	Mock	Between habitats	0.46925363369395295
+Weighted UniFrac	TS28	Even3	Human-associated	Mock	Between habitats	0.3360458641257613
+Weighted UniFrac	TS29	Even3	Human-associated	Mock	Between habitats	0.4195139854121445
+Weighted UniFrac	Even1	Even3	Mock	Mock	Within habitat	0.01842161681888828
+Weighted UniFrac	Even2	Even3	Mock	Mock	Within habitat	0.030436375263112186
+Aitchison	CL3	CC1	Soil	Soil	Within habitat	151.42511078318174
+Aitchison	CL3	SV1	Soil	Soil	Within habitat	227.43949728236763
+Aitchison	CC1	SV1	Soil	Soil	Within habitat	216.84927097545386
+Aitchison	CL3	M31Fcsw	Soil	Human-associated	Between habitats	286.2336137133613
+Aitchison	CC1	M31Fcsw	Soil	Human-associated	Between habitats	309.83256356749905
+Aitchison	SV1	M31Fcsw	Soil	Human-associated	Between habitats	277.25567686887354
+Aitchison	CL3	M11Fcsw	Soil	Human-associated	Between habitats	277.699542825178
+Aitchison	CC1	M11Fcsw	Soil	Human-associated	Between habitats	301.1284057544612
+Aitchison	SV1	M11Fcsw	Soil	Human-associated	Between habitats	268.6791913994752
+Aitchison	M31Fcsw	M11Fcsw	Human-associated	Human-associated	Within habitat	109.89311505534376
+Aitchison	CL3	M31Plmr	Soil	Human-associated	Between habitats	281.925825213419
+Aitchison	CC1	M31Plmr	Soil	Human-associated	Between habitats	289.3363128102055
+Aitchison	SV1	M31Plmr	Soil	Human-associated	Between habitats	257.9228834469846
+Aitchison	M31Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	206.7460676134761
+Aitchison	M11Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	201.08947814596993
+Aitchison	CL3	M11Plmr	Soil	Human-associated	Between habitats	270.60111194016457
+Aitchison	CC1	M11Plmr	Soil	Human-associated	Between habitats	270.98644999044495
+Aitchison	SV1	M11Plmr	Soil	Human-associated	Between habitats	240.81014385243276
+Aitchison	M31Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	221.4704737434496
+Aitchison	M11Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	213.98423556420235
+Aitchison	M31Plmr	M11Plmr	Human-associated	Human-associated	Within habitat	145.92666803857853
+Aitchison	CL3	F21Plmr	Soil	Human-associated	Between habitats	265.8446608342667
+Aitchison	CC1	F21Plmr	Soil	Human-associated	Between habitats	272.0507005127502
+Aitchison	SV1	F21Plmr	Soil	Human-associated	Between habitats	234.52696815890573
+Aitchison	M31Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	197.7660650062204
+Aitchison	M11Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	190.55936353846712
+Aitchison	M31Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	111.37083328895811
+Aitchison	M11Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	133.00319546110234
+Aitchison	CL3	M31Tong	Soil	Human-associated	Between habitats	272.8573079356734
+Aitchison	CC1	M31Tong	Soil	Human-associated	Between habitats	290.29455182162917
+Aitchison	SV1	M31Tong	Soil	Human-associated	Between habitats	260.39827993044526
+Aitchison	M31Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	177.18430222947768
+Aitchison	M11Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	167.21166936833148
+Aitchison	M31Plmr	M31Tong	Human-associated	Human-associated	Within habitat	150.35821268492623
+Aitchison	M11Plmr	M31Tong	Human-associated	Human-associated	Within habitat	184.101448540225
+Aitchison	F21Plmr	M31Tong	Human-associated	Human-associated	Within habitat	143.2092625353776
+Aitchison	CL3	M11Tong	Soil	Human-associated	Between habitats	254.84952926852165
+Aitchison	CC1	M11Tong	Soil	Human-associated	Between habitats	269.447252803391
+Aitchison	SV1	M11Tong	Soil	Human-associated	Between habitats	239.22030865650316
+Aitchison	M31Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	167.09885796339967
+Aitchison	M11Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	153.96684075414612
+Aitchison	M31Plmr	M11Tong	Human-associated	Human-associated	Within habitat	152.37789122365572
+Aitchison	M11Plmr	M11Tong	Human-associated	Human-associated	Within habitat	171.06766452117125
+Aitchison	F21Plmr	M11Tong	Human-associated	Human-associated	Within habitat	132.67790891579185
+Aitchison	M31Tong	M11Tong	Human-associated	Human-associated	Within habitat	91.51906180777179
+Aitchison	CL3	LMEpi24M	Soil	Freshwater	Between habitats	279.73094435149653
+Aitchison	CC1	LMEpi24M	Soil	Freshwater	Between habitats	284.568073551217
+Aitchison	SV1	LMEpi24M	Soil	Freshwater	Between habitats	263.31658125001695
+Aitchison	M31Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	217.4797308491419
+Aitchison	M11Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	202.74939901275977
+Aitchison	M31Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	208.13222608714997
+Aitchison	M11Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	206.6806905626714
+Aitchison	F21Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	188.60857062769074
+Aitchison	M31Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	167.7163891467187
+Aitchison	M11Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	122.10025208047055
+Aitchison	CL3	SLEpi20M	Soil	Freshwater	Between habitats	268.3889092704993
+Aitchison	CC1	SLEpi20M	Soil	Freshwater	Between habitats	271.818200971735
+Aitchison	SV1	SLEpi20M	Soil	Freshwater	Between habitats	254.4622845759326
+Aitchison	M31Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	215.6948077290298
+Aitchison	M11Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	203.94418852299736
+Aitchison	M31Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	204.9539520383486
+Aitchison	M11Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	200.4382189619281
+Aitchison	F21Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	182.72231877482645
+Aitchison	M31Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	172.17250911590497
+Aitchison	M11Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	135.96234516138244
+Aitchison	LMEpi24M	SLEpi20M	Freshwater	Freshwater	Within habitat	133.14376571150467
+Aitchison	CL3	AQC1cm	Soil	Freshwater	Between habitats	285.3570878916705
+Aitchison	CC1	AQC1cm	Soil	Freshwater	Between habitats	287.85554383145666
+Aitchison	SV1	AQC1cm	Soil	Freshwater	Between habitats	288.2888300413512
+Aitchison	M31Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	250.29561775276267
+Aitchison	M11Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	240.2043256336451
+Aitchison	M31Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	257.4332937020711
+Aitchison	M11Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	253.39635625807347
+Aitchison	F21Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	236.1844743158405
+Aitchison	M31Tong	AQC1cm	Human-associated	Freshwater	Between habitats	209.43129770304415
+Aitchison	M11Tong	AQC1cm	Human-associated	Freshwater	Between habitats	189.1594322432713
+Aitchison	LMEpi24M	AQC1cm	Freshwater	Freshwater	Within habitat	193.0940390069318
+Aitchison	SLEpi20M	AQC1cm	Freshwater	Freshwater	Within habitat	174.59071373690708
+Aitchison	CL3	AQC4cm	Soil	Freshwater	Between habitats	301.91700842757103
+Aitchison	CC1	AQC4cm	Soil	Freshwater	Between habitats	302.31309881988085
+Aitchison	SV1	AQC4cm	Soil	Freshwater	Between habitats	308.22555839114875
+Aitchison	M31Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	283.26816898291463
+Aitchison	M11Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	272.7125591886893
+Aitchison	M31Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	282.6455715858271
+Aitchison	M11Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	279.4984991066909
+Aitchison	F21Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	260.5779961884355
+Aitchison	M31Tong	AQC4cm	Human-associated	Freshwater	Between habitats	240.91532049360498
+Aitchison	M11Tong	AQC4cm	Human-associated	Freshwater	Between habitats	220.586266463359
+Aitchison	LMEpi24M	AQC4cm	Freshwater	Freshwater	Within habitat	224.58981516141696
+Aitchison	SLEpi20M	AQC4cm	Freshwater	Freshwater	Within habitat	206.96739495612954
+Aitchison	AQC1cm	AQC4cm	Freshwater	Freshwater	Within habitat	110.72239485291924
+Aitchison	CL3	AQC7cm	Soil	Freshwater	Between habitats	297.0924726544098
+Aitchison	CC1	AQC7cm	Soil	Freshwater	Between habitats	296.7985683075392
+Aitchison	SV1	AQC7cm	Soil	Freshwater	Between habitats	305.85456089475645
+Aitchison	M31Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	282.6917041912822
+Aitchison	M11Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	271.498245693933
+Aitchison	M31Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	282.9691777308255
+Aitchison	M11Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	279.73828156444
+Aitchison	F21Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	260.8863991918258
+Aitchison	M31Tong	AQC7cm	Human-associated	Freshwater	Between habitats	243.27731552922293
+Aitchison	M11Tong	AQC7cm	Human-associated	Freshwater	Between habitats	218.34405012623336
+Aitchison	LMEpi24M	AQC7cm	Freshwater	Freshwater	Within habitat	219.74825037928215
+Aitchison	SLEpi20M	AQC7cm	Freshwater	Freshwater	Within habitat	201.36348904250463
+Aitchison	AQC1cm	AQC7cm	Freshwater	Freshwater	Within habitat	115.8821185305437
+Aitchison	AQC4cm	AQC7cm	Freshwater	Freshwater	Within habitat	74.13248638593741
+Aitchison	CL3	NP2	Soil	Marine/estuarine	Between habitats	281.2973780574816
+Aitchison	CC1	NP2	Soil	Marine/estuarine	Between habitats	296.15657214098235
+Aitchison	SV1	NP2	Soil	Marine/estuarine	Between habitats	268.9727851084914
+Aitchison	M31Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	205.7236937178722
+Aitchison	M11Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	194.57439855559088
+Aitchison	M31Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	211.53690755064744
+Aitchison	M11Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	218.08117847605618
+Aitchison	F21Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	186.17735280808978
+Aitchison	M31Tong	NP2	Human-associated	Marine/estuarine	Between habitats	145.7745591755571
+Aitchison	M11Tong	NP2	Human-associated	Marine/estuarine	Between habitats	137.79136770818914
+Aitchison	LMEpi24M	NP2	Freshwater	Marine/estuarine	Between habitats	182.58092640952464
+Aitchison	SLEpi20M	NP2	Freshwater	Marine/estuarine	Between habitats	174.15035238593697
+Aitchison	AQC1cm	NP2	Freshwater	Marine/estuarine	Between habitats	190.28030828094535
+Aitchison	AQC4cm	NP2	Freshwater	Marine/estuarine	Between habitats	207.87936178515142
+Aitchison	AQC7cm	NP2	Freshwater	Marine/estuarine	Between habitats	215.92845636620368
+Aitchison	CL3	NP3	Soil	Marine/estuarine	Between habitats	314.1724760013855
+Aitchison	CC1	NP3	Soil	Marine/estuarine	Between habitats	329.0834405628166
+Aitchison	SV1	NP3	Soil	Marine/estuarine	Between habitats	297.92525131761323
+Aitchison	M31Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	234.8269605626256
+Aitchison	M11Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	224.4503883837465
+Aitchison	M31Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	234.97745657656023
+Aitchison	M11Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	239.39406450519112
+Aitchison	F21Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	213.8197433781295
+Aitchison	M31Tong	NP3	Human-associated	Marine/estuarine	Between habitats	174.92224501180434
+Aitchison	M11Tong	NP3	Human-associated	Marine/estuarine	Between habitats	174.6565029597893
+Aitchison	LMEpi24M	NP3	Freshwater	Marine/estuarine	Between habitats	215.3993522701932
+Aitchison	SLEpi20M	NP3	Freshwater	Marine/estuarine	Between habitats	212.16116870883135
+Aitchison	AQC1cm	NP3	Freshwater	Marine/estuarine	Between habitats	233.9230923139146
+Aitchison	AQC4cm	NP3	Freshwater	Marine/estuarine	Between habitats	265.2938225458645
+Aitchison	AQC7cm	NP3	Freshwater	Marine/estuarine	Between habitats	272.8790979607322
+Aitchison	NP2	NP3	Marine/estuarine	Marine/estuarine	Within habitat	139.4883553747343
+Aitchison	CL3	NP5	Soil	Marine/estuarine	Between habitats	308.5468208314457
+Aitchison	CC1	NP5	Soil	Marine/estuarine	Between habitats	324.5179404431383
+Aitchison	SV1	NP5	Soil	Marine/estuarine	Between habitats	293.7419219452285
+Aitchison	M31Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	225.93197535242288
+Aitchison	M11Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	216.11104546017452
+Aitchison	M31Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	227.18630747142407
+Aitchison	M11Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	235.37844773963036
+Aitchison	F21Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	206.89592887549108
+Aitchison	M31Tong	NP5	Human-associated	Marine/estuarine	Between habitats	153.87167463243185
+Aitchison	M11Tong	NP5	Human-associated	Marine/estuarine	Between habitats	163.07310299309233
+Aitchison	LMEpi24M	NP5	Freshwater	Marine/estuarine	Between habitats	210.92738131948838
+Aitchison	SLEpi20M	NP5	Freshwater	Marine/estuarine	Between habitats	209.12728315434111
+Aitchison	AQC1cm	NP5	Freshwater	Marine/estuarine	Between habitats	234.12591046459573
+Aitchison	AQC4cm	NP5	Freshwater	Marine/estuarine	Between habitats	260.03213463798147
+Aitchison	AQC7cm	NP5	Freshwater	Marine/estuarine	Between habitats	268.65021046316105
+Aitchison	NP2	NP5	Marine/estuarine	Marine/estuarine	Within habitat	116.25130799562234
+Aitchison	NP3	NP5	Marine/estuarine	Marine/estuarine	Within habitat	115.82994639053857
+Aitchison	CL3	TRRsed1	Soil	Marine/estuarine	Between habitats	280.8091476594026
+Aitchison	CC1	TRRsed1	Soil	Marine/estuarine	Between habitats	297.24354382417374
+Aitchison	SV1	TRRsed1	Soil	Marine/estuarine	Between habitats	261.7493264001175
+Aitchison	M31Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	200.2108961864652
+Aitchison	M11Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	190.19754150788262
+Aitchison	M31Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	205.99843315795147
+Aitchison	M11Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	216.38144071033378
+Aitchison	F21Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	178.83562693617904
+Aitchison	M31Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	157.14347859817013
+Aitchison	M11Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	138.9831262379545
+Aitchison	LMEpi24M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	194.74871284203434
+Aitchison	SLEpi20M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	191.41749032740145
+Aitchison	AQC1cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	224.83357043341456
+Aitchison	AQC4cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	248.79374947716278
+Aitchison	AQC7cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	249.45724501161672
+Aitchison	NP2	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	156.97538430110652
+Aitchison	NP3	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	169.5389284949961
+Aitchison	NP5	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	163.8510133513422
+Aitchison	CL3	TRRsed2	Soil	Marine/estuarine	Between habitats	305.94839807854754
+Aitchison	CC1	TRRsed2	Soil	Marine/estuarine	Between habitats	319.6637383919738
+Aitchison	SV1	TRRsed2	Soil	Marine/estuarine	Between habitats	289.1952605842899
+Aitchison	M31Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	240.8939364301913
+Aitchison	M11Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	231.11765967538366
+Aitchison	M31Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	239.29234232397715
+Aitchison	M11Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	245.47505264202107
+Aitchison	F21Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	212.99678699589887
+Aitchison	M31Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	205.96419311076085
+Aitchison	M11Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	189.2889338345857
+Aitchison	LMEpi24M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	234.96958452739878
+Aitchison	SLEpi20M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	230.23660936833318
+Aitchison	AQC1cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	258.5334878348871
+Aitchison	AQC4cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	276.033579880761
+Aitchison	AQC7cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	275.31896632994557
+Aitchison	NP2	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	201.16545205478084
+Aitchison	NP3	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	207.4445747589497
+Aitchison	NP5	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	209.56584003706078
+Aitchison	TRRsed1	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	116.34521835982295
+Aitchison	CL3	TRRsed3	Soil	Marine/estuarine	Between habitats	297.91275405131245
+Aitchison	CC1	TRRsed3	Soil	Marine/estuarine	Between habitats	315.23691199819984
+Aitchison	SV1	TRRsed3	Soil	Marine/estuarine	Between habitats	285.32976037320356
+Aitchison	M31Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	210.8791352296967
+Aitchison	M11Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	202.71913277308684
+Aitchison	M31Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	230.80322444100452
+Aitchison	M11Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	240.40328296538794
+Aitchison	F21Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	207.8933841278485
+Aitchison	M31Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	192.75469224755815
+Aitchison	M11Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	178.3589941625556
+Aitchison	LMEpi24M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	226.72730005254337
+Aitchison	SLEpi20M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	222.50140102626426
+Aitchison	AQC1cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	247.3198433552651
+Aitchison	AQC4cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	270.08506606681084
+Aitchison	AQC7cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	269.64176479590185
+Aitchison	NP2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	200.02931535677976
+Aitchison	NP3	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	211.72100148748768
+Aitchison	NP5	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	212.04054524886894
+Aitchison	TRRsed1	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	122.1888133526458
+Aitchison	TRRsed2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	105.98797407195268
+Aitchison	CL3	TS28	Soil	Human-associated	Between habitats	283.93661492374025
+Aitchison	CC1	TS28	Soil	Human-associated	Between habitats	306.60634337158257
+Aitchison	SV1	TS28	Soil	Human-associated	Between habitats	272.5861198248145
+Aitchison	M31Fcsw	TS28	Human-associated	Human-associated	Within habitat	108.87020787733384
+Aitchison	M11Fcsw	TS28	Human-associated	Human-associated	Within habitat	116.0959906964441
+Aitchison	M31Plmr	TS28	Human-associated	Human-associated	Within habitat	207.6859005462765
+Aitchison	M11Plmr	TS28	Human-associated	Human-associated	Within habitat	220.44689058804306
+Aitchison	F21Plmr	TS28	Human-associated	Human-associated	Within habitat	193.93006054637513
+Aitchison	M31Tong	TS28	Human-associated	Human-associated	Within habitat	167.45070776305766
+Aitchison	M11Tong	TS28	Human-associated	Human-associated	Within habitat	157.33291645690144
+Aitchison	LMEpi24M	TS28	Freshwater	Human-associated	Between habitats	210.56367451180185
+Aitchison	SLEpi20M	TS28	Freshwater	Human-associated	Between habitats	207.81039862537173
+Aitchison	AQC1cm	TS28	Freshwater	Human-associated	Between habitats	239.64960913756403
+Aitchison	AQC4cm	TS28	Freshwater	Human-associated	Between habitats	275.42632954705095
+Aitchison	AQC7cm	TS28	Freshwater	Human-associated	Between habitats	274.9938375302939
+Aitchison	NP2	TS28	Marine/estuarine	Human-associated	Between habitats	195.5188082577097
+Aitchison	NP3	TS28	Marine/estuarine	Human-associated	Between habitats	224.1538626936788
+Aitchison	NP5	TS28	Marine/estuarine	Human-associated	Between habitats	215.03356710071424
+Aitchison	TRRsed1	TS28	Marine/estuarine	Human-associated	Between habitats	184.73075315078665
+Aitchison	TRRsed2	TS28	Marine/estuarine	Human-associated	Between habitats	225.08657912662142
+Aitchison	TRRsed3	TS28	Marine/estuarine	Human-associated	Between habitats	187.1826391525974
+Aitchison	CL3	TS29	Soil	Human-associated	Between habitats	279.7483796466272
+Aitchison	CC1	TS29	Soil	Human-associated	Between habitats	301.20524954241836
+Aitchison	SV1	TS29	Soil	Human-associated	Between habitats	268.775571865761
+Aitchison	M31Fcsw	TS29	Human-associated	Human-associated	Within habitat	119.65408438894794
+Aitchison	M11Fcsw	TS29	Human-associated	Human-associated	Within habitat	122.63994481011544
+Aitchison	M31Plmr	TS29	Human-associated	Human-associated	Within habitat	205.19676011257664
+Aitchison	M11Plmr	TS29	Human-associated	Human-associated	Within habitat	217.35223086397124
+Aitchison	F21Plmr	TS29	Human-associated	Human-associated	Within habitat	190.55915930571535
+Aitchison	M31Tong	TS29	Human-associated	Human-associated	Within habitat	165.22244459206775
+Aitchison	M11Tong	TS29	Human-associated	Human-associated	Within habitat	152.05264502779661
+Aitchison	LMEpi24M	TS29	Freshwater	Human-associated	Between habitats	203.17801095431315
+Aitchison	SLEpi20M	TS29	Freshwater	Human-associated	Between habitats	199.11428781997486
+Aitchison	AQC1cm	TS29	Freshwater	Human-associated	Between habitats	223.57472114590155
+Aitchison	AQC4cm	TS29	Freshwater	Human-associated	Between habitats	263.3810447560202
+Aitchison	AQC7cm	TS29	Freshwater	Human-associated	Between habitats	262.8892483748156
+Aitchison	NP2	TS29	Marine/estuarine	Human-associated	Between habitats	189.04048027326428
+Aitchison	NP3	TS29	Marine/estuarine	Human-associated	Between habitats	221.27446775289053
+Aitchison	NP5	TS29	Marine/estuarine	Human-associated	Between habitats	213.31957902512062
+Aitchison	TRRsed1	TS29	Marine/estuarine	Human-associated	Between habitats	184.83295441430138
+Aitchison	TRRsed2	TS29	Marine/estuarine	Human-associated	Between habitats	226.88773075134154
+Aitchison	TRRsed3	TS29	Marine/estuarine	Human-associated	Between habitats	194.2084218332616
+Aitchison	TS28	TS29	Human-associated	Human-associated	Within habitat	88.94585382429386
+Aitchison	CL3	Even1	Soil	Mock	Between habitats	249.9681363294839
+Aitchison	CC1	Even1	Soil	Mock	Between habitats	276.20043567810217
+Aitchison	SV1	Even1	Soil	Mock	Between habitats	257.80017855652375
+Aitchison	M31Fcsw	Even1	Human-associated	Mock	Between habitats	166.97099127171168
+Aitchison	M11Fcsw	Even1	Human-associated	Mock	Between habitats	162.0105602889635
+Aitchison	M31Plmr	Even1	Human-associated	Mock	Between habitats	204.77659608039207
+Aitchison	M11Plmr	Even1	Human-associated	Mock	Between habitats	214.87952616665586
+Aitchison	F21Plmr	Even1	Human-associated	Mock	Between habitats	189.10451393300602
+Aitchison	M31Tong	Even1	Human-associated	Mock	Between habitats	159.5730890648343
+Aitchison	M11Tong	Even1	Human-associated	Mock	Between habitats	147.89029291884592
+Aitchison	LMEpi24M	Even1	Freshwater	Mock	Between habitats	194.57944247747196
+Aitchison	SLEpi20M	Even1	Freshwater	Mock	Between habitats	189.1382624012897
+Aitchison	AQC1cm	Even1	Freshwater	Mock	Between habitats	209.7847348669235
+Aitchison	AQC4cm	Even1	Freshwater	Mock	Between habitats	245.71556681047642
+Aitchison	AQC7cm	Even1	Freshwater	Mock	Between habitats	245.47789150980515
+Aitchison	NP2	Even1	Marine/estuarine	Mock	Between habitats	181.13270424168203
+Aitchison	NP3	Even1	Marine/estuarine	Mock	Between habitats	210.33372519111026
+Aitchison	NP5	Even1	Marine/estuarine	Mock	Between habitats	202.99976360668137
+Aitchison	TRRsed1	Even1	Marine/estuarine	Mock	Between habitats	166.4332311733485
+Aitchison	TRRsed2	Even1	Marine/estuarine	Mock	Between habitats	211.6701675454612
+Aitchison	TRRsed3	Even1	Marine/estuarine	Mock	Between habitats	179.30388709952953
+Aitchison	TS28	Even1	Human-associated	Mock	Between habitats	153.66048638840957
+Aitchison	TS29	Even1	Human-associated	Mock	Between habitats	150.95120402012063
+Aitchison	CL3	Even2	Soil	Mock	Between habitats	247.6048549834769
+Aitchison	CC1	Even2	Soil	Mock	Between habitats	262.4234119899678
+Aitchison	SV1	Even2	Soil	Mock	Between habitats	243.7695132069815
+Aitchison	M31Fcsw	Even2	Human-associated	Mock	Between habitats	159.72041024676992
+Aitchison	M11Fcsw	Even2	Human-associated	Mock	Between habitats	154.95160756530888
+Aitchison	M31Plmr	Even2	Human-associated	Mock	Between habitats	191.20605709670986
+Aitchison	M11Plmr	Even2	Human-associated	Mock	Between habitats	203.54507197211174
+Aitchison	F21Plmr	Even2	Human-associated	Mock	Between habitats	176.28716460693704
+Aitchison	M31Tong	Even2	Human-associated	Mock	Between habitats	156.25423993237237
+Aitchison	M11Tong	Even2	Human-associated	Mock	Between habitats	141.3510574767391
+Aitchison	LMEpi24M	Even2	Freshwater	Mock	Between habitats	192.18936991659982
+Aitchison	SLEpi20M	Even2	Freshwater	Mock	Between habitats	187.34832809954887
+Aitchison	AQC1cm	Even2	Freshwater	Mock	Between habitats	217.86359183446066
+Aitchison	AQC4cm	Even2	Freshwater	Mock	Between habitats	252.20159173397786
+Aitchison	AQC7cm	Even2	Freshwater	Mock	Between habitats	251.07823331284393
+Aitchison	NP2	Even2	Marine/estuarine	Mock	Between habitats	181.29031875568577
+Aitchison	NP3	Even2	Marine/estuarine	Mock	Between habitats	209.9954727432709
+Aitchison	NP5	Even2	Marine/estuarine	Mock	Between habitats	202.35823496947054
+Aitchison	TRRsed1	Even2	Marine/estuarine	Mock	Between habitats	167.1451295437878
+Aitchison	TRRsed2	Even2	Marine/estuarine	Mock	Between habitats	216.0679531068808
+Aitchison	TRRsed3	Even2	Marine/estuarine	Mock	Between habitats	187.79946684277476
+Aitchison	TS28	Even2	Human-associated	Mock	Between habitats	150.7185613205661
+Aitchison	TS29	Even2	Human-associated	Mock	Between habitats	147.59541039211794
+Aitchison	Even1	Even2	Mock	Mock	Within habitat	81.42628446756055
+Aitchison	CL3	Even3	Soil	Mock	Between habitats	261.5973190426823
+Aitchison	CC1	Even3	Soil	Mock	Between habitats	279.09659489160873
+Aitchison	SV1	Even3	Soil	Mock	Between habitats	237.01400304915603
+Aitchison	M31Fcsw	Even3	Human-associated	Mock	Between habitats	159.28997215077544
+Aitchison	M11Fcsw	Even3	Human-associated	Mock	Between habitats	154.74818866704925
+Aitchison	M31Plmr	Even3	Human-associated	Mock	Between habitats	192.6430231113588
+Aitchison	M11Plmr	Even3	Human-associated	Mock	Between habitats	204.19696397208565
+Aitchison	F21Plmr	Even3	Human-associated	Mock	Between habitats	175.34986875126344
+Aitchison	M31Tong	Even3	Human-associated	Mock	Between habitats	156.35612232663428
+Aitchison	M11Tong	Even3	Human-associated	Mock	Between habitats	140.3625756006727
+Aitchison	LMEpi24M	Even3	Freshwater	Mock	Between habitats	191.85179293301258
+Aitchison	SLEpi20M	Even3	Freshwater	Mock	Between habitats	189.33063291604591
+Aitchison	AQC1cm	Even3	Freshwater	Mock	Between habitats	225.02286462300836
+Aitchison	AQC4cm	Even3	Freshwater	Mock	Between habitats	260.0438954698864
+Aitchison	AQC7cm	Even3	Freshwater	Mock	Between habitats	259.5494428482558
+Aitchison	NP2	Even3	Marine/estuarine	Mock	Between habitats	181.85387046242008
+Aitchison	NP3	Even3	Marine/estuarine	Mock	Between habitats	209.16207895309347
+Aitchison	NP5	Even3	Marine/estuarine	Mock	Between habitats	201.25786687885054
+Aitchison	TRRsed1	Even3	Marine/estuarine	Mock	Between habitats	162.71090313530735
+Aitchison	TRRsed2	Even3	Marine/estuarine	Mock	Between habitats	215.79471741980143
+Aitchison	TRRsed3	Even3	Marine/estuarine	Mock	Between habitats	187.61693590016074
+Aitchison	TS28	Even3	Human-associated	Mock	Between habitats	148.6122997059882
+Aitchison	TS29	Even3	Human-associated	Mock	Between habitats	145.97342884917498
+Aitchison	Even1	Even3	Mock	Mock	Within habitat	87.83016089041197
+Aitchison	Even2	Even3	Mock	Mock	Within habitat	71.83231858650088
+Robust Aitchison	CL3	CC1	Soil	Soil	Within habitat	0.459440114245
+Robust Aitchison	CL3	SV1	Soil	Soil	Within habitat	0.802203909675
+Robust Aitchison	CC1	SV1	Soil	Soil	Within habitat	1.129734193312
+Robust Aitchison	CL3	M31Fcsw	Soil	Human-associated	Between habitats	3.303976097406
+Robust Aitchison	CC1	M31Fcsw	Soil	Human-associated	Between habitats	3.729648229712
+Robust Aitchison	SV1	M31Fcsw	Soil	Human-associated	Between habitats	2.783928818334
+Robust Aitchison	CL3	M11Fcsw	Soil	Human-associated	Between habitats	3.105213822658
+Robust Aitchison	CC1	M11Fcsw	Soil	Human-associated	Between habitats	3.520531993053
+Robust Aitchison	SV1	M11Fcsw	Soil	Human-associated	Between habitats	2.5669803156430002
+Robust Aitchison	M31Fcsw	M11Fcsw	Human-associated	Human-associated	Within habitat	0.28429616745
+Robust Aitchison	CL3	M31Plmr	Soil	Human-associated	Between habitats	2.612083190004
+Robust Aitchison	CC1	M31Plmr	Soil	Human-associated	Between habitats	2.977706264767
+Robust Aitchison	SV1	M31Plmr	Soil	Human-associated	Between habitats	1.858110615411
+Robust Aitchison	M31Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	1.554127783876
+Robust Aitchison	M11Fcsw	M31Plmr	Human-associated	Human-associated	Within habitat	1.357397372367
+Robust Aitchison	CL3	M11Plmr	Soil	Human-associated	Between habitats	1.914166482953
+Robust Aitchison	CC1	M11Plmr	Soil	Human-associated	Between habitats	2.276226802258
+Robust Aitchison	SV1	M11Plmr	Soil	Human-associated	Between habitats	1.221938655455
+Robust Aitchison	M31Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	1.719844644013
+Robust Aitchison	M11Fcsw	M11Plmr	Human-associated	Human-associated	Within habitat	1.469984102935
+Robust Aitchison	M31Plmr	M11Plmr	Human-associated	Human-associated	Within habitat	0.81385087552
+Robust Aitchison	CL3	F21Plmr	Soil	Human-associated	Between habitats	2.254584957837
+Robust Aitchison	CC1	F21Plmr	Soil	Human-associated	Between habitats	2.60745342768
+Robust Aitchison	SV1	F21Plmr	Soil	Human-associated	Between habitats	1.49859005293
+Robust Aitchison	M31Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	1.710362442267
+Robust Aitchison	M11Fcsw	F21Plmr	Human-associated	Human-associated	Within habitat	1.479429930941
+Robust Aitchison	M31Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.396594896042
+Robust Aitchison	M11Plmr	F21Plmr	Human-associated	Human-associated	Within habitat	0.459419493629
+Robust Aitchison	CL3	M31Tong	Soil	Human-associated	Between habitats	3.313643986215
+Robust Aitchison	CC1	M31Tong	Soil	Human-associated	Between habitats	3.629564445071
+Robust Aitchison	SV1	M31Tong	Soil	Human-associated	Between habitats	2.596496669005
+Robust Aitchison	M31Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	1.674507234098
+Robust Aitchison	M11Fcsw	M31Tong	Human-associated	Human-associated	Within habitat	1.461030539561
+Robust Aitchison	M31Plmr	M31Tong	Human-associated	Human-associated	Within habitat	1.070122003719
+Robust Aitchison	M11Plmr	M31Tong	Human-associated	Human-associated	Within habitat	1.437739631946
+Robust Aitchison	F21Plmr	M31Tong	Human-associated	Human-associated	Within habitat	1.2063879152
+Robust Aitchison	CL3	M11Tong	Soil	Human-associated	Between habitats	2.886370967054
+Robust Aitchison	CC1	M11Tong	Soil	Human-associated	Between habitats	3.188034738517
+Robust Aitchison	SV1	M11Tong	Soil	Human-associated	Between habitats	2.196925673196
+Robust Aitchison	M31Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	1.710200761874
+Robust Aitchison	M11Fcsw	M11Tong	Human-associated	Human-associated	Within habitat	1.449719329833
+Robust Aitchison	M31Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.994464308874
+Robust Aitchison	M11Plmr	M11Tong	Human-associated	Human-associated	Within habitat	1.07547156383
+Robust Aitchison	F21Plmr	M11Tong	Human-associated	Human-associated	Within habitat	0.96246060196
+Robust Aitchison	M31Tong	M11Tong	Human-associated	Human-associated	Within habitat	0.48523373711
+Robust Aitchison	CL3	LMEpi24M	Soil	Freshwater	Between habitats	2.836775866343
+Robust Aitchison	CC1	LMEpi24M	Soil	Freshwater	Between habitats	3.10649657194
+Robust Aitchison	SV1	LMEpi24M	Soil	Freshwater	Between habitats	2.197788233049
+Robust Aitchison	M31Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	1.916764402371
+Robust Aitchison	M11Fcsw	LMEpi24M	Human-associated	Freshwater	Between habitats	1.645132519677
+Robust Aitchison	M31Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	1.300671704194
+Robust Aitchison	M11Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	1.178714205222
+Robust Aitchison	F21Plmr	LMEpi24M	Human-associated	Freshwater	Between habitats	1.182733652954
+Robust Aitchison	M31Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.775123266876
+Robust Aitchison	M11Tong	LMEpi24M	Human-associated	Freshwater	Between habitats	0.361725560855
+Robust Aitchison	CL3	SLEpi20M	Soil	Freshwater	Between habitats	2.659811868116
+Robust Aitchison	CC1	SLEpi20M	Soil	Freshwater	Between habitats	2.894684785911
+Robust Aitchison	SV1	SLEpi20M	Soil	Freshwater	Between habitats	2.016620489656
+Robust Aitchison	M31Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	2.196502528473
+Robust Aitchison	M11Fcsw	SLEpi20M	Human-associated	Freshwater	Between habitats	1.91908947353
+Robust Aitchison	M31Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	1.365706454291
+Robust Aitchison	M11Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	1.151412399255
+Robust Aitchison	F21Plmr	SLEpi20M	Human-associated	Freshwater	Between habitats	1.174565657381
+Robust Aitchison	M31Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	1.014557040383
+Robust Aitchison	M11Tong	SLEpi20M	Human-associated	Freshwater	Between habitats	0.590494512267
+Robust Aitchison	LMEpi24M	SLEpi20M	Freshwater	Freshwater	Within habitat	0.353823074372
+Robust Aitchison	CL3	AQC1cm	Soil	Freshwater	Between habitats	3.531116352071
+Robust Aitchison	CC1	AQC1cm	Soil	Freshwater	Between habitats	3.6096884550460002
+Robust Aitchison	SV1	AQC1cm	Soil	Freshwater	Between habitats	3.237028539285
+Robust Aitchison	M31Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	3.445291437849
+Robust Aitchison	M11Fcsw	AQC1cm	Human-associated	Freshwater	Between habitats	3.1941207419730002
+Robust Aitchison	M31Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	3.187206440694
+Robust Aitchison	M11Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	2.752362286274
+Robust Aitchison	F21Plmr	AQC1cm	Human-associated	Freshwater	Between habitats	2.963337289014
+Robust Aitchison	M31Tong	AQC1cm	Human-associated	Freshwater	Between habitats	2.601543800464
+Robust Aitchison	M11Tong	AQC1cm	Human-associated	Freshwater	Between habitats	2.290769275441
+Robust Aitchison	LMEpi24M	AQC1cm	Freshwater	Freshwater	Within habitat	1.93237770707
+Robust Aitchison	SLEpi20M	AQC1cm	Freshwater	Freshwater	Within habitat	1.877623651553
+Robust Aitchison	CL3	AQC4cm	Soil	Freshwater	Between habitats	3.66397185319
+Robust Aitchison	CC1	AQC4cm	Soil	Freshwater	Between habitats	3.674225612769
+Robust Aitchison	SV1	AQC4cm	Soil	Freshwater	Between habitats	3.384672270445
+Robust Aitchison	M31Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	3.946040690383
+Robust Aitchison	M11Fcsw	AQC4cm	Human-associated	Freshwater	Between habitats	3.682328170733
+Robust Aitchison	M31Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	3.475806927829
+Robust Aitchison	M11Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	3.045775492822
+Robust Aitchison	F21Plmr	AQC4cm	Human-associated	Freshwater	Between habitats	3.231591921998
+Robust Aitchison	M31Tong	AQC4cm	Human-associated	Freshwater	Between habitats	2.925539427238
+Robust Aitchison	M11Tong	AQC4cm	Human-associated	Freshwater	Between habitats	2.612441577221
+Robust Aitchison	LMEpi24M	AQC4cm	Freshwater	Freshwater	Within habitat	2.258635895122
+Robust Aitchison	SLEpi20M	AQC4cm	Freshwater	Freshwater	Within habitat	2.119182339067
+Robust Aitchison	AQC1cm	AQC4cm	Freshwater	Freshwater	Within habitat	0.636833871707
+Robust Aitchison	CL3	AQC7cm	Soil	Freshwater	Between habitats	3.512530252294
+Robust Aitchison	CC1	AQC7cm	Soil	Freshwater	Between habitats	3.519926863434
+Robust Aitchison	SV1	AQC7cm	Soil	Freshwater	Between habitats	3.261674860239
+Robust Aitchison	M31Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	3.880058889523
+Robust Aitchison	M11Fcsw	AQC7cm	Human-associated	Freshwater	Between habitats	3.615433860938
+Robust Aitchison	M31Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	3.428044465021
+Robust Aitchison	M11Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	2.959390901502
+Robust Aitchison	F21Plmr	AQC7cm	Human-associated	Freshwater	Between habitats	3.169491968371
+Robust Aitchison	M31Tong	AQC7cm	Human-associated	Freshwater	Between habitats	2.923629318049
+Robust Aitchison	M11Tong	AQC7cm	Human-associated	Freshwater	Between habitats	2.586642602786
+Robust Aitchison	LMEpi24M	AQC7cm	Freshwater	Freshwater	Within habitat	2.22896166983
+Robust Aitchison	SLEpi20M	AQC7cm	Freshwater	Freshwater	Within habitat	2.086192739135
+Robust Aitchison	AQC1cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.587159087782
+Robust Aitchison	AQC4cm	AQC7cm	Freshwater	Freshwater	Within habitat	0.197618075408
+Robust Aitchison	CL3	NP2	Soil	Marine/estuarine	Between habitats	3.930133326451
+Robust Aitchison	CC1	NP2	Soil	Marine/estuarine	Between habitats	4.154749843752
+Robust Aitchison	SV1	NP2	Soil	Marine/estuarine	Between habitats	3.167487823692
+Robust Aitchison	M31Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	2.901841424708
+Robust Aitchison	M11Fcsw	NP2	Human-associated	Marine/estuarine	Between habitats	2.706219616517
+Robust Aitchison	M31Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	1.866057424805
+Robust Aitchison	M11Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	2.295275295143
+Robust Aitchison	F21Plmr	NP2	Human-associated	Marine/estuarine	Between habitats	1.975389631864
+Robust Aitchison	M31Tong	NP2	Human-associated	Marine/estuarine	Between habitats	1.271210314485
+Robust Aitchison	M11Tong	NP2	Human-associated	Marine/estuarine	Between habitats	1.486378776603
+Robust Aitchison	LMEpi24M	NP2	Freshwater	Marine/estuarine	Between habitats	1.611688050295
+Robust Aitchison	SLEpi20M	NP2	Freshwater	Marine/estuarine	Between habitats	1.594090713594
+Robust Aitchison	AQC1cm	NP2	Freshwater	Marine/estuarine	Between habitats	2.984985153457
+Robust Aitchison	AQC4cm	NP2	Freshwater	Marine/estuarine	Between habitats	3.068346979653
+Robust Aitchison	AQC7cm	NP2	Freshwater	Marine/estuarine	Between habitats	3.129842302358
+Robust Aitchison	CL3	NP3	Soil	Marine/estuarine	Between habitats	4.179398832317
+Robust Aitchison	CC1	NP3	Soil	Marine/estuarine	Between habitats	4.420237213699
+Robust Aitchison	SV1	NP3	Soil	Marine/estuarine	Between habitats	3.397020239251
+Robust Aitchison	M31Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	2.991819897627
+Robust Aitchison	M11Fcsw	NP3	Human-associated	Marine/estuarine	Between habitats	2.825103340776
+Robust Aitchison	M31Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	1.970685840758
+Robust Aitchison	M11Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	2.51318438099
+Robust Aitchison	F21Plmr	NP3	Human-associated	Marine/estuarine	Between habitats	2.144335603879
+Robust Aitchison	M31Tong	NP3	Human-associated	Marine/estuarine	Between habitats	1.461795442858
+Robust Aitchison	M11Tong	NP3	Human-associated	Marine/estuarine	Between habitats	1.752797597425
+Robust Aitchison	LMEpi24M	NP3	Freshwater	Marine/estuarine	Between habitats	1.93335981408
+Robust Aitchison	SLEpi20M	NP3	Freshwater	Marine/estuarine	Between habitats	1.943528991766
+Robust Aitchison	AQC1cm	NP3	Freshwater	Marine/estuarine	Between habitats	3.386437372371
+Robust Aitchison	AQC4cm	NP3	Freshwater	Marine/estuarine	Between habitats	3.479411725537
+Robust Aitchison	AQC7cm	NP3	Freshwater	Marine/estuarine	Between habitats	3.542294709489
+Robust Aitchison	NP2	NP3	Marine/estuarine	Marine/estuarine	Within habitat	0.413815327188
+Robust Aitchison	CL3	NP5	Soil	Marine/estuarine	Between habitats	4.429924217603
+Robust Aitchison	CC1	NP5	Soil	Marine/estuarine	Between habitats	4.661689223756
+Robust Aitchison	SV1	NP5	Soil	Marine/estuarine	Between habitats	3.656882346676
+Robust Aitchison	M31Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	3.170080380501
+Robust Aitchison	M11Fcsw	NP5	Human-associated	Marine/estuarine	Between habitats	3.006436649907
+Robust Aitchison	M31Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	2.240890018641
+Robust Aitchison	M11Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	2.757194716042
+Robust Aitchison	F21Plmr	NP5	Human-associated	Marine/estuarine	Between habitats	2.408140762944
+Robust Aitchison	M31Tong	NP5	Human-associated	Marine/estuarine	Between habitats	1.617239631297
+Robust Aitchison	M11Tong	NP5	Human-associated	Marine/estuarine	Between habitats	1.922059841826
+Robust Aitchison	LMEpi24M	NP5	Freshwater	Marine/estuarine	Between habitats	2.069489017926
+Robust Aitchison	SLEpi20M	NP5	Freshwater	Marine/estuarine	Between habitats	2.091294283326
+Robust Aitchison	AQC1cm	NP5	Freshwater	Marine/estuarine	Between habitats	3.3855631913
+Robust Aitchison	AQC4cm	NP5	Freshwater	Marine/estuarine	Between habitats	3.465200011304
+Robust Aitchison	AQC7cm	NP5	Freshwater	Marine/estuarine	Between habitats	3.543914153493
+Robust Aitchison	NP2	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.523150244913
+Robust Aitchison	NP3	NP5	Marine/estuarine	Marine/estuarine	Within habitat	0.316289880763
+Robust Aitchison	CL3	TRRsed1	Soil	Marine/estuarine	Between habitats	3.021206970326
+Robust Aitchison	CC1	TRRsed1	Soil	Marine/estuarine	Between habitats	3.350512457765
+Robust Aitchison	SV1	TRRsed1	Soil	Marine/estuarine	Between habitats	2.288248162766
+Robust Aitchison	M31Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	1.576687272903
+Robust Aitchison	M11Fcsw	TRRsed1	Human-associated	Marine/estuarine	Between habitats	1.350257103115
+Robust Aitchison	M31Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.7170850598
+Robust Aitchison	M11Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	1.129036643352
+Robust Aitchison	F21Plmr	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.856083934175
+Robust Aitchison	M31Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.358893520177
+Robust Aitchison	M11Tong	TRRsed1	Human-associated	Marine/estuarine	Between habitats	0.434546956558
+Robust Aitchison	LMEpi24M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.795421709006
+Robust Aitchison	SLEpi20M	TRRsed1	Freshwater	Marine/estuarine	Between habitats	0.97438783966
+Robust Aitchison	AQC1cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	2.720368941973
+Robust Aitchison	AQC4cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	3.03167082382
+Robust Aitchison	AQC7cm	TRRsed1	Freshwater	Marine/estuarine	Between habitats	3.011583688338
+Robust Aitchison	NP2	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	1.405098613511
+Robust Aitchison	NP3	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	1.57929415342
+Robust Aitchison	NP5	TRRsed1	Marine/estuarine	Marine/estuarine	Within habitat	1.786916582957
+Robust Aitchison	CL3	TRRsed2	Soil	Marine/estuarine	Between habitats	2.975764816354
+Robust Aitchison	CC1	TRRsed2	Soil	Marine/estuarine	Between habitats	3.29940754173
+Robust Aitchison	SV1	TRRsed2	Soil	Marine/estuarine	Between habitats	2.201037855735
+Robust Aitchison	M31Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	1.806076584876
+Robust Aitchison	M11Fcsw	TRRsed2	Human-associated	Marine/estuarine	Between habitats	1.601620290984
+Robust Aitchison	M31Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.547982498349
+Robust Aitchison	M11Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	1.153296174536
+Robust Aitchison	F21Plmr	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.753762864319
+Robust Aitchison	M31Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.69842717044
+Robust Aitchison	M11Tong	TRRsed2	Human-associated	Marine/estuarine	Between habitats	0.768269335766
+Robust Aitchison	LMEpi24M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	1.100208972427
+Robust Aitchison	SLEpi20M	TRRsed2	Freshwater	Marine/estuarine	Between habitats	1.168275362174
+Robust Aitchison	AQC1cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	3.010374268949
+Robust Aitchison	AQC4cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	3.262124270752
+Robust Aitchison	AQC7cm	TRRsed2	Freshwater	Marine/estuarine	Between habitats	3.244042875938
+Robust Aitchison	NP2	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	1.324351402169
+Robust Aitchison	NP3	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	1.440878895933
+Robust Aitchison	NP5	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	1.701079514809
+Robust Aitchison	TRRsed1	TRRsed2	Marine/estuarine	Marine/estuarine	Within habitat	0.419792973386
+Robust Aitchison	CL3	TRRsed3	Soil	Marine/estuarine	Between habitats	2.982835619326
+Robust Aitchison	CC1	TRRsed3	Soil	Marine/estuarine	Between habitats	3.351070361701
+Robust Aitchison	SV1	TRRsed3	Soil	Marine/estuarine	Between habitats	2.292246388408
+Robust Aitchison	M31Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	1.133770185961
+Robust Aitchison	M11Fcsw	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.91040185668
+Robust Aitchison	M31Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.695762390574
+Robust Aitchison	M11Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	1.077535148802
+Robust Aitchison	F21Plmr	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.877632482882
+Robust Aitchison	M31Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.64453682037
+Robust Aitchison	M11Tong	TRRsed3	Human-associated	Marine/estuarine	Between habitats	0.683908411795
+Robust Aitchison	LMEpi24M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	1.003017932182
+Robust Aitchison	SLEpi20M	TRRsed3	Freshwater	Marine/estuarine	Between habitats	1.24012125552
+Robust Aitchison	AQC1cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	2.87175430769
+Robust Aitchison	AQC4cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	3.250440701288
+Robust Aitchison	AQC7cm	TRRsed3	Freshwater	Marine/estuarine	Between habitats	3.212432328156
+Robust Aitchison	NP2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	1.826237584496
+Robust Aitchison	NP3	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	1.964303842884
+Robust Aitchison	NP5	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	2.167418064238
+Robust Aitchison	TRRsed1	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.446521078139
+Robust Aitchison	TRRsed2	TRRsed3	Marine/estuarine	Marine/estuarine	Within habitat	0.7190288214
+Robust Aitchison	CL3	TS28	Soil	Human-associated	Between habitats	3.207846880633
+Robust Aitchison	CC1	TS28	Soil	Human-associated	Between habitats	3.621045841437
+Robust Aitchison	SV1	TS28	Soil	Human-associated	Between habitats	2.716415899486
+Robust Aitchison	M31Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.311224787097
+Robust Aitchison	M11Fcsw	TS28	Human-associated	Human-associated	Within habitat	0.266561267969
+Robust Aitchison	M31Plmr	TS28	Human-associated	Human-associated	Within habitat	1.61227974081
+Robust Aitchison	M11Plmr	TS28	Human-associated	Human-associated	Within habitat	1.653454468944
+Robust Aitchison	F21Plmr	TS28	Human-associated	Human-associated	Within habitat	1.70894181048
+Robust Aitchison	M31Tong	TS28	Human-associated	Human-associated	Within habitat	1.637771162729
+Robust Aitchison	M11Tong	TS28	Human-associated	Human-associated	Within habitat	1.614915694221
+Robust Aitchison	LMEpi24M	TS28	Freshwater	Human-associated	Between habitats	1.770295942536
+Robust Aitchison	SLEpi20M	TS28	Freshwater	Human-associated	Between habitats	2.05679628321
+Robust Aitchison	AQC1cm	TS28	Freshwater	Human-associated	Between habitats	3.184014856533
+Robust Aitchison	AQC4cm	TS28	Freshwater	Human-associated	Between habitats	3.702196740393
+Robust Aitchison	AQC7cm	TS28	Freshwater	Human-associated	Between habitats	3.63112867057
+Robust Aitchison	NP2	TS28	Marine/estuarine	Human-associated	Between habitats	2.899570661386
+Robust Aitchison	NP3	TS28	Marine/estuarine	Human-associated	Between habitats	3.029787129232
+Robust Aitchison	NP5	TS28	Marine/estuarine	Human-associated	Between habitats	3.195617896991
+Robust Aitchison	TRRsed1	TS28	Marine/estuarine	Human-associated	Between habitats	1.561601798911
+Robust Aitchison	TRRsed2	TS28	Marine/estuarine	Human-associated	Between habitats	1.84160409723
+Robust Aitchison	TRRsed3	TS28	Marine/estuarine	Human-associated	Between habitats	1.134688218474
+Robust Aitchison	CL3	TS29	Soil	Human-associated	Between habitats	3.159519321046
+Robust Aitchison	CC1	TS29	Soil	Human-associated	Between habitats	3.566416431978
+Robust Aitchison	SV1	TS29	Soil	Human-associated	Between habitats	2.654397170051
+Robust Aitchison	M31Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.390316493215
+Robust Aitchison	M11Fcsw	TS29	Human-associated	Human-associated	Within habitat	0.242560986419
+Robust Aitchison	M31Plmr	TS29	Human-associated	Human-associated	Within habitat	1.53746282598
+Robust Aitchison	M11Plmr	TS29	Human-associated	Human-associated	Within habitat	1.56891974747
+Robust Aitchison	F21Plmr	TS29	Human-associated	Human-associated	Within habitat	1.624931445051
+Robust Aitchison	M31Tong	TS29	Human-associated	Human-associated	Within habitat	1.526265107627
+Robust Aitchison	M11Tong	TS29	Human-associated	Human-associated	Within habitat	1.492792627475
+Robust Aitchison	LMEpi24M	TS29	Freshwater	Human-associated	Between habitats	1.64311255777
+Robust Aitchison	SLEpi20M	TS29	Freshwater	Human-associated	Between habitats	1.93197386665
+Robust Aitchison	AQC1cm	TS29	Freshwater	Human-associated	Between habitats	3.0694961078569998
+Robust Aitchison	AQC4cm	TS29	Freshwater	Human-associated	Between habitats	3.582752532718
+Robust Aitchison	AQC7cm	TS29	Freshwater	Human-associated	Between habitats	3.513575714417
+Robust Aitchison	NP2	TS29	Marine/estuarine	Human-associated	Between habitats	2.792131810345
+Robust Aitchison	NP3	TS29	Marine/estuarine	Human-associated	Between habitats	2.932717658163
+Robust Aitchison	NP5	TS29	Marine/estuarine	Human-associated	Between habitats	3.096760775139
+Robust Aitchison	TRRsed1	TS29	Marine/estuarine	Human-associated	Between habitats	1.454735588051
+Robust Aitchison	TRRsed2	TS29	Marine/estuarine	Human-associated	Between habitats	1.748099697941
+Robust Aitchison	TRRsed3	TS29	Marine/estuarine	Human-associated	Between habitats	1.036178317986
+Robust Aitchison	TS28	TS29	Human-associated	Human-associated	Within habitat	0.12847246552
+Robust Aitchison	CL3	Even1	Soil	Mock	Between habitats	3.056184622538
+Robust Aitchison	CC1	Even1	Soil	Mock	Between habitats	3.427590642062
+Robust Aitchison	SV1	Even1	Soil	Mock	Between habitats	2.67087807138
+Robust Aitchison	M31Fcsw	Even1	Human-associated	Mock	Between habitats	1.041969793469
+Robust Aitchison	M11Fcsw	Even1	Human-associated	Mock	Between habitats	0.906396549861
+Robust Aitchison	M31Plmr	Even1	Human-associated	Mock	Between habitats	1.963705498536
+Robust Aitchison	M11Plmr	Even1	Human-associated	Mock	Between habitats	1.720992521492
+Robust Aitchison	F21Plmr	Even1	Human-associated	Mock	Between habitats	1.925579655476
+Robust Aitchison	M31Tong	Even1	Human-associated	Mock	Between habitats	1.833494298205
+Robust Aitchison	M11Tong	Even1	Human-associated	Mock	Between habitats	1.667598519584
+Robust Aitchison	LMEpi24M	Even1	Freshwater	Mock	Between habitats	1.669542884444
+Robust Aitchison	SLEpi20M	Even1	Freshwater	Mock	Between habitats	1.937186438335
+Robust Aitchison	AQC1cm	Even1	Freshwater	Mock	Between habitats	2.654492786135
+Robust Aitchison	AQC4cm	Even1	Freshwater	Mock	Between habitats	3.215888959263
+Robust Aitchison	AQC7cm	Even1	Freshwater	Mock	Between habitats	3.126912573272
+Robust Aitchison	NP2	Even1	Marine/estuarine	Mock	Between habitats	3.081266300605
+Robust Aitchison	NP3	Even1	Marine/estuarine	Mock	Between habitats	3.294571989293
+Robust Aitchison	NP5	Even1	Marine/estuarine	Mock	Between habitats	3.432021056566
+Robust Aitchison	TRRsed1	Even1	Marine/estuarine	Mock	Between habitats	1.801198939777
+Robust Aitchison	TRRsed2	Even1	Marine/estuarine	Mock	Between habitats	2.146653337893
+Robust Aitchison	TRRsed3	Even1	Marine/estuarine	Mock	Between habitats	1.469601715243
+Robust Aitchison	TS28	Even1	Human-associated	Mock	Between habitats	0.732091500732
+Robust Aitchison	TS29	Even1	Human-associated	Mock	Between habitats	0.688119758506
+Robust Aitchison	CL3	Even2	Soil	Mock	Between habitats	2.94024668499
+Robust Aitchison	CC1	Even2	Soil	Mock	Between habitats	3.320938265644
+Robust Aitchison	SV1	Even2	Soil	Mock	Between habitats	2.55562197691
+Robust Aitchison	M31Fcsw	Even2	Human-associated	Mock	Between habitats	0.972942270405
+Robust Aitchison	M11Fcsw	Even2	Human-associated	Mock	Between habitats	0.831168341075
+Robust Aitchison	M31Plmr	Even2	Human-associated	Mock	Between habitats	1.878602029655
+Robust Aitchison	M11Plmr	Even2	Human-associated	Mock	Between habitats	1.621747666568
+Robust Aitchison	F21Plmr	Even2	Human-associated	Mock	Between habitats	1.835031944641
+Robust Aitchison	M31Tong	Even2	Human-associated	Mock	Between habitats	1.83488050203
+Robust Aitchison	M11Tong	Even2	Human-associated	Mock	Between habitats	1.656208068866
+Robust Aitchison	LMEpi24M	Even2	Freshwater	Mock	Between habitats	1.675563255823
+Robust Aitchison	SLEpi20M	Even2	Freshwater	Mock	Between habitats	1.9303526682080001
+Robust Aitchison	AQC1cm	Even2	Freshwater	Mock	Between habitats	2.729475689535
+Robust Aitchison	AQC4cm	Even2	Freshwater	Mock	Between habitats	3.277342769238
+Robust Aitchison	AQC7cm	Even2	Freshwater	Mock	Between habitats	3.184117209632
+Robust Aitchison	NP2	Even2	Marine/estuarine	Mock	Between habitats	3.086987847355
+Robust Aitchison	NP3	Even2	Marine/estuarine	Mock	Between habitats	3.294794763772
+Robust Aitchison	NP5	Even2	Marine/estuarine	Mock	Between habitats	3.445475939518
+Robust Aitchison	TRRsed1	Even2	Marine/estuarine	Mock	Between habitats	1.771995915561
+Robust Aitchison	TRRsed2	Even2	Marine/estuarine	Mock	Between habitats	2.097669709738
+Robust Aitchison	TRRsed3	Even2	Marine/estuarine	Mock	Between habitats	1.425134517447
+Robust Aitchison	TS28	Even2	Human-associated	Mock	Between habitats	0.67164352076
+Robust Aitchison	TS29	Even2	Human-associated	Mock	Between habitats	0.633632805653
+Robust Aitchison	Even1	Even2	Mock	Mock	Within habitat	0.15835936634
+Robust Aitchison	CL3	Even3	Soil	Mock	Between habitats	3.019787969201
+Robust Aitchison	CC1	Even3	Soil	Mock	Between habitats	3.406733321309
+Robust Aitchison	SV1	Even3	Soil	Mock	Between habitats	2.61242626616
+Robust Aitchison	M31Fcsw	Even3	Human-associated	Mock	Between habitats	0.85347424136
+Robust Aitchison	M11Fcsw	Even3	Human-associated	Mock	Between habitats	0.723466943563
+Robust Aitchison	M31Plmr	Even3	Human-associated	Mock	Between habitats	1.839262809109
+Robust Aitchison	M11Plmr	Even3	Human-associated	Mock	Between habitats	1.640986079064
+Robust Aitchison	F21Plmr	Even3	Human-associated	Mock	Between habitats	1.82349804682
+Robust Aitchison	M31Tong	Even3	Human-associated	Mock	Between habitats	1.785372499074
+Robust Aitchison	M11Tong	Even3	Human-associated	Mock	Between habitats	1.639297844632
+Robust Aitchison	LMEpi24M	Even3	Freshwater	Mock	Between habitats	1.682972919066
+Robust Aitchison	SLEpi20M	Even3	Freshwater	Mock	Between habitats	1.951119003923
+Robust Aitchison	AQC1cm	Even3	Freshwater	Mock	Between habitats	2.804088446297
+Robust Aitchison	AQC4cm	Even3	Freshwater	Mock	Between habitats	3.350781536797
+Robust Aitchison	AQC7cm	Even3	Freshwater	Mock	Between habitats	3.263230780035
+Robust Aitchison	NP2	Even3	Marine/estuarine	Mock	Between habitats	3.047249506543
+Robust Aitchison	NP3	Even3	Marine/estuarine	Mock	Between habitats	3.241716061867
+Robust Aitchison	NP5	Even3	Marine/estuarine	Mock	Between habitats	3.3921486662500002
+Robust Aitchison	TRRsed1	Even3	Marine/estuarine	Mock	Between habitats	1.727754064354
+Robust Aitchison	TRRsed2	Even3	Marine/estuarine	Mock	Between habitats	2.053302027267
+Robust Aitchison	TRRsed3	Even3	Marine/estuarine	Mock	Between habitats	1.364620416517
+Robust Aitchison	TS28	Even3	Human-associated	Mock	Between habitats	0.548091381856
+Robust Aitchison	TS29	Even3	Human-associated	Mock	Between habitats	0.513794717356
+Robust Aitchison	Even1	Even3	Mock	Mock	Within habitat	0.203653150117
+Robust Aitchison	Even2	Even3	Mock	Mock	Within habitat	0.132171573286

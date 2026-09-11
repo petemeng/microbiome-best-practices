@@ -1,0 +1,148 @@
+{
+  "database": "Greengenes2",
+  "release": "2024.09",
+  "reference_subset": "full-length backbone",
+  "release_date": "2024-09-26",
+  "official_url": "https://ftp.microbio.me/greengenes_release/2024.09/",
+  "license": "BSD-3-Clause",
+  "taxonomy_sources": {
+    "gtdb": "R220",
+    "ltp": "08/2023",
+    "organelle_sequences": "SILVA 138.1"
+  },
+  "construction_scope": "Web of Life genome backbone updated with full-length 16S, with large-scale Qiita V4 ASVs placed by DEPP in the complete resource",
+  "source_files": {
+    "2024.09.backbone.full-length.fna.qza": {
+      "bytes": 66213262,
+      "sha256": "527e7a7d48fd2af7ebd269d9330f7d4da8ee92dd5961aa9c5514455f4b873989"
+    },
+    "2024.09.backbone.tax.qza": {
+      "bytes": 4769715,
+      "sha256": "6cb6f476afa9f8351d1d83cdec4e1836fb22a5c460cc86a97cef21cfecd9b1fe"
+    }
+  },
+  "full_sequences": {
+    "length": {
+      "records": 337506,
+      "minimum": 416,
+      "q1": 1483.0,
+      "median": 1499.0,
+      "mean": 1493.01,
+      "q3": 1518.0,
+      "maximum": 4563
+    },
+    "unique_identifiers": 337506,
+    "invalid_sequence_bases": 0
+  },
+  "full_taxonomy": {
+    "records": 337506,
+    "domain_counts": {
+      "Archaea": 2094,
+      "Bacteria": 335412
+    },
+    "nonempty_rank_counts": {
+      "d__": 337506,
+      "p__": 337431,
+      "c__": 336876,
+      "o__": 330113,
+      "f__": 323589,
+      "g__": 290541,
+      "s__": 199527
+    },
+    "organelle_label_records": 6238
+  },
+  "preparation_date": "2026-07-20",
+  "qiime_environment": "microbiome-qiime2-2026.4",
+  "qiime_release": "2026.4",
+  "q2_feature_classifier": "2026.4.0",
+  "rescript": "2026.4.0",
+  "region_processing": {
+    "marker": "16S V4",
+    "forward_primer_5_to_3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_primer_5_to_3": "GGACTACNVGGGTWTCTAAT",
+    "combined_primer_identity": 0.8,
+    "minimum_amplicon_length": 200,
+    "maximum_amplicon_length": 400,
+    "read_orientation": "both"
+  },
+  "exact_sequence_dereplication": {
+    "mode": "least common ancestor",
+    "sequence_identity": 1.0,
+    "reason": "Prevent identical V4 copies from weighting consensus by database redundancy while preserving label ambiguity."
+  },
+  "extraction_contract": {
+    "marker": "16S V4",
+    "forward_primer_5_to_3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_primer_5_to_3": "GGACTACNVGGGTWTCTAAT",
+    "combined_primer_identity": 0.8,
+    "minimum_amplicon_length": 200,
+    "maximum_amplicon_length": 400,
+    "read_orientation": "both"
+  },
+  "dereplication_contract": {
+    "mode": "least common ancestor",
+    "sequence_identity": 1.0,
+    "reason": "Prevent identical V4 copies from weighting consensus by database redundancy while preserving label ambiguity."
+  },
+  "raw_v4_records": 335976,
+  "raw_v4_length": {
+    "records": 335976,
+    "minimum": 200,
+    "q1": 253.0,
+    "median": 253.0,
+    "mean": 252.93,
+    "q3": 253.0,
+    "maximum": 399
+  },
+  "raw_v4_taxonomy": {
+    "records": 335976,
+    "domain_counts": {
+      "Archaea": 2048,
+      "Bacteria": 333928
+    },
+    "nonempty_rank_counts": {
+      "d__": 335976,
+      "p__": 335903,
+      "c__": 335350,
+      "o__": 329070,
+      "f__": 322562,
+      "g__": 289605,
+      "s__": 199024
+    },
+    "organelle_label_records": 5715
+  },
+  "lca_v4_records": 98185,
+  "lca_v4_length": {
+    "records": 98185,
+    "minimum": 200,
+    "q1": 253.0,
+    "median": 253,
+    "mean": 252.97,
+    "q3": 253.0,
+    "maximum": 399
+  },
+  "lca_v4_taxonomy": {
+    "records": 98185,
+    "domain_counts": {
+      "Archaea": 1337,
+      "Bacteria": 96848
+    },
+    "nonempty_rank_counts": {
+      "d__": 98185,
+      "p__": 98033,
+      "c__": 97459,
+      "o__": 92808,
+      "f__": 89613,
+      "g__": 76474,
+      "s__": 50443
+    },
+    "organelle_label_records": 4111
+  },
+  "derived_files": {
+    "sequences": "greengenes2-2024.09-v4.fasta.gz",
+    "sequences_sha256": "330fe7f400c84c1e454ca9193bcc49f078b01c7880a8bfb99cbe4c0c3c1c14d2",
+    "taxonomy": "greengenes2-2024.09-v4-taxonomy.tsv.gz",
+    "taxonomy_sha256": "9594e9ae78a568672891693207fd4dcc31f8eada83b931031642fafcff2684bd"
+  },
+  "interpretation_boundary": "This comparison uses the official full-length backbone and derives the same V4 locus; it does not substitute the legacy Greengenes 13_8 database."
+}

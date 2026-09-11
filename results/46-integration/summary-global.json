@@ -1,0 +1,50 @@
+{
+  "status": "passed",
+  "seed": 20260726,
+  "samples": 220,
+  "microbe_features": 250,
+  "metabolite_features": 277,
+  "tests": {
+    "1": [
+      {
+        "Model": "Observed",
+        "Method": "Procrustes",
+        "Statistic": 0.5881,
+        "PValue": 0.001,
+        "QValue": 0.001
+      }
+    ],
+    "2": [
+      {
+        "Model": "Observed",
+        "Method": "Mantel",
+        "Statistic": 0.5973,
+        "PValue": 0.001,
+        "QValue": 0.001
+      }
+    ],
+    "3": [
+      {
+        "Model": "Group-adjusted",
+        "Method": "Procrustes",
+        "Statistic": 0.5288,
+        "PValue": 0.001,
+        "QValue": 0.001
+      }
+    ],
+    "4": [
+      {
+        "Model": "Group-adjusted",
+        "Method": "Mantel",
+        "Statistic": 0.5543,
+        "PValue": 0.001,
+        "QValue": 0.001
+      }
+    ]
+  },
+  "versions": {
+    "R": "4.4.1",
+    "vegan": "2.6.6.1",
+    "permute": "0.9.7"
+  }
+}

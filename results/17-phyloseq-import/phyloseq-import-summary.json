@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "bundle_id": "nfcore-v4-phyloseq-input-v1",
+  "checks_total": 82,
+  "checks_passed": 82,
+  "checks_failed": 0,
+  "environment": {
+    "r": "4.4.1",
+    "packages": {
+      "phyloseq": "1.48.0",
+      "ape": "5.8",
+      "Biostrings": "2.72.1",
+      "ggplot2": "3.5.2",
+      "readr": "2.1.5",
+      "digest": "0.6.36",
+      "jsonlite": "1.8.8"
+    }
+  },
+  "input": {
+    "features": 366,
+    "samples": 4,
+    "reads": 5213,
+    "taxonomy_ranks": 7,
+    "representative_sequences": 366
+  },
+  "object": {
+    "class": "phyloseq",
+    "components": 5,
+    "component_names": ["otu_table", "tax_table", "sam_data", "phy_tree", "refseq"],
+    "taxa_are_rows": true,
+    "features": 366,
+    "samples": 4,
+    "reads": 5213
+  },
+  "tree": {
+    "full_tips": 203818,
+    "full_reference_tips": 203452,
+    "full_query_tips": 366,
+    "full_rooted": true,
+    "object_tips": 366,
+    "object_rooted": true,
+    "missing_branch_lengths": 0,
+    "negative_branch_lengths": 0
+  },
+  "taxonomy": {
+    "genus_assigned_features": 318,
+    "genus_assigned_reads": 4217,
+    "species_assigned_features": 0,
+    "species_assigned_reads": 0
+  },
+  "sequences": {
+    "minimum_length": 252,
+    "modal_length": 253,
+    "maximum_length": 303
+  },
+  "rds": {
+    "file": "atacama-v4-phyloseq.rds",
+    "bytes": 30836,
+    "sha256": "b668fd326f16df1185c5e7757a8afc09e36ce1267526804f4da288cabd9bbb18",
+    "roundtrip_passed": true
+  }
+}

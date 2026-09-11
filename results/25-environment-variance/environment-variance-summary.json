@@ -1,0 +1,92 @@
+{
+  "article": 25,
+  "title": "Environmental fitting, Mantel tests, and variation partitioning",
+  "dataset": {
+    "source": "microeco 2.0.0 packaged wetland 16S tables",
+    "features": 13628,
+    "samples": 90,
+    "reads": 1619670,
+    "environment_source_samples": 200,
+    "matched_samples": 90,
+    "environment_variables": 11,
+    "groups": 3
+  },
+  "standardization": {
+    "primary_prevalence": 0.05,
+    "minimum_samples": 5,
+    "retained_features": 11113,
+    "envfit_mantel": "Relative-abundance Bray-Curtis",
+    "variation_partition": "Hellinger-transformed community matrix"
+  },
+  "permutations": {
+    "seed": 20260725,
+    "mode": "Free sample-label permutations",
+    "count": 999,
+    "minimum_p": 0.001,
+    "unique_rows": 999,
+    "identity_rows": 0,
+    "matrix_sha256": "e69df77a49350b4f40997d316bb62a7eb69749f03882ff8c74ed41966e891499"
+  },
+  "environment": {
+    "envfit_family": 11,
+    "envfit_rejections_bh": 10,
+    "high_correlation_pairs_abs_r_ge_080": 4,
+    "edaphic_variables": ["pH", "TOC", "NH4", "NO3", "Conductivity"],
+    "climate_variables": ["Temperature", "Precipitation"],
+    "group_saline_completely_confounded": true
+  },
+  "mantel": {
+    "family_size": 3,
+    "rejections_holm": 3,
+    "edaphic_rho": 0.3318957450036,
+    "climate_rho": 0.3950914124335,
+    "geographic_rho": 0.5869834682457,
+    "partial_edaphic_given_geographic_pearson": 0.1884761989695,
+    "partial_mantel_primary": false
+  },
+  "variation_partition": {
+    "combined_raw_r2": 0.3382372096515,
+    "combined_adjusted_r2": 0.281745264134,
+    "pure_edaphic_adjusted_r2": 0.09673210232139,
+    "pure_group_adjusted_r2": 0.1140495857748,
+    "shared_adjusted_r2": 0.07096357603778,
+    "unexplained_adjusted_r2": 0.718254735866,
+    "testable_fractions": 2,
+    "pure_fraction_rejections_holm": 2,
+    "maximum_vif": 2.143883507802
+  },
+  "sensitivity": {
+    "prevalence_branches": 4,
+    "conditioning_branches": 3,
+    "pure_edaphic_adjusted_r2_range": [0.09554094044209, 0.1030368380428],
+    "edaphic_mantel_rho_range": [0.3290579097661, 0.3404245540081]
+  },
+  "graphics": {
+    "font_family": "DejaVu Sans",
+    "primary_figures": 4,
+    "vector_files": 8,
+    "raster_files": 8,
+    "format_files": 16,
+    "raster_ppi": 600,
+    "svg_files_with_text": 4,
+    "svg_chinese_characters": 0,
+    "pdf_files_with_embedded_font": 4,
+    "lzw_tiff_files": 4,
+    "dimension_checks_passed": 16
+  },
+  "versions": {
+    "digest": "0.6.36",
+    "ggplot2": "3.5.2",
+    "jsonlite": "1.8.8",
+    "permute": "0.9-7",
+    "ragg": "1.3.2",
+    "readr": "2.1.5",
+    "scales": "1.3.0",
+    "svglite": "2.1.3",
+    "systemfonts": "1.1.0",
+    "vegan": "2.6-6.1"
+  },
+  "checks_total": 221,
+  "checks_passed": 221,
+  "checks_failed": 0
+}

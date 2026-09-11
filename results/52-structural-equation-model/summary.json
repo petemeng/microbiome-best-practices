@@ -1,0 +1,13 @@
+{
+  "samples": 90,
+  "measured_environment_variables": ["pH", "conductivity", "temperature", "precipitation"],
+  "measured_phenotype": "total organic carbon (TOC)",
+  "full_dag_fisher_c": 4.514,
+  "full_dag_p": 0.105,
+  "reduced_dag_fisher_c": 51.796,
+  "reduced_dag_p": 0,
+  "shannon_to_carbon_beta": -0.0123,
+  "shannon_to_carbon_p": 0.8647,
+  "plspm_gof": 0.4597,
+  "interpretation": "The full graph is compatible with the observed covariance structure, whereas the mediation-only graph is rejected; neither result establishes causality."
+}

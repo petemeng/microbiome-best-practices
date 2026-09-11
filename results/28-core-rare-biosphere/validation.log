@@ -1,0 +1,14 @@
+Article 28 core/rare-biosphere validation
+Status: PASS
+Checks: 320/320
+Samples/features/reads: 90/13628/1619670
+Primary core features: 97
+Primary core abundance mass: 0.170361
+Group core IW/CW/TW: 166/160/278
+Shared three-group core: 59
+Group-core union: 425
+Raw/rarefied-one-read core: 334/167
+Primary/rarefied Jaccard: 0.580838
+Primary local rare mass: 0.441501
+Primary exports: 16 files
+R version: 4.4.1

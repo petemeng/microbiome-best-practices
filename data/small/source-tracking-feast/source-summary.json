@@ -1,0 +1,22 @@
+{
+  "dataset": "FEAST_official_source_tracking_example",
+  "citation": "Shenhav et al. Nature Methods 2019; doi:10.1038/s41592-019-0431-x",
+  "repository": "https://github.com/cozygene/FEAST",
+  "commit": "2f8f3df8051e0e08341f597a9f4693bfb76b3bf6",
+  "raw_sha256": {
+    "metadata_example.txt": "08cc3c0c10369e69ebe774b94a06c78597592228a350864df4bb541f1105bbae",
+    "otu_example.txt": "1be44c28462fe4b67f30852698168b13dc6ce9feca2d5aaa0e5e2a081bbb30d3"
+  },
+  "samples": 10,
+  "features": 1839,
+  "sink_samples": 1,
+  "source_samples": 9,
+  "source_class_counts": {
+    "Adult gut": 3,
+    "Adult skin": 3,
+    "Infant gut": 1,
+    "Soil": 2
+  },
+  "taxonomy_scope": "The official demo anonymises taxa; taxonomy rows are retained explicitly as unknown.",
+  "contract": "otutab/taxonomy/metadata with source/sink labels and candidate source classes"
+}

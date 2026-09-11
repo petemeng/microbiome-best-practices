@@ -1,0 +1,5 @@
+stem	width_mm	height_mm	raster_ppi	intended_layout
+18-encoding-redundancy-audit	183	95	600	two-column
+18-final-size-community-summary	89	105	600	single-column
+18-export-decision-map	183	90	600	two-column
+18-raster-resolution-audit	183	92	600	two-column

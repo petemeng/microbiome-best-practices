@@ -1,0 +1,5 @@
+branch	required_metadata	columns_detected	available	selected	action
+Independent groups	Group with independent experimental units	Group	TRUE	TRUE	Kruskal-Wallis plus planned pairwise rank comparisons
+Paired two-condition	SubjectID or PairID plus two conditions		FALSE	FALSE	Do not run without a pairing identifier
+Repeated measures	SubjectID plus Time and Condition		FALSE	FALSE	Do not run without subject and time identifiers
+Blocked or clustered	Block, SiteID, Center, Family, Cage, or Batch		FALSE	FALSE	Do not infer exchangeability without the clustering column

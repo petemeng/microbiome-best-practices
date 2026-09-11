@@ -1,0 +1,13 @@
+Article 29 DMM community-typing validation
+Status: PASS
+Checks: 222/222
+Samples/features/reads: 278/130/570851
+Selected k (Laplace/AIC/BIC): 4/2/1
+Canonical state sizes: 85/86/46/61
+Low-confidence posterior (<0.80): 8
+Initialization minimum ARI: 1.000000
+Repeated-pair agreement: 0.685484
+Repeated-pair ARI: 0.376783
+Primary exports: 16 files
+Fresh fit jobs/workers: 42/8
+R version: 4.4.1

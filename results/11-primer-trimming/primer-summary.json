@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "validation_date": "2026-07-19",
+  "qiime_release": "2026.4",
+  "qiime_version": "2026.4.0",
+  "q2cli_version": "2026.4.0",
+  "q2_cutadapt_version": "2026.4.0",
+  "cutadapt_version": "5.2",
+  "qiime_environment_sha256": "68b0e9b974937525b71cca3dec48b7dc5b6135f588a941d1313c118c2a41f4b5",
+  "positive_source_commit": "f282ad2bafb3ca90190ec87290066ee1985df655",
+  "positive_samples": 4,
+  "positive_input_pairs": 10000,
+  "positive_retained_pairs": 8614,
+  "positive_retention_percent": 86.14,
+  "positive_r1_primer_matches": 8841,
+  "positive_r2_primer_matches": 8708,
+  "unanchored_retained_pairs": 8627,
+  "anchor_delta_pairs": 13,
+  "wrong_region_retained_pairs": 0,
+  "negative_input_pairs": 2000,
+  "negative_retained_pairs": 0,
+  "provenance_actions": 2,
+  "checks_total": 50,
+  "checks_passed": 50,
+  "checks_failed": 0,
+  "figures": [
+    "11-primer-presence-gate",
+    "11-trimming-retention-audit",
+    "11-primer-read-architecture",
+    "11-region-branch-decision"
+  ]
+}

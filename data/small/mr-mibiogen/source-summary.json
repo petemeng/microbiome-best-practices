@@ -1,0 +1,30 @@
+{
+  "exposure": "MiBioGen genus.Bifidobacterium.id.436",
+  "exposure_citation": "Kurilshikov et al. Nature Genetics 2021; doi:10.1038/s41588-020-00763-1",
+  "exposure_source_url": "https://molgenis26.gcc.rug.nl/downloads/MiBioGen/MBG.allHits.p1e4.txt",
+  "exposure_source_sha256": "37001a83d060596fe0b97b63d6a397f01f43a29add2925d406916b7a50b5883e",
+  "outcome": "Inflammatory bowel disease, GCST004131",
+  "outcome_citation": "de Lange et al. Nature Genetics 2017; doi:10.1038/ng.3760; PMID:28067908",
+  "outcome_api": "NHGRI-EBI GWAS Catalog summary-statistics API",
+  "outcome_api_url_template": "https://www.ebi.ac.uk/gwas/summary-statistics/api/associations/{rsid}?study_accession=GCST004131&reveal=all",
+  "outcome_sample_size": {
+    "cases": 25042,
+    "controls": 34915,
+    "total": 59957
+  },
+  "instrument_rule": "MiBioGen P < 5e-6; one outcome-available SNP per chromosome",
+  "instrument_count": 6,
+  "instrument_note": "The frozen subset is cross-chromosome and therefore pairwise independent by chromosome, but it is not a substitute for ancestry-matched population LD clumping.",
+  "effect_allele_frequency_available": false,
+  "steiger_available": false,
+  "colocalisation_available": false,
+  "api_response_sha256": {
+    "GCST004131-rs182549.json": "d2c9b5e73aaa799a467899269ae518eb3248e0906fd38e4ec2875c44a8c7dace",
+    "GCST004131-rs73797465.json": "2fa1198cb7fe952952518189fefba47008523cdabec02d1ae5a2d3d54b6d6663",
+    "GCST004131-rs857444.json": "ca8d6634d47592ac1e612c6349ae66fb274be4ac563c144ac23b80b36fe17daa",
+    "GCST004131-rs10841473.json": "63dae98663e8af77a70839ecd327c305ab04f431bd351149bae56e89a7ef9ac0",
+    "GCST004131-rs7322849.json": "1c09441773535cb1c52f475ae12c080080bea0ef473055300a4e71d5820ab20f",
+    "GCST004131-rs75344046.json": "94b3ed3275b470488dc9b33014b3f701e434bca20c48e51d95f273fe7e49e9ff"
+  },
+  "contract": "TwoSampleMR-format exposure.tsv and outcome.tsv plus an API selection ledger"
+}

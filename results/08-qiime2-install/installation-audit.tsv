@@ -1,0 +1,21 @@
+check	observed	expected	status
+Environment manifest SHA-256	68b0e9b974937525b71cca3dec48b7dc5b6135f588a941d1313c118c2a41f4b5	68b0e9b974937525b71cca3dec48b7dc5b6135f588a941d1313c118c2a41f4b5	PASS
+QIIME 2 release	2026.4	2026.4	PASS
+QIIME 2 version	2026.4.0	2026.4.0	PASS
+q2cli version	2026.4.0	2026.4.0	PASS
+Registered plugins	27	27	PASS
+Real EMP import exit code	0	0	PASS
+Maximum validation exit code	0	0	PASS
+Artifact semantic type	EMPPairedEndSequences	EMPPairedEndSequences	PASS
+Artifact data format	EMPPairedEndDirFmt	EMPPairedEndDirFmt	PASS
+Artifact data members	3	3	PASS
+Artifact provenance	5	>= 1 member	PASS
+Artifact checksum manifest	1	1	PASS
+Forward round-trip SHA-256	True	True	PASS
+Reverse round-trip SHA-256	True	True	PASS
+Barcode round-trip SHA-256	True	True	PASS
+Forward FASTQ records	2000	2000	PASS
+Reverse FASTQ records	2000	2000	PASS
+Barcode FASTQ records	2000	2000	PASS
+FASTQ record synchronization	True	True	PASS
+Controlled error probes	4	4	PASS

@@ -1,0 +1,5 @@
+stem	width_mm	height_mm	raster_ppi
+25-environment-correlation	183	126	600
+25-envfit-pcoa	183	122	600
+25-mantel-distance-blocks	183	96	600
+25-variation-partition	183	100	600

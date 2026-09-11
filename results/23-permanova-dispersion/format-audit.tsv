@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	chinese_characters	font_status	dimension_status
+23-exchangeability-design	pdf	figures/23-exchangeability-design.pdf	PDF	18767	183	104	182.73888888888888	103.71666666666665						1			embedded	PASS
+23-exchangeability-design	svg	figures/23-exchangeability-design.svg	SVG	21457	183	104	182.99994444444442	103.99888888888889							69	0	declared	PASS
+23-exchangeability-design	png	figures/23-exchangeability-design.png	PNG	346539	183	104	183	104	4322	2456	599.8841530054644	599.8307692307693	Zip					PASS
+23-exchangeability-design	tiff	figures/23-exchangeability-design.tiff	TIFF	677174	183	104	183	104	4322	2456	599.8841530054644	599.8307692307693	LZW					PASS
+23-pcoa-centroid-dispersion	pdf	figures/23-pcoa-centroid-dispersion.pdf	PDF	20914	183	120	182.73888888888888	119.94444444444444						1			embedded	PASS
+23-pcoa-centroid-dispersion	svg	figures/23-pcoa-centroid-dispersion.svg	SVG	15600	183	120	182.99994444444442	120.0008888888889							23	0	declared	PASS
+23-pcoa-centroid-dispersion	png	figures/23-pcoa-centroid-dispersion.png	PNG	496496	183	120	183	120	4322	2834	599.8841530054644	599.8633333333332	Zip					PASS
+23-pcoa-centroid-dispersion	tiff	figures/23-pcoa-centroid-dispersion.tiff	TIFF	599620	183	120	183	120	4322	2834	599.8841530054644	599.8633333333332	LZW					PASS
+23-pairwise-permanova	pdf	figures/23-pairwise-permanova.pdf	PDF	26601	183	96	182.73888888888888	95.95555555555555						1			embedded	PASS
+23-pairwise-permanova	svg	figures/23-pairwise-permanova.svg	SVG	7686	183	96	182.99994444444442	96.00141666666667							19	0	declared	PASS
+23-pairwise-permanova	png	figures/23-pairwise-permanova.png	PNG	246954	183	96	183	96	4322	2267	599.8841530054644	599.8104166666666	Zip					PASS
+23-pairwise-permanova	tiff	figures/23-pairwise-permanova.tiff	TIFF	311562	183	96	183	96	4322	2267	599.8841530054644	599.8104166666666	LZW					PASS
+23-dispersion-by-treatment	pdf	figures/23-dispersion-by-treatment.pdf	PDF	21937	183	104	182.73888888888888	103.71666666666665						1			embedded	PASS
+23-dispersion-by-treatment	svg	figures/23-dispersion-by-treatment.svg	SVG	12538	183	104	182.99994444444442	103.99888888888889							19	0	declared	PASS
+23-dispersion-by-treatment	png	figures/23-dispersion-by-treatment.png	PNG	234506	183	104	183	104	4322	2456	599.8841530054644	599.8307692307693	Zip					PASS
+23-dispersion-by-treatment	tiff	figures/23-dispersion-by-treatment.tiff	TIFF	360698	183	104	183	104	4322	2456	599.8841530054644	599.8307692307693	LZW					PASS

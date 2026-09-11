@@ -1,0 +1,28 @@
+{
+  "dataset": "O'Keefe_diet_swap_2015",
+  "primary_citation": "O'Keefe et al. Nature Communications 2015; doi:10.1038/ncomms7342",
+  "primary_data_repository": "https://doi.org/10.5061/dryad.1mn1n",
+  "packaged_source": "Bioconductor microbiome 1.26.0 dietswap data object",
+  "packaged_source_url": "https://bioconductor.org/packages/3.19/bioc/src/contrib/microbiome_1.26.0.tar.gz",
+  "packaged_source_license": "BSD-2-Clause",
+  "packaged_source_sha256": "67cc6d117ce9dfbbc472fba828e1bb0d48c621fb574f4f8d3424f6cc9a77fdab",
+  "assay": "HITChip phylogenetic 16S rRNA microarray abundance profiles",
+  "features": 130,
+  "samples": 222,
+  "subjects": 38,
+  "cohort_counts": {
+    "African American": 123,
+    "Rural African": 99
+  },
+  "timepoint_counts": {
+    "1": 38,
+    "2": 37,
+    "3": 38,
+    "4": 37,
+    "5": 35,
+    "6": 37
+  },
+  "abundance_total": 2949085,
+  "contract": "otutab/taxonomy/metadata; features x samples; exact sample order shared across files",
+  "note": "The assay is a phylogenetic 16S microarray rather than amplicon sequencing; the longitudinal model and plotting workflow transfer, but assay-specific preprocessing does not."
+}

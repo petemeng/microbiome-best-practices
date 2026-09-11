@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	chinese_characters	font_status	dimension_status
+26-phylum-stacked	pdf	figures/26-phylum-stacked.pdf	PDF	38416	183	112	182.73888888888888	111.83055555555555						1			embedded	PASS
+26-phylum-stacked	svg	figures/26-phylum-stacked.svg	SVG	196851	183	112	182.99994444444442	111.99988888888889							26	0	declared	PASS
+26-phylum-stacked	png	figures/26-phylum-stacked.png	PNG	256466	183	112	183	112	4322	2645	599.8841530054644	599.8482142857142	Zip					PASS
+26-phylum-stacked	tiff	figures/26-phylum-stacked.tiff	TIFF	617406	183	112	183	112	4322	2645	599.8841530054644	599.8482142857142	LZW					PASS
+26-genus-bubble	pdf	figures/26-genus-bubble.pdf	PDF	29868	140	118	139.7	117.82777777777778						1			embedded	PASS
+26-genus-bubble	svg	figures/26-genus-bubble.svg	SVG	21812	140	118	139.9998611111111	118.00063888888889							36	0	declared	PASS
+26-genus-bubble	png	figures/26-genus-bubble.png	PNG	399155	140	118	140	118	3307	2787	599.9842857142858	599.9135593220338	Zip					PASS
+26-genus-bubble	tiff	figures/26-genus-bubble.tiff	TIFF	487674	140	118	140	118	3307	2787	599.9842857142858	599.9135593220338	LZW					PASS
+26-group-phylum-alluvial	pdf	figures/26-group-phylum-alluvial.pdf	PDF	32278	183	112	182.73888888888888	111.83055555555555						1			embedded	PASS
+26-group-phylum-alluvial	svg	figures/26-group-phylum-alluvial.svg	SVG	40283	183	112	182.99994444444442	111.99988888888889							18	0	declared	PASS
+26-group-phylum-alluvial	png	figures/26-group-phylum-alluvial.png	PNG	782457	183	112	183	112	4322	2645	599.8841530054644	599.8482142857142	Zip					PASS
+26-group-phylum-alluvial	tiff	figures/26-group-phylum-alluvial.tiff	TIFF	1243042	183	112	183	112	4322	2645	599.8841530054644	599.8482142857142	LZW					PASS
+26-genus-heatmap	pdf	figures/26-genus-heatmap.pdf	PDF	37649	183	122	182.73888888888888	121.70833333333333						1			embedded	PASS
+26-genus-heatmap	svg	figures/26-genus-heatmap.svg	SVG	322379	183	122	182.99994444444442	122.00113888888887							33	0	declared	PASS
+26-genus-heatmap	png	figures/26-genus-heatmap.png	PNG	296470	183	122	183	122	4322	2881	599.8841530054644	599.8147540983606	Zip					PASS
+26-genus-heatmap	tiff	figures/26-genus-heatmap.tiff	TIFF	3748146	183	122	183	122	4322	2881	599.8841530054644	599.8147540983606	LZW					PASS

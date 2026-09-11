@@ -1,0 +1,10 @@
+Metric	Definition	Unit	RareFeatureWeight
+Observed	Number of detected features	features	high
+Chao1	Singleton/doubleton-corrected richness lower-bound estimator	features	very high
+Shannon	Shannon entropy	entropy	moderate
+Simpson	One minus Simpson concentration	probability	low
+Pielou	Shannon divided by log observed richness	ratio	moderate
+Hill q=0	Observed feature richness	effective features	high
+Hill q=1	Exponential of Shannon entropy	effective features	moderate
+Hill q=2	Inverse Simpson concentration	effective features	low
+Good coverage	One minus singleton reads divided by library size	proportion	singleton-sensitive

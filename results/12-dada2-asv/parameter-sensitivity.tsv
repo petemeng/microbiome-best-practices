@@ -1,0 +1,6 @@
+profile_id	label	trunc_len_f	trunc_len_r	max_ee_f	max_ee_r	input	filtered	denoised	merged	non_chimeric	retention_percent	asv_count	modal_asv_length	maximum_asv_length	estimated_minimum_overlap	decision
+untruncated	No 3′ truncation	0	0	2.0	2.0	8614	7365	5658	4898	4861	56.43	340	253	303		Reject: low-quality terminal bases reduce retention.
+reverse-tail-kept	Keep reverse tail	220	220	2.0	2.0	8614	7515	5799	5154	5117	59.4	359	253	303	137	Reject: retaining 20 extra R2 bases loses reads without adding needed overlap.
+selected	Selected	220	200	2.0	2.0	8614	7641	5886	5257	5213	60.52	366	253	303	117	Select: high retention, long informative reads, and a large overlap reserve.
+shortened	Shortened	180	150	2.0	2.0	8614	8180	6456	5250	5223	60.63	323	253	303	27	Sensitivity only: similar reads retained but 90 informative bases are discarded.
+strict-ee	Strict maxEE	220	200	1.0	1.0	8614	6433	4912	4516	4478	51.99	358	253	303	117	Reject: maxEE=1 removes substantially more pairs in this dataset.

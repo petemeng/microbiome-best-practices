@@ -1,0 +1,36 @@
+Article 11 Atacama no-primer probe
+command: conda run -n microbiome-qiime2-2026.4 cutadapt --cores 1 -e 0.1 -O 15 -g '^GTGCCAGCMGCCGCGGTAA' -G '^GGACTACHVGGGTWTCTAAT' --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.json -o <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.R2.fastq.gz <PROJECT_ROOT>/data/small/fastq/forward.fastq.gz <PROJECT_ROOT>/data/small/fastq/reverse.fastq.gz
+returncode: 0
+stdout:
+This is cutadapt 5.2 with Python 3.12.13
+Command line parameters: --cores 1 -e 0.1 -O 15 -g ^GTGCCAGCMGCCGCGGTAA -G ^GGACTACHVGGGTWTCTAAT --discard-untrimmed --json <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.json -o <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.R1.fastq.gz -p <WORK_DIR>/cutadapt-probes/atacama-original-v4-anchored.R2.fastq.gz <PROJECT_ROOT>/data/small/fastq/forward.fastq.gz <PROJECT_ROOT>/data/small/fastq/reverse.fastq.gz
+Processing paired-end reads on 1 core ...
+
+=== Summary ===
+
+Total read pairs processed:              2,000
+  Read 1 with adapter:                       0 (0.0%)
+  Read 2 with adapter:                       0 (0.0%)
+
+== Read fate breakdown ==
+Pairs discarded as untrimmed:            2,000 (100.0%)
+Pairs written (passing filters):             0 (0.0%)
+
+Total basepairs processed:       604,000 bp
+  Read 1:       302,000 bp
+  Read 2:       302,000 bp
+Total written (filtered):              0 bp (0.0%)
+  Read 1:             0 bp
+  Read 2:             0 bp
+
+=== First read: Adapter 1 ===
+
+Sequence: GTGCCAGCMGCCGCGGTAA; Type: anchored 5'; Length: 19; Trimmed: 0 times
+
+=== Second read: Adapter 2 ===
+
+Sequence: GGACTACHVGGGTWTCTAAT; Type: anchored 5'; Length: 20; Trimmed: 0 times
+stderr:
+(empty)
+parsed_counts:
+{"input": 2000, "output": 0, "read1_with_adapter": 0, "read2_with_adapter": 0}

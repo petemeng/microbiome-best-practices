@@ -1,0 +1,5 @@
+stage	file	uuid	semantic_type	data_format	terminal_action	provenance_actions	maximum_validation
+Raw import	atacama-emp-paired-end.qza	29f9639c-9e72-4892-a515-491b8aa49fbc	EMPPairedEndSequences	EMPPairedEndDirFmt	import	1	PASS
+Demultiplexed reads	atacama-demux-paired.qza	93a348e3-3dfc-4737-b588-8c04f8b1a600	SampleData[PairedEndSequencesWithQuality]	SingleLanePerSamplePairedEndFastqDirFmt	demux.emp_paired	2	PASS
+Barcode correction	atacama-demux-details.qza	b98bd5d7-311a-4b10-8b19-c06dfc6b4e50	ErrorCorrectionDetails	ErrorCorrectionDetailsDirFmt	demux.emp_paired	2	PASS
+Quality visualization	atacama-demux-summary.qzv	d05e5b11-be9b-4f8f-b3c1-7773892dc358	Visualization	None	demux.summarize	3	PASS

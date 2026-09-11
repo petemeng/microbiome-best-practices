@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	chinese_characters	font_status	dimension_status
+29-model-selection	pdf	figures/29-model-selection.pdf	PDF	24690	170	158	169.6861111111111	157.69166666666666						1			embedded	PASS
+29-model-selection	svg	figures/29-model-selection.svg	SVG	22607	170	158	170.00008333333332	157.99858333333333							31	0	declared	PASS
+29-model-selection	png	figures/29-model-selection.png	PNG	421156	170	158	170	158	4015	3732	599.8882352941176	599.9544303797468	Zip					PASS
+29-model-selection	tiff	figures/29-model-selection.tiff	TIFF	553956	170	158	170	158	4015	3732	599.8882352941176	599.9544303797468	LZW					PASS
+29-posterior-ordination	pdf	figures/29-posterior-ordination.pdf	PDF	33914	170	125	169.6861111111111	124.88333333333334						1			embedded	PASS
+29-posterior-ordination	svg	figures/29-posterior-ordination.svg	SVG	43697	170	125	170.00008333333332	124.99975							24	0	declared	PASS
+29-posterior-ordination	png	figures/29-posterior-ordination.png	PNG	518295	170	125	170	125	4015	2952	599.8882352941176	599.8464	Zip					PASS
+29-posterior-ordination	tiff	figures/29-posterior-ordination.tiff	TIFF	611188	170	125	170	125	4015	2952	599.8882352941176	599.8464	LZW					PASS
+29-component-profiles	pdf	figures/29-component-profiles.pdf	PDF	29677	165	122	164.7472222222222	121.70833333333333						1			embedded	PASS
+29-component-profiles	svg	figures/29-component-profiles.svg	SVG	23195	165	122	165.00122222222222	122.00113888888887							60	0	declared	PASS
+29-component-profiles	png	figures/29-component-profiles.png	PNG	362233	165	122	165	122	3897	2881	599.9018181818182	599.8147540983606	Zip					PASS
+29-component-profiles	tiff	figures/29-component-profiles.tiff	TIFF	893464	165	122	165	122	3897	2881	599.9018181818182	599.8147540983606	LZW					PASS
+29-stability-audit	pdf	figures/29-stability-audit.pdf	PDF	25544	180	135	179.91666666666666	134.7611111111111						1			embedded	PASS
+29-stability-audit	svg	figures/29-stability-audit.svg	SVG	26785	180	135	180.00133333333332	135.001							66	0	declared	PASS
+29-stability-audit	png	figures/29-stability-audit.png	PNG	445239	180	135	180	135	4251	3188	599.8633333333332	599.8162962962963	Zip					PASS
+29-stability-audit	tiff	figures/29-stability-audit.tiff	TIFF	554190	180	135	180	135	4251	3188	599.8633333333332	599.8162962962963	LZW					PASS

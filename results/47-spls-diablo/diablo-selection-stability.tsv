@@ -1,0 +1,121 @@
+Block	Component	FeatureID	FoldSelectionRate	DisplayName
+Microbiome	comp2	MB_G007	0.92	Bifidobacterium
+Microbiome	comp2	MB_G008	0.2	Escherichia
+Microbiome	comp1	MB_G011	0.8	Ruminococcus_B
+Microbiome	comp2	MB_G015	0.92	Akkermansia
+Microbiome	comp2	MB_G017	0.2	Klebsiella
+Microbiome	comp2	MB_G025	0.2	Ruminococcus_E
+Microbiome	comp2	MB_G028	0.3	Dialister
+Microbiome	comp2	MB_G035	0.2	Cetobacterium_A
+Microbiome	comp2	MB_G036	0.266666666666667	Veillonella
+Microbiome	comp2	MB_G041	0.2	Erysipelatoclostridium
+Microbiome	comp1	MB_G043	1	CAG-103
+Microbiome	comp2	MB_G048	0.56	Acidaminococcus
+Microbiome	comp1	MB_G050	0.2	Lactobacillus
+Microbiome	comp2	MB_G050	0.3	Lactobacillus
+Microbiome	comp2	MB_G055	0.8	Haemophilus_D
+Microbiome	comp1	MB_G058	0.2	CAG-41
+Microbiome	comp2	MB_G058	0.2	CAG-41
+Microbiome	comp2	MB_G062	0.2	Phascolarctobacterium
+Microbiome	comp1	MB_G065	0.3	Adlercreutzia
+Microbiome	comp2	MB_G065	0.2	Adlercreutzia
+Microbiome	comp2	MB_G067	0.88	Parasutterella
+Microbiome	comp2	MB_G070	0.2	Barnesiella
+Microbiome	comp1	MB_G072	0.96	Limosilactobacillus
+Microbiome	comp2	MB_G072	0.25	Limosilactobacillus
+Microbiome	comp2	MB_G074	0.2	Bilophila
+Microbiome	comp1	MB_G079	1	UBA11524
+Microbiome	comp2	MB_G079	0.2	UBA11524
+Microbiome	comp2	MB_G083	0.68	Fimivicinus
+Microbiome	comp1	MB_G086	0.25	Enterobacter
+Microbiome	comp2	MB_G086	0.2	Enterobacter
+Microbiome	comp2	MB_G090	0.2	Clostridium_AP
+Microbiome	comp2	MB_G091	0.2	Ligilactobacillus
+Microbiome	comp2	MB_G093	0.52	Clostridium_A
+Microbiome	comp1	MB_G094	1	CAG-1427
+Microbiome	comp2	MB_G100	0.92	Clostridium_P
+Microbiome	comp1	MB_G103	0.96	Pediococcus
+Microbiome	comp2	MB_G103	0.2	Pediococcus
+Microbiome	comp2	MB_G110	0.2	Monoglobus
+Microbiome	comp2	MB_G116	0.2	Scatacola_A
+Microbiome	comp2	MB_G120	1	Romboutsia
+Microbiome	comp2	MB_G121	0.24	UBA5026
+Microbiome	comp2	MB_G122	0.32	Intestinibacter
+Microbiome	comp2	MB_G123	0.2	CAG-217
+Microbiome	comp2	MB_G124	0.2	Fusobacterium
+Microbiome	comp2	MB_G128	0.8	Longicatena
+Microbiome	comp1	MB_G134	0.56	Citrobacter
+Microbiome	comp2	MB_G134	0.2	Citrobacter
+Microbiome	comp2	MB_G140	0.4	Veillonella_A
+Microbiome	comp2	MB_G145	0.2	Lactiplantibacillus
+Microbiome	comp2	MB_G156	0.36	RUG705
+Microbiome	comp1	MB_G163	1	Pullichristensenella
+Microbiome	comp2	MB_G173	0.48	Scatocola
+Microbiome	comp2	MB_G181	1	Turicibacter
+Microbiome	comp1	MB_G182	0.8	Senegalimassilia
+Microbiome	comp2	MB_G183	0.44	MWCK01
+Microbiome	comp2	MB_G184	0.2	Merdimorpha
+Microbiome	comp2	MB_G202	0.88	CAG-417
+Microbiome	comp1	MB_G205	0.56	UMGS1975
+Microbiome	comp2	MB_G221	0.2	Campylobacter_A
+Microbiome	comp1	MB_G233	0.72	CAJFUR01
+Microbiome	comp2	MB_G233	0.2	CAJFUR01
+Microbiome	comp2	MB_G235	0.28	51-20
+Metabolome	comp2	MT_M004	0.72	C2 carnitine
+Metabolome	comp2	MT_M005	0.2	creatinine
+Metabolome	comp2	MT_M006	0.2	atenolol
+Metabolome	comp2	MT_M007	0.2	taurochenodesoxycholic acid
+Metabolome	comp2	MT_M008	0.2	saccharin
+Metabolome	comp2	MT_M009	0.2	C20:4 carnitine
+Metabolome	comp1	MT_M010	0.2	carnosol
+Metabolome	comp2	MT_M010	0.48	carnosol
+Metabolome	comp1	MT_M011	0.48	hydrocinnamic acid
+Metabolome	comp2	MT_M011	0.3	hydrocinnamic acid
+Metabolome	comp2	MT_M012	0.25	C42:0 TAG
+Metabolome	comp2	MT_M015	0.2	deoxycholic acid
+Metabolome	comp2	MT_M017	0.2	C56:1 TAG
+Metabolome	comp1	MT_M022	0.3	C3-DC-CH3 carnitine
+Metabolome	comp2	MT_M022	0.25	C3-DC-CH3 carnitine
+Metabolome	comp1	MT_M023	0.96	5alpha-cholestanol
+Metabolome	comp2	MT_M025	0.48	N-methylproline
+Metabolome	comp2	MT_M026	0.2	C56:2 TAG
+Metabolome	comp2	MT_M027	0.32	C44:0 TAG
+Metabolome	comp2	MT_M028	0.32	creatine
+Metabolome	comp2	MT_M029	0.84	ethyl glucuronide
+Metabolome	comp2	MT_M030	0.2	C56:3 TAG
+Metabolome	comp2	MT_M033	0.3	3-methylxanthine
+Metabolome	comp2	MT_M035	0.2	C20:5 LPC
+Metabolome	comp2	MT_M036	0.36	C46:1 TAG
+Metabolome	comp2	MT_M037	0.88	C34:1 PC plasmalogen-A
+Metabolome	comp2	MT_M040	0.2	C56:5 TAG
+Metabolome	comp2	MT_M041	0.28	C20:5 CE
+Metabolome	comp2	MT_M042	0.2	C18:0 SM
+Metabolome	comp2	MT_M044	0.2	C46:2 TAG
+Metabolome	comp1	MT_M045	1	adrenic acid
+Metabolome	comp2	MT_M046	0.2	1-methylnicotinamide
+Metabolome	comp2	MT_M047	0.48	glycocholate
+Metabolome	comp1	MT_M048	0.48	C36:5 PC plasmalogen-A
+Metabolome	comp2	MT_M049	0.2	5-acetylamino-6-amino-3-methyluracil
+Metabolome	comp2	MT_M050	0.4	caproic acid
+Metabolome	comp2	MT_M051	0.48	homovanillate
+Metabolome	comp2	MT_M052	0.48	glycolithocholic acid
+Metabolome	comp2	MT_M053	0.36	C24:0 SM
+Metabolome	comp2	MT_M054	0.2	1-methylguanine
+Metabolome	comp2	MT_M055	0.2	C58:6 TAG
+Metabolome	comp2	MT_M057	0.92	C16:0 SM
+Metabolome	comp2	MT_M059	0.2	C56:4 TAG
+Metabolome	comp1	MT_M060	1	C16 carnitine
+Metabolome	comp1	MT_M061	0.266666666666667	C22:5 CE
+Metabolome	comp2	MT_M061	0.28	C22:5 CE
+Metabolome	comp2	MT_M062	0.8	C18:0 LPC
+Metabolome	comp2	MT_M063	0.2	C14:0 CE
+Metabolome	comp2	MT_M065	0.4	ascorbate
+Metabolome	comp1	MT_M066	0.64	C14 carnitine
+Metabolome	comp2	MT_M067	0.333333333333333	C44:1 TAG
+Metabolome	comp2	MT_M068	1	C24:1 SM
+Metabolome	comp2	MT_M069	0.32	C34:0 PE
+Metabolome	comp2	MT_M070	0.2	1-3-7-trimethylurate
+Metabolome	comp2	MT_M072	0.2	shikimate
+Metabolome	comp2	MT_M073	0.24	betaine
+Metabolome	comp2	MT_M074	0.76	carnosine
+Metabolome	comp2	MT_M089	1	cytosine

@@ -1,0 +1,58 @@
+{
+  "dataset": "MiSurv processed NOD-mouse gut 16S data with time to T1D onset",
+  "dimensions": {
+    "censored": 55,
+    "events": 118,
+    "features": 348,
+    "reads": 3073108,
+    "samples": 173,
+    "sampling_week_counts": {
+      "6": 6,
+      "7": 164,
+      "8": 3
+    },
+    "treatment_counts": {
+      "Control": 89,
+      "Tylosin": 84
+    }
+  },
+  "files": {
+    "metadata.tsv": {
+      "bytes": 5613,
+      "sha256": "b83a3bffdcdd946b1c2b24e8d091d0eb14c914296c115cb84b1e87045a462f60"
+    },
+    "otutab.tsv": {
+      "bytes": 136139,
+      "sha256": "5fad49018e8e71158f0994e1336113d4965bb2b63292c998235cbbfa2e792ee7"
+    },
+    "taxonomy.tsv": {
+      "bytes": 27062,
+      "sha256": "3a8895f8badfc79e1304b37d9bd1ee2fb6177614208e9da7215f1920d3bf96f8"
+    }
+  },
+  "license_boundary": "The source GitHub repository does not state a data license. Cite both studies and verify redistribution terms before republishing the source tables.",
+  "outcome_boundary": "The event is T1D onset in NOD mice, not human death or overall survival.",
+  "primary_study": "Zhang XS et al. Nature Microbiology. 2018;3:1403-1413. doi:10.1038/s41564-018-0251-7.",
+  "processed_data_citation": "Gu W et al. Microbiology Spectrum. 2023;11:e05059-22. doi:10.1128/spectrum.05059-22.",
+  "qiita_study": "10508",
+  "source_commit": "692a2ac7079d2dbf581893b9a820c80cde0a7e31",
+  "source_files": {
+    "otu.tab.txt": {
+      "bytes": 137171,
+      "sha256": "2044c03631508ac8c1b799618d1e8a24ebc50cd1837eca5c22d8fecbbed9a960"
+    },
+    "sam.dat.txt": {
+      "bytes": 5106,
+      "sha256": "48eda70aaaf0ce13d1ff7508c7455e3dae2a6cb3d22aea87628e6b63070922ec"
+    },
+    "tax.tab.txt": {
+      "bytes": 32634,
+      "sha256": "3350c16af78eaaa3eb00e0221469a344e82cec0499f8a2f311133260030532b8"
+    },
+    "tree.tre": {
+      "bytes": 11441,
+      "sha256": "14fedf0c01814bd81e6a02f704d5f6fd19566415577ce5984a883065f737079d"
+    }
+  },
+  "source_repository": "https://github.com/wg99526/MiSurvGit"
+}

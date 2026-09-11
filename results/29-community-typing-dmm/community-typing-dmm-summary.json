@@ -1,0 +1,125 @@
+{
+  "article": 29,
+  "title": "Community typing with Dirichlet-multinomial mixtures",
+  "dataset": {
+    "source": "DirichletMultinomial 1.46.0 packaged Holmes Twins genus counts",
+    "features": 130,
+    "samples": 278,
+    "reads": 570851,
+    "library_depth_min": 53,
+    "library_depth_median": 1597.5,
+    "library_depth_max": 10585,
+    "participant_keys": 154,
+    "paired_keys": 124
+  },
+  "primary_definition": {
+    "feature_level": "Source genus categories",
+    "input_scale": "Raw non-negative integer counts",
+    "relative_abundance_input": false,
+    "pseudocount": false,
+    "rarefied": false,
+    "candidate_k": [1, 2, 3, 4, 5, 6, 7],
+    "selection_rule": "Minimum Laplace approximation",
+    "minimum_state_size": 14,
+    "seed": 20260729,
+    "label_rule": "Decreasing fitted Bacteroides proportion, then decreasing Prevotella proportion, then raw component index"
+  },
+  "model": {
+    "selected_k_laplace": 4,
+    "selected_k_aic": 2,
+    "selected_k_bic": 1,
+    "state_sizes": {
+      "DMM-A": 85,
+      "DMM-B": 86,
+      "DMM-C": 46,
+      "DMM-D": 61
+    },
+    "minimum_state_size": 46,
+    "maximum_state_size": 86,
+    "samples_below_point_eight_posterior": 8,
+    "samples_below_point_nine_posterior": 17,
+    "median_maximum_posterior": 0.9998694028834,
+    "median_normalized_entropy": 0.0009394537558873,
+    "fresh_k4_laplace": 38838.423218031719,
+    "bundled_reference_k4_laplace": 38781.103871980398,
+    "bundled_reference_partition_ari": 1
+  },
+  "stability": {
+    "initialization_seeds": [20260729, 20260730, 20260731, 20260732, 20260733, 20260734, 20260735, 20260736],
+    "initialization_pairs": 28,
+    "initialization_min_ari": 1,
+    "initialization_primary_basin_starts": 8,
+    "initialization_outlier_seeds": [],
+    "best_laplace_seed": 20260735,
+    "best_laplace_partition_ari_to_primary": 1,
+    "prevalence_features": 67,
+    "depth_samples": 247,
+    "rarefaction_depth": 1000,
+    "one_per_participant_samples": 154,
+    "sensitivity_selected_k_laplace": {
+      "Primary": 4,
+      "Prevalence >= 5%": 4,
+      "Depth >= 1,000": 2,
+      "Rarefied to 1,000": 2,
+      "One per participant": 2
+    },
+    "sensitivity_fixed_k4_ari": {
+      "Primary": 1,
+      "Prevalence >= 5%": 0.9035134477207,
+      "Depth >= 1,000": 0.9284259842716,
+      "Rarefied to 1,000": 0.905608750547,
+      "One per participant": 0.6795169172365
+    }
+  },
+  "repeated_samples": {
+    "paired_keys": 124,
+    "same_state_pairs": 85,
+    "different_state_pairs": 39,
+    "state_agreement": 0.6854838709677,
+    "adjusted_rand_index": 0.3767834827138,
+    "suffix_timing_independently_validated": false
+  },
+  "inference": {
+    "bmi_hypothesis_test": false,
+    "bmi_use": "Descriptive cross-tabulation only",
+    "natural_class_claim": false,
+    "disease_subtype_claim": false,
+    "causal_claim": false,
+    "absolute_abundance_claim": false
+  },
+  "graphics": {
+    "font_family": "DejaVu Sans",
+    "primary_figures": 4,
+    "vector_files": 8,
+    "raster_files": 8,
+    "format_files": 16,
+    "raster_ppi": 600,
+    "svg_files_with_text": 4,
+    "svg_chinese_characters": 0,
+    "pdf_files_with_embedded_font": 4,
+    "lzw_tiff_files": 4,
+    "dimension_checks_passed": 16
+  },
+  "execution": {
+    "backend": "One-shot PSOCK R process per model",
+    "workers": 8,
+    "fresh_models": 42,
+    "candidate_models": 35,
+    "initialization_models_beyond_primary": 7
+  },
+  "versions": {
+    "digest": "0.6.36",
+    "DirichletMultinomial": "1.46.0",
+    "ggplot2": "3.5.2",
+    "jsonlite": "1.8.8",
+    "ragg": "1.3.2",
+    "readr": "2.1.5",
+    "scales": "1.3.0",
+    "svglite": "2.1.3",
+    "systemfonts": "1.1.0",
+    "vegan": "2.6-6.1"
+  },
+  "checks_total": 222,
+  "checks_passed": 222,
+  "checks_failed": 0
+}

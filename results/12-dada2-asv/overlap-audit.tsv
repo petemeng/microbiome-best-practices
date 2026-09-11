@@ -1,0 +1,4 @@
+profile_id	trunc_len_f	trunc_len_r	retained_sum	insert_length_basis	insert_length	estimated_overlap	required_overlap	margin	status
+selected	220	200	420	observed maximum	303	117	12	105	PASS
+selected-modal	220	200	420	observed mode	253	167	12	155	PASS
+overtrimmed-modal	130	120	250	observed mode	253	-3	12	-15	EXPECTED FAIL

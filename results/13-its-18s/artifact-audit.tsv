@@ -1,0 +1,9 @@
+artifact	semantic_type	expected_type	format	status
+its2-raw.qza	SampleData[PairedEndSequencesWithQuality]	SampleData[PairedEndSequencesWithQuality]	SingleLanePerSamplePairedEndFastqDirFmt	PASS
+its2-trimmed.qza	SampleData[PairedEndSequencesWithQuality]	SampleData[PairedEndSequencesWithQuality]	SingleLanePerSamplePairedEndFastqDirFmt	PASS
+its2-table.qza	FeatureTable[Frequency]	FeatureTable[Frequency]	BIOMV210DirFmt	PASS
+its2-rep-seqs.qza	FeatureData[Sequence]	FeatureData[Sequence]	DNASequencesDirectoryFormat	PASS
+its2-denoising-stats.qza	SampleData[DADA2Stats]	SampleData[DADA2Stats]	DADA2StatsDirFmt	PASS
+its2-base-transitions.qza	DADA2BaseTransitionStats	DADA2BaseTransitionStats	DADA2BaseTransitionStatsDirFmt	PASS
+its2-feature-frequencies.qza	ImmutableMetadata	ImmutableMetadata	ImmutableMetadataDirectoryFormat	PASS
+its2-sample-frequencies.qza	ImmutableMetadata	ImmutableMetadata	ImmutableMetadataDirectoryFormat	PASS

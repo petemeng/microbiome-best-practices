@@ -1,0 +1,48 @@
+{
+  "dataset": "nf-core ampliseq V4 representative ASVs",
+  "marker": "bacterial and archaeal 16S V4",
+  "source_repository": "https://github.com/nf-core/test-datasets",
+  "source_commit": "f282ad2bafb3ca90190ec87290066ee1985df655",
+  "source_license": "MIT",
+  "source_fastq_pairs": 10000,
+  "primer_pair": {
+    "forward_name": "515F (Parada)",
+    "forward_5_to_3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_name": "806R (Apprill)",
+    "reverse_5_to_3": "GGACTACNVGGGTWTCTAAT"
+  },
+  "processing_contract": {
+    "primer_trimming": "anchored IUPAC-aware q2-cutadapt",
+    "primer_trimmed_pairs": 8614,
+    "dada2_trunc_len_forward": 220,
+    "dada2_trunc_len_reverse": 200,
+    "dada2_max_ee_forward": 2,
+    "dada2_max_ee_reverse": 2,
+    "non_chimeric_pairs": 5213,
+    "source_artifact": "results/12-dada2-asv/dada2-rep-seqs.qza",
+    "source_artifact_sha256": "6898f4fb7496a709f3737ccf62f387535aa4044531728f3df68bf3df7d5eaa13"
+  },
+  "prepared_query": {
+    "file": "query-v4-asvs.fasta.gz",
+    "preparation": "QIIME 2 2026.4 export followed by deterministic gzip (mtime=0, no embedded filename)",
+    "records": 366,
+    "unique_sequences": 366,
+    "minimum_length": 252,
+    "median_length": 253.0,
+    "mean_length": 253.83,
+    "maximum_length": 303,
+    "unique_lengths": 10,
+    "uncompressed_sha256": "4e6ef274c3db3d879ef75c8328693ecc6f7bf36461917a765608d18812128576",
+    "gzip_sha256": "fa71915be8007d36ec70f85d28401f5a94d0d33eca323782cc937cfc4bcf1af4"
+  },
+  "prepared_abundance": {
+    "file": "query-v4-asv-abundance.tsv",
+    "preparation": "QIIME 2 2026.4 feature-table export from the Article 12 DADA2 table",
+    "records": 366,
+    "total_frequency": 5213,
+    "maximum_samples_observed_in": 4,
+    "feature_ids_match_query_fasta": true,
+    "sha256": "a80e3b94d8632c48fb6c01e788e842c022c3b1ee64b79dc94456618328895e6e"
+  },
+  "interpretation_boundary": "These are real ASVs, not species. Taxonomic labels remain database- and method-dependent."
+}

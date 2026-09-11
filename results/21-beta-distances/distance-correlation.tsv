@@ -1,0 +1,37 @@
+MetricX	MetricY	Spearman
+Bray-Curtis	Bray-Curtis	1
+Bray-Curtis	Jaccard	0.8860435675039711
+Bray-Curtis	Unweighted UniFrac	0.7663526899197066
+Bray-Curtis	Weighted UniFrac	0.6911889613609333
+Bray-Curtis	Aitchison	0.36710993258920566
+Bray-Curtis	Robust Aitchison	0.47239819526706545
+Jaccard	Bray-Curtis	0.8860435675039711
+Jaccard	Jaccard	1
+Jaccard	Unweighted UniFrac	0.9532045997592018
+Jaccard	Weighted UniFrac	0.706727029410017
+Jaccard	Aitchison	0.49275710876523954
+Jaccard	Robust Aitchison	0.5052025330958484
+Unweighted UniFrac	Bray-Curtis	0.7663526899197066
+Unweighted UniFrac	Jaccard	0.9532045997592018
+Unweighted UniFrac	Unweighted UniFrac	1
+Unweighted UniFrac	Weighted UniFrac	0.6945337598098335
+Unweighted UniFrac	Aitchison	0.5571401604530439
+Unweighted UniFrac	Robust Aitchison	0.5062733994022338
+Weighted UniFrac	Bray-Curtis	0.6911889613609333
+Weighted UniFrac	Jaccard	0.706727029410017
+Weighted UniFrac	Unweighted UniFrac	0.6945337598098335
+Weighted UniFrac	Weighted UniFrac	1
+Weighted UniFrac	Aitchison	0.3410689878174541
+Weighted UniFrac	Robust Aitchison	0.41814727422089387
+Aitchison	Bray-Curtis	0.36710993258920566
+Aitchison	Jaccard	0.49275710876523954
+Aitchison	Unweighted UniFrac	0.5571401604530439
+Aitchison	Weighted UniFrac	0.3410689878174541
+Aitchison	Aitchison	1
+Aitchison	Robust Aitchison	0.8000115358397567
+Robust Aitchison	Bray-Curtis	0.47239819526706545
+Robust Aitchison	Jaccard	0.5052025330958484
+Robust Aitchison	Unweighted UniFrac	0.5062733994022338
+Robust Aitchison	Weighted UniFrac	0.41814727422089387
+Robust Aitchison	Aitchison	0.8000115358397567
+Robust Aitchison	Robust Aitchison	1

@@ -1,0 +1,4 @@
+Conditioning	RawR2	AdjustedR2	Primary	Boundary
+None	0.2144543481142762	0.16769567835917365	FALSE	Total edaphic association
+Binary salinity	0.17688194248179526	0.13521397447037964	FALSE	Salinity is completely nested in Group and is not an independent cause
+Three-level wetland group	0.1349097368684392	0.0967321023213904	TRUE	Primary pure fraction; Group remains a broad composite context

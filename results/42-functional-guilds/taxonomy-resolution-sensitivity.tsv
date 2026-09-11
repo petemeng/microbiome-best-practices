@@ -1,0 +1,94 @@
+Function	FullLineageMean	GenusOnlyMean	SampleSpearman	MeanAbsoluteDifference	FunctionLabel
+methanotrophy	0.005010550560739246	0.06531991398815253	0.5482240605836112	0.060309363427413276	methanotrophy
+acetoclastic_methanogenesis	9.005953772062779e-5	0	NA	9.005953772062779e-5	acetoclastic methanogenesis
+methanogenesis_by_disproportionation_of_methyl_groups	2.2760478205405548e-4	0	NA	2.2760478205405548e-4	methanogenesis by disproportionation of methyl groups
+methanogenesis_using_formate	0	0	NA	0	methanogenesis using formate
+methanogenesis_by_CO2_reduction_with_H2	0.0012132852807916754	0	NA	0.0012132852807916754	methanogenesis by CO2 reduction with H2
+methanogenesis_by_reduction_of_methyl_compounds_with_H2	0	0	NA	0	methanogenesis by reduction of methyl compounds with H2
+hydrogenotrophic_methanogenesis	0.0012132852807916754	0	NA	0.0012132852807916754	hydrogenotrophic methanogenesis
+methanogenesis	0.0015133411885205107	0	NA	0.0015133411885205107	methanogenesis
+methanol_oxidation	0.0013718413834871417	3.9822780694590877e-4	0.14488519924277368	9.73613576541233e-4	methanol oxidation
+methylotrophy	0.006352997723025441	0.06571814179509844	0.5370457258097707	0.059365144072072995	methylotrophy
+aerobic_ammonia_oxidation	0.02261914937068248	0	NA	0.02261914937068248	aerobic ammonia oxidation
+aerobic_nitrite_oxidation	0.017422163732786867	0	NA	0.017422163732786867	aerobic nitrite oxidation
+sulfate_respiration	0.02501109794790492	0	NA	0.02501109794790492	sulfate respiration
+sulfur_respiration	0.005952213266052987	0	NA	0.005952213266052987	sulfur respiration
+dark_sulfite_oxidation	8.728383077567817e-5	0	NA	8.728383077567817e-5	dark sulfite oxidation
+sulfite_respiration	0.00460106535432267	0	NA	0.00460106535432267	sulfite respiration
+thiosulfate_respiration	0.002801368085214274	0	NA	0.002801368085214274	thiosulfate respiration
+arsenate_detoxification	0	0	NA	0	arsenate detoxification
+arsenate_respiration	0	0	NA	0	arsenate respiration
+arsenite_oxidation_detoxification	0	0	NA	0	arsenite oxidation detoxification
+arsenite_oxidation_energy_yielding	0	0	NA	0	arsenite oxidation energy yielding
+dissimilatory_arsenite_oxidation	0	0	NA	0	dissimilatory arsenite oxidation
+anammox	0	0	NA	0	anammox
+nitrate_denitrification	0.001230866462409155	0	NA	0.001230866462409155	nitrate denitrification
+nitrite_denitrification	0.001230866462409155	0	NA	0.001230866462409155	nitrite denitrification
+nitrous_oxide_denitrification	1.3423662049291823e-5	0	NA	1.3423662049291823e-5	nitrous oxide denitrification
+denitrification	0.001230866462409155	0	NA	0.001230866462409155	denitrification
+chitinolysis	0.0029670249658712822	0	NA	0.0029670249658712822	chitinolysis
+knallgas_bacteria	0	0	NA	0	knallgas bacteria
+dark_hydrogen_oxidation	0.013533332156506196	0	NA	0.013533332156506196	dark hydrogen oxidation
+nitrogen_fixation	0.004761601127580789	0	NA	0.004761601127580789	nitrogen fixation
+nitrate_ammonification	7.465391661172507e-5	0	NA	7.465391661172507e-5	nitrate ammonification
+nitrite_ammonification	7.465391661172507e-5	0	NA	7.465391661172507e-5	nitrite ammonification
+nitrite_respiration	0.0013885018489455624	0	NA	0.0013885018489455624	nitrite respiration
+cellulolysis	0.008287224001678197	0	NA	0.008287224001678197	cellulolysis
+xylanolysis	0	0	NA	0	xylanolysis
+dark_sulfide_oxidation	0.012111785156774505	0	NA	0.012111785156774505	dark sulfide oxidation
+dark_sulfur_oxidation	1.8285543441764004e-4	0	NA	1.8285543441764004e-4	dark sulfur oxidation
+dark_thiosulfate_oxidation	1.8482995652989442e-4	0	NA	1.8482995652989442e-4	dark thiosulfate oxidation
+dark_oxidation_of_sulfur_compounds	0.012638914514914392	0	NA	0.012638914514914392	dark oxidation of sulfur compounds
+manganese_oxidation	3.25010108993518e-5	0	NA	3.25010108993518e-5	manganese oxidation
+manganese_respiration	9.310492277795275e-4	0	NA	9.310492277795275e-4	manganese respiration
+ligninolysis	2.1980296235365017e-5	0	NA	2.1980296235365017e-5	ligninolysis
+fermentation	0.029028427779161023	0.11461648016077172	0.285760147549077	0.0855880523816107	fermentation
+aerobic_chemoheterotrophy	0.19955824488040216	0.15077523780389193	0.24438408033913653	0.04878300707651023	aerobic chemoheterotrophy
+invertebrate_parasites	4.880155175703274e-6	0	NA	4.880155175703274e-6	invertebrate parasites
+human_pathogens_septicemia	0	0	NA	0	human pathogens septicemia
+human_pathogens_pneumonia	0	0	NA	0	human pathogens pneumonia
+human_pathogens_nosocomia	0	0	NA	0	human pathogens nosocomia
+human_pathogens_meningitis	0	0	NA	0	human pathogens meningitis
+human_pathogens_gastroenteritis	0	0	NA	0	human pathogens gastroenteritis
+human_pathogens_diarrhea	0	0	NA	0	human pathogens diarrhea
+human_pathogens_all	9.419282989485175e-4	0.008780527855028997	0.21715568349584347	0.00783859955608048	human pathogens all
+fish_parasites	0	0	NA	0	fish parasites
+human_gut	3.826136593413401e-4	0	NA	3.826136593413401e-4	human gut
+human_associated	0.0013245419582898577	0.008780527855028997	-0.06844055930280812	0.00745598589673914	human associated
+mammal_gut	3.826136593413401e-4	0	NA	3.826136593413401e-4	mammal gut
+animal_parasites_or_symbionts	0.004334837378490967	0.008780527855028997	0.2437485767334813	0.00444569047653803	animal parasites or symbionts
+plant_pathogen	0	0	NA	0	plant pathogen
+oil_bioremediation	3.670795270437657e-4	0	NA	3.670795270437657e-4	oil bioremediation
+aromatic_hydrocarbon_degradation	4.248472910325313e-4	0	NA	4.248472910325313e-4	aromatic hydrocarbon degradation
+aromatic_compound_degradation	0.003651290358324213	6.601917626771125e-5	0.23487556144804994	0.0035852711820565015	aromatic compound degradation
+aliphatic_non_methane_hydrocarbon_degradation	4.519492630973552e-4	0	NA	4.519492630973552e-4	aliphatic non methane hydrocarbon degradation
+hydrocarbon_degradation	0.00834839787869503	0.06531991398815253	0.2555624151129769	0.0569715161094575	hydrocarbon degradation
+dark_iron_oxidation	1.990256813447155e-4	0	NA	1.990256813447155e-4	dark iron oxidation
+iron_respiration	0.00717787660611921	0	NA	0.00717787660611921	iron respiration
+nitrate_respiration	0.005537173594841842	0	NA	0.005537173594841842	nitrate respiration
+nitrate_reduction	0.010235956495919147	0	NA	0.010235956495919147	nitrate reduction
+fumarate_respiration	5.432706162535055e-4	0	NA	5.432706162535055e-4	fumarate respiration
+intracellular_parasites	0.0011619646539247205	0	NA	0.0011619646539247205	intracellular parasites
+chlorate_reducers	4.7473334637710313e-4	0	NA	4.7473334637710313e-4	chlorate reducers
+predatory_or_exoparasitic	0.00426080510756324	0	NA	0.00426080510756324	predatory or exoparasitic
+chloroplasts	0.0012401316334676284	0	NA	0.0012401316334676284	chloroplasts
+nonphotosynthetic_cyanobacteria	6.441323479614362e-5	0	NA	6.441323479614362e-5	nonphotosynthetic cyanobacteria
+photosynthetic_cyanobacteria	0	0	NA	0	photosynthetic cyanobacteria
+anoxygenic_photoautotrophy_H2_oxidizing	0	0	NA	0	anoxygenic photoautotrophy H2 oxidizing
+anoxygenic_photoautotrophy_S_oxidizing	0.0010343256868379181	0	NA	0.0010343256868379181	anoxygenic photoautotrophy S oxidizing
+anoxygenic_photoautotrophy_Fe_oxidizing	0	0	NA	0	anoxygenic photoautotrophy Fe oxidizing
+anoxygenic_photoautotrophy	0.0014282138570334412	0	NA	0.0014282138570334412	anoxygenic photoautotrophy
+aerobic_anoxygenic_phototrophy	0	0	NA	0	aerobic anoxygenic phototrophy
+photoheterotrophy	0.002298366855226202	0	NA	0.002298366855226202	photoheterotrophy
+plastic_degradation	0	0	NA	0	plastic degradation
+ureolysis	0.0035778327573135022	0	NA	0.0035778327573135022	ureolysis
+reductive_acetogenesis	7.936063363987447e-4	0	NA	7.936063363987447e-4	reductive acetogenesis
+chemoheterotrophy	0.3365019008547081	0.3311098597597621	0.2304583319692183	0.00539204109494601	chemoheterotrophy
+nitrification	0.040041313103469346	0	NA	0.040041313103469346	nitrification
+respiration_of_sulfur_compounds	0.03143845758063773	0	NA	0.03143845758063773	respiration of sulfur compounds
+dissimilatory_arsenate_reduction	0	0	NA	0	dissimilatory arsenate reduction
+nitrogen_respiration	0.005537173594841842	0	NA	0.005537173594841842	nitrogen respiration
+oxygenic_photoautotrophy	0	0	NA	0	oxygenic photoautotrophy
+photoautotrophy	0.0014282138570334412	0	NA	0.0014282138570334412	photoautotrophy
+phototrophy	0.002495698578739585	0	NA	0.002495698578739585	phototrophy
+anaerobic_chemoheterotrophy	0.13694365597430594	0.18033462195587016	0.11045030436075094	0.04339096598156422	anaerobic chemoheterotrophy

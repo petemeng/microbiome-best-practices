@@ -1,0 +1,7 @@
+artifact	semantic_type	data_format	uuid_recorded	maximum_validation
+dada2-table.qza	FeatureTable[Frequency]	BIOMV210DirFmt	True	PASS
+dada2-rep-seqs.qza	FeatureData[Sequence]	DNASequencesDirectoryFormat	True	PASS
+dada2-stats.qza	SampleData[DADA2Stats]	DADA2StatsDirFmt	True	PASS
+dada2-base-transitions.qza	DADA2BaseTransitionStats	DADA2BaseTransitionStatsDirFmt	True	PASS
+dada2-feature-frequencies.qza	ImmutableMetadata	ImmutableMetadataDirectoryFormat	True	PASS
+dada2-sample-frequencies.qza	ImmutableMetadata	ImmutableMetadataDirectoryFormat	True	PASS

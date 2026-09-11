@@ -1,0 +1,26 @@
+Rank	TopRank	Taxon	RankQualifiedTaxon	OverallMean
+Phylum	1	Proteobacteria	P · Proteobacteria	0.3071339669457529
+Phylum	2	Chloroflexi	P · Chloroflexi	0.13824089760719027
+Phylum	3	Bacteroidetes	P · Bacteroidetes	0.11649247538266623
+Phylum	4	Acidobacteria	P · Acidobacteria	0.11337570062599393
+Phylum	5	Actinobacteria	P · Actinobacteria	0.1000956318837023
+Class	1	Acidobacteria	C · Acidobacteria	0.08963319722377674
+Class	2	Alphaproteobacteria	C · Alphaproteobacteria	0.0871028693992452
+Class	3	Betaproteobacteria	C · Betaproteobacteria	0.07801805379674998
+Class	4	Anaerolineae	C · Anaerolineae	0.06939835520483562
+Class	5	Gammaproteobacteria	C · Gammaproteobacteria	0.06740034331017529
+Order	1	Anaerolineales	O · Anaerolineales	0.06939835520483562
+Order	2	Acidimicrobiales	O · Acidimicrobiales	0.03660090964134116
+Order	3	Xanthomonadales	O · Xanthomonadales	0.0345992297682
+Order	4	Sphingobacteriales	O · Sphingobacteriales	0.03274827223283597
+Order	5	Rhizobiales	O · Rhizobiales	0.030755374116625003
+Family	1	Anaerolineaceae	F · Anaerolineaceae	0.06939835520483562
+Family	2	Flavobacteriaceae	F · Flavobacteriaceae	0.028304263819657165
+Family	3	Comamonadaceae	F · Comamonadaceae	0.02121024689704889
+Family	4	Planctomycetaceae	F · Planctomycetaceae	0.02054963775152625
+Family	5	Gemmatimonadaceae	F · Gemmatimonadaceae	0.01738382291076608
+Genus	1	Sphingomonas	G · Sphingomonas	0.012858134623686594
+Genus	2	Clostridium sensu stricto 13	G · Clostridium sensu stricto 13	0.012673357645117771
+Genus	3	Thiobacillus	G · Thiobacillus	0.010813746999199108
+Genus	4	Bacillus	G · Bacillus	0.010772492499551532
+Genus	5	Candidatus Solibacter	G · Candidatus Solibacter	0.00937809420422691

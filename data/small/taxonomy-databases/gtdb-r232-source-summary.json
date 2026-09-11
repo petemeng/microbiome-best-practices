@@ -1,0 +1,163 @@
+{
+  "database": "GTDB",
+  "release": "R11-RS232",
+  "reference_subset": "species-representative SSU",
+  "release_announcement_date": "2026-04-15",
+  "official_url": "https://data.gtdb.ecogenomic.org/releases/release232/232.0/",
+  "license": "CC BY-SA 4.0",
+  "release_scope": {
+    "genomes": 901341,
+    "species_clusters": 199923
+  },
+  "source_files": {
+    "ar53_ssu_reps_r232.fna.gz": {
+      "bytes": 1825778,
+      "md5": "96dddfbdb5bebafd8e459c02785d5a02",
+      "sha256": "899a36de5bb4283c13872bc1c535d433a9879d79928b4d1abdef36743181370c"
+    },
+    "bac120_ssu_reps_r232.fna.gz": {
+      "bytes": 30830689,
+      "md5": "3f0a53ff7fd8e3c56fc7246fe3b04342",
+      "sha256": "6fbd8f19619a8a82033e7995427b574c43bd866e03445194c400b4856a7318dd"
+    },
+    "ar53_taxonomy_r232.tsv.gz": {
+      "bytes": 311583,
+      "md5": "9fa569a0804c46e4ba8dcd85a5bc5240",
+      "sha256": "53c71cf120662c527ade15fa3994550f0012fdc0f37b2f32b0ca0eaa17424f84"
+    },
+    "bac120_taxonomy_r232.tsv.gz": {
+      "bytes": 9886191,
+      "md5": "807e3221f5553142eb0544ce3247d079",
+      "sha256": "d565d92730db443cd394a4b685ea682fe3691a3a1da3713804bbef2025d2cc71"
+    }
+  },
+  "full_reference_audit": {
+    "full_sequence_lengths": {
+      "records": 93770,
+      "minimum": 397,
+      "q1": 1260.0,
+      "median": 1502.0,
+      "mean": 1313.6,
+      "q3": 1529.0,
+      "maximum": 1919
+    },
+    "full_taxonomy_rows": 901341,
+    "representative_taxonomy": {
+      "records": 93770,
+      "domain_counts": {
+        "Archaea": 5289,
+        "Bacteria": 88481
+      },
+      "nonempty_rank_counts": {
+        "d__": 93770,
+        "p__": 93770,
+        "c__": 93770,
+        "o__": 93770,
+        "f__": 93770,
+        "g__": 93770,
+        "s__": 93770
+      },
+      "organelle_label_records": 1
+    },
+    "header_taxonomy_disagreements": 0,
+    "invalid_sequence_bases": 0
+  },
+  "method_documentation_boundary": {
+    "release_notes": "R232 changed 16S identification/extraction to mirror Prokka barnap and set a 396 bp minimum.",
+    "legacy_generic_files": "Bundled METHODS and FILE_DESCRIPTIONS still describe nhmmer and a 200 bp threshold; actual FASTA lengths are audited."
+  },
+  "preparation_date": "2026-07-20",
+  "qiime_environment": "microbiome-qiime2-2026.4",
+  "qiime_release": "2026.4",
+  "q2_feature_classifier": "2026.4.0",
+  "rescript": "2026.4.0",
+  "region_processing": {
+    "marker": "16S V4",
+    "forward_primer_5_to_3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_primer_5_to_3": "GGACTACNVGGGTWTCTAAT",
+    "combined_primer_identity": 0.8,
+    "minimum_amplicon_length": 200,
+    "maximum_amplicon_length": 400,
+    "read_orientation": "both"
+  },
+  "exact_sequence_dereplication": {
+    "mode": "least common ancestor",
+    "sequence_identity": 1.0,
+    "reason": "Prevent identical V4 copies from weighting consensus by database redundancy while preserving label ambiguity."
+  },
+  "extraction_contract": {
+    "marker": "16S V4",
+    "forward_primer_5_to_3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_primer_5_to_3": "GGACTACNVGGGTWTCTAAT",
+    "combined_primer_identity": 0.8,
+    "minimum_amplicon_length": 200,
+    "maximum_amplicon_length": 400,
+    "read_orientation": "both"
+  },
+  "dereplication_contract": {
+    "mode": "least common ancestor",
+    "sequence_identity": 1.0,
+    "reason": "Prevent identical V4 copies from weighting consensus by database redundancy while preserving label ambiguity."
+  },
+  "raw_v4_records": 79669,
+  "raw_v4_length": {
+    "records": 79669,
+    "minimum": 200,
+    "q1": 253.0,
+    "median": 253,
+    "mean": 253.15,
+    "q3": 253.0,
+    "maximum": 364
+  },
+  "raw_v4_taxonomy": {
+    "records": 79669,
+    "domain_counts": {
+      "Archaea": 4030,
+      "Bacteria": 75639
+    },
+    "nonempty_rank_counts": {
+      "d__": 79669,
+      "p__": 79669,
+      "c__": 79669,
+      "o__": 79669,
+      "f__": 79669,
+      "g__": 79669,
+      "s__": 79669
+    },
+    "organelle_label_records": 1
+  },
+  "lca_v4_records": 51985,
+  "lca_v4_length": {
+    "records": 51985,
+    "minimum": 200,
+    "q1": 253.0,
+    "median": 253,
+    "mean": 253.22,
+    "q3": 253.0,
+    "maximum": 364
+  },
+  "lca_v4_taxonomy": {
+    "records": 51985,
+    "domain_counts": {
+      "Archaea": 3396,
+      "Bacteria": 48567
+    },
+    "nonempty_rank_counts": {
+      "d__": 51963,
+      "p__": 51679,
+      "c__": 51629,
+      "o__": 51522,
+      "f__": 51425,
+      "g__": 50758,
+      "s__": 44014
+    },
+    "organelle_label_records": 1
+  },
+  "derived_files": {
+    "sequences": "gtdb-r232-v4.fasta.gz",
+    "sequences_sha256": "3c4234b4defcdc3d8c3b4d1e8956b12288bccd853a4b7f3a3003847c32e6e250",
+    "taxonomy": "gtdb-r232-v4-taxonomy.tsv.gz",
+    "taxonomy_sha256": "a23d0d4f62183e949c868c3f25aace3acdebb9362ae0bb1d0e9fe81e74c43fe0"
+  },
+  "interpretation_boundary": "Taxonomy is assigned from the representative genome phylogeny; the extracted 16S copy may be absent, partial, contaminated, or incongruent with the genome taxonomy."
+}

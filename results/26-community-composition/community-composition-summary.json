@@ -1,0 +1,65 @@
+{
+  "article": 26,
+  "title": "Community composition: stacked bars, bubbles, flows, and heatmaps",
+  "dataset": {
+    "source": "microeco 2.0.0 packaged Chinese wetland 16S tables",
+    "features": 13628,
+    "samples": 90,
+    "reads": 1619670,
+    "groups": 3,
+    "library_depth_min": 10364,
+    "library_depth_max": 37374
+  },
+  "taxonomy": {
+    "ranks": 7,
+    "phylum_labels": 56,
+    "genus_labels": 772,
+    "phylum_unknown_equal_sample_mean": 0.003463782392239,
+    "genus_unknown_equal_sample_mean": 0.6310561130699,
+    "species_unknown_equal_sample_mean": 0.9963450237357
+  },
+  "primary": {
+    "rank": "Phylum",
+    "top_n": 10,
+    "top_taxa": ["Proteobacteria", "Chloroflexi", "Bacteroidetes", "Acidobacteria", "Actinobacteria", "Firmicutes", "Verrucomicrobia", "Planctomycetes", "Gemmatimonadetes", "Nitrospirae"],
+    "top10_coverage_mean": 0.9480304709398,
+    "top10_coverage_min": 0.8651557298554,
+    "top10_coverage_max": 0.9891696750903,
+    "unknown_separate_from_other": true,
+    "aggregation": "Equal-sample mean after per-sample closure",
+    "inferential_claim": false
+  },
+  "sensitivity": {
+    "top_n_branches": 5,
+    "equal_vs_pooled_top10_jaccard": 1,
+    "maximum_known_only_inflation_pp": 7.27296856377,
+    "maximum_equal_vs_pooled_group_taxon_difference_pp": 1.452959181607,
+    "maximum_group_total_variation": 0.0212463192809
+  },
+  "graphics": {
+    "font_family": "DejaVu Sans",
+    "primary_figures": 4,
+    "vector_files": 8,
+    "raster_files": 8,
+    "format_files": 16,
+    "raster_ppi": 600,
+    "svg_files_with_text": 4,
+    "svg_chinese_characters": 0,
+    "pdf_files_with_embedded_font": 4,
+    "lzw_tiff_files": 4,
+    "dimension_checks_passed": 16
+  },
+  "versions": {
+    "digest": "0.6.36",
+    "ggplot2": "3.5.2",
+    "jsonlite": "1.8.8",
+    "ragg": "1.3.2",
+    "readr": "2.1.5",
+    "scales": "1.3.0",
+    "svglite": "2.1.3",
+    "systemfonts": "1.1.0"
+  },
+  "checks_total": 195,
+  "checks_passed": 195,
+  "checks_failed": 0
+}

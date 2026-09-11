@@ -1,0 +1,11 @@
+Article 26 community-composition validation
+Status: PASS
+Checks: 195/195
+Samples/features/reads: 90/13628/1619670
+Phylum Top 10 mean coverage: 0.9480
+Unknown phylum mean: 0.0035
+Unknown genus mean: 0.6311
+Equal-sample vs pooled Top 10 Jaccard: 1.000
+Maximum known-only inflation: 7.273 pp
+Primary exports: 16 files
+R version: 4.4.1

@@ -1,0 +1,7 @@
+Independ.Claim	Test.Type	DF	Crit.Value	P.Value	Var.6	Model
+LogECZ ~ pHZ + ...	coef	84	1.64041663510764	0.104658189515375		Full direct-path DAG
+ShannonZ ~ TempZ + ...	coef	84	3.79264422891773	0.000280019211755027	***	Mediation-only DAG
+TOCZ ~ TempZ + ...	coef	83	-2.70368224519818	0.00831678864515364	**	Mediation-only DAG
+ShannonZ ~ PrecipZ + ...	coef	84	4.32152529185138	4.23013207062794e-05	***	Mediation-only DAG
+TOCZ ~ PrecipZ + ...	coef	83	0.601961872120804	0.548840390002635		Mediation-only DAG
+LogECZ ~ pHZ + ...	coef	84	1.64041663510764	0.104658189515375		Mediation-only DAG

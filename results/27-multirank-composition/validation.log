@@ -1,0 +1,13 @@
+Article 27 multirank-composition validation
+Status: PASS
+Checks: 209/209
+Samples/features/reads: 90/13628/1619670
+Known fractions Phylum-to-Genus: 0.9965/0.9680/0.8557/0.6796/0.3689
+Largest resolution loss: 31.068 pp
+Complete genus lineage mean: 0.3438
+Family-unknown/genus-known features: 324
+Cross-rank name collisions: 13
+Top-12 complete lineage coverage: 0.1019
+Maximum known-only inflation: 7.273 pp
+Primary exports: 16 files
+R version: 4.4.1

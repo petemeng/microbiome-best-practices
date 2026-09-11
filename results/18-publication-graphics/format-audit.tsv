@@ -1,0 +1,17 @@
+figure	extension	path	detected_format	bytes	target_width_mm	target_height_mm	actual_width_mm	actual_height_mm	pixel_width	pixel_height	effective_ppi_x	effective_ppi_y	compression	pages	text_nodes	font_status	dimension_status
+18-encoding-redundancy-audit	pdf	figures/18-encoding-redundancy-audit.pdf	PDF	26188	183	95	182.73888888888888	94.89722222222221						1		embedded	PASS
+18-encoding-redundancy-audit	svg	figures/18-encoding-redundancy-audit.svg	SVG	58231	183	95	182.99994444444442	94.99952777777779							32	declared	PASS
+18-encoding-redundancy-audit	png	figures/18-encoding-redundancy-audit.png	PNG	567793	183	95	183	95	4322	2244	599.8841530054644	599.9747368421052	Zip				PASS
+18-encoding-redundancy-audit	tiff	figures/18-encoding-redundancy-audit.tiff	TIFF	938172	183	95	183	95	4322	2244	599.8841530054644	599.9747368421052	LZW				PASS
+18-final-size-community-summary	pdf	figures/18-final-size-community-summary.pdf	PDF	23618	89	105	88.89999999999999	104.77499999999999						1		embedded	PASS
+18-final-size-community-summary	svg	figures/18-final-size-community-summary.svg	SVG	10157	89	105	88.99877777777778	105.00077777777777							17	declared	PASS
+18-final-size-community-summary	png	figures/18-final-size-community-summary.png	PNG	171825	89	105	89	105	2102	2480	599.8966292134832	599.9238095238094	Zip				PASS
+18-final-size-community-summary	tiff	figures/18-final-size-community-summary.tiff	TIFF	233752	89	105	89	105	2102	2480	599.8966292134832	599.9238095238094	LZW				PASS
+18-export-decision-map	pdf	figures/18-export-decision-map.pdf	PDF	24334	183	90	182.73888888888888	89.95833333333333						1		embedded	PASS
+18-export-decision-map	svg	figures/18-export-decision-map.svg	SVG	6425	183	90	182.99994444444442	90.00066666666666							13	declared	PASS
+18-export-decision-map	png	figures/18-export-decision-map.png	PNG	196473	183	90	183	90	4322	2125	599.8841530054644	599.7222222222222	Zip				PASS
+18-export-decision-map	tiff	figures/18-export-decision-map.tiff	TIFF	301922	183	90	183	90	4322	2125	599.8841530054644	599.7222222222222	LZW				PASS
+18-raster-resolution-audit	pdf	figures/18-raster-resolution-audit.pdf	PDF	21131	183	92	182.73888888888888	91.72222222222223						1		embedded	PASS
+18-raster-resolution-audit	svg	figures/18-raster-resolution-audit.svg	SVG	6435	183	92	182.99994444444442	92.00091666666667							17	declared	PASS
+18-raster-resolution-audit	png	figures/18-raster-resolution-audit.png	PNG	182861	183	92	183	92	4322	2173	599.8841530054644	599.9369565217391	Zip				PASS
+18-raster-resolution-audit	tiff	figures/18-raster-resolution-audit.tiff	TIFF	286506	183	92	183	92	4322	2173	599.8841530054644	599.9369565217391	LZW				PASS

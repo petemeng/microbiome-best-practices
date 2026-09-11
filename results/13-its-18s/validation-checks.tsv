@@ -1,0 +1,56 @@
+check_id	observed	expected	status
+environment-qiime-2	2026.4.0	2026.4.0	PASS
+environment-q2cli	2026.4.0	2026.4.0	PASS
+environment-itsxpress	2.1.4	2.1.4	PASS
+environment-biopython	1.87	1.87	PASS
+environment-vsearch	2.30.4	2.30.4	PASS
+environment-hmmer	3.4	3.4	PASS
+sample1-r1-records	2500	2500	PASS
+sample1-r1-sha256	b629eb189a14a9daf5d94cdc027064079d76f0ff45fb73eec50fb0f55b585242	b629eb189a14a9daf5d94cdc027064079d76f0ff45fb73eec50fb0f55b585242	PASS
+sample1-r2-records	2500	2500	PASS
+sample1-r2-sha256	4d19ef0e9eef35c47308bdb5eeeaea8a78a5fa7d7d1f77322aed4a1349ec58e4	4d19ef0e9eef35c47308bdb5eeeaea8a78a5fa7d7d1f77322aed4a1349ec58e4	PASS
+sample1-paired-read-ids	0	0	PASS
+sample2-r1-records	2500	2500	PASS
+sample2-r1-sha256	28850a72bb24fd71b2b8e8b38617e75c633f46bc041da8074dabb6131460374f	28850a72bb24fd71b2b8e8b38617e75c633f46bc041da8074dabb6131460374f	PASS
+sample2-r2-records	2500	2500	PASS
+sample2-r2-sha256	00dc3aa71f3035717dcf656e29913b1a0b9a1eb6f2a033fa5506baa7ab6637fc	00dc3aa71f3035717dcf656e29913b1a0b9a1eb6f2a033fa5506baa7ab6637fc	PASS
+sample2-paired-read-ids	0	0	PASS
+artifact-raw-type	SampleData[PairedEndSequencesWithQuality]	SampleData[PairedEndSequencesWithQuality]	PASS
+artifact-trimmed-type	SampleData[PairedEndSequencesWithQuality]	SampleData[PairedEndSequencesWithQuality]	PASS
+artifact-table-type	FeatureTable[Frequency]	FeatureTable[Frequency]	PASS
+artifact-rep_seqs-type	FeatureData[Sequence]	FeatureData[Sequence]	PASS
+artifact-stats-type	SampleData[DADA2Stats]	SampleData[DADA2Stats]	PASS
+artifact-base_transitions-type	DADA2BaseTransitionStats	DADA2BaseTransitionStats	PASS
+artifact-feature_frequencies-type	ImmutableMetadata	ImmutableMetadata	PASS
+artifact-sample_frequencies-type	ImmutableMetadata	ImmutableMetadata	PASS
+sample1-itsxpress-pair-sync	1034	1034	PASS
+sample1-itsxpress-retains-reads	1034	> 0	PASS
+sample2-itsxpress-pair-sync	1031	1031	PASS
+sample2-itsxpress-retains-reads	1031	> 0	PASS
+itsxpress-changes-read-geometry	704.0	!= 1110.0	PASS
+sample1-dada2-monotonic-ledger	[1034, 909, 907, 905, 905]	non-increasing	PASS
+sample1-dada2-nonzero-output	905	> 0	PASS
+sample2-dada2-monotonic-ledger	[1031, 855, 848, 848, 848]	non-increasing	PASS
+sample2-dada2-nonzero-output	848	> 0	PASS
+asv-count-positive	16	> 0	PASS
+asv-lengths-variable	14	> 1	PASS
+provenance-itsxpress	[('', 'import'), ('dada2', 'denoise_paired'), ('itsxpress', 'trim_pair_output_unmerged')]	itsxpress trim_pair_output_unmerged	PASS
+provenance-dada2	[('', 'import'), ('dada2', 'denoise_paired'), ('itsxpress', 'trim_pair_output_unmerged')]	dada2 denoise_paired	PASS
+source-total-pairs	5000	5000	PASS
+source-claim-discrepancy-recorded	two samples subsampled to 10,000 read pairs	claim retained and actual count audited	PASS
+overlay-exists	True	True	PASS
+unite-evaluation-sha256	f59c439ced1622c372a647464c69c2069ac1d37402559f888c5e4a242c7d20cd	f59c439ced1622c372a647464c69c2069ac1d37402559f888c5e4a242c7d20cd	PASS
+unite-evaluation-type	Visualization	Visualization	PASS
+unite-classifier-release-tag	v10.0-2025-02-19-qiime2-2026.4	v10.0-2025-02-19-qiime2-2026.4	PASS
+unite-classifier-release-commit	26ca7e07979c230ea9a65565e4781b3538962352	26ca7e07979c230ea9a65565e4781b3538962352	PASS
+unite-raw-taxonomy-has-eight-labels-including-sh	['k__', 'p__', 'c__', 'o__', 'f__', 'g__', 's__', 'sh__']	8 labels including sh__	PASS
+unite-classifier-removes-sh-before-fitting	;sh__.*	;sh__.*	PASS
+unite-classifier-sha256	5df2370f89b7b64766c0d969ddc5374d3951fdb8bda598ae54ff15cf86b0fca0	5df2370f89b7b64766c0d969ddc5374d3951fdb8bda598ae54ff15cf86b0fca0	PASS
+pr2-source-sha256	0c8728abcbb2126eed2c7e587f820cbce39c138cdfdb51239bbf18621498462d	0c8728abcbb2126eed2c7e587f820cbce39c138cdfdb51239bbf18621498462d	PASS
+pr2-record-count	240201	240201	PASS
+pr2-nine-rank-schema	{'9': 240201}	{'9': 240201}	PASS
+pr2-no-empty-ranks	0	0	PASS
+pr2-snapshot-sha256	5f8eeee6d8b76bdc951f3620d45c750b0084491cee448553ec0baa944428add4	5f8eeee6d8b76bdc951f3620d45c750b0084491cee448553ec0baa944428add4	PASS
+pr2-snapshot-records	1002	1002	PASS
+pr2-snapshot-rank-depth	{9: 1002}	{9: 1002}	PASS
+pr2-off-target-labels-audited	['Archaea', 'Bacteria', 'Eukaryota', 'Eukaryota:apic', 'Eukaryota:chro', 'Eukaryota:mito', 'Eukaryota:nucl', 'Eukaryota:plas']	Bacteria + plastid + mitochondria + Archaea	PASS

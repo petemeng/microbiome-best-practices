@@ -1,0 +1,71 @@
+[classify-silva]
+command: conda run -n microbiome-qiime2-2026.4 qiime feature-classifier classify-consensus-vsearch --i-query <WORK_ROOT>/query-v4-asvs.qza --i-reference-reads <WORK_ROOT>/silva/reference.qza --i-reference-taxonomy <WORK_ROOT>/silva/taxonomy.qza --p-maxaccepts 50 --p-maxrejects all --p-perc-identity 0.8 --p-query-cov 0.8 --p-strand both --p-top-hits-only --p-maxhits all --p-output-no-hits --p-threads 4 --p-min-consensus 0.51 --p-unassignable-label Unassigned --o-classification <OUTPUT_DIR>/silva-taxonomy.qza --o-search-results <OUTPUT_DIR>/silva-search-results.qza --use-cache <WORK_ROOT>/qiime-cache --no-recycle --verbose
+returncode: 0
+elapsed_seconds: 177.833
+stdout:
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: vsearch --usearch_global <WORK_ROOT>/qiime-cache/data/fd31ad1b-a58c-47cc-9123-72a63ea3d41a/data/dna-sequences.fasta --id 0.8 --query_cov 0.8 --strand both --maxaccepts 50 --maxrejects 0 --db <WORK_ROOT>/qiime-cache/data/a5939777-daaa-4189-94b3-de726f7ca81a/data/dna-sequences.fasta --threads 4 --top_hits_only --output_no_hits --blast6out <WORK_ROOT>/qiime-cache/processes/15733-1784523980.61@tly9658/tmp/rachis-OutPath-5sqcx8mc
+
+Saved FeatureData[Taxonomy] to: <OUTPUT_DIR>/silva-taxonomy.qza
+Saved FeatureData[BLAST6] to: <OUTPUT_DIR>/silva-search-results.qza
+stderr:
+vsearch v2.30.4_linux_x86_64, 1007.8GB RAM, 72 cores
+https://github.com/torognes/vsearch
+
+Reading file <WORK_ROOT>/qiime-cache/data/a5939777-daaa-4189-94b3-de726f7ca81a/data/dna-sequences.fasta 100%
+66850205 nt in 262752 seqs, min 200, max 400, avg 254
+Masking 100%
+Counting k-mers 100%
+Creating k-mer index 100%
+Searching 100%
+Matching unique query sequences: 358 of 366 (97.81%)
+
+[classify-gtdb]
+command: conda run -n microbiome-qiime2-2026.4 qiime feature-classifier classify-consensus-vsearch --i-query <WORK_ROOT>/query-v4-asvs.qza --i-reference-reads <WORK_ROOT>/gtdb/reference.qza --i-reference-taxonomy <WORK_ROOT>/gtdb/taxonomy.qza --p-maxaccepts 50 --p-maxrejects all --p-perc-identity 0.8 --p-query-cov 0.8 --p-strand both --p-top-hits-only --p-maxhits all --p-output-no-hits --p-threads 4 --p-min-consensus 0.51 --p-unassignable-label Unassigned --o-classification <OUTPUT_DIR>/gtdb-taxonomy.qza --o-search-results <OUTPUT_DIR>/gtdb-search-results.qza --use-cache <WORK_ROOT>/qiime-cache --no-recycle --verbose
+returncode: 0
+elapsed_seconds: 60.422
+stdout:
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: vsearch --usearch_global <WORK_ROOT>/qiime-cache/data/fd31ad1b-a58c-47cc-9123-72a63ea3d41a/data/dna-sequences.fasta --id 0.8 --query_cov 0.8 --strand both --maxaccepts 50 --maxrejects 0 --db <WORK_ROOT>/qiime-cache/data/06a666b1-c7cf-45fd-913a-62897990d91f/data/dna-sequences.fasta --threads 4 --top_hits_only --output_no_hits --blast6out <WORK_ROOT>/qiime-cache/processes/22494-1784524411.8@tly9658/tmp/rachis-OutPath-9qpooh5p
+
+Saved FeatureData[Taxonomy] to: <OUTPUT_DIR>/gtdb-taxonomy.qza
+Saved FeatureData[BLAST6] to: <OUTPUT_DIR>/gtdb-search-results.qza
+stderr:
+vsearch v2.30.4_linux_x86_64, 1007.8GB RAM, 72 cores
+https://github.com/torognes/vsearch
+
+Reading file <WORK_ROOT>/qiime-cache/data/06a666b1-c7cf-45fd-913a-62897990d91f/data/dna-sequences.fasta 100%
+13163728 nt in 51985 seqs, min 200, max 364, avg 253
+Masking 100%
+Counting k-mers 100%
+Creating k-mer index 100%
+Searching 100%
+Matching unique query sequences: 356 of 366 (97.27%)
+
+[classify-greengenes2]
+command: conda run -n microbiome-qiime2-2026.4 qiime feature-classifier classify-consensus-vsearch --i-query <WORK_ROOT>/query-v4-asvs.qza --i-reference-reads <WORK_ROOT>/greengenes2/reference.qza --i-reference-taxonomy <WORK_ROOT>/greengenes2/taxonomy.qza --p-maxaccepts 50 --p-maxrejects all --p-perc-identity 0.8 --p-query-cov 0.8 --p-strand both --p-top-hits-only --p-maxhits all --p-output-no-hits --p-threads 4 --p-min-consensus 0.51 --p-unassignable-label Unassigned --o-classification <OUTPUT_DIR>/greengenes2-taxonomy.qza --o-search-results <OUTPUT_DIR>/greengenes2-search-results.qza --use-cache <WORK_ROOT>/qiime-cache --no-recycle --verbose
+returncode: 0
+elapsed_seconds: 114.75
+stdout:
+Running external command line application. This may print messages to stdout and/or stderr.
+The command being run is below. This command cannot be manually re-run as it will depend on temporary files that no longer exist.
+
+Command: vsearch --usearch_global <WORK_ROOT>/qiime-cache/data/fd31ad1b-a58c-47cc-9123-72a63ea3d41a/data/dna-sequences.fasta --id 0.8 --query_cov 0.8 --strand both --maxaccepts 50 --maxrejects 0 --db <WORK_ROOT>/qiime-cache/data/1d62a568-6138-4ac6-91be-2afb0383814c/data/dna-sequences.fasta --threads 4 --top_hits_only --output_no_hits --blast6out <WORK_ROOT>/qiime-cache/processes/29259-1784524728.01@tly9658/tmp/rachis-OutPath-_1el2h3a
+
+Saved FeatureData[Taxonomy] to: <OUTPUT_DIR>/greengenes2-taxonomy.qza
+Saved FeatureData[BLAST6] to: <OUTPUT_DIR>/greengenes2-search-results.qza
+stderr:
+vsearch v2.30.4_linux_x86_64, 1007.8GB RAM, 72 cores
+https://github.com/torognes/vsearch
+
+Reading file <WORK_ROOT>/qiime-cache/data/1d62a568-6138-4ac6-91be-2afb0383814c/data/dna-sequences.fasta 100%
+24837836 nt in 98185 seqs, min 200, max 399, avg 253
+Masking 100%
+Counting k-mers 100%
+Creating k-mer index 100%
+Searching 100%
+Matching unique query sequences: 362 of 366 (98.91%)

@@ -1,0 +1,66 @@
+QIIME 2 environment validation
+==============================
+
+Initial validation date: 2026-07-18
+Article 07 audit date: 2026-07-19
+Article 08 audit date: 2026-07-19
+Environment name: microbiome-qiime2-2026.4
+Manifest: env/qiime2.yml
+Manifest SHA-256: 68b0e9b974937525b71cca3dec48b7dc5b6135f588a941d1313c118c2a41f4b5
+
+Creation command:
+  mamba env create -n microbiome-qiime2-2026.4 \
+    -f env/qiime2.yml \
+    --channel-priority flexible
+
+The host's strict channel priority could not solve deblur 1.1.1 together with
+sortmerna 2.0. The same official manifest solved and installed successfully
+with flexible channel priority: 676 packages, approximately 895 MB downloaded.
+
+qiime info:
+  Python version: 3.12.13
+  QIIME 2 release: 2026.4
+  QIIME 2 version: 2026.4.0
+  q2cli version: 2026.4.0
+
+Registered plugins (27):
+  alignment, boots, composition, cutadapt, dada2, deblur, demux, diversity,
+  diversity-lib, emperor, feature-classifier, feature-table, fondue,
+  fragment-insertion, kmerizer, longitudinal, metadata, phylogeny,
+  quality-control, quality-filter, rescript, sample-classifier, stats, taxa,
+  types, vizard, vsearch
+
+Entrypoint checks (all exit status 0):
+  qiime dada2 denoise-paired --help
+  qiime feature-classifier classify-sklearn --help
+  qiime fragment-insertion sepp --help
+
+Article 07 Linux-side smoke validation:
+  Environment/entrypoint/FASTQ checks: 20/20 passed
+  Forward records: 2,000, 151 nt
+  Reverse records: 2,000, 151 nt
+  Barcode records: 2,000, 12 nt
+  Read identifiers synchronized: true
+  Atacama metadata samples: 75
+  Machine-readable record:
+    results/07-wsl2-conda/environment-summary.json
+
+Article 08 real Artifact validation:
+  Installation/Artifact checks: 20/20 passed
+  Controlled error probes: 4/4 passed
+  Semantic type: EMPPairedEndSequences
+  Data format: EMPPairedEndDirFmt
+  Maximum Artifact validation: PASS
+  Archive contents: 3 data members, 5 provenance members, 1 checksum manifest
+  Exported FASTQ hashes matching input: 3/3
+  Records per forward/reverse/barcode stream: 2,000
+  Read identifiers synchronized: true
+  Machine-readable record:
+    results/08-qiime2-install/artifact-summary.json
+
+Scope:
+  This record validates environment creation, plugin discovery, command
+  registration, the Article 07 real-FASTQ input smoke contract, and the
+  Article 08 import / maximum-validation / export round trip. It does not
+  claim demultiplexing, trimming, denoising, taxonomy classification, or
+  phylogeny execution for Articles 09–16.

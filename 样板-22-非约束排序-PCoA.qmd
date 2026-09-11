@@ -1,0 +1,356 @@
+---
+title: "第 22 篇 · 非约束排序:PCoA / NMDS / CLR-PCA——复现顶刊那张\"菌群整体差异图\""
+author: "微生物组分析最佳实践 · 16S 系列"
+date: last-modified
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: false
+    code-tools: true
+    code-copy: true
+    number-sections: true
+execute:
+  eval: true       # 下游出图章节在服务器真跑,产出的图直接进网页和推文
+  freeze: auto     # 结果缓存进 _freeze/,重渲染不重跑;数据或代码变了才重算
+  warning: false
+  message: false
+fig-dpi: 300
+fig-format: png
+---
+
+> **本篇属于:** 第 5 部分 · 多样性 → 排序
+> **需要:** R 环境 + `phyloseq` / `vegan` / `ggplot2` / `dplyr`(下方【准备工作】一键装好),以及 `otutab` / `taxonomy` / `metadata` 三个数据文件
+> **预计:** 阅读 20 分钟,本地跑通 15 分钟
+
+---
+
+## 这一步对应论文里的哪张图 {#sec-target}
+
+随手翻开任何一篇肠道菌群或环境微生物的高分文章,**正文第一张或第二张图几乎一定是一张散点图**:每个点是一个样本,不同分组用不同颜色,组和组之间拉开距离,通常还罩着一个椭圆,角落里写着 `PERMANOVA R² = 0.08, P = 0.001`。它回答的是全篇最基础也最关键的问题——
+
+> **"我的分组之间,整个菌群的结构到底有没有不一样?"**
+
+这张图就是**非约束排序(unconstrained ordination)**。今天我们要把它从原理到发表级成品做透,并且讲清 PCoA、NMDS、CLR-PCA 三者什么时候用哪个——这是新手最容易随手一选、结果被审稿人挑毛病的地方。
+
+::: {.callout-note title="目标图长什么样"}
+一张 2D 散点:X 轴 `PCoA1 (18.7%)`、Y 轴 `PCoA2 (11.2%)`,两到三个分组各一种色盲友好色,每组一个 95% 置信椭圆,右下角标注 PERMANOVA 的 R² 与 P 值。矢量导出、300 dpi、Arial/Helvetica 无衬线字体。做完这一篇你就能一比一复现它。
+:::
+
+**锚定文献建议(选其一即可,都提供公开数据+代码):**
+
+- 🦠 队列方向:任一 QIIME2/`phyloseq` 官方教程数据集,或 Halfvarson 2017 (*Nat Microbiol*, IBD 纵向) 的公开 feature table。
+- 🌱 环境方向:Global Soil / EMP(Earth Microbiome Project)子集,`vegan` 自带的 `dune`、`varespec` 也可做纯方法演示。
+
+> 下面的代码从 `otutab` / `taxonomy` / `metadata` 三件套读起,上面任意一篇文献的公开数据整理成这三张表后都能直接跑。
+
+---
+
+## 理论:为什么是"距离 → 排序",而不是直接 PCA {#sec-theory}
+
+先给结论,赶时间的可以只看这三句:
+
+1. **菌群数据不能直接做普通 PCA。** 它是稀疏的(大量 0)、成分的(受测序深度约束的相对值)、且我们关心的"差异"往往要用生态学距离(如 Bray-Curtis)而非欧氏距离来定义。
+2. **主流做法是两步:先算样本两两之间的"生态距离矩阵",再把这个矩阵"压"成 2D 散点。** 这一步就叫 PCoA(主坐标分析)。
+3. **选哪种距离,比选哪种排序更重要。** 距离度量的选择直接决定结论——这是本篇的核心。
+
+<details>
+<summary>**深入:PCoA / NMDS / CLR-PCA 三者到底差在哪(可跳过)**</summary>
+
+**PCoA(Principal Coordinates Analysis,主坐标分析)**
+又叫 MDS(度量多维标度)。输入是一个**距离矩阵**,输出是让样本间欧氏距离尽量逼近原始生态距离的低维坐标。每根轴带一个"解释方差百分比",可以像 PCA 那样解读。**这是 16S 领域的默认选择。**
+
+- 配 **Bray-Curtis**:只看物种"有多少",最常用,对高丰度类群敏感。
+- 配 **Jaccard**:只看物种"有没有"(存在/缺失),对稀有类群更敏感。
+- 配 **UniFrac**(需要系统发育树,来自第 16 篇):把进化亲缘关系纳入距离。**Unweighted** 看谱系存在与否(对稀有谱系敏感),**Weighted** 加上丰度权重。
+
+**NMDS(Non-metric MDS,非度量多维标度)**
+不追求"距离数值"逼近,只追求"距离的排序"逼近(A 比 B 远这个次序保住就行)。因此它常常能在 2D 里把结构展示得更"干净"。代价是:**轴没有解释方差百分比、每次迭代结果略有随机、必须报告 `stress` 值**(<0.1 很好,<0.2 可接受,>0.3 基本没意义)。
+
+**CLR-PCA / Aitchison / Robust Aitchison**
+这是成分数据(CoDA)学派的正道:先对丰度做 **CLR(中心对数比)变换**,再做**普通 PCA**。此时样本间的欧氏距离等价于 **Aitchison 距离**,从数学上正确处理了"成分"问题(详见第 21、30 篇)。**Robust Aitchison(RPCA / DEICODE)** 进一步用矩阵补全绕开"0 无法取对数"的难题,近年顶刊越来越常见。
+
+**一句话决策:** 常规展示用 **PCoA + Bray-Curtis**(审稿人最熟);想强调稀有类群或谱系差异用 **UniFrac**;想在方法学上站得最稳、或做差异丰度呼应用 **CLR-PCA / Robust Aitchison**;2D 实在挤不开时用 **NMDS** 补一张。顶刊常见做法是**正文放一种、补充材料放另一种做稳健性验证**。
+
+</details>
+
+::: {.callout-important title="排序图只负责\"给你看\",不负责\"给结论\""}
+散点分不分得开是**视觉印象**,不是统计证据。判断"组间是否真有差异"必须靠 **PERMANOVA**(第 23 篇),而且 PERMANOVA 显著还可能是"组内离散度不同"造成的假象,所以**必须配 `betadisper`**。本篇先把图做出来,统计严格版在第 23 篇。这里我们只在图上标注 PERMANOVA 结果,不展开检验细节。
+:::
+
+---
+
+## 溯源:作者代码通常长这样 {#sec-source}
+
+翻开锚定论文的 GitHub 或补充材料,你会发现绝大多数 16S 排序图的核心其实只有三行,区别只在"用什么包的壳":
+
+- **QIIME2 派**:`qiime diversity core-metrics-phylogenetic` 一步出 Bray/UniFrac 距离 + PCoA + Emperor 交互图。规范、可复现,但出的是探索用的交互图,**发表前几乎都要导出坐标到 R 重画**。
+- **phyloseq 派**:`phyloseq::ordinate()` + `plot_ordination()`。两行出图,但默认样式"一眼就是没美化过",需要接管 `ggplot2` 图层。
+- **vegan 派**:`vegan::metaMDS()` / `capscale()` / `cmdscale()`,统计功能最全,底图丑,同样导出到 `ggplot2`。
+
+**我们的策略:用 phyloseq/vegan 算坐标,自己用 ggplot2 画。** 这样既借了成熟算法,又拿到了对每个像素的控制权——这正是"发表级"和"能看"的分界线。
+
+---
+
+## 准备工作(首次运行执行一次) {#sec-setup}
+
+<details>
+<summary>**点开:安装依赖 + 定义作图函数(单看本篇即可复现)**</summary>
+
+```{r}
+#| eval: false
+# —— 首次运行:安装本篇用到的包 ——
+install.packages(c("vegan", "ggplot2", "dplyr"))
+# phyloseq 走 Bioconductor:
+install.packages("BiocManager")
+BiocManager::install("phyloseq")
+```
+
+```{r}
+# —— 出版级作图配方:配色 + 主题 + 导出函数 ——
+# (整仓库使用者可改为 source("R/theme_pub.R");单看本篇直接运行下面即可)
+library(ggplot2)
+
+pal_pub <- c("#0072B2", "#D55E00", "#009E73", "#CC79A7",
+             "#E69F00", "#56B4E9", "#F0E442", "#999999")
+scale_color_pub <- function(...) scale_color_manual(values = pal_pub, ...)
+scale_fill_pub  <- function(...) scale_fill_manual(values = pal_pub, ...)
+
+theme_pub <- function(base_size = 12) {
+  theme_bw(base_size = base_size) +
+    theme(
+      panel.grid        = element_blank(),
+      axis.text         = element_text(color = "black"),
+      axis.ticks        = element_line(color = "black", linewidth = 0.3),
+      legend.key        = element_blank(),
+      legend.background = element_rect(fill = alpha("white", 0.6), color = NA)
+    )
+}
+
+save_pub <- function(plot, file_base, width = 85, height = 85, units = "mm", dpi = 300) {
+  ggsave(paste0(file_base, ".pdf"), plot, width = width, height = height,
+         units = units, device = cairo_pdf)
+  ggsave(paste0(file_base, ".png"), plot, width = width, height = height,
+         units = units, dpi = dpi)
+  invisible(plot)
+}
+```
+
+</details>
+
+---
+
+## 可复制代码:从距离到坐标 {#sec-code}
+
+> **输入:** 扩增子分析的通用三件套——`otutab.txt`(特征表)、`taxonomy.txt`(物种注释)、`metadata.txt`(样本信息),这是任何上游流程都会导出的格式。
+> **耗时/内存:** 数百样本级别秒级完成,普通笔记本即可。
+
+### 第 0 步:准备与"抽平之争"的务实处理
+
+```{r}
+library(phyloseq)
+library(vegan)
+library(ggplot2)
+library(dplyr)
+
+# —— 从三件套读入:otutab / taxonomy / metadata ——
+# 这是扩增子分析的通用起点:无论上游用 QIIME2 还是别的流程,导出的都是这三张表。
+# 换成你自己的数据,只需把下面三个路径指向你的文件(见文末"换成你自己的数据")。
+
+# 1) 特征表:行 = ASV/OTU,列 = 样本(制表符分隔,首列为特征 ID)
+otu <- read.delim("data/small/otutab.txt", row.names = 1, sep = "\t",
+                  check.names = FALSE, comment.char = "")
+
+# 2) 物种注释:行 = ASV/OTU,列 = 界门纲目科属种(7 级)
+tax <- read.delim("data/small/taxonomy.txt", row.names = 1, sep = "\t",
+                  check.names = FALSE)
+
+# 3) 样本信息:行 = 样本,含分组列
+meta_tab <- read.delim("data/small/metadata.txt", row.names = 1, sep = "\t",
+                       check.names = FALSE)
+
+GROUP <- "Group"   # ← 改成你 metadata 里的分组列名
+
+# 图内文字建议全部用英文(便于投稿,也避免部分环境缺中文字体时出现方块乱码):
+# 若分组名是中文,先 recode 成英文再作图。例如:
+# meta_tab[[GROUP]] <- dplyr::recode(meta_tab[[GROUP]],
+#                                    "健康" = "Healthy", "患病" = "Disease")
+
+# —— 组装成 phyloseq 对象(本篇后续分析的容器)——
+# phyloseq 只是把三张表装进一个盒子,方便调用距离/排序函数;
+# 组装时它会强制对齐三表的样本名与特征名,顺便帮你查出对不齐的问题(见下方坑)。
+ps <- phyloseq(
+  otu_table(as.matrix(otu), taxa_are_rows = TRUE),
+  tax_table(as.matrix(tax)),
+  sample_data(meta_tab)
+)
+
+# —— 抽平之争的务实处理(理论见第 19 篇)——
+# 对"基于距离的排序",主流仍是先抽平到最小深度以消除测序深度差异带来的假分离。
+# CLR/Aitchison 路线则不抽平(见第 21、30 篇)。这里给 PCoA 用抽平版:
+set.seed(123)  # 抽平有随机性,固定种子保证可复现
+ps_rare <- rarefy_even_depth(ps, rngseed = 123,
+                             sample.size = min(sample_sums(ps)),
+                             replace = FALSE, verbose = FALSE)
+```
+
+::: {.callout-warning title="读三件套时最常见的翻车点(现在就避开)"}
+1. **样本名对不齐 → phyloseq 直接报错或悄悄丢样本。** `otutab` 的列名(样本)必须和 `metadata` 的行名完全一致——包括大小写、连字符 vs 下划线、Excel 给纯数字样本名偷偷加的空格。组装前先 `setdiff(colnames(otu), rownames(meta_tab))` 检查两边差集。
+2. **taxonomy 有两种格式。** 上面假设 `taxonomy.txt` 已经是 7 列(界门纲目科属种)。若你的注释是单列字符串(如 `d__Bacteria;p__Firmicutes;...`),先按 `;` 拆成 7 列:
+   ```r
+   # 单列字符串 → 7 列;列数不足的用 NA 补齐
+   ranks <- c("Kingdom","Phylum","Class","Order","Family","Genus","Species")
+   tax <- read.delim("data/small/taxonomy.txt", row.names = 1, sep = "\t", check.names = FALSE)
+   tax <- do.call(rbind, lapply(strsplit(as.character(tax[[1]]), ";\\s*"), function(x) {
+     length(x) <- 7; x
+   }))
+   colnames(tax) <- ranks
+   ```
+3. **`set.seed()` 不设 → 图每次都变。** 抽平和 NMDS 都含随机过程,不固定种子,你今天的图和投稿返修时的图对不上,审稿人一跑复现不了。
+4. **抽平深度选太高 → 样本被大量丢弃。** `min(sample_sums(ps))` 会被最浅的那个样本拖低。先看 `sort(sample_sums(ps))`,若最低的几个样本深度异常低(测序失败),应在第 10 篇 QC 阶段就剔除,而不是让它绑架整个数据集的抽平深度。
+:::
+
+### 第 1 步:PCoA + Bray-Curtis(主力方案)
+
+```{r}
+# 距离 + 排序,phyloseq 一步到位
+dist_bray <- phyloseq::distance(ps_rare, method = "bray")
+ord_pcoa  <- ordinate(ps_rare, method = "PCoA", distance = dist_bray)
+
+# 取出坐标 + 元数据,合成一个 tidy data.frame(自己画图的基础)
+plot_df <- plot_ordination(ps_rare, ord_pcoa, justDF = TRUE)
+
+# 取前两轴的解释方差(PCoA 的 Eigenvalues 转百分比)
+eig <- ord_pcoa$values$Relative_eig
+axis1_lab <- sprintf("PCoA1 (%.1f%%)", 100 * eig[1])
+axis2_lab <- sprintf("PCoA2 (%.1f%%)", 100 * eig[2])
+```
+
+### 第 2 步(可选替代):NMDS 或 CLR-PCA
+
+```{r}
+# —— 方案 B:NMDS(必须报 stress)——
+ord_nmds <- ordinate(ps_rare, method = "NMDS", distance = "bray", trymax = 100)
+cat("NMDS stress =", round(ord_nmds$stress, 3), "\n")  # <0.2 才可用
+
+# —— 方案 C:CLR-PCA(不抽平,成分数据正道,呼应第 30 篇)——
+# 用未抽平的 ps;加 1 伪计数避免 log(0)(更稳健的做法见第 21 篇 Robust Aitchison)
+otu <- as(otu_table(ps), "matrix")
+if (taxa_are_rows(ps)) otu <- t(otu)          # 统一成"行=样本"
+clr <- t(apply(otu + 1, 1, function(x) log(x) - mean(log(x))))
+pca <- prcomp(clr, center = TRUE, scale. = FALSE)
+ve  <- 100 * pca$sdev^2 / sum(pca$sdev^2)
+# pca$x[,1:2] 即坐标,ve[1:2] 即解释方差,后面画图逻辑与 PCoA 完全一致
+```
+
+### 第 3 步:把 PERMANOVA 结果拿来标注(细节留到第 23 篇)
+
+```{r}
+meta <- as(sample_data(ps_rare), "data.frame")
+set.seed(123)
+ada <- adonis2(dist_bray ~ meta[[GROUP]], permutations = 999)
+r2  <- ada$R2[1]; pval <- ada$`Pr(>F)`[1]
+stat_lab <- sprintf("PERMANOVA\nR² = %.3f, P = %.3f", r2, pval)
+```
+
+到这里数据全部备齐:`plot_df`(坐标+分组)、两个轴标签、一个统计标注。**下面才是发表级和"能看"拉开差距的地方。**
+
+---
+
+## 出版级美化:同一张图的"能看"→"能发" {#sec-polish}
+
+默认 `plot_ordination()` 的图有四宗罪:配色不友好、点太小、没有椭圆、轴标签没有解释方差。我们用【准备工作】里已定义的 `scale_*_pub()` / `theme_pub()` / `save_pub()` 一次全解决。
+
+```{r}
+p <- ggplot(plot_df, aes(x = Axis.1, y = Axis.2,
+                         color = .data[[GROUP]], fill = .data[[GROUP]])) +
+  # 95% 置信椭圆(t 分布),先画在点下面
+  stat_ellipse(aes(group = .data[[GROUP]]),
+               type = "t", level = 0.95, linewidth = 0.5, alpha = 0.9) +
+  geom_point(size = 2.6, alpha = 0.85, stroke = 0) +
+  # 过原点的参考虚线,帮助读者定位
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey80", linewidth = 0.3) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "grey80", linewidth = 0.3) +
+  scale_color_pub() +
+  scale_fill_pub() +
+  labs(x = axis1_lab, y = axis2_lab, color = NULL, fill = NULL) +
+  # 把 PERMANOVA 标注钉在右下角(图内文字用英文)
+  annotate("text", x = Inf, y = -Inf, label = stat_lab,
+           hjust = 1.05, vjust = -0.4, size = 3.2, lineheight = 0.9) +
+  coord_equal() +   # ← 关键!等比坐标轴,否则距离被视觉扭曲(见下方坑)
+  theme_pub(base_size = 12) +
+  theme(
+    legend.position = c(0.02, 0.98),
+    legend.justification = c(0, 1),
+    aspect.ratio = 1
+  )
+
+p
+```
+
+### 导出成投稿能用的文件
+
+```{r}
+# 统一用 theme_pub.R 里的 save_pub:一次导出 PDF(矢量,字体嵌入)+ PNG + TIFF
+# 物理尺寸按期刊分栏给(这里单栏 85mm 正方),别导出后硬缩放
+save_pub(p, "figures/Fig2_PCoA_bray", width = 85, height = 85)
+```
+
+::: {.callout-tip title="发表级的三个隐形细节"}
+- **字体嵌入:** 用 `cairo_pdf` 导出,字体才会嵌进 PDF,投稿系统不会把 Arial 替换成难看的默认字体。
+- **物理尺寸而非像素:** 期刊按厘米/英寸和分栏(单栏 ~85 mm、双栏 ~170 mm)要图。直接用 `width`/`height` 设成目标物理尺寸,字号才会和正文协调,别导出后在 AI 里硬缩放。
+- **改字不改图:** 需要在 Illustrator 微调标签时,PDF/SVG 里的文字仍是可编辑文本(前提是上一条的字体嵌入)。
+:::
+
+---
+
+## 常见坑方框 {#sec-pitfalls}
+
+::: {.callout-caution title="排序图的七个高频错误(审稿人专盯这些)"}
+1. **坐标轴不等比。** 不加 `coord_equal()`,PCoA1 和 PCoA2 被拉成不同尺度,样本间距离在视觉上被扭曲——这是排序图最常见、也最致命的错误。**PCoA/NMDS 的轴必须等比。**
+2. **NMDS 不报 stress。** 没有 stress 的 NMDS 图等于没有误差棒的柱状图,审稿人会直接要。
+3. **只看图不做 PERMANOVA。** "看起来分开了"不是结论。反过来,**PERMANOVA 显著但没做 `betadisper`**——差异可能来自组内离散度不同,不是中心位置不同(第 23 篇详解)。
+4. **距离选择和结论不匹配。** 想讲稀有类群却用了对高丰度敏感的 Bray-Curtis;有系统发育假设却不用 UniFrac。距离要服务于你的科学问题。
+5. **PERMANOVA 用了却忽略样本不平衡 / 混杂。** 分组样本量悬殊、或有批次等混杂时,单因子 `adonis2` 会误导;需要在公式里放协变量(第 23、25 篇)。
+6. **抽平不设种子 / 深度选择草率。** 见上文 @sec-code。
+7. **椭圆类型张冠李戴。** `type = "t"`/`"norm"` 是**置信/数据椭圆**(展示分布),不是统计检验;别把"椭圆不重叠"当成"差异显著"的证据。
+:::
+
+---
+
+## 这段 Methods 怎么写 {#sec-methods}
+
+> Beta diversity was assessed on ASV-level data rarefied to even depth (n = XXX reads per sample; `phyloseq` v1.xx). Between-sample dissimilarity was quantified with the Bray–Curtis index and visualized by Principal Coordinates Analysis (PCoA). Differences in community composition among groups were tested with PERMANOVA (`adonis2`, `vegan` v2.6, 999 permutations), and homogeneity of multivariate dispersion was verified with `betadisper`. Ordination axes were plotted with `ggplot2`, with 95% confidence ellipses. All analysis code is available at <GitHub URL>.
+
+**要点:** 写清①用了什么距离,②抽平深度(或声明未抽平+替代方法),③排序方法,④PERMANOVA 的置换次数,⑤**betadisper 也做了**(这一句能挡掉一大半审稿意见),⑥代码可获取。数字 XXX、版本号按你的实际填。
+
+---
+
+## 换成你自己的数据怎么做 {#sec-yourdata}
+
+本篇代码对"你自己的数据"**只有两处要改**,这就是统一输入约定的好处:
+
+1. **把第 0 步的三个文件路径指向你自己的 `otutab` / `taxonomy` / `metadata`**(格式见第 0 步注释;对不齐先按上面的坑排查)。
+2. **改一行分组列名**:`GROUP <- "你的分组列名"`。
+
+之后从第 0 步一路跑到导出即可。几个按需微调:
+
+- **多于两组、或有两个分组变量(如 疾病×性别):** 用 `shape = 第二变量` 叠加形状,或 `facet_wrap(~ 第二变量)` 分面。
+- **想强调稀有类群或谱系差异:** 把 `method = "bray"` 换成 `"jaccard"` 或 `"unifrac"`/`"wunifrac"`(后者需 `ps` 带 `phy_tree`)。
+- **走成分数据正道:** 用第 2 步的 CLR-PCA 分支,或直接上第 21 篇的 Robust Aitchison(DEICODE),画图逻辑一模一样,只是把 `plot_df` 换成 `pca$x` 的前两列、轴标签换成 `ve`。
+- **配对/纵向设计:** 排序照画,但 PERMANOVA 要加 `strata`/区块,详见第 23、48 篇。
+
+---
+
+## 小结与下一篇
+
+这一篇你拿到了三样东西:一张能一比一复现顶刊的 PCoA 散点、一套全系列复用的 `ggplot2` 出版级配方、以及"距离/排序怎么选"的决策力。但我们一直把统计"欠账"——图上那个 `R²`/`P` 到底怎么算、为什么必须配 `betadisper`、样本不平衡怎么办。
+
+**下一篇(第 23 篇):PERMANOVA + betadisper——把"看起来不一样"变成"统计上真不一样"。** 这是让排序图从"好看"升级到"站得住"的关键一步,也是审稿人最爱攻击的地方。
+
+::: {.callout-note title="本篇配套(GitHub 仓库 microbiome-best-practices)"}
+- 代码:`chapters/22-ordination.qmd`
+- 复用主题:`R/theme_pub.R`
+- 示例数据:`data/small/{otutab,taxonomy,metadata}.txt`(小数据三件套,已随仓库分发,可直接跑)
+- 成品图:`figures/Fig2_PCoA_bray.pdf`
+:::

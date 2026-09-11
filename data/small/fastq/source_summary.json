@@ -1,0 +1,83 @@
+{
+  "dataset": "QIIME 2 Atacama soils paired-end tutorial, 2024.5 1% subset",
+  "study": "Neilson JW et al. Significant Impacts of Increasing Aridity on the Arid Soil Microbiome. mSystems. 2017;2:e00195-16.",
+  "source_files": {
+    "forward": {
+      "url": "https://data.qiime2.org/2024.5/tutorials/atacama-soils/1p/forward.fastq.gz",
+      "sha256": "392f178b5f15967fafb9332c0493a8b6ecbf4a7857538023813a630c488c2702",
+      "records": 135487
+    },
+    "reverse": {
+      "url": "https://data.qiime2.org/2024.5/tutorials/atacama-soils/1p/reverse.fastq.gz",
+      "sha256": "5407370313a3974e5b70878153841a61df408e49ced133b3ace44b2db286cfae",
+      "records": 135487
+    },
+    "barcodes": {
+      "url": "https://data.qiime2.org/2024.5/tutorials/atacama-soils/1p/barcodes.fastq.gz",
+      "sha256": "c07f517e920d9e3924ce1e87102f057232b57041947523b90d560f68a0ff3c0f",
+      "records": 135487
+    },
+    "metadata": {
+      "url": "https://data.qiime2.org/2024.5/tutorials/atacama-soils/sample_metadata.tsv",
+      "sha256": "7cff810ad86a621ebc78a16b690255d839ea58e2622ad45a11a838d0f8c5b3bd",
+      "records": null
+    }
+  },
+  "selection": {
+    "method": "2000 evenly spaced, order-preserving synchronized records",
+    "source_records": 135487,
+    "selected_records": 2000,
+    "first_source_index_1_based": 1,
+    "last_source_index_1_based": 135487
+  },
+  "metadata_samples": 75,
+  "read_id_synchronization": true,
+  "phred_offset": 33,
+  "read_summaries": {
+    "forward": {
+      "records": 2000,
+      "read_length_min": 151,
+      "read_length_median": 151.0,
+      "read_length_max": 151,
+      "median_read_mean_phred": 36.089404,
+      "q30_base_fraction": 0.89345364,
+      "n_base_fraction": 0.00186093
+    },
+    "reverse": {
+      "records": 2000,
+      "read_length_min": 151,
+      "read_length_median": 151.0,
+      "read_length_max": 151,
+      "median_read_mean_phred": 32.337748,
+      "q30_base_fraction": 0.73892384,
+      "n_base_fraction": 0.00241722
+    },
+    "barcodes": {
+      "records": 2000,
+      "read_length_min": 12,
+      "read_length_median": 12.0,
+      "read_length_max": 12,
+      "median_read_mean_phred": 33.833333,
+      "q30_base_fraction": 0.73191667,
+      "n_base_fraction": 0.003125
+    }
+  },
+  "output_files": {
+    "forward.fastq.gz": {
+      "sha256": "e6fabdbd31db519c719447f1caf2d1cd334c6ab932353e534ea2433ead88d254",
+      "bytes": 210452
+    },
+    "reverse.fastq.gz": {
+      "sha256": "d2fa5841d150fead5a73067a267ec531221de11c512a38ec32ada03f1621bf65",
+      "bytes": 239206
+    },
+    "barcodes.fastq.gz": {
+      "sha256": "9cce1bb9a57975d14b54a5cf07c89b2b7c2095da4a8f0d1bd2720f1349e74057",
+      "bytes": 33297
+    },
+    "metadata.tsv": {
+      "sha256": "8d5342f0a80abf4197088bb1ce92f4903c1bd1212f6a9182e0e1c87ebc322bcb",
+      "bytes": 9358
+    }
+  }
+}

@@ -1,0 +1,5 @@
+Transition	ChildKnownParentUnknownFeatures	ChildKnownParentUnknownTaxa	EqualSampleMean
+Phylum to Class	0	0	0
+Class to Order	0	0	0
+Order to Family	0	0	0
+Family to Genus	324	17	0.025182773158744894

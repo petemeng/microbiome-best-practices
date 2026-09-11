@@ -1,0 +1,30 @@
+{
+  "status": "passed",
+  "seed": 20260726,
+  "samples": 36,
+  "balanced_design_cells": 9,
+  "replicates_per_cell": 4,
+  "input_features": {
+    "Bacteria": 772,
+    "Fungi": 1063,
+    "Oomycete": 219
+  },
+  "selected_features": {
+    "Bacteria": 20,
+    "Fungi": 20,
+    "Oomycete": 20
+  },
+  "procrustes_observed_q_lt_0_05": 3,
+  "procrustes_adjusted_q_lt_0_05": 2,
+  "tested_cross_kingdom_pairs": 1200,
+  "raw_cross_kingdom_q_lt_0_05": 505,
+  "adjusted_cross_kingdom_q_lt_0_05": 2,
+  "sign_changed_after_adjustment": 491,
+  "bootstrapped_candidates": 30,
+  "stable_candidates_q_lt_0_05": 2,
+  "versions": {
+    "R": "4.4.1",
+    "vegan": "2.6.6.1",
+    "permute": "0.9.7"
+  }
+}

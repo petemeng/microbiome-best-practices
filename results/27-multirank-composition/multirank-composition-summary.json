@@ -1,0 +1,102 @@
+{
+  "article": 27,
+  "title": "Multirank composition from phylum to genus",
+  "dataset": {
+    "source": "microeco 2.0.0 packaged Chinese wetland 16S tables",
+    "features": 13628,
+    "samples": 90,
+    "reads": 1619670,
+    "groups": 3,
+    "library_depth_min": 10364,
+    "library_depth_max": 37374
+  },
+  "taxonomy": {
+    "ranks": 5,
+    "rank_names": ["Phylum", "Class", "Order", "Family", "Genus"],
+    "labels_by_rank": {
+      "Phylum": 56,
+      "Class": 128,
+      "Order": 217,
+      "Family": 394,
+      "Genus": 772
+    },
+    "known_equal_sample_mean": {
+      "Phylum": 0.9965362176078,
+      "Class": 0.9679785442715,
+      "Order": 0.8557272804699,
+      "Family": 0.6796275393421,
+      "Genus": 0.3689438869301
+    },
+    "genus_known_equal_sample_mean": 0.3689438869301,
+    "genus_known_by_group": {
+      "IW": 0.2899130568271,
+      "CW": 0.3838467844566,
+      "TW": 0.4330718195066
+    },
+    "largest_resolution_loss_transition": "Family to Genus",
+    "largest_resolution_loss_pp": 31.068365241199,
+    "incertae_sedis_features": 300
+  },
+  "hierarchy": {
+    "complete_genus_lineages": 754,
+    "complete_genus_lineage_mean": 0.3437611137713,
+    "family_unknown_genus_known_features": 324,
+    "family_unknown_genus_known_taxa": 17,
+    "family_unknown_genus_known_mean": 0.02518277315874,
+    "parent_specific_label_collisions": 2,
+    "parent_specific_collision_mean": 0.006306081629523,
+    "cross_rank_name_collisions": 13,
+    "dominant_complete_lineages": 12,
+    "dominant_complete_lineage_mean": 0.1018762895889,
+    "rank_qualified_labels": true,
+    "missing_parent_backfill": false
+  },
+  "primary": {
+    "ranks": ["Phylum", "Class", "Order", "Family", "Genus"],
+    "top_known_per_rank": 5,
+    "aggregation": "Equal-sample mean after per-sample closure",
+    "denominator": "All reads",
+    "unknown_separate": true,
+    "inferential_claim": false
+  },
+  "sensitivity": {
+    "top_n_rows": 25,
+    "top_n_branches_per_rank": 5,
+    "top10_coverage_by_rank": {
+      "Phylum": 0.9480304709398,
+      "Class": 0.5900453172911,
+      "Order": 0.3476527849128,
+      "Family": 0.2367106566742,
+      "Genus": 0.09521804539338
+    },
+    "maximum_known_only_inflation_pp": 7.27296856377,
+    "maximum_equal_vs_pooled_total_variation": 0.04628915565241,
+    "maximum_equal_vs_pooled_taxon_difference_pp": 2.40788709279
+  },
+  "graphics": {
+    "font_family": "DejaVu Sans",
+    "primary_figures": 4,
+    "vector_files": 8,
+    "raster_files": 8,
+    "format_files": 16,
+    "raster_ppi": 600,
+    "svg_files_with_text": 4,
+    "svg_chinese_characters": 0,
+    "pdf_files_with_embedded_font": 4,
+    "lzw_tiff_files": 4,
+    "dimension_checks_passed": 16
+  },
+  "versions": {
+    "digest": "0.6.36",
+    "ggplot2": "3.5.2",
+    "jsonlite": "1.8.8",
+    "ragg": "1.3.2",
+    "readr": "2.1.5",
+    "scales": "1.3.0",
+    "svglite": "2.1.3",
+    "systemfonts": "1.1.0"
+  },
+  "checks_total": 209,
+  "checks_passed": 209,
+  "checks_failed": 0
+}

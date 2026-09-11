@@ -1,0 +1,67 @@
+$ conda run -n microbiome-qiime2-2026.4 qiime dada2 denoise-paired --i-demultiplexed-seqs <PROJECT_ROOT>/results/11-primer-trimming/nfcore-v4-trimmed.qza --p-trunc-len-f 130 --p-trunc-len-r 120 --p-trim-left-f 0 --p-trim-left-r 0 --p-max-ee-f 2.0 --p-max-ee-r 2.0 --p-trunc-q 2 --p-min-overlap 12 --p-max-merge-mismatch 0 --p-pooling-method independent --p-chimera-method consensus --p-n-threads 1 --p-n-reads-learn 1000000 --p-hashed-feature-ids --p-retain-all-samples --o-table <WORK_DIR>/profiles/overtrimmed/table.qza --o-representative-sequences <WORK_DIR>/profiles/overtrimmed/rep-seqs.qza --o-denoising-stats <WORK_DIR>/profiles/overtrimmed/stats.qza --o-base-transition-stats <WORK_DIR>/profiles/overtrimmed/base-transitions.qza --verbose
+
+[expected_exit_code] non-zero
+[observed_exit_code] 1
+[elapsed_seconds] 69.237
+
+[stdout]
+R version 4.5.2 (2025-10-31) 
+DADA2: 1.38.0 / Rcpp: 1.1.1.1.1 / RcppParallel: 5.1.11.2 
+2) Filtering ....
+3) Learning Error Rates
+1113190 total bases in 8563 reads from 4 samples will be used for learning the error rates.
+1027560 total bases in 8563 reads from 4 samples will be used for learning the error rates.
+3) Denoise samples ....
+....
+5) Remove chimeras (method = consensus)
+Running external command line application(s). This may print messages to stdout and/or stderr.
+The command(s) being run are below. These commands cannot be manually re-run as they will depend on temporary files that no longer exist.
+
+Command: run_dada.R --input_directory /tmp/tmpo8dziy_o/forward --input_directory_reverse /tmp/tmpo8dziy_o/reverse --output_path /tmp/tmpo8dziy_o/output.tsv.biom --output_track /tmp/tmpo8dziy_o/track.tsv --output_err_track /tmp/tmpo8dziy_o/err_track.tsv --filtered_directory /tmp/tmpo8dziy_o/filt_f --filtered_directory_reverse /tmp/tmpo8dziy_o/filt_r --truncation_length 130 --truncation_length_reverse 120 --trim_left 0 --trim_left_reverse 0 --max_expected_errors 2.0 --max_expected_errors_reverse 2.0 --truncation_quality_score 2 --min_overlap 12 --max_merge_mismatch 0 --trim_overhang False --pooling_method independent --chimera_method consensus --min_parental_fold 1.0 --allow_one_off False --num_threads 1 --learn_min_reads 1000000
+
+[stderr]
+载入需要的程序包：Rcpp
+错误于isBimeraDenovoTable(unqs[[i]], ..., verbose = verbose): 
+  Input must be a valid sequence table.
+Calls: removeBimeraDenovo -> isBimeraDenovoTable
+3: stop("Input must be a valid sequence table.")
+2: isBimeraDenovoTable(unqs[[i]], ..., verbose = verbose)
+1: removeBimeraDenovo(seqtab, method = chimeraMethod, minFoldParentOverAbundance = minParentFold, 
+       allowOneOff = allowOneOff, multithread = multithread)
+Traceback (most recent call last):
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/q2_dada2/_denoise.py", line 362, in denoise_paired
+    run_commands([cmd])
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/plugin/util.py", line 66, in run_commands
+    subprocess.run(cmd, check=True)
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['run_dada.R', '--input_directory', '/tmp/tmpo8dziy_o/forward', '--input_directory_reverse', '/tmp/tmpo8dziy_o/reverse', '--output_path', '/tmp/tmpo8dziy_o/output.tsv.biom', '--output_track', '/tmp/tmpo8dziy_o/track.tsv', '--output_err_track', '/tmp/tmpo8dziy_o/err_track.tsv', '--filtered_directory', '/tmp/tmpo8dziy_o/filt_f', '--filtered_directory_reverse', '/tmp/tmpo8dziy_o/filt_r', '--truncation_length', '130', '--truncation_length_reverse', '120', '--trim_left', '0', '--trim_left_reverse', '0', '--max_expected_errors', '2.0', '--max_expected_errors_reverse', '2.0', '--truncation_quality_score', '2', '--min_overlap', '12', '--max_merge_mismatch', '0', '--trim_overhang', 'False', '--pooling_method', 'independent', '--chimera_method', 'consensus', '--min_parental_fold', '1.0', '--allow_one_off', 'False', '--num_threads', '1', '--learn_min_reads', '1000000']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/q2cli/commands.py", line 573, in __call__
+    results = self._execute_action(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/q2cli/commands.py", line 645, in _execute_action
+    results = action(**arguments)
+              ^^^^^^^^^^^^^^^^^^^
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/sdk/action.py", line 371, in signature_wrapper
+    return wrapper(*bound.args, **bound.kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/sdk/action.py", line 294, in bound_callable
+    outputs = self._callable_executor_(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/rachis/sdk/action.py", line 472, in _callable_executor_
+    output_views = self._callable(**view_args)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/desk16/tly9658/miniconda3/envs/microbiome-qiime2-2026.4/lib/python3.12/site-packages/q2_dada2/_denoise.py", line 375, in denoise_paired
+    raise Exception("An error was encountered while running DADA2"
+Exception: An error was encountered while running DADA2 in R (return code 1), please inspect stdout and stderr to learn more.
+
+Plugin error from dada2:
+
+  An error was encountered while running DADA2 in R (return code 1), please inspect stdout and stderr to learn more.
+
+See above for debug info.
+ERROR conda.cli.main_run:execute(142): `conda run qiime dada2 denoise-paired --i-demultiplexed-seqs <PROJECT_ROOT>/results/11-primer-trimming/nfcore-v4-trimmed.qza --p-trunc-len-f 130 --p-trunc-len-r 120 --p-trim-left-f 0 --p-trim-left-r 0 --p-max-ee-f 2.0 --p-max-ee-r 2.0 --p-trunc-q 2 --p-min-overlap 12 --p-max-merge-mismatch 0 --p-pooling-method independent --p-chimera-method consensus --p-n-threads 1 --p-n-reads-learn 1000000 --p-hashed-feature-ids --p-retain-all-samples --o-table <WORK_DIR>/profiles/overtrimmed/table.qza --o-representative-sequences <WORK_DIR>/profiles/overtrimmed/rep-seqs.qza --o-denoising-stats <WORK_DIR>/profiles/overtrimmed/stats.qza --o-base-transition-stats <WORK_DIR>/profiles/overtrimmed/base-transitions.qza --verbose` failed. (See above for error)

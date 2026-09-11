@@ -1,0 +1,4 @@
+command	path	status
+pdfinfo	/usr/bin/pdfinfo	PASS
+pdffonts	/usr/bin/pdffonts	PASS
+identify	/usr/bin/identify-im6.q16	PASS

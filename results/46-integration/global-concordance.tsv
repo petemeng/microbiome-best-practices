@@ -1,0 +1,5 @@
+Model	Method	Statistic	PValue	QValue
+Observed	Procrustes	0.588107476116809	0.001	0.001
+Observed	Mantel	0.597317089319856	0.001	0.001
+Group-adjusted	Procrustes	0.528801294555665	0.001	0.001
+Group-adjusted	Mantel	0.554311306676936	0.001	0.001

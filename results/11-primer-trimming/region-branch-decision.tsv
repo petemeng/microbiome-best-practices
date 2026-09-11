@@ -1,0 +1,6 @@
+assay_branch	read_layout	primer_evidence	trim_action	downstream_implication
+V4 · primer retained	Paired short reads	Both R1 and R2 start with the documented pair	Trim anchored front-f and front-r; audit paired retention	Recalculate quality and overlap; DADA2 trim-left = 0 for primers
+V4 · primer absent	Paired short reads	No coherent 5′ match; protocol uses custom sequencing primers	Skip primer trimming	Proceed to quality-based truncation; do not discard all reads
+V3–V4	Paired short reads	Confirm the exact 341F/805R-family sequences and orientation	Trim run-specific primers before denoising	Longer insert makes overlap chemistry- and quality-dependent
+Full-length 16S	Single long read	Forward and reverse boundaries occur in one molecule	Use linked/orientation-aware primer logic	No paired merge; use platform-appropriate long-read denoising
+Short-read single-end	One acquired direction	Probe only the sequenced 5′ end	Trim the documented front primer if present	No paired merge and no evidence about the missing mate

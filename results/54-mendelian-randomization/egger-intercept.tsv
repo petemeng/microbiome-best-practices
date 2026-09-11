@@ -1,0 +1,2 @@
+id.exposure	id.outcome	outcome	exposure	egger_intercept	se	pval
+genus.Bifidobacterium.id.436	GCST004131	Inflammatory bowel disease	Bifidobacterium genus abundance	-0.00751144455474793	0.0312252619066169	0.82540078119796

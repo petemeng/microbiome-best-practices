@@ -1,0 +1,63 @@
+{
+  "source_repository": "https://github.com/USDA-ARS-GBRU/itsxpress-tutorial",
+  "source_commit": "916145d3b05e20656fde30c4732dc084de72d876",
+  "source_commit_date": "2024-04-15",
+  "source_license": "No separate repository or data license stated at the pinned commit",
+  "source_documentation_claim": "two samples subsampled to 10,000 read pairs",
+  "observed_sample_count": 2,
+  "observed_pairs_per_sample": 2500,
+  "observed_total_pairs": 5000,
+  "pair_id_mismatches": 0,
+  "preparation": "Verified the pinned plain-text source bytes and wrote deterministic gzip streams (mtime=0, no embedded filename).",
+  "prepared_collection_sha256": "21b351697749dab781e8396040dbde35e35b6bb3b24dd860a91d4ecfc8ac5121",
+  "files": [
+    {
+      "file": "sample1_r1.fastq.gz",
+      "sample_id": "sample1",
+      "direction": "forward",
+      "records": 2500,
+      "source_bytes": 1498149,
+      "source_sha256": "5e44d1794ff70790fc2ecf807390e459c60db8cb2d807f5a5cba8532d42ef6c4",
+      "source_is_gzip": false,
+      "prepared_bytes": 284227,
+      "prepared_sha256": "b629eb189a14a9daf5d94cdc027064079d76f0ff45fb73eec50fb0f55b585242",
+      "prepared_is_gzip": true
+    },
+    {
+      "file": "sample1_r2.fastq.gz",
+      "sample_id": "sample1",
+      "direction": "reverse",
+      "records": 2500,
+      "source_bytes": 1533167,
+      "source_sha256": "bffb461483b81e74beeeb65fed3ac3e5321535d1023ed3334ade9a2dd99e3ae7",
+      "source_is_gzip": false,
+      "prepared_bytes": 309085,
+      "prepared_sha256": "4d19ef0e9eef35c47308bdb5eeeaea8a78a5fa7d7d1f77322aed4a1349ec58e4",
+      "prepared_is_gzip": true
+    },
+    {
+      "file": "sample2_r1.fastq.gz",
+      "sample_id": "sample2",
+      "direction": "forward",
+      "records": 2500,
+      "source_bytes": 1529971,
+      "source_sha256": "00d49fbba7d69f6fad91e128581df2e144faefdd466b844bf0734f67e76a031c",
+      "source_is_gzip": false,
+      "prepared_bytes": 307349,
+      "prepared_sha256": "28850a72bb24fd71b2b8e8b38617e75c633f46bc041da8074dabb6131460374f",
+      "prepared_is_gzip": true
+    },
+    {
+      "file": "sample2_r2.fastq.gz",
+      "sample_id": "sample2",
+      "direction": "reverse",
+      "records": 2500,
+      "source_bytes": 1564795,
+      "source_sha256": "c31efec6c90f024122f5f282126ee14b32b4980daab517494cb1686ddba81aca",
+      "source_is_gzip": false,
+      "prepared_bytes": 326787,
+      "prepared_sha256": "00dc3aa71f3035717dcf656e29913b1a0b9a1eb6f2a033fa5506baa7ab6637fc",
+      "prepared_is_gzip": true
+    }
+  ]
+}

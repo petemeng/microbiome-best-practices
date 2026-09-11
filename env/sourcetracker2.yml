@@ -1,0 +1,12 @@
+name: sourcetracker2
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.20
+  - pip
+  - pip:
+      - biom-format==2.1.17
+      - numpy==2.2.6
+      - pandas==2.3.3
+      - scikit-bio==0.7.2
+      - sourcetracker==2.0.1

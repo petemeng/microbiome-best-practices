@@ -1,0 +1,144 @@
+{
+  "database": "SILVA",
+  "release": "138.2",
+  "reference_subset": "SSURef NR99",
+  "release_date": "2024-07-11",
+  "official_url": "https://www.arb-silva.de/documentation/release-1382/",
+  "source_url": "https://ftp.arb-silva.de/release_138.2/Exports/SILVA_138.2_SSURef_NR99_tax_silva.fasta.gz",
+  "license": "CC BY 4.0",
+  "taxonomy_contract": "RESCRIPt fixed six ranks (domain through genus), rank propagation enabled, species labels intentionally excluded",
+  "source_files": {
+    "SILVA_138.2_SSURef_NR99_tax_silva.fasta.gz": {
+      "bytes": 201107829,
+      "md5": "c3b7638cab8bf2fe1e5cad01ce406a53",
+      "sha256": "c779f51f1c605377f23d240005cbdd96068a77fdf85117f15d9f598b138a2072"
+    }
+  },
+  "full_sequences": {
+    "length": {
+      "records": 510495,
+      "minimum": 900,
+      "q1": 1384.0,
+      "median": 1458,
+      "mean": 1464.02,
+      "q3": 1519.0,
+      "maximum": 4000
+    },
+    "unique_identifiers": 510495,
+    "invalid_sequence_bases": 0
+  },
+  "full_taxonomy": {
+    "records": 510495,
+    "domain_counts": {
+      "Archaea": 20389,
+      "Bacteria": 431317,
+      "Eukaryota": 58789
+    },
+    "nonempty_rank_counts": {
+      "d__": 510495,
+      "p__": 510495,
+      "c__": 510495,
+      "o__": 510495,
+      "f__": 510495,
+      "g__": 510495,
+      "s__": 0
+    },
+    "organelle_label_records": 5991
+  },
+  "preparation_date": "2026-07-20",
+  "qiime_environment": "microbiome-qiime2-2026.4",
+  "qiime_release": "2026.4",
+  "q2_feature_classifier": "2026.4.0",
+  "rescript": "2026.4.0",
+  "region_processing": {
+    "marker": "16S V4",
+    "forward_primer_5_to_3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_primer_5_to_3": "GGACTACNVGGGTWTCTAAT",
+    "combined_primer_identity": 0.8,
+    "minimum_amplicon_length": 200,
+    "maximum_amplicon_length": 400,
+    "read_orientation": "both"
+  },
+  "exact_sequence_dereplication": {
+    "mode": "least common ancestor",
+    "sequence_identity": 1.0,
+    "reason": "Prevent identical V4 copies from weighting consensus by database redundancy while preserving label ambiguity."
+  },
+  "extraction_contract": {
+    "marker": "16S V4",
+    "forward_primer_5_to_3": "GTGYCAGCMGCCGCGGTAA",
+    "reverse_primer_5_to_3": "GGACTACNVGGGTWTCTAAT",
+    "combined_primer_identity": 0.8,
+    "minimum_amplicon_length": 200,
+    "maximum_amplicon_length": 400,
+    "read_orientation": "both"
+  },
+  "dereplication_contract": {
+    "mode": "least common ancestor",
+    "sequence_identity": 1.0,
+    "reason": "Prevent identical V4 copies from weighting consensus by database redundancy while preserving label ambiguity."
+  },
+  "raw_v4_records": 450770,
+  "raw_v4_length": {
+    "records": 450770,
+    "minimum": 200,
+    "q1": 253.0,
+    "median": 253.0,
+    "mean": 253.86,
+    "q3": 253.0,
+    "maximum": 400
+  },
+  "raw_v4_taxonomy": {
+    "records": 450770,
+    "domain_counts": {
+      "Archaea": 20003,
+      "Bacteria": 428005,
+      "Eukaryota": 2762
+    },
+    "nonempty_rank_counts": {
+      "d__": 450770,
+      "p__": 450770,
+      "c__": 450770,
+      "o__": 450770,
+      "f__": 450770,
+      "g__": 450770,
+      "s__": 0
+    },
+    "organelle_label_records": 5740
+  },
+  "lca_v4_records": 262752,
+  "lca_v4_length": {
+    "records": 262752,
+    "minimum": 200,
+    "q1": 253.0,
+    "median": 253.0,
+    "mean": 254.42,
+    "q3": 253.0,
+    "maximum": 400
+  },
+  "lca_v4_taxonomy": {
+    "records": 262752,
+    "domain_counts": {
+      "Archaea": 14984,
+      "Bacteria": 245197,
+      "Eukaryota": 2571
+    },
+    "nonempty_rank_counts": {
+      "d__": 262752,
+      "p__": 262626,
+      "c__": 262563,
+      "o__": 262264,
+      "f__": 261909,
+      "g__": 259626,
+      "s__": 0
+    },
+    "organelle_label_records": 4410
+  },
+  "derived_files": {
+    "sequences": "silva-138.2-v4.fasta.gz",
+    "sequences_sha256": "3a251d263bd4e12c96023c84b3f2e255b8bcb0d5865dc6f299f9918e6be3a808",
+    "taxonomy": "silva-138.2-v4-taxonomy.tsv.gz",
+    "taxonomy_sha256": "f49320aaa32aa70af5c5a48649786e3bb4177868da5da4d2143d0a54c5fa47b0"
+  },
+  "interpretation_boundary": "SILVA species text in raw FASTA descriptions was not promoted to a fixed species rank; short V4 reads do not prove species."
+}

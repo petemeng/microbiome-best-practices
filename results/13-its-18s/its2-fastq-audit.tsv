@@ -1,0 +1,5 @@
+sample_id	direction	file	records	gzip_bytes	sha256	paired_id_mismatches
+sample1	R1	sample1_r1.fastq.gz	2500	284227	b629eb189a14a9daf5d94cdc027064079d76f0ff45fb73eec50fb0f55b585242	0
+sample1	R2	sample1_r2.fastq.gz	2500	309085	4d19ef0e9eef35c47308bdb5eeeaea8a78a5fa7d7d1f77322aed4a1349ec58e4	0
+sample2	R1	sample2_r1.fastq.gz	2500	307349	28850a72bb24fd71b2b8e8b38617e75c633f46bc041da8074dabb6131460374f	0
+sample2	R2	sample2_r2.fastq.gz	2500	326787	00dc3aa71f3035717dcf656e29913b1a0b9a1eb6f2a033fa5506baa7ab6637fc	0

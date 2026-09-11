@@ -1,0 +1,26 @@
+{
+  "batch_size": 32,
+  "best_epoch_one_based": 100,
+  "best_training_loss": 47827596.0,
+  "best_validation_mae": 1844.2938232421875,
+  "epochs_run": 100,
+  "implementation": "biocore/mmvec native MMvec class",
+  "iterations_per_epoch": 475,
+  "latent_dim": 4,
+  "learning_rate": 1e-05,
+  "metabolite_features": 120,
+  "microbe_features": 100,
+  "probability_max_row_sum_error": 2.220446049250313e-16,
+  "samples": 220,
+  "seed": 20260726,
+  "status": "passed",
+  "test_samples": 67,
+  "train_samples": 153,
+  "versions": {
+    "mmvec": "1.0.5",
+    "numpy": "1.21.5",
+    "pandas": "0.25.3",
+    "python": "3.7.16",
+    "tensorflow": "1.15.0"
+  }
+}

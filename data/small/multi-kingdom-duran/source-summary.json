@@ -1,0 +1,44 @@
+{
+  "dataset": "Duran_Thiergart_Arabidopsis_interkingdom_2018",
+  "citation": "Duran et al. Cell 2018; doi:10.1016/j.cell.2018.10.020",
+  "repository": "https://github.com/ththi/Microbial-Interkingdom-Suppl",
+  "commit": "6db5e85cc5d442fd95fcdcb7250b72fa9e2ff900",
+  "raw_sha256": {
+    "design_own_bac.txt": "bd2f082b844621616060fa88b2a8c67ccf124126712a525f86fa3356b82264da",
+    "design_own_fun.txt": "543325611c0a855e0269a09b9e652baae034301fe3824a6b3d19c47df9abe19f",
+    "design_own_oomyc.txt": "ad132d9a741d7db1af218e9347c4588ce2d3433e4502ca62b8700a8e1a668965",
+    "otu_tab_filter_001_bac.txt": "ca90bd08ac7cc02f92bd50f8ac1c669aa7453ab01bd27d2d3045eadf3d57074e",
+    "otu_tab_filter_001_fun.txt": "5fbb95263f099adb7d8f051dd0da6bb4ec6950c6c012df5cad1148f1b82fad85",
+    "otu_tab_filter_001_oo.txt": "10fcfe028a57198716285e47610188cf66704c1b21ae91859cc511f940af0835",
+    "taxonomy_ref_bac.txt": "0e4060695620c8188157c35d4f97ad6bba3b8ec6b53a00ebcc597491c24ab424",
+    "taxonomy_ref_fun.txt": "1df2bf8750520a49e3b2935863641abbe51a1f280e8ee4ea5a08644afde088eb",
+    "taxonomy_ref_oo.txt": "baed37df5cd501528f12af4ef0e1823ecae096463951b9c5e8ea6df50f85b670"
+  },
+  "paired_samples": 36,
+  "soil_counts": {
+    "GE": 12,
+    "PU": 12,
+    "SD": 12
+  },
+  "compartment_counts": {
+    "Rhizosphere": 12,
+    "Root": 12,
+    "Soil": 12
+  },
+  "view_shapes_features_by_samples": {
+    "bacteria": [
+      772,
+      36
+    ],
+    "fungi": [
+      1063,
+      36
+    ],
+    "oomycetes": [
+      219,
+      36
+    ]
+  },
+  "pairing_key": "soil + compartment + biological replicate",
+  "contract": "bacterial three-piece set plus paired fungal and oomycete count/taxonomy tables"
+}

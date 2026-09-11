@@ -1,0 +1,4 @@
+database	release	reference_subset	license	full_sequence_records	full_taxonomy_records	raw_v4_records	lca_v4_records	official_url	sequence_sha256	taxonomy_sha256
+SILVA	138.2	SSURef NR99	CC BY 4.0	510495	510495	450770	262752	https://www.arb-silva.de/documentation/release-1382/	3a251d263bd4e12c96023c84b3f2e255b8bcb0d5865dc6f299f9918e6be3a808	f49320aaa32aa70af5c5a48649786e3bb4177868da5da4d2143d0a54c5fa47b0
+GTDB	R11-RS232	species-representative SSU	CC BY-SA 4.0	93770	901341	79669	51985	https://data.gtdb.ecogenomic.org/releases/release232/232.0/	3c4234b4defcdc3d8c3b4d1e8956b12288bccd853a4b7f3a3003847c32e6e250	a23d0d4f62183e949c868c3f25aace3acdebb9362ae0bb1d0e9fe81e74c43fe0
+Greengenes2	2024.09	full-length backbone	BSD-3-Clause	337506	337506	335976	98185	https://ftp.microbio.me/greengenes_release/2024.09/	330fe7f400c84c1e454ca9193bcc49f078b01c7880a8bfb99cbe4c0c3c1c14d2	9594e9ae78a568672891693207fd4dcc31f8eada83b931031642fafcff2684bd

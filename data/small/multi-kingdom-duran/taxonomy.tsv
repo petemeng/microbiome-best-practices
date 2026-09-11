@@ -1,0 +1,773 @@
+FeatureID	Kingdom	Phylum	Class	Order	Family	Genus	Species	Lineage	DisplayName
+OTU_81	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Friedmanniella		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__Friedmanniella;s__	Friedmanniella
+OTU_3	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_670	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_2	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Kineosporiaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Kineosporiaceae;g__;s__	Kineosporiaceae
+OTU_32	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_29	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_535	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_9	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Janthinobacterium		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__Janthinobacterium;s__	Janthinobacterium
+OTU_56	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Kaistobacter		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Sphingomonadales;f__Sphingomonadaceae;g__Kaistobacter;s__	Kaistobacter
+OTU_40	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__	Streptomyces
+OTU_27	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_92	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_17	Bacteria	Proteobacteria	Betaproteobacteria	Methylophilales	Methylophilaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Methylophilales;f__Methylophilaceae;g__;s__	Methylophilaceae
+OTU_340	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__;s__	Oxalobacteraceae
+OTU_233	Bacteria	Acidobacteria	iii1-8	DS-18				k__Bacteria;p__Acidobacteria;c__iii1-8;o__DS-18;f__;g__;s__	OTU_233
+OTU_327	Bacteria	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae	Pseudomonas	viridiflava	k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pseudomonadales;f__Pseudomonadaceae;g__Pseudomonas;s__viridiflava	viridiflava
+OTU_13	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_10	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_66	Bacteria	Chloroflexi	SHA-26					k__Bacteria;p__Chloroflexi;c__SHA-26;o__;f__;g__;s__	OTU_66
+OTU_85	Bacteria	Firmicutes	Bacilli	Bacillales	Bacillaceae	Bacillus	flexus	k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Bacillaceae;g__Bacillus;s__flexus	flexus
+OTU_4	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Janthinobacterium		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__Janthinobacterium;s__	Janthinobacterium
+OTU_49	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__;s__	Hyphomicrobiaceae
+OTU_3175	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_3175
+OTU_312	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae	Micromonosporaceae
+OTU_7	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_7
+OTU_1718	Bacteria	Proteobacteria	Betaproteobacteria	Ellin6067				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Ellin6067;f__;g__;s__	OTU_1718
+OTU_228	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__;g__;s__	OTU_228
+OTU_83									OTU_83
+OTU_771	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_800	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_8	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_530	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_530
+OTU_839	Bacteria	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Phenylobacterium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Caulobacterales;f__Caulobacteraceae;g__Phenylobacterium;s__	Phenylobacterium
+OTU_5	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_23	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_182	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_34	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae	Micromonosporaceae
+OTU_681	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Sporichthyaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Sporichthyaceae;g__;s__	Sporichthyaceae
+OTU_180	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Serratia		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacteriales;f__Enterobacteriaceae;g__Serratia;s__	Serratia
+OTU_362	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae	Amycolatopsis		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Pseudonocardiaceae;g__Amycolatopsis;s__	Amycolatopsis
+OTU_25	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__;g__;s__	OTU_25
+OTU_486	Bacteria	Firmicutes	Bacilli	Bacillales	Paenibacillaceae	Paenibacillus	chondroitinus	k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Paenibacillaceae;g__Paenibacillus;s__chondroitinus	chondroitinus
+OTU_42	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_262	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	C111			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__C111;g__;s__	C111
+OTU_38	Bacteria	Chloroflexi	Chloroflexi	Chloroflexales	SBYO_3720			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Chloroflexales;f__SBYO_3720;g__;s__	SBYO_3720
+OTU_6	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae	Comamonadaceae
+OTU_1091	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__;g__;s__	OTU_1091
+OTU_253	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	Iamiaceae	Iamia		k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__Iamiaceae;g__Iamia;s__	Iamia
+OTU_239	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_820	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_463	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_98	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nakamurellaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nakamurellaceae;g__;s__	Nakamurellaceae
+OTU_77	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_604	Bacteria	Acidobacteria	Sva0725	Sva0725				k__Bacteria;p__Acidobacteria;c__Sva0725;o__Sva0725;f__;g__;s__	OTU_604
+OTU_12	Bacteria	Chloroflexi	Chloroflexi	Chloroflexales	FFCH7168			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Chloroflexales;f__FFCH7168;g__;s__	FFCH7168
+OTU_14	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_1882	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Rhizobiaceae;g__;s__	Rhizobiaceae
+OTU_363	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_363
+OTU_3335	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_101	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_3779	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_1	Bacteria	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae	Pseudomonas		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pseudomonadales;f__Pseudomonadaceae;g__Pseudomonas;s__	Pseudomonas
+OTU_71	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Polyangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Polyangiaceae	Polyangiaceae
+OTU_97	Bacteria	Proteobacteria	Betaproteobacteria	Ellin6067				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Ellin6067;f__;g__;s__	OTU_97
+OTU_1056	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptococcaceae	Desulfosporosinus	meridiei	k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptococcaceae;g__Desulfosporosinus;s__meridiei	meridiei
+OTU_54	Bacteria	Chloroflexi	TK10	B07_WMSP1	FFCH4570			k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__FFCH4570;g__;s__	FFCH4570
+OTU_4335	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales	Conexibacteraceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__Conexibacteraceae;g__;s__	Conexibacteraceae
+OTU_82	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Janthinobacterium		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__Janthinobacterium;s__	Janthinobacterium
+OTU_3176	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_99	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_22	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_22
+OTU_358	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_358
+OTU_58	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__;s__	Oxalobacteraceae
+OTU_3361	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Sinobacteraceae;g__;s__	Sinobacteraceae
+OTU_28	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_146									OTU_146
+OTU_115	Bacteria	Proteobacteria	Betaproteobacteria	A21b	UD5			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__A21b;f__UD5;g__;s__	UD5
+OTU_33	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Methylibium		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__Methylibium;s__	Methylibium
+OTU_308	Bacteria	Planctomycetes	Phycisphaerae	Phycisphaerales				k__Bacteria;p__Planctomycetes;c__Phycisphaerae;o__Phycisphaerales;f__;g__;s__	OTU_308
+OTU_102	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_189									OTU_189
+OTU_1300	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales				k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales	OTU_1300
+OTU_30	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Bradyrhizobiaceae;g__;s__	Bradyrhizobiaceae
+OTU_868	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__	Streptomyces
+OTU_337	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Saprospiraceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Saprospiraceae;g__;s__	Saprospiraceae
+OTU_144	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_43	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_118	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Rhizobium	leguminosarum	k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Rhizobiaceae;g__Rhizobium;s__leguminosarum	leguminosarum
+OTU_4648	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__	Streptomyces
+OTU_527	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__;g__;s__	OTU_527
+OTU_416	Bacteria	Chloroflexi	TK10	B07_WMSP1	FFCH4570			k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__FFCH4570;g__;s__	FFCH4570
+OTU_643	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micrococcaceae	Arthrobacter		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micrococcaceae;g__Arthrobacter	Arthrobacter
+OTU_184	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_20	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_303	Bacteria	Proteobacteria	Gammaproteobacteria	Legionellales	Coxiellaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Legionellales;f__Coxiellaceae	Coxiellaceae
+OTU_311	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__;g__;s__	OTU_311
+OTU_226	Bacteria	Verrucomicrobia	[Pedosphaerae]	[Pedosphaerales]				k__Bacteria;p__Verrucomicrobia;c__[Pedosphaerae];o__[Pedosphaerales];f__;g__;s__	OTU_226
+OTU_242	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_11	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Rubrivivax		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__Rubrivivax;s__	Rubrivivax
+OTU_52	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_52
+OTU_2957	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_261	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Paucibacter		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__Paucibacter;s__	Paucibacter
+OTU_618	Bacteria	Acidobacteria	iii1-8	DS-18				k__Bacteria;p__Acidobacteria;c__iii1-8;o__DS-18;f__;g__;s__	OTU_618
+OTU_112	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Nocardioides		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__Nocardioides;s__	Nocardioides
+OTU_272	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__;g__;s__	OTU_272
+OTU_44	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_15	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_15
+OTU_324	Bacteria	TM7	MJK10					k__Bacteria;p__TM7;c__MJK10;o__;f__;g__;s__	OTU_324
+OTU_60	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__;g__;s__	OTU_60
+OTU_640	Bacteria	Planctomycetes	Phycisphaerae	Phycisphaerales				k__Bacteria;p__Planctomycetes;c__Phycisphaerae;o__Phycisphaerales;f__;g__;s__	OTU_640
+OTU_342	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_200	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Rhodoplanes		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Rhodoplanes;s__	Rhodoplanes
+OTU_248	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_248
+OTU_213	Bacteria	Gemmatimonadetes	Gemmatimonadetes	N1423WL				k__Bacteria;p__Gemmatimonadetes;c__Gemmatimonadetes;o__N1423WL;f__;g__;s__	OTU_213
+OTU_122	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Janthinobacterium		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__Janthinobacterium	Janthinobacterium
+OTU_18	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__;g__;s__	OTU_18
+OTU_332	Bacteria	Acidobacteria	Solibacteres	Solibacterales	Solibacteraceae	CandidatusSolibacter		k__Bacteria;p__Acidobacteria;c__Solibacteres;o__Solibacterales;f__Solibacteraceae;g__CandidatusSolibacter;s__	CandidatusSolibacter
+OTU_4120	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_96	Bacteria	Firmicutes	Bacilli	Bacillales	Bacillaceae	Bacillus		k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Bacillaceae;g__Bacillus;s__	Bacillus
+OTU_208	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_37	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Mycobacteriaceae	Mycobacterium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Mycobacteriaceae;g__Mycobacterium;s__	Mycobacterium
+OTU_111	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	C111			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__C111;g__;s__	C111
+OTU_113	Bacteria	Planctomycetes	Phycisphaerae	Phycisphaerales				k__Bacteria;p__Planctomycetes;c__Phycisphaerae;o__Phycisphaerales;f__;g__;s__	OTU_113
+OTU_408	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_408
+OTU_169	Bacteria	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Uliginosibacterium		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Rhodocyclales;f__Rhodocyclaceae;g__Uliginosibacterium;s__	Uliginosibacterium
+OTU_367	Bacteria	Chloroflexi						k__Bacteria;p__Chloroflexi;c__;o__;f__;g__;s__	OTU_367
+OTU_260	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodospirillales	Rhodospirillaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodospirillales;f__Rhodospirillaceae;g__;s__	Rhodospirillaceae
+OTU_245	Bacteria	Bacteroidetes	Sphingobacteriia	Sphingobacteriales				k__Bacteria;p__Bacteroidetes;c__Sphingobacteriia;o__Sphingobacteriales;f__;g__;s__	OTU_245
+OTU_152	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_544	Bacteria	Acidobacteria	Acidobacteria-5					k__Bacteria;p__Acidobacteria;c__Acidobacteria-5;o__;f__;g__;s__	OTU_544
+OTU_430	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae	Adhaeribacter		k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__Adhaeribacter;s__	Adhaeribacter
+OTU_95	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Phyllobacteriaceae	Mesorhizobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Phyllobacteriaceae;g__Mesorhizobium;s__	Mesorhizobium
+OTU_39	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_297	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_48	Bacteria	Proteobacteria	Alphaproteobacteria	Rickettsiales	mitochondria			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rickettsiales;f__mitochondria	mitochondria
+OTU_1238	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_195	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_195
+OTU_237	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_365	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Microbacteriaceae	Microbacteriaceae
+OTU_45	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_45
+OTU_2986	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_172	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_172
+OTU_443	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodospirillales	Rhodospirillaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodospirillales;f__Rhodospirillaceae;g__;s__	Rhodospirillaceae
+OTU_148	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Geodermatophilaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Geodermatophilaceae;g__;s__	Geodermatophilaceae
+OTU_205	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_57	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_57
+OTU_2737	Bacteria	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	CandidatusAccumulibacter		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Rhodocyclales;f__Rhodocyclaceae;g__CandidatusAccumulibacter;s__	CandidatusAccumulibacter
+OTU_16	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_379	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_124	Bacteria	Chloroflexi						k__Bacteria;p__Chloroflexi;c__;o__;f__;g__;s__	OTU_124
+OTU_252	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__;g__;s__	OTU_252
+OTU_114	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_114
+OTU_53	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_100	Bacteria	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Rhodocyclales;f__Rhodocyclaceae	Rhodocyclaceae
+OTU_409	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_409
+OTU_149	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_1364	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]	Kouleothrix		k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__Kouleothrix;s__	Kouleothrix
+OTU_972	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Pilimelia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae;g__Pilimelia;s__	Pilimelia
+OTU_204	Bacteria	Actinobacteria	Actinobacteria	Micrococcales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Micrococcales;f__;g__;s__	OTU_204
+OTU_405	Bacteria	Proteobacteria	Deltaproteobacteria	Syntrophobacterales	Syntrophobacteraceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Syntrophobacterales;f__Syntrophobacteraceae;g__;s__	Syntrophobacteraceae
+OTU_435	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_958	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_958
+OTU_73	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_162	Bacteria	Proteobacteria	Gammaproteobacteria	Alteromonadales	Alteromonadaceae	Cellvibrio		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Alteromonadales;f__Alteromonadaceae;g__Cellvibrio;s__	Cellvibrio
+OTU_280	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardiaceae	Rhodococcus		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardiaceae;g__Rhodococcus	Rhodococcus
+OTU_41	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_70	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_70
+OTU_507	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Arenimonas		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__Arenimonas	Arenimonas
+OTU_145	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_1753	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae	Phycicoccus		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Intrasporangiaceae;g__Phycicoccus;s__	Phycicoccus
+OTU_110	Bacteria	Gemmatimonadetes	Gemm-1					k__Bacteria;p__Gemmatimonadetes;c__Gemm-1;o__;f__;g__;s__	OTU_110
+OTU_63	Bacteria	Actinobacteria	MB-A2-108					k__Bacteria;p__Actinobacteria;c__MB-A2-108;o__;f__;g__;s__	OTU_63
+OTU_19	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales	OTU_19
+OTU_566	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]	Kouleothrix		k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__Kouleothrix;s__	Kouleothrix
+OTU_76	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__	Streptomyces
+OTU_1006	Bacteria	Verrucomicrobia	[Pedosphaerae]	[Pedosphaerales]	Ellin517			k__Bacteria;p__Verrucomicrobia;c__[Pedosphaerae];o__[Pedosphaerales];f__Ellin517;g__;s__	Ellin517
+OTU_128	Bacteria	Actinobacteria	MB-A2-108	0319-7L14				k__Bacteria;p__Actinobacteria;c__MB-A2-108;o__0319-7L14;f__;g__;s__	OTU_128
+OTU_93	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_133									OTU_133
+OTU_329	Bacteria	Chloroflexi	Chloroflexi	Chloroflexales	SBYO_3720			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Chloroflexales;f__SBYO_3720;g__;s__	SBYO_3720
+OTU_215	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_748	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Microbacteriaceae;g__;s__	Microbacteriaceae
+OTU_526	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Haliangiaceae;g__;s__	Haliangiaceae
+OTU_267	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Pseudoxanthomonas		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__Pseudoxanthomonas	Pseudoxanthomonas
+OTU_47	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_79	Archaea	Crenarchaeota	Thaumarchaeota	Nitrososphaerales	Nitrososphaeraceae	CandidatusNitrososphaera		k__Archaea;p__Crenarchaeota;c__Thaumarchaeota;o__Nitrososphaerales;f__Nitrososphaeraceae;g__CandidatusNitrososphaera	CandidatusNitrososphaera
+OTU_21	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_178	Bacteria	Acidobacteria	PAUC37f					k__Bacteria;p__Acidobacteria;c__PAUC37f;o__;f__;g__;s__	OTU_178
+OTU_682	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_682
+OTU_50	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_50
+OTU_4090	Bacteria	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pseudomonadales;f__Pseudomonadaceae;g__;s__	Pseudomonadaceae
+OTU_270	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Devosia;s__	Devosia
+OTU_243	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Rhodoplanes		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Rhodoplanes;s__	Rhodoplanes
+OTU_177	Bacteria	Proteobacteria	Betaproteobacteria	SC-I-84				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__SC-I-84;f__;g__;s__	OTU_177
+OTU_924	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_108	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_84	Bacteria	Chloroflexi	TK17					k__Bacteria;p__Chloroflexi;c__TK17;o__;f__;g__;s__	OTU_84
+OTU_407	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__;s__	Oxalobacteraceae
+OTU_284	Bacteria	Chloroflexi	TK17					k__Bacteria;p__Chloroflexi;c__TK17;o__;f__;g__;s__	OTU_284
+OTU_339	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_339
+OTU_220	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_220
+OTU_64	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_64
+OTU_301	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Rhizobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Rhizobiaceae;g__Rhizobium;s__	Rhizobium
+OTU_51	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacteriales;f__Enterobacteriaceae;g__;s__	Enterobacteriaceae
+OTU_652	Bacteria	Verrucomicrobia	[Pedosphaerae]	[Pedosphaerales]	Ellin515			k__Bacteria;p__Verrucomicrobia;c__[Pedosphaerae];o__[Pedosphaerales];f__Ellin515;g__;s__	Ellin515
+OTU_556	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Methylobacteriaceae	Methylobacterium	adhaesivum	k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Methylobacteriaceae;g__Methylobacterium;s__adhaesivum	adhaesivum
+OTU_675	Bacteria	Gemmatimonadetes	Gemm-3					k__Bacteria;p__Gemmatimonadetes;c__Gemm-3;o__;f__;g__;s__	OTU_675
+OTU_65	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Kribbella		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__Kribbella;s__	Kribbella
+OTU_103	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_191	Bacteria	Actinobacteria	MB-A2-108	0319-7L14				k__Bacteria;p__Actinobacteria;c__MB-A2-108;o__0319-7L14;f__;g__;s__	OTU_191
+OTU_116	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Geodermatophilaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Geodermatophilaceae	Geodermatophilaceae
+OTU_293	Bacteria	Proteobacteria	Deltaproteobacteria	Spirobacillales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Spirobacillales;f__;g__;s__	OTU_293
+OTU_194	Bacteria	Gemmatimonadetes	Gemmatimonadetes	Gemmatimonadales	Ellin5301			k__Bacteria;p__Gemmatimonadetes;c__Gemmatimonadetes;o__Gemmatimonadales;f__Ellin5301;g__;s__	Ellin5301
+OTU_130	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__;g__;s__	OTU_130
+OTU_192	Bacteria	Firmicutes	Bacilli	Bacillales	Alicyclobacillaceae	Alicyclobacillus		k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Alicyclobacillaceae;g__Alicyclobacillus;s__	Alicyclobacillus
+OTU_61	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae	Salinibacterium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Microbacteriaceae;g__Salinibacterium;s__	Salinibacterium
+OTU_78	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_412	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Williamsiaceae	Williamsia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Williamsiaceae;g__Williamsia;s__	Williamsia
+OTU_433	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_1202	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Sporichthyaceae	Sporichthya		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Sporichthyaceae;g__Sporichthya;s__	Sporichthya
+OTU_790	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__;g__;s__	OTU_790
+OTU_4630	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_1348	Bacteria	Chloroflexi	TK17					k__Bacteria;p__Chloroflexi;c__TK17;o__;f__;g__;s__	OTU_1348
+OTU_543	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Janthinobacterium	lividum	k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__Janthinobacterium;s__lividum	lividum
+OTU_235	Bacteria	Verrucomicrobia	[Pedosphaerae]	[Pedosphaerales]	Ellin515			k__Bacteria;p__Verrucomicrobia;c__[Pedosphaerae];o__[Pedosphaerales];f__Ellin515;g__;s__	Ellin515
+OTU_502	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_2387	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardiaceae	Rhodococcus		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardiaceae;g__Rhodococcus;s__	Rhodococcus
+OTU_31	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micrococcaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micrococcaceae;g__;s__	Micrococcaceae
+OTU_91	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_91
+OTU_273	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_273
+OTU_315	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Saprospiraceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Saprospiraceae;g__;s__	Saprospiraceae
+OTU_1984	Bacteria	Firmicutes	Bacilli	Bacillales	Paenibacillaceae	Paenibacillus		k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Paenibacillaceae;g__Paenibacillus;s__	Paenibacillus
+OTU_2083	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_382	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_59	Bacteria	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pseudomonadales;f__Pseudomonadaceae	Pseudomonadaceae
+OTU_484	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micrococcaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micrococcaceae;g__;s__	Micrococcaceae
+OTU_2561	Bacteria	Planctomycetes	Phycisphaerae	Phycisphaerales				k__Bacteria;p__Planctomycetes;c__Phycisphaerae;o__Phycisphaerales;f__;g__;s__	OTU_2561
+OTU_1356	Bacteria	Bacteroidetes	Sphingobacteriia	Sphingobacteriales	Sphingobacteriaceae	Pedobacter		k__Bacteria;p__Bacteroidetes;c__Sphingobacteriia;o__Sphingobacteriales;f__Sphingobacteriaceae;g__Pedobacter;s__	Pedobacter
+OTU_105	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_396	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Hyphomicrobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Hyphomicrobium;s__	Hyphomicrobium
+OTU_560	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Methylobacteriaceae	Methylobacterium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Methylobacteriaceae;g__Methylobacterium;s__	Methylobacterium
+OTU_35	Bacteria	Planctomycetes	Phycisphaerae	Phycisphaerales				k__Bacteria;p__Planctomycetes;c__Phycisphaerae;o__Phycisphaerales;f__;g__;s__	OTU_35
+OTU_219	Bacteria	Firmicutes	Bacilli	Bacillales	Bacillaceae			k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Bacillaceae;g__;s__	Bacillaceae
+OTU_155	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces	mirabilis	k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__mirabilis	mirabilis
+OTU_120	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Pseudonocardiaceae	Pseudonocardiaceae
+OTU_229	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_316	Bacteria	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae	Pseudomonas		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pseudomonadales;f__Pseudomonadaceae;g__Pseudomonas;s__	Pseudomonas
+OTU_343	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptosporangiaceae	Streptosporangium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptosporangiaceae;g__Streptosporangium;s__	Streptosporangium
+OTU_689	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Polyangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Polyangiaceae	Polyangiaceae
+OTU_397	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_397
+OTU_119	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_231	Bacteria	Firmicutes	Bacilli	Bacillales	Paenibacillaceae	Paenibacillus		k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Paenibacillaceae;g__Paenibacillus;s__	Paenibacillus
+OTU_307	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_69	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Mycobacteriaceae	Mycobacterium	vaccae	k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Mycobacteriaceae;g__Mycobacterium;s__vaccae	vaccae
+OTU_75	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_447	Bacteria	Chloroflexi						k__Bacteria;p__Chloroflexi	OTU_447
+OTU_36	Bacteria	Chloroflexi	Chloroflexi	Chloroflexales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Chloroflexales	OTU_36
+OTU_123	Bacteria	Acidobacteria	iii1-8	DS-18				k__Bacteria;p__Acidobacteria;c__iii1-8;o__DS-18;f__;g__;s__	OTU_123
+OTU_90	Bacteria	Chloroflexi	TK17					k__Bacteria;p__Chloroflexi;c__TK17;o__;f__;g__;s__	OTU_90
+OTU_170	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_480	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_74	Bacteria	Proteobacteria	Betaproteobacteria	Methylophilales	Methylophilaceae	Methylotenera	mobilis	k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Methylophilales;f__Methylophilaceae;g__Methylotenera;s__mobilis	mobilis
+OTU_394	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodobacterales	Rhodobacteraceae	Rhodobacter		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodobacterales;f__Rhodobacteraceae;g__Rhodobacter;s__	Rhodobacter
+OTU_493	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Burkholderia		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Burkholderiaceae;g__Burkholderia;s__	Burkholderia
+OTU_89	Bacteria	[Thermi]	Deinococci	Deinococcales	Deinococcaceae	Deinococcus		k__Bacteria;p__[Thermi];c__Deinococci;o__Deinococcales;f__Deinococcaceae;g__Deinococcus;s__	Deinococcus
+OTU_125	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_125
+OTU_1383	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_1383
+OTU_181	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10	OTU_181
+OTU_163	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_163
+OTU_368	Bacteria	Gemmatimonadetes	Gemmatimonadetes	Ellin5290				k__Bacteria;p__Gemmatimonadetes;c__Gemmatimonadetes;o__Ellin5290;f__;g__;s__	OTU_368
+OTU_3453	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	[Weeksellaceae]	Chryseobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__[Weeksellaceae];g__Chryseobacterium;s__	Chryseobacterium
+OTU_422	Bacteria	Proteobacteria	Betaproteobacteria	SC-I-84				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__SC-I-84;f__;g__;s__	OTU_422
+OTU_349	Bacteria	Proteobacteria	Betaproteobacteria	A21b	UD5			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__A21b;f__UD5;g__;s__	UD5
+OTU_1183	Bacteria	Planctomycetes	Pla4					k__Bacteria;p__Planctomycetes;c__Pla4;o__;f__;g__;s__	OTU_1183
+OTU_117									OTU_117
+OTU_294	Bacteria	Gemmatimonadetes	Gemmatimonadetes					k__Bacteria;p__Gemmatimonadetes;c__Gemmatimonadetes;o__;f__;g__;s__	OTU_294
+OTU_310	Bacteria	Proteobacteria	Betaproteobacteria	Ellin6067				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Ellin6067;f__;g__;s__	OTU_310
+OTU_842	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_406	Bacteria	TM7	TM7-3	EW055				k__Bacteria;p__TM7;c__TM7-3;o__EW055;f__;g__;s__	OTU_406
+OTU_461	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_590	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_171	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae	Balneimonas		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Bradyrhizobiaceae;g__Balneimonas;s__	Balneimonas
+OTU_190	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Ramlibacter		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__Ramlibacter;s__	Ramlibacter
+OTU_279	Bacteria	Chloroflexi						k__Bacteria;p__Chloroflexi;c__;o__;f__;g__;s__	OTU_279
+OTU_160	Bacteria	Proteobacteria	Betaproteobacteria	Methylophilales	Methylophilaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Methylophilales;f__Methylophilaceae;g__;s__	Methylophilaceae
+OTU_159	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales	Solirubrobacteraceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__Solirubrobacteraceae;g__;s__	Solirubrobacteraceae
+OTU_224	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_224
+OTU_106	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Methylibium		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__Methylibium;s__	Methylibium
+OTU_24	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Agrobacterium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Rhizobiaceae;g__Agrobacterium;s__	Agrobacterium
+OTU_286	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Aeromicrobium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__Aeromicrobium;s__	Aeromicrobium
+OTU_283	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_3950	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_129	Bacteria	Gemmatimonadetes	Gemmatimonadetes	N1423WL				k__Bacteria;p__Gemmatimonadetes;c__Gemmatimonadetes;o__N1423WL;f__;g__;s__	OTU_129
+OTU_222	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Saprospiraceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Saprospiraceae;g__;s__	Saprospiraceae
+OTU_269	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_269
+OTU_139	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Rhodoplanes		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Rhodoplanes;s__	Rhodoplanes
+OTU_104	Bacteria	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Caulobacterales;f__Caulobacteraceae;g__;s__	Caulobacteraceae
+OTU_62	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]	Kouleothrix		k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__Kouleothrix;s__	Kouleothrix
+OTU_121	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_672	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae	Oxalobacteraceae
+OTU_401	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae	Bosea	genosp.	k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Bradyrhizobiaceae;g__Bosea;s__genosp.	genosp.
+OTU_165	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_165
+OTU_325	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria	OTU_325
+OTU_348	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_348
+OTU_513	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_156	Bacteria	Proteobacteria	Betaproteobacteria	SC-I-84				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__SC-I-84;f__;g__;s__	OTU_156
+OTU_1062	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Rubrivivax		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__Rubrivivax;s__	Rubrivivax
+OTU_477	Bacteria	Acidobacteria	Acidobacteria-5					k__Bacteria;p__Acidobacteria;c__Acidobacteria-5;o__;f__;g__;s__	OTU_477
+OTU_1409	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae	Phycicoccus		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Intrasporangiaceae;g__Phycicoccus;s__	Phycicoccus
+OTU_1397	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_221	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae			k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Clostridiaceae;g__;s__	Clostridiaceae
+OTU_341	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_341
+OTU_317	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Devosia;s__	Devosia
+OTU_80	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_80
+OTU_197	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10	OTU_197
+OTU_201									OTU_201
+OTU_258	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae	Comamonadaceae
+OTU_209	Bacteria	Actinobacteria	MB-A2-108	0319-7L14				k__Bacteria;p__Actinobacteria;c__MB-A2-108;o__0319-7L14;f__;g__;s__	OTU_209
+OTU_26	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_26
+OTU_292	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_292
+OTU_979	Bacteria	Proteobacteria	Deltaproteobacteria	MIZ46				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__MIZ46;f__;g__;s__	OTU_979
+OTU_55	Bacteria	Chloroflexi	C0119					k__Bacteria;p__Chloroflexi;c__C0119;o__;f__;g__;s__	OTU_55
+OTU_506	Bacteria	Chloroflexi	Chloroflexi	AKIW781				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__AKIW781;f__;g__;s__	OTU_506
+OTU_227	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_227
+OTU_164	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_331	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae	Micromonosporaceae
+OTU_218	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_107	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	C111			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__C111;g__;s__	C111
+OTU_1204	Bacteria	Proteobacteria	Betaproteobacteria	Nitrosomonadales	Nitrosomonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Nitrosomonadales;f__Nitrosomonadaceae;g__;s__	Nitrosomonadaceae
+OTU_428	Bacteria	TM7	TM7-3	I025				k__Bacteria;p__TM7;c__TM7-3;o__I025;f__;g__;s__	OTU_428
+OTU_481	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_481
+OTU_849	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Sinobacteraceae;g__;s__	Sinobacteraceae
+OTU_186	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_186
+OTU_378	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae	Ralstonia		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__Ralstonia;s__	Ralstonia
+OTU_274	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae	Pseudonocardia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Pseudonocardiaceae;g__Pseudonocardia;s__	Pseudonocardia
+OTU_72	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_72
+OTU_728	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_2803	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_256	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]	Kouleothrix		k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__Kouleothrix;s__	Kouleothrix
+OTU_597	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_232	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_2615	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_2102	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Sporichthyaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Sporichthyaceae;g__;s__	Sporichthyaceae
+OTU_199	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_199
+OTU_183	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_183
+OTU_662	Bacteria	TM7	TM7-3					k__Bacteria;p__TM7;c__TM7-3;o__;f__;g__;s__	OTU_662
+OTU_490	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__;s__	Oxalobacteraceae
+OTU_701	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter		k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfuromonadales;f__Geobacteraceae;g__Geobacter;s__	Geobacter
+OTU_346	Bacteria	Actinobacteria	MB-A2-108	0319-7L14				k__Bacteria;p__Actinobacteria;c__MB-A2-108;o__0319-7L14;f__;g__;s__	OTU_346
+OTU_68	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae	Terracoccus		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Intrasporangiaceae;g__Terracoccus;s__	Terracoccus
+OTU_384	Bacteria	Chloroflexi	TK10	B07_WMSP1	FFCH4570			k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__FFCH4570;g__;s__	FFCH4570
+OTU_1946	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_1074	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae	Erwinia		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacteriales;f__Enterobacteriaceae;g__Erwinia;s__	Erwinia
+OTU_381	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__;g__;s__	OTU_381
+OTU_920	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae	Streptomycetaceae
+OTU_1405	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_1405
+OTU_1385	Bacteria	AD3	ABS-6					k__Bacteria;p__AD3;c__ABS-6;o__;f__;g__;s__	OTU_1385
+OTU_1704	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Hyphomicrobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Hyphomicrobium;s__	Hyphomicrobium
+OTU_336	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Devosia;s__	Devosia
+OTU_571	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_497	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Sphingopyxis		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Sphingomonadales;f__Sphingomonadaceae;g__Sphingopyxis;s__	Sphingopyxis
+OTU_4718	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__;g__;s__	OTU_4718
+OTU_729	Bacteria	Verrucomicrobia	[Pedosphaerae]	[Pedosphaerales]	Ellin517			k__Bacteria;p__Verrucomicrobia;c__[Pedosphaerae];o__[Pedosphaerales];f__Ellin517;g__;s__	Ellin517
+OTU_230	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__;g__;s__	OTU_230
+OTU_426	Bacteria	Proteobacteria	Alphaproteobacteria	Ellin329				k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Ellin329;f__;g__;s__	OTU_426
+OTU_483	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_954	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae	Comamonadaceae
+OTU_762	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__	Streptomyces
+OTU_500	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Pedomicrobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Pedomicrobium;s__	Pedomicrobium
+OTU_275	Bacteria	Acidobacteria	Solibacteres	Solibacterales				k__Bacteria;p__Acidobacteria;c__Solibacteres;o__Solibacterales;f__;g__;s__	OTU_275
+OTU_134	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales	Solirubrobacteraceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__Solirubrobacteraceae	Solirubrobacteraceae
+OTU_290	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_290
+OTU_554	Bacteria	Acidobacteria	Solibacteres	Solibacterales	Solibacteraceae	CandidatusSolibacter		k__Bacteria;p__Acidobacteria;c__Solibacteres;o__Solibacterales;f__Solibacteraceae;g__CandidatusSolibacter;s__	CandidatusSolibacter
+OTU_3455	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_3455
+OTU_249									OTU_249
+OTU_143	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Methylibium		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__Methylibium;s__	Methylibium
+OTU_811	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_436	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_244	Bacteria	Chloroflexi	Anaerolineae					k__Bacteria;p__Chloroflexi;c__Anaerolineae	OTU_244
+OTU_509	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_67	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Sinobacteraceae;g__;s__	Sinobacteraceae
+OTU_1482	Bacteria	Chloroflexi	TK10	B07_WMSP1	FFCH4570			k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__FFCH4570;g__;s__	FFCH4570
+OTU_392	Bacteria	Acidobacteria	DA052	Ellin6513				k__Bacteria;p__Acidobacteria;c__DA052;o__Ellin6513;f__;g__;s__	OTU_392
+OTU_450	Bacteria	Bacteroidetes	Sphingobacteriia	Sphingobacteriales				k__Bacteria;p__Bacteroidetes;c__Sphingobacteriia;o__Sphingobacteriales;f__;g__;s__	OTU_450
+OTU_334	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_632	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_420	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae	Pseudonocardia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Pseudonocardiaceae;g__Pseudonocardia;s__	Pseudonocardia
+OTU_600	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_404	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_390	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Kaistobacter		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Sphingomonadales;f__Sphingomonadaceae;g__Kaistobacter;s__	Kaistobacter
+OTU_2724	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_257	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_257
+OTU_151	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_3381	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae	Comamonadaceae
+OTU_784	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodospirillales	Rhodospirillaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodospirillales;f__Rhodospirillaceae;g__;s__	Rhodospirillaceae
+OTU_444	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	Microthrixaceae			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__Microthrixaceae;g__;s__	Microthrixaceae
+OTU_421	Bacteria	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae	Pseudomonas		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pseudomonadales;f__Pseudomonadaceae;g__Pseudomonas;s__	Pseudomonas
+OTU_179	Bacteria	Planctomycetes	Phycisphaerae	Phycisphaerales				k__Bacteria;p__Planctomycetes;c__Phycisphaerae;o__Phycisphaerales;f__;g__;s__	OTU_179
+OTU_223	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__;g__;s__	OTU_223
+OTU_345	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_4117	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_389	Bacteria	TM7	TM7-3	I025				k__Bacteria;p__TM7;c__TM7-3;o__I025;f__;g__;s__	OTU_389
+OTU_246	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae	Pseudonocardia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Pseudonocardiaceae;g__Pseudonocardia;s__	Pseudonocardia
+OTU_157	Bacteria	Verrucomicrobia	[Pedosphaerae]	[Pedosphaerales]	Ellin517			k__Bacteria;p__Verrucomicrobia;c__[Pedosphaerae];o__[Pedosphaerales];f__Ellin517;g__;s__	Ellin517
+OTU_1201	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_1201
+OTU_264	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__;s__	Oxalobacteraceae
+OTU_508	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodospirillales	Rhodospirillaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodospirillales;f__Rhodospirillaceae;g__;s__	Rhodospirillaceae
+OTU_203	Bacteria	Bacteroidetes	Sphingobacteriia	Sphingobacteriales				k__Bacteria;p__Bacteroidetes;c__Sphingobacteriia;o__Sphingobacteriales;f__;g__;s__	OTU_203
+OTU_1181	Bacteria	Chloroflexi						k__Bacteria;p__Chloroflexi	OTU_1181
+OTU_330	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Hyphomicrobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Hyphomicrobium;s__	Hyphomicrobium
+OTU_166	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_1407	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Sinobacteraceae;g__;s__	Sinobacteraceae
+OTU_383	Bacteria	AD3	ABS-6					k__Bacteria;p__AD3;c__ABS-6;o__;f__;g__;s__	OTU_383
+OTU_375	Bacteria	Actinobacteria	Rubrobacteria	Rubrobacterales	Rubrobacteraceae			k__Bacteria;p__Actinobacteria;c__Rubrobacteria;o__Rubrobacterales;f__Rubrobacteraceae;g__;s__	Rubrobacteraceae
+OTU_289	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__;g__;s__	OTU_289
+OTU_147	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae	Microbacterium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Microbacteriaceae;g__Microbacterium;s__	Microbacterium
+OTU_370	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_487	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Aurantimonadaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Aurantimonadaceae;g__;s__	Aurantimonadaceae
+OTU_612	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__;g__;s__	OTU_612
+OTU_207	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_207
+OTU_161	Bacteria	Proteobacteria	Alphaproteobacteria					k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria	OTU_161
+OTU_318	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Devosia;s__	Devosia
+OTU_424	Bacteria	[Thermi]	Deinococci	Deinococcales	Deinococcaceae	Deinococcus	aquatilis	k__Bacteria;p__[Thermi];c__Deinococci;o__Deinococcales;f__Deinococcaceae;g__Deinococcus;s__aquatilis	aquatilis
+OTU_935	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_935
+OTU_360	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_360
+OTU_453	Bacteria	Firmicutes	Bacilli	Bacillales	Paenibacillaceae	Cohnella		k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Paenibacillaceae;g__Cohnella;s__	Cohnella
+OTU_150	Bacteria	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Nitrospira		k__Bacteria;p__Nitrospirae;c__Nitrospira;o__Nitrospirales;f__Nitrospiraceae;g__Nitrospira;s__	Nitrospira
+OTU_472	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_2373	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae	Microbacterium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Microbacteriaceae;g__Microbacterium;s__	Microbacterium
+OTU_140	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Hyphomicrobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Hyphomicrobium;s__	Hyphomicrobium
+OTU_137	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Actinosynnemataceae	Lentzea		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Actinosynnemataceae;g__Lentzea	Lentzea
+OTU_3948	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_425	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhizobiaceae	Agrobacterium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Rhizobiaceae;g__Agrobacterium;s__	Agrobacterium
+OTU_153	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Polyangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Polyangiaceae	Polyangiaceae
+OTU_46	Bacteria	Bacteroidetes	Sphingobacteriia	Sphingobacteriales				k__Bacteria;p__Bacteroidetes;c__Sphingobacteriia;o__Sphingobacteriales;f__;g__;s__	OTU_46
+OTU_990	Bacteria	Actinobacteria	MB-A2-108	0319-7L14				k__Bacteria;p__Actinobacteria;c__MB-A2-108;o__0319-7L14;f__;g__;s__	OTU_990
+OTU_413	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__;g__;s__	OTU_413
+OTU_594	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_1909	Bacteria	Proteobacteria	Gammaproteobacteria	Alteromonadales	Alteromonadaceae	Cellvibrio		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Alteromonadales;f__Alteromonadaceae;g__Cellvibrio;s__	Cellvibrio
+OTU_319	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_584	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_584
+OTU_314	Bacteria	Acidobacteria	Sva0725	Sva0725				k__Bacteria;p__Acidobacteria;c__Sva0725;o__Sva0725;f__;g__;s__	OTU_314
+OTU_944	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter		k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfuromonadales;f__Geobacteraceae;g__Geobacter;s__	Geobacter
+OTU_302	Bacteria	Gemmatimonadetes	Gemm-1					k__Bacteria;p__Gemmatimonadetes;c__Gemm-1;o__;f__;g__;s__	OTU_302
+OTU_132	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_132
+OTU_706	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae	Hyphomicrobiaceae
+OTU_467	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__;g__;s__	OTU_467
+OTU_1940	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_1940
+OTU_2014									OTU_2014
+OTU_241	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_727	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_975	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_975
+OTU_265	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_135	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_214	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micrococcaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micrococcaceae;g__;s__	Micrococcaceae
+OTU_2939	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Intrasporangiaceae	Intrasporangiaceae
+OTU_175	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae	Agromyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Microbacteriaceae;g__Agromyces;s__	Agromyces
+OTU_236	Bacteria	Acidobacteria	Acidobacteriia	Acidobacteriales	Koribacteraceae			k__Bacteria;p__Acidobacteria;c__Acidobacteriia;o__Acidobacteriales;f__Koribacteraceae;g__;s__	Koribacteraceae
+OTU_475	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_475
+OTU_173	Bacteria	Acidobacteria	Solibacteres	Solibacterales	Solibacteraceae	CandidatusSolibacter		k__Bacteria;p__Acidobacteria;c__Solibacteres;o__Solibacterales;f__Solibacteraceae;g__CandidatusSolibacter;s__	CandidatusSolibacter
+OTU_2489	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__;g__;s__	OTU_2489
+OTU_2039	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Kaistobacter		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Sphingomonadales;f__Sphingomonadaceae;g__Kaistobacter;s__	Kaistobacter
+OTU_442	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_442
+OTU_3114	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_870	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_870
+OTU_326	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_904	Bacteria	AD3	JG37-AG-4					k__Bacteria;p__AD3;c__JG37-AG-4;o__;f__;g__;s__	OTU_904
+OTU_1671	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae;g__;s__	Micromonosporaceae
+OTU_515	Bacteria	Bacteroidetes	Sphingobacteriia	Sphingobacteriales				k__Bacteria;p__Bacteroidetes;c__Sphingobacteriia;o__Sphingobacteriales;f__;g__;s__	OTU_515
+OTU_836	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_836
+OTU_217	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_217
+OTU_127	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Rhodoplanes		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Rhodoplanes;s__	Rhodoplanes
+OTU_131	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_211	Bacteria	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Mycoplana		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Caulobacterales;f__Caulobacteraceae;g__Mycoplana;s__	Mycoplana
+OTU_875	Bacteria	Actinobacteria	Rubrobacteria	Rubrobacterales	Rubrobacteraceae	Rubrobacter		k__Bacteria;p__Actinobacteria;c__Rubrobacteria;o__Rubrobacterales;f__Rubrobacteraceae;g__Rubrobacter;s__	Rubrobacter
+OTU_3177	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Rhodoplanes		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Rhodoplanes;s__	Rhodoplanes
+OTU_1051	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_1051
+OTU_891	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_86	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_86
+OTU_87	Bacteria	Chloroflexi	C0119					k__Bacteria;p__Chloroflexi;c__C0119;o__;f__;g__;s__	OTU_87
+OTU_251	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	EB1017			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__EB1017;g__;s__	EB1017
+OTU_202	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_1352	Bacteria	TM7	TM7-3					k__Bacteria;p__TM7;c__TM7-3;o__;f__;g__;s__	OTU_1352
+OTU_641	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_641
+OTU_494	Bacteria	Proteobacteria	Betaproteobacteria	MND1				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__MND1;f__;g__;s__	OTU_494
+OTU_1021	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodobacterales	Rhodobacteraceae	Rhodobacter		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodobacterales;f__Rhodobacteraceae;g__Rhodobacter;s__	Rhodobacter
+OTU_411	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_411
+OTU_136	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Cellulomonadaceae	Cellulomonas		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Cellulomonadaceae;g__Cellulomonas;s__	Cellulomonas
+OTU_775	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_1317	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_4174	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1	OTU_4174
+OTU_593	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_462	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_462
+OTU_126	Bacteria	Verrucomicrobia	[Pedosphaerae]	[Pedosphaerales]				k__Bacteria;p__Verrucomicrobia;c__[Pedosphaerae];o__[Pedosphaerales];f__;g__;s__	OTU_126
+OTU_168	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Intrasporangiaceae	Phycicoccus		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Intrasporangiaceae;g__Phycicoccus;s__	Phycicoccus
+OTU_335	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_335
+OTU_1568	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_1568
+OTU_2855	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	EB1017			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__EB1017;g__;s__	EB1017
+OTU_489	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae	Salinispora		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Burkholderiaceae;g__Salinispora	Salinispora
+OTU_154	Bacteria	Proteobacteria	Betaproteobacteria	A21b	EB1003			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__A21b;f__EB1003;g__;s__	EB1003
+OTU_695	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales	OTU_695
+OTU_827	Bacteria	Proteobacteria	Deltaproteobacteria	Bdellovibrionales	Bdellovibrionaceae	Bdellovibrio		k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Bdellovibrionales;f__Bdellovibrionaceae;g__Bdellovibrio;s__	Bdellovibrio
+OTU_193	Bacteria	Chloroflexi	Dehalococcoidetes	Dehalococcoidales	Dehalococcoidaceae			k__Bacteria;p__Chloroflexi;c__Dehalococcoidetes;o__Dehalococcoidales;f__Dehalococcoidaceae;g__;s__	Dehalococcoidaceae
+OTU_657	Bacteria	Chloroflexi	TK17					k__Bacteria;p__Chloroflexi;c__TK17;o__;f__;g__;s__	OTU_657
+OTU_956	Bacteria	Acidobacteria	Sva0725	Sva0725				k__Bacteria;p__Acidobacteria;c__Sva0725;o__Sva0725;f__;g__;s__	OTU_956
+OTU_328	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_2129	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_263									OTU_263
+OTU_210	Bacteria	Chloroflexi	Chloroflexi	AKIW781				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__AKIW781;f__;g__;s__	OTU_210
+OTU_1620	Bacteria	Acidobacteria	Sva0725	Sva0725				k__Bacteria;p__Acidobacteria;c__Sva0725;o__Sva0725;f__;g__;s__	OTU_1620
+OTU_452	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_452
+OTU_1917	Bacteria	Gemmatimonadetes	Gemm-3					k__Bacteria;p__Gemmatimonadetes;c__Gemm-3;o__;f__;g__;s__	OTU_1917
+OTU_359	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	[Weeksellaceae]	Chryseobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__[Weeksellaceae];g__Chryseobacterium;s__	Chryseobacterium
+OTU_138	Bacteria	Chloroflexi	TK10	B07_WMSP1	FFCH4570			k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__FFCH4570;g__;s__	FFCH4570
+OTU_693	Bacteria	Proteobacteria	Deltaproteobacteria	MIZ46				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__MIZ46;f__;g__;s__	OTU_693
+OTU_234	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Aeromicrobium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__Aeromicrobium;s__	Aeromicrobium
+OTU_1599	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Pedomicrobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Pedomicrobium;s__	Pedomicrobium
+OTU_298	Bacteria	Firmicutes	Bacilli	Bacillales	Paenibacillaceae	Paenibacillus		k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Paenibacillaceae;g__Paenibacillus;s__	Paenibacillus
+OTU_187	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodospirillales	Acetobacteraceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodospirillales;f__Acetobacteraceae	Acetobacteraceae
+OTU_276	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_276
+OTU_2876	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_309	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_300	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_300
+OTU_1699	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_109	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Actinosynnemataceae	Lentzea		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Actinosynnemataceae;g__Lentzea	Lentzea
+OTU_448	Bacteria	Proteobacteria	Betaproteobacteria	MND1				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__MND1;f__;g__;s__	OTU_448
+OTU_2656	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_4440	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Alcaligenaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Alcaligenaceae;g__;s__	Alcaligenaceae
+OTU_94									OTU_94
+OTU_541	Bacteria	Chloroflexi	Chloroflexi	Chloroflexales	FFCH7168			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Chloroflexales;f__FFCH7168;g__;s__	FFCH7168
+OTU_478	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Cryomorphaceae			k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Cryomorphaceae;g__;s__	Cryomorphaceae
+OTU_380	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales				k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__;g__;s__	OTU_380
+OTU_391	Bacteria	Spirochaetes	Spirochaetes	Spirochaetales	Spirochaetaceae	Spirochaeta	aurantia	k__Bacteria;p__Spirochaetes;c__Spirochaetes;o__Spirochaetales;f__Spirochaetaceae;g__Spirochaeta;s__aurantia	aurantia
+OTU_295									OTU_295
+OTU_742	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Pilimelia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae;g__Pilimelia;s__	Pilimelia
+OTU_623	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_440	Bacteria	Planctomycetes	vadinHA49	DH61				k__Bacteria;p__Planctomycetes;c__vadinHA49;o__DH61;f__;g__;s__	OTU_440
+OTU_438	Bacteria	TM7	TM7-3					k__Bacteria;p__TM7;c__TM7-3;o__;f__;g__;s__	OTU_438
+OTU_1152	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_1152
+OTU_141	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	C111			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__C111;g__;s__	C111
+OTU_398	Bacteria	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Nitrospira		k__Bacteria;p__Nitrospirae;c__Nitrospira;o__Nitrospirales;f__Nitrospiraceae;g__Nitrospira;s__	Nitrospira
+OTU_240	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_185	Bacteria	Bacteroidetes	Sphingobacteriia	Sphingobacteriales				k__Bacteria;p__Bacteroidetes;c__Sphingobacteriia;o__Sphingobacteriales;f__;g__;s__	OTU_185
+OTU_142									OTU_142
+OTU_1804	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Thermomonosporaceae	Actinocorallia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Thermomonosporaceae;g__Actinocorallia	Actinocorallia
+OTU_719	Bacteria	Chloroflexi	Chloroflexi	AKIW781				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__AKIW781;f__;g__;s__	OTU_719
+OTU_1375	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__;s__	Oxalobacteraceae
+OTU_320	Bacteria	TM7	SC3					k__Bacteria;p__TM7;c__SC3;o__;f__;g__;s__	OTU_320
+OTU_357	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodobacterales	Rhodobacteraceae	Paracoccus		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodobacterales;f__Rhodobacteraceae;g__Paracoccus	Paracoccus
+OTU_1702	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Mycobacteriaceae	Mycobacterium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Mycobacteriaceae;g__Mycobacterium;s__	Mycobacterium
+OTU_1618	Bacteria	SBR1093						k__Bacteria;p__SBR1093;c__;o__;f__;g__;s__	OTU_1618
+OTU_476	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Lysobacter		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__Lysobacter;s__	Lysobacter
+OTU_158	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_158
+OTU_347	Bacteria	Chloroflexi	Chloroflexi	AKIW781				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__AKIW781;f__;g__;s__	OTU_347
+OTU_188	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_188
+OTU_2771	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_174	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_174
+OTU_581	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	C111			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__C111;g__;s__	C111
+OTU_1232	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__;g__;s__	OTU_1232
+OTU_485	Bacteria	Proteobacteria	Gammaproteobacteria	Alteromonadales	211ds20			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Alteromonadales;f__211ds20;g__;s__	211ds20
+OTU_752	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_3747	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria	OTU_3747
+OTU_551	Bacteria	Proteobacteria	Gammaproteobacteria	Legionellales				k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Legionellales	OTU_551
+OTU_291	Bacteria	Chloroflexi	Chloroflexi	AKIW781				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__AKIW781;f__;g__;s__	OTU_291
+OTU_271									OTU_271
+OTU_88	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_322	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Nannocystaceae	Nannocystis		k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Nannocystaceae;g__Nannocystis;s__	Nannocystis
+OTU_393	Bacteria	Chloroflexi						k__Bacteria;p__Chloroflexi;c__;o__;f__;g__;s__	OTU_393
+OTU_799	Bacteria	Acidobacteria	Sva0725	Sva0725				k__Bacteria;p__Acidobacteria;c__Sva0725;o__Sva0725;f__;g__;s__	OTU_799
+OTU_306	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_216	Bacteria	Proteobacteria	Betaproteobacteria	SC-I-84				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__SC-I-84;f__;g__;s__	OTU_216
+OTU_1478	Bacteria	FBP						k__Bacteria;p__FBP;c__;o__;f__;g__;s__	OTU_1478
+OTU_674	Bacteria	Proteobacteria	Gammaproteobacteria	Enterobacteriales	Enterobacteriaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Enterobacteriales;f__Enterobacteriaceae;g__;s__	Enterobacteriaceae
+OTU_753	Bacteria	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Caulobacterales;f__Caulobacteraceae;g__;s__	Caulobacteraceae
+OTU_714	Bacteria	Planctomycetes	Phycisphaerae	Phycisphaerales				k__Bacteria;p__Planctomycetes;c__Phycisphaerae;o__Phycisphaerales;f__;g__;s__	OTU_714
+OTU_777	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptococcaceae	Desulfosporosinus	meridiei	k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptococcaceae;g__Desulfosporosinus;s__meridiei	meridiei
+OTU_4481	Bacteria	Chloroflexi						k__Bacteria;p__Chloroflexi;c__;o__;f__;g__;s__	OTU_4481
+OTU_850	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales	OTU_850
+OTU_427	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardiaceae	Nocardia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardiaceae;g__Nocardia;s__	Nocardia
+OTU_3879	Bacteria	Proteobacteria	Betaproteobacteria	SC-I-84				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__SC-I-84;f__;g__;s__	OTU_3879
+OTU_167	Bacteria	Chlorobi	OPB56					k__Bacteria;p__Chlorobi;c__OPB56;o__;f__;g__;s__	OTU_167
+OTU_338	Bacteria	Chloroflexi	TK10	AKYG885	5B-12			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__5B-12;g__;s__	5B-12
+OTU_3881	Bacteria	Proteobacteria	Gammaproteobacteria	Aeromonadales	Aeromonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Aeromonadales;f__Aeromonadaceae;g__;s__	Aeromonadaceae
+OTU_196	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae	Bradyrhizobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Bradyrhizobiaceae;g__Bradyrhizobium;s__	Bradyrhizobium
+OTU_468	Bacteria	Proteobacteria	Deltaproteobacteria	MIZ46				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__MIZ46;f__;g__;s__	OTU_468
+OTU_212	Bacteria	GN02	GN10					k__Bacteria;p__GN02;c__GN10;o__;f__;g__;s__	OTU_212
+OTU_353	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae	Micromonosporaceae
+OTU_333	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Sinobacteraceae;g__;s__	Sinobacteraceae
+OTU_528	Bacteria	Proteobacteria	Deltaproteobacteria	Bdellovibrionales	Bdellovibrionaceae	Bdellovibrio		k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Bdellovibrionales;f__Bdellovibrionaceae;g__Bdellovibrio;s__	Bdellovibrio
+OTU_354	Bacteria	AD3	ABS-6					k__Bacteria;p__AD3;c__ABS-6;o__;f__;g__;s__	OTU_354
+OTU_3265	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_3475	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Bogoriellaceae	Georgenia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Bogoriellaceae;g__Georgenia;s__	Georgenia
+OTU_1893	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_1893
+OTU_288	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	EB1017			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__EB1017;g__;s__	EB1017
+OTU_1511	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_423	Bacteria	Chloroflexi	Chloroflexi	Chloroflexales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Chloroflexales	OTU_423
+OTU_355	Bacteria	Gemmatimonadetes	Gemmatimonadetes					k__Bacteria;p__Gemmatimonadetes;c__Gemmatimonadetes;o__;f__;g__;s__	OTU_355
+OTU_305	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_344	Bacteria	Gemmatimonadetes	Gemmatimonadetes	Gemmatimonadales	Ellin5301			k__Bacteria;p__Gemmatimonadetes;c__Gemmatimonadetes;o__Gemmatimonadales;f__Ellin5301;g__;s__	Ellin5301
+OTU_2469	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	C111			k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__C111;g__;s__	C111
+OTU_4428	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae	Amycolatopsis		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Pseudonocardiaceae;g__Amycolatopsis;s__	Amycolatopsis
+OTU_361	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_949	Bacteria	Proteobacteria	Betaproteobacteria	Ellin6067				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Ellin6067;f__;g__;s__	OTU_949
+OTU_576	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae;g__;s__	Comamonadaceae
+OTU_833	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Sphingomonadales;f__Sphingomonadaceae	Sphingomonadaceae
+OTU_852	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae	Pimelobacter		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__Pimelobacter;s__	Pimelobacter
+OTU_374	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_281	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Nannocystaceae	Plesiocystis		k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Nannocystaceae;g__Plesiocystis;s__	Plesiocystis
+OTU_2193	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter		k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfuromonadales;f__Geobacteraceae;g__Geobacter;s__	Geobacter
+OTU_250	Bacteria	Chloroflexi	Chloroflexi	Chloroflexales	Chloroflexaceae	Chloronema		k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Chloroflexales;f__Chloroflexaceae;g__Chloronema;s__	Chloronema
+OTU_647	Bacteria	Gemmatimonadetes	Gemmatimonadetes	Gemmatimonadales	Gemmatimonadaceae	Gemmatimonas		k__Bacteria;p__Gemmatimonadetes;c__Gemmatimonadetes;o__Gemmatimonadales;f__Gemmatimonadaceae;g__Gemmatimonas;s__	Gemmatimonas
+OTU_4483	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Mycobacteriaceae	Mycobacterium		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Mycobacteriaceae;g__Mycobacterium;s__	Mycobacterium
+OTU_372	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Dokdonella		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__Dokdonella;s__	Dokdonella
+OTU_495	Bacteria	Gemmatimonadetes	Gemm-3					k__Bacteria;p__Gemmatimonadetes;c__Gemm-3;o__;f__;g__;s__	OTU_495
+OTU_206	Bacteria	Chloroflexi	C0119					k__Bacteria;p__Chloroflexi;c__C0119;o__;f__;g__;s__	OTU_206
+OTU_710	Bacteria	Chloroflexi	Chloroflexi	Herpetosiphonales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Herpetosiphonales;f__;g__;s__	OTU_710
+OTU_974	Bacteria	[Thermi]	Deinococci	Deinococcales	Deinococcaceae	Deinococcus		k__Bacteria;p__[Thermi];c__Deinococci;o__Deinococcales;f__Deinococcaceae;g__Deinococcus;s__	Deinococcus
+OTU_1161	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_1161
+OTU_1987	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Polyangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Polyangiaceae;g__;s__	Polyangiaceae
+OTU_978	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales	OTU_978
+OTU_323	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_782	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_782
+OTU_626	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	[Weeksellaceae]	Chryseobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__[Weeksellaceae];g__Chryseobacterium;s__	Chryseobacterium
+OTU_198	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Labrys		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Xanthobacteraceae;g__Labrys;s__	Labrys
+OTU_587									OTU_587
+OTU_821	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_387	Bacteria	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Caulobacterales;f__Caulobacteraceae;g__;s__	Caulobacteraceae
+OTU_700	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Haliangiaceae;g__;s__	Haliangiaceae
+OTU_740	Bacteria	Chloroflexi	SHA-26					k__Bacteria;p__Chloroflexi;c__SHA-26;o__;f__;g__;s__	OTU_740
+OTU_2534	Bacteria	Proteobacteria	Gammaproteobacteria	Pseudomonadales	Pseudomonadaceae	Pseudomonas		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Pseudomonadales;f__Pseudomonadaceae;g__Pseudomonas	Pseudomonas
+OTU_599	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae;g__;s__	Micromonosporaceae
+OTU_579	Bacteria	Chloroflexi	TK10	AKYG885				k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__;g__;s__	OTU_579
+OTU_914	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Pedomicrobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Pedomicrobium;s__	Pedomicrobium
+OTU_1398	Bacteria	TM7	SC3					k__Bacteria;p__TM7;c__SC3;o__;f__;g__;s__	OTU_1398
+OTU_745	Bacteria	Proteobacteria	Gammaproteobacteria	Alteromonadales				k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Alteromonadales	OTU_745
+OTU_3508	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_225	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_225
+OTU_1029	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_514									OTU_514
+OTU_3412	Bacteria	[Thermi]	Deinococci	Deinococcales	Deinococcaceae	Deinococcus	aquatilis	k__Bacteria;p__[Thermi];c__Deinococci;o__Deinococcales;f__Deinococcaceae;g__Deinococcus;s__aquatilis	aquatilis
+OTU_1985	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Comamonadaceae	Comamonadaceae
+OTU_1757	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_2594	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodospirillales	Rhodospirillaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodospirillales;f__Rhodospirillaceae;g__;s__	Rhodospirillaceae
+OTU_4613	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_611	Bacteria	Chloroflexi	Chloroflexi	AKIW781				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__AKIW781;f__;g__;s__	OTU_611
+OTU_2563	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_932	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Haliangiaceae;g__;s__	Haliangiaceae
+OTU_446	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Saprospiraceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Saprospiraceae;g__;s__	Saprospiraceae
+OTU_583	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	[Weeksellaceae]	Chryseobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__[Weeksellaceae];g__Chryseobacterium;s__	Chryseobacterium
+OTU_1046	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__;s__	Hyphomicrobiaceae
+OTU_176	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_176
+OTU_386	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardioidaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardioidaceae;g__;s__	Nocardioidaceae
+OTU_702	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Haliangiaceae;g__;s__	Haliangiaceae
+OTU_3126	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_410	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_410
+OTU_3319	Bacteria	TM7	TM7-3					k__Bacteria;p__TM7;c__TM7-3;o__;f__;g__;s__	OTU_3319
+OTU_533	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__;g__;s__	OTU_533
+OTU_559	Bacteria	TM7	SC3					k__Bacteria;p__TM7;c__SC3;o__;f__;g__;s__	OTU_559
+OTU_973	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_873	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales	OTU_873
+OTU_525	Bacteria	TM7	TM7-3	EW055				k__Bacteria;p__TM7;c__TM7-3;o__EW055;f__;g__;s__	OTU_525
+OTU_285	Bacteria	Proteobacteria	Betaproteobacteria	Ellin6067				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Ellin6067;f__;g__;s__	OTU_285
+OTU_806	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_3989	Bacteria	Firmicutes	Bacilli	Bacillales	Bacillaceae	Bacillus		k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Bacillaceae;g__Bacillus;s__	Bacillus
+OTU_614	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__	Streptomyces
+OTU_299	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Xanthomonadaceae;g__;s__	Xanthomonadaceae
+OTU_529	Bacteria	TM7	TM7-1					k__Bacteria;p__TM7;c__TM7-1;o__;f__;g__;s__	OTU_529
+OTU_400	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Kineosporiaceae	Kineococcus		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Kineosporiaceae;g__Kineococcus;s__	Kineococcus
+OTU_671	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Haliangiaceae;g__;s__	Haliangiaceae
+OTU_869	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Haliangiaceae;g__;s__	Haliangiaceae
+OTU_992	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales				k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Sphingomonadales	OTU_992
+OTU_1556	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Sphingobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Sphingomonadales;f__Sphingomonadaceae;g__Sphingobium;s__	Sphingobium
+OTU_287	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_469	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_469
+OTU_776	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodospirillales	Acetobacteraceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodospirillales;f__Acetobacteraceae;g__;s__	Acetobacteraceae
+OTU_642	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_642
+OTU_598	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae	Chitinophagaceae
+OTU_504	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_1512	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Nocardiaceae	Rhodococcus		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Nocardiaceae;g__Rhodococcus;s__	Rhodococcus
+OTU_4167	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Burkholderiaceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Burkholderiaceae;g__;s__	Burkholderiaceae
+OTU_518	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Sinobacteraceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Xanthomonadales;f__Sinobacteraceae;g__;s__	Sinobacteraceae
+OTU_1109	Bacteria	[Thermi]	Deinococci	Deinococcales	Deinococcaceae	Deinococcus		k__Bacteria;p__[Thermi];c__Deinococci;o__Deinococcales;f__Deinococcaceae;g__Deinococcus;s__	Deinococcus
+OTU_247	Bacteria	TM7	TM7-3					k__Bacteria;p__TM7;c__TM7-3;o__;f__;g__;s__	OTU_247
+OTU_1294	Bacteria	Firmicutes	Bacilli	Bacillales	Alicyclobacillaceae	Alicyclobacillus		k__Bacteria;p__Firmicutes;c__Bacilli;o__Bacillales;f__Alicyclobacillaceae;g__Alicyclobacillus;s__	Alicyclobacillus
+OTU_2271	Bacteria	Actinobacteria	Thermoleophilia	Solirubrobacterales	Solirubrobacteraceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Solirubrobacterales;f__Solirubrobacteraceae;g__;s__	Solirubrobacteraceae
+OTU_3349	Bacteria	Proteobacteria	Gammaproteobacteria	Legionellales				k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Legionellales	OTU_3349
+OTU_458	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__;s__	Hyphomicrobiaceae
+OTU_2168	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodobacterales	Hyphomonadaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhodobacterales;f__Hyphomonadaceae;g__;s__	Hyphomonadaceae
+OTU_238	Bacteria	Proteobacteria	Betaproteobacteria	SC-I-84				k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__SC-I-84;f__;g__;s__	OTU_238
+OTU_996	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_996
+OTU_1874	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Flavobacterium		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Flavobacterium;s__	Flavobacterium
+OTU_296	Bacteria	Actinobacteria	MB-A2-108					k__Bacteria;p__Actinobacteria;c__MB-A2-108;o__;f__;g__;s__	OTU_296
+OTU_725	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Frankiaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Frankiaceae;g__;s__	Frankiaceae
+OTU_1001	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Ulvibacter		k__Bacteria;p__Bacteroidetes;c__Flavobacteriia;o__Flavobacteriales;f__Flavobacteriaceae;g__Ulvibacter	Ulvibacter
+OTU_473	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_550	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_550
+OTU_1603	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_1596	Bacteria	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Dechloromonas		k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Rhodocyclales;f__Rhodocyclaceae;g__Dechloromonas;s__	Dechloromonas
+OTU_464	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__	Streptomyces
+OTU_4391	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae;g__;s__	Micromonosporaceae
+OTU_731	Bacteria	GN02	GN10					k__Bacteria;p__GN02;c__GN10;o__;f__;g__;s__	OTU_731
+OTU_763	Bacteria	Chlamydiae	Chlamydiia	Chlamydiales	Parachlamydiaceae			k__Bacteria;p__Chlamydiae;c__Chlamydiia;o__Chlamydiales;f__Parachlamydiaceae	Parachlamydiaceae
+OTU_685	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Propionibacteriaceae	Propionibacterium	acnes	k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Propionibacteriaceae;g__Propionibacterium;s__acnes	acnes
+OTU_759	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_759
+OTU_1416	Bacteria	Actinobacteria	MB-A2-108					k__Bacteria;p__Actinobacteria;c__MB-A2-108;o__;f__;g__;s__	OTU_1416
+OTU_778	Bacteria	Bacteroidetes	Sphingobacteriia	Sphingobacteriales				k__Bacteria;p__Bacteroidetes;c__Sphingobacteriia;o__Sphingobacteriales;f__;g__;s__	OTU_778
+OTU_676	Bacteria	TM7	TM7-3					k__Bacteria;p__TM7;c__TM7-3;o__;f__;g__;s__	OTU_676
+OTU_557	Bacteria	Proteobacteria	Gammaproteobacteria	Thiotrichales	Piscirickettsiaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Thiotrichales;f__Piscirickettsiaceae;g__;s__	Piscirickettsiaceae
+OTU_876	Bacteria	Acidobacteria	iii1-8	DS-18				k__Bacteria;p__Acidobacteria;c__iii1-8;o__DS-18;f__;g__;s__	OTU_876
+OTU_3910	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_1783	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_1783
+OTU_2420	Bacteria	TM7	TM7-3					k__Bacteria;p__TM7;c__TM7-3;o__;f__;g__;s__	OTU_2420
+OTU_524	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_524
+OTU_636	Bacteria	Proteobacteria	Alphaproteobacteria	Caulobacterales	Caulobacteraceae	Asticcacaulis	biprosthecium	k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Caulobacterales;f__Caulobacteraceae;g__Asticcacaulis;s__biprosthecium	biprosthecium
+OTU_1332	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__;g__;s__	OTU_1332
+OTU_1276	Bacteria	Armatimonadetes	[Fimbriimonadia]	[Fimbriimonadales]	[Fimbriimonadaceae]	Fimbriimonas		k__Bacteria;p__Armatimonadetes;c__[Fimbriimonadia];o__[Fimbriimonadales];f__[Fimbriimonadaceae];g__Fimbriimonas;s__	Fimbriimonas
+OTU_255									OTU_255
+OTU_635	Bacteria	Chloroflexi	TK10	B07_WMSP1				k__Bacteria;p__Chloroflexi;c__TK10;o__B07_WMSP1;f__;g__;s__	OTU_635
+OTU_402	Bacteria	Chloroflexi	TK10	AKYG885				k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__;g__;s__	OTU_402
+OTU_505	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptosporangiaceae	Nonomuraea		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptosporangiaceae;g__Nonomuraea	Nonomuraea
+OTU_1636	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Oxalobacteraceae			k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__Burkholderiales;f__Oxalobacteraceae;g__;s__	Oxalobacteraceae
+OTU_456	Bacteria	SBR1093	VHS-B5-50					k__Bacteria;p__SBR1093;c__VHS-B5-50;o__;f__;g__;s__	OTU_456
+OTU_350	Bacteria	Chloroflexi	TK10	AKYG885	Dolo_23			k__Bacteria;p__Chloroflexi;c__TK10;o__AKYG885;f__Dolo_23;g__;s__	Dolo_23
+OTU_1932	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_1932
+OTU_683	Bacteria	Chloroflexi	Chloroflexi	[Roseiflexales]	[Kouleothrixaceae]			k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__[Roseiflexales];f__[Kouleothrixaceae];g__;s__	[Kouleothrixaceae]
+OTU_723	Bacteria	Acidobacteria	Sva0725	Sva0725				k__Bacteria;p__Acidobacteria;c__Sva0725;o__Sva0725;f__;g__;s__	OTU_723
+OTU_429	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_429
+OTU_971	Bacteria	Proteobacteria	Gammaproteobacteria	Vibrionales	Pseudoalteromonadaceae	Pseudoalteromonas		k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Vibrionales;f__Pseudoalteromonadaceae;g__Pseudoalteromonas;s__	Pseudoalteromonas
+OTU_1645	Bacteria	Firmicutes	Clostridia	Clostridiales	Peptococcaceae	Desulfosporosinus	meridiei	k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Peptococcaceae;g__Desulfosporosinus;s__meridiei	meridiei
+OTU_955	Bacteria	Chloroflexi	Chloroflexi	Chloroflexales				k__Bacteria;p__Chloroflexi;c__Chloroflexi;o__Chloroflexales	OTU_955
+OTU_482	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales				k__Bacteria;p__Actinobacteria;c__Acidimicrobiia;o__Acidimicrobiales;f__;g__;s__	OTU_482
+OTU_1974	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_1258	Bacteria	Proteobacteria	Gammaproteobacteria	Legionellales				k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Legionellales;f__;g__;s__	OTU_1258
+OTU_1677	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales				k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__;g__;s__	OTU_1677
+OTU_639	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Actinosynnemataceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Actinosynnemataceae;g__;s__	Actinosynnemataceae
+OTU_573	Bacteria	[Thermi]	Deinococci	Deinococcales	Deinococcaceae	Deinococcus		k__Bacteria;p__[Thermi];c__Deinococci;o__Deinococcales;f__Deinococcaceae;g__Deinococcus;s__	Deinococcus
+OTU_591	Bacteria	Chloroflexi	C0119					k__Bacteria;p__Chloroflexi;c__C0119;o__;f__;g__;s__	OTU_591
+OTU_1047	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae			k__Bacteria;p__Actinobacteria;c__Thermoleophilia;o__Gaiellales;f__Gaiellaceae;g__;s__	Gaiellaceae
+OTU_646	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Sphingomonas	wittichii	k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Sphingomonadales;f__Sphingomonadaceae;g__Sphingomonas;s__wittichii	wittichii
+OTU_930	Bacteria	TM7	TM7-3					k__Bacteria;p__TM7;c__TM7-3;o__;f__;g__;s__	OTU_930
+OTU_454	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micrococcaceae	Arthrobacter		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micrococcaceae;g__Arthrobacter;s__	Arthrobacter
+OTU_984	Bacteria	Spirochaetes	Spirochaetes	Spirochaetales	Spirochaetaceae	Spirochaeta	aurantia	k__Bacteria;p__Spirochaetes;c__Spirochaetes;o__Spirochaetales;f__Spirochaetaceae;g__Spirochaeta;s__aurantia	aurantia
+OTU_634	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae			k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__;s__	Cytophagaceae
+OTU_666	Bacteria	Bacteroidetes	[Saprospirae]	[Saprospirales]	Chitinophagaceae			k__Bacteria;p__Bacteroidetes;c__[Saprospirae];o__[Saprospirales];f__Chitinophagaceae;g__;s__	Chitinophagaceae
+OTU_680	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Hyphomicrobium		k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Hyphomicrobiaceae;g__Hyphomicrobium	Hyphomicrobium
+OTU_4435	Bacteria	Chloroflexi	TK10					k__Bacteria;p__Chloroflexi;c__TK10;o__;f__;g__;s__	OTU_4435
+OTU_1269									OTU_1269
+OTU_2743	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae;g__;s__	Micromonosporaceae
+OTU_1632	Bacteria	Firmicutes	Clostridia	Clostridiales				k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales	OTU_1632
+OTU_3999	Bacteria	Chloroflexi	S085					k__Bacteria;p__Chloroflexi;c__S085;o__;f__;g__;s__	OTU_3999
+OTU_1088	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_1088
+OTU_1078	Bacteria	Bacteroidetes	Cytophagia	Cytophagales	Cytophagaceae	Rhodocytophaga		k__Bacteria;p__Bacteroidetes;c__Cytophagia;o__Cytophagales;f__Cytophagaceae;g__Rhodocytophaga;s__	Rhodocytophaga
+OTU_522	Bacteria	Proteobacteria	Gammaproteobacteria	Legionellales				k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Legionellales;f__;g__;s__	OTU_522
+OTU_699	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales				k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__;g__;s__	OTU_699
+OTU_1106	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae	Pilimelia		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae;g__Pilimelia;s__	Pilimelia
+OTU_371	Bacteria	GN02	GN10					k__Bacteria;p__GN02;c__GN10;o__;f__;g__;s__	OTU_371
+OTU_1937	Bacteria	Chloroflexi						k__Bacteria;p__Chloroflexi;c__;o__;f__;g__;s__	OTU_1937
+OTU_658	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Haliangiaceae;g__;s__	Haliangiaceae
+OTU_2157	Bacteria	Chlamydiae	Chlamydiia	Chlamydiales				k__Bacteria;p__Chlamydiae;c__Chlamydiia;o__Chlamydiales	OTU_2157
+OTU_3960	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Micromonosporaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Micromonosporaceae;g__;s__	Micromonosporaceae
+OTU_585	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Microbacteriaceae			k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Microbacteriaceae	Microbacteriaceae
+OTU_1250	Bacteria	Firmicutes	Clostridia	Clostridiales	Ruminococcaceae			k__Bacteria;p__Firmicutes;c__Clostridia;o__Clostridiales;f__Ruminococcaceae;g__;s__	Ruminococcaceae
+OTU_1374	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Cystobacterineae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Cystobacterineae;g__;s__	Cystobacterineae
+OTU_1703	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter		k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Desulfuromonadales;f__Geobacteraceae;g__Geobacter;s__	Geobacter
+OTU_916	Bacteria	Proteobacteria	Deltaproteobacteria	Myxococcales	Haliangiaceae			k__Bacteria;p__Proteobacteria;c__Deltaproteobacteria;o__Myxococcales;f__Haliangiaceae;g__;s__	Haliangiaceae
+OTU_4225	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Pseudonocardiaceae	Amycolatopsis		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Pseudonocardiaceae;g__Amycolatopsis;s__	Amycolatopsis
+OTU_1901	Bacteria	Actinobacteria	Actinobacteria	Actinomycetales	Streptomycetaceae	Streptomyces		k__Bacteria;p__Actinobacteria;c__Actinobacteria;o__Actinomycetales;f__Streptomycetaceae;g__Streptomyces;s__	Streptomyces
+OTU_1679	Bacteria	Proteobacteria	Alphaproteobacteria					k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__;f__;g__;s__	OTU_1679
+OTU_1292	Bacteria	Proteobacteria	Betaproteobacteria					k__Bacteria;p__Proteobacteria;c__Betaproteobacteria;o__;f__;g__;s__	OTU_1292
+OTU_1485	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Aurantimonadaceae			k__Bacteria;p__Proteobacteria;c__Alphaproteobacteria;o__Rhizobiales;f__Aurantimonadaceae;g__;s__	Aurantimonadaceae
+OTU_1616	Bacteria	Tenericutes	Mollicutes					k__Bacteria;p__Tenericutes;c__Mollicutes;o__;f__;g__;s__	OTU_1616
+OTU_1623	Bacteria	Proteobacteria	Gammaproteobacteria	Legionellales	Coxiellaceae			k__Bacteria;p__Proteobacteria;c__Gammaproteobacteria;o__Legionellales;f__Coxiellaceae;g__;s__	Coxiellaceae

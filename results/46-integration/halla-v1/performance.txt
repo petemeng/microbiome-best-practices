@@ -1,0 +1,40 @@
+HAllA version:	0.8.40
+
+--Configuration parameters--
+  preprocess:
+    max freq thresh               : 1
+    transform funcs               : None
+    discretize bypass if possible : True
+    discretize func               : None
+    discretize num bins           : None
+  association:
+    pdist metric                  : spearman
+  hierarchy:
+    sim2dist set abs              : True
+    sim2dist func                 : None
+    linkage method                : average
+  permute:
+    iters                         : 999
+    func                          : gpd
+    speedup                       : True
+  stats:
+    fdr alpha                     : 0.05
+    fdr method                    : fdr_bh
+    fnr thresh                    : 0.2
+    rank cluster                  : best
+  output:
+    dir                           : results/46-integration/halla-v1
+    verbose                       : True
+
+--Results--
+X shape (# features, # size)                                : (25, 220)
+Y shape (# features, # size)                                : (40, 220)
+Number of significant associations                          : 350
+Number of significant clusters                              : 70
+
+--Durations--
+Loading and preprocessing data                              : 0:00:00.053802
+Computing pairwise similarities, p-values, q-values         : 0:00:01.126938
+Performing hierarchical clustering                          : 0:00:00.902592
+Finding densely associated blocks                           : 0:00:00.051258
+Total execution time                                        : 0:00:02.134591

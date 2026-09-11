@@ -1,0 +1,339 @@
+2026-07-26T00:04:47+08:00
+PICRUSt2 2.6.3
+pipeline-start
+37 of 37 sequence ids overlap between input table and FASTA.
+
+37 ASVs in the input FASTA. None of the sequence ids are duplicated.
+
+Placing sequences onto reference tree
+place_seqs.py --study_fasta /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/representative-sequences.fasta --ref_dir /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/bac_ref --out_tree /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac.tre --processes 8 --intermediate  --min_align 0.8 --chunk_size 5000 --placement_tool epa-ng --verbose
+
+INFO Selected: Output dir: /tmp/tmpagsl29up/epa_out/
+INFO Selected: Query file: /tmp/tmpagsl29up/study_seqs_hmmalign.fasta
+INFO Selected: Tree file: /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/bac_ref/bac_ref.tre
+INFO Selected: Reference MSA: /tmp/tmpagsl29up/ref_seqs_hmmalign.fasta
+INFO Selected: Filtering by accumulated threshold: 0.99
+INFO Selected: Maximum number of placements per query: 100
+INFO Selected: Automatic switching of use of per rate scalers
+INFO Selected: Preserving the root of the input tree
+INFO Selected: Specified model file: /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/bac_ref/bac_ref.model
+INFO Selected: Reading queries in chunks of: 5000
+INFO Selected: Using threads: 8
+INFO     ______ ____   ___           _   __ ______
+        / ____// __ \ /   |         / | / // ____/
+       / __/  / /_/ // /| | ______ /  |/ // / __  
+      / /___ / ____// ___ |/_____// /|  // /_/ /  
+     /_____//_/    /_/  |_|      /_/ |_/ \____/ (v0.3.8)
+INFO Using model parameters:
+INFO    Rate heterogeneity: GAMMA (4 cats, mean),  alpha: 0.408013 (user),  weights&rates: (0.25,0.0178872) (0.25,0.187716) (0.25,0.739808) (0.25,3.05459) 
+        Base frequencies (user): 0.209289 0.232667 0.311531 0.246513 
+        Substitution rates (user): 1.04872 2.92815 1.63887 0.831209 3.68952 1
+INFO Output file: /tmp/tmpagsl29up/epa_out/epa_result.jplace
+INFO 37 Sequences done!
+INFO Time spent placing: 26s
+INFO Elapsed Time: 33s
+
+                                              ....      ....  
+                                             '' '||.   .||'   
+                                                  ||  ||      
+                                                  '|.|'       
+     ...'   ....   ... ...  ... ...   ....        .|'|.       
+    |  ||  '' .||   ||'  ||  ||'  || '' .||      .|'  ||      
+     |''   .|' ||   ||    |  ||    | .|' ||     .|'|.  ||     
+    '....  '|..'|'. ||...'   ||...'  '|..'|.    '||'    ||:.  
+    '....'          ||       ||                               
+                   ''''     ''''   v0.8.5 (c) 2017-2024
+                                   by Lucas Czech and Pierre Barbera
+
+Invocation:                        gappa examine graft --jplace-path /tmp/tmpagsl29up/epa_out/epa_result_parsed.jplace --fully-resolve --out-dir /tmp/tmpagsl29up/epa_out
+Command:                           gappa examine graft
+
+Input:
+  --jplace-path                    /tmp/tmpagsl29up/epa_out/epa_result_parsed.jplace
+
+Settings:
+  --fully-resolve                  true
+  --name-prefix
+
+Output:
+  --out-dir                        /tmp/tmpagsl29up/epa_out
+  --file-prefix                    
+  --file-suffix
+
+Newick Tree Output:
+  --newick-tree-quote-invalid-chars
+                                   false
+
+Global Options:
+  --allow-file-overwriting         false
+  --verbose                        false
+  --threads                        36
+  --log-file
+
+Run the following command to get the references that need to be cited:
+`gappa tools citation Czech2020-genesis-and-gappa`
+
+Started 2026-07-26 00:08:52
+
+Found 1 jplace file
+
+Finished 2026-07-26 00:08:53
+
+
+hmmalign --trim --dna --mapali /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/bac_ref/bac_ref.fna --informat FASTA -o /tmp/tmpagsl29up/query_align.stockholm /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/bac_ref/bac_ref.hmm /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/representative-sequences.fasta
+
+All raw input sequences were the same length (400)
+
+epa-ng --tree /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/bac_ref/bac_ref.tre --ref-msa /tmp/tmpagsl29up/ref_seqs_hmmalign.fasta --query /tmp/tmpagsl29up/study_seqs_hmmalign.fasta --chunk-size 5000 -T 8 -m /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/bac_ref/bac_ref.model -w /tmp/tmpagsl29up/epa_out --filter-acc-lwr 0.99 --filter-max 100
+
+gappa examine graft --jplace-path /tmp/tmpagsl29up/epa_out/epa_result_parsed.jplace --fully-resolve --out-dir /tmp/tmpagsl29up/epa_out
+
+mv /tmp/tmpagsl29up/epa_out/epa_result_parsed.newick /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac.tre
+
+Finished placing sequences on output tree for reference 1: /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac.tre
+place_seqs.py --study_fasta /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/representative-sequences.fasta --ref_dir /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/archaea/arc_ref --out_tree /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/arc.tre --processes 8 --intermediate  --min_align 0.8 --chunk_size 5000 --placement_tool epa-ng --verbose
+
+INFO Selected: Output dir: /tmp/tmp5u6lu8k_/epa_out/
+INFO Selected: Query file: /tmp/tmp5u6lu8k_/study_seqs_hmmalign.fasta
+INFO Selected: Tree file: /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/archaea/arc_ref/arc_ref.tre
+INFO Selected: Reference MSA: /tmp/tmp5u6lu8k_/ref_seqs_hmmalign.fasta
+INFO Selected: Filtering by accumulated threshold: 0.99
+INFO Selected: Maximum number of placements per query: 100
+INFO Selected: Automatic switching of use of per rate scalers
+INFO Selected: Preserving the root of the input tree
+INFO Selected: Specified model file: /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/archaea/arc_ref/arc_ref.model
+INFO Selected: Reading queries in chunks of: 5000
+INFO Selected: Using threads: 8
+INFO     ______ ____   ___           _   __ ______
+        / ____// __ \ /   |         / | / // ____/
+       / __/  / /_/ // /| | ______ /  |/ // / __  
+      / /___ / ____// ___ |/_____// /|  // /_/ /  
+     /_____//_/    /_/  |_|      /_/ |_/ \____/ (v0.3.8)
+INFO Using model parameters:
+INFO    Rate heterogeneity: GAMMA (4 cats, mean),  alpha: 0.509646 (user),  weights&rates: (0.25,0.0351892) (0.25,0.258166) (0.25,0.827162) (0.25,2.87948) 
+        Base frequencies (user): 0.224411 0.252166 0.284495 0.238928 
+        Substitution rates (user): 1.16611 4.36836 1.83214 1.0193 5.96274 1
+INFO Output file: /tmp/tmp5u6lu8k_/epa_out/epa_result.jplace
+INFO 37 Sequences done!
+INFO Time spent placing: 0s
+INFO Elapsed Time: 0s
+
+                                              ....      ....  
+                                             '' '||.   .||'   
+                                                  ||  ||      
+                                                  '|.|'       
+     ...'   ....   ... ...  ... ...   ....        .|'|.       
+    |  ||  '' .||   ||'  ||  ||'  || '' .||      .|'  ||      
+     |''   .|' ||   ||    |  ||    | .|' ||     .|'|.  ||     
+    '....  '|..'|'. ||...'   ||...'  '|..'|.    '||'    ||:.  
+    '....'          ||       ||                               
+                   ''''     ''''   v0.8.5 (c) 2017-2024
+                                   by Lucas Czech and Pierre Barbera
+
+Invocation:                        gappa examine graft --jplace-path /tmp/tmp5u6lu8k_/epa_out/epa_result_parsed.jplace --fully-resolve --out-dir /tmp/tmp5u6lu8k_/epa_out
+Command:                           gappa examine graft
+
+Input:
+  --jplace-path                    /tmp/tmp5u6lu8k_/epa_out/epa_result_parsed.jplace
+
+Settings:
+  --fully-resolve                  true
+  --name-prefix
+
+Output:
+  --out-dir                        /tmp/tmp5u6lu8k_/epa_out
+  --file-prefix                    
+  --file-suffix
+
+Newick Tree Output:
+  --newick-tree-quote-invalid-chars
+                                   false
+
+Global Options:
+  --allow-file-overwriting         false
+  --verbose                        false
+  --threads                        36
+  --log-file
+
+Run the following command to get the references that need to be cited:
+`gappa tools citation Czech2020-genesis-and-gappa`
+
+Started 2026-07-26 00:08:58
+
+Found 1 jplace file
+
+Finished 2026-07-26 00:08:58
+
+
+hmmalign --trim --dna --mapali /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/archaea/arc_ref/arc_ref.fna --informat FASTA -o /tmp/tmp5u6lu8k_/query_align.stockholm /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/archaea/arc_ref/arc_ref.hmm /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/representative-sequences.fasta
+
+All raw input sequences were the same length (400)
+
+epa-ng --tree /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/archaea/arc_ref/arc_ref.tre --ref-msa /tmp/tmp5u6lu8k_/ref_seqs_hmmalign.fasta --query /tmp/tmp5u6lu8k_/study_seqs_hmmalign.fasta --chunk-size 5000 -T 8 -m /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/archaea/arc_ref/arc_ref.model -w /tmp/tmp5u6lu8k_/epa_out --filter-acc-lwr 0.99 --filter-max 100
+
+gappa examine graft --jplace-path /tmp/tmp5u6lu8k_/epa_out/epa_result_parsed.jplace --fully-resolve --out-dir /tmp/tmp5u6lu8k_/epa_out
+
+mv /tmp/tmp5u6lu8k_/epa_out/epa_result_parsed.newick /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/arc.tre
+
+Finished placing sequences on output tree for reference 2: /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/arc.tre
+hsp.py --tree /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac.tre --output /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_marker_predicted_and_nsti.tsv.gz --observed_trait_table /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/16S.txt.gz --hsp_method mp --edge_exponent 0.5 --seed 100 --calculate_NSTI --processes 1 --verbose
+
+
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_nsti.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac.tre /tmp/tmpko40t_vt/known_tips.txt /tmp/tmpko40t_vt/nsti_out.txt
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac.tre /tmp/tmp42ex_hf3/subset_tab_0 mp 0.5 FALSE FALSE /tmp/tmpw3k6s20n/predicted_counts.txt /tmp/tmpw3k6s20n/predicted_ci.txt 100
+
+
+hsp.py --tree /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/arc.tre --output /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/arc_marker_predicted_and_nsti.tsv.gz --observed_trait_table /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/archaea/16S.txt.gz --hsp_method mp --edge_exponent 0.5 --seed 100 --calculate_NSTI --processes 1 --verbose
+
+
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_nsti.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/arc.tre /tmp/tmph131dm_z/known_tips.txt /tmp/tmph131dm_z/nsti_out.txt
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/arc.tre /tmp/tmpg145ozc3/subset_tab_0 mp 0.5 FALSE FALSE /tmp/tmp08hzmsn9/predicted_counts.txt /tmp/tmp08hzmsn9/predicted_ci.txt 100
+
+
+Finished getting marker and NSTI predictions for both domains: /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_marker_predicted_and_nsti.tsv.gz, /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/arc_marker_predicted_and_nsti.tsv.gz
+Now finding the best one for each sequence.
+Picking the best domains for all sequences.
+37 sequences were kept for bac
+0 sequences were kept for arc
+Don't have any arc in the study sequences. Continuing with only bac
+Finished getting the best domain match for each sequence: /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/combined_marker_predicted_and_nsti.tsv.gz Now running hsp.py for the reduced reference sets.
+hsp.py --tree /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre --output /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_EC_predicted.tsv.gz --observed_trait_table /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/ec.txt.gz --hsp_method mp --edge_exponent 0.5 --seed 100 --processes 8 --verbose
+
+
+
+
+
+
+
+
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmph680zfd3/subset_tab_1 mp 0.5 FALSE FALSE /tmp/tmp6cjt91m_/predicted_counts.txt /tmp/tmp6cjt91m_/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmph680zfd3/subset_tab_0 mp 0.5 FALSE FALSE /tmp/tmpncvsrk6m/predicted_counts.txt /tmp/tmpncvsrk6m/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmph680zfd3/subset_tab_7 mp 0.5 FALSE FALSE /tmp/tmprzxolw90/predicted_counts.txt /tmp/tmprzxolw90/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmph680zfd3/subset_tab_6 mp 0.5 FALSE FALSE /tmp/tmp6vm5zvmv/predicted_counts.txt /tmp/tmp6vm5zvmv/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmph680zfd3/subset_tab_3 mp 0.5 FALSE FALSE /tmp/tmpr27ed52s/predicted_counts.txt /tmp/tmpr27ed52s/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmph680zfd3/subset_tab_4 mp 0.5 FALSE FALSE /tmp/tmpfpjbh09d/predicted_counts.txt /tmp/tmpfpjbh09d/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmph680zfd3/subset_tab_5 mp 0.5 FALSE FALSE /tmp/tmpktuansxr/predicted_counts.txt /tmp/tmpktuansxr/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmph680zfd3/subset_tab_2 mp 0.5 FALSE FALSE /tmp/tmp7prp9g2x/predicted_counts.txt /tmp/tmp7prp9g2x/predicted_ci.txt 100
+
+
+
+
+
+
+
+
+
+hsp.py --tree /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre --output /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_KO_predicted.tsv.gz --observed_trait_table /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/bacteria/ko.txt.gz --hsp_method mp --edge_exponent 0.5 --seed 100 --processes 8 --verbose
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_5 mp 0.5 FALSE FALSE /tmp/tmp80uge6vo/predicted_counts.txt /tmp/tmp80uge6vo/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_4 mp 0.5 FALSE FALSE /tmp/tmpkk9a8z_q/predicted_counts.txt /tmp/tmpkk9a8z_q/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_0 mp 0.5 FALSE FALSE /tmp/tmppi7_mxzr/predicted_counts.txt /tmp/tmppi7_mxzr/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_1 mp 0.5 FALSE FALSE /tmp/tmpy7nn5ln5/predicted_counts.txt /tmp/tmpy7nn5ln5/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_7 mp 0.5 FALSE FALSE /tmp/tmpj2ymxb73/predicted_counts.txt /tmp/tmpj2ymxb73/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_2 mp 0.5 FALSE FALSE /tmp/tmpz5dc4o6d/predicted_counts.txt /tmp/tmpz5dc4o6d/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_3 mp 0.5 FALSE FALSE /tmp/tmpqgbajdvu/predicted_counts.txt /tmp/tmpqgbajdvu/predicted_ci.txt 100
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_6 mp 0.5 FALSE FALSE /tmp/tmpwo78leah/predicted_counts.txt /tmp/tmpwo78leah/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_8 mp 0.5 FALSE FALSE /tmp/tmphh9qynpp/predicted_counts.txt /tmp/tmphh9qynpp/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_9 mp 0.5 FALSE FALSE /tmp/tmppo1yrqwh/predicted_counts.txt /tmp/tmppo1yrqwh/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_10 mp 0.5 FALSE FALSE /tmp/tmpq8odfmfw/predicted_counts.txt /tmp/tmpq8odfmfw/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_11 mp 0.5 FALSE FALSE /tmp/tmp3lied7vl/predicted_counts.txt /tmp/tmp3lied7vl/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_12 mp 0.5 FALSE FALSE /tmp/tmphfrzm7xb/predicted_counts.txt /tmp/tmphfrzm7xb/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_13 mp 0.5 FALSE FALSE /tmp/tmphpiqyta8/predicted_counts.txt /tmp/tmphpiqyta8/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_14 mp 0.5 FALSE FALSE /tmp/tmpe0_8sy5p/predicted_counts.txt /tmp/tmpe0_8sy5p/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_15 mp 0.5 FALSE FALSE /tmp/tmppnsblkgc/predicted_counts.txt /tmp/tmppnsblkgc/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_16 mp 0.5 FALSE FALSE /tmp/tmp1acqaqe9/predicted_counts.txt /tmp/tmp1acqaqe9/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_17 mp 0.5 FALSE FALSE /tmp/tmpbkefqffq/predicted_counts.txt /tmp/tmpbkefqffq/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_18 mp 0.5 FALSE FALSE /tmp/tmpiilxni73/predicted_counts.txt /tmp/tmpiilxni73/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_19 mp 0.5 FALSE FALSE /tmp/tmpdhmyu3as/predicted_counts.txt /tmp/tmpdhmyu3as/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_20 mp 0.5 FALSE FALSE /tmp/tmpi5duno9u/predicted_counts.txt /tmp/tmpi5duno9u/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_21 mp 0.5 FALSE FALSE /tmp/tmpq8nqudi6/predicted_counts.txt /tmp/tmpq8nqudi6/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_22 mp 0.5 FALSE FALSE /tmp/tmpxwv667yy/predicted_counts.txt /tmp/tmpxwv667yy/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_23 mp 0.5 FALSE FALSE /tmp/tmpwwf65l1i/predicted_counts.txt /tmp/tmpwwf65l1i/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_24 mp 0.5 FALSE FALSE /tmp/tmpk49uk69n/predicted_counts.txt /tmp/tmpk49uk69n/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_25 mp 0.5 FALSE FALSE /tmp/tmp2x9bod55/predicted_counts.txt /tmp/tmp2x9bod55/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_26 mp 0.5 FALSE FALSE /tmp/tmpi36hupoo/predicted_counts.txt /tmp/tmpi36hupoo/predicted_ci.txt 100
+
+Rscript /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/Rscripts/castor_hsp.R /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_reduced.tre /tmp/tmp0u5jtdjm/subset_tab_27 mp 0.5 FALSE FALSE /tmp/tmp8wp9phod/predicted_counts.txt /tmp/tmp8wp9phod/predicted_ci.txt 100
+
+
+
+
+
+
+
+
+
+Finished getting functional predictions for all traits.
+Warning: There was only one file for the function: EC
+Maybe that's fine if you used custom traits or there were no sequences matching one of the domains.
+Warning: There was only one file for the function: KO
+Maybe that's fine if you used custom traits or there were no sequences matching one of the domains.
+Finished joining together all trait tables with the same trait name for both domains.
+Running metagenome pipeline for EC
+metagenome_pipeline.py --input /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/table.biom --function /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_EC_predicted.tsv.gz --min_reads 1 --min_samples 1 --out_dir /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/EC_metagenome_out --max_nsti 2.0 --marker /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/combined_marker_predicted_and_nsti.tsv.gz --strat_out
+
+All ASVs were below the max NSTI cut-off of 2.0 and so all were retained for downstream analyses.
+
+Running metagenome pipeline for KO
+metagenome_pipeline.py --input /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/table.biom --function /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/bac_KO_predicted.tsv.gz --min_reads 1 --min_samples 1 --out_dir /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/KO_metagenome_out --max_nsti 2.0 --marker /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/combined_marker_predicted_and_nsti.tsv.gz --strat_out
+
+All ASVs were below the max NSTI cut-off of 2.0 and so all were retained for downstream analyses.
+
+Inferring pathways from predicted EC
+pathway_pipeline.py --input /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/EC_metagenome_out/pred_metagenome_contrib.tsv.gz --out_dir /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/pathways_out --map /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/pathway_mapfiles/metacyc_pathways_structured_filtered_v24.txt --intermediate  --proc 8 --coverage --regroup_map /media/desk16/tly9658/wechat/16s/.tools/picrust2-2.6.3/lib/python3.12/site-packages/picrust2/default_files/pathway_mapfiles/ec_level4_to_metacyc_rxn_new.tsv --verbose
+
+Wrote predicted pathway abundances and coverages to /media/desk16/tly9658/wechat/16s/data/small/picrust2-chemerin/picrust2-out-v2.6.3/pathways_out
+Completed PICRUSt2 pipeline in 1213.35 seconds.
+2026-07-26T00:25:03+08:00

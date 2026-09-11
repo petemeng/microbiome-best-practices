@@ -1,0 +1,98 @@
+FeatureID	Kingdom	Phylum	Class	Order	Family	Genus	Species	DetectedSamples	Prevalence	EqualSampleMean	PooledReadFraction	MaximumSampleAbundance
+OTU_1	Bacteria	Firmicutes	Clostridia	Clostridiales	Clostridiaceae 1	Clostridium sensu stricto 13	Unknown species	88	0.9777777777777777	0.010140087637493926	0.010361987318404367	0.20496562261268145
+OTU_2	Bacteria	Actinobacteria	Actinobacteria	Micrococcales	Micrococcaceae	Arthrobacter	Unknown species	90	1	0.008213118755311085	0.008654849444639958	0.19001162614365869
+OTU_12	Bacteria	Bacteroidetes	Bacteroidetes vadinHA17	Unknown order	Unknown family	Unknown genus	Unknown species	90	1	0.006985598764305498	0.007205788833527817	0.12342646607307338
+OTU_5	Bacteria	Proteobacteria	Betaproteobacteria	Hydrogenophilales	Hydrogenophilaceae	Thiobacillus	Unknown species	90	1	0.004339284931053062	0.004449054437014948	0.0343538416249632
+OTU_36	Bacteria	Verrucomicrobia	Spartobacteria	Chthoniobacterales	DA101 soil group	Unknown genus	Unknown species	90	1	0.00418673390832859	0.004194681632678262	0.08197254041758063
+OTU_8	Bacteria	Firmicutes	Bacilli	Bacillales	Planococcaceae	Planomicrobium	Unknown species	87	0.9666666666666667	0.004147366594134879	0.005201059475078256	0.07111140133211441
+OTU_59	Bacteria	Bacteroidetes	Bacteroidia	Bacteroidia Incertae Sedis	Draconibacteriaceae	Unknown genus	Unknown species	76	0.8444444444444444	0.004065472880655992	0.003953274432446116	0.06117976502100201
+OTU_16	Bacteria	Chloroflexi	KD4-96	Unknown order	Unknown family	Unknown genus	Unknown species	90	1	0.003803875934070899	0.004327424722319979	0.03320500481231954
+OTU_3	Bacteria	Firmicutes	Bacilli	Bacillales	Planococcaceae	Paenisporosarcina	Unknown species	74	0.8222222222222222	0.003382186259426206	0.004939895163829669	0.11001330039901197
+OTU_82	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Sphingomonas	Unknown species	85	0.9444444444444444	0.0033700798688022222	0.003348212907567591	0.03775526786197931
+OTU_80	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Sphingomonas	Unknown species	90	1	0.0033184944971392243	0.0032901763939567935	0.033819628647214856
+OTU_25	Bacteria	Chloroflexi	KD4-96	Unknown order	Unknown family	Unknown genus	Unknown species	90	1	0.0033040886842538907	0.0035667759481869763	0.03001684311838306
+OTU_13	Bacteria	Acidobacteria	Acidobacteria	Subgroup 3	Unknown family	Candidatus Solibacter	Unknown species	81	0.9	0.003295289131722974	0.003423536893317775	0.03799705449189985
+OTU_11	Bacteria	Proteobacteria	Epsilonproteobacteria	Campylobacterales	Helicobacteraceae	Sulfurovum	Unknown species	79	0.8777777777777778	0.0032669803238779926	0.0036816141559700435	0.0850275508265248
+OTU_220	Bacteria	Proteobacteria	Gammaproteobacteria	Order Incertae Sedis	Family Incertae Sedis	Marinicella	Unknown species	82	0.9111111111111111	0.003070821653559184	0.00255854587662919	0.0242284963887065
+OTU_23	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Alcaligenaceae	Unknown genus	Unknown species	90	1	0.0030354445089865543	0.0030302469021467335	0.01588826958805817
+OTU_31	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadales Incertae Sedis	Unknown genus	Unknown species	90	1	0.0028172518861042527	0.0026647403483425636	0.016080466397591132
+OTU_84	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	Acidimicrobiaceae	Illumatobacter	Unknown species	81	0.9	0.00281617384399388	0.002539406175332012	0.021146478043029767
+OTU_102	Bacteria	Proteobacteria	Betaproteobacteria	Nitrosomonadales	Nitrosomonadaceae	Unknown genus	Unknown species	87	0.9666666666666667	0.002491760698708417	0.0025820074459612145	0.01148033071778398
+OTU_73	Bacteria	Proteobacteria	Betaproteobacteria	Hydrogenophilales	Hydrogenophilaceae	Thiobacillus	Unknown species	89	0.9888888888888889	0.002447311356679798	0.002419011280075571	0.060637640883124906
+OTU_28	Bacteria	Proteobacteria	Deltaproteobacteria	43F-1404R	Unknown family	Unknown genus	Unknown species	87	0.9666666666666667	0.002422515803875429	0.0026431310081683305	0.03620390378688583
+OTU_51	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	DUNssu044	Unknown genus	Unknown species	86	0.9555555555555556	0.002320979594041432	0.0022097093852451424	0.05014158436356102
+OTU_15	Bacteria	Acidobacteria	Holophagae	Subgroup 23	Unknown family	Unknown genus	Unknown species	74	0.8222222222222222	0.0022634395281584006	0.002191804503386492	0.06729514140681653
+OTU_357	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Unknown genus	Unknown species	79	0.8777777777777778	0.0022490286229773235	0.0021634036563003573	0.016381594796434595
+OTU_62	Bacteria	Proteobacteria	Betaproteobacteria	Nitrosomonadales	Nitrosomonadaceae	Unknown genus	Unknown species	87	0.9666666666666667	0.0022477041953909505	0.002280094093241216	0.01882530120481928
+OTU_318	Bacteria	Chloroflexi	KD4-96	Unknown order	Unknown family	Unknown genus	Unknown species	90	1	0.0021267758029846467	0.002072027017849315	0.023095893009579815
+OTU_38	Bacteria	Actinobacteria	Actinobacteria	Micrococcales	Microbacteriaceae	Cryobacterium	Unknown species	88	0.9777777777777777	0.001994606409876405	0.002066470330375941	0.0205761316872428
+OTU_207	Bacteria	Acidobacteria	Holophagae	Subgroup 7	Unknown family	Unknown genus	Unknown species	86	0.9555555555555556	0.001860796201441226	0.0018497595189143467	0.025667792447037152
+OTU_20	Bacteria	Chloroflexi	KD4-96	Unknown order	Unknown family	Unknown genus	Unknown species	78	0.8666666666666667	0.0018592562673877722	0.00208746226083091	0.04397194350957758
+OTU_37	Bacteria	Acidobacteria	Acidobacteria	Subgroup 6	Unknown family	Unknown genus	Unknown species	88	0.9777777777777777	0.001810222986385486	0.0017701136651293164	0.01699154735207866
+OTU_6	Archaea	Thaumarchaeota	Soil Crenarchaeotic Group(SCG)	Unknown order	Unknown family	Unknown genus	Unknown species	79	0.8777777777777778	0.0017913318552329857	0.0017725833040063716	0.04468968033198048
+OTU_150	Bacteria	Acidobacteria	Acidobacteria	Subgroup 6	Unknown family	Unknown genus	Unknown species	86	0.9555555555555556	0.0017742491960657985	0.0019429883865231807	0.016167254726420558
+OTU_219	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Unknown genus	Unknown species	73	0.8111111111111111	0.0017671436118481695	0.0017231905264652675	0.027195066471212656
+OTU_50	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Unknown genus	Unknown species	74	0.8222222222222222	0.001751408063419826	0.001681824075274593	0.033587155421757865
+OTU_88	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Lysobacter	Unknown species	80	0.8888888888888888	0.0015919802576289032	0.0014360950070076003	0.039732142857142855
+OTU_254	Bacteria	Acidobacteria	Acidobacteria	Subgroup 6	Unknown family	Unknown genus	Unknown species	88	0.9777777777777777	0.0015835022439275085	0.0016299616588564337	0.008703051870189146
+OTU_192	Bacteria	Chloroflexi	KD4-96	Unknown order	Unknown family	Unknown genus	Unknown species	89	0.9888888888888889	0.0015682654244150004	0.001551550624509931	0.013451720310765816
+OTU_135	Bacteria	Chloroflexi	Gitt-GS-136	Unknown order	Unknown family	Unknown genus	Unknown species	89	0.9888888888888889	0.0015331993563722033	0.0015620465897374157	0.011730028873917228
+OTU_52	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Bradyrhizobiaceae	Bradyrhizobium	Unknown species	87	0.9666666666666667	0.0015234330385951657	0.0015657510480529984	0.010373066424021839
+OTU_61	Bacteria	Bacteroidetes	Flavobacteriia	Flavobacteriales	Flavobacteriaceae	Lutibacter	Unknown species	77	0.8555555555555555	0.0014826128178788032	0.0017201034778689486	0.02581843808059453
+OTU_79	Bacteria	Chloroflexi	KD4-96	Unknown order	Unknown family	Unknown genus	Unknown species	86	0.9555555555555556	0.0013994836503092762	0.0015867429785079677	0.008780451352563145
+OTU_94	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Unknown genus	Unknown species	89	0.9888888888888889	0.0013980338462897968	0.001427451270937907	0.007061713233036537
+OTU_64	Bacteria	Actinobacteria	Actinobacteria	Micrococcales	Intrasporangiaceae	Oryzihumus	Unknown species	83	0.9222222222222223	0.0013806968068532572	0.0014132508473948396	0.010034013605442177
+OTU_292	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	JG34-KF-161	Unknown genus	Unknown species	74	0.8222222222222222	0.001330400219557765	0.0012842122160687053	0.013633503460812418
+OTU_169	Bacteria	Proteobacteria	Betaproteobacteria	Hydrogenophilales	Hydrogenophilaceae	Thiobacillus	Unknown species	87	0.9666666666666667	0.0012822702005442763	0.0012058011817222027	0.009644478063540091
+OTU_578	Bacteria	Bacteroidetes	Bacteroidetes vadinHA17	Unknown order	Unknown family	Unknown genus	Unknown species	75	0.8333333333333334	0.0012687171347194682	0.0013280483061364353	0.010868897758673626
+OTU_10	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadaceae	Thermomonas	Unknown species	82	0.9111111111111111	0.0012331705718779179	0.0013144652923126317	0.010940214943046528
+OTU_656	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Unknown genus	Unknown species	88	0.9777777777777777	0.0012316162062410158	0.001226793112177172	0.020069653503335103
+OTU_40	Bacteria	Proteobacteria	Alphaproteobacteria	Sphingomonadales	Sphingomonadaceae	Sphingomonas	Unknown species	85	0.9444444444444444	0.0012225116810908496	0.0011916007581791353	0.019484964979725104
+OTU_255	Bacteria	Gemmatimonadetes	Gemmatimonadetes	Gemmatimonadales	Gemmatimonadaceae	Unknown genus	Unknown species	84	0.9333333333333333	0.0012203439718729992	0.0012953255910154538	0.01588065447545717
+OTU_41	Bacteria	Actinobacteria	Actinobacteria	PeM15	Unknown family	Unknown genus	Unknown species	78	0.8666666666666667	0.0012158504703719054	0.0013243438478208523	0.04235037465616997
+OTU_32	Archaea	Miscellaneous Crenarchaeotic Group	Unknown class	Unknown order	Unknown family	Unknown genus	Unknown species	84	0.9333333333333333	0.0011985667539466942	0.0013107608339970487	0.013318534961154272
+OTU_17	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodobacterales	Rhodobacteraceae	Unknown genus	Unknown species	87	0.9666666666666667	0.0011942010890158496	0.0012317323899312823	0.020010625110678235
+OTU_33	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	BVA18	Unknown genus	Unknown species	75	0.8333333333333334	0.0011734623586232434	0.0013984330141325085	0.03597548922711998
+OTU_49	Bacteria	Verrucomicrobia	Spartobacteria	Chthoniobacterales	DA101 soil group	Unknown genus	Unknown species	75	0.8333333333333334	0.0011567016937109635	0.0013422487296795027	0.013039904349125692
+OTU_1112	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Acidovorax	Unknown species	83	0.9222222222222223	0.0010901306586861587	0.0011292423765334914	0.008642114776321735
+OTU_72	Bacteria	Acidobacteria	Acidobacteria	Subgroup 4	Unknown family	Blastocatella	Unknown species	73	0.8111111111111111	0.0010817578579138452	0.00118913111930208	0.014043983591613492
+OTU_496	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Acidovorax	Unknown species	84	0.9333333333333333	0.0010672962606485333	0.0011465298486728777	0.00629189697753734
+OTU_119	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Pseudolabrys	Unknown species	77	0.8555555555555555	0.0010670502169655702	0.0010489791130291973	0.013632176849861836
+OTU_140	Bacteria	Acidobacteria	Holophagae	Subgroup 7	Unknown family	Unknown genus	Unknown species	76	0.8444444444444444	0.0010571093674304022	0.0011687565985663746	0.02043997307733182
+OTU_115	Bacteria	Nitrospirae	Nitrospira	Nitrospirales	Nitrospiraceae	Unknown genus	Unknown species	84	0.9333333333333333	0.001043657957653747	0.001216914556668951	0.014424492198999116
+OTU_372	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Unknown family	Unknown genus	Unknown species	82	0.9111111111111111	0.0010255132304243918	8.501731834262535e-4	0.010233393177737882
+OTU_123	Bacteria	Acidobacteria	Acidobacteria	Subgroup 17	Unknown family	Unknown genus	Unknown species	86	0.9555555555555556	0.0010032899285663756	9.341409052461304e-4	0.007911239749155813
+OTU_114	Bacteria	Proteobacteria	Alphaproteobacteria	Rhodobacterales	Rhodobacteraceae	Tropicimonas	Unknown species	75	0.8333333333333334	9.752173482901831e-4	9.335234955268666e-4	0.013203252032520325
+OTU_434	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfobacterales	Nitrospinaceae	Unknown genus	Unknown species	75	0.8333333333333334	9.565281645004894e-4	8.316508918483395e-4	0.012735166425470333
+OTU_275	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Xenophilus	Unknown species	86	0.9555555555555556	9.557023523404332e-4	0.001018726036785271	0.005068482550491372
+OTU_22	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadales Incertae Sedis	Unknown genus	Unknown species	79	0.8777777777777778	9.46730595250589e-4	9.829162730679707e-4	0.014225842630305177
+OTU_6426	Bacteria	Proteobacteria	Gammaproteobacteria	Xanthomonadales	Xanthomonadales Incertae Sedis	Unknown genus	Unknown species	78	0.8666666666666667	9.30892619525654e-4	7.822581143072354e-4	0.007912003087610961
+OTU_105	Bacteria	Verrucomicrobia	OPB35 soil group	Unknown order	Unknown family	Unknown genus	Unknown species	84	0.9333333333333333	8.884443097001499e-4	9.434020510350874e-4	0.004269618501680174
+OTU_18	Bacteria	Acidobacteria	Acidobacteria	Subgroup 4	RB41	Unknown genus	Unknown species	77	0.8555555555555555	8.854819882111064e-4	9.557502454203634e-4	0.01801042708936753
+OTU_195	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Unknown genus	Unknown species	82	0.9111111111111111	8.71910807351341e-4	8.538776417418363e-4	0.017696267696267698
+OTU_225	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Variibacter	Unknown species	82	0.9111111111111111	8.303275724485587e-4	8.594343292152105e-4	0.014376706096451319
+OTU_78	Bacteria	Verrucomicrobia	Verrucomicrobiae	Verrucomicrobiales	Verrucomicrobiaceae	Unknown genus	Unknown species	75	0.8333333333333334	8.085726118258217e-4	8.341205307253947e-4	0.007909804616020305
+OTU_75	Bacteria	Proteobacteria	Betaproteobacteria	Rhodocyclales	Rhodocyclaceae	Unknown genus	Unknown species	77	0.8555555555555555	7.79076814303051e-4	6.816203300672359e-4	0.016823091907207367
+OTU_197	Bacteria	Acidobacteria	Holophagae	Subgroup 7	Unknown family	Unknown genus	Unknown species	82	0.9111111111111111	7.789930065166549e-4	8.149808294282168e-4	0.007392964497522138
+OTU_926	Bacteria	Proteobacteria	Betaproteobacteria	Nitrosomonadales	Nitrosomonadaceae	Unknown genus	Unknown species	76	0.8444444444444444	7.52371291833489e-4	7.915192600961924e-4	0.007741323924377271
+OTU_164	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geobacter	Unknown species	73	0.8111111111111111	7.303172508975298e-4	7.921366698154563e-4	0.005050505050505051
+OTU_146	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Unknown family	Unknown genus	Unknown species	84	0.9333333333333333	6.755129176376049e-4	6.840899689442912e-4	0.006165228113440197
+OTU_459	Bacteria	Actinobacteria	Actinobacteria	Micrococcales	Intrasporangiaceae	Unknown genus	Unknown species	81	0.9	6.549124171691587e-4	6.155574901060092e-4	0.009504862953138815
+OTU_208	Bacteria	Actinobacteria	Actinobacteria	Micrococcales	Intrasporangiaceae	Ornithinibacter	Ornithinibacter aureus	75	0.8333333333333334	6.473689210045251e-4	6.982903924873585e-4	0.01446457365076354
+OTU_408	Bacteria	Proteobacteria	Deltaproteobacteria	Desulfuromonadales	Geobacteraceae	Geoalkalibacter	Unknown species	74	0.8222222222222222	6.308024717115559e-4	6.118530317904264e-4	0.003779870587481581
+OTU_800	Bacteria	Acidobacteria	Acidobacteria	Subgroup 6	Unknown family	Unknown genus	Unknown species	80	0.8888888888888888	6.08689176725635e-4	6.279056844912853e-4	0.0031046011781563445
+OTU_832	Bacteria	Actinobacteria	Thermoleophilia	Gaiellales	Gaiellaceae	Gaiella	Unknown species	74	0.8222222222222222	5.772235439225758e-4	4.6614433804416947e-4	0.008297954457738324
+OTU_218	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Hyphomicrobiaceae	Devosia	Unknown species	74	0.8222222222222222	5.727372318668279e-4	6.019744762822056e-4	0.003629008269379499
+OTU_457	Bacteria	Nitrospirae	Nitrospira	Nitrospirales	0319-6A21	Unknown genus	Unknown species	75	0.8333333333333334	5.641177316582554e-4	6.476627955077269e-4	0.006400221014826411
+OTU_409	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Rhodobiaceae	Unknown genus	Unknown species	73	0.8111111111111111	5.602499378112011e-4	5.890088721776658e-4	0.005857944837686112
+OTU_5117	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Unknown genus	Unknown species	74	0.8222222222222222	5.584761697992731e-4	5.97652608247359e-4	0.009247842170160296
+OTU_592	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	Acidimicrobiaceae	Illumatobacter	Unknown species	78	0.8666666666666667	5.397918277793335e-4	5.155371155852735e-4	0.007001795332136445
+OTU_312	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Variibacter	Unknown species	76	0.8444444444444444	5.353890184748474e-4	5.519642890218378e-4	0.003458980044345898
+OTU_747	Bacteria	Chloroflexi	KD4-96	Unknown order	Unknown family	Unknown genus	Unknown species	81	0.9	5.295637735080567e-4	5.494946501447826e-4	0.0027524972253052163
+OTU_293	Bacteria	Actinobacteria	Acidimicrobiia	Acidimicrobiales	Unknown family	Unknown genus	Unknown species	77	0.8555555555555555	5.090231643725696e-4	4.717010255175437e-4	0.003661837287056201
+OTU_260	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	MNG7	Unknown genus	Unknown species	81	0.9	5.059470735160249e-4	4.735532546753351e-4	0.003735274399003927
+OTU_356	Bacteria	Proteobacteria	Gammaproteobacteria	Cellvibrionales	Halieaceae	Unknown genus	Unknown species	76	0.8444444444444444	5.04578066674105e-4	5.402335043558255e-4	0.007398273736128237
+OTU_781	Bacteria	Proteobacteria	Betaproteobacteria	Nitrosomonadales	Gallionellaceae	Candidatus Nitrotoga	Unknown species	76	0.8444444444444444	4.918619751645447e-4	4.945451851303043e-4	0.0036281179138321997
+OTU_868	Bacteria	Actinobacteria	Actinobacteria	Corynebacteriales	Mycobacteriaceae	Mycobacterium	Unknown species	74	0.8222222222222222	4.705322666067157e-4	4.4947427562404686e-4	0.005296229802513465
+OTU_1759	Bacteria	Proteobacteria	Betaproteobacteria	Burkholderiales	Comamonadaceae	Unknown genus	Unknown species	73	0.8111111111111111	4.2841405277188046e-4	4.2477788685349487e-4	0.0017938368889743098
+OTU_1747	Bacteria	Proteobacteria	Alphaproteobacteria	Rhizobiales	Xanthobacteraceae	Variibacter	Unknown species	72	0.8	3.437470307371118e-4	3.3648829699877136e-4	0.001607043040804919

@@ -1,0 +1,32 @@
+{
+  "source": "phyloseq::soilrep",
+  "source_file": "phyloseq/data/soilrep.RData",
+  "phyloseq_version": "1.48.0",
+  "source_sha256": "47b25a0a033b794fca1db30ae6fdb68c55a44e6c4cd0d1be76788d1d77b51f36",
+  "source_bytes": 107392,
+  "primary_study": {
+    "title": "Reproducibility and quantitation of amplicon sequencing-based detection",
+    "citation": "Zhou J, Wu L, Deng Y, et al. ISME Journal. 2011;5:1303-1313.",
+    "doi": "10.1038/ismej.2011.11"
+  },
+  "license": "phyloseq package AGPL-3",
+  "features": 16825,
+  "technical_libraries": 56,
+  "biological_samples": 24,
+  "blocks": 6,
+  "main_plots": 12,
+  "treatments": 4,
+  "reads": 98022,
+  "minimum_library_size": 889,
+  "median_library_size": 1558.5,
+  "maximum_library_size": 4352,
+  "biological_samples_with_1_library": 2,
+  "biological_samples_with_2_libraries": 12,
+  "biological_samples_with_3_libraries": 10,
+  "taxonomy_status": "The packaged soilrep object has no tax_table; seven rank columns are deliberately empty and TaxonomyStatus records this boundary.",
+  "output_sha256": {
+    "otutab.tsv": "de52dc7457f15f07776c216561803afd92782af7d6723ec93deb8dc0e932b900",
+    "taxonomy.tsv": "599ed73e3d1f59bc2867782c58113100def184c3ebd2cab36286b2fc96dbaee0",
+    "metadata.tsv": "5ebf2fd60582e1a0ef80fe20d251594bec3607df11d8bb74d0981236e03f982c"
+  }
+}

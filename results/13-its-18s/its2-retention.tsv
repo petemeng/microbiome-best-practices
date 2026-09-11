@@ -1,0 +1,3 @@
+sample_id	raw_forward	raw_reverse	trimmed_forward	trimmed_reverse	retained_pairs	retention_percent
+sample1	2500	2500	1034	1034	1034	41.36
+sample2	2500	2500	1031	1031	1031	41.24
