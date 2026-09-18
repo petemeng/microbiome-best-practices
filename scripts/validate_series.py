@@ -131,7 +131,7 @@ REQUIRED_PILOT_SECTION_PATTERNS = (
     ("data-environment", r"\{#sec-(?:setup|preparation)\}"),
     ("analysis", r"\{#sec-code\}"),
     ("presentation", r"\{#sec-(?:publication|polish|beautify|visualization|figure)\}"),
-    ("pitfalls", r"常见.*(?:坑|误判)"),
+    ("pitfalls", r"(?:\{#sec-pitfalls\}|常见.*(?:坑|误判))"),
     ("methods", r"\{#sec-methods\}"),
     ("transfer", r"\{#sec-own-data\}"),
     ("references", r"\{#sec-references\}"),

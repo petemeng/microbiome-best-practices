@@ -11870,7 +11870,7 @@ series:
     - {number: 19, file: chapters/19-alpha-diversity.qmd, title: "Alpha 指数全家 + 稀释曲线 + 抽平之争 + Hill numbers"}
     - {number: 20, file: chapters/20-alpha-group-tests.qmd, title: "Alpha 组间检验 + 复现顶刊箱线图"}
     - {number: 21, file: chapters/21-beta-distances.qmd, title: "Beta 距离度量：Bray/Jaccard/UniFrac/Aitchison/Robust Aitchison（DEICODE）"}
-    - {number: 22, file: chapters/22-ordination-unconstrained.qmd, title: "非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）"}
+    - {number: 22, file: chapters/22-ordination-unconstrained.qmd, title: "非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA"}
     - {number: 23, file: chapters/23-permanova-dispersion.qmd, title: "PERMANOVA + betadisper（必配）+ ANOSIM/MRPP"}
     - {number: 24, file: chapters/24-ordination-constrained-cap.qmd, title: "约束排序：CAP/db-RDA/RDA/CCA（复现）"}
     - {number: 25, file: chapters/25-environment-variance.qmd, title: "方差解构：envfit/Mantel/VPA 变异分解"}

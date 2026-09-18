@@ -2,9 +2,14 @@ import re,unittest
 from lxml import html
 from reader_reproducibility import decisive_code,omit_generic_reader_helpers,public_blocks,reader_blocks,script_text
 from sync_wechat_revision import SafeError,verify_article,validate_plan
-from validate_series import PROHIBITED_PUBLIC_REGEXES
+from validate_series import PROHIBITED_PUBLIC_REGEXES, REQUIRED_PILOT_SECTION_PATTERNS
 
 class ReaderBoundaryTests(unittest.TestCase):
+    def test_topic_specific_pitfall_heading_does_not_need_stock_words(self):
+        pattern = dict(REQUIRED_PILOT_SECTION_PATTERNS)['pitfalls']
+        self.assertRegex('## 哪些诊断会让我们改变方案？ {#sec-pitfalls}', pattern)
+        self.assertNotRegex('## 方法比较', pattern)
+
     def test_figure_production_narration_variants_are_rejected(self):
         for text in ('这里不嵌入原图', '以下图不复制原论文图', '这里不拼贴论文原图'):
             with self.subTest(text=text):
