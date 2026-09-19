@@ -30,6 +30,12 @@ PICRUSt2 输出的是由 16S phylogeny 与 reference genomes **预测的 functio
 
 官方压缩包含 24 个样本、37 条 400-bp ASV sequences 和 108,718 reads；metadata 中有 `Genotype`（14 KO、10 WT）与 `Facility`（Dalhousie、PaloAlto 各 12）。官方包不分发 taxonomy，因此本章的 `taxonomy.tsv` 七个 rank 有意留空；PICRUSt2 的必需 biological input 是 representative sequences，而不是 taxonomy labels。
 
+### 通路检验的 P 值，包含功能预测的不确定性吗？
+
+对预测通路做线性模型，通常把预测丰度当作给定输入；其标准误主要描述样本间变异，并未完整传播参考基因组缺失、谱系放置和基因含量推断的不确定性。因此，小 q 值只能支持“预测的功能组成与分组有关”，不能变成实测通路改变的证据。NSTI 较低也不解决同一 16S 序列对应不同菌株基因含量的问题。
+
+本例只有 37 条 ASV，许多通路还共享相同的预测来源。多个显著通路未必是多条独立机制；应查看其共同的类群贡献以及 Facility 调整后的结果。若关键结论依赖特定功能，最有价值的补充是相同样本或独立样本中的直接功能测量，而不是再换一个热图聚类方式。[PICRUSt2 的参考库更新研究](https://pmc.ncbi.nlm.nih.gov/articles/PMC12089645/)也表明，参考范围是预测质量的重要条件。
+
 ## 开始前：数据与运行环境 {#sec-setup}
 
 在 Linux 或 WSL2 的项目文件夹中运行下面的下载命令。下载后保留这里的相对目录，后续命令使用同一组文件。

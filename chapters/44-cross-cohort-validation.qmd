@@ -42,6 +42,12 @@ reader-reproduction:
 
 数据来自 MicrobiomeHD Zenodo record 10.5281/zenodo.1146764 的 standardized 16S outputs，许可为 CC BY-NC 4.0。本页仅保留 CRC 与 healthy controls；Zackular cohort 的 adenoma 与 mock samples 在分析前排除。三项研究的 amplicon region、platform、geography 与 preprocessing lineage 不完全相同，这正是需要 study-level validation 的原因。
 
+### 同名属是否意味着跨研究测到了同一个量？
+
+不同扩增区域和数据库可能把相同属名映射到不同的可检测成员；在一个队列未出现的属，也可能是不可测或未注释，不能总当作生物学零。合并之前要保留各队列的测量范围。CLR 效应只有在参照集合与变换定义可比较时才具有共同尺度，不能仅凭列名相同就进行 meta 分析。
+
+本例只有三个研究，随机效应模型对研究间方差的估计本来就有限。低 I² 不证明不存在异质性，高 I² 也不说明平均效应毫无价值；应结合各研究效应区间、方向和留一研究结果。如果拿掉一个研究就改变主要方向，结论应降为研究依赖的关联。外部分类成功回答可迁移预测问题，不能反过来证明 meta 分析中的某个菌具有因果作用。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `ggplot2`、`ggrepel`、`metafor`、`pROC`、`ragg`、`ranger`、`readr`、`svglite`。本次使用三个公开结直肠癌队列各自的 count、taxonomy 和 metadata 表；队列身份不能在合并时丢失。

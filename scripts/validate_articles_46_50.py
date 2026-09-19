@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+from lock_validation import locked_packages_valid
 from PIL import Image
 
 
@@ -77,7 +78,7 @@ EXECUTABLE_TOKENS = {
     48: (
         "data/small/paired-ibd-multiomics", "from mmvec.multimodal import MMvec",
         "from mofapy2.run.entry_point import entry_point", "ValidationMAE",
-        "mmvec-native", "multiomics-native", "48-4-mofa-summary",
+        "env/mmvec-native.yml", "env/multiomics.yml", "48-4-mofa-summary",
     ),
     49: (
         "data/small/multi-kingdom-duran", "fungi-otutab.tsv",
@@ -297,7 +298,7 @@ def main() -> int:
 
     lock = json.loads((project / "env" / "renv.lock").read_text(encoding="utf-8"))
     packages = lock.get("Packages", {})
-    check("renv-package-count", len(packages) == 418, len(packages))
+    check("renv-package-records", locked_packages_valid(packages, PACKAGE_VERSIONS), len(packages))
     for package, version in PACKAGE_VERSIONS.items():
         observed = packages.get(package, {}).get("Version")
         check(f"renv-{package}", observed == version, observed)

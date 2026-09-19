@@ -57,6 +57,12 @@ reader-reproduction:
 三个 coverage-standardized Hill 指标的 Kruskal–Wallis 检验均未通过 Holm 校正；九个计划成对比较也没有一个通过 Holm 校正。未经标准化的 raw (q=0) 有一个未校正的名义信号（P = 0.035），但在 10,000 reads 和 90% coverage 下分别变为 P = 0.511 与 P = 0.216。这个例子说明，星号可能首先反映测量口径，而不是稳健的组间生物学差异。
 :::
 
+### 不显著之后，怎样判断是差异小还是估计不精确？
+
+本例最大的成对 Cliff's delta 为 0.258，95% bootstrap 区间为 −0.033 到 0.547。区间同时容许接近无差异和有一定幅度的秩差异，因此不能把结果写成“三种湿地的多样性相同”。若科学问题是证明差异小到可忽略，应在分析前给出有生物学意义的等效界值，并使用对应的等效性分析；普通检验的 P > 0.05 不能代替它。
+
+bootstrap 也不自动解决伪重复。本例在每组内重抽样本，区间有效性依赖这些样本可作为独立单位。若多个采样点来自同一湿地，应按湿地保留整组观测进行重采样，或采用能表达层级的模型。90 个测序样本不一定提供 90 个独立生态重复；这项设计限制应与效应区间一起报告。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `digest`、`dplyr`、`emmeans`、`ggplot2`、`iNEXT`、`jsonlite`、`lmerTest`、`ragg`、`readr`、`scales`、`svglite`、`tidyr`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
@@ -327,11 +333,11 @@ Kruskal–Wallis 先对所有观测联合排序，再比较各组秩和。其原
 
 Cliff's delta 定义为：
 
-\[
+$$
 \delta=P(X_A>X_B)-P(X_A<X_B), \qquad -1\leq\delta\leq 1.
-\]
+$$
 
-当 \(\delta>0\) 时，A 组样本倾向于高于 B 组；\(\delta=0\) 表示没有总体序优势。`ProbabilitySuperiority = (delta + 1) / 2` 将相同信息转换为更直观的概率尺度，并把 ties 各分一半。
+当 $\delta>0$ 时，A 组样本倾向于高于 B 组；$\delta=0$ 表示没有总体序优势。`ProbabilitySuperiority = (delta + 1) / 2` 将相同信息转换为更直观的概率尺度，并把 ties 各分一半。
 
 </details>
 
@@ -617,7 +623,7 @@ distribution_diagnostics
 
 ### 三个总体检验构成一个主检验族
 
-epsilon-squared 使用 \((H-k+1)/(n-k)\)，负的小样本估计截为 0。它描述秩差异的总体量级，不替代原始分布图。
+epsilon-squared 使用 $(H-k+1)/(n-k)$，负的小样本估计截为 0。它描述秩差异的总体量级，不替代原始分布图。
 
 ```{r}
 #| results: hold
@@ -652,9 +658,9 @@ omnibus_tests
 
 结果为：
 
-- (q=0)：(H=3.061)，raw P = 0.216，Holm P = 0.649，\(\epsilon^2=0.012\)；
-- (q=1)：(H=1.066)，raw P = 0.587，Holm P = 1.000，\(\epsilon^2=0\)；
-- (q=2)：(H=0.423)，raw P = 0.809，Holm P = 1.000，\(\epsilon^2=0\)。
+- (q=0)：(H=3.061)，raw P = 0.216，Holm P = 0.649，$\epsilon^2=0.012$；
+- (q=1)：(H=1.066)，raw P = 0.587，Holm P = 1.000，$\epsilon^2=0$；
+- (q=2)：(H=0.423)，raw P = 0.809，Holm P = 1.000，$\epsilon^2=0$。
 
 这里的“没有拒绝原假设”不等于证明三组完全相同；它表示当前样本与分析精度不足以支持预先指定的组间差异声明。
 
@@ -757,7 +763,7 @@ stopifnot(
 pairwise_tests
 ```
 
-最大的观察效应出现在 (q=0) 的 Inland wetland vs Tibetan Plateau：Cliff's \(\delta=0.258\)，95% bootstrap CI 为 -0.033 到 0.547，九项全局 Holm P = 0.789。区间跨过 0，因此数据同时容许接近无效应和中等正向优势；只看点估计会夸大确定性。
+最大的观察效应出现在 (q=0) 的 Inland wetland vs Tibetan Plateau：Cliff's $\delta=0.258$，95% bootstrap CI 为 -0.033 到 0.547，九项全局 Holm P = 0.789。区间跨过 0，因此数据同时容许接近无效应和中等正向优势；只看点估计会夸大确定性。
 
 ### 把 Welch 与标准化选择放入敏感性分析
 

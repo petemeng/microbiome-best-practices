@@ -46,6 +46,12 @@ reader-reproduction:
 全局拟合未拒绝一个图，只说明该图蕴含的条件独立关系没有与当前数据明显冲突。反向箭头、共同原因、测量误差或另一张竞争图也可能得到相似拟合；横断面 SEM 不会自动创造时间顺序。
 :::
 
+### 拟合优良，为什么仍可能无法区分竞争路径？
+
+两张因果图可能蕴含相同或非常接近的条件独立关系，因而在横断面数据上都拟合良好。箭头从 Shannon 指向 TOC，是预设机制假设，不是回归自己识别出的时间方向；TOC 也可能影响群落，或二者共享未测原因。应把竞争解释与研究能测到的时间信息并列，而不是只给最合意的一张图。
+
+标准化系数以当前样本的标准差为单位，换一个环境范围或人群后大小可能改变；它不是跨研究固定的机制强度。若根据同一数据逐条添加路径直到 Fisher's C 不显著，最终检验已包含探索性选择。应区分预设结构与事后修改，并在独立数据检查后者。增加更多微生物指标也会增加参数负担，不能用复杂路径图替代缺失的测量与设计。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `ggplot2`、`patchwork`、`piecewiseSEM`、`plspm`、`ragg`、`svglite`。本次使用湿地三张表及实测环境因子表；环境暴露和表型不能由菌群丰度臆造。
@@ -180,14 +186,14 @@ install.packages(c(
 
 传统单个回归只估计一个结局。分段 SEM 把多个回归连接起来，例如：
 
-\[
+$$
 \begin{aligned}
 \mathrm{pH} &\leftarrow \mathrm{Temperature}+\mathrm{Precipitation}+\mathrm{Group},\\
 \log(\mathrm{EC}) &\leftarrow \mathrm{Temperature}+\mathrm{Precipitation}+\mathrm{Group},\\
 \mathrm{Shannon} &\leftarrow \mathrm{pH}+\log(\mathrm{EC})+\mathrm{Climate}+\mathrm{Group},\\
 \log(\mathrm{TOC}) &\leftarrow \mathrm{Shannon}+\mathrm{pH}+\log(\mathrm{EC})+\mathrm{Climate}+\mathrm{Group}.
 \end{aligned}
-\]
+$$
 
 `piecewiseSEM` 对每个响应拟合独立模型，再用 directed separation（定向分离）检查图所蕴含的缺失路径。Fisher's C 的小 P 值表示至少有应独立的变量仍存在条件关联，因而拒绝当前图；大 P 值不代表图唯一或为真。
 

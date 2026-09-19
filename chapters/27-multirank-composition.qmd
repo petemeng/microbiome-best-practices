@@ -33,7 +33,7 @@ reader-reproduction:
 
 微生物组论文常把门、纲、目、科、属的组成并排展示：上层级交代群落骨架，下层级追踪更具体的分类单元。真正困难的不是把 `Phylum` 换成 `Genus`，而是保证每个面板仍使用同一批样本、同一分母和可追踪的分类路径，同时避免把跨层级同名 taxon 合并。
 
-本页使用 `microeco` 2.0.0 随包分发的中国湿地土壤 16S 数据。原研究 [An et al. (2019)](https://doi.org/10.1016/j.geoderma.2018.09.035)比较 inland、coastal 与 Tibetan wetland 的细菌群落；[Liu et al. (2021)](https://doi.org/10.1093/femsec/fiaa255)给出了三件套数据入口和逐分类级丰度计算框架。层级图的表达思路参考 [Metacoder](https://doi.org/10.1371/journal.pcbi.1005404)，但这里从公开 count、taxonomy 和 metadata 重新计算并绘制四张原创图。
+本页使用 `microeco` 2.0.0 随包分发的中国湿地土壤 16S 数据。原研究 [An et al. (2019)](https://doi.org/10.1016/j.geoderma.2018.09.035)比较 inland、coastal 与 Tibetan wetland 的细菌群落；[Liu et al. (2021)](https://doi.org/10.1093/femsec/fiaa255)给出了三件套数据入口和逐分类级丰度计算框架。层级图的表达思路参考 [Metacoder](https://doi.org/10.1371/journal.pcbi.1005404)，四种图分别展示分类层级、丰度分布与样本间差异。
 
 ::: {.callout-important title="先给结论"}
 以全部 reads 为分母、先逐样本闭合再等权平均，能够命名到 Phylum、Class、Order、Family、Genus 的 reads 比例依次为 **99.65%、96.80%、85.57%、67.96%、36.89%**。最大分辨率损失发生在 Family→Genus，一步减少 **31.07 个百分点**。
@@ -42,6 +42,12 @@ reader-reproduction:
 
 共有 **754** 条完整 Phylum→Genus lineage，合计覆盖 34.38% reads；丰度最高的 12 条完整 lineage 仅覆盖 10.19%。另外有 324 个 features（2.52% reads）出现“Family 未知、Genus 已知”，这些断裂路径被原样保留，不根据 genus 反推或补写 family。
 :::
+
+### 属水平图上的组间差异，会不会来自注释覆盖不同？
+
+三组能命名到属的 reads 比例分别为 28.99%、38.38% 和 43.31%。若只对已知属重新闭合到 100%，比较的问题就变成“在各组可命名的部分里，某属占多少”，而不再是全部群落中的份额。这个条件分母不同，可能放大原本很小的视觉差异。因此主图保留全部 reads 分母，已知属内部的组成只能作为明确标注的补充视图。
+
+Family→Genus 损失 31.07 个百分点，也说明更细的面板未必提供更多可靠信息。若关键结论在 family 层稳定、genus 层只剩少量可注释 reads，可以把 family 作为主要报告分辨率，同时呈现 genus 的有限证据；不应为了得到更具体的名字删除未知部分。跨级别的同名标签还要保留父系路径，否则会把不同谱系错误合并。
 
 ## 下载并读取本次分析的数据 {#sec-setup}
 
@@ -280,10 +286,10 @@ install.packages(c(
 
 对样本 (j)，把 feature counts 聚合到 rank (r) 后：
 
-\[
+$$
 p_{krj}=\frac{x_{krj}}{\sum_k x_{krj}}, \qquad
 \sum_k p_{krj}=1.
-\]
+$$
 
 同一条 read 会同时贡献给它的 phylum、class、order、family 和 genus。五个 rank 各自闭合到 100%，并不意味着把五级比例相加后得到新的“总丰度”；那会把同一证据重复计算五次。
 

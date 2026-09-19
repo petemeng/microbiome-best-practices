@@ -35,7 +35,7 @@ reader-reproduction:
 - 每个点是一个样本；
 - 点的颜色表示地点、处理或表型；
 - `pH`、`Conductivity`、`TOC` 等箭头表示环境梯度；
-- 图注报告约束模型的 \(R^2\)、调整后 \(R^2\) 和置换检验 P 值。
+- 图注报告约束模型的 $R^2$、调整后 $R^2$ 和置换检验 P 值。
 
 这类图回答的不是“样本自然会沿哪两个方向变化”，而是：
 
@@ -44,8 +44,16 @@ reader-reproduction:
 本例继续使用中国湿地土壤 16S 数据。[原始研究](https://doi.org/10.1016/j.geoderma.2018.09.035)报告 pH 与电导率是影响湿地土壤细菌群落的重要环境因子；[`microeco`](https://doi.org/10.1093/femsec/fiaa255)公开分发了 OTU、分类、样本和环境因子表。下面从这些表拟合一个五变量 CAP 模型。
 
 ::: {.callout-important title="约束排序不是把差异“逼出来”"}
-CAP 是有监督模型：坐标轴专门呈现可由给定变量解释的变异。因此分离更明显是模型定义的结果，不是独立证据。证据来自预先设定的假设、调整后 \(R^2\)、置换检验、共线性检查和与研究设计一致的置换方案。
+CAP 是有监督模型：坐标轴专门呈现可由给定变量解释的变异。因此分离更明显是模型定义的结果，不是独立证据。证据来自预先设定的假设、调整后 $R^2$、置换检验、共线性检查和与研究设计一致的置换方案。
 :::
+
+### 箭头、边际贡献与因果效应不是一回事
+
+CAP 图中的 pH 箭头表达当前约束空间内的梯度；边际检验问的是控制其余已纳入变量后，pH 是否仍提供额外解释。这两者都不自动等于改变 pH 所造成的群落变化。如果 pH 与未测量的地理或管理因素共同变化，统计调整只能控制已测且正确建模的部分。
+
+本例五个环境变量的 VIF 均低于 2，说明这五列之间没有严重线性冗余，不代表混杂已经消失。加入 `Condition(Group)` 会把问题改为“同一地理组内的环境关联”；若变量主要在组间变化，估计会变得不精确，这不必然是模型失败，而是数据对新问题提供的信息更少。是否调整 Group 应由目标比较决定，不应由哪个模型更显著决定。
+
+还有一个容易混淆的细节：在相同样本、带截距且无惩罚的线性约束模型中，给连续预测变量做 Z-score 不改变它们张成的空间，因此不会单靠缩放改变整体拟合或消除共线性。标准化便于描述单位；这与先计算环境欧氏距离时各变量量纲会改变权重的情况不同。
 
 ## 下载并读取本次分析的数据 {#sec-setup}
 
@@ -206,15 +214,15 @@ install.packages(c("vegan", "ggplot2", "ggrepel", "scales", "digest"))
 
 群落总变异可分为两部分：
 
-\[
+$$
 \text{Total variation}
 =
 \text{Constrained variation}
 +
 \text{Residual variation}
-\]
+$$
 
-约束部分是当前预测变量能够解释的群落变异，残差部分是模型没有解释的变异。原始 \(R^2\) 随变量数量增加而单调上升，因此多变量模型应同时报告调整后 \(R^2\)。
+约束部分是当前预测变量能够解释的群落变异，残差部分是模型没有解释的变异。原始 $R^2$ 随变量数量增加而单调上升，因此多变量模型应同时报告调整后 $R^2$。
 
 ### RDA、CCA 与 CAP/db-RDA 的选择
 
@@ -345,7 +353,7 @@ stopifnot(
 summary(model_data)
 ```
 
-### 拟合环境 CAP，并检查 \(R^2\) 与共线性
+### 拟合环境 CAP，并检查 $R^2$ 与共线性
 
 ```{r}
 #| results: hold
@@ -414,7 +422,7 @@ cap_env_r2_adjusted <- unname(cap_env_r2$adj.r.squared)
 
 ### 提取当前环境模型的坐标和轴标签
 
-轴百分比按“受约束变异内部的占比”计算，并在标签中明确写出 `constrained`。调整后 \(R^2\) 则衡量全部五个变量对总群落变异的解释比例。
+轴百分比按“受约束变异内部的占比”计算，并在标签中明确写出 `constrained`。调整后 $R^2$ 则衡量全部五个变量对总群落变异的解释比例。
 
 ```{r}
 #| results: hold
@@ -566,13 +574,13 @@ save_pub(
 ## 常见坑 {#sec-pitfalls}
 
 ::: {.callout-caution title="约束排序最常见的七个误区"}
-1. **看到 CAP 分开就宣称存在差异。** 轴本来就是按预测变量优化的；必须报告置换检验和调整后 \(R^2\)。
-2. **变量越多越好。** 原始 \(R^2\) 会随变量增加而上升。变量应由研究假设预先确定，并检查 VIF 和调整后 \(R^2\)。
+1. **看到 CAP 分开就宣称存在差异。** 轴本来就是按预测变量优化的；必须报告置换检验和调整后 $R^2$。
+2. **变量越多越好。** 原始 $R^2$ 会随变量增加而上升。变量应由研究假设预先确定，并检查 VIF 和调整后 $R^2$。
 3. **把 `by = "terms"` 当成独立效应。** 它依赖公式顺序；独立贡献应结合 `by = "margin"`，大量探索性检验还需控制多重比较。
-4. **不标准化不同量纲的环境变量。** pH、mg/kg 与 µS/cm 的数值尺度不同；连续预测变量应先 Z-score，除非模型有明确的原尺度解释需求。
+4. **把标准化当成消除共线性或混杂。** Z-score 便于比较变量单位，但不会改变本例线性约束模型的解释空间，也不能产生缺失的组内对照。对数变换、变量选择与调整集则可能实质改变问题，应分别说明。
 5. **忽略区组和重复测量。** `Condition(Batch)` 用于从模型中控制协变量，受限置换用于保证样本交换性；两者解决不同问题，不能互相替代。
 6. **把箭头解释为因果。** 箭头只表示当前模型与二维投影中的关联方向和强度。
-7. **复用别的模型轴标签。** 每次重拟合后都要从当前模型重新提取 eigenvalues、scores、\(R^2\) 和 P 值。
+7. **复用别的模型轴标签。** 每次重拟合后都要从当前模型重新提取 eigenvalues、scores、$R^2$ 和 P 值。
 :::
 
 ::: {.callout-warning title="环境变量和地理分组可能混杂"}
@@ -583,7 +591,7 @@ save_pub(
 
 可直接替换变量名、阈值和置换限制：
 
-> Distance-based redundancy analysis (db-RDA; CAP) was performed using Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Features detected in at least `r min_prevalence * 100`% of samples were retained, yielding `r format(ncol(comm_env), big.mark = ",")` features across `r nrow(comm_env)` complete samples. The prespecified environmental predictors (`r paste(predictors, collapse = ", ")`) were Z-score standardized before model fitting. A Lingoes correction was applied to the Bray–Curtis dissimilarities. Model significance was assessed with 999 permutations (P `r format_p(cap_env_p)`), and the model explained \(R^2\) = `r sprintf("%.3f", cap_env_r2_raw)` of the total variation (adjusted \(R^2\) = `r sprintf("%.3f", cap_env_r2_adjusted)`). Sequential, marginal, and axis-wise permutation tests were performed, and variance inflation factors were all below `r sprintf("%.2f", max(cap_env_vif))`. Wetland group was used only for point color in the environmental CAP figure.
+> Distance-based redundancy analysis (db-RDA; CAP) was performed using Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Features detected in at least `r min_prevalence * 100`% of samples were retained, yielding `r format(ncol(comm_env), big.mark = ",")` features across `r nrow(comm_env)` complete samples. The prespecified environmental predictors (`r paste(predictors, collapse = ", ")`) were Z-score standardized before model fitting. A Lingoes correction was applied to the Bray–Curtis dissimilarities. Model significance was assessed with 999 permutations (P `r format_p(cap_env_p)`), and the model explained $R^2$ = `r sprintf("%.3f", cap_env_r2_raw)` of the total variation (adjusted $R^2$ = `r sprintf("%.3f", cap_env_r2_adjusted)`). Sequential, marginal, and axis-wise permutation tests were performed, and variance inflation factors were all below `r sprintf("%.2f", max(cap_env_vif))`. Wetland group was used only for point color in the environmental CAP figure.
 
 若样本属于同一受试者、站点或区组，应把最后的置换描述改成实际限制，例如“permutations were restricted within site”。
 

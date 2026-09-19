@@ -42,6 +42,12 @@ Family、Genus、Species 必须各自从 ASV 表重新聚合、过滤、检验�
 
 本页预声明 CW 对 IW、prevalence `>=10%`、total reads `>=20`、每 rank 最多 80 个 group-blind 高信息行、BH `q<0.05`。Family/Genus 使用 ALDEx2 IQLR reference；Species 因可用 feature 太少而预声明使用全表 CLR reference，并同时判定报告门禁失败。每个 rank 的 unclassified residual 保留在 denominator 中，却永远不作为 biomarker。
 
+### 一条谱系的多个显著节点，能算多项发现吗？
+
+同一批 reads 同时进入 family 和 genus 汇总，父子节点显著不是两次独立复现。若一个 family 的变化由单个 genus 主导，两者可能是在不同分辨率重复描述同一信号；若子节点方向相反，聚合后又可能抵消。应沿完整谱系检查组成和方向，再决定主要结论在哪一层成立。
+
+本例 species 注释仅覆盖约 0.35% reads。5% 覆盖与 20 个 taxa 是本次比较的保守筛选条件，并不是验证物种分辨率的国际标准；即使满足，也还需要扩增区域确实能区分目标物种。若跨多个 rank 挑选最小 q 值后写成一组发现，rank 内 BH 已不再覆盖全部选择过程。可预先指定主要 rank，其他层作为解释，或采用适合整棵分类层级的多重检验方案。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `ALDEx2`、`ggplot2`、`ggrepel`、`knitr`、`patchwork`、`ragg`、`scales`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。
@@ -214,7 +220,7 @@ Family 有一套 tested hypotheses，Genus 和 Species 又各有一套。每个 
 
 ### Species label 还受扩增区分辨率约束
 
-短 16S 扩增区常无法区分多个 species；数据库给出的末级 label 也不等于 strain-level identification。本页使用双门禁：已知 reads 占比至少 5%，且过滤后至少 20 个可报告 taxa，才允许该 rank 进入主报告。这是保守的教程合同，不是普适常数；正式项目还要用 mock community、classifier confidence、扩增区和数据库版本校准。
+短 16S 扩增区常无法区分多个 species；数据库给出的末级 label 也不等于 strain-level identification。本页使用双门禁：已知 reads 占比至少 5%，且过滤后至少 20 个可报告 taxa，才允许该 rank 进入主报告。这是本例预先声明的展示条件，不是分类可靠性的普适标准；正式项目还要用 mock community、classifier confidence、扩增区和数据库版本校准。
 
 <details>
 <summary><strong>深入：为什么不能把“未注释种”均分给已知种</strong></summary>

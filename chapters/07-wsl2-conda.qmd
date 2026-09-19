@@ -19,24 +19,21 @@ fig-dpi: 300
 fig-format: png
 ---
 
-> **验证边界：**Windows 侧命令必须在读者自己的管理员 PowerShell 中执行；随文证据记录的是 Linux 执行层的真实服务器实测，不把 native Linux 主机冒充成 WSL2 主机。
+Windows 的虚拟化设置与 Linux 中的软件环境需要分别检查。PowerShell 用于管理 WSL；进入 Ubuntu 后，再安装和运行分析工具。
 
 ## Windows 上怎样建立稳定的分析环境？ {#sec-target}
 
-环境安装不是生物学结果，但它决定 Methods 中的命令能否被第三方重跑。对应到论文，最适合放在以下两个位置：
-
-1. Methods 的 **Computational environment** 段，报告操作系统、环境管理器、软件 release 和环境文件；
-2. Supplementary Methods 或代码仓库中的 **reproducibility workflow** 图，说明 Windows、WSL2、环境管理器、QIIME 2 与项目数据之间的层次。
+在 Windows 上运行 QIIME 2，首先要确定命令到底交给哪个操作系统执行。装在 Windows 中的 Python、WSL 中的 Python，以及某个 conda 环境中的 Python 可以同时存在；它们名字相同，却不共享同一套包。安装报错前，先分清这一层关系，才能判断应调整 WSL、激活环境还是修复工具依赖。
 
 ![Windows 到 QIIME 2 的执行层。Windows 只负责启用 WSL2，真正的分析命令在 Linux 层执行。](../figures/07-wsl2-layer-map.png){#fig-wsl2-layer-map}
 
 ![一次真实 Linux-side 验证：版本锁、三个关键插件入口与 Atacama FASTQ 冒烟输入均通过。](../figures/07-environment-validation.png){#fig-environment-validation}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="把 Windows 管理与 Linux 分析分开"}
 在 Windows 上做 16S 命令行分析时，**PowerShell 只用来安装和管理 WSL；`conda`、`mamba`、`qiime`、FASTQ 与项目代码都放到 Ubuntu/WSL2 终端里运行。**不要在 Windows Python、Anaconda Prompt 与 WSL 的 Linux 环境之间混装软件。
 :::
 
-### 为什么要保留“验证边界”
+### Linux 工具能运行，不代表 WSL 的所有设置都已正确
 
 一次 `qiime info` 成功只能证明当前 Linux shell 中的 QIIME 2 可启动，不能自动证明：
 

@@ -51,6 +51,14 @@ reader-reproduction:
 Hellinger VPA 的 combined adjusted (R^2=0.282)：纯土壤变量占 9.7%，纯 wetland group 占 11.4%，共享部分占 7.1%，未解释部分占 71.8%；两个纯组分的 Holm-adjusted (P=0.002)。`Group` 与 `Saline` 在这批数据中完全混杂，因此这些比例是统计关联分解，不能被写成盐度或地域的因果贡献。
 :::
 
+### 三类结果一致，为什么还不是三次独立验证？
+
+同一批样本上的 envfit、Mantel 和 VPA 共享群落数据与环境梯度，结果一致只能说明不同摘要方式给出相容的模式，不能当作三个独立队列的复现。本例 Temperature 与 Latitude 的二维拟合强度几乎相同，正提醒我们相关环境变量可能承载同一地理梯度。
+
+90 个样本能产生 4,005 个样本对，但 Mantel 的独立信息并没有因此变成 4,005 份。每个样本参与多个距离，置换必须作用于样本标签，并保持设计允许的交换关系。若群落与环境都存在空间自相关，自由置换可能破坏各自的空间结构；应先明确空间采样与目标零假设，不能把 partial Mantel 当作自动控制空间混杂的办法。[Mantel 方法说明](https://vegandevs.github.io/vegan/reference/mantel.html)也强调距离关联与普通独立观测回归并不相同。
+
+VPA 的 7.1% 共享部分同样不能被唯一归给环境或地理。若希望估计可迁移的环境响应，需要新的组内环境变化或独立地点验证，而不是进一步拆分同一份共享百分比。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `ggplot2`、`jsonlite`、`permute`、`ragg`、`scales`、`svglite`、`vegan`。本次使用中国湿地的 OTU count 表、分类表和样本信息表，以及本次分析使用的实测环境变量或系统发育信息。
@@ -326,9 +334,9 @@ partial Mantel 尝试在控制第三个距离矩阵后关联另外两个距离�
 
 VPA 把 Hellinger-transformed community matrix 的变异拆成：
 
-\[
+$$
 1=[a]+[b]+[c]+[d]
-\]
+$$
 
 - ([a])：edaphic set 在控制 wetland group 后的纯组分；
 - ([b])：wetland group 在控制 edaphic set 后的纯组分；

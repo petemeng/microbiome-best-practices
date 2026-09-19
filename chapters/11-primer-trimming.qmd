@@ -22,12 +22,9 @@ fig-format: png
 
 ## 去引物前，先确认扩增区域和读长结构 {#sec-target}
 
-去引物通常不会成为论文主图，却会决定 ASV 是否仍携带技术序列、双端 reads 是否还能合并，以及不同批次能否进入同一条分析链。建议把下面四类证据保存在补充材料或内部审计中：
+去引物不只是删除一段固定长度的文本。它还决定哪些分子能够进入去噪：使用 `discard-untrimmed` 时，未满足匹配规则的 read pair 会退出分析。如果把错误的引物假设当作输入，或本来就没有读入 PCR 引物，过滤可能删掉真实生物学序列，而不是改善质量。
 
-1. **Primer-presence gate**：不同引物假设在真实 reads 上的命中率；
-2. **Paired retention audit**：每个样本有多少 read pairs 因双端引物规则被保留；
-3. **Read architecture**：PCR 引物与实际测序起点之间的关系；
-4. **Region/layout decision matrix**：V4、V3–V4、全长和单双端数据分别走哪条分支。
+这里用两种真实 V4 数据区分这两种情况：nf-core MiSeq 测试数据在读段起点有明确引物支持；Atacama 数据从扩增子内部开始读取，不能因为同属 V4 就复制相同剪切命令。选择依据是建库协议与观测序列的一致性，而不是哪一组参数保留的 reads 最多。
 
 ![引物存在性门禁。正确的 V4 引物在 nf-core MiSeq 数据中得到双端一致的 5′ 命中；错误的 V3–V4 假设和 Atacama 原始 V4 引物探针均为 0。](../figures/11-primer-presence-gate.png){#fig-primer-presence-gate}
 
@@ -37,7 +34,7 @@ fig-format: png
 
 ![区域与 read layout 的分支决策。区域名称只负责提出候选引物，实际 5′ 序列与建库协议才决定操作。](../figures/11-region-branch-decision.png){#fig-region-branch-decision}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="引物是否存在，要看实际读段起点"}
 **“V4”不等于“FASTQ 一定含 515F/806R”。先看真实 read 起点，再决定是否 trimming；在证据出现之前，不要打开 `discard-untrimmed`。**
 :::
 

@@ -36,12 +36,9 @@ reader-reproduction:
 
 ## 把 QIIME 2 结果正确装进 phyloseq {#sec-target}
 
-`phyloseq` 对象通常不直接成为论文结果图，却是群落组成、alpha diversity、beta diversity、差异丰度和系统发育分析共同的数据入口。McMurdie 与 Holmes 在 `phyloseq` 方法论文中用对象与分析组件的关系说明这种设计。面对真实输入时，先检查以下四件事：
+把计数表、分类表和样本表装进同一个对象，最容易出错的不是语法，而是无声的取交集。缺少一个 sample ID 可能删除整个样本；缺少高丰度 ASV 的分类记录则可能改变所有剩余菌的相对比例。应先列出各表不匹配的 ID，决定如何处理，再构建对象，不能用构造器自动删掉不匹配项来代替判断。
 
-1. 五类输入如何通过方向与 ID gate 进入一个对象；
-2. feature ID 和 sample ID 是否完整对齐；
-3. 每个技术库的 reads 与 observed ASVs 是否在转换后保留；
-4. taxonomy 覆盖率应同时按 ASV 数和 reads 加权报告。
+行列数量相等也不代表对齐正确。需要按 ID 重排，并从对象中反向检查几个样本的计数、总 reads 和分组标签。本例的 366 个 ASV、5,213 条 reads 在转换后全部保留；树中另有 203,452 个参考尖端，它们不是样本中的额外菌。如果自己的部分 ASV 没有树位置，应说明系统发育分析使用的子集，而不是默认从所有不依赖树的分析中一并删除。
 
 ![五组件 phyloseq 对象合同。完整 SEPP tree 先与 366 个 ASV 对齐并显式裁剪，再与计数、taxonomy、metadata 和代表序列共同组装。](../figures/17-phyloseq-object-contract.png){#fig-phyloseq-contract}
 
@@ -51,7 +48,7 @@ reader-reproduction:
 
 ![逐分类层级覆盖。Genus 覆盖 318/366 个 ASV、4,217/5,213 条 reads；Species 没有可报告注释。](../figures/17-taxonomy-coverage-audit.png){#fig-taxonomy-coverage}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="按 ID 对齐，并核对转换前后的计数"}
 **成功执行 `phyloseq()` 只证明构造器返回了对象，不证明输入方向、ID 交集、计数总量和树尖端都正确。先验收每个组件，再构建对象；构建后再从对象反向核对。**
 :::
 
@@ -295,15 +292,15 @@ phy_tree <- rooted ASV tree
 
 设计数表 feature 集合为 (F_c)，taxonomy 为 (F_t)，代表序列为 (F_s)，树尖端为 (F_p)。进入五组件对象的 ASV 集合应为：
 
-\[
+$$
 F = F_c \cap F_t \cap F_s \cap F_p
-\]
+$$
 
 sample 集合则是计数表列名与 metadata 行名的交集：
 
-\[
+$$
 S = S_c \cap S_m
-\]
+$$
 
 真正重要的不是交集能算出来，而是集合差是否符合预期。若 taxonomy 少 20 个 ASV，构造器可能只保留共同部分；对象仍能生成，但 feature 数和 reads 已改变。正式分析应在构造器之前显式计算：
 

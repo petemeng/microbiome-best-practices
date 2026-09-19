@@ -38,6 +38,12 @@ reader-reproduction:
 naive CCA 的前三个 canonical correlations 都超过 0.999，但这里 $p=220$ features、$n=220$ samples，几乎完美的 training correlation 是高维过拟合警报。原生 MMvec 在固定的 153/67 train/holdout split 上运行 100 个 epochs，最低 holdout MAE 为 1844.29，且出现在最后一轮；这提示结果尚未形成内部最优点，不能冒充 early stopping。原生 MOFA2 最终保留 4 个 factors，解释 microbiome 34.8%、metabolome 32.6% 的总 variance，其中 3 个 factors 与 diagnosis group 通过 FDR。Spearman 与 MMvec top-50 pairs 的精确重叠为 0，说明它们不是同一个问题的可互换答案。
 :::
 
+### 怎样避免把潜变量的名字当作机制？
+
+MOFA factor 的正负号可以整体翻转，排列也可能在重新拟合时改变；跨运行比较应匹配载荷和样本结构，而不是机械比较 Factor 1。某个 factor 与 diagnosis 相关，可以帮助描述数据，却不能仅据最强载荷给它命名为已确定的生物通路。还应看各 view 的解释比例、缺失模式与批次关联。
+
+MMvec 的条件共现分数与 Spearman 相关估计对象不同，所以 top-50 零重叠不构成某一方错误的证据。本例 holdout MAE 最低点仍在第 100 轮，说明尚未观察到内部最优点；若继续用同一 holdout 反复选训练轮数和模型，它就成为验证集，需要另留测试数据才能无偏评估最终性能。两种模型都应在明确目标下与简单基线比较，不能用高维训练相关作为共同的成功指标。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `ggplot2`、`jsonlite`、`patchwork`、`ragg`、`readr`、`svglite`。本次使用配对的微生物组、代谢组、样本信息及代谢物注释表。

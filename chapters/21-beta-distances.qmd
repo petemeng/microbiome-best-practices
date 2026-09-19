@@ -45,7 +45,9 @@ reader-reproduction:
 同一批 26 个样本在六种距离几何中并不占据同样的位置。Jaccard 与 unweighted UniFrac 的 325 个样本对距离秩相关为 0.953，但前者不使用系统发育分支，不能据此称为同一方法；经典 Aitchison 与 Robust Aitchison 的相关为 0.800，说明零值处理会改变样本对的远近次序。weighted UniFrac 的 PCoA 有 3 个小负特征值，负/正特征值绝对和之比为 0.00455，因此只在该分支用 Lingoes 校正作图。
 :::
 
-本页不根据哪个距离“最能把组分开”来挑主结果，也不进行组间显著性检验。距离应由研究问题预先决定；PERMANOVA 与 dispersion test 是后续推断步骤。
+距离应由研究问题预先决定，而不是选“最能把组分开”的一种。需要强调常见类群丰度时，可把 Bray–Curtis 作为候选；关注是否检出时，Jaccard 要配合深度与稀有 feature 稳定性检查；关注相对比例时，log-ratio 距离需要清楚处理零值；问题涉及谱系替代时，才有理由引入 UniFrac。这里比较的是样本关系，不进行组间显著性推断。
+
+六种距离不一致并非一定有人算错，它们可能在强调不同的生物学变化。尤其 Robust Aitchison 虽不机械填入伪计数，仍依赖非零观测和低秩结构；不能据此说它恢复了所有零的真实值。若两种 log-ratio 路线差异主要由低检出 feature 驱动，应先检查稀疏度、过滤和测序深度，再判断是否值得改变主要距离。这个判断不能由一张更漂亮的 PCoA 决定。
 
 ## 下载并读取本次分析的数据 {#sec-setup}
 
@@ -298,16 +300,16 @@ BiocManager::install("phyloseq", version = "3.19", ask = FALSE)
 
 两个样本 (i,j) 的 Bray–Curtis dissimilarity 可写为：
 
-\[
+$$
 d_{BC}(i,j)=\frac{\sum_k |x_{ik}-x_{jk}|}
 {\sum_k(x_{ik}+x_{jk})}.
-\]
+$$
 
 它对共同高丰度 feature 更敏感。binary Jaccard 先把计数变为 0/1，再比较两样本 feature 集合的交集与并集：
 
-\[
+$$
 d_J(i,j)=1-\frac{|A_i\cap A_j|}{|A_i\cup A_j|}.
-\]
+$$
 
 因此，一个 feature 从 1 read 变为 10,000 reads 不改变 binary Jaccard，却会改变 Bray–Curtis。presence/absence 还很容易受测序深度影响：低深度样本更可能漏检稀有 feature，所以本例把四个生态距离放在同一份 50,000 reads 稀释表上比较。
 
@@ -327,10 +329,10 @@ Unweighted UniFrac 根据只出现在某一群落中的系统发育分支长度�
 
 微生物计数受总测序量约束。对正值组成向量 (x_i)，centered log-ratio（CLR）为：
 
-\[
+$$
 \operatorname{clr}(x_{ik})=
 \log x_{ik}-\frac{1}{D}\sum_{l=1}^{D}\log x_{il},
-\]
+$$
 
 两个样本 CLR 向量的欧氏距离就是 Aitchison distance。问题在于 (log(0)) 不存在。给所有零加 0.5、1 或其他 pseudocount 是一个分析假设，不是无害的格式修复。
 

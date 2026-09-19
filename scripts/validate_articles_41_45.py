@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+from lock_validation import locked_packages_valid
 from PIL import Image
 
 
@@ -324,7 +325,7 @@ def main() -> int:
 
     lock = json.loads((project / "env" / "renv.lock").read_text(encoding="utf-8"))
     packages = lock.get("Packages", {})
-    check("renv-package-count", len(packages) == 418, len(packages))
+    check("renv-package-records", locked_packages_valid(packages, PACKAGE_VERSIONS), len(packages))
     for package, version in PACKAGE_VERSIONS.items():
         observed = packages.get(package, {}).get("Version")
         check(f"renv-{package}", observed == version, observed)

@@ -48,6 +48,12 @@ reader-reproduction:
 即使 ACME 显著，横断面同日测量也无法排除炎症改变菌群、疾病严重程度同时决定用药与炎症，或其它药物共同改变菌群。可靠中介证据优先来自分时点测量、随机暴露、充分混杂控制和独立验证。
 :::
 
+### 随机化暴露，是否就足够解释中介效应？
+
+即使暴露随机分配，微生物中介通常仍未被随机化；中介与结局之间还可能有共同原因。因此暴露效应可识别，并不自动保证间接效应可识别。本例连暴露本身也不是随机的：疾病严重程度会影响 steroid 使用和炎症，当前数据无法完全排除适应证混杂。
+
+“介导比例”在总效应接近零或直接、间接效应方向相反时尤其难解释，可能超出 0–100%，不能强制截断为一个漂亮百分数。应先报告间接和直接效应各自的尺度、区间与识别假设。敏感性分析可以说明结论需要多强的未测混杂才会改变，但不能证明未测混杂不存在，也不能给横断面测量补上时间顺序。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `ggplot2`、`mediation`、`patchwork`、`ragg`、`svglite`。本次使用配对的微生物组、代谢组和样本信息表；同次采样不提供暴露、中介和结局的时间顺序。
@@ -192,15 +198,15 @@ install.packages(c(
 
 最简单的线性中介模型由两条回归组成：
 
-\[
+$$
 M = \alpha_0 + aA + \boldsymbol{\alpha}^{T}\mathbf{C}+\epsilon_M,
-\]
+$$
 
-\[
+$$
 Y = \beta_0 + c'A + bM + \boldsymbol{\beta}^{T}\mathbf{C}+\epsilon_Y.
-\]
+$$
 
-在线性、无 (A\times M) 交互的情形，间接效应近似为 (a\times b)，直接效应为 (c'\)，总效应为两者之和。`mediation::mediate()` 用潜在结局框架计算 average causal mediation effect（ACME）和 average direct effect（ADE），也能处理交互及更一般的模型组合。
+在线性、无 $A\times M$ 交互的情形，间接效应近似为 $a\times b$，直接效应为 $c'$，总效应为两者之和。`mediation::mediate()` 用潜在结局框架计算 average causal mediation effect（ACME）和 average direct effect（ADE），也能处理交互及更一般的模型组合。
 
 ### 识别所需的关键假设
 
@@ -217,7 +223,7 @@ Y = \beta_0 + c'A + bM + \boldsymbol{\beta}^{T}\mathbf{C}+\epsilon_Y.
 <details>
 <summary><strong>深入：为什么“总效应不显著”不阻止估计间接效应</strong></summary>
 
-现代中介分析不要求先得到显著总效应。直接与间接路径可能方向相反而互相抵消，或者总效应检验功效不足。不过，这不等于可以忽略科学设计：没有可信的 (A\rightarrow M\) 与 (M\rightarrow Y\) 时间顺序时，把任意相关菌放入中介模型只是在重新参数化相关性。
+现代中介分析不要求先得到显著总效应。直接与间接路径可能方向相反而互相抵消，或者总效应检验功效不足。不过，这不等于可以忽略科学设计：没有可信的 $A\rightarrow M$ 与 $M\rightarrow Y$ 时间顺序时，把任意相关菌放入中介模型只是在重新参数化相关性。
 
 “proportion mediated” 在总效应接近零、方向相反或区间跨零时尤其不稳定，可能小于 0 或大于 1。本例不把它画进主结果，也不作百分比解释。
 
@@ -406,7 +412,7 @@ save_pub(p_effects, "figures/53-mediation-analysis/53-2-effect-decomposition")
 
 ### 未测中介–结局混杂需要多强才会改变 ACME
 
-`medsens()` 令两条回归的残差相关为假定值 \(\rho\)。它不是“校正掉混杂”，而是显示结论如何随未测混杂强度变化。
+`medsens()` 令两条回归的残差相关为假定值 $\rho$。它不是“校正掉混杂”，而是显示结论如何随未测混杂强度变化。
 
 ```{r}
 #| results: hold

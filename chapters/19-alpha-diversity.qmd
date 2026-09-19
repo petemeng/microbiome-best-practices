@@ -34,13 +34,19 @@ Alpha 多样性（alpha diversity）描述的是**单个样本内部**检测到�
 ::: {.callout-important title="先记住四个结论"}
 
 1. **不要只报一个 Shannon。** 至少同时给 richness、evenness 或 dominant-sensitive 指标，并写清每个指标的定义。
-2. **原始 richness 不能脱离测序深度解释。** 本数据的 raw Observed 与 library size 的 Spearman \(\rho=0.781\)。
+2. **原始 richness 不能脱离测序深度解释。** 本数据的 raw Observed 与 library size 的 Spearman $\rho=0.781$。
 3. **抽平不是一个适用于所有任务的默认预处理。** 等 reads 可用于可视化或特定距离分析的敏感性比较，但不应把随机抽平表继续交给差异丰度计数模型。
-4. **Hill numbers 统一了量纲。** \(q=0\) 是 observed richness，\(q=1\) 是 \(\exp(H')\)，\(q=2\) 是 inverse Simpson；数值都表示“同等多样的有效 feature 数”。
+4. **Hill numbers 统一了量纲。** $q=0$ 是 observed richness，$q=1$ 是 $\exp(H')$，$q=2$ 是 inverse Simpson；数值都表示“同等多样的有效 feature 数”。
 
 :::
 
 本数据的 library size 为 10,364–37,374 reads。若所有样本都按 10,000 reads 比较，可保留 90/90 个样本，但相当于不利用 44.4% 的已测 reads。改按 90% coverage 比较时，56 个样本需要 interpolation，34 个样本需要短程 extrapolation，最大推算 effort 为原 library size 的 1.453 倍。两条路径都应连同目标值和代价一起报告。
+
+### 相同 coverage 之后，哪些不确定性仍然存在？
+
+90% coverage 不是“测到了 90% 的物种”，而是对当前群落中已观测类群所覆盖的丰度质量的估计。它让不同样本在更接近的采样完整度上比较，但不能修复引物偏倚、把 OTU 变成真正的物种，或把地点内的重复样本变成独立重复。本例对 34 个样本进行外推，所以还应查看这些样本的区间，而不能把外推后的点估计视为新增的观测 reads。
+
+这里有两层不同的不确定性：给定一个样本时，由有限 reads 带来的多样性估计误差；跨生物学样本时，由个体或地点差异带来的组间估计误差。iNEXT 曲线区间主要处理前者，组间模型与按独立单位的重采样处理后者。若主要结论只在高度外推的 richness 上出现，应降低外推目标或增加采样证据，而不是更换指数寻找显著性。
 
 ## 下载并读取本次分析的数据 {#sec-preparation}
 
@@ -296,33 +302,33 @@ BiocManager::install("phyloseq")
 
 ### Richness、evenness 和 dominance 不是同一个问题
 
-设样本中第 \(i\) 个 feature 的相对丰度为 \(p_i\)，检测到的 feature 数为 \(S_{obs}\)。常见指标可整理为：
+设样本中第 $i$ 个 feature 的相对丰度为 $p_i$，检测到的 feature 数为 $S_{obs}$。常见指标可整理为：
 
 | 指标 | 定义或直觉 | 单位 | 对稀有 feature 的敏感度 |
 |---|---|---|---|
 | Observed | 检测到的非零 feature 数 | features | 高 |
 | Chao1 | 用 singleton/doubleton 修正未检出 richness | features | 很高 |
-| Shannon | \(-\sum p_i\log p_i\) | entropy | 中等 |
-| Simpson | `vegan` 中为 \(1-\sum p_i^2\) | probability | 低 |
-| Pielou | \(H'/\log(S_{obs})\) | 0–1 ratio | 中等 |
-| Hill \(q=0\) | \(S_{obs}\) | effective features | 高 |
-| Hill \(q=1\) | \(\exp(H')\) | effective features | 中等 |
-| Hill \(q=2\) | \(1/\sum p_i^2\) | effective features | 低 |
+| Shannon | $-\sum p_i\log p_i$ | entropy | 中等 |
+| Simpson | `vegan` 中为 $1-\sum p_i^2$ | probability | 低 |
+| Pielou | $H'/\log(S_{obs})$ | 0–1 ratio | 中等 |
+| Hill $q=0$ | $S_{obs}$ | effective features | 高 |
+| Hill $q=1$ | $\exp(H')$ | effective features | 中等 |
+| Hill $q=2$ | $1/\sum p_i^2$ | effective features | 低 |
 
-Observed 只计算“见过多少个”；Shannon 同时受 richness 和均匀度影响；Simpson 更强调优势 feature。它们不应被互换命名。例如，`vegan::diversity(index = "simpson")` 返回的是 \(1-\sum p_i^2\)，而不是 inverse Simpson。
+Observed 只计算“见过多少个”；Shannon 同时受 richness 和均匀度影响；Simpson 更强调优势 feature。它们不应被互换命名。例如，`vegan::diversity(index = "simpson")` 返回的是 $1-\sum p_i^2$，而不是 inverse Simpson。
 
 <details>
 <summary><strong>深入：Chao1 与 sample coverage 为什么都盯着 singleton</strong></summary>
 
-若 \(f_1\) 和 \(f_2\) 分别表示样本中只出现 1 次和 2 次的 feature 数，经典 Chao1 的核心修正项与 \(f_1^2/(2f_2)\) 有关；软件会对 \(f_2=0\) 等边界情况使用修正公式。singleton 越多，未观察 richness 的证据通常越强。
+若 $f_1$ 和 $f_2$ 分别表示样本中只出现 1 次和 2 次的 feature 数，经典 Chao1 的核心修正项与 $f_1^2/(2f_2)$ 有关；软件会对 $f_2=0$ 等边界情况使用修正公式。singleton 越多，未观察 richness 的证据通常越强。
 
 Good's sample coverage 的直观估计为：
 
-\[
+$$
 \hat C = 1-\frac{f_1}{n}
-\]
+$$
 
-其中 \(n\) 是该样本的总 reads。它估计下一条 read 落在已观测 feature 中的概率，而不是“环境中 90% 的细胞或物种已经被测到”。PCR 偏好、16S 拷贝数、引物覆盖和分类数据库误差仍然存在。
+其中 $n$ 是该样本的总 reads。它估计下一条 read 落在已观测 feature 中的概率，而不是“环境中 90% 的细胞或物种已经被测到”。PCR 偏好、16S 拷贝数、引物覆盖和分类数据库误差仍然存在。
 
 在计算 Observed、Chao1 和 coverage 前删除 singleton，会直接改写这些估计量所需的信息。低丰度过滤可用于其他下游任务，但必须与原始 richness 估计分开。
 
@@ -344,17 +350,17 @@ Good's sample coverage 的直观估计为：
 
 Hill number 的一般形式为：
 
-\[
+$$
 {}^qD=\left(\sum_i p_i^q\right)^{1/(1-q)}
-\]
+$$
 
-当 \(q\) 增大，稀有 feature 的权重降低：
+当 $q$ 增大，稀有 feature 的权重降低：
 
-- \(q=0\)：每个被检测 feature 权重相同，对稀有 feature 最敏感；
-- \(q=1\)：极限形式为 \(\exp(H')\)，兼顾 richness 与 evenness；
-- \(q=2\)：为 inverse Simpson，主要反映优势 feature。
+- $q=0$：每个被检测 feature 权重相同，对稀有 feature 最敏感；
+- $q=1$：极限形式为 $\exp(H')$，兼顾 richness 与 evenness；
+- $q=2$：为 inverse Simpson，主要反映优势 feature。
 
-“Hill \(q=1=800\)”可以读作：该样本的 Shannon 多样性，相当于 800 个等丰度 feature。这个解释比直接比较 entropy 值更直观。
+“Hill $q=1=800$”可以读作：该样本的 Shannon 多样性，相当于 800 个等丰度 feature。这个解释比直接比较 entropy 值更直观。
 
 ## 从测序深度比较到相同完整度 {#sec-code}
 
@@ -698,7 +704,7 @@ rank_stability <- do.call(rbind, rank_rows)
 rank_stability
 ```
 
-对 \(q=0\)，raw 与标准化后的样本排序相关只有约 0.54；对 \(q=1\) 约为 0.99，对 \(q=2\) 几乎为 1。也就是说，测序量和 coverage 的选择主要影响稀有 feature 驱动的 richness，而优势 feature 驱动的结论更稳定。这个结果是诊断，不是选择 \(q=2\) 来回避问题的理由。
+对 $q=0$，raw 与标准化后的样本排序相关只有约 0.54；对 $q=1$ 约为 0.99，对 $q=2$ 几乎为 1。也就是说，测序量和 coverage 的选择主要影响稀有 feature 驱动的 richness，而优势 feature 驱动的结论更稳定。这个结果是诊断，不是选择 $q=2$ 来回避问题的理由。
 
 ### 生成组别描述表，不在这里做组间检验
 
@@ -1132,7 +1138,7 @@ if (file.exists(audit_summary_path)) {
 
 ::: {.callout-caution title="审稿人最常追问的八件事"}
 
-1. **只报 Shannon，不写定义。** Shannon entropy 与 Hill \(q=1\) 数值不同；Simpson 与 inverse Simpson 也不同。
+1. **只报 Shannon，不写定义。** Shannon entropy 与 Hill $q=1$ 数值不同；Simpson 与 inverse Simpson 也不同。
 2. **在 Observed/Chao1 前过滤 singleton。** 这会直接删除 richness 与 coverage 估计所需的信息，使结果被人为压低。
 3. **把原始 richness 当成可直接比较的表型。** 先画 richness–depth 关系，并报告测序量或 coverage 标准化策略。
 4. **抽到全队列最浅样本却不报告代价。** 应报告目标 reads、保留样本数和不再利用的 reads 比例。

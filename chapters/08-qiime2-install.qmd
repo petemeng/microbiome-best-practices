@@ -22,11 +22,9 @@ fig-format: png
 
 ## 怎样确认 QIIME 2 真的安装正确？ {#sec-target}
 
-安装过程通常不进入主文结果图，但它直接决定 Methods 与补充材料能否被第三方复现。最有用的呈现方式有三类：
+一个可以打印版本号的 QIIME 2 环境，仍可能缺少插件、读错文件格式，或者使用了与数据不符的 semantic type。判断它能否用于分析，需要让真实输入走完“导入 → 校验 → 导出”的往返，再把导出文件与原始输入比较。这样能把安装问题和数据问题分开，而不会在每次报错后重装所有软件。
 
-1. **Computational environment** 流程图：从锁定 manifest 到真实数据验收；
-2. **Artifact round-trip audit**：证明输入进入 QIIME 2 后类型正确、最大级别校验通过，并能无损导出；
-3. **Troubleshooting decision tree**：按环境、激活、插件加载、type/format 与 archive 层定位故障。
+这个往返测试也有明确的边界：它证明文件及其类型能够被正确读取和保存，不证明样本标签、生物学分组或后续去噪参数正确。环境可用之后，仍需按实验设计检查 metadata；不能把成功生成 `.qza` 当作数据已经完成质控。
 
 ![QIIME 2 安装验收合同。只有固定环境、CLI、真实导入、最大级别校验和导出回验全部通过，才算安装可用于分析。](../figures/08-qiime2-install-contract.png){#fig-qiime2-install-contract}
 
@@ -34,7 +32,7 @@ fig-format: png
 
 ![按最早失败层排查 QIIME 2，而不是遇到任意报错都重装整个环境。](../figures/08-error-triage.png){#fig-error-triage}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="验证环境要走完一次真实数据往返"}
 `qiime info` 成功只证明 CLI 能启动；**真正可接受的安装还必须让一组真实数据成功导入为正确 semantic type，经 `qiime tools validate --level max` 通过，再导出并与原始文件核对。**
 :::
 

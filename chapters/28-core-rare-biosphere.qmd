@@ -35,7 +35,7 @@ reader-reproduction:
 
 Core microbiome 常见于论文中的 abundance–occupancy 散点图、prevalence 阈值曲线、组间 core 集合交集图，以及 rare-biosphere 丰度分布图。它们都在回答同一个问题：哪些 feature 在指定样本集合中稳定达到可检测水平，哪些 feature 只在少数样本出现或始终维持低相对丰度？
 
-本页使用 `microeco` 2.0.0 随包分发的中国湿地土壤 16S 数据。原研究 [An et al. (2019)](https://doi.org/10.1016/j.geoderma.2018.09.035)比较 inland、coastal 与 Tibetan wetland 的细菌群落；[Liu et al. (2021)](https://doi.org/10.1093/femsec/fiaa255)提供了可复现的三件套数据入口。这里从公开 count、taxonomy 和 metadata 重新计算并绘制四张原创图。
+本页使用 `microeco` 2.0.0 随包分发的中国湿地土壤 16S 数据。原研究 [An et al. (2019)](https://doi.org/10.1016/j.geoderma.2018.09.035)比较 inland、coastal 与 Tibetan wetland 的细菌群落；[Liu et al. (2021)](https://doi.org/10.1093/femsec/fiaa255)提供了可复现的三件套数据入口。分析同时比较检出频率与相对丰度，避免将常见和优势混为一谈。
 
 ::: {.callout-important title="先给结论"}
 主分析在原始 feature/OTU 层使用全部 reads 为分母：某 feature 在单样本相对丰度 **≥0.01%** 时记为 detected，在 **≥80%** 的 90 个样本中 detected 时记为 global core。这个操作性定义得到 **97** 个 core features，合计占等样本平均相对丰度的 **17.04%**；其中 **34** 个 feature 的全局均值仍低于 0.1%，因此 core 不等于 abundant。
@@ -46,6 +46,12 @@ Core microbiome 常见于论文中的 abundance–occupancy 散点图、prevalen
 
 按单样本 `0 < relative abundance < 0.1%` 定义 local rare mass，其等权均值为 **44.15%**，范围为 **23.33%–59.43%**。这个比例是阈值下的相对丰度质量，不是“44.15% 的细胞处于休眠”或“44.15% 的功能来自稀有菌”。
 :::
+
+### 高检出率能否解释为稳定定植？
+
+本例 97 个 global core 中有 34 个的平均相对丰度低于 0.1%，所以“经常检出”和“占据大量 reads”是两个维度。更重要的是，横断面中 80% 的样本检出，描述的是这个样本集合的占据率，不是同一个体在 80% 的时间持续携带。稳定定植需要有时间顺序的重复采样，并区分重复检出与反复输入。
+
+一次未检出也未必意味着不存在：低深度下，稀有 feature 更容易得到零。只有出现阈值、丰度阈值和样本集合都固定，core 集合才可比较。这里将阈值从 presence 改为 0.01% 就从 334 个降至 97 个；这项变化应成为结果的一部分。若研究需要一个可推广的 core 清单，还要在独立队列按同一规则估计检出率及其区间，而不是在训练样本上不断调阈值直到清单大小合意。
 
 ## 下载并读取本次分析的数据 {#sec-setup}
 

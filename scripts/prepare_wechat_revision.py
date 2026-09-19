@@ -2,6 +2,7 @@
 """Prepare a private, resumable revision plan; never contact WeChat or delete a draft."""
 import argparse,hashlib,json,os,re
 from pathlib import Path
+from sync_wechat_revision import old_article_signature
 
 p=argparse.ArgumentParser(description=__doc__)
 p.add_argument('--project-root',type=Path,default=Path(__file__).resolve().parents[1])
@@ -41,8 +42,13 @@ for item in report['items']:
     relative=Path(item['source_qmd']).resolve().relative_to(root).as_posix()
     source_url=f'https://github.com/petemeng/microbiome-best-practices/blob/{args.source_commit}/{relative}'
     draft['content_source_url']=source_url
+    old_draft=json.loads((old_bundle/key/'draft.json').read_text())
+    # Covers can have been replaced after the archived body payload. The
+    # canonical live map is authoritative for the currently bound cover.
+    old_draft['thumb_media_id']=old['cover_media_id']
     entries.append({'chapter_id':key,'title':item['title'],'old_draft_media_id':old['draft_media_id'],
-        'cover_media_id':cover_id,'cover_file':str(cover),'images':images,'draft':draft,
+        'old_article_signature':old_article_signature(old_draft),
+        'cover_media_id':cover_id,'cover_file':str(cover),'cover_sha256':sha(cover),'images':images,'draft':draft,
         'source_commit':args.source_commit,'source_url':source_url,'created':False,'verified':False,'old_draft_deleted':False})
 plan={'baseline_map_sha256':sha(args.live_map),'live_map':str(args.live_map.resolve()),
     'bundle':str(bundle),'source_commit':args.source_commit,'entries':entries}

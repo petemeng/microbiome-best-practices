@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 import yaml
+from lock_validation import locked_packages_valid
 from PIL import Image
 
 
@@ -85,7 +86,7 @@ ARTICLE_TOKENS = {
     ),
     55: (
         "七项真实研究提供了哪些证据", "病例–对照研究",
-        "人群随机干预", "转移、救援和机制实验",
+        "人群饮食干预", "转移、救援和机制实验",
         "跨设计三角验证", "55-4-triangulation",
     ),
 }
@@ -194,10 +195,11 @@ def main() -> int:
                 re.search(pattern, text) is not None, pattern,
             )
         if number != 55:
-            check(f"article-{number}-copyable-code", "可复制代码" in text,
-                  "可复制代码")
-            check(f"article-{number}-own-data", "换成你自己的数据怎么做" in text,
-                  "换成你自己的数据怎么做")
+            check(f"article-{number}-executable-r-code", "```{r}" in text,
+                  "Executable R chunks accompany the worked analysis")
+            check(f"article-{number}-own-data", bool(re.search(
+                r"(?m)^##[^\n]*\{#sec-own-data\}[^\n]*\n\s*[^\s#]", text)),
+                  "Topic-specific transfer section contains reader guidance")
             check(f"article-{number}-seed", "set.seed(" in text, "set.seed present")
             check(
                 f"article-{number}-inline-theme",
@@ -375,7 +377,7 @@ def main() -> int:
 
     lock = json.loads((project / "env" / "renv.lock").read_text(encoding="utf-8"))
     packages = lock.get("Packages", {})
-    check("renv-package-count", len(packages) == 418, len(packages))
+    check("renv-package-records", locked_packages_valid(packages, PACKAGE_VERSIONS), len(packages))
     for package, version in PACKAGE_VERSIONS.items():
         observed = packages.get(package, {}).get("Version")
         check(f"renv-{package}", observed == version, observed)

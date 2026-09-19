@@ -22,11 +22,9 @@ fig-format: png
 
 ## UniFrac 之前，先得到可信的系统发育树 {#sec-target}
 
-系统发育树通常不会直接作为一张“全树图”放进正文。它更常以三种形式进入论文：
+Faith's PD 和 UniFrac 把分支长度纳入比较，因此它们不仅依赖丰度表，也依赖短读段被放在树上的什么位置。使用固定参考树可以统一坐标，却不能为 V4 中没有的信息补出更高分辨率。
 
-- Methods 中的 reference-placement contract：reference release、算法、subset 参数、线程和软件版本；
-- Supplementary 中的放置质量与序列保留审计；
-- 下游 Faith's PD、weighted UniFrac、unweighted UniFrac、phylogenetic balance 或树注释图。
+本例 366 条 ASV 全部成功放置，说明没有因缺少树尖端而丢失 reads，不说明所有位置同样可靠。候选位置的 likelihood weight 描述给定模型和候选范围内的相对支持；参考中缺少近缘类群时，最高权重也不能充当外部准确率。应联合查看位置歧义、末端分支长度和这些 ASV 承载的 reads：少数低频 ASV 与占大部分 reads 的不稳定放置，对不同系统发育指标的影响并不相同。没有适用于所有 marker 和参考树的统一长枝删除阈值。
 
 Janssen 等人的 SEPP 评估中，Figure 5 用已知来源的 V4 片段量化插入误差与歧义，Figure S2 比较 alignment/placement subset 的运行代价，Figure 12 对比 reference insertion 与 de novo tree construction。下面沿用这套验证逻辑，在真实 ASV 上检查插入、过滤和系统发育树的可用性。
 
@@ -38,7 +36,7 @@ Janssen 等人的 SEPP 评估中，Figure 5 用已知来源的 V4 片段量化�
 
 ![从 203,818-tip 完整 insertion tree 中抽取的 366-tip query-only tree，仅用于看 query 间的相对结构和 placement diagnostics；正式 UniFrac 使用包含 reference backbone 的 rooted tree。](../figures/16-query-placement-tree.png){#fig-query-tree}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="成功放置不等于位置没有不确定性"}
 **SEPP 是 reference placement，不是从头估计一棵新树。输出树能提供共享参考坐标和系统发育距离，但不会让短 V4 获得全长 16S 的分辨率。**
 :::
 
@@ -322,12 +320,12 @@ threads = 8
 
 QIIME 2 的 SEPP 输出语义类型为 `Phylogeny[Rooted]`。下游系统发育多样性依赖树上的 branch lengths 和样本拥有的 tips：
 
-\[
+$$
 \mathrm{Faith\ PD}(s) =
 \sum_{e \in E_s} \ell_e
-\]
+$$
 
-其中 \(E_s\) 是连接样本 \(s\) 所有观测 tips 与树根所需的边，\(\ell_e\) 是边长。UniFrac 则比较样本在树枝上的共享与非共享质量。若树没有根、tip ID 与 feature table 不一致，或枝长缺失，这些量就没有完整计算合同。
+其中 $E_s$ 是连接样本 $s$ 所有观测 tips 与树根所需的边，$\ell_e$ 是边长。UniFrac 则比较样本在树枝上的共享与非共享质量。若树没有根、tip ID 与 feature table 不一致，或枝长缺失，这些量就没有完整计算合同。
 
 因此验收不应停在“生成了 `.qza`”，而要核对：
 
@@ -357,13 +355,13 @@ Greengenes2 2024.09 taxonomy/reference release 与这里的 `SeppReferenceDataba
 
 ### likelihood weight 是候选位置间的相对支持
 
-jplace 为每个 query 保存候选 edges。本页把最高候选的 likelihood weight ratio（LWR）记为 \(w_{\max}\)：
+jplace 为每个 query 保存候选 edges。本页把最高候选的 likelihood weight ratio（LWR）记为 $w_{\max}$：
 
-\[
+$$
 w_i = \frac{L_i}{\sum_j L_j},
 \qquad
 w_{\max}=\max_i w_i
-\]
+$$
 
 它回答“在保留下来的候选位置中，最佳位置占多少相对支持”，不是经过外部校准的“位置正确概率”。本次 131/366 个 ASV 的 top LWR 低于 0.50，且它们代表 2,576/5,213 条 reads；因此即使 100% query 都被插入，也不能写成“所有 ASV 均被可靠定位”。
 

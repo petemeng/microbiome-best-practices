@@ -22,12 +22,11 @@ fig-format: png
 
 ## 截断参数决定能保留多少有效 ASV {#sec-target}
 
-DADA2 常被压缩成 Methods 里的一句话，但它实际上决定论文中最基础的两个对象：
+DADA2 要从带有测序错误的 reads 中推断扩增子序列，再统计每条序列在各样本中的数量。截断发生在这个推断过程之前：它既能减少低质量碱基，也会改变哪些分子有机会成功合并。因此，参数选择会影响计数和特征集合，而不仅影响一个总体保留率。
 
-1. **ASV abundance table**：每个样本中每条精确扩增子序列的计数；
-2. **Representative sequences**：分类注释、系统发育树和脱靶审计使用的序列。
+本例比较五组真实参数。220/200 对最长 303-nt ASV 仍有 117 nt 的理论重叠；130/120 对 253-nt 序列则连完整扩增子都覆盖不全。后者即使单端质量改善，也不能靠放宽合并规则补回不存在的序列。应先排除几何上不可行的方案，再比较过滤、去噪、合并和去嵌合阶段的逐样本损失。
 
-主文通常展示 alpha/beta diversity、差异丰度或机器学习结果；DADA2 的质量截断和 read-loss ledger 更适合放在补充材料。建议至少保存下面四类证据。
+选定方案后，还要检查损失是否集中于某些样本或较长的扩增子。总 reads 保留更多，不保证群落测量偏倚更小；如果长度筛选系统性排除了某类群，后续组成比较也会随之改变。
 
 ![去引物后 R1/R2 的真实质量分布。虚线为本数据采用的 220/200 截断位置；截断位置必须与 overlap 预算同时判断。](../figures/12-quality-truncation-gate.png){#fig-dada2-quality-gate}
 
@@ -37,7 +36,7 @@ DADA2 常被压缩成 Methods 里的一句话，但它实际上决定论文中�
 
 ![所选参数下的 ASV 长度分布与逐样本保留率。大多数 ASV 为 252–256 nt；5 条较长序列进入后续脱靶审计，而不是在没有分类证据时直接删除。](../figures/12-asv-output-audit.png){#fig-dada2-output-audit}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="先保住重叠，再比较逐样本的保留情况"}
 **截断参数不是在质量图上“看一个 Q30 断崖”就结束。可接受的参数必须同时满足：尾部质量可控、双端 overlap 充足、逐样本保留合理、技术序列已移除，并且没有为了多保留几条 reads 而无谓丢掉大量生物学序列。**
 :::
 
@@ -367,17 +366,17 @@ trim-left-r = 0
 
 ### `maxEE` 衡量整条 read 的错误负担
 
-单个碱基的 Phred score \(Q\) 对应错误概率：
+单个碱基的 Phred score $Q$ 对应错误概率：
 
-\[
+$$
 p_{\mathrm{error}} = 10^{-Q/10}
-\]
+$$
 
 一条 read 的 expected errors（EE）是各位置错误概率之和：
 
-\[
+$$
 EE = \sum_{i=1}^{L} 10^{-Q_i/10}
-\]
+$$
 
 因此两条“平均质量相近”的 reads 可能有不同 EE：一条 read 若在尾部积累多个低质量碱基，整条 read 更容易超过 `maxEE`。
 
@@ -402,17 +401,17 @@ EE = \sum_{i=1}^{L} 10^{-Q_i/10}
 
 最基本的预算是：
 
-\[
+$$
 O_{\mathrm{expected}} =
 L_F + L_R - L_{\mathrm{insert}}
-\]
+$$
 
 其中：
 
-- \(L_F\)：截断后 R1 长度；
-- \(L_R\)：截断后 R2 长度；
-- \(L_{\mathrm{insert}}\)：去引物后的真实扩增子长度；
-- \(O_{\mathrm{expected}}\)：理论 overlap。
+- $L_F$：截断后 R1 长度；
+- $L_R$：截断后 R2 长度；
+- $L_{\mathrm{insert}}$：去引物后的真实扩增子长度；
+- $O_{\mathrm{expected}}$：理论 overlap。
 
 q2-dada2 2026.4 的 `denoise-paired` 默认要求至少 12 nt overlap，并默认不允许 overlap mismatch。本例：
 

@@ -22,11 +22,9 @@ fig-format: png
 
 ## 先让每一步输入、输出和来源可追溯 {#sec-target}
 
-“导入成功”通常不会成为论文主图，但它决定后续 ASV 表是否还对应正确样本。建议至少保留三类证据：
+原始 FASTQ 的质量合格，与拆样后每个样本得到可信读段，是不同层面的判断。前者可以发现文件损坏、编码或逐位置质量问题；后者还依赖 barcode 方向、样本映射和建库结构。文件级平均质量看起来正常时，少数样本仍可能没有正确分配到 reads。
 
-1. **Raw-read acceptance and provenance map**：清楚区分文件级 QC 与样本级 QC；
-2. **FastQC module audit**：完整报告 PASS/WARN/FAIL，同时按扩增子文库语境解释；
-3. **Demultiplexing yield and positional quality**：展示逐样本 reads 和 forward/reverse 质量曲线。
+先验证文件身份和配对关系，再用与交付格式匹配的入口导入，最后查看逐样本的拆样产量。若拆样率低，应首先检查 barcode 与建库约定，而不是立即放宽错配阈值；更宽松的匹配虽然可能增加分配数量，也可能增加误分配。FastQC 的 WARN 则需要按扩增子结构解释，不能把所有模块变成 PASS 当作分析目标。
 
 ![原始 reads 的接收门禁与 provenance 路线。FastQC 诊断输入文件，QIIME 2 拆样和质量摘要诊断样本级数据，两者不能互相替代。](../figures/10-import-provenance-map.png){#fig-import-provenance-map}
 
@@ -34,7 +32,7 @@ fig-format: png
 
 ![真实 Atacama 确定性摘录的拆样产量和逐位置质量。左图仅用于验证流程，不代表完整研究的样本纳入阈值。](../figures/10-demultiplexing-qc.png){#fig-demultiplexing-qc}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="文件正确与样本身份正确要分别证明"}
 **FASTQ 完整、FastQC 状态正常、QIIME 2 semantic type 正确、barcode 能映射、provenance 可追溯，是五道不同的门。任何一道通过，都不能替代其余四道。**
 :::
 

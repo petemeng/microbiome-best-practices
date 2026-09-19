@@ -22,11 +22,9 @@ fig-format: png
 
 ## R 端分析需要哪些核心对象与包？ {#sec-target}
 
-R 与 RStudio 的安装通常不进入论文主图，却决定后续每一张图能否在另一台机器上重现。最有用的证据不是 IDE 截图，而是三类可审计结果：
+从三张表进入 R 分析时，要分别解决两个问题：软件能否运行，以及数据在对象转换后是否仍表示同一批样本。前者涉及 R、Bioconductor 和包之间的兼容性；后者涉及计数表方向、样本 ID、特征 ID，以及软件是否自动丢弃无法匹配的行列。
 
-1. **R ecosystem map**：运行时、锁文件、数据整理、对象模型与绘图各自负责什么；
-2. **Package contract**：R、Bioconductor 和关键包是否处在预期代际；
-3. **Object parity audit**：三件套转为不同对象后，feature、sample 与 reads 是否保持不变。
+同一份 90 样本湿地计数表可以装入 `phyloseq` 或 `microtable`。这不是两次独立测量：如果转换正确，样本集合、特征集合和每个样本的总 reads 应保持一致。若后续两个包的结果不同，先排查默认过滤、归一化和距离参数，再讨论统计方法本身；仅凭对象维度相同不足以证明其中的数据一致。
 
 ![可复现的 R 微生物组软件栈。IDE 负责交互体验，真正决定结果的是运行时、锁文件、数据合同和对象验收。](../figures/09-r-ecosystem-map.png){#fig-r-ecosystem-map}
 
@@ -34,7 +32,7 @@ R 与 RStudio 的安装通常不进入论文主图，却决定后续每一张图
 
 ![真实湿地三件套的对象转换回验。90 个样本在 phyloseq 和 microtable 中的 library size 与原始 otutab 完全一致。](../figures/09-object-parity-audit.png){#fig-object-parity-audit}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="对象转换不能悄悄改变样本和计数"}
 **RStudio 能打开，只说明编辑器能启动；`library()` 不报错，也只说明 namespace 能加载。可用于论文分析的环境还要证明版本被锁定、三件套方向正确、ID 对齐，并且对象转换没有改变数据。**
 :::
 

@@ -32,13 +32,19 @@ reader-reproduction:
 
 ## 相对丰度不能替代微生物总负荷 {#sec-target}
 
-[Vandeputte et al. (2017)](https://doi.org/10.1038/nature24460)把 flow-cytometry cell counts 与 16S composition 结合，展示 microbial load 如何改变 enterotype、疾病关联和共变网络的解释。Nature 图形许可不默认允许公众号整图转载，因此这里使用论文公开数据的 Bioconductor 分发版本，从数值重绘 load distribution、relative–quantitative effect map 和一个分歧 taxon 的双尺度分布。
+[Vandeputte et al. (2017)](https://doi.org/10.1038/nature24460)把 flow-cytometry cell counts 与 16S composition 结合，展示 microbial load 如何改变 enterotype、疾病关联和共变网络的解释。以下使用其公开数据的 Bioconductor 分发版本，比较细胞负荷分布、相对与定量效应，以及一个两种尺度结论不一致的类群。
 
 ::: {.callout-important title="先给结论"}
 相对丰度回答“某属占本样本测序组成的多少”，QMP 近似回答“某属每克样本有多少细胞”。若 CD 样本的总体 cell load 系统性较低，一个相对份额升高的属仍可能在绝对尺度下降。**Relative 和 quantitative 不是谁替代谁：前者描述 composition，后者恢复样本间 scale；两者并列最容易识别 closure illusion。**
 :::
 
 本页数据来自 `reconsi` 1.16.0 随包分发的 `Vandeputte` phyloseq object，原始研究同时提供 genus counts 与 flow cytometry。主比较只用 `Cohort == "Disease"`，避免把额外 40 个 study controls 与病例队列直接混合；健康状态仍是观察性标签，不能据此推出疾病因果菌。
+
+### 乘上总负荷之后，还剩下什么测量误差？
+
+QMP 的估计同时包含组成测量误差和负荷测量误差。总负荷偏高会把同一样本中所有类群的定量值一起推高，所以这些误差不是彼此独立的。若负荷检测批次与病例分组重合，增加统计协变量也未必能分离真实负荷变化与测量偏差。应确认测量单位、取样质量或体积，以及负荷表与测序表的样本对应关系。
+
+本例可比较同一队列的 29 个 CD 与 66 个 healthy 样本，但不能把得到的每克细胞数直接当作某菌的精确活菌数量。流式计数与序列比例的结合仍受提取、扩增和分类覆盖影响。若两种尺度方向相反，先把各自分母和总负荷差异展示清楚；这往往是生物学问题的关键，而不是需要删除的矛盾结果。
 
 ## 下载并读取本次分析的数据 {#sec-setup}
 

@@ -22,7 +22,9 @@ fig-format: png
 
 ## 分类结果首先取决于参考数据库 {#sec-target}
 
-数据库选择首先对应 Methods 中的 reference contract，也会直接改变正文或补充材料里的分类深度、未注释比例与脱靶审计。不要从“哪个数据库名字更熟”开始，而要从研究问题开始。
+同一条 V4 序列在三个数据库里得到不同名称，可能是参考序列不同、命名体系不同，也可能是可报告的分类层级不同。先确定需要区分哪些生物、哪些层级，再选择覆盖相应范围的参考库；不能把“注释得更多”直接等同于“注释得更准”。
+
+本例中 SILVA 的 species 覆盖为零，是因为输入分类表只保留到 genus；这不是物种全部不存在，也不是算法全部失败。两个库的一致率还只在双方都给出标签的 ASV 中计算：较难分类的序列被排除后，一致率可能变高。因此应把整体覆盖率、双方可比较的数量和条件一致率一起读，而不是只取最高的百分比。没有已知真值的样本不能据此给数据库排准确率名次。
 
 ![数据库选择的决策图。SILVA 强调广泛 SSU 覆盖，GTDB 强调与代表基因组系统发育一致的命名，Greengenes2 强调统一参考树中的扩增子与 shotgun 整合；公平比较必须锁定 query、区域提取与分类参数。](../figures/14-database-decision-map.png){#fig-database-decision-map}
 
@@ -32,7 +34,7 @@ fig-format: png
 
 ![在两个数据库都给出该层标签的 ASV 中，严格比较去掉 rank 前缀后的 exact-name agreement。数值反映命名体系和参考范围的共同差异，不能当作数据库准确率。](../figures/14-taxonomy-concordance.png){#fig-taxonomy-concordance}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="把覆盖率、命名一致率与准确率分开"}
 **数据库不是中性的物种字典。必须同时写清 release、reference subset、扩增区域、taxonomy schema、分类算法和参数；species 字符串只是数据库条件下的标签，不是 V4 已证明物种或菌株。**
 :::
 
@@ -429,17 +431,17 @@ QIIME 2 文档说明，只有 `maxaccepts = all` 且 `maxrejects = all` 才遍�
 
 ASV coverage 回答“有多少种不同序列拿到标签”；read-weighted coverage 回答“样本中有多少 reads 属于这些序列”。两者分母不同：
 
-\[
+$$
 \text{ASV coverage}_r =
-\frac{\#\{i:\text{ASV }i\text{ 在 rank }r\text{ 有标签}\}}
+\frac{\#\{i:\text{ASV }i\text{ has a label at rank }r\}}
 {\#\{\text{all query ASVs}\}}
-\]
+$$
 
-\[
+$$
 \text{Read-weighted coverage}_r =
-\frac{\sum_i n_i I(i\text{ 在 rank }r\text{ 有标签})}
+\frac{\sum_i n_i I(i\text{ has a label at rank }r)}
 {\sum_i n_i}
-\]
+$$
 
 本例中 SILVA 注释 358/366 个 ASV，但覆盖 5,181/5,213 条 reads。说明未注释 ASV 多为低频序列。若只报告 ASV 比例，会夸大它们在总 reads 中的影响；若只报告 reads，又会隐藏稀有 ASV 的 reference gap。
 

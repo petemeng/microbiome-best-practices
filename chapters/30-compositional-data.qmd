@@ -38,7 +38,13 @@ reader-reproduction:
 测序 reads 是在每个样本的有限文库中分配的份额。raw reads 同时受微生物组成和 library size 影响；relative abundance 消除了 library size，却引入总和固定为 1 的 closure；CLR/ALR 把问题改写为“某 taxon 相对一个 reference 变化多少”。因此，**“某菌的百分比下降”不等于“每克样本中的细胞数下降”**，而不说明 reference 的 log-ratio 也不是无条件的绝对变化。
 :::
 
-本页数据来自 `microeco` 2.0.0 随包分发的真实湿地 16S 数据，包含 conventional wetland（CW）、intensive wetland（IW）和 temporal wetland（TW）各 30 个样本。分析始终从三件套读起；属级已知 reads 仅占全部 reads 的一部分，未注释部分保留为 denominator residual，不被解释成一个生物学 taxon。
+本页数据来自 `microeco` 2.0.0 随包分发的真实湿地 16S 数据，包含 coastal wetland（CW，滨海湿地）、inland wetland（IW，内陆湿地）和 Tibetan wetland（TW，青藏高原湿地）各 30 个样本。属级已知 reads 仅占全部 reads 的一部分，未注释部分保留为 denominator residual，不被解释成一个生物学 taxon。
+
+### 换一个 reference 后，为什么“增加”可能变成“减少”？
+
+ALR 的组间效应是目标菌与参照菌的变化之差。换参照后符号改变，可能只是参照本身变化，并不说明前一次计算出错。CLR 把参照换成入选特征的几何均值，因此过滤或改变分类层级也可能移动效应基线。报告 log-ratio 结果时，应同时说明参照组成和目标对比，而不是只写“丰度上调”。
+
+一个两菌比例在删除其他正值组分后仍保持不变，但对计数加同一个伪计数再取比例，不再具有完全相同的尺度性质。低深度、低检出菌尤其可能受影响。若结论依赖某个伪计数或少数参照菌，应报告敏感性；若科学问题确实是每克样本增加多少，需要独立的微生物负荷测量，不能从另一种归一化中恢复这个缺失尺度。
 
 ## 下载并读取本次分析的数据 {#sec-setup}
 

@@ -70,6 +70,16 @@ def image_identity(url):
         path=path.rsplit('/',1)[0]+'/{display-size}'
     return parsed.hostname,path
 
+def old_article_signature(article):
+    text,images=body_signature(article.get('content',''))
+    fields={k:article.get(k) for k in ('title','author','digest','content_source_url','thumb_media_id')}
+    fields.update(body_text=text,images=[image_identity(url) for url in images])
+    return hashlib.sha256(json.dumps(fields,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
+
+def verify_old_article(entry,article):
+    if entry.get('old_article_signature') and old_article_signature(article)!=entry['old_article_signature']:
+        raise SafeError('The old draft changed after the reviewed baseline; retain it and reconcile before replacement')
+
 def verify_article(expected,actual):
     for key in ('title','author','digest','content_source_url','thumb_media_id'):
         if actual.get(key)!=expected.get(key):raise SafeError(f'Remote {key} differs from the reviewed article')
@@ -101,6 +111,7 @@ def synchronize(entry,args):
     if not state.get('created'):
         if args.verify_existing:raise SafeError('No created draft is available for verification')
         old=article_from_response(client.api('draft/get',{'media_id':entry['old_draft_media_id']}))
+        verify_old_article(entry,old)
         if not old.get('title','').startswith(f'16S最佳实践｜{int(key)}. ') or old.get('author')!='Peter':
             raise SafeError('Old mapped draft identity does not match this chapter')
         if not args.execute:return {'chapter':key,'identity_verified':True,'mutated':False}
@@ -111,6 +122,8 @@ def synchronize(entry,args):
         raise SafeError('No created draft is available for verification')
     if not state.get('cover_media_id'):
         if not args.execute:raise SafeError('Missing cover in verification-only mode')
+        if entry.get('cover_sha256') and hashlib.sha256(Path(state['cover_file']).read_bytes()).hexdigest()!=entry['cover_sha256']:
+            raise SafeError('Reviewed cover changed')
         state['cover_media_id']=client.api('material/add_material',file=Path(state['cover_file']),media_type='thumb')['media_id'];save()
     for image in state['images']:
         path=Path(image['file'])
@@ -142,6 +155,7 @@ def synchronize(entry,args):
     save()
     if args.execute and not state.get('old_draft_deleted'):
         old=article_from_response(client.api('draft/get',{'media_id':state['old_draft_media_id']}))
+        verify_old_article(entry,old)
         if not old.get('title','').startswith(f'16S最佳实践｜{int(key)}. ') or old.get('author')!='Peter':
             raise SafeError('Old draft identity changed before deletion')
         client.api('draft/delete',{'media_id':state['old_draft_media_id']})

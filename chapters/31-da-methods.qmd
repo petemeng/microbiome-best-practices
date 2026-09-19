@@ -46,6 +46,12 @@ reader-reproduction:
 
 本页使用 `microeco` 2.0.0 随包分发的湿地 16S 三件套，预先限定 CW 对 IW。Feature selection 只看总体 prevalence 与总体 reads，不看 group label；未注释 reads 合成一个 denominator residual，但它不进入 biomarker 报告。
 
+### 方法不一致时，先查估计目标，再查显著名单
+
+同一菌可以在 log-ratio、相对丰度均值和检出相关模型中表现不同，因为这些方法检验的量并不相同。先确认 contrast 方向、特征分母、零值处理、协变量和参与检验的样本一致，再解释差异；把所有系数都改名为 log fold change 并不会使它们成为同一效应量。
+
+本例把数据与 CW 对 IW 固定，因而能观察建模假设本身的影响，但没有已知差异真值，不能用“发现得最多”或“被其他方法支持得最多”判断谁最准确。对不一致候选，更有帮助的是回看检出分布、极端值、收敛状态及可比尺度上的方向。确认性研究应预先选择与目标和设计相匹配的主要方法；其他方法用于暴露假设依赖，而不是提供取并集的额外发现机会。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `ALDEx2`、`ANCOMBC`、`Maaslin2`、`S4Vectors`、`SummarizedExperiment`、`corncob`、`ggplot2`、`knitr`、`lefser`、`phyloseq`、`ragg`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。

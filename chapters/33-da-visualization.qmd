@@ -47,6 +47,12 @@ Volcano 的远点、cladogram 的彩色分支、Manhattan 的高峰和 forest �
 
 本页使用 `microeco` 2.0.0 的真实湿地三件套，预声明 CW 对 IW。属级 feature selection 只看总体 prevalence 和总体 reads；未注释 residual 进入 denominator，却从四种图的生物学标注中排除。
 
+### 为什么 q 值不显著，95% 区间却可能不跨零？
+
+普通逐项 95% Wald 区间对应单个系数的近似推断；BH q 值则考虑整组检验。两者不一定给出相同的二元判断，图中应分别标明区间类型和显著性规则，不能为了统一颜色把区间裁到零线外。若需要同时覆盖整组效应，应使用相应的同时推断方法，而不是给普通区间换名称。
+
+只画筛选后的最强信号还会夸大效应的典型大小。Volcano 和 Manhattan 应保留完整受检背景；forest 可以突出预先关心的菌，但需明确选择规则并附原始分布。很大的系数配很宽的区间通常提示信息不足或稀疏，而不是一个已确定的强效应。LEfSe LDA score 与 ANCOM-BC2 系数使用不同尺度，不能共用一条效应轴比较大小。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `ANCOMBC`、`S4Vectors`、`SummarizedExperiment`、`ggplot2`、`ggraph`、`ggrepel`、`igraph`、`knitr`、`lefser`、`phyloseq`、`ragg`、`readr`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。

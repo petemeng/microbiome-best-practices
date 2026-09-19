@@ -24,6 +24,7 @@ from lxml import etree, html
 from PIL import Image, ImageOps
 
 from reader_reproducibility import coalesce_rendered_code, omit_generic_reader_helpers, validate_reader_contract
+from wechat_math import replace_math
 
 
 MAX_TITLE_CHARS = 64
@@ -514,7 +515,7 @@ def resolve_and_optimize_images(
             cache[source] = (relative, destination)
         relative, destination = cache[source]
         image_element.set("src", relative)
-        image_element.set("style", STYLES["img"])
+        image_element.set("style", image_element.get("data-math-style") or STYLES["img"])
         with Image.open(destination) as optimized:
             width, height = optimized.size
         record = {
@@ -525,6 +526,7 @@ def resolve_and_optimize_images(
             "size_bytes": destination.stat().st_size,
             "width": width,
             "height": height,
+            "is_equation": bool(image_element.get("data-math-style")),
         }
         if not any(item["local_path"] == record["local_path"] for item in records):
             records.append(record)
@@ -576,6 +578,7 @@ def sanitize_article(
     stripped_install_calls = flatten_code(main)
     transform_special_blocks(main)
     apply_inline_styles(main)
+    replace_math(main, article_dir.parent / ".math-cache")
     images = resolve_and_optimize_images(main, source_html, article_dir)
     strip_unsupported_attributes(main)
     main.set("style", ROOT_STYLE)
@@ -597,6 +600,24 @@ def local_preview_html(title: str, content: str) -> str:
         "<meta name='viewport' content='width=device-width,initial-scale=1'>"
         f"<title>{title}</title></head><body style='margin:0 auto;padding:24px;max-width:760px;'>"
         f"{content}</body></html>"
+    )
+
+
+def image_ledger_matches(
+    fragment: etree._Element,
+    records: list[dict[str, Any]],
+    expected_count: int,
+) -> bool:
+    """Match unique local assets, allowing an image to occur more than once."""
+    referenced = {
+        element.get("src") or ""
+        for element in fragment.xpath(".//img")
+        if not (element.get("src") or "").startswith(("http://", "https://", "data:"))
+    }
+    recorded = [str(record["relative_src"]) for record in records]
+    return (
+        expected_count == len(recorded) == len(set(recorded))
+        and referenced == set(recorded)
     )
 
 
@@ -689,7 +710,7 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         if not images:
             raise RuntimeError(f"Article {number:02d} has no representative figure for its cover")
         cover = article_dir / "cover.jpg"
-        cover_source = Path(images[0]["local_path"])
+        cover_source = Path(next(item["local_path"] for item in images if not item.get("is_equation")))
         create_cover(cover_source, cover)
         payload = {
             "title": title,
@@ -744,6 +765,9 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         if item["html_chars"] < 3000:
             errors.append(f"{item['chapter_id']}: article content is unexpectedly short")
         draft = json.loads(Path(item["draft_json"]).read_text(encoding="utf-8"))
+        fragment = html.fragment_fromstring(draft["content"], create_parent="section")
+        if not image_ledger_matches(fragment, item["embedded_images"], item["embedded_image_count"]):
+            errors.append(f"{item['chapter_id']}: embedded image ledger does not match HTML")
         expected_prefix = f"16S最佳实践｜{int(item['chapter_id'])}. "
         if not draft["title"].startswith(expected_prefix):
             errors.append(f"{item['chapter_id']}: title order prefix is missing")

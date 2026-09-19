@@ -42,6 +42,12 @@ Network edge 最多表示在当前样本、feature filter、composition referenc
 
 本页使用 `microeco` 2.0.0 的真实湿地数据，纳入 CW、IW、TW 各 30 个样本。网络只包含具有可报告 genus label 的 40 个 group-blind 高信息属，不把 unclassified residual 当节点。由于 pooled groups 本身可能制造相关，所有 SparCC edges 额外与 group-centered CLR correlation 对照。
 
+### 稳定的边也可能来自稳定的混杂
+
+如果两个属都偏好相同湿地环境，反复 bootstrap 可以稳定选出它们的边；这证明关联对当前样本重采样不敏感，却不能区分共同环境响应与直接互作。本例的 group-centered CLR 对照能揭示部分组间驱动的相关，但没有调整未测量环境，也不是完整的协变量条件网络。
+
+40 个节点已有 780 个候选边，每组只有 30 个样本；稀疏正则化降低估计复杂度，却不会创造新的独立信息。应把节点过滤、边选择频率和推断方法一起报告。StARS 控制的是给定重采样方案下的平均不稳定性，不是每条边的错误发现率。若一个生物学论点只依赖某条边，应寻求新的时间、环境或实验对照证据，而不是只提高网络图的分辨率。
+
 ## 下载并读取本次分析的数据 {#sec-setup}
 
 需要 R，以及 `SpiecEasi`、`ggplot2`、`ggrepel`、`igraph`、`knitr`、`patchwork`、`ragg`、`svglite`。本次使用中国湿地的 OTU count 表、分类表和样本信息表。

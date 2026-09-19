@@ -22,10 +22,9 @@ fig-format: png
 
 ## 为什么分类器必须匹配你的引物区域？ {#sec-target}
 
-训练分类器通常不占正文里最醒目的生态结果图，却决定后面每一张堆叠柱图、差异菌图和网络图上的名称。论文中至少应留下两类证据：
+分类器阈值决定了什么时候给出一个名称，什么时候只报告更高的分类层级。本例把 confidence 从 0.50 提高到 0.90 后，留出集的 genus precision 从 0.9128 提高到 0.9612，但 recall 从 0.8429 降到 0.7314；真实样本中获得 genus 标签的 reads 同时从 4,607 降至 3,672。更保守的命名有明确代价，不能只展示 precision 的改善。
 
-- Methods 中完整的 classifier contract：数据库 release、引物区、区域提取规则、taxonomy 层级、训练参数和软件版本；
-- Supplementary 中的验证图：不同置信阈值下逐层 precision、recall、F1、拒判率，以及生产数据上的分类深度敏感性。
+这组结果来自同一 SILVA 发布内的已知 lineage 留出集，回答的是“参考范围内的新序列能否被正确分类”，不是“数据库之外的新类群能否被识别”。训练与测试之间没有相同序列仍不足以证明对新谱系的泛化能力。若目标环境的参考覆盖差，应允许较浅层级的结果，并用独立 mock community 或适合问题的谱系留出评估检验迁移，而不是把软件 confidence 当作每条真实样本标签的校准正确概率。
 
 ![区域分类器的完整构建合同。内部留出集只验证同一 SILVA release 内已知 lineage 的插值；最终交付模型必须用全部参考重新训练。](../figures/15-classifier-build-contract.png){#fig-build-contract}
 
@@ -35,7 +34,7 @@ fig-format: png
 
 ![confidence 0.70 的 Naive Bayes 与本篇使用同一 SILVA 区域参考重新计算的 sequence-search 结果比较。覆盖率和 exact-name agreement 是方法敏感性，不是准确率真值。](../figures/15-method-concordance.png){#fig-method-concordance}
 
-::: {.callout-important title="先记住一句话"}
+::: {.callout-important title="提高阈值会同时提高拒判比例"}
 **分类器不是一个可以跨项目随手复用的“数据库文件”。它是 marker region、reference release、taxonomy contract、训练参数和 scikit-learn 运行时共同定义的版本化模型。**
 :::
 
@@ -371,23 +370,23 @@ holdout lineages unseen
 
 对每个 taxonomy rank，本次定义：
 
-\[
+$$
 \mathrm{Precision} =
 \frac{\mathrm{Correct}}
 {\mathrm{Correct}+\mathrm{Incorrect}}
-\]
+$$
 
-\[
+$$
 \mathrm{Recall} =
 \frac{\mathrm{Correct}}
 {\mathrm{Expected}}
-\]
+$$
 
-\[
+$$
 \mathrm{F1} =
 \frac{2 \times \mathrm{Precision} \times \mathrm{Recall}}
 {\mathrm{Precision}+\mathrm{Recall}}
-\]
+$$
 
 其中：
 

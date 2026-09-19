@@ -44,13 +44,19 @@ PERMANOVA 常对应论文中的 PCoA/NMDS 分组图和一张含 pseudo-F、(R^2)
 
 本例使用 `phyloseq` 1.48.0 分发的真实 `soilrep` 数据，来源于长期增温 × 剪草草地实验。[Zhou et al. (2011)](https://doi.org/10.1038/ismej.2011.11)采用 6 个区组的 paired nested/split-plot 设计，并用多标签扩增测序研究方法重复性与处理响应。源对象保留 56 个 PCR/tag 文库，每个处理 14 个；这些文库对应 24 个生物学土壤样本，不能作为 56 个独立样本进入推断。
 
-原研究 Figure 2 的预处理保留“在任一处理至少 4 个 tagged libraries 中检出”的 feature。本页预先沿用该阈值作为主分析，先把同一土壤样本的 1–3 个技术文库相加，再计算 relative-abundance Bray–Curtis；论文图不直接复制，而是从公开数据重绘实验单位、中心/离散度、计划比较和 PERMDISP 四张英文图。
+原研究 Figure 2 的预处理保留“在任一处理至少 4 个 tagged libraries 中检出”的 feature。以下沿用该阈值作为主分析，先把同一土壤样本的 1–3 个技术文库相加，再计算 relative-abundance Bray–Curtis；四张图分别呈现实验单位、中心与离散度、计划比较和 PERMDISP 结果。
 
 ::: {.callout-important title="先给结论"}
 在研究锚定的 feature filter 和合法 split-plot 置换下，四水平 treatment omnibus PERMANOVA 的 total (R^2=0.0981)、block-adjusted partial (R^2=0.1847)、(P=0.0065)；区组本身解释 total (R^2=0.4689)。对应的 bias-adjusted spatial-median PERMDISP 为 (F=0.403)、(P=0.3714)，没有发现全局离散度差异。
 
 这个信号不能简化成“所有处理比较都显著”。Warming、Clipping 与交互项的 Holm-adjusted P 分别为 0.132、0.120 和 0.120；四个计划 simple effects 的 Holm-adjusted P 均为 0.125。更重要的是，保留全部 16,825 个 feature、仍使用同一合法置换时，omnibus P 变为 0.7642。因而结论应写成：**主预处理分支检测到条件性的整体位置差异，未见全局 dispersion 证据，但结果对 feature filter 敏感，不能宣称稳健而普遍的处理效应。**
 :::
+
+### PERMDISP 不显著，为什么仍然不能宣布检验安全？
+
+离散度检验未拒绝原假设，不等于证实各组离散度相等；它也可能缺少识别差异的精度。反过来，两个检验都显著，也不能机械地说 PERMANOVA 全部无效：位置与离散度差异可以同时存在，影响还取决于样本量平衡和研究设计。应同时看组内距离分布、样本量、效应量和合法置换，而不是把 PERMDISP 当成一个通过后即可忽略其他假设的开关。[vegan 方法说明](https://vegandevs.github.io/vegan/reference/adonis.html)明确区分了两类检验。
+
+本例更大的不稳定性来自特征集合：保留全部 feature 后 P 从 0.0065 变为 0.7642。主过滤规则虽有研究依据，仍使用了处理内检出信息；这种条件应在结论中保留。若新研究需要确认性检验，更容易解释的做法是提前固定不依赖待检验组标签的过滤规则，再把其他合理规则作为敏感性分析，不能在看过各分支 P 值后选择主结果。
 
 ## 下载并读取本次分析的数据 {#sec-setup}
 
@@ -301,15 +307,15 @@ PERMANOVA 把距离矩阵中的平方和分解到模型项，比较组中心位�
 
 因此每个区组有 8 种合法 treatment relabellings：whole-plot warming 可交换一次，两个 main plot 内的 clipping 可各交换一次，即 (2^3=8)。六个区组共有：
 
-\[
+$$
 8^6=262{,}144
-\]
+$$
 
 种合法 assignments（包含观察到的 identity）。主分析从其余 262,143 个 assignments 中以固定种子无放回抽取 9,999 个。置换 P 值按
 
-\[
+$$
 P=\frac{b+1}{m+1}
-\]
+$$
 
 计算，因此 9,999 次置换的最小 P 为 0.0001。四个 planned simple effects 各有 6 对区组配对，穷举 63 个 non-identity swaps；连同观察顺序后，最小 P 为 (1/64=0.015625)。
 

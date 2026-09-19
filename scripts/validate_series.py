@@ -702,7 +702,6 @@ def main() -> int:
             "18-export-decision-map",
             "18-raster-resolution-audit",
             "validate_publication_graphics.R",
-            "171 / 171 PASS",
             "89 mm",
             "183 mm",
             "600 ppi",
@@ -713,6 +712,10 @@ def main() -> int:
         execute = publication_graphics_metadata.get("execute", {})
         if not isinstance(execute, dict) or execute.get("eval") is not True:
             errors.append("article 18 must retain the downstream eval:true policy")
+        # Execution checks belong to validation code, never a prose PASS tally.
+        graphics_validator = root / "scripts/validate_publication_graphics.R"
+        if not graphics_validator.is_file():
+            errors.append("article 18 requires its graphics validation script")
 
     alpha_diversity_path = root / "chapters/19-alpha-diversity.qmd"
     if alpha_diversity_path.exists():
