@@ -76,6 +76,23 @@ def old_article_signature(article):
     fields.update(body_text=text,images=[image_identity(url) for url in images])
     return hashlib.sha256(json.dumps(fields,sort_keys=True,ensure_ascii=False).encode()).hexdigest()
 
+def mapped_article_payload(archived,entry):
+    """Bind an archived body to its authoritative current image/cover ledger."""
+    article=copy.deepcopy(archived)
+    article['thumb_media_id']=entry['cover_media_id']
+    tree=html.fragment_fromstring(article['content'],create_parent='section')
+    nodes=tree.xpath('.//img')
+    old_sources=list(dict.fromkeys(node.get('src') or node.get('data-src') for node in nodes))
+    current=entry['body_images']
+    if len(old_sources)!=len(current):
+        raise SafeError('Archived image occurrences do not match the canonical asset ledger')
+    replacements={old:image['url'] for old,image in zip(old_sources,current)}
+    for node in nodes:
+        node.set('src',replacements[node.get('src') or node.get('data-src')])
+        node.attrib.pop('data-src',None)
+    article['content']=html.tostring(tree,encoding='unicode')
+    return article
+
 def verify_old_article(entry,article):
     if entry.get('old_article_signature') and old_article_signature(article)!=entry['old_article_signature']:
         raise SafeError('The old draft changed after the reviewed baseline; retain it and reconcile before replacement')

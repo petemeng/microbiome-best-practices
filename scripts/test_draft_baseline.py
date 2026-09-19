@@ -1,6 +1,6 @@
 import copy
 import unittest
-from sync_wechat_revision import SafeError, old_article_signature, verify_old_article
+from sync_wechat_revision import SafeError, old_article_signature, verify_old_article, mapped_article_payload, body_signature
 
 
 class DraftBaselineTests(unittest.TestCase):
@@ -24,6 +24,17 @@ class DraftBaselineTests(unittest.TestCase):
         remote = dict(self.article, digest='User edited summary')
         with self.assertRaises(SafeError):
             verify_old_article({'old_article_signature': old_article_signature(self.article)}, remote)
+
+    def test_current_asset_ledger_rebinds_a_stale_archive(self):
+        entry={'cover_media_id':'current-test-cover','body_images':[{'url':'https://mmbiz.qpic.cn/current/0'}]}
+        rebound=mapped_article_payload(self.article,entry)
+        self.assertEqual(rebound['thumb_media_id'],'current-test-cover')
+        self.assertEqual(body_signature(rebound['content']),('Observed result',['https://mmbiz.qpic.cn/current/0']))
+        self.assertEqual(self.article['thumb_media_id'],'test-cover')
+
+    def test_ambiguous_archive_asset_count_is_rejected(self):
+        with self.assertRaises(SafeError):
+            mapped_article_payload(self.article,{'cover_media_id':'test-cover','body_images':[]})
 
 
 if __name__ == '__main__':
