@@ -44,6 +44,12 @@ class ChapterSelectionTests(unittest.TestCase):
 
 
 class EditorialSurfaceTests(unittest.TestCase):
+    def test_section_number_removal_keeps_the_actual_heading(self):
+        document=html.fromstring('<section><h2><span class="header-section-number">19.1</span> Alpha diversity <em>and coverage</em></h2></section>')
+        remove_unwanted(document)
+        self.assertEqual(document.xpath('.//h2')[0].text_content().strip(),'Alpha diversity and coverage')
+        self.assertEqual(len(document.xpath('.//h2/em')),1)
+
     def test_hidden_callout_label_is_removed_without_losing_title(self):
         document = html.fromstring('<section><div><span class="screen-reader-only">提示</span>按研究问题选图</div></section>')
         remove_unwanted(document)

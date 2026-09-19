@@ -283,7 +283,8 @@ def remove_unwanted(main: etree._Element) -> None:
             seen.add(element)
             parent = element.getparent()
             if parent is not None:
-                parent.remove(element)
+                # Section-number spans carry the real heading in their tail.
+                element.drop_tree()
 
 
 def normalized_text(element: etree._Element) -> str:
@@ -768,6 +769,8 @@ def build(args: argparse.Namespace) -> dict[str, Any]:
         fragment = html.fragment_fromstring(draft["content"], create_parent="section")
         if not image_ledger_matches(fragment, item["embedded_images"], item["embedded_image_count"]):
             errors.append(f"{item['chapter_id']}: embedded image ledger does not match HTML")
+        if any(not normalized_text(heading) for heading in fragment.xpath(".//h2 | .//h3 | .//h4")):
+            errors.append(f"{item['chapter_id']}: empty reader-facing heading remains")
         expected_prefix = f"16S最佳实践｜{int(item['chapter_id'])}. "
         if not draft["title"].startswith(expected_prefix):
             errors.append(f"{item['chapter_id']}: title order prefix is missing")
