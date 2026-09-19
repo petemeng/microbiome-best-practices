@@ -539,7 +539,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -851,7 +851,10 @@ window.Quarto = {
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">跨组学相关首先要保证样本与统计单位对齐</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">跨组学相关首先要保证样本与统计单位对齐</a>
+  <ul class="collapse">
+  <li><a href="#去掉共同分组后还相关是否就排除了混杂" id="toc-去掉共同分组后还相关是否就排除了混杂" class="nav-link" data-scroll-target="#去掉共同分组后还相关是否就排除了混杂">去掉共同分组后还相关，是否就排除了混杂？</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">下载并读取本次分析的数据</a>
   <ul class="collapse">
   <li><a href="#从三件套与配对代谢组读起" id="toc-从三件套与配对代谢组读起" class="nav-link" data-scroll-target="#从三件套与配对代谢组读起">从三件套与配对代谢组读起</a></li>
@@ -907,7 +910,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -935,6 +938,11 @@ window.Quarto = {
 <p>Observed 数据中 Procrustes correlation 为 0.588、Mantel Spearman 为 0.597；校正 Control/CD/UC 后仍分别为 0.529 与 0.554（四次 permutation test 均为 <span class="math inline">\(P=0.001\)</span>）。不过，1,000 对候选关联的 FDR hits 从 437 降到 350。<strong>整体结构相似不等于每条边可靠，局部相关也不等于代谢转化或因果。</strong></p>
 </div>
 </div>
+<section id="去掉共同分组后还相关是否就排除了混杂" class="level3">
+<h3 class="anchored" data-anchor-id="去掉共同分组后还相关是否就排除了混杂">去掉共同分组后还相关，是否就排除了混杂？</h3>
+<p>Control/CD/UC 调整后 Procrustes correlation 从 0.588 降到 0.529，说明部分整体相似性不只来自三个标签的均值差异；它并没有同时控制饮食、药物、批次或疾病活动度。诊断调整还改变了问题：从跨全部样本的共变，变成同诊断类别内部的共变。若诊断位于研究中的因果路径上，是否调整应由目标决定，而不是总把调整后的值称为“真实相关”。</p>
+<p>整体检验与局部筛选也有不同分母。1,000 对候选关联在调整后从 437 个 FDR hits 降到 350 个，不能用仍有整体相关来替代每条边的检查。代谢物缺失可能受检测下限影响，菌的零值也有测量原因；两端共享缺失模式就可能产生关联。筛选出的 block 是后续验证的统计线索，不直接证明底物、产物或代谢方向。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">下载并读取本次分析的数据</h2>
@@ -2052,473 +2060,479 @@ MT_M006     0.0000      0.000     0.0000  1035.2100     0.0000</code></pre>
 <span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>Observed 数据中 Procrustes correlation 为 0.588、Mantel Spearman 为 0.597；校正 Control/CD/UC 后仍分别为 0.529 与 0.554（四次 permutation test 均为 $P=0.001$）。不过，1,000 对候选关联的 FDR hits 从 437 降到 350。**整体结构相似不等于每条边可靠，局部相关也不等于代谢转化或因果。**</span>
 <span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### 去掉共同分组后还相关，是否就排除了混杂？</span></span>
 <span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`jsonlite`</span>、<span class="in">`permute`</span>、<span class="in">`ragg`</span>、<span class="in">`readr`</span>、<span class="in">`svglite`</span>、<span class="in">`vegan`</span>。本次使用配对的微生物组、代谢组、样本信息及代谢物注释表。</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>Control/CD/UC 调整后 Procrustes correlation 从 0.588 降到 0.529，说明部分整体相似性不只来自三个标签的均值差异；它并没有同时控制饮食、药物、批次或疾病活动度。诊断调整还改变了问题：从跨全部样本的共变，变成同诊断类别内部的共变。若诊断位于研究中的因果路径上，是否调整应由目标决定，而不是总把调整后的值称为“真实相关”。</span>
 <span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>整体检验与局部筛选也有不同分母。1,000 对候选关联在调整后从 437 个 FDR hits 降到 350 个，不能用仍有整体相关来替代每条边的检查。代谢物缺失可能受检测下限影响，菌的零值也有测量原因；两端共享缺失模式就可能产生关联。筛选出的 block 是后续验证的统计线索，不直接证明底物、产物或代谢方向。</span>
 <span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article46_global_concordance.R"</span>,</span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article46_halla.py"</span>,</span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>  <span class="st">"env/multiomics.yml"</span>,</span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metabolite-annotation.tsv"</span>,</span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metabolites.tsv"</span>,</span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metadata.tsv"</span>,</span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/otutab.tsv"</span>,</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/source-summary.json"</span>,</span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/taxonomy.tsv"</span></span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-integration-theme</span></span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260746</span>)</span>
-<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
-<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
-<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
-<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
-<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
-<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
-<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
-<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
-<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
-<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
-<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
-<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
-<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
-<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
-<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a><span class="fu">### 从三件套与配对代谢组读起</span></span>
-<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-paired-ibd-data</span></span>
-<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
-<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
-<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
-<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
-<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>  out</span>
-<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"data/small/paired-ibd-multiomics"</span></span>
-<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"otutab.tsv"</span>))</span>
-<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"taxonomy.tsv"</span>))</span>
-<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metadata.tsv"</span>))</span>
-<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>metabolites_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metabolites.tsv"</span>))</span>
-<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>metabolite_annotation <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(</span>
-<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(data_dir, <span class="st">"metabolite-annotation.tsv"</span>)</span>
-<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.numeric), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>metabolites <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(</span>
-<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(metabolites_raw, as.numeric), <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
-<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(metabolites) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metabolites_raw)</span>
-<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">250</span>L, <span class="fu">ncol</span>(otutab) <span class="sc">==</span> <span class="dv">220</span>L,</span>
-<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(metabolites) <span class="sc">==</span> <span class="dv">277</span>L, <span class="fu">ncol</span>(metabolites) <span class="sc">==</span> <span class="dv">220</span>L,</span>
-<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(metabolites), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
-<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.integer</span>(<span class="fu">table</span>(metadata<span class="sc">$</span>StudyGroup)[<span class="fu">c</span>(<span class="st">"CD"</span>, <span class="st">"Control"</span>, <span class="st">"UC"</span>)]),</span>
-<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">88</span>L, <span class="dv">56</span>L, <span class="dv">76</span>L)</span>
-<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy)</span>
-<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
-<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metabolites[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/46-procrustes-mantel-halla.R)</span>。脚本包含数据下载、计算和图形导出。</span>
-<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
-<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>  <span class="st">"eva"</span>, <span class="st">"ggplot2"</span>, <span class="st">"jsonlite"</span>, <span class="st">"permute"</span>, <span class="st">"ragg"</span>, <span class="st">"readr"</span>, <span class="st">"scales"</span>,</span>
-<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>  <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span>, <span class="st">"vegan"</span>, <span class="st">"XICOR"</span></span>
-<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="fu">## 整体一致与局部关联回答不同问题 {#sec-theory}</span></span>
-<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a><span class="fu">### Procrustes 比较两个低维构型</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`jsonlite`</span>、<span class="in">`permute`</span>、<span class="in">`ragg`</span>、<span class="in">`readr`</span>、<span class="in">`svglite`</span>、<span class="in">`vegan`</span>。本次使用配对的微生物组、代谢组、样本信息及代谢物注释表。</span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article46_global_concordance.R"</span>,</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article46_halla.py"</span>,</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"env/multiomics.yml"</span>,</span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metabolite-annotation.tsv"</span>,</span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metabolites.tsv"</span>,</span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metadata.tsv"</span>,</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/otutab.tsv"</span>,</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/source-summary.json"</span>,</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/taxonomy.tsv"</span></span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-integration-theme</span></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260746</span>)</span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a><span class="fu">### 从三件套与配对代谢组读起</span></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-paired-ibd-data</span></span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"data/small/paired-ibd-multiomics"</span></span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"otutab.tsv"</span>))</span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"taxonomy.tsv"</span>))</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metadata.tsv"</span>))</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>metabolites_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metabolites.tsv"</span>))</span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>metabolite_annotation <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(</span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(data_dir, <span class="st">"metabolite-annotation.tsv"</span>)</span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.numeric), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>metabolites <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(</span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(metabolites_raw, as.numeric), <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(metabolites) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metabolites_raw)</span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">250</span>L, <span class="fu">ncol</span>(otutab) <span class="sc">==</span> <span class="dv">220</span>L,</span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(metabolites) <span class="sc">==</span> <span class="dv">277</span>L, <span class="fu">ncol</span>(metabolites) <span class="sc">==</span> <span class="dv">220</span>L,</span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(metabolites), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.integer</span>(<span class="fu">table</span>(metadata<span class="sc">$</span>StudyGroup)[<span class="fu">c</span>(<span class="st">"CD"</span>, <span class="st">"Control"</span>, <span class="st">"UC"</span>)]),</span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">88</span>L, <span class="dv">56</span>L, <span class="dv">76</span>L)</span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy)</span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metabolites[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/46-procrustes-mantel-halla.R)</span>。脚本包含数据下载、计算和图形导出。</span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a>  <span class="st">"eva"</span>, <span class="st">"ggplot2"</span>, <span class="st">"jsonlite"</span>, <span class="st">"permute"</span>, <span class="st">"ragg"</span>, <span class="st">"readr"</span>, <span class="st">"scales"</span>,</span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a>  <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span>, <span class="st">"vegan"</span>, <span class="st">"XICOR"</span></span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a>先分别对微生物 CLR matrix 与 log-scaled metabolite matrix 求样本距离并排序。Procrustes 通过旋转、缩放和平移，把一个构型对齐到另一个构型；相关系数越高，表示样本在两个空间中的相对位置越一致。</span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mantel 比较两张距离矩阵</span></span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a><span class="fu">## 整体一致与局部关联回答不同问题 {#sec-theory}</span></span>
 <span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a>Mantel statistic 是两张样本距离矩阵上三角元素的相关。它能检验整体 distance concordance，但不能定位是哪一对菌—代谢物驱动结果，也不替代 multivariable model。空间、自相关、重复测量或 family structure 存在时，必须按设计限制 permutations。</span>
+<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a><span class="fu">### Procrustes 比较两个低维构型</span></span>
 <span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a><span class="fu">### HAllA 在相关矩阵上找层级 blocks</span></span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a>先分别对微生物 CLR matrix 与 log-scaled metabolite matrix 求样本距离并排序。Procrustes 通过旋转、缩放和平移，把一个构型对齐到另一个构型；相关系数越高，表示样本在两个空间中的相对位置越一致。</span>
 <span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a>HAllA 同时聚类两个 feature sets，并在 hierarchy 中寻找显著的 association blocks，减少逐对展示造成的信息碎片。本文用 Spearman、999 permutations、BH FDR 0.05 与 FNR threshold 0.20；block 是统计摘要，不是 biochemical pathway。</span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mantel 比较两张距离矩阵</span></span>
 <span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### 共同 diagnosis 会制造跨组学相关</span></span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a>Mantel statistic 是两张样本距离矩阵上三角元素的相关。它能检验整体 distance concordance，但不能定位是哪一对菌—代谢物驱动结果，也不替代 multivariable model。空间、自相关、重复测量或 family structure 存在时，必须按设计限制 permutations。</span>
 <span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a>若某菌和某代谢物都在 IBD 中升高，即使个体内没有直接联系，合并三组后仍会相关。本文先对每个 feature 回归 <span class="in">`StudyGroup`</span>，再对 residuals 计算局部关联；全局校正版同样先去除组均值，并把 permutations 限制在组内。</span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a><span class="fu">### HAllA 在相关矩阵上找层级 blocks</span></span>
 <span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：为什么 Mantel 显著不能替代 feature-level model<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>Mantel statistic 把所有 pairwise distances 压缩成一个数；不同机制可产生相同 statistic。它还无法告诉你 effect direction、单个 feature 的不确定性或 clinical covariates 是否充分调整。最稳妥的定位是：用它回答“两个视图是否共享结构”，再用预先限定的 feature-level model 回答“哪些关系值得验证”。</span>
-<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## 先比较整体一致性，再寻找局部关联 {#sec-code}</span></span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>HAllA 同时聚类两个 feature sets，并在 hierarchy 中寻找显著的 association blocks，减少逐对展示造成的信息碎片。本文用 Spearman、999 permutations、BH FDR 0.05 与 FNR threshold 0.20；block 是统计摘要，不是 biochemical pathway。</span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### 共同 diagnosis 会制造跨组学相关</span></span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a>若某菌和某代谢物都在 IBD 中升高，即使个体内没有直接联系，合并三组后仍会相关。本文先对每个 feature 回归 <span class="in">`StudyGroup`</span>，再对 residuals 计算局部关联；全局校正版同样先去除组均值，并把 permutations 限制在组内。</span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：为什么 Mantel 显著不能替代 feature-level model<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a><span class="fu">### 同时检验整体一致性与局部相关</span></span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>Mantel statistic 把所有 pairwise distances 压缩成一个数；不同机制可产生相同 statistic。它还无法告诉你 effect direction、单个 feature 的不确定性或 clinical covariates 是否充分调整。最稳妥的定位是：用它回答“两个视图是否共享结构”，再用预先限定的 feature-level model 回答“哪些关系值得验证”。</span>
 <span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a>从配对数据重新计算整体一致性、分组调整后的局部相关和 HAllA。</span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a>先在 Linux 或 WSL2 终端创建对应环境，回到 R 后运行计算代码。</span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## 先比较整体一致性，再寻找局部关联 {#sec-code}</span></span>
 <span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">--prefix</span> ./multiomics-env <span class="at">--file</span> env/multiomics.yml</span>
-<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### 同时检验整体一致性与局部相关</span></span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a>从配对数据重新计算整体一致性、分组调整后的局部相关和 HAllA。</span>
 <span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-native-computation</span></span>
-<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a>run_analysis <span class="ot">&lt;-</span> <span class="cf">function</span>(command, args) {</span>
-<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">system2</span>(command, args, <span class="at">stdout =</span> <span class="cn">TRUE</span>, <span class="at">stderr =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a>  status <span class="ot">&lt;-</span> <span class="fu">attr</span>(output, <span class="st">"status"</span>)</span>
-<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(status) <span class="sc">&amp;&amp;</span> status <span class="sc">!=</span> <span class="dv">0</span>L) <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="fu">tail</span>(output, <span class="dv">20</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(output)</span>
-<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">file.path</span>(<span class="fu">R.home</span>(<span class="st">"bin"</span>), <span class="st">"Rscript"</span>), <span class="fu">c</span>(<span class="st">"--vanilla"</span>, <span class="st">"scripts/run_article46_global_concordance.R"</span>))</span>
-<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">Sys.getenv</span>(<span class="st">"MULTIOMICS_PYTHON"</span>, <span class="st">"multiomics-env/bin/python"</span>), <span class="fu">c</span>(<span class="st">"scripts/run_article46_halla.py"</span>))</span>
-<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a>完整计算脚本：<span class="co">[</span><span class="ot">run_article46_global_concordance.R</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article46_global_concordance.R)</span>、<span class="co">[</span><span class="ot">run_article46_halla.py</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article46_halla.py)</span>。</span>
-<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a><span class="fu">### 全局 Procrustes 与 Mantel：同时做 group-adjusted audit</span></span>
-<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a>整体检验同时保留未调整和组内调整的统计量；关键变换如下。</span>
-<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(permute)</span>
-<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
-<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>microbe_log <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">t</span>(otutab) <span class="sc">+</span> <span class="fl">0.5</span>)</span>
-<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>microbe_clr <span class="ot">&lt;-</span> microbe_log <span class="sc">-</span> <span class="fu">rowMeans</span>(microbe_log)</span>
-<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>metabolite_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">log1p</span>(<span class="fu">t</span>(metabolites)))</span>
-<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>metabolite_scaled[, <span class="sc">!</span><span class="fu">is.finite</span>(<span class="fu">colSums</span>(metabolite_scaled))] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> StudyGroup, <span class="at">data =</span> metadata)</span>
-<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>residualize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">lm.fit</span>(design, x)<span class="sc">$</span>residuals</span>
-<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>views <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>  <span class="at">Observed =</span> <span class="fu">list</span>(<span class="at">Microbiome =</span> microbe_clr, <span class="at">Metabolome =</span> metabolite_scaled),</span>
-<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Group-adjusted</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
-<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>    <span class="at">Microbiome =</span> <span class="fu">residualize</span>(microbe_clr),</span>
-<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>    <span class="at">Metabolome =</span> <span class="fu">residualize</span>(metabolite_scaled)</span>
-<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
-<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (model_name <span class="cf">in</span> <span class="fu">names</span>(views)) {</span>
-<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a>  dx <span class="ot">&lt;-</span> <span class="fu">dist</span>(views[[model_name]]<span class="sc">$</span>Microbiome)</span>
-<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a>  dy <span class="ot">&lt;-</span> <span class="fu">dist</span>(views[[model_name]]<span class="sc">$</span>Metabolome)</span>
-<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(dx, <span class="at">k =</span> <span class="dv">5</span>)</span>
-<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(dy, <span class="at">k =</span> <span class="dv">5</span>)</span>
-<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a>  control <span class="ot">&lt;-</span> <span class="cf">if</span> (model_name <span class="sc">==</span> <span class="st">"Observed"</span>) <span class="fu">how</span>(<span class="at">nperm =</span> <span class="dv">999</span>) <span class="cf">else</span></span>
-<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a>    <span class="fu">how</span>(<span class="at">nperm =</span> <span class="dv">999</span>, <span class="at">blocks =</span> metadata<span class="sc">$</span>StudyGroup)</span>
-<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">protest</span>(x, y, <span class="at">permutations =</span> control, <span class="at">symmetric =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">mantel</span>(dx, dy, <span class="at">method =</span> <span class="st">"spearman"</span>, <span class="at">permutations =</span> control))</span>
-<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-global-concordance</span></span>
-<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a>result_dir <span class="ot">&lt;-</span> <span class="st">"results/46-integration"</span></span>
-<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>global_tests <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"global-concordance.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>procrustes_arrows <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"procrustes-arrows.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(global_tests) <span class="sc">==</span> <span class="dv">4</span>L, <span class="fu">all</span>(global_tests<span class="sc">$</span>QValue <span class="sc">&lt;=</span> <span class="fl">0.001</span>))</span>
-<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>global_tests</span>
-<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a><span class="fu">### 局部相关与 HAllA</span></span>
-<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>先按 CLR/log1p variance 固定 25 个菌和 40 个代谢物，对每个 feature 回归 <span class="in">`StudyGroup`</span>。HAllA 的核心调用如下；输入表是 features × samples。</span>
-<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> halla <span class="im">import</span> HAllA</span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a>先在 Linux 或 WSL2 终端创建对应环境，回到 R 后运行计算代码。</span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">--prefix</span> ./multiomics-env <span class="at">--file</span> env/multiomics.yml</span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-native-computation</span></span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a>run_analysis <span class="ot">&lt;-</span> <span class="cf">function</span>(command, args) {</span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">system2</span>(command, args, <span class="at">stdout =</span> <span class="cn">TRUE</span>, <span class="at">stderr =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>  status <span class="ot">&lt;-</span> <span class="fu">attr</span>(output, <span class="st">"status"</span>)</span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(status) <span class="sc">&amp;&amp;</span> status <span class="sc">!=</span> <span class="dv">0</span>L) <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="fu">tail</span>(output, <span class="dv">20</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(output)</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">file.path</span>(<span class="fu">R.home</span>(<span class="st">"bin"</span>), <span class="st">"Rscript"</span>), <span class="fu">c</span>(<span class="st">"--vanilla"</span>, <span class="st">"scripts/run_article46_global_concordance.R"</span>))</span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">Sys.getenv</span>(<span class="st">"MULTIOMICS_PYTHON"</span>, <span class="st">"multiomics-env/bin/python"</span>), <span class="fu">c</span>(<span class="st">"scripts/run_article46_halla.py"</span>))</span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a>完整计算脚本：<span class="co">[</span><span class="ot">run_article46_global_concordance.R</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article46_global_concordance.R)</span>、<span class="co">[</span><span class="ot">run_article46_halla.py</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article46_halla.py)</span>。</span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a><span class="fu">### 全局 Procrustes 与 Mantel：同时做 group-adjusted audit</span></span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a>整体检验同时保留未调整和组内调整的统计量；关键变换如下。</span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(permute)</span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>microbe_log <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">t</span>(otutab) <span class="sc">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>microbe_clr <span class="ot">&lt;-</span> microbe_log <span class="sc">-</span> <span class="fu">rowMeans</span>(microbe_log)</span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>metabolite_scaled <span class="ot">&lt;-</span> <span class="fu">scale</span>(<span class="fu">log1p</span>(<span class="fu">t</span>(metabolites)))</span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>metabolite_scaled[, <span class="sc">!</span><span class="fu">is.finite</span>(<span class="fu">colSums</span>(metabolite_scaled))] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">model.matrix</span>(<span class="sc">~</span> StudyGroup, <span class="at">data =</span> metadata)</span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>residualize <span class="ot">&lt;-</span> <span class="cf">function</span>(x) <span class="fu">lm.fit</span>(design, x)<span class="sc">$</span>residuals</span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>views <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a>  <span class="at">Observed =</span> <span class="fu">list</span>(<span class="at">Microbiome =</span> microbe_clr, <span class="at">Metabolome =</span> metabolite_scaled),</span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Group-adjusted</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">list</span>(</span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">Microbiome =</span> <span class="fu">residualize</span>(microbe_clr),</span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">Metabolome =</span> <span class="fu">residualize</span>(metabolite_scaled)</span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (model_name <span class="cf">in</span> <span class="fu">names</span>(views)) {</span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a>  dx <span class="ot">&lt;-</span> <span class="fu">dist</span>(views[[model_name]]<span class="sc">$</span>Microbiome)</span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a>  dy <span class="ot">&lt;-</span> <span class="fu">dist</span>(views[[model_name]]<span class="sc">$</span>Metabolome)</span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(dx, <span class="at">k =</span> <span class="dv">5</span>)</span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">cmdscale</span>(dy, <span class="at">k =</span> <span class="dv">5</span>)</span>
+<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a>  control <span class="ot">&lt;-</span> <span class="cf">if</span> (model_name <span class="sc">==</span> <span class="st">"Observed"</span>) <span class="fu">how</span>(<span class="at">nperm =</span> <span class="dv">999</span>) <span class="cf">else</span></span>
+<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a>    <span class="fu">how</span>(<span class="at">nperm =</span> <span class="dv">999</span>, <span class="at">blocks =</span> metadata<span class="sc">$</span>StudyGroup)</span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">protest</span>(x, y, <span class="at">permutations =</span> control, <span class="at">symmetric =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">mantel</span>(dx, dy, <span class="at">method =</span> <span class="st">"spearman"</span>, <span class="at">permutations =</span> control))</span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-global-concordance</span></span>
+<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a>result_dir <span class="ot">&lt;-</span> <span class="st">"results/46-integration"</span></span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a>global_tests <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"global-concordance.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a>procrustes_arrows <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"procrustes-arrows.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(global_tests) <span class="sc">==</span> <span class="dv">4</span>L, <span class="fu">all</span>(global_tests<span class="sc">$</span>QValue <span class="sc">&lt;=</span> <span class="fl">0.001</span>))</span>
+<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>global_tests</span>
+<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a><span class="fu">### 局部相关与 HAllA</span></span>
+<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a>先按 CLR/log1p variance 固定 25 个菌和 40 个代谢物，对每个 feature 回归 <span class="in">`StudyGroup`</span>。HAllA 的核心调用如下；输入表是 features × samples。</span>
+<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> HAllA(</span>
-<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a>    pdist_metric<span class="op">=</span><span class="st">"spearman"</span>, linkage_method<span class="op">=</span><span class="st">"average"</span>,</span>
-<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a>    permute_iters<span class="op">=</span><span class="dv">999</span>, permute_func<span class="op">=</span><span class="st">"gpd"</span>, fdr_alpha<span class="op">=</span><span class="fl">0.05</span>,</span>
-<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a>    fdr_method<span class="op">=</span><span class="st">"fdr_bh"</span>, fnr_thresh<span class="op">=</span><span class="fl">0.20</span>, rank_cluster<span class="op">=</span><span class="st">"best"</span>,</span>
-<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a>    out_dir<span class="op">=</span><span class="st">"results/46-integration/halla-v1"</span>,</span>
-<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a>    num_threads<span class="op">=</span><span class="dv">4</span>, seed<span class="op">=</span><span class="dv">20260726</span>, no_progress<span class="op">=</span><span class="va">True</span></span>
-<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a>model.load(</span>
-<span id="cb18-320"><a href="#cb18-320" aria-hidden="true" tabindex="-1"></a>    <span class="st">"results/46-integration/halla-microbes-group-residual.tsv"</span>,</span>
-<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a>    <span class="st">"results/46-integration/halla-metabolites-group-residual.tsv"</span></span>
-<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a>model.run()</span>
-<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-325"><a href="#cb18-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-326"><a href="#cb18-326" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-halla-results</span></span>
-<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a>raw_pairs <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb18-334"><a href="#cb18-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"pairwise-raw.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-335"><a href="#cb18-335" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a>adjusted_pairs <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"pairwise-group-residual.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a>halla_associations <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb18-340"><a href="#cb18-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"halla-v1"</span>, <span class="st">"all_associations.txt"</span>),</span>
-<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-343"><a href="#cb18-343" aria-hidden="true" tabindex="-1"></a>halla_blocks <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb18-344"><a href="#cb18-344" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"halla-v1"</span>, <span class="st">"sig_clusters.txt"</span>),</span>
-<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a>halla_summary <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(</span>
-<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"summary.json"</span>), <span class="at">simplifyVector =</span> <span class="cn">TRUE</span></span>
-<span id="cb18-349"><a href="#cb18-349" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-350"><a href="#cb18-350" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(raw_pairs) <span class="sc">==</span> <span class="dv">1000</span>L, <span class="fu">nrow</span>(adjusted_pairs) <span class="sc">==</span> <span class="dv">1000</span>L,</span>
-<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(raw_pairs<span class="sc">$</span>QValue <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">==</span> <span class="dv">437</span>L,</span>
-<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(adjusted_pairs<span class="sc">$</span>QValue <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">==</span> <span class="dv">350</span>L,</span>
-<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(halla_blocks) <span class="sc">==</span> <span class="dv">70</span>L</span>
+<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> halla <span class="im">import</span> HAllA</span>
+<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> HAllA(</span>
+<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a>    pdist_metric<span class="op">=</span><span class="st">"spearman"</span>, linkage_method<span class="op">=</span><span class="st">"average"</span>,</span>
+<span id="cb18-320"><a href="#cb18-320" aria-hidden="true" tabindex="-1"></a>    permute_iters<span class="op">=</span><span class="dv">999</span>, permute_func<span class="op">=</span><span class="st">"gpd"</span>, fdr_alpha<span class="op">=</span><span class="fl">0.05</span>,</span>
+<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a>    fdr_method<span class="op">=</span><span class="st">"fdr_bh"</span>, fnr_thresh<span class="op">=</span><span class="fl">0.20</span>, rank_cluster<span class="op">=</span><span class="st">"best"</span>,</span>
+<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a>    out_dir<span class="op">=</span><span class="st">"results/46-integration/halla-v1"</span>,</span>
+<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a>    num_threads<span class="op">=</span><span class="dv">4</span>, seed<span class="op">=</span><span class="dv">20260726</span>, no_progress<span class="op">=</span><span class="va">True</span></span>
+<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-325"><a href="#cb18-325" aria-hidden="true" tabindex="-1"></a>model.load(</span>
+<span id="cb18-326"><a href="#cb18-326" aria-hidden="true" tabindex="-1"></a>    <span class="st">"results/46-integration/halla-microbes-group-residual.tsv"</span>,</span>
+<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a>    <span class="st">"results/46-integration/halla-metabolites-group-residual.tsv"</span></span>
+<span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a>model.run()</span>
+<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-halla-results</span></span>
+<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a>raw_pairs <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb18-340"><a href="#cb18-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"pairwise-raw.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a>adjusted_pairs <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb18-343"><a href="#cb18-343" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"pairwise-group-residual.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-344"><a href="#cb18-344" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a>halla_associations <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"halla-v1"</span>, <span class="st">"all_associations.txt"</span>),</span>
+<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-349"><a href="#cb18-349" aria-hidden="true" tabindex="-1"></a>halla_blocks <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb18-350"><a href="#cb18-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"halla-v1"</span>, <span class="st">"sig_clusters.txt"</span>),</span>
+<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a>  <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a>halla_summary <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(</span>
+<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"summary.json"</span>), <span class="at">simplifyVector =</span> <span class="cn">TRUE</span></span>
 <span id="cb18-355"><a href="#cb18-355" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(halla_blocks, <span class="dv">5</span>)</span>
-<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a><span class="fu">## 全局一致不等于具体特征关联 {#sec-audit}</span></span>
-<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**先审配对。**这里 220 个 sample IDs 在两个视图中顺序完全一致；任何丢样或重复都应在分析前停止，而不是由函数静默取交集。</span>
-<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**先画 raw，再画 adjusted。**437 个 raw hits 中有一部分只是 diagnosis separation；校正后 350 个 hits 才进入 HAllA。若还有 age、medication、batch，应一起进入 design。</span>
-<span id="cb18-363"><a href="#cb18-363" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**全局检验报告 effect。**样本多时很小的 concordance 也会显著；本例同时给 statistic 与 permutation $P$，不只写“显著相关”。</span>
-<span id="cb18-364"><a href="#cb18-364" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**association family 预先定义。**FDR 的分母是固定的 25 × 40 = 1,000 对，而不是看完结果再缩小范围。</span>
-<span id="cb18-365"><a href="#cb18-365" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**独立验证。**优先在新 cohort 检验预注册的少量 pairs；代谢转化还需 isotope tracing、culture experiment、gene/pathway 或 intervention evidence。</span>
+<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(raw_pairs) <span class="sc">==</span> <span class="dv">1000</span>L, <span class="fu">nrow</span>(adjusted_pairs) <span class="sc">==</span> <span class="dv">1000</span>L,</span>
+<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(raw_pairs<span class="sc">$</span>QValue <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">==</span> <span class="dv">437</span>L,</span>
+<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(adjusted_pairs<span class="sc">$</span>QValue <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="sc">==</span> <span class="dv">350</span>L,</span>
+<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(halla_blocks) <span class="sc">==</span> <span class="dv">70</span>L</span>
+<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(halla_blocks, <span class="dv">5</span>)</span>
+<span id="cb18-363"><a href="#cb18-363" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-364"><a href="#cb18-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-365"><a href="#cb18-365" aria-hidden="true" tabindex="-1"></a><span class="fu">## 全局一致不等于具体特征关联 {#sec-audit}</span></span>
 <span id="cb18-366"><a href="#cb18-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="结果边界"}</span>
-<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a>HAllA 找到 70 个显著 blocks、350 个显著 feature pairs，并不表示存在 350 条直接代谢反应。宿主炎症、饮食、药物、肠道 transit 与总生物量都可能同时改变两个视图。</span>
-<span id="cb18-369"><a href="#cb18-369" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-370"><a href="#cb18-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-371"><a href="#cb18-371" aria-hidden="true" tabindex="-1"></a><span class="fu">## 区分组间分离与组内跨组学关联 {#sec-beautify}</span></span>
+<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**先审配对。**这里 220 个 sample IDs 在两个视图中顺序完全一致；任何丢样或重复都应在分析前停止，而不是由函数静默取交集。</span>
+<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**先画 raw，再画 adjusted。**437 个 raw hits 中有一部分只是 diagnosis separation；校正后 350 个 hits 才进入 HAllA。若还有 age、medication、batch，应一起进入 design。</span>
+<span id="cb18-369"><a href="#cb18-369" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**全局检验报告 effect。**样本多时很小的 concordance 也会显著；本例同时给 statistic 与 permutation $P$，不只写“显著相关”。</span>
+<span id="cb18-370"><a href="#cb18-370" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**association family 预先定义。**FDR 的分母是固定的 25 × 40 = 1,000 对，而不是看完结果再缩小范围。</span>
+<span id="cb18-371"><a href="#cb18-371" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**独立验证。**优先在新 cohort 检验预注册的少量 pairs；代谢转化还需 isotope tracing、culture experiment、gene/pathway 或 intervention evidence。</span>
 <span id="cb18-372"><a href="#cb18-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-373"><a href="#cb18-373" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 1：配对样本的 Procrustes arrows</span></span>
-<span id="cb18-374"><a href="#cb18-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-377"><a href="#cb18-377" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-378"><a href="#cb18-378" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-379"><a href="#cb18-379" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-integration-procrustes</span></span>
-<span id="cb18-380"><a href="#cb18-380" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Paired sample configurations before and after diagnosis-group adjustment."</span></span>
-<span id="cb18-381"><a href="#cb18-381" aria-hidden="true" tabindex="-1"></a>group_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-382"><a href="#cb18-382" aria-hidden="true" tabindex="-1"></a>  <span class="at">Control =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
-<span id="cb18-383"><a href="#cb18-383" aria-hidden="true" tabindex="-1"></a>  <span class="at">CD =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"vermillion"</span>]),</span>
-<span id="cb18-384"><a href="#cb18-384" aria-hidden="true" tabindex="-1"></a>  <span class="at">UC =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>])</span>
-<span id="cb18-385"><a href="#cb18-385" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-386"><a href="#cb18-386" aria-hidden="true" tabindex="-1"></a>p46_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(procrustes_arrows) <span class="sc">+</span></span>
-<span id="cb18-387"><a href="#cb18-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
-<span id="cb18-388"><a href="#cb18-388" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> StartAxis1, <span class="at">y =</span> StartAxis2, <span class="at">xend =</span> EndAxis1, <span class="at">yend =</span> EndAxis2,</span>
-<span id="cb18-389"><a href="#cb18-389" aria-hidden="true" tabindex="-1"></a>        <span class="at">colour =</span> StudyGroup),</span>
-<span id="cb18-390"><a href="#cb18-390" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.28</span></span>
-<span id="cb18-391"><a href="#cb18-391" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-392"><a href="#cb18-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(StartAxis1, StartAxis2, <span class="at">colour =</span> StudyGroup), <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
-<span id="cb18-393"><a href="#cb18-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(EndAxis1, EndAxis2, <span class="at">colour =</span> StudyGroup), <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb18-394"><a href="#cb18-394" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Model) <span class="sc">+</span></span>
-<span id="cb18-395"><a href="#cb18-395" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> group_colors) <span class="sc">+</span></span>
-<span id="cb18-396"><a href="#cb18-396" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-397"><a href="#cb18-397" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Procrustes axis 1"</span>, <span class="at">y =</span> <span class="st">"Procrustes axis 2"</span>, <span class="at">colour =</span> <span class="st">"Study group"</span>,</span>
-<span id="cb18-398"><a href="#cb18-398" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Microbiome–metabolome configuration"</span>,</span>
-<span id="cb18-399"><a href="#cb18-399" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Filled: microbiome; open: rotated metabolome"</span></span>
-<span id="cb18-400"><a href="#cb18-400" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-401"><a href="#cb18-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="fu">theme_pub</span>()</span>
-<span id="cb18-402"><a href="#cb18-402" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p46_1, <span class="st">"figures/46-integration/46-1-procrustes"</span>, <span class="dv">180</span>, <span class="dv">78</span>)</span>
-<span id="cb18-403"><a href="#cb18-403" aria-hidden="true" tabindex="-1"></a>p46_1</span>
-<span id="cb18-404"><a href="#cb18-404" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-405"><a href="#cb18-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-406"><a href="#cb18-406" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 2：展示整体关联统计量与置换结果</span></span>
-<span id="cb18-407"><a href="#cb18-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-410"><a href="#cb18-410" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-411"><a href="#cb18-411" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-412"><a href="#cb18-412" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-integration-global-tests</span></span>
-<span id="cb18-413"><a href="#cb18-413" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Global concordance remains after removing diagnosis-group means."</span></span>
-<span id="cb18-414"><a href="#cb18-414" aria-hidden="true" tabindex="-1"></a>global_tests<span class="sc">$</span>YPosition <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(global_tests<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"Mantel"</span>, <span class="dv">1</span>, <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb18-415"><a href="#cb18-415" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(global_tests<span class="sc">$</span>Model <span class="sc">==</span> <span class="st">"Group-adjusted"</span>, <span class="sc">-</span><span class="fl">0.09</span>, <span class="fl">0.09</span>)</span>
-<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a>p46_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(global_tests, <span class="fu">aes</span>(Statistic, YPosition, <span class="at">colour =</span> Model)) <span class="sc">+</span></span>
-<span id="cb18-417"><a href="#cb18-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> Statistic, <span class="at">yend =</span> YPosition), <span class="at">linewidth =</span> <span class="fl">0.6</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb18-418"><a href="#cb18-418" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb18-419"><a href="#cb18-419" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, Statistic)), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.18</span>,</span>
-<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">family =</span> font_pub, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb18-421"><a href="#cb18-421" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb18-422"><a href="#cb18-422" aria-hidden="true" tabindex="-1"></a>    <span class="at">Observed =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"grey"</span>]),</span>
-<span id="cb18-423"><a href="#cb18-423" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Group-adjusted</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>])</span>
-<span id="cb18-424"><a href="#cb18-424" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb18-425"><a href="#cb18-425" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.68</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.02</span>))) <span class="sc">+</span></span>
-<span id="cb18-426"><a href="#cb18-426" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Mantel"</span>, <span class="st">"Procrustes"</span>),</span>
-<span id="cb18-427"><a href="#cb18-427" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.65</span>, <span class="fl">2.35</span>)) <span class="sc">+</span></span>
-<span id="cb18-428"><a href="#cb18-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Correlation statistic"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Model"</span>,</span>
-<span id="cb18-429"><a href="#cb18-429" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Global concordance"</span>, <span class="at">subtitle =</span> <span class="st">"999 permutations; all BH q = 0.001"</span>) <span class="sc">+</span></span>
-<span id="cb18-430"><a href="#cb18-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
-<span id="cb18-431"><a href="#cb18-431" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p46_2, <span class="st">"figures/46-integration/46-2-global-tests"</span>, <span class="dv">89</span>, <span class="dv">66</span>)</span>
-<span id="cb18-432"><a href="#cb18-432" aria-hidden="true" tabindex="-1"></a>p46_2</span>
-<span id="cb18-433"><a href="#cb18-433" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-434"><a href="#cb18-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-435"><a href="#cb18-435" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 3：分组校正如何改变 1,000 条局部相关</span></span>
-<span id="cb18-436"><a href="#cb18-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-439"><a href="#cb18-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-440"><a href="#cb18-440" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-441"><a href="#cb18-441" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-integration-confounding</span></span>
-<span id="cb18-442"><a href="#cb18-442" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Pairwise associations before and after adjustment for study group."</span></span>
-<span id="cb18-443"><a href="#cb18-443" aria-hidden="true" tabindex="-1"></a>pair_audit <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
-<span id="cb18-444"><a href="#cb18-444" aria-hidden="true" tabindex="-1"></a>  raw_pairs[, <span class="fu">c</span>(<span class="st">"Microbe"</span>, <span class="st">"Metabolite"</span>, <span class="st">"Rho"</span>, <span class="st">"QValue"</span>)],</span>
-<span id="cb18-445"><a href="#cb18-445" aria-hidden="true" tabindex="-1"></a>  adjusted_pairs[, <span class="fu">c</span>(<span class="st">"Microbe"</span>, <span class="st">"Metabolite"</span>, <span class="st">"Rho"</span>, <span class="st">"QValue"</span>)],</span>
-<span id="cb18-446"><a href="#cb18-446" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Microbe"</span>, <span class="st">"Metabolite"</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">"Raw"</span>, <span class="st">"Adjusted"</span>)</span>
-<span id="cb18-447"><a href="#cb18-447" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-448"><a href="#cb18-448" aria-hidden="true" tabindex="-1"></a>pair_audit<span class="sc">$</span>Status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
-<span id="cb18-449"><a href="#cb18-449" aria-hidden="true" tabindex="-1"></a>  pair_audit<span class="sc">$</span>QValueRaw <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> pair_audit<span class="sc">$</span>QValueAdjusted <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Both"</span>,</span>
-<span id="cb18-450"><a href="#cb18-450" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(pair_audit<span class="sc">$</span>QValueRaw <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Raw only"</span>,</span>
-<span id="cb18-451"><a href="#cb18-451" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(pair_audit<span class="sc">$</span>QValueAdjusted <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Adjusted only"</span>, <span class="st">"Neither"</span>))</span>
-<span id="cb18-452"><a href="#cb18-452" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-453"><a href="#cb18-453" aria-hidden="true" tabindex="-1"></a>status_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-454"><a href="#cb18-454" aria-hidden="true" tabindex="-1"></a>  <span class="at">Both =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
-<span id="cb18-455"><a href="#cb18-455" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Raw only</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>]),</span>
-<span id="cb18-456"><a href="#cb18-456" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Adjusted only</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"green"</span>]),</span>
-<span id="cb18-457"><a href="#cb18-457" aria-hidden="true" tabindex="-1"></a>  <span class="at">Neither =</span> <span class="st">"#C9CDD3"</span></span>
+<span id="cb18-373"><a href="#cb18-373" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="结果边界"}</span>
+<span id="cb18-374"><a href="#cb18-374" aria-hidden="true" tabindex="-1"></a>HAllA 找到 70 个显著 blocks、350 个显著 feature pairs，并不表示存在 350 条直接代谢反应。宿主炎症、饮食、药物、肠道 transit 与总生物量都可能同时改变两个视图。</span>
+<span id="cb18-375"><a href="#cb18-375" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-376"><a href="#cb18-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-377"><a href="#cb18-377" aria-hidden="true" tabindex="-1"></a><span class="fu">## 区分组间分离与组内跨组学关联 {#sec-beautify}</span></span>
+<span id="cb18-378"><a href="#cb18-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-379"><a href="#cb18-379" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 1：配对样本的 Procrustes arrows</span></span>
+<span id="cb18-380"><a href="#cb18-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-383"><a href="#cb18-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-384"><a href="#cb18-384" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-385"><a href="#cb18-385" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-integration-procrustes</span></span>
+<span id="cb18-386"><a href="#cb18-386" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Paired sample configurations before and after diagnosis-group adjustment."</span></span>
+<span id="cb18-387"><a href="#cb18-387" aria-hidden="true" tabindex="-1"></a>group_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-388"><a href="#cb18-388" aria-hidden="true" tabindex="-1"></a>  <span class="at">Control =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
+<span id="cb18-389"><a href="#cb18-389" aria-hidden="true" tabindex="-1"></a>  <span class="at">CD =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"vermillion"</span>]),</span>
+<span id="cb18-390"><a href="#cb18-390" aria-hidden="true" tabindex="-1"></a>  <span class="at">UC =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>])</span>
+<span id="cb18-391"><a href="#cb18-391" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-392"><a href="#cb18-392" aria-hidden="true" tabindex="-1"></a>p46_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(procrustes_arrows) <span class="sc">+</span></span>
+<span id="cb18-393"><a href="#cb18-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb18-394"><a href="#cb18-394" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> StartAxis1, <span class="at">y =</span> StartAxis2, <span class="at">xend =</span> EndAxis1, <span class="at">yend =</span> EndAxis2,</span>
+<span id="cb18-395"><a href="#cb18-395" aria-hidden="true" tabindex="-1"></a>        <span class="at">colour =</span> StudyGroup),</span>
+<span id="cb18-396"><a href="#cb18-396" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.25</span>, <span class="at">alpha =</span> <span class="fl">0.28</span></span>
+<span id="cb18-397"><a href="#cb18-397" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-398"><a href="#cb18-398" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(StartAxis1, StartAxis2, <span class="at">colour =</span> StudyGroup), <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.75</span>) <span class="sc">+</span></span>
+<span id="cb18-399"><a href="#cb18-399" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(EndAxis1, EndAxis2, <span class="at">colour =</span> StudyGroup), <span class="at">shape =</span> <span class="dv">1</span>, <span class="at">size =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb18-400"><a href="#cb18-400" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Model) <span class="sc">+</span></span>
+<span id="cb18-401"><a href="#cb18-401" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> group_colors) <span class="sc">+</span></span>
+<span id="cb18-402"><a href="#cb18-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-403"><a href="#cb18-403" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Procrustes axis 1"</span>, <span class="at">y =</span> <span class="st">"Procrustes axis 2"</span>, <span class="at">colour =</span> <span class="st">"Study group"</span>,</span>
+<span id="cb18-404"><a href="#cb18-404" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Microbiome–metabolome configuration"</span>,</span>
+<span id="cb18-405"><a href="#cb18-405" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Filled: microbiome; open: rotated metabolome"</span></span>
+<span id="cb18-406"><a href="#cb18-406" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-407"><a href="#cb18-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="fu">theme_pub</span>()</span>
+<span id="cb18-408"><a href="#cb18-408" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p46_1, <span class="st">"figures/46-integration/46-1-procrustes"</span>, <span class="dv">180</span>, <span class="dv">78</span>)</span>
+<span id="cb18-409"><a href="#cb18-409" aria-hidden="true" tabindex="-1"></a>p46_1</span>
+<span id="cb18-410"><a href="#cb18-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-411"><a href="#cb18-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-412"><a href="#cb18-412" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 2：展示整体关联统计量与置换结果</span></span>
+<span id="cb18-413"><a href="#cb18-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-417"><a href="#cb18-417" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-418"><a href="#cb18-418" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-integration-global-tests</span></span>
+<span id="cb18-419"><a href="#cb18-419" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Global concordance remains after removing diagnosis-group means."</span></span>
+<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a>global_tests<span class="sc">$</span>YPosition <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(global_tests<span class="sc">$</span>Method <span class="sc">==</span> <span class="st">"Mantel"</span>, <span class="dv">1</span>, <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-421"><a href="#cb18-421" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(global_tests<span class="sc">$</span>Model <span class="sc">==</span> <span class="st">"Group-adjusted"</span>, <span class="sc">-</span><span class="fl">0.09</span>, <span class="fl">0.09</span>)</span>
+<span id="cb18-422"><a href="#cb18-422" aria-hidden="true" tabindex="-1"></a>p46_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(global_tests, <span class="fu">aes</span>(Statistic, YPosition, <span class="at">colour =</span> Model)) <span class="sc">+</span></span>
+<span id="cb18-423"><a href="#cb18-423" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> Statistic, <span class="at">yend =</span> YPosition), <span class="at">linewidth =</span> <span class="fl">0.6</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb18-424"><a href="#cb18-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb18-425"><a href="#cb18-425" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, Statistic)), <span class="at">hjust =</span> <span class="sc">-</span><span class="fl">0.18</span>,</span>
+<span id="cb18-426"><a href="#cb18-426" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">family =</span> font_pub, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb18-427"><a href="#cb18-427" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb18-428"><a href="#cb18-428" aria-hidden="true" tabindex="-1"></a>    <span class="at">Observed =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"grey"</span>]),</span>
+<span id="cb18-429"><a href="#cb18-429" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Group-adjusted</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>])</span>
+<span id="cb18-430"><a href="#cb18-430" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb18-431"><a href="#cb18-431" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.68</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.02</span>))) <span class="sc">+</span></span>
+<span id="cb18-432"><a href="#cb18-432" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Mantel"</span>, <span class="st">"Procrustes"</span>),</span>
+<span id="cb18-433"><a href="#cb18-433" aria-hidden="true" tabindex="-1"></a>                     <span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.65</span>, <span class="fl">2.35</span>)) <span class="sc">+</span></span>
+<span id="cb18-434"><a href="#cb18-434" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Correlation statistic"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Model"</span>,</span>
+<span id="cb18-435"><a href="#cb18-435" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Global concordance"</span>, <span class="at">subtitle =</span> <span class="st">"999 permutations; all BH q = 0.001"</span>) <span class="sc">+</span></span>
+<span id="cb18-436"><a href="#cb18-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
+<span id="cb18-437"><a href="#cb18-437" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p46_2, <span class="st">"figures/46-integration/46-2-global-tests"</span>, <span class="dv">89</span>, <span class="dv">66</span>)</span>
+<span id="cb18-438"><a href="#cb18-438" aria-hidden="true" tabindex="-1"></a>p46_2</span>
+<span id="cb18-439"><a href="#cb18-439" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-440"><a href="#cb18-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-441"><a href="#cb18-441" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 3：分组校正如何改变 1,000 条局部相关</span></span>
+<span id="cb18-442"><a href="#cb18-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-445"><a href="#cb18-445" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-446"><a href="#cb18-446" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-447"><a href="#cb18-447" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-integration-confounding</span></span>
+<span id="cb18-448"><a href="#cb18-448" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Pairwise associations before and after adjustment for study group."</span></span>
+<span id="cb18-449"><a href="#cb18-449" aria-hidden="true" tabindex="-1"></a>pair_audit <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb18-450"><a href="#cb18-450" aria-hidden="true" tabindex="-1"></a>  raw_pairs[, <span class="fu">c</span>(<span class="st">"Microbe"</span>, <span class="st">"Metabolite"</span>, <span class="st">"Rho"</span>, <span class="st">"QValue"</span>)],</span>
+<span id="cb18-451"><a href="#cb18-451" aria-hidden="true" tabindex="-1"></a>  adjusted_pairs[, <span class="fu">c</span>(<span class="st">"Microbe"</span>, <span class="st">"Metabolite"</span>, <span class="st">"Rho"</span>, <span class="st">"QValue"</span>)],</span>
+<span id="cb18-452"><a href="#cb18-452" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"Microbe"</span>, <span class="st">"Metabolite"</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">"Raw"</span>, <span class="st">"Adjusted"</span>)</span>
+<span id="cb18-453"><a href="#cb18-453" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-454"><a href="#cb18-454" aria-hidden="true" tabindex="-1"></a>pair_audit<span class="sc">$</span>Status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb18-455"><a href="#cb18-455" aria-hidden="true" tabindex="-1"></a>  pair_audit<span class="sc">$</span>QValueRaw <span class="sc">&lt;</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> pair_audit<span class="sc">$</span>QValueAdjusted <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Both"</span>,</span>
+<span id="cb18-456"><a href="#cb18-456" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(pair_audit<span class="sc">$</span>QValueRaw <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Raw only"</span>,</span>
+<span id="cb18-457"><a href="#cb18-457" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(pair_audit<span class="sc">$</span>QValueAdjusted <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="st">"Adjusted only"</span>, <span class="st">"Neither"</span>))</span>
 <span id="cb18-458"><a href="#cb18-458" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-459"><a href="#cb18-459" aria-hidden="true" tabindex="-1"></a>p46_3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pair_audit, <span class="fu">aes</span>(RhoRaw, RhoAdjusted, <span class="at">colour =</span> Status)) <span class="sc">+</span></span>
-<span id="cb18-460"><a href="#cb18-460" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb18-461"><a href="#cb18-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#DDDDDD"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb18-462"><a href="#cb18-462" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#DDDDDD"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb18-463"><a href="#cb18-463" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">alpha =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
-<span id="cb18-464"><a href="#cb18-464" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> status_colors) <span class="sc">+</span></span>
-<span id="cb18-465"><a href="#cb18-465" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Raw Spearman rho"</span>, <span class="at">y =</span> <span class="st">"Group-adjusted Spearman rho"</span>, <span class="at">colour =</span> <span class="st">"BH status"</span>,</span>
-<span id="cb18-467"><a href="#cb18-467" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Group confounding audit"</span>,</span>
-<span id="cb18-468"><a href="#cb18-468" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"437 raw hits; 350 adjusted hits"</span></span>
-<span id="cb18-469"><a href="#cb18-469" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-470"><a href="#cb18-470" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.7</span>, <span class="fl">0.7</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.7</span>, <span class="fl">0.7</span>)) <span class="sc">+</span> <span class="fu">theme_pub</span>()</span>
-<span id="cb18-471"><a href="#cb18-471" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p46_3, <span class="st">"figures/46-integration/46-3-confounding-audit"</span>, <span class="dv">89</span>, <span class="dv">82</span>)</span>
-<span id="cb18-472"><a href="#cb18-472" aria-hidden="true" tabindex="-1"></a>p46_3</span>
-<span id="cb18-473"><a href="#cb18-473" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-474"><a href="#cb18-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-475"><a href="#cb18-475" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 4：HAllA 输入中最强的 group-adjusted pairs</span></span>
-<span id="cb18-476"><a href="#cb18-476" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-479"><a href="#cb18-479" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-480"><a href="#cb18-480" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-481"><a href="#cb18-481" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-integration-halla</span></span>
-<span id="cb18-482"><a href="#cb18-482" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Top group-adjusted microbe–metabolite associations entering HAllA."</span></span>
-<span id="cb18-483"><a href="#cb18-483" aria-hidden="true" tabindex="-1"></a>top_halla <span class="ot">&lt;-</span> <span class="fu">head</span>(adjusted_pairs, <span class="dv">15</span>)</span>
-<span id="cb18-484"><a href="#cb18-484" aria-hidden="true" tabindex="-1"></a>top_halla<span class="sc">$</span>Association <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb18-485"><a href="#cb18-485" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sub</span>(<span class="st">" </span><span class="sc">\\</span><span class="st">[MB_.*$"</span>, <span class="st">""</span>, top_halla<span class="sc">$</span>Microbe), <span class="st">"  |  "</span>,</span>
-<span id="cb18-486"><a href="#cb18-486" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sub</span>(<span class="st">" </span><span class="sc">\\</span><span class="st">[MT_.*$"</span>, <span class="st">""</span>, top_halla<span class="sc">$</span>Metabolite)</span>
-<span id="cb18-487"><a href="#cb18-487" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-488"><a href="#cb18-488" aria-hidden="true" tabindex="-1"></a>top_halla<span class="sc">$</span>Association <span class="ot">&lt;-</span> <span class="fu">factor</span>(top_halla<span class="sc">$</span>Association, <span class="at">levels =</span> <span class="fu">rev</span>(top_halla<span class="sc">$</span>Association))</span>
-<span id="cb18-489"><a href="#cb18-489" aria-hidden="true" tabindex="-1"></a>p46_4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_halla, <span class="fu">aes</span>(Rho, Association, <span class="at">colour =</span> Rho <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb18-490"><a href="#cb18-490" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> Rho, <span class="at">yend =</span> Association), <span class="at">linewidth =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
-<span id="cb18-491"><a href="#cb18-491" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> <span class="sc">-</span><span class="fu">log10</span>(QValue)), <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb18-492"><a href="#cb18-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb18-493"><a href="#cb18-493" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
-<span id="cb18-494"><a href="#cb18-494" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"vermillion"</span>])</span>
-<span id="cb18-495"><a href="#cb18-495" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb18-496"><a href="#cb18-496" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Positive"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Negative"</span>)) <span class="sc">+</span></span>
-<span id="cb18-497"><a href="#cb18-497" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
-<span id="cb18-498"><a href="#cb18-498" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Adjusted Spearman rho"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Direction"</span>,</span>
-<span id="cb18-499"><a href="#cb18-499" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="fu">expression</span>(<span class="sc">-</span>log[<span class="dv">10</span>](q)), <span class="at">title =</span> <span class="st">"Strongest adjusted associations"</span>) <span class="sc">+</span></span>
-<span id="cb18-500"><a href="#cb18-500" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">9</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
-<span id="cb18-501"><a href="#cb18-501" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p46_4, <span class="st">"figures/46-integration/46-4-halla-associations"</span>, <span class="dv">180</span>, <span class="dv">105</span>)</span>
-<span id="cb18-502"><a href="#cb18-502" aria-hidden="true" tabindex="-1"></a>p46_4</span>
-<span id="cb18-503"><a href="#cb18-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-504"><a href="#cb18-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-505"><a href="#cb18-505" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
-<span id="cb18-506"><a href="#cb18-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-507"><a href="#cb18-507" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的五件事"}</span>
-<span id="cb18-508"><a href="#cb18-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-509"><a href="#cb18-509" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>两个表不是同一批样本，或 sample order 静默错位。</span>
-<span id="cb18-510"><a href="#cb18-510" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>对 raw relative abundance 直接 Pearson correlation，没有处理 closure、zeros 与 nonlinear relation。</span>
-<span id="cb18-511"><a href="#cb18-511" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>permutations 无视 repeated subject、site 或 household，导致伪精确。</span>
-<span id="cb18-512"><a href="#cb18-512" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>只展示筛中的 edges，不交代完整 tested family 与 FDR。</span>
-<span id="cb18-513"><a href="#cb18-513" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>把 taxon–metabolite association 写成“该菌产生该代谢物”。</span>
+<span id="cb18-459"><a href="#cb18-459" aria-hidden="true" tabindex="-1"></a>status_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-460"><a href="#cb18-460" aria-hidden="true" tabindex="-1"></a>  <span class="at">Both =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
+<span id="cb18-461"><a href="#cb18-461" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Raw only</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>]),</span>
+<span id="cb18-462"><a href="#cb18-462" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Adjusted only</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"green"</span>]),</span>
+<span id="cb18-463"><a href="#cb18-463" aria-hidden="true" tabindex="-1"></a>  <span class="at">Neither =</span> <span class="st">"#C9CDD3"</span></span>
+<span id="cb18-464"><a href="#cb18-464" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-465"><a href="#cb18-465" aria-hidden="true" tabindex="-1"></a>p46_3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pair_audit, <span class="fu">aes</span>(RhoRaw, RhoAdjusted, <span class="at">colour =</span> Status)) <span class="sc">+</span></span>
+<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">linewidth =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb18-467"><a href="#cb18-467" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#DDDDDD"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb18-468"><a href="#cb18-468" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#DDDDDD"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb18-469"><a href="#cb18-469" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.2</span>, <span class="at">alpha =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb18-470"><a href="#cb18-470" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> status_colors) <span class="sc">+</span></span>
+<span id="cb18-471"><a href="#cb18-471" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-472"><a href="#cb18-472" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Raw Spearman rho"</span>, <span class="at">y =</span> <span class="st">"Group-adjusted Spearman rho"</span>, <span class="at">colour =</span> <span class="st">"BH status"</span>,</span>
+<span id="cb18-473"><a href="#cb18-473" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Group confounding audit"</span>,</span>
+<span id="cb18-474"><a href="#cb18-474" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"437 raw hits; 350 adjusted hits"</span></span>
+<span id="cb18-475"><a href="#cb18-475" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-476"><a href="#cb18-476" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.7</span>, <span class="fl">0.7</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.7</span>, <span class="fl">0.7</span>)) <span class="sc">+</span> <span class="fu">theme_pub</span>()</span>
+<span id="cb18-477"><a href="#cb18-477" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p46_3, <span class="st">"figures/46-integration/46-3-confounding-audit"</span>, <span class="dv">89</span>, <span class="dv">82</span>)</span>
+<span id="cb18-478"><a href="#cb18-478" aria-hidden="true" tabindex="-1"></a>p46_3</span>
+<span id="cb18-479"><a href="#cb18-479" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-480"><a href="#cb18-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-481"><a href="#cb18-481" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 4：HAllA 输入中最强的 group-adjusted pairs</span></span>
+<span id="cb18-482"><a href="#cb18-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-485"><a href="#cb18-485" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-486"><a href="#cb18-486" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-487"><a href="#cb18-487" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-integration-halla</span></span>
+<span id="cb18-488"><a href="#cb18-488" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Top group-adjusted microbe–metabolite associations entering HAllA."</span></span>
+<span id="cb18-489"><a href="#cb18-489" aria-hidden="true" tabindex="-1"></a>top_halla <span class="ot">&lt;-</span> <span class="fu">head</span>(adjusted_pairs, <span class="dv">15</span>)</span>
+<span id="cb18-490"><a href="#cb18-490" aria-hidden="true" tabindex="-1"></a>top_halla<span class="sc">$</span>Association <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb18-491"><a href="#cb18-491" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sub</span>(<span class="st">" </span><span class="sc">\\</span><span class="st">[MB_.*$"</span>, <span class="st">""</span>, top_halla<span class="sc">$</span>Microbe), <span class="st">"  |  "</span>,</span>
+<span id="cb18-492"><a href="#cb18-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sub</span>(<span class="st">" </span><span class="sc">\\</span><span class="st">[MT_.*$"</span>, <span class="st">""</span>, top_halla<span class="sc">$</span>Metabolite)</span>
+<span id="cb18-493"><a href="#cb18-493" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-494"><a href="#cb18-494" aria-hidden="true" tabindex="-1"></a>top_halla<span class="sc">$</span>Association <span class="ot">&lt;-</span> <span class="fu">factor</span>(top_halla<span class="sc">$</span>Association, <span class="at">levels =</span> <span class="fu">rev</span>(top_halla<span class="sc">$</span>Association))</span>
+<span id="cb18-495"><a href="#cb18-495" aria-hidden="true" tabindex="-1"></a>p46_4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(top_halla, <span class="fu">aes</span>(Rho, Association, <span class="at">colour =</span> Rho <span class="sc">&gt;</span> <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb18-496"><a href="#cb18-496" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> Rho, <span class="at">yend =</span> Association), <span class="at">linewidth =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb18-497"><a href="#cb18-497" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">size =</span> <span class="sc">-</span><span class="fu">log10</span>(QValue)), <span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb18-498"><a href="#cb18-498" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb18-499"><a href="#cb18-499" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
+<span id="cb18-500"><a href="#cb18-500" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"vermillion"</span>])</span>
+<span id="cb18-501"><a href="#cb18-501" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb18-502"><a href="#cb18-502" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Positive"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"Negative"</span>)) <span class="sc">+</span></span>
+<span id="cb18-503"><a href="#cb18-503" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>)) <span class="sc">+</span></span>
+<span id="cb18-504"><a href="#cb18-504" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Adjusted Spearman rho"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Direction"</span>,</span>
+<span id="cb18-505"><a href="#cb18-505" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="fu">expression</span>(<span class="sc">-</span>log[<span class="dv">10</span>](q)), <span class="at">title =</span> <span class="st">"Strongest adjusted associations"</span>) <span class="sc">+</span></span>
+<span id="cb18-506"><a href="#cb18-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">9</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb18-507"><a href="#cb18-507" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p46_4, <span class="st">"figures/46-integration/46-4-halla-associations"</span>, <span class="dv">180</span>, <span class="dv">105</span>)</span>
+<span id="cb18-508"><a href="#cb18-508" aria-hidden="true" tabindex="-1"></a>p46_4</span>
+<span id="cb18-509"><a href="#cb18-509" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-510"><a href="#cb18-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-511"><a href="#cb18-511" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
+<span id="cb18-512"><a href="#cb18-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-513"><a href="#cb18-513" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的五件事"}</span>
 <span id="cb18-514"><a href="#cb18-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-515"><a href="#cb18-515" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-516"><a href="#cb18-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-517"><a href="#cb18-517" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告跨组学关联与混杂调整的方法与限制 {#sec-methods}</span></span>
-<span id="cb18-518"><a href="#cb18-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-519"><a href="#cb18-519" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Paired microbiome and metabolome profiles were available for 220 samples (56 controls, 88 Crohn's disease and 76 ulcerative colitis). Microbial counts were transformed using a pseudocount-0.5 centered log-ratio transformation; metabolite intensities were log1p-transformed and feature-standardized. Global concordance was quantified using symmetric Procrustes analysis and Spearman Mantel tests with 999 permutations. Diagnosis-adjusted analyses were performed on residuals from feature-wise models containing study group, with permutations restricted within diagnosis groups. For local integration, 25 microbial and 40 metabolite features were selected by outcome-blind variance, tested with Spearman association, and analyzed with HAllA v0.8.40 using 999 permutations, Benjamini–Hochberg FDR 0.05 and FNR threshold 0.20. Effect estimates and adjusted P values were reported; associations were not interpreted as causal or metabolic-production evidence.</span></span>
+<span id="cb18-515"><a href="#cb18-515" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>两个表不是同一批样本，或 sample order 静默错位。</span>
+<span id="cb18-516"><a href="#cb18-516" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>对 raw relative abundance 直接 Pearson correlation，没有处理 closure、zeros 与 nonlinear relation。</span>
+<span id="cb18-517"><a href="#cb18-517" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>permutations 无视 repeated subject、site 或 household，导致伪精确。</span>
+<span id="cb18-518"><a href="#cb18-518" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>只展示筛中的 edges，不交代完整 tested family 与 FDR。</span>
+<span id="cb18-519"><a href="#cb18-519" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>把 taxon–metabolite association 写成“该菌产生该代谢物”。</span>
 <span id="cb18-520"><a href="#cb18-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-521"><a href="#cb18-521" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将跨组学关联与混杂调整用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb18-521"><a href="#cb18-521" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb18-522"><a href="#cb18-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-523"><a href="#cb18-523" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>替换 <span class="in">`otutab.tsv`</span>、<span class="in">`taxonomy.tsv`</span>、<span class="in">`metadata.tsv`</span>、<span class="in">`metabolites.tsv`</span> 和 annotation 路径；两个 abundance tables 的列必须与 metadata 行名完全一致。</span>
-<span id="cb18-524"><a href="#cb18-524" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>把 <span class="in">`StudyGroup`</span> 换成你的 diagnosis/treatment 列；若有 batch、age、sex、site 或 repeated subject，把它们加入 residualization model，并按采样设计限制 permutations。</span>
-<span id="cb18-525"><a href="#cb18-525" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>feature filter 必须在看 association 之前固定，并在 Methods 报告完整测试数。</span>
-<span id="cb18-526"><a href="#cb18-526" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>若是 longitudinal data，不要把同一受试者多个时间点当独立样本；考虑 subject-level blocking、mixed model 或先预定义一个 timepoint。</span>
-<span id="cb18-527"><a href="#cb18-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-528"><a href="#cb18-528" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb18-529"><a href="#cb18-529" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-530"><a href="#cb18-530" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Franzosa EA, et al. Gut microbiome structure and metabolic activity in inflammatory bowel disease. *Nature Microbiology*. 2019. <span class="ot">&lt;https://doi.org/10.1038/s41564-018-0306-4&gt;</span></span>
-<span id="cb18-531"><a href="#cb18-531" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ghazi AR, et al. High-sensitivity pattern discovery in large, paired multiomic datasets. *Bioinformatics*. 2022. <span class="ot">&lt;https://doi.org/10.1093/bioinformatics/btac147&gt;</span></span>
-<span id="cb18-532"><a href="#cb18-532" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Peres-Neto PR, Jackson DA. How well do multivariate data sets match? The advantages of a Procrustean superimposition approach over the Mantel test. *Oecologia*. 2001. <span class="ot">&lt;https://doi.org/10.1007/s004420100720&gt;</span></span>
-<span id="cb18-533"><a href="#cb18-533" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oksanen J, et al. *vegan: Community Ecology Package*. <span class="ot">&lt;https://CRAN.R-project.org/package=vegan&gt;</span></span>
-<span id="cb18-534"><a href="#cb18-534" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Borenstein Lab. CuratedMetagenomicDataMetabolome. Fixed source commit: <span class="in">`89a519d8c832008fbc6e650453e83e2f04858d02`</span>. <span class="ot">&lt;https://github.com/borenstein-lab/CuratedMetagenomicDataMetabolome&gt;</span></span>
+<span id="cb18-523"><a href="#cb18-523" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告跨组学关联与混杂调整的方法与限制 {#sec-methods}</span></span>
+<span id="cb18-524"><a href="#cb18-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-525"><a href="#cb18-525" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Paired microbiome and metabolome profiles were available for 220 samples (56 controls, 88 Crohn's disease and 76 ulcerative colitis). Microbial counts were transformed using a pseudocount-0.5 centered log-ratio transformation; metabolite intensities were log1p-transformed and feature-standardized. Global concordance was quantified using symmetric Procrustes analysis and Spearman Mantel tests with 999 permutations. Diagnosis-adjusted analyses were performed on residuals from feature-wise models containing study group, with permutations restricted within diagnosis groups. For local integration, 25 microbial and 40 metabolite features were selected by outcome-blind variance, tested with Spearman association, and analyzed with HAllA v0.8.40 using 999 permutations, Benjamini–Hochberg FDR 0.05 and FNR threshold 0.20. Effect estimates and adjusted P values were reported; associations were not interpreted as causal or metabolic-production evidence.</span></span>
+<span id="cb18-526"><a href="#cb18-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-527"><a href="#cb18-527" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将跨组学关联与混杂调整用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb18-528"><a href="#cb18-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-529"><a href="#cb18-529" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>替换 <span class="in">`otutab.tsv`</span>、<span class="in">`taxonomy.tsv`</span>、<span class="in">`metadata.tsv`</span>、<span class="in">`metabolites.tsv`</span> 和 annotation 路径；两个 abundance tables 的列必须与 metadata 行名完全一致。</span>
+<span id="cb18-530"><a href="#cb18-530" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>把 <span class="in">`StudyGroup`</span> 换成你的 diagnosis/treatment 列；若有 batch、age、sex、site 或 repeated subject，把它们加入 residualization model，并按采样设计限制 permutations。</span>
+<span id="cb18-531"><a href="#cb18-531" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>feature filter 必须在看 association 之前固定，并在 Methods 报告完整测试数。</span>
+<span id="cb18-532"><a href="#cb18-532" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>若是 longitudinal data，不要把同一受试者多个时间点当独立样本；考虑 subject-level blocking、mixed model 或先预定义一个 timepoint。</span>
+<span id="cb18-533"><a href="#cb18-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-534"><a href="#cb18-534" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb18-535"><a href="#cb18-535" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-536"><a href="#cb18-536" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Franzosa EA, et al. Gut microbiome structure and metabolic activity in inflammatory bowel disease. *Nature Microbiology*. 2019. <span class="ot">&lt;https://doi.org/10.1038/s41564-018-0306-4&gt;</span></span>
+<span id="cb18-537"><a href="#cb18-537" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ghazi AR, et al. High-sensitivity pattern discovery in large, paired multiomic datasets. *Bioinformatics*. 2022. <span class="ot">&lt;https://doi.org/10.1093/bioinformatics/btac147&gt;</span></span>
+<span id="cb18-538"><a href="#cb18-538" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Peres-Neto PR, Jackson DA. How well do multivariate data sets match? The advantages of a Procrustean superimposition approach over the Mantel test. *Oecologia*. 2001. <span class="ot">&lt;https://doi.org/10.1007/s004420100720&gt;</span></span>
+<span id="cb18-539"><a href="#cb18-539" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oksanen J, et al. *vegan: Community Ecology Package*. <span class="ot">&lt;https://CRAN.R-project.org/package=vegan&gt;</span></span>
+<span id="cb18-540"><a href="#cb18-540" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Borenstein Lab. CuratedMetagenomicDataMetabolome. Fixed source commit: <span class="in">`89a519d8c832008fbc6e650453e83e2f04858d02`</span>. <span class="ot">&lt;https://github.com/borenstein-lab/CuratedMetagenomicDataMetabolome&gt;</span></span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

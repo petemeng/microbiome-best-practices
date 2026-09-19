@@ -2,183 +2,183 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/index.html</loc>
-    <lastmod>2026-09-06T06:09:47.735Z</lastmod>
+    <lastmod>2026-09-19T14:02:57.679Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/02-scope-and-limits.html</loc>
-    <lastmod>2026-09-06T06:36:13.933Z</lastmod>
+    <lastmod>2026-09-19T14:02:57.697Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/03-study-design.html</loc>
-    <lastmod>2026-09-06T08:10:23.883Z</lastmod>
+    <lastmod>2026-09-19T14:02:57.701Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/04-contamination-controls.html</loc>
-    <lastmod>2026-09-06T06:36:13.983Z</lastmod>
+    <lastmod>2026-09-19T14:02:57.703Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/05-batch-effects.html</loc>
-    <lastmod>2026-09-06T08:10:23.884Z</lastmod>
+    <lastmod>2026-09-19T14:02:57.706Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/06-data-and-fastq.html</loc>
-    <lastmod>2026-09-11T10:59:54.874Z</lastmod>
+    <lastmod>2026-09-19T14:02:57.708Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/07-wsl2-conda.html</loc>
-    <lastmod>2026-09-06T06:08:19.130Z</lastmod>
+    <lastmod>2026-09-19T14:06:15.259Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/08-qiime2-install.html</loc>
-    <lastmod>2026-09-11T11:04:30.829Z</lastmod>
+    <lastmod>2026-09-19T14:06:15.282Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/09-r-ecosystem.html</loc>
-    <lastmod>2026-09-11T11:04:30.829Z</lastmod>
+    <lastmod>2026-09-19T14:06:15.286Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/10-import-provenance-qc.html</loc>
-    <lastmod>2026-09-11T11:04:30.830Z</lastmod>
+    <lastmod>2026-09-19T14:06:15.287Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/11-primer-trimming.html</loc>
-    <lastmod>2026-09-11T11:04:30.830Z</lastmod>
+    <lastmod>2026-09-19T14:06:15.288Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/12-dada2-asv.html</loc>
-    <lastmod>2026-09-11T11:04:30.830Z</lastmod>
+    <lastmod>2026-09-19T14:06:15.289Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/13-its-18s.html</loc>
-    <lastmod>2026-09-11T11:04:30.831Z</lastmod>
+    <lastmod>2026-09-19T14:12:40.290Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/14-taxonomy-databases.html</loc>
-    <lastmod>2026-09-11T11:04:30.831Z</lastmod>
+    <lastmod>2026-09-19T14:12:40.292Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/15-train-classifier.html</loc>
-    <lastmod>2026-09-11T11:04:30.831Z</lastmod>
+    <lastmod>2026-09-19T14:12:40.294Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/16-sepp-phylogeny.html</loc>
-    <lastmod>2026-09-11T11:04:30.832Z</lastmod>
+    <lastmod>2026-09-19T14:12:40.295Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/17-phyloseq-import.html</loc>
-    <lastmod>2026-09-11T11:04:30.832Z</lastmod>
+    <lastmod>2026-09-19T14:12:40.297Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/18-publication-graphics.html</loc>
-    <lastmod>2026-09-11T10:59:54.887Z</lastmod>
+    <lastmod>2026-09-19T14:20:14.610Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/19-alpha-diversity.html</loc>
-    <lastmod>2026-09-11T10:59:54.887Z</lastmod>
+    <lastmod>2026-09-19T14:20:14.611Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/20-alpha-group-tests.html</loc>
-    <lastmod>2026-09-06T08:10:23.913Z</lastmod>
+    <lastmod>2026-09-19T14:20:14.612Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/21-beta-distances.html</loc>
-    <lastmod>2026-09-06T08:10:23.914Z</lastmod>
+    <lastmod>2026-09-19T14:20:14.613Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/22-ordination-unconstrained.html</loc>
-    <lastmod>2026-09-06T08:10:23.914Z</lastmod>
+    <lastmod>2026-09-18T15:59:00.527Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/23-permanova-dispersion.html</loc>
-    <lastmod>2026-09-06T08:10:23.914Z</lastmod>
+    <lastmod>2026-09-19T14:20:14.614Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/24-ordination-constrained-cap.html</loc>
-    <lastmod>2026-09-06T08:10:23.915Z</lastmod>
+    <lastmod>2026-09-19T14:20:14.615Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/25-environment-variance.html</loc>
-    <lastmod>2026-09-06T08:10:23.915Z</lastmod>
+    <lastmod>2026-09-19T14:20:14.616Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/26-community-composition.html</loc>
-    <lastmod>2026-09-06T04:20:11.700Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.650Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/27-multirank-composition.html</loc>
-    <lastmod>2026-09-11T10:59:54.887Z</lastmod>
+    <lastmod>2026-09-19T14:20:14.617Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/28-core-rare-biosphere.html</loc>
-    <lastmod>2026-09-11T10:59:54.888Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.655Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/29-community-typing-dmm.html</loc>
-    <lastmod>2026-09-11T10:59:54.888Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.657Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/30-compositional-data.html</loc>
-    <lastmod>2026-09-06T08:10:23.917Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.658Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/31-da-methods.html</loc>
-    <lastmod>2026-09-06T08:10:23.917Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.660Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/32-multirank-da.html</loc>
-    <lastmod>2026-09-06T08:10:23.918Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.661Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/33-da-visualization.html</loc>
-    <lastmod>2026-09-11T10:59:54.889Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.664Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/34-absolute-quantification.html</loc>
-    <lastmod>2026-09-06T08:10:23.918Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.666Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/35-cooccurrence-networks.html</loc>
-    <lastmod>2026-09-11T10:59:54.889Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.668Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/36-network-robustness.html</loc>
-    <lastmod>2026-09-06T08:10:23.919Z</lastmod>
+    <lastmod>2026-09-19T14:18:31.670Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/37-microbial-wgcna.html</loc>
-    <lastmod>2026-09-06T08:10:23.919Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.521Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/38-community-assembly-bnti.html</loc>
-    <lastmod>2026-09-06T08:10:23.920Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.522Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/39-neutral-community-model.html</loc>
-    <lastmod>2026-09-06T08:10:23.920Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.523Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/40-niche-distance-decay.html</loc>
-    <lastmod>2026-09-06T08:10:23.920Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.524Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/41-picrust2.html</loc>
-    <lastmod>2026-09-06T08:10:23.921Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.525Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/42-functional-guilds.html</loc>
-    <lastmod>2026-09-06T08:10:23.921Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.525Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/43-random-forest.html</loc>
-    <lastmod>2026-09-06T08:10:23.921Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.526Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/44-cross-cohort-validation.html</loc>
-    <lastmod>2026-09-06T08:10:23.922Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.527Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/45-survival-analysis.html</loc>
-    <lastmod>2026-09-06T08:10:23.922Z</lastmod>
+    <lastmod>2026-09-19T14:22:33.527Z</lastmod>
   </url>
   <url>
     <loc>https://petemeng.github.io/microbiome-best-practices/chapters/46-procrustes-mantel-halla.html</loc>

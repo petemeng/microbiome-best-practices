@@ -539,7 +539,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -851,7 +851,10 @@ window.Quarto = {
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">sPLS/DIABLO 找到的是协同变化，不自动等于机制</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">sPLS/DIABLO 找到的是协同变化，不自动等于机制</a>
+  <ul class="collapse">
+  <li><a href="#跨组学相关很高为什么分类仍然有限" id="toc-跨组学相关很高为什么分类仍然有限" class="nav-link" data-scroll-target="#跨组学相关很高为什么分类仍然有限">跨组学相关很高，为什么分类仍然有限？</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">下载并读取本次分析的数据</a>
   <ul class="collapse">
   <li><a href="#读取配对数据并固定-traintest-split" id="toc-读取配对数据并固定-traintest-split" class="nav-link" data-scroll-target="#读取配对数据并固定-traintest-split">读取配对数据并固定 train/test split</a></li>
@@ -908,7 +911,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -936,6 +939,11 @@ window.Quarto = {
 <p>sPLS component 1 的跨 block correlation 从 training 的 0.884 保持到 test 的 0.883；component 2 从 0.738 降到 0.502。DIABLO 在 67 个 锁定测试集 samples 上 accuracy 0.657、balanced accuracy 0.676、macro one-vs-rest AUC 0.798；UC AUC 只有 0.654。模型能概括部分跨组学结构，但还不够作为临床分类器。</p>
 </div>
 </div>
+<section id="跨组学相关很高为什么分类仍然有限" class="level3">
+<h3 class="anchored" data-anchor-id="跨组学相关很高为什么分类仍然有限">跨组学相关很高，为什么分类仍然有限？</h3>
+<p>sPLS 寻找的是两个数据块的共同变化，而 DIABLO 还使用分组标签；强共同梯度未必是区分疾病亚型所需的梯度。本例 component 1 的测试相关仍为 0.883，但 UC AUC 只有 0.654，说明“组学对齐”与“分类有用”不能相互替代。应分别评价整合目标和预测目标。</p>
+<p>两个数据块还可能只是都在反映同一批次或诊断差异。需要将联合模型与只用菌群、只用代谢组以及适当基础协变量的模型在相同划分下比较，才能判断第二种组学是否增加信息。该比较若尚未执行，就不能宣称多组学优于单组学。相关特征往往可互相替代，因此单个特征选择率低与潜变量表现稳定可以同时出现，不宜只发布一次拟合选出的“稳定标志物”。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">下载并读取本次分析的数据</h2>
@@ -2013,500 +2021,506 @@ $test_macro_auc
 <span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>sPLS component 1 的跨 block correlation 从 training 的 0.884 保持到 test 的 0.883；component 2 从 0.738 降到 0.502。DIABLO 在 67 个 锁定测试集 samples 上 accuracy 0.657、balanced accuracy 0.676、macro one-vs-rest AUC 0.798；UC AUC 只有 0.654。模型能概括部分跨组学结构，但还不够作为临床分类器。</span>
 <span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="fu">### 跨组学相关很高，为什么分类仍然有限？</span></span>
 <span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`jsonlite`</span>、<span class="in">`mixOmics`</span>、<span class="in">`patchwork`</span>、<span class="in">`ragg`</span>、<span class="in">`readr`</span>、<span class="in">`scales`</span>、<span class="in">`svglite`</span>。本次使用配对的微生物组、代谢组和样本信息表；训练和测试样本将在后续代码中分开。</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>sPLS 寻找的是两个数据块的共同变化，而 DIABLO 还使用分组标签；强共同梯度未必是区分疾病亚型所需的梯度。本例 component 1 的测试相关仍为 0.883，但 UC AUC 只有 0.654，说明“组学对齐”与“分类有用”不能相互替代。应分别评价整合目标和预测目标。</span>
 <span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>两个数据块还可能只是都在反映同一批次或诊断差异。需要将联合模型与只用菌群、只用代谢组以及适当基础协变量的模型在相同划分下比较，才能判断第二种组学是否增加信息。该比较若尚未执行，就不能宣称多组学优于单组学。相关特征往往可互相替代，因此单个特征选择率低与潜变量表现稳定可以同时出现，不宜只发布一次拟合选出的“稳定标志物”。</span>
 <span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
-<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
-<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
-<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article47_diablo.R"</span>,</span>
-<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metabolite-annotation.tsv"</span>,</span>
-<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metabolites.tsv"</span>,</span>
-<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metadata.tsv"</span>,</span>
-<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/otutab.tsv"</span>,</span>
-<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/source-summary.json"</span>,</span>
-<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/taxonomy.tsv"</span></span>
-<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
-<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-diablo-theme</span></span>
-<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260747</span>)</span>
-<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
-<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
-<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
-<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
-<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
-<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
-<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
-<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
-<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
-<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
-<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
-<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
-<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
-<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
-<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取配对数据并固定 train/test split</span></span>
-<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-diablo-data</span></span>
-<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
-<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
-<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
-<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
-<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
-<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a>  out</span>
-<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"data/small/paired-ibd-multiomics"</span></span>
-<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"otutab.tsv"</span>))</span>
-<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"taxonomy.tsv"</span>))</span>
-<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metadata.tsv"</span>))</span>
-<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>metabolites_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metabolites.tsv"</span>))</span>
-<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a>metabolite_annotation <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(</span>
-<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(data_dir, <span class="st">"metabolite-annotation.tsv"</span>)</span>
-<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.numeric), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a>metabolites <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(</span>
-<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(metabolites_raw, as.numeric), <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
-<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(metabolites) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metabolites_raw)</span>
-<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>StudyGroup <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>StudyGroup, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CD"</span>, <span class="st">"UC"</span>))</span>
-<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">250</span>L, <span class="fu">nrow</span>(metabolites) <span class="sc">==</span> <span class="dv">277</span>L,</span>
-<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(metabolites), <span class="fu">rownames</span>(metadata))</span>
-<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
-<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>train_ids <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="fu">levels</span>(metadata<span class="sc">$</span>StudyGroup), <span class="cf">function</span>(group_name) {</span>
-<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)[metadata<span class="sc">$</span>StudyGroup <span class="sc">==</span> group_name]</span>
-<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(ids, <span class="fu">floor</span>(<span class="fl">0.70</span> <span class="sc">*</span> <span class="fu">length</span>(ids)), <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a>}), <span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a>train_ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)[<span class="fu">rownames</span>(metadata) <span class="sc">%in%</span> train_ids]</span>
-<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>test_ids <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">rownames</span>(metadata), train_ids)</span>
-<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>split_ledger <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a>  <span class="at">Train =</span> <span class="fu">table</span>(metadata[train_ids, <span class="st">"StudyGroup"</span>]),</span>
-<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a>  <span class="at">Test =</span> <span class="fu">table</span>(metadata[test_ids, <span class="st">"StudyGroup"</span>])</span>
-<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(metadata) <span class="sc">==</span> <span class="dv">220</span>L, <span class="fu">length</span>(train_ids) <span class="sc">==</span> <span class="dv">153</span>L, <span class="fu">length</span>(test_ids) <span class="sc">==</span> <span class="dv">67</span>L)</span>
-<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>split_ledger</span>
-<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/47-spls-diablo.R)</span>。脚本包含数据下载、计算和图形导出。</span>
-<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
-<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BiocManager"</span>, <span class="st">"ggplot2"</span>, <span class="st">"jsonlite"</span>, <span class="st">"patchwork"</span>, <span class="st">"pROC"</span>, <span class="st">"ragg"</span>,</span>
-<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a>  <span class="st">"readr"</span>, <span class="st">"scales"</span>, <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span></span>
-<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"mixOmics"</span>)</span>
-<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="fu">## 共同变化、监督分离与预测验证是三个任务 {#sec-theory}</span></span>
-<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### 用 sPLS 筛选解释跨组学共同变化的特征</span></span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`jsonlite`</span>、<span class="in">`mixOmics`</span>、<span class="in">`patchwork`</span>、<span class="in">`ragg`</span>、<span class="in">`readr`</span>、<span class="in">`scales`</span>、<span class="in">`svglite`</span>。本次使用配对的微生物组、代谢组和样本信息表；训练和测试样本将在后续代码中分开。</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article47_diablo.R"</span>,</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metabolite-annotation.tsv"</span>,</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metabolites.tsv"</span>,</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/metadata.tsv"</span>,</span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/otutab.tsv"</span>,</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/source-summary.json"</span>,</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/paired-ibd-multiomics/taxonomy.tsv"</span></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-diablo-theme</span></span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260747</span>)</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取配对数据并固定 train/test split</span></span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-diablo-data</span></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"data/small/paired-ibd-multiomics"</span></span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"otutab.tsv"</span>))</span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"taxonomy.tsv"</span>))</span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metadata.tsv"</span>))</span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a>metabolites_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metabolites.tsv"</span>))</span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>metabolite_annotation <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(</span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(data_dir, <span class="st">"metabolite-annotation.tsv"</span>)</span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.numeric), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>metabolites <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(</span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(metabolites_raw, as.numeric), <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(metabolites) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metabolites_raw)</span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>StudyGroup <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>StudyGroup, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CD"</span>, <span class="st">"UC"</span>))</span>
+<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">250</span>L, <span class="fu">nrow</span>(metabolites) <span class="sc">==</span> <span class="dv">277</span>L,</span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(metabolites), <span class="fu">rownames</span>(metadata))</span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>train_ids <span class="ot">&lt;-</span> <span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="fu">levels</span>(metadata<span class="sc">$</span>StudyGroup), <span class="cf">function</span>(group_name) {</span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)[metadata<span class="sc">$</span>StudyGroup <span class="sc">==</span> group_name]</span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample</span>(ids, <span class="fu">floor</span>(<span class="fl">0.70</span> <span class="sc">*</span> <span class="fu">length</span>(ids)), <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>}), <span class="at">use.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>train_ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)[<span class="fu">rownames</span>(metadata) <span class="sc">%in%</span> train_ids]</span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>test_ids <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">rownames</span>(metadata), train_ids)</span>
+<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a>split_ledger <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>  <span class="at">Train =</span> <span class="fu">table</span>(metadata[train_ids, <span class="st">"StudyGroup"</span>]),</span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a>  <span class="at">Test =</span> <span class="fu">table</span>(metadata[test_ids, <span class="st">"StudyGroup"</span>])</span>
+<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(metadata) <span class="sc">==</span> <span class="dv">220</span>L, <span class="fu">length</span>(train_ids) <span class="sc">==</span> <span class="dv">153</span>L, <span class="fu">length</span>(test_ids) <span class="sc">==</span> <span class="dv">67</span>L)</span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a>split_ledger</span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/47-spls-diablo.R)</span>。脚本包含数据下载、计算和图形导出。</span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a>  <span class="st">"BiocManager"</span>, <span class="st">"ggplot2"</span>, <span class="st">"jsonlite"</span>, <span class="st">"patchwork"</span>, <span class="st">"pROC"</span>, <span class="st">"ragg"</span>,</span>
+<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a>  <span class="st">"readr"</span>, <span class="st">"scales"</span>, <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span></span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"mixOmics"</span>)</span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a>对 standardized blocks $X$ 与 $Y$，PLS 寻找 $u=Xa$、$v=Yb$ 使 covariance 最大；sPLS 对 $a,b$ 加稀疏约束，只保留少数 features。高 training correlation 可能来自过拟合，所以必须把 training loadings 原样投影到 test set 再算 correlation。</span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a><span class="fu">### 用 DIABLO 同时整合多组学数据与结局分组</span></span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## 共同变化、监督分离与预测验证是三个任务 {#sec-theory}</span></span>
 <span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a>DIABLO 是 supervised block-sPLS-DA。design matrix 的 off-diagonal value 控制“让两个 blocks 彼此相关”与“让 components 分离 outcome”之间的权衡。本文固定 0.10，优先分类而不过度强迫两个数据块一致。</span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a><span class="fu">### 用 sPLS 筛选解释跨组学共同变化的特征</span></span>
 <span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### `keepX` 是必须调的模型复杂度</span></span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a>对 standardized blocks $X$ 与 $Y$，PLS 寻找 $u=Xa$、$v=Yb$ 使 covariance 最大；sPLS 对 $a,b$ 加稀疏约束，只保留少数 features。高 training correlation 可能来自过拟合，所以必须把 training loadings 原样投影到 test set 再算 correlation。</span>
 <span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a>每个 block、每个 component 保留多少 features 会显著改变结果。本文在 training set 内对每个 block 搜索 5/10/15，目标为 5-fold × 3 repeats 的 balanced error rate（BER）；test labels 不参与筛选、scaling 或 tuning。</span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a><span class="fu">### 用 DIABLO 同时整合多组学数据与结局分组</span></span>
 <span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### 同时报告区分能力与特征稳定性</span></span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>DIABLO 是 supervised block-sPLS-DA。design matrix 的 off-diagonal value 控制“让两个 blocks 彼此相关”与“让 components 分离 outcome”之间的权衡。本文固定 0.10，优先分类而不过度强迫两个数据块一致。</span>
 <span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>三分类 accuracy 会被样本不平衡影响，因此同时给 balanced accuracy、BER 和 one-vs-rest AUC。feature 被一次 final fit 选中不代表稳定；本文再统计 5-fold × 5 repeated CV 中的平均选择率。</span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a><span class="fu">### `keepX` 是必须调的模型复杂度</span></span>
 <span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：为什么漂亮的 score plot 不是模型验证<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>supervised model 的坐标就是为分开 training labels 而学习，training score plot 天然乐观。它适合解释模型学到了什么，不适合证明泛化。性能结论只能来自 nested/repeated cross-validation、锁定测试集 set 或真正 external cohort；若用 test set 再挑 component 或 cutoff，它就不再是测试集。</span>
-<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## 在训练集选择潜变量与特征 {#sec-code}</span></span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a>每个 block、每个 component 保留多少 features 会显著改变结果。本文在 training set 内对每个 block 搜索 5/10/15，目标为 5-fold × 3 repeats 的 balanced error rate（BER）；test labels 不参与筛选、scaling 或 tuning。</span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a><span class="fu">### 同时报告区分能力与特征稳定性</span></span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a>三分类 accuracy 会被样本不平衡影响，因此同时给 balanced accuracy、BER 和 one-vs-rest AUC。feature 被一次 final fit 选中不代表稳定；本文再统计 5-fold × 5 repeated CV 中的平均选择率。</span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：为什么漂亮的 score plot 不是模型验证<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a><span class="fu">### 锁定测试集，再拟合与调参</span></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>supervised model 的坐标就是为分开 training labels 而学习，training score plot 天然乐观。它适合解释模型学到了什么，不适合证明泛化。性能结论只能来自 nested/repeated cross-validation、锁定测试集 set 或真正 external cohort；若用 test set 再挑 component 或 cutoff，它就不再是测试集。</span>
 <span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>从配对数据重新完成训练集筛选、sPLS、DIABLO 调参、重复交叉验证和锁定测试集评估。</span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-native-computation</span></span>
-<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a>run_analysis <span class="ot">&lt;-</span> <span class="cf">function</span>(command, args) {</span>
-<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">system2</span>(command, args, <span class="at">stdout =</span> <span class="cn">TRUE</span>, <span class="at">stderr =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a>  status <span class="ot">&lt;-</span> <span class="fu">attr</span>(output, <span class="st">"status"</span>)</span>
-<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(status) <span class="sc">&amp;&amp;</span> status <span class="sc">!=</span> <span class="dv">0</span>L) <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="fu">tail</span>(output, <span class="dv">20</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(output)</span>
-<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">file.path</span>(<span class="fu">R.home</span>(<span class="st">"bin"</span>), <span class="st">"Rscript"</span>), <span class="fu">c</span>(<span class="st">"--vanilla"</span>, <span class="st">"scripts/run_article47_diablo.R"</span>))</span>
-<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>完整计算脚本：<span class="co">[</span><span class="ot">run_article47_diablo.R</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article47_diablo.R)</span>。</span>
-<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a><span class="fu">### 过滤与标准化参数只从训练集估计</span></span>
-<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: preprocess-diablo-training-only</span></span>
-<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>min_train_samples <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fl">0.10</span> <span class="sc">*</span> <span class="fu">length</span>(train_ids))</span>
-<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a>prevalent_microbes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab)[</span>
-<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowSums</span>(otutab[, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>] <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">&gt;=</span> min_train_samples</span>
-<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a>train_log <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">t</span>(otutab[prevalent_microbes, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>]) <span class="sc">+</span> <span class="fl">0.5</span>)</span>
-<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a>train_clr_all <span class="ot">&lt;-</span> train_log <span class="sc">-</span> <span class="fu">rowMeans</span>(train_log)</span>
-<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a>microbe_features <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(<span class="fu">apply</span>(train_clr_all, <span class="dv">2</span>, var), <span class="at">decreasing =</span> <span class="cn">TRUE</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>]</span>
-<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a>train_metabolite_all <span class="ot">&lt;-</span> <span class="fu">log1p</span>(<span class="fu">t</span>(metabolites[, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
-<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a>metabolite_features <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(</span>
-<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apply</span>(train_metabolite_all, <span class="dv">2</span>, var), <span class="at">decreasing =</span> <span class="cn">TRUE</span></span>
-<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">80</span>]</span>
-<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a>clr_transform <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a>  logged <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">t</span>(x) <span class="sc">+</span> <span class="fl">0.5</span>)</span>
-<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a>  logged <span class="sc">-</span> <span class="fu">rowMeans</span>(logged)</span>
-<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>scale_from_train <span class="ot">&lt;-</span> <span class="cf">function</span>(train, test) {</span>
-<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a>  center <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(train)</span>
-<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>  spread <span class="ot">&lt;-</span> <span class="fu">apply</span>(train, <span class="dv">2</span>, sd)</span>
-<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a>  spread[<span class="sc">!</span><span class="fu">is.finite</span>(spread) <span class="sc">|</span> spread <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
-<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a>    <span class="at">train =</span> <span class="fu">sweep</span>(<span class="fu">sweep</span>(train, <span class="dv">2</span>, center, <span class="st">"-"</span>), <span class="dv">2</span>, spread, <span class="st">"/"</span>),</span>
-<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">test =</span> <span class="fu">sweep</span>(<span class="fu">sweep</span>(test, <span class="dv">2</span>, center, <span class="st">"-"</span>), <span class="dv">2</span>, spread, <span class="st">"/"</span>)</span>
-<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a>microbe_scaled <span class="ot">&lt;-</span> <span class="fu">scale_from_train</span>(</span>
-<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clr_transform</span>(otutab[microbe_features, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>]),</span>
-<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clr_transform</span>(otutab[microbe_features, test_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>metabolite_scaled <span class="ot">&lt;-</span> <span class="fu">scale_from_train</span>(</span>
-<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log1p</span>(<span class="fu">t</span>(metabolites[metabolite_features, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>])),</span>
-<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log1p</span>(<span class="fu">t</span>(metabolites[metabolite_features, test_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
-<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>train_blocks <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a>  <span class="at">Microbiome =</span> microbe_scaled<span class="sc">$</span>train,</span>
-<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metabolome =</span> metabolite_scaled<span class="sc">$</span>train</span>
-<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a>test_blocks <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a>  <span class="at">Microbiome =</span> microbe_scaled<span class="sc">$</span>test,</span>
-<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metabolome =</span> metabolite_scaled<span class="sc">$</span>test</span>
-<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a><span class="fu">### sPLS：训练后原样投影 锁定测试集</span></span>
-<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb16-295"><a href="#cb16-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mixOmics)</span>
-<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a>spls_fit <span class="ot">&lt;-</span> <span class="fu">spls</span>(</span>
-<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a>  train_blocks<span class="sc">$</span>Microbiome, train_blocks<span class="sc">$</span>Metabolome,</span>
-<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncomp =</span> <span class="dv">2</span>, <span class="at">keepX =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">15</span>), <span class="at">keepY =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">20</span>),</span>
-<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"regression"</span>, <span class="at">scale =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a>test_x <span class="ot">&lt;-</span> test_blocks<span class="sc">$</span>Microbiome <span class="sc">%*%</span> spls_fit<span class="sc">$</span>loadings<span class="sc">$</span>X</span>
-<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a>test_y <span class="ot">&lt;-</span> test_blocks<span class="sc">$</span>Metabolome <span class="sc">%*%</span> spls_fit<span class="sc">$</span>loadings<span class="sc">$</span>Y</span>
-<span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="cf">function</span>(k) <span class="fu">cor</span>(test_x[, k], test_y[, k]), <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
-<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a><span class="fu">### DIABLO：training-only tuning、repeated CV、一次 test prediction</span></span>
-<span id="cb16-314"><a href="#cb16-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb16-316"><a href="#cb16-316" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-320"><a href="#cb16-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-321"><a href="#cb16-321" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb16-322"><a href="#cb16-322" aria-hidden="true" tabindex="-1"></a>train_group <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(metadata[train_ids, <span class="st">"StudyGroup"</span>])</span>
-<span id="cb16-323"><a href="#cb16-323" aria-hidden="true" tabindex="-1"></a>test_group <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata[test_ids, <span class="st">"StudyGroup"</span>], <span class="at">levels =</span> <span class="fu">levels</span>(train_group))</span>
-<span id="cb16-324"><a href="#cb16-324" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fl">0.10</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">names</span>(train_blocks), <span class="fu">names</span>(train_blocks)))</span>
-<span id="cb16-325"><a href="#cb16-325" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(design) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb16-326"><a href="#cb16-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-327"><a href="#cb16-327" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
-<span id="cb16-328"><a href="#cb16-328" aria-hidden="true" tabindex="-1"></a>tuned <span class="ot">&lt;-</span> <span class="fu">tune.block.splsda</span>(</span>
-<span id="cb16-329"><a href="#cb16-329" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> train_blocks, <span class="at">Y =</span> train_group, <span class="at">ncomp =</span> <span class="dv">2</span>,</span>
-<span id="cb16-330"><a href="#cb16-330" aria-hidden="true" tabindex="-1"></a>  <span class="at">test.keepX =</span> <span class="fu">list</span>(<span class="at">Microbiome =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>), <span class="at">Metabolome =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>)),</span>
-<span id="cb16-331"><a href="#cb16-331" aria-hidden="true" tabindex="-1"></a>  <span class="at">validation =</span> <span class="st">"Mfold"</span>, <span class="at">folds =</span> <span class="dv">5</span>, <span class="at">nrepeat =</span> <span class="dv">3</span>,</span>
-<span id="cb16-332"><a href="#cb16-332" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist =</span> <span class="st">"centroids.dist"</span>, <span class="at">measure =</span> <span class="st">"BER"</span>, <span class="at">design =</span> design,</span>
-<span id="cb16-333"><a href="#cb16-333" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">progressBar =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-334"><a href="#cb16-334" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-335"><a href="#cb16-335" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">block.splsda</span>(</span>
-<span id="cb16-336"><a href="#cb16-336" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> train_blocks, <span class="at">Y =</span> train_group, <span class="at">ncomp =</span> <span class="dv">2</span>,</span>
-<span id="cb16-337"><a href="#cb16-337" aria-hidden="true" tabindex="-1"></a>  <span class="at">keepX =</span> tuned<span class="sc">$</span>choice.keepX, <span class="at">design =</span> design, <span class="at">scale =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-338"><a href="#cb16-338" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-339"><a href="#cb16-339" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
-<span id="cb16-340"><a href="#cb16-340" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> <span class="fu">perf</span>(fit, <span class="at">validation =</span> <span class="st">"Mfold"</span>, <span class="at">folds =</span> <span class="dv">5</span>, <span class="at">nrepeat =</span> <span class="dv">5</span>,</span>
-<span id="cb16-341"><a href="#cb16-341" aria-hidden="true" tabindex="-1"></a>           <span class="at">dist =</span> <span class="st">"centroids.dist"</span>, <span class="at">progressBar =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-342"><a href="#cb16-342" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> test_blocks, <span class="at">dist =</span> <span class="st">"centroids.dist"</span>)</span>
-<span id="cb16-343"><a href="#cb16-343" aria-hidden="true" tabindex="-1"></a>test_class <span class="ot">&lt;-</span> prediction<span class="sc">$</span>WeightedVote<span class="sc">$</span>centroids.dist[, <span class="dv">2</span>]</span>
-<span id="cb16-344"><a href="#cb16-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-345"><a href="#cb16-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-346"><a href="#cb16-346" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb16-347"><a href="#cb16-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-348"><a href="#cb16-348" aria-hidden="true" tabindex="-1"></a>完整固定运行命令为：</span>
-<span id="cb16-349"><a href="#cb16-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-350"><a href="#cb16-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-353"><a href="#cb16-353" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-354"><a href="#cb16-354" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb16-355"><a href="#cb16-355" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-diablo-results</span></span>
-<span id="cb16-356"><a href="#cb16-356" aria-hidden="true" tabindex="-1"></a>result_dir <span class="ot">&lt;-</span> <span class="st">"results/47-spls-diablo"</span></span>
-<span id="cb16-357"><a href="#cb16-357" aria-hidden="true" tabindex="-1"></a>spls_correlations <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb16-358"><a href="#cb16-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"spls-correlations.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-359"><a href="#cb16-359" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-360"><a href="#cb16-360" aria-hidden="true" tabindex="-1"></a>diablo_scores <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb16-361"><a href="#cb16-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"diablo-train-scores.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-362"><a href="#cb16-362" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-363"><a href="#cb16-363" aria-hidden="true" tabindex="-1"></a>test_predictions <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb16-364"><a href="#cb16-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"test-predictions.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a><span class="fu">## 在训练集选择潜变量与特征 {#sec-code}</span></span>
+<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a><span class="fu">### 锁定测试集，再拟合与调参</span></span>
+<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>从配对数据重新完成训练集筛选、sPLS、DIABLO 调参、重复交叉验证和锁定测试集评估。</span>
+<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-native-computation</span></span>
+<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a>run_analysis <span class="ot">&lt;-</span> <span class="cf">function</span>(command, args) {</span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">system2</span>(command, args, <span class="at">stdout =</span> <span class="cn">TRUE</span>, <span class="at">stderr =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>  status <span class="ot">&lt;-</span> <span class="fu">attr</span>(output, <span class="st">"status"</span>)</span>
+<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(status) <span class="sc">&amp;&amp;</span> status <span class="sc">!=</span> <span class="dv">0</span>L) <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="fu">tail</span>(output, <span class="dv">20</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(output)</span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">file.path</span>(<span class="fu">R.home</span>(<span class="st">"bin"</span>), <span class="st">"Rscript"</span>), <span class="fu">c</span>(<span class="st">"--vanilla"</span>, <span class="st">"scripts/run_article47_diablo.R"</span>))</span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>完整计算脚本：<span class="co">[</span><span class="ot">run_article47_diablo.R</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article47_diablo.R)</span>。</span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a><span class="fu">### 过滤与标准化参数只从训练集估计</span></span>
+<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: preprocess-diablo-training-only</span></span>
+<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a>min_train_samples <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(<span class="fl">0.10</span> <span class="sc">*</span> <span class="fu">length</span>(train_ids))</span>
+<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a>prevalent_microbes <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab)[</span>
+<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowSums</span>(otutab[, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>] <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">&gt;=</span> min_train_samples</span>
+<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a>train_log <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">t</span>(otutab[prevalent_microbes, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>]) <span class="sc">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a>train_clr_all <span class="ot">&lt;-</span> train_log <span class="sc">-</span> <span class="fu">rowMeans</span>(train_log)</span>
+<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a>microbe_features <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(<span class="fu">apply</span>(train_clr_all, <span class="dv">2</span>, var), <span class="at">decreasing =</span> <span class="cn">TRUE</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>]</span>
+<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a>train_metabolite_all <span class="ot">&lt;-</span> <span class="fu">log1p</span>(<span class="fu">t</span>(metabolites[, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
+<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a>metabolite_features <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(</span>
+<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">apply</span>(train_metabolite_all, <span class="dv">2</span>, var), <span class="at">decreasing =</span> <span class="cn">TRUE</span></span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">80</span>]</span>
+<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a>clr_transform <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a>  logged <span class="ot">&lt;-</span> <span class="fu">log</span>(<span class="fu">t</span>(x) <span class="sc">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a>  logged <span class="sc">-</span> <span class="fu">rowMeans</span>(logged)</span>
+<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a>scale_from_train <span class="ot">&lt;-</span> <span class="cf">function</span>(train, test) {</span>
+<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a>  center <span class="ot">&lt;-</span> <span class="fu">colMeans</span>(train)</span>
+<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a>  spread <span class="ot">&lt;-</span> <span class="fu">apply</span>(train, <span class="dv">2</span>, sd)</span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a>  spread[<span class="sc">!</span><span class="fu">is.finite</span>(spread) <span class="sc">|</span> spread <span class="sc">==</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(</span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>    <span class="at">train =</span> <span class="fu">sweep</span>(<span class="fu">sweep</span>(train, <span class="dv">2</span>, center, <span class="st">"-"</span>), <span class="dv">2</span>, spread, <span class="st">"/"</span>),</span>
+<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">test =</span> <span class="fu">sweep</span>(<span class="fu">sweep</span>(test, <span class="dv">2</span>, center, <span class="st">"-"</span>), <span class="dv">2</span>, spread, <span class="st">"/"</span>)</span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>microbe_scaled <span class="ot">&lt;-</span> <span class="fu">scale_from_train</span>(</span>
+<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clr_transform</span>(otutab[microbe_features, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>]),</span>
+<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clr_transform</span>(otutab[microbe_features, test_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>metabolite_scaled <span class="ot">&lt;-</span> <span class="fu">scale_from_train</span>(</span>
+<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log1p</span>(<span class="fu">t</span>(metabolites[metabolite_features, train_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>])),</span>
+<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log1p</span>(<span class="fu">t</span>(metabolites[metabolite_features, test_ids, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
+<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>train_blocks <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>  <span class="at">Microbiome =</span> microbe_scaled<span class="sc">$</span>train,</span>
+<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metabolome =</span> metabolite_scaled<span class="sc">$</span>train</span>
+<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a>test_blocks <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a>  <span class="at">Microbiome =</span> microbe_scaled<span class="sc">$</span>test,</span>
+<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a>  <span class="at">Metabolome =</span> metabolite_scaled<span class="sc">$</span>test</span>
+<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-295"><a href="#cb16-295" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-296"><a href="#cb16-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a><span class="fu">### sPLS：训练后原样投影 锁定测试集</span></span>
+<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mixOmics)</span>
+<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a>spls_fit <span class="ot">&lt;-</span> <span class="fu">spls</span>(</span>
+<span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a>  train_blocks<span class="sc">$</span>Microbiome, train_blocks<span class="sc">$</span>Metabolome,</span>
+<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncomp =</span> <span class="dv">2</span>, <span class="at">keepX =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">15</span>), <span class="at">keepY =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">20</span>),</span>
+<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a>  <span class="at">mode =</span> <span class="st">"regression"</span>, <span class="at">scale =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a>test_x <span class="ot">&lt;-</span> test_blocks<span class="sc">$</span>Microbiome <span class="sc">%*%</span> spls_fit<span class="sc">$</span>loadings<span class="sc">$</span>X</span>
+<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a>test_y <span class="ot">&lt;-</span> test_blocks<span class="sc">$</span>Metabolome <span class="sc">%*%</span> spls_fit<span class="sc">$</span>loadings<span class="sc">$</span>Y</span>
+<span id="cb16-314"><a href="#cb16-314" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="cf">function</span>(k) <span class="fu">cor</span>(test_x[, k], test_y[, k]), <span class="fu">numeric</span>(<span class="dv">1</span>))</span>
+<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-316"><a href="#cb16-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb16-318"><a href="#cb16-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-319"><a href="#cb16-319" aria-hidden="true" tabindex="-1"></a><span class="fu">### DIABLO：training-only tuning、repeated CV、一次 test prediction</span></span>
+<span id="cb16-320"><a href="#cb16-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-321"><a href="#cb16-321" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb16-322"><a href="#cb16-322" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb16-323"><a href="#cb16-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-326"><a href="#cb16-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-327"><a href="#cb16-327" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb16-328"><a href="#cb16-328" aria-hidden="true" tabindex="-1"></a>train_group <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(metadata[train_ids, <span class="st">"StudyGroup"</span>])</span>
+<span id="cb16-329"><a href="#cb16-329" aria-hidden="true" tabindex="-1"></a>test_group <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata[test_ids, <span class="st">"StudyGroup"</span>], <span class="at">levels =</span> <span class="fu">levels</span>(train_group))</span>
+<span id="cb16-330"><a href="#cb16-330" aria-hidden="true" tabindex="-1"></a>design <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fl">0.10</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="fu">names</span>(train_blocks), <span class="fu">names</span>(train_blocks)))</span>
+<span id="cb16-331"><a href="#cb16-331" aria-hidden="true" tabindex="-1"></a><span class="fu">diag</span>(design) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb16-332"><a href="#cb16-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-333"><a href="#cb16-333" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
+<span id="cb16-334"><a href="#cb16-334" aria-hidden="true" tabindex="-1"></a>tuned <span class="ot">&lt;-</span> <span class="fu">tune.block.splsda</span>(</span>
+<span id="cb16-335"><a href="#cb16-335" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> train_blocks, <span class="at">Y =</span> train_group, <span class="at">ncomp =</span> <span class="dv">2</span>,</span>
+<span id="cb16-336"><a href="#cb16-336" aria-hidden="true" tabindex="-1"></a>  <span class="at">test.keepX =</span> <span class="fu">list</span>(<span class="at">Microbiome =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>), <span class="at">Metabolome =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">15</span>)),</span>
+<span id="cb16-337"><a href="#cb16-337" aria-hidden="true" tabindex="-1"></a>  <span class="at">validation =</span> <span class="st">"Mfold"</span>, <span class="at">folds =</span> <span class="dv">5</span>, <span class="at">nrepeat =</span> <span class="dv">3</span>,</span>
+<span id="cb16-338"><a href="#cb16-338" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist =</span> <span class="st">"centroids.dist"</span>, <span class="at">measure =</span> <span class="st">"BER"</span>, <span class="at">design =</span> design,</span>
+<span id="cb16-339"><a href="#cb16-339" aria-hidden="true" tabindex="-1"></a>  <span class="at">scale =</span> <span class="cn">FALSE</span>, <span class="at">progressBar =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-340"><a href="#cb16-340" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-341"><a href="#cb16-341" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">block.splsda</span>(</span>
+<span id="cb16-342"><a href="#cb16-342" aria-hidden="true" tabindex="-1"></a>  <span class="at">X =</span> train_blocks, <span class="at">Y =</span> train_group, <span class="at">ncomp =</span> <span class="dv">2</span>,</span>
+<span id="cb16-343"><a href="#cb16-343" aria-hidden="true" tabindex="-1"></a>  <span class="at">keepX =</span> tuned<span class="sc">$</span>choice.keepX, <span class="at">design =</span> design, <span class="at">scale =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-344"><a href="#cb16-344" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-345"><a href="#cb16-345" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
+<span id="cb16-346"><a href="#cb16-346" aria-hidden="true" tabindex="-1"></a>cv <span class="ot">&lt;-</span> <span class="fu">perf</span>(fit, <span class="at">validation =</span> <span class="st">"Mfold"</span>, <span class="at">folds =</span> <span class="dv">5</span>, <span class="at">nrepeat =</span> <span class="dv">5</span>,</span>
+<span id="cb16-347"><a href="#cb16-347" aria-hidden="true" tabindex="-1"></a>           <span class="at">dist =</span> <span class="st">"centroids.dist"</span>, <span class="at">progressBar =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-348"><a href="#cb16-348" aria-hidden="true" tabindex="-1"></a>prediction <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">newdata =</span> test_blocks, <span class="at">dist =</span> <span class="st">"centroids.dist"</span>)</span>
+<span id="cb16-349"><a href="#cb16-349" aria-hidden="true" tabindex="-1"></a>test_class <span class="ot">&lt;-</span> prediction<span class="sc">$</span>WeightedVote<span class="sc">$</span>centroids.dist[, <span class="dv">2</span>]</span>
+<span id="cb16-350"><a href="#cb16-350" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-351"><a href="#cb16-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-352"><a href="#cb16-352" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb16-353"><a href="#cb16-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-354"><a href="#cb16-354" aria-hidden="true" tabindex="-1"></a>完整固定运行命令为：</span>
+<span id="cb16-355"><a href="#cb16-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-356"><a href="#cb16-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-359"><a href="#cb16-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-360"><a href="#cb16-360" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb16-361"><a href="#cb16-361" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-diablo-results</span></span>
+<span id="cb16-362"><a href="#cb16-362" aria-hidden="true" tabindex="-1"></a>result_dir <span class="ot">&lt;-</span> <span class="st">"results/47-spls-diablo"</span></span>
+<span id="cb16-363"><a href="#cb16-363" aria-hidden="true" tabindex="-1"></a>spls_correlations <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb16-364"><a href="#cb16-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"spls-correlations.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb16-365"><a href="#cb16-365" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-366"><a href="#cb16-366" aria-hidden="true" tabindex="-1"></a>test_auc <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb16-367"><a href="#cb16-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"test-auc.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-366"><a href="#cb16-366" aria-hidden="true" tabindex="-1"></a>diablo_scores <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb16-367"><a href="#cb16-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"diablo-train-scores.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb16-368"><a href="#cb16-368" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-369"><a href="#cb16-369" aria-hidden="true" tabindex="-1"></a>stability <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb16-370"><a href="#cb16-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"diablo-selection-stability.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-369"><a href="#cb16-369" aria-hidden="true" tabindex="-1"></a>test_predictions <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb16-370"><a href="#cb16-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"test-predictions.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb16-371"><a href="#cb16-371" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-372"><a href="#cb16-372" aria-hidden="true" tabindex="-1"></a>diablo_summary <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(</span>
-<span id="cb16-373"><a href="#cb16-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"summary.json"</span>), <span class="at">simplifyVector =</span> <span class="cn">TRUE</span></span>
+<span id="cb16-372"><a href="#cb16-372" aria-hidden="true" tabindex="-1"></a>test_auc <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb16-373"><a href="#cb16-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"test-auc.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb16-374"><a href="#cb16-374" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-375"><a href="#cb16-375" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb16-376"><a href="#cb16-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(test_predictions) <span class="sc">==</span> <span class="dv">67</span>L,</span>
-<span id="cb16-377"><a href="#cb16-377" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(diablo_summary<span class="sc">$</span>test_accuracy <span class="sc">-</span> <span class="fl">0.6567164</span>) <span class="sc">&lt;</span> <span class="fl">1e-4</span>,</span>
-<span id="cb16-378"><a href="#cb16-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(diablo_summary<span class="sc">$</span>test_macro_auc <span class="sc">-</span> <span class="fl">0.7984386</span>) <span class="sc">&lt;</span> <span class="fl">1e-4</span>,</span>
-<span id="cb16-379"><a href="#cb16-379" aria-hidden="true" tabindex="-1"></a>  diablo_summary<span class="sc">$</span>stable_selected_features_rate_ge_0_8 <span class="sc">==</span> <span class="dv">26</span>L</span>
+<span id="cb16-375"><a href="#cb16-375" aria-hidden="true" tabindex="-1"></a>stability <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb16-376"><a href="#cb16-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"diablo-selection-stability.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-377"><a href="#cb16-377" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-378"><a href="#cb16-378" aria-hidden="true" tabindex="-1"></a>diablo_summary <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(</span>
+<span id="cb16-379"><a href="#cb16-379" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"summary.json"</span>), <span class="at">simplifyVector =</span> <span class="cn">TRUE</span></span>
 <span id="cb16-380"><a href="#cb16-380" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-381"><a href="#cb16-381" aria-hidden="true" tabindex="-1"></a>diablo_summary[<span class="fu">c</span>(</span>
-<span id="cb16-382"><a href="#cb16-382" aria-hidden="true" tabindex="-1"></a>  <span class="st">"repeated_cv_weighted_vote_ber_component2"</span>, <span class="st">"test_accuracy"</span>,</span>
-<span id="cb16-383"><a href="#cb16-383" aria-hidden="true" tabindex="-1"></a>  <span class="st">"test_balanced_accuracy"</span>, <span class="st">"test_macro_auc"</span></span>
-<span id="cb16-384"><a href="#cb16-384" aria-hidden="true" tabindex="-1"></a>)]</span>
-<span id="cb16-385"><a href="#cb16-385" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-386"><a href="#cb16-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-387"><a href="#cb16-387" aria-hidden="true" tabindex="-1"></a><span class="fu">## 潜变量分离、分类性能与特征稳定性 {#sec-audit}</span></span>
-<span id="cb16-388"><a href="#cb16-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-389"><a href="#cb16-389" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**training-only preprocessing。**prevalence、variance filter、center、scale、<span class="in">`keepX`</span> 和 component count 都不能看 test labels。</span>
-<span id="cb16-390"><a href="#cb16-390" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**不要只报 training score plot。**本例 component 2 correlation 从 0.738 降到 0.502；这种 shrinkage 正是 test projection 的价值。</span>
-<span id="cb16-391"><a href="#cb16-391" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**类别性能拆开看。**Control/CD AUC 分别约 0.898/0.844，但 UC 只有 0.654；macro AUC 不能掩盖困难类别。</span>
-<span id="cb16-392"><a href="#cb16-392" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**CV 与 test 都要留档。**repeated-CV BER 为 0.377，test BER 为 0.324；两者接近但不相等是正常 sampling variation。</span>
-<span id="cb16-393"><a href="#cb16-393" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**feature stability 优先于单次 loading。**26 个 block-component features 的 selection rate ≥0.80；其余候选应降级为 exploratory。</span>
-<span id="cb16-394"><a href="#cb16-394" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**外部验证仍缺失。**这个 locked split 只是 internal holdout；clinical claim 还需要独立 cohort、calibration、decision analysis 与预注册 threshold。</span>
-<span id="cb16-395"><a href="#cb16-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-396"><a href="#cb16-396" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="模型不是生物机制"}</span>
-<span id="cb16-397"><a href="#cb16-397" aria-hidden="true" tabindex="-1"></a>DIABLO loading 的正负只定义 latent component direction；不能直接解释为某菌促进某代谢物，也不能把 supervised component 当 causal pathway。</span>
-<span id="cb16-398"><a href="#cb16-398" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-399"><a href="#cb16-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-400"><a href="#cb16-400" aria-hidden="true" tabindex="-1"></a><span class="fu">## 用测试表现检查潜变量分离是否可信 {#sec-beautify}</span></span>
+<span id="cb16-381"><a href="#cb16-381" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb16-382"><a href="#cb16-382" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(test_predictions) <span class="sc">==</span> <span class="dv">67</span>L,</span>
+<span id="cb16-383"><a href="#cb16-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(diablo_summary<span class="sc">$</span>test_accuracy <span class="sc">-</span> <span class="fl">0.6567164</span>) <span class="sc">&lt;</span> <span class="fl">1e-4</span>,</span>
+<span id="cb16-384"><a href="#cb16-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(diablo_summary<span class="sc">$</span>test_macro_auc <span class="sc">-</span> <span class="fl">0.7984386</span>) <span class="sc">&lt;</span> <span class="fl">1e-4</span>,</span>
+<span id="cb16-385"><a href="#cb16-385" aria-hidden="true" tabindex="-1"></a>  diablo_summary<span class="sc">$</span>stable_selected_features_rate_ge_0_8 <span class="sc">==</span> <span class="dv">26</span>L</span>
+<span id="cb16-386"><a href="#cb16-386" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-387"><a href="#cb16-387" aria-hidden="true" tabindex="-1"></a>diablo_summary[<span class="fu">c</span>(</span>
+<span id="cb16-388"><a href="#cb16-388" aria-hidden="true" tabindex="-1"></a>  <span class="st">"repeated_cv_weighted_vote_ber_component2"</span>, <span class="st">"test_accuracy"</span>,</span>
+<span id="cb16-389"><a href="#cb16-389" aria-hidden="true" tabindex="-1"></a>  <span class="st">"test_balanced_accuracy"</span>, <span class="st">"test_macro_auc"</span></span>
+<span id="cb16-390"><a href="#cb16-390" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb16-391"><a href="#cb16-391" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-392"><a href="#cb16-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-393"><a href="#cb16-393" aria-hidden="true" tabindex="-1"></a><span class="fu">## 潜变量分离、分类性能与特征稳定性 {#sec-audit}</span></span>
+<span id="cb16-394"><a href="#cb16-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-395"><a href="#cb16-395" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**training-only preprocessing。**prevalence、variance filter、center、scale、<span class="in">`keepX`</span> 和 component count 都不能看 test labels。</span>
+<span id="cb16-396"><a href="#cb16-396" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**不要只报 training score plot。**本例 component 2 correlation 从 0.738 降到 0.502；这种 shrinkage 正是 test projection 的价值。</span>
+<span id="cb16-397"><a href="#cb16-397" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**类别性能拆开看。**Control/CD AUC 分别约 0.898/0.844，但 UC 只有 0.654；macro AUC 不能掩盖困难类别。</span>
+<span id="cb16-398"><a href="#cb16-398" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**CV 与 test 都要留档。**repeated-CV BER 为 0.377，test BER 为 0.324；两者接近但不相等是正常 sampling variation。</span>
+<span id="cb16-399"><a href="#cb16-399" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**feature stability 优先于单次 loading。**26 个 block-component features 的 selection rate ≥0.80；其余候选应降级为 exploratory。</span>
+<span id="cb16-400"><a href="#cb16-400" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**外部验证仍缺失。**这个 locked split 只是 internal holdout；clinical claim 还需要独立 cohort、calibration、decision analysis 与预注册 threshold。</span>
 <span id="cb16-401"><a href="#cb16-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-402"><a href="#cb16-402" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 1：sPLS 的 train-to-test generalization</span></span>
-<span id="cb16-403"><a href="#cb16-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-406"><a href="#cb16-406" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-407"><a href="#cb16-407" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb16-408"><a href="#cb16-408" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-spls-generalization</span></span>
-<span id="cb16-409"><a href="#cb16-409" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Cross-block sPLS correlations in training and locked test samples."</span></span>
-<span id="cb16-410"><a href="#cb16-410" aria-hidden="true" tabindex="-1"></a>spls_long <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb16-411"><a href="#cb16-411" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Component =</span> spls_correlations<span class="sc">$</span>Component, <span class="at">Split =</span> <span class="st">"Training"</span>,</span>
-<span id="cb16-412"><a href="#cb16-412" aria-hidden="true" tabindex="-1"></a>             <span class="at">Correlation =</span> spls_correlations<span class="sc">$</span>TrainCorrelation),</span>
-<span id="cb16-413"><a href="#cb16-413" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Component =</span> spls_correlations<span class="sc">$</span>Component, <span class="at">Split =</span> <span class="st">"Locked test"</span>,</span>
-<span id="cb16-414"><a href="#cb16-414" aria-hidden="true" tabindex="-1"></a>             <span class="at">Correlation =</span> spls_correlations<span class="sc">$</span>TestCorrelation)</span>
-<span id="cb16-415"><a href="#cb16-415" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-416"><a href="#cb16-416" aria-hidden="true" tabindex="-1"></a>p47_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(spls_long, <span class="fu">aes</span>(Component, Correlation, <span class="at">fill =</span> Split)) <span class="sc">+</span></span>
-<span id="cb16-417"><a href="#cb16-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.72</span>), <span class="at">width =</span> <span class="fl">0.64</span>) <span class="sc">+</span></span>
-<span id="cb16-418"><a href="#cb16-418" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, Correlation)),</span>
-<span id="cb16-419"><a href="#cb16-419" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.72</span>), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.35</span>,</span>
-<span id="cb16-420"><a href="#cb16-420" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>, <span class="at">family =</span> font_pub) <span class="sc">+</span></span>
-<span id="cb16-421"><a href="#cb16-421" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb16-422"><a href="#cb16-422" aria-hidden="true" tabindex="-1"></a>    <span class="at">Training =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"grey"</span>]),</span>
-<span id="cb16-423"><a href="#cb16-423" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Locked test</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>])</span>
-<span id="cb16-424"><a href="#cb16-424" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb16-425"><a href="#cb16-425" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))) <span class="sc">+</span></span>
-<span id="cb16-426"><a href="#cb16-426" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Cross-block correlation"</span>, <span class="at">fill =</span> <span class="st">"Split"</span>,</span>
-<span id="cb16-427"><a href="#cb16-427" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"sPLS generalization audit"</span>) <span class="sc">+</span> <span class="fu">theme_pub</span>()</span>
-<span id="cb16-428"><a href="#cb16-428" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p47_1, <span class="st">"figures/47-spls-diablo/47-1-spls-generalization"</span>, <span class="dv">89</span>, <span class="dv">70</span>)</span>
-<span id="cb16-429"><a href="#cb16-429" aria-hidden="true" tabindex="-1"></a>p47_1</span>
-<span id="cb16-430"><a href="#cb16-430" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-431"><a href="#cb16-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-432"><a href="#cb16-432" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 2：DIABLO training scores（只用于解释）</span></span>
-<span id="cb16-433"><a href="#cb16-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-436"><a href="#cb16-436" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-437"><a href="#cb16-437" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb16-438"><a href="#cb16-438" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-diablo-scores</span></span>
-<span id="cb16-439"><a href="#cb16-439" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "DIABLO training scores by data block and study group."</span></span>
-<span id="cb16-440"><a href="#cb16-440" aria-hidden="true" tabindex="-1"></a>group_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb16-441"><a href="#cb16-441" aria-hidden="true" tabindex="-1"></a>  <span class="at">Control =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
-<span id="cb16-442"><a href="#cb16-442" aria-hidden="true" tabindex="-1"></a>  <span class="at">CD =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"vermillion"</span>]),</span>
-<span id="cb16-443"><a href="#cb16-443" aria-hidden="true" tabindex="-1"></a>  <span class="at">UC =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>])</span>
-<span id="cb16-444"><a href="#cb16-444" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-445"><a href="#cb16-445" aria-hidden="true" tabindex="-1"></a>p47_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(diablo_scores, <span class="fu">aes</span>(Component1, Component2, <span class="at">colour =</span> StudyGroup)) <span class="sc">+</span></span>
-<span id="cb16-446"><a href="#cb16-446" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#DDDDDD"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb16-447"><a href="#cb16-447" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#DDDDDD"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb16-448"><a href="#cb16-448" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.76</span>) <span class="sc">+</span></span>
-<span id="cb16-449"><a href="#cb16-449" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">linewidth =</span> <span class="fl">0.55</span>, <span class="at">level =</span> <span class="fl">0.80</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb16-450"><a href="#cb16-450" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Block, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
-<span id="cb16-451"><a href="#cb16-451" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> group_colors) <span class="sc">+</span></span>
-<span id="cb16-452"><a href="#cb16-452" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Component 1"</span>, <span class="at">y =</span> <span class="st">"Component 2"</span>, <span class="at">colour =</span> <span class="st">"Study group"</span>,</span>
-<span id="cb16-453"><a href="#cb16-453" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Supervised training representation"</span>,</span>
-<span id="cb16-454"><a href="#cb16-454" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Interpretation plot; performance is evaluated on the locked test set"</span>) <span class="sc">+</span></span>
-<span id="cb16-455"><a href="#cb16-455" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
-<span id="cb16-456"><a href="#cb16-456" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p47_2, <span class="st">"figures/47-spls-diablo/47-2-diablo-scores"</span>, <span class="dv">180</span>, <span class="dv">82</span>)</span>
-<span id="cb16-457"><a href="#cb16-457" aria-hidden="true" tabindex="-1"></a>p47_2</span>
-<span id="cb16-458"><a href="#cb16-458" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-459"><a href="#cb16-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-460"><a href="#cb16-460" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 3：留出测试集的混淆矩阵与各类别 AUC</span></span>
-<span id="cb16-461"><a href="#cb16-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-464"><a href="#cb16-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-465"><a href="#cb16-465" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb16-466"><a href="#cb16-466" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-diablo-test-performance</span></span>
-<span id="cb16-467"><a href="#cb16-467" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Locked-test confusion matrix and class-specific one-vs-rest AUC."</span></span>
-<span id="cb16-468"><a href="#cb16-468" aria-hidden="true" tabindex="-1"></a>confusion <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(</span>
-<span id="cb16-469"><a href="#cb16-469" aria-hidden="true" tabindex="-1"></a>  <span class="at">Truth =</span> <span class="fu">factor</span>(test_predictions<span class="sc">$</span>Truth, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CD"</span>, <span class="st">"UC"</span>)),</span>
-<span id="cb16-470"><a href="#cb16-470" aria-hidden="true" tabindex="-1"></a>  <span class="at">Predicted =</span> <span class="fu">factor</span>(test_predictions<span class="sc">$</span>Predicted, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CD"</span>, <span class="st">"UC"</span>))</span>
-<span id="cb16-471"><a href="#cb16-471" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb16-472"><a href="#cb16-472" aria-hidden="true" tabindex="-1"></a>confusion<span class="sc">$</span>WithinTruth <span class="ot">&lt;-</span> <span class="fu">ave</span>(confusion<span class="sc">$</span>Freq, confusion<span class="sc">$</span>Truth, <span class="at">FUN =</span> <span class="cf">function</span>(x) x <span class="sc">/</span> <span class="fu">sum</span>(x))</span>
-<span id="cb16-473"><a href="#cb16-473" aria-hidden="true" tabindex="-1"></a>p_confusion <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(confusion, <span class="fu">aes</span>(Predicted, Truth, <span class="at">fill =</span> WithinTruth)) <span class="sc">+</span></span>
-<span id="cb16-474"><a href="#cb16-474" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb16-475"><a href="#cb16-475" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%d</span><span class="sc">\n</span><span class="st">%.0f%%"</span>, Freq, <span class="dv">100</span> <span class="sc">*</span> WithinTruth)),</span>
-<span id="cb16-476"><a href="#cb16-476" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> font_pub, <span class="at">size =</span> <span class="fl">3.2</span>) <span class="sc">+</span></span>
-<span id="cb16-477"><a href="#cb16-477" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#F7FBFF"</span>, <span class="at">high =</span> pal_pub[<span class="st">"blue"</span>], <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb16-478"><a href="#cb16-478" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Predicted class"</span>, <span class="at">y =</span> <span class="st">"True class"</span>, <span class="at">fill =</span> <span class="st">"Row fraction"</span>,</span>
-<span id="cb16-479"><a href="#cb16-479" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Confusion matrix"</span>) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb16-480"><a href="#cb16-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-481"><a href="#cb16-481" aria-hidden="true" tabindex="-1"></a>test_auc<span class="sc">$</span>Class <span class="ot">&lt;-</span> <span class="fu">factor</span>(test_auc<span class="sc">$</span>Class, <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CD"</span>, <span class="st">"UC"</span>)))</span>
-<span id="cb16-482"><a href="#cb16-482" aria-hidden="true" tabindex="-1"></a>p_auc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(test_auc, <span class="fu">aes</span>(AUC, Class)) <span class="sc">+</span></span>
-<span id="cb16-483"><a href="#cb16-483" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
-<span id="cb16-484"><a href="#cb16-484" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> CILower, <span class="at">xmax =</span> CIUpper), <span class="at">height =</span> <span class="fl">0.16</span>,</span>
-<span id="cb16-485"><a href="#cb16-485" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> pal_pub[<span class="st">"grey"</span>], <span class="at">linewidth =</span> <span class="fl">0.55</span>) <span class="sc">+</span></span>
-<span id="cb16-486"><a href="#cb16-486" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">colour =</span> pal_pub[<span class="st">"vermillion"</span>]) <span class="sc">+</span></span>
-<span id="cb16-487"><a href="#cb16-487" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.45</span>, <span class="dv">1</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)) <span class="sc">+</span></span>
-<span id="cb16-488"><a href="#cb16-488" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"One-vs-rest AUC (95% CI)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
-<span id="cb16-489"><a href="#cb16-489" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Class discrimination"</span>) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb16-490"><a href="#cb16-490" aria-hidden="true" tabindex="-1"></a>p47_3 <span class="ot">&lt;-</span> p_confusion <span class="sc">+</span> p_auc <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
-<span id="cb16-491"><a href="#cb16-491" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Locked-test performance"</span>,</span>
-<span id="cb16-492"><a href="#cb16-492" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"Accuracy 0.657; balanced accuracy 0.676; macro AUC 0.798"</span></span>
-<span id="cb16-493"><a href="#cb16-493" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-494"><a href="#cb16-494" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p47_3, <span class="st">"figures/47-spls-diablo/47-3-test-performance"</span>, <span class="dv">180</span>, <span class="dv">82</span>)</span>
-<span id="cb16-495"><a href="#cb16-495" aria-hidden="true" tabindex="-1"></a>p47_3</span>
-<span id="cb16-496"><a href="#cb16-496" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-497"><a href="#cb16-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-498"><a href="#cb16-498" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 4：repeated-CV feature stability</span></span>
-<span id="cb16-499"><a href="#cb16-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-502"><a href="#cb16-502" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb16-503"><a href="#cb16-503" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb16-504"><a href="#cb16-504" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-diablo-stability</span></span>
-<span id="cb16-505"><a href="#cb16-505" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Features with the highest repeated-cross-validation selection rates."</span></span>
-<span id="cb16-506"><a href="#cb16-506" aria-hidden="true" tabindex="-1"></a>stable_plot <span class="ot">&lt;-</span> stability[<span class="fu">order</span>(<span class="sc">-</span>stability<span class="sc">$</span>FoldSelectionRate), ]</span>
-<span id="cb16-507"><a href="#cb16-507" aria-hidden="true" tabindex="-1"></a>stable_plot <span class="ot">&lt;-</span> stable_plot[<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(stable_plot<span class="sc">$</span>Block, stable_plot<span class="sc">$</span>FeatureID)), ]</span>
-<span id="cb16-508"><a href="#cb16-508" aria-hidden="true" tabindex="-1"></a>stable_plot <span class="ot">&lt;-</span> <span class="fu">head</span>(stable_plot, <span class="dv">20</span>)</span>
-<span id="cb16-509"><a href="#cb16-509" aria-hidden="true" tabindex="-1"></a>stable_plot<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
-<span id="cb16-510"><a href="#cb16-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nchar</span>(stable_plot<span class="sc">$</span>DisplayName) <span class="sc">&gt;</span> <span class="dv">28</span>,</span>
-<span id="cb16-511"><a href="#cb16-511" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="fu">substr</span>(stable_plot<span class="sc">$</span>DisplayName, <span class="dv">1</span>, <span class="dv">25</span>), <span class="st">"..."</span>),</span>
-<span id="cb16-512"><a href="#cb16-512" aria-hidden="true" tabindex="-1"></a>  stable_plot<span class="sc">$</span>DisplayName</span>
-<span id="cb16-513"><a href="#cb16-513" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-514"><a href="#cb16-514" aria-hidden="true" tabindex="-1"></a>stable_plot<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">factor</span>(stable_plot<span class="sc">$</span>Label, <span class="at">levels =</span> <span class="fu">rev</span>(stable_plot<span class="sc">$</span>Label))</span>
-<span id="cb16-515"><a href="#cb16-515" aria-hidden="true" tabindex="-1"></a>p47_4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(stable_plot, <span class="fu">aes</span>(FoldSelectionRate, Label, <span class="at">colour =</span> Block)) <span class="sc">+</span></span>
-<span id="cb16-516"><a href="#cb16-516" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.80</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
-<span id="cb16-517"><a href="#cb16-517" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> FoldSelectionRate, <span class="at">yend =</span> Label), <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb16-518"><a href="#cb16-518" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.7</span>) <span class="sc">+</span></span>
-<span id="cb16-519"><a href="#cb16-519" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb16-520"><a href="#cb16-520" aria-hidden="true" tabindex="-1"></a>    <span class="at">Microbiome =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
-<span id="cb16-521"><a href="#cb16-521" aria-hidden="true" tabindex="-1"></a>    <span class="at">Metabolome =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>])</span>
-<span id="cb16-522"><a href="#cb16-522" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb16-523"><a href="#cb16-523" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
-<span id="cb16-524"><a href="#cb16-524" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mean fold-selection rate"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Block"</span>,</span>
-<span id="cb16-525"><a href="#cb16-525" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Feature stability"</span>, <span class="at">subtitle =</span> <span class="st">"Dashed line: pre-specified 80% threshold"</span>) <span class="sc">+</span></span>
-<span id="cb16-526"><a href="#cb16-526" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">9</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
-<span id="cb16-527"><a href="#cb16-527" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p47_4, <span class="st">"figures/47-spls-diablo/47-4-feature-stability"</span>, <span class="dv">180</span>, <span class="dv">105</span>)</span>
-<span id="cb16-528"><a href="#cb16-528" aria-hidden="true" tabindex="-1"></a>p47_4</span>
-<span id="cb16-529"><a href="#cb16-529" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-530"><a href="#cb16-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-531"><a href="#cb16-531" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
-<span id="cb16-532"><a href="#cb16-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-533"><a href="#cb16-533" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的六件事"}</span>
-<span id="cb16-534"><a href="#cb16-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-535"><a href="#cb16-535" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>在全数据上先筛 feature 或标准化，再切 train/test，产生 leakage。</span>
-<span id="cb16-536"><a href="#cb16-536" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>用 test set 选择 <span class="in">`keepX`</span>、component 数或分类距离。</span>
-<span id="cb16-537"><a href="#cb16-537" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>只给 supervised training score plot，不给 CV/test performance。</span>
-<span id="cb16-538"><a href="#cb16-538" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>只给 overall accuracy，不给 class-wise recall、BER 或 AUC uncertainty。</span>
-<span id="cb16-539"><a href="#cb16-539" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>没报告 design matrix、fold 数、repeats、distance 与随机种子。</span>
-<span id="cb16-540"><a href="#cb16-540" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>把一次 fit 的 non-zero loadings 当稳定 biomarker。</span>
-<span id="cb16-541"><a href="#cb16-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-542"><a href="#cb16-542" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb16-543"><a href="#cb16-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-544"><a href="#cb16-544" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告sPLS与DIABLO验证的方法与限制 {#sec-methods}</span></span>
-<span id="cb16-545"><a href="#cb16-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-546"><a href="#cb16-546" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The 220 paired samples were split once into a stratified training set (n=153) and a locked test set (n=67) using seed 20260726. Prevalence filtering, variance filtering, CLR/log1p transformation parameters and feature standardization were learned using training samples only. Sparse PLS retained 15 microbial and 20 metabolite variables per component; learned loadings were projected without refitting into the test set. DIABLO was fitted using a block-design weight of 0.10 and two components. Block-specific keepX values were selected from {5, 10, 15} by 5-fold cross-validation repeated three times using balanced error rate; performance and selection stability were subsequently estimated by 5-fold cross-validation repeated five times. The locked test set was evaluated once using weighted-vote centroid distance. Accuracy, balanced accuracy, class-specific one-vs-rest AUC with 95% confidence intervals, and feature selection stability were reported.</span></span>
+<span id="cb16-402"><a href="#cb16-402" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="模型不是生物机制"}</span>
+<span id="cb16-403"><a href="#cb16-403" aria-hidden="true" tabindex="-1"></a>DIABLO loading 的正负只定义 latent component direction；不能直接解释为某菌促进某代谢物，也不能把 supervised component 当 causal pathway。</span>
+<span id="cb16-404"><a href="#cb16-404" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb16-405"><a href="#cb16-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-406"><a href="#cb16-406" aria-hidden="true" tabindex="-1"></a><span class="fu">## 用测试表现检查潜变量分离是否可信 {#sec-beautify}</span></span>
+<span id="cb16-407"><a href="#cb16-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-408"><a href="#cb16-408" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 1：sPLS 的 train-to-test generalization</span></span>
+<span id="cb16-409"><a href="#cb16-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-412"><a href="#cb16-412" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-413"><a href="#cb16-413" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb16-414"><a href="#cb16-414" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-spls-generalization</span></span>
+<span id="cb16-415"><a href="#cb16-415" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Cross-block sPLS correlations in training and locked test samples."</span></span>
+<span id="cb16-416"><a href="#cb16-416" aria-hidden="true" tabindex="-1"></a>spls_long <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb16-417"><a href="#cb16-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Component =</span> spls_correlations<span class="sc">$</span>Component, <span class="at">Split =</span> <span class="st">"Training"</span>,</span>
+<span id="cb16-418"><a href="#cb16-418" aria-hidden="true" tabindex="-1"></a>             <span class="at">Correlation =</span> spls_correlations<span class="sc">$</span>TrainCorrelation),</span>
+<span id="cb16-419"><a href="#cb16-419" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Component =</span> spls_correlations<span class="sc">$</span>Component, <span class="at">Split =</span> <span class="st">"Locked test"</span>,</span>
+<span id="cb16-420"><a href="#cb16-420" aria-hidden="true" tabindex="-1"></a>             <span class="at">Correlation =</span> spls_correlations<span class="sc">$</span>TestCorrelation)</span>
+<span id="cb16-421"><a href="#cb16-421" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-422"><a href="#cb16-422" aria-hidden="true" tabindex="-1"></a>p47_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(spls_long, <span class="fu">aes</span>(Component, Correlation, <span class="at">fill =</span> Split)) <span class="sc">+</span></span>
+<span id="cb16-423"><a href="#cb16-423" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.72</span>), <span class="at">width =</span> <span class="fl">0.64</span>) <span class="sc">+</span></span>
+<span id="cb16-424"><a href="#cb16-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, Correlation)),</span>
+<span id="cb16-425"><a href="#cb16-425" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.72</span>), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.35</span>,</span>
+<span id="cb16-426"><a href="#cb16-426" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">3</span>, <span class="at">family =</span> font_pub) <span class="sc">+</span></span>
+<span id="cb16-427"><a href="#cb16-427" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb16-428"><a href="#cb16-428" aria-hidden="true" tabindex="-1"></a>    <span class="at">Training =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"grey"</span>]),</span>
+<span id="cb16-429"><a href="#cb16-429" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Locked test</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>])</span>
+<span id="cb16-430"><a href="#cb16-430" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb16-431"><a href="#cb16-431" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))) <span class="sc">+</span></span>
+<span id="cb16-432"><a href="#cb16-432" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Cross-block correlation"</span>, <span class="at">fill =</span> <span class="st">"Split"</span>,</span>
+<span id="cb16-433"><a href="#cb16-433" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"sPLS generalization audit"</span>) <span class="sc">+</span> <span class="fu">theme_pub</span>()</span>
+<span id="cb16-434"><a href="#cb16-434" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p47_1, <span class="st">"figures/47-spls-diablo/47-1-spls-generalization"</span>, <span class="dv">89</span>, <span class="dv">70</span>)</span>
+<span id="cb16-435"><a href="#cb16-435" aria-hidden="true" tabindex="-1"></a>p47_1</span>
+<span id="cb16-436"><a href="#cb16-436" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-437"><a href="#cb16-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-438"><a href="#cb16-438" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 2：DIABLO training scores（只用于解释）</span></span>
+<span id="cb16-439"><a href="#cb16-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-442"><a href="#cb16-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-443"><a href="#cb16-443" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb16-444"><a href="#cb16-444" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-diablo-scores</span></span>
+<span id="cb16-445"><a href="#cb16-445" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "DIABLO training scores by data block and study group."</span></span>
+<span id="cb16-446"><a href="#cb16-446" aria-hidden="true" tabindex="-1"></a>group_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb16-447"><a href="#cb16-447" aria-hidden="true" tabindex="-1"></a>  <span class="at">Control =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
+<span id="cb16-448"><a href="#cb16-448" aria-hidden="true" tabindex="-1"></a>  <span class="at">CD =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"vermillion"</span>]),</span>
+<span id="cb16-449"><a href="#cb16-449" aria-hidden="true" tabindex="-1"></a>  <span class="at">UC =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>])</span>
+<span id="cb16-450"><a href="#cb16-450" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-451"><a href="#cb16-451" aria-hidden="true" tabindex="-1"></a>p47_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(diablo_scores, <span class="fu">aes</span>(Component1, Component2, <span class="at">colour =</span> StudyGroup)) <span class="sc">+</span></span>
+<span id="cb16-452"><a href="#cb16-452" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#DDDDDD"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb16-453"><a href="#cb16-453" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#DDDDDD"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb16-454"><a href="#cb16-454" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">alpha =</span> <span class="fl">0.76</span>) <span class="sc">+</span></span>
+<span id="cb16-455"><a href="#cb16-455" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(<span class="at">linewidth =</span> <span class="fl">0.55</span>, <span class="at">level =</span> <span class="fl">0.80</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-456"><a href="#cb16-456" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Block, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb16-457"><a href="#cb16-457" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> group_colors) <span class="sc">+</span></span>
+<span id="cb16-458"><a href="#cb16-458" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Component 1"</span>, <span class="at">y =</span> <span class="st">"Component 2"</span>, <span class="at">colour =</span> <span class="st">"Study group"</span>,</span>
+<span id="cb16-459"><a href="#cb16-459" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Supervised training representation"</span>,</span>
+<span id="cb16-460"><a href="#cb16-460" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Interpretation plot; performance is evaluated on the locked test set"</span>) <span class="sc">+</span></span>
+<span id="cb16-461"><a href="#cb16-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
+<span id="cb16-462"><a href="#cb16-462" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p47_2, <span class="st">"figures/47-spls-diablo/47-2-diablo-scores"</span>, <span class="dv">180</span>, <span class="dv">82</span>)</span>
+<span id="cb16-463"><a href="#cb16-463" aria-hidden="true" tabindex="-1"></a>p47_2</span>
+<span id="cb16-464"><a href="#cb16-464" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-465"><a href="#cb16-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-466"><a href="#cb16-466" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 3：留出测试集的混淆矩阵与各类别 AUC</span></span>
+<span id="cb16-467"><a href="#cb16-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-470"><a href="#cb16-470" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-471"><a href="#cb16-471" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb16-472"><a href="#cb16-472" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-diablo-test-performance</span></span>
+<span id="cb16-473"><a href="#cb16-473" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Locked-test confusion matrix and class-specific one-vs-rest AUC."</span></span>
+<span id="cb16-474"><a href="#cb16-474" aria-hidden="true" tabindex="-1"></a>confusion <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">table</span>(</span>
+<span id="cb16-475"><a href="#cb16-475" aria-hidden="true" tabindex="-1"></a>  <span class="at">Truth =</span> <span class="fu">factor</span>(test_predictions<span class="sc">$</span>Truth, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CD"</span>, <span class="st">"UC"</span>)),</span>
+<span id="cb16-476"><a href="#cb16-476" aria-hidden="true" tabindex="-1"></a>  <span class="at">Predicted =</span> <span class="fu">factor</span>(test_predictions<span class="sc">$</span>Predicted, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CD"</span>, <span class="st">"UC"</span>))</span>
+<span id="cb16-477"><a href="#cb16-477" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb16-478"><a href="#cb16-478" aria-hidden="true" tabindex="-1"></a>confusion<span class="sc">$</span>WithinTruth <span class="ot">&lt;-</span> <span class="fu">ave</span>(confusion<span class="sc">$</span>Freq, confusion<span class="sc">$</span>Truth, <span class="at">FUN =</span> <span class="cf">function</span>(x) x <span class="sc">/</span> <span class="fu">sum</span>(x))</span>
+<span id="cb16-479"><a href="#cb16-479" aria-hidden="true" tabindex="-1"></a>p_confusion <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(confusion, <span class="fu">aes</span>(Predicted, Truth, <span class="at">fill =</span> WithinTruth)) <span class="sc">+</span></span>
+<span id="cb16-480"><a href="#cb16-480" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb16-481"><a href="#cb16-481" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%d</span><span class="sc">\n</span><span class="st">%.0f%%"</span>, Freq, <span class="dv">100</span> <span class="sc">*</span> WithinTruth)),</span>
+<span id="cb16-482"><a href="#cb16-482" aria-hidden="true" tabindex="-1"></a>            <span class="at">family =</span> font_pub, <span class="at">size =</span> <span class="fl">3.2</span>) <span class="sc">+</span></span>
+<span id="cb16-483"><a href="#cb16-483" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#F7FBFF"</span>, <span class="at">high =</span> pal_pub[<span class="st">"blue"</span>], <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb16-484"><a href="#cb16-484" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Predicted class"</span>, <span class="at">y =</span> <span class="st">"True class"</span>, <span class="at">fill =</span> <span class="st">"Row fraction"</span>,</span>
+<span id="cb16-485"><a href="#cb16-485" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Confusion matrix"</span>) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb16-486"><a href="#cb16-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-487"><a href="#cb16-487" aria-hidden="true" tabindex="-1"></a>test_auc<span class="sc">$</span>Class <span class="ot">&lt;-</span> <span class="fu">factor</span>(test_auc<span class="sc">$</span>Class, <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CD"</span>, <span class="st">"UC"</span>)))</span>
+<span id="cb16-488"><a href="#cb16-488" aria-hidden="true" tabindex="-1"></a>p_auc <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(test_auc, <span class="fu">aes</span>(AUC, Class)) <span class="sc">+</span></span>
+<span id="cb16-489"><a href="#cb16-489" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.5</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
+<span id="cb16-490"><a href="#cb16-490" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> CILower, <span class="at">xmax =</span> CIUpper), <span class="at">height =</span> <span class="fl">0.16</span>,</span>
+<span id="cb16-491"><a href="#cb16-491" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> pal_pub[<span class="st">"grey"</span>], <span class="at">linewidth =</span> <span class="fl">0.55</span>) <span class="sc">+</span></span>
+<span id="cb16-492"><a href="#cb16-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">colour =</span> pal_pub[<span class="st">"vermillion"</span>]) <span class="sc">+</span></span>
+<span id="cb16-493"><a href="#cb16-493" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="fl">0.45</span>, <span class="dv">1</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">0.5</span>, <span class="dv">1</span>, <span class="fl">0.1</span>)) <span class="sc">+</span></span>
+<span id="cb16-494"><a href="#cb16-494" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"One-vs-rest AUC (95% CI)"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb16-495"><a href="#cb16-495" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Class discrimination"</span>) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb16-496"><a href="#cb16-496" aria-hidden="true" tabindex="-1"></a>p47_3 <span class="ot">&lt;-</span> p_confusion <span class="sc">+</span> p_auc <span class="sc">+</span> <span class="fu">plot_annotation</span>(</span>
+<span id="cb16-497"><a href="#cb16-497" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Locked-test performance"</span>,</span>
+<span id="cb16-498"><a href="#cb16-498" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle =</span> <span class="st">"Accuracy 0.657; balanced accuracy 0.676; macro AUC 0.798"</span></span>
+<span id="cb16-499"><a href="#cb16-499" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-500"><a href="#cb16-500" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p47_3, <span class="st">"figures/47-spls-diablo/47-3-test-performance"</span>, <span class="dv">180</span>, <span class="dv">82</span>)</span>
+<span id="cb16-501"><a href="#cb16-501" aria-hidden="true" tabindex="-1"></a>p47_3</span>
+<span id="cb16-502"><a href="#cb16-502" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-503"><a href="#cb16-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-504"><a href="#cb16-504" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 4：repeated-CV feature stability</span></span>
+<span id="cb16-505"><a href="#cb16-505" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-508"><a href="#cb16-508" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-509"><a href="#cb16-509" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb16-510"><a href="#cb16-510" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-diablo-stability</span></span>
+<span id="cb16-511"><a href="#cb16-511" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Features with the highest repeated-cross-validation selection rates."</span></span>
+<span id="cb16-512"><a href="#cb16-512" aria-hidden="true" tabindex="-1"></a>stable_plot <span class="ot">&lt;-</span> stability[<span class="fu">order</span>(<span class="sc">-</span>stability<span class="sc">$</span>FoldSelectionRate), ]</span>
+<span id="cb16-513"><a href="#cb16-513" aria-hidden="true" tabindex="-1"></a>stable_plot <span class="ot">&lt;-</span> stable_plot[<span class="sc">!</span><span class="fu">duplicated</span>(<span class="fu">paste</span>(stable_plot<span class="sc">$</span>Block, stable_plot<span class="sc">$</span>FeatureID)), ]</span>
+<span id="cb16-514"><a href="#cb16-514" aria-hidden="true" tabindex="-1"></a>stable_plot <span class="ot">&lt;-</span> <span class="fu">head</span>(stable_plot, <span class="dv">20</span>)</span>
+<span id="cb16-515"><a href="#cb16-515" aria-hidden="true" tabindex="-1"></a>stable_plot<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb16-516"><a href="#cb16-516" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nchar</span>(stable_plot<span class="sc">$</span>DisplayName) <span class="sc">&gt;</span> <span class="dv">28</span>,</span>
+<span id="cb16-517"><a href="#cb16-517" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="fu">substr</span>(stable_plot<span class="sc">$</span>DisplayName, <span class="dv">1</span>, <span class="dv">25</span>), <span class="st">"..."</span>),</span>
+<span id="cb16-518"><a href="#cb16-518" aria-hidden="true" tabindex="-1"></a>  stable_plot<span class="sc">$</span>DisplayName</span>
+<span id="cb16-519"><a href="#cb16-519" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-520"><a href="#cb16-520" aria-hidden="true" tabindex="-1"></a>stable_plot<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">factor</span>(stable_plot<span class="sc">$</span>Label, <span class="at">levels =</span> <span class="fu">rev</span>(stable_plot<span class="sc">$</span>Label))</span>
+<span id="cb16-521"><a href="#cb16-521" aria-hidden="true" tabindex="-1"></a>p47_4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(stable_plot, <span class="fu">aes</span>(FoldSelectionRate, Label, <span class="at">colour =</span> Block)) <span class="sc">+</span></span>
+<span id="cb16-522"><a href="#cb16-522" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fl">0.80</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
+<span id="cb16-523"><a href="#cb16-523" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> FoldSelectionRate, <span class="at">yend =</span> Label), <span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb16-524"><a href="#cb16-524" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.7</span>) <span class="sc">+</span></span>
+<span id="cb16-525"><a href="#cb16-525" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb16-526"><a href="#cb16-526" aria-hidden="true" tabindex="-1"></a>    <span class="at">Microbiome =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
+<span id="cb16-527"><a href="#cb16-527" aria-hidden="true" tabindex="-1"></a>    <span class="at">Metabolome =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>])</span>
+<span id="cb16-528"><a href="#cb16-528" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb16-529"><a href="#cb16-529" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb16-530"><a href="#cb16-530" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Mean fold-selection rate"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Block"</span>,</span>
+<span id="cb16-531"><a href="#cb16-531" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Feature stability"</span>, <span class="at">subtitle =</span> <span class="st">"Dashed line: pre-specified 80% threshold"</span>) <span class="sc">+</span></span>
+<span id="cb16-532"><a href="#cb16-532" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">9</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb16-533"><a href="#cb16-533" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p47_4, <span class="st">"figures/47-spls-diablo/47-4-feature-stability"</span>, <span class="dv">180</span>, <span class="dv">105</span>)</span>
+<span id="cb16-534"><a href="#cb16-534" aria-hidden="true" tabindex="-1"></a>p47_4</span>
+<span id="cb16-535"><a href="#cb16-535" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-536"><a href="#cb16-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-537"><a href="#cb16-537" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
+<span id="cb16-538"><a href="#cb16-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-539"><a href="#cb16-539" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的六件事"}</span>
+<span id="cb16-540"><a href="#cb16-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-541"><a href="#cb16-541" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>在全数据上先筛 feature 或标准化，再切 train/test，产生 leakage。</span>
+<span id="cb16-542"><a href="#cb16-542" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>用 test set 选择 <span class="in">`keepX`</span>、component 数或分类距离。</span>
+<span id="cb16-543"><a href="#cb16-543" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>只给 supervised training score plot，不给 CV/test performance。</span>
+<span id="cb16-544"><a href="#cb16-544" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>只给 overall accuracy，不给 class-wise recall、BER 或 AUC uncertainty。</span>
+<span id="cb16-545"><a href="#cb16-545" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>没报告 design matrix、fold 数、repeats、distance 与随机种子。</span>
+<span id="cb16-546"><a href="#cb16-546" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>把一次 fit 的 non-zero loadings 当稳定 biomarker。</span>
 <span id="cb16-547"><a href="#cb16-547" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-548"><a href="#cb16-548" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将sPLS与DIABLO验证用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb16-548"><a href="#cb16-548" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb16-549"><a href="#cb16-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-550"><a href="#cb16-550" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>替换三件套、<span class="in">`metabolites.tsv`</span> 和 annotation；两个 blocks 必须使用完全相同且同序的 sample IDs。</span>
-<span id="cb16-551"><a href="#cb16-551" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>把 <span class="in">`StudyGroup`</span> 换成你的 outcome；若为 repeated measures，按 subject 切分，绝不能让同一人同时进入 train 与 test。</span>
-<span id="cb16-552"><a href="#cb16-552" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>在 training data 内重新决定 prevalence、feature count、<span class="in">`keepX`</span> grid、component 数和 design matrix，不能照抄本文数字。</span>
-<span id="cb16-553"><a href="#cb16-553" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>类别严重不平衡时用 stratified folds、BER/PR-AUC，并保存每折 prediction；小样本优先 nested CV 而不是再切一个很小的 test set。</span>
-<span id="cb16-554"><a href="#cb16-554" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>发表 biomarker claim 前，增加独立 cohort、calibration、预定义 clinical comparator 和 decision-curve analysis。</span>
+<span id="cb16-550"><a href="#cb16-550" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告sPLS与DIABLO验证的方法与限制 {#sec-methods}</span></span>
+<span id="cb16-551"><a href="#cb16-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-552"><a href="#cb16-552" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; The 220 paired samples were split once into a stratified training set (n=153) and a locked test set (n=67) using seed 20260726. Prevalence filtering, variance filtering, CLR/log1p transformation parameters and feature standardization were learned using training samples only. Sparse PLS retained 15 microbial and 20 metabolite variables per component; learned loadings were projected without refitting into the test set. DIABLO was fitted using a block-design weight of 0.10 and two components. Block-specific keepX values were selected from {5, 10, 15} by 5-fold cross-validation repeated three times using balanced error rate; performance and selection stability were subsequently estimated by 5-fold cross-validation repeated five times. The locked test set was evaluated once using weighted-vote centroid distance. Accuracy, balanced accuracy, class-specific one-vs-rest AUC with 95% confidence intervals, and feature selection stability were reported.</span></span>
+<span id="cb16-553"><a href="#cb16-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-554"><a href="#cb16-554" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将sPLS与DIABLO验证用于自己的研究 {#sec-own-data}</span></span>
 <span id="cb16-555"><a href="#cb16-555" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-556"><a href="#cb16-556" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb16-557"><a href="#cb16-557" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-558"><a href="#cb16-558" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Singh A, et al. DIABLO: an integrative approach for identifying key molecular drivers from multi-omics assays. *Bioinformatics*. 2019. <span class="ot">&lt;https://doi.org/10.1093/bioinformatics/bty1054&gt;</span></span>
-<span id="cb16-559"><a href="#cb16-559" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Rohart F, et al. mixOmics: An R package for 'omics feature selection and multiple data integration. *PLoS Computational Biology*. 2017. <span class="ot">&lt;https://doi.org/10.1371/journal.pcbi.1005752&gt;</span></span>
-<span id="cb16-560"><a href="#cb16-560" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Franzosa EA, et al. Gut microbiome structure and metabolic activity in inflammatory bowel disease. *Nature Microbiology*. 2019. <span class="ot">&lt;https://doi.org/10.1038/s41564-018-0306-4&gt;</span></span>
-<span id="cb16-561"><a href="#cb16-561" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>mixOmics team. DIABLO documentation. <span class="ot">&lt;https://mixomics.org/mixdiablo/&gt;</span></span>
-<span id="cb16-562"><a href="#cb16-562" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Borenstein Lab. CuratedMetagenomicDataMetabolome. Fixed source commit: <span class="in">`89a519d8c832008fbc6e650453e83e2f04858d02`</span>. <span class="ot">&lt;https://github.com/borenstein-lab/CuratedMetagenomicDataMetabolome&gt;</span></span>
+<span id="cb16-556"><a href="#cb16-556" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>替换三件套、<span class="in">`metabolites.tsv`</span> 和 annotation；两个 blocks 必须使用完全相同且同序的 sample IDs。</span>
+<span id="cb16-557"><a href="#cb16-557" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>把 <span class="in">`StudyGroup`</span> 换成你的 outcome；若为 repeated measures，按 subject 切分，绝不能让同一人同时进入 train 与 test。</span>
+<span id="cb16-558"><a href="#cb16-558" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>在 training data 内重新决定 prevalence、feature count、<span class="in">`keepX`</span> grid、component 数和 design matrix，不能照抄本文数字。</span>
+<span id="cb16-559"><a href="#cb16-559" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>类别严重不平衡时用 stratified folds、BER/PR-AUC，并保存每折 prediction；小样本优先 nested CV 而不是再切一个很小的 test set。</span>
+<span id="cb16-560"><a href="#cb16-560" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>发表 biomarker claim 前，增加独立 cohort、calibration、预定义 clinical comparator 和 decision-curve analysis。</span>
+<span id="cb16-561"><a href="#cb16-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-562"><a href="#cb16-562" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb16-563"><a href="#cb16-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-564"><a href="#cb16-564" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Singh A, et al. DIABLO: an integrative approach for identifying key molecular drivers from multi-omics assays. *Bioinformatics*. 2019. <span class="ot">&lt;https://doi.org/10.1093/bioinformatics/bty1054&gt;</span></span>
+<span id="cb16-565"><a href="#cb16-565" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Rohart F, et al. mixOmics: An R package for 'omics feature selection and multiple data integration. *PLoS Computational Biology*. 2017. <span class="ot">&lt;https://doi.org/10.1371/journal.pcbi.1005752&gt;</span></span>
+<span id="cb16-566"><a href="#cb16-566" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Franzosa EA, et al. Gut microbiome structure and metabolic activity in inflammatory bowel disease. *Nature Microbiology*. 2019. <span class="ot">&lt;https://doi.org/10.1038/s41564-018-0306-4&gt;</span></span>
+<span id="cb16-567"><a href="#cb16-567" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>mixOmics team. DIABLO documentation. <span class="ot">&lt;https://mixomics.org/mixdiablo/&gt;</span></span>
+<span id="cb16-568"><a href="#cb16-568" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Borenstein Lab. CuratedMetagenomicDataMetabolome. Fixed source commit: <span class="in">`89a519d8c832008fbc6e650453e83e2f04858d02`</span>. <span class="ot">&lt;https://github.com/borenstein-lab/CuratedMetagenomicDataMetabolome&gt;</span></span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

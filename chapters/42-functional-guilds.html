@@ -539,7 +539,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -851,7 +851,10 @@ window.Quarto = {
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">功能类群注释依赖数据库规则与分类分辨率</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">功能类群注释依赖数据库规则与分类分辨率</a>
+  <ul class="collapse">
+  <li><a href="#功能占比变化可能只是可注释部分变了" id="toc-功能占比变化可能只是可注释部分变了" class="nav-link" data-scroll-target="#功能占比变化可能只是可注释部分变了">功能占比变化，可能只是可注释部分变了</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">下载并读取本次分析的数据</a>
   <ul class="collapse">
   <li><a href="#从三件套读取并构建-microtable" id="toc-从三件套读取并构建-microtable" class="nav-link" data-scroll-target="#从三件套读取并构建-microtable">从三件套读取并构建 <code>microtable</code></a></li>
@@ -907,7 +910,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -936,6 +939,11 @@ window.Quarto = {
 </div>
 </div>
 <p>本页使用 <code>microeco</code> 2.0.0 随包分发的真实中国湿地 16S 数据，CW、IW、TW 各 30 个样本。FAPROTAX 数据库版本由运行日志记录；同一个 OTU 可以匹配多个功能，因此功能条目的相对份额是 <strong>annotation assignments 的组成</strong>，不能解释为互斥细胞比例。</p>
+<section id="功能占比变化可能只是可注释部分变了" class="level3">
+<h3 class="anchored" data-anchor-id="功能占比变化可能只是可注释部分变了">功能占比变化，可能只是可注释部分变了</h3>
+<p>同一个 OTU 可以贡献给多个功能，因此把所有功能条目归一化得到的是注释赋值的组成，而不是互斥细胞比例。如果某组未注释 reads 更多，或可注释菌携带更多映射条目，这个分母就会改变。应把逐样本覆盖率和功能组成并列，不能只显示已命名功能的 100% 堆叠图。</p>
+<p>数据库把已知类群与文献功能联系起来，不代表该样本中的每个成员都具有或正在执行该功能。本例的属级降分辨率敏感性用于观察命名深度如何影响映射；结果不稳定时，应降低功能表述的具体程度。FAPROTAX 条目、Tax4Fun2 基因家族预测和 BugBase 高层表型不是相同测量对象，名称相近也不能合并成投票支持。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">下载并读取本次分析的数据</h2>
@@ -1996,430 +2004,436 @@ C_s=\frac{\sum_{i:\sum_kM_{ik}&gt;0}Y_{is}}{\sum_iY_{is}},
 <span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>本页使用 <span class="in">`microeco`</span> 2.0.0 随包分发的真实中国湿地 16S 数据，CW、IW、TW 各 30 个样本。FAPROTAX 数据库版本由运行日志记录；同一个 OTU 可以匹配多个功能，因此功能条目的相对份额是 **annotation assignments 的组成**，不能解释为互斥细胞比例。</span>
 <span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### 功能占比变化，可能只是可注释部分变了</span></span>
 <span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`ggrepel`</span>、<span class="in">`microeco`</span>、<span class="in">`ragg`</span>、<span class="in">`readr`</span>、<span class="in">`scales`</span>、<span class="in">`svglite`</span>。本次使用中国湿地的 OTU count 表、分类表和样本信息表。</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>同一个 OTU 可以贡献给多个功能，因此把所有功能条目归一化得到的是注释赋值的组成，而不是互斥细胞比例。如果某组未注释 reads 更多，或可注释菌携带更多映射条目，这个分母就会改变。应把逐样本覆盖率和功能组成并列，不能只显示已命名功能的 100% 堆叠图。</span>
 <span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>数据库把已知类群与文献功能联系起来，不代表该样本中的每个成员都具有或正在执行该功能。本例的属级降分辨率敏感性用于观察命名深度如何影响映射；结果不稳定时，应降低功能表述的具体程度。FAPROTAX 条目、Tax4Fun2 基因家族预测和 BugBase 高层表型不是相同测量对象，名称相近也不能合并成投票支持。</span>
 <span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/metadata.tsv"</span>,</span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/otutab.tsv"</span>,</span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/taxonomy.tsv"</span></span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-functional-guild-theme</span></span>
-<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microeco)</span>
-<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260742</span>)</span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
-<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
-<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
-<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
-<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
-<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
-<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
-<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
-<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
-<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
-<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
-<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
-<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
-<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
-<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a><span class="fu">### 从三件套读取并构建 `microtable`</span></span>
-<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-functional-guild-triad</span></span>
-<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
-<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
-<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
-<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
-<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
-<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>  out</span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"data/small/otutab.tsv"</span>)</span>
-<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"data/small/taxonomy.tsv"</span>)</span>
-<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"data/small/metadata.tsv"</span>)</span>
-<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.integer), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
-<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>Group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"CW"</span>, <span class="st">"IW"</span>, <span class="st">"TW"</span>))</span>
-<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> otutab[, <span class="fu">rownames</span>(metadata), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">13628</span>L, <span class="fu">ncol</span>(otutab) <span class="sc">==</span> <span class="dv">90</span>L,</span>
-<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(otutab) <span class="sc">==</span> <span class="dv">1619670</span>L,</span>
-<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(otutab), <span class="fu">rownames</span>(taxonomy)),</span>
-<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata))</span>
-<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> microeco<span class="sc">::</span>microtable<span class="sc">$</span><span class="fu">new</span>(</span>
-<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>  <span class="at">otu_table =</span> <span class="fu">as.data.frame</span>(otutab),</span>
-<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_table =</span> metadata,</span>
-<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>  <span class="at">tax_table =</span> taxonomy,</span>
-<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>  <span class="at">auto_tidy =</span> <span class="cn">TRUE</span></span>
-<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy)</span>
-<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
-<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/42-functional-guilds.R)</span>。脚本包含数据下载、计算和图形导出。</span>
-<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
-<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggplot2"</span>, <span class="st">"ggrepel"</span>, <span class="st">"microeco"</span>, <span class="st">"patchwork"</span>, <span class="st">"ragg"</span>, <span class="st">"readr"</span>, <span class="st">"scales"</span>,</span>
-<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>  <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span></span>
-<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a><span class="fu">## 三种工具估计的对象并不相同 {#sec-theory}</span></span>
-<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a><span class="fu">### FAPROTAX 是 taxonomy-to-trait literature mapping</span></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`ggrepel`</span>、<span class="in">`microeco`</span>、<span class="in">`ragg`</span>、<span class="in">`readr`</span>、<span class="in">`scales`</span>、<span class="in">`svglite`</span>。本次使用中国湿地的 OTU count 表、分类表和样本信息表。</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/metadata.tsv"</span>,</span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/otutab.tsv"</span>,</span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/taxonomy.tsv"</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-functional-guild-theme</span></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(microeco)</span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260742</span>)</span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a><span class="fu">### 从三件套读取并构建 `microtable`</span></span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-functional-guild-triad</span></span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"data/small/otutab.tsv"</span>)</span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"data/small/taxonomy.tsv"</span>)</span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"data/small/metadata.tsv"</span>)</span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.integer), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>Group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"CW"</span>, <span class="st">"IW"</span>, <span class="st">"TW"</span>))</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> otutab[, <span class="fu">rownames</span>(metadata), drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">13628</span>L, <span class="fu">ncol</span>(otutab) <span class="sc">==</span> <span class="dv">90</span>L,</span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(otutab) <span class="sc">==</span> <span class="dv">1619670</span>L,</span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(otutab), <span class="fu">rownames</span>(taxonomy)),</span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata))</span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> microeco<span class="sc">::</span>microtable<span class="sc">$</span><span class="fu">new</span>(</span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a>  <span class="at">otu_table =</span> <span class="fu">as.data.frame</span>(otutab),</span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a>  <span class="at">sample_table =</span> metadata,</span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">tax_table =</span> taxonomy,</span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a>  <span class="at">auto_tidy =</span> <span class="cn">TRUE</span></span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy)</span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/42-functional-guilds.R)</span>。脚本包含数据下载、计算和图形导出。</span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggplot2"</span>, <span class="st">"ggrepel"</span>, <span class="st">"microeco"</span>, <span class="st">"patchwork"</span>, <span class="st">"ragg"</span>, <span class="st">"readr"</span>, <span class="st">"scales"</span>,</span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>  <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span></span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a>对 OTU $i$ 与功能 $k$，数据库给出二元映射 $M_{ik}\in<span class="sc">\{</span>0,1<span class="sc">\}</span>$。样本 $s$ 的功能 assignment abundance 为</span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a>A_{ks}=\sum_i M_{ik}Y_{is}.</span>
-<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## 三种工具估计的对象并不相同 {#sec-theory}</span></span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="fu">### FAPROTAX 是 taxonomy-to-trait literature mapping</span></span>
 <span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a>同一 taxon 可对应多个功能，所以 $\sum_k A_{ks}$ 可以大于 mapped reads。这里另外计算</span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a>对 OTU $i$ 与功能 $k$，数据库给出二元映射 $M_{ik}\in<span class="sc">\{</span>0,1<span class="sc">\}</span>$。样本 $s$ 的功能 assignment abundance 为</span>
 <span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a>C_s=\frac{\sum_{i:\sum_kM_{ik}&gt;0}Y_{is}}{\sum_iY_{is}},</span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a>A_{ks}=\sum_i M_{ik}Y_{is}.</span>
 <span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a>即至少获得一个 FAPROTAX annotation 的 read fraction。它是解释功能图之前必须报告的 coverage。</span>
+<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a>同一 taxon 可对应多个功能，所以 $\sum_k A_{ks}$ 可以大于 mapped reads。这里另外计算</span>
 <span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tax4Fun2 从 representative sequence 邻近参考基因组</span></span>
-<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a>Tax4Fun2 不是简单读 taxonomy；它将 representative sequences 与 reference genomes 对齐，再汇总 KEGG ortholog predictions，并可报告 fraction of sequences unexplained 与 functional redundancy。若只有 <span class="in">`otutab/taxonomy/metadata`</span> 而没有代表序列，不能假装运行 Tax4Fun2。</span>
+<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a>C_s=\frac{\sum_{i:\sum_kM_{ik}&gt;0}Y_{is}}{\sum_iY_{is}},</span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a><span class="fu">### BugBase 汇总的是高层 microbial phenotypes</span></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a>即至少获得一个 FAPROTAX annotation 的 read fraction。它是解释功能图之前必须报告的 coverage。</span>
 <span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>BugBase 预测 aerobic、anaerobic、biofilm-forming、Gram-positive 等 phenotype，依赖 compatible taxonomic reference、copy-number normalization 与预计算 trait tables。它与 FAPROTAX pathways、Tax4Fun2 KOs 不在同一层级，不能把三个工具的条目直接做“多数投票”。</span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tax4Fun2 从 representative sequence 邻近参考基因组</span></span>
 <span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a><span class="fu">### 功能注释汇总仍然具有组成性</span></span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a>Tax4Fun2 不是简单读 taxonomy；它将 representative sequences 与 reference genomes 对齐，再汇总 KEGG ortholog predictions，并可报告 fraction of sequences unexplained 与 functional redundancy。若只有 <span class="in">`otutab/taxonomy/metadata`</span> 而没有代表序列，不能假装运行 Tax4Fun2。</span>
 <span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a>本页对每个样本的 assignment counts 做 closure，再以 pseudocount 0.5 计算 CLR；每个功能用 Kruskal–Wallis 检验 CW/IW/TW 差异，93 个 p-value 统一做 Benjamini–Hochberg correction，并同时报告 epsilon-squared effect size。筛图依据 effect size 与 adjusted p-value，不只按最小 p-value。</span>
+<span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### BugBase 汇总的是高层 microbial phenotypes</span></span>
 <span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：为什么不能用 16S 功能预测替代 shotgun metagenomics<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>同一分类单元内部可以存在 accessory-gene variation、水平基因转移和 strain-specific pathways；参考基因组与环境样本之间的系统发育距离又会引入 extrapolation。shotgun metagenomics 至少直接观察 DNA functional potential，metatranscriptomics/proteomics/metabolomics分别更接近 expression、protein 与 biochemical outcome。16S prediction 适合生成低成本假设和设计验证实验，不适合作为某通路真实增强的唯一证据。</span>
-<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a><span class="fu">## 按数据库规则映射功能类群 {#sec-code}</span></span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a>BugBase 预测 aerobic、anaerobic、biofilm-forming、Gram-positive 等 phenotype，依赖 compatible taxonomic reference、copy-number normalization 与预计算 trait tables。它与 FAPROTAX pathways、Tax4Fun2 KOs 不在同一层级，不能把三个工具的条目直接做“多数投票”。</span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="fu">### 功能注释汇总仍然具有组成性</span></span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>本页对每个样本的 assignment counts 做 closure，再以 pseudocount 0.5 计算 CLR；每个功能用 Kruskal–Wallis 检验 CW/IW/TW 差异，93 个 p-value 统一做 Benjamini–Hochberg correction，并同时报告 epsilon-squared effect size。筛图依据 effect size 与 adjusted p-value，不只按最小 p-value。</span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：为什么不能用 16S 功能预测替代 shotgun metagenomics<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a><span class="fu">### 映射 FAPROTAX，并单独计算 annotation coverage</span></span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a>同一分类单元内部可以存在 accessory-gene variation、水平基因转移和 strain-specific pathways；参考基因组与环境样本之间的系统发育距离又会引入 extrapolation。shotgun metagenomics 至少直接观察 DNA functional potential，metatranscriptomics/proteomics/metabolomics分别更接近 expression、protein 与 biochemical outcome。16S prediction 适合生成低成本假设和设计验证实验，不适合作为某通路真实增强的唯一证据。</span>
 <span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: map-faprotax</span></span>
-<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a>faprotax <span class="ot">&lt;-</span> microeco<span class="sc">::</span>trans_func<span class="sc">$</span><span class="fu">new</span>(dataset)</span>
-<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a>faprotax<span class="sc">$</span><span class="fu">cal_func</span>(<span class="at">prok_database =</span> <span class="st">"FAPROTAX"</span>)</span>
-<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a>function_map <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(faprotax<span class="sc">$</span>res_func)</span>
-<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a>function_map <span class="ot">&lt;-</span> function_map[<span class="fu">rownames</span>(otutab), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>mapped_taxon <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(function_map) <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a>function_counts <span class="ot">&lt;-</span> <span class="fu">t</span>(function_map) <span class="sc">%*%</span> otutab</span>
-<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> <span class="fu">colSums</span>(otutab[mapped_taxon, , <span class="at">drop =</span> <span class="cn">FALSE</span>]) <span class="sc">/</span> <span class="fu">colSums</span>(otutab)</span>
-<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a>coverage_ledger <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a>  <span class="at">SampleID =</span> <span class="fu">names</span>(coverage), <span class="at">Group =</span> metadata[<span class="fu">names</span>(coverage), <span class="st">"Group"</span>],</span>
-<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>  <span class="at">AnnotationCoverage =</span> <span class="fu">unname</span>(coverage), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a>mapping_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a>  <span class="at">Features =</span> <span class="fu">nrow</span>(function_map), <span class="at">Functions =</span> <span class="fu">ncol</span>(function_map),</span>
-<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>  <span class="at">MappedFeatures =</span> <span class="fu">sum</span>(mapped_taxon), <span class="at">MappedReads =</span> <span class="fu">sum</span>(otutab[mapped_taxon, ]),</span>
-<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a>  <span class="at">TotalReads =</span> <span class="fu">sum</span>(otutab), <span class="at">OverallReadCoverage =</span> <span class="fu">sum</span>(otutab[mapped_taxon, ]) <span class="sc">/</span> <span class="fu">sum</span>(otutab)</span>
-<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(function_map <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">ncol</span>(function_map) <span class="sc">==</span> <span class="dv">93</span>L,</span>
-<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(mapped_taxon) <span class="sc">==</span> <span class="dv">3992</span>L,</span>
-<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(otutab[mapped_taxon, ]) <span class="sc">==</span> <span class="dv">562755</span>L,</span>
-<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(coverage <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> coverage <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
-<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a>mapping_summary</span>
-<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a><span class="fu">### 计算 assignment composition 与多重检验</span></span>
-<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: test-faprotax-functions</span></span>
-<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>assignment_share <span class="ot">&lt;-</span> <span class="fu">sweep</span>(function_counts, <span class="dv">2</span>L, <span class="fu">colSums</span>(function_counts), <span class="st">"/"</span>)</span>
-<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>clr_counts <span class="ot">&lt;-</span> <span class="fu">log</span>(function_counts <span class="sc">+</span> <span class="fl">0.5</span>)</span>
-<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>clr_counts <span class="ot">&lt;-</span> <span class="fu">sweep</span>(clr_counts, <span class="dv">2</span>L, <span class="fu">colMeans</span>(clr_counts), <span class="st">"-"</span>)</span>
-<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>test_one_function <span class="ot">&lt;-</span> <span class="cf">function</span>(feature) {</span>
-<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>  values <span class="ot">&lt;-</span> clr_counts[feature, ]</span>
-<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">kruskal.test</span>(values <span class="sc">~</span> metadata<span class="sc">$</span>Group)</span>
-<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>  epsilon2 <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="dv">0</span>, (<span class="fu">unname</span>(test<span class="sc">$</span>statistic) <span class="sc">-</span> <span class="fu">nlevels</span>(metadata<span class="sc">$</span>Group) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span></span>
-<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>                       (<span class="fu">length</span>(values) <span class="sc">-</span> <span class="fu">nlevels</span>(metadata<span class="sc">$</span>Group)))</span>
-<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a>  medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(assignment_share[feature, ], metadata<span class="sc">$</span>Group, median)</span>
-<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a>    <span class="at">Function =</span> feature, <span class="at">PValue =</span> test<span class="sc">$</span>p.value, <span class="at">EpsilonSquared =</span> epsilon2,</span>
-<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a>    <span class="at">CWMedian =</span> medians[[<span class="st">"CW"</span>]], <span class="at">IWMedian =</span> medians[[<span class="st">"IW"</span>]],</span>
-<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>    <span class="at">TWMedian =</span> medians[[<span class="st">"TW"</span>]], <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a>function_tests <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">rownames</span>(function_counts), test_one_function))</span>
-<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a>function_tests<span class="sc">$</span>AdjustedP <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">p.adjust</span>(function_tests<span class="sc">$</span>PValue, <span class="at">method =</span> <span class="st">"BH"</span>)</span>
-<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a>function_tests <span class="ot">&lt;-</span> function_tests[<span class="fu">order</span>(<span class="sc">-</span>function_tests<span class="sc">$</span>EpsilonSquared, function_tests<span class="sc">$</span>AdjustedP), ]</span>
-<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>function_tests<span class="sc">$</span>FunctionLabel <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, function_tests<span class="sc">$</span>Function, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(function_tests) <span class="sc">==</span> <span class="dv">93</span>L, <span class="fu">all</span>(function_tests<span class="sc">$</span>AdjustedP <span class="sc">&gt;=</span> function_tests<span class="sc">$</span>PValue))</span>
-<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(function_tests, <span class="dv">12</span>)</span>
-<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a><span class="fu">### 仅保留属级信息重新注释，检查分类分辨率的影响</span></span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a><span class="fu">## 按数据库规则映射功能类群 {#sec-code}</span></span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a><span class="fu">### 映射 FAPROTAX，并单独计算 annotation coverage</span></span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: map-faprotax</span></span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a>faprotax <span class="ot">&lt;-</span> microeco<span class="sc">::</span>trans_func<span class="sc">$</span><span class="fu">new</span>(dataset)</span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a>faprotax<span class="sc">$</span><span class="fu">cal_func</span>(<span class="at">prok_database =</span> <span class="st">"FAPROTAX"</span>)</span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a>function_map <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(faprotax<span class="sc">$</span>res_func)</span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a>function_map <span class="ot">&lt;-</span> function_map[<span class="fu">rownames</span>(otutab), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>mapped_taxon <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(function_map) <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a>function_counts <span class="ot">&lt;-</span> <span class="fu">t</span>(function_map) <span class="sc">%*%</span> otutab</span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> <span class="fu">colSums</span>(otutab[mapped_taxon, , <span class="at">drop =</span> <span class="cn">FALSE</span>]) <span class="sc">/</span> <span class="fu">colSums</span>(otutab)</span>
+<span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>coverage_ledger <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a>  <span class="at">SampleID =</span> <span class="fu">names</span>(coverage), <span class="at">Group =</span> metadata[<span class="fu">names</span>(coverage), <span class="st">"Group"</span>],</span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a>  <span class="at">AnnotationCoverage =</span> <span class="fu">unname</span>(coverage), <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a>mapping_summary <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a>  <span class="at">Features =</span> <span class="fu">nrow</span>(function_map), <span class="at">Functions =</span> <span class="fu">ncol</span>(function_map),</span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a>  <span class="at">MappedFeatures =</span> <span class="fu">sum</span>(mapped_taxon), <span class="at">MappedReads =</span> <span class="fu">sum</span>(otutab[mapped_taxon, ]),</span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a>  <span class="at">TotalReads =</span> <span class="fu">sum</span>(otutab), <span class="at">OverallReadCoverage =</span> <span class="fu">sum</span>(otutab[mapped_taxon, ]) <span class="sc">/</span> <span class="fu">sum</span>(otutab)</span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(function_map <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)), <span class="fu">ncol</span>(function_map) <span class="sc">==</span> <span class="dv">93</span>L,</span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(mapped_taxon) <span class="sc">==</span> <span class="dv">3992</span>L,</span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(otutab[mapped_taxon, ]) <span class="sc">==</span> <span class="dv">562755</span>L,</span>
+<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(coverage <span class="sc">&gt;=</span> <span class="dv">0</span> <span class="sc">&amp;</span> coverage <span class="sc">&lt;=</span> <span class="dv">1</span>)</span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>mapping_summary</span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a><span class="fu">### 计算 assignment composition 与多重检验</span></span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: test-faprotax-functions</span></span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>assignment_share <span class="ot">&lt;-</span> <span class="fu">sweep</span>(function_counts, <span class="dv">2</span>L, <span class="fu">colSums</span>(function_counts), <span class="st">"/"</span>)</span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>clr_counts <span class="ot">&lt;-</span> <span class="fu">log</span>(function_counts <span class="sc">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>clr_counts <span class="ot">&lt;-</span> <span class="fu">sweep</span>(clr_counts, <span class="dv">2</span>L, <span class="fu">colMeans</span>(clr_counts), <span class="st">"-"</span>)</span>
+<span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a>test_one_function <span class="ot">&lt;-</span> <span class="cf">function</span>(feature) {</span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a>  values <span class="ot">&lt;-</span> clr_counts[feature, ]</span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a>  test <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">kruskal.test</span>(values <span class="sc">~</span> metadata<span class="sc">$</span>Group)</span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a>  epsilon2 <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="dv">0</span>, (<span class="fu">unname</span>(test<span class="sc">$</span>statistic) <span class="sc">-</span> <span class="fu">nlevels</span>(metadata<span class="sc">$</span>Group) <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">/</span></span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a>                       (<span class="fu">length</span>(values) <span class="sc">-</span> <span class="fu">nlevels</span>(metadata<span class="sc">$</span>Group)))</span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a>  medians <span class="ot">&lt;-</span> <span class="fu">tapply</span>(assignment_share[feature, ], metadata<span class="sc">$</span>Group, median)</span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a>    <span class="at">Function =</span> feature, <span class="at">PValue =</span> test<span class="sc">$</span>p.value, <span class="at">EpsilonSquared =</span> epsilon2,</span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a>    <span class="at">CWMedian =</span> medians[[<span class="st">"CW"</span>]], <span class="at">IWMedian =</span> medians[[<span class="st">"IW"</span>]],</span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>    <span class="at">TWMedian =</span> medians[[<span class="st">"TW"</span>]], <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a>function_tests <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">rownames</span>(function_counts), test_one_function))</span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a>function_tests<span class="sc">$</span>AdjustedP <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">p.adjust</span>(function_tests<span class="sc">$</span>PValue, <span class="at">method =</span> <span class="st">"BH"</span>)</span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a>function_tests <span class="ot">&lt;-</span> function_tests[<span class="fu">order</span>(<span class="sc">-</span>function_tests<span class="sc">$</span>EpsilonSquared, function_tests<span class="sc">$</span>AdjustedP), ]</span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a>function_tests<span class="sc">$</span>FunctionLabel <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, function_tests<span class="sc">$</span>Function, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: faprotax-resolution-sensitivity</span></span>
-<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>taxonomy_genus <span class="ot">&lt;-</span> taxonomy</span>
-<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>taxonomy_genus[, <span class="fu">setdiff</span>(<span class="fu">colnames</span>(taxonomy_genus), <span class="st">"Genus"</span>)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
-<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a>dataset_genus <span class="ot">&lt;-</span> microeco<span class="sc">::</span>microtable<span class="sc">$</span><span class="fu">new</span>(</span>
-<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a>  <span class="at">otu_table =</span> <span class="fu">as.data.frame</span>(otutab), <span class="at">sample_table =</span> metadata,</span>
-<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a>  <span class="at">tax_table =</span> taxonomy_genus, <span class="at">auto_tidy =</span> <span class="cn">TRUE</span></span>
-<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a>faprotax_genus <span class="ot">&lt;-</span> microeco<span class="sc">::</span>trans_func<span class="sc">$</span><span class="fu">new</span>(dataset_genus)</span>
-<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a>faprotax_genus<span class="sc">$</span>for_what <span class="ot">&lt;-</span> <span class="st">"prok"</span></span>
-<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a>faprotax_genus<span class="sc">$</span><span class="fu">cal_func</span>(<span class="at">prok_database =</span> <span class="st">"FAPROTAX"</span>)</span>
-<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>map_genus <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(faprotax_genus<span class="sc">$</span>res_func)[<span class="fu">rownames</span>(otutab), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>counts_genus <span class="ot">&lt;-</span> <span class="fu">t</span>(map_genus) <span class="sc">%*%</span> otutab</span>
-<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>share_genus <span class="ot">&lt;-</span> <span class="fu">sweep</span>(counts_genus, <span class="dv">2</span>L, <span class="fu">pmax</span>(<span class="fu">colSums</span>(counts_genus), <span class="dv">1</span>), <span class="st">"/"</span>)</span>
-<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a>function_sensitivity <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a>  <span class="at">Function =</span> <span class="fu">rownames</span>(function_counts),</span>
-<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a>  <span class="at">FullLineageMean =</span> <span class="fu">rowMeans</span>(assignment_share),</span>
-<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a>  <span class="at">GenusOnlyMean =</span> <span class="fu">rowMeans</span>(share_genus),</span>
-<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a>  <span class="at">SampleSpearman =</span> <span class="fu">vapply</span>(<span class="fu">rownames</span>(function_counts), <span class="cf">function</span>(feature) {</span>
-<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (stats<span class="sc">::</span><span class="fu">sd</span>(assignment_share[feature, ]) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> stats<span class="sc">::</span><span class="fu">sd</span>(share_genus[feature, ]) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NA_real_</span>)</span>
-<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a>    stats<span class="sc">::</span><span class="fu">cor</span>(assignment_share[feature, ], share_genus[feature, ], <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
-<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a>  }, <span class="fu">numeric</span>(<span class="dv">1</span>)),</span>
-<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a>function_sensitivity<span class="sc">$</span>MeanAbsoluteDifference <span class="ot">&lt;-</span> <span class="fu">abs</span>(</span>
-<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a>  function_sensitivity<span class="sc">$</span>FullLineageMean <span class="sc">-</span> function_sensitivity<span class="sc">$</span>GenusOnlyMean</span>
-<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a>function_sensitivity<span class="sc">$</span>FunctionLabel <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, function_sensitivity<span class="sc">$</span>Function, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a>resolution_coverage <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb18-320"><a href="#cb18-320" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mapping =</span> <span class="fu">c</span>(<span class="st">"Full lineage"</span>, <span class="st">"Genus only"</span>),</span>
-<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a>  <span class="at">ReadCoverage =</span> <span class="fu">c</span>(<span class="fu">sum</span>(otutab[mapped_taxon, ]) <span class="sc">/</span> <span class="fu">sum</span>(otutab),</span>
-<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">sum</span>(otutab[<span class="fu">rowSums</span>(map_genus) <span class="sc">&gt;</span> <span class="dv">0</span>, ]) <span class="sc">/</span> <span class="fu">sum</span>(otutab))</span>
-<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a>resolution_coverage</span>
-<span id="cb18-325"><a href="#cb18-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-326"><a href="#cb18-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a><span class="fu">## 功能数据库覆盖率决定解释上限 {#sec-audit}</span></span>
-<span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**先审 coverage。**低 coverage 时，组间差异可能只是“哪些 reads 能被数据库注释”的差异。必须给逐样本分布，而不是只给总体百分比。</span>
-<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**锁数据库和 reference。**FAPROTAX、Tax4Fun2 与 BugBase 更新节奏不同；版本、下载日期、reference files、checksum 与参数都应进入 provenance。</span>
-<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**区分 assignment 与 abundance。**多标签 FAPROTAX 条目不互斥，堆叠柱图的 denominator 必须说明；不要命名成“cell proportion”。</span>
-<span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**检验与筛图分离。**全部功能进入同一个 FDR family；Top 12 只用于展示，不能在看图后再重定义检验集合。</span>
-<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**用 orthogonal data 验证。**关键 nitrogen/sulfur/methane pathway 至少用 shotgun genes、qPCR、transcript、enzyme assay 或 metabolite corroboration。</span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(function_tests) <span class="sc">==</span> <span class="dv">93</span>L, <span class="fu">all</span>(function_tests<span class="sc">$</span>AdjustedP <span class="sc">&gt;=</span> function_tests<span class="sc">$</span>PValue))</span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(function_tests, <span class="dv">12</span>)</span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a><span class="fu">### 仅保留属级信息重新注释，检查分类分辨率的影响</span></span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: faprotax-resolution-sensitivity</span></span>
+<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a>taxonomy_genus <span class="ot">&lt;-</span> taxonomy</span>
+<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a>taxonomy_genus[, <span class="fu">setdiff</span>(<span class="fu">colnames</span>(taxonomy_genus), <span class="st">"Genus"</span>)] <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a>dataset_genus <span class="ot">&lt;-</span> microeco<span class="sc">::</span>microtable<span class="sc">$</span><span class="fu">new</span>(</span>
+<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>  <span class="at">otu_table =</span> <span class="fu">as.data.frame</span>(otutab), <span class="at">sample_table =</span> metadata,</span>
+<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>  <span class="at">tax_table =</span> taxonomy_genus, <span class="at">auto_tidy =</span> <span class="cn">TRUE</span></span>
+<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a>faprotax_genus <span class="ot">&lt;-</span> microeco<span class="sc">::</span>trans_func<span class="sc">$</span><span class="fu">new</span>(dataset_genus)</span>
+<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a>faprotax_genus<span class="sc">$</span>for_what <span class="ot">&lt;-</span> <span class="st">"prok"</span></span>
+<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a>faprotax_genus<span class="sc">$</span><span class="fu">cal_func</span>(<span class="at">prok_database =</span> <span class="st">"FAPROTAX"</span>)</span>
+<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a>map_genus <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(faprotax_genus<span class="sc">$</span>res_func)[<span class="fu">rownames</span>(otutab), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a>counts_genus <span class="ot">&lt;-</span> <span class="fu">t</span>(map_genus) <span class="sc">%*%</span> otutab</span>
+<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a>share_genus <span class="ot">&lt;-</span> <span class="fu">sweep</span>(counts_genus, <span class="dv">2</span>L, <span class="fu">pmax</span>(<span class="fu">colSums</span>(counts_genus), <span class="dv">1</span>), <span class="st">"/"</span>)</span>
+<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a>function_sensitivity <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a>  <span class="at">Function =</span> <span class="fu">rownames</span>(function_counts),</span>
+<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">FullLineageMean =</span> <span class="fu">rowMeans</span>(assignment_share),</span>
+<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a>  <span class="at">GenusOnlyMean =</span> <span class="fu">rowMeans</span>(share_genus),</span>
+<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a>  <span class="at">SampleSpearman =</span> <span class="fu">vapply</span>(<span class="fu">rownames</span>(function_counts), <span class="cf">function</span>(feature) {</span>
+<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (stats<span class="sc">::</span><span class="fu">sd</span>(assignment_share[feature, ]) <span class="sc">==</span> <span class="dv">0</span> <span class="sc">||</span> stats<span class="sc">::</span><span class="fu">sd</span>(share_genus[feature, ]) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(<span class="cn">NA_real_</span>)</span>
+<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a>    stats<span class="sc">::</span><span class="fu">cor</span>(assignment_share[feature, ], share_genus[feature, ], <span class="at">method =</span> <span class="st">"spearman"</span>)</span>
+<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a>  }, <span class="fu">numeric</span>(<span class="dv">1</span>)),</span>
+<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-320"><a href="#cb18-320" aria-hidden="true" tabindex="-1"></a>function_sensitivity<span class="sc">$</span>MeanAbsoluteDifference <span class="ot">&lt;-</span> <span class="fu">abs</span>(</span>
+<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a>  function_sensitivity<span class="sc">$</span>FullLineageMean <span class="sc">-</span> function_sensitivity<span class="sc">$</span>GenusOnlyMean</span>
+<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a>function_sensitivity<span class="sc">$</span>FunctionLabel <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, function_sensitivity<span class="sc">$</span>Function, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-325"><a href="#cb18-325" aria-hidden="true" tabindex="-1"></a>resolution_coverage <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-326"><a href="#cb18-326" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mapping =</span> <span class="fu">c</span>(<span class="st">"Full lineage"</span>, <span class="st">"Genus only"</span>),</span>
+<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a>  <span class="at">ReadCoverage =</span> <span class="fu">c</span>(<span class="fu">sum</span>(otutab[mapped_taxon, ]) <span class="sc">/</span> <span class="fu">sum</span>(otutab),</span>
+<span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">sum</span>(otutab[<span class="fu">rowSums</span>(map_genus) <span class="sc">&gt;</span> <span class="dv">0</span>, ]) <span class="sc">/</span> <span class="fu">sum</span>(otutab))</span>
+<span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a>resolution_coverage</span>
+<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a><span class="fu">## 功能数据库覆盖率决定解释上限 {#sec-audit}</span></span>
 <span id="cb18-334"><a href="#cb18-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-335"><a href="#cb18-335" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Tax4Fun2 与 BugBase 的最低输入审计"}</span>
-<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a>Tax4Fun2 必须保留与 count table 完全一致的 representative-sequence IDs，并报告 reference version、sequence identity/coverage、FTU/FSU 与 FRI；BugBase 必须记录 compatible taxonomy、normalization、phenotype threshold 和 unmapped fraction。只有三件套而缺代表序列时，本页的 FAPROTAX branch 可以运行，但 Tax4Fun2 branch 尚不具备合法输入。</span>
-<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a><span class="fu">## 把预测结果与注释覆盖率一起展示 {#sec-beautify}</span></span>
+<span id="cb18-335"><a href="#cb18-335" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**先审 coverage。**低 coverage 时，组间差异可能只是“哪些 reads 能被数据库注释”的差异。必须给逐样本分布，而不是只给总体百分比。</span>
+<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**锁数据库和 reference。**FAPROTAX、Tax4Fun2 与 BugBase 更新节奏不同；版本、下载日期、reference files、checksum 与参数都应进入 provenance。</span>
+<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**区分 assignment 与 abundance。**多标签 FAPROTAX 条目不互斥，堆叠柱图的 denominator 必须说明；不要命名成“cell proportion”。</span>
+<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**检验与筛图分离。**全部功能进入同一个 FDR family；Top 12 只用于展示，不能在看图后再重定义检验集合。</span>
+<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**用 orthogonal data 验证。**关键 nitrogen/sulfur/methane pathway 至少用 shotgun genes、qPCR、transcript、enzyme assay 或 metabolite corroboration。</span>
 <span id="cb18-340"><a href="#cb18-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a><span class="fu">### annotation coverage</span></span>
-<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-functional-coverage</span></span>
-<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "FAPROTAX annotation coverage must accompany predicted functions."</span></span>
-<span id="cb18-349"><a href="#cb18-349" aria-hidden="true" tabindex="-1"></a>p_coverage <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coverage_ledger, <span class="fu">aes</span>(Group, AnnotationCoverage, <span class="at">colour =</span> Group)) <span class="sc">+</span></span>
-<span id="cb18-350"><a href="#cb18-350" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.55</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">colour =</span> <span class="st">"#4D4D4D"</span>) <span class="sc">+</span></span>
-<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="fl">0.65</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pub</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">CW =</span> pal_pub[[<span class="st">"blue"</span>]], <span class="at">IW =</span> pal_pub[[<span class="st">"orange"</span>]], <span class="at">TW =</span> pal_pub[[<span class="st">"green"</span>]])) <span class="sc">+</span></span>
-<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"FAPROTAX annotation coverage"</span>, <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb18-355"><a href="#cb18-355" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Annotated read fraction"</span>,</span>
-<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Coverage precedes multi-function duplication."</span>) <span class="sc">+</span></span>
-<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_coverage, <span class="st">"figures/42-function-coverage"</span>, <span class="dv">110</span>, <span class="dv">82</span>)</span>
-<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a>p_coverage</span>
-<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a><span class="fu">### 展示主要功能类别的注释组成</span></span>
-<span id="cb18-363"><a href="#cb18-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-366"><a href="#cb18-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-functional-composition</span></span>
-<span id="cb18-369"><a href="#cb18-369" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Group means of the most abundant FAPROTAX assignment categories."</span></span>
-<span id="cb18-370"><a href="#cb18-370" aria-hidden="true" tabindex="-1"></a>top_functions <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(<span class="fu">rowMeans</span>(assignment_share), <span class="at">decreasing =</span> <span class="cn">TRUE</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb18-371"><a href="#cb18-371" aria-hidden="true" tabindex="-1"></a>composition_long <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(top_functions, <span class="cf">function</span>(feature) {</span>
-<span id="cb18-372"><a href="#cb18-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aggregate</span>(assignment_share[feature, ], <span class="fu">list</span>(<span class="at">Group =</span> metadata<span class="sc">$</span>Group), mean) <span class="sc">|&gt;</span></span>
-<span id="cb18-373"><a href="#cb18-373" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transform</span>(<span class="at">Function =</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, feature, <span class="at">fixed =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb18-374"><a href="#cb18-374" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">"Group"</span>, <span class="st">"AssignmentShare"</span>, <span class="st">"Function"</span>))</span>
-<span id="cb18-375"><a href="#cb18-375" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb18-376"><a href="#cb18-376" aria-hidden="true" tabindex="-1"></a>composition_long<span class="sc">$</span>Function <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb18-377"><a href="#cb18-377" aria-hidden="true" tabindex="-1"></a>  composition_long<span class="sc">$</span>Function,</span>
-<span id="cb18-378"><a href="#cb18-378" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, top_functions, <span class="at">fixed =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb18-379"><a href="#cb18-379" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-380"><a href="#cb18-380" aria-hidden="true" tabindex="-1"></a>p_composition <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(composition_long, <span class="fu">aes</span>(AssignmentShare, Function, <span class="at">fill =</span> Group)) <span class="sc">+</span></span>
-<span id="cb18-381"><a href="#cb18-381" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.78</span>), <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb18-382"><a href="#cb18-382" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_pub</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">CW =</span> pal_pub[[<span class="st">"blue"</span>]], <span class="at">IW =</span> pal_pub[[<span class="st">"orange"</span>]], <span class="at">TW =</span> pal_pub[[<span class="st">"green"</span>]])) <span class="sc">+</span></span>
-<span id="cb18-383"><a href="#cb18-383" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.04</span>))) <span class="sc">+</span></span>
-<span id="cb18-384"><a href="#cb18-384" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Most abundant predicted functions"</span>, <span class="at">x =</span> <span class="st">"Mean share of function assignments"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
-<span id="cb18-385"><a href="#cb18-385" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Categories are non-exclusive assignment shares."</span>) <span class="sc">+</span></span>
-<span id="cb18-386"><a href="#cb18-386" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
-<span id="cb18-387"><a href="#cb18-387" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_composition, <span class="st">"figures/42-functional-composition"</span>, <span class="dv">178</span>, <span class="dv">105</span>)</span>
-<span id="cb18-388"><a href="#cb18-388" aria-hidden="true" tabindex="-1"></a>p_composition</span>
-<span id="cb18-389"><a href="#cb18-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-390"><a href="#cb18-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-391"><a href="#cb18-391" aria-hidden="true" tabindex="-1"></a><span class="fu">### effect-size-ranked heatmap</span></span>
-<span id="cb18-392"><a href="#cb18-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-395"><a href="#cb18-395" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-396"><a href="#cb18-396" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-397"><a href="#cb18-397" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-functional-heatmap</span></span>
-<span id="cb18-398"><a href="#cb18-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Group-level CLR profiles for functions with the largest omnibus effects."</span></span>
-<span id="cb18-399"><a href="#cb18-399" aria-hidden="true" tabindex="-1"></a>heat_functions <span class="ot">&lt;-</span> function_tests<span class="sc">$</span>Function[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>]</span>
-<span id="cb18-400"><a href="#cb18-400" aria-hidden="true" tabindex="-1"></a>heat <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(heat_functions, <span class="cf">function</span>(feature) {</span>
-<span id="cb18-401"><a href="#cb18-401" aria-hidden="true" tabindex="-1"></a>  means <span class="ot">&lt;-</span> <span class="fu">tapply</span>(clr_counts[feature, ], metadata<span class="sc">$</span>Group, mean)</span>
-<span id="cb18-402"><a href="#cb18-402" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(means))</span>
-<span id="cb18-403"><a href="#cb18-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Function =</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, feature, <span class="at">fixed =</span> <span class="cn">TRUE</span>), <span class="at">Group =</span> <span class="fu">names</span>(means), <span class="at">Z =</span> z)</span>
-<span id="cb18-404"><a href="#cb18-404" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb18-405"><a href="#cb18-405" aria-hidden="true" tabindex="-1"></a>heat<span class="sc">$</span>Function <span class="ot">&lt;-</span> <span class="fu">factor</span>(heat<span class="sc">$</span>Function, <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, heat_functions, <span class="at">fixed =</span> <span class="cn">TRUE</span>)))</span>
-<span id="cb18-406"><a href="#cb18-406" aria-hidden="true" tabindex="-1"></a>p_heat <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(heat, <span class="fu">aes</span>(Group, Function, <span class="at">fill =</span> Z)) <span class="sc">+</span></span>
-<span id="cb18-407"><a href="#cb18-407" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.35</span>) <span class="sc">+</span></span>
-<span id="cb18-408"><a href="#cb18-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> pal_pub[[<span class="st">"blue"</span>]], <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> pal_pub[[<span class="st">"vermillion"</span>]], <span class="at">midpoint =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb18-409"><a href="#cb18-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicted-function effect audit"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Row z-score"</span>,</span>
-<span id="cb18-410"><a href="#cb18-410" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"BH correction covers all 93 functions."</span>) <span class="sc">+</span></span>
-<span id="cb18-411"><a href="#cb18-411" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
-<span id="cb18-412"><a href="#cb18-412" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_heat, <span class="st">"figures/42-functional-heatmap"</span>, <span class="dv">135</span>, <span class="dv">105</span>)</span>
-<span id="cb18-413"><a href="#cb18-413" aria-hidden="true" tabindex="-1"></a>p_heat</span>
-<span id="cb18-414"><a href="#cb18-414" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-415"><a href="#cb18-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a><span class="fu">### taxonomic-resolution sensitivity</span></span>
-<span id="cb18-417"><a href="#cb18-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-421"><a href="#cb18-421" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-422"><a href="#cb18-422" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-functional-sensitivity</span></span>
-<span id="cb18-423"><a href="#cb18-423" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Function means inferred from full lineages versus genus-only taxonomy."</span></span>
-<span id="cb18-424"><a href="#cb18-424" aria-hidden="true" tabindex="-1"></a>label_rows <span class="ot">&lt;-</span> <span class="fu">head</span>(function_sensitivity[<span class="fu">order</span>(<span class="sc">-</span>function_sensitivity<span class="sc">$</span>MeanAbsoluteDifference), ], <span class="dv">8</span>)</span>
-<span id="cb18-425"><a href="#cb18-425" aria-hidden="true" tabindex="-1"></a>p_sensitivity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(function_sensitivity, <span class="fu">aes</span>(FullLineageMean, GenusOnlyMean)) <span class="sc">+</span></span>
-<span id="cb18-426"><a href="#cb18-426" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#6B7280"</span>) <span class="sc">+</span></span>
-<span id="cb18-427"><a href="#cb18-427" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> SampleSpearman), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb18-428"><a href="#cb18-428" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">data =</span> label_rows, <span class="fu">aes</span>(<span class="at">label =</span> FunctionLabel),</span>
-<span id="cb18-429"><a href="#cb18-429" aria-hidden="true" tabindex="-1"></a>                           <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">max.overlaps =</span> <span class="cn">Inf</span>, <span class="at">min.segment.length =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb18-430"><a href="#cb18-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_gradient2</span>(<span class="at">low =</span> pal_pub[[<span class="st">"vermillion"</span>]], <span class="at">mid =</span> <span class="st">"#F2F2F2"</span>,</span>
-<span id="cb18-431"><a href="#cb18-431" aria-hidden="true" tabindex="-1"></a>                         <span class="at">high =</span> pal_pub[[<span class="st">"blue"</span>]], <span class="at">midpoint =</span> <span class="fl">0.5</span>, <span class="at">na.value =</span> pal_pub[[<span class="st">"grey"</span>]]) <span class="sc">+</span></span>
-<span id="cb18-432"><a href="#cb18-432" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="fl">0.01</span>)) <span class="sc">+</span></span>
-<span id="cb18-433"><a href="#cb18-433" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="fl">0.01</span>)) <span class="sc">+</span></span>
-<span id="cb18-434"><a href="#cb18-434" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Taxonomic-resolution sensitivity"</span>, <span class="at">x =</span> <span class="st">"Mean assignment share: full lineage"</span>,</span>
-<span id="cb18-435"><a href="#cb18-435" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean assignment share: genus only"</span>, <span class="at">colour =</span> <span class="st">"Sample rho"</span>,</span>
-<span id="cb18-436"><a href="#cb18-436" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Large departures from the diagonal identify taxonomy-dependent predictions."</span>) <span class="sc">+</span></span>
-<span id="cb18-437"><a href="#cb18-437" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
-<span id="cb18-438"><a href="#cb18-438" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_sensitivity, <span class="st">"figures/42-functional-sensitivity"</span>, <span class="dv">130</span>, <span class="dv">100</span>)</span>
-<span id="cb18-439"><a href="#cb18-439" aria-hidden="true" tabindex="-1"></a>p_sensitivity</span>
-<span id="cb18-440"><a href="#cb18-440" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-441"><a href="#cb18-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-444"><a href="#cb18-444" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-445"><a href="#cb18-445" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-446"><a href="#cb18-446" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: export-functional-guild-results</span></span>
-<span id="cb18-447"><a href="#cb18-447" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"results/42-functional-guilds"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-448"><a href="#cb18-448" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(mapping_summary, <span class="st">"results/42-functional-guilds/mapping-summary.tsv"</span>)</span>
-<span id="cb18-449"><a href="#cb18-449" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(coverage_ledger, <span class="st">"results/42-functional-guilds/sample-coverage.tsv"</span>)</span>
-<span id="cb18-450"><a href="#cb18-450" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(function_tests, <span class="st">"results/42-functional-guilds/function-tests.tsv"</span>)</span>
-<span id="cb18-451"><a href="#cb18-451" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(function_sensitivity, <span class="st">"results/42-functional-guilds/taxonomy-resolution-sensitivity.tsv"</span>)</span>
-<span id="cb18-452"><a href="#cb18-452" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(resolution_coverage, <span class="st">"results/42-functional-guilds/resolution-coverage.tsv"</span>)</span>
-<span id="cb18-453"><a href="#cb18-453" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-454"><a href="#cb18-454" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-455"><a href="#cb18-455" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
-<span id="cb18-456"><a href="#cb18-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-457"><a href="#cb18-457" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的五件事"}</span>
-<span id="cb18-458"><a href="#cb18-458" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-459"><a href="#cb18-459" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>把 predicted function 写成“pathway was activated”或“metabolism increased”。</span>
-<span id="cb18-460"><a href="#cb18-460" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>不报告 unmapped reads/ASVs，或 coverage 在组间明显不同仍直接比较功能。</span>
-<span id="cb18-461"><a href="#cb18-461" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>把一个 taxon 的多个 FAPROTAX labels 当成互斥组成，柱子含义不清。</span>
-<span id="cb18-462"><a href="#cb18-462" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>taxonomy 数据库、rank completeness 或 representative sequences 改了，却沿用旧预测。</span>
-<span id="cb18-463"><a href="#cb18-463" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>先挑显著功能再做 FDR，或只给 p-value 而没有 effect size 与独立验证。</span>
+<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Tax4Fun2 与 BugBase 的最低输入审计"}</span>
+<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a>Tax4Fun2 必须保留与 count table 完全一致的 representative-sequence IDs，并报告 reference version、sequence identity/coverage、FTU/FSU 与 FRI；BugBase 必须记录 compatible taxonomy、normalization、phenotype threshold 和 unmapped fraction。只有三件套而缺代表序列时，本页的 FAPROTAX branch 可以运行，但 Tax4Fun2 branch 尚不具备合法输入。</span>
+<span id="cb18-343"><a href="#cb18-343" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-344"><a href="#cb18-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a><span class="fu">## 把预测结果与注释覆盖率一起展示 {#sec-beautify}</span></span>
+<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a><span class="fu">### annotation coverage</span></span>
+<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-functional-coverage</span></span>
+<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "FAPROTAX annotation coverage must accompany predicted functions."</span></span>
+<span id="cb18-355"><a href="#cb18-355" aria-hidden="true" tabindex="-1"></a>p_coverage <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(coverage_ledger, <span class="fu">aes</span>(Group, AnnotationCoverage, <span class="at">colour =</span> Group)) <span class="sc">+</span></span>
+<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">width =</span> <span class="fl">0.55</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">colour =</span> <span class="st">"#4D4D4D"</span>) <span class="sc">+</span></span>
+<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.12</span>, <span class="at">height =</span> <span class="dv">0</span>, <span class="at">alpha =</span> <span class="fl">0.65</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pub</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">CW =</span> pal_pub[[<span class="st">"blue"</span>]], <span class="at">IW =</span> pal_pub[[<span class="st">"orange"</span>]], <span class="at">TW =</span> pal_pub[[<span class="st">"green"</span>]])) <span class="sc">+</span></span>
+<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>), <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"FAPROTAX annotation coverage"</span>, <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Annotated read fraction"</span>,</span>
+<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Coverage precedes multi-function duplication."</span>) <span class="sc">+</span></span>
+<span id="cb18-363"><a href="#cb18-363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb18-364"><a href="#cb18-364" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_coverage, <span class="st">"figures/42-function-coverage"</span>, <span class="dv">110</span>, <span class="dv">82</span>)</span>
+<span id="cb18-365"><a href="#cb18-365" aria-hidden="true" tabindex="-1"></a>p_coverage</span>
+<span id="cb18-366"><a href="#cb18-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a><span class="fu">### 展示主要功能类别的注释组成</span></span>
+<span id="cb18-369"><a href="#cb18-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-372"><a href="#cb18-372" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-373"><a href="#cb18-373" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-374"><a href="#cb18-374" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-functional-composition</span></span>
+<span id="cb18-375"><a href="#cb18-375" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Group means of the most abundant FAPROTAX assignment categories."</span></span>
+<span id="cb18-376"><a href="#cb18-376" aria-hidden="true" tabindex="-1"></a>top_functions <span class="ot">&lt;-</span> <span class="fu">names</span>(<span class="fu">sort</span>(<span class="fu">rowMeans</span>(assignment_share), <span class="at">decreasing =</span> <span class="cn">TRUE</span>))[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
+<span id="cb18-377"><a href="#cb18-377" aria-hidden="true" tabindex="-1"></a>composition_long <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(top_functions, <span class="cf">function</span>(feature) {</span>
+<span id="cb18-378"><a href="#cb18-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aggregate</span>(assignment_share[feature, ], <span class="fu">list</span>(<span class="at">Group =</span> metadata<span class="sc">$</span>Group), mean) <span class="sc">|&gt;</span></span>
+<span id="cb18-379"><a href="#cb18-379" aria-hidden="true" tabindex="-1"></a>    <span class="fu">transform</span>(<span class="at">Function =</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, feature, <span class="at">fixed =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb18-380"><a href="#cb18-380" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">"Group"</span>, <span class="st">"AssignmentShare"</span>, <span class="st">"Function"</span>))</span>
+<span id="cb18-381"><a href="#cb18-381" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb18-382"><a href="#cb18-382" aria-hidden="true" tabindex="-1"></a>composition_long<span class="sc">$</span>Function <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb18-383"><a href="#cb18-383" aria-hidden="true" tabindex="-1"></a>  composition_long<span class="sc">$</span>Function,</span>
+<span id="cb18-384"><a href="#cb18-384" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, top_functions, <span class="at">fixed =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb18-385"><a href="#cb18-385" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-386"><a href="#cb18-386" aria-hidden="true" tabindex="-1"></a>p_composition <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(composition_long, <span class="fu">aes</span>(AssignmentShare, Function, <span class="at">fill =</span> Group)) <span class="sc">+</span></span>
+<span id="cb18-387"><a href="#cb18-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.78</span>), <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb18-388"><a href="#cb18-388" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_pub</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="at">CW =</span> pal_pub[[<span class="st">"blue"</span>]], <span class="at">IW =</span> pal_pub[[<span class="st">"orange"</span>]], <span class="at">TW =</span> pal_pub[[<span class="st">"green"</span>]])) <span class="sc">+</span></span>
+<span id="cb18-389"><a href="#cb18-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="dv">1</span>), <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.04</span>))) <span class="sc">+</span></span>
+<span id="cb18-390"><a href="#cb18-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Most abundant predicted functions"</span>, <span class="at">x =</span> <span class="st">"Mean share of function assignments"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb18-391"><a href="#cb18-391" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Categories are non-exclusive assignment shares."</span>) <span class="sc">+</span></span>
+<span id="cb18-392"><a href="#cb18-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
+<span id="cb18-393"><a href="#cb18-393" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_composition, <span class="st">"figures/42-functional-composition"</span>, <span class="dv">178</span>, <span class="dv">105</span>)</span>
+<span id="cb18-394"><a href="#cb18-394" aria-hidden="true" tabindex="-1"></a>p_composition</span>
+<span id="cb18-395"><a href="#cb18-395" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-396"><a href="#cb18-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-397"><a href="#cb18-397" aria-hidden="true" tabindex="-1"></a><span class="fu">### effect-size-ranked heatmap</span></span>
+<span id="cb18-398"><a href="#cb18-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-401"><a href="#cb18-401" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-402"><a href="#cb18-402" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-403"><a href="#cb18-403" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-functional-heatmap</span></span>
+<span id="cb18-404"><a href="#cb18-404" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Group-level CLR profiles for functions with the largest omnibus effects."</span></span>
+<span id="cb18-405"><a href="#cb18-405" aria-hidden="true" tabindex="-1"></a>heat_functions <span class="ot">&lt;-</span> function_tests<span class="sc">$</span>Function[<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>]</span>
+<span id="cb18-406"><a href="#cb18-406" aria-hidden="true" tabindex="-1"></a>heat <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(heat_functions, <span class="cf">function</span>(feature) {</span>
+<span id="cb18-407"><a href="#cb18-407" aria-hidden="true" tabindex="-1"></a>  means <span class="ot">&lt;-</span> <span class="fu">tapply</span>(clr_counts[feature, ], metadata<span class="sc">$</span>Group, mean)</span>
+<span id="cb18-408"><a href="#cb18-408" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(means))</span>
+<span id="cb18-409"><a href="#cb18-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Function =</span> <span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, feature, <span class="at">fixed =</span> <span class="cn">TRUE</span>), <span class="at">Group =</span> <span class="fu">names</span>(means), <span class="at">Z =</span> z)</span>
+<span id="cb18-410"><a href="#cb18-410" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb18-411"><a href="#cb18-411" aria-hidden="true" tabindex="-1"></a>heat<span class="sc">$</span>Function <span class="ot">&lt;-</span> <span class="fu">factor</span>(heat<span class="sc">$</span>Function, <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">gsub</span>(<span class="st">"_"</span>, <span class="st">" "</span>, heat_functions, <span class="at">fixed =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb18-412"><a href="#cb18-412" aria-hidden="true" tabindex="-1"></a>p_heat <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(heat, <span class="fu">aes</span>(Group, Function, <span class="at">fill =</span> Z)) <span class="sc">+</span></span>
+<span id="cb18-413"><a href="#cb18-413" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.35</span>) <span class="sc">+</span></span>
+<span id="cb18-414"><a href="#cb18-414" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> pal_pub[[<span class="st">"blue"</span>]], <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> pal_pub[[<span class="st">"vermillion"</span>]], <span class="at">midpoint =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb18-415"><a href="#cb18-415" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Predicted-function effect audit"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Row z-score"</span>,</span>
+<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"BH correction covers all 93 functions."</span>) <span class="sc">+</span></span>
+<span id="cb18-417"><a href="#cb18-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
+<span id="cb18-418"><a href="#cb18-418" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_heat, <span class="st">"figures/42-functional-heatmap"</span>, <span class="dv">135</span>, <span class="dv">105</span>)</span>
+<span id="cb18-419"><a href="#cb18-419" aria-hidden="true" tabindex="-1"></a>p_heat</span>
+<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-421"><a href="#cb18-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-422"><a href="#cb18-422" aria-hidden="true" tabindex="-1"></a><span class="fu">### taxonomic-resolution sensitivity</span></span>
+<span id="cb18-423"><a href="#cb18-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-426"><a href="#cb18-426" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-427"><a href="#cb18-427" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-428"><a href="#cb18-428" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-functional-sensitivity</span></span>
+<span id="cb18-429"><a href="#cb18-429" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Function means inferred from full lineages versus genus-only taxonomy."</span></span>
+<span id="cb18-430"><a href="#cb18-430" aria-hidden="true" tabindex="-1"></a>label_rows <span class="ot">&lt;-</span> <span class="fu">head</span>(function_sensitivity[<span class="fu">order</span>(<span class="sc">-</span>function_sensitivity<span class="sc">$</span>MeanAbsoluteDifference), ], <span class="dv">8</span>)</span>
+<span id="cb18-431"><a href="#cb18-431" aria-hidden="true" tabindex="-1"></a>p_sensitivity <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(function_sensitivity, <span class="fu">aes</span>(FullLineageMean, GenusOnlyMean)) <span class="sc">+</span></span>
+<span id="cb18-432"><a href="#cb18-432" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(<span class="at">slope =</span> <span class="dv">1</span>, <span class="at">intercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#6B7280"</span>) <span class="sc">+</span></span>
+<span id="cb18-433"><a href="#cb18-433" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> SampleSpearman), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb18-434"><a href="#cb18-434" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(<span class="at">data =</span> label_rows, <span class="fu">aes</span>(<span class="at">label =</span> FunctionLabel),</span>
+<span id="cb18-435"><a href="#cb18-435" aria-hidden="true" tabindex="-1"></a>                           <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">max.overlaps =</span> <span class="cn">Inf</span>, <span class="at">min.segment.length =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb18-436"><a href="#cb18-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_gradient2</span>(<span class="at">low =</span> pal_pub[[<span class="st">"vermillion"</span>]], <span class="at">mid =</span> <span class="st">"#F2F2F2"</span>,</span>
+<span id="cb18-437"><a href="#cb18-437" aria-hidden="true" tabindex="-1"></a>                         <span class="at">high =</span> pal_pub[[<span class="st">"blue"</span>]], <span class="at">midpoint =</span> <span class="fl">0.5</span>, <span class="at">na.value =</span> pal_pub[[<span class="st">"grey"</span>]]) <span class="sc">+</span></span>
+<span id="cb18-438"><a href="#cb18-438" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="fl">0.01</span>)) <span class="sc">+</span></span>
+<span id="cb18-439"><a href="#cb18-439" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(<span class="at">accuracy =</span> <span class="fl">0.01</span>)) <span class="sc">+</span></span>
+<span id="cb18-440"><a href="#cb18-440" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Taxonomic-resolution sensitivity"</span>, <span class="at">x =</span> <span class="st">"Mean assignment share: full lineage"</span>,</span>
+<span id="cb18-441"><a href="#cb18-441" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Mean assignment share: genus only"</span>, <span class="at">colour =</span> <span class="st">"Sample rho"</span>,</span>
+<span id="cb18-442"><a href="#cb18-442" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Large departures from the diagonal identify taxonomy-dependent predictions."</span>) <span class="sc">+</span></span>
+<span id="cb18-443"><a href="#cb18-443" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>()</span>
+<span id="cb18-444"><a href="#cb18-444" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_sensitivity, <span class="st">"figures/42-functional-sensitivity"</span>, <span class="dv">130</span>, <span class="dv">100</span>)</span>
+<span id="cb18-445"><a href="#cb18-445" aria-hidden="true" tabindex="-1"></a>p_sensitivity</span>
+<span id="cb18-446"><a href="#cb18-446" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-447"><a href="#cb18-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-450"><a href="#cb18-450" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-451"><a href="#cb18-451" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-452"><a href="#cb18-452" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: export-functional-guild-results</span></span>
+<span id="cb18-453"><a href="#cb18-453" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"results/42-functional-guilds"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-454"><a href="#cb18-454" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(mapping_summary, <span class="st">"results/42-functional-guilds/mapping-summary.tsv"</span>)</span>
+<span id="cb18-455"><a href="#cb18-455" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(coverage_ledger, <span class="st">"results/42-functional-guilds/sample-coverage.tsv"</span>)</span>
+<span id="cb18-456"><a href="#cb18-456" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(function_tests, <span class="st">"results/42-functional-guilds/function-tests.tsv"</span>)</span>
+<span id="cb18-457"><a href="#cb18-457" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(function_sensitivity, <span class="st">"results/42-functional-guilds/taxonomy-resolution-sensitivity.tsv"</span>)</span>
+<span id="cb18-458"><a href="#cb18-458" aria-hidden="true" tabindex="-1"></a>readr<span class="sc">::</span><span class="fu">write_tsv</span>(resolution_coverage, <span class="st">"results/42-functional-guilds/resolution-coverage.tsv"</span>)</span>
+<span id="cb18-459"><a href="#cb18-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-460"><a href="#cb18-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-461"><a href="#cb18-461" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
+<span id="cb18-462"><a href="#cb18-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-463"><a href="#cb18-463" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的五件事"}</span>
 <span id="cb18-464"><a href="#cb18-464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-465"><a href="#cb18-465" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-467"><a href="#cb18-467" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告功能类群数据库映射的方法与限制 {#sec-methods}</span></span>
-<span id="cb18-468"><a href="#cb18-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-469"><a href="#cb18-469" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Putative prokaryotic functional groups were inferred from the feature-by-sample 16S count table and seven-rank taxonomy using </span><span class="in">`microeco`</span><span class="at"> v2.0.0 and its bundled FAPROTAX v1.2.12 mapping. For each sample, annotation coverage was defined as the fraction of reads assigned to at least one FAPROTAX group. Because taxa may receive multiple labels, functional profiles were interpreted as relative shares of annotation assignments rather than mutually exclusive cell fractions. Function counts were transformed by centered log ratio after adding 0.5, and group differences were tested using Kruskal–Wallis tests; all 93 functions were corrected together using the Benjamini–Hochberg procedure, with epsilon-squared reported as effect size. Robustness to taxonomic resolution was evaluated by repeating the complete mapping using genus-only taxonomy. Predicted functions were treated as hypotheses and were not interpreted as direct measurements of genes or metabolic activity.</span></span>
+<span id="cb18-465"><a href="#cb18-465" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>把 predicted function 写成“pathway was activated”或“metabolism increased”。</span>
+<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>不报告 unmapped reads/ASVs，或 coverage 在组间明显不同仍直接比较功能。</span>
+<span id="cb18-467"><a href="#cb18-467" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>把一个 taxon 的多个 FAPROTAX labels 当成互斥组成，柱子含义不清。</span>
+<span id="cb18-468"><a href="#cb18-468" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>taxonomy 数据库、rank completeness 或 representative sequences 改了，却沿用旧预测。</span>
+<span id="cb18-469"><a href="#cb18-469" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>先挑显著功能再做 FDR，或只给 p-value 而没有 effect size 与独立验证。</span>
 <span id="cb18-470"><a href="#cb18-470" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-471"><a href="#cb18-471" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将功能类群数据库映射用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb18-471"><a href="#cb18-471" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb18-472"><a href="#cb18-472" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-473"><a href="#cb18-473" aria-hidden="true" tabindex="-1"></a>只需替换三条路径与分组列名：</span>
+<span id="cb18-473"><a href="#cb18-473" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告功能类群数据库映射的方法与限制 {#sec-methods}</span></span>
 <span id="cb18-474"><a href="#cb18-474" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-477"><a href="#cb18-477" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-478"><a href="#cb18-478" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb18-479"><a href="#cb18-479" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/otutab.tsv"</span>)</span>
-<span id="cb18-480"><a href="#cb18-480" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/taxonomy.tsv"</span>)</span>
-<span id="cb18-481"><a href="#cb18-481" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/metadata.tsv"</span>)</span>
-<span id="cb18-482"><a href="#cb18-482" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>YourCondition)</span>
-<span id="cb18-483"><a href="#cb18-483" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-484"><a href="#cb18-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-485"><a href="#cb18-485" aria-hidden="true" tabindex="-1"></a>先确认 taxonomy 至少包含规范的 <span class="in">`Kingdom`</span>–<span class="in">`Species`</span> 列，并保留每个 rank 的前缀/命名规则。若要运行 Tax4Fun2，还需 <span class="in">`representative-sequences.fasta`</span>，FASTA header 必须与 <span class="in">`otutab`</span> 行名完全一致；若要运行 BugBase，需按其版本要求准备 compatible taxonomy 与 normalization。关键功能在进入论文结论前应设计 shotgun、qPCR 或 metabolite validation。</span>
-<span id="cb18-486"><a href="#cb18-486" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-487"><a href="#cb18-487" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb18-488"><a href="#cb18-488" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-489"><a href="#cb18-489" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Louca S, Parfrey LW, Doebeli M. Decoupling function and taxonomy in the global ocean microbiome. *Science*. 2016;353:1272–1277. <span class="ot">&lt;https://doi.org/10.1126/science.aaf4507&gt;</span></span>
-<span id="cb18-490"><a href="#cb18-490" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wemheuer F, Taylor JA, Daniel R, et al. Tax4Fun2: prediction of habitat-specific functional profiles and functional redundancy based on 16S rRNA gene sequences. *Microbiome*. 2020;8:11. <span class="ot">&lt;https://doi.org/10.1186/s40168-020-00815-y&gt;</span></span>
-<span id="cb18-491"><a href="#cb18-491" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ward T, Larson J, Meulemans J, et al. BugBase predicts organism-level microbiome phenotypes. *bioRxiv*. 2017. <span class="ot">&lt;https://doi.org/10.1101/133462&gt;</span></span>
-<span id="cb18-492"><a href="#cb18-492" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Liu C, Cui Y, Li X, Yao M. microeco: an R package for data mining in microbial community ecology. *FEMS Microbiology Ecology*. 2021;97:fiaa255. <span class="ot">&lt;https://doi.org/10.1093/femsec/fiaa255&gt;</span></span>
-<span id="cb18-493"><a href="#cb18-493" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An J, Liu C, Wang Q, et al. Soil bacterial community structure in Chinese wetlands. *Geoderma*. 2019;337:290–299. <span class="ot">&lt;https://doi.org/10.1016/j.geoderma.2018.09.035&gt;</span></span>
+<span id="cb18-475"><a href="#cb18-475" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Putative prokaryotic functional groups were inferred from the feature-by-sample 16S count table and seven-rank taxonomy using </span><span class="in">`microeco`</span><span class="at"> v2.0.0 and its bundled FAPROTAX v1.2.12 mapping. For each sample, annotation coverage was defined as the fraction of reads assigned to at least one FAPROTAX group. Because taxa may receive multiple labels, functional profiles were interpreted as relative shares of annotation assignments rather than mutually exclusive cell fractions. Function counts were transformed by centered log ratio after adding 0.5, and group differences were tested using Kruskal–Wallis tests; all 93 functions were corrected together using the Benjamini–Hochberg procedure, with epsilon-squared reported as effect size. Robustness to taxonomic resolution was evaluated by repeating the complete mapping using genus-only taxonomy. Predicted functions were treated as hypotheses and were not interpreted as direct measurements of genes or metabolic activity.</span></span>
+<span id="cb18-476"><a href="#cb18-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-477"><a href="#cb18-477" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将功能类群数据库映射用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb18-478"><a href="#cb18-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-479"><a href="#cb18-479" aria-hidden="true" tabindex="-1"></a>只需替换三条路径与分组列名：</span>
+<span id="cb18-480"><a href="#cb18-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-483"><a href="#cb18-483" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-484"><a href="#cb18-484" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb18-485"><a href="#cb18-485" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/otutab.tsv"</span>)</span>
+<span id="cb18-486"><a href="#cb18-486" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/taxonomy.tsv"</span>)</span>
+<span id="cb18-487"><a href="#cb18-487" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/metadata.tsv"</span>)</span>
+<span id="cb18-488"><a href="#cb18-488" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>YourCondition)</span>
+<span id="cb18-489"><a href="#cb18-489" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-490"><a href="#cb18-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-491"><a href="#cb18-491" aria-hidden="true" tabindex="-1"></a>先确认 taxonomy 至少包含规范的 <span class="in">`Kingdom`</span>–<span class="in">`Species`</span> 列，并保留每个 rank 的前缀/命名规则。若要运行 Tax4Fun2，还需 <span class="in">`representative-sequences.fasta`</span>，FASTA header 必须与 <span class="in">`otutab`</span> 行名完全一致；若要运行 BugBase，需按其版本要求准备 compatible taxonomy 与 normalization。关键功能在进入论文结论前应设计 shotgun、qPCR 或 metabolite validation。</span>
+<span id="cb18-492"><a href="#cb18-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-493"><a href="#cb18-493" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb18-494"><a href="#cb18-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-495"><a href="#cb18-495" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Louca S, Parfrey LW, Doebeli M. Decoupling function and taxonomy in the global ocean microbiome. *Science*. 2016;353:1272–1277. <span class="ot">&lt;https://doi.org/10.1126/science.aaf4507&gt;</span></span>
+<span id="cb18-496"><a href="#cb18-496" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wemheuer F, Taylor JA, Daniel R, et al. Tax4Fun2: prediction of habitat-specific functional profiles and functional redundancy based on 16S rRNA gene sequences. *Microbiome*. 2020;8:11. <span class="ot">&lt;https://doi.org/10.1186/s40168-020-00815-y&gt;</span></span>
+<span id="cb18-497"><a href="#cb18-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ward T, Larson J, Meulemans J, et al. BugBase predicts organism-level microbiome phenotypes. *bioRxiv*. 2017. <span class="ot">&lt;https://doi.org/10.1101/133462&gt;</span></span>
+<span id="cb18-498"><a href="#cb18-498" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Liu C, Cui Y, Li X, Yao M. microeco: an R package for data mining in microbial community ecology. *FEMS Microbiology Ecology*. 2021;97:fiaa255. <span class="ot">&lt;https://doi.org/10.1093/femsec/fiaa255&gt;</span></span>
+<span id="cb18-499"><a href="#cb18-499" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An J, Liu C, Wang Q, et al. Soil bacterial community structure in Chinese wetlands. *Geoderma*. 2019;337:290–299. <span class="ot">&lt;https://doi.org/10.1016/j.geoderma.2018.09.035&gt;</span></span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

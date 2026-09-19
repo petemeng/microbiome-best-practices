@@ -539,7 +539,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -851,7 +851,10 @@ window.Quarto = {
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">PICRUSt2 预测的是潜在功能，不是实测通路活性</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">PICRUSt2 预测的是潜在功能，不是实测通路活性</a>
+  <ul class="collapse">
+  <li><a href="#通路检验的-p-值包含功能预测的不确定性吗" id="toc-通路检验的-p-值包含功能预测的不确定性吗" class="nav-link" data-scroll-target="#通路检验的-p-值包含功能预测的不确定性吗">通路检验的 P 值，包含功能预测的不确定性吗？</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">开始前：数据与运行环境</a></li>
   <li><a href="#sec-theory" id="toc-sec-theory" class="nav-link" data-scroll-target="#sec-theory">PICRUSt2 如何根据系统发育邻近关系推断基因家族</a>
   <ul class="collapse">
@@ -906,7 +909,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -935,6 +938,11 @@ window.Quarto = {
 </div>
 </div>
 <p>官方压缩包含 24 个样本、37 条 400-bp ASV sequences 和 108,718 reads；metadata 中有 <code>Genotype</code>（14 KO、10 WT）与 <code>Facility</code>（Dalhousie、PaloAlto 各 12）。官方包不分发 taxonomy，因此本章的 <code>taxonomy.tsv</code> 七个 rank 有意留空；PICRUSt2 的必需 biological input 是 representative sequences，而不是 taxonomy labels。</p>
+<section id="通路检验的-p-值包含功能预测的不确定性吗" class="level3">
+<h3 class="anchored" data-anchor-id="通路检验的-p-值包含功能预测的不确定性吗">通路检验的 P 值，包含功能预测的不确定性吗？</h3>
+<p>对预测通路做线性模型，通常把预测丰度当作给定输入；其标准误主要描述样本间变异，并未完整传播参考基因组缺失、谱系放置和基因含量推断的不确定性。因此，小 q 值只能支持“预测的功能组成与分组有关”，不能变成实测通路改变的证据。NSTI 较低也不解决同一 16S 序列对应不同菌株基因含量的问题。</p>
+<p>本例只有 37 条 ASV，许多通路还共享相同的预测来源。多个显著通路未必是多条独立机制；应查看其共同的类群贡献以及 Facility 调整后的结果。若关键结论依赖特定功能，最有价值的补充是相同样本或独立样本中的直接功能测量，而不是再换一个热图聚类方式。<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12089645/">PICRUSt2 的参考库更新研究</a>也表明，参考范围是预测质量的重要条件。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">开始前：数据与运行环境</h2>
@@ -1827,347 +1835,353 @@ Completed PICRUSt2 pipeline in 1213.35 seconds.</code></pre>
 <span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>官方压缩包含 24 个样本、37 条 400-bp ASV sequences 和 108,718 reads；metadata 中有 <span class="in">`Genotype`</span>（14 KO、10 WT）与 <span class="in">`Facility`</span>（Dalhousie、PaloAlto 各 12）。官方包不分发 taxonomy，因此本章的 <span class="in">`taxonomy.tsv`</span> 七个 rank 有意留空；PICRUSt2 的必需 biological input 是 representative sequences，而不是 taxonomy labels。</span>
 <span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 开始前：数据与运行环境 {#sec-setup}</span></span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### 通路检验的 P 值，包含功能预测的不确定性吗？</span></span>
 <span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>在 Linux 或 WSL2 的项目文件夹中运行下面的下载命令。下载后保留这里的相对目录，后续命令使用同一组文件。</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>对预测通路做线性模型，通常把预测丰度当作给定输入；其标准误主要描述样本间变异，并未完整传播参考基因组缺失、谱系放置和基因含量推断的不确定性。因此，小 q 值只能支持“预测的功能组成与分组有关”，不能变成实测通路改变的证据。NSTI 较低也不解决同一 16S 序列对应不同菌株基因含量的问题。</span>
 <span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="va">base_url</span><span class="op">=</span><span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa"</span></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> <span class="dt">\</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/metadata.tsv <span class="dt">\</span></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/otutab.tsv <span class="dt">\</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/representative-sequences.fasta <span class="dt">\</span></span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/table.biom <span class="dt">\</span></span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/taxonomy.tsv <span class="dt">\</span></span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>  scripts/download_articles_41_45_data.sh <span class="dt">\</span></span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  scripts/render_article41_picrust2.R</span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span><span class="va">)</span><span class="st">"</span></span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">--fail</span> <span class="at">--location</span> <span class="at">--retry</span> 3 <span class="st">"</span><span class="va">$base_url</span><span class="st">/</span><span class="va">$file</span><span class="st">"</span> <span class="at">--output</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span> <span class="kw">||</span> <span class="cf">break</span></span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>本次分析的数据、环境与图形设置<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>PICRUSt2 用独立 Conda/Mamba environment，避免与网站 R environment 混装：</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>本例只有 37 条 ASV，许多通路还共享相同的预测来源。多个显著通路未必是多条独立机制；应查看其共同的类群贡献以及 Facility 调整后的结果。若关键结论依赖特定功能，最有价值的补充是相同样本或独立样本中的直接功能测量，而不是再换一个热图聚类方式。<span class="co">[</span><span class="ot">PICRUSt2 的参考库更新研究</span><span class="co">](https://pmc.ncbi.nlm.nih.gov/articles/PMC12089645/)</span>也表明，参考范围是预测质量的重要条件。</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## 开始前：数据与运行环境 {#sec-setup}</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>在 Linux 或 WSL2 的项目文件夹中运行下面的下载命令。下载后保留这里的相对目录，后续命令使用同一组文件。</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="va">base_url</span><span class="op">=</span><span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa"</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> file <span class="kw">in</span> <span class="dt">\</span></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/metadata.tsv <span class="dt">\</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/otutab.tsv <span class="dt">\</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/representative-sequences.fasta <span class="dt">\</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/table.biom <span class="dt">\</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>  data/small/picrust2-chemerin/taxonomy.tsv <span class="dt">\</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>  scripts/download_articles_41_45_data.sh <span class="dt">\</span></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>  scripts/render_article41_picrust2.R</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="cf">do</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>  <span class="ex">curl</span> <span class="at">--fail</span> <span class="at">--location</span> <span class="at">--retry</span> 3 <span class="st">"</span><span class="va">$base_url</span><span class="st">/</span><span class="va">$file</span><span class="st">"</span> <span class="at">--output</span> <span class="st">"</span><span class="va">$file</span><span class="st">"</span> <span class="kw">||</span> <span class="cf">break</span></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> picrust2-2.6.3 <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="dt">\</span></span>
-<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>  picrust2=2.6.3</span>
-<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate picrust2-2.6.3</span>
-<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a><span class="ex">picrust2_pipeline.py</span> <span class="at">--version</span></span>
-<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
-<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggplot2"</span>, <span class="st">"ggrepel"</span>, <span class="st">"ggpicrust2"</span>, <span class="st">"patchwork"</span>, <span class="st">"ragg"</span>, <span class="st">"readr"</span>,</span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span></span>
-<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpicrust2)</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>本次分析的数据、环境与图形设置<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>PICRUSt2 用独立 Conda/Mamba environment，避免与网站 R environment 混装：</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a><span class="ex">mamba</span> create <span class="at">-n</span> picrust2-2.6.3 <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="dt">\</span></span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>  picrust2=2.6.3</span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate picrust2-2.6.3</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a><span class="ex">picrust2_pipeline.py</span> <span class="at">--version</span></span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggplot2"</span>, <span class="st">"ggrepel"</span>, <span class="st">"ggpicrust2"</span>, <span class="st">"patchwork"</span>, <span class="st">"ragg"</span>, <span class="st">"readr"</span>,</span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span></span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260741</span>)</span>
-<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"DejaVu Sans"</span></span>
-<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
-<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
-<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
-<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
-<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
-<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
-<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
-<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
-<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
-<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
-<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
-<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb13-118"><a href="#cb13-118" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
-<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
-<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-124"><a href="#cb13-124" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## PICRUSt2 如何根据系统发育邻近关系推断基因家族 {#sec-theory}</span></span>
-<span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a><span class="fu">### 先将序列定位到参考树上</span></span>
-<span id="cb13-130"><a href="#cb13-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a>EPA-ng 将每条 study ASV 放入细菌与古菌 reference trees；pipeline 比较两个 domains 的 nearest-sequenced-taxon distance，保留更匹配的一支。此次 37/37 个 ASV 都选择 bacterial reference，archaeal branch 为 0。</span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpicrust2)</span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260741</span>)</span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"DejaVu Sans"</span></span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
+<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
+<span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
+<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
+<span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
+<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
+<span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb13-118"><a href="#cb13-118" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb13-124"><a href="#cb13-124" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
+<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
+<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-130"><a href="#cb13-130" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-132"><a href="#cb13-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-133"><a href="#cb13-133" aria-hidden="true" tabindex="-1"></a><span class="fu">### 根据参考树预测标记基因与功能基因家族的拷贝数</span></span>
+<span id="cb13-133"><a href="#cb13-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## PICRUSt2 如何根据系统发育邻近关系推断基因家族 {#sec-theory}</span></span>
 <span id="cb13-134"><a href="#cb13-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-135"><a href="#cb13-135" aria-hidden="true" tabindex="-1"></a>对放置后的叶节点，PICRUSt2 用参考基因组的 trait table 推断 16S、EC 和 KO copy numbers。样本 ASV counts 先按预测的 16S copy number归一，再与预测 gene-family copies 相乘，形成 metagenome profile。</span>
+<span id="cb13-135"><a href="#cb13-135" aria-hidden="true" tabindex="-1"></a><span class="fu">### 先将序列定位到参考树上</span></span>
 <span id="cb13-136"><a href="#cb13-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-137"><a href="#cb13-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### NSTI 是 reference extrapolation 的距离审计</span></span>
+<span id="cb13-137"><a href="#cb13-137" aria-hidden="true" tabindex="-1"></a>EPA-ng 将每条 study ASV 放入细菌与古菌 reference trees；pipeline 比较两个 domains 的 nearest-sequenced-taxon distance，保留更匹配的一支。此次 37/37 个 ASV 都选择 bacterial reference，archaeal branch 为 0。</span>
 <span id="cb13-138"><a href="#cb13-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-139"><a href="#cb13-139" aria-hidden="true" tabindex="-1"></a>ASV-level NSTI 越大，study sequence 与最近已测序参考基因组的距离越远。sample-weighted NSTI 还结合该 ASV 的 normalized abundance。NSTI 不是 prediction accuracy 的直接概率，也没有跨 habitat 通用的“及格线”；应给完整分布、pipeline cutoff 和关键结果对 high-NSTI ASVs 的敏感性。</span>
+<span id="cb13-139"><a href="#cb13-139" aria-hidden="true" tabindex="-1"></a><span class="fu">### 根据参考树预测标记基因与功能基因家族的拷贝数</span></span>
 <span id="cb13-140"><a href="#cb13-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-141"><a href="#cb13-141" aria-hidden="true" tabindex="-1"></a><span class="fu">### 通路丰度与通路覆盖度不是同一个量</span></span>
+<span id="cb13-141"><a href="#cb13-141" aria-hidden="true" tabindex="-1"></a>对放置后的叶节点，PICRUSt2 用参考基因组的 trait table 推断 16S、EC 和 KO copy numbers。样本 ASV counts 先按预测的 16S copy number归一，再与预测 gene-family copies 相乘，形成 metagenome profile。</span>
 <span id="cb13-142"><a href="#cb13-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-143"><a href="#cb13-143" aria-hidden="true" tabindex="-1"></a>MetaCyc abundance 由预测 EC profiles 经 regrouping、MinPath 与 gap filling 得到；experimental coverage 描述 pathway reactions 的覆盖程度。高 abundance 但低/不稳定 coverage 的通路值得降级解释，而不是只按 abundance p-value 排名。</span>
+<span id="cb13-143"><a href="#cb13-143" aria-hidden="true" tabindex="-1"></a><span class="fu">### NSTI 是 reference extrapolation 的距离审计</span></span>
 <span id="cb13-144"><a href="#cb13-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### differential test 必须保留实验结构</span></span>
+<span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a>ASV-level NSTI 越大，study sequence 与最近已测序参考基因组的距离越远。sample-weighted NSTI 还结合该 ASV 的 normalized abundance。NSTI 不是 prediction accuracy 的直接概率，也没有跨 habitat 通用的“及格线”；应给完整分布、pipeline cutoff 和关键结果对 high-NSTI ASVs 的敏感性。</span>
 <span id="cb13-146"><a href="#cb13-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a>本数据的 facility 与 genotype 并非同一变量。对每个 prevalence-filtered pathway 的 pseudocount-0.5 CLR abundance 拟合</span>
+<span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### 通路丰度与通路覆盖度不是同一个量</span></span>
 <span id="cb13-148"><a href="#cb13-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-149"><a href="#cb13-149" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb13-150"><a href="#cb13-150" aria-hidden="true" tabindex="-1"></a>z_{ks}=\beta_{0k}+\beta_{1k}I(\mathrm{KO})+\beta_{2k}I(\mathrm{PaloAlto})+\epsilon_{ks},</span>
-<span id="cb13-151"><a href="#cb13-151" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-149"><a href="#cb13-149" aria-hidden="true" tabindex="-1"></a>MetaCyc abundance 由预测 EC profiles 经 regrouping、MinPath 与 gap filling 得到；experimental coverage 描述 pathway reactions 的覆盖程度。高 abundance 但低/不稳定 coverage 的通路值得降级解释，而不是只按 abundance p-value 排名。</span>
+<span id="cb13-150"><a href="#cb13-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-151"><a href="#cb13-151" aria-hidden="true" tabindex="-1"></a><span class="fu">### differential test 必须保留实验结构</span></span>
 <span id="cb13-152"><a href="#cb13-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a>并对完整 pathway family 做 BH correction。热图用 <span class="in">`Genotype × Facility`</span> 四列展示，避免把 facility shift 伪装成 genotype pattern。</span>
+<span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a>本数据的 facility 与 genotype 并非同一变量。对每个 prevalence-filtered pathway 的 pseudocount-0.5 CLR abundance 拟合</span>
 <span id="cb13-154"><a href="#cb13-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：为什么不能把 PICRUSt2 pathway 当 shotgun pathway<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a>strain-specific accessory genes、horizontal gene transfer、reference sampling bias 与未培养 lineages 都会破坏“phylogenetic neighbor 拥有同一 gene repertoire”的假设。16S copy-number correction 又是预测值。shotgun metagenomics 直接观察 DNA fragments，仍有 assembly/annotation bias，但证据层级不同；metatranscriptomics、proteomics 与 metabolomics 才分别更接近 expression、protein 与 biochemical output。</span>
-<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a><span class="fu">## 从代表序列预测基因家族与通路 {#sec-code}</span></span>
+<span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a>z_{ks}=\beta_{0k}+\beta_{1k}I(\mathrm{KO})+\beta_{2k}I(\mathrm{PaloAlto})+\epsilon_{ks},</span>
+<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a>并对完整 pathway family 做 BH correction。热图用 <span class="in">`Genotype × Facility`</span> 四列展示，避免把 facility shift 伪装成 genotype pattern。</span>
+<span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：为什么不能把 PICRUSt2 pathway 当 shotgun pathway<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb13-163"><a href="#cb13-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-164"><a href="#cb13-164" aria-hidden="true" tabindex="-1"></a><span class="fu">### 下载固定数据并核对三张表与代表序列的对应关系</span></span>
+<span id="cb13-164"><a href="#cb13-164" aria-hidden="true" tabindex="-1"></a>strain-specific accessory genes、horizontal gene transfer、reference sampling bias 与未培养 lineages 都会破坏“phylogenetic neighbor 拥有同一 gene repertoire”的假设。16S copy-number correction 又是预测值。shotgun metagenomics 直接观察 DNA fragments，仍有 assembly/annotation bias，但证据层级不同；metatranscriptomics、proteomics 与 metabolomics 才分别更接近 expression、protein 与 biochemical output。</span>
 <span id="cb13-165"><a href="#cb13-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-166"><a href="#cb13-166" aria-hidden="true" tabindex="-1"></a>项目脚本固定官方 archive、三个后续篇目的公开数据与 SHA-256；只取本章数据时也可以按同一 URL 下载：</span>
+<span id="cb13-166"><a href="#cb13-166" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb13-167"><a href="#cb13-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-170"><a href="#cb13-170" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb13-171"><a href="#cb13-171" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/download_articles_41_45_data.sh</span>
-<span id="cb13-172"><a href="#cb13-172" aria-hidden="true" tabindex="-1"></a><span class="fu">sha256sum</span> data/raw/articles-41-45/chemerin_16S.zip</span>
-<span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a><span class="co"># f57abdc069b6560f0ddb739cf9a341f5679b12f4947f4db2ad5e2cab893669e9</span></span>
-<span id="cb13-174"><a href="#cb13-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-175"><a href="#cb13-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-178"><a href="#cb13-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-179"><a href="#cb13-179" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
-<span id="cb13-180"><a href="#cb13-180" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb13-181"><a href="#cb13-181" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
-<span id="cb13-182"><a href="#cb13-182" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
-<span id="cb13-183"><a href="#cb13-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
-<span id="cb13-184"><a href="#cb13-184" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb13-185"><a href="#cb13-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
-<span id="cb13-186"><a href="#cb13-186" aria-hidden="true" tabindex="-1"></a>  out</span>
-<span id="cb13-187"><a href="#cb13-187" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-188"><a href="#cb13-188" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"data/small/picrust2-chemerin"</span></span>
-<span id="cb13-189"><a href="#cb13-189" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"otutab.tsv"</span>))</span>
-<span id="cb13-190"><a href="#cb13-190" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"taxonomy.tsv"</span>))</span>
-<span id="cb13-191"><a href="#cb13-191" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metadata.tsv"</span>))</span>
-<span id="cb13-192"><a href="#cb13-192" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.integer), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb13-193"><a href="#cb13-193" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
-<span id="cb13-194"><a href="#cb13-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-195"><a href="#cb13-195" aria-hidden="true" tabindex="-1"></a>fasta_ids <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"^&gt;"</span>, <span class="st">""</span>, <span class="fu">grep</span>(</span>
-<span id="cb13-196"><a href="#cb13-196" aria-hidden="true" tabindex="-1"></a>  <span class="st">"^&gt;"</span>, <span class="fu">readLines</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"representative-sequences.fasta"</span>)), <span class="at">value =</span> <span class="cn">TRUE</span></span>
-<span id="cb13-197"><a href="#cb13-197" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb13-198"><a href="#cb13-198" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb13-199"><a href="#cb13-199" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">37</span>L, <span class="fu">ncol</span>(otutab) <span class="sc">==</span> <span class="dv">24</span>L, <span class="fu">sum</span>(otutab) <span class="sc">==</span> <span class="dv">108718</span>L,</span>
-<span id="cb13-200"><a href="#cb13-200" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb13-201"><a href="#cb13-201" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setequal</span>(<span class="fu">rownames</span>(otutab), fasta_ids),</span>
-<span id="cb13-202"><a href="#cb13-202" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">vapply</span>(taxonomy, <span class="cf">function</span>(x) <span class="fu">all</span>(<span class="fu">is.na</span>(x) <span class="sc">|</span> x <span class="sc">==</span> <span class="st">""</span>), <span class="fu">logical</span>(<span class="dv">1</span>)))</span>
-<span id="cb13-203"><a href="#cb13-203" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-204"><a href="#cb13-204" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb13-205"><a href="#cb13-205" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
-<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-207"><a href="#cb13-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-208"><a href="#cb13-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### 一次性运行 PICRUSt2 2.6.3</span></span>
-<span id="cb13-209"><a href="#cb13-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-212"><a href="#cb13-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
-<span id="cb13-213"><a href="#cb13-213" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
-<span id="cb13-214"><a href="#cb13-214" aria-hidden="true" tabindex="-1"></a><span class="ex">picrust2_pipeline.py</span> <span class="dt">\</span></span>
-<span id="cb13-215"><a href="#cb13-215" aria-hidden="true" tabindex="-1"></a>  <span class="at">--study_fasta</span> data/small/picrust2-chemerin/representative-sequences.fasta <span class="dt">\</span></span>
-<span id="cb13-216"><a href="#cb13-216" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> data/small/picrust2-chemerin/table.biom <span class="dt">\</span></span>
-<span id="cb13-217"><a href="#cb13-217" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> data/small/picrust2-chemerin/picrust2-out-v2.6.3 <span class="dt">\</span></span>
-<span id="cb13-218"><a href="#cb13-218" aria-hidden="true" tabindex="-1"></a>  <span class="at">--processes</span> 8 <span class="dt">\</span></span>
-<span id="cb13-219"><a href="#cb13-219" aria-hidden="true" tabindex="-1"></a>  <span class="at">--stratified</span> <span class="dt">\</span></span>
-<span id="cb13-220"><a href="#cb13-220" aria-hidden="true" tabindex="-1"></a>  <span class="at">--coverage</span> <span class="dt">\</span></span>
-<span id="cb13-221"><a href="#cb13-221" aria-hidden="true" tabindex="-1"></a>  <span class="at">--remove_intermediate</span> <span class="dt">\</span></span>
-<span id="cb13-222"><a href="#cb13-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">--verbose</span> <span class="dt">\</span></span>
-<span id="cb13-223"><a href="#cb13-223" aria-hidden="true" tabindex="-1"></a>  <span class="op">&gt;</span> results/41-picrust2/picrust2-run.log <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
-<span id="cb13-224"><a href="#cb13-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-225"><a href="#cb13-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-226"><a href="#cb13-226" aria-hidden="true" tabindex="-1"></a>这次固定运行的关键日志为：</span>
-<span id="cb13-227"><a href="#cb13-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-228"><a href="#cb13-228" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
-<span id="cb13-229"><a href="#cb13-229" aria-hidden="true" tabindex="-1"></a><span class="in">PICRUSt2 2.6.3</span></span>
-<span id="cb13-230"><a href="#cb13-230" aria-hidden="true" tabindex="-1"></a><span class="in">37 of 37 sequence ids overlap between input table and FASTA.</span></span>
-<span id="cb13-231"><a href="#cb13-231" aria-hidden="true" tabindex="-1"></a><span class="in">37 sequences were kept for bac</span></span>
-<span id="cb13-232"><a href="#cb13-232" aria-hidden="true" tabindex="-1"></a><span class="in">0 sequences were kept for arc</span></span>
-<span id="cb13-233"><a href="#cb13-233" aria-hidden="true" tabindex="-1"></a><span class="in">All ASVs were below the max NSTI cut-off of 2.0 and so all were retained.</span></span>
-<span id="cb13-234"><a href="#cb13-234" aria-hidden="true" tabindex="-1"></a><span class="in">Completed PICRUSt2 pipeline in 1213.35 seconds.</span></span>
-<span id="cb13-235"><a href="#cb13-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-236"><a href="#cb13-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-237"><a href="#cb13-237" aria-hidden="true" tabindex="-1"></a>输出目录至少应有：<span class="in">`combined_marker_predicted_and_nsti.tsv.gz`</span>、<span class="in">`EC_metagenome_out/`</span>、<span class="in">`KO_metagenome_out/`</span>、<span class="in">`pathways_out/path_abun_unstrat.tsv.gz`</span>、<span class="in">`path_abun_contrib.tsv.gz`</span> 与 <span class="in">`path_cov_unstrat.tsv.gz`</span>。运行后对 22 个输出逐文件写 SHA-256，防止后续图与 pipeline output 脱节。</span>
-<span id="cb13-238"><a href="#cb13-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-239"><a href="#cb13-239" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取 NSTI 与 MetaCyc abundance/coverage</span></span>
-<span id="cb13-240"><a href="#cb13-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-243"><a href="#cb13-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-244"><a href="#cb13-244" aria-hidden="true" tabindex="-1"></a>out_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">"picrust2-out-v2.6.3"</span>)</span>
-<span id="cb13-245"><a href="#cb13-245" aria-hidden="true" tabindex="-1"></a>nsti <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"combined_marker_predicted_and_nsti.tsv.gz"</span>))</span>
-<span id="cb13-246"><a href="#cb13-246" aria-hidden="true" tabindex="-1"></a>weighted_nsti <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"EC_metagenome_out"</span>, <span class="st">"weighted_nsti.tsv.gz"</span>))</span>
-<span id="cb13-247"><a href="#cb13-247" aria-hidden="true" tabindex="-1"></a>pathway_abundance <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(</span>
-<span id="cb13-248"><a href="#cb13-248" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"pathways_out"</span>, <span class="st">"path_abun_unstrat.tsv.gz"</span>)), as.numeric),</span>
-<span id="cb13-249"><a href="#cb13-249" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb13-250"><a href="#cb13-250" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb13-251"><a href="#cb13-251" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pathway_abundance) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(</span>
-<span id="cb13-252"><a href="#cb13-252" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"pathways_out"</span>, <span class="st">"path_abun_unstrat.tsv.gz"</span>))</span>
-<span id="cb13-253"><a href="#cb13-253" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-254"><a href="#cb13-254" aria-hidden="true" tabindex="-1"></a>pathway_coverage <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(</span>
-<span id="cb13-255"><a href="#cb13-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"pathways_out"</span>, <span class="st">"path_cov_unstrat.tsv.gz"</span>)), as.numeric),</span>
-<span id="cb13-256"><a href="#cb13-256" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb13-257"><a href="#cb13-257" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb13-258"><a href="#cb13-258" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pathway_coverage) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(</span>
-<span id="cb13-259"><a href="#cb13-259" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"pathways_out"</span>, <span class="st">"path_cov_unstrat.tsv.gz"</span>))</span>
-<span id="cb13-260"><a href="#cb13-260" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-261"><a href="#cb13-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-262"><a href="#cb13-262" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb13-263"><a href="#cb13-263" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(nsti) <span class="sc">==</span> <span class="dv">37</span>L, <span class="fu">all</span>(nsti<span class="sc">$</span>best_domain <span class="sc">==</span> <span class="st">"bac"</span>),</span>
-<span id="cb13-264"><a href="#cb13-264" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>(<span class="fu">as.numeric</span>(nsti<span class="sc">$</span>metadata_NSTI)) <span class="sc">&lt;</span> <span class="dv">2</span>,</span>
-<span id="cb13-265"><a href="#cb13-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ncol</span>(pathway_abundance) <span class="sc">==</span> <span class="dv">24</span>L,</span>
-<span id="cb13-266"><a href="#cb13-266" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(pathway_abundance), <span class="fu">rownames</span>(metadata))</span>
-<span id="cb13-267"><a href="#cb13-267" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-268"><a href="#cb13-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-269"><a href="#cb13-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-270"><a href="#cb13-270" aria-hidden="true" tabindex="-1"></a><span class="fu">### 用 MetaCyc 注释通路，并在模型中调整 `facility`</span></span>
-<span id="cb13-271"><a href="#cb13-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-274"><a href="#cb13-274" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-275"><a href="#cb13-275" aria-hidden="true" tabindex="-1"></a>annotation <span class="ot">&lt;-</span> ggpicrust2<span class="sc">::</span>metacyc_reference</span>
-<span id="cb13-276"><a href="#cb13-276" aria-hidden="true" tabindex="-1"></a>description <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">as.character</span>(annotation<span class="sc">$</span>description), annotation<span class="sc">$</span>id)</span>
-<span id="cb13-277"><a href="#cb13-277" aria-hidden="true" tabindex="-1"></a>pathway_ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pathway_abundance)</span>
-<span id="cb13-278"><a href="#cb13-278" aria-hidden="true" tabindex="-1"></a>pathway_description <span class="ot">&lt;-</span> <span class="fu">unname</span>(description[pathway_ids])</span>
-<span id="cb13-279"><a href="#cb13-279" aria-hidden="true" tabindex="-1"></a>pathway_description[<span class="fu">is.na</span>(pathway_description) <span class="sc">|</span> pathway_description <span class="sc">==</span> <span class="st">""</span>] <span class="ot">&lt;-</span> pathway_ids[</span>
-<span id="cb13-280"><a href="#cb13-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(pathway_description) <span class="sc">|</span> pathway_description <span class="sc">==</span> <span class="st">""</span></span>
-<span id="cb13-281"><a href="#cb13-281" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb13-282"><a href="#cb13-282" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pathway_description) <span class="ot">&lt;-</span> pathway_ids</span>
-<span id="cb13-283"><a href="#cb13-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-284"><a href="#cb13-284" aria-hidden="true" tabindex="-1"></a>prevalence <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(pathway_abundance <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb13-285"><a href="#cb13-285" aria-hidden="true" tabindex="-1"></a>keep <span class="ot">&lt;-</span> prevalence <span class="sc">&gt;=</span> <span class="fl">0.20</span> <span class="sc">&amp;</span> <span class="fu">rowSums</span>(pathway_abundance) <span class="sc">&gt;</span> <span class="dv">0</span></span>
-<span id="cb13-286"><a href="#cb13-286" aria-hidden="true" tabindex="-1"></a>analysis_abundance <span class="ot">&lt;-</span> pathway_abundance[keep, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb13-287"><a href="#cb13-287" aria-hidden="true" tabindex="-1"></a>clr <span class="ot">&lt;-</span> <span class="fu">log</span>(analysis_abundance <span class="sc">+</span> <span class="fl">0.5</span>)</span>
-<span id="cb13-288"><a href="#cb13-288" aria-hidden="true" tabindex="-1"></a>clr <span class="ot">&lt;-</span> <span class="fu">sweep</span>(clr, <span class="dv">2</span>L, <span class="fu">colMeans</span>(clr), <span class="st">"-"</span>)</span>
-<span id="cb13-289"><a href="#cb13-289" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Genotype <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>Genotype, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"WT"</span>, <span class="st">"KO"</span>))</span>
-<span id="cb13-290"><a href="#cb13-290" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Facility <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>Facility, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Dalhousie"</span>, <span class="st">"PaloAlto"</span>))</span>
-<span id="cb13-291"><a href="#cb13-291" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-292"><a href="#cb13-292" aria-hidden="true" tabindex="-1"></a>test_one <span class="ot">&lt;-</span> <span class="cf">function</span>(pathway) {</span>
-<span id="cb13-293"><a href="#cb13-293" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lm</span>(clr[pathway, ] <span class="sc">~</span> metadata<span class="sc">$</span>Genotype <span class="sc">+</span> metadata<span class="sc">$</span>Facility)</span>
-<span id="cb13-294"><a href="#cb13-294" aria-hidden="true" tabindex="-1"></a>  coefficient <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="st">"metadata$GenotypeKO"</span>, ]</span>
-<span id="cb13-295"><a href="#cb13-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb13-296"><a href="#cb13-296" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pathway =</span> pathway,</span>
-<span id="cb13-297"><a href="#cb13-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">Description =</span> <span class="fu">unname</span>(pathway_description[pathway]),</span>
-<span id="cb13-298"><a href="#cb13-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">KOminusWT =</span> coefficient[<span class="st">"Estimate"</span>],</span>
-<span id="cb13-299"><a href="#cb13-299" aria-hidden="true" tabindex="-1"></a>    <span class="at">SE =</span> coefficient[<span class="st">"Std. Error"</span>],</span>
-<span id="cb13-300"><a href="#cb13-300" aria-hidden="true" tabindex="-1"></a>    <span class="at">PValue =</span> coefficient[<span class="st">"Pr(&gt;|t|)"</span>]</span>
-<span id="cb13-301"><a href="#cb13-301" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb13-302"><a href="#cb13-302" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-303"><a href="#cb13-303" aria-hidden="true" tabindex="-1"></a>pathway_tests <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">rownames</span>(clr), test_one))</span>
-<span id="cb13-304"><a href="#cb13-304" aria-hidden="true" tabindex="-1"></a>pathway_tests<span class="sc">$</span>AdjustedP <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">p.adjust</span>(pathway_tests<span class="sc">$</span>PValue, <span class="st">"BH"</span>)</span>
-<span id="cb13-305"><a href="#cb13-305" aria-hidden="true" tabindex="-1"></a>pathway_tests <span class="ot">&lt;-</span> pathway_tests[<span class="fu">order</span>(pathway_tests<span class="sc">$</span>AdjustedP, <span class="sc">-</span><span class="fu">abs</span>(pathway_tests<span class="sc">$</span>KOminusWT)), ]</span>
-<span id="cb13-306"><a href="#cb13-306" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pathway_tests, <span class="dv">12</span>)</span>
-<span id="cb13-307"><a href="#cb13-307" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-308"><a href="#cb13-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-309"><a href="#cb13-309" aria-hidden="true" tabindex="-1"></a><span class="in">`ggpicrust2::pathway_daa()`</span> 可快速比较多个 DAA backends，<span class="in">`pathway_heatmap()`</span> 可直接生成分组热图；本数据主模型需要显式调整 <span class="in">`Facility`</span>，因此统计层用上面的 covariate-aware model，注释与图形语法沿用 ggpicrust2，再通过 <span class="in">`theme_pub()`</span> 锁定尺寸、字体和输出格式。</span>
-<span id="cb13-310"><a href="#cb13-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-311"><a href="#cb13-311" aria-hidden="true" tabindex="-1"></a><span class="fu">## NSTI、参考基因组和组成性限制了什么？ {#sec-audit}</span></span>
-<span id="cb13-312"><a href="#cb13-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-313"><a href="#cb13-313" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**ID contract 在 placement 前检查。**FASTA headers 与 count rownames 必须一一对应；重名、空格截断或 ASV 表已过滤而 FASTA 未同步都会污染结果。</span>
-<span id="cb13-314"><a href="#cb13-314" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**NSTI 给分布和权重。**此次 ASV max NSTI 远低于 cutoff 2，但不能把低 NSTI 改写成“功能预测准确”；目标 habitat 的 reference representation 仍需讨论。</span>
-<span id="cb13-315"><a href="#cb13-315" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**不要混淆 abundance、coverage 与 contribution。**unstratified abundance 做 sample comparison；coverage 做反应完整性审计；contribution table 用于追踪哪些 ASVs 驱动预测，三者不能互换。</span>
-<span id="cb13-316"><a href="#cb13-316" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**facility 进入 model。**metadata 中有明确 sequencing facility；只做 KO/WT t-test 会忽略设计结构。更复杂设计应加入 cage/litter/batch random effects。</span>
-<span id="cb13-317"><a href="#cb13-317" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**pathway inference 参数要锁定。**placement tool、reference、max NSTI、HSP method、MinPath、gap filling、regroup map 与 database descriptions都进入 provenance。</span>
-<span id="cb13-318"><a href="#cb13-318" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**关键 pathway 做实测升级。**用 shotgun gene families、qPCR、metatranscriptome、targeted metabolite 或 enzyme assay验证，不让预测热图承担超出证据层级的结论。</span>
-<span id="cb13-319"><a href="#cb13-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-320"><a href="#cb13-320" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="ggpicrust2 的定位"}</span>
-<span id="cb13-321"><a href="#cb13-321" aria-hidden="true" tabindex="-1"></a>ggpicrust2 解决 import、annotation、DAA comparison 与可视化的一致接口；它不会自动修复 confounding、paired design、cage effect 或 reference extrapolation。先确定合法 statistical model，再决定用哪一个绘图 wrapper。</span>
-<span id="cb13-322"><a href="#cb13-322" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb13-323"><a href="#cb13-323" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-324"><a href="#cb13-324" aria-hidden="true" tabindex="-1"></a><span class="fu">## 结合NSTI解释预测功能 {#sec-beautify}</span></span>
+<span id="cb13-168"><a href="#cb13-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## 从代表序列预测基因家族与通路 {#sec-code}</span></span>
+<span id="cb13-169"><a href="#cb13-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-170"><a href="#cb13-170" aria-hidden="true" tabindex="-1"></a><span class="fu">### 下载固定数据并核对三张表与代表序列的对应关系</span></span>
+<span id="cb13-171"><a href="#cb13-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-172"><a href="#cb13-172" aria-hidden="true" tabindex="-1"></a>项目脚本固定官方 archive、三个后续篇目的公开数据与 SHA-256；只取本章数据时也可以按同一 URL 下载：</span>
+<span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-176"><a href="#cb13-176" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb13-177"><a href="#cb13-177" aria-hidden="true" tabindex="-1"></a><span class="fu">bash</span> scripts/download_articles_41_45_data.sh</span>
+<span id="cb13-178"><a href="#cb13-178" aria-hidden="true" tabindex="-1"></a><span class="fu">sha256sum</span> data/raw/articles-41-45/chemerin_16S.zip</span>
+<span id="cb13-179"><a href="#cb13-179" aria-hidden="true" tabindex="-1"></a><span class="co"># f57abdc069b6560f0ddb739cf9a341f5679b12f4947f4db2ad5e2cab893669e9</span></span>
+<span id="cb13-180"><a href="#cb13-180" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-181"><a href="#cb13-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-184"><a href="#cb13-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-185"><a href="#cb13-185" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
+<span id="cb13-186"><a href="#cb13-186" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-187"><a href="#cb13-187" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
+<span id="cb13-188"><a href="#cb13-188" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
+<span id="cb13-189"><a href="#cb13-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
+<span id="cb13-190"><a href="#cb13-190" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb13-191"><a href="#cb13-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
+<span id="cb13-192"><a href="#cb13-192" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb13-193"><a href="#cb13-193" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-194"><a href="#cb13-194" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"data/small/picrust2-chemerin"</span></span>
+<span id="cb13-195"><a href="#cb13-195" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"otutab.tsv"</span>))</span>
+<span id="cb13-196"><a href="#cb13-196" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"taxonomy.tsv"</span>))</span>
+<span id="cb13-197"><a href="#cb13-197" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metadata.tsv"</span>))</span>
+<span id="cb13-198"><a href="#cb13-198" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.integer), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb13-199"><a href="#cb13-199" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
+<span id="cb13-200"><a href="#cb13-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-201"><a href="#cb13-201" aria-hidden="true" tabindex="-1"></a>fasta_ids <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"^&gt;"</span>, <span class="st">""</span>, <span class="fu">grep</span>(</span>
+<span id="cb13-202"><a href="#cb13-202" aria-hidden="true" tabindex="-1"></a>  <span class="st">"^&gt;"</span>, <span class="fu">readLines</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"representative-sequences.fasta"</span>)), <span class="at">value =</span> <span class="cn">TRUE</span></span>
+<span id="cb13-203"><a href="#cb13-203" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb13-204"><a href="#cb13-204" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb13-205"><a href="#cb13-205" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">37</span>L, <span class="fu">ncol</span>(otutab) <span class="sc">==</span> <span class="dv">24</span>L, <span class="fu">sum</span>(otutab) <span class="sc">==</span> <span class="dv">108718</span>L,</span>
+<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb13-207"><a href="#cb13-207" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setequal</span>(<span class="fu">rownames</span>(otutab), fasta_ids),</span>
+<span id="cb13-208"><a href="#cb13-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">vapply</span>(taxonomy, <span class="cf">function</span>(x) <span class="fu">all</span>(<span class="fu">is.na</span>(x) <span class="sc">|</span> x <span class="sc">==</span> <span class="st">""</span>), <span class="fu">logical</span>(<span class="dv">1</span>)))</span>
+<span id="cb13-209"><a href="#cb13-209" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-210"><a href="#cb13-210" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb13-211"><a href="#cb13-211" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
+<span id="cb13-212"><a href="#cb13-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-213"><a href="#cb13-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-214"><a href="#cb13-214" aria-hidden="true" tabindex="-1"></a><span class="fu">### 一次性运行 PICRUSt2 2.6.3</span></span>
+<span id="cb13-215"><a href="#cb13-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-218"><a href="#cb13-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash}</span></span>
+<span id="cb13-219"><a href="#cb13-219" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-euo</span> pipefail</span>
+<span id="cb13-220"><a href="#cb13-220" aria-hidden="true" tabindex="-1"></a><span class="ex">picrust2_pipeline.py</span> <span class="dt">\</span></span>
+<span id="cb13-221"><a href="#cb13-221" aria-hidden="true" tabindex="-1"></a>  <span class="at">--study_fasta</span> data/small/picrust2-chemerin/representative-sequences.fasta <span class="dt">\</span></span>
+<span id="cb13-222"><a href="#cb13-222" aria-hidden="true" tabindex="-1"></a>  <span class="at">--input</span> data/small/picrust2-chemerin/table.biom <span class="dt">\</span></span>
+<span id="cb13-223"><a href="#cb13-223" aria-hidden="true" tabindex="-1"></a>  <span class="at">--output</span> data/small/picrust2-chemerin/picrust2-out-v2.6.3 <span class="dt">\</span></span>
+<span id="cb13-224"><a href="#cb13-224" aria-hidden="true" tabindex="-1"></a>  <span class="at">--processes</span> 8 <span class="dt">\</span></span>
+<span id="cb13-225"><a href="#cb13-225" aria-hidden="true" tabindex="-1"></a>  <span class="at">--stratified</span> <span class="dt">\</span></span>
+<span id="cb13-226"><a href="#cb13-226" aria-hidden="true" tabindex="-1"></a>  <span class="at">--coverage</span> <span class="dt">\</span></span>
+<span id="cb13-227"><a href="#cb13-227" aria-hidden="true" tabindex="-1"></a>  <span class="at">--remove_intermediate</span> <span class="dt">\</span></span>
+<span id="cb13-228"><a href="#cb13-228" aria-hidden="true" tabindex="-1"></a>  <span class="at">--verbose</span> <span class="dt">\</span></span>
+<span id="cb13-229"><a href="#cb13-229" aria-hidden="true" tabindex="-1"></a>  <span class="op">&gt;</span> results/41-picrust2/picrust2-run.log <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span></span>
+<span id="cb13-230"><a href="#cb13-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-231"><a href="#cb13-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-232"><a href="#cb13-232" aria-hidden="true" tabindex="-1"></a>这次固定运行的关键日志为：</span>
+<span id="cb13-233"><a href="#cb13-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-234"><a href="#cb13-234" aria-hidden="true" tabindex="-1"></a><span class="in">```text</span></span>
+<span id="cb13-235"><a href="#cb13-235" aria-hidden="true" tabindex="-1"></a><span class="in">PICRUSt2 2.6.3</span></span>
+<span id="cb13-236"><a href="#cb13-236" aria-hidden="true" tabindex="-1"></a><span class="in">37 of 37 sequence ids overlap between input table and FASTA.</span></span>
+<span id="cb13-237"><a href="#cb13-237" aria-hidden="true" tabindex="-1"></a><span class="in">37 sequences were kept for bac</span></span>
+<span id="cb13-238"><a href="#cb13-238" aria-hidden="true" tabindex="-1"></a><span class="in">0 sequences were kept for arc</span></span>
+<span id="cb13-239"><a href="#cb13-239" aria-hidden="true" tabindex="-1"></a><span class="in">All ASVs were below the max NSTI cut-off of 2.0 and so all were retained.</span></span>
+<span id="cb13-240"><a href="#cb13-240" aria-hidden="true" tabindex="-1"></a><span class="in">Completed PICRUSt2 pipeline in 1213.35 seconds.</span></span>
+<span id="cb13-241"><a href="#cb13-241" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-242"><a href="#cb13-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-243"><a href="#cb13-243" aria-hidden="true" tabindex="-1"></a>输出目录至少应有：<span class="in">`combined_marker_predicted_and_nsti.tsv.gz`</span>、<span class="in">`EC_metagenome_out/`</span>、<span class="in">`KO_metagenome_out/`</span>、<span class="in">`pathways_out/path_abun_unstrat.tsv.gz`</span>、<span class="in">`path_abun_contrib.tsv.gz`</span> 与 <span class="in">`path_cov_unstrat.tsv.gz`</span>。运行后对 22 个输出逐文件写 SHA-256，防止后续图与 pipeline output 脱节。</span>
+<span id="cb13-244"><a href="#cb13-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-245"><a href="#cb13-245" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取 NSTI 与 MetaCyc abundance/coverage</span></span>
+<span id="cb13-246"><a href="#cb13-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-249"><a href="#cb13-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-250"><a href="#cb13-250" aria-hidden="true" tabindex="-1"></a>out_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(data_dir, <span class="st">"picrust2-out-v2.6.3"</span>)</span>
+<span id="cb13-251"><a href="#cb13-251" aria-hidden="true" tabindex="-1"></a>nsti <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"combined_marker_predicted_and_nsti.tsv.gz"</span>))</span>
+<span id="cb13-252"><a href="#cb13-252" aria-hidden="true" tabindex="-1"></a>weighted_nsti <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"EC_metagenome_out"</span>, <span class="st">"weighted_nsti.tsv.gz"</span>))</span>
+<span id="cb13-253"><a href="#cb13-253" aria-hidden="true" tabindex="-1"></a>pathway_abundance <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(</span>
+<span id="cb13-254"><a href="#cb13-254" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"pathways_out"</span>, <span class="st">"path_abun_unstrat.tsv.gz"</span>)), as.numeric),</span>
+<span id="cb13-255"><a href="#cb13-255" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb13-256"><a href="#cb13-256" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb13-257"><a href="#cb13-257" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pathway_abundance) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(</span>
+<span id="cb13-258"><a href="#cb13-258" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"pathways_out"</span>, <span class="st">"path_abun_unstrat.tsv.gz"</span>))</span>
+<span id="cb13-259"><a href="#cb13-259" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-260"><a href="#cb13-260" aria-hidden="true" tabindex="-1"></a>pathway_coverage <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(</span>
+<span id="cb13-261"><a href="#cb13-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lapply</span>(<span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"pathways_out"</span>, <span class="st">"path_cov_unstrat.tsv.gz"</span>)), as.numeric),</span>
+<span id="cb13-262"><a href="#cb13-262" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb13-263"><a href="#cb13-263" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb13-264"><a href="#cb13-264" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(pathway_coverage) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(</span>
+<span id="cb13-265"><a href="#cb13-265" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(out_dir, <span class="st">"pathways_out"</span>, <span class="st">"path_cov_unstrat.tsv.gz"</span>))</span>
+<span id="cb13-266"><a href="#cb13-266" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-267"><a href="#cb13-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-268"><a href="#cb13-268" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb13-269"><a href="#cb13-269" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(nsti) <span class="sc">==</span> <span class="dv">37</span>L, <span class="fu">all</span>(nsti<span class="sc">$</span>best_domain <span class="sc">==</span> <span class="st">"bac"</span>),</span>
+<span id="cb13-270"><a href="#cb13-270" aria-hidden="true" tabindex="-1"></a>  <span class="fu">max</span>(<span class="fu">as.numeric</span>(nsti<span class="sc">$</span>metadata_NSTI)) <span class="sc">&lt;</span> <span class="dv">2</span>,</span>
+<span id="cb13-271"><a href="#cb13-271" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ncol</span>(pathway_abundance) <span class="sc">==</span> <span class="dv">24</span>L,</span>
+<span id="cb13-272"><a href="#cb13-272" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(pathway_abundance), <span class="fu">rownames</span>(metadata))</span>
+<span id="cb13-273"><a href="#cb13-273" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-274"><a href="#cb13-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-275"><a href="#cb13-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-276"><a href="#cb13-276" aria-hidden="true" tabindex="-1"></a><span class="fu">### 用 MetaCyc 注释通路，并在模型中调整 `facility`</span></span>
+<span id="cb13-277"><a href="#cb13-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-280"><a href="#cb13-280" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-281"><a href="#cb13-281" aria-hidden="true" tabindex="-1"></a>annotation <span class="ot">&lt;-</span> ggpicrust2<span class="sc">::</span>metacyc_reference</span>
+<span id="cb13-282"><a href="#cb13-282" aria-hidden="true" tabindex="-1"></a>description <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">as.character</span>(annotation<span class="sc">$</span>description), annotation<span class="sc">$</span>id)</span>
+<span id="cb13-283"><a href="#cb13-283" aria-hidden="true" tabindex="-1"></a>pathway_ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(pathway_abundance)</span>
+<span id="cb13-284"><a href="#cb13-284" aria-hidden="true" tabindex="-1"></a>pathway_description <span class="ot">&lt;-</span> <span class="fu">unname</span>(description[pathway_ids])</span>
+<span id="cb13-285"><a href="#cb13-285" aria-hidden="true" tabindex="-1"></a>pathway_description[<span class="fu">is.na</span>(pathway_description) <span class="sc">|</span> pathway_description <span class="sc">==</span> <span class="st">""</span>] <span class="ot">&lt;-</span> pathway_ids[</span>
+<span id="cb13-286"><a href="#cb13-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.na</span>(pathway_description) <span class="sc">|</span> pathway_description <span class="sc">==</span> <span class="st">""</span></span>
+<span id="cb13-287"><a href="#cb13-287" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb13-288"><a href="#cb13-288" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(pathway_description) <span class="ot">&lt;-</span> pathway_ids</span>
+<span id="cb13-289"><a href="#cb13-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-290"><a href="#cb13-290" aria-hidden="true" tabindex="-1"></a>prevalence <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(pathway_abundance <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb13-291"><a href="#cb13-291" aria-hidden="true" tabindex="-1"></a>keep <span class="ot">&lt;-</span> prevalence <span class="sc">&gt;=</span> <span class="fl">0.20</span> <span class="sc">&amp;</span> <span class="fu">rowSums</span>(pathway_abundance) <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb13-292"><a href="#cb13-292" aria-hidden="true" tabindex="-1"></a>analysis_abundance <span class="ot">&lt;-</span> pathway_abundance[keep, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb13-293"><a href="#cb13-293" aria-hidden="true" tabindex="-1"></a>clr <span class="ot">&lt;-</span> <span class="fu">log</span>(analysis_abundance <span class="sc">+</span> <span class="fl">0.5</span>)</span>
+<span id="cb13-294"><a href="#cb13-294" aria-hidden="true" tabindex="-1"></a>clr <span class="ot">&lt;-</span> <span class="fu">sweep</span>(clr, <span class="dv">2</span>L, <span class="fu">colMeans</span>(clr), <span class="st">"-"</span>)</span>
+<span id="cb13-295"><a href="#cb13-295" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Genotype <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>Genotype, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"WT"</span>, <span class="st">"KO"</span>))</span>
+<span id="cb13-296"><a href="#cb13-296" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Facility <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>Facility, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Dalhousie"</span>, <span class="st">"PaloAlto"</span>))</span>
+<span id="cb13-297"><a href="#cb13-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-298"><a href="#cb13-298" aria-hidden="true" tabindex="-1"></a>test_one <span class="ot">&lt;-</span> <span class="cf">function</span>(pathway) {</span>
+<span id="cb13-299"><a href="#cb13-299" aria-hidden="true" tabindex="-1"></a>  fit <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lm</span>(clr[pathway, ] <span class="sc">~</span> metadata<span class="sc">$</span>Genotype <span class="sc">+</span> metadata<span class="sc">$</span>Facility)</span>
+<span id="cb13-300"><a href="#cb13-300" aria-hidden="true" tabindex="-1"></a>  coefficient <span class="ot">&lt;-</span> <span class="fu">summary</span>(fit)<span class="sc">$</span>coefficients[<span class="st">"metadata$GenotypeKO"</span>, ]</span>
+<span id="cb13-301"><a href="#cb13-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb13-302"><a href="#cb13-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">Pathway =</span> pathway,</span>
+<span id="cb13-303"><a href="#cb13-303" aria-hidden="true" tabindex="-1"></a>    <span class="at">Description =</span> <span class="fu">unname</span>(pathway_description[pathway]),</span>
+<span id="cb13-304"><a href="#cb13-304" aria-hidden="true" tabindex="-1"></a>    <span class="at">KOminusWT =</span> coefficient[<span class="st">"Estimate"</span>],</span>
+<span id="cb13-305"><a href="#cb13-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">SE =</span> coefficient[<span class="st">"Std. Error"</span>],</span>
+<span id="cb13-306"><a href="#cb13-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">PValue =</span> coefficient[<span class="st">"Pr(&gt;|t|)"</span>]</span>
+<span id="cb13-307"><a href="#cb13-307" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-308"><a href="#cb13-308" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-309"><a href="#cb13-309" aria-hidden="true" tabindex="-1"></a>pathway_tests <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">rownames</span>(clr), test_one))</span>
+<span id="cb13-310"><a href="#cb13-310" aria-hidden="true" tabindex="-1"></a>pathway_tests<span class="sc">$</span>AdjustedP <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">p.adjust</span>(pathway_tests<span class="sc">$</span>PValue, <span class="st">"BH"</span>)</span>
+<span id="cb13-311"><a href="#cb13-311" aria-hidden="true" tabindex="-1"></a>pathway_tests <span class="ot">&lt;-</span> pathway_tests[<span class="fu">order</span>(pathway_tests<span class="sc">$</span>AdjustedP, <span class="sc">-</span><span class="fu">abs</span>(pathway_tests<span class="sc">$</span>KOminusWT)), ]</span>
+<span id="cb13-312"><a href="#cb13-312" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pathway_tests, <span class="dv">12</span>)</span>
+<span id="cb13-313"><a href="#cb13-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-314"><a href="#cb13-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-315"><a href="#cb13-315" aria-hidden="true" tabindex="-1"></a><span class="in">`ggpicrust2::pathway_daa()`</span> 可快速比较多个 DAA backends，<span class="in">`pathway_heatmap()`</span> 可直接生成分组热图；本数据主模型需要显式调整 <span class="in">`Facility`</span>，因此统计层用上面的 covariate-aware model，注释与图形语法沿用 ggpicrust2，再通过 <span class="in">`theme_pub()`</span> 锁定尺寸、字体和输出格式。</span>
+<span id="cb13-316"><a href="#cb13-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-317"><a href="#cb13-317" aria-hidden="true" tabindex="-1"></a><span class="fu">## NSTI、参考基因组和组成性限制了什么？ {#sec-audit}</span></span>
+<span id="cb13-318"><a href="#cb13-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-319"><a href="#cb13-319" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**ID contract 在 placement 前检查。**FASTA headers 与 count rownames 必须一一对应；重名、空格截断或 ASV 表已过滤而 FASTA 未同步都会污染结果。</span>
+<span id="cb13-320"><a href="#cb13-320" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**NSTI 给分布和权重。**此次 ASV max NSTI 远低于 cutoff 2，但不能把低 NSTI 改写成“功能预测准确”；目标 habitat 的 reference representation 仍需讨论。</span>
+<span id="cb13-321"><a href="#cb13-321" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**不要混淆 abundance、coverage 与 contribution。**unstratified abundance 做 sample comparison；coverage 做反应完整性审计；contribution table 用于追踪哪些 ASVs 驱动预测，三者不能互换。</span>
+<span id="cb13-322"><a href="#cb13-322" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**facility 进入 model。**metadata 中有明确 sequencing facility；只做 KO/WT t-test 会忽略设计结构。更复杂设计应加入 cage/litter/batch random effects。</span>
+<span id="cb13-323"><a href="#cb13-323" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**pathway inference 参数要锁定。**placement tool、reference、max NSTI、HSP method、MinPath、gap filling、regroup map 与 database descriptions都进入 provenance。</span>
+<span id="cb13-324"><a href="#cb13-324" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**关键 pathway 做实测升级。**用 shotgun gene families、qPCR、metatranscriptome、targeted metabolite 或 enzyme assay验证，不让预测热图承担超出证据层级的结论。</span>
 <span id="cb13-325"><a href="#cb13-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-326"><a href="#cb13-326" aria-hidden="true" tabindex="-1"></a>完成上面的 PICRUSt2 计算后，用下面的 R 命令读取三张表与本次预测输出，重新计算按 facility 调整的通路比较，并导出四张结果图：</span>
-<span id="cb13-327"><a href="#cb13-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-328"><a href="#cb13-328" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb13-329"><a href="#cb13-329" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/render_article41_picrust2.R .</span>
-<span id="cb13-330"><a href="#cb13-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-326"><a href="#cb13-326" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="ggpicrust2 的定位"}</span>
+<span id="cb13-327"><a href="#cb13-327" aria-hidden="true" tabindex="-1"></a>ggpicrust2 解决 import、annotation、DAA comparison 与可视化的一致接口；它不会自动修复 confounding、paired design、cage effect 或 reference extrapolation。先确定合法 statistical model，再决定用哪一个绘图 wrapper。</span>
+<span id="cb13-328"><a href="#cb13-328" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb13-329"><a href="#cb13-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-330"><a href="#cb13-330" aria-hidden="true" tabindex="-1"></a><span class="fu">## 结合NSTI解释预测功能 {#sec-beautify}</span></span>
 <span id="cb13-331"><a href="#cb13-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-332"><a href="#cb13-332" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">查看完整的通路分析与绘图脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/render_article41_picrust2.R)</span>。NSTI、通路丰度和 coverage 均来自前面的预测输出，不是直接测量的基因表达或代谢通量。</span>
+<span id="cb13-332"><a href="#cb13-332" aria-hidden="true" tabindex="-1"></a>完成上面的 PICRUSt2 计算后，用下面的 R 命令读取三张表与本次预测输出，重新计算按 facility 调整的通路比较，并导出四张结果图：</span>
 <span id="cb13-333"><a href="#cb13-333" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-334"><a href="#cb13-334" aria-hidden="true" tabindex="-1"></a><span class="fu">### 从 ASV 到 pathway 的分析链</span></span>
-<span id="cb13-335"><a href="#cb13-335" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-336"><a href="#cb13-336" aria-hidden="true" tabindex="-1"></a><span class="al">![PICRUSt2 analysis workflow.](../figures/41-picrust2-workflow.png)</span>{#fig-picrust2-workflow fig-alt="PICRUSt2 workflow from ASV counts and representative sequences to EC, KO and MetaCyc predictions."}</span>
+<span id="cb13-334"><a href="#cb13-334" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb13-335"><a href="#cb13-335" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/render_article41_picrust2.R .</span>
+<span id="cb13-336"><a href="#cb13-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-337"><a href="#cb13-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-338"><a href="#cb13-338" aria-hidden="true" tabindex="-1"></a><span class="fu">### NSTI 必须与结果图并列</span></span>
+<span id="cb13-338"><a href="#cb13-338" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">查看完整的通路分析与绘图脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/render_article41_picrust2.R)</span>。NSTI、通路丰度和 coverage 均来自前面的预测输出，不是直接测量的基因表达或代谢通量。</span>
 <span id="cb13-339"><a href="#cb13-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-340"><a href="#cb13-340" aria-hidden="true" tabindex="-1"></a><span class="al">![NSTI audit at sample and ASV levels.](../figures/41-nsti-audit.png)</span>{#fig-nsti-audit fig-alt="Sample-weighted NSTI by genotype and facility, plus the ASV NSTI distribution."}</span>
+<span id="cb13-340"><a href="#cb13-340" aria-hidden="true" tabindex="-1"></a><span class="fu">### 从 ASV 到 pathway 的分析链</span></span>
 <span id="cb13-341"><a href="#cb13-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-342"><a href="#cb13-342" aria-hidden="true" tabindex="-1"></a><span class="fu">### facility-aware MetaCyc heatmap</span></span>
+<span id="cb13-342"><a href="#cb13-342" aria-hidden="true" tabindex="-1"></a><span class="al">![PICRUSt2 analysis workflow.](../figures/41-picrust2-workflow.png)</span>{#fig-picrust2-workflow fig-alt="PICRUSt2 workflow from ASV counts and representative sequences to EC, KO and MetaCyc predictions."}</span>
 <span id="cb13-343"><a href="#cb13-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-344"><a href="#cb13-344" aria-hidden="true" tabindex="-1"></a><span class="al">![Predicted MetaCyc pathway heatmap.](../figures/41-pathway-heatmap.png)</span>{#fig-picrust2-heatmap fig-alt="Facility-aware heatmap of predicted MetaCyc pathway profiles."}</span>
+<span id="cb13-344"><a href="#cb13-344" aria-hidden="true" tabindex="-1"></a><span class="fu">### NSTI 必须与结果图并列</span></span>
 <span id="cb13-345"><a href="#cb13-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-346"><a href="#cb13-346" aria-hidden="true" tabindex="-1"></a><span class="fu">### effect、FDR、abundance 与 coverage 同图审计</span></span>
+<span id="cb13-346"><a href="#cb13-346" aria-hidden="true" tabindex="-1"></a><span class="al">![NSTI audit at sample and ASV levels.](../figures/41-nsti-audit.png)</span>{#fig-nsti-audit fig-alt="Sample-weighted NSTI by genotype and facility, plus the ASV NSTI distribution."}</span>
 <span id="cb13-347"><a href="#cb13-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-348"><a href="#cb13-348" aria-hidden="true" tabindex="-1"></a><span class="al">![Facility-adjusted pathway effect audit.](../figures/41-pathway-effect.png)</span>{#fig-picrust2-effect fig-alt="Facility-adjusted genotype effects with BH adjusted p values, abundance and pathway coverage."}</span>
+<span id="cb13-348"><a href="#cb13-348" aria-hidden="true" tabindex="-1"></a><span class="fu">### facility-aware MetaCyc heatmap</span></span>
 <span id="cb13-349"><a href="#cb13-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-350"><a href="#cb13-350" aria-hidden="true" tabindex="-1"></a>四个图基名分别为 <span class="in">`41-picrust2-workflow`</span>、<span class="in">`41-nsti-audit`</span>、<span class="in">`41-pathway-heatmap`</span>、<span class="in">`41-pathway-effect`</span>；每个同时导出 PDF、SVG、600 ppi PNG 与 LZW-TIFF。完整数值表位于 <span class="in">`results/41-picrust2/`</span>。</span>
+<span id="cb13-350"><a href="#cb13-350" aria-hidden="true" tabindex="-1"></a><span class="al">![Predicted MetaCyc pathway heatmap.](../figures/41-pathway-heatmap.png)</span>{#fig-picrust2-heatmap fig-alt="Facility-aware heatmap of predicted MetaCyc pathway profiles."}</span>
 <span id="cb13-351"><a href="#cb13-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-352"><a href="#cb13-352" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
+<span id="cb13-352"><a href="#cb13-352" aria-hidden="true" tabindex="-1"></a><span class="fu">### effect、FDR、abundance 与 coverage 同图审计</span></span>
 <span id="cb13-353"><a href="#cb13-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-354"><a href="#cb13-354" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的七件事"}</span>
+<span id="cb13-354"><a href="#cb13-354" aria-hidden="true" tabindex="-1"></a><span class="al">![Facility-adjusted pathway effect audit.](../figures/41-pathway-effect.png)</span>{#fig-picrust2-effect fig-alt="Facility-adjusted genotype effects with BH adjusted p values, abundance and pathway coverage."}</span>
 <span id="cb13-355"><a href="#cb13-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-356"><a href="#cb13-356" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>只有 OTU/ASV table，没有 representative sequences，却声称运行了 PICRUSt2。</span>
-<span id="cb13-357"><a href="#cb13-357" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>FASTA 与 table IDs 未核对，或从 taxonomy strings 伪造 sequences。</span>
-<span id="cb13-358"><a href="#cb13-358" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>不报告 PICRUSt2/reference/database versions、NSTI 与 filtered reads。</span>
-<span id="cb13-359"><a href="#cb13-359" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>把 predicted pathway 写成 measured gene、activated pathway 或 metabolite production。</span>
-<span id="cb13-360"><a href="#cb13-360" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>只按 p-value 选热图，不做完整 family 的 FDR，也不调整 facility/batch。</span>
-<span id="cb13-361"><a href="#cb13-361" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>把同一 ASV 的多个 pathway contributions 当独立 biological replicates。</span>
-<span id="cb13-362"><a href="#cb13-362" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>忽略 low coverage、MinPath/gap-fill sensitivity 与 strain-level gene variation。</span>
-<span id="cb13-363"><a href="#cb13-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-364"><a href="#cb13-364" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb13-365"><a href="#cb13-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-366"><a href="#cb13-366" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告PICRUSt2预测与局限 {#sec-methods}</span></span>
-<span id="cb13-367"><a href="#cb13-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-368"><a href="#cb13-368" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Functional potential was inferred from 37 ASVs and their sample counts using PICRUSt2 v2.6.3. Study sequences were placed independently into the default bacterial and archaeal reference trees with EPA-ng; all 37 ASVs selected the bacterial domain and passed the prespecified maximum NSTI of 2.0. Hidden-state prediction used the default maximum-parsimony method and seed 100. Sequence abundances were normalized by predicted 16S rRNA copy number, and EC and KO profiles were inferred. MetaCyc pathway abundance and experimental coverage were reconstructed from EC profiles using the bundled v24 structured map, EC-to-MetaCyc regrouping, MinPath, and gap filling; stratified contribution tables were retained. MetaCyc identifiers were annotated with ggpicrust2 v2.5.17. Pathways present in ≥20% of samples were CLR-transformed after adding 0.5 and modeled as a function of genotype while adjusting for sequencing facility. Benjamini–Hochberg correction covered the complete filtered pathway set. Predictions were interpreted as phylogenetically inferred functional potential and not as measured genes or metabolic activity.</span></span>
+<span id="cb13-356"><a href="#cb13-356" aria-hidden="true" tabindex="-1"></a>四个图基名分别为 <span class="in">`41-picrust2-workflow`</span>、<span class="in">`41-nsti-audit`</span>、<span class="in">`41-pathway-heatmap`</span>、<span class="in">`41-pathway-effect`</span>；每个同时导出 PDF、SVG、600 ppi PNG 与 LZW-TIFF。完整数值表位于 <span class="in">`results/41-picrust2/`</span>。</span>
+<span id="cb13-357"><a href="#cb13-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-358"><a href="#cb13-358" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
+<span id="cb13-359"><a href="#cb13-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-360"><a href="#cb13-360" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的七件事"}</span>
+<span id="cb13-361"><a href="#cb13-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-362"><a href="#cb13-362" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>只有 OTU/ASV table，没有 representative sequences，却声称运行了 PICRUSt2。</span>
+<span id="cb13-363"><a href="#cb13-363" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>FASTA 与 table IDs 未核对，或从 taxonomy strings 伪造 sequences。</span>
+<span id="cb13-364"><a href="#cb13-364" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>不报告 PICRUSt2/reference/database versions、NSTI 与 filtered reads。</span>
+<span id="cb13-365"><a href="#cb13-365" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>把 predicted pathway 写成 measured gene、activated pathway 或 metabolite production。</span>
+<span id="cb13-366"><a href="#cb13-366" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>只按 p-value 选热图，不做完整 family 的 FDR，也不调整 facility/batch。</span>
+<span id="cb13-367"><a href="#cb13-367" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>把同一 ASV 的多个 pathway contributions 当独立 biological replicates。</span>
+<span id="cb13-368"><a href="#cb13-368" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>忽略 low coverage、MinPath/gap-fill sensitivity 与 strain-level gene variation。</span>
 <span id="cb13-369"><a href="#cb13-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-370"><a href="#cb13-370" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将PICRUSt2预测与局限用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb13-370"><a href="#cb13-370" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb13-371"><a href="#cb13-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-372"><a href="#cb13-372" aria-hidden="true" tabindex="-1"></a>替换三件套和 FASTA 路径，并先执行四个 contract checks：</span>
+<span id="cb13-372"><a href="#cb13-372" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告PICRUSt2预测与局限 {#sec-methods}</span></span>
 <span id="cb13-373"><a href="#cb13-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-376"><a href="#cb13-376" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-377"><a href="#cb13-377" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/otutab.tsv"</span>)</span>
-<span id="cb13-378"><a href="#cb13-378" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/taxonomy.tsv"</span>)</span>
-<span id="cb13-379"><a href="#cb13-379" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/metadata.tsv"</span>)</span>
-<span id="cb13-380"><a href="#cb13-380" aria-hidden="true" tabindex="-1"></a>fasta <span class="ot">&lt;-</span> <span class="st">"your_data/representative-sequences.fasta"</span></span>
-<span id="cb13-381"><a href="#cb13-381" aria-hidden="true" tabindex="-1"></a><span class="co"># 检查：feature IDs 唯一、sample IDs 对齐、FASTA IDs 完全匹配、counts 为非负整数</span></span>
-<span id="cb13-382"><a href="#cb13-382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-383"><a href="#cb13-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-384"><a href="#cb13-384" aria-hidden="true" tabindex="-1"></a>metadata 中把 <span class="in">`Genotype`</span>、<span class="in">`Facility`</span> 换成你的 primary exposure 与 batch/design columns。paired/repeated data 用 subject/cage random effect 或 blocked permutation；多中心数据按 center 审计。运行前锁定 PICRUSt2/reference/MetaCyc versions 与 checksum，运行后保存 NSTI、filtered fraction、coverage、contribution table、session information 和命令日志。</span>
-<span id="cb13-385"><a href="#cb13-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-386"><a href="#cb13-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb13-387"><a href="#cb13-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-388"><a href="#cb13-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Douglas GM, Maffei VJ, Zaneveld JR, et al. PICRUSt2 for prediction of metagenome functions. *Nature Biotechnology*. 2020;38:685–688. <span class="ot">&lt;https://doi.org/10.1038/s41587-020-0548-6&gt;</span></span>
-<span id="cb13-389"><a href="#cb13-389" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Yang C, Mai J, Cao X, Burberry A, Cominelli F, Zhang L. ggpicrust2: an R package for PICRUSt2 predicted functional profile analysis and visualization. *Bioinformatics*. 2023;39:btad470. <span class="ot">&lt;https://doi.org/10.1093/bioinformatics/btad470&gt;</span></span>
-<span id="cb13-390"><a href="#cb13-390" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ye Y, Doak TG. A parsimony approach to biological pathway reconstruction/inference for genomes and metagenomes. *PLoS Computational Biology*. 2009;5:e1000465. <span class="ot">&lt;https://doi.org/10.1371/journal.pcbi.1000465&gt;</span></span>
-<span id="cb13-391"><a href="#cb13-391" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PICRUSt2 official tutorial and chemerin dataset. <span class="ot">&lt;https://github.com/picrust/picrust2/wiki/PICRUSt2-Tutorial-(v2.5.0)&gt;</span></span>
+<span id="cb13-374"><a href="#cb13-374" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Functional potential was inferred from 37 ASVs and their sample counts using PICRUSt2 v2.6.3. Study sequences were placed independently into the default bacterial and archaeal reference trees with EPA-ng; all 37 ASVs selected the bacterial domain and passed the prespecified maximum NSTI of 2.0. Hidden-state prediction used the default maximum-parsimony method and seed 100. Sequence abundances were normalized by predicted 16S rRNA copy number, and EC and KO profiles were inferred. MetaCyc pathway abundance and experimental coverage were reconstructed from EC profiles using the bundled v24 structured map, EC-to-MetaCyc regrouping, MinPath, and gap filling; stratified contribution tables were retained. MetaCyc identifiers were annotated with ggpicrust2 v2.5.17. Pathways present in ≥20% of samples were CLR-transformed after adding 0.5 and modeled as a function of genotype while adjusting for sequencing facility. Benjamini–Hochberg correction covered the complete filtered pathway set. Predictions were interpreted as phylogenetically inferred functional potential and not as measured genes or metabolic activity.</span></span>
+<span id="cb13-375"><a href="#cb13-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-376"><a href="#cb13-376" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将PICRUSt2预测与局限用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb13-377"><a href="#cb13-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-378"><a href="#cb13-378" aria-hidden="true" tabindex="-1"></a>替换三件套和 FASTA 路径，并先执行四个 contract checks：</span>
+<span id="cb13-379"><a href="#cb13-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-382"><a href="#cb13-382" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-383"><a href="#cb13-383" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/otutab.tsv"</span>)</span>
+<span id="cb13-384"><a href="#cb13-384" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/taxonomy.tsv"</span>)</span>
+<span id="cb13-385"><a href="#cb13-385" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="st">"your_data/metadata.tsv"</span>)</span>
+<span id="cb13-386"><a href="#cb13-386" aria-hidden="true" tabindex="-1"></a>fasta <span class="ot">&lt;-</span> <span class="st">"your_data/representative-sequences.fasta"</span></span>
+<span id="cb13-387"><a href="#cb13-387" aria-hidden="true" tabindex="-1"></a><span class="co"># 检查：feature IDs 唯一、sample IDs 对齐、FASTA IDs 完全匹配、counts 为非负整数</span></span>
+<span id="cb13-388"><a href="#cb13-388" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-389"><a href="#cb13-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-390"><a href="#cb13-390" aria-hidden="true" tabindex="-1"></a>metadata 中把 <span class="in">`Genotype`</span>、<span class="in">`Facility`</span> 换成你的 primary exposure 与 batch/design columns。paired/repeated data 用 subject/cage random effect 或 blocked permutation；多中心数据按 center 审计。运行前锁定 PICRUSt2/reference/MetaCyc versions 与 checksum，运行后保存 NSTI、filtered fraction、coverage、contribution table、session information 和命令日志。</span>
+<span id="cb13-391"><a href="#cb13-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-392"><a href="#cb13-392" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb13-393"><a href="#cb13-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-394"><a href="#cb13-394" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Douglas GM, Maffei VJ, Zaneveld JR, et al. PICRUSt2 for prediction of metagenome functions. *Nature Biotechnology*. 2020;38:685–688. <span class="ot">&lt;https://doi.org/10.1038/s41587-020-0548-6&gt;</span></span>
+<span id="cb13-395"><a href="#cb13-395" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Yang C, Mai J, Cao X, Burberry A, Cominelli F, Zhang L. ggpicrust2: an R package for PICRUSt2 predicted functional profile analysis and visualization. *Bioinformatics*. 2023;39:btad470. <span class="ot">&lt;https://doi.org/10.1093/bioinformatics/btad470&gt;</span></span>
+<span id="cb13-396"><a href="#cb13-396" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ye Y, Doak TG. A parsimony approach to biological pathway reconstruction/inference for genomes and metagenomes. *PLoS Computational Biology*. 2009;5:e1000465. <span class="ot">&lt;https://doi.org/10.1371/journal.pcbi.1000465&gt;</span></span>
+<span id="cb13-397"><a href="#cb13-397" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PICRUSt2 official tutorial and chemerin dataset. <span class="ot">&lt;https://github.com/picrust/picrust2/wiki/PICRUSt2-Tutorial-(v2.5.0)&gt;</span></span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

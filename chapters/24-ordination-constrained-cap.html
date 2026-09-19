@@ -114,6 +114,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -510,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -822,7 +851,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">约束排序回答环境解释了多少群落差异</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">约束排序回答环境解释了多少群落差异</a>
+  <ul class="collapse">
+  <li><a href="#箭头边际贡献与因果效应不是一回事" id="toc-箭头边际贡献与因果效应不是一回事" class="nav-link" data-scroll-target="#箭头边际贡献与因果效应不是一回事">箭头、边际贡献与因果效应不是一回事</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">下载并读取本次分析的数据</a>
   <ul class="collapse">
   <li><a href="#读取四张表并按-id-对齐" id="toc-读取四张表并按-id-对齐" class="nav-link" data-scroll-target="#读取四张表并按-id-对齐">读取四张表并按 ID 对齐</a></li>
@@ -836,7 +868,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#构建用于-braycurtis-的群落矩阵" id="toc-构建用于-braycurtis-的群落矩阵" class="nav-link" data-scroll-target="#构建用于-braycurtis-的群落矩阵">构建用于 Bray–Curtis 的群落矩阵</a></li>
   <li><a href="#先看一个单因子-cap-模型" id="toc-先看一个单因子-cap-模型" class="nav-link" data-scroll-target="#先看一个单因子-cap-模型">先看一个单因子 CAP 模型</a></li>
   <li><a href="#预先确定环境变量并处理缺失值" id="toc-预先确定环境变量并处理缺失值" class="nav-link" data-scroll-target="#预先确定环境变量并处理缺失值">预先确定环境变量并处理缺失值</a></li>
-  <li><a href="#拟合环境-cap并检查-r2-与共线性" id="toc-拟合环境-cap并检查-r2-与共线性" class="nav-link" data-scroll-target="#拟合环境-cap并检查-r2-与共线性">拟合环境 CAP，并检查 (R^2) 与共线性</a></li>
+  <li><a href="#拟合环境-cap并检查-r2-与共线性" id="toc-拟合环境-cap并检查-r2-与共线性" class="nav-link" data-scroll-target="#拟合环境-cap并检查-r2-与共线性">拟合环境 CAP，并检查 <span class="math inline">\(R^2\)</span> 与共线性</a></li>
   <li><a href="#整体逐项边际和逐轴置换检验" id="toc-整体逐项边际和逐轴置换检验" class="nav-link" data-scroll-target="#整体逐项边际和逐轴置换检验">整体、逐项、边际和逐轴置换检验</a></li>
   <li><a href="#提取当前环境模型的坐标和轴标签" id="toc-提取当前环境模型的坐标和轴标签" class="nav-link" data-scroll-target="#提取当前环境模型的坐标和轴标签">提取当前环境模型的坐标和轴标签</a></li>
   </ul></li>
@@ -874,7 +906,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -893,7 +925,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>每个点是一个样本；</li>
 <li>点的颜色表示地点、处理或表型；</li>
 <li><code>pH</code>、<code>Conductivity</code>、<code>TOC</code> 等箭头表示环境梯度；</li>
-<li>图注报告约束模型的 (R^2)、调整后 (R^2) 和置换检验 P 值。</li>
+<li>图注报告约束模型的 <span class="math inline">\(R^2\)</span>、调整后 <span class="math inline">\(R^2\)</span> 和置换检验 P 值。</li>
 </ul>
 <p>这类图回答的不是“样本自然会沿哪两个方向变化”，而是：</p>
 <blockquote class="blockquote">
@@ -910,9 +942,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>CAP 是有监督模型：坐标轴专门呈现可由给定变量解释的变异。因此分离更明显是模型定义的结果，不是独立证据。证据来自预先设定的假设、调整后 (R^2)、置换检验、共线性检查和与研究设计一致的置换方案。</p>
+<p>CAP 是有监督模型：坐标轴专门呈现可由给定变量解释的变异。因此分离更明显是模型定义的结果，不是独立证据。证据来自预先设定的假设、调整后 <span class="math inline">\(R^2\)</span>、置换检验、共线性检查和与研究设计一致的置换方案。</p>
 </div>
 </div>
+<section id="箭头边际贡献与因果效应不是一回事" class="level3">
+<h3 class="anchored" data-anchor-id="箭头边际贡献与因果效应不是一回事">箭头、边际贡献与因果效应不是一回事</h3>
+<p>CAP 图中的 pH 箭头表达当前约束空间内的梯度；边际检验问的是控制其余已纳入变量后，pH 是否仍提供额外解释。这两者都不自动等于改变 pH 所造成的群落变化。如果 pH 与未测量的地理或管理因素共同变化，统计调整只能控制已测且正确建模的部分。</p>
+<p>本例五个环境变量的 VIF 均低于 2，说明这五列之间没有严重线性冗余，不代表混杂已经消失。加入 <code>Condition(Group)</code> 会把问题改为“同一地理组内的环境关联”；若变量主要在组间变化，估计会变得不精确，这不必然是模型失败，而是数据对新问题提供的信息更少。是否调整 Group 应由目标比较决定，不应由哪个模型更显著决定。</p>
+<p>还有一个容易混淆的细节：在相同样本、带截距且无惩罚的线性约束模型中，给连续预测变量做 Z-score 不改变它们张成的空间，因此不会单靠缩放改变整体拟合或消除共线性。标准化便于描述单位；这与先计算环境欧氏距离时各变量量纲会改变权重的情况不同。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">下载并读取本次分析的数据</h2>
@@ -1108,8 +1146,14 @@ S6 5.37         33.3 0.26</code></pre>
 <section id="sec-theory" class="level2">
 <h2 class="anchored" data-anchor-id="sec-theory">CAP 到底约束了什么</h2>
 <p>群落总变异可分为两部分：</p>
-<p>[ = + ]</p>
-<p>约束部分是当前预测变量能够解释的群落变异，残差部分是模型没有解释的变异。原始 (R^2) 随变量数量增加而单调上升，因此多变量模型应同时报告调整后 (R^2)。</p>
+<p><span class="math display">\[
+\text{Total variation}
+=
+\text{Constrained variation}
++
+\text{Residual variation}
+\]</span></p>
+<p>约束部分是当前预测变量能够解释的群落变异，残差部分是模型没有解释的变异。原始 <span class="math inline">\(R^2\)</span> 随变量数量增加而单调上升，因此多变量模型应同时报告调整后 <span class="math inline">\(R^2\)</span>。</p>
 <section id="rdacca-与-capdb-rda-的选择" class="level3">
 <h3 class="anchored" data-anchor-id="rdacca-与-capdb-rda-的选择">RDA、CCA 与 CAP/db-RDA 的选择</h3>
 <ul>
@@ -1280,7 +1324,7 @@ $adj.r.squared
 </div>
 </section>
 <section id="拟合环境-cap并检查-r2-与共线性" class="level3">
-<h3 class="anchored" data-anchor-id="拟合环境-cap并检查-r2-与共线性">拟合环境 CAP，并检查 (R^2) 与共线性</h3>
+<h3 class="anchored" data-anchor-id="拟合环境-cap并检查-r2-与共线性">拟合环境 CAP，并检查 <span class="math inline">\(R^2\)</span> 与共线性</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>cap_env <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">capscale</span>(</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  comm_env <span class="sc">~</span> pH <span class="sc">+</span> TOC <span class="sc">+</span> NH4 <span class="sc">+</span> NO3 <span class="sc">+</span> Conductivity,</span>
@@ -1408,7 +1452,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </section>
 <section id="提取当前环境模型的坐标和轴标签" class="level3">
 <h3 class="anchored" data-anchor-id="提取当前环境模型的坐标和轴标签">提取当前环境模型的坐标和轴标签</h3>
-<p>轴百分比按“受约束变异内部的占比”计算，并在标签中明确写出 <code>constrained</code>。调整后 (R^2) 则衡量全部五个变量对总群落变异的解释比例。</p>
+<p>轴百分比按“受约束变异内部的占比”计算，并在标签中明确写出 <code>constrained</code>。调整后 <span class="math inline">\(R^2\)</span> 则衡量全部五个变量对总群落变异的解释比例。</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>env_eigenvalues_mod2 <span class="ot">&lt;-</span> cap_env<span class="sc">$</span>CCA<span class="sc">$</span>eig</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>env_axis_percent_mod2 <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span></span>
@@ -1586,13 +1630,13 @@ Conductivity  0.88250723 -0.59897850 Conductivity</code></pre>
 </div>
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li><strong>看到 CAP 分开就宣称存在差异。</strong> 轴本来就是按预测变量优化的；必须报告置换检验和调整后 (R^2)。</li>
-<li><strong>变量越多越好。</strong> 原始 (R^2) 会随变量增加而上升。变量应由研究假设预先确定，并检查 VIF 和调整后 (R^2)。</li>
+<li><strong>看到 CAP 分开就宣称存在差异。</strong> 轴本来就是按预测变量优化的；必须报告置换检验和调整后 <span class="math inline">\(R^2\)</span>。</li>
+<li><strong>变量越多越好。</strong> 原始 <span class="math inline">\(R^2\)</span> 会随变量增加而上升。变量应由研究假设预先确定，并检查 VIF 和调整后 <span class="math inline">\(R^2\)</span>。</li>
 <li><strong>把 <code>by = "terms"</code> 当成独立效应。</strong> 它依赖公式顺序；独立贡献应结合 <code>by = "margin"</code>，大量探索性检验还需控制多重比较。</li>
-<li><strong>不标准化不同量纲的环境变量。</strong> pH、mg/kg 与 µS/cm 的数值尺度不同；连续预测变量应先 Z-score，除非模型有明确的原尺度解释需求。</li>
+<li><strong>把标准化当成消除共线性或混杂。</strong> Z-score 便于比较变量单位，但不会改变本例线性约束模型的解释空间，也不能产生缺失的组内对照。对数变换、变量选择与调整集则可能实质改变问题，应分别说明。</li>
 <li><strong>忽略区组和重复测量。</strong> <code>Condition(Batch)</code> 用于从模型中控制协变量，受限置换用于保证样本交换性；两者解决不同问题，不能互相替代。</li>
 <li><strong>把箭头解释为因果。</strong> 箭头只表示当前模型与二维投影中的关联方向和强度。</li>
-<li><strong>复用别的模型轴标签。</strong> 每次重拟合后都要从当前模型重新提取 eigenvalues、scores、(R^2) 和 P 值。</li>
+<li><strong>复用别的模型轴标签。</strong> 每次重拟合后都要从当前模型重新提取 eigenvalues、scores、<span class="math inline">\(R^2\)</span> 和 P 值。</li>
 </ol>
 </div>
 </div>
@@ -1614,7 +1658,7 @@ Conductivity  0.88250723 -0.59897850 Conductivity</code></pre>
 <h2 class="anchored" data-anchor-id="sec-methods">报告约束排序与置换检验的方法与限制</h2>
 <p>可直接替换变量名、阈值和置换限制：</p>
 <blockquote class="blockquote">
-<p>Distance-based redundancy analysis (db-RDA; CAP) was performed using Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Features detected in at least 5% of samples were retained, yielding 11,113 features across 90 complete samples. The prespecified environmental predictors (pH, TOC, NH4, NO3, Conductivity) were Z-score standardized before model fitting. A Lingoes correction was applied to the Bray–Curtis dissimilarities. Model significance was assessed with 999 permutations (P = 0.001), and the model explained (R^2) = 0.229 of the total variation (adjusted (R^2) = 0.183). Sequential, marginal, and axis-wise permutation tests were performed, and variance inflation factors were all below 1.63. Wetland group was used only for point color in the environmental CAP figure.</p>
+<p>Distance-based redundancy analysis (db-RDA; CAP) was performed using Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Features detected in at least 5% of samples were retained, yielding 11,113 features across 90 complete samples. The prespecified environmental predictors (pH, TOC, NH4, NO3, Conductivity) were Z-score standardized before model fitting. A Lingoes correction was applied to the Bray–Curtis dissimilarities. Model significance was assessed with 999 permutations (P = 0.001), and the model explained <span class="math inline">\(R^2\)</span> = 0.229 of the total variation (adjusted <span class="math inline">\(R^2\)</span> = 0.183). Sequential, marginal, and axis-wise permutation tests were performed, and variance inflation factors were all below 1.63. Wetland group was used only for point color in the environmental CAP figure.</p>
 </blockquote>
 <p>若样本属于同一受试者、站点或区组，应把最后的置换描述改成实际限制，例如“permutations were restricted within site”。</p>
 </section>
@@ -2211,7 +2255,7 @@ Conductivity  0.88250723 -0.59897850 Conductivity</code></pre>
 <span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>每个点是一个样本；</span>
 <span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>点的颜色表示地点、处理或表型；</span>
 <span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`pH`</span>、<span class="in">`Conductivity`</span>、<span class="in">`TOC`</span> 等箭头表示环境梯度；</span>
-<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>图注报告约束模型的 <span class="sc">\(</span>R^2<span class="sc">\)</span>、调整后 <span class="sc">\(</span>R^2<span class="sc">\)</span> 和置换检验 P 值。</span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>图注报告约束模型的 $R^2$、调整后 $R^2$ 和置换检验 P 值。</span>
 <span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>这类图回答的不是“样本自然会沿哪两个方向变化”，而是：</span>
 <span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a></span>
@@ -2220,623 +2264,631 @@ Conductivity  0.88250723 -0.59897850 Conductivity</code></pre>
 <span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>本例继续使用中国湿地土壤 16S 数据。<span class="co">[</span><span class="ot">原始研究</span><span class="co">](https://doi.org/10.1016/j.geoderma.2018.09.035)</span>报告 pH 与电导率是影响湿地土壤细菌群落的重要环境因子；<span class="co">[</span><span class="ot">`microeco`</span><span class="co">](https://doi.org/10.1093/femsec/fiaa255)</span>公开分发了 OTU、分类、样本和环境因子表。下面从这些表拟合一个五变量 CAP 模型。</span>
 <span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>::: {.callout-important title="约束排序不是把差异“逼出来”"}</span>
-<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>CAP 是有监督模型：坐标轴专门呈现可由给定变量解释的变异。因此分离更明显是模型定义的结果，不是独立证据。证据来自预先设定的假设、调整后 <span class="sc">\(</span>R^2<span class="sc">\)</span>、置换检验、共线性检查和与研究设计一致的置换方案。</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>CAP 是有监督模型：坐标轴专门呈现可由给定变量解释的变异。因此分离更明显是模型定义的结果，不是独立证据。证据来自预先设定的假设、调整后 $R^2$、置换检验、共线性检查和与研究设计一致的置换方案。</span>
 <span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### 箭头、边际贡献与因果效应不是一回事</span></span>
 <span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`ggrepel`</span>、<span class="in">`scales`</span>、<span class="in">`vegan`</span>。本次使用中国湿地的 OTU count 表、分类表和样本信息表，以及本次分析使用的实测环境变量或系统发育信息。</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>CAP 图中的 pH 箭头表达当前约束空间内的梯度；边际检验问的是控制其余已纳入变量后，pH 是否仍提供额外解释。这两者都不自动等于改变 pH 所造成的群落变化。如果 pH 与未测量的地理或管理因素共同变化，统计调整只能控制已测且正确建模的部分。</span>
 <span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>本例五个环境变量的 VIF 均低于 2，说明这五列之间没有严重线性冗余，不代表混杂已经消失。加入 <span class="in">`Condition(Group)`</span> 会把问题改为“同一地理组内的环境关联”；若变量主要在组间变化，估计会变得不精确，这不必然是模型失败，而是数据对新问题提供的信息更少。是否调整 Group 应由目标比较决定，不应由哪个模型更显著决定。</span>
 <span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
-<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
-<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
-<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/environment.tsv"</span>,</span>
-<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/metadata.tsv"</span>,</span>
-<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/otutab.tsv"</span>,</span>
-<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/taxonomy.tsv"</span></span>
-<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
-<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-02</span></span>
-<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
-<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>还有一个容易混淆的细节：在相同样本、带截距且无惩罚的线性约束模型中，给连续预测变量做 Z-score 不改变它们张成的空间，因此不会单靠缩放改变整体拟合或消除共线性。标准化便于描述单位；这与先计算环境欧氏距离时各变量量纲会改变权重的情况不同。</span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`ggrepel`</span>、<span class="in">`scales`</span>、<span class="in">`vegan`</span>。本次使用中国湿地的 OTU count 表、分类表和样本信息表，以及本次分析使用的实测环境变量或系统发育信息。</span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/environment.tsv"</span>,</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/metadata.tsv"</span>,</span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/otutab.tsv"</span>,</span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/taxonomy.tsv"</span></span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
-<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#009E73"</span>, <span class="st">"#CC79A7"</span>,</span>
-<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#999999"</span></span>
-<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> pal_pub, ...)</span>
-<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
-<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal_pub, ...)</span>
-<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-02</span></span>
+<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#009E73"</span>, <span class="st">"#CC79A7"</span>,</span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a>  <span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#999999"</span></span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">12</span>) {</span>
-<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
-<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.ticks =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>),</span>
-<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(</span>
-<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> scales<span class="sc">::</span><span class="fu">alpha</span>(<span class="st">"white"</span>, <span class="fl">0.7</span>),</span>
-<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="cn">NA</span></span>
-<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
-<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a>  plot,</span>
-<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a>  file_base,</span>
-<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">125</span>,</span>
-<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">100</span>,</span>
-<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a>  <span class="at">units =</span> <span class="st">"mm"</span>,</span>
-<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">300</span></span>
-<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a>) {</span>
-<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(</span>
-<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>),</span>
-<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a>    plot,</span>
-<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width,</span>
-<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> height,</span>
-<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> units,</span>
-<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a>    <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf</span>
-<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(<span class="at">values =</span> pal_pub, ...)</span>
+<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(...) {</span>
+<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal_pub, ...)</span>
+<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">12</span>) {</span>
+<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
+<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.ticks =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.3</span>),</span>
+<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(</span>
+<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a>        <span class="at">fill =</span> scales<span class="sc">::</span><span class="fu">alpha</span>(<span class="st">"white"</span>, <span class="fl">0.7</span>),</span>
+<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a>        <span class="at">color =</span> <span class="cn">NA</span></span>
+<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a>  plot,</span>
+<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a>  file_base,</span>
+<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">125</span>,</span>
+<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">100</span>,</span>
+<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a>  <span class="at">units =</span> <span class="st">"mm"</span>,</span>
+<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a>  <span class="at">dpi =</span> <span class="dv">300</span></span>
+<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a>) {</span>
+<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb22-129"><a href="#cb22-129" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(</span>
-<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(file_base, <span class="st">".png"</span>),</span>
+<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>),</span>
 <span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a>    plot,</span>
 <span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width,</span>
 <span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> height,</span>
 <span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> units,</span>
-<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a>    <span class="at">dpi =</span> dpi,</span>
-<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"white"</span></span>
-<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(</span>
-<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>),</span>
-<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a>    plot,</span>
-<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width,</span>
-<span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> height,</span>
-<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> units,</span>
-<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a>    <span class="at">dpi =</span> dpi,</span>
-<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a>    <span class="at">compression =</span> <span class="st">"lzw"</span>,</span>
-<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"white"</span></span>
-<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
-<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取四张表并按 ID 对齐</span></span>
-<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-03</span></span>
-<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/otutab.tsv"</span>,</span>
-<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/taxonomy.tsv"</span>,</span>
-<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/metadata.tsv"</span>,</span>
-<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a>environment <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/environment.tsv"</span>,</span>
-<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(otutab)</span>
-<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a><span class="fu">storage.mode</span>(otutab) <span class="ot">&lt;-</span> <span class="st">"numeric"</span></span>
-<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(otutab), <span class="fu">rownames</span>(taxonomy)),</span>
-<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">colnames</span>(otutab) <span class="sc">%in%</span> <span class="fu">rownames</span>(environment)),</span>
-<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(otutab <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
-<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">colSums</span>(otutab) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a>environment <span class="ot">&lt;-</span> environment[<span class="fu">colnames</span>(otutab), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(otutab)</span>
-<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a>otutab[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
-<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a>taxonomy[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
-<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(environment)</span>
-<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/24-ordination-constrained-cap.R)</span>。脚本包含数据下载、计算和图形导出。</span>
-<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-206"><a href="#cb22-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-207"><a href="#cb22-207" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb22-208"><a href="#cb22-208" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"vegan"</span>, <span class="st">"ggplot2"</span>, <span class="st">"ggrepel"</span>, <span class="st">"scales"</span>, <span class="st">"digest"</span>))</span>
-<span id="cb22-209"><a href="#cb22-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-210"><a href="#cb22-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-211"><a href="#cb22-211" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb22-212"><a href="#cb22-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-213"><a href="#cb22-213" aria-hidden="true" tabindex="-1"></a><span class="fu">## CAP 到底约束了什么 {#sec-theory}</span></span>
-<span id="cb22-214"><a href="#cb22-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-215"><a href="#cb22-215" aria-hidden="true" tabindex="-1"></a>群落总变异可分为两部分：</span>
-<span id="cb22-216"><a href="#cb22-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-217"><a href="#cb22-217" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb22-218"><a href="#cb22-218" aria-hidden="true" tabindex="-1"></a>\text{Total variation}</span>
-<span id="cb22-219"><a href="#cb22-219" aria-hidden="true" tabindex="-1"></a>=</span>
-<span id="cb22-220"><a href="#cb22-220" aria-hidden="true" tabindex="-1"></a>\text{Constrained variation}</span>
-<span id="cb22-221"><a href="#cb22-221" aria-hidden="true" tabindex="-1"></a>+</span>
-<span id="cb22-222"><a href="#cb22-222" aria-hidden="true" tabindex="-1"></a>\text{Residual variation}</span>
-<span id="cb22-223"><a href="#cb22-223" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a>    <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf</span>
+<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(</span>
+<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(file_base, <span class="st">".png"</span>),</span>
+<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a>    plot,</span>
+<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width,</span>
+<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> height,</span>
+<span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> units,</span>
+<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a>    <span class="at">dpi =</span> dpi,</span>
+<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"white"</span></span>
+<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(</span>
+<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a>    <span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>),</span>
+<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a>    plot,</span>
+<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> width,</span>
+<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> height,</span>
+<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a>    <span class="at">units =</span> units,</span>
+<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a>    <span class="at">dpi =</span> dpi,</span>
+<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a>    <span class="at">compression =</span> <span class="st">"lzw"</span>,</span>
+<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a>    <span class="at">bg =</span> <span class="st">"white"</span></span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
+<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取四张表并按 ID 对齐</span></span>
+<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-03</span></span>
+<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/otutab.tsv"</span>,</span>
+<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/taxonomy.tsv"</span>,</span>
+<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/metadata.tsv"</span>,</span>
+<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a>environment <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/environment.tsv"</span>,</span>
+<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(otutab)</span>
+<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a><span class="fu">storage.mode</span>(otutab) <span class="ot">&lt;-</span> <span class="st">"numeric"</span></span>
+<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(otutab), <span class="fu">rownames</span>(taxonomy)),</span>
+<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">colnames</span>(otutab) <span class="sc">%in%</span> <span class="fu">rownames</span>(environment)),</span>
+<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(otutab <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
+<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">colSums</span>(otutab) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a>environment <span class="ot">&lt;-</span> environment[<span class="fu">colnames</span>(otutab), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(otutab)</span>
+<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a>otutab[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span>
+<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a>taxonomy[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
+<span id="cb22-204"><a href="#cb22-204" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(environment)</span>
+<span id="cb22-205"><a href="#cb22-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-206"><a href="#cb22-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-207"><a href="#cb22-207" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/24-ordination-constrained-cap.R)</span>。脚本包含数据下载、计算和图形导出。</span>
+<span id="cb22-208"><a href="#cb22-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-209"><a href="#cb22-209" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb22-210"><a href="#cb22-210" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb22-211"><a href="#cb22-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-214"><a href="#cb22-214" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-215"><a href="#cb22-215" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-216"><a href="#cb22-216" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"vegan"</span>, <span class="st">"ggplot2"</span>, <span class="st">"ggrepel"</span>, <span class="st">"scales"</span>, <span class="st">"digest"</span>))</span>
+<span id="cb22-217"><a href="#cb22-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-218"><a href="#cb22-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-219"><a href="#cb22-219" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb22-220"><a href="#cb22-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-221"><a href="#cb22-221" aria-hidden="true" tabindex="-1"></a><span class="fu">## CAP 到底约束了什么 {#sec-theory}</span></span>
+<span id="cb22-222"><a href="#cb22-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-223"><a href="#cb22-223" aria-hidden="true" tabindex="-1"></a>群落总变异可分为两部分：</span>
 <span id="cb22-224"><a href="#cb22-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-225"><a href="#cb22-225" aria-hidden="true" tabindex="-1"></a>约束部分是当前预测变量能够解释的群落变异，残差部分是模型没有解释的变异。原始 <span class="sc">\(</span>R^2<span class="sc">\)</span> 随变量数量增加而单调上升，因此多变量模型应同时报告调整后 <span class="sc">\(</span>R^2<span class="sc">\)</span>。</span>
-<span id="cb22-226"><a href="#cb22-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-227"><a href="#cb22-227" aria-hidden="true" tabindex="-1"></a><span class="fu">### RDA、CCA 与 CAP/db-RDA 的选择</span></span>
-<span id="cb22-228"><a href="#cb22-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-229"><a href="#cb22-229" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**RDA（redundancy analysis）**：本质上是多响应线性回归后做 PCA，适合 Hellinger 或 CLR 等近欧氏表示。</span>
-<span id="cb22-230"><a href="#cb22-230" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**CCA（canonical correspondence analysis）**：基于卡方距离和单峰响应假设，常用于沿长环境梯度的经典群落生态数据。</span>
-<span id="cb22-231"><a href="#cb22-231" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**db-RDA（distance-based RDA）/ CAP**：先用距离表示群落差异，再用预测变量约束排序，可结合 Bray–Curtis 等非欧氏距离。</span>
+<span id="cb22-225"><a href="#cb22-225" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-226"><a href="#cb22-226" aria-hidden="true" tabindex="-1"></a>\text{Total variation}</span>
+<span id="cb22-227"><a href="#cb22-227" aria-hidden="true" tabindex="-1"></a>=</span>
+<span id="cb22-228"><a href="#cb22-228" aria-hidden="true" tabindex="-1"></a>\text{Constrained variation}</span>
+<span id="cb22-229"><a href="#cb22-229" aria-hidden="true" tabindex="-1"></a>+</span>
+<span id="cb22-230"><a href="#cb22-230" aria-hidden="true" tabindex="-1"></a>\text{Residual variation}</span>
+<span id="cb22-231"><a href="#cb22-231" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb22-232"><a href="#cb22-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-233"><a href="#cb22-233" aria-hidden="true" tabindex="-1"></a><span class="in">`vegan::capscale()`</span> 和 <span class="in">`vegan::dbrda()`</span> 都可拟合基于距离的约束模型。这里用 <span class="in">`capscale(..., distance = "bray", add = "lingoes")`</span>，显式处理 Bray–Curtis 可能产生的负特征值。</span>
+<span id="cb22-233"><a href="#cb22-233" aria-hidden="true" tabindex="-1"></a>约束部分是当前预测变量能够解释的群落变异，残差部分是模型没有解释的变异。原始 $R^2$ 随变量数量增加而单调上升，因此多变量模型应同时报告调整后 $R^2$。</span>
 <span id="cb22-234"><a href="#cb22-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-235"><a href="#cb22-235" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb22-236"><a href="#cb22-236" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：箭头、样本点和分组颜色分别代表什么<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb22-237"><a href="#cb22-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-238"><a href="#cb22-238" aria-hidden="true" tabindex="-1"></a>连续变量的箭头方向表示该变量增加的方向，箭头长度反映它与当前二维排序空间的关联强度。两个箭头夹角较小通常表示正相关，方向相反通常表示负相关，接近直角表示当前二维投影中的相关较弱。</span>
-<span id="cb22-239"><a href="#cb22-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-240"><a href="#cb22-240" aria-hidden="true" tabindex="-1"></a>这些解释有三项限制：</span>
-<span id="cb22-241"><a href="#cb22-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>箭头是多维模型在二维平面的投影，短箭头可能只是信息落在更高轴；</span>
-<span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>箭头表示关联，不证明因果；</span>
-<span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>图上用颜色标出的 <span class="in">`Group`</span> 可以只用于展示。若 <span class="in">`Group`</span> 没进入公式，它不是该模型的约束变量。</span>
+<span id="cb22-235"><a href="#cb22-235" aria-hidden="true" tabindex="-1"></a><span class="fu">### RDA、CCA 与 CAP/db-RDA 的选择</span></span>
+<span id="cb22-236"><a href="#cb22-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-237"><a href="#cb22-237" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**RDA（redundancy analysis）**：本质上是多响应线性回归后做 PCA，适合 Hellinger 或 CLR 等近欧氏表示。</span>
+<span id="cb22-238"><a href="#cb22-238" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**CCA（canonical correspondence analysis）**：基于卡方距离和单峰响应假设，常用于沿长环境梯度的经典群落生态数据。</span>
+<span id="cb22-239"><a href="#cb22-239" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**db-RDA（distance-based RDA）/ CAP**：先用距离表示群落差异，再用预测变量约束排序，可结合 Bray–Curtis 等非欧氏距离。</span>
+<span id="cb22-240"><a href="#cb22-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-241"><a href="#cb22-241" aria-hidden="true" tabindex="-1"></a><span class="in">`vegan::capscale()`</span> 和 <span class="in">`vegan::dbrda()`</span> 都可拟合基于距离的约束模型。这里用 <span class="in">`capscale(..., distance = "bray", add = "lingoes")`</span>，显式处理 Bray–Curtis 可能产生的负特征值。</span>
+<span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：箭头、样本点和分组颜色分别代表什么<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-246"><a href="#cb22-246" aria-hidden="true" tabindex="-1"></a>因子变量进入公式后通常显示为水平质心；连续变量显示为 biplot arrows。不要把两者都解释成连续梯度。</span>
+<span id="cb22-246"><a href="#cb22-246" aria-hidden="true" tabindex="-1"></a>连续变量的箭头方向表示该变量增加的方向，箭头长度反映它与当前二维排序空间的关联强度。两个箭头夹角较小通常表示正相关，方向相反通常表示负相关，接近直角表示当前二维投影中的相关较弱。</span>
 <span id="cb22-247"><a href="#cb22-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a>这些解释有三项限制：</span>
 <span id="cb22-249"><a href="#cb22-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="为什么同时做顺序检验和边际检验"}</span>
-<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a><span class="in">`anova(model, by = "terms")`</span> 按公式顺序逐项加入变量，结果依赖变量排列；<span class="in">`by = "margin"`</span> 检验每个变量在控制其余变量后的边际贡献。本例两者都运行：前者复现预先指定的建模顺序，后者用于判断独立贡献。</span>
-<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>箭头是多维模型在二维平面的投影，短箭头可能只是信息落在更高轴；</span>
+<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>箭头表示关联，不证明因果；</span>
+<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>图上用颜色标出的 <span class="in">`Group`</span> 可以只用于展示。若 <span class="in">`Group`</span> 没进入公式，它不是该模型的约束变量。</span>
 <span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## 检验预先指定变量与群落结构的关系 {#sec-code}</span></span>
+<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a>因子变量进入公式后通常显示为水平质心；连续变量显示为 biplot arrows。不要把两者都解释成连续梯度。</span>
 <span id="cb22-255"><a href="#cb22-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a><span class="fu">### 构建用于 Bray–Curtis 的群落矩阵</span></span>
+<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a>与非约束排序一致，保留至少在 5% 样本中检出的特征，并转换为样本内相对丰度。</span>
-<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-04</span></span>
-<span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a>min_prevalence <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a>min_samples <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(min_prevalence <span class="sc">*</span> <span class="fu">ncol</span>(otutab))</span>
-<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a>keep_feature <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(otutab <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">&gt;=</span> min_samples</span>
-<span id="cb22-268"><a href="#cb22-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-269"><a href="#cb22-269" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> <span class="fu">t</span>(otutab[keep_feature, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a>comm_rel <span class="ot">&lt;-</span> <span class="fu">sweep</span>(comm, <span class="dv">1</span>, <span class="fu">rowSums</span>(comm), <span class="st">"/"</span>)</span>
-<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> metadata[<span class="fu">rownames</span>(comm_rel), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-272"><a href="#cb22-272" aria-hidden="true" tabindex="-1"></a>environment <span class="ot">&lt;-</span> environment[<span class="fu">rownames</span>(comm_rel), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a>group_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb22-275"><a href="#cb22-275" aria-hidden="true" tabindex="-1"></a>  <span class="at">IW =</span> <span class="st">"Inland wetland"</span>,</span>
-<span id="cb22-276"><a href="#cb22-276" aria-hidden="true" tabindex="-1"></a>  <span class="at">CW =</span> <span class="st">"Coastal wetland"</span>,</span>
-<span id="cb22-277"><a href="#cb22-277" aria-hidden="true" tabindex="-1"></a>  <span class="at">TW =</span> <span class="st">"Tibetan Plateau"</span></span>
-<span id="cb22-278"><a href="#cb22-278" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unname</span>(group_labels[metadata<span class="sc">$</span>Group]),</span>
-<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">unname</span>(group_labels)</span>
-<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-283"><a href="#cb22-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">abs</span>(<span class="fu">rowSums</span>(comm_rel) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">1e-10</span>),</span>
-<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(comm_rel), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb22-287"><a href="#cb22-287" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(comm_rel), <span class="fu">rownames</span>(environment)),</span>
-<span id="cb22-288"><a href="#cb22-288" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">anyNA</span>(metadata<span class="sc">$</span>Group)</span>
-<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-291"><a href="#cb22-291" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
-<span id="cb22-292"><a href="#cb22-292" aria-hidden="true" tabindex="-1"></a>  <span class="at">samples =</span> <span class="fu">nrow</span>(comm_rel),</span>
-<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a>  <span class="at">retained_features =</span> <span class="fu">ncol</span>(comm_rel),</span>
-<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a>  <span class="at">original_features =</span> <span class="fu">nrow</span>(otutab)</span>
-<span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(metadata<span class="sc">$</span>Group)</span>
-<span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="为什么同时做顺序检验和边际检验"}</span>
+<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a><span class="in">`anova(model, by = "terms")`</span> 按公式顺序逐项加入变量，结果依赖变量排列；<span class="in">`by = "margin"`</span> 检验每个变量在控制其余变量后的边际贡献。本例两者都运行：前者复现预先指定的建模顺序，后者用于判断独立贡献。</span>
+<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a><span class="fu">## 检验预先指定变量与群落结构的关系 {#sec-code}</span></span>
+<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a><span class="fu">### 构建用于 Bray–Curtis 的群落矩阵</span></span>
+<span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a>与非约束排序一致，保留至少在 5% 样本中检出的特征，并转换为样本内相对丰度。</span>
+<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-272"><a href="#cb22-272" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-04</span></span>
+<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a>min_prevalence <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a>min_samples <span class="ot">&lt;-</span> <span class="fu">ceiling</span>(min_prevalence <span class="sc">*</span> <span class="fu">ncol</span>(otutab))</span>
+<span id="cb22-275"><a href="#cb22-275" aria-hidden="true" tabindex="-1"></a>keep_feature <span class="ot">&lt;-</span> <span class="fu">rowSums</span>(otutab <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">&gt;=</span> min_samples</span>
+<span id="cb22-276"><a href="#cb22-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-277"><a href="#cb22-277" aria-hidden="true" tabindex="-1"></a>comm <span class="ot">&lt;-</span> <span class="fu">t</span>(otutab[keep_feature, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb22-278"><a href="#cb22-278" aria-hidden="true" tabindex="-1"></a>comm_rel <span class="ot">&lt;-</span> <span class="fu">sweep</span>(comm, <span class="dv">1</span>, <span class="fu">rowSums</span>(comm), <span class="st">"/"</span>)</span>
+<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> metadata[<span class="fu">rownames</span>(comm_rel), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a>environment <span class="ot">&lt;-</span> environment[<span class="fu">rownames</span>(comm_rel), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a>group_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb22-283"><a href="#cb22-283" aria-hidden="true" tabindex="-1"></a>  <span class="at">IW =</span> <span class="st">"Inland wetland"</span>,</span>
+<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a>  <span class="at">CW =</span> <span class="st">"Coastal wetland"</span>,</span>
+<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a>  <span class="at">TW =</span> <span class="st">"Tibetan Plateau"</span></span>
+<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-287"><a href="#cb22-287" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb22-288"><a href="#cb22-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unname</span>(group_labels[metadata<span class="sc">$</span>Group]),</span>
+<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">unname</span>(group_labels)</span>
+<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-291"><a href="#cb22-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-292"><a href="#cb22-292" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">abs</span>(<span class="fu">rowSums</span>(comm_rel) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">1e-10</span>),</span>
+<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(comm_rel), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(comm_rel), <span class="fu">rownames</span>(environment)),</span>
+<span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">anyNA</span>(metadata<span class="sc">$</span>Group)</span>
+<span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb22-298"><a href="#cb22-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-299"><a href="#cb22-299" aria-hidden="true" tabindex="-1"></a><span class="fu">### 先看一个单因子 CAP 模型</span></span>
-<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a>这个模型把湿地地理组作为约束变量。图上分开是预期结果，模型显著性仍由置换检验决定。</span>
-<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-05</span></span>
-<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a>cap_group <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">capscale</span>(</span>
-<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a>  comm_rel <span class="sc">~</span> Group,</span>
-<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> metadata,</span>
-<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance =</span> <span class="st">"bray"</span>,</span>
-<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="st">"lingoes"</span></span>
-<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
-<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a>cap_group_test <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
-<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a>  cap_group,</span>
-<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
-<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a>cap_group_r2 <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">RsquareAdj</span>(cap_group)</span>
-<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-322"><a href="#cb22-322" aria-hidden="true" tabindex="-1"></a>cap_group_test</span>
-<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a>cap_group_r2</span>
-<span id="cb22-324"><a href="#cb22-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-325"><a href="#cb22-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-326"><a href="#cb22-326" aria-hidden="true" tabindex="-1"></a><span class="fu">### 预先确定环境变量并处理缺失值</span></span>
-<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a>本例选择 <span class="in">`pH`</span>、<span class="in">`TOC`</span>、<span class="in">`NH4`</span>、<span class="in">`NO3`</span> 和 <span class="in">`Conductivity`</span>。其中 pH 与电导率来自原研究的主要环境结论，其余三项代表碳、铵态氮和硝态氮。变量在建模前做 Z-score 标准化，使量纲可比。</span>
+<span id="cb22-299"><a href="#cb22-299" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(</span>
+<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a>  <span class="at">samples =</span> <span class="fu">nrow</span>(comm_rel),</span>
+<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a>  <span class="at">retained_features =</span> <span class="fu">ncol</span>(comm_rel),</span>
+<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a>  <span class="at">original_features =</span> <span class="fu">nrow</span>(otutab)</span>
+<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(metadata<span class="sc">$</span>Group)</span>
+<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a><span class="fu">### 先看一个单因子 CAP 模型</span></span>
+<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a>这个模型把湿地地理组作为约束变量。图上分开是预期结果，模型显著性仍由置换检验决定。</span>
+<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-05</span></span>
+<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a>cap_group <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">capscale</span>(</span>
+<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a>  comm_rel <span class="sc">~</span> Group,</span>
+<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> metadata,</span>
+<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance =</span> <span class="st">"bray"</span>,</span>
+<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="st">"lingoes"</span></span>
+<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-322"><a href="#cb22-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
+<span id="cb22-324"><a href="#cb22-324" aria-hidden="true" tabindex="-1"></a>cap_group_test <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
+<span id="cb22-325"><a href="#cb22-325" aria-hidden="true" tabindex="-1"></a>  cap_group,</span>
+<span id="cb22-326"><a href="#cb22-326" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
+<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a>cap_group_r2 <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">RsquareAdj</span>(cap_group)</span>
 <span id="cb22-329"><a href="#cb22-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-332"><a href="#cb22-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-06</span></span>
-<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a>predictors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a>  <span class="st">"pH"</span>,</span>
-<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TOC"</span>,</span>
-<span id="cb22-338"><a href="#cb22-338" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NH4"</span>,</span>
-<span id="cb22-339"><a href="#cb22-339" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NO3"</span>,</span>
-<span id="cb22-340"><a href="#cb22-340" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Conductivity"</span></span>
-<span id="cb22-341"><a href="#cb22-341" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(predictors <span class="sc">%in%</span> <span class="fu">colnames</span>(environment)))</span>
-<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a>complete_samples <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(environment[, predictors, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a>comm_env <span class="ot">&lt;-</span> comm_rel[complete_samples, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-346"><a href="#cb22-346" aria-hidden="true" tabindex="-1"></a>metadata_env <span class="ot">&lt;-</span> metadata[complete_samples, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-347"><a href="#cb22-347" aria-hidden="true" tabindex="-1"></a>environment_env <span class="ot">&lt;-</span> environment[</span>
-<span id="cb22-348"><a href="#cb22-348" aria-hidden="true" tabindex="-1"></a>  complete_samples,</span>
-<span id="cb22-349"><a href="#cb22-349" aria-hidden="true" tabindex="-1"></a>  predictors,</span>
-<span id="cb22-350"><a href="#cb22-350" aria-hidden="true" tabindex="-1"></a>  drop <span class="ot">=</span> <span class="cn">FALSE</span></span>
-<span id="cb22-351"><a href="#cb22-351" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb22-352"><a href="#cb22-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a>model_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(environment_env))</span>
-<span id="cb22-354"><a href="#cb22-354" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb22-355"><a href="#cb22-355" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(comm_env), <span class="fu">rownames</span>(model_data)),</span>
-<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">vapply</span>(model_data, is.numeric, <span class="fu">logical</span>(<span class="dv">1</span>)))</span>
-<span id="cb22-357"><a href="#cb22-357" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-358"><a href="#cb22-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-359"><a href="#cb22-359" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_data)</span>
-<span id="cb22-360"><a href="#cb22-360" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-361"><a href="#cb22-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a><span class="fu">### 拟合环境 CAP，并检查 \(R^2\) 与共线性</span></span>
-<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-07</span></span>
-<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a>cap_env <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">capscale</span>(</span>
-<span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a>  comm_env <span class="sc">~</span> pH <span class="sc">+</span> TOC <span class="sc">+</span> NH4 <span class="sc">+</span> NO3 <span class="sc">+</span> Conductivity,</span>
-<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> model_data,</span>
-<span id="cb22-372"><a href="#cb22-372" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance =</span> <span class="st">"bray"</span>,</span>
-<span id="cb22-373"><a href="#cb22-373" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="st">"lingoes"</span></span>
-<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a>cap_env_r2 <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">RsquareAdj</span>(cap_env)</span>
-<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a>cap_env_vif <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">vif.cca</span>(cap_env)</span>
-<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a>cap_env_r2</span>
-<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a>cap_env_vif</span>
-<span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a>本例所有 VIF 均低于 2，没有明显多重共线性。VIF 很高时，应依据科学问题删除或合并变量，不能为了获得更漂亮的箭头保留冗余预测因子。</span>
-<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a><span class="fu">### 整体、逐项、边际和逐轴置换检验</span></span>
+<span id="cb22-330"><a href="#cb22-330" aria-hidden="true" tabindex="-1"></a>cap_group_test</span>
+<span id="cb22-331"><a href="#cb22-331" aria-hidden="true" tabindex="-1"></a>cap_group_r2</span>
+<span id="cb22-332"><a href="#cb22-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a><span class="fu">### 预先确定环境变量并处理缺失值</span></span>
+<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a>本例选择 <span class="in">`pH`</span>、<span class="in">`TOC`</span>、<span class="in">`NH4`</span>、<span class="in">`NO3`</span> 和 <span class="in">`Conductivity`</span>。其中 pH 与电导率来自原研究的主要环境结论，其余三项代表碳、铵态氮和硝态氮。变量在建模前做 Z-score 标准化，使量纲可比。</span>
+<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-340"><a href="#cb22-340" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-341"><a href="#cb22-341" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-06</span></span>
+<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a>predictors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a>  <span class="st">"pH"</span>,</span>
+<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a>  <span class="st">"TOC"</span>,</span>
+<span id="cb22-346"><a href="#cb22-346" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NH4"</span>,</span>
+<span id="cb22-347"><a href="#cb22-347" aria-hidden="true" tabindex="-1"></a>  <span class="st">"NO3"</span>,</span>
+<span id="cb22-348"><a href="#cb22-348" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Conductivity"</span></span>
+<span id="cb22-349"><a href="#cb22-349" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-350"><a href="#cb22-350" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(predictors <span class="sc">%in%</span> <span class="fu">colnames</span>(environment)))</span>
+<span id="cb22-351"><a href="#cb22-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-352"><a href="#cb22-352" aria-hidden="true" tabindex="-1"></a>complete_samples <span class="ot">&lt;-</span> <span class="fu">complete.cases</span>(environment[, predictors, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a>comm_env <span class="ot">&lt;-</span> comm_rel[complete_samples, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-354"><a href="#cb22-354" aria-hidden="true" tabindex="-1"></a>metadata_env <span class="ot">&lt;-</span> metadata[complete_samples, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-355"><a href="#cb22-355" aria-hidden="true" tabindex="-1"></a>environment_env <span class="ot">&lt;-</span> environment[</span>
+<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a>  complete_samples,</span>
+<span id="cb22-357"><a href="#cb22-357" aria-hidden="true" tabindex="-1"></a>  predictors,</span>
+<span id="cb22-358"><a href="#cb22-358" aria-hidden="true" tabindex="-1"></a>  drop <span class="ot">=</span> <span class="cn">FALSE</span></span>
+<span id="cb22-359"><a href="#cb22-359" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb22-360"><a href="#cb22-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-361"><a href="#cb22-361" aria-hidden="true" tabindex="-1"></a>model_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(environment_env))</span>
+<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(comm_env), <span class="fu">rownames</span>(model_data)),</span>
+<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">vapply</span>(model_data, is.numeric, <span class="fu">logical</span>(<span class="dv">1</span>)))</span>
+<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model_data)</span>
+<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a><span class="fu">### 拟合环境 CAP，并检查 $R^2$ 与共线性</span></span>
+<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-07</span></span>
+<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a>cap_env <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">capscale</span>(</span>
+<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a>  comm_env <span class="sc">~</span> pH <span class="sc">+</span> TOC <span class="sc">+</span> NH4 <span class="sc">+</span> NO3 <span class="sc">+</span> Conductivity,</span>
+<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> model_data,</span>
+<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance =</span> <span class="st">"bray"</span>,</span>
+<span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="st">"lingoes"</span></span>
+<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a>cap_env_r2 <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">RsquareAdj</span>(cap_env)</span>
+<span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a>cap_env_vif <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">vif.cca</span>(cap_env)</span>
 <span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a>每次随机置换前都固定种子。<span class="in">`by = "terms"`</span> 是顺序检验，<span class="in">`by = "margin"`</span> 是控制其他变量后的边际检验。</span>
-<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-08</span></span>
-<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
-<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a>cap_env_overall <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
-<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a>  cap_env,</span>
-<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
-<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
-<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a>cap_env_terms <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
-<span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a>  cap_env,</span>
-<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"terms"</span>,</span>
-<span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
-<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-406"><a href="#cb22-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-407"><a href="#cb22-407" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
-<span id="cb22-408"><a href="#cb22-408" aria-hidden="true" tabindex="-1"></a>cap_env_margin <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
-<span id="cb22-409"><a href="#cb22-409" aria-hidden="true" tabindex="-1"></a>  cap_env,</span>
-<span id="cb22-410"><a href="#cb22-410" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"margin"</span>,</span>
-<span id="cb22-411"><a href="#cb22-411" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
-<span id="cb22-412"><a href="#cb22-412" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-413"><a href="#cb22-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-414"><a href="#cb22-414" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
-<span id="cb22-415"><a href="#cb22-415" aria-hidden="true" tabindex="-1"></a>cap_env_axes <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
-<span id="cb22-416"><a href="#cb22-416" aria-hidden="true" tabindex="-1"></a>  cap_env,</span>
-<span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"axis"</span>,</span>
-<span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
-<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-420"><a href="#cb22-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-421"><a href="#cb22-421" aria-hidden="true" tabindex="-1"></a>cap_env_overall</span>
-<span id="cb22-422"><a href="#cb22-422" aria-hidden="true" tabindex="-1"></a>cap_env_terms</span>
-<span id="cb22-423"><a href="#cb22-423" aria-hidden="true" tabindex="-1"></a>cap_env_margin</span>
-<span id="cb22-424"><a href="#cb22-424" aria-hidden="true" tabindex="-1"></a>cap_env_axes</span>
-<span id="cb22-425"><a href="#cb22-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-426"><a href="#cb22-426" aria-hidden="true" tabindex="-1"></a>cap_env_p <span class="ot">&lt;-</span> <span class="fu">unname</span>(cap_env_overall<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>])</span>
-<span id="cb22-427"><a href="#cb22-427" aria-hidden="true" tabindex="-1"></a>cap_env_r2_raw <span class="ot">&lt;-</span> <span class="fu">unname</span>(cap_env_r2<span class="sc">$</span>r.squared)</span>
-<span id="cb22-428"><a href="#cb22-428" aria-hidden="true" tabindex="-1"></a>cap_env_r2_adjusted <span class="ot">&lt;-</span> <span class="fu">unname</span>(cap_env_r2<span class="sc">$</span>adj.r.squared)</span>
-<span id="cb22-429"><a href="#cb22-429" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-431"><a href="#cb22-431" aria-hidden="true" tabindex="-1"></a>注意 <span class="in">`NO3`</span> 在顺序检验与边际检验中的结论可能不同：前者会把先进入模型的变量解释后的剩余变异依次分配，后者检验控制全部其他变量后的贡献。这正是不能只贴一张箭头图的原因。</span>
-<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-433"><a href="#cb22-433" aria-hidden="true" tabindex="-1"></a><span class="fu">### 提取当前环境模型的坐标和轴标签</span></span>
-<span id="cb22-434"><a href="#cb22-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-435"><a href="#cb22-435" aria-hidden="true" tabindex="-1"></a>轴百分比按“受约束变异内部的占比”计算，并在标签中明确写出 <span class="in">`constrained`</span>。调整后 <span class="sc">\(</span>R^2<span class="sc">\)</span> 则衡量全部五个变量对总群落变异的解释比例。</span>
-<span id="cb22-436"><a href="#cb22-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-440"><a href="#cb22-440" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-441"><a href="#cb22-441" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-09</span></span>
-<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a>env_eigenvalues_mod2 <span class="ot">&lt;-</span> cap_env<span class="sc">$</span>CCA<span class="sc">$</span>eig</span>
-<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a>env_axis_percent_mod2 <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span></span>
-<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a>  env_eigenvalues_mod2[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">/</span></span>
-<span id="cb22-445"><a href="#cb22-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(env_eigenvalues_mod2)</span>
-<span id="cb22-446"><a href="#cb22-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a>lab1_mod2 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(</span>
-<span id="cb22-448"><a href="#cb22-448" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CAP1 (%.1f%% constrained)"</span>,</span>
-<span id="cb22-449"><a href="#cb22-449" aria-hidden="true" tabindex="-1"></a>  env_axis_percent_mod2[<span class="dv">1</span>]</span>
-<span id="cb22-450"><a href="#cb22-450" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-451"><a href="#cb22-451" aria-hidden="true" tabindex="-1"></a>lab2_mod2 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(</span>
-<span id="cb22-452"><a href="#cb22-452" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CAP2 (%.1f%% constrained)"</span>,</span>
-<span id="cb22-453"><a href="#cb22-453" aria-hidden="true" tabindex="-1"></a>  env_axis_percent_mod2[<span class="dv">2</span>]</span>
-<span id="cb22-454"><a href="#cb22-454" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-455"><a href="#cb22-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-456"><a href="#cb22-456" aria-hidden="true" tabindex="-1"></a>site_scores_mod2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
-<span id="cb22-457"><a href="#cb22-457" aria-hidden="true" tabindex="-1"></a>  vegan<span class="sc">::</span><span class="fu">scores</span>(</span>
-<span id="cb22-458"><a href="#cb22-458" aria-hidden="true" tabindex="-1"></a>    cap_env,</span>
-<span id="cb22-459"><a href="#cb22-459" aria-hidden="true" tabindex="-1"></a>    <span class="at">display =</span> <span class="st">"sites"</span>,</span>
-<span id="cb22-460"><a href="#cb22-460" aria-hidden="true" tabindex="-1"></a>    <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
-<span id="cb22-461"><a href="#cb22-461" aria-hidden="true" tabindex="-1"></a>    <span class="at">scaling =</span> <span class="dv">2</span></span>
-<span id="cb22-462"><a href="#cb22-462" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb22-463"><a href="#cb22-463" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-464"><a href="#cb22-464" aria-hidden="true" tabindex="-1"></a>site_scores_mod2<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">rownames</span>(site_scores_mod2)</span>
-<span id="cb22-465"><a href="#cb22-465" aria-hidden="true" tabindex="-1"></a>site_scores_mod2<span class="sc">$</span>Group <span class="ot">&lt;-</span> metadata_env[</span>
-<span id="cb22-466"><a href="#cb22-466" aria-hidden="true" tabindex="-1"></a>  site_scores_mod2<span class="sc">$</span>SampleID,</span>
-<span id="cb22-467"><a href="#cb22-467" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Group"</span></span>
-<span id="cb22-468"><a href="#cb22-468" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb22-469"><a href="#cb22-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-470"><a href="#cb22-470" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
-<span id="cb22-471"><a href="#cb22-471" aria-hidden="true" tabindex="-1"></a>  vegan<span class="sc">::</span><span class="fu">scores</span>(</span>
-<span id="cb22-472"><a href="#cb22-472" aria-hidden="true" tabindex="-1"></a>    cap_env,</span>
-<span id="cb22-473"><a href="#cb22-473" aria-hidden="true" tabindex="-1"></a>    <span class="at">display =</span> <span class="st">"bp"</span>,</span>
-<span id="cb22-474"><a href="#cb22-474" aria-hidden="true" tabindex="-1"></a>    <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
-<span id="cb22-475"><a href="#cb22-475" aria-hidden="true" tabindex="-1"></a>    <span class="at">scaling =</span> <span class="dv">2</span></span>
-<span id="cb22-476"><a href="#cb22-476" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb22-477"><a href="#cb22-477" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-478"><a href="#cb22-478" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2<span class="sc">$</span>Variable <span class="ot">&lt;-</span> <span class="fu">rownames</span>(arrow_scores_mod2)</span>
-<span id="cb22-479"><a href="#cb22-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-480"><a href="#cb22-480" aria-hidden="true" tabindex="-1"></a>arrow_multiplier_mod2 <span class="ot">&lt;-</span> <span class="fu">min</span>(</span>
-<span id="cb22-481"><a href="#cb22-481" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>(<span class="fu">range</span>(site_scores_mod2<span class="sc">$</span>CAP1)) <span class="sc">*</span> <span class="fl">0.35</span> <span class="sc">/</span></span>
-<span id="cb22-482"><a href="#cb22-482" aria-hidden="true" tabindex="-1"></a>    <span class="fu">max</span>(<span class="fu">abs</span>(arrow_scores_mod2<span class="sc">$</span>CAP1)),</span>
-<span id="cb22-483"><a href="#cb22-483" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>(<span class="fu">range</span>(site_scores_mod2<span class="sc">$</span>CAP2)) <span class="sc">*</span> <span class="fl">0.35</span> <span class="sc">/</span></span>
-<span id="cb22-484"><a href="#cb22-484" aria-hidden="true" tabindex="-1"></a>    <span class="fu">max</span>(<span class="fu">abs</span>(arrow_scores_mod2<span class="sc">$</span>CAP2))</span>
+<span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a>cap_env_r2</span>
+<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a>cap_env_vif</span>
+<span id="cb22-389"><a href="#cb22-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a>本例所有 VIF 均低于 2，没有明显多重共线性。VIF 很高时，应依据科学问题删除或合并变量，不能为了获得更漂亮的箭头保留冗余预测因子。</span>
+<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a><span class="fu">### 整体、逐项、边际和逐轴置换检验</span></span>
+<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a>每次随机置换前都固定种子。<span class="in">`by = "terms"`</span> 是顺序检验，<span class="in">`by = "margin"`</span> 是控制其他变量后的边际检验。</span>
+<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-08</span></span>
+<span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
+<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a>cap_env_overall <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
+<span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a>  cap_env,</span>
+<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
+<span id="cb22-406"><a href="#cb22-406" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-407"><a href="#cb22-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-408"><a href="#cb22-408" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
+<span id="cb22-409"><a href="#cb22-409" aria-hidden="true" tabindex="-1"></a>cap_env_terms <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
+<span id="cb22-410"><a href="#cb22-410" aria-hidden="true" tabindex="-1"></a>  cap_env,</span>
+<span id="cb22-411"><a href="#cb22-411" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"terms"</span>,</span>
+<span id="cb22-412"><a href="#cb22-412" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
+<span id="cb22-413"><a href="#cb22-413" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-414"><a href="#cb22-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-415"><a href="#cb22-415" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
+<span id="cb22-416"><a href="#cb22-416" aria-hidden="true" tabindex="-1"></a>cap_env_margin <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
+<span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a>  cap_env,</span>
+<span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"margin"</span>,</span>
+<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
+<span id="cb22-420"><a href="#cb22-420" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-421"><a href="#cb22-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-422"><a href="#cb22-422" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260718</span>)</span>
+<span id="cb22-423"><a href="#cb22-423" aria-hidden="true" tabindex="-1"></a>cap_env_axes <span class="ot">&lt;-</span> <span class="fu">anova</span>(</span>
+<span id="cb22-424"><a href="#cb22-424" aria-hidden="true" tabindex="-1"></a>  cap_env,</span>
+<span id="cb22-425"><a href="#cb22-425" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"axis"</span>,</span>
+<span id="cb22-426"><a href="#cb22-426" aria-hidden="true" tabindex="-1"></a>  <span class="at">permutations =</span> <span class="dv">999</span></span>
+<span id="cb22-427"><a href="#cb22-427" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-428"><a href="#cb22-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-429"><a href="#cb22-429" aria-hidden="true" tabindex="-1"></a>cap_env_overall</span>
+<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a>cap_env_terms</span>
+<span id="cb22-431"><a href="#cb22-431" aria-hidden="true" tabindex="-1"></a>cap_env_margin</span>
+<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a>cap_env_axes</span>
+<span id="cb22-433"><a href="#cb22-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-434"><a href="#cb22-434" aria-hidden="true" tabindex="-1"></a>cap_env_p <span class="ot">&lt;-</span> <span class="fu">unname</span>(cap_env_overall<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>])</span>
+<span id="cb22-435"><a href="#cb22-435" aria-hidden="true" tabindex="-1"></a>cap_env_r2_raw <span class="ot">&lt;-</span> <span class="fu">unname</span>(cap_env_r2<span class="sc">$</span>r.squared)</span>
+<span id="cb22-436"><a href="#cb22-436" aria-hidden="true" tabindex="-1"></a>cap_env_r2_adjusted <span class="ot">&lt;-</span> <span class="fu">unname</span>(cap_env_r2<span class="sc">$</span>adj.r.squared)</span>
+<span id="cb22-437"><a href="#cb22-437" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-438"><a href="#cb22-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a>注意 <span class="in">`NO3`</span> 在顺序检验与边际检验中的结论可能不同：前者会把先进入模型的变量解释后的剩余变异依次分配，后者检验控制全部其他变量后的贡献。这正是不能只贴一张箭头图的原因。</span>
+<span id="cb22-440"><a href="#cb22-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-441"><a href="#cb22-441" aria-hidden="true" tabindex="-1"></a><span class="fu">### 提取当前环境模型的坐标和轴标签</span></span>
+<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a>轴百分比按“受约束变异内部的占比”计算，并在标签中明确写出 <span class="in">`constrained`</span>。调整后 $R^2$ 则衡量全部五个变量对总群落变异的解释比例。</span>
+<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-448"><a href="#cb22-448" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-449"><a href="#cb22-449" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-09</span></span>
+<span id="cb22-450"><a href="#cb22-450" aria-hidden="true" tabindex="-1"></a>env_eigenvalues_mod2 <span class="ot">&lt;-</span> cap_env<span class="sc">$</span>CCA<span class="sc">$</span>eig</span>
+<span id="cb22-451"><a href="#cb22-451" aria-hidden="true" tabindex="-1"></a>env_axis_percent_mod2 <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span></span>
+<span id="cb22-452"><a href="#cb22-452" aria-hidden="true" tabindex="-1"></a>  env_eigenvalues_mod2[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">/</span></span>
+<span id="cb22-453"><a href="#cb22-453" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>(env_eigenvalues_mod2)</span>
+<span id="cb22-454"><a href="#cb22-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-455"><a href="#cb22-455" aria-hidden="true" tabindex="-1"></a>lab1_mod2 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(</span>
+<span id="cb22-456"><a href="#cb22-456" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CAP1 (%.1f%% constrained)"</span>,</span>
+<span id="cb22-457"><a href="#cb22-457" aria-hidden="true" tabindex="-1"></a>  env_axis_percent_mod2[<span class="dv">1</span>]</span>
+<span id="cb22-458"><a href="#cb22-458" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-459"><a href="#cb22-459" aria-hidden="true" tabindex="-1"></a>lab2_mod2 <span class="ot">&lt;-</span> <span class="fu">sprintf</span>(</span>
+<span id="cb22-460"><a href="#cb22-460" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CAP2 (%.1f%% constrained)"</span>,</span>
+<span id="cb22-461"><a href="#cb22-461" aria-hidden="true" tabindex="-1"></a>  env_axis_percent_mod2[<span class="dv">2</span>]</span>
+<span id="cb22-462"><a href="#cb22-462" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-463"><a href="#cb22-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-464"><a href="#cb22-464" aria-hidden="true" tabindex="-1"></a>site_scores_mod2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
+<span id="cb22-465"><a href="#cb22-465" aria-hidden="true" tabindex="-1"></a>  vegan<span class="sc">::</span><span class="fu">scores</span>(</span>
+<span id="cb22-466"><a href="#cb22-466" aria-hidden="true" tabindex="-1"></a>    cap_env,</span>
+<span id="cb22-467"><a href="#cb22-467" aria-hidden="true" tabindex="-1"></a>    <span class="at">display =</span> <span class="st">"sites"</span>,</span>
+<span id="cb22-468"><a href="#cb22-468" aria-hidden="true" tabindex="-1"></a>    <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb22-469"><a href="#cb22-469" aria-hidden="true" tabindex="-1"></a>    <span class="at">scaling =</span> <span class="dv">2</span></span>
+<span id="cb22-470"><a href="#cb22-470" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb22-471"><a href="#cb22-471" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-472"><a href="#cb22-472" aria-hidden="true" tabindex="-1"></a>site_scores_mod2<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">rownames</span>(site_scores_mod2)</span>
+<span id="cb22-473"><a href="#cb22-473" aria-hidden="true" tabindex="-1"></a>site_scores_mod2<span class="sc">$</span>Group <span class="ot">&lt;-</span> metadata_env[</span>
+<span id="cb22-474"><a href="#cb22-474" aria-hidden="true" tabindex="-1"></a>  site_scores_mod2<span class="sc">$</span>SampleID,</span>
+<span id="cb22-475"><a href="#cb22-475" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Group"</span></span>
+<span id="cb22-476"><a href="#cb22-476" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb22-477"><a href="#cb22-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-478"><a href="#cb22-478" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2 <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(</span>
+<span id="cb22-479"><a href="#cb22-479" aria-hidden="true" tabindex="-1"></a>  vegan<span class="sc">::</span><span class="fu">scores</span>(</span>
+<span id="cb22-480"><a href="#cb22-480" aria-hidden="true" tabindex="-1"></a>    cap_env,</span>
+<span id="cb22-481"><a href="#cb22-481" aria-hidden="true" tabindex="-1"></a>    <span class="at">display =</span> <span class="st">"bp"</span>,</span>
+<span id="cb22-482"><a href="#cb22-482" aria-hidden="true" tabindex="-1"></a>    <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb22-483"><a href="#cb22-483" aria-hidden="true" tabindex="-1"></a>    <span class="at">scaling =</span> <span class="dv">2</span></span>
+<span id="cb22-484"><a href="#cb22-484" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb22-485"><a href="#cb22-485" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-486"><a href="#cb22-486" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2<span class="sc">$</span>CAP1 <span class="ot">&lt;-</span> arrow_scores_mod2<span class="sc">$</span>CAP1 <span class="sc">*</span></span>
-<span id="cb22-487"><a href="#cb22-487" aria-hidden="true" tabindex="-1"></a>  arrow_multiplier_mod2</span>
-<span id="cb22-488"><a href="#cb22-488" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2<span class="sc">$</span>CAP2 <span class="ot">&lt;-</span> arrow_scores_mod2<span class="sc">$</span>CAP2 <span class="sc">*</span></span>
-<span id="cb22-489"><a href="#cb22-489" aria-hidden="true" tabindex="-1"></a>  arrow_multiplier_mod2</span>
-<span id="cb22-490"><a href="#cb22-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-491"><a href="#cb22-491" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(site_scores_mod2)</span>
-<span id="cb22-492"><a href="#cb22-492" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2</span>
-<span id="cb22-493"><a href="#cb22-493" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-494"><a href="#cb22-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-495"><a href="#cb22-495" aria-hidden="true" tabindex="-1"></a>每个模型都必须重新提取 eigenvalues 和 labels。不能把单因子模型的 <span class="in">`CAP1`</span> 百分比复制到环境模型。</span>
-<span id="cb22-496"><a href="#cb22-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-497"><a href="#cb22-497" aria-hidden="true" tabindex="-1"></a><span class="fu">## 正确解释约束轴和环境箭头 {#sec-polish}</span></span>
+<span id="cb22-486"><a href="#cb22-486" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2<span class="sc">$</span>Variable <span class="ot">&lt;-</span> <span class="fu">rownames</span>(arrow_scores_mod2)</span>
+<span id="cb22-487"><a href="#cb22-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-488"><a href="#cb22-488" aria-hidden="true" tabindex="-1"></a>arrow_multiplier_mod2 <span class="ot">&lt;-</span> <span class="fu">min</span>(</span>
+<span id="cb22-489"><a href="#cb22-489" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>(<span class="fu">range</span>(site_scores_mod2<span class="sc">$</span>CAP1)) <span class="sc">*</span> <span class="fl">0.35</span> <span class="sc">/</span></span>
+<span id="cb22-490"><a href="#cb22-490" aria-hidden="true" tabindex="-1"></a>    <span class="fu">max</span>(<span class="fu">abs</span>(arrow_scores_mod2<span class="sc">$</span>CAP1)),</span>
+<span id="cb22-491"><a href="#cb22-491" aria-hidden="true" tabindex="-1"></a>  <span class="fu">diff</span>(<span class="fu">range</span>(site_scores_mod2<span class="sc">$</span>CAP2)) <span class="sc">*</span> <span class="fl">0.35</span> <span class="sc">/</span></span>
+<span id="cb22-492"><a href="#cb22-492" aria-hidden="true" tabindex="-1"></a>    <span class="fu">max</span>(<span class="fu">abs</span>(arrow_scores_mod2<span class="sc">$</span>CAP2))</span>
+<span id="cb22-493"><a href="#cb22-493" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-494"><a href="#cb22-494" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2<span class="sc">$</span>CAP1 <span class="ot">&lt;-</span> arrow_scores_mod2<span class="sc">$</span>CAP1 <span class="sc">*</span></span>
+<span id="cb22-495"><a href="#cb22-495" aria-hidden="true" tabindex="-1"></a>  arrow_multiplier_mod2</span>
+<span id="cb22-496"><a href="#cb22-496" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2<span class="sc">$</span>CAP2 <span class="ot">&lt;-</span> arrow_scores_mod2<span class="sc">$</span>CAP2 <span class="sc">*</span></span>
+<span id="cb22-497"><a href="#cb22-497" aria-hidden="true" tabindex="-1"></a>  arrow_multiplier_mod2</span>
 <span id="cb22-498"><a href="#cb22-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-499"><a href="#cb22-499" aria-hidden="true" tabindex="-1"></a>箭头缩放只改变绘图长度，不进入模型计算。环境变量是约束项，地理组仅用于给样本点着色。</span>
-<span id="cb22-500"><a href="#cb22-500" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-503"><a href="#cb22-503" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-504"><a href="#cb22-504" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-505"><a href="#cb22-505" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-10</span></span>
-<span id="cb22-506"><a href="#cb22-506" aria-hidden="true" tabindex="-1"></a>format_p <span class="ot">&lt;-</span> <span class="cf">function</span>(p) {</span>
-<span id="cb22-507"><a href="#cb22-507" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(p)) {</span>
-<span id="cb22-508"><a href="#cb22-508" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"= NA"</span>)</span>
-<span id="cb22-509"><a href="#cb22-509" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb22-510"><a href="#cb22-510" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (p <span class="sc">&lt;</span> <span class="fl">0.001</span>) {</span>
-<span id="cb22-511"><a href="#cb22-511" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"&lt; 0.001"</span>)</span>
-<span id="cb22-512"><a href="#cb22-512" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb22-513"><a href="#cb22-513" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"= %.3f"</span>, p)</span>
-<span id="cb22-514"><a href="#cb22-514" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-515"><a href="#cb22-515" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-516"><a href="#cb22-516" aria-hidden="true" tabindex="-1"></a>p_cap_environment <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb22-517"><a href="#cb22-517" aria-hidden="true" tabindex="-1"></a>  site_scores_mod2,</span>
-<span id="cb22-518"><a href="#cb22-518" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(CAP1, CAP2, <span class="at">color =</span> Group)</span>
-<span id="cb22-519"><a href="#cb22-519" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb22-520"><a href="#cb22-520" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(</span>
-<span id="cb22-521"><a href="#cb22-521" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"t"</span>,</span>
-<span id="cb22-522"><a href="#cb22-522" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
-<span id="cb22-523"><a href="#cb22-523" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
-<span id="cb22-524"><a href="#cb22-524" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-525"><a href="#cb22-525" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb22-526"><a href="#cb22-526" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">alpha =</span> <span class="fl">0.86</span>) <span class="sc">+</span></span>
-<span id="cb22-527"><a href="#cb22-527" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
-<span id="cb22-528"><a href="#cb22-528" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> arrow_scores_mod2,</span>
-<span id="cb22-529"><a href="#cb22-529" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> CAP1, <span class="at">yend =</span> CAP2),</span>
-<span id="cb22-530"><a href="#cb22-530" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb22-531"><a href="#cb22-531" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey20"</span>,</span>
-<span id="cb22-532"><a href="#cb22-532" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.55</span>,</span>
-<span id="cb22-533"><a href="#cb22-533" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(</span>
-<span id="cb22-534"><a href="#cb22-534" aria-hidden="true" tabindex="-1"></a>      <span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">2.2</span>, <span class="st">"mm"</span>),</span>
-<span id="cb22-535"><a href="#cb22-535" aria-hidden="true" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">"closed"</span></span>
-<span id="cb22-536"><a href="#cb22-536" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb22-537"><a href="#cb22-537" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb22-538"><a href="#cb22-538" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(</span>
-<span id="cb22-539"><a href="#cb22-539" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> arrow_scores_mod2,</span>
-<span id="cb22-540"><a href="#cb22-540" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> CAP1, <span class="at">y =</span> CAP2, <span class="at">label =</span> Variable),</span>
-<span id="cb22-541"><a href="#cb22-541" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb22-542"><a href="#cb22-542" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey10"</span>,</span>
-<span id="cb22-543"><a href="#cb22-543" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.0</span>,</span>
-<span id="cb22-544"><a href="#cb22-544" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb22-545"><a href="#cb22-545" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">20260718</span>,</span>
-<span id="cb22-546"><a href="#cb22-546" aria-hidden="true" tabindex="-1"></a>    <span class="at">box.padding =</span> <span class="fl">0.35</span>,</span>
-<span id="cb22-547"><a href="#cb22-547" aria-hidden="true" tabindex="-1"></a>    <span class="at">point.padding =</span> <span class="fl">0.2</span>,</span>
-<span id="cb22-548"><a href="#cb22-548" aria-hidden="true" tabindex="-1"></a>    <span class="at">min.segment.length =</span> <span class="dv">0</span>,</span>
-<span id="cb22-549"><a href="#cb22-549" aria-hidden="true" tabindex="-1"></a>    <span class="at">segment.color =</span> <span class="st">"grey60"</span></span>
-<span id="cb22-550"><a href="#cb22-550" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb22-551"><a href="#cb22-551" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pub</span>(<span class="at">name =</span> <span class="st">"Wetland group"</span>) <span class="sc">+</span></span>
-<span id="cb22-552"><a href="#cb22-552" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb22-553"><a href="#cb22-553" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Environmental CAP"</span>,</span>
-<span id="cb22-554"><a href="#cb22-554" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(</span>
-<span id="cb22-555"><a href="#cb22-555" aria-hidden="true" tabindex="-1"></a>      <span class="st">"R² = "</span>, <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, cap_env_r2_raw),</span>
-<span id="cb22-556"><a href="#cb22-556" aria-hidden="true" tabindex="-1"></a>      <span class="st">" · adjusted R² = "</span>, <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, cap_env_r2_adjusted),</span>
-<span id="cb22-557"><a href="#cb22-557" aria-hidden="true" tabindex="-1"></a>      <span class="st">" · permutation P "</span>, <span class="fu">format_p</span>(cap_env_p)</span>
-<span id="cb22-558"><a href="#cb22-558" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb22-559"><a href="#cb22-559" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> lab1_mod2,</span>
-<span id="cb22-560"><a href="#cb22-560" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> lab2_mod2</span>
-<span id="cb22-561"><a href="#cb22-561" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb22-562"><a href="#cb22-562" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
-<span id="cb22-563"><a href="#cb22-563" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
-<span id="cb22-564"><a href="#cb22-564" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb22-565"><a href="#cb22-565" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">11</span>),</span>
-<span id="cb22-566"><a href="#cb22-566" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">9.2</span>),</span>
-<span id="cb22-567"><a href="#cb22-567" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
-<span id="cb22-568"><a href="#cb22-568" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">9</span>),</span>
-<span id="cb22-569"><a href="#cb22-569" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">8.3</span>)</span>
-<span id="cb22-570"><a href="#cb22-570" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb22-571"><a href="#cb22-571" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb22-572"><a href="#cb22-572" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-573"><a href="#cb22-573" aria-hidden="true" tabindex="-1"></a>p_cap_environment</span>
-<span id="cb22-574"><a href="#cb22-574" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(</span>
-<span id="cb22-575"><a href="#cb22-575" aria-hidden="true" tabindex="-1"></a>  p_cap_environment,</span>
-<span id="cb22-576"><a href="#cb22-576" aria-hidden="true" tabindex="-1"></a>  <span class="st">"figures/24-cap-environment"</span>,</span>
-<span id="cb22-577"><a href="#cb22-577" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">150</span>,</span>
-<span id="cb22-578"><a href="#cb22-578" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">110</span></span>
-<span id="cb22-579"><a href="#cb22-579" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-580"><a href="#cb22-580" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-581"><a href="#cb22-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-582"><a href="#cb22-582" aria-hidden="true" tabindex="-1"></a>导出后得到：</span>
-<span id="cb22-583"><a href="#cb22-583" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-584"><a href="#cb22-584" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`figures/24-cap-environment.pdf`</span>：矢量主图；</span>
-<span id="cb22-585"><a href="#cb22-585" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`figures/24-cap-environment.png`</span>：300 dpi 网页与公众号图；</span>
-<span id="cb22-586"><a href="#cb22-586" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`figures/24-cap-environment.tiff`</span>：300 dpi、LZW 压缩期刊图。</span>
-<span id="cb22-587"><a href="#cb22-587" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-588"><a href="#cb22-588" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
+<span id="cb22-499"><a href="#cb22-499" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(site_scores_mod2)</span>
+<span id="cb22-500"><a href="#cb22-500" aria-hidden="true" tabindex="-1"></a>arrow_scores_mod2</span>
+<span id="cb22-501"><a href="#cb22-501" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-502"><a href="#cb22-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-503"><a href="#cb22-503" aria-hidden="true" tabindex="-1"></a>每个模型都必须重新提取 eigenvalues 和 labels。不能把单因子模型的 <span class="in">`CAP1`</span> 百分比复制到环境模型。</span>
+<span id="cb22-504"><a href="#cb22-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-505"><a href="#cb22-505" aria-hidden="true" tabindex="-1"></a><span class="fu">## 正确解释约束轴和环境箭头 {#sec-polish}</span></span>
+<span id="cb22-506"><a href="#cb22-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-507"><a href="#cb22-507" aria-hidden="true" tabindex="-1"></a>箭头缩放只改变绘图长度，不进入模型计算。环境变量是约束项，地理组仅用于给样本点着色。</span>
+<span id="cb22-508"><a href="#cb22-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-511"><a href="#cb22-511" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-512"><a href="#cb22-512" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-513"><a href="#cb22-513" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-10</span></span>
+<span id="cb22-514"><a href="#cb22-514" aria-hidden="true" tabindex="-1"></a>format_p <span class="ot">&lt;-</span> <span class="cf">function</span>(p) {</span>
+<span id="cb22-515"><a href="#cb22-515" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(p)) {</span>
+<span id="cb22-516"><a href="#cb22-516" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"= NA"</span>)</span>
+<span id="cb22-517"><a href="#cb22-517" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-518"><a href="#cb22-518" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (p <span class="sc">&lt;</span> <span class="fl">0.001</span>) {</span>
+<span id="cb22-519"><a href="#cb22-519" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">"&lt; 0.001"</span>)</span>
+<span id="cb22-520"><a href="#cb22-520" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-521"><a href="#cb22-521" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sprintf</span>(<span class="st">"= %.3f"</span>, p)</span>
+<span id="cb22-522"><a href="#cb22-522" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-523"><a href="#cb22-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-524"><a href="#cb22-524" aria-hidden="true" tabindex="-1"></a>p_cap_environment <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb22-525"><a href="#cb22-525" aria-hidden="true" tabindex="-1"></a>  site_scores_mod2,</span>
+<span id="cb22-526"><a href="#cb22-526" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(CAP1, CAP2, <span class="at">color =</span> Group)</span>
+<span id="cb22-527"><a href="#cb22-527" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb22-528"><a href="#cb22-528" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_ellipse</span>(</span>
+<span id="cb22-529"><a href="#cb22-529" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"t"</span>,</span>
+<span id="cb22-530"><a href="#cb22-530" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="fl">0.95</span>,</span>
+<span id="cb22-531"><a href="#cb22-531" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.7</span>,</span>
+<span id="cb22-532"><a href="#cb22-532" aria-hidden="true" tabindex="-1"></a>    <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-533"><a href="#cb22-533" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-534"><a href="#cb22-534" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">alpha =</span> <span class="fl">0.86</span>) <span class="sc">+</span></span>
+<span id="cb22-535"><a href="#cb22-535" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb22-536"><a href="#cb22-536" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> arrow_scores_mod2,</span>
+<span id="cb22-537"><a href="#cb22-537" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> CAP1, <span class="at">yend =</span> CAP2),</span>
+<span id="cb22-538"><a href="#cb22-538" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-539"><a href="#cb22-539" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey20"</span>,</span>
+<span id="cb22-540"><a href="#cb22-540" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">0.55</span>,</span>
+<span id="cb22-541"><a href="#cb22-541" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(</span>
+<span id="cb22-542"><a href="#cb22-542" aria-hidden="true" tabindex="-1"></a>      <span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">2.2</span>, <span class="st">"mm"</span>),</span>
+<span id="cb22-543"><a href="#cb22-543" aria-hidden="true" tabindex="-1"></a>      <span class="at">type =</span> <span class="st">"closed"</span></span>
+<span id="cb22-544"><a href="#cb22-544" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb22-545"><a href="#cb22-545" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-546"><a href="#cb22-546" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(</span>
+<span id="cb22-547"><a href="#cb22-547" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> arrow_scores_mod2,</span>
+<span id="cb22-548"><a href="#cb22-548" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> CAP1, <span class="at">y =</span> CAP2, <span class="at">label =</span> Variable),</span>
+<span id="cb22-549"><a href="#cb22-549" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb22-550"><a href="#cb22-550" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"grey10"</span>,</span>
+<span id="cb22-551"><a href="#cb22-551" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">3.0</span>,</span>
+<span id="cb22-552"><a href="#cb22-552" aria-hidden="true" tabindex="-1"></a>    <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb22-553"><a href="#cb22-553" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">20260718</span>,</span>
+<span id="cb22-554"><a href="#cb22-554" aria-hidden="true" tabindex="-1"></a>    <span class="at">box.padding =</span> <span class="fl">0.35</span>,</span>
+<span id="cb22-555"><a href="#cb22-555" aria-hidden="true" tabindex="-1"></a>    <span class="at">point.padding =</span> <span class="fl">0.2</span>,</span>
+<span id="cb22-556"><a href="#cb22-556" aria-hidden="true" tabindex="-1"></a>    <span class="at">min.segment.length =</span> <span class="dv">0</span>,</span>
+<span id="cb22-557"><a href="#cb22-557" aria-hidden="true" tabindex="-1"></a>    <span class="at">segment.color =</span> <span class="st">"grey60"</span></span>
+<span id="cb22-558"><a href="#cb22-558" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-559"><a href="#cb22-559" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pub</span>(<span class="at">name =</span> <span class="st">"Wetland group"</span>) <span class="sc">+</span></span>
+<span id="cb22-560"><a href="#cb22-560" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-561"><a href="#cb22-561" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Environmental CAP"</span>,</span>
+<span id="cb22-562"><a href="#cb22-562" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(</span>
+<span id="cb22-563"><a href="#cb22-563" aria-hidden="true" tabindex="-1"></a>      <span class="st">"R² = "</span>, <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, cap_env_r2_raw),</span>
+<span id="cb22-564"><a href="#cb22-564" aria-hidden="true" tabindex="-1"></a>      <span class="st">" · adjusted R² = "</span>, <span class="fu">sprintf</span>(<span class="st">"%.3f"</span>, cap_env_r2_adjusted),</span>
+<span id="cb22-565"><a href="#cb22-565" aria-hidden="true" tabindex="-1"></a>      <span class="st">" · permutation P "</span>, <span class="fu">format_p</span>(cap_env_p)</span>
+<span id="cb22-566"><a href="#cb22-566" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb22-567"><a href="#cb22-567" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> lab1_mod2,</span>
+<span id="cb22-568"><a href="#cb22-568" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> lab2_mod2</span>
+<span id="cb22-569"><a href="#cb22-569" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-570"><a href="#cb22-570" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb22-571"><a href="#cb22-571" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="at">base_size =</span> <span class="dv">11</span>) <span class="sc">+</span></span>
+<span id="cb22-572"><a href="#cb22-572" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb22-573"><a href="#cb22-573" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb22-574"><a href="#cb22-574" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">9.2</span>),</span>
+<span id="cb22-575"><a href="#cb22-575" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb22-576"><a href="#cb22-576" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">9</span>),</span>
+<span id="cb22-577"><a href="#cb22-577" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">8.3</span>)</span>
+<span id="cb22-578"><a href="#cb22-578" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-579"><a href="#cb22-579" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb22-580"><a href="#cb22-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-581"><a href="#cb22-581" aria-hidden="true" tabindex="-1"></a>p_cap_environment</span>
+<span id="cb22-582"><a href="#cb22-582" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(</span>
+<span id="cb22-583"><a href="#cb22-583" aria-hidden="true" tabindex="-1"></a>  p_cap_environment,</span>
+<span id="cb22-584"><a href="#cb22-584" aria-hidden="true" tabindex="-1"></a>  <span class="st">"figures/24-cap-environment"</span>,</span>
+<span id="cb22-585"><a href="#cb22-585" aria-hidden="true" tabindex="-1"></a>  <span class="at">width =</span> <span class="dv">150</span>,</span>
+<span id="cb22-586"><a href="#cb22-586" aria-hidden="true" tabindex="-1"></a>  <span class="at">height =</span> <span class="dv">110</span></span>
+<span id="cb22-587"><a href="#cb22-587" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-588"><a href="#cb22-588" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-589"><a href="#cb22-589" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-590"><a href="#cb22-590" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="约束排序最常见的七个误区"}</span>
-<span id="cb22-591"><a href="#cb22-591" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**看到 CAP 分开就宣称存在差异。** 轴本来就是按预测变量优化的；必须报告置换检验和调整后 <span class="sc">\(</span>R^2<span class="sc">\)</span>。</span>
-<span id="cb22-592"><a href="#cb22-592" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**变量越多越好。** 原始 <span class="sc">\(</span>R^2<span class="sc">\)</span> 会随变量增加而上升。变量应由研究假设预先确定，并检查 VIF 和调整后 <span class="sc">\(</span>R^2<span class="sc">\)</span>。</span>
-<span id="cb22-593"><a href="#cb22-593" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**把 `by = "terms"` 当成独立效应。** 它依赖公式顺序；独立贡献应结合 <span class="in">`by = "margin"`</span>，大量探索性检验还需控制多重比较。</span>
-<span id="cb22-594"><a href="#cb22-594" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**不标准化不同量纲的环境变量。** pH、mg/kg 与 µS/cm 的数值尺度不同；连续预测变量应先 Z-score，除非模型有明确的原尺度解释需求。</span>
-<span id="cb22-595"><a href="#cb22-595" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**忽略区组和重复测量。** <span class="in">`Condition(Batch)`</span> 用于从模型中控制协变量，受限置换用于保证样本交换性；两者解决不同问题，不能互相替代。</span>
-<span id="cb22-596"><a href="#cb22-596" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**把箭头解释为因果。** 箭头只表示当前模型与二维投影中的关联方向和强度。</span>
-<span id="cb22-597"><a href="#cb22-597" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**复用别的模型轴标签。** 每次重拟合后都要从当前模型重新提取 eigenvalues、scores、<span class="sc">\(</span>R^2<span class="sc">\)</span> 和 P 值。</span>
-<span id="cb22-598"><a href="#cb22-598" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb22-599"><a href="#cb22-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-600"><a href="#cb22-600" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="环境变量和地理分组可能混杂"}</span>
-<span id="cb22-601"><a href="#cb22-601" aria-hidden="true" tabindex="-1"></a>本数据来自不同地理湿地，环境梯度与地理组可能相关。主模型描述的是环境因子与群落结构的总体关联，不证明环境因子的独立因果效应。若目标是估计“控制地理组后的环境关联”，可拟合 <span class="in">`... + Condition(Group)`</span> 的 partial CAP，并使用与采样层级一致的置换设计。</span>
-<span id="cb22-602"><a href="#cb22-602" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb22-603"><a href="#cb22-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-604"><a href="#cb22-604" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告约束排序与置换检验的方法与限制 {#sec-methods}</span></span>
-<span id="cb22-605"><a href="#cb22-605" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-606"><a href="#cb22-606" aria-hidden="true" tabindex="-1"></a>可直接替换变量名、阈值和置换限制：</span>
+<span id="cb22-590"><a href="#cb22-590" aria-hidden="true" tabindex="-1"></a>导出后得到：</span>
+<span id="cb22-591"><a href="#cb22-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-592"><a href="#cb22-592" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`figures/24-cap-environment.pdf`</span>：矢量主图；</span>
+<span id="cb22-593"><a href="#cb22-593" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`figures/24-cap-environment.png`</span>：300 dpi 网页与公众号图；</span>
+<span id="cb22-594"><a href="#cb22-594" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`figures/24-cap-environment.tiff`</span>：300 dpi、LZW 压缩期刊图。</span>
+<span id="cb22-595"><a href="#cb22-595" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-596"><a href="#cb22-596" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
+<span id="cb22-597"><a href="#cb22-597" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-598"><a href="#cb22-598" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="约束排序最常见的七个误区"}</span>
+<span id="cb22-599"><a href="#cb22-599" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**看到 CAP 分开就宣称存在差异。** 轴本来就是按预测变量优化的；必须报告置换检验和调整后 $R^2$。</span>
+<span id="cb22-600"><a href="#cb22-600" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**变量越多越好。** 原始 $R^2$ 会随变量增加而上升。变量应由研究假设预先确定，并检查 VIF 和调整后 $R^2$。</span>
+<span id="cb22-601"><a href="#cb22-601" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**把 `by = "terms"` 当成独立效应。** 它依赖公式顺序；独立贡献应结合 <span class="in">`by = "margin"`</span>，大量探索性检验还需控制多重比较。</span>
+<span id="cb22-602"><a href="#cb22-602" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**把标准化当成消除共线性或混杂。** Z-score 便于比较变量单位，但不会改变本例线性约束模型的解释空间，也不能产生缺失的组内对照。对数变换、变量选择与调整集则可能实质改变问题，应分别说明。</span>
+<span id="cb22-603"><a href="#cb22-603" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**忽略区组和重复测量。** <span class="in">`Condition(Batch)`</span> 用于从模型中控制协变量，受限置换用于保证样本交换性；两者解决不同问题，不能互相替代。</span>
+<span id="cb22-604"><a href="#cb22-604" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**把箭头解释为因果。** 箭头只表示当前模型与二维投影中的关联方向和强度。</span>
+<span id="cb22-605"><a href="#cb22-605" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**复用别的模型轴标签。** 每次重拟合后都要从当前模型重新提取 eigenvalues、scores、$R^2$ 和 P 值。</span>
+<span id="cb22-606"><a href="#cb22-606" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb22-607"><a href="#cb22-607" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-608"><a href="#cb22-608" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Distance-based redundancy analysis (db-RDA; CAP) was performed using Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Features detected in at least </span><span class="in">`r min_prevalence * 100`</span><span class="at">% of samples were retained, yielding </span><span class="in">`r format(ncol(comm_env), big.mark = ",")`</span><span class="at"> features across </span><span class="in">`r nrow(comm_env)`</span><span class="at"> complete samples. The prespecified environmental predictors (</span><span class="in">`r paste(predictors, collapse = ", ")`</span><span class="at">) were Z-score standardized before model fitting. A Lingoes correction was applied to the Bray–Curtis dissimilarities. Model significance was assessed with 999 permutations (P </span><span class="in">`r format_p(cap_env_p)`</span><span class="at">), and the model explained </span><span class="sc">\(</span><span class="at">R^2</span><span class="sc">\)</span><span class="at"> = </span><span class="in">`r sprintf("%.3f", cap_env_r2_raw)`</span><span class="at"> of the total variation (adjusted </span><span class="sc">\(</span><span class="at">R^2</span><span class="sc">\)</span><span class="at"> = </span><span class="in">`r sprintf("%.3f", cap_env_r2_adjusted)`</span><span class="at">). Sequential, marginal, and axis-wise permutation tests were performed, and variance inflation factors were all below </span><span class="in">`r sprintf("%.2f", max(cap_env_vif))`</span><span class="at">. Wetland group was used only for point color in the environmental CAP figure.</span></span>
-<span id="cb22-609"><a href="#cb22-609" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-610"><a href="#cb22-610" aria-hidden="true" tabindex="-1"></a>若样本属于同一受试者、站点或区组，应把最后的置换描述改成实际限制，例如“permutations were restricted within site”。</span>
+<span id="cb22-608"><a href="#cb22-608" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="环境变量和地理分组可能混杂"}</span>
+<span id="cb22-609"><a href="#cb22-609" aria-hidden="true" tabindex="-1"></a>本数据来自不同地理湿地，环境梯度与地理组可能相关。主模型描述的是环境因子与群落结构的总体关联，不证明环境因子的独立因果效应。若目标是估计“控制地理组后的环境关联”，可拟合 <span class="in">`... + Condition(Group)`</span> 的 partial CAP，并使用与采样层级一致的置换设计。</span>
+<span id="cb22-610"><a href="#cb22-610" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb22-611"><a href="#cb22-611" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-612"><a href="#cb22-612" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将约束排序与置换检验用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb22-612"><a href="#cb22-612" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告约束排序与置换检验的方法与限制 {#sec-methods}</span></span>
 <span id="cb22-613"><a href="#cb22-613" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-614"><a href="#cb22-614" aria-hidden="true" tabindex="-1"></a><span class="fu">### 四张表的最低要求</span></span>
+<span id="cb22-614"><a href="#cb22-614" aria-hidden="true" tabindex="-1"></a>可直接替换变量名、阈值和置换限制：</span>
 <span id="cb22-615"><a href="#cb22-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-616"><a href="#cb22-616" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`otutab`</span>：特征 × 样本的非负计数表；</span>
-<span id="cb22-617"><a href="#cb22-617" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`taxonomy`</span>：特征 × 分类层级，行名与 <span class="in">`otutab`</span> 完全相同；</span>
-<span id="cb22-618"><a href="#cb22-618" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`metadata`</span>：样本 × 分组/协变量，行名与 <span class="in">`otutab`</span> 列名一致；</span>
-<span id="cb22-619"><a href="#cb22-619" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`environment`</span>：样本 × 连续环境或临床变量，行名能与样本 ID 对齐。</span>
-<span id="cb22-620"><a href="#cb22-620" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-621"><a href="#cb22-621" aria-hidden="true" tabindex="-1"></a>替换路径和公式：</span>
-<span id="cb22-622"><a href="#cb22-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-625"><a href="#cb22-625" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-626"><a href="#cb22-626" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb22-627"><a href="#cb22-627" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb22-628"><a href="#cb22-628" aria-hidden="true" tabindex="-1"></a>  <span class="st">"your_project/otutab.tsv"</span>,</span>
-<span id="cb22-629"><a href="#cb22-629" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb22-630"><a href="#cb22-630" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-631"><a href="#cb22-631" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-632"><a href="#cb22-632" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb22-633"><a href="#cb22-633" aria-hidden="true" tabindex="-1"></a>  <span class="st">"your_project/taxonomy.tsv"</span>,</span>
-<span id="cb22-634"><a href="#cb22-634" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb22-635"><a href="#cb22-635" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-636"><a href="#cb22-636" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-637"><a href="#cb22-637" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb22-638"><a href="#cb22-638" aria-hidden="true" tabindex="-1"></a>  <span class="st">"your_project/metadata.tsv"</span>,</span>
-<span id="cb22-639"><a href="#cb22-639" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb22-640"><a href="#cb22-640" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-641"><a href="#cb22-641" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-642"><a href="#cb22-642" aria-hidden="true" tabindex="-1"></a>environment <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb22-643"><a href="#cb22-643" aria-hidden="true" tabindex="-1"></a>  <span class="st">"your_project/environment.tsv"</span>,</span>
-<span id="cb22-644"><a href="#cb22-644" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
-<span id="cb22-645"><a href="#cb22-645" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb22-646"><a href="#cb22-646" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-647"><a href="#cb22-647" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-648"><a href="#cb22-648" aria-hidden="true" tabindex="-1"></a>predictors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pH"</span>, <span class="st">"Moisture"</span>, <span class="st">"OrganicCarbon"</span>)</span>
-<span id="cb22-649"><a href="#cb22-649" aria-hidden="true" tabindex="-1"></a>group_col <span class="ot">&lt;-</span> <span class="st">"Treatment"</span></span>
-<span id="cb22-650"><a href="#cb22-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-651"><a href="#cb22-651" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb22-652"><a href="#cb22-652" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(otutab), <span class="fu">rownames</span>(taxonomy)),</span>
-<span id="cb22-653"><a href="#cb22-653" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb22-654"><a href="#cb22-654" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">colnames</span>(otutab) <span class="sc">%in%</span> <span class="fu">rownames</span>(environment)),</span>
-<span id="cb22-655"><a href="#cb22-655" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(predictors <span class="sc">%in%</span> <span class="fu">colnames</span>(environment))</span>
-<span id="cb22-656"><a href="#cb22-656" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-657"><a href="#cb22-657" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-616"><a href="#cb22-616" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Distance-based redundancy analysis (db-RDA; CAP) was performed using Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Features detected in at least </span><span class="in">`r min_prevalence * 100`</span><span class="at">% of samples were retained, yielding </span><span class="in">`r format(ncol(comm_env), big.mark = ",")`</span><span class="at"> features across </span><span class="in">`r nrow(comm_env)`</span><span class="at"> complete samples. The prespecified environmental predictors (</span><span class="in">`r paste(predictors, collapse = ", ")`</span><span class="at">) were Z-score standardized before model fitting. A Lingoes correction was applied to the Bray–Curtis dissimilarities. Model significance was assessed with 999 permutations (P </span><span class="in">`r format_p(cap_env_p)`</span><span class="at">), and the model explained $R^2$ = </span><span class="in">`r sprintf("%.3f", cap_env_r2_raw)`</span><span class="at"> of the total variation (adjusted $R^2$ = </span><span class="in">`r sprintf("%.3f", cap_env_r2_adjusted)`</span><span class="at">). Sequential, marginal, and axis-wise permutation tests were performed, and variance inflation factors were all below </span><span class="in">`r sprintf("%.2f", max(cap_env_vif))`</span><span class="at">. Wetland group was used only for point color in the environmental CAP figure.</span></span>
+<span id="cb22-617"><a href="#cb22-617" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-618"><a href="#cb22-618" aria-hidden="true" tabindex="-1"></a>若样本属于同一受试者、站点或区组，应把最后的置换描述改成实际限制，例如“permutations were restricted within site”。</span>
+<span id="cb22-619"><a href="#cb22-619" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-620"><a href="#cb22-620" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将约束排序与置换检验用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb22-621"><a href="#cb22-621" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-622"><a href="#cb22-622" aria-hidden="true" tabindex="-1"></a><span class="fu">### 四张表的最低要求</span></span>
+<span id="cb22-623"><a href="#cb22-623" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-624"><a href="#cb22-624" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`otutab`</span>：特征 × 样本的非负计数表；</span>
+<span id="cb22-625"><a href="#cb22-625" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`taxonomy`</span>：特征 × 分类层级，行名与 <span class="in">`otutab`</span> 完全相同；</span>
+<span id="cb22-626"><a href="#cb22-626" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`metadata`</span>：样本 × 分组/协变量，行名与 <span class="in">`otutab`</span> 列名一致；</span>
+<span id="cb22-627"><a href="#cb22-627" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`environment`</span>：样本 × 连续环境或临床变量，行名能与样本 ID 对齐。</span>
+<span id="cb22-628"><a href="#cb22-628" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-629"><a href="#cb22-629" aria-hidden="true" tabindex="-1"></a>替换路径和公式：</span>
+<span id="cb22-630"><a href="#cb22-630" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-633"><a href="#cb22-633" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-634"><a href="#cb22-634" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-635"><a href="#cb22-635" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb22-636"><a href="#cb22-636" aria-hidden="true" tabindex="-1"></a>  <span class="st">"your_project/otutab.tsv"</span>,</span>
+<span id="cb22-637"><a href="#cb22-637" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb22-638"><a href="#cb22-638" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-639"><a href="#cb22-639" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-640"><a href="#cb22-640" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb22-641"><a href="#cb22-641" aria-hidden="true" tabindex="-1"></a>  <span class="st">"your_project/taxonomy.tsv"</span>,</span>
+<span id="cb22-642"><a href="#cb22-642" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb22-643"><a href="#cb22-643" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-644"><a href="#cb22-644" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-645"><a href="#cb22-645" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb22-646"><a href="#cb22-646" aria-hidden="true" tabindex="-1"></a>  <span class="st">"your_project/metadata.tsv"</span>,</span>
+<span id="cb22-647"><a href="#cb22-647" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb22-648"><a href="#cb22-648" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-649"><a href="#cb22-649" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-650"><a href="#cb22-650" aria-hidden="true" tabindex="-1"></a>environment <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb22-651"><a href="#cb22-651" aria-hidden="true" tabindex="-1"></a>  <span class="st">"your_project/environment.tsv"</span>,</span>
+<span id="cb22-652"><a href="#cb22-652" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="dv">1</span>,</span>
+<span id="cb22-653"><a href="#cb22-653" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb22-654"><a href="#cb22-654" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-655"><a href="#cb22-655" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-656"><a href="#cb22-656" aria-hidden="true" tabindex="-1"></a>predictors <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pH"</span>, <span class="st">"Moisture"</span>, <span class="st">"OrganicCarbon"</span>)</span>
+<span id="cb22-657"><a href="#cb22-657" aria-hidden="true" tabindex="-1"></a>group_col <span class="ot">&lt;-</span> <span class="st">"Treatment"</span></span>
 <span id="cb22-658"><a href="#cb22-658" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-659"><a href="#cb22-659" aria-hidden="true" tabindex="-1"></a>然后把主模型公式替换为：</span>
-<span id="cb22-660"><a href="#cb22-660" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-663"><a href="#cb22-663" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-664"><a href="#cb22-664" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb22-665"><a href="#cb22-665" aria-hidden="true" tabindex="-1"></a>cap_your_data <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">capscale</span>(</span>
-<span id="cb22-666"><a href="#cb22-666" aria-hidden="true" tabindex="-1"></a>  comm_rel <span class="sc">~</span> pH <span class="sc">+</span> Moisture <span class="sc">+</span> OrganicCarbon,</span>
-<span id="cb22-667"><a href="#cb22-667" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> model_data,</span>
-<span id="cb22-668"><a href="#cb22-668" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance =</span> <span class="st">"bray"</span>,</span>
-<span id="cb22-669"><a href="#cb22-669" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="st">"lingoes"</span></span>
-<span id="cb22-670"><a href="#cb22-670" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-671"><a href="#cb22-671" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-672"><a href="#cb22-672" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-673"><a href="#cb22-673" aria-hidden="true" tabindex="-1"></a>正式建模前还要决定：</span>
-<span id="cb22-674"><a href="#cb22-674" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-675"><a href="#cb22-675" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>环境变量是否由先验假设确定，而不是根据同一张图反复筛选；</span>
-<span id="cb22-676"><a href="#cb22-676" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>缺失样本如何处理，最终模型样本数是多少；</span>
-<span id="cb22-677"><a href="#cb22-677" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>是否存在批次、地点、家庭、受试者或时间序列结构；</span>
-<span id="cb22-678"><a href="#cb22-678" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>需要把哪些变量放入 <span class="in">`Condition()`</span>，置换应限制在哪个层级；</span>
-<span id="cb22-679"><a href="#cb22-679" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Bray–Curtis、Aitchison 或 UniFrac 哪个距离与科学问题一致；</span>
-<span id="cb22-680"><a href="#cb22-680" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>模型结果在不同 prevalence 阈值和变量集合下是否稳定。</span>
-<span id="cb22-681"><a href="#cb22-681" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-682"><a href="#cb22-682" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb22-683"><a href="#cb22-683" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-684"><a href="#cb22-684" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An J, Liu C, Wang Q, et al. Soil bacterial community structure in Chinese wetlands. *Geoderma*. 2019;337:290–299. <span class="co">[</span><span class="ot">doi:10.1016/j.geoderma.2018.09.035</span><span class="co">](https://doi.org/10.1016/j.geoderma.2018.09.035)</span></span>
-<span id="cb22-685"><a href="#cb22-685" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Liu C, Cui Y, Li X, Yao M. microeco: an R package for data mining in microbial community ecology. *FEMS Microbiology Ecology*. 2021;97(2):fiaa255. <span class="co">[</span><span class="ot">doi:10.1093/femsec/fiaa255</span><span class="co">](https://doi.org/10.1093/femsec/fiaa255)</span></span>
-<span id="cb22-686"><a href="#cb22-686" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Anderson MJ, Willis TJ. Canonical analysis of principal coordinates: a useful method of constrained ordination for ecology. *Ecology*. 2003;84:511–525. <span class="co">[</span><span class="ot">doi:10.1890/0012-9658(2003)084[0511:CAOPCA]2.0.CO;2</span><span class="co">]</span>(https://doi.org/10.1890/0012-9658(2003)084%5B0511:CAOPCA%5D2.0.CO;2)</span>
-<span id="cb22-687"><a href="#cb22-687" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Legendre P, Anderson MJ. Distance-based redundancy analysis: testing multispecies responses in multifactorial ecological experiments. *Ecological Monographs*. 1999;69:1–24.</span>
-<span id="cb22-688"><a href="#cb22-688" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Peres-Neto PR, Legendre P, Dray S, Borcard D. Variation partitioning of species data matrices: estimation and comparison of fractions. *Ecology*. 2006;87:2614–2625.</span>
-<span id="cb22-689"><a href="#cb22-689" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oksanen J, Simpson GL, Blanchet FG, et al. <span class="in">`vegan`</span>: Community Ecology Package. <span class="co">[</span><span class="ot">CRAN package page</span><span class="co">](https://CRAN.R-project.org/package=vegan)</span></span>
+<span id="cb22-659"><a href="#cb22-659" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb22-660"><a href="#cb22-660" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(otutab), <span class="fu">rownames</span>(taxonomy)),</span>
+<span id="cb22-661"><a href="#cb22-661" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb22-662"><a href="#cb22-662" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">colnames</span>(otutab) <span class="sc">%in%</span> <span class="fu">rownames</span>(environment)),</span>
+<span id="cb22-663"><a href="#cb22-663" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(predictors <span class="sc">%in%</span> <span class="fu">colnames</span>(environment))</span>
+<span id="cb22-664"><a href="#cb22-664" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-665"><a href="#cb22-665" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-666"><a href="#cb22-666" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-667"><a href="#cb22-667" aria-hidden="true" tabindex="-1"></a>然后把主模型公式替换为：</span>
+<span id="cb22-668"><a href="#cb22-668" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-671"><a href="#cb22-671" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-672"><a href="#cb22-672" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-673"><a href="#cb22-673" aria-hidden="true" tabindex="-1"></a>cap_your_data <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">capscale</span>(</span>
+<span id="cb22-674"><a href="#cb22-674" aria-hidden="true" tabindex="-1"></a>  comm_rel <span class="sc">~</span> pH <span class="sc">+</span> Moisture <span class="sc">+</span> OrganicCarbon,</span>
+<span id="cb22-675"><a href="#cb22-675" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> model_data,</span>
+<span id="cb22-676"><a href="#cb22-676" aria-hidden="true" tabindex="-1"></a>  <span class="at">distance =</span> <span class="st">"bray"</span>,</span>
+<span id="cb22-677"><a href="#cb22-677" aria-hidden="true" tabindex="-1"></a>  <span class="at">add =</span> <span class="st">"lingoes"</span></span>
+<span id="cb22-678"><a href="#cb22-678" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-679"><a href="#cb22-679" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-680"><a href="#cb22-680" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-681"><a href="#cb22-681" aria-hidden="true" tabindex="-1"></a>正式建模前还要决定：</span>
+<span id="cb22-682"><a href="#cb22-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-683"><a href="#cb22-683" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>环境变量是否由先验假设确定，而不是根据同一张图反复筛选；</span>
+<span id="cb22-684"><a href="#cb22-684" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>缺失样本如何处理，最终模型样本数是多少；</span>
+<span id="cb22-685"><a href="#cb22-685" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>是否存在批次、地点、家庭、受试者或时间序列结构；</span>
+<span id="cb22-686"><a href="#cb22-686" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>需要把哪些变量放入 <span class="in">`Condition()`</span>，置换应限制在哪个层级；</span>
+<span id="cb22-687"><a href="#cb22-687" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Bray–Curtis、Aitchison 或 UniFrac 哪个距离与科学问题一致；</span>
+<span id="cb22-688"><a href="#cb22-688" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>模型结果在不同 prevalence 阈值和变量集合下是否稳定。</span>
+<span id="cb22-689"><a href="#cb22-689" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-690"><a href="#cb22-690" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb22-691"><a href="#cb22-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-692"><a href="#cb22-692" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>An J, Liu C, Wang Q, et al. Soil bacterial community structure in Chinese wetlands. *Geoderma*. 2019;337:290–299. <span class="co">[</span><span class="ot">doi:10.1016/j.geoderma.2018.09.035</span><span class="co">](https://doi.org/10.1016/j.geoderma.2018.09.035)</span></span>
+<span id="cb22-693"><a href="#cb22-693" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Liu C, Cui Y, Li X, Yao M. microeco: an R package for data mining in microbial community ecology. *FEMS Microbiology Ecology*. 2021;97(2):fiaa255. <span class="co">[</span><span class="ot">doi:10.1093/femsec/fiaa255</span><span class="co">](https://doi.org/10.1093/femsec/fiaa255)</span></span>
+<span id="cb22-694"><a href="#cb22-694" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Anderson MJ, Willis TJ. Canonical analysis of principal coordinates: a useful method of constrained ordination for ecology. *Ecology*. 2003;84:511–525. <span class="co">[</span><span class="ot">doi:10.1890/0012-9658(2003)084[0511:CAOPCA]2.0.CO;2</span><span class="co">]</span>(https://doi.org/10.1890/0012-9658(2003)084%5B0511:CAOPCA%5D2.0.CO;2)</span>
+<span id="cb22-695"><a href="#cb22-695" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Legendre P, Anderson MJ. Distance-based redundancy analysis: testing multispecies responses in multifactorial ecological experiments. *Ecological Monographs*. 1999;69:1–24.</span>
+<span id="cb22-696"><a href="#cb22-696" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Peres-Neto PR, Legendre P, Dray S, Borcard D. Variation partitioning of species data matrices: estimation and comparison of fractions. *Ecology*. 2006;87:2614–2625.</span>
+<span id="cb22-697"><a href="#cb22-697" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oksanen J, Simpson GL, Blanchet FG, et al. <span class="in">`vegan`</span>: Community Ecology Package. <span class="co">[</span><span class="ot">CRAN package page</span><span class="co">](https://CRAN.R-project.org/package=vegan)</span></span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

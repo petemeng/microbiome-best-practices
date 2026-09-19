@@ -511,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -823,7 +823,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">从样本组成开始，按问题选择图形</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">从样本组成开始，按问题选择图形</a>
+  <ul class="collapse">
+  <li><a href="#同一组样本为什么两种平均组成会不同" id="toc-同一组样本为什么两种平均组成会不同" class="nav-link" data-scroll-target="#同一组样本为什么两种平均组成会不同">同一组样本，为什么两种“平均组成”会不同？</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">下载并读取湿地示例数据</a></li>
   <li><a href="#sec-code" id="toc-sec-code" class="nav-link" data-scroll-target="#sec-code">先用堆叠图看清每个样本</a></li>
   <li><a href="#sec-theory" id="toc-sec-theory" class="nav-link" data-scroll-target="#sec-theory">门、属和种，应该画到哪一级？</a>
@@ -864,7 +867,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -898,6 +901,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </div>
+<section id="同一组样本为什么两种平均组成会不同" class="level3">
+<h3 class="anchored" data-anchor-id="同一组样本为什么两种平均组成会不同">同一组样本，为什么两种“平均组成”会不同？</h3>
+<p>先合并一组的所有 reads 再算比例，会让测得更深的样本权重更高；先算每个样本的比例再取均值，则让每个样本等权。两者不是可以随意互换的作图技巧。如果研究对象是典型样本的组成，本例采用后者；如果要描述合并测序池，前者才对应那个目标，但它仍不等于按生物量加权的群落。</p>
+<p>Top 10 也要在同一候选集合上选。若每组各选自己的 Top 10，再把剩余部分都叫 Other，相同颜色就可能代表不同的类群集合。下面始终使用全样本共同的 Top 10，并保留 Unknown；属水平注释较少时，读者因此可以分清“这组真的缺少某属”和“这组有更多 reads 无法命名”。热图的行 Z-score 另外只表达某属在样本间的相对高低，不能用于比较不同属的绝对优势程度。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">下载并读取湿地示例数据</h2>
@@ -1955,492 +1963,498 @@ S3    IW   NE</code></pre>
 <span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取湿地示例数据 {#sec-setup}</span></span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### 同一组样本，为什么两种“平均组成”会不同？</span></span>
 <span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`ggalluvial`</span>、<span class="in">`ragg`</span> 和 <span class="in">`svglite`</span>。下面使用的版本分别是 R 4.4.1、ggplot2 3.5.2、ggalluvial 0.12.5、ragg 1.3.2 和 svglite 2.1.3；后两个包用于导出图片。</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>先合并一组的所有 reads 再算比例，会让测得更深的样本权重更高；先算每个样本的比例再取均值，则让每个样本等权。两者不是可以随意互换的作图技巧。如果研究对象是典型样本的组成，本例采用后者；如果要描述合并测序池，前者才对应那个目标，但它仍不等于按生物量加权的群落。</span>
 <span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"ggplot2"</span>, <span class="st">"ggalluvial"</span>, <span class="st">"ragg"</span>, <span class="st">"svglite"</span>))</span>
-<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a>先准备三张表：<span class="co">[</span><span class="ot">OTU count 表</span><span class="co">](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/f394362dda37f04fe62a5ba245cd00b94cbb84b9/data/small/otutab.tsv)</span>、<span class="co">[</span><span class="ot">分类表</span><span class="co">](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/f394362dda37f04fe62a5ba245cd00b94cbb84b9/data/small/taxonomy.tsv)</span>和<span class="co">[</span><span class="ot">样本信息表</span><span class="co">](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/f394362dda37f04fe62a5ba245cd00b94cbb84b9/data/small/metadata.tsv)</span>。它们对应同一批样本；下面的代码会下载并读取这些文件。</span>
-<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a>在一个新建的项目文件夹中运行：</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>Top 10 也要在同一候选集合上选。若每组各选自己的 Top 10，再把剩余部分都叫 Other，相同颜色就可能代表不同的类群集合。下面始终使用全样本共同的 Top 10，并保留 Unknown；属水平注释较少时，读者因此可以分清“这组真的缺少某属”和“这组有更多 reads 无法命名”。热图的行 Z-score 另外只表达某属在样本间的相对高低，不能用于比较不同属的绝对优势程度。</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取湿地示例数据 {#sec-setup}</span></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`ggplot2`</span>、<span class="in">`ggalluvial`</span>、<span class="in">`ragg`</span> 和 <span class="in">`svglite`</span>。下面使用的版本分别是 R 4.4.1、ggplot2 3.5.2、ggalluvial 0.12.5、ragg 1.3.2 和 svglite 2.1.3；后两个包用于导出图片。</span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"ggplot2"</span>, <span class="st">"ggalluvial"</span>, <span class="st">"ragg"</span>, <span class="st">"svglite"</span>))</span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
-<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalluvial)</span>
-<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
-<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">300</span>)</span>
-<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/"</span>,</span>
-<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"f394362dda37f04fe62a5ba245cd00b94cbb84b9/data/small/"</span></span>
-<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"data/small"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"otutab.tsv"</span>, <span class="st">"taxonomy.tsv"</span>, <span class="st">"metadata.tsv"</span>)) {</span>
-<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a>  path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data/small"</span>, file)</span>
-<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, file), path, <span class="at">mode =</span> <span class="st">"wb"</span>)</span>
-<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/small/otutab.tsv"</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/small/taxonomy.tsv"</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/small/metadata.tsv"</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a><span class="in">`otutab`</span> 的行是 OTU、列是样本；<span class="in">`taxonomy`</span> 的行名对应 OTU ID，<span class="in">`metadata`</span> 的行名对应样本 ID。不要依赖三个文件原来的排列顺序，先按 ID 对齐：</span>
-<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-align</span></span>
-<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(otutab)</span>
-<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">anyDuplicated</span>(<span class="fu">rownames</span>(counts)), <span class="sc">!</span><span class="fu">anyDuplicated</span>(<span class="fu">colnames</span>(counts)),</span>
-<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setequal</span>(<span class="fu">rownames</span>(counts), <span class="fu">rownames</span>(taxonomy)),</span>
-<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setequal</span>(<span class="fu">colnames</span>(counts), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">is.finite</span>(counts)), <span class="fu">all</span>(counts <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
-<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(counts <span class="sc">==</span> <span class="fu">round</span>(counts)), <span class="fu">all</span>(<span class="fu">colSums</span>(counts) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> taxonomy[<span class="fu">rownames</span>(counts), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> metadata[<span class="fu">colnames</span>(counts), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(counts)</span>
-<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">3</span>)</span>
-<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy[, <span class="fu">c</span>(<span class="st">"Phylum"</span>, <span class="st">"Genus"</span>)], <span class="dv">3</span>)</span>
-<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata[, <span class="fu">c</span>(<span class="st">"Group"</span>, <span class="st">"Type"</span>)], <span class="dv">3</span>)</span>
-<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a>先准备三张表：<span class="co">[</span><span class="ot">OTU count 表</span><span class="co">](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/f394362dda37f04fe62a5ba245cd00b94cbb84b9/data/small/otutab.tsv)</span>、<span class="co">[</span><span class="ot">分类表</span><span class="co">](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/f394362dda37f04fe62a5ba245cd00b94cbb84b9/data/small/taxonomy.tsv)</span>和<span class="co">[</span><span class="ot">样本信息表</span><span class="co">](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/f394362dda37f04fe62a5ba245cd00b94cbb84b9/data/small/metadata.tsv)</span>。它们对应同一批样本；下面的代码会下载并读取这些文件。</span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a>在一个新建的项目文件夹中运行：</span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggalluvial)</span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">300</span>)</span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/"</span>,</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a>  <span class="st">"f394362dda37f04fe62a5ba245cd00b94cbb84b9/data/small/"</span></span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"data/small"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (file <span class="cf">in</span> <span class="fu">c</span>(<span class="st">"otutab.tsv"</span>, <span class="st">"taxonomy.tsv"</span>, <span class="st">"metadata.tsv"</span>)) {</span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a>  path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data/small"</span>, file)</span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, file), path, <span class="at">mode =</span> <span class="st">"wb"</span>)</span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/small/otutab.tsv"</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/small/taxonomy.tsv"</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(<span class="st">"data/small/metadata.tsv"</span>, <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a><span class="in">`otutab`</span> 的行是 OTU、列是样本；<span class="in">`taxonomy`</span> 的行名对应 OTU ID，<span class="in">`metadata`</span> 的行名对应样本 ID。不要依赖三个文件原来的排列顺序，先按 ID 对齐：</span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-align</span></span>
+<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(otutab)</span>
+<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">anyDuplicated</span>(<span class="fu">rownames</span>(counts)), <span class="sc">!</span><span class="fu">anyDuplicated</span>(<span class="fu">colnames</span>(counts)),</span>
+<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setequal</span>(<span class="fu">rownames</span>(counts), <span class="fu">rownames</span>(taxonomy)),</span>
+<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setequal</span>(<span class="fu">colnames</span>(counts), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">is.finite</span>(counts)), <span class="fu">all</span>(counts <span class="sc">&gt;=</span> <span class="dv">0</span>),</span>
+<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(counts <span class="sc">==</span> <span class="fu">round</span>(counts)), <span class="fu">all</span>(<span class="fu">colSums</span>(counts) <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> taxonomy[<span class="fu">rownames</span>(counts), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> metadata[<span class="fu">colnames</span>(counts), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
 <span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a>读入后应得到 **13,628 个 OTU × 90 个样本**。样本信息中的 <span class="in">`IW`</span>、<span class="in">`CW`</span>、<span class="in">`TW`</span> 分别表示内陆、滨海和青藏高原湿地，各有 30 个样本。接下来把图内组名改为英文，并固定样本顺序：</span>
-<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-sample-order</span></span>
-<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a>group_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"IW"</span>, <span class="st">"CW"</span>, <span class="st">"TW"</span>)</span>
-<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a>group_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">IW =</span> <span class="st">"Inland wetland"</span>, <span class="at">CW =</span> <span class="st">"Coastal wetland"</span>, <span class="at">TW =</span> <span class="st">"Tibetan wetland"</span>)</span>
-<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a>region_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">NE =</span> <span class="st">"Northeast"</span>, <span class="at">NW =</span> <span class="st">"Northwest"</span>, <span class="at">NC =</span> <span class="st">"North China"</span>,</span>
-<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a>                   <span class="at">YML =</span> <span class="st">"Yangtze middle-lower"</span>, <span class="at">SC =</span> <span class="st">"Southern coast"</span>,</span>
-<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a>                   <span class="at">QTP =</span> <span class="st">"Qinghai-Tibet Plateau"</span>)</span>
-<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)</span>
-<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>GroupDisplay <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_labels[metadata<span class="sc">$</span>Group], <span class="at">levels =</span> group_labels)</span>
-<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Region <span class="ot">&lt;-</span> <span class="fu">unname</span>(region_labels[metadata<span class="sc">$</span>Type])</span>
-<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a>sample_order <span class="ot">&lt;-</span> metadata<span class="sc">$</span>SampleID[<span class="fu">order</span>(</span>
-<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a>  metadata<span class="sc">$</span>GroupDisplay, metadata<span class="sc">$</span>Region,</span>
-<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.integer</span>(<span class="fu">sub</span>(<span class="st">"^S"</span>, <span class="st">""</span>, metadata<span class="sc">$</span>SampleID))</span>
-<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a>)]</span>
-<span id="cb22-129"><a href="#cb22-129" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(metadata<span class="sc">$</span>GroupDisplay)</span>
-<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">9</span>, <span class="at">base_family =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
-<span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a>                  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a>                  <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)))</span>
-<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(counts)</span>
+<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>], <span class="dv">3</span>)</span>
+<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy[, <span class="fu">c</span>(<span class="st">"Phylum"</span>, <span class="st">"Genus"</span>)], <span class="dv">3</span>)</span>
+<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata[, <span class="fu">c</span>(<span class="st">"Group"</span>, <span class="st">"Type"</span>)], <span class="dv">3</span>)</span>
+<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a>读入后应得到 **13,628 个 OTU × 90 个样本**。样本信息中的 <span class="in">`IW`</span>、<span class="in">`CW`</span>、<span class="in">`TW`</span> 分别表示内陆、滨海和青藏高原湿地，各有 30 个样本。接下来把图内组名改为英文，并固定样本顺序：</span>
+<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-sample-order</span></span>
+<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a>group_codes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"IW"</span>, <span class="st">"CW"</span>, <span class="st">"TW"</span>)</span>
+<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a>group_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">IW =</span> <span class="st">"Inland wetland"</span>, <span class="at">CW =</span> <span class="st">"Coastal wetland"</span>, <span class="at">TW =</span> <span class="st">"Tibetan wetland"</span>)</span>
+<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a>region_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">NE =</span> <span class="st">"Northeast"</span>, <span class="at">NW =</span> <span class="st">"Northwest"</span>, <span class="at">NC =</span> <span class="st">"North China"</span>,</span>
+<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a>                   <span class="at">YML =</span> <span class="st">"Yangtze middle-lower"</span>, <span class="at">SC =</span> <span class="st">"Southern coast"</span>,</span>
+<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a>                   <span class="at">QTP =</span> <span class="st">"Qinghai-Tibet Plateau"</span>)</span>
+<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)</span>
+<span id="cb22-129"><a href="#cb22-129" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>GroupDisplay <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_labels[metadata<span class="sc">$</span>Group], <span class="at">levels =</span> group_labels)</span>
+<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Region <span class="ot">&lt;-</span> <span class="fu">unname</span>(region_labels[metadata<span class="sc">$</span>Type])</span>
+<span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a>sample_order <span class="ot">&lt;-</span> metadata<span class="sc">$</span>SampleID[<span class="fu">order</span>(</span>
+<span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a>  metadata<span class="sc">$</span>GroupDisplay, metadata<span class="sc">$</span>Region,</span>
+<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.integer</span>(<span class="fu">sub</span>(<span class="st">"^S"</span>, <span class="st">""</span>, metadata<span class="sc">$</span>SampleID))</span>
+<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(metadata<span class="sc">$</span>GroupDisplay)</span>
 <span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a><span class="fu">## 先用堆叠图看清每个样本 {#sec-code}</span></span>
-<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a>门水平适合先交代这组数据的整体结构。把同一门的 OTU counts 相加，再除以各自样本的总 counts，便得到每个样本中各门的相对丰度。分母包含未注释的 reads。</span>
-<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a>先去掉 <span class="in">`p__`</span>、<span class="in">`g__`</span> 这样的分类层级前缀，把未分类标签单独归入 <span class="in">`Unknown`</span>，再把同一类群的 counts 相加：</span>
+<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_bw</span>(<span class="at">base_size =</span> <span class="dv">9</span>, <span class="at">base_family =</span> <span class="st">"sans"</span>) <span class="sc">+</span></span>
+<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a>            <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a>                  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a>                  <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)))</span>
+<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-aggregate-rank</span></span>
-<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a>clean_taxon <span class="ot">&lt;-</span> <span class="cf">function</span>(x, rank) {</span>
-<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"^[A-Za-z]__"</span>, <span class="st">""</span>, <span class="fu">trimws</span>(<span class="fu">as.character</span>(x)))</span>
-<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a>  missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(x) <span class="sc">|</span> x <span class="sc">==</span> <span class="st">""</span> <span class="sc">|</span> <span class="fu">tolower</span>(x) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"unassigned"</span>, <span class="st">"unclassified"</span>, <span class="st">"unknown"</span>, <span class="st">"na"</span>, <span class="st">"nan"</span>)</span>
-<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a>  x[missing] <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Unknown"</span>, <span class="fu">tolower</span>(rank))</span>
-<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a>  x</span>
-<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a>aggregate_rank <span class="ot">&lt;-</span> <span class="cf">function</span>(counts, taxonomy, rank) {</span>
-<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">rowsum</span>(counts, <span class="fu">clean_taxon</span>(taxonomy[[rank]], rank), <span class="at">reorder =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a>  unknown <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Unknown"</span>, <span class="fu">tolower</span>(rank))</span>
-<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>unknown <span class="sc">%in%</span> <span class="fu">rownames</span>(out)) {</span>
-<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(out, <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fu">ncol</span>(out), <span class="at">dimnames =</span> <span class="fu">list</span>(unknown, <span class="fu">colnames</span>(out))))</span>
-<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a>  out[<span class="fu">order</span>(<span class="fu">rownames</span>(out)), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a>sample_depths <span class="ot">&lt;-</span> <span class="fu">colSums</span>(counts)</span>
-<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a>phylum_counts <span class="ot">&lt;-</span> <span class="fu">aggregate_rank</span>(counts, taxonomy, <span class="st">"Phylum"</span>)</span>
-<span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a>phylum_rel <span class="ot">&lt;-</span> <span class="fu">sweep</span>(phylum_counts, <span class="dv">2</span>, sample_depths, <span class="st">"/"</span>)</span>
-<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">colSums</span>(phylum_rel) <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">&lt;</span> <span class="fl">1e-12</span>)</span>
-<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>在所有样本上按平均相对丰度选出同一份 Top 10；其余已知门合为 <span class="in">`Other known phyla`</span>，未注释部分单列。再把矩阵转成长表，每行对应一个“样本 × 类群”：</span>
-<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-phylum-display</span></span>
-<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a>known_phyla <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">rownames</span>(phylum_rel), <span class="st">"Unknown phylum"</span>)</span>
-<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a>known_order <span class="ot">&lt;-</span> known_phyla[<span class="fu">order</span>(<span class="fu">rowMeans</span>(phylum_rel)[known_phyla], <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
-<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a>top10_phyla <span class="ot">&lt;-</span> <span class="fu">head</span>(known_order, <span class="dv">10</span>)</span>
-<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a>display_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(top10_phyla, <span class="st">"Other known phyla"</span>, <span class="st">"Unknown phylum"</span>)</span>
-<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a>display_group <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">rownames</span>(phylum_rel) <span class="sc">%in%</span> top10_phyla, <span class="fu">rownames</span>(phylum_rel),</span>
-<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">ifelse</span>(<span class="fu">rownames</span>(phylum_rel) <span class="sc">==</span> <span class="st">"Unknown phylum"</span>,</span>
-<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Unknown phylum"</span>, <span class="st">"Other known phyla"</span>))</span>
-<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a>phylum_display <span class="ot">&lt;-</span> <span class="fu">rowsum</span>(phylum_rel, display_group, <span class="at">reorder =</span> <span class="cn">FALSE</span>)[display_labels, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a>matrix_to_long <span class="ot">&lt;-</span> <span class="cf">function</span>(x, value_name) {</span>
-<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Taxon =</span> <span class="fu">rep</span>(<span class="fu">rownames</span>(x), <span class="fu">ncol</span>(x)),</span>
-<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a>                    <span class="at">SampleID =</span> <span class="fu">rep</span>(<span class="fu">colnames</span>(x), <span class="at">each =</span> <span class="fu">nrow</span>(x)), <span class="at">Value =</span> <span class="fu">as.vector</span>(x))</span>
-<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(out)[<span class="dv">3</span>] <span class="ot">&lt;-</span> value_name</span>
-<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a>  out</span>
-<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a>stack_data <span class="ot">&lt;-</span> <span class="fu">matrix_to_long</span>(phylum_display, <span class="st">"RelativeAbundance"</span>)</span>
-<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a>stack_data<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">factor</span>(stack_data<span class="sc">$</span>SampleID, <span class="at">levels =</span> sample_order)</span>
-<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a>stack_data<span class="sc">$</span>Taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(stack_data<span class="sc">$</span>Taxon, <span class="at">levels =</span> <span class="fu">rev</span>(display_labels))</span>
-<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a>stack_data<span class="sc">$</span>Group <span class="ot">&lt;-</span> metadata[<span class="fu">as.character</span>(stack_data<span class="sc">$</span>SampleID), <span class="st">"GroupDisplay"</span>]</span>
-<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a>taxon_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Proteobacteria =</span> <span class="st">"#0072B2"</span>, <span class="at">Chloroflexi =</span> <span class="st">"#E69F00"</span>,</span>
-<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Bacteroidetes =</span> <span class="st">"#009E73"</span>, <span class="at">Acidobacteria =</span> <span class="st">"#D55E00"</span>,</span>
-<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Actinobacteria =</span> <span class="st">"#CC79A7"</span>, <span class="at">Firmicutes =</span> <span class="st">"#56B4E9"</span>,</span>
-<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Verrucomicrobia =</span> <span class="st">"#F0E442"</span>, <span class="at">Planctomycetes =</span> <span class="st">"#8C564B"</span>,</span>
-<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Gemmatimonadetes =</span> <span class="st">"#17BECF"</span>, <span class="at">Nitrospirae =</span> <span class="st">"#9467BD"</span>,</span>
-<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Other known phyla"</span> <span class="ot">=</span> <span class="st">"#B8B8B8"</span>, <span class="st">"Unknown phylum"</span> <span class="ot">=</span> <span class="st">"#2F2F2F"</span>)</span>
-<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-phylum-stacked</span></span>
-<span id="cb22-204"><a href="#cb22-204" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "每根柱代表一个湿地样本，颜色表示 Top 10 已知门、其余已知门 Other 和未注释部分 Unknown。每个样本总比例为 100%。"</span></span>
-<span id="cb22-205"><a href="#cb22-205" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 7.2</span></span>
-<span id="cb22-206"><a href="#cb22-206" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.4</span></span>
-<span id="cb22-207"><a href="#cb22-207" aria-hidden="true" tabindex="-1"></a>stack_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(stack_data, <span class="fu">aes</span>(SampleID, RelativeAbundance, <span class="at">fill =</span> Taxon)) <span class="sc">+</span></span>
-<span id="cb22-208"><a href="#cb22-208" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb22-209"><a href="#cb22-209" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Group, <span class="at">scales =</span> <span class="st">"free_x"</span>, <span class="at">space =</span> <span class="st">"free_x"</span>) <span class="sc">+</span></span>
-<span id="cb22-210"><a href="#cb22-210" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> taxon_palette, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb22-211"><a href="#cb22-211" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb22-212"><a href="#cb22-212" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Phylum composition across 90 wetland samples"</span>,</span>
-<span id="cb22-213"><a href="#cb22-213" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Samples ordered by wetland group and region"</span>, <span class="at">y =</span> <span class="st">"Relative abundance"</span>, <span class="at">fill =</span> <span class="st">"Phylum"</span>) <span class="sc">+</span></span>
-<span id="cb22-214"><a href="#cb22-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb22-215"><a href="#cb22-215" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
-<span id="cb22-216"><a href="#cb22-216" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.spacing.x =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"mm"</span>))</span>
-<span id="cb22-217"><a href="#cb22-217" aria-hidden="true" tabindex="-1"></a>stack_plot</span>
-<span id="cb22-218"><a href="#cb22-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-219"><a href="#cb22-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-220"><a href="#cb22-220" aria-hidden="true" tabindex="-1"></a>组均值由每个样本的比例等权平均得到。下面的函数只按组取均值，不合并测序 reads：</span>
-<span id="cb22-221"><a href="#cb22-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-224"><a href="#cb22-224" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-225"><a href="#cb22-225" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-phylum-means</span></span>
-<span id="cb22-226"><a href="#cb22-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb22-227"><a href="#cb22-227" aria-hidden="true" tabindex="-1"></a>group_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb22-228"><a href="#cb22-228" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(group_codes, <span class="cf">function</span>(g) <span class="fu">rowMeans</span>(x[, metadata<span class="sc">$</span>Group <span class="sc">==</span> g, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
-<span id="cb22-229"><a href="#cb22-229" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-230"><a href="#cb22-230" aria-hidden="true" tabindex="-1"></a>phylum_group_mean <span class="ot">&lt;-</span> <span class="fu">group_mean</span>(phylum_display)</span>
-<span id="cb22-231"><a href="#cb22-231" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> phylum_group_mean[<span class="fu">c</span>(<span class="st">"Proteobacteria"</span>, <span class="st">"Acidobacteria"</span>, <span class="st">"Bacteroidetes"</span>), ], <span class="dv">2</span>)</span>
-<span id="cb22-232"><a href="#cb22-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-233"><a href="#cb22-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-234"><a href="#cb22-234" aria-hidden="true" tabindex="-1"></a>先读优势类群，再读同组柱子之间的差别。Proteobacteria 在三组中都占较大比例，但滨海湿地的平均占比更高；Acidobacteria 在内陆湿地占比更高，Bacteroidetes 在青藏高原湿地占比更高。对应的样本平均值如下：</span>
-<span id="cb22-235"><a href="#cb22-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-236"><a href="#cb22-236" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 类群 <span class="pp">|</span> 内陆湿地 <span class="pp">|</span> 滨海湿地 <span class="pp">|</span> 青藏高原湿地 <span class="pp">|</span></span>
-<span id="cb22-237"><a href="#cb22-237" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---:|---:|---:|</span></span>
-<span id="cb22-238"><a href="#cb22-238" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Proteobacteria <span class="pp">|</span> 23.38% <span class="pp">|</span> 37.27% <span class="pp">|</span> 31.49% <span class="pp">|</span></span>
-<span id="cb22-239"><a href="#cb22-239" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Acidobacteria <span class="pp">|</span> 19.26% <span class="pp">|</span> 7.11% <span class="pp">|</span> 7.65% <span class="pp">|</span></span>
-<span id="cb22-240"><a href="#cb22-240" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Bacteroidetes <span class="pp">|</span> 6.52% <span class="pp">|</span> 10.07% <span class="pp">|</span> 18.36% <span class="pp">|</span></span>
+<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a><span class="fu">## 先用堆叠图看清每个样本 {#sec-code}</span></span>
+<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a>门水平适合先交代这组数据的整体结构。把同一门的 OTU counts 相加，再除以各自样本的总 counts，便得到每个样本中各门的相对丰度。分母包含未注释的 reads。</span>
+<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a>先去掉 <span class="in">`p__`</span>、<span class="in">`g__`</span> 这样的分类层级前缀，把未分类标签单独归入 <span class="in">`Unknown`</span>，再把同一类群的 counts 相加：</span>
+<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-aggregate-rank</span></span>
+<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a>clean_taxon <span class="ot">&lt;-</span> <span class="cf">function</span>(x, rank) {</span>
+<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"^[A-Za-z]__"</span>, <span class="st">""</span>, <span class="fu">trimws</span>(<span class="fu">as.character</span>(x)))</span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a>  missing <span class="ot">&lt;-</span> <span class="fu">is.na</span>(x) <span class="sc">|</span> x <span class="sc">==</span> <span class="st">""</span> <span class="sc">|</span> <span class="fu">tolower</span>(x) <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"unassigned"</span>, <span class="st">"unclassified"</span>, <span class="st">"unknown"</span>, <span class="st">"na"</span>, <span class="st">"nan"</span>)</span>
+<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a>  x[missing] <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Unknown"</span>, <span class="fu">tolower</span>(rank))</span>
+<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a>  x</span>
+<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a>aggregate_rank <span class="ot">&lt;-</span> <span class="cf">function</span>(counts, taxonomy, rank) {</span>
+<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">rowsum</span>(counts, <span class="fu">clean_taxon</span>(taxonomy[[rank]], rank), <span class="at">reorder =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a>  unknown <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Unknown"</span>, <span class="fu">tolower</span>(rank))</span>
+<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span>unknown <span class="sc">%in%</span> <span class="fu">rownames</span>(out)) {</span>
+<span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a>    out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(out, <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fu">ncol</span>(out), <span class="at">dimnames =</span> <span class="fu">list</span>(unknown, <span class="fu">colnames</span>(out))))</span>
+<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a>  out[<span class="fu">order</span>(<span class="fu">rownames</span>(out)), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a>sample_depths <span class="ot">&lt;-</span> <span class="fu">colSums</span>(counts)</span>
+<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a>phylum_counts <span class="ot">&lt;-</span> <span class="fu">aggregate_rank</span>(counts, taxonomy, <span class="st">"Phylum"</span>)</span>
+<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a>phylum_rel <span class="ot">&lt;-</span> <span class="fu">sweep</span>(phylum_counts, <span class="dv">2</span>, sample_depths, <span class="st">"/"</span>)</span>
+<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">max</span>(<span class="fu">abs</span>(<span class="fu">colSums</span>(phylum_rel) <span class="sc">-</span> <span class="dv">1</span>)) <span class="sc">&lt;</span> <span class="fl">1e-12</span>)</span>
+<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a>在所有样本上按平均相对丰度选出同一份 Top 10；其余已知门合为 <span class="in">`Other known phyla`</span>，未注释部分单列。再把矩阵转成长表，每行对应一个“样本 × 类群”：</span>
+<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-phylum-display</span></span>
+<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a>known_phyla <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">rownames</span>(phylum_rel), <span class="st">"Unknown phylum"</span>)</span>
+<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a>known_order <span class="ot">&lt;-</span> known_phyla[<span class="fu">order</span>(<span class="fu">rowMeans</span>(phylum_rel)[known_phyla], <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
+<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a>top10_phyla <span class="ot">&lt;-</span> <span class="fu">head</span>(known_order, <span class="dv">10</span>)</span>
+<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a>display_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(top10_phyla, <span class="st">"Other known phyla"</span>, <span class="st">"Unknown phylum"</span>)</span>
+<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a>display_group <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(<span class="fu">rownames</span>(phylum_rel) <span class="sc">%in%</span> top10_phyla, <span class="fu">rownames</span>(phylum_rel),</span>
+<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a>                        <span class="fu">ifelse</span>(<span class="fu">rownames</span>(phylum_rel) <span class="sc">==</span> <span class="st">"Unknown phylum"</span>,</span>
+<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a>                               <span class="st">"Unknown phylum"</span>, <span class="st">"Other known phyla"</span>))</span>
+<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a>phylum_display <span class="ot">&lt;-</span> <span class="fu">rowsum</span>(phylum_rel, display_group, <span class="at">reorder =</span> <span class="cn">FALSE</span>)[display_labels, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a>matrix_to_long <span class="ot">&lt;-</span> <span class="cf">function</span>(x, value_name) {</span>
+<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Taxon =</span> <span class="fu">rep</span>(<span class="fu">rownames</span>(x), <span class="fu">ncol</span>(x)),</span>
+<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a>                    <span class="at">SampleID =</span> <span class="fu">rep</span>(<span class="fu">colnames</span>(x), <span class="at">each =</span> <span class="fu">nrow</span>(x)), <span class="at">Value =</span> <span class="fu">as.vector</span>(x))</span>
+<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(out)[<span class="dv">3</span>] <span class="ot">&lt;-</span> value_name</span>
+<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a>stack_data <span class="ot">&lt;-</span> <span class="fu">matrix_to_long</span>(phylum_display, <span class="st">"RelativeAbundance"</span>)</span>
+<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a>stack_data<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">factor</span>(stack_data<span class="sc">$</span>SampleID, <span class="at">levels =</span> sample_order)</span>
+<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a>stack_data<span class="sc">$</span>Taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(stack_data<span class="sc">$</span>Taxon, <span class="at">levels =</span> <span class="fu">rev</span>(display_labels))</span>
+<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a>stack_data<span class="sc">$</span>Group <span class="ot">&lt;-</span> metadata[<span class="fu">as.character</span>(stack_data<span class="sc">$</span>SampleID), <span class="st">"GroupDisplay"</span>]</span>
+<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a>taxon_palette <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">Proteobacteria =</span> <span class="st">"#0072B2"</span>, <span class="at">Chloroflexi =</span> <span class="st">"#E69F00"</span>,</span>
+<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Bacteroidetes =</span> <span class="st">"#009E73"</span>, <span class="at">Acidobacteria =</span> <span class="st">"#D55E00"</span>,</span>
+<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Actinobacteria =</span> <span class="st">"#CC79A7"</span>, <span class="at">Firmicutes =</span> <span class="st">"#56B4E9"</span>,</span>
+<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Verrucomicrobia =</span> <span class="st">"#F0E442"</span>, <span class="at">Planctomycetes =</span> <span class="st">"#8C564B"</span>,</span>
+<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Gemmatimonadetes =</span> <span class="st">"#17BECF"</span>, <span class="at">Nitrospirae =</span> <span class="st">"#9467BD"</span>,</span>
+<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a>                    <span class="st">"Other known phyla"</span> <span class="ot">=</span> <span class="st">"#B8B8B8"</span>, <span class="st">"Unknown phylum"</span> <span class="ot">=</span> <span class="st">"#2F2F2F"</span>)</span>
+<span id="cb22-204"><a href="#cb22-204" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-205"><a href="#cb22-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-208"><a href="#cb22-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-209"><a href="#cb22-209" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-phylum-stacked</span></span>
+<span id="cb22-210"><a href="#cb22-210" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "每根柱代表一个湿地样本，颜色表示 Top 10 已知门、其余已知门 Other 和未注释部分 Unknown。每个样本总比例为 100%。"</span></span>
+<span id="cb22-211"><a href="#cb22-211" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 7.2</span></span>
+<span id="cb22-212"><a href="#cb22-212" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.4</span></span>
+<span id="cb22-213"><a href="#cb22-213" aria-hidden="true" tabindex="-1"></a>stack_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(stack_data, <span class="fu">aes</span>(SampleID, RelativeAbundance, <span class="at">fill =</span> Taxon)) <span class="sc">+</span></span>
+<span id="cb22-214"><a href="#cb22-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-215"><a href="#cb22-215" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Group, <span class="at">scales =</span> <span class="st">"free_x"</span>, <span class="at">space =</span> <span class="st">"free_x"</span>) <span class="sc">+</span></span>
+<span id="cb22-216"><a href="#cb22-216" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> taxon_palette, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb22-217"><a href="#cb22-217" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>(), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb22-218"><a href="#cb22-218" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Phylum composition across 90 wetland samples"</span>,</span>
+<span id="cb22-219"><a href="#cb22-219" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Samples ordered by wetland group and region"</span>, <span class="at">y =</span> <span class="st">"Relative abundance"</span>, <span class="at">fill =</span> <span class="st">"Phylum"</span>) <span class="sc">+</span></span>
+<span id="cb22-220"><a href="#cb22-220" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-221"><a href="#cb22-221" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"right"</span>,</span>
+<span id="cb22-222"><a href="#cb22-222" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.spacing.x =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"mm"</span>))</span>
+<span id="cb22-223"><a href="#cb22-223" aria-hidden="true" tabindex="-1"></a>stack_plot</span>
+<span id="cb22-224"><a href="#cb22-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-225"><a href="#cb22-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-226"><a href="#cb22-226" aria-hidden="true" tabindex="-1"></a>组均值由每个样本的比例等权平均得到。下面的函数只按组取均值，不合并测序 reads：</span>
+<span id="cb22-227"><a href="#cb22-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-230"><a href="#cb22-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-231"><a href="#cb22-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-phylum-means</span></span>
+<span id="cb22-232"><a href="#cb22-232" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb22-233"><a href="#cb22-233" aria-hidden="true" tabindex="-1"></a>group_mean <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb22-234"><a href="#cb22-234" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(group_codes, <span class="cf">function</span>(g) <span class="fu">rowMeans</span>(x[, metadata<span class="sc">$</span>Group <span class="sc">==</span> g, <span class="at">drop =</span> <span class="cn">FALSE</span>]))</span>
+<span id="cb22-235"><a href="#cb22-235" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-236"><a href="#cb22-236" aria-hidden="true" tabindex="-1"></a>phylum_group_mean <span class="ot">&lt;-</span> <span class="fu">group_mean</span>(phylum_display)</span>
+<span id="cb22-237"><a href="#cb22-237" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> phylum_group_mean[<span class="fu">c</span>(<span class="st">"Proteobacteria"</span>, <span class="st">"Acidobacteria"</span>, <span class="st">"Bacteroidetes"</span>), ], <span class="dv">2</span>)</span>
+<span id="cb22-238"><a href="#cb22-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-239"><a href="#cb22-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-240"><a href="#cb22-240" aria-hidden="true" tabindex="-1"></a>先读优势类群，再读同组柱子之间的差别。Proteobacteria 在三组中都占较大比例，但滨海湿地的平均占比更高；Acidobacteria 在内陆湿地占比更高，Bacteroidetes 在青藏高原湿地占比更高。对应的样本平均值如下：</span>
 <span id="cb22-241"><a href="#cb22-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a>这些均值帮助概括图形，但不能代替每个样本的柱子。即使属于同一类湿地，样本之间的比例也并不一致。若只画三根组均值柱，这部分信息就会消失。</span>
-<span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a><span class="fu">## 门、属和种，应该画到哪一级？ {#sec-theory}</span></span>
-<span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-246"><a href="#cb22-246" aria-hidden="true" tabindex="-1"></a>想从门继续细化到属之前，先看有多少 reads 能被注释到那个层级。</span>
+<span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 类群 <span class="pp">|</span> 内陆湿地 <span class="pp">|</span> 滨海湿地 <span class="pp">|</span> 青藏高原湿地 <span class="pp">|</span></span>
+<span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---:|---:|---:|</span></span>
+<span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Proteobacteria <span class="pp">|</span> 23.38% <span class="pp">|</span> 37.27% <span class="pp">|</span> 31.49% <span class="pp">|</span></span>
+<span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Acidobacteria <span class="pp">|</span> 19.26% <span class="pp">|</span> 7.11% <span class="pp">|</span> 7.65% <span class="pp">|</span></span>
+<span id="cb22-246"><a href="#cb22-246" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Bacteroidetes <span class="pp">|</span> 6.52% <span class="pp">|</span> 10.07% <span class="pp">|</span> 18.36% <span class="pp">|</span></span>
 <span id="cb22-247"><a href="#cb22-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-rank-coverage</span></span>
-<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a>rank_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kingdom"</span>, <span class="st">"Phylum"</span>, <span class="st">"Class"</span>, <span class="st">"Order"</span>, <span class="st">"Family"</span>, <span class="st">"Genus"</span>, <span class="st">"Species"</span>)</span>
-<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a>rank_matrices <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">lapply</span>(rank_names, <span class="cf">function</span>(rank) {</span>
-<span id="cb22-255"><a href="#cb22-255" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sweep</span>(<span class="fu">aggregate_rank</span>(counts, taxonomy, rank), <span class="dv">2</span>, sample_depths, <span class="st">"/"</span>)</span>
-<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a>}), rank_names)</span>
-<span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a>unknown_percent <span class="ot">&lt;-</span> <span class="fu">sapply</span>(rank_names, <span class="cf">function</span>(rank) {</span>
-<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(rank_matrices[[rank]][<span class="fu">paste</span>(<span class="st">"Unknown"</span>, <span class="fu">tolower</span>(rank)), ])</span>
-<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(unknown_percent[<span class="fu">c</span>(<span class="st">"Phylum"</span>, <span class="st">"Genus"</span>, <span class="st">"Species"</span>)], <span class="dv">2</span>)</span>
-<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a>top_n_sensitivity <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>), <span class="cf">function</span>(n) {</span>
-<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a>  coverage <span class="ot">&lt;-</span> <span class="fu">colSums</span>(phylum_rel[<span class="fu">head</span>(known_order, n), , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(coverage), <span class="at">Minimum =</span> <span class="fu">min</span>(coverage), <span class="at">Maximum =</span> <span class="fu">max</span>(coverage))</span>
+<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a>这些均值帮助概括图形，但不能代替每个样本的柱子。即使属于同一类湿地，样本之间的比例也并不一致。若只画三根组均值柱，这部分信息就会消失。</span>
+<span id="cb22-249"><a href="#cb22-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a><span class="fu">## 门、属和种，应该画到哪一级？ {#sec-theory}</span></span>
+<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a>想从门继续细化到属之前，先看有多少 reads 能被注释到那个层级。</span>
+<span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-rank-coverage</span></span>
+<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a>rank_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kingdom"</span>, <span class="st">"Phylum"</span>, <span class="st">"Class"</span>, <span class="st">"Order"</span>, <span class="st">"Family"</span>, <span class="st">"Genus"</span>, <span class="st">"Species"</span>)</span>
+<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a>rank_matrices <span class="ot">&lt;-</span> <span class="fu">setNames</span>(<span class="fu">lapply</span>(rank_names, <span class="cf">function</span>(rank) {</span>
+<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sweep</span>(<span class="fu">aggregate_rank</span>(counts, taxonomy, rank), <span class="dv">2</span>, sample_depths, <span class="st">"/"</span>)</span>
+<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a>}), rank_names)</span>
+<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a>unknown_percent <span class="ot">&lt;-</span> <span class="fu">sapply</span>(rank_names, <span class="cf">function</span>(rank) {</span>
+<span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span> <span class="sc">*</span> <span class="fu">mean</span>(rank_matrices[[rank]][<span class="fu">paste</span>(<span class="st">"Unknown"</span>, <span class="fu">tolower</span>(rank)), ])</span>
 <span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(top_n_sensitivity) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Top"</span>, <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>))</span>
-<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(top_n_sensitivity, <span class="dv">2</span>)</span>
-<span id="cb22-268"><a href="#cb22-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-269"><a href="#cb22-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a>这组数据的结果是：</span>
-<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-272"><a href="#cb22-272" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 分类层级 <span class="pp">|</span> 每个样本未注释比例的平均值 <span class="pp">|</span> 对作图的影响 <span class="pp">|</span></span>
-<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---:|---|</span></span>
-<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 门 <span class="pp">|</span> 0.35% <span class="pp">|</span> 可以较完整地展示整体组成 <span class="pp">|</span></span>
-<span id="cb22-275"><a href="#cb22-275" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 属 <span class="pp">|</span> 63.11% <span class="pp">|</span> 只能描述已知属的局部结构，需说明未注释比例 <span class="pp">|</span></span>
-<span id="cb22-276"><a href="#cb22-276" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 种 <span class="pp">|</span> 99.63% <span class="pp">|</span> 不适合用物种组成概括这组样本 <span class="pp">|</span></span>
+<span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(unknown_percent[<span class="fu">c</span>(<span class="st">"Phylum"</span>, <span class="st">"Genus"</span>, <span class="st">"Species"</span>)], <span class="dv">2</span>)</span>
+<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-268"><a href="#cb22-268" aria-hidden="true" tabindex="-1"></a>top_n_sensitivity <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>), <span class="cf">function</span>(n) {</span>
+<span id="cb22-269"><a href="#cb22-269" aria-hidden="true" tabindex="-1"></a>  coverage <span class="ot">&lt;-</span> <span class="fu">colSums</span>(phylum_rel[<span class="fu">head</span>(known_order, n), , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a>  <span class="dv">100</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(coverage), <span class="at">Minimum =</span> <span class="fu">min</span>(coverage), <span class="at">Maximum =</span> <span class="fu">max</span>(coverage))</span>
+<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb22-272"><a href="#cb22-272" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(top_n_sensitivity) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"Top"</span>, <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>))</span>
+<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(top_n_sensitivity, <span class="dv">2</span>)</span>
+<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-275"><a href="#cb22-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-276"><a href="#cb22-276" aria-hidden="true" tabindex="-1"></a>这组数据的结果是：</span>
 <span id="cb22-277"><a href="#cb22-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-278"><a href="#cb22-278" aria-hidden="true" tabindex="-1"></a>因此，这里用门水平做概览，再用属水平回答更具体的问题；并不把物种名更多当作分析更精细。</span>
-<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a>**显示多少个类群，也由覆盖率和可读性共同决定。** 门水平 Top 10 在各样本中平均覆盖 94.80% 的 reads，单样本为 86.52%–98.92%。若只画 Top 5，平均覆盖率降至 77.53%；增加到 Top 20 则为 98.48%，但图例更长。因此本例采用 Top 10，这不是所有数据都应使用的固定值。</span>
-<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a>图中的两个汇总类别要分开理解：</span>
+<span id="cb22-278"><a href="#cb22-278" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 分类层级 <span class="pp">|</span> 每个样本未注释比例的平均值 <span class="pp">|</span> 对作图的影响 <span class="pp">|</span></span>
+<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---:|---|</span></span>
+<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 门 <span class="pp">|</span> 0.35% <span class="pp">|</span> 可以较完整地展示整体组成 <span class="pp">|</span></span>
+<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 属 <span class="pp">|</span> 63.11% <span class="pp">|</span> 只能描述已知属的局部结构，需说明未注释比例 <span class="pp">|</span></span>
+<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 种 <span class="pp">|</span> 99.63% <span class="pp">|</span> 不适合用物种组成概括这组样本 <span class="pp">|</span></span>
 <span id="cb22-283"><a href="#cb22-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Other known phyla`</span> 是已经注释到门、但没有进入 Top 10 的类群。</span>
-<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Unknown phylum`</span> 是没有注释到门的 reads，不能解释成一个新的门。</span>
-<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-287"><a href="#cb22-287" aria-hidden="true" tabindex="-1"></a><span class="fu">### 删除未注释部分，会改变百分比的含义</span></span>
-<span id="cb22-288"><a href="#cb22-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a>属水平尤其容易出现这个问题。内陆湿地平均有 71.01% 的 reads 未注释到属。如果先删掉它们，再让剩下的属加起来等于 100%，同一个 *Candidatus Solibacter* 会得到两种不同的组均值：</span>
-<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-denominator</span></span>
-<span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a>genus_rel <span class="ot">&lt;-</span> rank_matrices[[<span class="st">"Genus"</span>]]</span>
-<span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a>unknown_genus <span class="ot">&lt;-</span> <span class="st">"Unknown genus"</span></span>
-<span id="cb22-298"><a href="#cb22-298" aria-hidden="true" tabindex="-1"></a>known_genera <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">rownames</span>(genus_rel), unknown_genus)</span>
-<span id="cb22-299"><a href="#cb22-299" aria-hidden="true" tabindex="-1"></a>genus_order <span class="ot">&lt;-</span> known_genera[<span class="fu">order</span>(<span class="fu">rowMeans</span>(genus_rel)[known_genera], <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
-<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a>top20_genera <span class="ot">&lt;-</span> <span class="fu">head</span>(genus_order, <span class="dv">20</span>)</span>
-<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a>top15_genera <span class="ot">&lt;-</span> <span class="fu">head</span>(genus_order, <span class="dv">15</span>)</span>
-<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> metadata<span class="sc">$</span>SampleID[metadata<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"IW"</span>]</span>
-<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a>known_fraction <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> genus_rel[unknown_genus, ids]</span>
-<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(known_fraction <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
-<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a>denominator_sensitivity <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">c</span>(</span>
-<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a>  <span class="at">AllReads =</span> <span class="fu">mean</span>(genus_rel[<span class="st">"Candidatus Solibacter"</span>, ids]),</span>
-<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a>  <span class="at">ClassifiedReads =</span> <span class="fu">mean</span>(genus_rel[<span class="st">"Candidatus Solibacter"</span>, ids] <span class="sc">/</span> known_fraction)</span>
-<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(denominator_sensitivity, <span class="dv">2</span>)</span>
-<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 每个样本计算比例时的分母 <span class="pp">|</span> 内陆湿地的平均相对丰度 <span class="pp">|</span></span>
-<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---:|</span></span>
-<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 全部 reads <span class="pp">|</span> 2.38% <span class="pp">|</span></span>
-<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 仅已注释到属的 reads <span class="pp">|</span> 9.66% <span class="pp">|</span></span>
-<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a>菌群没有因此发生变化，变化的是分母。若研究问题确实是“已知属内部如何分配”，第二种算法可以使用，但必须明确标为“已注释 reads 内的相对丰度”，并报告注释覆盖率。这里比较整体群落，后续属水平图仍以全部 reads 为分母。</span>
-<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a><span class="fu">## 比较组间组成：丰度和检出率分开看 {#sec-publication}</span></span>
-<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a>堆叠图看过整体后，若想比较一批已知属在三组中的分布，可以用气泡图压缩信息。不过，先要决定“组均值”怎样计算。</span>
+<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a>因此，这里用门水平做概览，再用属水平回答更具体的问题；并不把物种名更多当作分析更精细。</span>
+<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a>**显示多少个类群，也由覆盖率和可读性共同决定。** 门水平 Top 10 在各样本中平均覆盖 94.80% 的 reads，单样本为 86.52%–98.92%。若只画 Top 5，平均覆盖率降至 77.53%；增加到 Top 20 则为 98.48%，但图例更长。因此本例采用 Top 10，这不是所有数据都应使用的固定值。</span>
+<span id="cb22-287"><a href="#cb22-287" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-288"><a href="#cb22-288" aria-hidden="true" tabindex="-1"></a>图中的两个汇总类别要分开理解：</span>
+<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Other known phyla`</span> 是已经注释到门、但没有进入 Top 10 的类群。</span>
+<span id="cb22-291"><a href="#cb22-291" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`Unknown phylum`</span> 是没有注释到门的 reads，不能解释成一个新的门。</span>
+<span id="cb22-292"><a href="#cb22-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### 删除未注释部分，会改变百分比的含义</span></span>
+<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a>属水平尤其容易出现这个问题。内陆湿地平均有 71.01% 的 reads 未注释到属。如果先删掉它们，再让剩下的属加起来等于 100%，同一个 *Candidatus Solibacter* 会得到两种不同的组均值：</span>
+<span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-299"><a href="#cb22-299" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-denominator</span></span>
+<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a>genus_rel <span class="ot">&lt;-</span> rank_matrices[[<span class="st">"Genus"</span>]]</span>
+<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a>unknown_genus <span class="ot">&lt;-</span> <span class="st">"Unknown genus"</span></span>
+<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a>known_genera <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">rownames</span>(genus_rel), unknown_genus)</span>
+<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a>genus_order <span class="ot">&lt;-</span> known_genera[<span class="fu">order</span>(<span class="fu">rowMeans</span>(genus_rel)[known_genera], <span class="at">decreasing =</span> <span class="cn">TRUE</span>)]</span>
+<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a>top20_genera <span class="ot">&lt;-</span> <span class="fu">head</span>(genus_order, <span class="dv">20</span>)</span>
+<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a>top15_genera <span class="ot">&lt;-</span> <span class="fu">head</span>(genus_order, <span class="dv">15</span>)</span>
+<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> metadata<span class="sc">$</span>SampleID[metadata<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"IW"</span>]</span>
+<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a>known_fraction <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> genus_rel[unknown_genus, ids]</span>
+<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">all</span>(known_fraction <span class="sc">&gt;</span> <span class="dv">0</span>))</span>
+<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a>denominator_sensitivity <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> <span class="fu">c</span>(</span>
+<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a>  <span class="at">AllReads =</span> <span class="fu">mean</span>(genus_rel[<span class="st">"Candidatus Solibacter"</span>, ids]),</span>
+<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a>  <span class="at">ClassifiedReads =</span> <span class="fu">mean</span>(genus_rel[<span class="st">"Candidatus Solibacter"</span>, ids] <span class="sc">/</span> known_fraction)</span>
+<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(denominator_sensitivity, <span class="dv">2</span>)</span>
+<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 每个样本计算比例时的分母 <span class="pp">|</span> 内陆湿地的平均相对丰度 <span class="pp">|</span></span>
+<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---:|</span></span>
+<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 全部 reads <span class="pp">|</span> 2.38% <span class="pp">|</span></span>
+<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 仅已注释到属的 reads <span class="pp">|</span> 9.66% <span class="pp">|</span></span>
 <span id="cb22-322"><a href="#cb22-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a>**当目标是概括一个组中样本的平均组成时，先算每个样本的相对丰度，再对样本等权平均。** 不要先合并整组 counts：本例样本测序量相差三倍以上，先合并会让测序较深的样本权重更大。两种算法在门水平的单个组–类群比例上，最多相差 1.45 个百分点。</span>
+<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a>菌群没有因此发生变化，变化的是分母。若研究问题确实是“已知属内部如何分配”，第二种算法可以使用，但必须明确标为“已注释 reads 内的相对丰度”，并报告注释覆盖率。这里比较整体群落，后续属水平图仍以全部 reads 为分母。</span>
 <span id="cb22-324"><a href="#cb22-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-weighting</span></span>
-<span id="cb22-329"><a href="#cb22-329" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb22-330"><a href="#cb22-330" aria-hidden="true" tabindex="-1"></a>pooled_phylum <span class="ot">&lt;-</span> <span class="fu">sapply</span>(group_codes, <span class="cf">function</span>(g) {</span>
-<span id="cb22-331"><a href="#cb22-331" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> metadata<span class="sc">$</span>SampleID[metadata<span class="sc">$</span>Group <span class="sc">==</span> g]</span>
-<span id="cb22-332"><a href="#cb22-332" aria-hidden="true" tabindex="-1"></a>  weighted <span class="ot">&lt;-</span> <span class="fu">sweep</span>(phylum_display[, ids, <span class="at">drop =</span> <span class="cn">FALSE</span>], <span class="dv">2</span>, sample_depths[ids], <span class="st">"*"</span>)</span>
-<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowSums</span>(weighted) <span class="sc">/</span> <span class="fu">sum</span>(sample_depths[ids])</span>
-<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">max</span>(<span class="fu">abs</span>(phylum_group_mean <span class="sc">-</span> pooled_phylum)), <span class="dv">2</span>)</span>
-<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-338"><a href="#cb22-338" aria-hidden="true" tabindex="-1"></a>平均相对丰度回答“平均占多少”，检出率回答“多少样本中有检出”。这里把非零 count 视为检出；它是本次测序中的检出记录，不等于没有检出的样本中绝对不存在该类群。</span>
-<span id="cb22-339"><a href="#cb22-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-bubble-summary</span></span>
-<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a>shown_genera <span class="ot">&lt;-</span> <span class="fu">c</span>(top15_genera, unknown_genus)</span>
-<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a>genus_means <span class="ot">&lt;-</span> <span class="fu">group_mean</span>(genus_rel[shown_genera, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb22-346"><a href="#cb22-346" aria-hidden="true" tabindex="-1"></a>genus_prevalence <span class="ot">&lt;-</span> <span class="fu">group_mean</span>(genus_rel[shown_genera, , <span class="at">drop =</span> <span class="cn">FALSE</span>] <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb22-347"><a href="#cb22-347" aria-hidden="true" tabindex="-1"></a>bubble_data <span class="ot">&lt;-</span> <span class="fu">matrix_to_long</span>(genus_means, <span class="st">"MeanRelativeAbundance"</span>)</span>
-<span id="cb22-348"><a href="#cb22-348" aria-hidden="true" tabindex="-1"></a>bubble_data<span class="sc">$</span>MeanPercent <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> bubble_data<span class="sc">$</span>MeanRelativeAbundance</span>
-<span id="cb22-349"><a href="#cb22-349" aria-hidden="true" tabindex="-1"></a>bubble_data<span class="sc">$</span>Prevalence <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(genus_prevalence)</span>
-<span id="cb22-350"><a href="#cb22-350" aria-hidden="true" tabindex="-1"></a>bubble_data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_labels[bubble_data<span class="sc">$</span>SampleID], <span class="at">levels =</span> group_labels)</span>
-<span id="cb22-351"><a href="#cb22-351" aria-hidden="true" tabindex="-1"></a>bubble_data<span class="sc">$</span>Taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(bubble_data<span class="sc">$</span>Taxon, <span class="at">levels =</span> <span class="fu">rev</span>(shown_genera))</span>
-<span id="cb22-352"><a href="#cb22-352" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-357"><a href="#cb22-357" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-genus-bubble</span></span>
-<span id="cb22-358"><a href="#cb22-358" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "圆的面积表示平均相对丰度，颜色表示非零 count 的样本比例。展示 Top 15 已知属及 Unknown genus；分母始终包含全部 reads。"</span></span>
-<span id="cb22-359"><a href="#cb22-359" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 5.5</span></span>
-<span id="cb22-360"><a href="#cb22-360" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.65</span></span>
-<span id="cb22-361"><a href="#cb22-361" aria-hidden="true" tabindex="-1"></a>bubble_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(bubble_data, <span class="fu">aes</span>(Group, Taxon, <span class="at">size =</span> MeanPercent, <span class="at">colour =</span> Prevalence)) <span class="sc">+</span></span>
-<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
-<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">13</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">60</span>)) <span class="sc">+</span></span>
-<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">add =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.8</span>))) <span class="sc">+</span></span>
-<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_gradientn</span>(<span class="at">colours =</span> <span class="fu">c</span>(<span class="st">"#D9EAF7"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#003B5C"</span>),</span>
-<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a>                         <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
-<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Inland wetland"</span> <span class="ot">=</span> <span class="st">"Inland</span><span class="sc">\n</span><span class="st">wetland"</span>,</span>
-<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Coastal wetland"</span> <span class="ot">=</span> <span class="st">"Coastal</span><span class="sc">\n</span><span class="st">wetland"</span>,</span>
-<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Tibetan wetland"</span> <span class="ot">=</span> <span class="st">"Tibetan</span><span class="sc">\n</span><span class="st">wetland"</span>)) <span class="sc">+</span></span>
-<span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Genus abundance and prevalence"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
-<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"Mean abundance (%)"</span>, <span class="at">colour =</span> <span class="st">"Prevalence"</span>) <span class="sc">+</span></span>
-<span id="cb22-372"><a href="#cb22-372" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
-<span id="cb22-373"><a href="#cb22-373" aria-hidden="true" tabindex="-1"></a>bubble_plot</span>
-<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a>圆的面积表示平均丰度，颜色表示检出率。例如，*Candidatus Solibacter* 在内陆、滨海和青藏高原湿地的平均相对丰度分别为 2.38%、0.12% 和 0.31%，但三组的检出率都是 100%。这里的区别主要是占比，不是“某一组有、另一组没有”。</span>
-<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a>这张图里，多数优势属的检出率都很高，因此颜色提供的额外信息有限，阅读重点是圆的面积。若自己的数据中检出率几乎没有差异，也可以改用点图或条形图展示均值，并另加样本分布。</span>
-<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a><span class="in">`Unknown genus`</span> 的大圆汇总了许多未注释到属的 OTU，不是一个优势菌属。如果它使其他圆点太小，可另画已知属的局部图，并在图注保留未注释比例；不要为了让圆点变大而悄悄换掉分母。</span>
+<span id="cb22-325"><a href="#cb22-325" aria-hidden="true" tabindex="-1"></a><span class="fu">## 比较组间组成：丰度和检出率分开看 {#sec-publication}</span></span>
+<span id="cb22-326"><a href="#cb22-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a>堆叠图看过整体后，若想比较一批已知属在三组中的分布，可以用气泡图压缩信息。不过，先要决定“组均值”怎样计算。</span>
+<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-329"><a href="#cb22-329" aria-hidden="true" tabindex="-1"></a>**当目标是概括一个组中样本的平均组成时，先算每个样本的相对丰度，再对样本等权平均。** 不要先合并整组 counts：本例样本测序量相差三倍以上，先合并会让测序较深的样本权重更大。两种算法在门水平的单个组–类群比例上，最多相差 1.45 个百分点。</span>
+<span id="cb22-330"><a href="#cb22-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-weighting</span></span>
+<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a>pooled_phylum <span class="ot">&lt;-</span> <span class="fu">sapply</span>(group_codes, <span class="cf">function</span>(g) {</span>
+<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> metadata<span class="sc">$</span>SampleID[metadata<span class="sc">$</span>Group <span class="sc">==</span> g]</span>
+<span id="cb22-338"><a href="#cb22-338" aria-hidden="true" tabindex="-1"></a>  weighted <span class="ot">&lt;-</span> <span class="fu">sweep</span>(phylum_display[, ids, <span class="at">drop =</span> <span class="cn">FALSE</span>], <span class="dv">2</span>, sample_depths[ids], <span class="st">"*"</span>)</span>
+<span id="cb22-339"><a href="#cb22-339" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowSums</span>(weighted) <span class="sc">/</span> <span class="fu">sum</span>(sample_depths[ids])</span>
+<span id="cb22-340"><a href="#cb22-340" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb22-341"><a href="#cb22-341" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">max</span>(<span class="fu">abs</span>(phylum_group_mean <span class="sc">-</span> pooled_phylum)), <span class="dv">2</span>)</span>
+<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a>平均相对丰度回答“平均占多少”，检出率回答“多少样本中有检出”。这里把非零 count 视为检出；它是本次测序中的检出记录，不等于没有检出的样本中绝对不存在该类群。</span>
+<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-348"><a href="#cb22-348" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-349"><a href="#cb22-349" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-bubble-summary</span></span>
+<span id="cb22-350"><a href="#cb22-350" aria-hidden="true" tabindex="-1"></a>shown_genera <span class="ot">&lt;-</span> <span class="fu">c</span>(top15_genera, unknown_genus)</span>
+<span id="cb22-351"><a href="#cb22-351" aria-hidden="true" tabindex="-1"></a>genus_means <span class="ot">&lt;-</span> <span class="fu">group_mean</span>(genus_rel[shown_genera, , <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb22-352"><a href="#cb22-352" aria-hidden="true" tabindex="-1"></a>genus_prevalence <span class="ot">&lt;-</span> <span class="fu">group_mean</span>(genus_rel[shown_genera, , <span class="at">drop =</span> <span class="cn">FALSE</span>] <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a>bubble_data <span class="ot">&lt;-</span> <span class="fu">matrix_to_long</span>(genus_means, <span class="st">"MeanRelativeAbundance"</span>)</span>
+<span id="cb22-354"><a href="#cb22-354" aria-hidden="true" tabindex="-1"></a>bubble_data<span class="sc">$</span>MeanPercent <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> bubble_data<span class="sc">$</span>MeanRelativeAbundance</span>
+<span id="cb22-355"><a href="#cb22-355" aria-hidden="true" tabindex="-1"></a>bubble_data<span class="sc">$</span>Prevalence <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(genus_prevalence)</span>
+<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a>bubble_data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_labels[bubble_data<span class="sc">$</span>SampleID], <span class="at">levels =</span> group_labels)</span>
+<span id="cb22-357"><a href="#cb22-357" aria-hidden="true" tabindex="-1"></a>bubble_data<span class="sc">$</span>Taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(bubble_data<span class="sc">$</span>Taxon, <span class="at">levels =</span> <span class="fu">rev</span>(shown_genera))</span>
+<span id="cb22-358"><a href="#cb22-358" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-359"><a href="#cb22-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-genus-bubble</span></span>
+<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "圆的面积表示平均相对丰度，颜色表示非零 count 的样本比例。展示 Top 15 已知属及 Unknown genus；分母始终包含全部 reads。"</span></span>
+<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 5.5</span></span>
+<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.65</span></span>
+<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a>bubble_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(bubble_data, <span class="fu">aes</span>(Group, Taxon, <span class="at">size =</span> MeanPercent, <span class="at">colour =</span> Prevalence)) <span class="sc">+</span></span>
+<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.9</span>) <span class="sc">+</span></span>
+<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_size_area</span>(<span class="at">max_size =</span> <span class="dv">13</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">5</span>, <span class="dv">20</span>, <span class="dv">60</span>)) <span class="sc">+</span></span>
+<span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">add =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.8</span>))) <span class="sc">+</span></span>
+<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_gradientn</span>(<span class="at">colours =</span> <span class="fu">c</span>(<span class="st">"#D9EAF7"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#003B5C"</span>),</span>
+<span id="cb22-372"><a href="#cb22-372" aria-hidden="true" tabindex="-1"></a>                         <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_percent</span>()) <span class="sc">+</span></span>
+<span id="cb22-373"><a href="#cb22-373" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Inland wetland"</span> <span class="ot">=</span> <span class="st">"Inland</span><span class="sc">\n</span><span class="st">wetland"</span>,</span>
+<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Coastal wetland"</span> <span class="ot">=</span> <span class="st">"Coastal</span><span class="sc">\n</span><span class="st">wetland"</span>,</span>
+<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"Tibetan wetland"</span> <span class="ot">=</span> <span class="st">"Tibetan</span><span class="sc">\n</span><span class="st">wetland"</span>)) <span class="sc">+</span></span>
+<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Genus abundance and prevalence"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="st">"Mean abundance (%)"</span>, <span class="at">colour =</span> <span class="st">"Prevalence"</span>) <span class="sc">+</span></span>
+<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a>bubble_plot</span>
+<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a><span class="fu">## 组内是否一致，要回到样本级热图</span></span>
+<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a>圆的面积表示平均丰度，颜色表示检出率。例如，*Candidatus Solibacter* 在内陆、滨海和青藏高原湿地的平均相对丰度分别为 2.38%、0.12% 和 0.31%，但三组的检出率都是 100%。这里的区别主要是占比，不是“某一组有、另一组没有”。</span>
 <span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a>气泡图省去了样本维度，因此还不能回答“组均值是否代表大多数样本”。这个问题适合用热图继续看：每列一个样本，每行一个属，同组样本相邻排列。</span>
+<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a>这张图里，多数优势属的检出率都很高，因此颜色提供的额外信息有限，阅读重点是圆的面积。若自己的数据中检出率几乎没有差异，也可以改用点图或条形图展示均值，并另加样本分布。</span>
 <span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a>这里展示平均丰度最高的 20 个已知属。相对丰度经过 <span class="in">`log1p(相对丰度 × 10,000)`</span> 变换后用于着色，让低丰度部分更容易分辨。这个变换只影响显示；不把选中的 20 个属重新归一化到 100%。</span>
+<span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a><span class="in">`Unknown genus`</span> 的大圆汇总了许多未注释到属的 OTU，不是一个优势菌属。如果它使其他圆点太小，可另画已知属的局部图，并在图注保留未注释比例；不要为了让圆点变大而悄悄换掉分母。</span>
 <span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-genus-heatmap</span></span>
-<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "20 个优势已知属的样本级热图。行按变换后的丰度轮廓聚类，列按湿地类型、地区和样本编号排列；未展示的类群仍保留在分母中。"</span></span>
-<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 7.2</span></span>
-<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.8</span></span>
-<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a>heatmap_matrix <span class="ot">&lt;-</span> <span class="fu">log1p</span>(<span class="dv">10000</span> <span class="sc">*</span> genus_rel[top20_genera, sample_order, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
-<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a>row_order <span class="ot">&lt;-</span> <span class="fu">rownames</span>(heatmap_matrix)[<span class="fu">hclust</span>(<span class="fu">dist</span>(heatmap_matrix), <span class="at">method =</span> <span class="st">"complete"</span>)<span class="sc">$</span>order]</span>
-<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a>heatmap_data <span class="ot">&lt;-</span> <span class="fu">matrix_to_long</span>(heatmap_matrix, <span class="st">"Log1pAbundance"</span>)</span>
-<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a>heatmap_data<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">factor</span>(heatmap_data<span class="sc">$</span>SampleID, <span class="at">levels =</span> sample_order)</span>
-<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a>heatmap_data<span class="sc">$</span>Taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(heatmap_data<span class="sc">$</span>Taxon, <span class="at">levels =</span> <span class="fu">rev</span>(row_order))</span>
-<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a>heatmap_data<span class="sc">$</span>Group <span class="ot">&lt;-</span> metadata[<span class="fu">as.character</span>(heatmap_data<span class="sc">$</span>SampleID), <span class="st">"GroupDisplay"</span>]</span>
-<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a>heatmap_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(heatmap_data, <span class="fu">aes</span>(SampleID, Taxon, <span class="at">fill =</span> Log1pAbundance)) <span class="sc">+</span></span>
-<span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Group, <span class="at">scales =</span> <span class="st">"free_x"</span>, <span class="at">space =</span> <span class="st">"free_x"</span>) <span class="sc">+</span></span>
-<span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> <span class="fu">c</span>(<span class="st">"#F7FBFF"</span>, <span class="st">"#C6DBEF"</span>, <span class="st">"#6BAED6"</span>, <span class="st">"#2171B5"</span>, <span class="st">"#08306B"</span>)) <span class="sc">+</span></span>
-<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Genus composition varies within wetland groups"</span>,</span>
-<span id="cb22-406"><a href="#cb22-406" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Samples ordered by wetland group and region"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
-<span id="cb22-407"><a href="#cb22-407" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"log1p(relative</span><span class="sc">\n</span><span class="st">abundance x 10,000)"</span>) <span class="sc">+</span></span>
-<span id="cb22-408"><a href="#cb22-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb22-409"><a href="#cb22-409" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(), <span class="at">panel.spacing.x =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"mm"</span>))</span>
-<span id="cb22-410"><a href="#cb22-410" aria-hidden="true" tabindex="-1"></a>heatmap_plot</span>
-<span id="cb22-411"><a href="#cb22-411" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-412"><a href="#cb22-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-415"><a href="#cb22-415" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-416"><a href="#cb22-416" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-within-group-range</span></span>
-<span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> metadata<span class="sc">$</span>SampleID[metadata<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"TW"</span>]</span>
-<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(genus_rel[<span class="st">"Pedobacter"</span>, ids]),</span>
-<span id="cb22-420"><a href="#cb22-420" aria-hidden="true" tabindex="-1"></a>               <span class="at">Minimum =</span> <span class="fu">min</span>(genus_rel[<span class="st">"Pedobacter"</span>, ids]),</span>
-<span id="cb22-421"><a href="#cb22-421" aria-hidden="true" tabindex="-1"></a>               <span class="at">Maximum =</span> <span class="fu">max</span>(genus_rel[<span class="st">"Pedobacter"</span>, ids])), <span class="dv">2</span>)</span>
-<span id="cb22-422"><a href="#cb22-422" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-423"><a href="#cb22-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-424"><a href="#cb22-424" aria-hidden="true" tabindex="-1"></a>例如，*Pedobacter* 在青藏高原湿地的平均相对丰度为 1.66%，但单个样本从 0.09% 到 7.96% 不等。气泡图只能给出一个平均圆点，热图中的深浅变化则提醒我们：同组样本并不是同样高。</span>
-<span id="cb22-425"><a href="#cb22-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-426"><a href="#cb22-426" aria-hidden="true" tabindex="-1"></a>这里的列按湿地类型、地区和样本编号排列，便于直接比较已知分组；行按变换后的丰度轮廓做欧氏距离、complete-linkage 聚类，让分布相似的属相邻。聚类样本列也可以用于探索，但不能把聚类后形成的色块再当作独立证据证明组间差异。</span>
-<span id="cb22-427"><a href="#cb22-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-428"><a href="#cb22-428" aria-hidden="true" tabindex="-1"></a>颜色越深代表变换后的数值越大，不是线性倍数。若目标是精确比较某一个属的丰度，应再画这个属的样本散点图或箱线图，而不是从热图色阶估算倍数。</span>
+<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a><span class="fu">## 组内是否一致，要回到样本级热图</span></span>
+<span id="cb22-389"><a href="#cb22-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a>气泡图省去了样本维度，因此还不能回答“组均值是否代表大多数样本”。这个问题适合用热图继续看：每列一个样本，每行一个属，同组样本相邻排列。</span>
+<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a>这里展示平均丰度最高的 20 个已知属。相对丰度经过 <span class="in">`log1p(相对丰度 × 10,000)`</span> 变换后用于着色，让低丰度部分更容易分辨。这个变换只影响显示；不把选中的 20 个属重新归一化到 100%。</span>
+<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-genus-heatmap</span></span>
+<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "20 个优势已知属的样本级热图。行按变换后的丰度轮廓聚类，列按湿地类型、地区和样本编号排列；未展示的类群仍保留在分母中。"</span></span>
+<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 7.2</span></span>
+<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.8</span></span>
+<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a>heatmap_matrix <span class="ot">&lt;-</span> <span class="fu">log1p</span>(<span class="dv">10000</span> <span class="sc">*</span> genus_rel[top20_genera, sample_order, <span class="at">drop =</span> <span class="cn">FALSE</span>])</span>
+<span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a>row_order <span class="ot">&lt;-</span> <span class="fu">rownames</span>(heatmap_matrix)[<span class="fu">hclust</span>(<span class="fu">dist</span>(heatmap_matrix), <span class="at">method =</span> <span class="st">"complete"</span>)<span class="sc">$</span>order]</span>
+<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a>heatmap_data <span class="ot">&lt;-</span> <span class="fu">matrix_to_long</span>(heatmap_matrix, <span class="st">"Log1pAbundance"</span>)</span>
+<span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a>heatmap_data<span class="sc">$</span>SampleID <span class="ot">&lt;-</span> <span class="fu">factor</span>(heatmap_data<span class="sc">$</span>SampleID, <span class="at">levels =</span> sample_order)</span>
+<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a>heatmap_data<span class="sc">$</span>Taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(heatmap_data<span class="sc">$</span>Taxon, <span class="at">levels =</span> <span class="fu">rev</span>(row_order))</span>
+<span id="cb22-406"><a href="#cb22-406" aria-hidden="true" tabindex="-1"></a>heatmap_data<span class="sc">$</span>Group <span class="ot">&lt;-</span> metadata[<span class="fu">as.character</span>(heatmap_data<span class="sc">$</span>SampleID), <span class="st">"GroupDisplay"</span>]</span>
+<span id="cb22-407"><a href="#cb22-407" aria-hidden="true" tabindex="-1"></a>heatmap_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(heatmap_data, <span class="fu">aes</span>(SampleID, Taxon, <span class="at">fill =</span> Log1pAbundance)) <span class="sc">+</span></span>
+<span id="cb22-408"><a href="#cb22-408" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb22-409"><a href="#cb22-409" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Group, <span class="at">scales =</span> <span class="st">"free_x"</span>, <span class="at">space =</span> <span class="st">"free_x"</span>) <span class="sc">+</span></span>
+<span id="cb22-410"><a href="#cb22-410" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradientn</span>(<span class="at">colours =</span> <span class="fu">c</span>(<span class="st">"#F7FBFF"</span>, <span class="st">"#C6DBEF"</span>, <span class="st">"#6BAED6"</span>, <span class="st">"#2171B5"</span>, <span class="st">"#08306B"</span>)) <span class="sc">+</span></span>
+<span id="cb22-411"><a href="#cb22-411" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Genus composition varies within wetland groups"</span>,</span>
+<span id="cb22-412"><a href="#cb22-412" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Samples ordered by wetland group and region"</span>, <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb22-413"><a href="#cb22-413" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"log1p(relative</span><span class="sc">\n</span><span class="st">abundance x 10,000)"</span>) <span class="sc">+</span></span>
+<span id="cb22-414"><a href="#cb22-414" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb22-415"><a href="#cb22-415" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(), <span class="at">panel.spacing.x =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">1.5</span>, <span class="st">"mm"</span>))</span>
+<span id="cb22-416"><a href="#cb22-416" aria-hidden="true" tabindex="-1"></a>heatmap_plot</span>
+<span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-421"><a href="#cb22-421" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-422"><a href="#cb22-422" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-within-group-range</span></span>
+<span id="cb22-423"><a href="#cb22-423" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb22-424"><a href="#cb22-424" aria-hidden="true" tabindex="-1"></a>ids <span class="ot">&lt;-</span> metadata<span class="sc">$</span>SampleID[metadata<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">"TW"</span>]</span>
+<span id="cb22-425"><a href="#cb22-425" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="dv">100</span> <span class="sc">*</span> <span class="fu">c</span>(<span class="at">Mean =</span> <span class="fu">mean</span>(genus_rel[<span class="st">"Pedobacter"</span>, ids]),</span>
+<span id="cb22-426"><a href="#cb22-426" aria-hidden="true" tabindex="-1"></a>               <span class="at">Minimum =</span> <span class="fu">min</span>(genus_rel[<span class="st">"Pedobacter"</span>, ids]),</span>
+<span id="cb22-427"><a href="#cb22-427" aria-hidden="true" tabindex="-1"></a>               <span class="at">Maximum =</span> <span class="fu">max</span>(genus_rel[<span class="st">"Pedobacter"</span>, ids])), <span class="dv">2</span>)</span>
+<span id="cb22-428"><a href="#cb22-428" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-429"><a href="#cb22-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a><span class="fu">## 冲积图适合做组成摘要，不表示菌群流动</span></span>
+<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a>例如，*Pedobacter* 在青藏高原湿地的平均相对丰度为 1.66%，但单个样本从 0.09% 到 7.96% 不等。气泡图只能给出一个平均圆点，热图中的深浅变化则提醒我们：同组样本并不是同样高。</span>
 <span id="cb22-431"><a href="#cb22-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a>如果需要在一张图里连接“湿地类型”和“主要门”，可以把前面的组均值画成冲积图。这里每个湿地块的总高度相同，连带的宽度表示相应门在该组的平均相对丰度。</span>
+<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a>这里的列按湿地类型、地区和样本编号排列，便于直接比较已知分组；行按变换后的丰度轮廓做欧氏距离、complete-linkage 聚类，让分布相似的属相邻。聚类样本列也可以用于探索，但不能把聚类后形成的色块再当作独立证据证明组间差异。</span>
 <span id="cb22-433"><a href="#cb22-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-436"><a href="#cb22-436" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-437"><a href="#cb22-437" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-group-phylum-alluvial</span></span>
-<span id="cb22-438"><a href="#cb22-438" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "湿地类型与优势门之间的组成分配。每组总高度为 1，连带宽度表示平均相对丰度；图中不包含迁移或时间信息。"</span></span>
-<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 7.2</span></span>
-<span id="cb22-440"><a href="#cb22-440" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.4</span></span>
-<span id="cb22-441"><a href="#cb22-441" aria-hidden="true" tabindex="-1"></a>flow_data <span class="ot">&lt;-</span> <span class="fu">matrix_to_long</span>(phylum_group_mean, <span class="st">"MeanRelativeAbundance"</span>)</span>
-<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a>flow_data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_labels[flow_data<span class="sc">$</span>SampleID], <span class="at">levels =</span> group_labels)</span>
-<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a>flow_data<span class="sc">$</span>Taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(flow_data<span class="sc">$</span>Taxon, <span class="at">levels =</span> display_labels)</span>
-<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a>alluvial_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(flow_data, <span class="fu">aes</span>(<span class="at">y =</span> MeanRelativeAbundance, <span class="at">axis1 =</span> Group, <span class="at">axis2 =</span> Taxon)) <span class="sc">+</span></span>
-<span id="cb22-445"><a href="#cb22-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_alluvium</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Taxon), <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb22-446"><a href="#cb22-446" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">after_stat</span>(stratum)), <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">stat =</span> <span class="st">"stratum"</span>,</span>
-<span id="cb22-448"><a href="#cb22-448" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">after_stat</span>(<span class="fu">ifelse</span>(x <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">sub</span>(<span class="st">" wetland"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">wetland"</span>, stratum), <span class="st">""</span>))),</span>
-<span id="cb22-449"><a href="#cb22-449" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">0.06</span>) <span class="sc">+</span></span>
-<span id="cb22-450"><a href="#cb22-450" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Wetland group"</span>, <span class="st">"Phylum"</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.05</span>)) <span class="sc">+</span></span>
-<span id="cb22-451"><a href="#cb22-451" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(taxon_palette, <span class="fu">setNames</span>(<span class="fu">rep</span>(<span class="st">"grey85"</span>, <span class="dv">3</span>), group_labels)),</span>
-<span id="cb22-452"><a href="#cb22-452" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> display_labels, <span class="at">name =</span> <span class="st">"Phylum"</span>) <span class="sc">+</span></span>
-<span id="cb22-453"><a href="#cb22-453" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Wetland groups share dominant phyla"</span>,</span>
-<span id="cb22-454"><a href="#cb22-454" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Group means; ribbons do not imply migration."</span>) <span class="sc">+</span></span>
-<span id="cb22-455"><a href="#cb22-455" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>(<span class="at">base_family =</span> <span class="st">"sans"</span>, <span class="at">base_size =</span> <span class="dv">9</span>) <span class="sc">+</span></span>
-<span id="cb22-456"><a href="#cb22-456" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>, <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb22-457"><a href="#cb22-457" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(), <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">5</span>))</span>
-<span id="cb22-458"><a href="#cb22-458" aria-hidden="true" tabindex="-1"></a>alluvial_plot</span>
-<span id="cb22-459"><a href="#cb22-459" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-460"><a href="#cb22-460" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-461"><a href="#cb22-461" aria-hidden="true" tabindex="-1"></a>这张图重述了堆叠图中的优势组成：不同湿地类型分配给 Proteobacteria、Acidobacteria 和 Bacteroidetes 的比例不同。右端每个门的总高度是三个组均值之和，不是全部样本中的总细胞数。</span>
-<span id="cb22-462"><a href="#cb22-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-463"><a href="#cb22-463" aria-hidden="true" tabindex="-1"></a>连带很容易让人联想到迁移或演替，但这里没有追踪菌群从一个湿地进入另一个湿地，也没有时间序列。它只是组成分配的视觉摘要。如果堆叠图已经把问题讲清楚，就不必再加一张冲积图。</span>
-<span id="cb22-464"><a href="#cb22-464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-465"><a href="#cb22-465" aria-hidden="true" tabindex="-1"></a><span class="fu">## 按论文尺寸保存四张图</span></span>
+<span id="cb22-434"><a href="#cb22-434" aria-hidden="true" tabindex="-1"></a>颜色越深代表变换后的数值越大，不是线性倍数。若目标是精确比较某一个属的丰度，应再画这个属的样本散点图或箱线图，而不是从热图色阶估算倍数。</span>
+<span id="cb22-435"><a href="#cb22-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-436"><a href="#cb22-436" aria-hidden="true" tabindex="-1"></a><span class="fu">## 冲积图适合做组成摘要，不表示菌群流动</span></span>
+<span id="cb22-437"><a href="#cb22-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-438"><a href="#cb22-438" aria-hidden="true" tabindex="-1"></a>如果需要在一张图里连接“湿地类型”和“主要门”，可以把前面的组均值画成冲积图。这里每个湿地块的总高度相同，连带的宽度表示相应门在该组的平均相对丰度。</span>
+<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-group-phylum-alluvial</span></span>
+<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "湿地类型与优势门之间的组成分配。每组总高度为 1，连带宽度表示平均相对丰度；图中不包含迁移或时间信息。"</span></span>
+<span id="cb22-445"><a href="#cb22-445" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 7.2</span></span>
+<span id="cb22-446"><a href="#cb22-446" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 4.4</span></span>
+<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a>flow_data <span class="ot">&lt;-</span> <span class="fu">matrix_to_long</span>(phylum_group_mean, <span class="st">"MeanRelativeAbundance"</span>)</span>
+<span id="cb22-448"><a href="#cb22-448" aria-hidden="true" tabindex="-1"></a>flow_data<span class="sc">$</span>Group <span class="ot">&lt;-</span> <span class="fu">factor</span>(group_labels[flow_data<span class="sc">$</span>SampleID], <span class="at">levels =</span> group_labels)</span>
+<span id="cb22-449"><a href="#cb22-449" aria-hidden="true" tabindex="-1"></a>flow_data<span class="sc">$</span>Taxon <span class="ot">&lt;-</span> <span class="fu">factor</span>(flow_data<span class="sc">$</span>Taxon, <span class="at">levels =</span> display_labels)</span>
+<span id="cb22-450"><a href="#cb22-450" aria-hidden="true" tabindex="-1"></a>alluvial_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(flow_data, <span class="fu">aes</span>(<span class="at">y =</span> MeanRelativeAbundance, <span class="at">axis1 =</span> Group, <span class="at">axis2 =</span> Taxon)) <span class="sc">+</span></span>
+<span id="cb22-451"><a href="#cb22-451" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_alluvium</span>(<span class="fu">aes</span>(<span class="at">fill =</span> Taxon), <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb22-452"><a href="#cb22-452" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_stratum</span>(<span class="fu">aes</span>(<span class="at">fill =</span> <span class="fu">after_stat</span>(stratum)), <span class="at">width =</span> <span class="fl">0.08</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb22-453"><a href="#cb22-453" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">stat =</span> <span class="st">"stratum"</span>,</span>
+<span id="cb22-454"><a href="#cb22-454" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">after_stat</span>(<span class="fu">ifelse</span>(x <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">sub</span>(<span class="st">" wetland"</span>, <span class="st">"</span><span class="sc">\n</span><span class="st">wetland"</span>, stratum), <span class="st">""</span>))),</span>
+<span id="cb22-455"><a href="#cb22-455" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>, <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">0.06</span>) <span class="sc">+</span></span>
+<span id="cb22-456"><a href="#cb22-456" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"Wetland group"</span>, <span class="st">"Phylum"</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="fl">0.35</span>, <span class="fl">0.05</span>)) <span class="sc">+</span></span>
+<span id="cb22-457"><a href="#cb22-457" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(taxon_palette, <span class="fu">setNames</span>(<span class="fu">rep</span>(<span class="st">"grey85"</span>, <span class="dv">3</span>), group_labels)),</span>
+<span id="cb22-458"><a href="#cb22-458" aria-hidden="true" tabindex="-1"></a>                    <span class="at">breaks =</span> display_labels, <span class="at">name =</span> <span class="st">"Phylum"</span>) <span class="sc">+</span></span>
+<span id="cb22-459"><a href="#cb22-459" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Wetland groups share dominant phyla"</span>,</span>
+<span id="cb22-460"><a href="#cb22-460" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Group means; ribbons do not imply migration."</span>) <span class="sc">+</span></span>
+<span id="cb22-461"><a href="#cb22-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>(<span class="at">base_family =</span> <span class="st">"sans"</span>, <span class="at">base_size =</span> <span class="dv">9</span>) <span class="sc">+</span></span>
+<span id="cb22-462"><a href="#cb22-462" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"right"</span>, <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb22-463"><a href="#cb22-463" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(), <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb22-464"><a href="#cb22-464" aria-hidden="true" tabindex="-1"></a>alluvial_plot</span>
+<span id="cb22-465"><a href="#cb22-465" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-466"><a href="#cb22-466" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-467"><a href="#cb22-467" aria-hidden="true" tabindex="-1"></a>屏幕中的绘图窗口会随拖动而改变尺寸。导出时明确指定宽、高：气泡图宽 140 mm，其余图宽 183 mm。下面同时保存 PDF、SVG 矢量文件和 600 ppi 的 PNG、TIFF：</span>
+<span id="cb22-467"><a href="#cb22-467" aria-hidden="true" tabindex="-1"></a>这张图重述了堆叠图中的优势组成：不同湿地类型分配给 Proteobacteria、Acidobacteria 和 Bacteroidetes 的比例不同。右端每个门的总高度是三个组均值之和，不是全部样本中的总细胞数。</span>
 <span id="cb22-468"><a href="#cb22-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-471"><a href="#cb22-471" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-472"><a href="#cb22-472" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-export-figures</span></span>
-<span id="cb22-473"><a href="#cb22-473" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"26-phylum-stacked"</span> <span class="ot">=</span> stack_plot, <span class="st">"26-genus-bubble"</span> <span class="ot">=</span> bubble_plot,</span>
-<span id="cb22-474"><a href="#cb22-474" aria-hidden="true" tabindex="-1"></a>              <span class="st">"26-genus-heatmap"</span> <span class="ot">=</span> heatmap_plot, <span class="st">"26-group-phylum-alluvial"</span> <span class="ot">=</span> alluvial_plot)</span>
-<span id="cb22-475"><a href="#cb22-475" aria-hidden="true" tabindex="-1"></a>plot_sizes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">width =</span> <span class="fu">c</span>(<span class="dv">183</span>, <span class="dv">140</span>, <span class="dv">183</span>, <span class="dv">183</span>), <span class="at">height =</span> <span class="fu">c</span>(<span class="dv">112</span>, <span class="dv">118</span>, <span class="dv">122</span>, <span class="dv">112</span>),</span>
-<span id="cb22-476"><a href="#cb22-476" aria-hidden="true" tabindex="-1"></a>                         <span class="at">row.names =</span> <span class="fu">names</span>(plots))</span>
-<span id="cb22-477"><a href="#cb22-477" aria-hidden="true" tabindex="-1"></a>devices <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">pdf =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">svg =</span> svglite<span class="sc">::</span>svglite,</span>
-<span id="cb22-478"><a href="#cb22-478" aria-hidden="true" tabindex="-1"></a>                <span class="at">png =</span> ragg<span class="sc">::</span>agg_png, <span class="at">tiff =</span> ragg<span class="sc">::</span>agg_tiff)</span>
-<span id="cb22-479"><a href="#cb22-479" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"figures"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-480"><a href="#cb22-480" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (name <span class="cf">in</span> <span class="fu">names</span>(plots)) {</span>
-<span id="cb22-481"><a href="#cb22-481" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (format <span class="cf">in</span> <span class="fu">names</span>(devices)) {</span>
-<span id="cb22-482"><a href="#cb22-482" aria-hidden="true" tabindex="-1"></a>    args <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">filename =</span> <span class="fu">file.path</span>(<span class="st">"figures"</span>, <span class="fu">paste0</span>(name, <span class="st">"."</span>, format)),</span>
-<span id="cb22-483"><a href="#cb22-483" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot =</span> plots[[name]], <span class="at">device =</span> devices[[format]],</span>
-<span id="cb22-484"><a href="#cb22-484" aria-hidden="true" tabindex="-1"></a>                 <span class="at">width =</span> plot_sizes[name, <span class="st">"width"</span>], <span class="at">height =</span> plot_sizes[name, <span class="st">"height"</span>],</span>
-<span id="cb22-485"><a href="#cb22-485" aria-hidden="true" tabindex="-1"></a>                 <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb22-486"><a href="#cb22-486" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (format <span class="sc">==</span> <span class="st">"tiff"</span>) args<span class="sc">$</span>compression <span class="ot">&lt;-</span> <span class="st">"lzw"</span></span>
-<span id="cb22-487"><a href="#cb22-487" aria-hidden="true" tabindex="-1"></a>    <span class="fu">do.call</span>(ggsave, args)</span>
-<span id="cb22-488"><a href="#cb22-488" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb22-489"><a href="#cb22-489" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb22-490"><a href="#cb22-490" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-491"><a href="#cb22-491" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-492"><a href="#cb22-492" aria-hidden="true" tabindex="-1"></a>用于计算的相对丰度也一并保留。下面两张表没有 Top-N 折叠，也没有热图的对数变换：</span>
-<span id="cb22-493"><a href="#cb22-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-496"><a href="#cb22-496" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-497"><a href="#cb22-497" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-export-tables</span></span>
-<span id="cb22-498"><a href="#cb22-498" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"results/26-community-composition"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb22-499"><a href="#cb22-499" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(phylum_rel, <span class="st">"results/26-community-composition/reader-phylum-relative.tsv"</span>,</span>
-<span id="cb22-500"><a href="#cb22-500" aria-hidden="true" tabindex="-1"></a>             <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">NA</span>)</span>
-<span id="cb22-501"><a href="#cb22-501" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(genus_rel, <span class="st">"results/26-community-composition/reader-genus-relative.tsv"</span>,</span>
-<span id="cb22-502"><a href="#cb22-502" aria-hidden="true" tabindex="-1"></a>             <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">NA</span>)</span>
-<span id="cb22-503"><a href="#cb22-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-504"><a href="#cb22-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-505"><a href="#cb22-505" aria-hidden="true" tabindex="-1"></a>也可以<span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/9302cfab3c37c54f8205a117a75b36f3a957cd2c/examples/26-community-composition.R)</span>，在准备好上述 R 包后按顺序运行。数据下载、计算和作图均包含在脚本中。</span>
-<span id="cb22-506"><a href="#cb22-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-507"><a href="#cb22-507" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见误判：把组成差别写成了生物学结论 {#sec-pitfalls}</span></span>
-<span id="cb22-508"><a href="#cb22-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-509"><a href="#cb22-509" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="占比更高，不等于数量更多，也不等于显著富集"}</span>
+<span id="cb22-469"><a href="#cb22-469" aria-hidden="true" tabindex="-1"></a>连带很容易让人联想到迁移或演替，但这里没有追踪菌群从一个湿地进入另一个湿地，也没有时间序列。它只是组成分配的视觉摘要。如果堆叠图已经把问题讲清楚，就不必再加一张冲积图。</span>
+<span id="cb22-470"><a href="#cb22-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-471"><a href="#cb22-471" aria-hidden="true" tabindex="-1"></a><span class="fu">## 按论文尺寸保存四张图</span></span>
+<span id="cb22-472"><a href="#cb22-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-473"><a href="#cb22-473" aria-hidden="true" tabindex="-1"></a>屏幕中的绘图窗口会随拖动而改变尺寸。导出时明确指定宽、高：气泡图宽 140 mm，其余图宽 183 mm。下面同时保存 PDF、SVG 矢量文件和 600 ppi 的 PNG、TIFF：</span>
+<span id="cb22-474"><a href="#cb22-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-477"><a href="#cb22-477" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-478"><a href="#cb22-478" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-export-figures</span></span>
+<span id="cb22-479"><a href="#cb22-479" aria-hidden="true" tabindex="-1"></a>plots <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"26-phylum-stacked"</span> <span class="ot">=</span> stack_plot, <span class="st">"26-genus-bubble"</span> <span class="ot">=</span> bubble_plot,</span>
+<span id="cb22-480"><a href="#cb22-480" aria-hidden="true" tabindex="-1"></a>              <span class="st">"26-genus-heatmap"</span> <span class="ot">=</span> heatmap_plot, <span class="st">"26-group-phylum-alluvial"</span> <span class="ot">=</span> alluvial_plot)</span>
+<span id="cb22-481"><a href="#cb22-481" aria-hidden="true" tabindex="-1"></a>plot_sizes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">width =</span> <span class="fu">c</span>(<span class="dv">183</span>, <span class="dv">140</span>, <span class="dv">183</span>, <span class="dv">183</span>), <span class="at">height =</span> <span class="fu">c</span>(<span class="dv">112</span>, <span class="dv">118</span>, <span class="dv">122</span>, <span class="dv">112</span>),</span>
+<span id="cb22-482"><a href="#cb22-482" aria-hidden="true" tabindex="-1"></a>                         <span class="at">row.names =</span> <span class="fu">names</span>(plots))</span>
+<span id="cb22-483"><a href="#cb22-483" aria-hidden="true" tabindex="-1"></a>devices <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">pdf =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">svg =</span> svglite<span class="sc">::</span>svglite,</span>
+<span id="cb22-484"><a href="#cb22-484" aria-hidden="true" tabindex="-1"></a>                <span class="at">png =</span> ragg<span class="sc">::</span>agg_png, <span class="at">tiff =</span> ragg<span class="sc">::</span>agg_tiff)</span>
+<span id="cb22-485"><a href="#cb22-485" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"figures"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-486"><a href="#cb22-486" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (name <span class="cf">in</span> <span class="fu">names</span>(plots)) {</span>
+<span id="cb22-487"><a href="#cb22-487" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (format <span class="cf">in</span> <span class="fu">names</span>(devices)) {</span>
+<span id="cb22-488"><a href="#cb22-488" aria-hidden="true" tabindex="-1"></a>    args <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">filename =</span> <span class="fu">file.path</span>(<span class="st">"figures"</span>, <span class="fu">paste0</span>(name, <span class="st">"."</span>, format)),</span>
+<span id="cb22-489"><a href="#cb22-489" aria-hidden="true" tabindex="-1"></a>                 <span class="at">plot =</span> plots[[name]], <span class="at">device =</span> devices[[format]],</span>
+<span id="cb22-490"><a href="#cb22-490" aria-hidden="true" tabindex="-1"></a>                 <span class="at">width =</span> plot_sizes[name, <span class="st">"width"</span>], <span class="at">height =</span> plot_sizes[name, <span class="st">"height"</span>],</span>
+<span id="cb22-491"><a href="#cb22-491" aria-hidden="true" tabindex="-1"></a>                 <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb22-492"><a href="#cb22-492" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (format <span class="sc">==</span> <span class="st">"tiff"</span>) args<span class="sc">$</span>compression <span class="ot">&lt;-</span> <span class="st">"lzw"</span></span>
+<span id="cb22-493"><a href="#cb22-493" aria-hidden="true" tabindex="-1"></a>    <span class="fu">do.call</span>(ggsave, args)</span>
+<span id="cb22-494"><a href="#cb22-494" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb22-495"><a href="#cb22-495" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-496"><a href="#cb22-496" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-497"><a href="#cb22-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-498"><a href="#cb22-498" aria-hidden="true" tabindex="-1"></a>用于计算的相对丰度也一并保留。下面两张表没有 Top-N 折叠，也没有热图的对数变换：</span>
+<span id="cb22-499"><a href="#cb22-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-502"><a href="#cb22-502" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-503"><a href="#cb22-503" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-export-tables</span></span>
+<span id="cb22-504"><a href="#cb22-504" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"results/26-community-composition"</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb22-505"><a href="#cb22-505" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(phylum_rel, <span class="st">"results/26-community-composition/reader-phylum-relative.tsv"</span>,</span>
+<span id="cb22-506"><a href="#cb22-506" aria-hidden="true" tabindex="-1"></a>             <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">NA</span>)</span>
+<span id="cb22-507"><a href="#cb22-507" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(genus_rel, <span class="st">"results/26-community-composition/reader-genus-relative.tsv"</span>,</span>
+<span id="cb22-508"><a href="#cb22-508" aria-hidden="true" tabindex="-1"></a>             <span class="at">sep =</span> <span class="st">"</span><span class="sc">\t</span><span class="st">"</span>, <span class="at">quote =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="cn">NA</span>)</span>
+<span id="cb22-509"><a href="#cb22-509" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb22-510"><a href="#cb22-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-511"><a href="#cb22-511" aria-hidden="true" tabindex="-1"></a>本例可以写“滨海湿地中 Proteobacteria 的平均相对丰度为 37.27%，高于内陆湿地的 23.38%”。不能仅凭这张图写“Proteobacteria 显著富集”或“菌量增加”。</span>
+<span id="cb22-511"><a href="#cb22-511" aria-hidden="true" tabindex="-1"></a>也可以<span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://raw.githubusercontent.com/petemeng/microbiome-best-practices/9302cfab3c37c54f8205a117a75b36f3a957cd2c/examples/26-community-composition.R)</span>，在准备好上述 R 包后按顺序运行。数据下载、计算和作图均包含在脚本中。</span>
 <span id="cb22-512"><a href="#cb22-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-513"><a href="#cb22-513" aria-hidden="true" tabindex="-1"></a>显著性需要与研究设计匹配的差异分析，并处理协变量、重复测量和多重检验；绝对数量则需要总菌量或其他绝对定量信息。一个类群的相对占比上升，也可能是其他类群减少所致。</span>
+<span id="cb22-513"><a href="#cb22-513" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见误判：把组成差别写成了生物学结论 {#sec-pitfalls}</span></span>
 <span id="cb22-514"><a href="#cb22-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-515"><a href="#cb22-515" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-515"><a href="#cb22-515" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="占比更高，不等于数量更多，也不等于显著富集"}</span>
 <span id="cb22-516"><a href="#cb22-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-517"><a href="#cb22-517" aria-hidden="true" tabindex="-1"></a>Top 10、Top 15 和 Top 20 都只是本例的显示选择。不能因为某个属没有进入图例，就把它从差异分析候选中删除；只在少数样本或某一组出现的类群，可能并不具有很高的全体平均丰度。</span>
+<span id="cb22-517"><a href="#cb22-517" aria-hidden="true" tabindex="-1"></a>本例可以写“滨海湿地中 Proteobacteria 的平均相对丰度为 37.27%，高于内陆湿地的 23.38%”。不能仅凭这张图写“Proteobacteria 显著富集”或“菌量增加”。</span>
 <span id="cb22-518"><a href="#cb22-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-519"><a href="#cb22-519" aria-hidden="true" tabindex="-1"></a><span class="fu">## 在图注和方法中说明比例是怎样算的 {#sec-methods}</span></span>
+<span id="cb22-519"><a href="#cb22-519" aria-hidden="true" tabindex="-1"></a>显著性需要与研究设计匹配的差异分析，并处理协变量、重复测量和多重检验；绝对数量则需要总菌量或其他绝对定量信息。一个类群的相对占比上升，也可能是其他类群减少所致。</span>
 <span id="cb22-520"><a href="#cb22-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-521"><a href="#cb22-521" aria-hidden="true" tabindex="-1"></a>一张组成图至少要让读者知道：使用哪个分类层级、展示哪些类群、未注释部分如何处理、分母是什么，以及画的是样本值还是组均值。气泡图还要说明检出阈值，热图还要说明变换和排序方式。</span>
+<span id="cb22-521"><a href="#cb22-521" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb22-522"><a href="#cb22-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-523"><a href="#cb22-523" aria-hidden="true" tabindex="-1"></a>对应这次分析，可以这样描述：</span>
+<span id="cb22-523"><a href="#cb22-523" aria-hidden="true" tabindex="-1"></a>Top 10、Top 15 和 Top 20 都只是本例的显示选择。不能因为某个属没有进入图例，就把它从差异分析候选中删除；只在少数样本或某一组出现的类群，可能并不具有很高的全体平均丰度。</span>
 <span id="cb22-524"><a href="#cb22-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-525"><a href="#cb22-525" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Counts were aggregated by taxonomic rank and divided by each sample's total read count, including unclassified reads. Known taxa were ranked by their mean relative abundance across all 90 samples. The phylum plot displayed the top 10 known phyla, with remaining known phyla combined as Other and unclassified reads shown separately. Group means used equal sample weights. The genus bubble plot displayed the top 15 known genera and the unclassified fraction; prevalence was the proportion of samples with non-zero counts. The heatmap displayed the top 20 known genera after log1p(relative abundance × 10,000) transformation. Rows were clustered using Euclidean distance and complete linkage; columns were ordered by wetland group, region, and sample ID. All plots were descriptive.</span></span>
+<span id="cb22-525"><a href="#cb22-525" aria-hidden="true" tabindex="-1"></a><span class="fu">## 在图注和方法中说明比例是怎样算的 {#sec-methods}</span></span>
 <span id="cb22-526"><a href="#cb22-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-527"><a href="#cb22-527" aria-hidden="true" tabindex="-1"></a><span class="fu">## 换用自己的分组和样本时，哪些选择需要重做？ {#sec-own-data}</span></span>
+<span id="cb22-527"><a href="#cb22-527" aria-hidden="true" tabindex="-1"></a>一张组成图至少要让读者知道：使用哪个分类层级、展示哪些类群、未注释部分如何处理、分母是什么，以及画的是样本值还是组均值。气泡图还要说明检出阈值，热图还要说明变换和排序方式。</span>
 <span id="cb22-528"><a href="#cb22-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-529"><a href="#cb22-529" aria-hidden="true" tabindex="-1"></a>输入仍是 OTU/ASV count 表、分类表和样本信息表。先确认 feature 与样本 ID 能正确对齐，再选择自己的分组列；不要把测序文件数当成生物学样本数。</span>
+<span id="cb22-529"><a href="#cb22-529" aria-hidden="true" tabindex="-1"></a>对应这次分析，可以这样描述：</span>
 <span id="cb22-530"><a href="#cb22-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-531"><a href="#cb22-531" aria-hidden="true" tabindex="-1"></a>如果一个生物学样本测了多个技术库，应先确认分组、采样时间等信息一致，再合并技术库 counts。来自同一人的不同时间点不是技术重复，不能这样合并；需要按时间点展示，后续推断也要处理受试者内相关性。</span>
+<span id="cb22-531"><a href="#cb22-531" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Counts were aggregated by taxonomic rank and divided by each sample's total read count, including unclassified reads. Known taxa were ranked by their mean relative abundance across all 90 samples. The phylum plot displayed the top 10 known phyla, with remaining known phyla combined as Other and unclassified reads shown separately. Group means used equal sample weights. The genus bubble plot displayed the top 15 known genera and the unclassified fraction; prevalence was the proportion of samples with non-zero counts. The heatmap displayed the top 20 known genera after log1p(relative abundance × 10,000) transformation. Rows were clustered using Euclidean distance and complete linkage; columns were ordered by wetland group, region, and sample ID. All plots were descriptive.</span></span>
 <span id="cb22-532"><a href="#cb22-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-533"><a href="#cb22-533" aria-hidden="true" tabindex="-1"></a>更换数据后，分类层级、Top-N 和检出阈值需要重新检查；样本顺序中的湿地/地区字段也要换成自己的分组，颜色表要使用实际出现的类群名称。若门水平已经有很高的未注释比例，应先查注释结果；若 Top 10 只覆盖少量 reads，可以增加显示类群，或改用更合适的层级。不同组仍应使用同一份类群清单和同一套颜色。</span>
+<span id="cb22-533"><a href="#cb22-533" aria-hidden="true" tabindex="-1"></a><span class="fu">## 换用自己的分组和样本时，哪些选择需要重做？ {#sec-own-data}</span></span>
 <span id="cb22-534"><a href="#cb22-534" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-535"><a href="#cb22-535" aria-hidden="true" tabindex="-1"></a>最终选择哪张图，取决于还需要回答什么：整体组成用堆叠图；组间的均值与检出率用气泡图；样本内部差异用热图。冲积图只有在确实让组成关系更清楚时再加入。</span>
+<span id="cb22-535"><a href="#cb22-535" aria-hidden="true" tabindex="-1"></a>输入仍是 OTU/ASV count 表、分类表和样本信息表。先确认 feature 与样本 ID 能正确对齐，再选择自己的分组列；不要把测序文件数当成生物学样本数。</span>
 <span id="cb22-536"><a href="#cb22-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-537"><a href="#cb22-537" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb22-538"><a href="#cb22-538" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>分类表只有一列时拆分为七级<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb22-539"><a href="#cb22-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-540"><a href="#cb22-540" aria-hidden="true" tabindex="-1"></a>如果分类字符串按 Kingdom 到 Species 固定顺序排列，可在读入后、聚合前拆分；若字符串会跳过中间层级，则应按 <span class="in">`k__`</span>、<span class="in">`p__`</span> 等前缀识别层级。</span>
-<span id="cb22-541"><a href="#cb22-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-544"><a href="#cb22-544" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb22-545"><a href="#cb22-545" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb22-546"><a href="#cb22-546" aria-hidden="true" tabindex="-1"></a>parts <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(<span class="fu">as.character</span>(taxonomy<span class="sc">$</span>Taxon), <span class="st">";"</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb22-547"><a href="#cb22-547" aria-hidden="true" tabindex="-1"></a>taxonomy_split <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">vapply</span>(parts, <span class="cf">function</span>(x) {</span>
-<span id="cb22-548"><a href="#cb22-548" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(x) <span class="ot">&lt;-</span> <span class="dv">7</span>L</span>
-<span id="cb22-549"><a href="#cb22-549" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trimws</span>(x)</span>
-<span id="cb22-550"><a href="#cb22-550" aria-hidden="true" tabindex="-1"></a>}, <span class="fu">character</span>(<span class="dv">7</span>)))</span>
-<span id="cb22-551"><a href="#cb22-551" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(taxonomy_split) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kingdom"</span>, <span class="st">"Phylum"</span>, <span class="st">"Class"</span>, <span class="st">"Order"</span>, <span class="st">"Family"</span>, <span class="st">"Genus"</span>, <span class="st">"Species"</span>)</span>
-<span id="cb22-552"><a href="#cb22-552" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(taxonomy_split) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(taxonomy)</span>
-<span id="cb22-553"><a href="#cb22-553" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(taxonomy_split)</span>
-<span id="cb22-554"><a href="#cb22-554" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb22-555"><a href="#cb22-555" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-556"><a href="#cb22-556" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb22-557"><a href="#cb22-557" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-558"><a href="#cb22-558" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb22-559"><a href="#cb22-559" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-560"><a href="#cb22-560" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>An J, Liu C, Wang Q, et al. Soil bacterial community structure in Chinese wetlands. *Geoderma*. 2019;337:290–299. <span class="co">[</span><span class="ot">doi:10.1016/j.geoderma.2018.09.035</span><span class="co">](https://doi.org/10.1016/j.geoderma.2018.09.035)</span>.</span>
-<span id="cb22-561"><a href="#cb22-561" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Liu C, Cui Y, Li X, Yao M. microeco: an R package for data mining in microbial community ecology. *FEMS Microbiology Ecology*. 2021;97:fiaa255. <span class="co">[</span><span class="ot">doi:10.1093/femsec/fiaa255</span><span class="co">](https://doi.org/10.1093/femsec/fiaa255)</span>.</span>
-<span id="cb22-562"><a href="#cb22-562" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Gloor GB, Macklaim JM, Pawlowsky-Glahn V, Egozcue JJ. Microbiome datasets are compositional: and this is not optional. *Frontiers in Microbiology*. 2017;8:2224. <span class="co">[</span><span class="ot">doi:10.3389/fmicb.2017.02224</span><span class="co">](https://doi.org/10.3389/fmicb.2017.02224)</span>.</span>
-<span id="cb22-563"><a href="#cb22-563" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>McLaren MR, Willis AD, Callahan BJ. Consistent and correctable bias in metagenomic sequencing experiments. *eLife*. 2019;8:e46923. <span class="co">[</span><span class="ot">doi:10.7554/eLife.46923</span><span class="co">](https://doi.org/10.7554/eLife.46923)</span>.</span>
-<span id="cb22-564"><a href="#cb22-564" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Wickham H. *ggplot2: Elegant Graphics for Data Analysis*. 2nd ed. Springer; 2016. <span class="co">[</span><span class="ot">ggplot2 documentation</span><span class="co">](https://ggplot2.tidyverse.org/)</span>.</span>
-<span id="cb22-565"><a href="#cb22-565" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Brunson JC. ggalluvial: Layered Grammar for Alluvial Plots. <span class="co">[</span><span class="ot">包文档与作图方法</span><span class="co">](https://corybrunson.github.io/ggalluvial/articles/ggalluvial.html)</span>.</span>
+<span id="cb22-537"><a href="#cb22-537" aria-hidden="true" tabindex="-1"></a>如果一个生物学样本测了多个技术库，应先确认分组、采样时间等信息一致，再合并技术库 counts。来自同一人的不同时间点不是技术重复，不能这样合并；需要按时间点展示，后续推断也要处理受试者内相关性。</span>
+<span id="cb22-538"><a href="#cb22-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-539"><a href="#cb22-539" aria-hidden="true" tabindex="-1"></a>更换数据后，分类层级、Top-N 和检出阈值需要重新检查；样本顺序中的湿地/地区字段也要换成自己的分组，颜色表要使用实际出现的类群名称。若门水平已经有很高的未注释比例，应先查注释结果；若 Top 10 只覆盖少量 reads，可以增加显示类群，或改用更合适的层级。不同组仍应使用同一份类群清单和同一套颜色。</span>
+<span id="cb22-540"><a href="#cb22-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-541"><a href="#cb22-541" aria-hidden="true" tabindex="-1"></a>最终选择哪张图，取决于还需要回答什么：整体组成用堆叠图；组间的均值与检出率用气泡图；样本内部差异用热图。冲积图只有在确实让组成关系更清楚时再加入。</span>
+<span id="cb22-542"><a href="#cb22-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-543"><a href="#cb22-543" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb22-544"><a href="#cb22-544" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>分类表只有一列时拆分为七级<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb22-545"><a href="#cb22-545" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-546"><a href="#cb22-546" aria-hidden="true" tabindex="-1"></a>如果分类字符串按 Kingdom 到 Species 固定顺序排列，可在读入后、聚合前拆分；若字符串会跳过中间层级，则应按 <span class="in">`k__`</span>、<span class="in">`p__`</span> 等前缀识别层级。</span>
+<span id="cb22-547"><a href="#cb22-547" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-550"><a href="#cb22-550" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb22-551"><a href="#cb22-551" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb22-552"><a href="#cb22-552" aria-hidden="true" tabindex="-1"></a>parts <span class="ot">&lt;-</span> <span class="fu">strsplit</span>(<span class="fu">as.character</span>(taxonomy<span class="sc">$</span>Taxon), <span class="st">";"</span>, <span class="at">fixed =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb22-553"><a href="#cb22-553" aria-hidden="true" tabindex="-1"></a>taxonomy_split <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">vapply</span>(parts, <span class="cf">function</span>(x) {</span>
+<span id="cb22-554"><a href="#cb22-554" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(x) <span class="ot">&lt;-</span> <span class="dv">7</span>L</span>
+<span id="cb22-555"><a href="#cb22-555" aria-hidden="true" tabindex="-1"></a>  <span class="fu">trimws</span>(x)</span>
+<span id="cb22-556"><a href="#cb22-556" aria-hidden="true" tabindex="-1"></a>}, <span class="fu">character</span>(<span class="dv">7</span>)))</span>
+<span id="cb22-557"><a href="#cb22-557" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(taxonomy_split) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kingdom"</span>, <span class="st">"Phylum"</span>, <span class="st">"Class"</span>, <span class="st">"Order"</span>, <span class="st">"Family"</span>, <span class="st">"Genus"</span>, <span class="st">"Species"</span>)</span>
+<span id="cb22-558"><a href="#cb22-558" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(taxonomy_split) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(taxonomy)</span>
+<span id="cb22-559"><a href="#cb22-559" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(taxonomy_split)</span>
+<span id="cb22-560"><a href="#cb22-560" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-561"><a href="#cb22-561" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-562"><a href="#cb22-562" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb22-563"><a href="#cb22-563" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-564"><a href="#cb22-564" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb22-565"><a href="#cb22-565" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-566"><a href="#cb22-566" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>An J, Liu C, Wang Q, et al. Soil bacterial community structure in Chinese wetlands. *Geoderma*. 2019;337:290–299. <span class="co">[</span><span class="ot">doi:10.1016/j.geoderma.2018.09.035</span><span class="co">](https://doi.org/10.1016/j.geoderma.2018.09.035)</span>.</span>
+<span id="cb22-567"><a href="#cb22-567" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Liu C, Cui Y, Li X, Yao M. microeco: an R package for data mining in microbial community ecology. *FEMS Microbiology Ecology*. 2021;97:fiaa255. <span class="co">[</span><span class="ot">doi:10.1093/femsec/fiaa255</span><span class="co">](https://doi.org/10.1093/femsec/fiaa255)</span>.</span>
+<span id="cb22-568"><a href="#cb22-568" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Gloor GB, Macklaim JM, Pawlowsky-Glahn V, Egozcue JJ. Microbiome datasets are compositional: and this is not optional. *Frontiers in Microbiology*. 2017;8:2224. <span class="co">[</span><span class="ot">doi:10.3389/fmicb.2017.02224</span><span class="co">](https://doi.org/10.3389/fmicb.2017.02224)</span>.</span>
+<span id="cb22-569"><a href="#cb22-569" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>McLaren MR, Willis AD, Callahan BJ. Consistent and correctable bias in metagenomic sequencing experiments. *eLife*. 2019;8:e46923. <span class="co">[</span><span class="ot">doi:10.7554/eLife.46923</span><span class="co">](https://doi.org/10.7554/eLife.46923)</span>.</span>
+<span id="cb22-570"><a href="#cb22-570" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Wickham H. *ggplot2: Elegant Graphics for Data Analysis*. 2nd ed. Springer; 2016. <span class="co">[</span><span class="ot">ggplot2 documentation</span><span class="co">](https://ggplot2.tidyverse.org/)</span>.</span>
+<span id="cb22-571"><a href="#cb22-571" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>Brunson JC. ggalluvial: Layered Grammar for Alluvial Plots. <span class="co">[</span><span class="ot">包文档与作图方法</span><span class="co">](https://corybrunson.github.io/ggalluvial/articles/ggalluvial.html)</span>.</span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

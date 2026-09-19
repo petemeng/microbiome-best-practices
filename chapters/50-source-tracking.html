@@ -539,7 +539,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -851,7 +851,10 @@ window.Quarto = {
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">来源追踪估计贡献比例，不证明传播路径</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">来源追踪估计贡献比例，不证明传播路径</a>
+  <ul class="collapse">
+  <li><a href="#来源很相似时精确百分比为什么可能不可识别" id="toc-来源很相似时精确百分比为什么可能不可识别" class="nav-link" data-scroll-target="#来源很相似时精确百分比为什么可能不可识别">来源很相似时，精确百分比为什么可能不可识别？</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">下载并读取本次分析的数据</a>
   <ul class="collapse">
   <li><a href="#从三件套读起并验证-来源与待解释样本的输入格式" id="toc-从三件套读起并验证-来源与待解释样本的输入格式" class="nav-link" data-scroll-target="#从三件套读起并验证-来源与待解释样本的输入格式">从三件套读起，并验证 来源与待解释样本的输入格式</a></li>
@@ -908,7 +911,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -936,6 +939,11 @@ window.Quarto = {
 <p>两种方法都把 <code>infant gut 1</code> sink 的最大已知来源判为 <code>infant gut</code>，但 FEAST 给 66.9%、Unknown 18.5%，SourceTracker2 给 92.9%、Unknown 0.44%。两者对 8 个可留一验证的 sources，其已知类别回判率都只有 50%。<strong>最大来源标签一致，不代表比例可互换；Unknown 更不是“真实未知比例”的直接测量。</strong></p>
 </div>
 </div>
+<section id="来源很相似时精确百分比为什么可能不可识别" class="level3">
+<h3 class="anchored" data-anchor-id="来源很相似时精确百分比为什么可能不可识别">来源很相似时，精确百分比为什么可能不可识别？</h3>
+<p>若两个候选来源的特征分布几乎相同，多种权重组合都可能很好地重建 sink。优化收敛或后验集中并不单独证明来源有足够的区分信息，还要结合独立来源样本的回判表现。这里已知来源留一验证只有 50%，所以 infant gut 的最大标签一致，不能让 66.9% 与 92.9% 变成两个同样精确的物理贡献比例。</p>
+<p>删除 infant gut 后 Unknown 反而降低，进一步说明“未知”是给定来源库和模型的剩余成分。缺失来源既可能进入 Unknown，也可能被相似的已知来源吸收。应同时报告来源覆盖、每类独立重复和留一来源敏感性；来源相似性本身不提供接触、方向或时间信息，不能作为传播路径的单独证据。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">下载并读取本次分析的数据</h2>
@@ -2027,500 +2035,506 @@ p(x_{\mathrm{sink}}) = \sum_{k=1}^{K}\pi_k\theta_k + \pi_U\theta_U,
 <span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>两种方法都把 <span class="in">`infant gut 1`</span> sink 的最大已知来源判为 <span class="in">`infant gut`</span>，但 FEAST 给 66.9%、Unknown 18.5%，SourceTracker2 给 92.9%、Unknown 0.44%。两者对 8 个可留一验证的 sources，其已知类别回判率都只有 50%。**最大来源标签一致，不代表比例可互换；Unknown 更不是“真实未知比例”的直接测量。**</span>
 <span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### 来源很相似时，精确百分比为什么可能不可识别？</span></span>
 <span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`FEAST`</span>、<span class="in">`ggplot2`</span>、<span class="in">`jsonlite`</span>、<span class="in">`ragg`</span>、<span class="in">`readr`</span>、<span class="in">`scales`</span>、<span class="in">`svglite`</span>。本次使用来源与待解释样本的 count、taxonomy 和 metadata 表；source/sink 身份保留在样本表中。</span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>若两个候选来源的特征分布几乎相同，多种权重组合都可能很好地重建 sink。优化收敛或后验集中并不单独证明来源有足够的区分信息，还要结合独立来源样本的回判表现。这里已知来源留一验证只有 50%，所以 infant gut 的最大标签一致，不能让 66.9% 与 92.9% 变成两个同样精确的物理贡献比例。</span>
 <span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>删除 infant gut 后 Unknown 反而降低，进一步说明“未知”是给定来源库和模型的剩余成分。缺失来源既可能进入 Unknown，也可能被相似的已知来源吸收。应同时报告来源覆盖、每类独立重复和留一来源敏感性；来源相似性本身不提供接触、方向或时间信息，不能作为传播路径的单独证据。</span>
 <span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article50_feast.R"</span>,</span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article50_sourcetracker.py"</span>,</span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>  <span class="st">"env/sourcetracker2.yml"</span>,</span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/source-tracking-feast/metadata.tsv"</span>,</span>
-<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/source-tracking-feast/otutab.tsv"</span>,</span>
-<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/source-tracking-feast/source-summary.json"</span>,</span>
-<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/source-tracking-feast/taxonomy.tsv"</span></span>
-<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-source-tracking-theme</span></span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260750</span>)</span>
-<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
-<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
-<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
-<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
-<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
-<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
-<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
-<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
-<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
-<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
-<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
-<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
-<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
-<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
-<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
-<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
-<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
-<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a><span class="fu">### 从三件套读起，并验证 来源与待解释样本的输入格式</span></span>
-<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-source-tracking-data</span></span>
-<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
-<span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
-<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
-<span id="cb17-132"><a href="#cb17-132" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
-<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
-<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a>  out</span>
-<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"data/small/source-tracking-feast"</span></span>
-<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"otutab.tsv"</span>))</span>
-<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"taxonomy.tsv"</span>))</span>
-<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metadata.tsv"</span>))</span>
-<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.integer), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb17-142"><a href="#cb17-142" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
-<span id="cb17-143"><a href="#cb17-143" aria-hidden="true" tabindex="-1"></a>source_ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)[metadata<span class="sc">$</span>SourceSink <span class="sc">==</span> <span class="st">"Source"</span>]</span>
-<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a>sink_ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)[metadata<span class="sc">$</span>SourceSink <span class="sc">==</span> <span class="st">"Sink"</span>]</span>
-<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb17-146"><a href="#cb17-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">1839</span>L, <span class="fu">ncol</span>(otutab) <span class="sc">==</span> <span class="dv">10</span>L, <span class="fu">sum</span>(otutab) <span class="sc">==</span> <span class="dv">475154</span>L,</span>
-<span id="cb17-147"><a href="#cb17-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb17-148"><a href="#cb17-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(source_ids) <span class="sc">==</span> <span class="dv">9</span>L, <span class="fu">length</span>(sink_ids) <span class="sc">==</span> <span class="dv">1</span>L,</span>
-<span id="cb17-149"><a href="#cb17-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
-<span id="cb17-150"><a href="#cb17-150" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.integer</span>(<span class="fu">table</span>(metadata[source_ids, <span class="st">"SourceClass"</span>])[<span class="fu">c</span>(</span>
-<span id="cb17-151"><a href="#cb17-151" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Adult gut"</span>, <span class="st">"Adult skin"</span>, <span class="st">"Infant gut"</span>, <span class="st">"Soil"</span></span>
-<span id="cb17-152"><a href="#cb17-152" aria-hidden="true" tabindex="-1"></a>    )]),</span>
-<span id="cb17-153"><a href="#cb17-153" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">3</span>L, <span class="dv">3</span>L, <span class="dv">1</span>L, <span class="dv">2</span>L)</span>
-<span id="cb17-154"><a href="#cb17-154" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb17-155"><a href="#cb17-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(taxonomy<span class="sc">$</span>TaxonomyStatus <span class="sc">==</span> <span class="st">"Anonymous taxon in the official FEAST example"</span>)</span>
-<span id="cb17-156"><a href="#cb17-156" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-157"><a href="#cb17-157" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
-<span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy)</span>
-<span id="cb17-159"><a href="#cb17-159" aria-hidden="true" tabindex="-1"></a>metadata</span>
-<span id="cb17-160"><a href="#cb17-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-161"><a href="#cb17-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/50-source-tracking.R)</span>。脚本包含数据下载、计算和图形导出。</span>
-<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
-<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggplot2"</span>, <span class="st">"jsonlite"</span>, <span class="st">"patchwork"</span>, <span class="st">"ragg"</span>, <span class="st">"readr"</span>, <span class="st">"remotes"</span>,</span>
-<span id="cb17-173"><a href="#cb17-173" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span></span>
-<span id="cb17-174"><a href="#cb17-174" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb17-175"><a href="#cb17-175" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(</span>
-<span id="cb17-176"><a href="#cb17-176" aria-hidden="true" tabindex="-1"></a>  <span class="st">"cozygene/FEAST"</span>,</span>
-<span id="cb17-177"><a href="#cb17-177" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref =</span> <span class="st">"2f8f3df8051e0e08341f597a9f4693bfb76b3bf6"</span></span>
-<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## 来源追踪的结果取决于参考来源集 {#sec-theory}</span></span>
-<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a><span class="fu">### 把待追踪样本看作多个候选来源的混合</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`FEAST`</span>、<span class="in">`ggplot2`</span>、<span class="in">`jsonlite`</span>、<span class="in">`ragg`</span>、<span class="in">`readr`</span>、<span class="in">`scales`</span>、<span class="in">`svglite`</span>。本次使用来源与待解释样本的 count、taxonomy 和 metadata 表；source/sink 身份保留在样本表中。</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article50_feast.R"</span>,</span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/run_article50_sourcetracker.py"</span>,</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"env/sourcetracker2.yml"</span>,</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/source-tracking-feast/metadata.tsv"</span>,</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/source-tracking-feast/otutab.tsv"</span>,</span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/source-tracking-feast/source-summary.json"</span>,</span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/source-tracking-feast/taxonomy.tsv"</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup-source-tracking-theme</span></span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260750</span>)</span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
+<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.caption =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#666666"</span>, <span class="at">hjust =</span> <span class="dv">0</span>),</span>
+<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.background =</span> ggplot2<span class="sc">::</span><span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#F2F2F2"</span>, <span class="at">colour =</span> <span class="st">"#B3B3B3"</span>),</span>
+<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>      <span class="at">strip.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"top"</span></span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">89</span>, <span class="at">height =</span> <span class="dv">70</span>, <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
+<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width, <span class="at">height =</span> height,</span>
+<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a>                  <span class="at">units =</span> units, <span class="at">dpi =</span> dpi, <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff,</span>
+<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a>                  <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a><span class="fu">### 从三件套读起，并验证 来源与待解释样本的输入格式</span></span>
+<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-132"><a href="#cb17-132" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: read-source-tracking-data</span></span>
+<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a>read_keyed_tsv <span class="ot">&lt;-</span> <span class="cf">function</span>(path) {</span>
+<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>, <span class="at">progress =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a>                       <span class="at">name_repair =</span> <span class="st">"minimal"</span>, <span class="at">na =</span> <span class="fu">character</span>())</span>
+<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a>  ids <span class="ot">&lt;-</span> <span class="fu">as.character</span>(x[[<span class="dv">1</span>L]])</span>
+<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="sc">!</span><span class="fu">anyDuplicated</span>(ids))</span>
+<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(x[<span class="sc">-</span><span class="dv">1</span>L], <span class="at">check.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(out) <span class="ot">&lt;-</span> ids</span>
+<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb17-142"><a href="#cb17-142" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-143"><a href="#cb17-143" aria-hidden="true" tabindex="-1"></a>data_dir <span class="ot">&lt;-</span> <span class="st">"data/small/source-tracking-feast"</span></span>
+<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a>otutab_raw <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"otutab.tsv"</span>))</span>
+<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"taxonomy.tsv"</span>))</span>
+<span id="cb17-146"><a href="#cb17-146" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read_keyed_tsv</span>(<span class="fu">file.path</span>(data_dir, <span class="st">"metadata.tsv"</span>))</span>
+<span id="cb17-147"><a href="#cb17-147" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">data.frame</span>(<span class="fu">lapply</span>(otutab_raw, as.integer), <span class="at">check.names =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb17-148"><a href="#cb17-148" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(otutab) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(otutab_raw)</span>
+<span id="cb17-149"><a href="#cb17-149" aria-hidden="true" tabindex="-1"></a>source_ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)[metadata<span class="sc">$</span>SourceSink <span class="sc">==</span> <span class="st">"Source"</span>]</span>
+<span id="cb17-150"><a href="#cb17-150" aria-hidden="true" tabindex="-1"></a>sink_ids <span class="ot">&lt;-</span> <span class="fu">rownames</span>(metadata)[metadata<span class="sc">$</span>SourceSink <span class="sc">==</span> <span class="st">"Sink"</span>]</span>
+<span id="cb17-151"><a href="#cb17-151" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb17-152"><a href="#cb17-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(otutab) <span class="sc">==</span> <span class="dv">1839</span>L, <span class="fu">ncol</span>(otutab) <span class="sc">==</span> <span class="dv">10</span>L, <span class="fu">sum</span>(otutab) <span class="sc">==</span> <span class="dv">475154</span>L,</span>
+<span id="cb17-153"><a href="#cb17-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb17-154"><a href="#cb17-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(source_ids) <span class="sc">==</span> <span class="dv">9</span>L, <span class="fu">length</span>(sink_ids) <span class="sc">==</span> <span class="dv">1</span>L,</span>
+<span id="cb17-155"><a href="#cb17-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
+<span id="cb17-156"><a href="#cb17-156" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as.integer</span>(<span class="fu">table</span>(metadata[source_ids, <span class="st">"SourceClass"</span>])[<span class="fu">c</span>(</span>
+<span id="cb17-157"><a href="#cb17-157" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Adult gut"</span>, <span class="st">"Adult skin"</span>, <span class="st">"Infant gut"</span>, <span class="st">"Soil"</span></span>
+<span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a>    )]),</span>
+<span id="cb17-159"><a href="#cb17-159" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="dv">3</span>L, <span class="dv">3</span>L, <span class="dv">1</span>L, <span class="dv">2</span>L)</span>
+<span id="cb17-160"><a href="#cb17-160" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb17-161"><a href="#cb17-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(taxonomy<span class="sc">$</span>TaxonomyStatus <span class="sc">==</span> <span class="st">"Anonymous taxon in the official FEAST example"</span>)</span>
+<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(otutab[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>])</span>
+<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy)</span>
+<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a>metadata</span>
+<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-167"><a href="#cb17-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-168"><a href="#cb17-168" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/50-source-tracking.R)</span>。脚本包含数据下载、计算和图形导出。</span>
+<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-175"><a href="#cb17-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-176"><a href="#cb17-176" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb17-177"><a href="#cb17-177" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ggplot2"</span>, <span class="st">"jsonlite"</span>, <span class="st">"patchwork"</span>, <span class="st">"ragg"</span>, <span class="st">"readr"</span>, <span class="st">"remotes"</span>,</span>
+<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"svglite"</span>, <span class="st">"systemfonts"</span></span>
+<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(</span>
+<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a>  <span class="st">"cozygene/FEAST"</span>,</span>
+<span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a>  <span class="at">ref =</span> <span class="st">"2f8f3df8051e0e08341f597a9f4693bfb76b3bf6"</span></span>
+<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a>设 source $k$ 的 feature distribution 为 $\theta_k$，sink 的 mixture weights 为 $\pi_k$，则模型近似</span>
+<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a>p(x_{\mathrm{sink}}) = \sum_{k=1}^{K}\pi_k\theta_k + \pi_U\theta_U,</span>
-<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a>\qquad \sum_k\pi_k+\pi_U=1.</span>
-<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a>FEAST 用 expectation-maximization 快速估计；SourceTracker2 用 Bayesian Gibbs sampling。两者的 priors、source pooling、unknown model 与 optimization 不同，因此比例不应被视为算法无关的物理量。</span>
-<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a><span class="fu">### 来源库决定了贡献比例的含义</span></span>
-<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a>模型只能在你提供的 candidate sources 中分配。缺少真正来源时，信号可能进入 Unknown，也可能被最相似的已知 source 吸收。本页逐一删除 source class：删除 infant gut 后，FEAST Unknown 反而从 18.5% 降到 13.2%，其余权重被 adult skin/soil 吸收，直接说明 Unknown 不是“未采样来源”的单调计量器。</span>
+<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## 来源追踪的结果取决于参考来源集 {#sec-theory}</span></span>
+<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a><span class="fu">### 把待追踪样本看作多个候选来源的混合</span></span>
+<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a>设 source $k$ 的 feature distribution 为 $\theta_k$，sink 的 mixture weights 为 $\pi_k$，则模型近似</span>
+<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a>p(x_{\mathrm{sink}}) = \sum_{k=1}^{K}\pi_k\theta_k + \pi_U\theta_U,</span>
+<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a>\qquad \sum_k\pi_k+\pi_U=1.</span>
+<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a><span class="fu">### 先用已知来源的样本检查模型</span></span>
+<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a>FEAST 用 expectation-maximization 快速估计；SourceTracker2 用 Bayesian Gibbs sampling。两者的 priors、source pooling、unknown model 与 optimization 不同，因此比例不应被视为算法无关的物理量。</span>
 <span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a>把一个已知 source sample 暂作 sink，并从对应 source pool 删除，再看是否回判到其真实 class。只有至少两个 replicates 的 class 才能做这种验证；本例 infant gut 只有一个 source，因此不参与 leave-one-out accuracy。</span>
+<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a><span class="fu">### 来源库决定了贡献比例的含义</span></span>
 <span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a><span class="fu">### 来源组成相似不等于菌株传播</span></span>
+<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a>模型只能在你提供的 candidate sources 中分配。缺少真正来源时，信号可能进入 Unknown，也可能被最相似的已知 source 吸收。本页逐一删除 source class：删除 infant gut 后，FEAST Unknown 反而从 18.5% 降到 13.2%，其余权重被 adult skin/soil 吸收，直接说明 Unknown 不是“未采样来源”的单调计量器。</span>
 <span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a>16S/OTU-level source similarity无法区分共享高层 taxon、环境共同暴露与真正 donor-to-recipient transmission。传播结论至少需要高分辨率 strain/SNV sharing、方向与时间顺序、污染排除、背景人群比较，理想情况下再加 epidemiological contact 或 intervention evidence。</span>
+<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### 先用已知来源的样本检查模型</span></span>
 <span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb17-209"><a href="#cb17-209" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：Unknown 应怎样写进论文<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb17-210"><a href="#cb17-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a>Unknown 是“在给定 reference panel、特征空间、depth、prior/algorithm 下，无法由候选 sources 解释的模型分量”。它可能包含真正未采样来源、candidate source 内部变异、批次差异、测序误差、模型失配或过度平滑。最稳妥的写法是 model-dependent unexplained fraction，并同时给 missing-source sensitivity。</span>
-<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb17-214"><a href="#cb17-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a><span class="fu">## 根据来源库估计贡献，并检查遗漏来源 {#sec-code}</span></span>
+<span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a>把一个已知 source sample 暂作 sink，并从对应 source pool 删除，再看是否回判到其真实 class。只有至少两个 replicates 的 class 才能做这种验证；本例 infant gut 只有一个 source，因此不参与 leave-one-out accuracy。</span>
+<span id="cb17-209"><a href="#cb17-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-210"><a href="#cb17-210" aria-hidden="true" tabindex="-1"></a><span class="fu">### 来源组成相似不等于菌株传播</span></span>
+<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a>16S/OTU-level source similarity无法区分共享高层 taxon、环境共同暴露与真正 donor-to-recipient transmission。传播结论至少需要高分辨率 strain/SNV sharing、方向与时间顺序、污染排除、背景人群比较，理想情况下再加 epidemiological contact 或 intervention evidence。</span>
+<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-214"><a href="#cb17-214" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：Unknown 应怎样写进论文<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb17-216"><a href="#cb17-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-217"><a href="#cb17-217" aria-hidden="true" tabindex="-1"></a><span class="fu">### 在相同来源集下比较两种模型</span></span>
+<span id="cb17-217"><a href="#cb17-217" aria-hidden="true" tabindex="-1"></a>Unknown 是“在给定 reference panel、特征空间、depth、prior/algorithm 下，无法由候选 sources 解释的模型分量”。它可能包含真正未采样来源、candidate source 内部变异、批次差异、测序误差、模型失配或过度平滑。最稳妥的写法是 model-dependent unexplained fraction，并同时给 missing-source sensitivity。</span>
 <span id="cb17-218"><a href="#cb17-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-219"><a href="#cb17-219" aria-hidden="true" tabindex="-1"></a>在相同输入与测序深度下重新运行 FEAST 和 SourceTracker2，同时计算留一来源与遗漏来源敏感性。</span>
+<span id="cb17-219"><a href="#cb17-219" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb17-220"><a href="#cb17-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a>先在 Linux 或 WSL2 终端创建对应环境，回到 R 后运行计算代码。</span>
+<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a><span class="fu">## 根据来源库估计贡献，并检查遗漏来源 {#sec-code}</span></span>
 <span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
-<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">--prefix</span> ./sourcetracker-env <span class="at">--file</span> env/sourcetracker2.yml</span>
-<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a><span class="fu">### 在相同来源集下比较两种模型</span></span>
+<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a>在相同输入与测序深度下重新运行 FEAST 和 SourceTracker2，同时计算留一来源与遗漏来源敏感性。</span>
 <span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-native-computation</span></span>
-<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a>run_analysis <span class="ot">&lt;-</span> <span class="cf">function</span>(command, args) {</span>
-<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">system2</span>(command, args, <span class="at">stdout =</span> <span class="cn">TRUE</span>, <span class="at">stderr =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a>  status <span class="ot">&lt;-</span> <span class="fu">attr</span>(output, <span class="st">"status"</span>)</span>
-<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(status) <span class="sc">&amp;&amp;</span> status <span class="sc">!=</span> <span class="dv">0</span>L) <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="fu">tail</span>(output, <span class="dv">20</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
-<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(output)</span>
-<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">file.path</span>(<span class="fu">R.home</span>(<span class="st">"bin"</span>), <span class="st">"Rscript"</span>), <span class="fu">c</span>(<span class="st">"--vanilla"</span>, <span class="st">"scripts/run_article50_feast.R"</span>))</span>
-<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">Sys.getenv</span>(<span class="st">"SOURCETRACKER_PYTHON"</span>, <span class="st">"sourcetracker-env/bin/python"</span>), <span class="fu">c</span>(<span class="st">"scripts/run_article50_sourcetracker.py"</span>))</span>
-<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a>完整计算脚本：<span class="co">[</span><span class="ot">run_article50_feast.R</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article50_feast.R)</span>、<span class="co">[</span><span class="ot">run_article50_sourcetracker.py</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article50_sourcetracker.py)</span>。</span>
-<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a><span class="fu">### FEAST 主分析</span></span>
-<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a>FEAST 要求 samples × taxa count matrix，metadata 中列名为 <span class="in">`Env`</span>、<span class="in">`SourceSink`</span>、<span class="in">`id`</span>。固定 <span class="in">`COVERAGE=5000`</span>，并在每次稀释/EM 前设 seed。</span>
-<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb17-256"><a href="#cb17-256" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FEAST)</span>
-<span id="cb17-257"><a href="#cb17-257" aria-hidden="true" tabindex="-1"></a>feast_metadata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb17-258"><a href="#cb17-258" aria-hidden="true" tabindex="-1"></a>  <span class="at">Env =</span> metadata<span class="sc">$</span>SourceClass,</span>
-<span id="cb17-259"><a href="#cb17-259" aria-hidden="true" tabindex="-1"></a>  <span class="at">SourceSink =</span> metadata<span class="sc">$</span>SourceSink,</span>
-<span id="cb17-260"><a href="#cb17-260" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">as.integer</span>(metadata<span class="sc">$</span>FeastID),</span>
-<span id="cb17-261"><a href="#cb17-261" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="fu">rownames</span>(metadata)</span>
-<span id="cb17-262"><a href="#cb17-262" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-263"><a href="#cb17-263" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
-<span id="cb17-264"><a href="#cb17-264" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">FEAST</span>(</span>
-<span id="cb17-265"><a href="#cb17-265" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">t</span>(otutab), <span class="at">metadata =</span> feast_metadata,</span>
-<span id="cb17-266"><a href="#cb17-266" aria-hidden="true" tabindex="-1"></a>  <span class="at">EM_iterations =</span> <span class="dv">1000</span>, <span class="at">COVERAGE =</span> <span class="dv">5000</span>,</span>
-<span id="cb17-267"><a href="#cb17-267" aria-hidden="true" tabindex="-1"></a>  <span class="at">different_sources_flag =</span> <span class="dv">0</span>,</span>
-<span id="cb17-268"><a href="#cb17-268" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_path =</span> <span class="st">"results/50-source-tracking/feast-native/main"</span>,</span>
-<span id="cb17-269"><a href="#cb17-269" aria-hidden="true" tabindex="-1"></a>  <span class="at">outfile =</span> <span class="st">"main"</span></span>
-<span id="cb17-270"><a href="#cb17-270" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-271"><a href="#cb17-271" aria-hidden="true" tabindex="-1"></a><span class="co"># FEAST 输出每个 source sample 的 weight；按 metadata$SourceClass 求和后作图。</span></span>
-<span id="cb17-272"><a href="#cb17-272" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-273"><a href="#cb17-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-274"><a href="#cb17-274" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb17-275"><a href="#cb17-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-276"><a href="#cb17-276" aria-hidden="true" tabindex="-1"></a><span class="fu">### leave-one-out 与 missing-source audit</span></span>
-<span id="cb17-277"><a href="#cb17-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-278"><a href="#cb17-278" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb17-279"><a href="#cb17-279" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb17-280"><a href="#cb17-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-283"><a href="#cb17-283" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-284"><a href="#cb17-284" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb17-285"><a href="#cb17-285" aria-hidden="true" tabindex="-1"></a>class_sizes <span class="ot">&lt;-</span> <span class="fu">table</span>(metadata[source_ids, <span class="st">"SourceClass"</span>])</span>
-<span id="cb17-286"><a href="#cb17-286" aria-hidden="true" tabindex="-1"></a>eligible_loo <span class="ot">&lt;-</span> source_ids[</span>
-<span id="cb17-287"><a href="#cb17-287" aria-hidden="true" tabindex="-1"></a>  class_sizes[metadata[source_ids, <span class="st">"SourceClass"</span>]] <span class="sc">&gt;=</span> <span class="dv">2</span></span>
-<span id="cb17-288"><a href="#cb17-288" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb17-289"><a href="#cb17-289" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(eligible_loo)) {</span>
-<span id="cb17-290"><a href="#cb17-290" aria-hidden="true" tabindex="-1"></a>  held_out <span class="ot">&lt;-</span> eligible_loo[i]</span>
-<span id="cb17-291"><a href="#cb17-291" aria-hidden="true" tabindex="-1"></a>  training_sources <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(source_ids, held_out)</span>
-<span id="cb17-292"><a href="#cb17-292" aria-hidden="true" tabindex="-1"></a>  <span class="co"># held_out 标记为 Sink；training_sources 标记为 Source。</span></span>
-<span id="cb17-293"><a href="#cb17-293" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set.seed(20260726 + i)，用同一 COVERAGE/iterations 重新拟合。</span></span>
-<span id="cb17-294"><a href="#cb17-294" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-295"><a href="#cb17-295" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (removed_class <span class="cf">in</span> <span class="fu">unique</span>(metadata[source_ids, <span class="st">"SourceClass"</span>])) {</span>
-<span id="cb17-296"><a href="#cb17-296" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 从 reference panel 删除该 class，重新估计原始 sink。</span></span>
-<span id="cb17-297"><a href="#cb17-297" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-298"><a href="#cb17-298" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-299"><a href="#cb17-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-300"><a href="#cb17-300" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb17-301"><a href="#cb17-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-302"><a href="#cb17-302" aria-hidden="true" tabindex="-1"></a><span class="fu">### SourceTracker2：相同 source classes、depth 与随机种子</span></span>
-<span id="cb17-303"><a href="#cb17-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-304"><a href="#cb17-304" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb17-305"><a href="#cb17-305" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb17-306"><a href="#cb17-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-309"><a href="#cb17-309" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-310"><a href="#cb17-310" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb17-311"><a href="#cb17-311" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb17-312"><a href="#cb17-312" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb17-313"><a href="#cb17-313" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skbio.stats <span class="im">import</span> subsample_counts</span>
-<span id="cb17-314"><a href="#cb17-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-315"><a href="#cb17-315" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="bu">hasattr</span>(np, <span class="st">"int"</span>):</span>
-<span id="cb17-316"><a href="#cb17-316" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">int</span> <span class="op">=</span> <span class="bu">int</span>  <span class="co"># SourceTracker2 2.0.1 / NumPy 2 compatibility</span></span>
-<span id="cb17-317"><a href="#cb17-317" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sourcetracker._sourcetracker <span class="im">import</span> _gibbs</span>
-<span id="cb17-318"><a href="#cb17-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-319"><a href="#cb17-319" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">20260726</span>)</span>
-<span id="cb17-320"><a href="#cb17-320" aria-hidden="true" tabindex="-1"></a><span class="co"># 按 SourceClass 汇总 source samples；每个 source class 与 sink 稀释到 5,000 reads。</span></span>
-<span id="cb17-321"><a href="#cb17-321" aria-hidden="true" tabindex="-1"></a>mean, monte_carlo_sd <span class="op">=</span> _gibbs(</span>
-<span id="cb17-322"><a href="#cb17-322" aria-hidden="true" tabindex="-1"></a>    source_df, sink_df,</span>
-<span id="cb17-323"><a href="#cb17-323" aria-hidden="true" tabindex="-1"></a>    alpha1<span class="op">=</span><span class="fl">0.001</span>, alpha2<span class="op">=</span><span class="fl">0.001</span>, beta<span class="op">=</span><span class="dv">10</span>,</span>
-<span id="cb17-324"><a href="#cb17-324" aria-hidden="true" tabindex="-1"></a>    restarts<span class="op">=</span><span class="dv">10</span>, draws_per_restart<span class="op">=</span><span class="dv">2</span>, burnin<span class="op">=</span><span class="dv">100</span>, delay<span class="op">=</span><span class="dv">10</span></span>
-<span id="cb17-325"><a href="#cb17-325" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-326"><a href="#cb17-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-327"><a href="#cb17-327" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-328"><a href="#cb17-328" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb17-329"><a href="#cb17-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-330"><a href="#cb17-330" aria-hidden="true" tabindex="-1"></a>完整固定运行命令为：</span>
-<span id="cb17-331"><a href="#cb17-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-332"><a href="#cb17-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-335"><a href="#cb17-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-336"><a href="#cb17-336" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb17-337"><a href="#cb17-337" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-source-tracking-results</span></span>
-<span id="cb17-338"><a href="#cb17-338" aria-hidden="true" tabindex="-1"></a>result_dir <span class="ot">&lt;-</span> <span class="st">"results/50-source-tracking"</span></span>
-<span id="cb17-339"><a href="#cb17-339" aria-hidden="true" tabindex="-1"></a>feast_main <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb17-340"><a href="#cb17-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"feast-main-class.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb17-341"><a href="#cb17-341" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-342"><a href="#cb17-342" aria-hidden="true" tabindex="-1"></a>feast_loo <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb17-343"><a href="#cb17-343" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"feast-loo-predictions.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
-<span id="cb17-344"><a href="#cb17-344" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-345"><a href="#cb17-345" aria-hidden="true" tabindex="-1"></a>feast_missing <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb17-346"><a href="#cb17-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"feast-missing-source.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a>先在 Linux 或 WSL2 终端创建对应环境，回到 R 后运行计算代码。</span>
+<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> env create <span class="at">--prefix</span> ./sourcetracker-env <span class="at">--file</span> env/sourcetracker2.yml</span>
+<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-native-computation</span></span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a>run_analysis <span class="ot">&lt;-</span> <span class="cf">function</span>(command, args) {</span>
+<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a>  output <span class="ot">&lt;-</span> <span class="fu">system2</span>(command, args, <span class="at">stdout =</span> <span class="cn">TRUE</span>, <span class="at">stderr =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a>  status <span class="ot">&lt;-</span> <span class="fu">attr</span>(output, <span class="st">"status"</span>)</span>
+<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.null</span>(status) <span class="sc">&amp;&amp;</span> status <span class="sc">!=</span> <span class="dv">0</span>L) <span class="fu">stop</span>(<span class="fu">paste</span>(<span class="fu">tail</span>(output, <span class="dv">20</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>))</span>
+<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(output)</span>
+<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">file.path</span>(<span class="fu">R.home</span>(<span class="st">"bin"</span>), <span class="st">"Rscript"</span>), <span class="fu">c</span>(<span class="st">"--vanilla"</span>, <span class="st">"scripts/run_article50_feast.R"</span>))</span>
+<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a><span class="fu">run_analysis</span>(<span class="fu">Sys.getenv</span>(<span class="st">"SOURCETRACKER_PYTHON"</span>, <span class="st">"sourcetracker-env/bin/python"</span>), <span class="fu">c</span>(<span class="st">"scripts/run_article50_sourcetracker.py"</span>))</span>
+<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a>完整计算脚本：<span class="co">[</span><span class="ot">run_article50_feast.R</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article50_feast.R)</span>、<span class="co">[</span><span class="ot">run_article50_sourcetracker.py</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/scripts/run_article50_sourcetracker.py)</span>。</span>
+<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-250"><a href="#cb17-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-251"><a href="#cb17-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### FEAST 主分析</span></span>
+<span id="cb17-252"><a href="#cb17-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-253"><a href="#cb17-253" aria-hidden="true" tabindex="-1"></a>FEAST 要求 samples × taxa count matrix，metadata 中列名为 <span class="in">`Env`</span>、<span class="in">`SourceSink`</span>、<span class="in">`id`</span>。固定 <span class="in">`COVERAGE=5000`</span>，并在每次稀释/EM 前设 seed。</span>
+<span id="cb17-254"><a href="#cb17-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-255"><a href="#cb17-255" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb17-256"><a href="#cb17-256" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb17-257"><a href="#cb17-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-260"><a href="#cb17-260" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-261"><a href="#cb17-261" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb17-262"><a href="#cb17-262" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FEAST)</span>
+<span id="cb17-263"><a href="#cb17-263" aria-hidden="true" tabindex="-1"></a>feast_metadata <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb17-264"><a href="#cb17-264" aria-hidden="true" tabindex="-1"></a>  <span class="at">Env =</span> metadata<span class="sc">$</span>SourceClass,</span>
+<span id="cb17-265"><a href="#cb17-265" aria-hidden="true" tabindex="-1"></a>  <span class="at">SourceSink =</span> metadata<span class="sc">$</span>SourceSink,</span>
+<span id="cb17-266"><a href="#cb17-266" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">as.integer</span>(metadata<span class="sc">$</span>FeastID),</span>
+<span id="cb17-267"><a href="#cb17-267" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="fu">rownames</span>(metadata)</span>
+<span id="cb17-268"><a href="#cb17-268" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-269"><a href="#cb17-269" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260726</span>)</span>
+<span id="cb17-270"><a href="#cb17-270" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">FEAST</span>(</span>
+<span id="cb17-271"><a href="#cb17-271" aria-hidden="true" tabindex="-1"></a>  <span class="at">C =</span> <span class="fu">t</span>(otutab), <span class="at">metadata =</span> feast_metadata,</span>
+<span id="cb17-272"><a href="#cb17-272" aria-hidden="true" tabindex="-1"></a>  <span class="at">EM_iterations =</span> <span class="dv">1000</span>, <span class="at">COVERAGE =</span> <span class="dv">5000</span>,</span>
+<span id="cb17-273"><a href="#cb17-273" aria-hidden="true" tabindex="-1"></a>  <span class="at">different_sources_flag =</span> <span class="dv">0</span>,</span>
+<span id="cb17-274"><a href="#cb17-274" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_path =</span> <span class="st">"results/50-source-tracking/feast-native/main"</span>,</span>
+<span id="cb17-275"><a href="#cb17-275" aria-hidden="true" tabindex="-1"></a>  <span class="at">outfile =</span> <span class="st">"main"</span></span>
+<span id="cb17-276"><a href="#cb17-276" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-277"><a href="#cb17-277" aria-hidden="true" tabindex="-1"></a><span class="co"># FEAST 输出每个 source sample 的 weight；按 metadata$SourceClass 求和后作图。</span></span>
+<span id="cb17-278"><a href="#cb17-278" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-279"><a href="#cb17-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-280"><a href="#cb17-280" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb17-281"><a href="#cb17-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-282"><a href="#cb17-282" aria-hidden="true" tabindex="-1"></a><span class="fu">### leave-one-out 与 missing-source audit</span></span>
+<span id="cb17-283"><a href="#cb17-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-284"><a href="#cb17-284" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb17-285"><a href="#cb17-285" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb17-286"><a href="#cb17-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-289"><a href="#cb17-289" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-290"><a href="#cb17-290" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb17-291"><a href="#cb17-291" aria-hidden="true" tabindex="-1"></a>class_sizes <span class="ot">&lt;-</span> <span class="fu">table</span>(metadata[source_ids, <span class="st">"SourceClass"</span>])</span>
+<span id="cb17-292"><a href="#cb17-292" aria-hidden="true" tabindex="-1"></a>eligible_loo <span class="ot">&lt;-</span> source_ids[</span>
+<span id="cb17-293"><a href="#cb17-293" aria-hidden="true" tabindex="-1"></a>  class_sizes[metadata[source_ids, <span class="st">"SourceClass"</span>]] <span class="sc">&gt;=</span> <span class="dv">2</span></span>
+<span id="cb17-294"><a href="#cb17-294" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb17-295"><a href="#cb17-295" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(eligible_loo)) {</span>
+<span id="cb17-296"><a href="#cb17-296" aria-hidden="true" tabindex="-1"></a>  held_out <span class="ot">&lt;-</span> eligible_loo[i]</span>
+<span id="cb17-297"><a href="#cb17-297" aria-hidden="true" tabindex="-1"></a>  training_sources <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(source_ids, held_out)</span>
+<span id="cb17-298"><a href="#cb17-298" aria-hidden="true" tabindex="-1"></a>  <span class="co"># held_out 标记为 Sink；training_sources 标记为 Source。</span></span>
+<span id="cb17-299"><a href="#cb17-299" aria-hidden="true" tabindex="-1"></a>  <span class="co"># set.seed(20260726 + i)，用同一 COVERAGE/iterations 重新拟合。</span></span>
+<span id="cb17-300"><a href="#cb17-300" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-301"><a href="#cb17-301" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (removed_class <span class="cf">in</span> <span class="fu">unique</span>(metadata[source_ids, <span class="st">"SourceClass"</span>])) {</span>
+<span id="cb17-302"><a href="#cb17-302" aria-hidden="true" tabindex="-1"></a>  <span class="co"># 从 reference panel 删除该 class，重新估计原始 sink。</span></span>
+<span id="cb17-303"><a href="#cb17-303" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-304"><a href="#cb17-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-305"><a href="#cb17-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-306"><a href="#cb17-306" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb17-307"><a href="#cb17-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-308"><a href="#cb17-308" aria-hidden="true" tabindex="-1"></a><span class="fu">### SourceTracker2：相同 source classes、depth 与随机种子</span></span>
+<span id="cb17-309"><a href="#cb17-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-310"><a href="#cb17-310" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb17-311"><a href="#cb17-311" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>模型调用与参数<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb17-312"><a href="#cb17-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-315"><a href="#cb17-315" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-316"><a href="#cb17-316" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb17-317"><a href="#cb17-317" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-318"><a href="#cb17-318" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-319"><a href="#cb17-319" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> skbio.stats <span class="im">import</span> subsample_counts</span>
+<span id="cb17-320"><a href="#cb17-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-321"><a href="#cb17-321" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="bu">hasattr</span>(np, <span class="st">"int"</span>):</span>
+<span id="cb17-322"><a href="#cb17-322" aria-hidden="true" tabindex="-1"></a>    np.<span class="bu">int</span> <span class="op">=</span> <span class="bu">int</span>  <span class="co"># SourceTracker2 2.0.1 / NumPy 2 compatibility</span></span>
+<span id="cb17-323"><a href="#cb17-323" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sourcetracker._sourcetracker <span class="im">import</span> _gibbs</span>
+<span id="cb17-324"><a href="#cb17-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-325"><a href="#cb17-325" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">20260726</span>)</span>
+<span id="cb17-326"><a href="#cb17-326" aria-hidden="true" tabindex="-1"></a><span class="co"># 按 SourceClass 汇总 source samples；每个 source class 与 sink 稀释到 5,000 reads。</span></span>
+<span id="cb17-327"><a href="#cb17-327" aria-hidden="true" tabindex="-1"></a>mean, monte_carlo_sd <span class="op">=</span> _gibbs(</span>
+<span id="cb17-328"><a href="#cb17-328" aria-hidden="true" tabindex="-1"></a>    source_df, sink_df,</span>
+<span id="cb17-329"><a href="#cb17-329" aria-hidden="true" tabindex="-1"></a>    alpha1<span class="op">=</span><span class="fl">0.001</span>, alpha2<span class="op">=</span><span class="fl">0.001</span>, beta<span class="op">=</span><span class="dv">10</span>,</span>
+<span id="cb17-330"><a href="#cb17-330" aria-hidden="true" tabindex="-1"></a>    restarts<span class="op">=</span><span class="dv">10</span>, draws_per_restart<span class="op">=</span><span class="dv">2</span>, burnin<span class="op">=</span><span class="dv">100</span>, delay<span class="op">=</span><span class="dv">10</span></span>
+<span id="cb17-331"><a href="#cb17-331" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-332"><a href="#cb17-332" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-333"><a href="#cb17-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-334"><a href="#cb17-334" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb17-335"><a href="#cb17-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-336"><a href="#cb17-336" aria-hidden="true" tabindex="-1"></a>完整固定运行命令为：</span>
+<span id="cb17-337"><a href="#cb17-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-338"><a href="#cb17-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-341"><a href="#cb17-341" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-342"><a href="#cb17-342" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb17-343"><a href="#cb17-343" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: load-source-tracking-results</span></span>
+<span id="cb17-344"><a href="#cb17-344" aria-hidden="true" tabindex="-1"></a>result_dir <span class="ot">&lt;-</span> <span class="st">"results/50-source-tracking"</span></span>
+<span id="cb17-345"><a href="#cb17-345" aria-hidden="true" tabindex="-1"></a>feast_main <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb17-346"><a href="#cb17-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"feast-main-class.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-347"><a href="#cb17-347" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-348"><a href="#cb17-348" aria-hidden="true" tabindex="-1"></a>source_tracker_main <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb17-349"><a href="#cb17-349" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"source-tracker-main.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-348"><a href="#cb17-348" aria-hidden="true" tabindex="-1"></a>feast_loo <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb17-349"><a href="#cb17-349" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"feast-loo-predictions.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-350"><a href="#cb17-350" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-351"><a href="#cb17-351" aria-hidden="true" tabindex="-1"></a>source_tracker_loo <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
-<span id="cb17-352"><a href="#cb17-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"source-tracker-loo-predictions.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
+<span id="cb17-351"><a href="#cb17-351" aria-hidden="true" tabindex="-1"></a>feast_missing <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb17-352"><a href="#cb17-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"feast-missing-source.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-353"><a href="#cb17-353" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-354"><a href="#cb17-354" aria-hidden="true" tabindex="-1"></a>feast_summary <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(</span>
-<span id="cb17-355"><a href="#cb17-355" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"summary-feast.json"</span>), <span class="at">simplifyVector =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-354"><a href="#cb17-354" aria-hidden="true" tabindex="-1"></a>source_tracker_main <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb17-355"><a href="#cb17-355" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"source-tracker-main.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-356"><a href="#cb17-356" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-357"><a href="#cb17-357" aria-hidden="true" tabindex="-1"></a>source_tracker_summary <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(</span>
-<span id="cb17-358"><a href="#cb17-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"summary-source-tracker.json"</span>), <span class="at">simplifyVector =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-357"><a href="#cb17-357" aria-hidden="true" tabindex="-1"></a>source_tracker_loo <span class="ot">&lt;-</span> readr<span class="sc">::</span><span class="fu">read_tsv</span>(</span>
+<span id="cb17-358"><a href="#cb17-358" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"source-tracker-loo-predictions.tsv"</span>), <span class="at">show_col_types =</span> <span class="cn">FALSE</span></span>
 <span id="cb17-359"><a href="#cb17-359" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-360"><a href="#cb17-360" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb17-361"><a href="#cb17-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(<span class="fu">sum</span>(feast_main<span class="sc">$</span>Contribution) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">1e-6</span>,</span>
-<span id="cb17-362"><a href="#cb17-362" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(<span class="fu">sum</span>(source_tracker_main<span class="sc">$</span>Contribution) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">1e-6</span>,</span>
-<span id="cb17-363"><a href="#cb17-363" aria-hidden="true" tabindex="-1"></a>  feast_summary<span class="sc">$</span>leave_one_out_known_class_accuracy <span class="sc">==</span> <span class="fl">0.5</span>,</span>
-<span id="cb17-364"><a href="#cb17-364" aria-hidden="true" tabindex="-1"></a>  source_tracker_summary<span class="sc">$</span>leave_one_out_known_class_accuracy <span class="sc">==</span> <span class="fl">0.5</span>,</span>
-<span id="cb17-365"><a href="#cb17-365" aria-hidden="true" tabindex="-1"></a>  feast_summary<span class="sc">$</span>main_largest_source_class <span class="sc">==</span> <span class="st">"Infant gut"</span>,</span>
-<span id="cb17-366"><a href="#cb17-366" aria-hidden="true" tabindex="-1"></a>  source_tracker_summary<span class="sc">$</span>main_largest_source_class <span class="sc">==</span> <span class="st">"Infant gut"</span></span>
-<span id="cb17-367"><a href="#cb17-367" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-368"><a href="#cb17-368" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(</span>
-<span id="cb17-369"><a href="#cb17-369" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="st">"FEAST"</span>, <span class="at">Unknown =</span> feast_summary<span class="sc">$</span>main_unknown,</span>
-<span id="cb17-370"><a href="#cb17-370" aria-hidden="true" tabindex="-1"></a>             <span class="at">LOOAccuracy =</span> feast_summary<span class="sc">$</span>leave_one_out_known_class_accuracy),</span>
-<span id="cb17-371"><a href="#cb17-371" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="st">"SourceTracker2"</span>, <span class="at">Unknown =</span> source_tracker_summary<span class="sc">$</span>main_unknown,</span>
-<span id="cb17-372"><a href="#cb17-372" aria-hidden="true" tabindex="-1"></a>             <span class="at">LOOAccuracy =</span> source_tracker_summary<span class="sc">$</span>leave_one_out_known_class_accuracy)</span>
+<span id="cb17-360"><a href="#cb17-360" aria-hidden="true" tabindex="-1"></a>feast_summary <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(</span>
+<span id="cb17-361"><a href="#cb17-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"summary-feast.json"</span>), <span class="at">simplifyVector =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-362"><a href="#cb17-362" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-363"><a href="#cb17-363" aria-hidden="true" tabindex="-1"></a>source_tracker_summary <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">read_json</span>(</span>
+<span id="cb17-364"><a href="#cb17-364" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(result_dir, <span class="st">"summary-source-tracker.json"</span>), <span class="at">simplifyVector =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-365"><a href="#cb17-365" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-366"><a href="#cb17-366" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb17-367"><a href="#cb17-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(<span class="fu">sum</span>(feast_main<span class="sc">$</span>Contribution) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">1e-6</span>,</span>
+<span id="cb17-368"><a href="#cb17-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abs</span>(<span class="fu">sum</span>(source_tracker_main<span class="sc">$</span>Contribution) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">&lt;</span> <span class="fl">1e-6</span>,</span>
+<span id="cb17-369"><a href="#cb17-369" aria-hidden="true" tabindex="-1"></a>  feast_summary<span class="sc">$</span>leave_one_out_known_class_accuracy <span class="sc">==</span> <span class="fl">0.5</span>,</span>
+<span id="cb17-370"><a href="#cb17-370" aria-hidden="true" tabindex="-1"></a>  source_tracker_summary<span class="sc">$</span>leave_one_out_known_class_accuracy <span class="sc">==</span> <span class="fl">0.5</span>,</span>
+<span id="cb17-371"><a href="#cb17-371" aria-hidden="true" tabindex="-1"></a>  feast_summary<span class="sc">$</span>main_largest_source_class <span class="sc">==</span> <span class="st">"Infant gut"</span>,</span>
+<span id="cb17-372"><a href="#cb17-372" aria-hidden="true" tabindex="-1"></a>  source_tracker_summary<span class="sc">$</span>main_largest_source_class <span class="sc">==</span> <span class="st">"Infant gut"</span></span>
 <span id="cb17-373"><a href="#cb17-373" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-374"><a href="#cb17-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-375"><a href="#cb17-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-376"><a href="#cb17-376" aria-hidden="true" tabindex="-1"></a><span class="fu">## 未知来源、留一校准与方法敏感性 {#sec-audit}</span></span>
-<span id="cb17-377"><a href="#cb17-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-378"><a href="#cb17-378" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**source panel 先于算法。**candidate sources 应来自研究问题与 sampling design，而不是看完 sink 后补最相似的样本。</span>
-<span id="cb17-379"><a href="#cb17-379" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**negative controls 不能缺。**extraction blanks、reagent lots 与 sequencing runs 应作为 contamination audit；低 biomass sinks 尤其不能把 kit contaminants 当来源。</span>
-<span id="cb17-380"><a href="#cb17-380" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**匹配 feature space。**所有 sources/sinks 必须同一 primer、region、pipeline、taxonomy/ASV universe；不同 studies 合并前要审 batch 与 zero inflation。</span>
-<span id="cb17-381"><a href="#cb17-381" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Unknown 做 sensitivity，不做真值。**本例删掉 infant gut 后 Unknown 没有上升，证明它依赖其余 source geometry 与算法。</span>
-<span id="cb17-382"><a href="#cb17-382" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**留一验证暴露局限。**两套方法已知 class accuracy 都只有 50%；主 sink 的最大类别一致不能抵消这一校准结果。</span>
-<span id="cb17-383"><a href="#cb17-383" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**跨算法比较先统一 contract。**本例统一 5,000 reads、source classes 与 seed；FEAST 给 point estimate，SourceTracker2 另给 20 draws 的 Monte Carlo SD，但这不是 biological confidence interval。</span>
-<span id="cb17-384"><a href="#cb17-384" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**传播结论升级到 strain level。**16S genus/OTU contribution 只能称 source attribution/similarity；transmission 需 shotgun SNVs/strain haplotypes、方向与时间证据。</span>
-<span id="cb17-385"><a href="#cb17-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-386"><a href="#cb17-386" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="不能这样写"}</span>
-<span id="cb17-387"><a href="#cb17-387" aria-hidden="true" tabindex="-1"></a>“Infant gut contributed 92.9% of the sink, proving transmission”同时犯了两处错误：92.9% 是 SourceTracker2 在特定 reference panel 下的 model allocation；16S profile 也无法证明 donor、方向或 strain identity。</span>
-<span id="cb17-388"><a href="#cb17-388" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb17-389"><a href="#cb17-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-390"><a href="#cb17-390" aria-hidden="true" tabindex="-1"></a><span class="fu">## 同时查看来源比例、未知部分与留一验证 {#sec-beautify}</span></span>
+<span id="cb17-374"><a href="#cb17-374" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(</span>
+<span id="cb17-375"><a href="#cb17-375" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="st">"FEAST"</span>, <span class="at">Unknown =</span> feast_summary<span class="sc">$</span>main_unknown,</span>
+<span id="cb17-376"><a href="#cb17-376" aria-hidden="true" tabindex="-1"></a>             <span class="at">LOOAccuracy =</span> feast_summary<span class="sc">$</span>leave_one_out_known_class_accuracy),</span>
+<span id="cb17-377"><a href="#cb17-377" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="st">"SourceTracker2"</span>, <span class="at">Unknown =</span> source_tracker_summary<span class="sc">$</span>main_unknown,</span>
+<span id="cb17-378"><a href="#cb17-378" aria-hidden="true" tabindex="-1"></a>             <span class="at">LOOAccuracy =</span> source_tracker_summary<span class="sc">$</span>leave_one_out_known_class_accuracy)</span>
+<span id="cb17-379"><a href="#cb17-379" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-380"><a href="#cb17-380" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-381"><a href="#cb17-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-382"><a href="#cb17-382" aria-hidden="true" tabindex="-1"></a><span class="fu">## 未知来源、留一校准与方法敏感性 {#sec-audit}</span></span>
+<span id="cb17-383"><a href="#cb17-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-384"><a href="#cb17-384" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**source panel 先于算法。**candidate sources 应来自研究问题与 sampling design，而不是看完 sink 后补最相似的样本。</span>
+<span id="cb17-385"><a href="#cb17-385" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**negative controls 不能缺。**extraction blanks、reagent lots 与 sequencing runs 应作为 contamination audit；低 biomass sinks 尤其不能把 kit contaminants 当来源。</span>
+<span id="cb17-386"><a href="#cb17-386" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**匹配 feature space。**所有 sources/sinks 必须同一 primer、region、pipeline、taxonomy/ASV universe；不同 studies 合并前要审 batch 与 zero inflation。</span>
+<span id="cb17-387"><a href="#cb17-387" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Unknown 做 sensitivity，不做真值。**本例删掉 infant gut 后 Unknown 没有上升，证明它依赖其余 source geometry 与算法。</span>
+<span id="cb17-388"><a href="#cb17-388" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**留一验证暴露局限。**两套方法已知 class accuracy 都只有 50%；主 sink 的最大类别一致不能抵消这一校准结果。</span>
+<span id="cb17-389"><a href="#cb17-389" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**跨算法比较先统一 contract。**本例统一 5,000 reads、source classes 与 seed；FEAST 给 point estimate，SourceTracker2 另给 20 draws 的 Monte Carlo SD，但这不是 biological confidence interval。</span>
+<span id="cb17-390"><a href="#cb17-390" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>**传播结论升级到 strain level。**16S genus/OTU contribution 只能称 source attribution/similarity；transmission 需 shotgun SNVs/strain haplotypes、方向与时间证据。</span>
 <span id="cb17-391"><a href="#cb17-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-392"><a href="#cb17-392" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 1：FEAST 估计的各类来源贡献</span></span>
-<span id="cb17-393"><a href="#cb17-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-396"><a href="#cb17-396" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-397"><a href="#cb17-397" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb17-398"><a href="#cb17-398" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-feast-main</span></span>
-<span id="cb17-399"><a href="#cb17-399" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "FEAST class-level source contributions for the official infant-gut sink."</span></span>
-<span id="cb17-400"><a href="#cb17-400" aria-hidden="true" tabindex="-1"></a>source_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb17-401"><a href="#cb17-401" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Infant gut</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
-<span id="cb17-402"><a href="#cb17-402" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Adult gut</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>]),</span>
-<span id="cb17-403"><a href="#cb17-403" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Adult skin</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"purple"</span>]),</span>
-<span id="cb17-404"><a href="#cb17-404" aria-hidden="true" tabindex="-1"></a>  <span class="at">Soil =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"green"</span>]),</span>
-<span id="cb17-405"><a href="#cb17-405" aria-hidden="true" tabindex="-1"></a>  <span class="at">Unknown =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"grey"</span>])</span>
-<span id="cb17-406"><a href="#cb17-406" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-407"><a href="#cb17-407" aria-hidden="true" tabindex="-1"></a>feast_main<span class="sc">$</span>SourceClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb17-408"><a href="#cb17-408" aria-hidden="true" tabindex="-1"></a>  feast_main<span class="sc">$</span>SourceClass,</span>
-<span id="cb17-409"><a href="#cb17-409" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">names</span>(source_colors)</span>
-<span id="cb17-410"><a href="#cb17-410" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-411"><a href="#cb17-411" aria-hidden="true" tabindex="-1"></a>p50_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(feast_main, <span class="fu">aes</span>(SourceClass, Contribution, <span class="at">fill =</span> SourceClass)) <span class="sc">+</span></span>
-<span id="cb17-412"><a href="#cb17-412" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.68</span>) <span class="sc">+</span></span>
-<span id="cb17-413"><a href="#cb17-413" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">percent</span>(Contribution, <span class="at">accuracy =</span> <span class="fl">0.1</span>)),</span>
-<span id="cb17-414"><a href="#cb17-414" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.35</span>, <span class="at">family =</span> font_pub, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb17-415"><a href="#cb17-415" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> source_colors, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb17-416"><a href="#cb17-416" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.78</span>),</span>
-<span id="cb17-417"><a href="#cb17-417" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.02</span>))) <span class="sc">+</span></span>
-<span id="cb17-418"><a href="#cb17-418" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Estimated contribution"</span>, <span class="at">fill =</span> <span class="st">"Source class"</span>,</span>
-<span id="cb17-419"><a href="#cb17-419" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"FEAST source attribution"</span>,</span>
-<span id="cb17-420"><a href="#cb17-420" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Sink: infant gut 1; 5,000-read analysis depth"</span>) <span class="sc">+</span></span>
-<span id="cb17-421"><a href="#cb17-421" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb17-422"><a href="#cb17-422" aria-hidden="true" tabindex="-1"></a>                      <span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb17-423"><a href="#cb17-423" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p50_1, <span class="st">"figures/50-source-tracking/50-1-feast-main"</span>, <span class="dv">89</span>, <span class="dv">78</span>)</span>
-<span id="cb17-424"><a href="#cb17-424" aria-hidden="true" tabindex="-1"></a>p50_1</span>
-<span id="cb17-425"><a href="#cb17-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-426"><a href="#cb17-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-427"><a href="#cb17-427" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 2：同一数据、不同算法</span></span>
-<span id="cb17-428"><a href="#cb17-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-431"><a href="#cb17-431" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-432"><a href="#cb17-432" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb17-433"><a href="#cb17-433" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-source-tracker-comparison</span></span>
-<span id="cb17-434"><a href="#cb17-434" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "FEAST and SourceTracker2 allocations for the same sink and candidate source classes."</span></span>
-<span id="cb17-435"><a href="#cb17-435" aria-hidden="true" tabindex="-1"></a>method_comparison <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb17-436"><a href="#cb17-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="st">"FEAST"</span>, <span class="at">SourceClass =</span> <span class="fu">as.character</span>(feast_main<span class="sc">$</span>SourceClass),</span>
-<span id="cb17-437"><a href="#cb17-437" aria-hidden="true" tabindex="-1"></a>             <span class="at">Contribution =</span> feast_main<span class="sc">$</span>Contribution, <span class="at">MonteCarloSD =</span> <span class="cn">NA_real_</span>),</span>
-<span id="cb17-438"><a href="#cb17-438" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="st">"SourceTracker2"</span>, <span class="at">SourceClass =</span> source_tracker_main<span class="sc">$</span>SourceClass,</span>
-<span id="cb17-439"><a href="#cb17-439" aria-hidden="true" tabindex="-1"></a>             <span class="at">Contribution =</span> source_tracker_main<span class="sc">$</span>Contribution,</span>
-<span id="cb17-440"><a href="#cb17-440" aria-hidden="true" tabindex="-1"></a>             <span class="at">MonteCarloSD =</span> source_tracker_main<span class="sc">$</span>MonteCarloSD)</span>
-<span id="cb17-441"><a href="#cb17-441" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-442"><a href="#cb17-442" aria-hidden="true" tabindex="-1"></a>method_comparison<span class="sc">$</span>SourceClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(method_comparison<span class="sc">$</span>SourceClass, <span class="at">levels =</span> <span class="fu">names</span>(source_colors))</span>
-<span id="cb17-443"><a href="#cb17-443" aria-hidden="true" tabindex="-1"></a>p50_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(method_comparison, <span class="fu">aes</span>(SourceClass, Contribution, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
-<span id="cb17-444"><a href="#cb17-444" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.74</span>), <span class="at">width =</span> <span class="fl">0.66</span>) <span class="sc">+</span></span>
-<span id="cb17-445"><a href="#cb17-445" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
-<span id="cb17-446"><a href="#cb17-446" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, Contribution <span class="sc">-</span> MonteCarloSD),</span>
-<span id="cb17-447"><a href="#cb17-447" aria-hidden="true" tabindex="-1"></a>        <span class="at">ymax =</span> <span class="fu">pmin</span>(<span class="dv">1</span>, Contribution <span class="sc">+</span> MonteCarloSD)),</span>
-<span id="cb17-448"><a href="#cb17-448" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.74</span>), <span class="at">width =</span> <span class="fl">0.16</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
-<span id="cb17-449"><a href="#cb17-449" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb17-450"><a href="#cb17-450" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb17-451"><a href="#cb17-451" aria-hidden="true" tabindex="-1"></a>    <span class="at">FEAST =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
-<span id="cb17-452"><a href="#cb17-452" aria-hidden="true" tabindex="-1"></a>    <span class="at">SourceTracker2 =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>])</span>
-<span id="cb17-453"><a href="#cb17-453" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb17-454"><a href="#cb17-454" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb17-455"><a href="#cb17-455" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Estimated contribution"</span>, <span class="at">fill =</span> <span class="st">"Method"</span>,</span>
-<span id="cb17-456"><a href="#cb17-456" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Algorithm-dependent allocation"</span>,</span>
-<span id="cb17-457"><a href="#cb17-457" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"SourceTracker2 bars show Monte Carlo SD, not biological uncertainty"</span>) <span class="sc">+</span></span>
-<span id="cb17-458"><a href="#cb17-458" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb17-459"><a href="#cb17-459" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p50_2, <span class="st">"figures/50-source-tracking/50-2-method-comparison"</span>, <span class="dv">180</span>, <span class="dv">82</span>)</span>
-<span id="cb17-460"><a href="#cb17-460" aria-hidden="true" tabindex="-1"></a>p50_2</span>
-<span id="cb17-461"><a href="#cb17-461" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-462"><a href="#cb17-462" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-463"><a href="#cb17-463" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 3：leave-one-out calibration</span></span>
-<span id="cb17-464"><a href="#cb17-464" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-467"><a href="#cb17-467" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-468"><a href="#cb17-468" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb17-469"><a href="#cb17-469" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-source-tracking-loo</span></span>
-<span id="cb17-470"><a href="#cb17-470" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Leave-one-source-sample-out contribution profiles for FEAST and SourceTracker2."</span></span>
-<span id="cb17-471"><a href="#cb17-471" aria-hidden="true" tabindex="-1"></a>feast_loo_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb17-472"><a href="#cb17-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(feast_loo[, <span class="fu">c</span>(<span class="st">"SampleID"</span>, <span class="st">"TrueClass"</span>, <span class="st">"InfantGut"</span>, <span class="st">"AdultGut"</span>,</span>
-<span id="cb17-473"><a href="#cb17-473" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"AdultSkin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>)]),</span>
-<span id="cb17-474"><a href="#cb17-474" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">"InfantGut"</span>, <span class="st">"AdultGut"</span>, <span class="st">"AdultSkin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>),</span>
-<span id="cb17-475"><a href="#cb17-475" aria-hidden="true" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="st">"Contribution"</span>, <span class="at">timevar =</span> <span class="st">"SourceClass"</span>,</span>
-<span id="cb17-476"><a href="#cb17-476" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="fu">c</span>(<span class="st">"Infant gut"</span>, <span class="st">"Adult gut"</span>, <span class="st">"Adult skin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>),</span>
-<span id="cb17-477"><a href="#cb17-477" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">"long"</span></span>
-<span id="cb17-478"><a href="#cb17-478" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-479"><a href="#cb17-479" aria-hidden="true" tabindex="-1"></a>feast_loo_long<span class="sc">$</span>Method <span class="ot">&lt;-</span> <span class="st">"FEAST"</span></span>
-<span id="cb17-480"><a href="#cb17-480" aria-hidden="true" tabindex="-1"></a>st_loo_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
-<span id="cb17-481"><a href="#cb17-481" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(source_tracker_loo[, <span class="fu">c</span>(<span class="st">"SampleID"</span>, <span class="st">"TrueClass"</span>, <span class="st">"Infantgut"</span>,</span>
-<span id="cb17-482"><a href="#cb17-482" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Adultgut"</span>, <span class="st">"Adultskin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>)]),</span>
-<span id="cb17-483"><a href="#cb17-483" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">"Infantgut"</span>, <span class="st">"Adultgut"</span>, <span class="st">"Adultskin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>),</span>
-<span id="cb17-484"><a href="#cb17-484" aria-hidden="true" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="st">"Contribution"</span>, <span class="at">timevar =</span> <span class="st">"SourceClass"</span>,</span>
-<span id="cb17-485"><a href="#cb17-485" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="fu">c</span>(<span class="st">"Infant gut"</span>, <span class="st">"Adult gut"</span>, <span class="st">"Adult skin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>),</span>
-<span id="cb17-486"><a href="#cb17-486" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">"long"</span></span>
-<span id="cb17-487"><a href="#cb17-487" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-488"><a href="#cb17-488" aria-hidden="true" tabindex="-1"></a>st_loo_long<span class="sc">$</span>Method <span class="ot">&lt;-</span> <span class="st">"SourceTracker2"</span></span>
-<span id="cb17-489"><a href="#cb17-489" aria-hidden="true" tabindex="-1"></a>loo_long <span class="ot">&lt;-</span> <span class="fu">rbind</span>(feast_loo_long, st_loo_long)</span>
-<span id="cb17-490"><a href="#cb17-490" aria-hidden="true" tabindex="-1"></a>loo_long<span class="sc">$</span>SampleLabel <span class="ot">&lt;-</span> <span class="fu">paste0</span>(loo_long<span class="sc">$</span>SampleID, <span class="st">" ("</span>, loo_long<span class="sc">$</span>TrueClass, <span class="st">")"</span>)</span>
-<span id="cb17-491"><a href="#cb17-491" aria-hidden="true" tabindex="-1"></a>loo_long<span class="sc">$</span>SourceClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(loo_long<span class="sc">$</span>SourceClass, <span class="at">levels =</span> <span class="fu">names</span>(source_colors))</span>
-<span id="cb17-492"><a href="#cb17-492" aria-hidden="true" tabindex="-1"></a>p50_3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(loo_long, <span class="fu">aes</span>(SourceClass, SampleLabel, <span class="at">fill =</span> Contribution)) <span class="sc">+</span></span>
-<span id="cb17-493"><a href="#cb17-493" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.45</span>) <span class="sc">+</span></span>
-<span id="cb17-494"><a href="#cb17-494" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Method, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb17-495"><a href="#cb17-495" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#F7FBFF"</span>, <span class="at">high =</span> pal_pub[<span class="st">"blue"</span>], <span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
-<span id="cb17-496"><a href="#cb17-496" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Candidate source class"</span>, <span class="at">y =</span> <span class="st">"Held-out sample (true class)"</span>,</span>
-<span id="cb17-497"><a href="#cb17-497" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Contribution"</span>, <span class="at">title =</span> <span class="st">"Leave-one-out calibration"</span>,</span>
-<span id="cb17-498"><a href="#cb17-498" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Known-class top-1 accuracy: 50% for both methods"</span>) <span class="sc">+</span></span>
-<span id="cb17-499"><a href="#cb17-499" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="fl">8.5</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb17-500"><a href="#cb17-500" aria-hidden="true" tabindex="-1"></a>                         <span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
-<span id="cb17-501"><a href="#cb17-501" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p50_3, <span class="st">"figures/50-source-tracking/50-3-loo-calibration"</span>, <span class="dv">180</span>, <span class="dv">135</span>)</span>
-<span id="cb17-502"><a href="#cb17-502" aria-hidden="true" tabindex="-1"></a>p50_3</span>
-<span id="cb17-503"><a href="#cb17-503" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-504"><a href="#cb17-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-505"><a href="#cb17-505" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 4：missing-source sensitivity</span></span>
-<span id="cb17-506"><a href="#cb17-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-509"><a href="#cb17-509" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb17-510"><a href="#cb17-510" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb17-511"><a href="#cb17-511" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-feast-missing-source</span></span>
-<span id="cb17-512"><a href="#cb17-512" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "FEAST allocation after removing each candidate source class."</span></span>
-<span id="cb17-513"><a href="#cb17-513" aria-hidden="true" tabindex="-1"></a>scenario_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"Infant gut"</span>, <span class="st">"Adult gut"</span>, <span class="st">"Adult skin"</span>, <span class="st">"Soil"</span>)</span>
-<span id="cb17-514"><a href="#cb17-514" aria-hidden="true" tabindex="-1"></a>feast_missing<span class="sc">$</span>RemovedClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(feast_missing<span class="sc">$</span>RemovedClass, <span class="at">levels =</span> scenario_order)</span>
-<span id="cb17-515"><a href="#cb17-515" aria-hidden="true" tabindex="-1"></a>feast_missing<span class="sc">$</span>SourceClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(feast_missing<span class="sc">$</span>SourceClass, <span class="at">levels =</span> <span class="fu">names</span>(source_colors))</span>
-<span id="cb17-516"><a href="#cb17-516" aria-hidden="true" tabindex="-1"></a>p50_4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(feast_missing, <span class="fu">aes</span>(RemovedClass, Contribution, <span class="at">fill =</span> SourceClass)) <span class="sc">+</span></span>
-<span id="cb17-517"><a href="#cb17-517" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.72</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb17-518"><a href="#cb17-518" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> source_colors, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb17-519"><a href="#cb17-519" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))) <span class="sc">+</span></span>
-<span id="cb17-520"><a href="#cb17-520" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Removed source class"</span>, <span class="at">y =</span> <span class="st">"Estimated contribution"</span>, <span class="at">fill =</span> <span class="st">"Allocated class"</span>,</span>
-<span id="cb17-521"><a href="#cb17-521" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Missing-source sensitivity"</span>,</span>
-<span id="cb17-522"><a href="#cb17-522" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Unknown is model-dependent and need not increase when a true source is omitted"</span>) <span class="sc">+</span></span>
-<span id="cb17-523"><a href="#cb17-523" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
-<span id="cb17-524"><a href="#cb17-524" aria-hidden="true" tabindex="-1"></a>                      <span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
-<span id="cb17-525"><a href="#cb17-525" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p50_4, <span class="st">"figures/50-source-tracking/50-4-missing-source"</span>, <span class="dv">180</span>, <span class="dv">90</span>)</span>
-<span id="cb17-526"><a href="#cb17-526" aria-hidden="true" tabindex="-1"></a>p50_4</span>
-<span id="cb17-527"><a href="#cb17-527" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-528"><a href="#cb17-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-529"><a href="#cb17-529" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
-<span id="cb17-530"><a href="#cb17-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-531"><a href="#cb17-531" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的七件事"}</span>
-<span id="cb17-532"><a href="#cb17-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-533"><a href="#cb17-533" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>source samples 在 sink 之后才按相似性选择，造成 circular reference panel。</span>
-<span id="cb17-534"><a href="#cb17-534" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>sources 与 sinks 来自不同 primer、batch、pipeline 或 feature definitions。</span>
-<span id="cb17-535"><a href="#cb17-535" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>没有 extraction blanks/negative controls，尤其在低 biomass 场景。</span>
-<span id="cb17-536"><a href="#cb17-536" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>不做 leave-one-out、synthetic mixture 或 external validation。</span>
-<span id="cb17-537"><a href="#cb17-537" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>把 Unknown 当未采样来源的真实比例，且不给 missing-source sensitivity。</span>
-<span id="cb17-538"><a href="#cb17-538" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>只跑一个 stochastic result，不设 seed、不报 chains/draws/burn-in/depth。</span>
-<span id="cb17-539"><a href="#cb17-539" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>用 16S source attribution 宣称 direct transmission、donor identity 或传播方向。</span>
-<span id="cb17-540"><a href="#cb17-540" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-541"><a href="#cb17-541" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb17-542"><a href="#cb17-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-543"><a href="#cb17-543" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告来源追踪与校准的方法与限制 {#sec-methods}</span></span>
-<span id="cb17-544"><a href="#cb17-544" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-545"><a href="#cb17-545" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Source attribution was evaluated using the official FEAST example comprising one sink, nine source samples, four candidate source classes and 1,839 anonymous taxa. Count tables and metadata were aligned by exact sample identifier. FEAST v0.1.0 was run for 1,000 EM iterations at a coverage of 5,000 reads using seed 20260726, and sample-level weights were summed within pre-specified source classes. SourceTracker2 v2.0.1 used the same source classes and depth, alpha1=0.001, alpha2=0.001, beta=10, 10 restarts, two draws per restart, burn-in 100 and thinning delay 10. Classes with at least two source replicates were evaluated by leave-one-source-sample-out classification; FEAST was additionally rerun after removing each source class. Unknown was interpreted as a model-dependent unexplained fraction. Amplicon-level attribution was not considered evidence of strain transmission or directionality.</span></span>
+<span id="cb17-392"><a href="#cb17-392" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning title="不能这样写"}</span>
+<span id="cb17-393"><a href="#cb17-393" aria-hidden="true" tabindex="-1"></a>“Infant gut contributed 92.9% of the sink, proving transmission”同时犯了两处错误：92.9% 是 SourceTracker2 在特定 reference panel 下的 model allocation；16S profile 也无法证明 donor、方向或 strain identity。</span>
+<span id="cb17-394"><a href="#cb17-394" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb17-395"><a href="#cb17-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-396"><a href="#cb17-396" aria-hidden="true" tabindex="-1"></a><span class="fu">## 同时查看来源比例、未知部分与留一验证 {#sec-beautify}</span></span>
+<span id="cb17-397"><a href="#cb17-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-398"><a href="#cb17-398" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 1：FEAST 估计的各类来源贡献</span></span>
+<span id="cb17-399"><a href="#cb17-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-402"><a href="#cb17-402" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-403"><a href="#cb17-403" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb17-404"><a href="#cb17-404" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-feast-main</span></span>
+<span id="cb17-405"><a href="#cb17-405" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "FEAST class-level source contributions for the official infant-gut sink."</span></span>
+<span id="cb17-406"><a href="#cb17-406" aria-hidden="true" tabindex="-1"></a>source_colors <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb17-407"><a href="#cb17-407" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Infant gut</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
+<span id="cb17-408"><a href="#cb17-408" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Adult gut</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>]),</span>
+<span id="cb17-409"><a href="#cb17-409" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Adult skin</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">unname</span>(pal_pub[<span class="st">"purple"</span>]),</span>
+<span id="cb17-410"><a href="#cb17-410" aria-hidden="true" tabindex="-1"></a>  <span class="at">Soil =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"green"</span>]),</span>
+<span id="cb17-411"><a href="#cb17-411" aria-hidden="true" tabindex="-1"></a>  <span class="at">Unknown =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"grey"</span>])</span>
+<span id="cb17-412"><a href="#cb17-412" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-413"><a href="#cb17-413" aria-hidden="true" tabindex="-1"></a>feast_main<span class="sc">$</span>SourceClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb17-414"><a href="#cb17-414" aria-hidden="true" tabindex="-1"></a>  feast_main<span class="sc">$</span>SourceClass,</span>
+<span id="cb17-415"><a href="#cb17-415" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">names</span>(source_colors)</span>
+<span id="cb17-416"><a href="#cb17-416" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-417"><a href="#cb17-417" aria-hidden="true" tabindex="-1"></a>p50_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(feast_main, <span class="fu">aes</span>(SourceClass, Contribution, <span class="at">fill =</span> SourceClass)) <span class="sc">+</span></span>
+<span id="cb17-418"><a href="#cb17-418" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.68</span>) <span class="sc">+</span></span>
+<span id="cb17-419"><a href="#cb17-419" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> scales<span class="sc">::</span><span class="fu">percent</span>(Contribution, <span class="at">accuracy =</span> <span class="fl">0.1</span>)),</span>
+<span id="cb17-420"><a href="#cb17-420" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.35</span>, <span class="at">family =</span> font_pub, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-421"><a href="#cb17-421" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> source_colors, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb17-422"><a href="#cb17-422" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.78</span>),</span>
+<span id="cb17-423"><a href="#cb17-423" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.02</span>))) <span class="sc">+</span></span>
+<span id="cb17-424"><a href="#cb17-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Estimated contribution"</span>, <span class="at">fill =</span> <span class="st">"Source class"</span>,</span>
+<span id="cb17-425"><a href="#cb17-425" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"FEAST source attribution"</span>,</span>
+<span id="cb17-426"><a href="#cb17-426" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Sink: infant gut 1; 5,000-read analysis depth"</span>) <span class="sc">+</span></span>
+<span id="cb17-427"><a href="#cb17-427" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb17-428"><a href="#cb17-428" aria-hidden="true" tabindex="-1"></a>                      <span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb17-429"><a href="#cb17-429" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p50_1, <span class="st">"figures/50-source-tracking/50-1-feast-main"</span>, <span class="dv">89</span>, <span class="dv">78</span>)</span>
+<span id="cb17-430"><a href="#cb17-430" aria-hidden="true" tabindex="-1"></a>p50_1</span>
+<span id="cb17-431"><a href="#cb17-431" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-432"><a href="#cb17-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-433"><a href="#cb17-433" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 2：同一数据、不同算法</span></span>
+<span id="cb17-434"><a href="#cb17-434" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-437"><a href="#cb17-437" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-438"><a href="#cb17-438" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb17-439"><a href="#cb17-439" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-source-tracker-comparison</span></span>
+<span id="cb17-440"><a href="#cb17-440" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "FEAST and SourceTracker2 allocations for the same sink and candidate source classes."</span></span>
+<span id="cb17-441"><a href="#cb17-441" aria-hidden="true" tabindex="-1"></a>method_comparison <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb17-442"><a href="#cb17-442" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="st">"FEAST"</span>, <span class="at">SourceClass =</span> <span class="fu">as.character</span>(feast_main<span class="sc">$</span>SourceClass),</span>
+<span id="cb17-443"><a href="#cb17-443" aria-hidden="true" tabindex="-1"></a>             <span class="at">Contribution =</span> feast_main<span class="sc">$</span>Contribution, <span class="at">MonteCarloSD =</span> <span class="cn">NA_real_</span>),</span>
+<span id="cb17-444"><a href="#cb17-444" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">Method =</span> <span class="st">"SourceTracker2"</span>, <span class="at">SourceClass =</span> source_tracker_main<span class="sc">$</span>SourceClass,</span>
+<span id="cb17-445"><a href="#cb17-445" aria-hidden="true" tabindex="-1"></a>             <span class="at">Contribution =</span> source_tracker_main<span class="sc">$</span>Contribution,</span>
+<span id="cb17-446"><a href="#cb17-446" aria-hidden="true" tabindex="-1"></a>             <span class="at">MonteCarloSD =</span> source_tracker_main<span class="sc">$</span>MonteCarloSD)</span>
+<span id="cb17-447"><a href="#cb17-447" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-448"><a href="#cb17-448" aria-hidden="true" tabindex="-1"></a>method_comparison<span class="sc">$</span>SourceClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(method_comparison<span class="sc">$</span>SourceClass, <span class="at">levels =</span> <span class="fu">names</span>(source_colors))</span>
+<span id="cb17-449"><a href="#cb17-449" aria-hidden="true" tabindex="-1"></a>p50_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(method_comparison, <span class="fu">aes</span>(SourceClass, Contribution, <span class="at">fill =</span> Method)) <span class="sc">+</span></span>
+<span id="cb17-450"><a href="#cb17-450" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.74</span>), <span class="at">width =</span> <span class="fl">0.66</span>) <span class="sc">+</span></span>
+<span id="cb17-451"><a href="#cb17-451" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb17-452"><a href="#cb17-452" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> <span class="fu">pmax</span>(<span class="dv">0</span>, Contribution <span class="sc">-</span> MonteCarloSD),</span>
+<span id="cb17-453"><a href="#cb17-453" aria-hidden="true" tabindex="-1"></a>        <span class="at">ymax =</span> <span class="fu">pmin</span>(<span class="dv">1</span>, Contribution <span class="sc">+</span> MonteCarloSD)),</span>
+<span id="cb17-454"><a href="#cb17-454" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.74</span>), <span class="at">width =</span> <span class="fl">0.16</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span></span>
+<span id="cb17-455"><a href="#cb17-455" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-456"><a href="#cb17-456" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb17-457"><a href="#cb17-457" aria-hidden="true" tabindex="-1"></a>    <span class="at">FEAST =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"blue"</span>]),</span>
+<span id="cb17-458"><a href="#cb17-458" aria-hidden="true" tabindex="-1"></a>    <span class="at">SourceTracker2 =</span> <span class="fu">unname</span>(pal_pub[<span class="st">"orange"</span>])</span>
+<span id="cb17-459"><a href="#cb17-459" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb17-460"><a href="#cb17-460" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb17-461"><a href="#cb17-461" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Estimated contribution"</span>, <span class="at">fill =</span> <span class="st">"Method"</span>,</span>
+<span id="cb17-462"><a href="#cb17-462" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Algorithm-dependent allocation"</span>,</span>
+<span id="cb17-463"><a href="#cb17-463" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"SourceTracker2 bars show Monte Carlo SD, not biological uncertainty"</span>) <span class="sc">+</span></span>
+<span id="cb17-464"><a href="#cb17-464" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb17-465"><a href="#cb17-465" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p50_2, <span class="st">"figures/50-source-tracking/50-2-method-comparison"</span>, <span class="dv">180</span>, <span class="dv">82</span>)</span>
+<span id="cb17-466"><a href="#cb17-466" aria-hidden="true" tabindex="-1"></a>p50_2</span>
+<span id="cb17-467"><a href="#cb17-467" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-468"><a href="#cb17-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-469"><a href="#cb17-469" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 3：leave-one-out calibration</span></span>
+<span id="cb17-470"><a href="#cb17-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-473"><a href="#cb17-473" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-474"><a href="#cb17-474" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb17-475"><a href="#cb17-475" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-source-tracking-loo</span></span>
+<span id="cb17-476"><a href="#cb17-476" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Leave-one-source-sample-out contribution profiles for FEAST and SourceTracker2."</span></span>
+<span id="cb17-477"><a href="#cb17-477" aria-hidden="true" tabindex="-1"></a>feast_loo_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb17-478"><a href="#cb17-478" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(feast_loo[, <span class="fu">c</span>(<span class="st">"SampleID"</span>, <span class="st">"TrueClass"</span>, <span class="st">"InfantGut"</span>, <span class="st">"AdultGut"</span>,</span>
+<span id="cb17-479"><a href="#cb17-479" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"AdultSkin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>)]),</span>
+<span id="cb17-480"><a href="#cb17-480" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">"InfantGut"</span>, <span class="st">"AdultGut"</span>, <span class="st">"AdultSkin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>),</span>
+<span id="cb17-481"><a href="#cb17-481" aria-hidden="true" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="st">"Contribution"</span>, <span class="at">timevar =</span> <span class="st">"SourceClass"</span>,</span>
+<span id="cb17-482"><a href="#cb17-482" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="fu">c</span>(<span class="st">"Infant gut"</span>, <span class="st">"Adult gut"</span>, <span class="st">"Adult skin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>),</span>
+<span id="cb17-483"><a href="#cb17-483" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">"long"</span></span>
+<span id="cb17-484"><a href="#cb17-484" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-485"><a href="#cb17-485" aria-hidden="true" tabindex="-1"></a>feast_loo_long<span class="sc">$</span>Method <span class="ot">&lt;-</span> <span class="st">"FEAST"</span></span>
+<span id="cb17-486"><a href="#cb17-486" aria-hidden="true" tabindex="-1"></a>st_loo_long <span class="ot">&lt;-</span> <span class="fu">reshape</span>(</span>
+<span id="cb17-487"><a href="#cb17-487" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(source_tracker_loo[, <span class="fu">c</span>(<span class="st">"SampleID"</span>, <span class="st">"TrueClass"</span>, <span class="st">"Infantgut"</span>,</span>
+<span id="cb17-488"><a href="#cb17-488" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"Adultgut"</span>, <span class="st">"Adultskin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>)]),</span>
+<span id="cb17-489"><a href="#cb17-489" aria-hidden="true" tabindex="-1"></a>  <span class="at">varying =</span> <span class="fu">c</span>(<span class="st">"Infantgut"</span>, <span class="st">"Adultgut"</span>, <span class="st">"Adultskin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>),</span>
+<span id="cb17-490"><a href="#cb17-490" aria-hidden="true" tabindex="-1"></a>  <span class="at">v.names =</span> <span class="st">"Contribution"</span>, <span class="at">timevar =</span> <span class="st">"SourceClass"</span>,</span>
+<span id="cb17-491"><a href="#cb17-491" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> <span class="fu">c</span>(<span class="st">"Infant gut"</span>, <span class="st">"Adult gut"</span>, <span class="st">"Adult skin"</span>, <span class="st">"Soil"</span>, <span class="st">"Unknown"</span>),</span>
+<span id="cb17-492"><a href="#cb17-492" aria-hidden="true" tabindex="-1"></a>  <span class="at">direction =</span> <span class="st">"long"</span></span>
+<span id="cb17-493"><a href="#cb17-493" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-494"><a href="#cb17-494" aria-hidden="true" tabindex="-1"></a>st_loo_long<span class="sc">$</span>Method <span class="ot">&lt;-</span> <span class="st">"SourceTracker2"</span></span>
+<span id="cb17-495"><a href="#cb17-495" aria-hidden="true" tabindex="-1"></a>loo_long <span class="ot">&lt;-</span> <span class="fu">rbind</span>(feast_loo_long, st_loo_long)</span>
+<span id="cb17-496"><a href="#cb17-496" aria-hidden="true" tabindex="-1"></a>loo_long<span class="sc">$</span>SampleLabel <span class="ot">&lt;-</span> <span class="fu">paste0</span>(loo_long<span class="sc">$</span>SampleID, <span class="st">" ("</span>, loo_long<span class="sc">$</span>TrueClass, <span class="st">")"</span>)</span>
+<span id="cb17-497"><a href="#cb17-497" aria-hidden="true" tabindex="-1"></a>loo_long<span class="sc">$</span>SourceClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(loo_long<span class="sc">$</span>SourceClass, <span class="at">levels =</span> <span class="fu">names</span>(source_colors))</span>
+<span id="cb17-498"><a href="#cb17-498" aria-hidden="true" tabindex="-1"></a>p50_3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(loo_long, <span class="fu">aes</span>(SourceClass, SampleLabel, <span class="at">fill =</span> Contribution)) <span class="sc">+</span></span>
+<span id="cb17-499"><a href="#cb17-499" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.45</span>) <span class="sc">+</span></span>
+<span id="cb17-500"><a href="#cb17-500" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Method, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb17-501"><a href="#cb17-501" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"#F7FBFF"</span>, <span class="at">high =</span> pal_pub[<span class="st">"blue"</span>], <span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb17-502"><a href="#cb17-502" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Candidate source class"</span>, <span class="at">y =</span> <span class="st">"Held-out sample (true class)"</span>,</span>
+<span id="cb17-503"><a href="#cb17-503" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Contribution"</span>, <span class="at">title =</span> <span class="st">"Leave-one-out calibration"</span>,</span>
+<span id="cb17-504"><a href="#cb17-504" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Known-class top-1 accuracy: 50% for both methods"</span>) <span class="sc">+</span></span>
+<span id="cb17-505"><a href="#cb17-505" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="fl">8.5</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb17-506"><a href="#cb17-506" aria-hidden="true" tabindex="-1"></a>                         <span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb17-507"><a href="#cb17-507" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p50_3, <span class="st">"figures/50-source-tracking/50-3-loo-calibration"</span>, <span class="dv">180</span>, <span class="dv">135</span>)</span>
+<span id="cb17-508"><a href="#cb17-508" aria-hidden="true" tabindex="-1"></a>p50_3</span>
+<span id="cb17-509"><a href="#cb17-509" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-510"><a href="#cb17-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-511"><a href="#cb17-511" aria-hidden="true" tabindex="-1"></a><span class="fu">### 图 4：missing-source sensitivity</span></span>
+<span id="cb17-512"><a href="#cb17-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-515"><a href="#cb17-515" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-516"><a href="#cb17-516" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb17-517"><a href="#cb17-517" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-feast-missing-source</span></span>
+<span id="cb17-518"><a href="#cb17-518" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "FEAST allocation after removing each candidate source class."</span></span>
+<span id="cb17-519"><a href="#cb17-519" aria-hidden="true" tabindex="-1"></a>scenario_order <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"Infant gut"</span>, <span class="st">"Adult gut"</span>, <span class="st">"Adult skin"</span>, <span class="st">"Soil"</span>)</span>
+<span id="cb17-520"><a href="#cb17-520" aria-hidden="true" tabindex="-1"></a>feast_missing<span class="sc">$</span>RemovedClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(feast_missing<span class="sc">$</span>RemovedClass, <span class="at">levels =</span> scenario_order)</span>
+<span id="cb17-521"><a href="#cb17-521" aria-hidden="true" tabindex="-1"></a>feast_missing<span class="sc">$</span>SourceClass <span class="ot">&lt;-</span> <span class="fu">factor</span>(feast_missing<span class="sc">$</span>SourceClass, <span class="at">levels =</span> <span class="fu">names</span>(source_colors))</span>
+<span id="cb17-522"><a href="#cb17-522" aria-hidden="true" tabindex="-1"></a>p50_4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(feast_missing, <span class="fu">aes</span>(RemovedClass, Contribution, <span class="at">fill =</span> SourceClass)) <span class="sc">+</span></span>
+<span id="cb17-523"><a href="#cb17-523" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.72</span>, <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb17-524"><a href="#cb17-524" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> source_colors, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb17-525"><a href="#cb17-525" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent, <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>))) <span class="sc">+</span></span>
+<span id="cb17-526"><a href="#cb17-526" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Removed source class"</span>, <span class="at">y =</span> <span class="st">"Estimated contribution"</span>, <span class="at">fill =</span> <span class="st">"Allocated class"</span>,</span>
+<span id="cb17-527"><a href="#cb17-527" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Missing-source sensitivity"</span>,</span>
+<span id="cb17-528"><a href="#cb17-528" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Unknown is model-dependent and need not increase when a true source is omitted"</span>) <span class="sc">+</span></span>
+<span id="cb17-529"><a href="#cb17-529" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb17-530"><a href="#cb17-530" aria-hidden="true" tabindex="-1"></a>                      <span class="at">legend.position =</span> <span class="st">"right"</span>)</span>
+<span id="cb17-531"><a href="#cb17-531" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p50_4, <span class="st">"figures/50-source-tracking/50-4-missing-source"</span>, <span class="dv">180</span>, <span class="dv">90</span>)</span>
+<span id="cb17-532"><a href="#cb17-532" aria-hidden="true" tabindex="-1"></a>p50_4</span>
+<span id="cb17-533"><a href="#cb17-533" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-534"><a href="#cb17-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-535"><a href="#cb17-535" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常见坑 {#sec-pitfalls}</span></span>
+<span id="cb17-536"><a href="#cb17-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-537"><a href="#cb17-537" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="审稿人最常追问的七件事"}</span>
+<span id="cb17-538"><a href="#cb17-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-539"><a href="#cb17-539" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>source samples 在 sink 之后才按相似性选择，造成 circular reference panel。</span>
+<span id="cb17-540"><a href="#cb17-540" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>sources 与 sinks 来自不同 primer、batch、pipeline 或 feature definitions。</span>
+<span id="cb17-541"><a href="#cb17-541" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>没有 extraction blanks/negative controls，尤其在低 biomass 场景。</span>
+<span id="cb17-542"><a href="#cb17-542" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>不做 leave-one-out、synthetic mixture 或 external validation。</span>
+<span id="cb17-543"><a href="#cb17-543" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>把 Unknown 当未采样来源的真实比例，且不给 missing-source sensitivity。</span>
+<span id="cb17-544"><a href="#cb17-544" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>只跑一个 stochastic result，不设 seed、不报 chains/draws/burn-in/depth。</span>
+<span id="cb17-545"><a href="#cb17-545" aria-hidden="true" tabindex="-1"></a><span class="ss">7. </span>用 16S source attribution 宣称 direct transmission、donor identity 或传播方向。</span>
 <span id="cb17-546"><a href="#cb17-546" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-547"><a href="#cb17-547" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将来源追踪与校准用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb17-547"><a href="#cb17-547" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb17-548"><a href="#cb17-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-549"><a href="#cb17-549" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>替换三件套；metadata 至少增加 <span class="in">`SourceSink`</span> 与预先定义的 <span class="in">`SourceClass`</span>。FEAST 多 sink/source-set 设计还需正确的 <span class="in">`id`</span>。</span>
-<span id="cb17-550"><a href="#cb17-550" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>sources/sinks 必须同批处理；若必须跨 study，先做 negative controls、batch sensitivity 与 matched-pipeline reprocessing。</span>
-<span id="cb17-551"><a href="#cb17-551" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>每个 source class 尽量有多个 biological replicates；预留可做 leave-one-out 的样本，不要只给一个 pooled profile。</span>
-<span id="cb17-552"><a href="#cb17-552" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>按最浅合理样本预设 analysis depth，并在多个 depths、priors 和 source panels 下做 sensitivity。</span>
-<span id="cb17-553"><a href="#cb17-553" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>若研究问题是母婴、院内或食品链传播，另准备 shotgun metagenomes、采样时间、接触信息与 strain/SNV pipeline；不要靠本页的 proportions 完成传播结论。</span>
+<span id="cb17-549"><a href="#cb17-549" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告来源追踪与校准的方法与限制 {#sec-methods}</span></span>
+<span id="cb17-550"><a href="#cb17-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-551"><a href="#cb17-551" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Source attribution was evaluated using the official FEAST example comprising one sink, nine source samples, four candidate source classes and 1,839 anonymous taxa. Count tables and metadata were aligned by exact sample identifier. FEAST v0.1.0 was run for 1,000 EM iterations at a coverage of 5,000 reads using seed 20260726, and sample-level weights were summed within pre-specified source classes. SourceTracker2 v2.0.1 used the same source classes and depth, alpha1=0.001, alpha2=0.001, beta=10, 10 restarts, two draws per restart, burn-in 100 and thinning delay 10. Classes with at least two source replicates were evaluated by leave-one-source-sample-out classification; FEAST was additionally rerun after removing each source class. Unknown was interpreted as a model-dependent unexplained fraction. Amplicon-level attribution was not considered evidence of strain transmission or directionality.</span></span>
+<span id="cb17-552"><a href="#cb17-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-553"><a href="#cb17-553" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将来源追踪与校准用于自己的研究 {#sec-own-data}</span></span>
 <span id="cb17-554"><a href="#cb17-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-555"><a href="#cb17-555" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb17-556"><a href="#cb17-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-557"><a href="#cb17-557" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Knights D, et al. Bayesian community-wide culture-independent microbial source tracking. *Nature Methods*. 2011. <span class="ot">&lt;https://doi.org/10.1038/nmeth.1650&gt;</span></span>
-<span id="cb17-558"><a href="#cb17-558" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Shenhav L, et al. FEAST: fast expectation-maximization for microbial source tracking. *Nature Methods*. 2019. <span class="ot">&lt;https://doi.org/10.1038/s41592-019-0431-x&gt;</span></span>
-<span id="cb17-559"><a href="#cb17-559" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>FEAST official repository and demo, fixed source commit <span class="in">`2f8f3df8051e0e08341f597a9f4693bfb76b3bf6`</span>. <span class="ot">&lt;https://github.com/cozygene/FEAST&gt;</span></span>
-<span id="cb17-560"><a href="#cb17-560" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>SourceTracker2 official repository. <span class="ot">&lt;https://github.com/biota/sourcetracker2&gt;</span></span>
-<span id="cb17-561"><a href="#cb17-561" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Olm MR, et al. inStrain profiles population microdiversity from metagenomic data and sensitively detects shared microbial strains. *Nature Biotechnology*. 2021. <span class="ot">&lt;https://doi.org/10.1038/s41587-020-00797-0&gt;</span></span>
+<span id="cb17-555"><a href="#cb17-555" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>替换三件套；metadata 至少增加 <span class="in">`SourceSink`</span> 与预先定义的 <span class="in">`SourceClass`</span>。FEAST 多 sink/source-set 设计还需正确的 <span class="in">`id`</span>。</span>
+<span id="cb17-556"><a href="#cb17-556" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>sources/sinks 必须同批处理；若必须跨 study，先做 negative controls、batch sensitivity 与 matched-pipeline reprocessing。</span>
+<span id="cb17-557"><a href="#cb17-557" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>每个 source class 尽量有多个 biological replicates；预留可做 leave-one-out 的样本，不要只给一个 pooled profile。</span>
+<span id="cb17-558"><a href="#cb17-558" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>按最浅合理样本预设 analysis depth，并在多个 depths、priors 和 source panels 下做 sensitivity。</span>
+<span id="cb17-559"><a href="#cb17-559" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>若研究问题是母婴、院内或食品链传播，另准备 shotgun metagenomes、采样时间、接触信息与 strain/SNV pipeline；不要靠本页的 proportions 完成传播结论。</span>
+<span id="cb17-560"><a href="#cb17-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-561"><a href="#cb17-561" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb17-562"><a href="#cb17-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-563"><a href="#cb17-563" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Knights D, et al. Bayesian community-wide culture-independent microbial source tracking. *Nature Methods*. 2011. <span class="ot">&lt;https://doi.org/10.1038/nmeth.1650&gt;</span></span>
+<span id="cb17-564"><a href="#cb17-564" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Shenhav L, et al. FEAST: fast expectation-maximization for microbial source tracking. *Nature Methods*. 2019. <span class="ot">&lt;https://doi.org/10.1038/s41592-019-0431-x&gt;</span></span>
+<span id="cb17-565"><a href="#cb17-565" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>FEAST official repository and demo, fixed source commit <span class="in">`2f8f3df8051e0e08341f597a9f4693bfb76b3bf6`</span>. <span class="ot">&lt;https://github.com/cozygene/FEAST&gt;</span></span>
+<span id="cb17-566"><a href="#cb17-566" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>SourceTracker2 official repository. <span class="ot">&lt;https://github.com/biota/sourcetracker2&gt;</span></span>
+<span id="cb17-567"><a href="#cb17-567" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Olm MR, et al. inStrain profiles population microdiversity from metagenomic data and sensitively detects shared microbial strains. *Nature Biotechnology*. 2021. <span class="ot">&lt;https://doi.org/10.1038/s41587-020-00797-0&gt;</span></span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

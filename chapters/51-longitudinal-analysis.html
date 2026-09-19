@@ -114,6 +114,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -510,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -822,7 +851,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">纵向分析的独立单位是受试者，不是时间点</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">纵向分析的独立单位是受试者，不是时间点</a>
+  <ul class="collapse">
+  <li><a href="#个体内变化与个体间差异为什么需要分开" id="toc-个体内变化与个体间差异为什么需要分开" class="nav-link" data-scroll-target="#个体内变化与个体间差异为什么需要分开">个体内变化与个体间差异，为什么需要分开？</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">下载并读取本次分析的数据</a>
   <ul class="collapse">
   <li><a href="#读取三件套并核对重复测量结构" id="toc-读取三件套并核对重复测量结构" class="nav-link" data-scroll-target="#读取三件套并核对重复测量结构">读取三件套并核对重复测量结构</a></li>
@@ -870,7 +902,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -903,6 +935,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>把同一个体的点连起来只是一种展示。推断必须在模型中声明同一个体内的相关性；把 222 个样本当作 222 个独立观察，会低估标准误并制造过度显著。</p>
 </div>
 </div>
+<section id="个体内变化与个体间差异为什么需要分开" class="level3">
+<h3 class="anchored" data-anchor-id="个体内变化与个体间差异为什么需要分开">个体内变化与个体间差异，为什么需要分开？</h3>
+<p>一个人的指标随时间升高，与平均指标较高的人属于哪个群体，是不同的比较。随机截距吸收稳定个体差异，但不会自动分离所有时间变化的混杂。若饮食、药物或疾病活动也随访变化，应先确定目标效应，再决定是否需要分解协变量的个体均值与个体内偏离。</p>
+<p>相邻观测距离还取决于时间间隔。两天与两周的 Bray–Curtis 差异不能直接当作同一速度比较；缺失中间时间点会让“相邻记录”跨过更长间隔。本例只有 38 位参与者，随机斜率和复杂残差结构需要与信息量相匹配。AR(1) 若按访问序号而非真实时间建立，也隐含等间隔假设，应与实际采样记录核对。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">下载并读取本次分析的数据</h2>
@@ -1072,8 +1109,11 @@ Cohort              1  2  3  4  5  6
 <section id="sec-theory" class="level2">
 <h2 class="anchored" data-anchor-id="sec-theory">为什么普通线性模型不够</h2>
 <p>对第 (i) 位参与者在时间 (t) 的 Shannon 多样性，可写成：</p>
-<p>[ y_{it}=_0+_1_i+_2_t+ _3(_i<em>t)+b_i+</em>{it}, ]</p>
-<p>其中 (b_i) 是个体随机截距，吸收稳定的个体间差异。<code>Cohort × Time</code> 交互项检验的是“两组随时间的改变是否不同”，不是某一组单独是否显著。</p>
+<p><span class="math display">\[
+y_{it}=\beta_0+\beta_1\mathrm{Cohort}_i+\beta_2\mathrm{Time}_t+
+\beta_3(\mathrm{Cohort}_i\times\mathrm{Time}_t)+b_i+\epsilon_{it},
+\]</span></p>
+<p>其中 <span class="math inline">\(b_i\)</span> 是个体随机截距，吸收稳定的个体间差异。<code>Cohort × Time</code> 交互项检验的是“两组随时间的改变是否不同”，不是某一组单独是否显著。</p>
 <p>先记住四点：</p>
 <ol type="1">
 <li><strong>时间先按因子建模。</strong> 只有六个预设时间点时，因子模型不强迫轨迹为直线，也便于定位差异发生在哪个阶段。</li>
@@ -2059,512 +2099,518 @@ CohortRural African:WindowT5-T6 4.959807e-01</code></pre>
 <span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>把同一个体的点连起来只是一种展示。推断必须在模型中声明同一个体内的相关性；把 222 个样本当作 222 个独立观察，会低估标准误并制造过度显著。</span>
 <span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### 个体内变化与个体间差异，为什么需要分开？</span></span>
 <span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`emmeans`</span>、<span class="in">`ggplot2`</span>、<span class="in">`nlme`</span>、<span class="in">`patchwork`</span>、<span class="in">`ragg`</span>、<span class="in">`svglite`</span>、<span class="in">`vegan`</span>。本次使用饮食互换研究的 HITChip 丰度、分类和样本信息表；它们不是扩增子计数，模型需保留受试者和时间点。</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>一个人的指标随时间升高，与平均指标较高的人属于哪个群体，是不同的比较。随机截距吸收稳定个体差异，但不会自动分离所有时间变化的混杂。若饮食、药物或疾病活动也随访变化，应先确定目标效应，再决定是否需要分解协变量的个体均值与个体内偏离。</span>
 <span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>相邻观测距离还取决于时间间隔。两天与两周的 Bray–Curtis 差异不能直接当作同一速度比较；缺失中间时间点会让“相邻记录”跨过更长间隔。本例只有 38 位参与者，随机斜率和复杂残差结构需要与信息量相匹配。AR(1) 若按访问序号而非真实时间建立，也隐含等间隔假设，应与实际采样记录核对。</span>
 <span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
-<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
-<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/longitudinal-dietswap/metadata.tsv"</span>,</span>
-<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/longitudinal-dietswap/otutab.tsv"</span>,</span>
-<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/longitudinal-dietswap/source-summary.json"</span>,</span>
-<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/longitudinal-dietswap/taxonomy.tsv"</span></span>
-<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
-<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-02</span></span>
-<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>(<span class="fu">c</span>(<span class="st">".r-lib"</span>, <span class="fu">.libPaths</span>()))</span>
-<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
-<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
-<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260751</span>)</span>
-<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
-<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
-<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
-<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
-<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
-<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
-<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
-<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
-<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
-<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()</span>
-<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">180</span>, <span class="at">height =</span> <span class="dv">125</span>,</span>
-<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>                     <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
-<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width,</span>
-<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units,</span>
-<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width,</span>
-<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite,</span>
-<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>                  <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width,</span>
-<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">dpi =</span> dpi,</span>
-<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width,</span>
-<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">dpi =</span> dpi,</span>
-<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff, <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
-<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取三件套并核对重复测量结构</span></span>
-<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-03</span></span>
-<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="st">"data/small/longitudinal-dietswap"</span></span>
-<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.delim</span>(</span>
-<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"otutab.tsv"</span>), <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"taxonomy.tsv"</span>), <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"metadata.tsv"</span>), <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a><span class="fu">storage.mode</span>(otutab) <span class="ot">&lt;-</span> <span class="st">"numeric"</span></span>
-<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(otutab), <span class="fu">rownames</span>(taxonomy)),</span>
-<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
-<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(otutab <span class="sc">&gt;=</span> <span class="dv">0</span>), <span class="fu">all</span>(<span class="fu">colSums</span>(otutab) <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
-<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">anyDuplicated</span>(<span class="fu">paste</span>(metadata<span class="sc">$</span>SubjectID, metadata<span class="sc">$</span>Timepoint))</span>
-<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(otutab)</span>
-<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy[, <span class="fu">c</span>(<span class="st">"Phylum"</span>, <span class="st">"Family"</span>, <span class="st">"Genus"</span>, <span class="st">"DisplayName"</span>)])</span>
-<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
-<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(metadata, <span class="fu">table</span>(Cohort, Timepoint))</span>
-<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`emmeans`</span>、<span class="in">`ggplot2`</span>、<span class="in">`nlme`</span>、<span class="in">`patchwork`</span>、<span class="in">`ragg`</span>、<span class="in">`svglite`</span>、<span class="in">`vegan`</span>。本次使用饮食互换研究的 HITChip 丰度、分类和样本信息表；它们不是扩增子计数，模型需保留受试者和时间点。</span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/longitudinal-dietswap/metadata.tsv"</span>,</span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/longitudinal-dietswap/otutab.tsv"</span>,</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/longitudinal-dietswap/source-summary.json"</span>,</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/longitudinal-dietswap/taxonomy.tsv"</span></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-02</span></span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>(<span class="fu">c</span>(<span class="st">".r-lib"</span>, <span class="fu">.libPaths</span>()))</span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nlme)</span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260751</span>)</span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-101"><a href="#cb18-101" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb18-102"><a href="#cb18-102" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()</span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-117"><a href="#cb18-117" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-118"><a href="#cb18-118" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">180</span>, <span class="at">height =</span> <span class="dv">125</span>,</span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a>                     <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width,</span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units,</span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width,</span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite,</span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a>                  <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width,</span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">dpi =</span> dpi,</span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width,</span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">dpi =</span> dpi,</span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff, <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取三件套并核对重复测量结构</span></span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-03</span></span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="st">"data/small/longitudinal-dietswap"</span></span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a>otutab <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">read.delim</span>(</span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"otutab.tsv"</span>), <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>taxonomy <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"taxonomy.tsv"</span>), <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>metadata <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"metadata.tsv"</span>), <span class="at">row.names =</span> <span class="dv">1</span>, <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-153"><a href="#cb18-153" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-154"><a href="#cb18-154" aria-hidden="true" tabindex="-1"></a><span class="fu">storage.mode</span>(otutab) <span class="ot">&lt;-</span> <span class="st">"numeric"</span></span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">rownames</span>(otutab), <span class="fu">rownames</span>(taxonomy)),</span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">colnames</span>(otutab), <span class="fu">rownames</span>(metadata)),</span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(otutab <span class="sc">&gt;=</span> <span class="dv">0</span>), <span class="fu">all</span>(<span class="fu">colSums</span>(otutab) <span class="sc">&gt;</span> <span class="dv">0</span>),</span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">anyDuplicated</span>(<span class="fu">paste</span>(metadata<span class="sc">$</span>SubjectID, metadata<span class="sc">$</span>Timepoint))</span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a>先把每个样本转为相对丰度并计算 Shannon。组名在进入图片前统一成英文。</span>
-<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-04</span></span>
-<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a>relative <span class="ot">&lt;-</span> <span class="fu">sweep</span>(otutab, <span class="dv">2</span>, <span class="fu">colSums</span>(otutab), <span class="st">"/"</span>)</span>
-<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Shannon <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">colSums</span>(<span class="fu">ifelse</span>(</span>
-<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a>  relative <span class="sc">&gt;</span> <span class="dv">0</span>, relative <span class="sc">*</span> <span class="fu">log</span>(relative), <span class="dv">0</span></span>
-<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a>))[<span class="fu">rownames</span>(metadata)]</span>
-<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Cohort <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a>  metadata<span class="sc">$</span>Cohort,</span>
-<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"African American"</span>, <span class="st">"Rural African"</span>)</span>
-<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>TimeFactor <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>Timepoint, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>TimeLabel <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"T"</span>, metadata<span class="sc">$</span>Timepoint), <span class="at">levels =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/51-longitudinal-analysis.R)</span>。脚本包含数据下载、计算和图形导出。</span>
-<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
-<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a>  <span class="st">"nlme"</span>, <span class="st">"emmeans"</span>, <span class="st">"vegan"</span>, <span class="st">"ggplot2"</span>, <span class="st">"patchwork"</span>,</span>
-<span id="cb18-194"><a href="#cb18-194" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"digest"</span>, <span class="st">"svglite"</span>, <span class="st">"ragg"</span></span>
-<span id="cb18-195"><a href="#cb18-195" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
-<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
-<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"phyloseq"</span>, <span class="st">"microbiome"</span>))</span>
-<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a><span class="fu">## 为什么普通线性模型不够 {#sec-theory}</span></span>
-<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a>对第 (i) 位参与者在时间 (t) 的 Shannon 多样性，可写成：</span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(otutab)</span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(taxonomy[, <span class="fu">c</span>(<span class="st">"Phylum"</span>, <span class="st">"Family"</span>, <span class="st">"Genus"</span>, <span class="st">"DisplayName"</span>)])</span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(metadata)</span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(metadata, <span class="fu">table</span>(Cohort, Timepoint))</span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a>先把每个样本转为相对丰度并计算 Shannon。组名在进入图片前统一成英文。</span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-172"><a href="#cb18-172" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-173"><a href="#cb18-173" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-174"><a href="#cb18-174" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-04</span></span>
+<span id="cb18-175"><a href="#cb18-175" aria-hidden="true" tabindex="-1"></a>relative <span class="ot">&lt;-</span> <span class="fu">sweep</span>(otutab, <span class="dv">2</span>, <span class="fu">colSums</span>(otutab), <span class="st">"/"</span>)</span>
+<span id="cb18-176"><a href="#cb18-176" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Shannon <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fu">colSums</span>(<span class="fu">ifelse</span>(</span>
+<span id="cb18-177"><a href="#cb18-177" aria-hidden="true" tabindex="-1"></a>  relative <span class="sc">&gt;</span> <span class="dv">0</span>, relative <span class="sc">*</span> <span class="fu">log</span>(relative), <span class="dv">0</span></span>
+<span id="cb18-178"><a href="#cb18-178" aria-hidden="true" tabindex="-1"></a>))[<span class="fu">rownames</span>(metadata)]</span>
+<span id="cb18-179"><a href="#cb18-179" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>Cohort <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb18-180"><a href="#cb18-180" aria-hidden="true" tabindex="-1"></a>  metadata<span class="sc">$</span>Cohort,</span>
+<span id="cb18-181"><a href="#cb18-181" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"African American"</span>, <span class="st">"Rural African"</span>)</span>
+<span id="cb18-182"><a href="#cb18-182" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-183"><a href="#cb18-183" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>TimeFactor <span class="ot">&lt;-</span> <span class="fu">factor</span>(metadata<span class="sc">$</span>Timepoint, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb18-184"><a href="#cb18-184" aria-hidden="true" tabindex="-1"></a>metadata<span class="sc">$</span>TimeLabel <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb18-185"><a href="#cb18-185" aria-hidden="true" tabindex="-1"></a>  <span class="fu">paste0</span>(<span class="st">"T"</span>, metadata<span class="sc">$</span>Timepoint), <span class="at">levels =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb18-186"><a href="#cb18-186" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-187"><a href="#cb18-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-188"><a href="#cb18-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-189"><a href="#cb18-189" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/51-longitudinal-analysis.R)</span>。脚本包含数据下载、计算和图形导出。</span>
+<span id="cb18-190"><a href="#cb18-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-191"><a href="#cb18-191" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb18-192"><a href="#cb18-192" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb18-193"><a href="#cb18-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-196"><a href="#cb18-196" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-197"><a href="#cb18-197" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb18-198"><a href="#cb18-198" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb18-199"><a href="#cb18-199" aria-hidden="true" tabindex="-1"></a>  <span class="st">"nlme"</span>, <span class="st">"emmeans"</span>, <span class="st">"vegan"</span>, <span class="st">"ggplot2"</span>, <span class="st">"patchwork"</span>,</span>
+<span id="cb18-200"><a href="#cb18-200" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"digest"</span>, <span class="st">"svglite"</span>, <span class="st">"ragg"</span></span>
+<span id="cb18-201"><a href="#cb18-201" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb18-202"><a href="#cb18-202" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb18-203"><a href="#cb18-203" aria-hidden="true" tabindex="-1"></a>  <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb18-204"><a href="#cb18-204" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-205"><a href="#cb18-205" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="fu">c</span>(<span class="st">"phyloseq"</span>, <span class="st">"microbiome"</span>))</span>
+<span id="cb18-206"><a href="#cb18-206" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-207"><a href="#cb18-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a>y_{it}=\beta_0+\beta_1\mathrm{Cohort}_i+\beta_2\mathrm{Time}_t+</span>
-<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a>\beta_3(\mathrm{Cohort}_i\times\mathrm{Time}_t)+b_i+\epsilon_{it},</span>
-<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
-<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a>其中 (b_i<span class="sc">\)</span> 是个体随机截距，吸收稳定的个体间差异。<span class="in">`Cohort × Time`</span> 交互项检验的是“两组随时间的改变是否不同”，不是某一组单独是否显著。</span>
-<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a>先记住四点：</span>
-<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**时间先按因子建模。** 只有六个预设时间点时，因子模型不强迫轨迹为直线，也便于定位差异发生在哪个阶段。</span>
-<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**个体是随机效应或置换区组。** 重复测量的独立单位是参与者，不是粪便样本。</span>
-<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**AR(1) 是候选结构，不是默认真理。** 相邻时间点残差可能更相似，但样本少、缺失不规则时，额外参数未必改善模型。</span>
-<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**volatility 是个体内距离。** 本例定义为同一参与者相邻观测之间的 Bray–Curtis 距离；值越大表示该时间窗群落改变越大。</span>
-<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：随机截距、随机斜率和 AR(1) 分别解决什么<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>随机截距允许每位参与者有不同基线；</span>
-<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>随机斜率允许每位参与者有不同时间趋势，但需要足够个体和时间点；</span>
-<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>AR(1) 描述同一个体残差随时间间隔衰减的相关性。</span>
-<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a>三者不是互相替代。复杂模型应由设计和诊断支持，不能只因 AIC 略降就无限加参数。若时间间隔不等，连续时间相关结构 <span class="in">`corCAR1`</span> 往往比离散 <span class="in">`corAR1`</span> 更合适；若结局是计数或比例，则需匹配分布的广义混合模型。</span>
+<span id="cb18-208"><a href="#cb18-208" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-209"><a href="#cb18-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-210"><a href="#cb18-210" aria-hidden="true" tabindex="-1"></a><span class="fu">## 为什么普通线性模型不够 {#sec-theory}</span></span>
+<span id="cb18-211"><a href="#cb18-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-212"><a href="#cb18-212" aria-hidden="true" tabindex="-1"></a>对第 (i) 位参与者在时间 (t) 的 Shannon 多样性，可写成：</span>
+<span id="cb18-213"><a href="#cb18-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-214"><a href="#cb18-214" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb18-215"><a href="#cb18-215" aria-hidden="true" tabindex="-1"></a>y_{it}=\beta_0+\beta_1\mathrm{Cohort}_i+\beta_2\mathrm{Time}_t+</span>
+<span id="cb18-216"><a href="#cb18-216" aria-hidden="true" tabindex="-1"></a>\beta_3(\mathrm{Cohort}_i\times\mathrm{Time}_t)+b_i+\epsilon_{it},</span>
+<span id="cb18-217"><a href="#cb18-217" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb18-218"><a href="#cb18-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-219"><a href="#cb18-219" aria-hidden="true" tabindex="-1"></a>其中 $b_i$ 是个体随机截距，吸收稳定的个体间差异。<span class="in">`Cohort × Time`</span> 交互项检验的是“两组随时间的改变是否不同”，不是某一组单独是否显著。</span>
+<span id="cb18-220"><a href="#cb18-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-221"><a href="#cb18-221" aria-hidden="true" tabindex="-1"></a>先记住四点：</span>
+<span id="cb18-222"><a href="#cb18-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-223"><a href="#cb18-223" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**时间先按因子建模。** 只有六个预设时间点时，因子模型不强迫轨迹为直线，也便于定位差异发生在哪个阶段。</span>
+<span id="cb18-224"><a href="#cb18-224" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**个体是随机效应或置换区组。** 重复测量的独立单位是参与者，不是粪便样本。</span>
+<span id="cb18-225"><a href="#cb18-225" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**AR(1) 是候选结构，不是默认真理。** 相邻时间点残差可能更相似，但样本少、缺失不规则时，额外参数未必改善模型。</span>
+<span id="cb18-226"><a href="#cb18-226" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**volatility 是个体内距离。** 本例定义为同一参与者相邻观测之间的 Bray–Curtis 距离；值越大表示该时间窗群落改变越大。</span>
+<span id="cb18-227"><a href="#cb18-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-228"><a href="#cb18-228" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb18-229"><a href="#cb18-229" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：随机截距、随机斜率和 AR(1) 分别解决什么<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb18-230"><a href="#cb18-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="缺失时间点可以保留，但需说明缺失机制"}</span>
-<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a>混合模型不要求每个人都有全部六个时间点。本例 222 个样本来自 38 人，理论满格为 228 个观测。模型在“给定已纳入协变量后缺失近似随机”的假设下使用可用观测；若失访与症状恶化有关，应做缺失机制与敏感性分析。</span>
-<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-231"><a href="#cb18-231" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>随机截距允许每位参与者有不同基线；</span>
+<span id="cb18-232"><a href="#cb18-232" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>随机斜率允许每位参与者有不同时间趋势，但需要足够个体和时间点；</span>
+<span id="cb18-233"><a href="#cb18-233" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>AR(1) 描述同一个体残差随时间间隔衰减的相关性。</span>
+<span id="cb18-234"><a href="#cb18-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-235"><a href="#cb18-235" aria-hidden="true" tabindex="-1"></a>三者不是互相替代。复杂模型应由设计和诊断支持，不能只因 AIC 略降就无限加参数。若时间间隔不等，连续时间相关结构 <span class="in">`corCAR1`</span> 往往比离散 <span class="in">`corAR1`</span> 更合适；若结局是计数或比例，则需匹配分布的广义混合模型。</span>
 <span id="cb18-236"><a href="#cb18-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a><span class="fu">## 用个体内模型比较时间变化 {#sec-code}</span></span>
+<span id="cb18-237"><a href="#cb18-237" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
 <span id="cb18-238"><a href="#cb18-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a><span class="fu">### 拟合随机截距主模型</span></span>
-<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a>模型比较必须用最大似然（ML）；固定效应估计与区间再用限制最大似然（REML）。不要用 REML 比较固定效应不同的模型。</span>
+<span id="cb18-239"><a href="#cb18-239" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="缺失时间点可以保留，但需说明缺失机制"}</span>
+<span id="cb18-240"><a href="#cb18-240" aria-hidden="true" tabindex="-1"></a>混合模型不要求每个人都有全部六个时间点。本例 222 个样本来自 38 人，理论满格为 228 个观测。模型在“给定已纳入协变量后缺失近似随机”的假设下使用可用观测；若失访与症状恶化有关，应做缺失机制与敏感性分析。</span>
+<span id="cb18-241"><a href="#cb18-241" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb18-242"><a href="#cb18-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-05</span></span>
-<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a>fit_ri_ml <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
-<span id="cb18-249"><a href="#cb18-249" aria-hidden="true" tabindex="-1"></a>  Shannon <span class="sc">~</span> Cohort <span class="sc">*</span> TimeFactor,</span>
-<span id="cb18-250"><a href="#cb18-250" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> SubjectID,</span>
-<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> metadata,</span>
-<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"ML"</span>,</span>
-<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.omit,</span>
-<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> nlme<span class="sc">::</span><span class="fu">lmeControl</span>(<span class="at">opt =</span> <span class="st">"optim"</span>)</span>
-<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>fit_ar1_ml <span class="ot">&lt;-</span> <span class="fu">update</span>(</span>
-<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>  fit_ri_ml,</span>
-<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> nlme<span class="sc">::</span><span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span> Timepoint <span class="sc">|</span> SubjectID)</span>
-<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>fit_ri <span class="ot">&lt;-</span> <span class="fu">update</span>(fit_ri_ml, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
-<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>fit_ar1 <span class="ot">&lt;-</span> <span class="fu">update</span>(fit_ar1_ml, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
-<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>model_comparison <span class="ot">&lt;-</span> <span class="fu">anova</span>(fit_ri_ml, fit_ar1_ml)</span>
-<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>model_comparison</span>
-<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">coef</span>(fit_ar1<span class="sc">$</span>modelStruct<span class="sc">$</span>corStruct, <span class="at">unconstrained =</span> <span class="cn">FALSE</span>))</span>
-<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_ri)<span class="sc">$</span>tTable</span>
-<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-243"><a href="#cb18-243" aria-hidden="true" tabindex="-1"></a><span class="fu">## 用个体内模型比较时间变化 {#sec-code}</span></span>
+<span id="cb18-244"><a href="#cb18-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-245"><a href="#cb18-245" aria-hidden="true" tabindex="-1"></a><span class="fu">### 拟合随机截距主模型</span></span>
+<span id="cb18-246"><a href="#cb18-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-247"><a href="#cb18-247" aria-hidden="true" tabindex="-1"></a>模型比较必须用最大似然（ML）；固定效应估计与区间再用限制最大似然（REML）。不要用 REML 比较固定效应不同的模型。</span>
+<span id="cb18-248"><a href="#cb18-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-251"><a href="#cb18-251" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-252"><a href="#cb18-252" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-253"><a href="#cb18-253" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-05</span></span>
+<span id="cb18-254"><a href="#cb18-254" aria-hidden="true" tabindex="-1"></a>fit_ri_ml <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb18-255"><a href="#cb18-255" aria-hidden="true" tabindex="-1"></a>  Shannon <span class="sc">~</span> Cohort <span class="sc">*</span> TimeFactor,</span>
+<span id="cb18-256"><a href="#cb18-256" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> SubjectID,</span>
+<span id="cb18-257"><a href="#cb18-257" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> metadata,</span>
+<span id="cb18-258"><a href="#cb18-258" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"ML"</span>,</span>
+<span id="cb18-259"><a href="#cb18-259" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.action =</span> na.omit,</span>
+<span id="cb18-260"><a href="#cb18-260" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> nlme<span class="sc">::</span><span class="fu">lmeControl</span>(<span class="at">opt =</span> <span class="st">"optim"</span>)</span>
+<span id="cb18-261"><a href="#cb18-261" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-262"><a href="#cb18-262" aria-hidden="true" tabindex="-1"></a>fit_ar1_ml <span class="ot">&lt;-</span> <span class="fu">update</span>(</span>
+<span id="cb18-263"><a href="#cb18-263" aria-hidden="true" tabindex="-1"></a>  fit_ri_ml,</span>
+<span id="cb18-264"><a href="#cb18-264" aria-hidden="true" tabindex="-1"></a>  <span class="at">correlation =</span> nlme<span class="sc">::</span><span class="fu">corAR1</span>(<span class="at">form =</span> <span class="sc">~</span> Timepoint <span class="sc">|</span> SubjectID)</span>
+<span id="cb18-265"><a href="#cb18-265" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-266"><a href="#cb18-266" aria-hidden="true" tabindex="-1"></a>fit_ri <span class="ot">&lt;-</span> <span class="fu">update</span>(fit_ri_ml, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
+<span id="cb18-267"><a href="#cb18-267" aria-hidden="true" tabindex="-1"></a>fit_ar1 <span class="ot">&lt;-</span> <span class="fu">update</span>(fit_ar1_ml, <span class="at">method =</span> <span class="st">"REML"</span>)</span>
 <span id="cb18-268"><a href="#cb18-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a>随机截距模型中，<span class="in">`Rural African × T4`</span> 交互估计为 0.529（P = 0.011），表示两组从 T1 到 T4 的 Shannon 改变量相差约 0.53。T6 交互也为正，但这些时间点检验没有做跨全部结局与分类单元的多重校正，不能挑一个 P 值写成全局结论。</span>
-<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a><span class="fu">### 得到模型边际均值轨迹</span></span>
-<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-06</span></span>
-<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a>model_means <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(emmeans<span class="sc">::</span><span class="fu">emmeans</span>(</span>
-<span id="cb18-279"><a href="#cb18-279" aria-hidden="true" tabindex="-1"></a>  fit_ri, <span class="sc">~</span> Cohort <span class="sc">*</span> TimeFactor</span>
-<span id="cb18-280"><a href="#cb18-280" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a>model_means<span class="sc">$</span>Timepoint <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.character</span>(model_means<span class="sc">$</span>TimeFactor))</span>
-<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a>cohort_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a>  <span class="st">"African American"</span> <span class="ot">=</span> pal_pub[[<span class="st">"blue"</span>]],</span>
-<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Rural African"</span> <span class="ot">=</span> pal_pub[[<span class="st">"orange"</span>]]</span>
-<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>p_alpha <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metadata, <span class="fu">aes</span>(Timepoint, Shannon, <span class="at">colour =</span> Cohort)) <span class="sc">+</span></span>
-<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> SubjectID), <span class="at">linewidth =</span> <span class="fl">0.35</span>, <span class="at">alpha =</span> <span class="fl">0.17</span>) <span class="sc">+</span></span>
-<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.9</span>, <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(</span>
-<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means,</span>
-<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Timepoint, <span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL, <span class="at">fill =</span> Cohort),</span>
-<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.16</span>, <span class="at">colour =</span> <span class="cn">NA</span></span>
-<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
-<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means,</span>
-<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(Timepoint, emmean, <span class="at">colour =</span> Cohort, <span class="at">group =</span> Cohort),</span>
-<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">1.05</span></span>
-<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means, <span class="fu">aes</span>(Timepoint, emmean, <span class="at">colour =</span> Cohort), <span class="at">size =</span> <span class="fl">2.1</span></span>
-<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)) <span class="sc">+</span></span>
-<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
-<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
-<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Within-subject diversity trajectories"</span>,</span>
-<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Thin lines: participants; thick lines and bands: mixed-model means and 95% CI"</span>,</span>
-<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Study timepoint"</span>, <span class="at">y =</span> <span class="st">"Shannon diversity"</span>,</span>
-<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Cohort"</span>, <span class="at">fill =</span> <span class="st">"Cohort"</span></span>
-<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">10</span>)</span>
-<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a>p_alpha</span>
-<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_alpha, <span class="st">"figures/51-longitudinal-analysis/51-1-alpha-trajectories"</span>)</span>
-<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a><span class="fu">### 在 Bray–Curtis 空间画个体轨迹</span></span>
-<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-07</span></span>
-<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a>bray <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(<span class="fu">t</span>(relative), <span class="at">method =</span> <span class="st">"bray"</span>)</span>
-<span id="cb18-325"><a href="#cb18-325" aria-hidden="true" tabindex="-1"></a>pcoa <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">cmdscale</span>(bray, <span class="at">k =</span> <span class="dv">5</span>, <span class="at">eig =</span> <span class="cn">TRUE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb18-326"><a href="#cb18-326" aria-hidden="true" tabindex="-1"></a>pcoa_scores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a>  <span class="at">SampleID =</span> <span class="fu">rownames</span>(pcoa<span class="sc">$</span>points),</span>
-<span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a>  <span class="at">Axis1 =</span> pcoa<span class="sc">$</span>points[, <span class="dv">1</span>], <span class="at">Axis2 =</span> pcoa<span class="sc">$</span>points[, <span class="dv">2</span>]</span>
-<span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a>pcoa_scores <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
-<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a>  pcoa_scores,</span>
-<span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a>  metadata[pcoa_scores<span class="sc">$</span>SampleID,</span>
-<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">"SubjectID"</span>, <span class="st">"Cohort"</span>, <span class="st">"Timepoint"</span>, <span class="st">"TimeLabel"</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>]</span>
-<span id="cb18-334"><a href="#cb18-334" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-335"><a href="#cb18-335" aria-hidden="true" tabindex="-1"></a>positive_eigenvalues <span class="ot">&lt;-</span> pcoa<span class="sc">$</span>eig[pcoa<span class="sc">$</span>eig <span class="sc">&gt;</span> <span class="dv">0</span>]</span>
-<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a>axis_percent <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> pcoa<span class="sc">$</span>eig[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">/</span> <span class="fu">sum</span>(positive_eigenvalues)</span>
-<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
-<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(Axis1, Axis2) <span class="sc">~</span> Cohort <span class="sc">+</span> Timepoint, pcoa_scores, mean</span>
-<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-340"><a href="#cb18-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a>p_pcoa <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pcoa_scores, <span class="fu">aes</span>(Axis1, Axis2, <span class="at">colour =</span> Cohort)) <span class="sc">+</span></span>
-<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(</span>
-<span id="cb18-343"><a href="#cb18-343" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">group =</span> SubjectID), <span class="at">linewidth =</span> <span class="fl">0.3</span>, <span class="at">alpha =</span> <span class="fl">0.13</span>,</span>
-<span id="cb18-344"><a href="#cb18-344" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">1.2</span>, <span class="st">"mm"</span>), <span class="at">type =</span> <span class="st">"closed"</span>)</span>
-<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.18</span>, <span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(</span>
-<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> centroids, <span class="fu">aes</span>(<span class="at">group =</span> Cohort), <span class="at">linewidth =</span> <span class="fl">1.2</span>,</span>
-<span id="cb18-349"><a href="#cb18-349" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">2.2</span>, <span class="st">"mm"</span>), <span class="at">type =</span> <span class="st">"closed"</span>)</span>
-<span id="cb18-350"><a href="#cb18-350" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> centroids, <span class="fu">aes</span>(<span class="at">fill =</span> Cohort), <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">"white"</span></span>
-<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb18-355"><a href="#cb18-355" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> centroids[centroids<span class="sc">$</span>Timepoint <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">6</span>), ],</span>
-<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, Timepoint)), <span class="at">colour =</span> <span class="st">"#202020"</span>,</span>
-<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="fl">0.008</span>, <span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
-<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
-<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
-<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Bray-Curtis trajectories retain subject history"</span>,</span>
-<span id="cb18-363"><a href="#cb18-363" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Faint arrows show participants; labelled paths show cohort centroids"</span>,</span>
-<span id="cb18-364"><a href="#cb18-364" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">"PCoA 1 (%.1f%%)"</span>, axis_percent[<span class="dv">1</span>]),</span>
-<span id="cb18-365"><a href="#cb18-365" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">"PCoA 2 (%.1f%%)"</span>, axis_percent[<span class="dv">2</span>]),</span>
-<span id="cb18-366"><a href="#cb18-366" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Cohort"</span>, <span class="at">fill =</span> <span class="st">"Cohort"</span></span>
-<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">10</span>)</span>
-<span id="cb18-369"><a href="#cb18-369" aria-hidden="true" tabindex="-1"></a>p_pcoa</span>
-<span id="cb18-370"><a href="#cb18-370" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_pcoa, <span class="st">"figures/51-longitudinal-analysis/51-2-pcoa-trajectories"</span>,</span>
-<span id="cb18-371"><a href="#cb18-371" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">135</span>)</span>
-<span id="cb18-372"><a href="#cb18-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-373"><a href="#cb18-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-374"><a href="#cb18-374" aria-hidden="true" tabindex="-1"></a>PCoA 轨迹适合展示方向，却不能把二维箭头长度当成完整 Bray–Curtis 改变量。定量比较应回到原始距离矩阵。</span>
-<span id="cb18-375"><a href="#cb18-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-376"><a href="#cb18-376" aria-hidden="true" tabindex="-1"></a><span class="fu">### 计算相邻时间点 volatility</span></span>
-<span id="cb18-377"><a href="#cb18-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-380"><a href="#cb18-380" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-381"><a href="#cb18-381" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-382"><a href="#cb18-382" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-08</span></span>
-<span id="cb18-383"><a href="#cb18-383" aria-hidden="true" tabindex="-1"></a>bray_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(bray)</span>
-<span id="cb18-384"><a href="#cb18-384" aria-hidden="true" tabindex="-1"></a>volatility <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">split</span>(metadata, metadata<span class="sc">$</span>SubjectID), <span class="cf">function</span>(x) {</span>
-<span id="cb18-385"><a href="#cb18-385" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x[<span class="fu">order</span>(x<span class="sc">$</span>Timepoint), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb18-386"><a href="#cb18-386" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(x) <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
-<span id="cb18-387"><a href="#cb18-387" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(x) <span class="sc">-</span> <span class="dv">1</span>), <span class="cf">function</span>(j) {</span>
-<span id="cb18-388"><a href="#cb18-388" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x<span class="sc">$</span>Timepoint[j <span class="sc">+</span> <span class="dv">1</span>] <span class="sc">-</span> x<span class="sc">$</span>Timepoint[j] <span class="sc">!=</span> <span class="dv">1</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
-<span id="cb18-389"><a href="#cb18-389" aria-hidden="true" tabindex="-1"></a>    from <span class="ot">&lt;-</span> <span class="fu">rownames</span>(x)[j]</span>
-<span id="cb18-390"><a href="#cb18-390" aria-hidden="true" tabindex="-1"></a>    to <span class="ot">&lt;-</span> <span class="fu">rownames</span>(x)[j <span class="sc">+</span> <span class="dv">1</span>]</span>
-<span id="cb18-391"><a href="#cb18-391" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
-<span id="cb18-392"><a href="#cb18-392" aria-hidden="true" tabindex="-1"></a>      <span class="at">SubjectID =</span> x<span class="sc">$</span>SubjectID[j], <span class="at">Cohort =</span> x<span class="sc">$</span>Cohort[j],</span>
-<span id="cb18-393"><a href="#cb18-393" aria-hidden="true" tabindex="-1"></a>      <span class="at">Window =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, x<span class="sc">$</span>Timepoint[j], <span class="st">"-T"</span>, x<span class="sc">$</span>Timepoint[j <span class="sc">+</span> <span class="dv">1</span>]),</span>
-<span id="cb18-394"><a href="#cb18-394" aria-hidden="true" tabindex="-1"></a>      <span class="at">Volatility =</span> <span class="fu">unname</span>(bray_matrix[from, to])</span>
-<span id="cb18-395"><a href="#cb18-395" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb18-396"><a href="#cb18-396" aria-hidden="true" tabindex="-1"></a>  }))</span>
-<span id="cb18-397"><a href="#cb18-397" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb18-398"><a href="#cb18-398" aria-hidden="true" tabindex="-1"></a>volatility<span class="sc">$</span>Cohort <span class="ot">&lt;-</span> <span class="fu">factor</span>(volatility<span class="sc">$</span>Cohort, <span class="at">levels =</span> <span class="fu">levels</span>(metadata<span class="sc">$</span>Cohort))</span>
-<span id="cb18-399"><a href="#cb18-399" aria-hidden="true" tabindex="-1"></a>volatility<span class="sc">$</span>Window <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb18-400"><a href="#cb18-400" aria-hidden="true" tabindex="-1"></a>  volatility<span class="sc">$</span>Window, <span class="at">levels =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="st">"-T"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)</span>
-<span id="cb18-401"><a href="#cb18-401" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-402"><a href="#cb18-402" aria-hidden="true" tabindex="-1"></a>fit_volatility <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
-<span id="cb18-403"><a href="#cb18-403" aria-hidden="true" tabindex="-1"></a>  Volatility <span class="sc">~</span> Cohort <span class="sc">*</span> Window,</span>
-<span id="cb18-404"><a href="#cb18-404" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> SubjectID,</span>
-<span id="cb18-405"><a href="#cb18-405" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> volatility,</span>
-<span id="cb18-406"><a href="#cb18-406" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span>,</span>
-<span id="cb18-407"><a href="#cb18-407" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> nlme<span class="sc">::</span><span class="fu">lmeControl</span>(<span class="at">opt =</span> <span class="st">"optim"</span>)</span>
-<span id="cb18-408"><a href="#cb18-408" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-409"><a href="#cb18-409" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(volatility)</span>
-<span id="cb18-410"><a href="#cb18-410" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_volatility)<span class="sc">$</span>tTable</span>
-<span id="cb18-411"><a href="#cb18-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-412"><a href="#cb18-412" aria-hidden="true" tabindex="-1"></a>p_volatility <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(volatility, <span class="fu">aes</span>(Window, Volatility, <span class="at">fill =</span> Cohort)) <span class="sc">+</span></span>
-<span id="cb18-413"><a href="#cb18-413" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
-<span id="cb18-414"><a href="#cb18-414" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.72</span>), <span class="at">width =</span> <span class="fl">0.62</span>,</span>
-<span id="cb18-415"><a href="#cb18-415" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.72</span></span>
-<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-417"><a href="#cb18-417" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb18-418"><a href="#cb18-418" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">colour =</span> Cohort),</span>
-<span id="cb18-419"><a href="#cb18-419" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.12</span>, <span class="at">dodge.width =</span> <span class="fl">0.72</span>),</span>
-<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.45</span></span>
-<span id="cb18-421"><a href="#cb18-421" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-422"><a href="#cb18-422" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
-<span id="cb18-423"><a href="#cb18-423" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
-<span id="cb18-424"><a href="#cb18-424" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-425"><a href="#cb18-425" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Volatility is a within-person distance"</span>,</span>
-<span id="cb18-426"><a href="#cb18-426" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Bray-Curtis distance between consecutive observed timepoints"</span>,</span>
-<span id="cb18-427"><a href="#cb18-427" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Consecutive time window"</span>, <span class="at">y =</span> <span class="st">"Bray-Curtis volatility"</span>,</span>
-<span id="cb18-428"><a href="#cb18-428" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Cohort"</span>, <span class="at">fill =</span> <span class="st">"Cohort"</span></span>
-<span id="cb18-429"><a href="#cb18-429" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-430"><a href="#cb18-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb18-431"><a href="#cb18-431" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">25</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
-<span id="cb18-432"><a href="#cb18-432" aria-hidden="true" tabindex="-1"></a>p_volatility</span>
-<span id="cb18-433"><a href="#cb18-433" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_volatility, <span class="st">"figures/51-longitudinal-analysis/51-3-volatility"</span>)</span>
-<span id="cb18-434"><a href="#cb18-434" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb18-435"><a href="#cb18-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-436"><a href="#cb18-436" aria-hidden="true" tabindex="-1"></a>这里得到 180 对完整相邻观测。若跳过缺失时间点，不能把 T2 到 T4 当作“T2–T3”或“T3–T4”的 volatility；应保留实际时间差，或改用每单位时间距离。</span>
-<span id="cb18-437"><a href="#cb18-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-438"><a href="#cb18-438" aria-hidden="true" tabindex="-1"></a><span class="fu">## 时间相关、缺失和个体异质性 {#sec-audit}</span></span>
-<span id="cb18-439"><a href="#cb18-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-440"><a href="#cb18-440" aria-hidden="true" tabindex="-1"></a><span class="fu">### 相关结构是否改变结论</span></span>
+<span id="cb18-269"><a href="#cb18-269" aria-hidden="true" tabindex="-1"></a>model_comparison <span class="ot">&lt;-</span> <span class="fu">anova</span>(fit_ri_ml, fit_ar1_ml)</span>
+<span id="cb18-270"><a href="#cb18-270" aria-hidden="true" tabindex="-1"></a>model_comparison</span>
+<span id="cb18-271"><a href="#cb18-271" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">coef</span>(fit_ar1<span class="sc">$</span>modelStruct<span class="sc">$</span>corStruct, <span class="at">unconstrained =</span> <span class="cn">FALSE</span>))</span>
+<span id="cb18-272"><a href="#cb18-272" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_ri)<span class="sc">$</span>tTable</span>
+<span id="cb18-273"><a href="#cb18-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-274"><a href="#cb18-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-275"><a href="#cb18-275" aria-hidden="true" tabindex="-1"></a>随机截距模型中，<span class="in">`Rural African × T4`</span> 交互估计为 0.529（P = 0.011），表示两组从 T1 到 T4 的 Shannon 改变量相差约 0.53。T6 交互也为正，但这些时间点检验没有做跨全部结局与分类单元的多重校正，不能挑一个 P 值写成全局结论。</span>
+<span id="cb18-276"><a href="#cb18-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-277"><a href="#cb18-277" aria-hidden="true" tabindex="-1"></a><span class="fu">### 得到模型边际均值轨迹</span></span>
+<span id="cb18-278"><a href="#cb18-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-281"><a href="#cb18-281" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-282"><a href="#cb18-282" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-283"><a href="#cb18-283" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-06</span></span>
+<span id="cb18-284"><a href="#cb18-284" aria-hidden="true" tabindex="-1"></a>model_means <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(emmeans<span class="sc">::</span><span class="fu">emmeans</span>(</span>
+<span id="cb18-285"><a href="#cb18-285" aria-hidden="true" tabindex="-1"></a>  fit_ri, <span class="sc">~</span> Cohort <span class="sc">*</span> TimeFactor</span>
+<span id="cb18-286"><a href="#cb18-286" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb18-287"><a href="#cb18-287" aria-hidden="true" tabindex="-1"></a>model_means<span class="sc">$</span>Timepoint <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">as.character</span>(model_means<span class="sc">$</span>TimeFactor))</span>
+<span id="cb18-288"><a href="#cb18-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-289"><a href="#cb18-289" aria-hidden="true" tabindex="-1"></a>cohort_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb18-290"><a href="#cb18-290" aria-hidden="true" tabindex="-1"></a>  <span class="st">"African American"</span> <span class="ot">=</span> pal_pub[[<span class="st">"blue"</span>]],</span>
+<span id="cb18-291"><a href="#cb18-291" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Rural African"</span> <span class="ot">=</span> pal_pub[[<span class="st">"orange"</span>]]</span>
+<span id="cb18-292"><a href="#cb18-292" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-293"><a href="#cb18-293" aria-hidden="true" tabindex="-1"></a>p_alpha <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(metadata, <span class="fu">aes</span>(Timepoint, Shannon, <span class="at">colour =</span> Cohort)) <span class="sc">+</span></span>
+<span id="cb18-294"><a href="#cb18-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">group =</span> SubjectID), <span class="at">linewidth =</span> <span class="fl">0.35</span>, <span class="at">alpha =</span> <span class="fl">0.17</span>) <span class="sc">+</span></span>
+<span id="cb18-295"><a href="#cb18-295" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">0.9</span>, <span class="at">alpha =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb18-296"><a href="#cb18-296" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(</span>
+<span id="cb18-297"><a href="#cb18-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means,</span>
+<span id="cb18-298"><a href="#cb18-298" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Timepoint, <span class="at">ymin =</span> lower.CL, <span class="at">ymax =</span> upper.CL, <span class="at">fill =</span> Cohort),</span>
+<span id="cb18-299"><a href="#cb18-299" aria-hidden="true" tabindex="-1"></a>    <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>, <span class="at">alpha =</span> <span class="fl">0.16</span>, <span class="at">colour =</span> <span class="cn">NA</span></span>
+<span id="cb18-300"><a href="#cb18-300" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-301"><a href="#cb18-301" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(</span>
+<span id="cb18-302"><a href="#cb18-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means,</span>
+<span id="cb18-303"><a href="#cb18-303" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(Timepoint, emmean, <span class="at">colour =</span> Cohort, <span class="at">group =</span> Cohort),</span>
+<span id="cb18-304"><a href="#cb18-304" aria-hidden="true" tabindex="-1"></a>    <span class="at">linewidth =</span> <span class="fl">1.05</span></span>
+<span id="cb18-305"><a href="#cb18-305" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-306"><a href="#cb18-306" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb18-307"><a href="#cb18-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> model_means, <span class="fu">aes</span>(Timepoint, emmean, <span class="at">colour =</span> Cohort), <span class="at">size =</span> <span class="fl">2.1</span></span>
+<span id="cb18-308"><a href="#cb18-308" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-309"><a href="#cb18-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>, <span class="at">labels =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)) <span class="sc">+</span></span>
+<span id="cb18-310"><a href="#cb18-310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
+<span id="cb18-311"><a href="#cb18-311" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
+<span id="cb18-312"><a href="#cb18-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-313"><a href="#cb18-313" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Within-subject diversity trajectories"</span>,</span>
+<span id="cb18-314"><a href="#cb18-314" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Thin lines: participants; thick lines and bands: mixed-model means and 95% CI"</span>,</span>
+<span id="cb18-315"><a href="#cb18-315" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Study timepoint"</span>, <span class="at">y =</span> <span class="st">"Shannon diversity"</span>,</span>
+<span id="cb18-316"><a href="#cb18-316" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Cohort"</span>, <span class="at">fill =</span> <span class="st">"Cohort"</span></span>
+<span id="cb18-317"><a href="#cb18-317" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-318"><a href="#cb18-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">10</span>)</span>
+<span id="cb18-319"><a href="#cb18-319" aria-hidden="true" tabindex="-1"></a>p_alpha</span>
+<span id="cb18-320"><a href="#cb18-320" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_alpha, <span class="st">"figures/51-longitudinal-analysis/51-1-alpha-trajectories"</span>)</span>
+<span id="cb18-321"><a href="#cb18-321" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-322"><a href="#cb18-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-323"><a href="#cb18-323" aria-hidden="true" tabindex="-1"></a><span class="fu">### 在 Bray–Curtis 空间画个体轨迹</span></span>
+<span id="cb18-324"><a href="#cb18-324" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-327"><a href="#cb18-327" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-328"><a href="#cb18-328" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-329"><a href="#cb18-329" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-07</span></span>
+<span id="cb18-330"><a href="#cb18-330" aria-hidden="true" tabindex="-1"></a>bray <span class="ot">&lt;-</span> vegan<span class="sc">::</span><span class="fu">vegdist</span>(<span class="fu">t</span>(relative), <span class="at">method =</span> <span class="st">"bray"</span>)</span>
+<span id="cb18-331"><a href="#cb18-331" aria-hidden="true" tabindex="-1"></a>pcoa <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">cmdscale</span>(bray, <span class="at">k =</span> <span class="dv">5</span>, <span class="at">eig =</span> <span class="cn">TRUE</span>, <span class="at">add =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb18-332"><a href="#cb18-332" aria-hidden="true" tabindex="-1"></a>pcoa_scores <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-333"><a href="#cb18-333" aria-hidden="true" tabindex="-1"></a>  <span class="at">SampleID =</span> <span class="fu">rownames</span>(pcoa<span class="sc">$</span>points),</span>
+<span id="cb18-334"><a href="#cb18-334" aria-hidden="true" tabindex="-1"></a>  <span class="at">Axis1 =</span> pcoa<span class="sc">$</span>points[, <span class="dv">1</span>], <span class="at">Axis2 =</span> pcoa<span class="sc">$</span>points[, <span class="dv">2</span>]</span>
+<span id="cb18-335"><a href="#cb18-335" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-336"><a href="#cb18-336" aria-hidden="true" tabindex="-1"></a>pcoa_scores <span class="ot">&lt;-</span> <span class="fu">cbind</span>(</span>
+<span id="cb18-337"><a href="#cb18-337" aria-hidden="true" tabindex="-1"></a>  pcoa_scores,</span>
+<span id="cb18-338"><a href="#cb18-338" aria-hidden="true" tabindex="-1"></a>  metadata[pcoa_scores<span class="sc">$</span>SampleID,</span>
+<span id="cb18-339"><a href="#cb18-339" aria-hidden="true" tabindex="-1"></a>           <span class="fu">c</span>(<span class="st">"SubjectID"</span>, <span class="st">"Cohort"</span>, <span class="st">"Timepoint"</span>, <span class="st">"TimeLabel"</span>), <span class="at">drop =</span> <span class="cn">FALSE</span>]</span>
+<span id="cb18-340"><a href="#cb18-340" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-341"><a href="#cb18-341" aria-hidden="true" tabindex="-1"></a>positive_eigenvalues <span class="ot">&lt;-</span> pcoa<span class="sc">$</span>eig[pcoa<span class="sc">$</span>eig <span class="sc">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb18-342"><a href="#cb18-342" aria-hidden="true" tabindex="-1"></a>axis_percent <span class="ot">&lt;-</span> <span class="dv">100</span> <span class="sc">*</span> pcoa<span class="sc">$</span>eig[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>] <span class="sc">/</span> <span class="fu">sum</span>(positive_eigenvalues)</span>
+<span id="cb18-343"><a href="#cb18-343" aria-hidden="true" tabindex="-1"></a>centroids <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
+<span id="cb18-344"><a href="#cb18-344" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(Axis1, Axis2) <span class="sc">~</span> Cohort <span class="sc">+</span> Timepoint, pcoa_scores, mean</span>
+<span id="cb18-345"><a href="#cb18-345" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-346"><a href="#cb18-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-347"><a href="#cb18-347" aria-hidden="true" tabindex="-1"></a>p_pcoa <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pcoa_scores, <span class="fu">aes</span>(Axis1, Axis2, <span class="at">colour =</span> Cohort)) <span class="sc">+</span></span>
+<span id="cb18-348"><a href="#cb18-348" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(</span>
+<span id="cb18-349"><a href="#cb18-349" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">group =</span> SubjectID), <span class="at">linewidth =</span> <span class="fl">0.3</span>, <span class="at">alpha =</span> <span class="fl">0.13</span>,</span>
+<span id="cb18-350"><a href="#cb18-350" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">1.2</span>, <span class="st">"mm"</span>), <span class="at">type =</span> <span class="st">"closed"</span>)</span>
+<span id="cb18-351"><a href="#cb18-351" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-352"><a href="#cb18-352" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.18</span>, <span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb18-353"><a href="#cb18-353" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(</span>
+<span id="cb18-354"><a href="#cb18-354" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> centroids, <span class="fu">aes</span>(<span class="at">group =</span> Cohort), <span class="at">linewidth =</span> <span class="fl">1.2</span>,</span>
+<span id="cb18-355"><a href="#cb18-355" aria-hidden="true" tabindex="-1"></a>    <span class="at">arrow =</span> grid<span class="sc">::</span><span class="fu">arrow</span>(<span class="at">length =</span> grid<span class="sc">::</span><span class="fu">unit</span>(<span class="fl">2.2</span>, <span class="st">"mm"</span>), <span class="at">type =</span> <span class="st">"closed"</span>)</span>
+<span id="cb18-356"><a href="#cb18-356" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-357"><a href="#cb18-357" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb18-358"><a href="#cb18-358" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> centroids, <span class="fu">aes</span>(<span class="at">fill =</span> Cohort), <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">colour =</span> <span class="st">"white"</span></span>
+<span id="cb18-359"><a href="#cb18-359" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-360"><a href="#cb18-360" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb18-361"><a href="#cb18-361" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> centroids[centroids<span class="sc">$</span>Timepoint <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">6</span>), ],</span>
+<span id="cb18-362"><a href="#cb18-362" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, Timepoint)), <span class="at">colour =</span> <span class="st">"#202020"</span>,</span>
+<span id="cb18-363"><a href="#cb18-363" aria-hidden="true" tabindex="-1"></a>    <span class="at">nudge_y =</span> <span class="fl">0.008</span>, <span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span></span>
+<span id="cb18-364"><a href="#cb18-364" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-365"><a href="#cb18-365" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
+<span id="cb18-366"><a href="#cb18-366" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
+<span id="cb18-367"><a href="#cb18-367" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-368"><a href="#cb18-368" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Bray-Curtis trajectories retain subject history"</span>,</span>
+<span id="cb18-369"><a href="#cb18-369" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Faint arrows show participants; labelled paths show cohort centroids"</span>,</span>
+<span id="cb18-370"><a href="#cb18-370" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">sprintf</span>(<span class="st">"PCoA 1 (%.1f%%)"</span>, axis_percent[<span class="dv">1</span>]),</span>
+<span id="cb18-371"><a href="#cb18-371" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">sprintf</span>(<span class="st">"PCoA 2 (%.1f%%)"</span>, axis_percent[<span class="dv">2</span>]),</span>
+<span id="cb18-372"><a href="#cb18-372" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Cohort"</span>, <span class="at">fill =</span> <span class="st">"Cohort"</span></span>
+<span id="cb18-373"><a href="#cb18-373" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-374"><a href="#cb18-374" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">10</span>)</span>
+<span id="cb18-375"><a href="#cb18-375" aria-hidden="true" tabindex="-1"></a>p_pcoa</span>
+<span id="cb18-376"><a href="#cb18-376" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_pcoa, <span class="st">"figures/51-longitudinal-analysis/51-2-pcoa-trajectories"</span>,</span>
+<span id="cb18-377"><a href="#cb18-377" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">135</span>)</span>
+<span id="cb18-378"><a href="#cb18-378" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-379"><a href="#cb18-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-380"><a href="#cb18-380" aria-hidden="true" tabindex="-1"></a>PCoA 轨迹适合展示方向，却不能把二维箭头长度当成完整 Bray–Curtis 改变量。定量比较应回到原始距离矩阵。</span>
+<span id="cb18-381"><a href="#cb18-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-382"><a href="#cb18-382" aria-hidden="true" tabindex="-1"></a><span class="fu">### 计算相邻时间点 volatility</span></span>
+<span id="cb18-383"><a href="#cb18-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-386"><a href="#cb18-386" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-387"><a href="#cb18-387" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-388"><a href="#cb18-388" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-08</span></span>
+<span id="cb18-389"><a href="#cb18-389" aria-hidden="true" tabindex="-1"></a>bray_matrix <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(bray)</span>
+<span id="cb18-390"><a href="#cb18-390" aria-hidden="true" tabindex="-1"></a>volatility <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">split</span>(metadata, metadata<span class="sc">$</span>SubjectID), <span class="cf">function</span>(x) {</span>
+<span id="cb18-391"><a href="#cb18-391" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> x[<span class="fu">order</span>(x<span class="sc">$</span>Timepoint), , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb18-392"><a href="#cb18-392" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(x) <span class="sc">&lt;</span> <span class="dv">2</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb18-393"><a href="#cb18-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">seq_len</span>(<span class="fu">nrow</span>(x) <span class="sc">-</span> <span class="dv">1</span>), <span class="cf">function</span>(j) {</span>
+<span id="cb18-394"><a href="#cb18-394" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x<span class="sc">$</span>Timepoint[j <span class="sc">+</span> <span class="dv">1</span>] <span class="sc">-</span> x<span class="sc">$</span>Timepoint[j] <span class="sc">!=</span> <span class="dv">1</span>) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb18-395"><a href="#cb18-395" aria-hidden="true" tabindex="-1"></a>    from <span class="ot">&lt;-</span> <span class="fu">rownames</span>(x)[j]</span>
+<span id="cb18-396"><a href="#cb18-396" aria-hidden="true" tabindex="-1"></a>    to <span class="ot">&lt;-</span> <span class="fu">rownames</span>(x)[j <span class="sc">+</span> <span class="dv">1</span>]</span>
+<span id="cb18-397"><a href="#cb18-397" aria-hidden="true" tabindex="-1"></a>    <span class="fu">data.frame</span>(</span>
+<span id="cb18-398"><a href="#cb18-398" aria-hidden="true" tabindex="-1"></a>      <span class="at">SubjectID =</span> x<span class="sc">$</span>SubjectID[j], <span class="at">Cohort =</span> x<span class="sc">$</span>Cohort[j],</span>
+<span id="cb18-399"><a href="#cb18-399" aria-hidden="true" tabindex="-1"></a>      <span class="at">Window =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, x<span class="sc">$</span>Timepoint[j], <span class="st">"-T"</span>, x<span class="sc">$</span>Timepoint[j <span class="sc">+</span> <span class="dv">1</span>]),</span>
+<span id="cb18-400"><a href="#cb18-400" aria-hidden="true" tabindex="-1"></a>      <span class="at">Volatility =</span> <span class="fu">unname</span>(bray_matrix[from, to])</span>
+<span id="cb18-401"><a href="#cb18-401" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb18-402"><a href="#cb18-402" aria-hidden="true" tabindex="-1"></a>  }))</span>
+<span id="cb18-403"><a href="#cb18-403" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb18-404"><a href="#cb18-404" aria-hidden="true" tabindex="-1"></a>volatility<span class="sc">$</span>Cohort <span class="ot">&lt;-</span> <span class="fu">factor</span>(volatility<span class="sc">$</span>Cohort, <span class="at">levels =</span> <span class="fu">levels</span>(metadata<span class="sc">$</span>Cohort))</span>
+<span id="cb18-405"><a href="#cb18-405" aria-hidden="true" tabindex="-1"></a>volatility<span class="sc">$</span>Window <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb18-406"><a href="#cb18-406" aria-hidden="true" tabindex="-1"></a>  volatility<span class="sc">$</span>Window, <span class="at">levels =</span> <span class="fu">paste0</span>(<span class="st">"T"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="st">"-T"</span>, <span class="dv">2</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb18-407"><a href="#cb18-407" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-408"><a href="#cb18-408" aria-hidden="true" tabindex="-1"></a>fit_volatility <span class="ot">&lt;-</span> nlme<span class="sc">::</span><span class="fu">lme</span>(</span>
+<span id="cb18-409"><a href="#cb18-409" aria-hidden="true" tabindex="-1"></a>  Volatility <span class="sc">~</span> Cohort <span class="sc">*</span> Window,</span>
+<span id="cb18-410"><a href="#cb18-410" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> SubjectID,</span>
+<span id="cb18-411"><a href="#cb18-411" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> volatility,</span>
+<span id="cb18-412"><a href="#cb18-412" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"REML"</span>,</span>
+<span id="cb18-413"><a href="#cb18-413" aria-hidden="true" tabindex="-1"></a>  <span class="at">control =</span> nlme<span class="sc">::</span><span class="fu">lmeControl</span>(<span class="at">opt =</span> <span class="st">"optim"</span>)</span>
+<span id="cb18-414"><a href="#cb18-414" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-415"><a href="#cb18-415" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(volatility)</span>
+<span id="cb18-416"><a href="#cb18-416" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit_volatility)<span class="sc">$</span>tTable</span>
+<span id="cb18-417"><a href="#cb18-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-418"><a href="#cb18-418" aria-hidden="true" tabindex="-1"></a>p_volatility <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(volatility, <span class="fu">aes</span>(Window, Volatility, <span class="at">fill =</span> Cohort)) <span class="sc">+</span></span>
+<span id="cb18-419"><a href="#cb18-419" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb18-420"><a href="#cb18-420" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.72</span>), <span class="at">width =</span> <span class="fl">0.62</span>,</span>
+<span id="cb18-421"><a href="#cb18-421" aria-hidden="true" tabindex="-1"></a>    <span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> <span class="fl">0.72</span></span>
+<span id="cb18-422"><a href="#cb18-422" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-423"><a href="#cb18-423" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb18-424"><a href="#cb18-424" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">colour =</span> Cohort),</span>
+<span id="cb18-425"><a href="#cb18-425" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_jitterdodge</span>(<span class="at">jitter.width =</span> <span class="fl">0.12</span>, <span class="at">dodge.width =</span> <span class="fl">0.72</span>),</span>
+<span id="cb18-426"><a href="#cb18-426" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.8</span>, <span class="at">alpha =</span> <span class="fl">0.45</span></span>
+<span id="cb18-427"><a href="#cb18-427" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-428"><a href="#cb18-428" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
+<span id="cb18-429"><a href="#cb18-429" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
+<span id="cb18-430"><a href="#cb18-430" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-431"><a href="#cb18-431" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Volatility is a within-person distance"</span>,</span>
+<span id="cb18-432"><a href="#cb18-432" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Bray-Curtis distance between consecutive observed timepoints"</span>,</span>
+<span id="cb18-433"><a href="#cb18-433" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Consecutive time window"</span>, <span class="at">y =</span> <span class="st">"Bray-Curtis volatility"</span>,</span>
+<span id="cb18-434"><a href="#cb18-434" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"Cohort"</span>, <span class="at">fill =</span> <span class="st">"Cohort"</span></span>
+<span id="cb18-435"><a href="#cb18-435" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-436"><a href="#cb18-436" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb18-437"><a href="#cb18-437" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">25</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb18-438"><a href="#cb18-438" aria-hidden="true" tabindex="-1"></a>p_volatility</span>
+<span id="cb18-439"><a href="#cb18-439" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_volatility, <span class="st">"figures/51-longitudinal-analysis/51-3-volatility"</span>)</span>
+<span id="cb18-440"><a href="#cb18-440" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb18-441"><a href="#cb18-441" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-442"><a href="#cb18-442" aria-hidden="true" tabindex="-1"></a>随机截距与随机截距+AR(1) 的 ML AIC 分别约为 326.26 和 326.21；似然比检验 P = 0.153，AR(1) 参数约 0.139。额外相关参数没有得到强支持，而 T4 交互在两种模型中方向和量级接近。因此主结果保留更简约的随机截距模型，并把 AR(1) 放入敏感性分析。</span>
+<span id="cb18-442"><a href="#cb18-442" aria-hidden="true" tabindex="-1"></a>这里得到 180 对完整相邻观测。若跳过缺失时间点，不能把 T2 到 T4 当作“T2–T3”或“T3–T4”的 volatility；应保留实际时间差，或改用每单位时间距离。</span>
 <span id="cb18-443"><a href="#cb18-443" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-444"><a href="#cb18-444" aria-hidden="true" tabindex="-1"></a>下面把全部组别×时间交互的区间并排，并对 T4−T1 改变量按**参与者**自助抽样。若按样本行抽样，会破坏重复测量结构。</span>
+<span id="cb18-444"><a href="#cb18-444" aria-hidden="true" tabindex="-1"></a><span class="fu">## 时间相关、缺失和个体异质性 {#sec-audit}</span></span>
 <span id="cb18-445"><a href="#cb18-445" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-448"><a href="#cb18-448" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb18-449"><a href="#cb18-449" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb18-450"><a href="#cb18-450" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-09</span></span>
-<span id="cb18-451"><a href="#cb18-451" aria-hidden="true" tabindex="-1"></a>extract_fixed <span class="ot">&lt;-</span> <span class="cf">function</span>(model, label) {</span>
-<span id="cb18-452"><a href="#cb18-452" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>tTable</span>
-<span id="cb18-453"><a href="#cb18-453" aria-hidden="true" tabindex="-1"></a>  critical <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> x[, <span class="st">"DF"</span>])</span>
-<span id="cb18-454"><a href="#cb18-454" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb18-455"><a href="#cb18-455" aria-hidden="true" tabindex="-1"></a>    <span class="at">Model =</span> label, <span class="at">Term =</span> <span class="fu">rownames</span>(x), <span class="at">Estimate =</span> x[, <span class="st">"Value"</span>],</span>
-<span id="cb18-456"><a href="#cb18-456" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower =</span> x[, <span class="st">"Value"</span>] <span class="sc">-</span> critical <span class="sc">*</span> x[, <span class="st">"Std.Error"</span>],</span>
-<span id="cb18-457"><a href="#cb18-457" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper =</span> x[, <span class="st">"Value"</span>] <span class="sc">+</span> critical <span class="sc">*</span> x[, <span class="st">"Std.Error"</span>],</span>
-<span id="cb18-458"><a href="#cb18-458" aria-hidden="true" tabindex="-1"></a>    <span class="at">PValue =</span> x[, <span class="st">"p-value"</span>], <span class="at">row.names =</span> <span class="cn">NULL</span></span>
-<span id="cb18-459"><a href="#cb18-459" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-460"><a href="#cb18-460" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-461"><a href="#cb18-461" aria-hidden="true" tabindex="-1"></a>fixed_effects <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
-<span id="cb18-462"><a href="#cb18-462" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fixed</span>(fit_ri, <span class="st">"Random intercept"</span>),</span>
-<span id="cb18-463"><a href="#cb18-463" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fixed</span>(fit_ar1, <span class="st">"Random intercept + AR(1)"</span>)</span>
-<span id="cb18-464"><a href="#cb18-464" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-465"><a href="#cb18-465" aria-hidden="true" tabindex="-1"></a>interactions <span class="ot">&lt;-</span> fixed_effects[<span class="fu">grepl</span>(<span class="st">"CohortRural African:TimeFactor"</span>, fixed_effects<span class="sc">$</span>Term), ]</span>
-<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">$</span>Timepoint <span class="ot">&lt;-</span> <span class="fu">sub</span>(</span>
-<span id="cb18-467"><a href="#cb18-467" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CohortRural African:TimeFactor"</span>, <span class="st">"T"</span>, interactions<span class="sc">$</span>Term, <span class="at">fixed =</span> <span class="cn">TRUE</span></span>
-<span id="cb18-468"><a href="#cb18-468" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-469"><a href="#cb18-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-470"><a href="#cb18-470" aria-hidden="true" tabindex="-1"></a>paired_change <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">split</span>(metadata, metadata<span class="sc">$</span>SubjectID), <span class="cf">function</span>(x) {</span>
-<span id="cb18-471"><a href="#cb18-471" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">%in%</span> x<span class="sc">$</span>Timepoint)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
-<span id="cb18-472"><a href="#cb18-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb18-473"><a href="#cb18-473" aria-hidden="true" tabindex="-1"></a>    <span class="at">SubjectID =</span> x<span class="sc">$</span>SubjectID[<span class="dv">1</span>], <span class="at">Cohort =</span> x<span class="sc">$</span>Cohort[<span class="dv">1</span>],</span>
-<span id="cb18-474"><a href="#cb18-474" aria-hidden="true" tabindex="-1"></a>    <span class="at">DeltaT4T1 =</span> x<span class="sc">$</span>Shannon[x<span class="sc">$</span>Timepoint <span class="sc">==</span> <span class="dv">4</span>][<span class="dv">1</span>] <span class="sc">-</span> x<span class="sc">$</span>Shannon[x<span class="sc">$</span>Timepoint <span class="sc">==</span> <span class="dv">1</span>][<span class="dv">1</span>]</span>
-<span id="cb18-475"><a href="#cb18-475" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-476"><a href="#cb18-476" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb18-477"><a href="#cb18-477" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260751</span>)</span>
-<span id="cb18-478"><a href="#cb18-478" aria-hidden="true" tabindex="-1"></a>bootstrap_draws <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">levels</span>(metadata<span class="sc">$</span>Cohort), <span class="cf">function</span>(g) {</span>
-<span id="cb18-479"><a href="#cb18-479" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> paired_change<span class="sc">$</span>DeltaT4T1[paired_change<span class="sc">$</span>Cohort <span class="sc">==</span> g]</span>
-<span id="cb18-480"><a href="#cb18-480" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb18-481"><a href="#cb18-481" aria-hidden="true" tabindex="-1"></a>    <span class="at">Cohort =</span> g,</span>
-<span id="cb18-482"><a href="#cb18-482" aria-hidden="true" tabindex="-1"></a>    <span class="at">MeanChange =</span> <span class="fu">replicate</span>(<span class="dv">5000</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(v, <span class="fu">length</span>(v), <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
-<span id="cb18-483"><a href="#cb18-483" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb18-484"><a href="#cb18-484" aria-hidden="true" tabindex="-1"></a>}))</span>
-<span id="cb18-485"><a href="#cb18-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-486"><a href="#cb18-486" aria-hidden="true" tabindex="-1"></a>p_audit_a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(interactions, <span class="fu">aes</span>(Estimate, Timepoint, <span class="at">colour =</span> Model)) <span class="sc">+</span></span>
-<span id="cb18-487"><a href="#cb18-487" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
-<span id="cb18-488"><a href="#cb18-488" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(</span>
-<span id="cb18-489"><a href="#cb18-489" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">xmin =</span> Lower, <span class="at">xmax =</span> Upper),</span>
-<span id="cb18-490"><a href="#cb18-490" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.45</span>), <span class="at">height =</span> <span class="dv">0</span></span>
-<span id="cb18-491"><a href="#cb18-491" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb18-492"><a href="#cb18-492" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.45</span>), <span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
-<span id="cb18-493"><a href="#cb18-493" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb18-494"><a href="#cb18-494" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random intercept"</span> <span class="ot">=</span> pal_pub[[<span class="st">"blue"</span>]],</span>
-<span id="cb18-495"><a href="#cb18-495" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random intercept + AR(1)"</span> <span class="ot">=</span> pal_pub[[<span class="st">"vermillion"</span>]]</span>
-<span id="cb18-496"><a href="#cb18-496" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb18-497"><a href="#cb18-497" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-498"><a href="#cb18-498" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"A. Correlation-structure audit"</span>,</span>
-<span id="cb18-499"><a href="#cb18-499" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Cohort-by-time interaction estimate (95% CI)"</span>,</span>
-<span id="cb18-500"><a href="#cb18-500" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Timepoint vs T1"</span>, <span class="at">colour =</span> <span class="st">"Model"</span></span>
-<span id="cb18-501"><a href="#cb18-501" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>)</span>
-<span id="cb18-502"><a href="#cb18-502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-503"><a href="#cb18-503" aria-hidden="true" tabindex="-1"></a>p_audit_b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(bootstrap_draws, <span class="fu">aes</span>(MeanChange, <span class="at">fill =</span> Cohort)) <span class="sc">+</span></span>
-<span id="cb18-504"><a href="#cb18-504" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.45</span>, <span class="at">colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb18-505"><a href="#cb18-505" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#555555"</span>) <span class="sc">+</span></span>
-<span id="cb18-506"><a href="#cb18-506" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
-<span id="cb18-507"><a href="#cb18-507" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-508"><a href="#cb18-508" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"B. Participant-level bootstrap"</span>,</span>
-<span id="cb18-509"><a href="#cb18-509" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Mean Shannon change, T4 minus T1"</span>,</span>
-<span id="cb18-510"><a href="#cb18-510" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Bootstrapped mean change"</span>, <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">fill =</span> <span class="st">"Cohort"</span></span>
-<span id="cb18-511"><a href="#cb18-511" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>)</span>
-<span id="cb18-512"><a href="#cb18-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-513"><a href="#cb18-513" aria-hidden="true" tabindex="-1"></a>p_audit <span class="ot">&lt;-</span> p_audit_a <span class="sc">+</span> p_audit_b <span class="sc">+</span> patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="fl">1.25</span>, <span class="dv">1</span>))</span>
-<span id="cb18-514"><a href="#cb18-514" aria-hidden="true" tabindex="-1"></a>p_audit</span>
-<span id="cb18-515"><a href="#cb18-515" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_audit, <span class="st">"figures/51-longitudinal-analysis/51-4-model-audit"</span>,</span>
-<span id="cb18-516"><a href="#cb18-516" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">115</span>)</span>
-<span id="cb18-517"><a href="#cb18-517" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-446"><a href="#cb18-446" aria-hidden="true" tabindex="-1"></a><span class="fu">### 相关结构是否改变结论</span></span>
+<span id="cb18-447"><a href="#cb18-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-448"><a href="#cb18-448" aria-hidden="true" tabindex="-1"></a>随机截距与随机截距+AR(1) 的 ML AIC 分别约为 326.26 和 326.21；似然比检验 P = 0.153，AR(1) 参数约 0.139。额外相关参数没有得到强支持，而 T4 交互在两种模型中方向和量级接近。因此主结果保留更简约的随机截距模型，并把 AR(1) 放入敏感性分析。</span>
+<span id="cb18-449"><a href="#cb18-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-450"><a href="#cb18-450" aria-hidden="true" tabindex="-1"></a>下面把全部组别×时间交互的区间并排，并对 T4−T1 改变量按**参与者**自助抽样。若按样本行抽样，会破坏重复测量结构。</span>
+<span id="cb18-451"><a href="#cb18-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-454"><a href="#cb18-454" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-455"><a href="#cb18-455" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb18-456"><a href="#cb18-456" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-09</span></span>
+<span id="cb18-457"><a href="#cb18-457" aria-hidden="true" tabindex="-1"></a>extract_fixed <span class="ot">&lt;-</span> <span class="cf">function</span>(model, label) {</span>
+<span id="cb18-458"><a href="#cb18-458" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>tTable</span>
+<span id="cb18-459"><a href="#cb18-459" aria-hidden="true" tabindex="-1"></a>  critical <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> x[, <span class="st">"DF"</span>])</span>
+<span id="cb18-460"><a href="#cb18-460" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb18-461"><a href="#cb18-461" aria-hidden="true" tabindex="-1"></a>    <span class="at">Model =</span> label, <span class="at">Term =</span> <span class="fu">rownames</span>(x), <span class="at">Estimate =</span> x[, <span class="st">"Value"</span>],</span>
+<span id="cb18-462"><a href="#cb18-462" aria-hidden="true" tabindex="-1"></a>    <span class="at">Lower =</span> x[, <span class="st">"Value"</span>] <span class="sc">-</span> critical <span class="sc">*</span> x[, <span class="st">"Std.Error"</span>],</span>
+<span id="cb18-463"><a href="#cb18-463" aria-hidden="true" tabindex="-1"></a>    <span class="at">Upper =</span> x[, <span class="st">"Value"</span>] <span class="sc">+</span> critical <span class="sc">*</span> x[, <span class="st">"Std.Error"</span>],</span>
+<span id="cb18-464"><a href="#cb18-464" aria-hidden="true" tabindex="-1"></a>    <span class="at">PValue =</span> x[, <span class="st">"p-value"</span>], <span class="at">row.names =</span> <span class="cn">NULL</span></span>
+<span id="cb18-465"><a href="#cb18-465" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-466"><a href="#cb18-466" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-467"><a href="#cb18-467" aria-hidden="true" tabindex="-1"></a>fixed_effects <span class="ot">&lt;-</span> <span class="fu">rbind</span>(</span>
+<span id="cb18-468"><a href="#cb18-468" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fixed</span>(fit_ri, <span class="st">"Random intercept"</span>),</span>
+<span id="cb18-469"><a href="#cb18-469" aria-hidden="true" tabindex="-1"></a>  <span class="fu">extract_fixed</span>(fit_ar1, <span class="st">"Random intercept + AR(1)"</span>)</span>
+<span id="cb18-470"><a href="#cb18-470" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-471"><a href="#cb18-471" aria-hidden="true" tabindex="-1"></a>interactions <span class="ot">&lt;-</span> fixed_effects[<span class="fu">grepl</span>(<span class="st">"CohortRural African:TimeFactor"</span>, fixed_effects<span class="sc">$</span>Term), ]</span>
+<span id="cb18-472"><a href="#cb18-472" aria-hidden="true" tabindex="-1"></a>interactions<span class="sc">$</span>Timepoint <span class="ot">&lt;-</span> <span class="fu">sub</span>(</span>
+<span id="cb18-473"><a href="#cb18-473" aria-hidden="true" tabindex="-1"></a>  <span class="st">"CohortRural African:TimeFactor"</span>, <span class="st">"T"</span>, interactions<span class="sc">$</span>Term, <span class="at">fixed =</span> <span class="cn">TRUE</span></span>
+<span id="cb18-474"><a href="#cb18-474" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-475"><a href="#cb18-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-476"><a href="#cb18-476" aria-hidden="true" tabindex="-1"></a>paired_change <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">split</span>(metadata, metadata<span class="sc">$</span>SubjectID), <span class="cf">function</span>(x) {</span>
+<span id="cb18-477"><a href="#cb18-477" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">all</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">%in%</span> x<span class="sc">$</span>Timepoint)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb18-478"><a href="#cb18-478" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb18-479"><a href="#cb18-479" aria-hidden="true" tabindex="-1"></a>    <span class="at">SubjectID =</span> x<span class="sc">$</span>SubjectID[<span class="dv">1</span>], <span class="at">Cohort =</span> x<span class="sc">$</span>Cohort[<span class="dv">1</span>],</span>
+<span id="cb18-480"><a href="#cb18-480" aria-hidden="true" tabindex="-1"></a>    <span class="at">DeltaT4T1 =</span> x<span class="sc">$</span>Shannon[x<span class="sc">$</span>Timepoint <span class="sc">==</span> <span class="dv">4</span>][<span class="dv">1</span>] <span class="sc">-</span> x<span class="sc">$</span>Shannon[x<span class="sc">$</span>Timepoint <span class="sc">==</span> <span class="dv">1</span>][<span class="dv">1</span>]</span>
+<span id="cb18-481"><a href="#cb18-481" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-482"><a href="#cb18-482" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb18-483"><a href="#cb18-483" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260751</span>)</span>
+<span id="cb18-484"><a href="#cb18-484" aria-hidden="true" tabindex="-1"></a>bootstrap_draws <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">lapply</span>(<span class="fu">levels</span>(metadata<span class="sc">$</span>Cohort), <span class="cf">function</span>(g) {</span>
+<span id="cb18-485"><a href="#cb18-485" aria-hidden="true" tabindex="-1"></a>  v <span class="ot">&lt;-</span> paired_change<span class="sc">$</span>DeltaT4T1[paired_change<span class="sc">$</span>Cohort <span class="sc">==</span> g]</span>
+<span id="cb18-486"><a href="#cb18-486" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
+<span id="cb18-487"><a href="#cb18-487" aria-hidden="true" tabindex="-1"></a>    <span class="at">Cohort =</span> g,</span>
+<span id="cb18-488"><a href="#cb18-488" aria-hidden="true" tabindex="-1"></a>    <span class="at">MeanChange =</span> <span class="fu">replicate</span>(<span class="dv">5000</span>, <span class="fu">mean</span>(<span class="fu">sample</span>(v, <span class="fu">length</span>(v), <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb18-489"><a href="#cb18-489" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-490"><a href="#cb18-490" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb18-491"><a href="#cb18-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-492"><a href="#cb18-492" aria-hidden="true" tabindex="-1"></a>p_audit_a <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(interactions, <span class="fu">aes</span>(Estimate, Timepoint, <span class="at">colour =</span> Model)) <span class="sc">+</span></span>
+<span id="cb18-493"><a href="#cb18-493" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
+<span id="cb18-494"><a href="#cb18-494" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(</span>
+<span id="cb18-495"><a href="#cb18-495" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">xmin =</span> Lower, <span class="at">xmax =</span> Upper),</span>
+<span id="cb18-496"><a href="#cb18-496" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.45</span>), <span class="at">height =</span> <span class="dv">0</span></span>
+<span id="cb18-497"><a href="#cb18-497" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-498"><a href="#cb18-498" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.45</span>), <span class="at">size =</span> <span class="fl">1.8</span>) <span class="sc">+</span></span>
+<span id="cb18-499"><a href="#cb18-499" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb18-500"><a href="#cb18-500" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random intercept"</span> <span class="ot">=</span> pal_pub[[<span class="st">"blue"</span>]],</span>
+<span id="cb18-501"><a href="#cb18-501" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Random intercept + AR(1)"</span> <span class="ot">=</span> pal_pub[[<span class="st">"vermillion"</span>]]</span>
+<span id="cb18-502"><a href="#cb18-502" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb18-503"><a href="#cb18-503" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-504"><a href="#cb18-504" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"A. Correlation-structure audit"</span>,</span>
+<span id="cb18-505"><a href="#cb18-505" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Cohort-by-time interaction estimate (95% CI)"</span>,</span>
+<span id="cb18-506"><a href="#cb18-506" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Timepoint vs T1"</span>, <span class="at">colour =</span> <span class="st">"Model"</span></span>
+<span id="cb18-507"><a href="#cb18-507" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>)</span>
+<span id="cb18-508"><a href="#cb18-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-509"><a href="#cb18-509" aria-hidden="true" tabindex="-1"></a>p_audit_b <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(bootstrap_draws, <span class="fu">aes</span>(MeanChange, <span class="at">fill =</span> Cohort)) <span class="sc">+</span></span>
+<span id="cb18-510"><a href="#cb18-510" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.45</span>, <span class="at">colour =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb18-511"><a href="#cb18-511" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#555555"</span>) <span class="sc">+</span></span>
+<span id="cb18-512"><a href="#cb18-512" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cohort_colours) <span class="sc">+</span></span>
+<span id="cb18-513"><a href="#cb18-513" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-514"><a href="#cb18-514" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"B. Participant-level bootstrap"</span>,</span>
+<span id="cb18-515"><a href="#cb18-515" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Mean Shannon change, T4 minus T1"</span>,</span>
+<span id="cb18-516"><a href="#cb18-516" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Bootstrapped mean change"</span>, <span class="at">y =</span> <span class="st">"Density"</span>, <span class="at">fill =</span> <span class="st">"Cohort"</span></span>
+<span id="cb18-517"><a href="#cb18-517" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>)</span>
 <span id="cb18-518"><a href="#cb18-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-519"><a href="#cb18-519" aria-hidden="true" tabindex="-1"></a><span class="fu">### 今天还应补哪些验证</span></span>
-<span id="cb18-520"><a href="#cb18-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-521"><a href="#cb18-521" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**先画每个人的采样日历。** 若“时间点”并非相同实际天数，优先使用真实天数和连续时间相关结构。</span>
-<span id="cb18-522"><a href="#cb18-522" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**检查残差与异方差。** 两组或不同阶段方差明显不同时，可用 <span class="in">`weights = varIdent(...)`</span>；不要只盯固定效应 P 值。</span>
-<span id="cb18-523"><a href="#cb18-523" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**预先定义主终点与主时间窗。** 同时测试许多 alpha 指标、距离、菌和时间点时，要控制多重比较。</span>
-<span id="cb18-524"><a href="#cb18-524" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**差异丰度需使用纵向方法。** 对每个菌单独套普通检验会同时忽略重复测量、成分性和零膨胀；应选能声明 subject/block 的方法并做稳健性比较。</span>
-<span id="cb18-525"><a href="#cb18-525" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**饮食阶段与时间完全绑定时要克制。** 时间趋势、适应效应和干预效应可能无法仅靠模型公式分开。</span>
+<span id="cb18-519"><a href="#cb18-519" aria-hidden="true" tabindex="-1"></a>p_audit <span class="ot">&lt;-</span> p_audit_a <span class="sc">+</span> p_audit_b <span class="sc">+</span> patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="fl">1.25</span>, <span class="dv">1</span>))</span>
+<span id="cb18-520"><a href="#cb18-520" aria-hidden="true" tabindex="-1"></a>p_audit</span>
+<span id="cb18-521"><a href="#cb18-521" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_audit, <span class="st">"figures/51-longitudinal-analysis/51-4-model-audit"</span>,</span>
+<span id="cb18-522"><a href="#cb18-522" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">115</span>)</span>
+<span id="cb18-523"><a href="#cb18-523" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-524"><a href="#cb18-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-525"><a href="#cb18-525" aria-hidden="true" tabindex="-1"></a><span class="fu">### 今天还应补哪些验证</span></span>
 <span id="cb18-526"><a href="#cb18-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-527"><a href="#cb18-527" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="常见坑：轨迹最容易制造的四种假象"}</span>
-<span id="cb18-528"><a href="#cb18-528" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>同一个人的样本未连对，或 sample ID 被误当成 subject ID；  </span>
-<span id="cb18-529"><a href="#cb18-529" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>先在每个时间点分别做组间检验，再把 P 值变化解释成组别×时间交互；  </span>
-<span id="cb18-530"><a href="#cb18-530" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>PCoA 只画二维投影，却把图上箭头长度当成原始距离；  </span>
-<span id="cb18-531"><a href="#cb18-531" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>看到纵向先后顺序，就把观察到的改变写成饮食导致的机制。纵向设计加强时间信息，但仍需随机化、依从性、共干预和缺失机制支持因果解释。</span>
-<span id="cb18-532"><a href="#cb18-532" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb18-533"><a href="#cb18-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-534"><a href="#cb18-534" aria-hidden="true" tabindex="-1"></a><span class="fu">## 把组平均轨迹与个体波动一起展示 {#sec-publication}</span></span>
-<span id="cb18-535"><a href="#cb18-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-536"><a href="#cb18-536" aria-hidden="true" tabindex="-1"></a>四张图承担不同信息，不要堆进一张拥挤的“全能图”：</span>
-<span id="cb18-537"><a href="#cb18-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-538"><a href="#cb18-538" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>主图优先放混合模型边际均值和 95% CI，个体线用低透明度作为数据层；</span>
-<span id="cb18-539"><a href="#cb18-539" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PCoA 只标关键时间点，个体轨迹淡化、组质心加粗；</span>
-<span id="cb18-540"><a href="#cb18-540" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>volatility 明确定义距离和时间窗，避免只写“stability”；</span>
-<span id="cb18-541"><a href="#cb18-541" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>审计图用相同横轴和零参考线，直接比较模型结构与重抽样结果。</span>
-<span id="cb18-542"><a href="#cb18-542" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-543"><a href="#cb18-543" aria-hidden="true" tabindex="-1"></a><span class="in">`save_pub()`</span> 已同时导出带可编辑文字的 PDF/SVG，以及 600 ppi 的 PNG/TIFF。图中组名、轴、图例和注释均为英文，可直接进入英文稿件。</span>
-<span id="cb18-544"><a href="#cb18-544" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-545"><a href="#cb18-545" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告重复测量与时间变化的方法与限制 {#sec-methods}</span></span>
-<span id="cb18-546"><a href="#cb18-546" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-547"><a href="#cb18-547" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Longitudinal alpha-diversity was analysed using linear mixed-effects models with participant-specific random intercepts. Cohort, categorical study timepoint, and their interaction were included as fixed effects. Models were fitted by restricted maximum likelihood for effect estimation; maximum-likelihood fits were used to compare a random-intercept model with an AR(1) residual correlation model. Estimated marginal means and 95% confidence intervals were reported. Community trajectories were visualised by principal coordinates analysis of Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Within-participant volatility was defined as the Bray–Curtis dissimilarity between consecutive observed timepoints and was analysed using a mixed-effects model with participant as a random intercept. Random procedures used fixed seeds, and participant-level bootstrap resampling was used as a sensitivity analysis.</span></span>
+<span id="cb18-527"><a href="#cb18-527" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**先画每个人的采样日历。** 若“时间点”并非相同实际天数，优先使用真实天数和连续时间相关结构。</span>
+<span id="cb18-528"><a href="#cb18-528" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**检查残差与异方差。** 两组或不同阶段方差明显不同时，可用 <span class="in">`weights = varIdent(...)`</span>；不要只盯固定效应 P 值。</span>
+<span id="cb18-529"><a href="#cb18-529" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**预先定义主终点与主时间窗。** 同时测试许多 alpha 指标、距离、菌和时间点时，要控制多重比较。</span>
+<span id="cb18-530"><a href="#cb18-530" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**差异丰度需使用纵向方法。** 对每个菌单独套普通检验会同时忽略重复测量、成分性和零膨胀；应选能声明 subject/block 的方法并做稳健性比较。</span>
+<span id="cb18-531"><a href="#cb18-531" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**饮食阶段与时间完全绑定时要克制。** 时间趋势、适应效应和干预效应可能无法仅靠模型公式分开。</span>
+<span id="cb18-532"><a href="#cb18-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-533"><a href="#cb18-533" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="常见坑：轨迹最容易制造的四种假象"}</span>
+<span id="cb18-534"><a href="#cb18-534" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>同一个人的样本未连对，或 sample ID 被误当成 subject ID；  </span>
+<span id="cb18-535"><a href="#cb18-535" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>先在每个时间点分别做组间检验，再把 P 值变化解释成组别×时间交互；  </span>
+<span id="cb18-536"><a href="#cb18-536" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>PCoA 只画二维投影，却把图上箭头长度当成原始距离；  </span>
+<span id="cb18-537"><a href="#cb18-537" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>看到纵向先后顺序，就把观察到的改变写成饮食导致的机制。纵向设计加强时间信息，但仍需随机化、依从性、共干预和缺失机制支持因果解释。</span>
+<span id="cb18-538"><a href="#cb18-538" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb18-539"><a href="#cb18-539" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-540"><a href="#cb18-540" aria-hidden="true" tabindex="-1"></a><span class="fu">## 把组平均轨迹与个体波动一起展示 {#sec-publication}</span></span>
+<span id="cb18-541"><a href="#cb18-541" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-542"><a href="#cb18-542" aria-hidden="true" tabindex="-1"></a>四张图承担不同信息，不要堆进一张拥挤的“全能图”：</span>
+<span id="cb18-543"><a href="#cb18-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-544"><a href="#cb18-544" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>主图优先放混合模型边际均值和 95% CI，个体线用低透明度作为数据层；</span>
+<span id="cb18-545"><a href="#cb18-545" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PCoA 只标关键时间点，个体轨迹淡化、组质心加粗；</span>
+<span id="cb18-546"><a href="#cb18-546" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>volatility 明确定义距离和时间窗，避免只写“stability”；</span>
+<span id="cb18-547"><a href="#cb18-547" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>审计图用相同横轴和零参考线，直接比较模型结构与重抽样结果。</span>
 <span id="cb18-548"><a href="#cb18-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-549"><a href="#cb18-549" aria-hidden="true" tabindex="-1"></a>把 <span class="in">`cohort`</span>、时间定义、随机效应、相关结构、距离、缺失处理、软件版本和 bootstrap 次数替换为自己的实际设置。若主模型用了随机斜率、非线性样条或广义分布，也必须写明。</span>
+<span id="cb18-549"><a href="#cb18-549" aria-hidden="true" tabindex="-1"></a><span class="in">`save_pub()`</span> 已同时导出带可编辑文字的 PDF/SVG，以及 600 ppi 的 PNG/TIFF。图中组名、轴、图例和注释均为英文，可直接进入英文稿件。</span>
 <span id="cb18-550"><a href="#cb18-550" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-551"><a href="#cb18-551" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将重复测量与时间变化用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb18-551"><a href="#cb18-551" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告重复测量与时间变化的方法与限制 {#sec-methods}</span></span>
 <span id="cb18-552"><a href="#cb18-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-553"><a href="#cb18-553" aria-hidden="true" tabindex="-1"></a>三张表仍保持：</span>
+<span id="cb18-553"><a href="#cb18-553" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Longitudinal alpha-diversity was analysed using linear mixed-effects models with participant-specific random intercepts. Cohort, categorical study timepoint, and their interaction were included as fixed effects. Models were fitted by restricted maximum likelihood for effect estimation; maximum-likelihood fits were used to compare a random-intercept model with an AR(1) residual correlation model. Estimated marginal means and 95% confidence intervals were reported. Community trajectories were visualised by principal coordinates analysis of Bray–Curtis dissimilarities calculated from sample-wise relative abundances. Within-participant volatility was defined as the Bray–Curtis dissimilarity between consecutive observed timepoints and was analysed using a mixed-effects model with participant as a random intercept. Random procedures used fixed seeds, and participant-level bootstrap resampling was used as a sensitivity analysis.</span></span>
 <span id="cb18-554"><a href="#cb18-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-555"><a href="#cb18-555" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`otutab.tsv`</span>：行为特征、列为样本；</span>
-<span id="cb18-556"><a href="#cb18-556" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`taxonomy.tsv`</span>：行顺序与 <span class="in">`otutab`</span> 完全一致；</span>
-<span id="cb18-557"><a href="#cb18-557" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`metadata.tsv`</span>：行为样本，至少含 <span class="in">`SubjectID`</span>、<span class="in">`Cohort`</span>、<span class="in">`Timepoint`</span>。</span>
+<span id="cb18-555"><a href="#cb18-555" aria-hidden="true" tabindex="-1"></a>把 <span class="in">`cohort`</span>、时间定义、随机效应、相关结构、距离、缺失处理、软件版本和 bootstrap 次数替换为自己的实际设置。若主模型用了随机斜率、非线性样条或广义分布，也必须写明。</span>
+<span id="cb18-556"><a href="#cb18-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-557"><a href="#cb18-557" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将重复测量与时间变化用于自己的研究 {#sec-own-data}</span></span>
 <span id="cb18-558"><a href="#cb18-558" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-559"><a href="#cb18-559" aria-hidden="true" tabindex="-1"></a>替换路径后，重点修改三处：</span>
+<span id="cb18-559"><a href="#cb18-559" aria-hidden="true" tabindex="-1"></a>三张表仍保持：</span>
 <span id="cb18-560"><a href="#cb18-560" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-561"><a href="#cb18-561" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>把 <span class="in">`Cohort`</span> 换成处理/病例状态列，并设定有科学意义的参考水平；</span>
-<span id="cb18-562"><a href="#cb18-562" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>把 <span class="in">`Timepoint`</span> 换成预先定义的离散访视，或使用实际天数建连续/非线性模型；</span>
-<span id="cb18-563"><a href="#cb18-563" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>根据真实采样间隔决定 <span class="in">`corAR1`</span>、<span class="in">`corCAR1`</span> 或不加残差相关结构。</span>
+<span id="cb18-561"><a href="#cb18-561" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`otutab.tsv`</span>：行为特征、列为样本；</span>
+<span id="cb18-562"><a href="#cb18-562" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`taxonomy.tsv`</span>：行顺序与 <span class="in">`otutab`</span> 完全一致；</span>
+<span id="cb18-563"><a href="#cb18-563" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`metadata.tsv`</span>：行为样本，至少含 <span class="in">`SubjectID`</span>、<span class="in">`Cohort`</span>、<span class="in">`Timepoint`</span>。</span>
 <span id="cb18-564"><a href="#cb18-564" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-565"><a href="#cb18-565" aria-hidden="true" tabindex="-1"></a>若同一受试者还有左右部位、技术重复或中心批次，应把层级结构完整写入模型。不要把多个层级压成一个“复合 ID”后就停止思考。</span>
+<span id="cb18-565"><a href="#cb18-565" aria-hidden="true" tabindex="-1"></a>替换路径后，重点修改三处：</span>
 <span id="cb18-566"><a href="#cb18-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-567"><a href="#cb18-567" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb18-568"><a href="#cb18-568" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-569"><a href="#cb18-569" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>O'Keefe SJD, et al. Fat, fibre and cancer risk in African Americans and rural Africans. *Nature Communications*. 2015;6:6342. <span class="co">[</span><span class="ot">doi:10.1038/ncomms7342</span><span class="co">](https://doi.org/10.1038/ncomms7342)</span></span>
-<span id="cb18-570"><a href="#cb18-570" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>O'Keefe et al. Diet swap study data. Dryad. <span class="co">[</span><span class="ot">doi:10.5061/dryad.1mn1n</span><span class="co">](https://doi.org/10.5061/dryad.1mn1n)</span></span>
-<span id="cb18-571"><a href="#cb18-571" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lloyd-Price J, et al. Multi-omics of the gut microbial ecosystem in inflammatory bowel diseases. *Nature*. 2019;569:655–662. <span class="co">[</span><span class="ot">doi:10.1038/s41586-019-1237-9</span><span class="co">](https://doi.org/10.1038/s41586-019-1237-9)</span></span>
-<span id="cb18-572"><a href="#cb18-572" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pinheiro JC, Bates DM. *Mixed-Effects Models in S and S-PLUS*. Springer; 2000.</span>
-<span id="cb18-573"><a href="#cb18-573" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oksanen J, et al. *vegan: Community Ecology Package*. R package.</span>
+<span id="cb18-567"><a href="#cb18-567" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>把 <span class="in">`Cohort`</span> 换成处理/病例状态列，并设定有科学意义的参考水平；</span>
+<span id="cb18-568"><a href="#cb18-568" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>把 <span class="in">`Timepoint`</span> 换成预先定义的离散访视，或使用实际天数建连续/非线性模型；</span>
+<span id="cb18-569"><a href="#cb18-569" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>根据真实采样间隔决定 <span class="in">`corAR1`</span>、<span class="in">`corCAR1`</span> 或不加残差相关结构。</span>
+<span id="cb18-570"><a href="#cb18-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-571"><a href="#cb18-571" aria-hidden="true" tabindex="-1"></a>若同一受试者还有左右部位、技术重复或中心批次，应把层级结构完整写入模型。不要把多个层级压成一个“复合 ID”后就停止思考。</span>
+<span id="cb18-572"><a href="#cb18-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-573"><a href="#cb18-573" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb18-574"><a href="#cb18-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-575"><a href="#cb18-575" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>O'Keefe SJD, et al. Fat, fibre and cancer risk in African Americans and rural Africans. *Nature Communications*. 2015;6:6342. <span class="co">[</span><span class="ot">doi:10.1038/ncomms7342</span><span class="co">](https://doi.org/10.1038/ncomms7342)</span></span>
+<span id="cb18-576"><a href="#cb18-576" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>O'Keefe et al. Diet swap study data. Dryad. <span class="co">[</span><span class="ot">doi:10.5061/dryad.1mn1n</span><span class="co">](https://doi.org/10.5061/dryad.1mn1n)</span></span>
+<span id="cb18-577"><a href="#cb18-577" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lloyd-Price J, et al. Multi-omics of the gut microbial ecosystem in inflammatory bowel diseases. *Nature*. 2019;569:655–662. <span class="co">[</span><span class="ot">doi:10.1038/s41586-019-1237-9</span><span class="co">](https://doi.org/10.1038/s41586-019-1237-9)</span></span>
+<span id="cb18-578"><a href="#cb18-578" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pinheiro JC, Bates DM. *Mixed-Effects Models in S and S-PLUS*. Springer; 2000.</span>
+<span id="cb18-579"><a href="#cb18-579" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Oksanen J, et al. *vegan: Community Ecology Package*. R package.</span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

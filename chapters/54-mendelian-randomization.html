@@ -114,6 +114,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -510,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/22-ordination-unconstrained.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：PCoA/NMDS/CLR-PCA（复现顶刊）</span></span></a>
+ <span class="menu-text"><span class="chapter-number">22</span>&nbsp; <span class="chapter-title">非约束排序：如何选择和解释 PCoA、NMDS 与 CLR-PCA</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -822,7 +851,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">目录</h2>
    
   <ul>
-  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">MR 的可信度由工具变量假设决定</a></li>
+  <li><a href="#sec-target" id="toc-sec-target" class="nav-link active" data-scroll-target="#sec-target">MR 的可信度由工具变量假设决定</a>
+  <ul class="collapse">
+  <li><a href="#多种估计器方向一致为什么还不够" id="toc-多种估计器方向一致为什么还不够" class="nav-link" data-scroll-target="#多种估计器方向一致为什么还不够">多种估计器方向一致，为什么还不够？</a></li>
+  </ul></li>
   <li><a href="#sec-setup" id="toc-sec-setup" class="nav-link" data-scroll-target="#sec-setup">下载并读取本次分析的数据</a>
   <ul class="collapse">
   <li><a href="#读取并审计暴露结局汇总统计" id="toc-读取并审计暴露结局汇总统计" class="nav-link" data-scroll-target="#读取并审计暴露结局汇总统计">读取并审计暴露/结局汇总统计</a></li>
@@ -875,7 +907,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2026年9月6日</p>
+      <p class="date">2026年9月19日</p>
     </div>
   </div>
   
@@ -911,6 +943,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>MR 的因果解释依赖三个不可由一次回归完全验证的假设：工具与暴露相关；工具不受暴露–结局混杂影响；工具只经暴露影响结局。菌群 GWAS 的弱工具、祖源差异、菌定义不一致、水平多效性和宿主位点共享尤其容易破坏这些条件。</p>
 </div>
 </div>
+<section id="多种估计器方向一致为什么还不够" class="level3">
+<h3 class="anchored" data-anchor-id="多种估计器方向一致为什么还不够">多种估计器方向一致，为什么还不够？</h3>
+<p>IVW、加权中位数与 MR-Egger 使用同一组候选位点，可能共享弱工具、祖源差异和选择偏差；方向相同不是三次独立验证。只有少数 SNP 时，异质性或 Egger 截距检验的低功效尤其明显，P &gt; 0.05 不能当作没有水平多效性的证明。单个宿主位点还可能通过饮食或免疫等路径同时影响微生物与结局。</p>
+<p>本例按较宽松阈值选择六个位点，近似 F 值来自用于选择工具的暴露结果，可能受到选择效应影响。迁移到正式研究时，需要明确祖源、样本重叠、等位基因协调和工具独立性，并在适用情况下用独立暴露估计、弱工具稳健分析或共定位证据检查结论。遗传代理描述的是特定尺度的长期暴露倾向，不等于短期补充某菌的干预效果。</p>
+</section>
 </section>
 <section id="sec-setup" class="level2">
 <h2 class="anchored" data-anchor-id="sec-setup">下载并读取本次分析的数据</h2>
@@ -1072,12 +1109,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="sec-theory" class="level2">
 <h2 class="anchored" data-anchor-id="sec-theory">孟德尔随机化依赖哪三项工具变量假设</h2>
 <p>对工具 SNP (G_j)、微生物暴露 (X) 和结局 (Y)，Wald ratio 为：</p>
-<p>[ _{MR,j}=. ]</p>
+<p><span class="math display">\[
+\hat\beta_{MR,j}=\frac{\hat\beta_{Y G,j}}{\hat\beta_{X G,j}}.
+\]</span></p>
 <p>IVW（inverse-variance weighted）将多个 ratio 按精度合并。它依赖：</p>
 <ol type="1">
-<li><strong>Relevance（相关性）</strong>：(G) 能预测 (X)。常用近似 (F=(_X/SE_X)^2)，但 F &gt; 10 只是经验筛查，不是强工具保证。</li>
-<li><strong>Independence（独立性）</strong>：(G) 与 (X-Y) 混杂因素独立；人群分层、家系结构和择偶可破坏它。</li>
-<li><strong>Exclusion restriction（排除限制）</strong>：(G) 不经 (X) 之外的路径影响 (Y)。这正是水平多效性的核心风险。</li>
+<li><strong>Relevance（相关性）</strong>：<span class="math inline">\(G\)</span> 能预测 <span class="math inline">\(X\)</span>。常用近似 <span class="math inline">\(F=(\beta_X/SE_X)^2\)</span>，但 F &gt; 10 只是经验筛查，不是强工具保证。</li>
+<li><strong>Independence（独立性）</strong>：<span class="math inline">\(G\)</span> 与 <span class="math inline">\(X-Y\)</span> 混杂因素独立；人群分层、家系结构和择偶可破坏它。</li>
+<li><strong>Exclusion restriction（排除限制）</strong>：<span class="math inline">\(G\)</span> 不经 <span class="math inline">\(X\)</span> 之外的路径影响 <span class="math inline">\(Y\)</span>。这正是水平多效性的核心风险。</li>
 </ol>
 <details>
 <summary>
@@ -2075,473 +2114,479 @@ $Pvalue
 <span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>MR 的因果解释依赖三个不可由一次回归完全验证的假设：工具与暴露相关；工具不受暴露–结局混杂影响；工具只经暴露影响结局。菌群 GWAS 的弱工具、祖源差异、菌定义不一致、水平多效性和宿主位点共享尤其容易破坏这些条件。</span>
 <span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### 多种估计器方向一致，为什么还不够？</span></span>
 <span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`MRPRESSO`</span>、<span class="in">`TwoSampleMR`</span>、<span class="in">`ggplot2`</span>、<span class="in">`ggrepel`</span>、<span class="in">`patchwork`</span>、<span class="in">`ragg`</span>、<span class="in">`svglite`</span>。本次使用筛选后的 MiBioGen 暴露、结局 GWAS 汇总统计和变异筛选记录；MR 的输入不是 16S 三件套。</span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a>IVW、加权中位数与 MR-Egger 使用同一组候选位点，可能共享弱工具、祖源差异和选择偏差；方向相同不是三次独立验证。只有少数 SNP 时，异质性或 Egger 截距检验的低功效尤其明显，P &gt; 0.05 不能当作没有水平多效性的证明。单个宿主位点还可能通过饮食或免疫等路径同时影响微生物与结局。</span>
 <span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a>本例按较宽松阈值选择六个位点，近似 F 值来自用于选择工具的暴露结果，可能受到选择效应影响。迁移到正式研究时，需要明确祖源、样本重叠、等位基因协调和工具独立性，并在适用情况下用独立暴露估计、弱工具稳健分析或共定位证据检查结论。遗传代理描述的是特定尺度的长期暴露倾向，不等于短期补充某菌的干预效果。</span>
 <span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/mr-mibiogen/exposure.tsv"</span>,</span>
-<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/mr-mibiogen/outcome.tsv"</span>,</span>
-<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/mr-mibiogen/selection-ledger.tsv"</span>,</span>
-<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/mr-mibiogen/source-summary.json"</span></span>
-<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
-<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-02</span></span>
-<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>(<span class="fu">c</span>(<span class="st">".r-lib"</span>, <span class="fu">.libPaths</span>()))</span>
-<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TwoSampleMR)</span>
-<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MRPRESSO)</span>
-<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
-<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260754</span>)</span>
-<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
-<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
-<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
-<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
-<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
-<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
-<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
-<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
-<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
-<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
-<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
-<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
-<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
-<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
-<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
-<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"top"</span>, <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()</span>
-<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">180</span>, <span class="at">height =</span> <span class="dv">115</span>,</span>
-<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a>                     <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
-<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width,</span>
-<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units,</span>
-<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width,</span>
-<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite,</span>
-<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>                  <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width,</span>
-<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">dpi =</span> dpi,</span>
-<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width,</span>
-<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">dpi =</span> dpi,</span>
-<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff, <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
-<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
-<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取并审计暴露/结局汇总统计</span></span>
-<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-03</span></span>
-<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="st">"data/small/mr-mibiogen"</span></span>
-<span id="cb20-140"><a href="#cb20-140" aria-hidden="true" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb20-141"><a href="#cb20-141" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"exposure.tsv"</span>), <span class="at">check.names =</span> <span class="cn">FALSE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
-<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"outcome.tsv"</span>), <span class="at">check.names =</span> <span class="cn">FALSE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(exposure) <span class="sc">==</span> <span class="dv">6</span>,</span>
-<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(exposure<span class="sc">$</span>SNP, outcome<span class="sc">$</span>SNP),</span>
-<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">unique</span>(exposure<span class="sc">$</span>chr.exposure)) <span class="sc">==</span> <span class="fu">nrow</span>(exposure),</span>
-<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(exposure<span class="sc">$</span>FStatistic <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## 下载并读取本次分析的数据 {#sec-setup}</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a>需要 R，以及 <span class="in">`MRPRESSO`</span>、<span class="in">`TwoSampleMR`</span>、<span class="in">`ggplot2`</span>、<span class="in">`ggrepel`</span>、<span class="in">`patchwork`</span>、<span class="in">`ragg`</span>、<span class="in">`svglite`</span>。本次使用筛选后的 MiBioGen 暴露、结局 GWAS 汇总统计和变异筛选记录；MR 的输入不是 16S 三件套。</span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a>在一个新建的文件夹中运行以下代码，下载文件后按文中的顺序继续分析：</span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-download</span></span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hide</span></span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">600</span>)</span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="st">"https://raw.githubusercontent.com/petemeng/microbiome-best-practices/3cb6a817e0c73ab7ecbec1cedc1ad80cbb9ecfaa/"</span></span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a>input_files <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/mr-mibiogen/exposure.tsv"</span>,</span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/mr-mibiogen/outcome.tsv"</span>,</span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/mr-mibiogen/selection-ledger.tsv"</span>,</span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/small/mr-mibiogen/source-summary.json"</span></span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (path <span class="cf">in</span> input_files) {</span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(path), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(path)) <span class="fu">download.file</span>(<span class="fu">paste0</span>(data_url, path), path, <span class="at">mode =</span> <span class="st">"wb"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-02</span></span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>(<span class="fu">c</span>(<span class="st">".r-lib"</span>, <span class="fu">.libPaths</span>()))</span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(TwoSampleMR)</span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MRPRESSO)</span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260754</span>)</span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a>font_pub <span class="ot">&lt;-</span> <span class="st">"sans"</span></span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a>pal_pub <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a>  <span class="at">blue =</span> <span class="st">"#0072B2"</span>, <span class="at">orange =</span> <span class="st">"#E69F00"</span>, <span class="at">green =</span> <span class="st">"#009E73"</span>,</span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a>  <span class="at">vermillion =</span> <span class="st">"#D55E00"</span>, <span class="at">purple =</span> <span class="st">"#CC79A7"</span>, <span class="at">sky =</span> <span class="st">"#56B4E9"</span>,</span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a>  <span class="at">yellow =</span> <span class="st">"#F0E442"</span>, <span class="at">grey =</span> <span class="st">"#6B7280"</span></span>
+<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a>scale_color_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_color_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a>scale_fill_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(..., <span class="at">values =</span> <span class="fu">unname</span>(pal_pub)) {</span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">scale_fill_manual</span>(..., <span class="at">values =</span> values)</span>
+<span id="cb20-105"><a href="#cb20-105" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-106"><a href="#cb20-106" aria-hidden="true" tabindex="-1"></a>theme_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">base_size =</span> <span class="dv">10</span>, <span class="at">base_family =</span> font_pub) {</span>
+<span id="cb20-107"><a href="#cb20-107" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">theme_bw</span>(<span class="at">base_size =</span> base_size, <span class="at">base_family =</span> base_family) <span class="sc">+</span></span>
+<span id="cb20-108"><a href="#cb20-108" aria-hidden="true" tabindex="-1"></a>    ggplot2<span class="sc">::</span><span class="fu">theme</span>(</span>
+<span id="cb20-109"><a href="#cb20-109" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>(),</span>
+<span id="cb20-110"><a href="#cb20-110" aria-hidden="true" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> ggplot2<span class="sc">::</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"#E6E6E6"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>),</span>
+<span id="cb20-111"><a href="#cb20-111" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.text =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb20-112"><a href="#cb20-112" aria-hidden="true" tabindex="-1"></a>      <span class="at">axis.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#1A1A1A"</span>),</span>
+<span id="cb20-113"><a href="#cb20-113" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title.position =</span> <span class="st">"plot"</span>,</span>
+<span id="cb20-114"><a href="#cb20-114" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.title =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> ggplot2<span class="sc">::</span><span class="fu">rel</span>(<span class="fl">1.15</span>)),</span>
+<span id="cb20-115"><a href="#cb20-115" aria-hidden="true" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> ggplot2<span class="sc">::</span><span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"#4D4D4D"</span>),</span>
+<span id="cb20-116"><a href="#cb20-116" aria-hidden="true" tabindex="-1"></a>      <span class="at">legend.position =</span> <span class="st">"top"</span>, <span class="at">legend.key =</span> ggplot2<span class="sc">::</span><span class="fu">element_blank</span>()</span>
+<span id="cb20-117"><a href="#cb20-117" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb20-118"><a href="#cb20-118" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-119"><a href="#cb20-119" aria-hidden="true" tabindex="-1"></a>save_pub <span class="ot">&lt;-</span> <span class="cf">function</span>(plot, file_base, <span class="at">width =</span> <span class="dv">180</span>, <span class="at">height =</span> <span class="dv">115</span>,</span>
+<span id="cb20-120"><a href="#cb20-120" aria-hidden="true" tabindex="-1"></a>                     <span class="at">units =</span> <span class="st">"mm"</span>, <span class="at">dpi =</span> <span class="dv">600</span>) {</span>
+<span id="cb20-121"><a href="#cb20-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dir.create</span>(<span class="fu">dirname</span>(file_base), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb20-122"><a href="#cb20-122" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".pdf"</span>), plot, <span class="at">width =</span> width,</span>
+<span id="cb20-123"><a href="#cb20-123" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units,</span>
+<span id="cb20-124"><a href="#cb20-124" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> grDevices<span class="sc">::</span>cairo_pdf, <span class="at">family =</span> font_pub, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb20-125"><a href="#cb20-125" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".svg"</span>), plot, <span class="at">width =</span> width,</span>
+<span id="cb20-126"><a href="#cb20-126" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">device =</span> svglite<span class="sc">::</span>svglite,</span>
+<span id="cb20-127"><a href="#cb20-127" aria-hidden="true" tabindex="-1"></a>                  <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb20-128"><a href="#cb20-128" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".png"</span>), plot, <span class="at">width =</span> width,</span>
+<span id="cb20-129"><a href="#cb20-129" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">dpi =</span> dpi,</span>
+<span id="cb20-130"><a href="#cb20-130" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> ragg<span class="sc">::</span>agg_png, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb20-131"><a href="#cb20-131" aria-hidden="true" tabindex="-1"></a>  ggplot2<span class="sc">::</span><span class="fu">ggsave</span>(<span class="fu">paste0</span>(file_base, <span class="st">".tiff"</span>), plot, <span class="at">width =</span> width,</span>
+<span id="cb20-132"><a href="#cb20-132" aria-hidden="true" tabindex="-1"></a>                  <span class="at">height =</span> height, <span class="at">units =</span> units, <span class="at">dpi =</span> dpi,</span>
+<span id="cb20-133"><a href="#cb20-133" aria-hidden="true" tabindex="-1"></a>                  <span class="at">device =</span> ragg<span class="sc">::</span>agg_tiff, <span class="at">compression =</span> <span class="st">"lzw"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span>
+<span id="cb20-134"><a href="#cb20-134" aria-hidden="true" tabindex="-1"></a>  <span class="fu">invisible</span>(plot)</span>
+<span id="cb20-135"><a href="#cb20-135" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-136"><a href="#cb20-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-137"><a href="#cb20-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-138"><a href="#cb20-138" aria-hidden="true" tabindex="-1"></a><span class="fu">### 读取并审计暴露/结局汇总统计</span></span>
+<span id="cb20-139"><a href="#cb20-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-142"><a href="#cb20-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-143"><a href="#cb20-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-144"><a href="#cb20-144" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-03</span></span>
+<span id="cb20-145"><a href="#cb20-145" aria-hidden="true" tabindex="-1"></a>base <span class="ot">&lt;-</span> <span class="st">"data/small/mr-mibiogen"</span></span>
+<span id="cb20-146"><a href="#cb20-146" aria-hidden="true" tabindex="-1"></a>exposure <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb20-147"><a href="#cb20-147" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"exposure.tsv"</span>), <span class="at">check.names =</span> <span class="cn">FALSE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-148"><a href="#cb20-148" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-149"><a href="#cb20-149" aria-hidden="true" tabindex="-1"></a>outcome <span class="ot">&lt;-</span> <span class="fu">read.delim</span>(</span>
+<span id="cb20-150"><a href="#cb20-150" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(base, <span class="st">"outcome.tsv"</span>), <span class="at">check.names =</span> <span class="cn">FALSE</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
 <span id="cb20-151"><a href="#cb20-151" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a>exposure</span>
-<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a>outcome</span>
-<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a>候选工具的最小近似 F = 20.77，但最弱位点仍只达到暴露 GWAS 的 suggestive threshold，而非传统 genome-wide significance。菌群性状遗传解释度较低时，F 筛查不能替代弱工具稳健分析。</span>
-<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/54-mendelian-randomization.R)</span>。脚本包含数据下载、计算和图形导出。</span>
-<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
-<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
-<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a>  <span class="st">"remotes"</span>, <span class="st">"jsonlite"</span>, <span class="st">"digest"</span>, <span class="st">"ggplot2"</span>, <span class="st">"ggrepel"</span>, <span class="st">"patchwork"</span>,</span>
-<span id="cb20-169"><a href="#cb20-169" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"svglite"</span>, <span class="st">"ragg"</span></span>
-<span id="cb20-170"><a href="#cb20-170" aria-hidden="true" tabindex="-1"></a>))</span>
-<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"MRCIEU/TwoSampleMR@v0.6.6"</span>)</span>
-<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rondolab/MR-PRESSO"</span>)</span>
-<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a><span class="fu">## 孟德尔随机化依赖哪三项工具变量假设 {#sec-theory}</span></span>
-<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a>对工具 SNP (G_j)、微生物暴露 (X) 和结局 (Y)，Wald ratio 为：</span>
+<span id="cb20-152"><a href="#cb20-152" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb20-153"><a href="#cb20-153" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(exposure) <span class="sc">==</span> <span class="dv">6</span>,</span>
+<span id="cb20-154"><a href="#cb20-154" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(exposure<span class="sc">$</span>SNP, outcome<span class="sc">$</span>SNP),</span>
+<span id="cb20-155"><a href="#cb20-155" aria-hidden="true" tabindex="-1"></a>  <span class="fu">length</span>(<span class="fu">unique</span>(exposure<span class="sc">$</span>chr.exposure)) <span class="sc">==</span> <span class="fu">nrow</span>(exposure),</span>
+<span id="cb20-156"><a href="#cb20-156" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(exposure<span class="sc">$</span>FStatistic <span class="sc">&gt;</span> <span class="dv">10</span>)</span>
+<span id="cb20-157"><a href="#cb20-157" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-158"><a href="#cb20-158" aria-hidden="true" tabindex="-1"></a>exposure</span>
+<span id="cb20-159"><a href="#cb20-159" aria-hidden="true" tabindex="-1"></a>outcome</span>
+<span id="cb20-160"><a href="#cb20-160" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-161"><a href="#cb20-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-162"><a href="#cb20-162" aria-hidden="true" tabindex="-1"></a>候选工具的最小近似 F = 20.77，但最弱位点仍只达到暴露 GWAS 的 suggestive threshold，而非传统 genome-wide significance。菌群性状遗传解释度较低时，F 筛查不能替代弱工具稳健分析。</span>
+<span id="cb20-163"><a href="#cb20-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-164"><a href="#cb20-164" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">下载完整 R 脚本</span><span class="co">](https://github.com/petemeng/microbiome-best-practices/blob/691722146e287afe063bd43e9ce4fa41977fe763/examples/54-mendelian-randomization.R)</span>。脚本包含数据下载、计算和图形导出。</span>
+<span id="cb20-165"><a href="#cb20-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-166"><a href="#cb20-166" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="ot"> class</span><span class="op">=</span><span class="st">"wechat-omit"</span><span class="dt">&gt;</span></span>
+<span id="cb20-167"><a href="#cb20-167" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;</span>首次使用时安装 R 包<span class="dt">&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
+<span id="cb20-168"><a href="#cb20-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-171"><a href="#cb20-171" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-172"><a href="#cb20-172" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
+<span id="cb20-173"><a href="#cb20-173" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(</span>
+<span id="cb20-174"><a href="#cb20-174" aria-hidden="true" tabindex="-1"></a>  <span class="st">"remotes"</span>, <span class="st">"jsonlite"</span>, <span class="st">"digest"</span>, <span class="st">"ggplot2"</span>, <span class="st">"ggrepel"</span>, <span class="st">"patchwork"</span>,</span>
+<span id="cb20-175"><a href="#cb20-175" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scales"</span>, <span class="st">"svglite"</span>, <span class="st">"ragg"</span></span>
+<span id="cb20-176"><a href="#cb20-176" aria-hidden="true" tabindex="-1"></a>))</span>
+<span id="cb20-177"><a href="#cb20-177" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"MRCIEU/TwoSampleMR@v0.6.6"</span>)</span>
+<span id="cb20-178"><a href="#cb20-178" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"rondolab/MR-PRESSO"</span>)</span>
+<span id="cb20-179"><a href="#cb20-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb20-180"><a href="#cb20-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span></span>
-<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a>\hat\beta_{MR,j}=\frac{\hat\beta_{Y G,j}}{\hat\beta_{X G,j}}.</span>
-<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a><span class="sc">\]</span></span>
+<span id="cb20-181"><a href="#cb20-181" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb20-182"><a href="#cb20-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-183"><a href="#cb20-183" aria-hidden="true" tabindex="-1"></a><span class="fu">## 孟德尔随机化依赖哪三项工具变量假设 {#sec-theory}</span></span>
 <span id="cb20-184"><a href="#cb20-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a>IVW（inverse-variance weighted）将多个 ratio 按精度合并。它依赖：</span>
+<span id="cb20-185"><a href="#cb20-185" aria-hidden="true" tabindex="-1"></a>对工具 SNP (G_j)、微生物暴露 (X) 和结局 (Y)，Wald ratio 为：</span>
 <span id="cb20-186"><a href="#cb20-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Relevance（相关性）**：(G<span class="sc">\)</span> 能预测 (X<span class="sc">\)</span>。常用近似 (F=(\beta_X/SE_X)^2<span class="sc">\)</span>，但 F &gt; 10 只是经验筛查，不是强工具保证。</span>
-<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Independence（独立性）**：(G<span class="sc">\)</span> 与 (X-Y<span class="sc">\)</span> 混杂因素独立；人群分层、家系结构和择偶可破坏它。</span>
-<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Exclusion restriction（排除限制）**：(G<span class="sc">\)</span> 不经 (X<span class="sc">\)</span> 之外的路径影响 (Y<span class="sc">\)</span>。这正是水平多效性的核心风险。</span>
+<span id="cb20-187"><a href="#cb20-187" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb20-188"><a href="#cb20-188" aria-hidden="true" tabindex="-1"></a>\hat\beta_{MR,j}=\frac{\hat\beta_{Y G,j}}{\hat\beta_{X G,j}}.</span>
+<span id="cb20-189"><a href="#cb20-189" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb20-190"><a href="#cb20-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：不同敏感性估计器保护什么<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
-<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**IVW**：在所有工具有效，或无方向性多效性时效率高；异质性提示 ratio 不一致。</span>
-<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**MR-Egger**：截距检验平均方向性多效性，斜率在 InSIDE 假设下可较稳健，但工具少时功效极低且易受弱工具影响。</span>
-<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Weighted median**：当至少一半权重来自有效工具时可一致。</span>
-<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Mode estimators**：假设最大的一簇相似 ratio 来自有效工具，通常区间较宽。</span>
-<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**MR-PRESSO**：寻找异常多效性工具并比较校正前后结果；没有检测到 outlier 不等于没有多效性。</span>
+<span id="cb20-191"><a href="#cb20-191" aria-hidden="true" tabindex="-1"></a>IVW（inverse-variance weighted）将多个 ratio 按精度合并。它依赖：</span>
+<span id="cb20-192"><a href="#cb20-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-193"><a href="#cb20-193" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Relevance（相关性）**：$G$ 能预测 $X$。常用近似 $F=(\beta_X/SE_X)^2$，但 F &gt; 10 只是经验筛查，不是强工具保证。</span>
+<span id="cb20-194"><a href="#cb20-194" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Independence（独立性）**：$G$ 与 $X-Y$ 混杂因素独立；人群分层、家系结构和择偶可破坏它。</span>
+<span id="cb20-195"><a href="#cb20-195" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Exclusion restriction（排除限制）**：$G$ 不经 $X$ 之外的路径影响 $Y$。这正是水平多效性的核心风险。</span>
+<span id="cb20-196"><a href="#cb20-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-197"><a href="#cb20-197" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb20-198"><a href="#cb20-198" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">summary</span><span class="dt">&gt;&lt;</span><span class="kw">strong</span><span class="dt">&gt;</span>深入：不同敏感性估计器保护什么<span class="dt">&lt;/</span><span class="kw">strong</span><span class="dt">&gt;&lt;/</span><span class="kw">summary</span><span class="dt">&gt;</span></span>
 <span id="cb20-199"><a href="#cb20-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a>所有方法都可能在共同假设同时失败时一致地给出错误答案。敏感性分析的价值是压力测试，不是“多数投票即真”。</span>
-<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
-<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a><span class="fu">### 微生物 MR 的专属审计</span></span>
+<span id="cb20-200"><a href="#cb20-200" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**IVW**：在所有工具有效，或无方向性多效性时效率高；异质性提示 ratio 不一致。</span>
+<span id="cb20-201"><a href="#cb20-201" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**MR-Egger**：截距检验平均方向性多效性，斜率在 InSIDE 假设下可较稳健，但工具少时功效极低且易受弱工具影响。</span>
+<span id="cb20-202"><a href="#cb20-202" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Weighted median**：当至少一半权重来自有效工具时可一致。</span>
+<span id="cb20-203"><a href="#cb20-203" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Mode estimators**：假设最大的一簇相似 ratio 来自有效工具，通常区间较宽。</span>
+<span id="cb20-204"><a href="#cb20-204" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**MR-PRESSO**：寻找异常多效性工具并比较校正前后结果；没有检测到 outlier 不等于没有多效性。</span>
 <span id="cb20-205"><a href="#cb20-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>暴露 GWAS 中的“属”可能由不同 16S 区域、分类库、相对丰度变换和 cohort-specific prevalence 定义；</span>
-<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>暴露 beta 的一单位到底代表标准化丰度、presence/absence 还是秩正态值，决定效应量如何解释；</span>
-<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>两个 GWAS 的祖源、样本重叠和协变量策略影响偏倚；</span>
-<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>同一宿主位点同时关联菌和 IBD，不代表由菌介导；需要 locus colocalisation 区分共享因果变异与 LD 中的两个信号。</span>
-<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a><span class="fu">## 对齐变异，再检查工具强度和多效性 {#sec-code}</span></span>
-<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a><span class="fu">### 等位基因 harmonisation</span></span>
-<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a>同一个 SNP 在两份 GWAS 中可能以相反 effect allele 报告。<span class="in">`harmonise_data(action = 2)`</span> 对齐方向，并在缺少 allele frequency 时删除不能可靠判向的 palindromic SNP。</span>
+<span id="cb20-206"><a href="#cb20-206" aria-hidden="true" tabindex="-1"></a>所有方法都可能在共同假设同时失败时一致地给出错误答案。敏感性分析的价值是压力测试，不是“多数投票即真”。</span>
+<span id="cb20-207"><a href="#cb20-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-208"><a href="#cb20-208" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">details</span><span class="dt">&gt;</span></span>
+<span id="cb20-209"><a href="#cb20-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-210"><a href="#cb20-210" aria-hidden="true" tabindex="-1"></a><span class="fu">### 微生物 MR 的专属审计</span></span>
+<span id="cb20-211"><a href="#cb20-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-212"><a href="#cb20-212" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>暴露 GWAS 中的“属”可能由不同 16S 区域、分类库、相对丰度变换和 cohort-specific prevalence 定义；</span>
+<span id="cb20-213"><a href="#cb20-213" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>暴露 beta 的一单位到底代表标准化丰度、presence/absence 还是秩正态值，决定效应量如何解释；</span>
+<span id="cb20-214"><a href="#cb20-214" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>两个 GWAS 的祖源、样本重叠和协变量策略影响偏倚；</span>
+<span id="cb20-215"><a href="#cb20-215" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>同一宿主位点同时关联菌和 IBD，不代表由菌介导；需要 locus colocalisation 区分共享因果变异与 LD 中的两个信号。</span>
 <span id="cb20-216"><a href="#cb20-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-04</span></span>
-<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a>harmonised <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">harmonise_data</span>(exposure, outcome, <span class="at">action =</span> <span class="dv">2</span>)</span>
-<span id="cb20-223"><a href="#cb20-223" aria-hidden="true" tabindex="-1"></a>harmonisation_ledger <span class="ot">&lt;-</span> harmonised[, <span class="fu">c</span>(</span>
-<span id="cb20-224"><a href="#cb20-224" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SNP"</span>, <span class="st">"effect_allele.exposure"</span>, <span class="st">"other_allele.exposure"</span>,</span>
-<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a>  <span class="st">"effect_allele.outcome"</span>, <span class="st">"other_allele.outcome"</span>,</span>
-<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a>  <span class="st">"beta.exposure"</span>, <span class="st">"beta.outcome"</span>, <span class="st">"palindromic"</span>, <span class="st">"ambiguous"</span>,</span>
-<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mr_keep"</span>, <span class="st">"remove"</span>, <span class="st">"action"</span></span>
-<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a>)]</span>
-<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a>harmonisation_ledger</span>
-<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a>analysis_data <span class="ot">&lt;-</span> harmonised[harmonised<span class="sc">$</span>mr_keep, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
-<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(analysis_data) <span class="sc">==</span> <span class="dv">5</span>)</span>
-<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a><span class="in">`rs10841473`</span> 是 C/G palindromic SNP，且两份紧凑表没有 effect-allele frequency，无法判断 strand，因而删除。不能为了增加工具数而强行保留。</span>
-<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a><span class="fu">### 主估计与稳健估计器</span></span>
-<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-05</span></span>
-<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a>methods <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb20-244"><a href="#cb20-244" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mr_ivw"</span>, <span class="st">"mr_egger_regression"</span>, <span class="st">"mr_weighted_median"</span>,</span>
-<span id="cb20-245"><a href="#cb20-245" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mr_simple_mode"</span>, <span class="st">"mr_weighted_mode"</span></span>
-<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260754</span>)</span>
-<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a>mr_results <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr</span>(analysis_data, <span class="at">method_list =</span> methods)</span>
-<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>Lower <span class="ot">&lt;-</span> mr_results<span class="sc">$</span>b <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> mr_results<span class="sc">$</span>se</span>
-<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>Upper <span class="ot">&lt;-</span> mr_results<span class="sc">$</span>b <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> mr_results<span class="sc">$</span>se</span>
-<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>OR <span class="ot">&lt;-</span> <span class="fu">exp</span>(mr_results<span class="sc">$</span>b)</span>
-<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>ORLower <span class="ot">&lt;-</span> <span class="fu">exp</span>(mr_results<span class="sc">$</span>Lower)</span>
-<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>ORUpper <span class="ot">&lt;-</span> <span class="fu">exp</span>(mr_results<span class="sc">$</span>Upper)</span>
-<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a>mr_results[, <span class="fu">c</span>(<span class="st">"method"</span>, <span class="st">"nsnp"</span>, <span class="st">"b"</span>, <span class="st">"se"</span>, <span class="st">"pval"</span>, <span class="st">"Lower"</span>, <span class="st">"Upper"</span>, <span class="st">"OR"</span>)]</span>
-<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a>IVW 估计为 −0.0167（SE = 0.1065，P = 0.876），对应 OR = 0.984（95% CI 0.798–1.212）。MR-Egger、weighted median 和两种 mode 的区间也均包含零。这里的“每单位更高 abundance”沿用 MiBioGen 暴露标度，不能写成“每增加 1% 相对丰度”。</span>
-<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a><span class="fu">### 散点图：每个 SNP 的方向与方法斜率</span></span>
-<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-06</span></span>
-<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a>ivw <span class="ot">&lt;-</span> mr_results[mr_results<span class="sc">$</span>method <span class="sc">==</span> <span class="st">"Inverse variance weighted"</span>, ]</span>
-<span id="cb20-267"><a href="#cb20-267" aria-hidden="true" tabindex="-1"></a>egger <span class="ot">&lt;-</span> mr_results[mr_results<span class="sc">$</span>method <span class="sc">==</span> <span class="st">"MR Egger"</span>, ]</span>
-<span id="cb20-268"><a href="#cb20-268" aria-hidden="true" tabindex="-1"></a>median <span class="ot">&lt;-</span> mr_results[mr_results<span class="sc">$</span>method <span class="sc">==</span> <span class="st">"Weighted median"</span>, ]</span>
-<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a>egger_intercept <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr_pleiotropy_test</span>(analysis_data)</span>
-<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a>line_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb20-271"><a href="#cb20-271" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">c</span>(<span class="st">"IVW"</span>, <span class="st">"MR Egger"</span>, <span class="st">"Weighted median"</span>),</span>
-<span id="cb20-272"><a href="#cb20-272" aria-hidden="true" tabindex="-1"></a>  <span class="at">Intercept =</span> <span class="fu">c</span>(<span class="dv">0</span>, egger_intercept<span class="sc">$</span>egger_intercept, <span class="dv">0</span>),</span>
-<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a>  <span class="at">Slope =</span> <span class="fu">c</span>(ivw<span class="sc">$</span>b, egger<span class="sc">$</span>b, median<span class="sc">$</span>b)</span>
-<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a>method_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a>  <span class="at">IVW =</span> pal_pub[[<span class="st">"blue"</span>]],</span>
-<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">MR Egger</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"vermillion"</span>]],</span>
-<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Weighted median</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"green"</span>]]</span>
-<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a>p_scatter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
-<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a>  analysis_data, <span class="fu">aes</span>(beta.exposure, beta.outcome, <span class="at">label =</span> SNP)</span>
-<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
-<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> beta.outcome <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se.outcome,</span>
-<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a>        <span class="at">ymax =</span> beta.outcome <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se.outcome),</span>
-<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#888888"</span></span>
-<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(</span>
-<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">xmin =</span> beta.exposure <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se.exposure,</span>
-<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a>        <span class="at">xmax =</span> beta.exposure <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se.exposure),</span>
-<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#888888"</span></span>
-<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.3</span>, <span class="at">colour =</span> <span class="st">"#202020"</span>) <span class="sc">+</span></span>
-<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(</span>
-<span id="cb20-295"><a href="#cb20-295" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">20260754</span>, <span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">max.overlaps =</span> <span class="cn">Inf</span>,</span>
-<span id="cb20-296"><a href="#cb20-296" aria-hidden="true" tabindex="-1"></a>    <span class="at">min.segment.length =</span> <span class="dv">0</span>, <span class="at">box.padding =</span> <span class="fl">0.35</span>, <span class="at">point.padding =</span> <span class="fl">0.25</span></span>
-<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
-<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> line_data,</span>
-<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">intercept =</span> Intercept, <span class="at">slope =</span> Slope, <span class="at">colour =</span> Method), <span class="at">linewidth =</span> <span class="fl">0.9</span></span>
-<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> method_colours) <span class="sc">+</span></span>
-<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(analysis_data<span class="sc">$</span>beta.exposure) <span class="sc">*</span> <span class="fl">1.15</span>) <span class="sc">+</span></span>
-<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Harmonised SNP effects do not share a stable causal slope"</span>,</span>
-<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Five non-ambiguous instruments; error bars are 95% confidence intervals"</span>,</span>
-<span id="cb20-307"><a href="#cb20-307" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"SNP effect on Bifidobacterium abundance"</span>,</span>
-<span id="cb20-308"><a href="#cb20-308" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"SNP effect on log-odds of IBD"</span>, <span class="at">colour =</span> <span class="st">"MR method"</span></span>
-<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">10</span>)</span>
-<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a>p_scatter</span>
-<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_scatter, <span class="st">"figures/54-mendelian-randomization/54-1-harmonised-scatter"</span>,</span>
-<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">120</span>)</span>
-<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-315"><a href="#cb20-315" aria-hidden="true" tabindex="-1"></a><span class="fu">### 森林图：不要只报告 IVW</span></span>
-<span id="cb20-316"><a href="#cb20-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-07</span></span>
-<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>method <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb20-323"><a href="#cb20-323" aria-hidden="true" tabindex="-1"></a>  mr_results<span class="sc">$</span>method,</span>
-<span id="cb20-324"><a href="#cb20-324" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(</span>
-<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Inverse variance weighted"</span>, <span class="st">"MR Egger"</span>, <span class="st">"Weighted median"</span>,</span>
-<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Simple mode"</span>, <span class="st">"Weighted mode"</span></span>
-<span id="cb20-327"><a href="#cb20-327" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb20-328"><a href="#cb20-328" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a>p_methods <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mr_results, <span class="fu">aes</span>(b, method)) <span class="sc">+</span></span>
-<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
-<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> Lower, <span class="at">xmax =</span> Upper), <span class="at">height =</span> <span class="dv">0</span>,</span>
-<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> pal_pub[[<span class="st">"grey"</span>]]) <span class="sc">+</span></span>
-<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> method <span class="sc">==</span> <span class="st">"Inverse variance weighted"</span>), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"grey"</span>]], <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"blue"</span>]]</span>
-<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sensitivity estimators all include the null"</span>,</span>
-<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Effects are log-odds of IBD per unit higher genetically predicted abundance"</span>,</span>
-<span id="cb20-340"><a href="#cb20-340" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"MR estimate (95% confidence interval)"</span>, <span class="at">y =</span> <span class="cn">NULL</span></span>
-<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">10</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a>p_methods</span>
-<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_methods, <span class="st">"figures/54-mendelian-randomization/54-2-method-forest"</span>,</span>
-<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">110</span>)</span>
-<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工具强度、多效性与共定位 {#sec-audit}</span></span>
-<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a><span class="fu">### 异质性、Egger 截距与 MR-PRESSO</span></span>
-<span id="cb20-350"><a href="#cb20-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-353"><a href="#cb20-353" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-354"><a href="#cb20-354" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-355"><a href="#cb20-355" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-08</span></span>
-<span id="cb20-356"><a href="#cb20-356" aria-hidden="true" tabindex="-1"></a>heterogeneity <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr_heterogeneity</span>(analysis_data)</span>
-<span id="cb20-357"><a href="#cb20-357" aria-hidden="true" tabindex="-1"></a>egger_intercept <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr_pleiotropy_test</span>(analysis_data)</span>
-<span id="cb20-358"><a href="#cb20-358" aria-hidden="true" tabindex="-1"></a>heterogeneity</span>
-<span id="cb20-359"><a href="#cb20-359" aria-hidden="true" tabindex="-1"></a>egger_intercept</span>
-<span id="cb20-360"><a href="#cb20-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-361"><a href="#cb20-361" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260754</span>)</span>
-<span id="cb20-362"><a href="#cb20-362" aria-hidden="true" tabindex="-1"></a>presso <span class="ot">&lt;-</span> MRPRESSO<span class="sc">::</span><span class="fu">mr_presso</span>(</span>
-<span id="cb20-363"><a href="#cb20-363" aria-hidden="true" tabindex="-1"></a>  <span class="at">BetaOutcome =</span> <span class="st">"beta.outcome"</span>, <span class="at">BetaExposure =</span> <span class="st">"beta.exposure"</span>,</span>
-<span id="cb20-364"><a href="#cb20-364" aria-hidden="true" tabindex="-1"></a>  <span class="at">SdOutcome =</span> <span class="st">"se.outcome"</span>, <span class="at">SdExposure =</span> <span class="st">"se.exposure"</span>,</span>
-<span id="cb20-365"><a href="#cb20-365" aria-hidden="true" tabindex="-1"></a>  <span class="at">OUTLIERtest =</span> <span class="cn">TRUE</span>, <span class="at">DISTORTIONtest =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb20-366"><a href="#cb20-366" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> analysis_data, <span class="at">NbDistribution =</span> <span class="dv">2000</span>, <span class="at">SignifThreshold =</span> <span class="fl">0.05</span></span>
-<span id="cb20-367"><a href="#cb20-367" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-368"><a href="#cb20-368" aria-hidden="true" tabindex="-1"></a>presso[[<span class="st">"Main MR results"</span>]]</span>
-<span id="cb20-369"><a href="#cb20-369" aria-hidden="true" tabindex="-1"></a>presso[[<span class="st">"MR-PRESSO results"</span>]][[<span class="st">"Global Test"</span>]]</span>
-<span id="cb20-370"><a href="#cb20-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-371"><a href="#cb20-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-372"><a href="#cb20-372" aria-hidden="true" tabindex="-1"></a>IVW Cochran's Q P = 0.106，Egger intercept = −0.0075（P = 0.825），MR-PRESSO global P = 0.183，未检测到 outlier。只有 5 个工具时这些检验功效很低，因此结果应写作“未发现多效性信号”，而不是“证明不存在多效性”。</span>
-<span id="cb20-373"><a href="#cb20-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-374"><a href="#cb20-374" aria-hidden="true" tabindex="-1"></a><span class="fu">### Leave-one-out 只能发现单点主导</span></span>
-<span id="cb20-375"><a href="#cb20-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-378"><a href="#cb20-378" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-379"><a href="#cb20-379" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-380"><a href="#cb20-380" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-09</span></span>
-<span id="cb20-381"><a href="#cb20-381" aria-hidden="true" tabindex="-1"></a>leave_one_out <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr_leaveoneout</span>(analysis_data)</span>
-<span id="cb20-382"><a href="#cb20-382" aria-hidden="true" tabindex="-1"></a>leave_one_out<span class="sc">$</span>Lower <span class="ot">&lt;-</span> leave_one_out<span class="sc">$</span>b <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> leave_one_out<span class="sc">$</span>se</span>
-<span id="cb20-383"><a href="#cb20-383" aria-hidden="true" tabindex="-1"></a>leave_one_out<span class="sc">$</span>Upper <span class="ot">&lt;-</span> leave_one_out<span class="sc">$</span>b <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> leave_one_out<span class="sc">$</span>se</span>
-<span id="cb20-384"><a href="#cb20-384" aria-hidden="true" tabindex="-1"></a>leave_one_out<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
-<span id="cb20-385"><a href="#cb20-385" aria-hidden="true" tabindex="-1"></a>  leave_one_out<span class="sc">$</span>SNP <span class="sc">==</span> <span class="st">"All"</span>, <span class="st">"All instruments"</span>, <span class="fu">paste</span>(<span class="st">"Remove"</span>, leave_one_out<span class="sc">$</span>SNP)</span>
-<span id="cb20-386"><a href="#cb20-386" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-387"><a href="#cb20-387" aria-hidden="true" tabindex="-1"></a>leave_one_out<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">factor</span>(leave_one_out<span class="sc">$</span>Label, <span class="at">levels =</span> <span class="fu">rev</span>(leave_one_out<span class="sc">$</span>Label))</span>
-<span id="cb20-388"><a href="#cb20-388" aria-hidden="true" tabindex="-1"></a>p_loo <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(leave_one_out, <span class="fu">aes</span>(b, Label)) <span class="sc">+</span></span>
-<span id="cb20-389"><a href="#cb20-389" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
-<span id="cb20-390"><a href="#cb20-390" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> Lower, <span class="at">xmax =</span> Upper), <span class="at">height =</span> <span class="dv">0</span>,</span>
-<span id="cb20-391"><a href="#cb20-391" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> pal_pub[[<span class="st">"grey"</span>]]) <span class="sc">+</span></span>
-<span id="cb20-392"><a href="#cb20-392" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> SNP <span class="sc">==</span> <span class="st">"All"</span>), <span class="at">size =</span> <span class="fl">2.3</span>) <span class="sc">+</span></span>
-<span id="cb20-393"><a href="#cb20-393" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb20-394"><a href="#cb20-394" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"orange"</span>]], <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"blue"</span>]]</span>
-<span id="cb20-395"><a href="#cb20-395" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb20-396"><a href="#cb20-396" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-397"><a href="#cb20-397" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Leave-one-out estimates remain imprecise"</span>,</span>
-<span id="cb20-398"><a href="#cb20-398" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"A stable sign alone would not overcome weak instrument design or pleiotropy"</span>,</span>
-<span id="cb20-399"><a href="#cb20-399" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"IVW estimate after exclusion (95% confidence interval)"</span>, <span class="at">y =</span> <span class="cn">NULL</span></span>
-<span id="cb20-400"><a href="#cb20-400" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">10</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb20-401"><a href="#cb20-401" aria-hidden="true" tabindex="-1"></a>p_loo</span>
-<span id="cb20-402"><a href="#cb20-402" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_loo, <span class="st">"figures/54-mendelian-randomization/54-3-leave-one-out"</span>,</span>
-<span id="cb20-403"><a href="#cb20-403" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">110</span>)</span>
-<span id="cb20-404"><a href="#cb20-404" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-405"><a href="#cb20-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-406"><a href="#cb20-406" aria-hidden="true" tabindex="-1"></a><span class="fu">### 把无法完成的诊断也写进结果</span></span>
-<span id="cb20-407"><a href="#cb20-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-410"><a href="#cb20-410" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb20-411"><a href="#cb20-411" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
-<span id="cb20-412"><a href="#cb20-412" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-10</span></span>
-<span id="cb20-413"><a href="#cb20-413" aria-hidden="true" tabindex="-1"></a>presso_global_p <span class="ot">&lt;-</span> presso[[<span class="st">"MR-PRESSO results"</span>]][[<span class="st">"Global Test"</span>]]<span class="sc">$</span>Pvalue</span>
-<span id="cb20-414"><a href="#cb20-414" aria-hidden="true" tabindex="-1"></a>assumption_audit <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb20-415"><a href="#cb20-415" aria-hidden="true" tabindex="-1"></a>  <span class="at">Assumption =</span> <span class="fu">c</span>(</span>
-<span id="cb20-416"><a href="#cb20-416" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Instrument strength"</span>, <span class="st">"LD independence"</span>, <span class="st">"Allele harmonisation"</span>,</span>
-<span id="cb20-417"><a href="#cb20-417" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Directional pleiotropy"</span>, <span class="st">"Outlier pleiotropy"</span>, <span class="st">"Steiger directionality"</span>,</span>
-<span id="cb20-418"><a href="#cb20-418" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Population overlap"</span>, <span class="st">"Locus colocalisation"</span></span>
-<span id="cb20-419"><a href="#cb20-419" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-420"><a href="#cb20-420" aria-hidden="true" tabindex="-1"></a>  <span class="at">Status =</span> <span class="fu">c</span>(</span>
-<span id="cb20-421"><a href="#cb20-421" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Supported"</span>, <span class="st">"Partial"</span>, <span class="st">"Partial"</span>, <span class="st">"Low power"</span>,</span>
-<span id="cb20-422"><a href="#cb20-422" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No signal"</span>, <span class="st">"Unavailable"</span>, <span class="st">"Unresolved"</span>, <span class="st">"Unavailable"</span></span>
-<span id="cb20-423"><a href="#cb20-423" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb20-424"><a href="#cb20-424" aria-hidden="true" tabindex="-1"></a>  <span class="at">Evidence =</span> <span class="fu">c</span>(</span>
-<span id="cb20-425"><a href="#cb20-425" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"Minimum F = %.1f"</span>, <span class="fu">min</span>(exposure<span class="sc">$</span>FStatistic)),</span>
-<span id="cb20-426"><a href="#cb20-426" aria-hidden="true" tabindex="-1"></a>    <span class="st">"One SNP per chromosome;</span><span class="sc">\n</span><span class="st">no ancestry-matched clumping"</span>,</span>
-<span id="cb20-427"><a href="#cb20-427" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"%d of %d SNPs retained"</span>, <span class="fu">nrow</span>(analysis_data), <span class="fu">nrow</span>(harmonised)),</span>
-<span id="cb20-428"><a href="#cb20-428" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"Egger intercept P = %.3f"</span>, egger_intercept<span class="sc">$</span>pval),</span>
-<span id="cb20-429"><a href="#cb20-429" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"MR-PRESSO global P = %.3f"</span>, presso_global_p),</span>
-<span id="cb20-430"><a href="#cb20-430" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Effect-allele frequencies absent"</span>,</span>
-<span id="cb20-431"><a href="#cb20-431" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cohort overlap unresolved</span><span class="sc">\n</span><span class="st">from compact files"</span>,</span>
-<span id="cb20-432"><a href="#cb20-432" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Top-hit file lacks full</span><span class="sc">\n</span><span class="st">locus statistics"</span></span>
-<span id="cb20-433"><a href="#cb20-433" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-434"><a href="#cb20-434" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-435"><a href="#cb20-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-436"><a href="#cb20-436" aria-hidden="true" tabindex="-1"></a>strength <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
-<span id="cb20-437"><a href="#cb20-437" aria-hidden="true" tabindex="-1"></a>  exposure[, <span class="fu">c</span>(<span class="st">"SNP"</span>, <span class="st">"FStatistic"</span>)],</span>
-<span id="cb20-438"><a href="#cb20-438" aria-hidden="true" tabindex="-1"></a>  harmonisation_ledger[, <span class="fu">c</span>(<span class="st">"SNP"</span>, <span class="st">"mr_keep"</span>)],</span>
-<span id="cb20-439"><a href="#cb20-439" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"SNP"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">sort =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-217"><a href="#cb20-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## 对齐变异，再检查工具强度和多效性 {#sec-code}</span></span>
+<span id="cb20-218"><a href="#cb20-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-219"><a href="#cb20-219" aria-hidden="true" tabindex="-1"></a><span class="fu">### 等位基因 harmonisation</span></span>
+<span id="cb20-220"><a href="#cb20-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-221"><a href="#cb20-221" aria-hidden="true" tabindex="-1"></a>同一个 SNP 在两份 GWAS 中可能以相反 effect allele 报告。<span class="in">`harmonise_data(action = 2)`</span> 对齐方向，并在缺少 allele frequency 时删除不能可靠判向的 palindromic SNP。</span>
+<span id="cb20-222"><a href="#cb20-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-225"><a href="#cb20-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-226"><a href="#cb20-226" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-227"><a href="#cb20-227" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-04</span></span>
+<span id="cb20-228"><a href="#cb20-228" aria-hidden="true" tabindex="-1"></a>harmonised <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">harmonise_data</span>(exposure, outcome, <span class="at">action =</span> <span class="dv">2</span>)</span>
+<span id="cb20-229"><a href="#cb20-229" aria-hidden="true" tabindex="-1"></a>harmonisation_ledger <span class="ot">&lt;-</span> harmonised[, <span class="fu">c</span>(</span>
+<span id="cb20-230"><a href="#cb20-230" aria-hidden="true" tabindex="-1"></a>  <span class="st">"SNP"</span>, <span class="st">"effect_allele.exposure"</span>, <span class="st">"other_allele.exposure"</span>,</span>
+<span id="cb20-231"><a href="#cb20-231" aria-hidden="true" tabindex="-1"></a>  <span class="st">"effect_allele.outcome"</span>, <span class="st">"other_allele.outcome"</span>,</span>
+<span id="cb20-232"><a href="#cb20-232" aria-hidden="true" tabindex="-1"></a>  <span class="st">"beta.exposure"</span>, <span class="st">"beta.outcome"</span>, <span class="st">"palindromic"</span>, <span class="st">"ambiguous"</span>,</span>
+<span id="cb20-233"><a href="#cb20-233" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mr_keep"</span>, <span class="st">"remove"</span>, <span class="st">"action"</span></span>
+<span id="cb20-234"><a href="#cb20-234" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb20-235"><a href="#cb20-235" aria-hidden="true" tabindex="-1"></a>harmonisation_ledger</span>
+<span id="cb20-236"><a href="#cb20-236" aria-hidden="true" tabindex="-1"></a>analysis_data <span class="ot">&lt;-</span> harmonised[harmonised<span class="sc">$</span>mr_keep, , drop <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb20-237"><a href="#cb20-237" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(analysis_data) <span class="sc">==</span> <span class="dv">5</span>)</span>
+<span id="cb20-238"><a href="#cb20-238" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-239"><a href="#cb20-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-240"><a href="#cb20-240" aria-hidden="true" tabindex="-1"></a><span class="in">`rs10841473`</span> 是 C/G palindromic SNP，且两份紧凑表没有 effect-allele frequency，无法判断 strand，因而删除。不能为了增加工具数而强行保留。</span>
+<span id="cb20-241"><a href="#cb20-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-242"><a href="#cb20-242" aria-hidden="true" tabindex="-1"></a><span class="fu">### 主估计与稳健估计器</span></span>
+<span id="cb20-243"><a href="#cb20-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-246"><a href="#cb20-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-247"><a href="#cb20-247" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-248"><a href="#cb20-248" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-05</span></span>
+<span id="cb20-249"><a href="#cb20-249" aria-hidden="true" tabindex="-1"></a>methods <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb20-250"><a href="#cb20-250" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mr_ivw"</span>, <span class="st">"mr_egger_regression"</span>, <span class="st">"mr_weighted_median"</span>,</span>
+<span id="cb20-251"><a href="#cb20-251" aria-hidden="true" tabindex="-1"></a>  <span class="st">"mr_simple_mode"</span>, <span class="st">"mr_weighted_mode"</span></span>
+<span id="cb20-252"><a href="#cb20-252" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-253"><a href="#cb20-253" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260754</span>)</span>
+<span id="cb20-254"><a href="#cb20-254" aria-hidden="true" tabindex="-1"></a>mr_results <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr</span>(analysis_data, <span class="at">method_list =</span> methods)</span>
+<span id="cb20-255"><a href="#cb20-255" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>Lower <span class="ot">&lt;-</span> mr_results<span class="sc">$</span>b <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> mr_results<span class="sc">$</span>se</span>
+<span id="cb20-256"><a href="#cb20-256" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>Upper <span class="ot">&lt;-</span> mr_results<span class="sc">$</span>b <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> mr_results<span class="sc">$</span>se</span>
+<span id="cb20-257"><a href="#cb20-257" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>OR <span class="ot">&lt;-</span> <span class="fu">exp</span>(mr_results<span class="sc">$</span>b)</span>
+<span id="cb20-258"><a href="#cb20-258" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>ORLower <span class="ot">&lt;-</span> <span class="fu">exp</span>(mr_results<span class="sc">$</span>Lower)</span>
+<span id="cb20-259"><a href="#cb20-259" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>ORUpper <span class="ot">&lt;-</span> <span class="fu">exp</span>(mr_results<span class="sc">$</span>Upper)</span>
+<span id="cb20-260"><a href="#cb20-260" aria-hidden="true" tabindex="-1"></a>mr_results[, <span class="fu">c</span>(<span class="st">"method"</span>, <span class="st">"nsnp"</span>, <span class="st">"b"</span>, <span class="st">"se"</span>, <span class="st">"pval"</span>, <span class="st">"Lower"</span>, <span class="st">"Upper"</span>, <span class="st">"OR"</span>)]</span>
+<span id="cb20-261"><a href="#cb20-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-262"><a href="#cb20-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-263"><a href="#cb20-263" aria-hidden="true" tabindex="-1"></a>IVW 估计为 −0.0167（SE = 0.1065，P = 0.876），对应 OR = 0.984（95% CI 0.798–1.212）。MR-Egger、weighted median 和两种 mode 的区间也均包含零。这里的“每单位更高 abundance”沿用 MiBioGen 暴露标度，不能写成“每增加 1% 相对丰度”。</span>
+<span id="cb20-264"><a href="#cb20-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-265"><a href="#cb20-265" aria-hidden="true" tabindex="-1"></a><span class="fu">### 散点图：每个 SNP 的方向与方法斜率</span></span>
+<span id="cb20-266"><a href="#cb20-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-269"><a href="#cb20-269" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-270"><a href="#cb20-270" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-271"><a href="#cb20-271" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-06</span></span>
+<span id="cb20-272"><a href="#cb20-272" aria-hidden="true" tabindex="-1"></a>ivw <span class="ot">&lt;-</span> mr_results[mr_results<span class="sc">$</span>method <span class="sc">==</span> <span class="st">"Inverse variance weighted"</span>, ]</span>
+<span id="cb20-273"><a href="#cb20-273" aria-hidden="true" tabindex="-1"></a>egger <span class="ot">&lt;-</span> mr_results[mr_results<span class="sc">$</span>method <span class="sc">==</span> <span class="st">"MR Egger"</span>, ]</span>
+<span id="cb20-274"><a href="#cb20-274" aria-hidden="true" tabindex="-1"></a>median <span class="ot">&lt;-</span> mr_results[mr_results<span class="sc">$</span>method <span class="sc">==</span> <span class="st">"Weighted median"</span>, ]</span>
+<span id="cb20-275"><a href="#cb20-275" aria-hidden="true" tabindex="-1"></a>egger_intercept <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr_pleiotropy_test</span>(analysis_data)</span>
+<span id="cb20-276"><a href="#cb20-276" aria-hidden="true" tabindex="-1"></a>line_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-277"><a href="#cb20-277" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">c</span>(<span class="st">"IVW"</span>, <span class="st">"MR Egger"</span>, <span class="st">"Weighted median"</span>),</span>
+<span id="cb20-278"><a href="#cb20-278" aria-hidden="true" tabindex="-1"></a>  <span class="at">Intercept =</span> <span class="fu">c</span>(<span class="dv">0</span>, egger_intercept<span class="sc">$</span>egger_intercept, <span class="dv">0</span>),</span>
+<span id="cb20-279"><a href="#cb20-279" aria-hidden="true" tabindex="-1"></a>  <span class="at">Slope =</span> <span class="fu">c</span>(ivw<span class="sc">$</span>b, egger<span class="sc">$</span>b, median<span class="sc">$</span>b)</span>
+<span id="cb20-280"><a href="#cb20-280" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-281"><a href="#cb20-281" aria-hidden="true" tabindex="-1"></a>method_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb20-282"><a href="#cb20-282" aria-hidden="true" tabindex="-1"></a>  <span class="at">IVW =</span> pal_pub[[<span class="st">"blue"</span>]],</span>
+<span id="cb20-283"><a href="#cb20-283" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">MR Egger</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"vermillion"</span>]],</span>
+<span id="cb20-284"><a href="#cb20-284" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Weighted median</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"green"</span>]]</span>
+<span id="cb20-285"><a href="#cb20-285" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-286"><a href="#cb20-286" aria-hidden="true" tabindex="-1"></a>p_scatter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb20-287"><a href="#cb20-287" aria-hidden="true" tabindex="-1"></a>  analysis_data, <span class="fu">aes</span>(beta.exposure, beta.outcome, <span class="at">label =</span> SNP)</span>
+<span id="cb20-288"><a href="#cb20-288" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb20-289"><a href="#cb20-289" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(</span>
+<span id="cb20-290"><a href="#cb20-290" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">ymin =</span> beta.outcome <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se.outcome,</span>
+<span id="cb20-291"><a href="#cb20-291" aria-hidden="true" tabindex="-1"></a>        <span class="at">ymax =</span> beta.outcome <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se.outcome),</span>
+<span id="cb20-292"><a href="#cb20-292" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#888888"</span></span>
+<span id="cb20-293"><a href="#cb20-293" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-294"><a href="#cb20-294" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(</span>
+<span id="cb20-295"><a href="#cb20-295" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">xmin =</span> beta.exposure <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> se.exposure,</span>
+<span id="cb20-296"><a href="#cb20-296" aria-hidden="true" tabindex="-1"></a>        <span class="at">xmax =</span> beta.exposure <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> se.exposure),</span>
+<span id="cb20-297"><a href="#cb20-297" aria-hidden="true" tabindex="-1"></a>    <span class="at">height =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"#888888"</span></span>
+<span id="cb20-298"><a href="#cb20-298" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-299"><a href="#cb20-299" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.3</span>, <span class="at">colour =</span> <span class="st">"#202020"</span>) <span class="sc">+</span></span>
+<span id="cb20-300"><a href="#cb20-300" aria-hidden="true" tabindex="-1"></a>  ggrepel<span class="sc">::</span><span class="fu">geom_text_repel</span>(</span>
+<span id="cb20-301"><a href="#cb20-301" aria-hidden="true" tabindex="-1"></a>    <span class="at">seed =</span> <span class="dv">20260754</span>, <span class="at">size =</span> <span class="fl">2.8</span>, <span class="at">max.overlaps =</span> <span class="cn">Inf</span>,</span>
+<span id="cb20-302"><a href="#cb20-302" aria-hidden="true" tabindex="-1"></a>    <span class="at">min.segment.length =</span> <span class="dv">0</span>, <span class="at">box.padding =</span> <span class="fl">0.35</span>, <span class="at">point.padding =</span> <span class="fl">0.25</span></span>
+<span id="cb20-303"><a href="#cb20-303" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-304"><a href="#cb20-304" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_abline</span>(</span>
+<span id="cb20-305"><a href="#cb20-305" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> line_data,</span>
+<span id="cb20-306"><a href="#cb20-306" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">intercept =</span> Intercept, <span class="at">slope =</span> Slope, <span class="at">colour =</span> Method), <span class="at">linewidth =</span> <span class="fl">0.9</span></span>
+<span id="cb20-307"><a href="#cb20-307" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb20-308"><a href="#cb20-308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> method_colours) <span class="sc">+</span></span>
+<span id="cb20-309"><a href="#cb20-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">range</span>(analysis_data<span class="sc">$</span>beta.exposure) <span class="sc">*</span> <span class="fl">1.15</span>) <span class="sc">+</span></span>
+<span id="cb20-310"><a href="#cb20-310" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-311"><a href="#cb20-311" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Harmonised SNP effects do not share a stable causal slope"</span>,</span>
+<span id="cb20-312"><a href="#cb20-312" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Five non-ambiguous instruments; error bars are 95% confidence intervals"</span>,</span>
+<span id="cb20-313"><a href="#cb20-313" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"SNP effect on Bifidobacterium abundance"</span>,</span>
+<span id="cb20-314"><a href="#cb20-314" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"SNP effect on log-odds of IBD"</span>, <span class="at">colour =</span> <span class="st">"MR method"</span></span>
+<span id="cb20-315"><a href="#cb20-315" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">10</span>)</span>
+<span id="cb20-316"><a href="#cb20-316" aria-hidden="true" tabindex="-1"></a>p_scatter</span>
+<span id="cb20-317"><a href="#cb20-317" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_scatter, <span class="st">"figures/54-mendelian-randomization/54-1-harmonised-scatter"</span>,</span>
+<span id="cb20-318"><a href="#cb20-318" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">120</span>)</span>
+<span id="cb20-319"><a href="#cb20-319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-320"><a href="#cb20-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-321"><a href="#cb20-321" aria-hidden="true" tabindex="-1"></a><span class="fu">### 森林图：不要只报告 IVW</span></span>
+<span id="cb20-322"><a href="#cb20-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-325"><a href="#cb20-325" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-326"><a href="#cb20-326" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-327"><a href="#cb20-327" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-07</span></span>
+<span id="cb20-328"><a href="#cb20-328" aria-hidden="true" tabindex="-1"></a>mr_results<span class="sc">$</span>method <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb20-329"><a href="#cb20-329" aria-hidden="true" tabindex="-1"></a>  mr_results<span class="sc">$</span>method,</span>
+<span id="cb20-330"><a href="#cb20-330" aria-hidden="true" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">rev</span>(<span class="fu">c</span>(</span>
+<span id="cb20-331"><a href="#cb20-331" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Inverse variance weighted"</span>, <span class="st">"MR Egger"</span>, <span class="st">"Weighted median"</span>,</span>
+<span id="cb20-332"><a href="#cb20-332" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Simple mode"</span>, <span class="st">"Weighted mode"</span></span>
+<span id="cb20-333"><a href="#cb20-333" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb20-334"><a href="#cb20-334" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-335"><a href="#cb20-335" aria-hidden="true" tabindex="-1"></a>p_methods <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mr_results, <span class="fu">aes</span>(b, method)) <span class="sc">+</span></span>
+<span id="cb20-336"><a href="#cb20-336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
+<span id="cb20-337"><a href="#cb20-337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> Lower, <span class="at">xmax =</span> Upper), <span class="at">height =</span> <span class="dv">0</span>,</span>
+<span id="cb20-338"><a href="#cb20-338" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> pal_pub[[<span class="st">"grey"</span>]]) <span class="sc">+</span></span>
+<span id="cb20-339"><a href="#cb20-339" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> method <span class="sc">==</span> <span class="st">"Inverse variance weighted"</span>), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb20-340"><a href="#cb20-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb20-341"><a href="#cb20-341" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"grey"</span>]], <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"blue"</span>]]</span>
+<span id="cb20-342"><a href="#cb20-342" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb20-343"><a href="#cb20-343" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-344"><a href="#cb20-344" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Sensitivity estimators all include the null"</span>,</span>
+<span id="cb20-345"><a href="#cb20-345" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Effects are log-odds of IBD per unit higher genetically predicted abundance"</span>,</span>
+<span id="cb20-346"><a href="#cb20-346" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"MR estimate (95% confidence interval)"</span>, <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb20-347"><a href="#cb20-347" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">10</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb20-348"><a href="#cb20-348" aria-hidden="true" tabindex="-1"></a>p_methods</span>
+<span id="cb20-349"><a href="#cb20-349" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_methods, <span class="st">"figures/54-mendelian-randomization/54-2-method-forest"</span>,</span>
+<span id="cb20-350"><a href="#cb20-350" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">110</span>)</span>
+<span id="cb20-351"><a href="#cb20-351" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-352"><a href="#cb20-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-353"><a href="#cb20-353" aria-hidden="true" tabindex="-1"></a><span class="fu">## 工具强度、多效性与共定位 {#sec-audit}</span></span>
+<span id="cb20-354"><a href="#cb20-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-355"><a href="#cb20-355" aria-hidden="true" tabindex="-1"></a><span class="fu">### 异质性、Egger 截距与 MR-PRESSO</span></span>
+<span id="cb20-356"><a href="#cb20-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-359"><a href="#cb20-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-360"><a href="#cb20-360" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-361"><a href="#cb20-361" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-08</span></span>
+<span id="cb20-362"><a href="#cb20-362" aria-hidden="true" tabindex="-1"></a>heterogeneity <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr_heterogeneity</span>(analysis_data)</span>
+<span id="cb20-363"><a href="#cb20-363" aria-hidden="true" tabindex="-1"></a>egger_intercept <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr_pleiotropy_test</span>(analysis_data)</span>
+<span id="cb20-364"><a href="#cb20-364" aria-hidden="true" tabindex="-1"></a>heterogeneity</span>
+<span id="cb20-365"><a href="#cb20-365" aria-hidden="true" tabindex="-1"></a>egger_intercept</span>
+<span id="cb20-366"><a href="#cb20-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-367"><a href="#cb20-367" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">20260754</span>)</span>
+<span id="cb20-368"><a href="#cb20-368" aria-hidden="true" tabindex="-1"></a>presso <span class="ot">&lt;-</span> MRPRESSO<span class="sc">::</span><span class="fu">mr_presso</span>(</span>
+<span id="cb20-369"><a href="#cb20-369" aria-hidden="true" tabindex="-1"></a>  <span class="at">BetaOutcome =</span> <span class="st">"beta.outcome"</span>, <span class="at">BetaExposure =</span> <span class="st">"beta.exposure"</span>,</span>
+<span id="cb20-370"><a href="#cb20-370" aria-hidden="true" tabindex="-1"></a>  <span class="at">SdOutcome =</span> <span class="st">"se.outcome"</span>, <span class="at">SdExposure =</span> <span class="st">"se.exposure"</span>,</span>
+<span id="cb20-371"><a href="#cb20-371" aria-hidden="true" tabindex="-1"></a>  <span class="at">OUTLIERtest =</span> <span class="cn">TRUE</span>, <span class="at">DISTORTIONtest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb20-372"><a href="#cb20-372" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> analysis_data, <span class="at">NbDistribution =</span> <span class="dv">2000</span>, <span class="at">SignifThreshold =</span> <span class="fl">0.05</span></span>
+<span id="cb20-373"><a href="#cb20-373" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-374"><a href="#cb20-374" aria-hidden="true" tabindex="-1"></a>presso[[<span class="st">"Main MR results"</span>]]</span>
+<span id="cb20-375"><a href="#cb20-375" aria-hidden="true" tabindex="-1"></a>presso[[<span class="st">"MR-PRESSO results"</span>]][[<span class="st">"Global Test"</span>]]</span>
+<span id="cb20-376"><a href="#cb20-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-377"><a href="#cb20-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-378"><a href="#cb20-378" aria-hidden="true" tabindex="-1"></a>IVW Cochran's Q P = 0.106，Egger intercept = −0.0075（P = 0.825），MR-PRESSO global P = 0.183，未检测到 outlier。只有 5 个工具时这些检验功效很低，因此结果应写作“未发现多效性信号”，而不是“证明不存在多效性”。</span>
+<span id="cb20-379"><a href="#cb20-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-380"><a href="#cb20-380" aria-hidden="true" tabindex="-1"></a><span class="fu">### Leave-one-out 只能发现单点主导</span></span>
+<span id="cb20-381"><a href="#cb20-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-384"><a href="#cb20-384" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-385"><a href="#cb20-385" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-386"><a href="#cb20-386" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-09</span></span>
+<span id="cb20-387"><a href="#cb20-387" aria-hidden="true" tabindex="-1"></a>leave_one_out <span class="ot">&lt;-</span> TwoSampleMR<span class="sc">::</span><span class="fu">mr_leaveoneout</span>(analysis_data)</span>
+<span id="cb20-388"><a href="#cb20-388" aria-hidden="true" tabindex="-1"></a>leave_one_out<span class="sc">$</span>Lower <span class="ot">&lt;-</span> leave_one_out<span class="sc">$</span>b <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> leave_one_out<span class="sc">$</span>se</span>
+<span id="cb20-389"><a href="#cb20-389" aria-hidden="true" tabindex="-1"></a>leave_one_out<span class="sc">$</span>Upper <span class="ot">&lt;-</span> leave_one_out<span class="sc">$</span>b <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> leave_one_out<span class="sc">$</span>se</span>
+<span id="cb20-390"><a href="#cb20-390" aria-hidden="true" tabindex="-1"></a>leave_one_out<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(</span>
+<span id="cb20-391"><a href="#cb20-391" aria-hidden="true" tabindex="-1"></a>  leave_one_out<span class="sc">$</span>SNP <span class="sc">==</span> <span class="st">"All"</span>, <span class="st">"All instruments"</span>, <span class="fu">paste</span>(<span class="st">"Remove"</span>, leave_one_out<span class="sc">$</span>SNP)</span>
+<span id="cb20-392"><a href="#cb20-392" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-393"><a href="#cb20-393" aria-hidden="true" tabindex="-1"></a>leave_one_out<span class="sc">$</span>Label <span class="ot">&lt;-</span> <span class="fu">factor</span>(leave_one_out<span class="sc">$</span>Label, <span class="at">levels =</span> <span class="fu">rev</span>(leave_one_out<span class="sc">$</span>Label))</span>
+<span id="cb20-394"><a href="#cb20-394" aria-hidden="true" tabindex="-1"></a>p_loo <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(leave_one_out, <span class="fu">aes</span>(b, Label)) <span class="sc">+</span></span>
+<span id="cb20-395"><a href="#cb20-395" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> <span class="st">"#777777"</span>) <span class="sc">+</span></span>
+<span id="cb20-396"><a href="#cb20-396" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbarh</span>(<span class="fu">aes</span>(<span class="at">xmin =</span> Lower, <span class="at">xmax =</span> Upper), <span class="at">height =</span> <span class="dv">0</span>,</span>
+<span id="cb20-397"><a href="#cb20-397" aria-hidden="true" tabindex="-1"></a>                 <span class="at">colour =</span> pal_pub[[<span class="st">"grey"</span>]]) <span class="sc">+</span></span>
+<span id="cb20-398"><a href="#cb20-398" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">colour =</span> SNP <span class="sc">==</span> <span class="st">"All"</span>), <span class="at">size =</span> <span class="fl">2.3</span>) <span class="sc">+</span></span>
+<span id="cb20-399"><a href="#cb20-399" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb20-400"><a href="#cb20-400" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"orange"</span>]], <span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"blue"</span>]]</span>
+<span id="cb20-401"><a href="#cb20-401" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb20-402"><a href="#cb20-402" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-403"><a href="#cb20-403" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Leave-one-out estimates remain imprecise"</span>,</span>
+<span id="cb20-404"><a href="#cb20-404" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"A stable sign alone would not overcome weak instrument design or pleiotropy"</span>,</span>
+<span id="cb20-405"><a href="#cb20-405" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"IVW estimate after exclusion (95% confidence interval)"</span>, <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb20-406"><a href="#cb20-406" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">10</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb20-407"><a href="#cb20-407" aria-hidden="true" tabindex="-1"></a>p_loo</span>
+<span id="cb20-408"><a href="#cb20-408" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_loo, <span class="st">"figures/54-mendelian-randomization/54-3-leave-one-out"</span>,</span>
+<span id="cb20-409"><a href="#cb20-409" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">110</span>)</span>
+<span id="cb20-410"><a href="#cb20-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-411"><a href="#cb20-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-412"><a href="#cb20-412" aria-hidden="true" tabindex="-1"></a><span class="fu">### 把无法完成的诊断也写进结果</span></span>
+<span id="cb20-413"><a href="#cb20-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-416"><a href="#cb20-416" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-417"><a href="#cb20-417" aria-hidden="true" tabindex="-1"></a><span class="co">#| results: hold</span></span>
+<span id="cb20-418"><a href="#cb20-418" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: reader-step-10</span></span>
+<span id="cb20-419"><a href="#cb20-419" aria-hidden="true" tabindex="-1"></a>presso_global_p <span class="ot">&lt;-</span> presso[[<span class="st">"MR-PRESSO results"</span>]][[<span class="st">"Global Test"</span>]]<span class="sc">$</span>Pvalue</span>
+<span id="cb20-420"><a href="#cb20-420" aria-hidden="true" tabindex="-1"></a>assumption_audit <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb20-421"><a href="#cb20-421" aria-hidden="true" tabindex="-1"></a>  <span class="at">Assumption =</span> <span class="fu">c</span>(</span>
+<span id="cb20-422"><a href="#cb20-422" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Instrument strength"</span>, <span class="st">"LD independence"</span>, <span class="st">"Allele harmonisation"</span>,</span>
+<span id="cb20-423"><a href="#cb20-423" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Directional pleiotropy"</span>, <span class="st">"Outlier pleiotropy"</span>, <span class="st">"Steiger directionality"</span>,</span>
+<span id="cb20-424"><a href="#cb20-424" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Population overlap"</span>, <span class="st">"Locus colocalisation"</span></span>
+<span id="cb20-425"><a href="#cb20-425" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-426"><a href="#cb20-426" aria-hidden="true" tabindex="-1"></a>  <span class="at">Status =</span> <span class="fu">c</span>(</span>
+<span id="cb20-427"><a href="#cb20-427" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Supported"</span>, <span class="st">"Partial"</span>, <span class="st">"Partial"</span>, <span class="st">"Low power"</span>,</span>
+<span id="cb20-428"><a href="#cb20-428" aria-hidden="true" tabindex="-1"></a>    <span class="st">"No signal"</span>, <span class="st">"Unavailable"</span>, <span class="st">"Unresolved"</span>, <span class="st">"Unavailable"</span></span>
+<span id="cb20-429"><a href="#cb20-429" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb20-430"><a href="#cb20-430" aria-hidden="true" tabindex="-1"></a>  <span class="at">Evidence =</span> <span class="fu">c</span>(</span>
+<span id="cb20-431"><a href="#cb20-431" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"Minimum F = %.1f"</span>, <span class="fu">min</span>(exposure<span class="sc">$</span>FStatistic)),</span>
+<span id="cb20-432"><a href="#cb20-432" aria-hidden="true" tabindex="-1"></a>    <span class="st">"One SNP per chromosome;</span><span class="sc">\n</span><span class="st">no ancestry-matched clumping"</span>,</span>
+<span id="cb20-433"><a href="#cb20-433" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"%d of %d SNPs retained"</span>, <span class="fu">nrow</span>(analysis_data), <span class="fu">nrow</span>(harmonised)),</span>
+<span id="cb20-434"><a href="#cb20-434" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"Egger intercept P = %.3f"</span>, egger_intercept<span class="sc">$</span>pval),</span>
+<span id="cb20-435"><a href="#cb20-435" aria-hidden="true" tabindex="-1"></a>    <span class="fu">sprintf</span>(<span class="st">"MR-PRESSO global P = %.3f"</span>, presso_global_p),</span>
+<span id="cb20-436"><a href="#cb20-436" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Effect-allele frequencies absent"</span>,</span>
+<span id="cb20-437"><a href="#cb20-437" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cohort overlap unresolved</span><span class="sc">\n</span><span class="st">from compact files"</span>,</span>
+<span id="cb20-438"><a href="#cb20-438" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Top-hit file lacks full</span><span class="sc">\n</span><span class="st">locus statistics"</span></span>
+<span id="cb20-439"><a href="#cb20-439" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb20-440"><a href="#cb20-440" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-441"><a href="#cb20-441" aria-hidden="true" tabindex="-1"></a>strength<span class="sc">$</span>Status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(strength<span class="sc">$</span>mr_keep, <span class="st">"Retained"</span>, <span class="st">"Dropped: palindromic"</span>)</span>
-<span id="cb20-442"><a href="#cb20-442" aria-hidden="true" tabindex="-1"></a>p_strength <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(strength, <span class="fu">aes</span>(FStatistic, <span class="fu">reorder</span>(SNP, FStatistic), <span class="at">colour =</span> Status)) <span class="sc">+</span></span>
-<span id="cb20-443"><a href="#cb20-443" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">10</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> pal_pub[[<span class="st">"vermillion"</span>]]) <span class="sc">+</span></span>
-<span id="cb20-444"><a href="#cb20-444" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> FStatistic, <span class="at">yend =</span> <span class="fu">reorder</span>(SNP, FStatistic)),</span>
-<span id="cb20-445"><a href="#cb20-445" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb20-446"><a href="#cb20-446" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.4</span>) <span class="sc">+</span></span>
-<span id="cb20-447"><a href="#cb20-447" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb20-448"><a href="#cb20-448" aria-hidden="true" tabindex="-1"></a>    <span class="at">Retained =</span> pal_pub[[<span class="st">"blue"</span>]],</span>
-<span id="cb20-449"><a href="#cb20-449" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Dropped: palindromic</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"orange"</span>]]</span>
-<span id="cb20-450"><a href="#cb20-450" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb20-451"><a href="#cb20-451" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-452"><a href="#cb20-452" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"A. Candidate instruments"</span>, <span class="at">subtitle =</span> <span class="st">"The dashed line marks F = 10"</span>,</span>
-<span id="cb20-453"><a href="#cb20-453" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Approximate F statistic"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Harmonisation"</span></span>
-<span id="cb20-454"><a href="#cb20-454" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>)</span>
-<span id="cb20-455"><a href="#cb20-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-456"><a href="#cb20-456" aria-hidden="true" tabindex="-1"></a>assumption_audit<span class="sc">$</span>Assumption <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
-<span id="cb20-457"><a href="#cb20-457" aria-hidden="true" tabindex="-1"></a>  assumption_audit<span class="sc">$</span>Assumption, <span class="at">levels =</span> <span class="fu">rev</span>(assumption_audit<span class="sc">$</span>Assumption)</span>
-<span id="cb20-458"><a href="#cb20-458" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-459"><a href="#cb20-459" aria-hidden="true" tabindex="-1"></a>status_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb20-460"><a href="#cb20-460" aria-hidden="true" tabindex="-1"></a>  <span class="at">Supported =</span> pal_pub[[<span class="st">"green"</span>]], <span class="at">Partial =</span> pal_pub[[<span class="st">"orange"</span>]],</span>
-<span id="cb20-461"><a href="#cb20-461" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">No signal</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"sky"</span>]], <span class="st">`</span><span class="at">Low power</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"purple"</span>]],</span>
-<span id="cb20-462"><a href="#cb20-462" aria-hidden="true" tabindex="-1"></a>  <span class="at">Unavailable =</span> pal_pub[[<span class="st">"vermillion"</span>]], <span class="at">Unresolved =</span> pal_pub[[<span class="st">"grey"</span>]]</span>
-<span id="cb20-463"><a href="#cb20-463" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-464"><a href="#cb20-464" aria-hidden="true" tabindex="-1"></a>p_assumptions <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(assumption_audit, <span class="fu">aes</span>(<span class="dv">1</span>, Assumption, <span class="at">fill =</span> Status)) <span class="sc">+</span></span>
-<span id="cb20-465"><a href="#cb20-465" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">width =</span> <span class="fl">0.28</span>, <span class="at">height =</span> <span class="fl">0.7</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb20-466"><a href="#cb20-466" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.2</span>, <span class="at">label =</span> Evidence), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="fl">2.35</span>,</span>
-<span id="cb20-467"><a href="#cb20-467" aria-hidden="true" tabindex="-1"></a>            <span class="at">lineheight =</span> <span class="fl">0.9</span>, <span class="at">colour =</span> <span class="st">"#252525"</span>) <span class="sc">+</span></span>
-<span id="cb20-468"><a href="#cb20-468" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> status_colours) <span class="sc">+</span></span>
-<span id="cb20-469"><a href="#cb20-469" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">2.55</span>), <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
-<span id="cb20-470"><a href="#cb20-470" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"B. Assumption audit"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Status"</span>) <span class="sc">+</span></span>
-<span id="cb20-471"><a href="#cb20-471" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">8</span>) <span class="sc">+</span></span>
-<span id="cb20-472"><a href="#cb20-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb20-473"><a href="#cb20-473" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb20-474"><a href="#cb20-474" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(), <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>, <span class="dv">85</span>, <span class="dv">5</span>, <span class="dv">5</span>)</span>
-<span id="cb20-475"><a href="#cb20-475" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb20-476"><a href="#cb20-476" aria-hidden="true" tabindex="-1"></a>p_audit <span class="ot">&lt;-</span> p_strength <span class="sc">+</span> p_assumptions <span class="sc">+</span></span>
-<span id="cb20-477"><a href="#cb20-477" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="fl">0.85</span>, <span class="fl">1.5</span>), <span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
-<span id="cb20-478"><a href="#cb20-478" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
-<span id="cb20-479"><a href="#cb20-479" aria-hidden="true" tabindex="-1"></a>p_audit</span>
-<span id="cb20-480"><a href="#cb20-480" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_audit, <span class="st">"figures/54-mendelian-randomization/54-4-assumption-audit"</span>,</span>
-<span id="cb20-481"><a href="#cb20-481" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">130</span>)</span>
-<span id="cb20-482"><a href="#cb20-482" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb20-483"><a href="#cb20-483" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-484"><a href="#cb20-484" aria-hidden="true" tabindex="-1"></a>本教学子集没有 effect-allele frequency，不能可靠计算 exposure/outcome explained variance，因此不伪造 Steiger directionality；暴露仅有 top-hit 记录，也无法做位点共定位。样本重叠不能从紧凑文件排除。把这些标成 unavailable/unresolved 比输出一个看似齐全的绿色勾选表更重要。</span>
-<span id="cb20-485"><a href="#cb20-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-486"><a href="#cb20-486" aria-hidden="true" tabindex="-1"></a><span class="fu">### 今天可投稿分析还要升级什么</span></span>
-<span id="cb20-487"><a href="#cb20-487" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-488"><a href="#cb20-488" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>用与暴露 GWAS 祖源匹配的 reference panel 做 LD clumping，并报告阈值、窗口和 panel；</span>
-<span id="cb20-489"><a href="#cb20-489" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>获取完整暴露与结局 summary statistics，做 Steiger、双向 MR 和关键位点 colocalisation；</span>
-<span id="cb20-490"><a href="#cb20-490" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>报告暴露 GWAS 的统一分类/变换、工具解释度、conditional F 和样本重叠；</span>
-<span id="cb20-491"><a href="#cb20-491" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>检查 SNP 与 BMI、饮食、药物、免疫表型等潜在多效性通路；</span>
-<span id="cb20-492"><a href="#cb20-492" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在独立 GWAS、不同 16S 区域或 shotgun taxonomic definition 中复现；</span>
-<span id="cb20-493"><a href="#cb20-493" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若暴露是多个相关菌，考虑 multivariable MR，但先证明工具对各暴露有足够条件强度。</span>
-<span id="cb20-494"><a href="#cb20-494" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-495"><a href="#cb20-495" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="常见坑：MR 最危险的“全绿结果”"}</span>
-<span id="cb20-496"><a href="#cb20-496" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>用 P &lt; 1×10^-5 的弱工具，却只写所有 F &gt; 10；  </span>
-<span id="cb20-497"><a href="#cb20-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>把“一染色体一个 SNP”写成已完成 LD clumping；  </span>
-<span id="cb20-498"><a href="#cb20-498" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>palindromic SNP 无 EAF 仍强行对齐；  </span>
-<span id="cb20-499"><a href="#cb20-499" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Egger/PRESSO P &gt; 0.05 就宣称不存在水平多效性；  </span>
-<span id="cb20-500"><a href="#cb20-500" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>两份 GWAS 中同名菌属的测量定义不同，却按同一 exposure 解释；  </span>
-<span id="cb20-501"><a href="#cb20-501" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>没做 colocalisation，就把共享区域写成“菌介导宿主遗传效应”；  </span>
-<span id="cb20-502"><a href="#cb20-502" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>空结果写成“证明该菌对疾病无因果作用”。宽区间通常只表示数据还不能排除有意义的正负效应。</span>
-<span id="cb20-503"><a href="#cb20-503" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb20-504"><a href="#cb20-504" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-505"><a href="#cb20-505" aria-hidden="true" tabindex="-1"></a><span class="fu">## 比较主估计与方向性、稳健性分析 {#sec-publication}</span></span>
-<span id="cb20-506"><a href="#cb20-506" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-507"><a href="#cb20-507" aria-hidden="true" tabindex="-1"></a>MR 主图建议用“散点 + 方法森林图”，把 leave-one-out 与 assumption audit 放补充材料。森林图必须有零参考线、方法名、SNP 数和 95% CI；二元结局可补充 OR，但不要把暴露标度误写成百分比。</span>
-<span id="cb20-508"><a href="#cb20-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-509"><a href="#cb20-509" aria-hidden="true" tabindex="-1"></a>图注应同时说明：候选/保留 SNP 数、harmonisation action、工具选择与 clumping、效应单位、样本量以及哪些诊断不可得。<span class="in">`save_pub()`</span> 已输出 PDF/SVG 和 600 ppi PNG/TIFF，图中文字全部为英文。</span>
+<span id="cb20-441"><a href="#cb20-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-442"><a href="#cb20-442" aria-hidden="true" tabindex="-1"></a>strength <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb20-443"><a href="#cb20-443" aria-hidden="true" tabindex="-1"></a>  exposure[, <span class="fu">c</span>(<span class="st">"SNP"</span>, <span class="st">"FStatistic"</span>)],</span>
+<span id="cb20-444"><a href="#cb20-444" aria-hidden="true" tabindex="-1"></a>  harmonisation_ledger[, <span class="fu">c</span>(<span class="st">"SNP"</span>, <span class="st">"mr_keep"</span>)],</span>
+<span id="cb20-445"><a href="#cb20-445" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"SNP"</span>, <span class="at">all.x =</span> <span class="cn">TRUE</span>, <span class="at">sort =</span> <span class="cn">FALSE</span></span>
+<span id="cb20-446"><a href="#cb20-446" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-447"><a href="#cb20-447" aria-hidden="true" tabindex="-1"></a>strength<span class="sc">$</span>Status <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(strength<span class="sc">$</span>mr_keep, <span class="st">"Retained"</span>, <span class="st">"Dropped: palindromic"</span>)</span>
+<span id="cb20-448"><a href="#cb20-448" aria-hidden="true" tabindex="-1"></a>p_strength <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(strength, <span class="fu">aes</span>(FStatistic, <span class="fu">reorder</span>(SNP, FStatistic), <span class="at">colour =</span> Status)) <span class="sc">+</span></span>
+<span id="cb20-449"><a href="#cb20-449" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">10</span>, <span class="at">linetype =</span> <span class="dv">2</span>, <span class="at">colour =</span> pal_pub[[<span class="st">"vermillion"</span>]]) <span class="sc">+</span></span>
+<span id="cb20-450"><a href="#cb20-450" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">xend =</span> FStatistic, <span class="at">yend =</span> <span class="fu">reorder</span>(SNP, FStatistic)),</span>
+<span id="cb20-451"><a href="#cb20-451" aria-hidden="true" tabindex="-1"></a>               <span class="at">linewidth =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb20-452"><a href="#cb20-452" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">2.4</span>) <span class="sc">+</span></span>
+<span id="cb20-453"><a href="#cb20-453" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb20-454"><a href="#cb20-454" aria-hidden="true" tabindex="-1"></a>    <span class="at">Retained =</span> pal_pub[[<span class="st">"blue"</span>]],</span>
+<span id="cb20-455"><a href="#cb20-455" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Dropped: palindromic</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"orange"</span>]]</span>
+<span id="cb20-456"><a href="#cb20-456" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb20-457"><a href="#cb20-457" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-458"><a href="#cb20-458" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"A. Candidate instruments"</span>, <span class="at">subtitle =</span> <span class="st">"The dashed line marks F = 10"</span>,</span>
+<span id="cb20-459"><a href="#cb20-459" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Approximate F statistic"</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">colour =</span> <span class="st">"Harmonisation"</span></span>
+<span id="cb20-460"><a href="#cb20-460" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span> <span class="fu">theme_pub</span>(<span class="dv">9</span>)</span>
+<span id="cb20-461"><a href="#cb20-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-462"><a href="#cb20-462" aria-hidden="true" tabindex="-1"></a>assumption_audit<span class="sc">$</span>Assumption <span class="ot">&lt;-</span> <span class="fu">factor</span>(</span>
+<span id="cb20-463"><a href="#cb20-463" aria-hidden="true" tabindex="-1"></a>  assumption_audit<span class="sc">$</span>Assumption, <span class="at">levels =</span> <span class="fu">rev</span>(assumption_audit<span class="sc">$</span>Assumption)</span>
+<span id="cb20-464"><a href="#cb20-464" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-465"><a href="#cb20-465" aria-hidden="true" tabindex="-1"></a>status_colours <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb20-466"><a href="#cb20-466" aria-hidden="true" tabindex="-1"></a>  <span class="at">Supported =</span> pal_pub[[<span class="st">"green"</span>]], <span class="at">Partial =</span> pal_pub[[<span class="st">"orange"</span>]],</span>
+<span id="cb20-467"><a href="#cb20-467" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">No signal</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"sky"</span>]], <span class="st">`</span><span class="at">Low power</span><span class="st">`</span> <span class="ot">=</span> pal_pub[[<span class="st">"purple"</span>]],</span>
+<span id="cb20-468"><a href="#cb20-468" aria-hidden="true" tabindex="-1"></a>  <span class="at">Unavailable =</span> pal_pub[[<span class="st">"vermillion"</span>]], <span class="at">Unresolved =</span> pal_pub[[<span class="st">"grey"</span>]]</span>
+<span id="cb20-469"><a href="#cb20-469" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-470"><a href="#cb20-470" aria-hidden="true" tabindex="-1"></a>p_assumptions <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(assumption_audit, <span class="fu">aes</span>(<span class="dv">1</span>, Assumption, <span class="at">fill =</span> Status)) <span class="sc">+</span></span>
+<span id="cb20-471"><a href="#cb20-471" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">width =</span> <span class="fl">0.28</span>, <span class="at">height =</span> <span class="fl">0.7</span>, <span class="at">colour =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb20-472"><a href="#cb20-472" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fl">1.2</span>, <span class="at">label =</span> Evidence), <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="fl">2.35</span>,</span>
+<span id="cb20-473"><a href="#cb20-473" aria-hidden="true" tabindex="-1"></a>            <span class="at">lineheight =</span> <span class="fl">0.9</span>, <span class="at">colour =</span> <span class="st">"#252525"</span>) <span class="sc">+</span></span>
+<span id="cb20-474"><a href="#cb20-474" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> status_colours) <span class="sc">+</span></span>
+<span id="cb20-475"><a href="#cb20-475" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="fl">0.82</span>, <span class="fl">2.55</span>), <span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb20-476"><a href="#cb20-476" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"B. Assumption audit"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="st">"Status"</span>) <span class="sc">+</span></span>
+<span id="cb20-477"><a href="#cb20-477" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pub</span>(<span class="dv">8</span>) <span class="sc">+</span></span>
+<span id="cb20-478"><a href="#cb20-478" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb20-479"><a href="#cb20-479" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb20-480"><a href="#cb20-480" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(), <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">5</span>, <span class="dv">85</span>, <span class="dv">5</span>, <span class="dv">5</span>)</span>
+<span id="cb20-481"><a href="#cb20-481" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb20-482"><a href="#cb20-482" aria-hidden="true" tabindex="-1"></a>p_audit <span class="ot">&lt;-</span> p_strength <span class="sc">+</span> p_assumptions <span class="sc">+</span></span>
+<span id="cb20-483"><a href="#cb20-483" aria-hidden="true" tabindex="-1"></a>  patchwork<span class="sc">::</span><span class="fu">plot_layout</span>(<span class="at">widths =</span> <span class="fu">c</span>(<span class="fl">0.85</span>, <span class="fl">1.5</span>), <span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span></span>
+<span id="cb20-484"><a href="#cb20-484" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb20-485"><a href="#cb20-485" aria-hidden="true" tabindex="-1"></a>p_audit</span>
+<span id="cb20-486"><a href="#cb20-486" aria-hidden="true" tabindex="-1"></a><span class="fu">save_pub</span>(p_audit, <span class="st">"figures/54-mendelian-randomization/54-4-assumption-audit"</span>,</span>
+<span id="cb20-487"><a href="#cb20-487" aria-hidden="true" tabindex="-1"></a>         <span class="at">height =</span> <span class="dv">130</span>)</span>
+<span id="cb20-488"><a href="#cb20-488" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb20-489"><a href="#cb20-489" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-490"><a href="#cb20-490" aria-hidden="true" tabindex="-1"></a>本教学子集没有 effect-allele frequency，不能可靠计算 exposure/outcome explained variance，因此不伪造 Steiger directionality；暴露仅有 top-hit 记录，也无法做位点共定位。样本重叠不能从紧凑文件排除。把这些标成 unavailable/unresolved 比输出一个看似齐全的绿色勾选表更重要。</span>
+<span id="cb20-491"><a href="#cb20-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-492"><a href="#cb20-492" aria-hidden="true" tabindex="-1"></a><span class="fu">### 今天可投稿分析还要升级什么</span></span>
+<span id="cb20-493"><a href="#cb20-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-494"><a href="#cb20-494" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>用与暴露 GWAS 祖源匹配的 reference panel 做 LD clumping，并报告阈值、窗口和 panel；</span>
+<span id="cb20-495"><a href="#cb20-495" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>获取完整暴露与结局 summary statistics，做 Steiger、双向 MR 和关键位点 colocalisation；</span>
+<span id="cb20-496"><a href="#cb20-496" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>报告暴露 GWAS 的统一分类/变换、工具解释度、conditional F 和样本重叠；</span>
+<span id="cb20-497"><a href="#cb20-497" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>检查 SNP 与 BMI、饮食、药物、免疫表型等潜在多效性通路；</span>
+<span id="cb20-498"><a href="#cb20-498" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>在独立 GWAS、不同 16S 区域或 shotgun taxonomic definition 中复现；</span>
+<span id="cb20-499"><a href="#cb20-499" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>若暴露是多个相关菌，考虑 multivariable MR，但先证明工具对各暴露有足够条件强度。</span>
+<span id="cb20-500"><a href="#cb20-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-501"><a href="#cb20-501" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution title="常见坑：MR 最危险的“全绿结果”"}</span>
+<span id="cb20-502"><a href="#cb20-502" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>用 P &lt; 1×10^-5 的弱工具，却只写所有 F &gt; 10；  </span>
+<span id="cb20-503"><a href="#cb20-503" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>把“一染色体一个 SNP”写成已完成 LD clumping；  </span>
+<span id="cb20-504"><a href="#cb20-504" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>palindromic SNP 无 EAF 仍强行对齐；  </span>
+<span id="cb20-505"><a href="#cb20-505" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Egger/PRESSO P &gt; 0.05 就宣称不存在水平多效性；  </span>
+<span id="cb20-506"><a href="#cb20-506" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>两份 GWAS 中同名菌属的测量定义不同，却按同一 exposure 解释；  </span>
+<span id="cb20-507"><a href="#cb20-507" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>没做 colocalisation，就把共享区域写成“菌介导宿主遗传效应”；  </span>
+<span id="cb20-508"><a href="#cb20-508" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>空结果写成“证明该菌对疾病无因果作用”。宽区间通常只表示数据还不能排除有意义的正负效应。</span>
+<span id="cb20-509"><a href="#cb20-509" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb20-510"><a href="#cb20-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-511"><a href="#cb20-511" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告遗传工具与MR敏感性分析的方法与限制 {#sec-methods}</span></span>
+<span id="cb20-511"><a href="#cb20-511" aria-hidden="true" tabindex="-1"></a><span class="fu">## 比较主估计与方向性、稳健性分析 {#sec-publication}</span></span>
 <span id="cb20-512"><a href="#cb20-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-513"><a href="#cb20-513" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We performed two-sample Mendelian randomisation using summary associations for MiBioGen genus-level *Bifidobacterium* abundance and inflammatory bowel disease (GCST004131; 25,042 cases and 34,915 controls). Candidate instruments were selected at P &lt; 5×10^-6. For this compact teaching analysis, one outcome-available variant per chromosome was retained before harmonisation; this cross-chromosome rule was not considered a substitute for ancestry-matched LD clumping. Effect alleles were harmonised using </span><span class="in">`TwoSampleMR`</span><span class="at"> with action 2, and one palindromic variant without allele-frequency information was excluded. The inverse-variance weighted estimator was primary; MR-Egger, weighted-median, simple-mode and weighted-mode estimators were sensitivity analyses. Heterogeneity, the MR-Egger intercept, leave-one-out estimates and MR-PRESSO with 2,000 fixed-seed simulations were evaluated. Steiger directionality and locus colocalisation were not estimable because effect-allele frequencies and full locus-level exposure statistics, respectively, were unavailable. Results were therefore treated as a limited teaching analysis rather than definitive causal evidence.</span></span>
+<span id="cb20-513"><a href="#cb20-513" aria-hidden="true" tabindex="-1"></a>MR 主图建议用“散点 + 方法森林图”，把 leave-one-out 与 assumption audit 放补充材料。森林图必须有零参考线、方法名、SNP 数和 95% CI；二元结局可补充 OR，但不要把暴露标度误写成百分比。</span>
 <span id="cb20-514"><a href="#cb20-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-515"><a href="#cb20-515" aria-hidden="true" tabindex="-1"></a>正式论文必须把上述“cross-chromosome rule”替换为真正执行的 clumping 参数，并补充 population、exposure scale、software version、sample overlap、Steiger、bidirectional MR、colocalisation 和数据 accession。</span>
+<span id="cb20-515"><a href="#cb20-515" aria-hidden="true" tabindex="-1"></a>图注应同时说明：候选/保留 SNP 数、harmonisation action、工具选择与 clumping、效应单位、样本量以及哪些诊断不可得。<span class="in">`save_pub()`</span> 已输出 PDF/SVG 和 600 ppi PNG/TIFF，图中文字全部为英文。</span>
 <span id="cb20-516"><a href="#cb20-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-517"><a href="#cb20-517" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将遗传工具与MR敏感性分析用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb20-517"><a href="#cb20-517" aria-hidden="true" tabindex="-1"></a><span class="fu">## 报告遗传工具与MR敏感性分析的方法与限制 {#sec-methods}</span></span>
 <span id="cb20-518"><a href="#cb20-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-519"><a href="#cb20-519" aria-hidden="true" tabindex="-1"></a>你的 16S 三件套只能定义表型和发现问题，不能充当 MR 暴露 GWAS。还需两张独立汇总统计表：</span>
+<span id="cb20-519"><a href="#cb20-519" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; We performed two-sample Mendelian randomisation using summary associations for MiBioGen genus-level *Bifidobacterium* abundance and inflammatory bowel disease (GCST004131; 25,042 cases and 34,915 controls). Candidate instruments were selected at P &lt; 5×10^-6. For this compact teaching analysis, one outcome-available variant per chromosome was retained before harmonisation; this cross-chromosome rule was not considered a substitute for ancestry-matched LD clumping. Effect alleles were harmonised using </span><span class="in">`TwoSampleMR`</span><span class="at"> with action 2, and one palindromic variant without allele-frequency information was excluded. The inverse-variance weighted estimator was primary; MR-Egger, weighted-median, simple-mode and weighted-mode estimators were sensitivity analyses. Heterogeneity, the MR-Egger intercept, leave-one-out estimates and MR-PRESSO with 2,000 fixed-seed simulations were evaluated. Steiger directionality and locus colocalisation were not estimable because effect-allele frequencies and full locus-level exposure statistics, respectively, were unavailable. Results were therefore treated as a limited teaching analysis rather than definitive causal evidence.</span></span>
 <span id="cb20-520"><a href="#cb20-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-521"><a href="#cb20-521" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 字段 <span class="pp">|</span> 暴露表 <span class="pp">|</span> 结局表 <span class="pp">|</span></span>
-<span id="cb20-522"><a href="#cb20-522" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
-<span id="cb20-523"><a href="#cb20-523" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 变异 ID <span class="pp">|</span> <span class="in">`SNP`</span> <span class="pp">|</span> <span class="in">`SNP`</span> <span class="pp">|</span></span>
-<span id="cb20-524"><a href="#cb20-524" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 等位基因 <span class="pp">|</span> <span class="in">`effect_allele.exposure`</span>, <span class="in">`other_allele.exposure`</span> <span class="pp">|</span> 对应 <span class="in">`.outcome`</span> 字段 <span class="pp">|</span></span>
-<span id="cb20-525"><a href="#cb20-525" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 效应与标准误 <span class="pp">|</span> <span class="in">`beta.exposure`</span>, <span class="in">`se.exposure`</span> <span class="pp">|</span> <span class="in">`beta.outcome`</span>, <span class="in">`se.outcome`</span> <span class="pp">|</span></span>
-<span id="cb20-526"><a href="#cb20-526" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> P 值 <span class="pp">|</span> <span class="in">`pval.exposure`</span> <span class="pp">|</span> <span class="in">`pval.outcome`</span> <span class="pp">|</span></span>
-<span id="cb20-527"><a href="#cb20-527" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 推荐补充 <span class="pp">|</span> EAF、N、祖源、坐标/build <span class="pp">|</span> EAF、病例/对照 N、祖源、坐标/build <span class="pp">|</span></span>
-<span id="cb20-528"><a href="#cb20-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-529"><a href="#cb20-529" aria-hidden="true" tabindex="-1"></a>先统一 genome build 与 variant ID，再做 ancestry-matched clumping，最后 harmonise。若菌属 GWAS 与你的 16S 研究在分类层级、扩增区域和变换上不一致，只能把 MR 当作外部三角验证，不能声称它直接验证了你队列中的具体 ASV。</span>
-<span id="cb20-530"><a href="#cb20-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-531"><a href="#cb20-531" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
-<span id="cb20-532"><a href="#cb20-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-533"><a href="#cb20-533" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Kurilshikov A, et al. Large-scale association analyses identify host factors influencing human gut microbiome composition. *Nature Genetics*. 2021;53:156–165. <span class="co">[</span><span class="ot">doi:10.1038/s41588-020-00763-1</span><span class="co">](https://doi.org/10.1038/s41588-020-00763-1)</span></span>
-<span id="cb20-534"><a href="#cb20-534" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>de Lange KM, et al. Genome-wide association study implicates immune activation of multiple integrin genes in inflammatory bowel disease. *Nature Genetics*. 2017;49:256–261. <span class="co">[</span><span class="ot">doi:10.1038/ng.3760</span><span class="co">](https://doi.org/10.1038/ng.3760)</span></span>
-<span id="cb20-535"><a href="#cb20-535" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hemani G, et al. The MR-Base platform supports systematic causal inference across the human phenome. *eLife*. 2018;7:e34408. <span class="co">[</span><span class="ot">doi:10.7554/eLife.34408</span><span class="co">](https://doi.org/10.7554/eLife.34408)</span></span>
-<span id="cb20-536"><a href="#cb20-536" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bowden J, Davey Smith G, Burgess S. Mendelian randomization with invalid instruments: effect estimation and bias detection through Egger regression. *International Journal of Epidemiology*. 2015;44:512–525. <span class="co">[</span><span class="ot">doi:10.1093/ije/dyv080</span><span class="co">](https://doi.org/10.1093/ije/dyv080)</span></span>
-<span id="cb20-537"><a href="#cb20-537" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verbanck M, et al. Detection of widespread horizontal pleiotropy in causal relationships inferred from Mendelian randomization. *Nature Genetics*. 2018;50:693–698. <span class="co">[</span><span class="ot">doi:10.1038/s41588-018-0099-7</span><span class="co">](https://doi.org/10.1038/s41588-018-0099-7)</span></span>
-<span id="cb20-538"><a href="#cb20-538" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Burgess S, Thompson SG. *Mendelian Randomization: Methods for Using Genetic Variants in Causal Estimation*. Chapman &amp; Hall/CRC; 2015.</span>
+<span id="cb20-521"><a href="#cb20-521" aria-hidden="true" tabindex="-1"></a>正式论文必须把上述“cross-chromosome rule”替换为真正执行的 clumping 参数，并补充 population、exposure scale、software version、sample overlap、Steiger、bidirectional MR、colocalisation 和数据 accession。</span>
+<span id="cb20-522"><a href="#cb20-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-523"><a href="#cb20-523" aria-hidden="true" tabindex="-1"></a><span class="fu">## 将遗传工具与MR敏感性分析用于自己的研究 {#sec-own-data}</span></span>
+<span id="cb20-524"><a href="#cb20-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-525"><a href="#cb20-525" aria-hidden="true" tabindex="-1"></a>你的 16S 三件套只能定义表型和发现问题，不能充当 MR 暴露 GWAS。还需两张独立汇总统计表：</span>
+<span id="cb20-526"><a href="#cb20-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-527"><a href="#cb20-527" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 字段 <span class="pp">|</span> 暴露表 <span class="pp">|</span> 结局表 <span class="pp">|</span></span>
+<span id="cb20-528"><a href="#cb20-528" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb20-529"><a href="#cb20-529" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 变异 ID <span class="pp">|</span> <span class="in">`SNP`</span> <span class="pp">|</span> <span class="in">`SNP`</span> <span class="pp">|</span></span>
+<span id="cb20-530"><a href="#cb20-530" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 等位基因 <span class="pp">|</span> <span class="in">`effect_allele.exposure`</span>, <span class="in">`other_allele.exposure`</span> <span class="pp">|</span> 对应 <span class="in">`.outcome`</span> 字段 <span class="pp">|</span></span>
+<span id="cb20-531"><a href="#cb20-531" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 效应与标准误 <span class="pp">|</span> <span class="in">`beta.exposure`</span>, <span class="in">`se.exposure`</span> <span class="pp">|</span> <span class="in">`beta.outcome`</span>, <span class="in">`se.outcome`</span> <span class="pp">|</span></span>
+<span id="cb20-532"><a href="#cb20-532" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> P 值 <span class="pp">|</span> <span class="in">`pval.exposure`</span> <span class="pp">|</span> <span class="in">`pval.outcome`</span> <span class="pp">|</span></span>
+<span id="cb20-533"><a href="#cb20-533" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> 推荐补充 <span class="pp">|</span> EAF、N、祖源、坐标/build <span class="pp">|</span> EAF、病例/对照 N、祖源、坐标/build <span class="pp">|</span></span>
+<span id="cb20-534"><a href="#cb20-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-535"><a href="#cb20-535" aria-hidden="true" tabindex="-1"></a>先统一 genome build 与 variant ID，再做 ancestry-matched clumping，最后 harmonise。若菌属 GWAS 与你的 16S 研究在分类层级、扩增区域和变换上不一致，只能把 MR 当作外部三角验证，不能声称它直接验证了你队列中的具体 ASV。</span>
+<span id="cb20-536"><a href="#cb20-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-537"><a href="#cb20-537" aria-hidden="true" tabindex="-1"></a><span class="fu">## 参考 {#sec-references}</span></span>
+<span id="cb20-538"><a href="#cb20-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-539"><a href="#cb20-539" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Kurilshikov A, et al. Large-scale association analyses identify host factors influencing human gut microbiome composition. *Nature Genetics*. 2021;53:156–165. <span class="co">[</span><span class="ot">doi:10.1038/s41588-020-00763-1</span><span class="co">](https://doi.org/10.1038/s41588-020-00763-1)</span></span>
+<span id="cb20-540"><a href="#cb20-540" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>de Lange KM, et al. Genome-wide association study implicates immune activation of multiple integrin genes in inflammatory bowel disease. *Nature Genetics*. 2017;49:256–261. <span class="co">[</span><span class="ot">doi:10.1038/ng.3760</span><span class="co">](https://doi.org/10.1038/ng.3760)</span></span>
+<span id="cb20-541"><a href="#cb20-541" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Hemani G, et al. The MR-Base platform supports systematic causal inference across the human phenome. *eLife*. 2018;7:e34408. <span class="co">[</span><span class="ot">doi:10.7554/eLife.34408</span><span class="co">](https://doi.org/10.7554/eLife.34408)</span></span>
+<span id="cb20-542"><a href="#cb20-542" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bowden J, Davey Smith G, Burgess S. Mendelian randomization with invalid instruments: effect estimation and bias detection through Egger regression. *International Journal of Epidemiology*. 2015;44:512–525. <span class="co">[</span><span class="ot">doi:10.1093/ije/dyv080</span><span class="co">](https://doi.org/10.1093/ije/dyv080)</span></span>
+<span id="cb20-543"><a href="#cb20-543" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Verbanck M, et al. Detection of widespread horizontal pleiotropy in causal relationships inferred from Mendelian randomization. *Nature Genetics*. 2018;50:693–698. <span class="co">[</span><span class="ot">doi:10.1038/s41588-018-0099-7</span><span class="co">](https://doi.org/10.1038/s41588-018-0099-7)</span></span>
+<span id="cb20-544"><a href="#cb20-544" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Burgess S, Thompson SG. *Mendelian Randomization: Methods for Using Genetic Variants in Causal Estimation*. Chapman &amp; Hall/CRC; 2015.</span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
